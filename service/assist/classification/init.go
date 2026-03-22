@@ -50,36 +50,40 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/assist/classification/FieldClassification")
 	if err != nil {
-		return fmt.Errorf("find class android.service.assist.classification.FieldClassification: %w", err)
-	}
-	clsFieldClassification = env.NewGlobalRef(&c.Object)
-
-	midFieldClassificationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFieldClassification = env.NewGlobalRef(&c.Object)
 
-	midFieldClassificationGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFieldClassificationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFieldClassificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFieldClassificationGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFieldClassificationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFieldClassificationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldClassificationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

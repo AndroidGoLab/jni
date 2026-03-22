@@ -52,42 +52,50 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/telephony/ims/feature/MmTelFeature")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.ims.feature.MmTelFeature: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMmTelFeature = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMmTelFeature = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/telephony/ims/feature/MmTelFeature$MmTelCapabilities")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.ims.feature.MmTelFeature$MmTelCapabilities: %w", err)
-	}
-	clsMmTelFeatureMmTelCapabilities = env.NewGlobalRef(&c.Object)
-
-	midMmTelFeatureMmTelCapabilitiesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMmTelFeatureMmTelCapabilities = env.NewGlobalRef(&c.Object)
 
-	midMmTelFeatureMmTelCapabilitiesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMmTelFeatureMmTelCapabilitiesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMmTelFeatureMmTelCapabilitiesIsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "isCapable", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMmTelFeatureMmTelCapabilitiesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMmTelFeatureMmTelCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMmTelFeatureMmTelCapabilitiesIsCapable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "isCapable", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMmTelFeatureMmTelCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMmTelFeatureMmTelCapabilities)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

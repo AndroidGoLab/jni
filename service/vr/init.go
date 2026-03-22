@@ -49,29 +49,33 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/vr/VrListenerService")
 	if err != nil {
-		return fmt.Errorf("find class android.service.vr.VrListenerService: %w", err)
-	}
-	clsListenerService = env.NewGlobalRef(&c.Object)
-
-	midListenerServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsListenerService = env.NewGlobalRef(&c.Object)
 
-	midListenerServiceOnCurrentVrActivityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onCurrentVrActivityChanged", "(Landroid/content/ComponentName;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midListenerServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midListenerServiceIsVrModePackageEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "isVrModePackageEnabled", "(Landroid/content/Context;Landroid/content/ComponentName;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midListenerServiceOnCurrentVrActivityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onCurrentVrActivityChanged", "(Landroid/content/ComponentName;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceIsVrModePackageEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "isVrModePackageEnabled", "(Landroid/content/Context;Landroid/content/ComponentName;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

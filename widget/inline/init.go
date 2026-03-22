@@ -70,152 +70,168 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/widget/inline/InlinePresentationSpec")
 	if err != nil {
-		return fmt.Errorf("find class android.widget.inline.InlinePresentationSpec: %w", err)
-	}
-	clsPresentationSpec = env.NewGlobalRef(&c.Object)
-
-	midPresentationSpecDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPresentationSpec = env.NewGlobalRef(&c.Object)
 
-	midPresentationSpecEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPresentationSpecDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPresentationSpecGetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "getMaxSize", "()Landroid/util/Size;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPresentationSpecEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPresentationSpecGetMinSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "getMinSize", "()Landroid/util/Size;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPresentationSpecGetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "getMaxSize", "()Landroid/util/Size;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPresentationSpecGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "getStyle", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPresentationSpecGetMinSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "getMinSize", "()Landroid/util/Size;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPresentationSpecHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPresentationSpecGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "getStyle", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPresentationSpecToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPresentationSpecHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPresentationSpecWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPresentationSpecToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPresentationSpecWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpec)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/widget/inline/InlinePresentationSpec$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.widget.inline.InlinePresentationSpec$Builder: %w", err)
-	}
-	clsPresentationSpecBuilder = env.NewGlobalRef(&c.Object)
-
-	midPresentationSpecBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpecBuilder)), "build", "()Landroid/widget/inline/InlinePresentationSpec;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPresentationSpecBuilder = env.NewGlobalRef(&c.Object)
 
-	midPresentationSpecBuilderSetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpecBuilder)), "setStyle", "(Landroid/os/Bundle;)Landroid/widget/inline/InlinePresentationSpec$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPresentationSpecBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpecBuilder)), "build", "()Landroid/widget/inline/InlinePresentationSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPresentationSpecBuilderSetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresentationSpecBuilder)), "setStyle", "(Landroid/os/Bundle;)Landroid/widget/inline/InlinePresentationSpec$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/widget/inline/InlineContentView")
 	if err != nil {
-		return fmt.Errorf("find class android.widget.inline.InlineContentView: %w", err)
-	}
-	clsContentView = env.NewGlobalRef(&c.Object)
-
-	midContentViewGetSurfaceControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "getSurfaceControl", "()Landroid/view/SurfaceControl;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContentView = env.NewGlobalRef(&c.Object)
 
-	midContentViewIsZOrderedOnTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "isZOrderedOnTop", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentViewGetSurfaceControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "getSurfaceControl", "()Landroid/view/SurfaceControl;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentViewOnLayout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "onLayout", "(ZIIII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentViewIsZOrderedOnTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "isZOrderedOnTop", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentViewSetClipBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "setClipBounds", "(Landroid/graphics/Rect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentViewOnLayout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "onLayout", "(ZIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentViewSetSurfaceControlCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "setSurfaceControlCallback", "(Landroid/widget/inline/InlineContentView$SurfaceControlCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentViewSetClipBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "setClipBounds", "(Landroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentViewSetZOrderedOnTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "setZOrderedOnTop", "(Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContentViewSetSurfaceControlCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "setSurfaceControlCallback", "(Landroid/widget/inline/InlineContentView$SurfaceControlCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentViewSetZOrderedOnTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentView)), "setZOrderedOnTop", "(Z)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/widget/inline/InlineContentView$SurfaceControlCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.widget.inline.InlineContentView$SurfaceControlCallback: %w", err)
-	}
-	clsContentViewSurfaceControlCallback = env.NewGlobalRef(&c.Object)
-
-	midContentViewSurfaceControlCallbackOnCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentViewSurfaceControlCallback)), "onCreated", "(Landroid/view/SurfaceControl;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContentViewSurfaceControlCallback = env.NewGlobalRef(&c.Object)
 
-	midContentViewSurfaceControlCallbackOnDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentViewSurfaceControlCallback)), "onDestroyed", "(Landroid/view/SurfaceControl;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContentViewSurfaceControlCallbackOnCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentViewSurfaceControlCallback)), "onCreated", "(Landroid/view/SurfaceControl;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentViewSurfaceControlCallbackOnDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentViewSurfaceControlCallback)), "onDestroyed", "(Landroid/view/SurfaceControl;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

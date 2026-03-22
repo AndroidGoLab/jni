@@ -78,216 +78,228 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/DownloadManager")
 	if err != nil {
-		return fmt.Errorf("find class android.app.DownloadManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerAddCompletedDownload7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addCompletedDownload", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;JZ)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerAddCompletedDownload9_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addCompletedDownload", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;JZLandroid/net/Uri;Landroid/net/Uri;)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerAddCompletedDownload7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addCompletedDownload", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;JZ)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerEnqueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "enqueue", "(Landroid/app/DownloadManager$Request;)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerAddCompletedDownload9_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addCompletedDownload", "(Ljava/lang/String;Ljava/lang/String;ZLjava/lang/String;Ljava/lang/String;JZLandroid/net/Uri;Landroid/net/Uri;)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetMimeTypeForDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMimeTypeForDownloadedFile", "(J)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerEnqueue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "enqueue", "(Landroid/app/DownloadManager$Request;)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetUriForDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getUriForDownloadedFile", "(J)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetMimeTypeForDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMimeTypeForDownloadedFile", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerOpenDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openDownloadedFile", "(J)Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetUriForDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getUriForDownloadedFile", "(J)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerQuery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "query", "(Landroid/app/DownloadManager$Query;)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerOpenDownloadedFile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openDownloadedFile", "(J)Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "remove", "([J)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerQuery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "query", "(Landroid/app/DownloadManager$Query;)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "remove", "([J)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetRecommendedMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRecommendedMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerGetMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetRecommendedMaxBytesOverMobile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRecommendedMaxBytesOverMobile", "(Landroid/content/Context;)Ljava/lang/Long;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/DownloadManager$Query")
 	if err != nil {
-		return fmt.Errorf("find class android.app.DownloadManager$Query: %w", err)
-	}
-	clsManagerQuery = env.NewGlobalRef(&c.Object)
-
-	midManagerQuerySetFilterById, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterById", "([J)Landroid/app/DownloadManager$Query;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManagerQuery = env.NewGlobalRef(&c.Object)
 
-	midManagerQuerySetFilterByStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterByStatus", "(I)Landroid/app/DownloadManager$Query;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerQuerySetFilterById, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterById", "([J)Landroid/app/DownloadManager$Query;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerQuerySetFilterByStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerQuery)), "setFilterByStatus", "(I)Landroid/app/DownloadManager$Query;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/DownloadManager$Request")
 	if err != nil {
-		return fmt.Errorf("find class android.app.DownloadManager$Request: %w", err)
-	}
-	clsManagerRequest = env.NewGlobalRef(&c.Object)
-
-	midManagerRequestAddRequestHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "addRequestHeader", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManagerRequest = env.NewGlobalRef(&c.Object)
 
-	midManagerRequestAllowScanningByMediaScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "allowScanningByMediaScanner", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestAddRequestHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "addRequestHeader", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetAllowedNetworkTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedNetworkTypes", "(I)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestAllowScanningByMediaScanner, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "allowScanningByMediaScanner", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetAllowedOverMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedOverMetered", "(Z)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetAllowedNetworkTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedNetworkTypes", "(I)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetAllowedOverRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedOverRoaming", "(Z)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetAllowedOverMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedOverMetered", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetAllowedOverRoaming, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setAllowedOverRoaming", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetDestinationInExternalFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationInExternalFilesDir", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetDestinationInExternalPublicDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationInExternalPublicDir", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetDestinationInExternalFilesDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationInExternalFilesDir", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetDestinationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationUri", "(Landroid/net/Uri;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetDestinationInExternalPublicDir, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationInExternalPublicDir", "(Ljava/lang/String;Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setMimeType", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetDestinationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setDestinationUri", "(Landroid/net/Uri;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetNotificationVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setNotificationVisibility", "(I)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setMimeType", "(Ljava/lang/String;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setRequiresCharging", "(Z)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetNotificationVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setNotificationVisibility", "(I)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setRequiresDeviceIdle", "(Z)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetRequiresCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setRequiresCharging", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetShowRunningNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setShowRunningNotification", "(Z)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetRequiresDeviceIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setRequiresDeviceIdle", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerRequestSetShowRunningNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setShowRunningNotification", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRequestSetVisibleInDownloadsUi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setVisibleInDownloadsUi", "(Z)Landroid/app/DownloadManager$Request;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerRequestSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerRequestSetVisibleInDownloadsUi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerRequest)), "setVisibleInDownloadsUi", "(Z)Landroid/app/DownloadManager$Request;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

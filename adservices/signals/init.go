@@ -57,69 +57,81 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/adservices/signals/ProtectedSignalsManager")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.signals.ProtectedSignalsManager: %w", err)
-	}
-	clsProtectedSignalsManager = env.NewGlobalRef(&c.Object)
-
-	midProtectedSignalsManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsProtectedSignalsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/signals/ProtectedSignalsManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsProtectedSignalsManager = env.NewGlobalRef(&c.Object)
+
+		midProtectedSignalsManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsProtectedSignalsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/signals/ProtectedSignalsManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/signals/UpdateSignalsRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.signals.UpdateSignalsRequest: %w", err)
-	}
-	clsUpdateSignalsRequest = env.NewGlobalRef(&c.Object)
-
-	midUpdateSignalsRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsUpdateSignalsRequest = env.NewGlobalRef(&c.Object)
 
-	midUpdateSignalsRequestGetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "getUpdateUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateSignalsRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateSignalsRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateSignalsRequestGetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "getUpdateUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateSignalsRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midUpdateSignalsRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUpdateSignalsRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/signals/UpdateSignalsRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.signals.UpdateSignalsRequest$Builder: %w", err)
-	}
-	clsUpdateSignalsRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midUpdateSignalsRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequestBuilder)), "build", "()Landroid/adservices/signals/UpdateSignalsRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsUpdateSignalsRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midUpdateSignalsRequestBuilderSetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequestBuilder)), "setUpdateUri", "(Landroid/net/Uri;)Landroid/adservices/signals/UpdateSignalsRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midUpdateSignalsRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequestBuilder)), "build", "()Landroid/adservices/signals/UpdateSignalsRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUpdateSignalsRequestBuilderSetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateSignalsRequestBuilder)), "setUpdateUri", "(Landroid/net/Uri;)Landroid/adservices/signals/UpdateSignalsRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

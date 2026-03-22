@@ -138,548 +138,604 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/media/midi/MidiUmpDeviceService")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiUmpDeviceService: %w", err)
-	}
-	clsUmpDeviceService = env.NewGlobalRef(&c.Object)
-
-	midUmpDeviceServiceGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "getDeviceInfo", "()Landroid/media/midi/MidiDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsUmpDeviceService = env.NewGlobalRef(&c.Object)
 
-	midUmpDeviceServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUmpDeviceServiceGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "getDeviceInfo", "()Landroid/media/midi/MidiDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUmpDeviceServiceOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onClose", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUmpDeviceServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUmpDeviceServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onCreate", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUmpDeviceServiceOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onClose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUmpDeviceServiceOnDeviceStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onDeviceStatusChanged", "(Landroid/media/midi/MidiDeviceStatus;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midUmpDeviceServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUmpDeviceServiceOnDeviceStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUmpDeviceService)), "onDeviceStatusChanged", "(Landroid/media/midi/MidiDeviceStatus;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiManager")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerGetDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDevices", "()[Landroid/media/midi/MidiDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerRegisterDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerDeviceCallback", "(ILjava/util/concurrent/Executor;Landroid/media/midi/MidiManager$DeviceCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDevices", "()[Landroid/media/midi/MidiDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerUnregisterDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterDeviceCallback", "(Landroid/media/midi/MidiManager$DeviceCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerRegisterDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerDeviceCallback", "(ILjava/util/concurrent/Executor;Landroid/media/midi/MidiManager$DeviceCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerUnregisterDeviceCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterDeviceCallback", "(Landroid/media/midi/MidiManager$DeviceCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiManager$DeviceCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiManager$DeviceCallback: %w", err)
-	}
-	clsManagerDeviceCallback = env.NewGlobalRef(&c.Object)
-
-	midManagerDeviceCallbackOnDeviceAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDeviceCallback)), "onDeviceAdded", "(Landroid/media/midi/MidiDeviceInfo;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManagerDeviceCallback = env.NewGlobalRef(&c.Object)
 
-	midManagerDeviceCallbackOnDeviceRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDeviceCallback)), "onDeviceRemoved", "(Landroid/media/midi/MidiDeviceInfo;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerDeviceCallbackOnDeviceAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDeviceCallback)), "onDeviceAdded", "(Landroid/media/midi/MidiDeviceInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerDeviceCallbackOnDeviceStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDeviceCallback)), "onDeviceStatusChanged", "(Landroid/media/midi/MidiDeviceStatus;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerDeviceCallbackOnDeviceRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDeviceCallback)), "onDeviceRemoved", "(Landroid/media/midi/MidiDeviceInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerDeviceCallbackOnDeviceStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDeviceCallback)), "onDeviceStatusChanged", "(Landroid/media/midi/MidiDeviceStatus;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiManager$OnDeviceOpenedListener")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiManager$OnDeviceOpenedListener: %w", err)
-	}
-	clsManagerOnDeviceOpenedListener = env.NewGlobalRef(&c.Object)
-
-	midManagerOnDeviceOpenedListenerOnDeviceOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnDeviceOpenedListener)), "onDeviceOpened", "(Landroid/media/midi/MidiDevice;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsManagerOnDeviceOpenedListener = env.NewGlobalRef(&c.Object)
+
+		midManagerOnDeviceOpenedListenerOnDeviceOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnDeviceOpenedListener)), "onDeviceOpened", "(Landroid/media/midi/MidiDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiReceiver")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiReceiver: %w", err)
-	}
-	clsReceiver = env.NewGlobalRef(&c.Object)
-
-	midReceiverFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "flush", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReceiver = env.NewGlobalRef(&c.Object)
 
-	midReceiverGetMaxMessageSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "getMaxMessageSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReceiverFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "flush", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReceiverOnFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onFlush", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReceiverGetMaxMessageSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "getMaxMessageSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReceiverOnSend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onSend", "([BIIJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReceiverOnFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onFlush", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReceiverSend3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "send", "([BII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReceiverOnSend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onSend", "([BIIJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReceiverSend4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "send", "([BIIJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReceiverSend3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "send", "([BII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReceiverSend4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "send", "([BIIJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiOutputPort")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiOutputPort: %w", err)
-	}
-	clsOutputPort = env.NewGlobalRef(&c.Object)
-
-	midOutputPortClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsOutputPort = env.NewGlobalRef(&c.Object)
 
-	midOutputPortGetPortNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "getPortNumber", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputPortClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputPortOnConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "onConnect", "(Landroid/media/midi/MidiReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputPortGetPortNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "getPortNumber", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputPortOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "onDisconnect", "(Landroid/media/midi/MidiReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midOutputPortOnConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "onConnect", "(Landroid/media/midi/MidiReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOutputPortOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputPort)), "onDisconnect", "(Landroid/media/midi/MidiReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiDeviceStatus")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiDeviceStatus: %w", err)
-	}
-	clsDeviceStatus = env.NewGlobalRef(&c.Object)
-
-	midDeviceStatusDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeviceStatus = env.NewGlobalRef(&c.Object)
 
-	midDeviceStatusGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "getDeviceInfo", "()Landroid/media/midi/MidiDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceStatusDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceStatusGetOutputPortOpenCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "getOutputPortOpenCount", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceStatusGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "getDeviceInfo", "()Landroid/media/midi/MidiDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceStatusIsInputPortOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "isInputPortOpen", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceStatusGetOutputPortOpenCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "getOutputPortOpenCount", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceStatusIsInputPortOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "isInputPortOpen", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceStatusWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceStatusToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceStatusWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceStatus)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiInputPort")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiInputPort: %w", err)
-	}
-	clsInputPort = env.NewGlobalRef(&c.Object)
-
-	midInputPortClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsInputPort = env.NewGlobalRef(&c.Object)
 
-	midInputPortGetPortNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "getPortNumber", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midInputPortClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midInputPortOnFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "onFlush", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midInputPortGetPortNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "getPortNumber", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midInputPortOnSend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "onSend", "([BIIJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midInputPortOnFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "onFlush", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInputPortOnSend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInputPort)), "onSend", "([BIIJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiDeviceInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiDeviceInfo: %w", err)
-	}
-	clsDeviceInfo = env.NewGlobalRef(&c.Object)
-
-	midDeviceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeviceInfo = env.NewGlobalRef(&c.Object)
 
-	midDeviceInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetDefaultProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getDefaultProtocol", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetDefaultProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getDefaultProtocol", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetInputPortCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getInputPortCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetOutputPortCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getOutputPortCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetInputPortCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getInputPortCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetPorts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getPorts", "()[Landroid/media/midi/MidiDeviceInfo$PortInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetOutputPortCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getOutputPortCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getProperties", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetPorts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getPorts", "()[Landroid/media/midi/MidiDeviceInfo$PortInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getProperties", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoIsPrivate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "isPrivate", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoIsPrivate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "isPrivate", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiDeviceInfo$PortInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiDeviceInfo$PortInfo: %w", err)
-	}
-	clsDeviceInfoPortInfo = env.NewGlobalRef(&c.Object)
-
-	midDeviceInfoPortInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfoPortInfo)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeviceInfoPortInfo = env.NewGlobalRef(&c.Object)
 
-	midDeviceInfoPortInfoGetPortNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfoPortInfo)), "getPortNumber", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoPortInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfoPortInfo)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoPortInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfoPortInfo)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceInfoPortInfoGetPortNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfoPortInfo)), "getPortNumber", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceInfoPortInfoGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfoPortInfo)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiSender")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiSender: %w", err)
-	}
-	clsSender = env.NewGlobalRef(&c.Object)
-
-	midSenderConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "connect", "(Landroid/media/midi/MidiReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSender = env.NewGlobalRef(&c.Object)
 
-	midSenderDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "disconnect", "(Landroid/media/midi/MidiReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSenderConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "connect", "(Landroid/media/midi/MidiReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSenderOnConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "onConnect", "(Landroid/media/midi/MidiReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSenderDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "disconnect", "(Landroid/media/midi/MidiReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSenderOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "onDisconnect", "(Landroid/media/midi/MidiReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSenderOnConnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "onConnect", "(Landroid/media/midi/MidiReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSenderOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSender)), "onDisconnect", "(Landroid/media/midi/MidiReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiDevice")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiDevice: %w", err)
-	}
-	clsDevice = env.NewGlobalRef(&c.Object)
-
-	midDeviceClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDevice = env.NewGlobalRef(&c.Object)
 
-	midDeviceConnectPorts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectPorts", "(Landroid/media/midi/MidiInputPort;I)Landroid/media/midi/MidiDevice$MidiConnection;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getInfo", "()Landroid/media/midi/MidiDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceConnectPorts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "connectPorts", "(Landroid/media/midi/MidiInputPort;I)Landroid/media/midi/MidiDevice$MidiConnection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceOpenInputPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "openInputPort", "(I)Landroid/media/midi/MidiInputPort;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getInfo", "()Landroid/media/midi/MidiDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceOpenOutputPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "openOutputPort", "(I)Landroid/media/midi/MidiOutputPort;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceOpenInputPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "openInputPort", "(I)Landroid/media/midi/MidiInputPort;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceOpenOutputPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "openOutputPort", "(I)Landroid/media/midi/MidiOutputPort;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiDevice$MidiConnection")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiDevice$MidiConnection: %w", err)
-	}
-	clsDeviceMidiConnection = env.NewGlobalRef(&c.Object)
-
-	midDeviceMidiConnectionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceMidiConnection)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsDeviceMidiConnection = env.NewGlobalRef(&c.Object)
+
+		midDeviceMidiConnectionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceMidiConnection)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/midi/MidiDeviceService")
 	if err != nil {
-		return fmt.Errorf("find class android.media.midi.MidiDeviceService: %w", err)
-	}
-	clsDeviceService = env.NewGlobalRef(&c.Object)
-
-	midDeviceServiceGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "getDeviceInfo", "()Landroid/media/midi/MidiDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeviceService = env.NewGlobalRef(&c.Object)
 
-	midDeviceServiceGetOutputPortReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "getOutputPortReceivers", "()[Landroid/media/midi/MidiReceiver;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceServiceGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "getDeviceInfo", "()Landroid/media/midi/MidiDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceServiceGetOutputPortReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "getOutputPortReceivers", "()[Landroid/media/midi/MidiReceiver;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceServiceOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onClose", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onCreate", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceServiceOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onClose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceServiceOnDeviceStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onDeviceStatusChanged", "(Landroid/media/midi/MidiDeviceStatus;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceServiceOnGetInputPortReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onGetInputPortReceivers", "()[Landroid/media/midi/MidiReceiver;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceServiceOnDeviceStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onDeviceStatusChanged", "(Landroid/media/midi/MidiDeviceStatus;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceServiceOnGetInputPortReceivers, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceService)), "onGetInputPortReceivers", "()[Landroid/media/midi/MidiReceiver;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

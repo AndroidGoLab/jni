@@ -153,709 +153,737 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/mtp/MtpObjectInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpObjectInfo: %w", err)
-	}
-	clsObjectInfo = env.NewGlobalRef(&c.Object)
-
-	midObjectInfoGetAssociationDesc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getAssociationDesc", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsObjectInfo = env.NewGlobalRef(&c.Object)
 
-	midObjectInfoGetAssociationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getAssociationType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetAssociationDesc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getAssociationDesc", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getCompressedSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetAssociationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getAssociationType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetCompressedSizeLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getCompressedSizeLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getCompressedSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetDateCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getDateCreated", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetCompressedSizeLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getCompressedSizeLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetDateModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getDateModified", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetDateCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getDateCreated", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getFormat", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetDateModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getDateModified", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetImagePixDepth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixDepth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getFormat", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetImagePixDepthLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixDepthLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetImagePixDepth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixDepth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetImagePixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetImagePixDepthLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixDepthLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetImagePixHeightLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixHeightLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetImagePixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetImagePixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetImagePixHeightLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixHeightLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetImagePixWidthLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixWidthLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetImagePixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetKeywords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getKeywords", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetImagePixWidthLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getImagePixWidthLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetKeywords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getKeywords", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetObjectHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getObjectHandle", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetParent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getParent", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetObjectHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getObjectHandle", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetProtectionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getProtectionStatus", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetParent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getParent", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetSequenceNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getSequenceNumber", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetProtectionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getProtectionStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetSequenceNumberLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getSequenceNumberLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetSequenceNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getSequenceNumber", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getStorageId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetSequenceNumberLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getSequenceNumberLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbCompressedSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getStorageId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbCompressedSizeLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbCompressedSizeLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetThumbCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbCompressedSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbFormat", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetThumbCompressedSizeLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbCompressedSizeLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbPixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetThumbFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbFormat", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbPixHeightLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixHeightLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetThumbPixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbPixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoGetThumbPixHeightLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixHeightLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoGetThumbPixWidthLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixWidthLong", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midObjectInfoGetThumbPixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midObjectInfoGetThumbPixWidthLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfo)), "getThumbPixWidthLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpObjectInfo$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpObjectInfo$Builder: %w", err)
-	}
-	clsObjectInfoBuilder = env.NewGlobalRef(&c.Object)
-
-	midObjectInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "build", "()Landroid/mtp/MtpObjectInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsObjectInfoBuilder = env.NewGlobalRef(&c.Object)
 
-	midObjectInfoBuilderSetAssociationDesc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setAssociationDesc", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "build", "()Landroid/mtp/MtpObjectInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetAssociationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setAssociationType", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetAssociationDesc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setAssociationDesc", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setCompressedSize", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetAssociationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setAssociationType", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetDateCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setDateCreated", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setCompressedSize", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetDateModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setDateModified", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetDateCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setDateCreated", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setFormat", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetDateModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setDateModified", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetImagePixDepth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setImagePixDepth", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setFormat", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetImagePixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setImagePixHeight", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetImagePixDepth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setImagePixDepth", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetImagePixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setImagePixWidth", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetImagePixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setImagePixHeight", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetKeywords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setKeywords", "(Ljava/lang/String;)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetImagePixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setImagePixWidth", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setName", "(Ljava/lang/String;)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetKeywords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setKeywords", "(Ljava/lang/String;)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetObjectHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setObjectHandle", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setName", "(Ljava/lang/String;)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetParent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setParent", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetObjectHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setObjectHandle", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetProtectionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setProtectionStatus", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetParent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setParent", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetSequenceNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setSequenceNumber", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetProtectionStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setProtectionStatus", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setStorageId", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetSequenceNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setSequenceNumber", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetThumbCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbCompressedSize", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setStorageId", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetThumbFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbFormat", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetThumbCompressedSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbCompressedSize", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetThumbPixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbPixHeight", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midObjectInfoBuilderSetThumbFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbFormat", "(I)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midObjectInfoBuilderSetThumbPixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbPixWidth", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midObjectInfoBuilderSetThumbPixHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbPixHeight", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midObjectInfoBuilderSetThumbPixWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsObjectInfoBuilder)), "setThumbPixWidth", "(J)Landroid/mtp/MtpObjectInfo$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpDevice")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpDevice: %w", err)
-	}
-	clsDevice = env.NewGlobalRef(&c.Object)
-
-	midDeviceClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDevice = env.NewGlobalRef(&c.Object)
 
-	midDeviceDeleteObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "deleteObject", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetDeviceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getDeviceId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceDeleteObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "deleteObject", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getDeviceInfo", "()Landroid/mtp/MtpDeviceInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetDeviceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getDeviceId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetDeviceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getDeviceName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getDeviceInfo", "()Landroid/mtp/MtpDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getObject", "(II)[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetDeviceName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getDeviceName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetObjectHandles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getObjectHandles", "(III)[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getObject", "(II)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetObjectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getObjectInfo", "(I)Landroid/mtp/MtpObjectInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetObjectHandles, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getObjectHandles", "(III)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetParent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getParent", "(I)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetObjectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getObjectInfo", "(I)Landroid/mtp/MtpObjectInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetPartialObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getPartialObject", "(IJJ[B)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetParent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getParent", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetPartialObject64, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getPartialObject64", "(IJJ[B)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetPartialObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getPartialObject", "(IJJ[B)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getStorageId", "(I)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetPartialObject64, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getPartialObject64", "(IJJ[B)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetStorageIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getStorageIds", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getStorageId", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetStorageInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getStorageInfo", "(I)Landroid/mtp/MtpStorageInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetStorageIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getStorageIds", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetThumbnail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getThumbnail", "(I)[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetStorageInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getStorageInfo", "(I)Landroid/mtp/MtpStorageInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceImportFile2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "importFile", "(ILandroid/os/ParcelFileDescriptor;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetThumbnail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getThumbnail", "(I)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceImportFile2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "importFile", "(ILjava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceImportFile2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "importFile", "(ILandroid/os/ParcelFileDescriptor;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "open", "(Landroid/hardware/usb/UsbDeviceConnection;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceImportFile2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "importFile", "(ILjava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceReadEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "readEvent", "(Landroid/os/CancellationSignal;)Landroid/mtp/MtpEvent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "open", "(Landroid/hardware/usb/UsbDeviceConnection;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceSendObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "sendObject", "(IJLandroid/os/ParcelFileDescriptor;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceReadEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "readEvent", "(Landroid/os/CancellationSignal;)Landroid/mtp/MtpEvent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceSendObjectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "sendObjectInfo", "(Landroid/mtp/MtpObjectInfo;)Landroid/mtp/MtpObjectInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceSendObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "sendObject", "(IJLandroid/os/ParcelFileDescriptor;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceSendObjectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "sendObjectInfo", "(Landroid/mtp/MtpObjectInfo;)Landroid/mtp/MtpObjectInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpConstants")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpConstants: %w", err)
-	}
-	clsConstants = env.NewGlobalRef(&c.Object)
-
-	midConstantsIsAbstractObject, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConstants)), "isAbstractObject", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsConstants = env.NewGlobalRef(&c.Object)
+
+		midConstantsIsAbstractObject, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConstants)), "isAbstractObject", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpEvent")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpEvent: %w", err)
-	}
-	clsEvent = env.NewGlobalRef(&c.Object)
-
-	midEventGetDevicePropCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getDevicePropCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsEvent = env.NewGlobalRef(&c.Object)
 
-	midEventGetEventCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getEventCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetDevicePropCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getDevicePropCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetObjectFormatCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getObjectFormatCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetEventCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getEventCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetObjectHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getObjectHandle", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetObjectFormatCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getObjectFormatCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetObjectPropCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getObjectPropCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetObjectHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getObjectHandle", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetParameter1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getParameter1", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetObjectPropCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getObjectPropCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetParameter2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getParameter2", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetParameter1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getParameter1", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetParameter3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getParameter3", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetParameter2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getParameter2", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getStorageId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEventGetParameter3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getParameter3", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEventGetTransactionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getTransactionId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midEventGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getStorageId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventGetTransactionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEvent)), "getTransactionId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpStorageInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpStorageInfo: %w", err)
-	}
-	clsStorageInfo = env.NewGlobalRef(&c.Object)
-
-	midStorageInfoGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getDescription", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStorageInfo = env.NewGlobalRef(&c.Object)
 
-	midStorageInfoGetFreeSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getFreeSpace", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStorageInfoGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getDescription", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStorageInfoGetMaxCapacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getMaxCapacity", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStorageInfoGetFreeSpace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getFreeSpace", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStorageInfoGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getStorageId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStorageInfoGetMaxCapacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getMaxCapacity", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStorageInfoGetVolumeIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getVolumeIdentifier", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStorageInfoGetStorageId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getStorageId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStorageInfoGetVolumeIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStorageInfo)), "getVolumeIdentifier", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/mtp/MtpDeviceInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.mtp.MtpDeviceInfo: %w", err)
-	}
-	clsDeviceInfo = env.NewGlobalRef(&c.Object)
-
-	midDeviceInfoGetEventsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getEventsSupported", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeviceInfo = env.NewGlobalRef(&c.Object)
 
-	midDeviceInfoGetManufacturer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getManufacturer", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetEventsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getEventsSupported", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetModel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getModel", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetManufacturer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getManufacturer", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetOperationsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getOperationsSupported", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetModel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getModel", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetSerialNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getSerialNumber", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetOperationsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getOperationsSupported", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoGetVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getVersion", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetSerialNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getSerialNumber", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoIsEventSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "isEventSupported", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceInfoGetVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "getVersion", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceInfoIsOperationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "isOperationSupported", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceInfoIsEventSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "isEventSupported", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceInfoIsOperationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceInfo)), "isOperationSupported", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

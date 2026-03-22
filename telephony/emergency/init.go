@@ -59,99 +59,103 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/telephony/emergency/EmergencyNumber")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.emergency.EmergencyNumber: %w", err)
-	}
-	clsNumber = env.NewGlobalRef(&c.Object)
-
-	midNumberCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "compareTo", "(Landroid/telephony/emergency/EmergencyNumber;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsNumber = env.NewGlobalRef(&c.Object)
 
-	midNumberDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "compareTo", "(Landroid/telephony/emergency/EmergencyNumber;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberGetCountryIso, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getCountryIso", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberGetEmergencyCallRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getEmergencyCallRouting", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberGetCountryIso, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getCountryIso", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberGetMnc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getMnc", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberGetEmergencyCallRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getEmergencyCallRouting", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberGetNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getNumber", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberGetMnc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getMnc", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberGetNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getNumber", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberIsFromSources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "isFromSources", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberIsInEmergencyServiceCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "isInEmergencyServiceCategories", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberIsFromSources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "isFromSources", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberIsInEmergencyServiceCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "isInEmergencyServiceCategories", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNumberToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNumberCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "compareTo", "(Ljava/lang/Object;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midNumberWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNumberCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

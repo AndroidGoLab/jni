@@ -56,70 +56,78 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/ranging/ble/rssi/BleRssiRangingParams")
 	if err != nil {
-		return fmt.Errorf("find class android.ranging.ble.rssi.BleRssiRangingParams: %w", err)
-	}
-	clsBleRssiRangingParams = env.NewGlobalRef(&c.Object)
-
-	midBleRssiRangingParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBleRssiRangingParams = env.NewGlobalRef(&c.Object)
 
-	midBleRssiRangingParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBleRssiRangingParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBleRssiRangingParamsGetPeerBluetoothAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "getPeerBluetoothAddress", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBleRssiRangingParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBleRssiRangingParamsGetRangingUpdateRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "getRangingUpdateRate", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBleRssiRangingParamsGetPeerBluetoothAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "getPeerBluetoothAddress", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBleRssiRangingParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBleRssiRangingParamsGetRangingUpdateRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "getRangingUpdateRate", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBleRssiRangingParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBleRssiRangingParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleRssiRangingParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/ranging/ble/rssi/BleRssiRangingParams$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.ranging.ble.rssi.BleRssiRangingParams$Builder: %w", err)
-	}
-	clsBleRssiRangingParamsBuilder = env.NewGlobalRef(&c.Object)
-
-	midBleRssiRangingParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParamsBuilder)), "build", "()Landroid/ranging/ble/rssi/BleRssiRangingParams;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBleRssiRangingParamsBuilder = env.NewGlobalRef(&c.Object)
 
-	midBleRssiRangingParamsBuilderSetRangingUpdateRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParamsBuilder)), "setRangingUpdateRate", "(I)Landroid/ranging/ble/rssi/BleRssiRangingParams$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBleRssiRangingParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParamsBuilder)), "build", "()Landroid/ranging/ble/rssi/BleRssiRangingParams;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleRssiRangingParamsBuilderSetRangingUpdateRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleRssiRangingParamsBuilder)), "setRangingUpdateRate", "(I)Landroid/ranging/ble/rssi/BleRssiRangingParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

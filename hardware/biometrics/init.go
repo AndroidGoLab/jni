@@ -80,190 +80,222 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentViewWithMoreOptionsButton")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptContentViewWithMoreOptionsButton: %w", err)
-	}
-	clsPromptContentViewWithMoreOptionsButton = env.NewGlobalRef(&c.Object)
-
-	midPromptContentViewWithMoreOptionsButtonDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptContentViewWithMoreOptionsButton = env.NewGlobalRef(&c.Object)
 
-	midPromptContentViewWithMoreOptionsButtonGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getDescription", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptContentViewWithMoreOptionsButtonDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptContentViewWithMoreOptionsButtonGetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getMoreOptionsButtonListener", "()Landroid/content/DialogInterface$OnClickListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptContentViewWithMoreOptionsButtonGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getDescription", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptContentViewWithMoreOptionsButtonWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptContentViewWithMoreOptionsButtonGetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getMoreOptionsButtonListener", "()Landroid/content/DialogInterface$OnClickListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentViewWithMoreOptionsButtonWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptContentViewWithMoreOptionsButton$Builder: %w", err)
-	}
-	clsPromptContentViewWithMoreOptionsButtonBuilder = env.NewGlobalRef(&c.Object)
-
-	midPromptContentViewWithMoreOptionsButtonBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "build", "()Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptContentViewWithMoreOptionsButtonBuilder = env.NewGlobalRef(&c.Object)
 
-	midPromptContentViewWithMoreOptionsButtonBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptContentViewWithMoreOptionsButtonBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "build", "()Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptContentViewWithMoreOptionsButtonBuilderSetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setMoreOptionsButtonListener", "(Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptContentViewWithMoreOptionsButtonBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentViewWithMoreOptionsButtonBuilderSetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setMoreOptionsButtonListener", "(Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemPlainText")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptContentItemPlainText: %w", err)
-	}
-	clsPromptContentItemPlainText = env.NewGlobalRef(&c.Object)
-
-	midPromptContentItemPlainTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptContentItemPlainText = env.NewGlobalRef(&c.Object)
 
-	midPromptContentItemPlainTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptContentItemPlainTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentItemPlainTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentView")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptContentView: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPromptContentView = env.NewGlobalRef(&c.Object)
+
 	}
-	clsPromptContentView = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentItem")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptContentItem: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPromptContentItem = env.NewGlobalRef(&c.Object)
+
 	}
-	clsPromptContentItem = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptVerticalListContentView")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptVerticalListContentView: %w", err)
-	}
-	clsPromptVerticalListContentView = env.NewGlobalRef(&c.Object)
-
-	midPromptVerticalListContentViewDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptVerticalListContentView = env.NewGlobalRef(&c.Object)
 
-	midPromptVerticalListContentViewGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getDescription", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptVerticalListContentViewDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptVerticalListContentViewWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptVerticalListContentViewGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getDescription", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptVerticalListContentViewGetMaxEachItemCharacterNumber, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getMaxEachItemCharacterNumber", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptVerticalListContentViewWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptVerticalListContentViewGetMaxItemCount, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getMaxItemCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptVerticalListContentViewGetMaxEachItemCharacterNumber, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getMaxEachItemCharacterNumber", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptVerticalListContentViewGetMaxItemCount, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getMaxItemCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptVerticalListContentView$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptVerticalListContentView$Builder: %w", err)
-	}
-	clsPromptVerticalListContentViewBuilder = env.NewGlobalRef(&c.Object)
-
-	midPromptVerticalListContentViewBuilderAddListItem1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "addListItem", "(Landroid/hardware/biometrics/PromptContentItem;)Landroid/hardware/biometrics/PromptVerticalListContentView$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptVerticalListContentViewBuilder = env.NewGlobalRef(&c.Object)
 
-	midPromptVerticalListContentViewBuilderAddListItem2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "addListItem", "(Landroid/hardware/biometrics/PromptContentItem;I)Landroid/hardware/biometrics/PromptVerticalListContentView$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptVerticalListContentViewBuilderAddListItem1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "addListItem", "(Landroid/hardware/biometrics/PromptContentItem;)Landroid/hardware/biometrics/PromptVerticalListContentView$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptVerticalListContentViewBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "build", "()Landroid/hardware/biometrics/PromptVerticalListContentView;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptVerticalListContentViewBuilderAddListItem2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "addListItem", "(Landroid/hardware/biometrics/PromptContentItem;I)Landroid/hardware/biometrics/PromptVerticalListContentView$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptVerticalListContentViewBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/PromptVerticalListContentView$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptVerticalListContentViewBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "build", "()Landroid/hardware/biometrics/PromptVerticalListContentView;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptVerticalListContentViewBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentViewBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/PromptVerticalListContentView$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemBulletedText")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.PromptContentItemBulletedText: %w", err)
-	}
-	clsPromptContentItemBulletedText = env.NewGlobalRef(&c.Object)
-
-	midPromptContentItemBulletedTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptContentItemBulletedText = env.NewGlobalRef(&c.Object)
 
-	midPromptContentItemBulletedTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptContentItemBulletedTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentItemBulletedTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

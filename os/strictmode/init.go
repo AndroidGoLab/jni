@@ -94,169 +94,261 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/os/strictmode/NonSdkApiUsedViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.NonSdkApiUsedViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsNonSdkApiUsedViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsNonSdkApiUsedViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/UntaggedSocketViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.UntaggedSocketViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUntaggedSocketViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsUntaggedSocketViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/NetworkViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.NetworkViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsNetworkViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsNetworkViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/CustomViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.CustomViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCustomViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCustomViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/IncorrectContextUseViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.IncorrectContextUseViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIncorrectContextUseViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsIncorrectContextUseViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/SqliteObjectLeakedViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.SqliteObjectLeakedViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSqliteObjectLeakedViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsSqliteObjectLeakedViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/CleartextNetworkViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.CleartextNetworkViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCleartextNetworkViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCleartextNetworkViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/FileUriExposedViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.FileUriExposedViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFileUriExposedViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsFileUriExposedViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/ExplicitGcViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.ExplicitGcViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExplicitGcViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExplicitGcViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/Violation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.Violation: %w", err)
-	}
-	clsViolation = env.NewGlobalRef(&c.Object)
-
-	midViolationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViolation)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsViolation = env.NewGlobalRef(&c.Object)
 
-	midViolationSetStackTrace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViolation)), "setStackTrace", "([Ljava/lang/StackTraceElement;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midViolationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViolation)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViolationSetStackTrace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViolation)), "setStackTrace", "([Ljava/lang/StackTraceElement;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/DiskWriteViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.DiskWriteViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDiskWriteViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsDiskWriteViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/WebViewMethodCalledOnWrongThreadViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.WebViewMethodCalledOnWrongThreadViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebViewMethodCalledOnWrongThreadViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsWebViewMethodCalledOnWrongThreadViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/IntentReceiverLeakedViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.IntentReceiverLeakedViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIntentReceiverLeakedViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsIntentReceiverLeakedViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/LeakedClosableViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.LeakedClosableViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLeakedClosableViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsLeakedClosableViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/CredentialProtectedWhileLockedViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.CredentialProtectedWhileLockedViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCredentialProtectedWhileLockedViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCredentialProtectedWhileLockedViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/ContentUriWithoutPermissionViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.ContentUriWithoutPermissionViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContentUriWithoutPermissionViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContentUriWithoutPermissionViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/UnsafeIntentLaunchViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.UnsafeIntentLaunchViolation: %w", err)
-	}
-	clsUnsafeIntentLaunchViolation = env.NewGlobalRef(&c.Object)
-
-	midUnsafeIntentLaunchViolationGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnsafeIntentLaunchViolation)), "getIntent", "()Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsUnsafeIntentLaunchViolation = env.NewGlobalRef(&c.Object)
+
+		midUnsafeIntentLaunchViolationGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnsafeIntentLaunchViolation)), "getIntent", "()Landroid/content/Intent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/ImplicitDirectBootViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.ImplicitDirectBootViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsImplicitDirectBootViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsImplicitDirectBootViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/UnbufferedIoViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.UnbufferedIoViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUnbufferedIoViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsUnbufferedIoViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/InstanceCountViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.InstanceCountViolation: %w", err)
-	}
-	clsInstanceCountViolation = env.NewGlobalRef(&c.Object)
-
-	midInstanceCountViolationGetNumberOfInstances, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstanceCountViolation)), "getNumberOfInstances", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsInstanceCountViolation = env.NewGlobalRef(&c.Object)
+
+		midInstanceCountViolationGetNumberOfInstances, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstanceCountViolation)), "getNumberOfInstances", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/strictmode/ServiceConnectionLeakedViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.ServiceConnectionLeakedViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsServiceConnectionLeakedViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsServiceConnectionLeakedViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/DiskReadViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.DiskReadViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDiskReadViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsDiskReadViolation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/strictmode/ResourceMismatchViolation")
 	if err != nil {
-		return fmt.Errorf("find class android.os.strictmode.ResourceMismatchViolation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsResourceMismatchViolation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsResourceMismatchViolation = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

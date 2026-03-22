@@ -47,15 +47,19 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/appsearch/exceptions/AppSearchException")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appsearch.exceptions.AppSearchException: %w", err)
-	}
-	clsAppSearchException = env.NewGlobalRef(&c.Object)
-
-	midAppSearchExceptionGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSearchException)), "getResultCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAppSearchException = env.NewGlobalRef(&c.Object)
+
+		midAppSearchExceptionGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSearchException)), "getResultCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

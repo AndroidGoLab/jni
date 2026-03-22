@@ -72,143 +72,171 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/sax/StartElementListener")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.StartElementListener: %w", err)
-	}
-	clsStartElementListener = env.NewGlobalRef(&c.Object)
-
-	midStartElementListenerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStartElementListener)), "start", "(Lorg/xml/sax/Attributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsStartElementListener = env.NewGlobalRef(&c.Object)
+
+		midStartElementListenerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStartElementListener)), "start", "(Lorg/xml/sax/Attributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/EndTextElementListener")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.EndTextElementListener: %w", err)
-	}
-	clsEndTextElementListener = env.NewGlobalRef(&c.Object)
-
-	midEndTextElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndTextElementListener)), "end", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsEndTextElementListener = env.NewGlobalRef(&c.Object)
+
+		midEndTextElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndTextElementListener)), "end", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/RootElement")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.RootElement: %w", err)
-	}
-	clsRootElement = env.NewGlobalRef(&c.Object)
-
-	midRootElementGetContentHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRootElement)), "getContentHandler", "()Lorg/xml/sax/ContentHandler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsRootElement = env.NewGlobalRef(&c.Object)
+
+		midRootElementGetContentHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRootElement)), "getContentHandler", "()Lorg/xml/sax/ContentHandler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/Element")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.Element: %w", err)
-	}
-	clsElement = env.NewGlobalRef(&c.Object)
-
-	midElementGetChild1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getChild", "(Ljava/lang/String;)Landroid/sax/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsElement = env.NewGlobalRef(&c.Object)
 
-	midElementGetChild2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getChild", "(Ljava/lang/String;Ljava/lang/String;)Landroid/sax/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementGetChild1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getChild", "(Ljava/lang/String;)Landroid/sax/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementRequireChild1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "requireChild", "(Ljava/lang/String;)Landroid/sax/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementGetChild2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getChild", "(Ljava/lang/String;Ljava/lang/String;)Landroid/sax/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementRequireChild2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "requireChild", "(Ljava/lang/String;Ljava/lang/String;)Landroid/sax/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementRequireChild1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "requireChild", "(Ljava/lang/String;)Landroid/sax/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementSetElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setElementListener", "(Landroid/sax/ElementListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementRequireChild2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "requireChild", "(Ljava/lang/String;Ljava/lang/String;)Landroid/sax/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementSetEndElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setEndElementListener", "(Landroid/sax/EndElementListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementSetElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setElementListener", "(Landroid/sax/ElementListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementSetEndTextElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setEndTextElementListener", "(Landroid/sax/EndTextElementListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementSetEndElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setEndElementListener", "(Landroid/sax/EndElementListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementSetStartElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setStartElementListener", "(Landroid/sax/StartElementListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementSetEndTextElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setEndTextElementListener", "(Landroid/sax/EndTextElementListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementSetTextElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setTextElementListener", "(Landroid/sax/TextElementListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementSetStartElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setStartElementListener", "(Landroid/sax/StartElementListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midElementSetTextElementListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "setTextElementListener", "(Landroid/sax/TextElementListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/EndElementListener")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.EndElementListener: %w", err)
-	}
-	clsEndElementListener = env.NewGlobalRef(&c.Object)
-
-	midEndElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndElementListener)), "end", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsEndElementListener = env.NewGlobalRef(&c.Object)
+
+		midEndElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndElementListener)), "end", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/sax/ElementListener")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.ElementListener: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsElementListener = env.NewGlobalRef(&c.Object)
+
 	}
-	clsElementListener = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/sax/TextElementListener")
 	if err != nil {
-		return fmt.Errorf("find class android.sax.TextElementListener: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTextElementListener = env.NewGlobalRef(&c.Object)
+
 	}
-	clsTextElementListener = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

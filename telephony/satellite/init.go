@@ -51,35 +51,43 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/telephony/satellite/SatelliteStateChangeListener")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.satellite.SatelliteStateChangeListener: %w", err)
-	}
-	clsStateChangeListener = env.NewGlobalRef(&c.Object)
-
-	midStateChangeListenerOnEnabledStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateChangeListener)), "onEnabledStateChanged", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsStateChangeListener = env.NewGlobalRef(&c.Object)
+
+		midStateChangeListenerOnEnabledStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateChangeListener)), "onEnabledStateChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/satellite/SatelliteManager")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.satellite.SatelliteManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerRegisterStateChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerStateChangeListener", "(Ljava/util/concurrent/Executor;Landroid/telephony/satellite/SatelliteStateChangeListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerUnregisterStateChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterStateChangeListener", "(Landroid/telephony/satellite/SatelliteStateChangeListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerRegisterStateChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerStateChangeListener", "(Ljava/util/concurrent/Executor;Landroid/telephony/satellite/SatelliteStateChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerUnregisterStateChangeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterStateChangeListener", "(Landroid/telephony/satellite/SatelliteStateChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

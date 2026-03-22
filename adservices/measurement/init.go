@@ -123,451 +123,503 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/adservices/measurement/WebSourceRegistrationRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebSourceRegistrationRequest: %w", err)
-	}
-	clsWebSourceRegistrationRequest = env.NewGlobalRef(&c.Object)
-
-	midWebSourceRegistrationRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebSourceRegistrationRequest = env.NewGlobalRef(&c.Object)
 
-	midWebSourceRegistrationRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestGetAppDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getAppDestination", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestGetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getInputEvent", "()Landroid/view/InputEvent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestGetAppDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getAppDestination", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestGetTopOriginUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getTopOriginUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestGetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getInputEvent", "()Landroid/view/InputEvent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestGetVerifiedDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getVerifiedDestination", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestGetTopOriginUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getTopOriginUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestGetWebDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getWebDestination", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestGetVerifiedDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getVerifiedDestination", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestGetWebDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "getWebDestination", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebSourceRegistrationRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebSourceRegistrationRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebSourceRegistrationRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebSourceRegistrationRequest$Builder: %w", err)
-	}
-	clsWebSourceRegistrationRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midWebSourceRegistrationRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "build", "()Landroid/adservices/measurement/WebSourceRegistrationRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebSourceRegistrationRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midWebSourceRegistrationRequestBuilderSetAppDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setAppDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "build", "()Landroid/adservices/measurement/WebSourceRegistrationRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestBuilderSetAppDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setAppDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestBuilderSetVerifiedDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setVerifiedDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceRegistrationRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceRegistrationRequestBuilderSetWebDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setWebDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebSourceRegistrationRequestBuilderSetVerifiedDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setVerifiedDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebSourceRegistrationRequestBuilderSetWebDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceRegistrationRequestBuilder)), "setWebDestination", "(Landroid/net/Uri;)Landroid/adservices/measurement/WebSourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/DeletionRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.DeletionRequest: %w", err)
-	}
-	clsDeletionRequest = env.NewGlobalRef(&c.Object)
-
-	midDeletionRequestGetDeletionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getDeletionMode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeletionRequest = env.NewGlobalRef(&c.Object)
 
-	midDeletionRequestGetEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getEnd", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeletionRequestGetDeletionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getDeletionMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeletionRequestGetMatchBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getMatchBehavior", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeletionRequestGetEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getEnd", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeletionRequestGetStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getStart", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeletionRequestGetMatchBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getMatchBehavior", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeletionRequestGetStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequest)), "getStart", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/DeletionRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.DeletionRequest$Builder: %w", err)
-	}
-	clsDeletionRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midDeletionRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "build", "()Landroid/adservices/measurement/DeletionRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeletionRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midDeletionRequestBuilderSetDeletionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setDeletionMode", "(I)Landroid/adservices/measurement/DeletionRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeletionRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "build", "()Landroid/adservices/measurement/DeletionRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeletionRequestBuilderSetEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setEnd", "(Ljava/time/Instant;)Landroid/adservices/measurement/DeletionRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeletionRequestBuilderSetDeletionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setDeletionMode", "(I)Landroid/adservices/measurement/DeletionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeletionRequestBuilderSetMatchBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setMatchBehavior", "(I)Landroid/adservices/measurement/DeletionRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeletionRequestBuilderSetEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setEnd", "(Ljava/time/Instant;)Landroid/adservices/measurement/DeletionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeletionRequestBuilderSetStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setStart", "(Ljava/time/Instant;)Landroid/adservices/measurement/DeletionRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeletionRequestBuilderSetMatchBehavior, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setMatchBehavior", "(I)Landroid/adservices/measurement/DeletionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeletionRequestBuilderSetStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeletionRequestBuilder)), "setStart", "(Ljava/time/Instant;)Landroid/adservices/measurement/DeletionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebTriggerRegistrationRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebTriggerRegistrationRequest: %w", err)
-	}
-	clsWebTriggerRegistrationRequest = env.NewGlobalRef(&c.Object)
-
-	midWebTriggerRegistrationRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebTriggerRegistrationRequest = env.NewGlobalRef(&c.Object)
 
-	midWebTriggerRegistrationRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerRegistrationRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerRegistrationRequestGetDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "getDestination", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerRegistrationRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerRegistrationRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerRegistrationRequestGetDestination, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "getDestination", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerRegistrationRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebTriggerRegistrationRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerRegistrationRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebTriggerRegistrationRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebTriggerRegistrationRequest$Builder: %w", err)
-	}
-	clsWebTriggerRegistrationRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midWebTriggerRegistrationRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequestBuilder)), "build", "()Landroid/adservices/measurement/WebTriggerRegistrationRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsWebTriggerRegistrationRequestBuilder = env.NewGlobalRef(&c.Object)
+
+		midWebTriggerRegistrationRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerRegistrationRequestBuilder)), "build", "()Landroid/adservices/measurement/WebTriggerRegistrationRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/MeasurementManager")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.MeasurementManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/measurement/MeasurementManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
+
+		midManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "get", "(Landroid/content/Context;)Landroid/adservices/measurement/MeasurementManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebSourceParams")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebSourceParams: %w", err)
-	}
-	clsWebSourceParams = env.NewGlobalRef(&c.Object)
-
-	midWebSourceParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebSourceParams = env.NewGlobalRef(&c.Object)
 
-	midWebSourceParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceParamsGetRegistrationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "getRegistrationUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceParamsGetRegistrationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "getRegistrationUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceParamsIsDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "isDebugKeyAllowed", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebSourceParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebSourceParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebSourceParamsIsDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "isDebugKeyAllowed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebSourceParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebSourceParams$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebSourceParams$Builder: %w", err)
-	}
-	clsWebSourceParamsBuilder = env.NewGlobalRef(&c.Object)
-
-	midWebSourceParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParamsBuilder)), "build", "()Landroid/adservices/measurement/WebSourceParams;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebSourceParamsBuilder = env.NewGlobalRef(&c.Object)
 
-	midWebSourceParamsBuilderSetDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParamsBuilder)), "setDebugKeyAllowed", "(Z)Landroid/adservices/measurement/WebSourceParams$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebSourceParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParamsBuilder)), "build", "()Landroid/adservices/measurement/WebSourceParams;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebSourceParamsBuilderSetDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebSourceParamsBuilder)), "setDebugKeyAllowed", "(Z)Landroid/adservices/measurement/WebSourceParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebTriggerParams")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebTriggerParams: %w", err)
-	}
-	clsWebTriggerParams = env.NewGlobalRef(&c.Object)
-
-	midWebTriggerParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebTriggerParams = env.NewGlobalRef(&c.Object)
 
-	midWebTriggerParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerParamsGetRegistrationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "getRegistrationUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerParamsGetRegistrationUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "getRegistrationUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerParamsIsDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "isDebugKeyAllowed", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWebTriggerParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWebTriggerParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebTriggerParamsIsDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "isDebugKeyAllowed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/WebTriggerParams$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.WebTriggerParams$Builder: %w", err)
-	}
-	clsWebTriggerParamsBuilder = env.NewGlobalRef(&c.Object)
-
-	midWebTriggerParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParamsBuilder)), "build", "()Landroid/adservices/measurement/WebTriggerParams;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWebTriggerParamsBuilder = env.NewGlobalRef(&c.Object)
 
-	midWebTriggerParamsBuilderSetDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParamsBuilder)), "setDebugKeyAllowed", "(Z)Landroid/adservices/measurement/WebTriggerParams$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWebTriggerParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParamsBuilder)), "build", "()Landroid/adservices/measurement/WebTriggerParams;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerParamsBuilderSetDebugKeyAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerParamsBuilder)), "setDebugKeyAllowed", "(Z)Landroid/adservices/measurement/WebTriggerParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/SourceRegistrationRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.SourceRegistrationRequest: %w", err)
-	}
-	clsSourceRegistrationRequest = env.NewGlobalRef(&c.Object)
-
-	midSourceRegistrationRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSourceRegistrationRequest = env.NewGlobalRef(&c.Object)
 
-	midSourceRegistrationRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSourceRegistrationRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSourceRegistrationRequestGetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "getInputEvent", "()Landroid/view/InputEvent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSourceRegistrationRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSourceRegistrationRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSourceRegistrationRequestGetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "getInputEvent", "()Landroid/view/InputEvent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSourceRegistrationRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSourceRegistrationRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSourceRegistrationRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/measurement/SourceRegistrationRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.measurement.SourceRegistrationRequest$Builder: %w", err)
-	}
-	clsSourceRegistrationRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midSourceRegistrationRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequestBuilder)), "build", "()Landroid/adservices/measurement/SourceRegistrationRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSourceRegistrationRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midSourceRegistrationRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/measurement/SourceRegistrationRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSourceRegistrationRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequestBuilder)), "build", "()Landroid/adservices/measurement/SourceRegistrationRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSourceRegistrationRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSourceRegistrationRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/measurement/SourceRegistrationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

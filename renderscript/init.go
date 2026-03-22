@@ -830,4921 +830,5213 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/renderscript/Int4")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Int4: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsInt4 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsInt4 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/AllocationAdapter")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.AllocationAdapter: %w", err)
-	}
-	clsAllocationAdapter = env.NewGlobalRef(&c.Object)
-
-	midAllocationAdapterSetFace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setFace", "(Landroid/renderscript/Type$CubemapFace;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAllocationAdapter = env.NewGlobalRef(&c.Object)
 
-	midAllocationAdapterSetLOD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setLOD", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAllocationAdapterSetFace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setFace", "(Landroid/renderscript/Type$CubemapFace;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAllocationAdapterSetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setX", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAllocationAdapterSetLOD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setLOD", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAllocationAdapterSetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setY", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAllocationAdapterSetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setX", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAllocationAdapterSetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setZ", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAllocationAdapterSetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setY", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAllocationAdapterCreate1D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "create1D", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;)Landroid/renderscript/AllocationAdapter;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAllocationAdapterSetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "setZ", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAllocationAdapterCreate2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "create2D", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;)Landroid/renderscript/AllocationAdapter;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAllocationAdapterCreate1D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "create1D", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;)Landroid/renderscript/AllocationAdapter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAllocationAdapterCreateTyped, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;Landroid/renderscript/Type;)Landroid/renderscript/AllocationAdapter;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAllocationAdapterCreate2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "create2D", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;)Landroid/renderscript/AllocationAdapter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationAdapterCreateTyped, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationAdapter)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Allocation;Landroid/renderscript/Type;)Landroid/renderscript/AllocationAdapter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Element")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Element: %w", err)
-	}
-	clsElement = env.NewGlobalRef(&c.Object)
-
-	midElementGetBytesSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getBytesSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetDataKind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getDataKind", "()Landroid/renderscript/Element$DataKind;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetDataType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getDataType", "()Landroid/renderscript/Element$DataType;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetSubElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElement", "(I)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetSubElementArraySize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementArraySize", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetSubElementCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetSubElementName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementName", "(I)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetSubElementOffsetBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementOffsetBytes", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementGetVectorSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getVectorSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementIsCompatible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "isCompatible", "(Landroid/renderscript/Element;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementIsComplex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "isComplex", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementALLOCATION, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "ALLOCATION", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementA_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "A_8", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementBOOLEAN, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "BOOLEAN", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementELEMENT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "ELEMENT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF16, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF16_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF16_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF16_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF32, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF32_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF32_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF32_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF64, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF64_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF64_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementF64_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementFONT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "FONT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI16, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI16_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI16_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI16_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI32, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI32_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI32_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI32_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI64, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI64_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI64_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI64_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI8_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI8_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementI8_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementMATRIX4X4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX4X4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementMATRIX_2X2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX_2X2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementMATRIX_3X3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX_3X3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementMATRIX_4X4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX_4X4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementMESH, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MESH", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementPROGRAM_FRAGMENT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_FRAGMENT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementPROGRAM_RASTER, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_RASTER", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementPROGRAM_STORE, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_STORE", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementPROGRAM_VERTEX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_VERTEX", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementRGBA_4444, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGBA_4444", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementRGBA_5551, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGBA_5551", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementRGBA_8888, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGBA_8888", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementRGB_565, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGB_565", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementRGB_888, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGB_888", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementSAMPLER, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "SAMPLER", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementSCRIPT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "SCRIPT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementTYPE, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "TYPE", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU16, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU16_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU16_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU16_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU32, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU32_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU32_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU32_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU64, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU64_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU64_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU64_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU8_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU8_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementU8_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementYUV, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "YUV", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementCreatePixel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "createPixel", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element$DataType;Landroid/renderscript/Element$DataKind;)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midElementCreateVector, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "createVector", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element$DataType;I)Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsElement = env.NewGlobalRef(&c.Object)
+
+		midElementGetBytesSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getBytesSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetDataKind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getDataKind", "()Landroid/renderscript/Element$DataKind;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetDataType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getDataType", "()Landroid/renderscript/Element$DataType;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetSubElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElement", "(I)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetSubElementArraySize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementArraySize", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetSubElementCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetSubElementName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementName", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetSubElementOffsetBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getSubElementOffsetBytes", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementGetVectorSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "getVectorSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementIsCompatible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "isCompatible", "(Landroid/renderscript/Element;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementIsComplex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "isComplex", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementALLOCATION, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "ALLOCATION", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementA_8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "A_8", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementBOOLEAN, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "BOOLEAN", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementELEMENT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "ELEMENT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF16, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF16_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF16_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF16_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F16_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF32, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF32_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF32_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF32_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F32_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF64, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF64_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF64_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementF64_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "F64_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementFONT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "FONT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI16, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI16_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI16_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI16_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I16_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI32, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI32_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI32_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI32_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I32_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI64, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI64_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI64_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI64_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I64_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI8_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI8_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementI8_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "I8_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementMATRIX4X4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX4X4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementMATRIX_2X2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX_2X2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementMATRIX_3X3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX_3X3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementMATRIX_4X4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MATRIX_4X4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementMESH, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "MESH", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementPROGRAM_FRAGMENT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_FRAGMENT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementPROGRAM_RASTER, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_RASTER", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementPROGRAM_STORE, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_STORE", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementPROGRAM_VERTEX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "PROGRAM_VERTEX", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementRGBA_4444, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGBA_4444", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementRGBA_5551, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGBA_5551", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementRGBA_8888, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGBA_8888", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementRGB_565, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGB_565", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementRGB_888, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "RGB_888", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementSAMPLER, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "SAMPLER", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementSCRIPT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "SCRIPT", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementTYPE, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "TYPE", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU16, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU16_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU16_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU16_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U16_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU32, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU32_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU32_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU32_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U32_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU64, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU64_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU64_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU64_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U64_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU8, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU8_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8_2", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU8_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8_3", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementU8_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "U8_4", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementYUV, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "YUV", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementCreatePixel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "createPixel", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element$DataType;Landroid/renderscript/Element$DataKind;)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementCreateVector, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElement)), "createVector", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element$DataType;I)Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Element$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Element$Builder: %w", err)
-	}
-	clsElementBuilder = env.NewGlobalRef(&c.Object)
-
-	midElementBuilderAdd2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "add", "(Landroid/renderscript/Element;Ljava/lang/String;)Landroid/renderscript/Element$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsElementBuilder = env.NewGlobalRef(&c.Object)
 
-	midElementBuilderAdd3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "add", "(Landroid/renderscript/Element;Ljava/lang/String;I)Landroid/renderscript/Element$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElementBuilderAdd2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "add", "(Landroid/renderscript/Element;Ljava/lang/String;)Landroid/renderscript/Element$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElementBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "create", "()Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midElementBuilderAdd3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "add", "(Landroid/renderscript/Element;Ljava/lang/String;I)Landroid/renderscript/Element$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElementBuilder)), "create", "()Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Element$DataKind")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Element$DataKind: %w", err)
-	}
-	clsElementDataKind = env.NewGlobalRef(&c.Object)
-
-	midElementDataKindValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataKind)), "values", "()[Landroid/renderscript/Element$DataKind;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsElementDataKind = env.NewGlobalRef(&c.Object)
 
-	midElementDataKindValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataKind)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Element$DataKind;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midElementDataKindValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataKind)), "values", "()[Landroid/renderscript/Element$DataKind;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementDataKindValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataKind)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Element$DataKind;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Element$DataType")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Element$DataType: %w", err)
-	}
-	clsElementDataType = env.NewGlobalRef(&c.Object)
-
-	midElementDataTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataType)), "values", "()[Landroid/renderscript/Element$DataType;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsElementDataType = env.NewGlobalRef(&c.Object)
 
-	midElementDataTypeValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataType)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Element$DataType;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midElementDataTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataType)), "values", "()[Landroid/renderscript/Element$DataType;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElementDataTypeValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsElementDataType)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Element$DataType;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicConvolve5x5")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicConvolve5x5: %w", err)
-	}
-	clsScriptIntrinsicConvolve5x5 = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicConvolve5x5ForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "forEach", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicConvolve5x5 = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicConvolve5x5ForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve5x5ForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "forEach", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve5x5GetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve5x5ForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve5x5GetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve5x5GetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve5x5SetCoefficients, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "setCoefficients", "([F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve5x5GetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve5x5SetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "setInput", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve5x5SetCoefficients, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "setCoefficients", "([F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve5x5Create, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicConvolve5x5;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicConvolve5x5SetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicConvolve5x5Create, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve5x5)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicConvolve5x5;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Short4")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Short4: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsShort4 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsShort4 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/RSInvalidStateException")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RSInvalidStateException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRSInvalidStateException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsRSInvalidStateException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Long3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Long3: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLong3 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsLong3 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Double3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Double3: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDouble3 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsDouble3 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Script")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script: %w", err)
-	}
-	clsScript = env.NewGlobalRef(&c.Object)
-
-	midScriptBindAllocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "bindAllocation", "(Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScript = env.NewGlobalRef(&c.Object)
 
-	midScriptGetVarB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarB", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptBindAllocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "bindAllocation", "(Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGetVarD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarD", "(I)D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGetVarB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarB", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGetVarF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarF", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGetVarD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarD", "(I)D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGetVarI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarI", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGetVarF, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarF", "(I)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGetVarJ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarJ", "(I)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGetVarI, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarI", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGetVarV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarV", "(ILandroid/renderscript/FieldPacker;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGetVarJ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarJ", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetTimeZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setTimeZone", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGetVarV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "getVarV", "(ILandroid/renderscript/FieldPacker;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ILandroid/renderscript/BaseObj;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetTimeZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setTimeZone", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ILandroid/renderscript/FieldPacker;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetVar2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ILandroid/renderscript/BaseObj;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ILandroid/renderscript/FieldPacker;Landroid/renderscript/Element;[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetVar2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ILandroid/renderscript/FieldPacker;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(IZ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetVar4_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ILandroid/renderscript/FieldPacker;Landroid/renderscript/Element;[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ID)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetVar2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(IZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(IF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetVar2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(ID)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptSetVar2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(IF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptSetVar2_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(IJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptSetVar2_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptSetVar2_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScript)), "setVar", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Script$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script$Builder: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptBuilder = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptBuilder = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Script$FieldBase")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script$FieldBase: %w", err)
-	}
-	clsScriptFieldBase = env.NewGlobalRef(&c.Object)
-
-	midScriptFieldBaseGetAllocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "getAllocation", "()Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptFieldBase = env.NewGlobalRef(&c.Object)
 
-	midScriptFieldBaseGetElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "getElement", "()Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptFieldBaseGetAllocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "getAllocation", "()Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptFieldBaseGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "getType", "()Landroid/renderscript/Type;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptFieldBaseGetElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "getElement", "()Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptFieldBaseUpdateAllocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "updateAllocation", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptFieldBaseGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "getType", "()Landroid/renderscript/Type;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptFieldBaseUpdateAllocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptFieldBase)), "updateAllocation", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Script$FieldID")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script$FieldID: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptFieldID = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptFieldID = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Script$InvokeID")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script$InvokeID: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptInvokeID = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptInvokeID = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Script$KernelID")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script$KernelID: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptKernelID = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptKernelID = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Script$LaunchOptions")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Script$LaunchOptions: %w", err)
-	}
-	clsScriptLaunchOptions = env.NewGlobalRef(&c.Object)
-
-	midScriptLaunchOptionsGetXEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getXEnd", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptLaunchOptions = env.NewGlobalRef(&c.Object)
 
-	midScriptLaunchOptionsGetXStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getXStart", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsGetXEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getXEnd", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsGetYEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getYEnd", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsGetXStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getXStart", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsGetYStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getYStart", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsGetYEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getYEnd", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsGetZEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getZEnd", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsGetYStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getYStart", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsGetZStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getZStart", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsGetZEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getZEnd", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsSetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "setX", "(II)Landroid/renderscript/Script$LaunchOptions;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsGetZStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "getZStart", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsSetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "setY", "(II)Landroid/renderscript/Script$LaunchOptions;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptLaunchOptionsSetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "setX", "(II)Landroid/renderscript/Script$LaunchOptions;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptLaunchOptionsSetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "setZ", "(II)Landroid/renderscript/Script$LaunchOptions;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptLaunchOptionsSetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "setY", "(II)Landroid/renderscript/Script$LaunchOptions;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptLaunchOptionsSetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptLaunchOptions)), "setZ", "(II)Landroid/renderscript/Script$LaunchOptions;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Byte2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Byte2: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsByte2 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsByte2 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicLUT")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicLUT: %w", err)
-	}
-	clsScriptIntrinsicLUT = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicLUTDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "destroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicLUT = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicLUTForEach2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTForEach3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTForEach2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTForEach3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setAlpha", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTSetBlue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setBlue", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setAlpha", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTSetGreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setGreen", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTSetBlue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setBlue", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTSetRed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setRed", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicLUTSetGreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setGreen", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicLUTCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicLUT;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicLUTSetRed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "setRed", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicLUTCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicLUT)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicLUT;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Int2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Int2: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsInt2 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsInt2 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Byte4")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Byte4: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsByte4 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsByte4 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Long2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Long2: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLong2 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsLong2 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup: %w", err)
-	}
-	clsScriptGroup = env.NewGlobalRef(&c.Object)
-
-	midScriptGroupDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "destroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptGroup = env.NewGlobalRef(&c.Object)
 
-	midScriptGroupExecute0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "execute", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupExecute1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "execute", "([Ljava/lang/Object;)[Ljava/lang/Object;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupExecute0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "execute", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "setInput", "(Landroid/renderscript/Script$KernelID;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupExecute1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "execute", "([Ljava/lang/Object;)[Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupSetOutput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "setOutput", "(Landroid/renderscript/Script$KernelID;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptGroupSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "setInput", "(Landroid/renderscript/Script$KernelID;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptGroupSetOutput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroup)), "setOutput", "(Landroid/renderscript/Script$KernelID;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Binding")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup$Binding: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptGroupBinding = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptGroupBinding = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup$Builder: %w", err)
-	}
-	clsScriptGroupBuilder = env.NewGlobalRef(&c.Object)
-
-	midScriptGroupBuilderAddConnection3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "addConnection", "(Landroid/renderscript/Type;Landroid/renderscript/Script$KernelID;Landroid/renderscript/Script$FieldID;)Landroid/renderscript/ScriptGroup$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptGroupBuilder = env.NewGlobalRef(&c.Object)
 
-	midScriptGroupBuilderAddConnection3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "addConnection", "(Landroid/renderscript/Type;Landroid/renderscript/Script$KernelID;Landroid/renderscript/Script$KernelID;)Landroid/renderscript/ScriptGroup$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupBuilderAddConnection3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "addConnection", "(Landroid/renderscript/Type;Landroid/renderscript/Script$KernelID;Landroid/renderscript/Script$FieldID;)Landroid/renderscript/ScriptGroup$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupBuilderAddKernel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "addKernel", "(Landroid/renderscript/Script$KernelID;)Landroid/renderscript/ScriptGroup$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupBuilderAddConnection3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "addConnection", "(Landroid/renderscript/Type;Landroid/renderscript/Script$KernelID;Landroid/renderscript/Script$KernelID;)Landroid/renderscript/ScriptGroup$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "create", "()Landroid/renderscript/ScriptGroup;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptGroupBuilderAddKernel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "addKernel", "(Landroid/renderscript/Script$KernelID;)Landroid/renderscript/ScriptGroup$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptGroupBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder)), "create", "()Landroid/renderscript/ScriptGroup;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Builder2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup$Builder2: %w", err)
-	}
-	clsScriptGroupBuilder2 = env.NewGlobalRef(&c.Object)
-
-	midScriptGroupBuilder2AddInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "addInput", "()Landroid/renderscript/ScriptGroup$Input;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptGroupBuilder2 = env.NewGlobalRef(&c.Object)
 
-	midScriptGroupBuilder2AddInvoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "addInvoke", "(Landroid/renderscript/Script$InvokeID;[Ljava/lang/Object;)Landroid/renderscript/ScriptGroup$Closure;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupBuilder2AddInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "addInput", "()Landroid/renderscript/ScriptGroup$Input;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupBuilder2AddKernel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "addKernel", "(Landroid/renderscript/Script$KernelID;Landroid/renderscript/Type;[Ljava/lang/Object;)Landroid/renderscript/ScriptGroup$Closure;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupBuilder2AddInvoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "addInvoke", "(Landroid/renderscript/Script$InvokeID;[Ljava/lang/Object;)Landroid/renderscript/ScriptGroup$Closure;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupBuilder2Create, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "create", "(Ljava/lang/String;[Landroid/renderscript/ScriptGroup$Future;)Landroid/renderscript/ScriptGroup;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptGroupBuilder2AddKernel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "addKernel", "(Landroid/renderscript/Script$KernelID;Landroid/renderscript/Type;[Ljava/lang/Object;)Landroid/renderscript/ScriptGroup$Closure;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptGroupBuilder2Create, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupBuilder2)), "create", "(Ljava/lang/String;[Landroid/renderscript/ScriptGroup$Future;)Landroid/renderscript/ScriptGroup;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Closure")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup$Closure: %w", err)
-	}
-	clsScriptGroupClosure = env.NewGlobalRef(&c.Object)
-
-	midScriptGroupClosureDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "destroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptGroupClosure = env.NewGlobalRef(&c.Object)
 
-	midScriptGroupClosureGetGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "getGlobal", "(Landroid/renderscript/Script$FieldID;)Landroid/renderscript/ScriptGroup$Future;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptGroupClosureDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptGroupClosureGetReturn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "getReturn", "()Landroid/renderscript/ScriptGroup$Future;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptGroupClosureGetGlobal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "getGlobal", "(Landroid/renderscript/Script$FieldID;)Landroid/renderscript/ScriptGroup$Future;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptGroupClosureGetReturn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptGroupClosure)), "getReturn", "()Landroid/renderscript/ScriptGroup$Future;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Future")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup$Future: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptGroupFuture = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptGroupFuture = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptGroup$Input")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptGroup$Input: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptGroupInput = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptGroupInput = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Double2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Double2: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDouble2 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsDouble2 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/RSIllegalArgumentException")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RSIllegalArgumentException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRSIllegalArgumentException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsRSIllegalArgumentException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicBlur")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicBlur: %w", err)
-	}
-	clsScriptIntrinsicBlur = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicBlurForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "forEach", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicBlur = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicBlurForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlurForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "forEach", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlurGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlurForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlurGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlurGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlurSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "setInput", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlurGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlurSetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "setRadius", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlurSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlurCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicBlur;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicBlurSetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "setRadius", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBlurCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlur)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicBlur;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Type")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Type: %w", err)
-	}
-	clsType = env.NewGlobalRef(&c.Object)
-
-	midTypeGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsType = env.NewGlobalRef(&c.Object)
 
-	midTypeGetElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getElement", "()Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeGetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getX", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeGetElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getElement", "()Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeGetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getY", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeGetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getX", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeGetYuv, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getYuv", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeGetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getY", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeGetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getZ", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeGetYuv, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getYuv", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeHasFaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "hasFaces", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeGetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "getZ", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeHasMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "hasMipmaps", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeHasFaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "hasFaces", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeCreateX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsType)), "createX", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;I)Landroid/renderscript/Type;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeHasMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsType)), "hasMipmaps", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeCreateXY, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsType)), "createXY", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;II)Landroid/renderscript/Type;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeCreateX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsType)), "createX", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;I)Landroid/renderscript/Type;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeCreateXYZ, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsType)), "createXYZ", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;III)Landroid/renderscript/Type;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTypeCreateXY, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsType)), "createXY", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;II)Landroid/renderscript/Type;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypeCreateXYZ, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsType)), "createXYZ", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;III)Landroid/renderscript/Type;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Type$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Type$Builder: %w", err)
-	}
-	clsTypeBuilder = env.NewGlobalRef(&c.Object)
-
-	midTypeBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "create", "()Landroid/renderscript/Type;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTypeBuilder = env.NewGlobalRef(&c.Object)
 
-	midTypeBuilderSetFaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setFaces", "(Z)Landroid/renderscript/Type$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "create", "()Landroid/renderscript/Type;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeBuilderSetMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setMipmaps", "(Z)Landroid/renderscript/Type$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeBuilderSetFaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setFaces", "(Z)Landroid/renderscript/Type$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeBuilderSetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setX", "(I)Landroid/renderscript/Type$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeBuilderSetMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setMipmaps", "(Z)Landroid/renderscript/Type$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeBuilderSetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setY", "(I)Landroid/renderscript/Type$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeBuilderSetX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setX", "(I)Landroid/renderscript/Type$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeBuilderSetYuvFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setYuvFormat", "(I)Landroid/renderscript/Type$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypeBuilderSetY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setY", "(I)Landroid/renderscript/Type$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypeBuilderSetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setZ", "(I)Landroid/renderscript/Type$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTypeBuilderSetYuvFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setYuvFormat", "(I)Landroid/renderscript/Type$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypeBuilderSetZ, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypeBuilder)), "setZ", "(I)Landroid/renderscript/Type$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Type$CubemapFace")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Type$CubemapFace: %w", err)
-	}
-	clsTypeCubemapFace = env.NewGlobalRef(&c.Object)
-
-	midTypeCubemapFaceValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeCubemapFace)), "values", "()[Landroid/renderscript/Type$CubemapFace;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTypeCubemapFace = env.NewGlobalRef(&c.Object)
 
-	midTypeCubemapFaceValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeCubemapFace)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Type$CubemapFace;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTypeCubemapFaceValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeCubemapFace)), "values", "()[Landroid/renderscript/Type$CubemapFace;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypeCubemapFaceValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTypeCubemapFace)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Type$CubemapFace;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/BaseObj")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.BaseObj: %w", err)
-	}
-	clsBaseObj = env.NewGlobalRef(&c.Object)
-
-	midBaseObjDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "destroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBaseObj = env.NewGlobalRef(&c.Object)
 
-	midBaseObjEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseObjDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseObjGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseObjEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseObjHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseObjGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseObjSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "setName", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBaseObjHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBaseObjSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseObj)), "setName", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Byte3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Byte3: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsByte3 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsByte3 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Long4")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Long4: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLong4 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsLong4 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Float3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Float3: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFloat3 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsFloat3 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsic")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsic: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptIntrinsic = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptIntrinsic = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Short3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Short3: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsShort3 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsShort3 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Sampler")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Sampler: %w", err)
-	}
-	clsSampler = env.NewGlobalRef(&c.Object)
-
-	midSamplerGetAnisotropy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getAnisotropy", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSampler = env.NewGlobalRef(&c.Object)
 
-	midSamplerGetMagnification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getMagnification", "()Landroid/renderscript/Sampler$Value;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerGetAnisotropy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getAnisotropy", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerGetMinification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getMinification", "()Landroid/renderscript/Sampler$Value;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerGetMagnification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getMagnification", "()Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerGetWrapS, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getWrapS", "()Landroid/renderscript/Sampler$Value;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerGetMinification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getMinification", "()Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerGetWrapT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getWrapT", "()Landroid/renderscript/Sampler$Value;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerGetWrapS, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getWrapS", "()Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerCLAMP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "CLAMP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerGetWrapT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "getWrapT", "()Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerCLAMP_LINEAR_MIP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "CLAMP_LINEAR_MIP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerCLAMP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "CLAMP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerCLAMP_NEAREST, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "CLAMP_NEAREST", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerCLAMP_LINEAR_MIP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "CLAMP_LINEAR_MIP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerMIRRORED_REPEAT_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "MIRRORED_REPEAT_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerCLAMP_NEAREST, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "CLAMP_NEAREST", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerMIRRORED_REPEAT_LINEAR_MIP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "MIRRORED_REPEAT_LINEAR_MIP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerMIRRORED_REPEAT_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "MIRRORED_REPEAT_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerMIRRORED_REPEAT_NEAREST, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "MIRRORED_REPEAT_NEAREST", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerMIRRORED_REPEAT_LINEAR_MIP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "MIRRORED_REPEAT_LINEAR_MIP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerWRAP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "WRAP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerMIRRORED_REPEAT_NEAREST, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "MIRRORED_REPEAT_NEAREST", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerWRAP_LINEAR_MIP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "WRAP_LINEAR_MIP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerWRAP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "WRAP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerWRAP_NEAREST, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "WRAP_NEAREST", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSamplerWRAP_LINEAR_MIP_LINEAR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "WRAP_LINEAR_MIP_LINEAR", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSamplerWRAP_NEAREST, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSampler)), "WRAP_NEAREST", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Sampler$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Sampler$Builder: %w", err)
-	}
-	clsSamplerBuilder = env.NewGlobalRef(&c.Object)
-
-	midSamplerBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "create", "()Landroid/renderscript/Sampler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSamplerBuilder = env.NewGlobalRef(&c.Object)
 
-	midSamplerBuilderSetAnisotropy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setAnisotropy", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerBuilderCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "create", "()Landroid/renderscript/Sampler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerBuilderSetMagnification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setMagnification", "(Landroid/renderscript/Sampler$Value;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerBuilderSetAnisotropy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setAnisotropy", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerBuilderSetMinification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setMinification", "(Landroid/renderscript/Sampler$Value;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerBuilderSetMagnification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setMagnification", "(Landroid/renderscript/Sampler$Value;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerBuilderSetWrapS, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setWrapS", "(Landroid/renderscript/Sampler$Value;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSamplerBuilderSetMinification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setMinification", "(Landroid/renderscript/Sampler$Value;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSamplerBuilderSetWrapT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setWrapT", "(Landroid/renderscript/Sampler$Value;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSamplerBuilderSetWrapS, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setWrapS", "(Landroid/renderscript/Sampler$Value;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSamplerBuilderSetWrapT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSamplerBuilder)), "setWrapT", "(Landroid/renderscript/Sampler$Value;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Sampler$Value")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Sampler$Value: %w", err)
-	}
-	clsSamplerValue = env.NewGlobalRef(&c.Object)
-
-	midSamplerValueValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSamplerValue)), "values", "()[Landroid/renderscript/Sampler$Value;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSamplerValue = env.NewGlobalRef(&c.Object)
 
-	midSamplerValueValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSamplerValue)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Sampler$Value;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSamplerValueValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSamplerValue)), "values", "()[Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSamplerValueValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSamplerValue)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Sampler$Value;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RSDriverException")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RSDriverException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRSDriverException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsRSDriverException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Int3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Int3: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsInt3 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsInt3 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicResize")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicResize: %w", err)
-	}
-	clsScriptIntrinsicResize = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicResizeForEach_bicubic1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "forEach_bicubic", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicResize = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicResizeForEach_bicubic2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "forEach_bicubic", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicResizeForEach_bicubic1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "forEach_bicubic", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicResizeGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicResizeForEach_bicubic2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "forEach_bicubic", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicResizeGetKernelID_bicubic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "getKernelID_bicubic", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicResizeGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicResizeSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "setInput", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicResizeGetKernelID_bicubic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "getKernelID_bicubic", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicResizeCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicResize;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicResizeSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicResizeCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicResize)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicResize;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Matrix2f")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Matrix2f: %w", err)
-	}
-	clsMatrix2f = env.NewGlobalRef(&c.Object)
-
-	midMatrix2fGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "get", "(II)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMatrix2f = env.NewGlobalRef(&c.Object)
 
-	midMatrix2fGetArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "getArray", "()[F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "get", "(II)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fLoad, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "load", "(Landroid/renderscript/Matrix2f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fGetArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "getArray", "()[F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fLoadIdentity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadIdentity", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fLoad, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "load", "(Landroid/renderscript/Matrix2f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fLoadMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadMultiply", "(Landroid/renderscript/Matrix2f;Landroid/renderscript/Matrix2f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fLoadIdentity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadIdentity", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fLoadRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadRotate", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fLoadMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadMultiply", "(Landroid/renderscript/Matrix2f;Landroid/renderscript/Matrix2f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fLoadScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadScale", "(FF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fLoadRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadRotate", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "multiply", "(Landroid/renderscript/Matrix2f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fLoadScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "loadScale", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "rotate", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "multiply", "(Landroid/renderscript/Matrix2f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "scale", "(FF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "rotate", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "set", "(IIF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix2fScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "scale", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix2fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "transpose", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMatrix2fSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "set", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrix2fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix2f)), "transpose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicConvolve3x3")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicConvolve3x3: %w", err)
-	}
-	clsScriptIntrinsicConvolve3x3 = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicConvolve3x3ForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "forEach", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicConvolve3x3 = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicConvolve3x3ForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve3x3ForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "forEach", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve3x3GetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve3x3ForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve3x3GetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve3x3GetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve3x3SetCoefficients, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "setCoefficients", "([F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve3x3GetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve3x3SetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "setInput", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicConvolve3x3SetCoefficients, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "setCoefficients", "([F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicConvolve3x3Create, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicConvolve3x3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicConvolve3x3SetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicConvolve3x3Create, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicConvolve3x3)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicConvolve3x3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/FieldPacker")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.FieldPacker: %w", err)
-	}
-	clsFieldPacker = env.NewGlobalRef(&c.Object)
-
-	midFieldPackerAddBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addBoolean", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF321, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(Landroid/renderscript/Float2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF321_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(Landroid/renderscript/Float3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF321_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(Landroid/renderscript/Float4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF321_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF641, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(Landroid/renderscript/Double2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF641_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(Landroid/renderscript/Double3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF641_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(Landroid/renderscript/Double4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddF641_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(D)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI161, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(Landroid/renderscript/Short2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI161_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(Landroid/renderscript/Short3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI161_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(Landroid/renderscript/Short4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI161_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI321, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(Landroid/renderscript/Int2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI321_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(Landroid/renderscript/Int3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI321_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(Landroid/renderscript/Int4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI321_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI641, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(Landroid/renderscript/Long2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI641_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(Landroid/renderscript/Long3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI641_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(Landroid/renderscript/Long4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI641_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI81, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(Landroid/renderscript/Byte2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI81_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(Landroid/renderscript/Byte3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI81_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(Landroid/renderscript/Byte4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddI81_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddMatrix1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addMatrix", "(Landroid/renderscript/Matrix2f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddMatrix1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addMatrix", "(Landroid/renderscript/Matrix3f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddMatrix1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addMatrix", "(Landroid/renderscript/Matrix4f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddObj, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addObj", "(Landroid/renderscript/BaseObj;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU161, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(Landroid/renderscript/Int2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU161_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(Landroid/renderscript/Int3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU161_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(Landroid/renderscript/Int4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU161_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU321, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(Landroid/renderscript/Long2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU321_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(Landroid/renderscript/Long3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU321_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(Landroid/renderscript/Long4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU321_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU641, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(Landroid/renderscript/Long2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU641_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(Landroid/renderscript/Long3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU641_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(Landroid/renderscript/Long4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU641_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU81, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(Landroid/renderscript/Short2;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU81_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(Landroid/renderscript/Short3;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU81_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(Landroid/renderscript/Short4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAddU81_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerAlign, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "align", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "getData", "()[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerReset0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "reset", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerReset1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "reset", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSkip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "skip", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subBoolean", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubByte2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subByte2", "()Landroid/renderscript/Byte2;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubByte3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subByte3", "()Landroid/renderscript/Byte3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubByte4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subByte4", "()Landroid/renderscript/Byte4;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubDouble2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subDouble2", "()Landroid/renderscript/Double2;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubDouble3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subDouble3", "()Landroid/renderscript/Double3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubDouble4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subDouble4", "()Landroid/renderscript/Double4;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubF32, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subF32", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubF64, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subF64", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubFloat2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subFloat2", "()Landroid/renderscript/Float2;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubFloat3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subFloat3", "()Landroid/renderscript/Float3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubFloat4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subFloat4", "()Landroid/renderscript/Float4;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubI16, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI16", "()S")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubI32, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI32", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubI64, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI64", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubI8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI8", "()B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubInt2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subInt2", "()Landroid/renderscript/Int2;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubInt3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subInt3", "()Landroid/renderscript/Int3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubInt4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subInt4", "()Landroid/renderscript/Int4;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubLong2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subLong2", "()Landroid/renderscript/Long2;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubLong3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subLong3", "()Landroid/renderscript/Long3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubLong4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subLong4", "()Landroid/renderscript/Long4;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubMatrix2f, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subMatrix2f", "()Landroid/renderscript/Matrix2f;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubMatrix3f, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subMatrix3f", "()Landroid/renderscript/Matrix3f;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubMatrix4f, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subMatrix4f", "()Landroid/renderscript/Matrix4f;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubShort2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subShort2", "()Landroid/renderscript/Short2;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubShort3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subShort3", "()Landroid/renderscript/Short3;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubShort4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subShort4", "()Landroid/renderscript/Short4;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midFieldPackerSubalign, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subalign", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFieldPacker = env.NewGlobalRef(&c.Object)
+
+		midFieldPackerAddBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addBoolean", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF321, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(Landroid/renderscript/Float2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF321_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(Landroid/renderscript/Float3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF321_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(Landroid/renderscript/Float4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF321_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF32", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF641, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(Landroid/renderscript/Double2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF641_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(Landroid/renderscript/Double3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF641_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(Landroid/renderscript/Double4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddF641_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addF64", "(D)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI161, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(Landroid/renderscript/Short2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI161_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(Landroid/renderscript/Short3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI161_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(Landroid/renderscript/Short4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI161_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI16", "(S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI321, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(Landroid/renderscript/Int2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI321_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(Landroid/renderscript/Int3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI321_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(Landroid/renderscript/Int4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI321_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI32", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI641, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(Landroid/renderscript/Long2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI641_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(Landroid/renderscript/Long3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI641_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(Landroid/renderscript/Long4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI641_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI64", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI81, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(Landroid/renderscript/Byte2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI81_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(Landroid/renderscript/Byte3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI81_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(Landroid/renderscript/Byte4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddI81_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addI8", "(B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddMatrix1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addMatrix", "(Landroid/renderscript/Matrix2f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddMatrix1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addMatrix", "(Landroid/renderscript/Matrix3f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddMatrix1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addMatrix", "(Landroid/renderscript/Matrix4f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddObj, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addObj", "(Landroid/renderscript/BaseObj;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU161, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(Landroid/renderscript/Int2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU161_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(Landroid/renderscript/Int3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU161_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(Landroid/renderscript/Int4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU161_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU16", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU321, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(Landroid/renderscript/Long2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU321_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(Landroid/renderscript/Long3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU321_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(Landroid/renderscript/Long4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU321_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU32", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU641, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(Landroid/renderscript/Long2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU641_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(Landroid/renderscript/Long3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU641_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(Landroid/renderscript/Long4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU641_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU64", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU81, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(Landroid/renderscript/Short2;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU81_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(Landroid/renderscript/Short3;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU81_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(Landroid/renderscript/Short4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAddU81_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "addU8", "(S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerAlign, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "align", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "getData", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerReset0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "reset", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerReset1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "reset", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSkip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "skip", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubBoolean, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subBoolean", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubByte2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subByte2", "()Landroid/renderscript/Byte2;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubByte3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subByte3", "()Landroid/renderscript/Byte3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubByte4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subByte4", "()Landroid/renderscript/Byte4;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubDouble2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subDouble2", "()Landroid/renderscript/Double2;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubDouble3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subDouble3", "()Landroid/renderscript/Double3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubDouble4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subDouble4", "()Landroid/renderscript/Double4;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubF32, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subF32", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubF64, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subF64", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubFloat2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subFloat2", "()Landroid/renderscript/Float2;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubFloat3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subFloat3", "()Landroid/renderscript/Float3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubFloat4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subFloat4", "()Landroid/renderscript/Float4;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubI16, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI16", "()S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubI32, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI32", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubI64, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI64", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubI8, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subI8", "()B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubInt2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subInt2", "()Landroid/renderscript/Int2;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubInt3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subInt3", "()Landroid/renderscript/Int3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubInt4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subInt4", "()Landroid/renderscript/Int4;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubLong2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subLong2", "()Landroid/renderscript/Long2;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubLong3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subLong3", "()Landroid/renderscript/Long3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubLong4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subLong4", "()Landroid/renderscript/Long4;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubMatrix2f, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subMatrix2f", "()Landroid/renderscript/Matrix2f;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubMatrix3f, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subMatrix3f", "()Landroid/renderscript/Matrix3f;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubMatrix4f, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subMatrix4f", "()Landroid/renderscript/Matrix4f;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubShort2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subShort2", "()Landroid/renderscript/Short2;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubShort3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subShort3", "()Landroid/renderscript/Short3;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubShort4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subShort4", "()Landroid/renderscript/Short4;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFieldPackerSubalign, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldPacker)), "subalign", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Allocation")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Allocation: %w", err)
-	}
-	clsAllocation = env.NewGlobalRef(&c.Object)
-
-	midAllocationCopy1DRangeFrom4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(IILandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFrom3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFrom3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFrom3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFrom3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(IILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFrom3_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFromUnchecked3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFromUnchecked3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFromUnchecked3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFromUnchecked3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(IILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeFromUnchecked3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeTo3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeTo3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeTo3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeTo3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(IILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeTo3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeToUnchecked3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeToUnchecked3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeToUnchecked3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeToUnchecked3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(IILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy1DRangeToUnchecked3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IILandroid/graphics/Bitmap;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIIILandroid/renderscript/Allocation;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom5_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIIILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeFrom5_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeTo5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeTo5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeTo5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeTo5_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIIILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy2DRangeTo5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy3DRangeFrom10, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy3DRangeFrom", "(IIIIIILandroid/renderscript/Allocation;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy3DRangeFrom7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy3DRangeFrom", "(IIIIIILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopy3DRangeTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy3DRangeTo", "(IIIIIILjava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "(Landroid/graphics/Bitmap;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([Landroid/renderscript/BaseObj;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "(Ljava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFrom1_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFromUnchecked1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFromUnchecked1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFromUnchecked1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFromUnchecked1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "(Ljava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyFromUnchecked1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "(Landroid/graphics/Bitmap;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyTo1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyTo1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyTo1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "(Ljava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCopyTo1_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([S)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "destroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGenerateMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "generateMipmaps", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetByteBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getByteBuffer", "()Ljava/nio/ByteBuffer;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetBytesSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getBytesSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getElement", "()Landroid/renderscript/Element;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetStride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getStride", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getSurface", "()Landroid/view/Surface;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetTimeStamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getTimeStamp", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getType", "()Landroid/renderscript/Type;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationGetUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getUsage", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationIoReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "ioReceive", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationIoSend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "ioSend", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSetAutoPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setAutoPadding", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSetFromFieldPacker2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setFromFieldPacker", "(ILandroid/renderscript/FieldPacker;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSetFromFieldPacker3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setFromFieldPacker", "(IILandroid/renderscript/FieldPacker;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSetFromFieldPacker5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setFromFieldPacker", "(IIIILandroid/renderscript/FieldPacker;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSetOnBufferAvailableListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setOnBufferAvailableListener", "(Landroid/renderscript/Allocation$OnBufferAvailableListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setSurface", "(Landroid/view/Surface;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationSyncAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "syncAll", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateAllocations, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createAllocations", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;II)[Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateCubemapFromBitmap2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateCubemapFromBitmap4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateCubemapFromCubeFaces7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromCubeFaces", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateCubemapFromCubeFaces9_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromCubeFaces", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateFromBitmap2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateFromBitmap4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateFromBitmapResource3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmapResource", "(Landroid/renderscript/RenderScript;Landroid/content/res/Resources;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateFromBitmapResource5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmapResource", "(Landroid/renderscript/RenderScript;Landroid/content/res/Resources;ILandroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateFromString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromString", "(Landroid/renderscript/RenderScript;Ljava/lang/String;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateSized3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createSized", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateSized4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createSized", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;II)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateTyped2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateTyped4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midAllocationCreateTyped3_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;I)Landroid/renderscript/Allocation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAllocation = env.NewGlobalRef(&c.Object)
+
+		midAllocationCopy1DRangeFrom4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(IILandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFrom3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFrom3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFrom3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFrom3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(IILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFrom3_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFrom", "(II[S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFromUnchecked3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFromUnchecked3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFromUnchecked3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFromUnchecked3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(IILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeFromUnchecked3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeFromUnchecked", "(II[S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeTo3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeTo3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeTo3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeTo3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(IILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeTo3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeTo", "(II[S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeToUnchecked3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeToUnchecked3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeToUnchecked3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeToUnchecked3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(IILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy1DRangeToUnchecked3_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy1DRangeToUnchecked", "(II[S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IILandroid/graphics/Bitmap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIIILandroid/renderscript/Allocation;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom5_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom5_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIIILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeFrom5_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeFrom", "(IIII[S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeTo5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeTo5_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeTo5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeTo5_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIIILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy2DRangeTo5_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy2DRangeTo", "(IIII[S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy3DRangeFrom10, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy3DRangeFrom", "(IIIIIILandroid/renderscript/Allocation;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy3DRangeFrom7_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy3DRangeFrom", "(IIIIIILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopy3DRangeTo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copy3DRangeTo", "(IIIIIILjava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "(Landroid/graphics/Bitmap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([Landroid/renderscript/BaseObj;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFrom1_7, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFrom", "([S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFromUnchecked1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFromUnchecked1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFromUnchecked1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFromUnchecked1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyFromUnchecked1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyFromUnchecked", "([S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "(Landroid/graphics/Bitmap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyTo1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyTo1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyTo1_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCopyTo1_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "copyTo", "([S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGenerateMipmaps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "generateMipmaps", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetByteBuffer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getByteBuffer", "()Ljava/nio/ByteBuffer;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetBytesSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getBytesSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetElement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getElement", "()Landroid/renderscript/Element;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetStride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getStride", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getSurface", "()Landroid/view/Surface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetTimeStamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getTimeStamp", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getType", "()Landroid/renderscript/Type;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationGetUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "getUsage", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationIoReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "ioReceive", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationIoSend, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "ioSend", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSetAutoPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setAutoPadding", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSetFromFieldPacker2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setFromFieldPacker", "(ILandroid/renderscript/FieldPacker;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSetFromFieldPacker3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setFromFieldPacker", "(IILandroid/renderscript/FieldPacker;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSetFromFieldPacker5_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setFromFieldPacker", "(IIIILandroid/renderscript/FieldPacker;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSetOnBufferAvailableListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setOnBufferAvailableListener", "(Landroid/renderscript/Allocation$OnBufferAvailableListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "setSurface", "(Landroid/view/Surface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationSyncAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "syncAll", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateAllocations, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createAllocations", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;II)[Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateCubemapFromBitmap2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateCubemapFromBitmap4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateCubemapFromCubeFaces7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromCubeFaces", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateCubemapFromCubeFaces9_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createCubemapFromCubeFaces", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/graphics/Bitmap;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateFromBitmap2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateFromBitmap4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmap", "(Landroid/renderscript/RenderScript;Landroid/graphics/Bitmap;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateFromBitmapResource3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmapResource", "(Landroid/renderscript/RenderScript;Landroid/content/res/Resources;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateFromBitmapResource5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromBitmapResource", "(Landroid/renderscript/RenderScript;Landroid/content/res/Resources;ILandroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateFromString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createFromString", "(Landroid/renderscript/RenderScript;Ljava/lang/String;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateSized3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createSized", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateSized4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createSized", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;II)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateTyped2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateTyped4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;Landroid/renderscript/Allocation$MipmapControl;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationCreateTyped3_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocation)), "createTyped", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Type;I)Landroid/renderscript/Allocation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Allocation$MipmapControl")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Allocation$MipmapControl: %w", err)
-	}
-	clsAllocationMipmapControl = env.NewGlobalRef(&c.Object)
-
-	midAllocationMipmapControlValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationMipmapControl)), "values", "()[Landroid/renderscript/Allocation$MipmapControl;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAllocationMipmapControl = env.NewGlobalRef(&c.Object)
 
-	midAllocationMipmapControlValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationMipmapControl)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Allocation$MipmapControl;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAllocationMipmapControlValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationMipmapControl)), "values", "()[Landroid/renderscript/Allocation$MipmapControl;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAllocationMipmapControlValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAllocationMipmapControl)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/Allocation$MipmapControl;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Allocation$OnBufferAvailableListener")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Allocation$OnBufferAvailableListener: %w", err)
-	}
-	clsAllocationOnBufferAvailableListener = env.NewGlobalRef(&c.Object)
-
-	midAllocationOnBufferAvailableListenerOnBufferAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationOnBufferAvailableListener)), "onBufferAvailable", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAllocationOnBufferAvailableListener = env.NewGlobalRef(&c.Object)
+
+		midAllocationOnBufferAvailableListenerOnBufferAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAllocationOnBufferAvailableListener)), "onBufferAvailable", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicHistogram")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicHistogram: %w", err)
-	}
-	clsScriptIntrinsicHistogram = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicHistogramForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicHistogram = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicHistogramForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramForEach1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramForEach_Dot1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach_Dot", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramForEach2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramForEach_Dot2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach_Dot", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramForEach_Dot1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach_Dot", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramForEach_Dot2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "forEach_Dot", "(Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramGetKernelID_Separate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "getKernelID_Separate", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramSetDotCoefficients, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "setDotCoefficients", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramGetKernelID_Separate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "getKernelID_Separate", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramSetOutput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "setOutput", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicHistogramSetDotCoefficients, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "setDotCoefficients", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicHistogramCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicHistogram;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicHistogramSetOutput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "setOutput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicHistogramCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicHistogram)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicHistogram;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RenderScript")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RenderScript: %w", err)
-	}
-	clsRenderScript = env.NewGlobalRef(&c.Object)
-
-	midRenderScriptContextDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "contextDump", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRenderScript = env.NewGlobalRef(&c.Object)
 
-	midRenderScriptDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "destroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptContextDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "contextDump", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "finish", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptGetApplicationContext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getApplicationContext", "()Landroid/content/Context;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "finish", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptGetErrorHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getErrorHandler", "()Landroid/renderscript/RenderScript$RSErrorHandler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptGetApplicationContext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getApplicationContext", "()Landroid/content/Context;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptGetMessageHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getMessageHandler", "()Landroid/renderscript/RenderScript$RSMessageHandler;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptGetErrorHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getErrorHandler", "()Landroid/renderscript/RenderScript$RSErrorHandler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptSendMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "sendMessage", "(I[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptGetMessageHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getMessageHandler", "()Landroid/renderscript/RenderScript$RSMessageHandler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptSetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "setPriority", "(Landroid/renderscript/RenderScript$Priority;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptSendMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "sendMessage", "(I[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptCreate1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;)Landroid/renderscript/RenderScript;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptSetPriority, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "setPriority", "(Landroid/renderscript/RenderScript$Priority;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptCreate2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;Landroid/renderscript/RenderScript$ContextType;)Landroid/renderscript/RenderScript;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptCreate1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;)Landroid/renderscript/RenderScript;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptCreate3_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;Landroid/renderscript/RenderScript$ContextType;I)Landroid/renderscript/RenderScript;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptCreate2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;Landroid/renderscript/RenderScript$ContextType;)Landroid/renderscript/RenderScript;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptCreateMultiContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "createMultiContext", "(Landroid/content/Context;Landroid/renderscript/RenderScript$ContextType;II)Landroid/renderscript/RenderScript;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptCreate3_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "create", "(Landroid/content/Context;Landroid/renderscript/RenderScript$ContextType;I)Landroid/renderscript/RenderScript;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptGetMinorVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getMinorVersion", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRenderScriptCreateMultiContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "createMultiContext", "(Landroid/content/Context;Landroid/renderscript/RenderScript$ContextType;II)Landroid/renderscript/RenderScript;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRenderScriptReleaseAllContexts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "releaseAllContexts", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRenderScriptGetMinorVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "getMinorVersion", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderScriptReleaseAllContexts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScript)), "releaseAllContexts", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RenderScript$ContextType")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RenderScript$ContextType: %w", err)
-	}
-	clsRenderScriptContextType = env.NewGlobalRef(&c.Object)
-
-	midRenderScriptContextTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptContextType)), "values", "()[Landroid/renderscript/RenderScript$ContextType;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRenderScriptContextType = env.NewGlobalRef(&c.Object)
 
-	midRenderScriptContextTypeValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptContextType)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/RenderScript$ContextType;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRenderScriptContextTypeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptContextType)), "values", "()[Landroid/renderscript/RenderScript$ContextType;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderScriptContextTypeValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptContextType)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/RenderScript$ContextType;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RenderScript$Priority")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RenderScript$Priority: %w", err)
-	}
-	clsRenderScriptPriority = env.NewGlobalRef(&c.Object)
-
-	midRenderScriptPriorityValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptPriority)), "values", "()[Landroid/renderscript/RenderScript$Priority;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRenderScriptPriority = env.NewGlobalRef(&c.Object)
 
-	midRenderScriptPriorityValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptPriority)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/RenderScript$Priority;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRenderScriptPriorityValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptPriority)), "values", "()[Landroid/renderscript/RenderScript$Priority;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderScriptPriorityValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptPriority)), "valueOf", "(Ljava/lang/String;)Landroid/renderscript/RenderScript$Priority;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RenderScript$RSErrorHandler")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RenderScript$RSErrorHandler: %w", err)
-	}
-	clsRenderScriptRSErrorHandler = env.NewGlobalRef(&c.Object)
-
-	midRenderScriptRSErrorHandlerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSErrorHandler)), "run", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsRenderScriptRSErrorHandler = env.NewGlobalRef(&c.Object)
+
+		midRenderScriptRSErrorHandlerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSErrorHandler)), "run", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RenderScript$RSMessageHandler")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RenderScript$RSMessageHandler: %w", err)
-	}
-	clsRenderScriptRSMessageHandler = env.NewGlobalRef(&c.Object)
-
-	midRenderScriptRSMessageHandlerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSMessageHandler)), "run", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsRenderScriptRSMessageHandler = env.NewGlobalRef(&c.Object)
+
+		midRenderScriptRSMessageHandlerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderScriptRSMessageHandler)), "run", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Matrix3f")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Matrix3f: %w", err)
-	}
-	clsMatrix3f = env.NewGlobalRef(&c.Object)
-
-	midMatrix3fGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "get", "(II)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMatrix3f = env.NewGlobalRef(&c.Object)
 
-	midMatrix3fGetArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "getArray", "()[F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "get", "(II)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoad, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "load", "(Landroid/renderscript/Matrix3f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fGetArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "getArray", "()[F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadIdentity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadIdentity", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoad, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "load", "(Landroid/renderscript/Matrix3f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadMultiply", "(Landroid/renderscript/Matrix3f;Landroid/renderscript/Matrix3f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadIdentity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadIdentity", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadRotate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadRotate", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadMultiply", "(Landroid/renderscript/Matrix3f;Landroid/renderscript/Matrix3f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadRotate4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadRotate", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadRotate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadRotate", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadScale2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadScale", "(FF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadRotate4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadRotate", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadScale3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadScale", "(FFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadScale2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadScale", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fLoadTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadTranslate", "(FF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadScale3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadScale", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "multiply", "(Landroid/renderscript/Matrix3f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fLoadTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "loadTranslate", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fRotate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "rotate", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "multiply", "(Landroid/renderscript/Matrix3f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fRotate4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "rotate", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fRotate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "rotate", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fScale2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "scale", "(FF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fRotate4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "rotate", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fScale3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "scale", "(FFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fScale2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "scale", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "set", "(IIF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fScale3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "scale", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "translate", "(FF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix3fSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "set", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix3fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "transpose", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMatrix3fTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "translate", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrix3fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix3f)), "transpose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicColorMatrix")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicColorMatrix: %w", err)
-	}
-	clsScriptIntrinsicColorMatrix = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicColorMatrixForEach2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicColorMatrix = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicColorMatrixForEach3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixForEach2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixForEach3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetAdd1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setAdd", "(Landroid/renderscript/Float4;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetAdd4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setAdd", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetAdd1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setAdd", "(Landroid/renderscript/Float4;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetColorMatrix1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setColorMatrix", "(Landroid/renderscript/Matrix3f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetAdd4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setAdd", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetColorMatrix1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setColorMatrix", "(Landroid/renderscript/Matrix4f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetColorMatrix1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setColorMatrix", "(Landroid/renderscript/Matrix3f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetGreyscale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setGreyscale", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetColorMatrix1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setColorMatrix", "(Landroid/renderscript/Matrix4f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetRGBtoYUV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setRGBtoYUV", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetGreyscale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setGreyscale", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixSetYUVtoRGB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setYUVtoRGB", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetRGBtoYUV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setRGBtoYUV", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixCreate1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicColorMatrix;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicColorMatrixSetYUVtoRGB, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "setYUVtoRGB", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicColorMatrixCreate2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicColorMatrix;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicColorMatrixCreate1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicColorMatrix;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicColorMatrixCreate2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicColorMatrix)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicColorMatrix;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Matrix4f")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Matrix4f: %w", err)
-	}
-	clsMatrix4f = env.NewGlobalRef(&c.Object)
-
-	midMatrix4fGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "get", "(II)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMatrix4f = env.NewGlobalRef(&c.Object)
 
-	midMatrix4fGetArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "getArray", "()[F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "get", "(II)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fInverse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "inverse", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fGetArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "getArray", "()[F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fInverseTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "inverseTranspose", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fInverse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "inverse", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoad, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "load", "(Landroid/renderscript/Matrix4f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fInverseTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "inverseTranspose", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadFrustum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadFrustum", "(FFFFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoad, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "load", "(Landroid/renderscript/Matrix4f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadIdentity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadIdentity", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadFrustum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadFrustum", "(FFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadMultiply", "(Landroid/renderscript/Matrix4f;Landroid/renderscript/Matrix4f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadIdentity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadIdentity", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadOrtho, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadOrtho", "(FFFFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadMultiply", "(Landroid/renderscript/Matrix4f;Landroid/renderscript/Matrix4f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadOrthoWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadOrthoWindow", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadOrtho, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadOrtho", "(FFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadPerspective, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadPerspective", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadOrthoWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadOrthoWindow", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadProjectionNormalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadProjectionNormalized", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadPerspective, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadPerspective", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadRotate", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadProjectionNormalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadProjectionNormalized", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadScale", "(FFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadRotate", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fLoadTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadTranslate", "(FFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadScale", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "multiply", "(Landroid/renderscript/Matrix4f;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fLoadTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "loadTranslate", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "rotate", "(FFFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "multiply", "(Landroid/renderscript/Matrix4f;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "scale", "(FFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fRotate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "rotate", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "set", "(IIF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "scale", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "translate", "(FFF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMatrix4fSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "set", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMatrix4fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "transpose", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMatrix4fTranslate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "translate", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrix4fTranspose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix4f)), "transpose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Double4")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Double4: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDouble4 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsDouble4 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsic3DLUT")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsic3DLUT: %w", err)
-	}
-	clsScriptIntrinsic3DLUT = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsic3DLUTForEach2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsic3DLUT = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsic3DLUTForEach3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsic3DLUTForEach2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsic3DLUTGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsic3DLUTForEach3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "forEach", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsic3DLUTSetLUT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "setLUT", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsic3DLUTGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsic3DLUTCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsic3DLUT;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsic3DLUTSetLUT, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "setLUT", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsic3DLUTCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsic3DLUT)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsic3DLUT;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Short2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Short2: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsShort2 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsShort2 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptC")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptC: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptC = env.NewGlobalRef(&c.Object)
+
 	}
-	clsScriptC = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicYuvToRGB")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicYuvToRGB: %w", err)
-	}
-	clsScriptIntrinsicYuvToRGB = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicYuvToRGBForEach, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "forEach", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicYuvToRGB = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicYuvToRGBGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicYuvToRGBForEach, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "forEach", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicYuvToRGBGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicYuvToRGBGetFieldID_Input, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "getFieldID_Input", "()Landroid/renderscript/Script$FieldID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicYuvToRGBSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "setInput", "(Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicYuvToRGBGetKernelID, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "getKernelID", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicYuvToRGBCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicYuvToRGB;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicYuvToRGBSetInput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "setInput", "(Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicYuvToRGBCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicYuvToRGB)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicYuvToRGB;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicBLAS")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicBLAS: %w", err)
-	}
-	clsScriptIntrinsicBLAS = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicBLASBNNM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "BNNM", "(Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGBMV", "(IIILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGEMM", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGEMV", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCGERC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGERC", "(Landroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCGERU, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGERU", "(Landroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHBMV", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHEMM", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHEMV", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHER", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHER2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHER2", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHER2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHER2K", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHERK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHERK", "(IIFLandroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHPMV", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHPR", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCHPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHPR2", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CSYMM", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CSYR2K", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CSYRK", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRMM", "(IIIILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRSM", "(IIIILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGBMV", "(IIIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGEMM", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGEMV", "(IDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDGER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGER", "(DLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSBMV", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSPMV", "(IDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSPR", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSPR2", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYMM", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSYMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYMV", "(IDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSYR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYR", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSYR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYR2", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYR2K", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYRK", "(IIDLandroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRMM", "(IIIIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRSM", "(IIIIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASDTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGBMV", "(IIIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGEMM", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGEMV", "(IFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSGER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGER", "(FLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSBMV", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSPMV", "(IFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSPR", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSPR2", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYMM", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSYMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYMV", "(IFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSYR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYR", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSYR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYR2", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYR2K", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYRK", "(IIFLandroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRMM", "(IIIIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRSM", "(IIIIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASSTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGBMV", "(IIILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGEMM", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGEMV", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZGERC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGERC", "(Landroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZGERU, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGERU", "(Landroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHBMV", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHEMM", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHEMV", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHER", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHER2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHER2", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHER2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHER2K", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHERK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHERK", "(IIDLandroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHPMV", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHPR", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZHPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHPR2", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZSYMM", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZSYR2K", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZSYRK", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRMM", "(IIIILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRSM", "(IIIILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASZTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midScriptIntrinsicBLASCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicBLAS;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScriptIntrinsicBLAS = env.NewGlobalRef(&c.Object)
+
+		midScriptIntrinsicBLASBNNM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "BNNM", "(Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGBMV", "(IIILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGEMM", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGEMV", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCGERC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGERC", "(Landroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCGERU, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CGERU", "(Landroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHBMV", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHEMM", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHEMV", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHER", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHER2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHER2", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHER2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHER2K", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHERK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHERK", "(IIFLandroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHPMV", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHPR", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCHPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CHPR2", "(ILandroid/renderscript/Float2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CSYMM", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CSYR2K", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CSYRK", "(IILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Float2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRMM", "(IIIILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRSM", "(IIIILandroid/renderscript/Float2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "CTRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGBMV", "(IIIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGEMM", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGEMV", "(IDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDGER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DGER", "(DLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSBMV", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSPMV", "(IDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSPR", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSPR2", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYMM", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSYMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYMV", "(IDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IDLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSYR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYR", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSYR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYR2", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYR2K", "(IIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DSYRK", "(IIDLandroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRMM", "(IIIIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRSM", "(IIIIDLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASDTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "DTRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGBMV", "(IIIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGEMM", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGEMV", "(IFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSGER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SGER", "(FLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSBMV", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSPMV", "(IFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSPR", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSPR2", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYMM", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSYMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYMV", "(IFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;IFLandroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSYR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYR", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSYR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYR2", "(IFLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYR2K", "(IIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "SSYRK", "(IIFLandroid/renderscript/Allocation;FLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRMM", "(IIIIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRSM", "(IIIIFLandroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASSTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "STRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZGBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGBMV", "(IIILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZGEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGEMM", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZGEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGEMV", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZGERC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGERC", "(Landroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZGERU, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZGERU", "(Landroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHBMV", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHEMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHEMM", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHEMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHEMV", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHER, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHER", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHER2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHER2", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHER2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHER2K", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHERK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHERK", "(IIDLandroid/renderscript/Allocation;DLandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHPMV", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHPR, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHPR", "(IDLandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZHPR2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZHPR2", "(ILandroid/renderscript/Double2;Landroid/renderscript/Allocation;ILandroid/renderscript/Allocation;ILandroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZSYMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZSYMM", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZSYR2K, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZSYR2K", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZSYRK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZSYRK", "(IILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Double2;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTBMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTBMV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTBSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTBSV", "(IIIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTPMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTPMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTPSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTPSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTRMM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRMM", "(IIIILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTRMV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRMV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTRSM, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRSM", "(IIIILandroid/renderscript/Double2;Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASZTRSV, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "ZTRSV", "(IIILandroid/renderscript/Allocation;Landroid/renderscript/Allocation;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBLASCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBLAS)), "create", "(Landroid/renderscript/RenderScript;)Landroid/renderscript/ScriptIntrinsicBLAS;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/Float2")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Float2: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFloat2 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsFloat2 = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/ScriptIntrinsicBlend")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.ScriptIntrinsicBlend: %w", err)
-	}
-	clsScriptIntrinsicBlend = env.NewGlobalRef(&c.Object)
-
-	midScriptIntrinsicBlendForEachAdd2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachAdd", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScriptIntrinsicBlend = env.NewGlobalRef(&c.Object)
 
-	midScriptIntrinsicBlendForEachAdd3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachAdd", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachAdd2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachAdd", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachClear2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachClear", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachAdd3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachAdd", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachClear3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachClear", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachClear2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachClear", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDst2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDst", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachClear3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachClear", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDst3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDst", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDst2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDst", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstAtop2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDst3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDst", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstAtop3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstAtop2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstIn2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstAtop3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstIn3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstIn2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstOut2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstIn3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstOut3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstOut2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstOver2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstOut3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachDstOver3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstOver2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachMultiply2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachMultiply", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachDstOver3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachDstOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachMultiply3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachMultiply", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachMultiply2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachMultiply", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrc2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrc", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachMultiply3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachMultiply", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrc3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrc", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrc2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrc", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcAtop2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrc3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrc", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcAtop3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcAtop2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcIn2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcAtop3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcAtop", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcIn3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcIn2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcOut2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcIn3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcIn", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcOut3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcOut2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcOver2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcOut3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOut", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSrcOver3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcOver2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSubtract2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSubtract", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSrcOver3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSrcOver", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachSubtract3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSubtract", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSubtract2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSubtract", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachXor2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachXor", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachSubtract3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachSubtract", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendForEachXor3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachXor", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachXor2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachXor", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDAdd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDAdd", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendForEachXor3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "forEachXor", "(Landroid/renderscript/Allocation;Landroid/renderscript/Allocation;Landroid/renderscript/Script$LaunchOptions;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDClear", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDAdd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDAdd", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDDst, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDst", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDClear", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDDstAtop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstAtop", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDDst, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDst", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDDstIn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstIn", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDDstAtop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstAtop", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDDstOut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstOut", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDDstIn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstIn", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDDstOver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstOver", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDDstOut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstOut", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDMultiply", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDDstOver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDDstOver", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDSrc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrc", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDMultiply, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDMultiply", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDSrcAtop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcAtop", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDSrc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrc", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDSrcIn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcIn", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDSrcAtop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcAtop", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDSrcOut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcOut", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDSrcIn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcIn", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDSrcOver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcOver", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDSrcOut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcOut", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDSubtract, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSubtract", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDSrcOver, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSrcOver", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendGetKernelIDXor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDXor", "()Landroid/renderscript/Script$KernelID;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScriptIntrinsicBlendGetKernelIDSubtract, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDSubtract", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScriptIntrinsicBlendCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicBlend;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScriptIntrinsicBlendGetKernelIDXor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "getKernelIDXor", "()Landroid/renderscript/Script$KernelID;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScriptIntrinsicBlendCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScriptIntrinsicBlend)), "create", "(Landroid/renderscript/RenderScript;Landroid/renderscript/Element;)Landroid/renderscript/ScriptIntrinsicBlend;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/renderscript/RSRuntimeException")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.RSRuntimeException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRSRuntimeException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsRSRuntimeException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/renderscript/Float4")
 	if err != nil {
-		return fmt.Errorf("find class android.renderscript.Float4: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFloat4 = env.NewGlobalRef(&c.Object)
+
 	}
-	clsFloat4 = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

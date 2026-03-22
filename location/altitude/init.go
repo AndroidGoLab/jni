@@ -48,22 +48,26 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/location/altitude/AltitudeConverter")
 	if err != nil {
-		return fmt.Errorf("find class android.location.altitude.AltitudeConverter: %w", err)
-	}
-	clsConverter = env.NewGlobalRef(&c.Object)
-
-	midConverterAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "addMslAltitudeToLocation", "(Landroid/content/Context;Landroid/location/Location;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsConverter = env.NewGlobalRef(&c.Object)
 
-	midConverterTryAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "tryAddMslAltitudeToLocation", "(Landroid/location/Location;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midConverterAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "addMslAltitudeToLocation", "(Landroid/content/Context;Landroid/location/Location;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConverterTryAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "tryAddMslAltitudeToLocation", "(Landroid/location/Location;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

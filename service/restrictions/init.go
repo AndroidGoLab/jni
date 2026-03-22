@@ -48,22 +48,26 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/restrictions/RestrictionsReceiver")
 	if err != nil {
-		return fmt.Errorf("find class android.service.restrictions.RestrictionsReceiver: %w", err)
-	}
-	clsReceiver = env.NewGlobalRef(&c.Object)
-
-	midReceiverOnReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onReceive", "(Landroid/content/Context;Landroid/content/Intent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReceiver = env.NewGlobalRef(&c.Object)
 
-	midReceiverOnRequestPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onRequestPermission", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/os/PersistableBundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReceiverOnReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onReceive", "(Landroid/content/Context;Landroid/content/Intent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReceiverOnRequestPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReceiver)), "onRequestPermission", "(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/os/PersistableBundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

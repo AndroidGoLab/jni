@@ -47,15 +47,19 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/adservices/AdServicesState")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.AdServicesState: %w", err)
-	}
-	clsAdServicesState = env.NewGlobalRef(&c.Object)
-
-	midAdServicesStateIsAdServicesStateEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesState)), "isAdServicesStateEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAdServicesState = env.NewGlobalRef(&c.Object)
+
+		midAdServicesStateIsAdServicesStateEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesState)), "isAdServicesStateEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -51,43 +51,47 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/os/BatteryManager")
 	if err != nil {
-		return fmt.Errorf("find class android.os.BatteryManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerComputeChargeTimeRemaining, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "computeChargeTimeRemaining", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerGetIntProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getIntProperty", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerComputeChargeTimeRemaining, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "computeChargeTimeRemaining", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetLongProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLongProperty", "(I)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetIntProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getIntProperty", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetStringProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStringProperty", "(I)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetLongProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLongProperty", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isCharging", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerGetStringProperty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStringProperty", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsCharging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isCharging", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

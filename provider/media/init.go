@@ -89,245 +89,281 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/provider/MediaStore")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore: %w", err)
-	}
-	clsMediaStore = env.NewGlobalRef(&c.Object)
-
-	midMediaStoreCanManageMedia, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "canManageMedia", "(Landroid/content/Context;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMediaStore = env.NewGlobalRef(&c.Object)
 
-	midMediaStoreGetDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreCanManageMedia, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "canManageMedia", "(Landroid/content/Context;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetGeneration, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getGeneration", "(Landroid/content/Context;Ljava/lang/String;)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetMediaScannerUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getMediaScannerUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetGeneration, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getGeneration", "(Landroid/content/Context;Ljava/lang/String;)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetMediaUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getMediaUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetMediaScannerUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getMediaScannerUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetOriginalMediaFormatFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getOriginalMediaFormatFileDescriptor", "(Landroid/content/Context;Landroid/os/ParcelFileDescriptor;)Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetMediaUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getMediaUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetPickImagesMaxLimit, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getPickImagesMaxLimit", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetOriginalMediaFormatFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getOriginalMediaFormatFileDescriptor", "(Landroid/content/Context;Landroid/os/ParcelFileDescriptor;)Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetRedactedUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetPickImagesMaxLimit, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getPickImagesMaxLimit", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRequireOriginal", "(Landroid/net/Uri;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetRedactedUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRedactedUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetVersion1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVersion", "(Landroid/content/Context;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRequireOriginal", "(Landroid/net/Uri;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetVersion2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVersion", "(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetVersion1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVersion", "(Landroid/content/Context;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreGetVolumeName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVolumeName", "(Landroid/net/Uri;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetVersion2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVersion", "(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreIsCurrentCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isCurrentCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreGetVolumeName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getVolumeName", "(Landroid/net/Uri;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreIsCurrentSystemGallery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isCurrentSystemGallery", "(Landroid/content/ContentResolver;ILjava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreIsCurrentCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isCurrentCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreIsSupportedCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isSupportedCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreIsCurrentSystemGallery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isCurrentSystemGallery", "(Landroid/content/ContentResolver;ILjava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreNotifyCloudMediaChangedEvent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "notifyCloudMediaChangedEvent", "(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreIsSupportedCloudMediaProviderAuthority, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "isSupportedCloudMediaProviderAuthority", "(Landroid/content/ContentResolver;Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreOpenAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreNotifyCloudMediaChangedEvent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "notifyCloudMediaChangedEvent", "(Landroid/content/ContentResolver;Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreOpenFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreOpenAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreOpenTypedAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openTypedAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreOpenFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/CancellationSignal;)Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreSetIncludePending, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "setIncludePending", "(Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMediaStoreOpenTypedAssetFileDescriptor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "openTypedAssetFileDescriptor", "(Landroid/content/ContentResolver;Landroid/net/Uri;Ljava/lang/String;Landroid/os/Bundle;Landroid/os/CancellationSignal;)Landroid/content/res/AssetFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMediaStoreSetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "setRequireOriginal", "(Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMediaStoreSetIncludePending, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "setIncludePending", "(Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaStoreSetRequireOriginal, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "setRequireOriginal", "(Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/MediaStore$Audio")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$Audio: %w", err)
-	}
-	clsMediaStoreAudio = env.NewGlobalRef(&c.Object)
-
-	midMediaStoreAudioKeyFor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreAudio)), "keyFor", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsMediaStoreAudio = env.NewGlobalRef(&c.Object)
+
+		midMediaStoreAudioKeyFor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreAudio)), "keyFor", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/MediaStore$DownloadColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$DownloadColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaStoreDownloadColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMediaStoreDownloadColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/MediaStore$Downloads")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$Downloads: %w", err)
-	}
-	clsMediaStoreDownloads = env.NewGlobalRef(&c.Object)
-
-	midMediaStoreDownloadsGetContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreDownloads)), "getContentUri", "(Ljava/lang/String;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMediaStoreDownloads = env.NewGlobalRef(&c.Object)
 
-	midMediaStoreDownloadsGetContentUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreDownloads)), "getContentUri", "(Ljava/lang/String;J)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMediaStoreDownloadsGetContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreDownloads)), "getContentUri", "(Ljava/lang/String;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaStoreDownloadsGetContentUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreDownloads)), "getContentUri", "(Ljava/lang/String;J)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/MediaStore$Files")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$Files: %w", err)
-	}
-	clsMediaStoreFiles = env.NewGlobalRef(&c.Object)
-
-	midMediaStoreFilesGetContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreFiles)), "getContentUri", "(Ljava/lang/String;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMediaStoreFiles = env.NewGlobalRef(&c.Object)
 
-	midMediaStoreFilesGetContentUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreFiles)), "getContentUri", "(Ljava/lang/String;J)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMediaStoreFilesGetContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreFiles)), "getContentUri", "(Ljava/lang/String;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaStoreFilesGetContentUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreFiles)), "getContentUri", "(Ljava/lang/String;J)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/MediaStore$Images")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$Images: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaStoreImages = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMediaStoreImages = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/MediaStore$MediaColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$MediaColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaStoreMediaColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMediaStoreMediaColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/MediaStore$PickerMediaColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$PickerMediaColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaStorePickerMediaColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMediaStorePickerMediaColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/MediaStore$Video")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.MediaStore$Video: %w", err)
-	}
-	clsMediaStoreVideo = env.NewGlobalRef(&c.Object)
-
-	midMediaStoreVideoQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreVideo)), "query", "(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsMediaStoreVideo = env.NewGlobalRef(&c.Object)
+
+		midMediaStoreVideoQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStoreVideo)), "query", "(Landroid/content/ContentResolver;Landroid/net/Uri;[Ljava/lang/String;)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

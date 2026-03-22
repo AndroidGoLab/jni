@@ -109,441 +109,449 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/icu/math/MathContext")
 	if err != nil {
-		return fmt.Errorf("find class android.icu.math.MathContext: %w", err)
-	}
-	clsContext = env.NewGlobalRef(&c.Object)
-
-	midContextGetDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getDigits", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContext = env.NewGlobalRef(&c.Object)
 
-	midContextGetForm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getForm", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContextGetDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getDigits", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContextGetLostDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getLostDigits", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContextGetForm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getForm", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContextGetRoundingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getRoundingMode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContextGetLostDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getLostDigits", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContextGetRoundingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getRoundingMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/icu/math/BigDecimal")
 	if err != nil {
-		return fmt.Errorf("find class android.icu.math.BigDecimal: %w", err)
-	}
-	clsBigDecimal = env.NewGlobalRef(&c.Object)
-
-	midBigDecimalAbs0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "abs", "()Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBigDecimal = env.NewGlobalRef(&c.Object)
 
-	midBigDecimalAbs1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "abs", "(Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalAbs0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "abs", "()Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalAdd1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "add", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalAbs1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "abs", "(Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalAdd2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "add", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalAdd1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "add", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalByteValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "byteValueExact", "()B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalAdd2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "add", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "compareTo", "(Landroid/icu/math/BigDecimal;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalByteValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "byteValueExact", "()B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalCompareTo2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "compareTo", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "compareTo", "(Landroid/icu/math/BigDecimal;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDivide1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalCompareTo2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "compareTo", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDivide2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDivide1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDivide2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;I)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDivide2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDivide3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;II)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDivide2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;I)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDivideInteger1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divideInteger", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDivide3_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divide", "(Landroid/icu/math/BigDecimal;II)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDivideInteger2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divideInteger", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDivideInteger1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divideInteger", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalDoubleValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "doubleValue", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDivideInteger2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "divideInteger", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalDoubleValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "doubleValue", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalFloatValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "floatValue", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalFormat2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "format", "(II)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalFloatValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "floatValue", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalFormat6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "format", "(IIIIII)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalFormat2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "format", "(II)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalFormat6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "format", "(IIIIII)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalIntValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "intValue", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalIntValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "intValueExact", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalIntValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "intValue", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalLongValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "longValue", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalIntValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "intValueExact", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalLongValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "longValueExact", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalLongValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "longValue", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMax1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "max", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalLongValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "longValueExact", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMax2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "max", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMax1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "max", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMin1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "min", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMax2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "max", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMin2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "min", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMin1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "min", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMovePointLeft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "movePointLeft", "(I)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMin2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "min", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMovePointRight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "movePointRight", "(I)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMovePointLeft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "movePointLeft", "(I)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMultiply1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "multiply", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMovePointRight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "movePointRight", "(I)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalMultiply2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "multiply", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMultiply1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "multiply", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalNegate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "negate", "()Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalMultiply2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "multiply", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalNegate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "negate", "(Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalNegate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "negate", "()Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalPlus0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "plus", "()Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalNegate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "negate", "(Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalPlus1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "plus", "(Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalPlus0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "plus", "()Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalPow1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "pow", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalPlus1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "plus", "(Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalPow2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "pow", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalPow1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "pow", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalRemainder1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "remainder", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalPow2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "pow", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalRemainder2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "remainder", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalRemainder1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "remainder", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "scale", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalRemainder2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "remainder", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalSetScale1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "setScale", "(I)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalScale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "scale", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalSetScale2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "setScale", "(II)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalSetScale1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "setScale", "(I)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalShortValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "shortValueExact", "()S")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalSetScale2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "setScale", "(II)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalSignum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "signum", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalShortValueExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "shortValueExact", "()S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalSubtract1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "subtract", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalSignum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "signum", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalSubtract2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "subtract", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalSubtract1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "subtract", "(Landroid/icu/math/BigDecimal;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalToBigDecimal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toBigDecimal", "()Ljava/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalSubtract2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "subtract", "(Landroid/icu/math/BigDecimal;Landroid/icu/math/MathContext;)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalToBigInteger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toBigInteger", "()Ljava/math/BigInteger;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalToBigDecimal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toBigDecimal", "()Ljava/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalToBigIntegerExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toBigIntegerExact", "()Ljava/math/BigInteger;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalToBigInteger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toBigInteger", "()Ljava/math/BigInteger;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalToCharArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toCharArray", "()[C")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalToBigIntegerExact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toBigIntegerExact", "()Ljava/math/BigInteger;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalToCharArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toCharArray", "()[C")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalUnscaledValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "unscaledValue", "()Ljava/math/BigInteger;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalCompareTo1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "compareTo", "(Ljava/lang/Object;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalUnscaledValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "unscaledValue", "()Ljava/math/BigInteger;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalValueOf1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(D)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalCompareTo1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalValueOf1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(J)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBigDecimalValueOf1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(D)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBigDecimalValueOf2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(JI)Landroid/icu/math/BigDecimal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBigDecimalValueOf1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(J)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBigDecimalValueOf2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(JI)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

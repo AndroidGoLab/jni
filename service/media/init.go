@@ -69,145 +69,161 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/media/MediaBrowserService")
 	if err != nil {
-		return fmt.Errorf("find class android.service.media.MediaBrowserService: %w", err)
-	}
-	clsBrowserService = env.NewGlobalRef(&c.Object)
-
-	midBrowserServiceDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "dump", "(Ljava/io/FileDescriptor;Ljava/io/PrintWriter;[Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBrowserService = env.NewGlobalRef(&c.Object)
 
-	midBrowserServiceGetBrowserRootHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "getBrowserRootHints", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "dump", "(Ljava/io/FileDescriptor;Ljava/io/PrintWriter;[Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceGetCurrentBrowserInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "getCurrentBrowserInfo", "()Landroid/media/session/MediaSessionManager$RemoteUserInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceGetBrowserRootHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "getBrowserRootHints", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceGetSessionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "getSessionToken", "()Landroid/media/session/MediaSession$Token;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceGetCurrentBrowserInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "getCurrentBrowserInfo", "()Landroid/media/session/MediaSessionManager$RemoteUserInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceNotifyChildrenChanged1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "notifyChildrenChanged", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceGetSessionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "getSessionToken", "()Landroid/media/session/MediaSession$Token;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceNotifyChildrenChanged2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "notifyChildrenChanged", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceNotifyChildrenChanged1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "notifyChildrenChanged", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceNotifyChildrenChanged2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "notifyChildrenChanged", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "onCreate", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceOnGetRoot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "onGetRoot", "(Ljava/lang/String;ILandroid/os/Bundle;)Landroid/service/media/MediaBrowserService$BrowserRoot;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBrowserServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBrowserServiceSetSessionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "setSessionToken", "(Landroid/media/session/MediaSession$Token;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBrowserServiceOnGetRoot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "onGetRoot", "(Ljava/lang/String;ILandroid/os/Bundle;)Landroid/service/media/MediaBrowserService$BrowserRoot;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBrowserServiceSetSessionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserService)), "setSessionToken", "(Landroid/media/session/MediaSession$Token;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/media/MediaBrowserService$BrowserRoot")
 	if err != nil {
-		return fmt.Errorf("find class android.service.media.MediaBrowserService$BrowserRoot: %w", err)
-	}
-	clsBrowserServiceBrowserRoot = env.NewGlobalRef(&c.Object)
-
-	midBrowserServiceBrowserRootGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceBrowserRoot)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBrowserServiceBrowserRoot = env.NewGlobalRef(&c.Object)
 
-	midBrowserServiceBrowserRootGetRootId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceBrowserRoot)), "getRootId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBrowserServiceBrowserRootGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceBrowserRoot)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBrowserServiceBrowserRootGetRootId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceBrowserRoot)), "getRootId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/media/MediaBrowserService$Result")
 	if err != nil {
-		return fmt.Errorf("find class android.service.media.MediaBrowserService$Result: %w", err)
-	}
-	clsBrowserServiceResult = env.NewGlobalRef(&c.Object)
-
-	midBrowserServiceResultDetach, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceResult)), "detach", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsBrowserServiceResult = env.NewGlobalRef(&c.Object)
+
+		midBrowserServiceResultDetach, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceResult)), "detach", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/media/CameraPrewarmService")
 	if err != nil {
-		return fmt.Errorf("find class android.service.media.CameraPrewarmService: %w", err)
-	}
-	clsCameraPrewarmService = env.NewGlobalRef(&c.Object)
-
-	midCameraPrewarmServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraPrewarmService = env.NewGlobalRef(&c.Object)
 
-	midCameraPrewarmServiceOnCooldown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onCooldown", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraPrewarmServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraPrewarmServiceOnPrewarm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onPrewarm", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraPrewarmServiceOnCooldown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onCooldown", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraPrewarmServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onUnbind", "(Landroid/content/Intent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraPrewarmServiceOnPrewarm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onPrewarm", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraPrewarmServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

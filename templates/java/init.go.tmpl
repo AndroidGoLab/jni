@@ -56,13 +56,15 @@ func doInit(env *jni.Env) error {
 {{range .Classes}}
 	c, err = env.FindClass("{{.JavaClassSlash}}")
 	if err != nil {
-		return fmt.Errorf("find class {{.JavaClass}}: %w", err)
-	}
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
 	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
 {{- if eq .Obtain "constructor"}}
 	mid{{.GoType}}Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), "<init>", "{{.ConstructorJNISig}}")
 	if err != nil {
-		return fmt.Errorf("get constructor {{.JavaClass}}.<init>: %w", err)
+		env.ExceptionClear()
 	}
 {{- end}}
 {{$cls := .}}{{range .Methods}}
@@ -72,30 +74,35 @@ func doInit(env *jni.Env) error {
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	}
-{{end}}{{end}}
+{{end}}
+	}
+{{end}}
 {{- range .DataClasses}}
 	c, err = env.FindClass("{{.JavaClassSlash}}")
 	if err != nil {
-		return fmt.Errorf("find class {{.JavaClass}}: %w", err)
-	}
+		env.ExceptionClear()
+	} else {
 	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
 {{$dc := .}}{{range .Fields}}{{if .IsField}}
 	fid{{$dc.GoType}}{{.GoName}}, err = env.GetFieldID((*jni.Class)(unsafe.Pointer(cls{{$dc.GoType}})), "{{.JavaName}}", "{{.JNISig}}")
 	if err != nil {
-		return fmt.Errorf("get field {{$dc.JavaClass}}.{{.JavaName}}: %w", err)
+		env.ExceptionClear()
 	}
 {{else}}
 	mid{{$dc.GoType}}{{.GoName}}, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{$dc.GoType}})), "{{.JavaMethod}}", "{{.JNISig}}")
 	if err != nil {
-		return fmt.Errorf("get method {{$dc.JavaClass}}.{{.JavaMethod}}: %w", err)
+		env.ExceptionClear()
 	}
-{{end}}{{end}}{{end}}
+{{end}}{{end}}
+	}
+{{end}}
 {{- range .Callbacks}}
 	c, err = env.FindClass("{{javaClassToSlash .JavaInterface}}")
 	if err != nil {
-		return fmt.Errorf("find class {{.JavaInterface}}: %w", err)
-	}
+		env.ExceptionClear()
+	} else {
 	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
+	}
 {{end}}
 	return nil
 }

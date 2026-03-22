@@ -64,126 +64,134 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/net/wifi/hotspot2/ConfigParser")
 	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.hotspot2.ConfigParser: %w", err)
-	}
-	clsConfigParser = env.NewGlobalRef(&c.Object)
-
-	midConfigParserParsePasspointConfig, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConfigParser)), "parsePasspointConfig", "(Ljava/lang/String;[B)Landroid/net/wifi/hotspot2/PasspointConfiguration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsConfigParser = env.NewGlobalRef(&c.Object)
+
+		midConfigParserParsePasspointConfig, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConfigParser)), "parsePasspointConfig", "(Ljava/lang/String;[B)Landroid/net/wifi/hotspot2/PasspointConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/wifi/hotspot2/PasspointConfiguration")
 	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.hotspot2.PasspointConfiguration: %w", err)
-	}
-	clsPasspointConfiguration = env.NewGlobalRef(&c.Object)
-
-	midPasspointConfigurationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPasspointConfiguration = env.NewGlobalRef(&c.Object)
 
-	midPasspointConfigurationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationGetCredential, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getCredential", "()Landroid/net/wifi/hotspot2/pps/Credential;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationGetDecoratedIdentityPrefix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getDecoratedIdentityPrefix", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationGetCredential, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getCredential", "()Landroid/net/wifi/hotspot2/pps/Credential;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationGetHomeSp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getHomeSp", "()Landroid/net/wifi/hotspot2/pps/HomeSp;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationGetDecoratedIdentityPrefix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getDecoratedIdentityPrefix", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationGetSubscriptionExpirationTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getSubscriptionExpirationTimeMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationGetHomeSp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getHomeSp", "()Landroid/net/wifi/hotspot2/pps/HomeSp;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationGetUniqueId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getUniqueId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationGetSubscriptionExpirationTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getSubscriptionExpirationTimeMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationGetUniqueId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "getUniqueId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationIsOsuProvisioned, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "isOsuProvisioned", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationSetCredential, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setCredential", "(Landroid/net/wifi/hotspot2/pps/Credential;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationIsOsuProvisioned, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "isOsuProvisioned", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationSetDecoratedIdentityPrefix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setDecoratedIdentityPrefix", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationSetCredential, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setCredential", "(Landroid/net/wifi/hotspot2/pps/Credential;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationSetHomeSp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setHomeSp", "(Landroid/net/wifi/hotspot2/pps/HomeSp;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationSetDecoratedIdentityPrefix, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setDecoratedIdentityPrefix", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationSetSubscriptionExpirationTimeInMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setSubscriptionExpirationTimeInMillis", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationSetHomeSp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setHomeSp", "(Landroid/net/wifi/hotspot2/pps/HomeSp;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasspointConfigurationSetSubscriptionExpirationTimeInMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "setSubscriptionExpirationTimeInMillis", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasspointConfigurationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPasspointConfigurationToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPasspointConfigurationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

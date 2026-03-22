@@ -53,49 +53,57 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/adservices/appsetid/AppSetIdManager")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.appsetid.AppSetIdManager: %w", err)
-	}
-	clsAppSetIdManager = env.NewGlobalRef(&c.Object)
-
-	midAppSetIdManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAppSetIdManager)), "get", "(Landroid/content/Context;)Landroid/adservices/appsetid/AppSetIdManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAppSetIdManager = env.NewGlobalRef(&c.Object)
+
+		midAppSetIdManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAppSetIdManager)), "get", "(Landroid/content/Context;)Landroid/adservices/appsetid/AppSetIdManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/appsetid/AppSetId")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.appsetid.AppSetId: %w", err)
-	}
-	clsAppSetId = env.NewGlobalRef(&c.Object)
-
-	midAppSetIdEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAppSetId = env.NewGlobalRef(&c.Object)
 
-	midAppSetIdGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppSetIdEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppSetIdGetScope, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "getScope", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppSetIdGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppSetIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAppSetIdGetScope, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "getScope", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppSetIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

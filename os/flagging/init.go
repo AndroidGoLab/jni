@@ -52,42 +52,50 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/os/flagging/AconfigPackage")
 	if err != nil {
-		return fmt.Errorf("find class android.os.flagging.AconfigPackage: %w", err)
-	}
-	clsAconfigPackage = env.NewGlobalRef(&c.Object)
-
-	midAconfigPackageGetBooleanFlagValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigPackage)), "getBooleanFlagValue", "(Ljava/lang/String;Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAconfigPackage = env.NewGlobalRef(&c.Object)
 
-	midAconfigPackageLoad, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAconfigPackage)), "load", "(Ljava/lang/String;)Landroid/os/flagging/AconfigPackage;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAconfigPackageGetBooleanFlagValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigPackage)), "getBooleanFlagValue", "(Ljava/lang/String;Z)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAconfigPackageLoad, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAconfigPackage)), "load", "(Ljava/lang/String;)Landroid/os/flagging/AconfigPackage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/flagging/AconfigStorageReadException")
 	if err != nil {
-		return fmt.Errorf("find class android.os.flagging.AconfigStorageReadException: %w", err)
-	}
-	clsAconfigStorageReadException = env.NewGlobalRef(&c.Object)
-
-	midAconfigStorageReadExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), "getErrorCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAconfigStorageReadException = env.NewGlobalRef(&c.Object)
 
-	midAconfigStorageReadExceptionGetMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), "getMessage", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAconfigStorageReadExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), "getErrorCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAconfigStorageReadExceptionGetMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), "getMessage", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

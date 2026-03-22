@@ -90,316 +90,320 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/dreams/DreamService")
 	if err != nil {
-		return fmt.Errorf("find class android.service.dreams.DreamService: %w", err)
-	}
-	clsDreamService = env.NewGlobalRef(&c.Object)
-
-	midDreamServiceAddContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "addContentView", "(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDreamService = env.NewGlobalRef(&c.Object)
 
-	midDreamServiceDispatchGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchGenericMotionEvent", "(Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceAddContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "addContentView", "(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceDispatchKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchKeyEvent", "(Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceDispatchGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchGenericMotionEvent", "(Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceDispatchKeyShortcutEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchKeyShortcutEvent", "(Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceDispatchKeyEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchKeyEvent", "(Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceDispatchPopulateAccessibilityEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchPopulateAccessibilityEvent", "(Landroid/view/accessibility/AccessibilityEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceDispatchKeyShortcutEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchKeyShortcutEvent", "(Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceDispatchTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchTouchEvent", "(Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceDispatchPopulateAccessibilityEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchPopulateAccessibilityEvent", "(Landroid/view/accessibility/AccessibilityEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceDispatchTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchTrackballEvent", "(Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceDispatchTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchTouchEvent", "(Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "finish", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceDispatchTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "dispatchTrackballEvent", "(Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceGetWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "getWindow", "()Landroid/view/Window;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "finish", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceGetWindowManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "getWindowManager", "()Landroid/view/WindowManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceGetWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "getWindow", "()Landroid/view/Window;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceIsFullscreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "isFullscreen", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceGetWindowManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "getWindowManager", "()Landroid/view/WindowManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "isInteractive", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceIsFullscreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "isFullscreen", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceIsScreenBright, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "isScreenBright", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "isInteractive", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnActionModeFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onActionModeFinished", "(Landroid/view/ActionMode;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceIsScreenBright, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "isScreenBright", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnActionModeStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onActionModeStarted", "(Landroid/view/ActionMode;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnActionModeFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onActionModeFinished", "(Landroid/view/ActionMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnAttachedToWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onAttachedToWindow", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnActionModeStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onActionModeStarted", "(Landroid/view/ActionMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnAttachedToWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onAttachedToWindow", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnContentChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onContentChanged", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onCreate", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnContentChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onContentChanged", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnCreatePanelMenu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onCreatePanelMenu", "(ILandroid/view/Menu;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnCreatePanelView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onCreatePanelView", "(I)Landroid/view/View;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnCreatePanelMenu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onCreatePanelMenu", "(ILandroid/view/Menu;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDestroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnCreatePanelView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onCreatePanelView", "(I)Landroid/view/View;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnDetachedFromWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDetachedFromWindow", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnDreamingStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDreamingStarted", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnDetachedFromWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDetachedFromWindow", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnDreamingStopped, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDreamingStopped", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnDreamingStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDreamingStarted", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnMenuItemSelected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onMenuItemSelected", "(ILandroid/view/MenuItem;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnDreamingStopped, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onDreamingStopped", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnMenuOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onMenuOpened", "(ILandroid/view/Menu;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnMenuItemSelected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onMenuItemSelected", "(ILandroid/view/MenuItem;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnPanelClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onPanelClosed", "(ILandroid/view/Menu;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnMenuOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onMenuOpened", "(ILandroid/view/Menu;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnPreparePanel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onPreparePanel", "(ILandroid/view/View;Landroid/view/Menu;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnPanelClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onPanelClosed", "(ILandroid/view/Menu;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnSearchRequested0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onSearchRequested", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnPreparePanel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onPreparePanel", "(ILandroid/view/View;Landroid/view/Menu;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnSearchRequested1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onSearchRequested", "(Landroid/view/SearchEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnSearchRequested0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onSearchRequested", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onUnbind", "(Landroid/content/Intent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnSearchRequested1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onSearchRequested", "(Landroid/view/SearchEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnWakeUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWakeUp", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnWindowAttributesChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowAttributesChanged", "(Landroid/view/WindowManager$LayoutParams;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnWakeUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWakeUp", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnWindowFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowFocusChanged", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnWindowAttributesChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowAttributesChanged", "(Landroid/view/WindowManager$LayoutParams;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnWindowStartingActionMode1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowStartingActionMode", "(Landroid/view/ActionMode$Callback;)Landroid/view/ActionMode;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnWindowFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowFocusChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceOnWindowStartingActionMode2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowStartingActionMode", "(Landroid/view/ActionMode$Callback;I)Landroid/view/ActionMode;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnWindowStartingActionMode1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowStartingActionMode", "(Landroid/view/ActionMode$Callback;)Landroid/view/ActionMode;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceSetContentView1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setContentView", "(Landroid/view/View;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceOnWindowStartingActionMode2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "onWindowStartingActionMode", "(Landroid/view/ActionMode$Callback;I)Landroid/view/ActionMode;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceSetContentView2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setContentView", "(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceSetContentView1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setContentView", "(Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceSetContentView1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setContentView", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceSetContentView2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setContentView", "(Landroid/view/View;Landroid/view/ViewGroup$LayoutParams;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceSetFullscreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setFullscreen", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceSetContentView1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setContentView", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceSetInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setInteractive", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceSetFullscreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setFullscreen", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceSetScreenBright, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setScreenBright", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDreamServiceSetInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setInteractive", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDreamServiceWakeUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "wakeUp", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDreamServiceSetScreenBright, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "setScreenBright", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDreamServiceWakeUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "wakeUp", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

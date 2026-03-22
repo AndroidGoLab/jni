@@ -141,649 +141,665 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/assist/AssistStructure")
 	if err != nil {
-		return fmt.Errorf("find class android.app.assist.AssistStructure: %w", err)
-	}
-	clsStructure = env.NewGlobalRef(&c.Object)
-
-	midStructureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStructure = env.NewGlobalRef(&c.Object)
 
-	midStructureGetAcquisitionEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getAcquisitionEndTime", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureGetAcquisitionStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getAcquisitionStartTime", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureGetAcquisitionEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getAcquisitionEndTime", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureGetActivityComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getActivityComponent", "()Landroid/content/ComponentName;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureGetAcquisitionStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getAcquisitionStartTime", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureGetWindowNodeAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getWindowNodeAt", "(I)Landroid/app/assist/AssistStructure$WindowNode;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureGetActivityComponent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getActivityComponent", "()Landroid/content/ComponentName;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureGetWindowNodeCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getWindowNodeCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureGetWindowNodeAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getWindowNodeAt", "(I)Landroid/app/assist/AssistStructure$WindowNode;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureIsHomeActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "isHomeActivity", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureGetWindowNodeCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "getWindowNodeCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStructureIsHomeActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "isHomeActivity", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStructureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructure)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/assist/AssistStructure$ViewNode")
 	if err != nil {
-		return fmt.Errorf("find class android.app.assist.AssistStructure$ViewNode: %w", err)
-	}
-	clsStructureViewNode = env.NewGlobalRef(&c.Object)
-
-	midStructureViewNodeGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAlpha", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStructureViewNode = env.NewGlobalRef(&c.Object)
 
-	midStructureViewNodeGetAutofillHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillHints", "()[Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAlpha", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetAutofillHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillHints", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetAutofillOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillOptions", "()[Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetAutofillType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetAutofillOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillOptions", "()[Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetAutofillValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillValue", "()Landroid/view/autofill/AutofillValue;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetAutofillType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetChildAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getChildAt", "(I)Landroid/app/assist/AssistStructure$ViewNode;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetAutofillValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getAutofillValue", "()Landroid/view/autofill/AutofillValue;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetChildCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getChildCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetChildAt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getChildAt", "(I)Landroid/app/assist/AssistStructure$ViewNode;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetClassName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getClassName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetChildCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getChildCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getContentDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetClassName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getClassName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetElevation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getElevation", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getContentDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetElevation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getElevation", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHint", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetHintIdEntry, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHintIdEntry", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHint", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetHtmlInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHtmlInfo", "()Landroid/view/ViewStructure$HtmlInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetHintIdEntry, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHintIdEntry", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetHtmlInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getHtmlInfo", "()Landroid/view/ViewStructure$HtmlInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetIdEntry, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getIdEntry", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetIdPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getIdPackage", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetIdEntry, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getIdEntry", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetIdType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getIdType", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetIdPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getIdPackage", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetImportantForAutofill, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getImportantForAutofill", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetIdType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getIdType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetImportantForAutofill, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getImportantForAutofill", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetLeft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getLeft", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetLocaleList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getLocaleList", "()Landroid/os/LocaleList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetLeft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getLeft", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetMaxTextEms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getMaxTextEms", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetLocaleList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getLocaleList", "()Landroid/os/LocaleList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetMaxTextLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getMaxTextLength", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetMaxTextEms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getMaxTextEms", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetMinTextEms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getMinTextEms", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetMaxTextLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getMaxTextLength", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetReceiveContentMimeTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getReceiveContentMimeTypes", "()[Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetMinTextEms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getMinTextEms", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetScrollX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getScrollX", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetReceiveContentMimeTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getReceiveContentMimeTypes", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetScrollY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getScrollY", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetScrollX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getScrollX", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getText", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetScrollY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getScrollY", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextBackgroundColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getText", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextBackgroundColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextIdEntry, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextIdEntry", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextLineBaselines, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextLineBaselines", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextIdEntry, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextIdEntry", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextLineCharOffsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextLineCharOffsets", "()[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextLineBaselines, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextLineBaselines", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextSelectionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextSelectionEnd", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextLineCharOffsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextLineCharOffsets", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextSelectionStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextSelectionStart", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextSelectionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextSelectionEnd", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextSize", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextSelectionStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextSelectionStart", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTextStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextStyle", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextSize", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTop", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTextStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTextStyle", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTransformation", "()Landroid/graphics/Matrix;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTop", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getVisibility", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getTransformation", "()Landroid/graphics/Matrix;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetWebDomain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getWebDomain", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getVisibility", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetWebScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getWebScheme", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetWebDomain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getWebDomain", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetWebScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getWebScheme", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsAccessibilityFocused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isAccessibilityFocused", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "getWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsActivated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isActivated", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsAccessibilityFocused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isAccessibilityFocused", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsAssistBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isAssistBlocked", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsActivated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isActivated", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsCheckable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isCheckable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsAssistBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isAssistBlocked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isChecked", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsCheckable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isCheckable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsClickable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isClickable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isChecked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsContextClickable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isContextClickable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsClickable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isClickable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsContextClickable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isContextClickable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsFocusable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isFocusable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsFocused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isFocused", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsFocusable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isFocusable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsLongClickable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isLongClickable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsFocused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isFocused", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isOpaque", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureViewNodeIsLongClickable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isLongClickable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureViewNodeIsSelected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isSelected", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStructureViewNodeIsOpaque, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isOpaque", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStructureViewNodeIsSelected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureViewNode)), "isSelected", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/assist/AssistStructure$WindowNode")
 	if err != nil {
-		return fmt.Errorf("find class android.app.assist.AssistStructure$WindowNode: %w", err)
-	}
-	clsStructureWindowNode = env.NewGlobalRef(&c.Object)
-
-	midStructureWindowNodeGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getDisplayId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStructureWindowNode = env.NewGlobalRef(&c.Object)
 
-	midStructureWindowNodeGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureWindowNodeGetDisplayId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getDisplayId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureWindowNodeGetLeft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getLeft", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureWindowNodeGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureWindowNodeGetRootViewNode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getRootViewNode", "()Landroid/app/assist/AssistStructure$ViewNode;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureWindowNodeGetLeft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getLeft", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureWindowNodeGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getTitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureWindowNodeGetRootViewNode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getRootViewNode", "()Landroid/app/assist/AssistStructure$ViewNode;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureWindowNodeGetTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getTop", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStructureWindowNodeGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStructureWindowNodeGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStructureWindowNodeGetTop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getTop", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStructureWindowNodeGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStructureWindowNode)), "getWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/assist/AssistContent")
 	if err != nil {
-		return fmt.Errorf("find class android.app.assist.AssistContent: %w", err)
-	}
-	clsContent = env.NewGlobalRef(&c.Object)
-
-	midContentDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContent = env.NewGlobalRef(&c.Object)
 
-	midContentGetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getClipData", "()Landroid/content/ClipData;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentGetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getClipData", "()Landroid/content/ClipData;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getIntent", "()Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentGetSessionTransferUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getSessionTransferUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentGetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getIntent", "()Landroid/content/Intent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentGetStructuredData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getStructuredData", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentGetSessionTransferUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getSessionTransferUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentGetWebUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getWebUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentGetStructuredData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getStructuredData", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentIsAppProvidedIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "isAppProvidedIntent", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentGetWebUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "getWebUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentIsAppProvidedWebUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "isAppProvidedWebUri", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentIsAppProvidedIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "isAppProvidedIntent", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentSetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setClipData", "(Landroid/content/ClipData;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentIsAppProvidedWebUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "isAppProvidedWebUri", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentSetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setIntent", "(Landroid/content/Intent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentSetClipData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setClipData", "(Landroid/content/ClipData;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentSetSessionTransferUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setSessionTransferUri", "(Landroid/net/Uri;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentSetIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setIntent", "(Landroid/content/Intent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentSetStructuredData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setStructuredData", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentSetSessionTransferUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setSessionTransferUri", "(Landroid/net/Uri;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentSetWebUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setWebUri", "(Landroid/net/Uri;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContentSetStructuredData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setStructuredData", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContentWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContentSetWebUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "setWebUri", "(Landroid/net/Uri;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

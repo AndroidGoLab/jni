@@ -46,9 +46,13 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/adservices/exceptions/AdServicesException")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.exceptions.AdServicesException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAdServicesException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsAdServicesException = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

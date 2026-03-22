@@ -174,552 +174,732 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/provider/ContactsContract")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract: %w", err)
-	}
-	clsContract = env.NewGlobalRef(&c.Object)
-
-	midContractIsProfileId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isProfileId", "(J)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContract = env.NewGlobalRef(&c.Object)
+
+		midContractIsProfileId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isProfileId", "(J)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$AggregationExceptions")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$AggregationExceptions: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractAggregationExceptions = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractAggregationExceptions = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$BaseSyncColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$BaseSyncColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractBaseSyncColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractBaseSyncColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$CommonDataKinds")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$CommonDataKinds: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCommonDataKinds = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCommonDataKinds = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$ContactNameColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$ContactNameColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractContactNameColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractContactNameColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$ContactOptionsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$ContactOptionsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractContactOptionsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractContactOptionsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$ContactStatusColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$ContactStatusColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractContactStatusColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractContactStatusColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Contacts")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Contacts: %w", err)
-	}
-	clsContractContacts = env.NewGlobalRef(&c.Object)
-
-	midContractContactsGetLookupUri2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "getLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractContacts = env.NewGlobalRef(&c.Object)
 
-	midContractContactsGetLookupUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "getLookupUri", "(JLjava/lang/String;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractContactsGetLookupUri2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "getLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractContactsIsEnterpriseContactId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "isEnterpriseContactId", "(J)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractContactsGetLookupUri2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "getLookupUri", "(JLjava/lang/String;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractContactsLookupContact, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "lookupContact", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractContactsIsEnterpriseContactId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "isEnterpriseContactId", "(J)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractContactsMarkAsContacted, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "markAsContacted", "(Landroid/content/ContentResolver;J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractContactsLookupContact, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "lookupContact", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractContactsOpenContactPhotoInputStream2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "openContactPhotoInputStream", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Ljava/io/InputStream;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractContactsMarkAsContacted, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "markAsContacted", "(Landroid/content/ContentResolver;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractContactsOpenContactPhotoInputStream3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "openContactPhotoInputStream", "(Landroid/content/ContentResolver;Landroid/net/Uri;Z)Ljava/io/InputStream;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractContactsOpenContactPhotoInputStream2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "openContactPhotoInputStream", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Ljava/io/InputStream;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractContactsOpenContactPhotoInputStream3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractContacts)), "openContactPhotoInputStream", "(Landroid/content/ContentResolver;Landroid/net/Uri;Z)Ljava/io/InputStream;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$ContactsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$ContactsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractContactsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractContactsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Data")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Data: %w", err)
-	}
-	clsContractData = env.NewGlobalRef(&c.Object)
-
-	midContractDataGetContactLookupUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractData)), "getContactLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractData = env.NewGlobalRef(&c.Object)
+
+		midContractDataGetContactLookupUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractData)), "getContactLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$DataColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DataColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDataColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDataColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$DataColumnsWithJoins")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DataColumnsWithJoins: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDataColumnsWithJoins = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDataColumnsWithJoins = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$DataUsageFeedback")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DataUsageFeedback: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDataUsageFeedback = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDataUsageFeedback = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$DataUsageStatColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DataUsageStatColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDataUsageStatColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDataUsageStatColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$DeletedContacts")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DeletedContacts: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDeletedContacts = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDeletedContacts = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$DeletedContactsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DeletedContactsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDeletedContactsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDeletedContactsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Directory")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Directory: %w", err)
-	}
-	clsContractDirectory = env.NewGlobalRef(&c.Object)
-
-	midContractDirectoryIsEnterpriseDirectoryId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "isEnterpriseDirectoryId", "(J)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractDirectory = env.NewGlobalRef(&c.Object)
 
-	midContractDirectoryIsRemoteDirectoryId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "isRemoteDirectoryId", "(J)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractDirectoryIsEnterpriseDirectoryId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "isEnterpriseDirectoryId", "(J)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractDirectoryNotifyDirectoryChange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "notifyDirectoryChange", "(Landroid/content/ContentResolver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractDirectoryIsRemoteDirectoryId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "isRemoteDirectoryId", "(J)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractDirectoryNotifyDirectoryChange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractDirectory)), "notifyDirectoryChange", "(Landroid/content/ContentResolver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$DisplayNameSources")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DisplayNameSources: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDisplayNameSources = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDisplayNameSources = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$DisplayPhoto")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$DisplayPhoto: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractDisplayPhoto = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractDisplayPhoto = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$FullNameStyle")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$FullNameStyle: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractFullNameStyle = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractFullNameStyle = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Groups")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Groups: %w", err)
-	}
-	clsContractGroups = env.NewGlobalRef(&c.Object)
-
-	midContractGroupsNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractGroups)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractGroups = env.NewGlobalRef(&c.Object)
+
+		midContractGroupsNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractGroups)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$GroupsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$GroupsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractGroupsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractGroupsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Intents")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Intents: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractIntents = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractIntents = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$PhoneLookup")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$PhoneLookup: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractPhoneLookup = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractPhoneLookup = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$PhoneLookupColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$PhoneLookupColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractPhoneLookupColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractPhoneLookupColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$PhoneticNameStyle")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$PhoneticNameStyle: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractPhoneticNameStyle = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractPhoneticNameStyle = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$PinnedPositions")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$PinnedPositions: %w", err)
-	}
-	clsContractPinnedPositions = env.NewGlobalRef(&c.Object)
-
-	midContractPinnedPositionsPin, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractPinnedPositions)), "pin", "(Landroid/content/ContentResolver;JI)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractPinnedPositions = env.NewGlobalRef(&c.Object)
 
-	midContractPinnedPositionsUndemote, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractPinnedPositions)), "undemote", "(Landroid/content/ContentResolver;J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractPinnedPositionsPin, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractPinnedPositions)), "pin", "(Landroid/content/ContentResolver;JI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractPinnedPositionsUndemote, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractPinnedPositions)), "undemote", "(Landroid/content/ContentResolver;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$Presence")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Presence: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractPresence = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractPresence = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$PresenceColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$PresenceColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractPresenceColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractPresenceColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Profile")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Profile: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractProfile = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractProfile = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$ProfileSyncState")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$ProfileSyncState: %w", err)
-	}
-	clsContractProfileSyncState = env.NewGlobalRef(&c.Object)
-
-	midContractProfileSyncStateGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "get", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;)[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractProfileSyncState = env.NewGlobalRef(&c.Object)
 
-	midContractProfileSyncStateNewSetOperation, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "newSetOperation", "(Landroid/accounts/Account;[B)Landroid/content/ContentProviderOperation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractProfileSyncStateGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "get", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractProfileSyncStateSet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "set", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractProfileSyncStateNewSetOperation, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "newSetOperation", "(Landroid/accounts/Account;[B)Landroid/content/ContentProviderOperation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractProfileSyncStateSet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractProfileSyncState)), "set", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$ProviderStatus")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$ProviderStatus: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractProviderStatus = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractProviderStatus = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$QuickContact")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$QuickContact: %w", err)
-	}
-	clsContractQuickContact = env.NewGlobalRef(&c.Object)
-
-	midContractQuickContactShowQuickContact5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/graphics/Rect;Landroid/net/Uri;I[Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractQuickContact = env.NewGlobalRef(&c.Object)
 
-	midContractQuickContactShowQuickContact5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/graphics/Rect;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractQuickContactShowQuickContact5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/graphics/Rect;Landroid/net/Uri;I[Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractQuickContactShowQuickContact5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/view/View;Landroid/net/Uri;I[Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractQuickContactShowQuickContact5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/graphics/Rect;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractQuickContactShowQuickContact5_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/view/View;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractQuickContactShowQuickContact5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/view/View;Landroid/net/Uri;I[Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractQuickContactShowQuickContact5_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractQuickContact)), "showQuickContact", "(Landroid/content/Context;Landroid/view/View;Landroid/net/Uri;[Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$RawContacts")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$RawContacts: %w", err)
-	}
-	clsContractRawContacts = env.NewGlobalRef(&c.Object)
-
-	midContractRawContactsGetContactLookupUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getContactLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractRawContacts = env.NewGlobalRef(&c.Object)
 
-	midContractRawContactsGetLocalAccountName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getLocalAccountName", "(Landroid/content/Context;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractRawContactsGetContactLookupUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getContactLookupUri", "(Landroid/content/ContentResolver;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractRawContactsGetLocalAccountType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getLocalAccountType", "(Landroid/content/Context;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractRawContactsGetLocalAccountName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getLocalAccountName", "(Landroid/content/Context;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractRawContactsNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractRawContactsGetLocalAccountType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "getLocalAccountType", "(Landroid/content/Context;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractRawContactsNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractRawContacts)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$RawContactsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$RawContactsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractRawContactsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractRawContactsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$RawContactsEntity")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$RawContactsEntity: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractRawContactsEntity = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractRawContactsEntity = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$SearchSnippets")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$SearchSnippets: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractSearchSnippets = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractSearchSnippets = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$Settings")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$Settings: %w", err)
-	}
-	clsContractSettings = env.NewGlobalRef(&c.Object)
-
-	midContractSettingsGetDefaultAccount, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSettings)), "getDefaultAccount", "(Landroid/content/ContentResolver;)Landroid/accounts/Account;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractSettings = env.NewGlobalRef(&c.Object)
+
+		midContractSettingsGetDefaultAccount, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSettings)), "getDefaultAccount", "(Landroid/content/ContentResolver;)Landroid/accounts/Account;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$SettingsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$SettingsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractSettingsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractSettingsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$SimAccount")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$SimAccount: %w", err)
-	}
-	clsContractSimAccount = env.NewGlobalRef(&c.Object)
-
-	midContractSimAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractSimAccount = env.NewGlobalRef(&c.Object)
 
-	midContractSimAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSimAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSimAccountGetAccountName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getAccountName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSimAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSimAccountGetAccountType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getAccountType", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSimAccountGetAccountName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getAccountName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSimAccountGetEfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getEfType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSimAccountGetAccountType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getAccountType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSimAccountGetSimSlotIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getSimSlotIndex", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSimAccountGetEfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getEfType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSimAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSimAccountGetSimSlotIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "getSimSlotIndex", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSimAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractSimAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractSimAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractSimAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$SimContacts")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$SimContacts: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractSimContacts = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractSimContacts = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$StatusColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$StatusColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractStatusColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractStatusColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$StatusUpdates")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$StatusUpdates: %w", err)
-	}
-	clsContractStatusUpdates = env.NewGlobalRef(&c.Object)
-
-	midContractStatusUpdatesGetPresenceIconResourceId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusUpdates)), "getPresenceIconResourceId", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractStatusUpdates = env.NewGlobalRef(&c.Object)
 
-	midContractStatusUpdatesGetPresencePrecedence, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusUpdates)), "getPresencePrecedence", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractStatusUpdatesGetPresenceIconResourceId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusUpdates)), "getPresenceIconResourceId", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractStatusUpdatesGetPresencePrecedence, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractStatusUpdates)), "getPresencePrecedence", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/ContactsContract$SyncColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$SyncColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractSyncColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractSyncColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/ContactsContract$SyncState")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.ContactsContract$SyncState: %w", err)
-	}
-	clsContractSyncState = env.NewGlobalRef(&c.Object)
-
-	midContractSyncStateGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "get", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;)[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractSyncState = env.NewGlobalRef(&c.Object)
 
-	midContractSyncStateNewSetOperation, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "newSetOperation", "(Landroid/accounts/Account;[B)Landroid/content/ContentProviderOperation;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midContractSyncStateGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "get", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midContractSyncStateSet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "set", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractSyncStateNewSetOperation, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "newSetOperation", "(Landroid/accounts/Account;[B)Landroid/content/ContentProviderOperation;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractSyncStateSet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSyncState)), "set", "(Landroid/content/ContentProviderClient;Landroid/accounts/Account;[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

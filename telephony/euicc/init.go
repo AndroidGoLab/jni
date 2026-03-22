@@ -75,187 +75,203 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/telephony/euicc/EuiccInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.euicc.EuiccInfo: %w", err)
-	}
-	clsInfo = env.NewGlobalRef(&c.Object)
-
-	midInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsInfo = env.NewGlobalRef(&c.Object)
 
-	midInfoGetOsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "getOsVersion", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midInfoGetOsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "getOsVersion", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/euicc/EuiccManager")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.euicc.EuiccManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerCreateForCardId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createForCardId", "(I)Landroid/telephony/euicc/EuiccManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerDeleteSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "deleteSubscription", "(ILandroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerCreateForCardId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createForCardId", "(I)Landroid/telephony/euicc/EuiccManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerDownloadSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "downloadSubscription", "(Landroid/telephony/euicc/DownloadableSubscription;ZLandroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerDeleteSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "deleteSubscription", "(ILandroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetAvailableMemoryInBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAvailableMemoryInBytes", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerDownloadSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "downloadSubscription", "(Landroid/telephony/euicc/DownloadableSubscription;ZLandroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetEid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getEid", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetAvailableMemoryInBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAvailableMemoryInBytes", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetEuiccInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getEuiccInfo", "()Landroid/telephony/euicc/EuiccInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetEid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getEid", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetEuiccInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getEuiccInfo", "()Landroid/telephony/euicc/EuiccInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsSimPortAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSimPortAvailable", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerStartResolutionActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "startResolutionActivity", "(Landroid/app/Activity;ILandroid/content/Intent;Landroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsSimPortAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSimPortAvailable", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerSwitchToSubscription2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "switchToSubscription", "(ILandroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerStartResolutionActivity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "startResolutionActivity", "(Landroid/app/Activity;ILandroid/content/Intent;Landroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerSwitchToSubscription3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "switchToSubscription", "(IILandroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerSwitchToSubscription2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "switchToSubscription", "(ILandroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerUpdateSubscriptionNickname, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "updateSubscriptionNickname", "(ILjava/lang/String;Landroid/app/PendingIntent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerSwitchToSubscription3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "switchToSubscription", "(IILandroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerUpdateSubscriptionNickname, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "updateSubscriptionNickname", "(ILjava/lang/String;Landroid/app/PendingIntent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/euicc/DownloadableSubscription")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.euicc.DownloadableSubscription: %w", err)
-	}
-	clsDownloadableSubscription = env.NewGlobalRef(&c.Object)
-
-	midDownloadableSubscriptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDownloadableSubscription = env.NewGlobalRef(&c.Object)
 
-	midDownloadableSubscriptionGetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getConfirmationCode", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDownloadableSubscriptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDownloadableSubscriptionGetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getEncodedActivationCode", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDownloadableSubscriptionGetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getConfirmationCode", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDownloadableSubscriptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDownloadableSubscriptionGetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getEncodedActivationCode", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDownloadableSubscriptionForActivationCode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "forActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDownloadableSubscriptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadableSubscriptionForActivationCode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "forActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/telephony/euicc/DownloadableSubscription$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.euicc.DownloadableSubscription$Builder: %w", err)
-	}
-	clsDownloadableSubscriptionBuilder = env.NewGlobalRef(&c.Object)
-
-	midDownloadableSubscriptionBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "build", "()Landroid/telephony/euicc/DownloadableSubscription;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDownloadableSubscriptionBuilder = env.NewGlobalRef(&c.Object)
 
-	midDownloadableSubscriptionBuilderSetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setConfirmationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDownloadableSubscriptionBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "build", "()Landroid/telephony/euicc/DownloadableSubscription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDownloadableSubscriptionBuilderSetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setEncodedActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDownloadableSubscriptionBuilderSetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setConfirmationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadableSubscriptionBuilderSetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setEncodedActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

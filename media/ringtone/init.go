@@ -84,266 +84,274 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/media/Ringtone")
 	if err != nil {
-		return fmt.Errorf("find class android.media.Ringtone: %w", err)
-	}
-	clsRingtone = env.NewGlobalRef(&c.Object)
-
-	midRingtoneGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRingtone = env.NewGlobalRef(&c.Object)
 
-	midRingtoneGetStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getStreamType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneGetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getAudioAttributes", "()Landroid/media/AudioAttributes;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getTitle", "(Landroid/content/Context;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneGetStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getStreamType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneGetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getVolume", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getTitle", "(Landroid/content/Context;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneIsHapticGeneratorEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "isHapticGeneratorEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneGetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "getVolume", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneIsLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "isLooping", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneIsHapticGeneratorEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "isHapticGeneratorEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneIsPlaying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "isPlaying", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneIsLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "isLooping", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtonePlay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "play", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneIsPlaying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "isPlaying", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneSetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setAudioAttributes", "(Landroid/media/AudioAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtonePlay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "play", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneSetHapticGeneratorEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setHapticGeneratorEnabled", "(Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneSetAudioAttributes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setAudioAttributes", "(Landroid/media/AudioAttributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneSetLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setLooping", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneSetHapticGeneratorEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setHapticGeneratorEnabled", "(Z)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneSetStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setStreamType", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneSetLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setLooping", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneSetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setVolume", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRingtoneSetStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setStreamType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRingtoneStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "stop", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRingtoneSetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "setVolume", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtoneStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtone)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/media/RingtoneManager")
 	if err != nil {
-		return fmt.Errorf("find class android.media.RingtoneManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerGetCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCursor", "()Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerGetIncludeDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getIncludeDrm", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetCursor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCursor", "()Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetRingtone1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtone", "(I)Landroid/media/Ringtone;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetIncludeDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getIncludeDrm", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetRingtonePosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtonePosition", "(Landroid/net/Uri;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetRingtone1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtone", "(I)Landroid/media/Ringtone;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtoneUri", "(I)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetRingtonePosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtonePosition", "(Landroid/net/Uri;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStopPreviousRingtone", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetRingtoneUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtoneUri", "(I)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerHasHapticChannels1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasHapticChannels", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStopPreviousRingtone", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerInferStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "inferStreamType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerHasHapticChannels1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasHapticChannels", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerSetIncludeDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setIncludeDrm", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerInferStreamType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "inferStreamType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerSetStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setStopPreviousRingtone", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerSetIncludeDrm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setIncludeDrm", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setType", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerSetStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setStopPreviousRingtone", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopPreviousRingtone", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetActualDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActualDefaultRingtoneUri", "(Landroid/content/Context;I)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerStopPreviousRingtone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "stopPreviousRingtone", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetDefaultType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultType", "(Landroid/net/Uri;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetActualDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getActualDefaultRingtoneUri", "(Landroid/content/Context;I)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetDefaultUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultUri", "(I)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetDefaultType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultType", "(Landroid/net/Uri;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetRingtone2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtone", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetDefaultUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultUri", "(I)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetValidRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getValidRingtoneUri", "(Landroid/content/Context;)Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetRingtone2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRingtone", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/media/Ringtone;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerHasHapticChannels2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasHapticChannels", "(Landroid/content/Context;Landroid/net/Uri;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetValidRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getValidRingtoneUri", "(Landroid/content/Context;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerHasHapticChannels1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasHapticChannels", "(Landroid/net/Uri;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerHasHapticChannels2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasHapticChannels", "(Landroid/content/Context;Landroid/net/Uri;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsDefault, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDefault", "(Landroid/net/Uri;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerHasHapticChannels1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasHapticChannels", "(Landroid/net/Uri;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerOpenDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openDefaultRingtoneUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/content/res/AssetFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsDefault, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDefault", "(Landroid/net/Uri;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerSetActualDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setActualDefaultRingtoneUri", "(Landroid/content/Context;ILandroid/net/Uri;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerOpenDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "openDefaultRingtoneUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/content/res/AssetFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerSetActualDefaultRingtoneUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "setActualDefaultRingtoneUri", "(Landroid/content/Context;ILandroid/net/Uri;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

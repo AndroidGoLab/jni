@@ -91,267 +91,299 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/controls/templates/ToggleTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.ToggleTemplate: %w", err)
-	}
-	clsToggleTemplate = env.NewGlobalRef(&c.Object)
-
-	midToggleTemplateGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), "getContentDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsToggleTemplate = env.NewGlobalRef(&c.Object)
 
-	midToggleTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midToggleTemplateGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), "getContentDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midToggleTemplateIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), "isChecked", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midToggleTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midToggleTemplateIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), "isChecked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/TemperatureControlTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.TemperatureControlTemplate: %w", err)
-	}
-	clsTemperatureControlTemplate = env.NewGlobalRef(&c.Object)
-
-	midTemperatureControlTemplateGetCurrentActiveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getCurrentActiveMode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTemperatureControlTemplate = env.NewGlobalRef(&c.Object)
 
-	midTemperatureControlTemplateGetCurrentMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getCurrentMode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTemperatureControlTemplateGetCurrentActiveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getCurrentActiveMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTemperatureControlTemplateGetModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getModes", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTemperatureControlTemplateGetCurrentMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getCurrentMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTemperatureControlTemplateGetTemplate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getTemplate", "()Landroid/service/controls/templates/ControlTemplate;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTemperatureControlTemplateGetModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getModes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTemperatureControlTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTemperatureControlTemplateGetTemplate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getTemplate", "()Landroid/service/controls/templates/ControlTemplate;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureControlTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/ThumbnailTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.ThumbnailTemplate: %w", err)
-	}
-	clsThumbnailTemplate = env.NewGlobalRef(&c.Object)
-
-	midThumbnailTemplateGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "getContentDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsThumbnailTemplate = env.NewGlobalRef(&c.Object)
 
-	midThumbnailTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midThumbnailTemplateGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "getContentDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midThumbnailTemplateGetThumbnail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "getThumbnail", "()Landroid/graphics/drawable/Icon;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midThumbnailTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midThumbnailTemplateIsActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "isActive", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midThumbnailTemplateGetThumbnail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "getThumbnail", "()Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midThumbnailTemplateIsActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), "isActive", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/StatelessTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.StatelessTemplate: %w", err)
-	}
-	clsStatelessTemplate = env.NewGlobalRef(&c.Object)
-
-	midStatelessTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatelessTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsStatelessTemplate = env.NewGlobalRef(&c.Object)
+
+		midStatelessTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatelessTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/ControlTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.ControlTemplate: %w", err)
-	}
-	clsControlTemplate = env.NewGlobalRef(&c.Object)
-
-	midControlTemplateGetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getTemplateId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsControlTemplate = env.NewGlobalRef(&c.Object)
 
-	midControlTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midControlTemplateGetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getTemplateId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midControlTemplateGetErrorTemplate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getErrorTemplate", "()Landroid/service/controls/templates/ControlTemplate;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midControlTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midControlTemplateGetNoTemplateObject, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getNoTemplateObject", "()Landroid/service/controls/templates/ControlTemplate;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midControlTemplateGetErrorTemplate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getErrorTemplate", "()Landroid/service/controls/templates/ControlTemplate;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midControlTemplateGetNoTemplateObject, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsControlTemplate)), "getNoTemplateObject", "()Landroid/service/controls/templates/ControlTemplate;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/RangeTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.RangeTemplate: %w", err)
-	}
-	clsRangeTemplate = env.NewGlobalRef(&c.Object)
-
-	midRangeTemplateGetCurrentValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getCurrentValue", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRangeTemplate = env.NewGlobalRef(&c.Object)
 
-	midRangeTemplateGetFormatString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getFormatString", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRangeTemplateGetCurrentValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getCurrentValue", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRangeTemplateGetMaxValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getMaxValue", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRangeTemplateGetFormatString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getFormatString", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRangeTemplateGetMinValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getMinValue", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRangeTemplateGetMaxValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getMaxValue", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRangeTemplateGetStepValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getStepValue", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRangeTemplateGetMinValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getMinValue", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRangeTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRangeTemplateGetStepValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getStepValue", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRangeTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/ToggleRangeTemplate")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.ToggleRangeTemplate: %w", err)
-	}
-	clsToggleRangeTemplate = env.NewGlobalRef(&c.Object)
-
-	midToggleRangeTemplateGetActionDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "getActionDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsToggleRangeTemplate = env.NewGlobalRef(&c.Object)
 
-	midToggleRangeTemplateGetRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "getRange", "()Landroid/service/controls/templates/RangeTemplate;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midToggleRangeTemplateGetActionDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "getActionDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midToggleRangeTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "getTemplateType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midToggleRangeTemplateGetRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "getRange", "()Landroid/service/controls/templates/RangeTemplate;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midToggleRangeTemplateIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "isChecked", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midToggleRangeTemplateGetTemplateType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "getTemplateType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midToggleRangeTemplateIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), "isChecked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/controls/templates/ControlButton")
 	if err != nil {
-		return fmt.Errorf("find class android.service.controls.templates.ControlButton: %w", err)
-	}
-	clsControlButton = env.NewGlobalRef(&c.Object)
-
-	midControlButtonDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsControlButton = env.NewGlobalRef(&c.Object)
 
-	midControlButtonGetActionDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "getActionDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midControlButtonDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midControlButtonIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "isChecked", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midControlButtonGetActionDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "getActionDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midControlButtonWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midControlButtonIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "isChecked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midControlButtonWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlButton)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -57,77 +57,85 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/content/pm/verify/domain/DomainVerificationUserState")
 	if err != nil {
-		return fmt.Errorf("find class android.content.pm.verify.domain.DomainVerificationUserState: %w", err)
-	}
-	clsVerificationUserState = env.NewGlobalRef(&c.Object)
-
-	midVerificationUserStateDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsVerificationUserState = env.NewGlobalRef(&c.Object)
 
-	midVerificationUserStateEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVerificationUserStateDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVerificationUserStateGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVerificationUserStateEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVerificationUserStateGetUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "getUser", "()Landroid/os/UserHandle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVerificationUserStateGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVerificationUserStateHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVerificationUserStateGetUser, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "getUser", "()Landroid/os/UserHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVerificationUserStateIsLinkHandlingAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "isLinkHandlingAllowed", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVerificationUserStateHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVerificationUserStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVerificationUserStateIsLinkHandlingAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "isLinkHandlingAllowed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVerificationUserStateWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midVerificationUserStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVerificationUserStateWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationUserState)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/content/pm/verify/domain/DomainVerificationManager")
 	if err != nil {
-		return fmt.Errorf("find class android.content.pm.verify.domain.DomainVerificationManager: %w", err)
-	}
-	clsVerificationManager = env.NewGlobalRef(&c.Object)
-
-	midVerificationManagerGetDomainVerificationUserState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationManager)), "getDomainVerificationUserState", "(Ljava/lang/String;)Landroid/content/pm/verify/domain/DomainVerificationUserState;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsVerificationManager = env.NewGlobalRef(&c.Object)
+
+		midVerificationManagerGetDomainVerificationUserState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerificationManager)), "getDomainVerificationUserState", "(Ljava/lang/String;)Landroid/content/pm/verify/domain/DomainVerificationUserState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

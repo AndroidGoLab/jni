@@ -90,284 +90,304 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/printservice/PrintService")
 	if err != nil {
-		return fmt.Errorf("find class android.printservice.PrintService: %w", err)
-	}
-	clsPrintService = env.NewGlobalRef(&c.Object)
-
-	midPrintServiceGeneratePrinterId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "generatePrinterId", "(Ljava/lang/String;)Landroid/print/PrinterId;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPrintService = env.NewGlobalRef(&c.Object)
 
-	midPrintServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPrintServiceGeneratePrinterId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "generatePrinterId", "(Ljava/lang/String;)Landroid/print/PrinterId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/printservice/PrintDocument")
 	if err != nil {
-		return fmt.Errorf("find class android.printservice.PrintDocument: %w", err)
-	}
-	clsPrintDocument = env.NewGlobalRef(&c.Object)
-
-	midPrintDocumentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getData", "()Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPrintDocument = env.NewGlobalRef(&c.Object)
 
-	midPrintDocumentGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getInfo", "()Landroid/print/PrintDocumentInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPrintDocumentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getData", "()Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintDocumentGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getInfo", "()Landroid/print/PrintDocumentInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/printservice/CustomPrinterIconCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.printservice.CustomPrinterIconCallback: %w", err)
-	}
-	clsCustomPrinterIconCallback = env.NewGlobalRef(&c.Object)
-
-	midCustomPrinterIconCallbackOnCustomPrinterIconLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomPrinterIconCallback)), "onCustomPrinterIconLoaded", "(Landroid/graphics/drawable/Icon;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsCustomPrinterIconCallback = env.NewGlobalRef(&c.Object)
+
+		midCustomPrinterIconCallbackOnCustomPrinterIconLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomPrinterIconCallback)), "onCustomPrinterIconLoaded", "(Landroid/graphics/drawable/Icon;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/printservice/PrinterDiscoverySession")
 	if err != nil {
-		return fmt.Errorf("find class android.printservice.PrinterDiscoverySession: %w", err)
-	}
-	clsPrinterDiscoverySession = env.NewGlobalRef(&c.Object)
-
-	midPrinterDiscoverySessionIsDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isDestroyed", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPrinterDiscoverySession = env.NewGlobalRef(&c.Object)
 
-	midPrinterDiscoverySessionIsPrinterDiscoveryStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isPrinterDiscoveryStarted", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrinterDiscoverySessionIsDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isDestroyed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrinterDiscoverySessionOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onDestroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrinterDiscoverySessionIsPrinterDiscoveryStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isPrinterDiscoveryStarted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrinterDiscoverySessionOnRequestCustomPrinterIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onRequestCustomPrinterIcon", "(Landroid/print/PrinterId;Landroid/os/CancellationSignal;Landroid/printservice/CustomPrinterIconCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrinterDiscoverySessionOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrinterDiscoverySessionOnStartPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStartPrinterStateTracking", "(Landroid/print/PrinterId;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrinterDiscoverySessionOnRequestCustomPrinterIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onRequestCustomPrinterIcon", "(Landroid/print/PrinterId;Landroid/os/CancellationSignal;Landroid/printservice/CustomPrinterIconCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrinterDiscoverySessionOnStopPrinterDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterDiscovery", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrinterDiscoverySessionOnStartPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStartPrinterStateTracking", "(Landroid/print/PrinterId;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrinterDiscoverySessionOnStopPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterStateTracking", "(Landroid/print/PrinterId;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPrinterDiscoverySessionOnStopPrinterDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterDiscovery", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionOnStopPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterStateTracking", "(Landroid/print/PrinterId;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/printservice/PrintJob")
 	if err != nil {
-		return fmt.Errorf("find class android.printservice.PrintJob: %w", err)
-	}
-	clsPrintJob = env.NewGlobalRef(&c.Object)
-
-	midPrintJobBlock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "block", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPrintJob = env.NewGlobalRef(&c.Object)
 
-	midPrintJobCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "cancel", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobBlock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "block", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobComplete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "complete", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "cancel", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobComplete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "complete", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobFail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "fail", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobGetAdvancedIntOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getAdvancedIntOption", "(Ljava/lang/String;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobFail, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "fail", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobGetAdvancedStringOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getAdvancedStringOption", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobGetAdvancedIntOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getAdvancedIntOption", "(Ljava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobGetDocument, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getDocument", "()Landroid/printservice/PrintDocument;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobGetAdvancedStringOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getAdvancedStringOption", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getId", "()Landroid/print/PrintJobId;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobGetDocument, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getDocument", "()Landroid/printservice/PrintDocument;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getInfo", "()Landroid/print/PrintJobInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getId", "()Landroid/print/PrintJobId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getTag", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getInfo", "()Landroid/print/PrintJobInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobHasAdvancedOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "hasAdvancedOption", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "getTag", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobHasAdvancedOption, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "hasAdvancedOption", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobIsBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isBlocked", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobIsCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isCancelled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobIsBlocked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isBlocked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobIsCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isCompleted", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobIsCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isCancelled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobIsFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isFailed", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobIsCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isCompleted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobIsQueued, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isQueued", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobIsFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isFailed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobIsStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isStarted", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobIsQueued, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isQueued", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobSetProgress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setProgress", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobIsStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "isStarted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobSetStatus1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setStatus", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobSetProgress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setProgress", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobSetStatus1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setStatus", "(Ljava/lang/CharSequence;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobSetStatus1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setStatus", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobSetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setTag", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintJobSetStatus1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setStatus", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintJobStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "start", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPrintJobSetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "setTag", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintJobStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "start", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

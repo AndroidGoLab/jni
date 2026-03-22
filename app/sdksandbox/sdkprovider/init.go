@@ -56,62 +56,74 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/sdksandbox/sdkprovider/SdkSandboxActivityHandler")
 	if err != nil {
-		return fmt.Errorf("find class android.app.sdksandbox.sdkprovider.SdkSandboxActivityHandler: %w", err)
-	}
-	clsSdkSandboxActivityHandler = env.NewGlobalRef(&c.Object)
-
-	midSdkSandboxActivityHandlerOnActivityCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxActivityHandler)), "onActivityCreated", "(Landroid/app/Activity;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsSdkSandboxActivityHandler = env.NewGlobalRef(&c.Object)
+
+		midSdkSandboxActivityHandlerOnActivityCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxActivityHandler)), "onActivityCreated", "(Landroid/app/Activity;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/sdksandbox/sdkprovider/SdkSandboxClientImportanceListener")
 	if err != nil {
-		return fmt.Errorf("find class android.app.sdksandbox.sdkprovider.SdkSandboxClientImportanceListener: %w", err)
-	}
-	clsSdkSandboxClientImportanceListener = env.NewGlobalRef(&c.Object)
-
-	midSdkSandboxClientImportanceListenerOnForegroundImportanceChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxClientImportanceListener)), "onForegroundImportanceChanged", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsSdkSandboxClientImportanceListener = env.NewGlobalRef(&c.Object)
+
+		midSdkSandboxClientImportanceListenerOnForegroundImportanceChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxClientImportanceListener)), "onForegroundImportanceChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/sdksandbox/sdkprovider/SdkSandboxController")
 	if err != nil {
-		return fmt.Errorf("find class android.app.sdksandbox.sdkprovider.SdkSandboxController: %w", err)
-	}
-	clsSdkSandboxController = env.NewGlobalRef(&c.Object)
-
-	midSdkSandboxControllerGetClientPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getClientPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSdkSandboxController = env.NewGlobalRef(&c.Object)
 
-	midSdkSandboxControllerGetClientSharedPreferences, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getClientSharedPreferences", "()Landroid/content/SharedPreferences;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSdkSandboxControllerGetClientPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getClientPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSdkSandboxControllerRegisterSdkSandboxClientImportanceListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "registerSdkSandboxClientImportanceListener", "(Ljava/util/concurrent/Executor;Landroid/app/sdksandbox/sdkprovider/SdkSandboxClientImportanceListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSdkSandboxControllerGetClientSharedPreferences, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getClientSharedPreferences", "()Landroid/content/SharedPreferences;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSdkSandboxControllerUnregisterSdkSandboxClientImportanceListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "unregisterSdkSandboxClientImportanceListener", "(Landroid/app/sdksandbox/sdkprovider/SdkSandboxClientImportanceListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSdkSandboxControllerRegisterSdkSandboxClientImportanceListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "registerSdkSandboxClientImportanceListener", "(Ljava/util/concurrent/Executor;Landroid/app/sdksandbox/sdkprovider/SdkSandboxClientImportanceListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSdkSandboxControllerUnregisterSdkSandboxClientImportanceListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "unregisterSdkSandboxClientImportanceListener", "(Landroid/app/sdksandbox/sdkprovider/SdkSandboxClientImportanceListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

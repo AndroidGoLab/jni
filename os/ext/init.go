@@ -47,15 +47,19 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/os/ext/SdkExtensions")
 	if err != nil {
-		return fmt.Errorf("find class android.os.ext.SdkExtensions: %w", err)
-	}
-	clsSdkExtensions = env.NewGlobalRef(&c.Object)
-
-	midSdkExtensionsGetExtensionVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSdkExtensions)), "getExtensionVersion", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsSdkExtensions = env.NewGlobalRef(&c.Object)
+
+		midSdkExtensionsGetExtensionVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSdkExtensions)), "getExtensionVersion", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

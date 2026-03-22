@@ -72,182 +72,190 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/location/provider/ProviderProperties")
 	if err != nil {
-		return fmt.Errorf("find class android.location.provider.ProviderProperties: %w", err)
-	}
-	clsProperties = env.NewGlobalRef(&c.Object)
-
-	midPropertiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsProperties = env.NewGlobalRef(&c.Object)
 
-	midPropertiesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesGetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "getAccuracy", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesGetPowerUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "getPowerUsage", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesGetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "getAccuracy", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasAltitudeSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasAltitudeSupport", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesGetPowerUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "getPowerUsage", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasBearingSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasBearingSupport", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasAltitudeSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasAltitudeSupport", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasCellRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasCellRequirement", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasBearingSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasBearingSupport", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasMonetaryCost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasMonetaryCost", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasCellRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasCellRequirement", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasNetworkRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasNetworkRequirement", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasMonetaryCost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasMonetaryCost", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasSatelliteRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasSatelliteRequirement", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasNetworkRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasNetworkRequirement", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHasSpeedSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasSpeedSupport", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasSatelliteRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasSatelliteRequirement", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHasSpeedSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hasSpeedSupport", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPropertiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPropertiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProperties)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/location/provider/ProviderProperties$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.location.provider.ProviderProperties$Builder: %w", err)
-	}
-	clsPropertiesBuilder = env.NewGlobalRef(&c.Object)
-
-	midPropertiesBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "build", "()Landroid/location/provider/ProviderProperties;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPropertiesBuilder = env.NewGlobalRef(&c.Object)
 
-	midPropertiesBuilderSetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setAccuracy", "(I)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "build", "()Landroid/location/provider/ProviderProperties;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasAltitudeSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasAltitudeSupport", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setAccuracy", "(I)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasBearingSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasBearingSupport", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetHasAltitudeSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasAltitudeSupport", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasCellRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasCellRequirement", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetHasBearingSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasBearingSupport", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasMonetaryCost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasMonetaryCost", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetHasCellRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasCellRequirement", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasNetworkRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasNetworkRequirement", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetHasMonetaryCost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasMonetaryCost", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasSatelliteRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasSatelliteRequirement", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetHasNetworkRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasNetworkRequirement", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetHasSpeedSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasSpeedSupport", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPropertiesBuilderSetHasSatelliteRequirement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasSatelliteRequirement", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPropertiesBuilderSetPowerUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setPowerUsage", "(I)Landroid/location/provider/ProviderProperties$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPropertiesBuilderSetHasSpeedSupport, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setHasSpeedSupport", "(Z)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPropertiesBuilderSetPowerUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPropertiesBuilder)), "setPowerUsage", "(I)Landroid/location/provider/ProviderProperties$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

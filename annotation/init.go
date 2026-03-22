@@ -50,28 +50,36 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/annotation/SuppressLint")
 	if err != nil {
-		return fmt.Errorf("find class android.annotation.SuppressLint: %w", err)
-	}
-	clsSuppressLint = env.NewGlobalRef(&c.Object)
-
-	midSuppressLintValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuppressLint)), "value", "()[Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsSuppressLint = env.NewGlobalRef(&c.Object)
+
+		midSuppressLintValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuppressLint)), "value", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/annotation/TargetApi")
 	if err != nil {
-		return fmt.Errorf("find class android.annotation.TargetApi: %w", err)
-	}
-	clsTargetApi = env.NewGlobalRef(&c.Object)
-
-	midTargetApiValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetApi)), "value", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsTargetApi = env.NewGlobalRef(&c.Object)
+
+		midTargetApiValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTargetApi)), "value", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

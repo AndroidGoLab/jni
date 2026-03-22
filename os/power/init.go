@@ -91,291 +91,311 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/os/PowerManager")
 	if err != nil {
-		return fmt.Errorf("find class android.os.PowerManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerAddThermalHeadroomListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerAddThermalHeadroomListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalHeadroomListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerAddThermalHeadroomListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerAddThermalStatusListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerAddThermalHeadroomListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalHeadroomListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerAddThermalStatusListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalStatusListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerAddThermalStatusListener1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetBatteryDischargePrediction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getBatteryDischargePrediction", "()Ljava/time/Duration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerAddThermalStatusListener2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addThermalStatusListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetCurrentThermalStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCurrentThermalStatus", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetBatteryDischargePrediction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getBatteryDischargePrediction", "()Ljava/time/Duration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetLocationPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLocationPowerSaveMode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetCurrentThermalStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCurrentThermalStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetThermalHeadroom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getThermalHeadroom", "(I)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetLocationPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLocationPowerSaveMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsAllowedInLowPowerStandby1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAllowedInLowPowerStandby", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerGetThermalHeadroom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getThermalHeadroom", "(I)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsAllowedInLowPowerStandby1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAllowedInLowPowerStandby", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsAllowedInLowPowerStandby1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAllowedInLowPowerStandby", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsBatteryDischargePredictionPersonalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isBatteryDischargePredictionPersonalized", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsAllowedInLowPowerStandby1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isAllowedInLowPowerStandby", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsDeviceIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceIdleMode", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsBatteryDischargePredictionPersonalized, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isBatteryDischargePredictionPersonalized", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsDeviceLightIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceLightIdleMode", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsDeviceIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceIdleMode", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsExemptFromLowPowerStandby, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isExemptFromLowPowerStandby", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsDeviceLightIdleMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isDeviceLightIdleMode", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsIgnoringBatteryOptimizations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isIgnoringBatteryOptimizations", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsExemptFromLowPowerStandby, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isExemptFromLowPowerStandby", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInteractive", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsIgnoringBatteryOptimizations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isIgnoringBatteryOptimizations", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsLowPowerStandbyEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isLowPowerStandbyEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsInteractive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInteractive", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPowerSaveMode", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsLowPowerStandbyEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isLowPowerStandbyEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsRebootingUserspaceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRebootingUserspaceSupported", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsPowerSaveMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isPowerSaveMode", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsScreenOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isScreenOn", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsRebootingUserspaceSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRebootingUserspaceSupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsSustainedPerformanceModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSustainedPerformanceModeSupported", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsScreenOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isScreenOn", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsWakeLockLevelSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isWakeLockLevelSupported", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsSustainedPerformanceModeSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isSustainedPerformanceModeSupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerNewWakeLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerIsWakeLockLevelSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isWakeLockLevelSupported", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "reboot", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerNewWakeLock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "newWakeLock", "(ILjava/lang/String;)Landroid/os/PowerManager$WakeLock;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRemoveThermalHeadroomListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerReboot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "reboot", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerRemoveThermalStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerRemoveThermalHeadroomListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeThermalHeadroomListener", "(Landroid/os/PowerManager$OnThermalHeadroomChangedListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerRemoveThermalStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "removeThermalStatusListener", "(Landroid/os/PowerManager$OnThermalStatusChangedListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/PowerManager$OnThermalHeadroomChangedListener")
 	if err != nil {
-		return fmt.Errorf("find class android.os.PowerManager$OnThermalHeadroomChangedListener: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManagerOnThermalHeadroomChangedListener = env.NewGlobalRef(&c.Object)
+
 	}
-	clsManagerOnThermalHeadroomChangedListener = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/os/PowerManager$OnThermalStatusChangedListener")
 	if err != nil {
-		return fmt.Errorf("find class android.os.PowerManager$OnThermalStatusChangedListener: %w", err)
-	}
-	clsManagerOnThermalStatusChangedListener = env.NewGlobalRef(&c.Object)
-
-	midManagerOnThermalStatusChangedListenerOnThermalStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnThermalStatusChangedListener)), "onThermalStatusChanged", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsManagerOnThermalStatusChangedListener = env.NewGlobalRef(&c.Object)
+
+		midManagerOnThermalStatusChangedListenerOnThermalStatusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerOnThermalStatusChangedListener)), "onThermalStatusChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/PowerManager$WakeLock")
 	if err != nil {
-		return fmt.Errorf("find class android.os.PowerManager$WakeLock: %w", err)
-	}
-	clsManagerWakeLock = env.NewGlobalRef(&c.Object)
-
-	midManagerWakeLockAcquire0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "acquire", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManagerWakeLock = env.NewGlobalRef(&c.Object)
 
-	midManagerWakeLockAcquire1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "acquire", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockAcquire0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "acquire", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockIsHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "isHeld", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockAcquire1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "acquire", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockRelease0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "release", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockIsHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "isHeld", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockRelease1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "release", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockRelease0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "release", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockSetReferenceCounted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setReferenceCounted", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockRelease1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "release", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockSetStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setStateListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$WakeLockStateListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockSetReferenceCounted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setReferenceCounted", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockSetWorkSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setWorkSource", "(Landroid/os/WorkSource;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerWakeLockSetStateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setStateListener", "(Ljava/util/concurrent/Executor;Landroid/os/PowerManager$WakeLockStateListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerWakeLockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerWakeLockSetWorkSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "setWorkSource", "(Landroid/os/WorkSource;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerWakeLockToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLock)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/PowerManager$WakeLockStateListener")
 	if err != nil {
-		return fmt.Errorf("find class android.os.PowerManager$WakeLockStateListener: %w", err)
-	}
-	clsManagerWakeLockStateListener = env.NewGlobalRef(&c.Object)
-
-	midManagerWakeLockStateListenerOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLockStateListener)), "onStateChanged", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsManagerWakeLockStateListener = env.NewGlobalRef(&c.Object)
+
+		midManagerWakeLockStateListenerOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerWakeLockStateListener)), "onStateChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

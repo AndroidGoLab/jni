@@ -128,486 +128,538 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/accounts/OnAccountsUpdateListener")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.OnAccountsUpdateListener: %w", err)
-	}
-	clsOnAccountsUpdateListener = env.NewGlobalRef(&c.Object)
-
-	midOnAccountsUpdateListenerOnAccountsUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnAccountsUpdateListener)), "onAccountsUpdated", "([Landroid/accounts/Account;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsOnAccountsUpdateListener = env.NewGlobalRef(&c.Object)
+
+		midOnAccountsUpdateListenerOnAccountsUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnAccountsUpdateListener)), "onAccountsUpdated", "([Landroid/accounts/Account;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/AccountManagerFuture")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountManagerFuture: %w", err)
-	}
-	clsAccountManagerFuture = env.NewGlobalRef(&c.Object)
-
-	midAccountManagerFutureCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManagerFuture)), "cancel", "(Z)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAccountManagerFuture = env.NewGlobalRef(&c.Object)
 
-	midAccountManagerFutureIsCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManagerFuture)), "isCancelled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerFutureCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManagerFuture)), "cancel", "(Z)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerFutureIsDone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManagerFuture)), "isDone", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAccountManagerFutureIsCancelled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManagerFuture)), "isCancelled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccountManagerFutureIsDone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManagerFuture)), "isDone", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/AuthenticatorException")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AuthenticatorException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAuthenticatorException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsAuthenticatorException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/accounts/AccountsException")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountsException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/accounts/AccountManager")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountManager: %w", err)
-	}
-	clsAccountManager = env.NewGlobalRef(&c.Object)
-
-	midAccountManagerAddAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAccountManager = env.NewGlobalRef(&c.Object)
 
-	midAccountManagerBlockingGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "blockingGetAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Z)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerAddAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "addAccountExplicitly", "(Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerClearPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "clearPassword", "(Landroid/accounts/Account;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerBlockingGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "blockingGetAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Z)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerClearPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "clearPassword", "(Landroid/accounts/Account;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccounts", "()[Landroid/accounts/Account;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetAccountsByType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountsByType", "(Ljava/lang/String;)[Landroid/accounts/Account;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccounts", "()[Landroid/accounts/Account;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetAccountsByTypeForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountsByTypeForPackage", "(Ljava/lang/String;Ljava/lang/String;)[Landroid/accounts/Account;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetAccountsByType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountsByType", "(Ljava/lang/String;)[Landroid/accounts/Account;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetAuthenticatorTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAuthenticatorTypes", "()[Landroid/accounts/AuthenticatorDescription;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetAccountsByTypeForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAccountsByTypeForPackage", "(Ljava/lang/String;Ljava/lang/String;)[Landroid/accounts/Account;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getPassword", "(Landroid/accounts/Account;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetAuthenticatorTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getAuthenticatorTypes", "()[Landroid/accounts/AuthenticatorDescription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetPreviousName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getPreviousName", "(Landroid/accounts/Account;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getPassword", "(Landroid/accounts/Account;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getUserData", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetPreviousName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getPreviousName", "(Landroid/accounts/Account;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerInvalidateAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "invalidateAuthToken", "(Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "getUserData", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerNotifyAccountAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "notifyAccountAuthenticated", "(Landroid/accounts/Account;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerInvalidateAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "invalidateAuthToken", "(Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerPeekAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "peekAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerNotifyAccountAuthenticated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "notifyAccountAuthenticated", "(Landroid/accounts/Account;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerRemoveAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "removeAccountExplicitly", "(Landroid/accounts/Account;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerPeekAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "peekAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerRemoveOnAccountsUpdatedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "removeOnAccountsUpdatedListener", "(Landroid/accounts/OnAccountsUpdateListener;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerRemoveAccountExplicitly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "removeAccountExplicitly", "(Landroid/accounts/Account;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerSetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerRemoveOnAccountsUpdatedListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "removeOnAccountsUpdatedListener", "(Landroid/accounts/OnAccountsUpdateListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerSetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerSetAccountVisibility, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setAccountVisibility", "(Landroid/accounts/Account;Ljava/lang/String;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setPassword", "(Landroid/accounts/Account;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerSetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setAuthToken", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerSetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setUserData", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountManagerSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setPassword", "(Landroid/accounts/Account;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "get", "(Landroid/content/Context;)Landroid/accounts/AccountManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAccountManagerSetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "setUserData", "(Landroid/accounts/Account;Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccountManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAccountManager)), "get", "(Landroid/content/Context;)Landroid/accounts/AccountManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/AccountAuthenticatorActivity")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountAuthenticatorActivity: %w", err)
-	}
-	clsAccountAuthenticatorActivity = env.NewGlobalRef(&c.Object)
-
-	midAccountAuthenticatorActivityFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), "finish", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAccountAuthenticatorActivity = env.NewGlobalRef(&c.Object)
 
-	midAccountAuthenticatorActivitySetAccountAuthenticatorResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), "setAccountAuthenticatorResult", "(Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAccountAuthenticatorActivityFinish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), "finish", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccountAuthenticatorActivitySetAccountAuthenticatorResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), "setAccountAuthenticatorResult", "(Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/AccountManagerCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountManagerCallback: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAccountManagerCallback = env.NewGlobalRef(&c.Object)
+
 	}
-	clsAccountManagerCallback = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/accounts/AuthenticatorDescription")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AuthenticatorDescription: %w", err)
-	}
-	clsAuthenticatorDescription = env.NewGlobalRef(&c.Object)
-
-	midAuthenticatorDescriptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAuthenticatorDescription = env.NewGlobalRef(&c.Object)
 
-	midAuthenticatorDescriptionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAuthenticatorDescriptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAuthenticatorDescriptionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAuthenticatorDescriptionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAuthenticatorDescriptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAuthenticatorDescriptionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAuthenticatorDescriptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAuthenticatorDescriptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAuthenticatorDescriptionNewKey, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "newKey", "(Ljava/lang/String;)Landroid/accounts/AuthenticatorDescription;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAuthenticatorDescriptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAuthenticatorDescriptionNewKey, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), "newKey", "(Ljava/lang/String;)Landroid/accounts/AuthenticatorDescription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/Account")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.Account: %w", err)
-	}
-	clsAccount = env.NewGlobalRef(&c.Object)
-
-	midAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAccount = env.NewGlobalRef(&c.Object)
 
-	midAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/NetworkErrorException")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.NetworkErrorException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsNetworkErrorException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsNetworkErrorException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/accounts/OperationCanceledException")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.OperationCanceledException: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsOperationCanceledException = env.NewGlobalRef(&c.Object)
+
 	}
-	clsOperationCanceledException = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/accounts/AbstractAccountAuthenticator")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AbstractAccountAuthenticator: %w", err)
-	}
-	clsAbstractAccountAuthenticator = env.NewGlobalRef(&c.Object)
-
-	midAbstractAccountAuthenticatorAddAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "addAccount", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAbstractAccountAuthenticator = env.NewGlobalRef(&c.Object)
 
-	midAbstractAccountAuthenticatorAddAccountFromCredentials, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "addAccountFromCredentials", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorAddAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "addAccount", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorConfirmCredentials, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "confirmCredentials", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorAddAccountFromCredentials, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "addAccountFromCredentials", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorEditProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "editProperties", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorConfirmCredentials, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "confirmCredentials", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorFinishSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "finishSession", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorEditProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "editProperties", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorGetAccountCredentialsForCloning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAccountCredentialsForCloning", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorFinishSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "finishSession", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorGetAccountRemovalAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAccountRemovalAllowed", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorGetAccountCredentialsForCloning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAccountCredentialsForCloning", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAuthToken", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorGetAccountRemovalAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAccountRemovalAllowed", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorGetAuthTokenLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAuthTokenLabel", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorGetAuthToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAuthToken", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorGetIBinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getIBinder", "()Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorGetAuthTokenLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getAuthTokenLabel", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorHasFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "hasFeatures", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;[Ljava/lang/String;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorGetIBinder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "getIBinder", "()Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorIsCredentialsUpdateSuggested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "isCredentialsUpdateSuggested", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorHasFeatures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "hasFeatures", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;[Ljava/lang/String;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorStartAddAccountSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "startAddAccountSession", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorIsCredentialsUpdateSuggested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "isCredentialsUpdateSuggested", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorStartUpdateCredentialsSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "startUpdateCredentialsSession", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbstractAccountAuthenticatorStartAddAccountSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "startAddAccountSession", "(Landroid/accounts/AccountAuthenticatorResponse;Ljava/lang/String;Ljava/lang/String;[Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbstractAccountAuthenticatorUpdateCredentials, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "updateCredentials", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAbstractAccountAuthenticatorStartUpdateCredentialsSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "startUpdateCredentialsSession", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAbstractAccountAuthenticatorUpdateCredentials, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractAccountAuthenticator)), "updateCredentials", "(Landroid/accounts/AccountAuthenticatorResponse;Landroid/accounts/Account;Ljava/lang/String;Landroid/os/Bundle;)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/accounts/AccountAuthenticatorResponse")
 	if err != nil {
-		return fmt.Errorf("find class android.accounts.AccountAuthenticatorResponse: %w", err)
-	}
-	clsAccountAuthenticatorResponse = env.NewGlobalRef(&c.Object)
-
-	midAccountAuthenticatorResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAccountAuthenticatorResponse = env.NewGlobalRef(&c.Object)
 
-	midAccountAuthenticatorResponseOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "onError", "(ILjava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountAuthenticatorResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountAuthenticatorResponseOnRequestContinued, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "onRequestContinued", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountAuthenticatorResponseOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "onError", "(ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountAuthenticatorResponseOnResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "onResult", "(Landroid/os/Bundle;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAccountAuthenticatorResponseOnRequestContinued, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "onRequestContinued", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAccountAuthenticatorResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAccountAuthenticatorResponseOnResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "onResult", "(Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAccountAuthenticatorResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

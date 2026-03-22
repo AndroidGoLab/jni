@@ -219,1011 +219,1119 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/hardware/camera2/MultiResolutionImageReader")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.MultiResolutionImageReader: %w", err)
-	}
-	clsMultiResolutionImageReader = env.NewGlobalRef(&c.Object)
-
-	midMultiResolutionImageReaderClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMultiResolutionImageReader = env.NewGlobalRef(&c.Object)
 
-	midMultiResolutionImageReaderFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "flush", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiResolutionImageReaderClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiResolutionImageReaderGetStreamInfoForImageReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "getStreamInfoForImageReader", "(Landroid/media/ImageReader;)Landroid/hardware/camera2/params/MultiResolutionStreamInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiResolutionImageReaderFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "flush", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiResolutionImageReaderGetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "getSurface", "()Landroid/view/Surface;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiResolutionImageReaderGetStreamInfoForImageReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "getStreamInfoForImageReader", "(Landroid/media/ImageReader;)Landroid/hardware/camera2/params/MultiResolutionStreamInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiResolutionImageReaderSetOnImageAvailableListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "setOnImageAvailableListener", "(Landroid/media/ImageReader$OnImageAvailableListener;Ljava/util/concurrent/Executor;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMultiResolutionImageReaderGetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "getSurface", "()Landroid/view/Surface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMultiResolutionImageReaderSetOnImageAvailableListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), "setOnImageAvailableListener", "(Landroid/media/ImageReader$OnImageAvailableListener;Ljava/util/concurrent/Executor;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/DngCreator")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.DngCreator: %w", err)
-	}
-	clsDngCreator = env.NewGlobalRef(&c.Object)
-
-	midDngCreatorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDngCreator = env.NewGlobalRef(&c.Object)
 
-	midDngCreatorSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/camera2/DngCreator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDngCreatorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDngCreatorSetLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setLocation", "(Landroid/location/Location;)Landroid/hardware/camera2/DngCreator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDngCreatorSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/camera2/DngCreator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDngCreatorSetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setOrientation", "(I)Landroid/hardware/camera2/DngCreator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDngCreatorSetLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setLocation", "(Landroid/location/Location;)Landroid/hardware/camera2/DngCreator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDngCreatorSetThumbnail1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setThumbnail", "(Landroid/graphics/Bitmap;)Landroid/hardware/camera2/DngCreator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDngCreatorSetOrientation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setOrientation", "(I)Landroid/hardware/camera2/DngCreator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDngCreatorSetThumbnail1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setThumbnail", "(Landroid/media/Image;)Landroid/hardware/camera2/DngCreator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDngCreatorSetThumbnail1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setThumbnail", "(Landroid/graphics/Bitmap;)Landroid/hardware/camera2/DngCreator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDngCreatorWriteImage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "writeImage", "(Ljava/io/OutputStream;Landroid/media/Image;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDngCreatorSetThumbnail1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "setThumbnail", "(Landroid/media/Image;)Landroid/hardware/camera2/DngCreator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDngCreatorWriteInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "writeInputStream", "(Ljava/io/OutputStream;Landroid/util/Size;Ljava/io/InputStream;J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDngCreatorWriteImage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "writeImage", "(Ljava/io/OutputStream;Landroid/media/Image;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDngCreatorWriteInputStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDngCreator)), "writeInputStream", "(Ljava/io/OutputStream;Landroid/util/Size;Ljava/io/InputStream;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CaptureRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CaptureRequest: %w", err)
-	}
-	clsCaptureRequest = env.NewGlobalRef(&c.Object)
-
-	midCaptureRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCaptureRequest = env.NewGlobalRef(&c.Object)
 
-	midCaptureRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "getTag", "()Ljava/lang/Object;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "getTag", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestIsReprocess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "isReprocess", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCaptureRequestIsReprocess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "isReprocess", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptureRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CaptureRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CaptureRequest$Builder: %w", err)
-	}
-	clsCaptureRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midCaptureRequestBuilderAddTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "addTarget", "(Landroid/view/Surface;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCaptureRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midCaptureRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "build", "()Landroid/hardware/camera2/CaptureRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestBuilderAddTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "addTarget", "(Landroid/view/Surface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestBuilderRemoveTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "removeTarget", "(Landroid/view/Surface;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "build", "()Landroid/hardware/camera2/CaptureRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestBuilderSetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "setTag", "(Ljava/lang/Object;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCaptureRequestBuilderRemoveTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "removeTarget", "(Landroid/view/Surface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptureRequestBuilderSetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestBuilder)), "setTag", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CaptureRequest$Key")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CaptureRequest$Key: %w", err)
-	}
-	clsCaptureRequestKey = env.NewGlobalRef(&c.Object)
-
-	midCaptureRequestKeyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCaptureRequestKey = env.NewGlobalRef(&c.Object)
 
-	midCaptureRequestKeyGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestKeyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestKeyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureRequestKeyGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureRequestKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCaptureRequestKeyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptureRequestKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureRequestKey)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraMetadata")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraMetadata: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCameraMetadata = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCameraMetadata = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/camera2/CameraCharacteristics")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraCharacteristics: %w", err)
-	}
-	clsCameraCharacteristics = env.NewGlobalRef(&c.Object)
-
-	midCameraCharacteristicsGetRecommendedStreamConfigurationMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristics)), "getRecommendedStreamConfigurationMap", "(I)Landroid/hardware/camera2/params/RecommendedStreamConfigurationMap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsCameraCharacteristics = env.NewGlobalRef(&c.Object)
+
+		midCameraCharacteristicsGetRecommendedStreamConfigurationMap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristics)), "getRecommendedStreamConfigurationMap", "(I)Landroid/hardware/camera2/params/RecommendedStreamConfigurationMap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraCharacteristics$Key")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraCharacteristics$Key: %w", err)
-	}
-	clsCameraCharacteristicsKey = env.NewGlobalRef(&c.Object)
-
-	midCameraCharacteristicsKeyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraCharacteristicsKey = env.NewGlobalRef(&c.Object)
 
-	midCameraCharacteristicsKeyGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCharacteristicsKeyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCharacteristicsKeyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCharacteristicsKeyGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCharacteristicsKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraCharacteristicsKeyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraCharacteristicsKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCharacteristicsKey)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraExtensionCharacteristics")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraExtensionCharacteristics: %w", err)
-	}
-	clsCameraExtensionCharacteristics = env.NewGlobalRef(&c.Object)
-
-	midCameraExtensionCharacteristicsIsCaptureProcessProgressAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionCharacteristics)), "isCaptureProcessProgressAvailable", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraExtensionCharacteristics = env.NewGlobalRef(&c.Object)
 
-	midCameraExtensionCharacteristicsIsPostviewAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionCharacteristics)), "isPostviewAvailable", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraExtensionCharacteristicsIsCaptureProcessProgressAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionCharacteristics)), "isCaptureProcessProgressAvailable", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraExtensionCharacteristicsIsPostviewAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionCharacteristics)), "isPostviewAvailable", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraOfflineSession")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraOfflineSession: %w", err)
-	}
-	clsCameraOfflineSession = env.NewGlobalRef(&c.Object)
-
-	midCameraOfflineSessionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSession)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsCameraOfflineSession = env.NewGlobalRef(&c.Object)
+
+		midCameraOfflineSessionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSession)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraOfflineSession$CameraOfflineSessionCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraOfflineSession$CameraOfflineSessionCallback: %w", err)
-	}
-	clsCameraOfflineSessionCameraOfflineSessionCallback = env.NewGlobalRef(&c.Object)
-
-	midCameraOfflineSessionCameraOfflineSessionCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onClosed", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraOfflineSessionCameraOfflineSessionCallback = env.NewGlobalRef(&c.Object)
 
-	midCameraOfflineSessionCameraOfflineSessionCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onError", "(Landroid/hardware/camera2/CameraOfflineSession;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraOfflineSessionCameraOfflineSessionCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onClosed", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraOfflineSessionCameraOfflineSessionCallbackOnIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onIdle", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraOfflineSessionCameraOfflineSessionCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onError", "(Landroid/hardware/camera2/CameraOfflineSession;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraOfflineSessionCameraOfflineSessionCallbackOnReady, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onReady", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraOfflineSessionCameraOfflineSessionCallbackOnIdle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onIdle", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraOfflineSessionCameraOfflineSessionCallbackOnSwitchFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onSwitchFailed", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraOfflineSessionCameraOfflineSessionCallbackOnReady, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onReady", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraOfflineSessionCameraOfflineSessionCallbackOnSwitchFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraOfflineSessionCameraOfflineSessionCallback)), "onSwitchFailed", "(Landroid/hardware/camera2/CameraOfflineSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraExtensionSession")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraExtensionSession: %w", err)
-	}
-	clsCameraExtensionSession = env.NewGlobalRef(&c.Object)
-
-	midCameraExtensionSessionCapture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "capture", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraExtensionSession$ExtensionCaptureCallback;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraExtensionSession = env.NewGlobalRef(&c.Object)
 
-	midCameraExtensionSessionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionCapture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "capture", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraExtensionSession$ExtensionCaptureCallback;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "getDevice", "()Landroid/hardware/camera2/CameraDevice;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionGetRealtimeStillCaptureLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "getRealtimeStillCaptureLatency", "()Landroid/hardware/camera2/CameraExtensionSession$StillCaptureLatency;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "getDevice", "()Landroid/hardware/camera2/CameraDevice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionSetRepeatingRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "setRepeatingRequest", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraExtensionSession$ExtensionCaptureCallback;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionGetRealtimeStillCaptureLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "getRealtimeStillCaptureLatency", "()Landroid/hardware/camera2/CameraExtensionSession$StillCaptureLatency;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionStopRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "stopRepeating", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraExtensionSessionSetRepeatingRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "setRepeatingRequest", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraExtensionSession$ExtensionCaptureCallback;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraExtensionSessionStopRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSession)), "stopRepeating", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraExtensionSession$ExtensionCaptureCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback: %w", err)
-	}
-	clsCameraExtensionSessionExtensionCaptureCallback = env.NewGlobalRef(&c.Object)
-
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureFailed2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureFailed", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraExtensionSessionExtensionCaptureCallback = env.NewGlobalRef(&c.Object)
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureFailed3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureFailed", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureFailed2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureFailed", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureProcessProgressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureProcessProgressed", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureFailed3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureFailed", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureProcessStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureProcessStarted", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureProcessProgressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureProcessProgressed", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureResultAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureResultAvailable", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/TotalCaptureResult;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureProcessStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureProcessStarted", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureSequenceAborted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureSequenceAborted", "(Landroid/hardware/camera2/CameraExtensionSession;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureResultAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureResultAvailable", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/TotalCaptureResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureSequenceCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureSequenceCompleted", "(Landroid/hardware/camera2/CameraExtensionSession;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureSequenceAborted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureSequenceAborted", "(Landroid/hardware/camera2/CameraExtensionSession;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionExtensionCaptureCallbackOnCaptureStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureStarted", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureSequenceCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureSequenceCompleted", "(Landroid/hardware/camera2/CameraExtensionSession;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraExtensionSessionExtensionCaptureCallbackOnCaptureStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionExtensionCaptureCallback)), "onCaptureStarted", "(Landroid/hardware/camera2/CameraExtensionSession;Landroid/hardware/camera2/CaptureRequest;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraExtensionSession$StateCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraExtensionSession$StateCallback: %w", err)
-	}
-	clsCameraExtensionSessionStateCallback = env.NewGlobalRef(&c.Object)
-
-	midCameraExtensionSessionStateCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStateCallback)), "onClosed", "(Landroid/hardware/camera2/CameraExtensionSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraExtensionSessionStateCallback = env.NewGlobalRef(&c.Object)
 
-	midCameraExtensionSessionStateCallbackOnConfigureFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStateCallback)), "onConfigureFailed", "(Landroid/hardware/camera2/CameraExtensionSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionStateCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStateCallback)), "onClosed", "(Landroid/hardware/camera2/CameraExtensionSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionStateCallbackOnConfigured, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStateCallback)), "onConfigured", "(Landroid/hardware/camera2/CameraExtensionSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraExtensionSessionStateCallbackOnConfigureFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStateCallback)), "onConfigureFailed", "(Landroid/hardware/camera2/CameraExtensionSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraExtensionSessionStateCallbackOnConfigured, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStateCallback)), "onConfigured", "(Landroid/hardware/camera2/CameraExtensionSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraExtensionSession$StillCaptureLatency")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraExtensionSession$StillCaptureLatency: %w", err)
-	}
-	clsCameraExtensionSessionStillCaptureLatency = env.NewGlobalRef(&c.Object)
-
-	midCameraExtensionSessionStillCaptureLatencyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraExtensionSessionStillCaptureLatency = env.NewGlobalRef(&c.Object)
 
-	midCameraExtensionSessionStillCaptureLatencyGetCaptureLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "getCaptureLatency", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionStillCaptureLatencyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionStillCaptureLatencyGetProcessingLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "getProcessingLatency", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionStillCaptureLatencyGetCaptureLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "getCaptureLatency", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionStillCaptureLatencyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraExtensionSessionStillCaptureLatencyGetProcessingLatency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "getProcessingLatency", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraExtensionSessionStillCaptureLatencyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraExtensionSessionStillCaptureLatencyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraExtensionSessionStillCaptureLatencyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraExtensionSessionStillCaptureLatency)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraCaptureSession")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraCaptureSession: %w", err)
-	}
-	clsCameraCaptureSession = env.NewGlobalRef(&c.Object)
-
-	midCameraCaptureSessionAbortCaptures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "abortCaptures", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraCaptureSession = env.NewGlobalRef(&c.Object)
 
-	midCameraCaptureSessionCaptureSingleRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "captureSingleRequest", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraCaptureSession$CaptureCallback;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionAbortCaptures, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "abortCaptures", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureSingleRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "captureSingleRequest", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraCaptureSession$CaptureCallback;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "getDevice", "()Landroid/hardware/camera2/CameraDevice;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionGetInputSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "getInputSurface", "()Landroid/view/Surface;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "getDevice", "()Landroid/hardware/camera2/CameraDevice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionIsReprocessable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "isReprocessable", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionGetInputSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "getInputSurface", "()Landroid/view/Surface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionPrepare, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "prepare", "(Landroid/view/Surface;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionIsReprocessable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "isReprocessable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionSetSingleRepeatingRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "setSingleRepeatingRequest", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraCaptureSession$CaptureCallback;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionPrepare, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "prepare", "(Landroid/view/Surface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionStopRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "stopRepeating", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionSetSingleRepeatingRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "setSingleRepeatingRequest", "(Landroid/hardware/camera2/CaptureRequest;Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraCaptureSession$CaptureCallback;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionSupportsOfflineProcessing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "supportsOfflineProcessing", "(Landroid/view/Surface;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionStopRepeating, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "stopRepeating", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionUpdateOutputConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "updateOutputConfiguration", "(Landroid/hardware/camera2/params/OutputConfiguration;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraCaptureSessionSupportsOfflineProcessing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "supportsOfflineProcessing", "(Landroid/view/Surface;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraCaptureSessionUpdateOutputConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSession)), "updateOutputConfiguration", "(Landroid/hardware/camera2/params/OutputConfiguration;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraCaptureSession$CaptureCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraCaptureSession$CaptureCallback: %w", err)
-	}
-	clsCameraCaptureSessionCaptureCallback = env.NewGlobalRef(&c.Object)
-
-	midCameraCaptureSessionCaptureCallbackOnCaptureBufferLost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureBufferLost", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/view/Surface;J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraCaptureSessionCaptureCallback = env.NewGlobalRef(&c.Object)
 
-	midCameraCaptureSessionCaptureCallbackOnCaptureCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureCompleted", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/TotalCaptureResult;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureCallbackOnCaptureBufferLost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureBufferLost", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/view/Surface;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionCaptureCallbackOnCaptureFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureFailed", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/CaptureFailure;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureCallbackOnCaptureCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureCompleted", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/TotalCaptureResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionCaptureCallbackOnCaptureProgressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureProgressed", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/CaptureResult;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureCallbackOnCaptureFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureFailed", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/CaptureFailure;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionCaptureCallbackOnCaptureSequenceAborted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureSequenceAborted", "(Landroid/hardware/camera2/CameraCaptureSession;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureCallbackOnCaptureProgressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureProgressed", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;Landroid/hardware/camera2/CaptureResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionCaptureCallbackOnCaptureSequenceCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureSequenceCompleted", "(Landroid/hardware/camera2/CameraCaptureSession;IJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureCallbackOnCaptureSequenceAborted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureSequenceAborted", "(Landroid/hardware/camera2/CameraCaptureSession;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionCaptureCallbackOnCaptureStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureStarted", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;JJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionCaptureCallbackOnCaptureSequenceCompleted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureSequenceCompleted", "(Landroid/hardware/camera2/CameraCaptureSession;IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionCaptureCallbackOnReadoutStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onReadoutStarted", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;JJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraCaptureSessionCaptureCallbackOnCaptureStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onCaptureStarted", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;JJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraCaptureSessionCaptureCallbackOnReadoutStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionCaptureCallback)), "onReadoutStarted", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/hardware/camera2/CaptureRequest;JJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraCaptureSession$StateCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraCaptureSession$StateCallback: %w", err)
-	}
-	clsCameraCaptureSessionStateCallback = env.NewGlobalRef(&c.Object)
-
-	midCameraCaptureSessionStateCallbackOnActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onActive", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraCaptureSessionStateCallback = env.NewGlobalRef(&c.Object)
 
-	midCameraCaptureSessionStateCallbackOnCaptureQueueEmpty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onCaptureQueueEmpty", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionStateCallbackOnActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onActive", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionStateCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onClosed", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionStateCallbackOnCaptureQueueEmpty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onCaptureQueueEmpty", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionStateCallbackOnConfigureFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onConfigureFailed", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionStateCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onClosed", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionStateCallbackOnConfigured, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onConfigured", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionStateCallbackOnConfigureFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onConfigureFailed", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionStateCallbackOnReady, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onReady", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraCaptureSessionStateCallbackOnConfigured, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onConfigured", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraCaptureSessionStateCallbackOnSurfacePrepared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onSurfacePrepared", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/view/Surface;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraCaptureSessionStateCallbackOnReady, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onReady", "(Landroid/hardware/camera2/CameraCaptureSession;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraCaptureSessionStateCallbackOnSurfacePrepared, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraCaptureSessionStateCallback)), "onSurfacePrepared", "(Landroid/hardware/camera2/CameraCaptureSession;Landroid/view/Surface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/TotalCaptureResult")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.TotalCaptureResult: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTotalCaptureResult = env.NewGlobalRef(&c.Object)
+
 	}
-	clsTotalCaptureResult = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/camera2/CaptureFailure")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CaptureFailure: %w", err)
-	}
-	clsCaptureFailure = env.NewGlobalRef(&c.Object)
-
-	midCaptureFailureGetFrameNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getFrameNumber", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCaptureFailure = env.NewGlobalRef(&c.Object)
 
-	midCaptureFailureGetPhysicalCameraId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getPhysicalCameraId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureFailureGetFrameNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getFrameNumber", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureFailureGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getReason", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureFailureGetPhysicalCameraId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getPhysicalCameraId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureFailureGetRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getRequest", "()Landroid/hardware/camera2/CaptureRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureFailureGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getReason", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureFailureGetSequenceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getSequenceId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureFailureGetRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getRequest", "()Landroid/hardware/camera2/CaptureRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureFailureWasImageCaptured, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "wasImageCaptured", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCaptureFailureGetSequenceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "getSequenceId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptureFailureWasImageCaptured, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureFailure)), "wasImageCaptured", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CaptureResult")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CaptureResult: %w", err)
-	}
-	clsCaptureResult = env.NewGlobalRef(&c.Object)
-
-	midCaptureResultGetCameraId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getCameraId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCaptureResult = env.NewGlobalRef(&c.Object)
 
-	midCaptureResultGetFrameNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getFrameNumber", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureResultGetCameraId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getCameraId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureResultGetRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getRequest", "()Landroid/hardware/camera2/CaptureRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureResultGetFrameNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getFrameNumber", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureResultGetSequenceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getSequenceId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCaptureResultGetRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getRequest", "()Landroid/hardware/camera2/CaptureRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptureResultGetSequenceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResult)), "getSequenceId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CaptureResult$Key")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CaptureResult$Key: %w", err)
-	}
-	clsCaptureResultKey = env.NewGlobalRef(&c.Object)
-
-	midCaptureResultKeyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCaptureResultKey = env.NewGlobalRef(&c.Object)
 
-	midCaptureResultKeyGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureResultKeyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureResultKeyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCaptureResultKeyGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCaptureResultKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCaptureResultKeyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCaptureResultKeyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCaptureResultKey)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraConstrainedHighSpeedCaptureSession")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCameraConstrainedHighSpeedCaptureSession = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCameraConstrainedHighSpeedCaptureSession = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/camera2/CameraAccessException")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraAccessException: %w", err)
-	}
-	clsCameraAccessException = env.NewGlobalRef(&c.Object)
-
-	midCameraAccessExceptionGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraAccessException)), "getReason", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsCameraAccessException = env.NewGlobalRef(&c.Object)
+
+		midCameraAccessExceptionGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraAccessException)), "getReason", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraDevice")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraDevice: %w", err)
-	}
-	clsCameraDevice = env.NewGlobalRef(&c.Object)
-
-	midCameraDeviceClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "close", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraDevice = env.NewGlobalRef(&c.Object)
 
-	midCameraDeviceCreateCaptureRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createCaptureRequest", "(I)Landroid/hardware/camera2/CaptureRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceCreateCaptureSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createCaptureSession", "(Landroid/hardware/camera2/params/SessionConfiguration;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCreateCaptureRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createCaptureRequest", "(I)Landroid/hardware/camera2/CaptureRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceCreateExtensionSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createExtensionSession", "(Landroid/hardware/camera2/params/ExtensionSessionConfiguration;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCreateCaptureSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createCaptureSession", "(Landroid/hardware/camera2/params/SessionConfiguration;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceCreateReprocessCaptureRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createReprocessCaptureRequest", "(Landroid/hardware/camera2/TotalCaptureResult;)Landroid/hardware/camera2/CaptureRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCreateExtensionSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createExtensionSession", "(Landroid/hardware/camera2/params/ExtensionSessionConfiguration;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceGetCameraAudioRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "getCameraAudioRestriction", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCreateReprocessCaptureRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "createReprocessCaptureRequest", "(Landroid/hardware/camera2/TotalCaptureResult;)Landroid/hardware/camera2/CaptureRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceGetCameraAudioRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "getCameraAudioRestriction", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceIsSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "isSessionConfigurationSupported", "(Landroid/hardware/camera2/params/SessionConfiguration;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceSetCameraAudioRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "setCameraAudioRestriction", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraDeviceIsSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "isSessionConfigurationSupported", "(Landroid/hardware/camera2/params/SessionConfiguration;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraDeviceSetCameraAudioRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDevice)), "setCameraAudioRestriction", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraDevice$CameraDeviceSetup")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraDevice$CameraDeviceSetup: %w", err)
-	}
-	clsCameraDeviceCameraDeviceSetup = env.NewGlobalRef(&c.Object)
-
-	midCameraDeviceCameraDeviceSetupCreateCaptureRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "createCaptureRequest", "(I)Landroid/hardware/camera2/CaptureRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraDeviceCameraDeviceSetup = env.NewGlobalRef(&c.Object)
 
-	midCameraDeviceCameraDeviceSetupGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCameraDeviceSetupCreateCaptureRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "createCaptureRequest", "(I)Landroid/hardware/camera2/CaptureRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceCameraDeviceSetupGetSessionCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "getSessionCharacteristics", "(Landroid/hardware/camera2/params/SessionConfiguration;)Landroid/hardware/camera2/CameraCharacteristics;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCameraDeviceSetupGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceCameraDeviceSetupIsSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "isSessionConfigurationSupported", "(Landroid/hardware/camera2/params/SessionConfiguration;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceCameraDeviceSetupGetSessionCharacteristics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "getSessionCharacteristics", "(Landroid/hardware/camera2/params/SessionConfiguration;)Landroid/hardware/camera2/CameraCharacteristics;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceCameraDeviceSetupOpenCamera, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "openCamera", "(Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraDevice$StateCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraDeviceCameraDeviceSetupIsSessionConfigurationSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "isSessionConfigurationSupported", "(Landroid/hardware/camera2/params/SessionConfiguration;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraDeviceCameraDeviceSetupOpenCamera, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceCameraDeviceSetup)), "openCamera", "(Ljava/util/concurrent/Executor;Landroid/hardware/camera2/CameraDevice$StateCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/camera2/CameraDevice$StateCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.camera2.CameraDevice$StateCallback: %w", err)
-	}
-	clsCameraDeviceStateCallback = env.NewGlobalRef(&c.Object)
-
-	midCameraDeviceStateCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onClosed", "(Landroid/hardware/camera2/CameraDevice;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCameraDeviceStateCallback = env.NewGlobalRef(&c.Object)
 
-	midCameraDeviceStateCallbackOnDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onDisconnected", "(Landroid/hardware/camera2/CameraDevice;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceStateCallbackOnClosed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onClosed", "(Landroid/hardware/camera2/CameraDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceStateCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onError", "(Landroid/hardware/camera2/CameraDevice;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCameraDeviceStateCallbackOnDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onDisconnected", "(Landroid/hardware/camera2/CameraDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCameraDeviceStateCallbackOnOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onOpened", "(Landroid/hardware/camera2/CameraDevice;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCameraDeviceStateCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onError", "(Landroid/hardware/camera2/CameraDevice;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraDeviceStateCallbackOnOpened, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraDeviceStateCallback)), "onOpened", "(Landroid/hardware/camera2/CameraDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -52,42 +52,50 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/security/advancedprotection/AdvancedProtectionManager")
 	if err != nil {
-		return fmt.Errorf("find class android.security.advancedprotection.AdvancedProtectionManager: %w", err)
-	}
-	clsAdvancedProtectionManager = env.NewGlobalRef(&c.Object)
-
-	midAdvancedProtectionManagerIsAdvancedProtectionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "isAdvancedProtectionEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdvancedProtectionManager = env.NewGlobalRef(&c.Object)
 
-	midAdvancedProtectionManagerRegisterAdvancedProtectionCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "registerAdvancedProtectionCallback", "(Ljava/util/concurrent/Executor;Landroid/security/advancedprotection/AdvancedProtectionManager$Callback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdvancedProtectionManagerIsAdvancedProtectionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "isAdvancedProtectionEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdvancedProtectionManagerUnregisterAdvancedProtectionCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "unregisterAdvancedProtectionCallback", "(Landroid/security/advancedprotection/AdvancedProtectionManager$Callback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdvancedProtectionManagerRegisterAdvancedProtectionCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "registerAdvancedProtectionCallback", "(Ljava/util/concurrent/Executor;Landroid/security/advancedprotection/AdvancedProtectionManager$Callback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdvancedProtectionManagerUnregisterAdvancedProtectionCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManager)), "unregisterAdvancedProtectionCallback", "(Landroid/security/advancedprotection/AdvancedProtectionManager$Callback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/security/advancedprotection/AdvancedProtectionManager$Callback")
 	if err != nil {
-		return fmt.Errorf("find class android.security.advancedprotection.AdvancedProtectionManager$Callback: %w", err)
-	}
-	clsAdvancedProtectionManagerCallback = env.NewGlobalRef(&c.Object)
-
-	midAdvancedProtectionManagerCallbackOnAdvancedProtectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManagerCallback)), "onAdvancedProtectionChanged", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAdvancedProtectionManagerCallback = env.NewGlobalRef(&c.Object)
+
+		midAdvancedProtectionManagerCallbackOnAdvancedProtectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdvancedProtectionManagerCallback)), "onAdvancedProtectionChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

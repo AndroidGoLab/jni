@@ -80,214 +80,234 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/text/util/Linkify")
 	if err != nil {
-		return fmt.Errorf("find class android.text.util.Linkify: %w", err)
-	}
-	clsLinkify = env.NewGlobalRef(&c.Object)
-
-	midLinkifyAddLinks2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLinkify = env.NewGlobalRef(&c.Object)
 
-	midLinkifyAddLinks3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkifyAddLinks2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkifyAddLinks5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkifyAddLinks3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkifyAddLinks6_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkifyAddLinks5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkifyAddLinks2_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkifyAddLinks6_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/text/Spannable;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkifyAddLinks3_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkifyAddLinks2_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkifyAddLinks5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkifyAddLinks3_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkifyAddLinks6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLinkifyAddLinks5_6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLinkifyAddLinks6_7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "addLinks", "(Landroid/widget/TextView;Ljava/util/regex/Pattern;Ljava/lang/String;[Ljava/lang/String;Landroid/text/util/Linkify$MatchFilter;Landroid/text/util/Linkify$TransformFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/util/Linkify$MatchFilter")
 	if err != nil {
-		return fmt.Errorf("find class android.text.util.Linkify$MatchFilter: %w", err)
-	}
-	clsLinkifyMatchFilter = env.NewGlobalRef(&c.Object)
-
-	midLinkifyMatchFilterAcceptMatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyMatchFilter)), "acceptMatch", "(Ljava/lang/CharSequence;II)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsLinkifyMatchFilter = env.NewGlobalRef(&c.Object)
+
+		midLinkifyMatchFilterAcceptMatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyMatchFilter)), "acceptMatch", "(Ljava/lang/CharSequence;II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/util/Linkify$TransformFilter")
 	if err != nil {
-		return fmt.Errorf("find class android.text.util.Linkify$TransformFilter: %w", err)
-	}
-	clsLinkifyTransformFilter = env.NewGlobalRef(&c.Object)
-
-	midLinkifyTransformFilterTransformUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyTransformFilter)), "transformUrl", "(Ljava/util/regex/Matcher;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsLinkifyTransformFilter = env.NewGlobalRef(&c.Object)
+
+		midLinkifyTransformFilterTransformUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkifyTransformFilter)), "transformUrl", "(Ljava/util/regex/Matcher;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/util/Rfc822Tokenizer")
 	if err != nil {
-		return fmt.Errorf("find class android.text.util.Rfc822Tokenizer: %w", err)
-	}
-	clsRfc822Tokenizer = env.NewGlobalRef(&c.Object)
-
-	midRfc822TokenizerFindTokenEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "findTokenEnd", "(Ljava/lang/CharSequence;I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRfc822Tokenizer = env.NewGlobalRef(&c.Object)
 
-	midRfc822TokenizerFindTokenStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "findTokenStart", "(Ljava/lang/CharSequence;I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenizerFindTokenEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "findTokenEnd", "(Ljava/lang/CharSequence;I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenizerTerminateToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "terminateToken", "(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenizerFindTokenStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "findTokenStart", "(Ljava/lang/CharSequence;I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenizerTokenize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "tokenize", "(Ljava/lang/CharSequence;)[Landroid/text/util/Rfc822Token;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRfc822TokenizerTerminateToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "terminateToken", "(Ljava/lang/CharSequence;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRfc822TokenizerTokenize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "tokenize", "(Ljava/lang/CharSequence;)[Landroid/text/util/Rfc822Token;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/util/Rfc822Token")
 	if err != nil {
-		return fmt.Errorf("find class android.text.util.Rfc822Token: %w", err)
-	}
-	clsRfc822Token = env.NewGlobalRef(&c.Object)
-
-	midRfc822TokenEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRfc822Token = env.NewGlobalRef(&c.Object)
 
-	midRfc822TokenGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "getAddress", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenGetComment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "getComment", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "getAddress", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenGetComment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "getComment", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenSetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "setAddress", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenSetComment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "setComment", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenSetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "setAddress", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "setName", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenSetComment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "setComment", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "setName", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenQuoteComment, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "quoteComment", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenQuoteName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "quoteName", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRfc822TokenQuoteComment, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "quoteComment", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRfc822TokenQuoteNameIfNecessary, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "quoteNameIfNecessary", "(Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRfc822TokenQuoteName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "quoteName", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRfc822TokenQuoteNameIfNecessary, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "quoteNameIfNecessary", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

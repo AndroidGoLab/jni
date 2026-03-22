@@ -76,178 +76,202 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/appfunctions/AppFunctionException")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appfunctions.AppFunctionException: %w", err)
-	}
-	clsAppFunctionException = env.NewGlobalRef(&c.Object)
-
-	midAppFunctionExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAppFunctionException = env.NewGlobalRef(&c.Object)
 
-	midAppFunctionExceptionGetErrorCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getErrorCategory", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppFunctionExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppFunctionExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getErrorCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppFunctionExceptionGetErrorCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getErrorCategory", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppFunctionExceptionGetErrorMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getErrorMessage", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppFunctionExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getErrorCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppFunctionExceptionGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppFunctionExceptionGetErrorMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getErrorMessage", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppFunctionExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAppFunctionExceptionGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppFunctionExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/appfunctions/AppFunctionService")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appfunctions.AppFunctionService: %w", err)
-	}
-	clsAppFunctionService = env.NewGlobalRef(&c.Object)
-
-	midAppFunctionServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAppFunctionService = env.NewGlobalRef(&c.Object)
+
+		midAppFunctionServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppFunctionService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/appfunctions/ExecuteAppFunctionRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appfunctions.ExecuteAppFunctionRequest: %w", err)
-	}
-	clsExecuteAppFunctionRequest = env.NewGlobalRef(&c.Object)
-
-	midExecuteAppFunctionRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExecuteAppFunctionRequest = env.NewGlobalRef(&c.Object)
 
-	midExecuteAppFunctionRequestGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionRequestGetFunctionIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getFunctionIdentifier", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionRequestGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionRequestGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getParameters", "()Landroid/app/appsearch/GenericDocument;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionRequestGetFunctionIdentifier, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getFunctionIdentifier", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionRequestGetTargetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getTargetPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionRequestGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getParameters", "()Landroid/app/appsearch/GenericDocument;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExecuteAppFunctionRequestGetTargetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "getTargetPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteAppFunctionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/appfunctions/ExecuteAppFunctionRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appfunctions.ExecuteAppFunctionRequest$Builder: %w", err)
-	}
-	clsExecuteAppFunctionRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midExecuteAppFunctionRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequestBuilder)), "build", "()Landroid/app/appfunctions/ExecuteAppFunctionRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExecuteAppFunctionRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midExecuteAppFunctionRequestBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequestBuilder)), "setExtras", "(Landroid/os/Bundle;)Landroid/app/appfunctions/ExecuteAppFunctionRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequestBuilder)), "build", "()Landroid/app/appfunctions/ExecuteAppFunctionRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionRequestBuilderSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequestBuilder)), "setParameters", "(Landroid/app/appsearch/GenericDocument;)Landroid/app/appfunctions/ExecuteAppFunctionRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExecuteAppFunctionRequestBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequestBuilder)), "setExtras", "(Landroid/os/Bundle;)Landroid/app/appfunctions/ExecuteAppFunctionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteAppFunctionRequestBuilderSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionRequestBuilder)), "setParameters", "(Landroid/app/appsearch/GenericDocument;)Landroid/app/appfunctions/ExecuteAppFunctionRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/app/appfunctions/AppFunctionManager")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appfunctions.AppFunctionManager: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAppFunctionManager = env.NewGlobalRef(&c.Object)
+
 	}
-	clsAppFunctionManager = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/app/appfunctions/ExecuteAppFunctionResponse")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appfunctions.ExecuteAppFunctionResponse: %w", err)
-	}
-	clsExecuteAppFunctionResponse = env.NewGlobalRef(&c.Object)
-
-	midExecuteAppFunctionResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExecuteAppFunctionResponse = env.NewGlobalRef(&c.Object)
 
-	midExecuteAppFunctionResponseGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "getExtras", "()Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionResponseGetResultDocument, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "getResultDocument", "()Landroid/app/appsearch/GenericDocument;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExecuteAppFunctionResponseGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExecuteAppFunctionResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExecuteAppFunctionResponseGetResultDocument, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "getResultDocument", "()Landroid/app/appsearch/GenericDocument;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteAppFunctionResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -49,29 +49,33 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/role/RoleManager")
 	if err != nil {
-		return fmt.Errorf("find class android.app.role.RoleManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerCreateRequestRoleIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createRequestRoleIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerIsRoleAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRoleAvailable", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerCreateRequestRoleIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createRequestRoleIntent", "(Ljava/lang/String;)Landroid/content/Intent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerIsRoleHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRoleHeld", "(Ljava/lang/String;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerIsRoleAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRoleAvailable", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsRoleHeld, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isRoleHeld", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

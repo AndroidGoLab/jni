@@ -77,177 +77,205 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogsRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogsRequest: %w", err)
-	}
-	clsChangeLogsRequest = env.NewGlobalRef(&c.Object)
-
-	midChangeLogsRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogsRequest = env.NewGlobalRef(&c.Object)
 
-	midChangeLogsRequestGetPageSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "getPageSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midChangeLogsRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midChangeLogsRequestGetToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "getToken", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midChangeLogsRequestGetPageSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "getPageSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midChangeLogsRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogsRequestGetToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "getToken", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogsRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogsRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogsRequest$Builder: %w", err)
-	}
-	clsChangeLogsRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midChangeLogsRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequestBuilder)), "build", "()Landroid/health/connect/changelog/ChangeLogsRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogsRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midChangeLogsRequestBuilderSetPageSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequestBuilder)), "setPageSize", "(I)Landroid/health/connect/changelog/ChangeLogsRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogsRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequestBuilder)), "build", "()Landroid/health/connect/changelog/ChangeLogsRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogsRequestBuilderSetPageSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsRequestBuilder)), "setPageSize", "(I)Landroid/health/connect/changelog/ChangeLogsRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogTokenResponse")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogTokenResponse: %w", err)
-	}
-	clsChangeLogTokenResponse = env.NewGlobalRef(&c.Object)
-
-	midChangeLogTokenResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenResponse)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogTokenResponse = env.NewGlobalRef(&c.Object)
 
-	midChangeLogTokenResponseGetToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenResponse)), "getToken", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midChangeLogTokenResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midChangeLogTokenResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogTokenResponseGetToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenResponse)), "getToken", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogTokenResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogsResponse")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogsResponse: %w", err)
-	}
-	clsChangeLogsResponse = env.NewGlobalRef(&c.Object)
-
-	midChangeLogsResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogsResponse = env.NewGlobalRef(&c.Object)
 
-	midChangeLogsResponseGetNextChangesToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "getNextChangesToken", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midChangeLogsResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midChangeLogsResponseHasMorePages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "hasMorePages", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midChangeLogsResponseGetNextChangesToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "getNextChangesToken", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midChangeLogsResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogsResponseHasMorePages, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "hasMorePages", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogsResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogsResponse$DeletedLog")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogsResponse$DeletedLog: %w", err)
-	}
-	clsChangeLogsResponseDeletedLog = env.NewGlobalRef(&c.Object)
-
-	midChangeLogsResponseDeletedLogGetDeletedRecordId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponseDeletedLog)), "getDeletedRecordId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogsResponseDeletedLog = env.NewGlobalRef(&c.Object)
 
-	midChangeLogsResponseDeletedLogGetDeletedTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponseDeletedLog)), "getDeletedTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogsResponseDeletedLogGetDeletedRecordId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponseDeletedLog)), "getDeletedRecordId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogsResponseDeletedLogGetDeletedTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogsResponseDeletedLog)), "getDeletedTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogTokenRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogTokenRequest: %w", err)
-	}
-	clsChangeLogTokenRequest = env.NewGlobalRef(&c.Object)
-
-	midChangeLogTokenRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequest)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogTokenRequest = env.NewGlobalRef(&c.Object)
 
-	midChangeLogTokenRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogTokenRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogTokenRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/changelog/ChangeLogTokenRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.changelog.ChangeLogTokenRequest$Builder: %w", err)
-	}
-	clsChangeLogTokenRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midChangeLogTokenRequestBuilderAddDataOriginFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequestBuilder)), "addDataOriginFilter", "(Landroid/health/connect/datatypes/DataOrigin;)Landroid/health/connect/changelog/ChangeLogTokenRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsChangeLogTokenRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midChangeLogTokenRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequestBuilder)), "build", "()Landroid/health/connect/changelog/ChangeLogTokenRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midChangeLogTokenRequestBuilderAddDataOriginFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequestBuilder)), "addDataOriginFilter", "(Landroid/health/connect/datatypes/DataOrigin;)Landroid/health/connect/changelog/ChangeLogTokenRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChangeLogTokenRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChangeLogTokenRequestBuilder)), "build", "()Landroid/health/connect/changelog/ChangeLogTokenRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

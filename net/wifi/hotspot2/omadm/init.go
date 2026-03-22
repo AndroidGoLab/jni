@@ -47,15 +47,19 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/net/wifi/hotspot2/omadm/PpsMoParser")
 	if err != nil {
-		return fmt.Errorf("find class android.net.wifi.hotspot2.omadm.PpsMoParser: %w", err)
-	}
-	clsPpsMoParser = env.NewGlobalRef(&c.Object)
-
-	midPpsMoParserParseMoText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPpsMoParser)), "parseMoText", "(Ljava/lang/String;)Landroid/net/wifi/hotspot2/PasspointConfiguration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsPpsMoParser = env.NewGlobalRef(&c.Object)
+
+		midPpsMoParserParseMoText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPpsMoParser)), "parseMoText", "(Ljava/lang/String;)Landroid/net/wifi/hotspot2/PasspointConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

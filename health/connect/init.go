@@ -61,113 +61,117 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/health/connect/HealthConnectManager")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.HealthConnectManager: %w", err)
-	}
-	clsHealthConnectManager = env.NewGlobalRef(&c.Object)
-
-	midHealthConnectManagerCreateMedicalDataSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "createMedicalDataSource", "(Landroid/health/connect/CreateMedicalDataSourceRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHealthConnectManager = env.NewGlobalRef(&c.Object)
 
-	midHealthConnectManagerDeleteMedicalDataSourceWithData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteMedicalDataSourceWithData", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerCreateMedicalDataSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "createMedicalDataSource", "(Landroid/health/connect/CreateMedicalDataSourceRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerDeleteMedicalResources3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteMedicalResources", "(Landroid/health/connect/DeleteMedicalResourcesRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerDeleteMedicalDataSourceWithData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteMedicalDataSourceWithData", "(Ljava/lang/String;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerDeleteMedicalResources3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerDeleteMedicalResources3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteMedicalResources", "(Landroid/health/connect/DeleteMedicalResourcesRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerDeleteRecords4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteRecords", "(Ljava/lang/Class;Landroid/health/connect/TimeRangeFilter;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerDeleteMedicalResources3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerDeleteRecords3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteRecords", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerDeleteRecords4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteRecords", "(Ljava/lang/Class;Landroid/health/connect/TimeRangeFilter;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerGetChangeLogToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getChangeLogToken", "(Landroid/health/connect/changelog/ChangeLogTokenRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerDeleteRecords3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "deleteRecords", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerGetChangeLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getChangeLogs", "(Landroid/health/connect/changelog/ChangeLogsRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerGetChangeLogToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getChangeLogToken", "(Landroid/health/connect/changelog/ChangeLogTokenRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerGetMedicalDataSources3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getMedicalDataSources", "(Landroid/health/connect/GetMedicalDataSourcesRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerGetChangeLogs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getChangeLogs", "(Landroid/health/connect/changelog/ChangeLogsRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerGetMedicalDataSources3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getMedicalDataSources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerGetMedicalDataSources3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getMedicalDataSources", "(Landroid/health/connect/GetMedicalDataSourcesRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerInsertRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "insertRecords", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerGetMedicalDataSources3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "getMedicalDataSources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerReadMedicalResources3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "readMedicalResources", "(Landroid/health/connect/ReadMedicalResourcesRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerInsertRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "insertRecords", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerReadMedicalResources3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "readMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerReadMedicalResources3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "readMedicalResources", "(Landroid/health/connect/ReadMedicalResourcesRequest;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerUpdateRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "updateRecords", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHealthConnectManagerReadMedicalResources3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "readMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHealthConnectManagerUpsertMedicalResources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "upsertMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHealthConnectManagerUpdateRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "updateRecords", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHealthConnectManagerUpsertMedicalResources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHealthConnectManager)), "upsertMedicalResources", "(Ljava/util/List;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

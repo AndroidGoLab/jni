@@ -47,15 +47,19 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/persistentdata/PersistentDataBlockManager")
 	if err != nil {
-		return fmt.Errorf("find class android.service.persistentdata.PersistentDataBlockManager: %w", err)
-	}
-	clsPersistentDataBlockManager = env.NewGlobalRef(&c.Object)
-
-	midPersistentDataBlockManagerIsFactoryResetProtectionActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistentDataBlockManager)), "isFactoryResetProtectionActive", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsPersistentDataBlockManager = env.NewGlobalRef(&c.Object)
+
+		midPersistentDataBlockManagerIsFactoryResetProtectionActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistentDataBlockManager)), "isFactoryResetProtectionActive", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

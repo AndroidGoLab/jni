@@ -458,2396 +458,2648 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/text/style/TabStopSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TabStopSpan: %w", err)
-	}
-	clsTabStopSpan = env.NewGlobalRef(&c.Object)
-
-	midTabStopSpanGetTabStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTabStopSpan)), "getTabStop", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsTabStopSpan = env.NewGlobalRef(&c.Object)
+
+		midTabStopSpanGetTabStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTabStopSpan)), "getTabStop", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TabStopSpan$Standard")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TabStopSpan$Standard: %w", err)
-	}
-	clsTabStopSpanStandard = env.NewGlobalRef(&c.Object)
-
-	midTabStopSpanStandardGetTabStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTabStopSpanStandard)), "getTabStop", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTabStopSpanStandard = env.NewGlobalRef(&c.Object)
 
-	midTabStopSpanStandardToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTabStopSpanStandard)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTabStopSpanStandardGetTabStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTabStopSpanStandard)), "getTabStop", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTabStopSpanStandardToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTabStopSpanStandard)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LineBreakConfigSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LineBreakConfigSpan: %w", err)
-	}
-	clsLineBreakConfigSpan = env.NewGlobalRef(&c.Object)
-
-	midLineBreakConfigSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLineBreakConfigSpan = env.NewGlobalRef(&c.Object)
 
-	midLineBreakConfigSpanEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanGetLineBreakConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "getLineBreakConfig", "()Landroid/graphics/text/LineBreakConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanGetLineBreakConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "getLineBreakConfig", "()Landroid/graphics/text/LineBreakConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanCreateNoBreakSpan, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "createNoBreakSpan", "()Landroid/text/style/LineBreakConfigSpan;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBreakConfigSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBreakConfigSpanCreateNoHyphenationSpan, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "createNoHyphenationSpan", "()Landroid/text/style/LineBreakConfigSpan;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLineBreakConfigSpanCreateNoBreakSpan, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "createNoBreakSpan", "()Landroid/text/style/LineBreakConfigSpan;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLineBreakConfigSpanCreateNoHyphenationSpan, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), "createNoHyphenationSpan", "()Landroid/text/style/LineBreakConfigSpan;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/UnderlineSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.UnderlineSpan: %w", err)
-	}
-	clsUnderlineSpan = env.NewGlobalRef(&c.Object)
-
-	midUnderlineSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsUnderlineSpan = env.NewGlobalRef(&c.Object)
 
-	midUnderlineSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUnderlineSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUnderlineSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUnderlineSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUnderlineSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUnderlineSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUnderlineSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midUnderlineSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUnderlineSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/CharacterStyle")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.CharacterStyle: %w", err)
-	}
-	clsCharacterStyle = env.NewGlobalRef(&c.Object)
-
-	midCharacterStyleGetUnderlying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterStyle)), "getUnderlying", "()Landroid/text/style/CharacterStyle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCharacterStyle = env.NewGlobalRef(&c.Object)
 
-	midCharacterStyleUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterStyle)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCharacterStyleGetUnderlying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterStyle)), "getUnderlying", "()Landroid/text/style/CharacterStyle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCharacterStyleWrap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCharacterStyle)), "wrap", "(Landroid/text/style/CharacterStyle;)Landroid/text/style/CharacterStyle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCharacterStyleUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterStyle)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCharacterStyleWrap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCharacterStyle)), "wrap", "(Landroid/text/style/CharacterStyle;)Landroid/text/style/CharacterStyle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan: %w", err)
-	}
-	clsTtsSpan = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpan = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanGetArgs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "getArgs", "()Landroid/os/PersistableBundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanGetArgs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "getArgs", "()Landroid/os/PersistableBundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "getType", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "getType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$Builder: %w", err)
-	}
-	clsTtsSpanBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanBuilder)), "build", "()Landroid/text/style/TtsSpan;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsTtsSpanBuilder = env.NewGlobalRef(&c.Object)
+
+		midTtsSpanBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanBuilder)), "build", "()Landroid/text/style/TtsSpan;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$CardinalBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$CardinalBuilder: %w", err)
-	}
-	clsTtsSpanCardinalBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanCardinalBuilderSetNumber1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanCardinalBuilder)), "setNumber", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$CardinalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanCardinalBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanCardinalBuilderSetNumber1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanCardinalBuilder)), "setNumber", "(J)Landroid/text/style/TtsSpan$CardinalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanCardinalBuilderSetNumber1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanCardinalBuilder)), "setNumber", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$CardinalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanCardinalBuilderSetNumber1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanCardinalBuilder)), "setNumber", "(J)Landroid/text/style/TtsSpan$CardinalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$DateBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$DateBuilder: %w", err)
-	}
-	clsTtsSpanDateBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanDateBuilderSetDay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setDay", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanDateBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanDateBuilderSetMonth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setMonth", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanDateBuilderSetDay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setDay", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanDateBuilderSetWeekday, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setWeekday", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanDateBuilderSetMonth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setMonth", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanDateBuilderSetYear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setYear", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanDateBuilderSetWeekday, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setWeekday", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanDateBuilderSetYear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDateBuilder)), "setYear", "(I)Landroid/text/style/TtsSpan$DateBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$DecimalBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$DecimalBuilder: %w", err)
-	}
-	clsTtsSpanDecimalBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanDecimalBuilderSetArgumentsFromDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setArgumentsFromDouble", "(DII)Landroid/text/style/TtsSpan$DecimalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanDecimalBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanDecimalBuilderSetFractionalPart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setFractionalPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$DecimalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanDecimalBuilderSetArgumentsFromDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setArgumentsFromDouble", "(DII)Landroid/text/style/TtsSpan$DecimalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanDecimalBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$DecimalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanDecimalBuilderSetFractionalPart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setFractionalPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$DecimalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanDecimalBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$DecimalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanDecimalBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$DecimalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanDecimalBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDecimalBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$DecimalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$DigitsBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$DigitsBuilder: %w", err)
-	}
-	clsTtsSpanDigitsBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanDigitsBuilderSetDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDigitsBuilder)), "setDigits", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$DigitsBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsTtsSpanDigitsBuilder = env.NewGlobalRef(&c.Object)
+
+		midTtsSpanDigitsBuilderSetDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDigitsBuilder)), "setDigits", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$DigitsBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$DurationBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$DurationBuilder: %w", err)
-	}
-	clsTtsSpanDurationBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanDurationBuilderSetHours, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDurationBuilder)), "setHours", "(I)Landroid/text/style/TtsSpan$DurationBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanDurationBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanDurationBuilderSetMinutes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDurationBuilder)), "setMinutes", "(I)Landroid/text/style/TtsSpan$DurationBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanDurationBuilderSetHours, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDurationBuilder)), "setHours", "(I)Landroid/text/style/TtsSpan$DurationBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanDurationBuilderSetSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDurationBuilder)), "setSeconds", "(I)Landroid/text/style/TtsSpan$DurationBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanDurationBuilderSetMinutes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDurationBuilder)), "setMinutes", "(I)Landroid/text/style/TtsSpan$DurationBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanDurationBuilderSetSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanDurationBuilder)), "setSeconds", "(I)Landroid/text/style/TtsSpan$DurationBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$ElectronicBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$ElectronicBuilder: %w", err)
-	}
-	clsTtsSpanElectronicBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanElectronicBuilderSetDomain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setDomain", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanElectronicBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanElectronicBuilderSetEmailArguments, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setEmailArguments", "(Ljava/lang/String;Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetDomain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setDomain", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetFragmentId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setFragmentId", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetEmailArguments, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setEmailArguments", "(Ljava/lang/String;Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setPassword", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetFragmentId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setFragmentId", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setPath", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetPassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setPassword", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setPort", "(I)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setPath", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setProtocol", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setPort", "(I)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetQueryString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setQueryString", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanElectronicBuilderSetProtocol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setProtocol", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanElectronicBuilderSetUsername, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setUsername", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanElectronicBuilderSetQueryString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setQueryString", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanElectronicBuilderSetUsername, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanElectronicBuilder)), "setUsername", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$ElectronicBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$FractionBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$FractionBuilder: %w", err)
-	}
-	clsTtsSpanFractionBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanFractionBuilderSetDenominator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setDenominator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$FractionBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanFractionBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanFractionBuilderSetDenominator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setDenominator", "(J)Landroid/text/style/TtsSpan$FractionBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanFractionBuilderSetDenominator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setDenominator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$FractionBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanFractionBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$FractionBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanFractionBuilderSetDenominator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setDenominator", "(J)Landroid/text/style/TtsSpan$FractionBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanFractionBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$FractionBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanFractionBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$FractionBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanFractionBuilderSetNumerator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setNumerator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$FractionBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanFractionBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$FractionBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanFractionBuilderSetNumerator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setNumerator", "(J)Landroid/text/style/TtsSpan$FractionBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanFractionBuilderSetNumerator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setNumerator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$FractionBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanFractionBuilderSetNumerator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanFractionBuilder)), "setNumerator", "(J)Landroid/text/style/TtsSpan$FractionBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$MeasureBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$MeasureBuilder: %w", err)
-	}
-	clsTtsSpanMeasureBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanMeasureBuilderSetDenominator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setDenominator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanMeasureBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanMeasureBuilderSetDenominator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setDenominator", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetDenominator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setDenominator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetFractionalPart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setFractionalPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetDenominator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setDenominator", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetFractionalPart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setFractionalPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetNumber1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumber", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetNumber1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumber", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetNumber1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumber", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetNumerator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumerator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetNumber1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumber", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetNumerator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumerator", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMeasureBuilderSetNumerator1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumerator", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMeasureBuilderSetUnit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setUnit", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanMeasureBuilderSetNumerator1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setNumerator", "(J)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanMeasureBuilderSetUnit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMeasureBuilder)), "setUnit", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MeasureBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$MoneyBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$MoneyBuilder: %w", err)
-	}
-	clsTtsSpanMoneyBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanMoneyBuilderSetCurrency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setCurrency", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanMoneyBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanMoneyBuilderSetFractionalPart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setFractionalPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMoneyBuilderSetCurrency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setCurrency", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMoneyBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMoneyBuilderSetFractionalPart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setFractionalPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMoneyBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$MoneyBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanMoneyBuilderSetIntegerPart1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setIntegerPart", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanMoneyBuilderSetQuantity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setQuantity", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanMoneyBuilderSetIntegerPart1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setIntegerPart", "(J)Landroid/text/style/TtsSpan$MoneyBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanMoneyBuilderSetQuantity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanMoneyBuilder)), "setQuantity", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$MoneyBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$OrdinalBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$OrdinalBuilder: %w", err)
-	}
-	clsTtsSpanOrdinalBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanOrdinalBuilderSetNumber1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanOrdinalBuilder)), "setNumber", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$OrdinalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanOrdinalBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanOrdinalBuilderSetNumber1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanOrdinalBuilder)), "setNumber", "(J)Landroid/text/style/TtsSpan$OrdinalBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanOrdinalBuilderSetNumber1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanOrdinalBuilder)), "setNumber", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$OrdinalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanOrdinalBuilderSetNumber1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanOrdinalBuilder)), "setNumber", "(J)Landroid/text/style/TtsSpan$OrdinalBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$SemioticClassBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$SemioticClassBuilder: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTtsSpanSemioticClassBuilder = env.NewGlobalRef(&c.Object)
+
 	}
-	clsTtsSpanSemioticClassBuilder = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/text/style/TtsSpan$TelephoneBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$TelephoneBuilder: %w", err)
-	}
-	clsTtsSpanTelephoneBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanTelephoneBuilderSetCountryCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTelephoneBuilder)), "setCountryCode", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TelephoneBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanTelephoneBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanTelephoneBuilderSetExtension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTelephoneBuilder)), "setExtension", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TelephoneBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanTelephoneBuilderSetCountryCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTelephoneBuilder)), "setCountryCode", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TelephoneBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanTelephoneBuilderSetNumberParts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTelephoneBuilder)), "setNumberParts", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TelephoneBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanTelephoneBuilderSetExtension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTelephoneBuilder)), "setExtension", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TelephoneBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanTelephoneBuilderSetNumberParts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTelephoneBuilder)), "setNumberParts", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TelephoneBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$TextBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$TextBuilder: %w", err)
-	}
-	clsTtsSpanTextBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanTextBuilderSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTextBuilder)), "setText", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TextBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsTtsSpanTextBuilder = env.NewGlobalRef(&c.Object)
+
+		midTtsSpanTextBuilderSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTextBuilder)), "setText", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$TextBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$TimeBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$TimeBuilder: %w", err)
-	}
-	clsTtsSpanTimeBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanTimeBuilderSetHours, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTimeBuilder)), "setHours", "(I)Landroid/text/style/TtsSpan$TimeBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTtsSpanTimeBuilder = env.NewGlobalRef(&c.Object)
 
-	midTtsSpanTimeBuilderSetMinutes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTimeBuilder)), "setMinutes", "(I)Landroid/text/style/TtsSpan$TimeBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTtsSpanTimeBuilderSetHours, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTimeBuilder)), "setHours", "(I)Landroid/text/style/TtsSpan$TimeBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTtsSpanTimeBuilderSetSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTimeBuilder)), "setSeconds", "(I)Landroid/text/style/TtsSpan$TimeBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTtsSpanTimeBuilderSetMinutes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTimeBuilder)), "setMinutes", "(I)Landroid/text/style/TtsSpan$TimeBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTtsSpanTimeBuilderSetSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanTimeBuilder)), "setSeconds", "(I)Landroid/text/style/TtsSpan$TimeBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TtsSpan$VerbatimBuilder")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TtsSpan$VerbatimBuilder: %w", err)
-	}
-	clsTtsSpanVerbatimBuilder = env.NewGlobalRef(&c.Object)
-
-	midTtsSpanVerbatimBuilderSetVerbatim, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanVerbatimBuilder)), "setVerbatim", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$VerbatimBuilder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsTtsSpanVerbatimBuilder = env.NewGlobalRef(&c.Object)
+
+		midTtsSpanVerbatimBuilderSetVerbatim, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTtsSpanVerbatimBuilder)), "setVerbatim", "(Ljava/lang/String;)Landroid/text/style/TtsSpan$VerbatimBuilder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LeadingMarginSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LeadingMarginSpan: %w", err)
-	}
-	clsLeadingMarginSpan = env.NewGlobalRef(&c.Object)
-
-	midLeadingMarginSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLeadingMarginSpan = env.NewGlobalRef(&c.Object)
 
-	midLeadingMarginSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpan)), "getLeadingMargin", "(Z)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLeadingMarginSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeadingMarginSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpan)), "getLeadingMargin", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LeadingMarginSpan$LeadingMarginSpan2")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LeadingMarginSpan$LeadingMarginSpan2: %w", err)
-	}
-	clsLeadingMarginSpanLeadingMarginSpan2 = env.NewGlobalRef(&c.Object)
-
-	midLeadingMarginSpanLeadingMarginSpan2GetLeadingMarginLineCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanLeadingMarginSpan2)), "getLeadingMarginLineCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsLeadingMarginSpanLeadingMarginSpan2 = env.NewGlobalRef(&c.Object)
+
+		midLeadingMarginSpanLeadingMarginSpan2GetLeadingMarginLineCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanLeadingMarginSpan2)), "getLeadingMarginLineCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LeadingMarginSpan$Standard")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LeadingMarginSpan$Standard: %w", err)
-	}
-	clsLeadingMarginSpanStandard = env.NewGlobalRef(&c.Object)
-
-	midLeadingMarginSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLeadingMarginSpanStandard = env.NewGlobalRef(&c.Object)
 
-	midLeadingMarginSpanStandardDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLeadingMarginSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLeadingMarginSpanStandardGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "getLeadingMargin", "(Z)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLeadingMarginSpanStandardDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLeadingMarginSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLeadingMarginSpanStandardGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "getLeadingMargin", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLeadingMarginSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLeadingMarginSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeadingMarginSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeadingMarginSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/SubscriptSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.SubscriptSpan: %w", err)
-	}
-	clsSubscriptSpan = env.NewGlobalRef(&c.Object)
-
-	midSubscriptSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSubscriptSpan = env.NewGlobalRef(&c.Object)
 
-	midSubscriptSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSubscriptSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSubscriptSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSubscriptSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSubscriptSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSubscriptSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSubscriptSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSubscriptSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSubscriptSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSubscriptSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSubscriptSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/ForegroundColorSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.ForegroundColorSpan: %w", err)
-	}
-	clsForegroundColorSpan = env.NewGlobalRef(&c.Object)
-
-	midForegroundColorSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsForegroundColorSpan = env.NewGlobalRef(&c.Object)
 
-	midForegroundColorSpanGetForegroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "getForegroundColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midForegroundColorSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midForegroundColorSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midForegroundColorSpanGetForegroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "getForegroundColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midForegroundColorSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midForegroundColorSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midForegroundColorSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midForegroundColorSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midForegroundColorSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midForegroundColorSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midForegroundColorSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/SuperscriptSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.SuperscriptSpan: %w", err)
-	}
-	clsSuperscriptSpan = env.NewGlobalRef(&c.Object)
-
-	midSuperscriptSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSuperscriptSpan = env.NewGlobalRef(&c.Object)
 
-	midSuperscriptSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuperscriptSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuperscriptSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuperscriptSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuperscriptSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuperscriptSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuperscriptSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuperscriptSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuperscriptSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSuperscriptSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSuperscriptSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LineHeightSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LineHeightSpan: %w", err)
-	}
-	clsLineHeightSpan = env.NewGlobalRef(&c.Object)
-
-	midLineHeightSpanChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpan)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsLineHeightSpan = env.NewGlobalRef(&c.Object)
+
+		midLineHeightSpanChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpan)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LineHeightSpan$Standard")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LineHeightSpan$Standard: %w", err)
-	}
-	clsLineHeightSpanStandard = env.NewGlobalRef(&c.Object)
-
-	midLineHeightSpanStandardChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLineHeightSpanStandard = env.NewGlobalRef(&c.Object)
 
-	midLineHeightSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineHeightSpanStandardChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineHeightSpanStandardGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "getHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineHeightSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineHeightSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineHeightSpanStandardGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineHeightSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLineHeightSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLineHeightSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LineHeightSpan$WithDensity")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LineHeightSpan$WithDensity: %w", err)
-	}
-	clsLineHeightSpanWithDensity = env.NewGlobalRef(&c.Object)
-
-	midLineHeightSpanWithDensityChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanWithDensity)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsLineHeightSpanWithDensity = env.NewGlobalRef(&c.Object)
+
+		midLineHeightSpanWithDensityChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineHeightSpanWithDensity)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/TextAppearanceSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TextAppearanceSpan: %w", err)
-	}
-	clsTextAppearanceSpan = env.NewGlobalRef(&c.Object)
-
-	midTextAppearanceSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTextAppearanceSpan = env.NewGlobalRef(&c.Object)
 
-	midTextAppearanceSpanGetFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getFamily", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetFontFeatureSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getFontFeatureSettings", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getFamily", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetFontVariationSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getFontVariationSettings", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetFontFeatureSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getFontFeatureSettings", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetLetterSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getLetterSpacing", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetFontVariationSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getFontVariationSettings", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetLinkTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getLinkTextColor", "()Landroid/content/res/ColorStateList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetLetterSpacing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getLetterSpacing", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetShadowColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetLinkTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getLinkTextColor", "()Landroid/content/res/ColorStateList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetShadowDx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowDx", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetShadowColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetShadowDy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowDy", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetShadowDx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowDx", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetShadowRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowRadius", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetShadowDy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowDy", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetShadowRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getShadowRadius", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextColor", "()Landroid/content/res/ColorStateList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetTextFontWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextFontWeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetTextColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextColor", "()Landroid/content/res/ColorStateList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetTextLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextLocales", "()Landroid/os/LocaleList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetTextFontWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextFontWeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetTextLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextLocales", "()Landroid/os/LocaleList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetTextStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextStyle", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetTextSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanGetTypeface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTypeface", "()Landroid/graphics/Typeface;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetTextStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTextStyle", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanIsElegantTextHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "isElegantTextHeight", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanGetTypeface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "getTypeface", "()Landroid/graphics/Typeface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanIsElegantTextHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "isElegantTextHeight", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextAppearanceSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextAppearanceSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTextAppearanceSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextAppearanceSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextAppearanceSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/RelativeSizeSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.RelativeSizeSpan: %w", err)
-	}
-	clsRelativeSizeSpan = env.NewGlobalRef(&c.Object)
-
-	midRelativeSizeSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRelativeSizeSpan = env.NewGlobalRef(&c.Object)
 
-	midRelativeSizeSpanGetSizeChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "getSizeChange", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRelativeSizeSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRelativeSizeSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRelativeSizeSpanGetSizeChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "getSizeChange", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRelativeSizeSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRelativeSizeSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRelativeSizeSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRelativeSizeSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRelativeSizeSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRelativeSizeSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRelativeSizeSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRelativeSizeSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRelativeSizeSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/URLSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.URLSpan: %w", err)
-	}
-	clsURLSpan = env.NewGlobalRef(&c.Object)
-
-	midURLSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsURLSpan = env.NewGlobalRef(&c.Object)
 
-	midURLSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midURLSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midURLSpanGetURL, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "getURL", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midURLSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midURLSpanOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "onClick", "(Landroid/view/View;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midURLSpanGetURL, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "getURL", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midURLSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midURLSpanOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "onClick", "(Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midURLSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midURLSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midURLSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/DrawableMarginSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.DrawableMarginSpan: %w", err)
-	}
-	clsDrawableMarginSpan = env.NewGlobalRef(&c.Object)
-
-	midDrawableMarginSpanChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDrawableMarginSpan = env.NewGlobalRef(&c.Object)
 
-	midDrawableMarginSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDrawableMarginSpanChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDrawableMarginSpanGetDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "getDrawable", "()Landroid/graphics/drawable/Drawable;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDrawableMarginSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDrawableMarginSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "getLeadingMargin", "(Z)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDrawableMarginSpanGetDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "getDrawable", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDrawableMarginSpanGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "getPadding", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDrawableMarginSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "getLeadingMargin", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDrawableMarginSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDrawableMarginSpanGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "getPadding", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDrawableMarginSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/StyleSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.StyleSpan: %w", err)
-	}
-	clsSpan = env.NewGlobalRef(&c.Object)
-
-	midSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSpan = env.NewGlobalRef(&c.Object)
 
-	midSpanGetFontWeightAdjustment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "getFontWeightAdjustment", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpanGetFontWeightAdjustment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "getFontWeightAdjustment", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpanGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "getStyle", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpanGetStyle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "getStyle", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/UpdateLayout")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.UpdateLayout: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUpdateLayout = env.NewGlobalRef(&c.Object)
+
 	}
-	clsUpdateLayout = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/text/style/ParagraphStyle")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.ParagraphStyle: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsParagraphStyle = env.NewGlobalRef(&c.Object)
+
 	}
-	clsParagraphStyle = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/text/style/SuggestionSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.SuggestionSpan: %w", err)
-	}
-	clsSuggestionSpan = env.NewGlobalRef(&c.Object)
-
-	midSuggestionSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSuggestionSpan = env.NewGlobalRef(&c.Object)
 
-	midSuggestionSpanEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getFlags", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanGetLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getLocale", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getFlags", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanGetLocaleObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getLocaleObject", "()Ljava/util/Locale;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanGetLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getLocale", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanGetLocaleObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getLocaleObject", "()Ljava/util/Locale;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanGetSuggestions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getSuggestions", "()[Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanGetUnderlineColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getUnderlineColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanGetSuggestions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getSuggestions", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanGetUnderlineColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "getUnderlineColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "setFlags", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionSpanSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "setFlags", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSuggestionSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSuggestionSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LocaleSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LocaleSpan: %w", err)
-	}
-	clsLocaleSpan = env.NewGlobalRef(&c.Object)
-
-	midLocaleSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLocaleSpan = env.NewGlobalRef(&c.Object)
 
-	midLocaleSpanGetLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "getLocale", "()Ljava/util/Locale;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLocaleSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLocaleSpanGetLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "getLocales", "()Landroid/os/LocaleList;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLocaleSpanGetLocale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "getLocale", "()Ljava/util/Locale;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLocaleSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLocaleSpanGetLocales, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "getLocales", "()Landroid/os/LocaleList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLocaleSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLocaleSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLocaleSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLocaleSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLocaleSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLocaleSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLocaleSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLocaleSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLocaleSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLocaleSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/MaskFilterSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.MaskFilterSpan: %w", err)
-	}
-	clsMaskFilterSpan = env.NewGlobalRef(&c.Object)
-
-	midMaskFilterSpanGetMaskFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), "getMaskFilter", "()Landroid/graphics/MaskFilter;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMaskFilterSpan = env.NewGlobalRef(&c.Object)
 
-	midMaskFilterSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMaskFilterSpanGetMaskFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), "getMaskFilter", "()Landroid/graphics/MaskFilter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMaskFilterSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMaskFilterSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMaskFilterSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/ScaleXSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.ScaleXSpan: %w", err)
-	}
-	clsScaleXSpan = env.NewGlobalRef(&c.Object)
-
-	midScaleXSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScaleXSpan = env.NewGlobalRef(&c.Object)
 
-	midScaleXSpanGetScaleX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "getScaleX", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScaleXSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScaleXSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScaleXSpanGetScaleX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "getScaleX", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScaleXSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScaleXSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScaleXSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScaleXSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScaleXSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScaleXSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScaleXSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScaleXSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScaleXSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/EasyEditSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.EasyEditSpan: %w", err)
-	}
-	clsEasyEditSpan = env.NewGlobalRef(&c.Object)
-
-	midEasyEditSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsEasyEditSpan = env.NewGlobalRef(&c.Object)
 
-	midEasyEditSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEasyEditSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEasyEditSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midEasyEditSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEasyEditSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/BulletSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.BulletSpan: %w", err)
-	}
-	clsBulletSpan = env.NewGlobalRef(&c.Object)
-
-	midBulletSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBulletSpan = env.NewGlobalRef(&c.Object)
 
-	midBulletSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanGetBulletRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getBulletRadius", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanGetBulletRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getBulletRadius", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanGetGapWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getGapWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getLeadingMargin", "(Z)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanGetGapWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getGapWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getLeadingMargin", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBulletSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBulletSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBulletSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBulletSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBulletSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/DynamicDrawableSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.DynamicDrawableSpan: %w", err)
-	}
-	clsDynamicDrawableSpan = env.NewGlobalRef(&c.Object)
-
-	midDynamicDrawableSpanDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "draw", "(Landroid/graphics/Canvas;Ljava/lang/CharSequence;IIFIIILandroid/graphics/Paint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDynamicDrawableSpan = env.NewGlobalRef(&c.Object)
 
-	midDynamicDrawableSpanGetDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "getDrawable", "()Landroid/graphics/drawable/Drawable;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDynamicDrawableSpanDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "draw", "(Landroid/graphics/Canvas;Ljava/lang/CharSequence;IIFIIILandroid/graphics/Paint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDynamicDrawableSpanGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "getSize", "(Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDynamicDrawableSpanGetDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "getDrawable", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDynamicDrawableSpanGetVerticalAlignment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "getVerticalAlignment", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDynamicDrawableSpanGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "getSize", "(Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDynamicDrawableSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDynamicDrawableSpanGetVerticalAlignment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "getVerticalAlignment", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDynamicDrawableSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicDrawableSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/NoWritingToolsSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.NoWritingToolsSpan: %w", err)
-	}
-	clsNoWritingToolsSpan = env.NewGlobalRef(&c.Object)
-
-	midNoWritingToolsSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsNoWritingToolsSpan = env.NewGlobalRef(&c.Object)
 
-	midNoWritingToolsSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNoWritingToolsSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNoWritingToolsSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNoWritingToolsSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNoWritingToolsSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midNoWritingToolsSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNoWritingToolsSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/ReplacementSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.ReplacementSpan: %w", err)
-	}
-	clsReplacementSpan = env.NewGlobalRef(&c.Object)
-
-	midReplacementSpanDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "draw", "(Landroid/graphics/Canvas;Ljava/lang/CharSequence;IIFIIILandroid/graphics/Paint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReplacementSpan = env.NewGlobalRef(&c.Object)
 
-	midReplacementSpanGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "getContentDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReplacementSpanDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "draw", "(Landroid/graphics/Canvas;Ljava/lang/CharSequence;IIFIIILandroid/graphics/Paint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReplacementSpanGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "getSize", "(Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReplacementSpanGetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "getContentDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReplacementSpanSetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "setContentDescription", "(Ljava/lang/CharSequence;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReplacementSpanGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "getSize", "(Landroid/graphics/Paint;Ljava/lang/CharSequence;IILandroid/graphics/Paint$FontMetricsInt;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReplacementSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReplacementSpanSetContentDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "setContentDescription", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReplacementSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReplacementSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReplacementSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/StrikethroughSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.StrikethroughSpan: %w", err)
-	}
-	clsStrikethroughSpan = env.NewGlobalRef(&c.Object)
-
-	midStrikethroughSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStrikethroughSpan = env.NewGlobalRef(&c.Object)
 
-	midStrikethroughSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStrikethroughSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStrikethroughSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStrikethroughSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStrikethroughSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStrikethroughSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStrikethroughSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStrikethroughSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStrikethroughSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/SuggestionRangeSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.SuggestionRangeSpan: %w", err)
-	}
-	clsSuggestionRangeSpan = env.NewGlobalRef(&c.Object)
-
-	midSuggestionRangeSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSuggestionRangeSpan = env.NewGlobalRef(&c.Object)
 
-	midSuggestionRangeSpanGetBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "getBackgroundColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionRangeSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionRangeSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionRangeSpanGetBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "getBackgroundColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionRangeSpanSetBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "setBackgroundColor", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionRangeSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionRangeSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSuggestionRangeSpanSetBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "setBackgroundColor", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSuggestionRangeSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSuggestionRangeSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSuggestionRangeSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/WrapTogetherSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.WrapTogetherSpan: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWrapTogetherSpan = env.NewGlobalRef(&c.Object)
+
 	}
-	clsWrapTogetherSpan = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/text/style/IconMarginSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.IconMarginSpan: %w", err)
-	}
-	clsIconMarginSpan = env.NewGlobalRef(&c.Object)
-
-	midIconMarginSpanChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsIconMarginSpan = env.NewGlobalRef(&c.Object)
 
-	midIconMarginSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIconMarginSpanChooseHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "chooseHeight", "(Ljava/lang/CharSequence;IIIILandroid/graphics/Paint$FontMetricsInt;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIconMarginSpanGetBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "getBitmap", "()Landroid/graphics/Bitmap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIconMarginSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIconMarginSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "getLeadingMargin", "(Z)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIconMarginSpanGetBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "getBitmap", "()Landroid/graphics/Bitmap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIconMarginSpanGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "getPadding", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIconMarginSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "getLeadingMargin", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIconMarginSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midIconMarginSpanGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "getPadding", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIconMarginSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/MetricAffectingSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.MetricAffectingSpan: %w", err)
-	}
-	clsMetricAffectingSpan = env.NewGlobalRef(&c.Object)
-
-	midMetricAffectingSpanGetUnderlying0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetricAffectingSpan)), "getUnderlying", "()Landroid/text/style/MetricAffectingSpan;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMetricAffectingSpan = env.NewGlobalRef(&c.Object)
 
-	midMetricAffectingSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetricAffectingSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetricAffectingSpanGetUnderlying0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetricAffectingSpan)), "getUnderlying", "()Landroid/text/style/MetricAffectingSpan;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetricAffectingSpanGetUnderlying0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetricAffectingSpan)), "getUnderlying", "()Landroid/text/style/CharacterStyle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMetricAffectingSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetricAffectingSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMetricAffectingSpanGetUnderlying0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetricAffectingSpan)), "getUnderlying", "()Landroid/text/style/CharacterStyle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/QuoteSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.QuoteSpan: %w", err)
-	}
-	clsQuoteSpan = env.NewGlobalRef(&c.Object)
-
-	midQuoteSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsQuoteSpan = env.NewGlobalRef(&c.Object)
 
-	midQuoteSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanDrawLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "drawLeadingMargin", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;IIZLandroid/text/Layout;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanGetGapWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getGapWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getLeadingMargin", "(Z)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanGetGapWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getGapWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanGetLeadingMargin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getLeadingMargin", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanGetStripeWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getStripeWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQuoteSpanGetStripeWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "getStripeWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQuoteSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midQuoteSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midQuoteSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/ImageSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.ImageSpan: %w", err)
-	}
-	clsImageSpan = env.NewGlobalRef(&c.Object)
-
-	midImageSpanGetDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageSpan)), "getDrawable", "()Landroid/graphics/drawable/Drawable;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsImageSpan = env.NewGlobalRef(&c.Object)
 
-	midImageSpanGetSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageSpan)), "getSource", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midImageSpanGetDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageSpan)), "getDrawable", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midImageSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midImageSpanGetSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageSpan)), "getSource", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midImageSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsImageSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/UpdateAppearance")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.UpdateAppearance: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUpdateAppearance = env.NewGlobalRef(&c.Object)
+
 	}
-	clsUpdateAppearance = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/text/style/TypefaceSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.TypefaceSpan: %w", err)
-	}
-	clsTypefaceSpan = env.NewGlobalRef(&c.Object)
-
-	midTypefaceSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTypefaceSpan = env.NewGlobalRef(&c.Object)
 
-	midTypefaceSpanGetFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "getFamily", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypefaceSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypefaceSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypefaceSpanGetFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "getFamily", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypefaceSpanGetTypeface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "getTypeface", "()Landroid/graphics/Typeface;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypefaceSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypefaceSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypefaceSpanGetTypeface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "getTypeface", "()Landroid/graphics/Typeface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypefaceSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypefaceSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypefaceSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTypefaceSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTypefaceSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTypefaceSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTypefaceSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/BackgroundColorSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.BackgroundColorSpan: %w", err)
-	}
-	clsBackgroundColorSpan = env.NewGlobalRef(&c.Object)
-
-	midBackgroundColorSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBackgroundColorSpan = env.NewGlobalRef(&c.Object)
 
-	midBackgroundColorSpanGetBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "getBackgroundColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBackgroundColorSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBackgroundColorSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBackgroundColorSpanGetBackgroundColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "getBackgroundColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBackgroundColorSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBackgroundColorSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBackgroundColorSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBackgroundColorSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBackgroundColorSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBackgroundColorSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBackgroundColorSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/ClickableSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.ClickableSpan: %w", err)
-	}
-	clsClickableSpan = env.NewGlobalRef(&c.Object)
-
-	midClickableSpanOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClickableSpan)), "onClick", "(Landroid/view/View;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsClickableSpan = env.NewGlobalRef(&c.Object)
 
-	midClickableSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClickableSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midClickableSpanOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClickableSpan)), "onClick", "(Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midClickableSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClickableSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midClickableSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClickableSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClickableSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClickableSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/AbsoluteSizeSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.AbsoluteSizeSpan: %w", err)
-	}
-	clsAbsoluteSizeSpan = env.NewGlobalRef(&c.Object)
-
-	midAbsoluteSizeSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAbsoluteSizeSpan = env.NewGlobalRef(&c.Object)
 
-	midAbsoluteSizeSpanGetDip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "getDip", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbsoluteSizeSpanDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbsoluteSizeSpanGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "getSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbsoluteSizeSpanGetDip, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "getDip", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbsoluteSizeSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbsoluteSizeSpanGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "getSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbsoluteSizeSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbsoluteSizeSpanGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbsoluteSizeSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbsoluteSizeSpanToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbsoluteSizeSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAbsoluteSizeSpanUpdateDrawState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "updateDrawState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAbsoluteSizeSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAbsoluteSizeSpanUpdateMeasureState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "updateMeasureState", "(Landroid/text/TextPaint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAbsoluteSizeSpanWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbsoluteSizeSpan)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/AlignmentSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.AlignmentSpan: %w", err)
-	}
-	clsAlignmentSpan = env.NewGlobalRef(&c.Object)
-
-	midAlignmentSpanGetAlignment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpan)), "getAlignment", "()Landroid/text/Layout$Alignment;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsAlignmentSpan = env.NewGlobalRef(&c.Object)
+
+		midAlignmentSpanGetAlignment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpan)), "getAlignment", "()Landroid/text/Layout$Alignment;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/AlignmentSpan$Standard")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.AlignmentSpan$Standard: %w", err)
-	}
-	clsAlignmentSpanStandard = env.NewGlobalRef(&c.Object)
-
-	midAlignmentSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAlignmentSpanStandard = env.NewGlobalRef(&c.Object)
 
-	midAlignmentSpanStandardGetAlignment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "getAlignment", "()Landroid/text/Layout$Alignment;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAlignmentSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAlignmentSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAlignmentSpanStandardGetAlignment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "getAlignment", "()Landroid/text/Layout$Alignment;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAlignmentSpanStandardToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAlignmentSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAlignmentSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAlignmentSpanStandardToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAlignmentSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAlignmentSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LineBackgroundSpan")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LineBackgroundSpan: %w", err)
-	}
-	clsLineBackgroundSpan = env.NewGlobalRef(&c.Object)
-
-	midLineBackgroundSpanDrawBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpan)), "drawBackground", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsLineBackgroundSpan = env.NewGlobalRef(&c.Object)
+
+		midLineBackgroundSpanDrawBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpan)), "drawBackground", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/style/LineBackgroundSpan$Standard")
 	if err != nil {
-		return fmt.Errorf("find class android.text.style.LineBackgroundSpan$Standard: %w", err)
-	}
-	clsLineBackgroundSpanStandard = env.NewGlobalRef(&c.Object)
-
-	midLineBackgroundSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLineBackgroundSpanStandard = env.NewGlobalRef(&c.Object)
 
-	midLineBackgroundSpanStandardDrawBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "drawBackground", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBackgroundSpanStandardDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBackgroundSpanStandardGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "getColor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBackgroundSpanStandardDrawBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "drawBackground", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;IIIIILjava/lang/CharSequence;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBackgroundSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "getSpanTypeId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLineBackgroundSpanStandardGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "getColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLineBackgroundSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLineBackgroundSpanStandardGetSpanTypeId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "getSpanTypeId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLineBackgroundSpanStandardWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLineBackgroundSpanStandard)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

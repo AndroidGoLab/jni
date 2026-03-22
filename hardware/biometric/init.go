@@ -103,351 +103,383 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricManager")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricManager: %w", err)
-	}
-	clsManager = env.NewGlobalRef(&c.Object)
-
-	midManagerCanAuthenticate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canAuthenticate", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
 
-	midManagerCanAuthenticate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canAuthenticate", "(I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerCanAuthenticate0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canAuthenticate", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetLastAuthenticationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLastAuthenticationTime", "(I)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerCanAuthenticate1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "canAuthenticate", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerGetStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStrings", "(I)Landroid/hardware/biometrics/BiometricManager$Strings;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerGetLastAuthenticationTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLastAuthenticationTime", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getStrings", "(I)Landroid/hardware/biometrics/BiometricManager$Strings;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricManager$Authenticators")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricManager$Authenticators: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManagerAuthenticators = env.NewGlobalRef(&c.Object)
+
 	}
-	clsManagerAuthenticators = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricManager$Strings")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricManager$Strings: %w", err)
-	}
-	clsManagerStrings = env.NewGlobalRef(&c.Object)
-
-	midManagerStringsGetButtonLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStrings)), "getButtonLabel", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsManagerStrings = env.NewGlobalRef(&c.Object)
 
-	midManagerStringsGetPromptMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStrings)), "getPromptMessage", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midManagerStringsGetButtonLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStrings)), "getButtonLabel", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midManagerStringsGetSettingName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStrings)), "getSettingName", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midManagerStringsGetPromptMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStrings)), "getPromptMessage", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerStringsGetSettingName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerStrings)), "getSettingName", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt: %w", err)
-	}
-	clsPrompt = env.NewGlobalRef(&c.Object)
-
-	midPromptAuthenticate4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "authenticate", "(Landroid/hardware/biometrics/BiometricPrompt$CryptoObject;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPrompt = env.NewGlobalRef(&c.Object)
 
-	midPromptAuthenticate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "authenticate", "(Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptAuthenticate4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "authenticate", "(Landroid/hardware/biometrics/BiometricPrompt$CryptoObject;Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getAllowedAuthenticators", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptAuthenticate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "authenticate", "(Landroid/os/CancellationSignal;Ljava/util/concurrent/Executor;Landroid/hardware/biometrics/BiometricPrompt$AuthenticationCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getContentView", "()Landroid/hardware/biometrics/PromptContentView;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getAllowedAuthenticators", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getContentView", "()Landroid/hardware/biometrics/PromptContentView;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoBitmap", "()Landroid/graphics/Bitmap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoDescription", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoBitmap", "()Landroid/graphics/Bitmap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoRes", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoDescription", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetNegativeButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getNegativeButtonText", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getLogoRes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getSubtitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetNegativeButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getNegativeButtonText", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getTitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptGetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getSubtitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptIsConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "isConfirmationRequired", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptIsConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrompt)), "isConfirmationRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$AuthenticationCallback")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$AuthenticationCallback: %w", err)
-	}
-	clsPromptAuthenticationCallback = env.NewGlobalRef(&c.Object)
-
-	midPromptAuthenticationCallbackOnAuthenticationError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationError", "(ILjava/lang/CharSequence;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptAuthenticationCallback = env.NewGlobalRef(&c.Object)
 
-	midPromptAuthenticationCallbackOnAuthenticationFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationFailed", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptAuthenticationCallbackOnAuthenticationError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationError", "(ILjava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptAuthenticationCallbackOnAuthenticationHelp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationHelp", "(ILjava/lang/CharSequence;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptAuthenticationCallbackOnAuthenticationFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationFailed", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptAuthenticationCallbackOnAuthenticationSucceeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationSucceeded", "(Landroid/hardware/biometrics/BiometricPrompt$AuthenticationResult;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptAuthenticationCallbackOnAuthenticationHelp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationHelp", "(ILjava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptAuthenticationCallbackOnAuthenticationSucceeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationCallback)), "onAuthenticationSucceeded", "(Landroid/hardware/biometrics/BiometricPrompt$AuthenticationResult;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$AuthenticationResult")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$AuthenticationResult: %w", err)
-	}
-	clsPromptAuthenticationResult = env.NewGlobalRef(&c.Object)
-
-	midPromptAuthenticationResultGetAuthenticationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationResult)), "getAuthenticationType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptAuthenticationResult = env.NewGlobalRef(&c.Object)
 
-	midPromptAuthenticationResultGetCryptoObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationResult)), "getCryptoObject", "()Landroid/hardware/biometrics/BiometricPrompt$CryptoObject;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptAuthenticationResultGetAuthenticationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationResult)), "getAuthenticationType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptAuthenticationResultGetCryptoObject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptAuthenticationResult)), "getCryptoObject", "()Landroid/hardware/biometrics/BiometricPrompt$CryptoObject;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$Builder: %w", err)
-	}
-	clsPromptBuilder = env.NewGlobalRef(&c.Object)
-
-	midPromptBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "build", "()Landroid/hardware/biometrics/BiometricPrompt;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptBuilder = env.NewGlobalRef(&c.Object)
 
-	midPromptBuilderSetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setAllowedAuthenticators", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "build", "()Landroid/hardware/biometrics/BiometricPrompt;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setConfirmationRequired", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetAllowedAuthenticators, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setAllowedAuthenticators", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setContentView", "(Landroid/hardware/biometrics/PromptContentView;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setConfirmationRequired", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetContentView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setContentView", "(Landroid/hardware/biometrics/PromptContentView;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetDeviceCredentialAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setDeviceCredentialAllowed", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoBitmap", "(Landroid/graphics/Bitmap;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetDeviceCredentialAllowed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setDeviceCredentialAllowed", "(Z)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetLogoBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoBitmap", "(Landroid/graphics/Bitmap;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoRes", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetLogoDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetNegativeButton, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setNegativeButton", "(Ljava/lang/CharSequence;Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetLogoRes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setLogoRes", "(I)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setSubtitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptBuilderSetNegativeButton, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setNegativeButton", "(Ljava/lang/CharSequence;Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptBuilderSetSubtitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setSubtitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/hardware/biometrics/BiometricPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/biometrics/BiometricPrompt$CryptoObject")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.biometrics.BiometricPrompt$CryptoObject: %w", err)
-	}
-	clsPromptCryptoObject = env.NewGlobalRef(&c.Object)
-
-	midPromptCryptoObjectGetCipher, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getCipher", "()Ljavax/crypto/Cipher;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPromptCryptoObject = env.NewGlobalRef(&c.Object)
 
-	midPromptCryptoObjectGetIdentityCredential, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getIdentityCredential", "()Landroid/security/identity/IdentityCredential;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptCryptoObjectGetCipher, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getCipher", "()Ljavax/crypto/Cipher;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptCryptoObjectGetMac, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getMac", "()Ljavax/crypto/Mac;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptCryptoObjectGetIdentityCredential, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getIdentityCredential", "()Landroid/security/identity/IdentityCredential;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptCryptoObjectGetOperationHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getOperationHandle", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptCryptoObjectGetMac, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getMac", "()Ljavax/crypto/Mac;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptCryptoObjectGetPresentationSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getPresentationSession", "()Landroid/security/identity/PresentationSession;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPromptCryptoObjectGetOperationHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getOperationHandle", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPromptCryptoObjectGetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getSignature", "()Ljava/security/Signature;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPromptCryptoObjectGetPresentationSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getPresentationSession", "()Landroid/security/identity/PresentationSession;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptCryptoObjectGetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptCryptoObject)), "getSignature", "()Ljava/security/Signature;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

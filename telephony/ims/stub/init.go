@@ -46,9 +46,13 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/telephony/ims/stub/ImsRegistrationImplBase")
 	if err != nil {
-		return fmt.Errorf("find class android.telephony.ims.stub.ImsRegistrationImplBase: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsImsRegistrationImplBase = env.NewGlobalRef(&c.Object)
+
 	}
-	clsImsRegistrationImplBase = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

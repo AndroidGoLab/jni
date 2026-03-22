@@ -50,21 +50,33 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/Manifest")
 	if err != nil {
-		return fmt.Errorf("find class android.Manifest: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManifest = env.NewGlobalRef(&c.Object)
+
 	}
-	clsManifest = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/Manifest$permission")
 	if err != nil {
-		return fmt.Errorf("find class android.Manifest$permission: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManifestpermission = env.NewGlobalRef(&c.Object)
+
 	}
-	clsManifestpermission = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/Manifest$permission_group")
 	if err != nil {
-		return fmt.Errorf("find class android.Manifest$permission_group: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManifestpermission_group = env.NewGlobalRef(&c.Object)
+
 	}
-	clsManifestpermission_group = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

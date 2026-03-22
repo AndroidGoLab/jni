@@ -84,258 +84,270 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/os/vibrator/VibratorFrequencyProfile")
 	if err != nil {
-		return fmt.Errorf("find class android.os.vibrator.VibratorFrequencyProfile: %w", err)
-	}
-	clsFrequencyProfile = env.NewGlobalRef(&c.Object)
-
-	midFrequencyProfileGetMaxFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getMaxFrequencyHz", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFrequencyProfile = env.NewGlobalRef(&c.Object)
 
-	midFrequencyProfileGetMaxOutputAccelerationGs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getMaxOutputAccelerationGs", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFrequencyProfileGetMaxFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getMaxFrequencyHz", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFrequencyProfileGetMinFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getMinFrequencyHz", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFrequencyProfileGetMaxOutputAccelerationGs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getMaxOutputAccelerationGs", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFrequencyProfileGetOutputAccelerationGs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getOutputAccelerationGs", "(F)F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFrequencyProfileGetMinFrequencyHz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getMinFrequencyHz", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFrequencyProfileGetOutputAccelerationGs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFrequencyProfile)), "getOutputAccelerationGs", "(F)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/vibrator/VibratorEnvelopeEffectInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.os.vibrator.VibratorEnvelopeEffectInfo: %w", err)
-	}
-	clsEnvelopeEffectInfo = env.NewGlobalRef(&c.Object)
-
-	midEnvelopeEffectInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsEnvelopeEffectInfo = env.NewGlobalRef(&c.Object)
 
-	midEnvelopeEffectInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoGetMaxControlPointDurationMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMaxControlPointDurationMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoGetMaxDurationMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMaxDurationMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoGetMaxControlPointDurationMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMaxControlPointDurationMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoGetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMaxSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoGetMaxDurationMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMaxDurationMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoGetMinControlPointDurationMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMinControlPointDurationMillis", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoGetMaxSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMaxSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoGetMinControlPointDurationMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "getMinControlPointDurationMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midEnvelopeEffectInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midEnvelopeEffectInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midEnvelopeEffectInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnvelopeEffectInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvelopeEffectInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/os/Vibrator")
 	if err != nil {
-		return fmt.Errorf("find class android.os.Vibrator: %w", err)
-	}
-	clsVibrator = env.NewGlobalRef(&c.Object)
-
-	midVibratorAreAllEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areAllEffectsSupported", "([I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsVibrator = env.NewGlobalRef(&c.Object)
 
-	midVibratorAreAllPrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areAllPrimitivesSupported", "([I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorAreAllEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areAllEffectsSupported", "([I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorAreEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areEffectsSupported", "([I)[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorAreAllPrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areAllPrimitivesSupported", "([I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorAreEnvelopeEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areEnvelopeEffectsSupported", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorAreEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areEffectsSupported", "([I)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorArePrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "arePrimitivesSupported", "([I)[Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorAreEnvelopeEffectsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "areEnvelopeEffectsSupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "cancel", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorArePrimitivesSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "arePrimitivesSupported", "([I)[Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorGetEnvelopeEffectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getEnvelopeEffectInfo", "()Landroid/os/vibrator/VibratorEnvelopeEffectInfo;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "cancel", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorGetFrequencyProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getFrequencyProfile", "()Landroid/os/vibrator/VibratorFrequencyProfile;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorGetEnvelopeEffectInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getEnvelopeEffectInfo", "()Landroid/os/vibrator/VibratorEnvelopeEffectInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getId", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorGetFrequencyProfile, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getFrequencyProfile", "()Landroid/os/vibrator/VibratorFrequencyProfile;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorGetPrimitiveDurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getPrimitiveDurations", "([I)[I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorGetQFactor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getQFactor", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorGetPrimitiveDurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getPrimitiveDurations", "([I)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorGetResonantFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getResonantFrequency", "()F")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorGetQFactor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getQFactor", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorHasAmplitudeControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasAmplitudeControl", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorGetResonantFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "getResonantFrequency", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorHasVibrator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasVibrator", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorHasAmplitudeControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasAmplitudeControl", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorHasVibrator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "hasVibrator", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/media/AudioAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorVibrate1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/os/VibrationAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorVibrate2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/media/AudioAttributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorVibrate2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(Landroid/os/VibrationEffect;Landroid/os/VibrationAttributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(JLandroid/media/AudioAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorVibrate1_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "([JI)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVibratorVibrate2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "(JLandroid/media/AudioAttributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVibratorVibrate3_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "([JILandroid/media/AudioAttributes;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midVibratorVibrate2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "([JI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVibratorVibrate3_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVibrator)), "vibrate", "([JILandroid/media/AudioAttributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -53,49 +53,57 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/hardware/ConsumerIrManager")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.ConsumerIrManager: %w", err)
-	}
-	clsConsumerIrManager = env.NewGlobalRef(&c.Object)
-
-	midConsumerIrManagerGetCarrierFrequencies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "getCarrierFrequencies", "()[Landroid/hardware/ConsumerIrManager$CarrierFrequencyRange;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsConsumerIrManager = env.NewGlobalRef(&c.Object)
 
-	midConsumerIrManagerHasIrEmitter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "hasIrEmitter", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midConsumerIrManagerGetCarrierFrequencies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "getCarrierFrequencies", "()[Landroid/hardware/ConsumerIrManager$CarrierFrequencyRange;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midConsumerIrManagerTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "transmit", "(I[I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midConsumerIrManagerHasIrEmitter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "hasIrEmitter", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConsumerIrManagerTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManager)), "transmit", "(I[I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/hardware/ConsumerIrManager$CarrierFrequencyRange")
 	if err != nil {
-		return fmt.Errorf("find class android.hardware.ConsumerIrManager$CarrierFrequencyRange: %w", err)
-	}
-	clsConsumerIrManagerCarrierFrequencyRange = env.NewGlobalRef(&c.Object)
-
-	midConsumerIrManagerCarrierFrequencyRangeGetMaxFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManagerCarrierFrequencyRange)), "getMaxFrequency", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsConsumerIrManagerCarrierFrequencyRange = env.NewGlobalRef(&c.Object)
 
-	midConsumerIrManagerCarrierFrequencyRangeGetMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManagerCarrierFrequencyRange)), "getMinFrequency", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midConsumerIrManagerCarrierFrequencyRangeGetMaxFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManagerCarrierFrequencyRange)), "getMaxFrequency", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConsumerIrManagerCarrierFrequencyRangeGetMinFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsumerIrManagerCarrierFrequencyRange)), "getMinFrequency", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

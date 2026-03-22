@@ -48,22 +48,26 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/app/appsearch/util/DocumentIdUtil")
 	if err != nil {
-		return fmt.Errorf("find class android.app.appsearch.util.DocumentIdUtil: %w", err)
-	}
-	clsDocumentIdUtil = env.NewGlobalRef(&c.Object)
-
-	midDocumentIdUtilCreateQualifiedId3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentIdUtil)), "createQualifiedId", "(Ljava/lang/String;Ljava/lang/String;Landroid/app/appsearch/GenericDocument;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDocumentIdUtil = env.NewGlobalRef(&c.Object)
 
-	midDocumentIdUtilCreateQualifiedId4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentIdUtil)), "createQualifiedId", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDocumentIdUtilCreateQualifiedId3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentIdUtil)), "createQualifiedId", "(Ljava/lang/String;Ljava/lang/String;Landroid/app/appsearch/GenericDocument;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentIdUtilCreateQualifiedId4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDocumentIdUtil)), "createQualifiedId", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -845,14 +845,14 @@ func (m *Parcel) ReadByteArray(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midParcelReadByteArray == nil {
+		if midParcelReadByteValueArray == nil {
 			callErr = fmt.Errorf("android.os.Parcel.readByteArray is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midParcelReadByteArray, jni.ObjectValue(arg0),
+			midParcelReadByteValueArray, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1918,14 +1918,14 @@ func (m *Parcel) WriteByteArray1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midParcelWriteByteArray1 == nil {
+		if midParcelWriteByteValueArray1 == nil {
 			callErr = fmt.Errorf("android.os.Parcel.writeByteArray is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midParcelWriteByteArray1, jni.ObjectValue(arg0),
+			midParcelWriteByteValueArray1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1945,14 +1945,14 @@ func (m *Parcel) WriteByteArray3_1(
 			callErr = err
 			return err
 		}
-		if midParcelWriteByteArray3_1 == nil {
+		if midParcelWriteByteValueArray3_1 == nil {
 			callErr = fmt.Errorf("android.os.Parcel.writeByteArray is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midParcelWriteByteArray3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midParcelWriteByteValueArray3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})

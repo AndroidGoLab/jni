@@ -50,36 +50,40 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/print/pdf/PrintedPdfDocument")
 	if err != nil {
-		return fmt.Errorf("find class android.print.pdf.PrintedPdfDocument: %w", err)
-	}
-	clsPrintedPdfDocument = env.NewGlobalRef(&c.Object)
-
-	midPrintedPdfDocumentGetPageContentRect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageContentRect", "()Landroid/graphics/Rect;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPrintedPdfDocument = env.NewGlobalRef(&c.Object)
 
-	midPrintedPdfDocumentGetPageHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintedPdfDocumentGetPageContentRect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageContentRect", "()Landroid/graphics/Rect;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintedPdfDocumentGetPageWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPrintedPdfDocumentGetPageHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPrintedPdfDocumentStartPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "startPage", "(I)Landroid/graphics/pdf/PdfDocument$Page;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPrintedPdfDocumentGetPageWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintedPdfDocumentStartPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "startPage", "(I)Landroid/graphics/pdf/PdfDocument$Page;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

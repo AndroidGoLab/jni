@@ -989,5393 +989,6005 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeightRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeightRecord: %w", err)
-	}
-	clsHeightRecord = env.NewGlobalRef(&c.Object)
-
-	midHeightRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeightRecord = env.NewGlobalRef(&c.Object)
 
-	midHeightRecordGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "getHeight", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeightRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeightRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeightRecordGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "getHeight", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeightRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeightRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeightRecord$Builder: %w", err)
-	}
-	clsHeightRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midHeightRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HeightRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeightRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midHeightRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/HeightRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeightRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HeightRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeightRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeightRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeightRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/HeightRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeightRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeightRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeightRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyTemperatureMeasurementLocation")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyTemperatureMeasurementLocation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBodyTemperatureMeasurementLocation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsBodyTemperatureMeasurementLocation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseLap")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseLap: %w", err)
-	}
-	clsExerciseLap = env.NewGlobalRef(&c.Object)
-
-	midExerciseLapEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseLap = env.NewGlobalRef(&c.Object)
 
-	midExerciseLapGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "getEndTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseLapEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseLapGetLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "getLength", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseLapGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "getEndTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseLapGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "getStartTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseLapGetLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "getLength", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseLapHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseLapGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "getStartTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseLapHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLap)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseLap$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseLap$Builder: %w", err)
-	}
-	clsExerciseLapBuilder = env.NewGlobalRef(&c.Object)
-
-	midExerciseLapBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLapBuilder)), "build", "()Landroid/health/connect/datatypes/ExerciseLap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseLapBuilder = env.NewGlobalRef(&c.Object)
 
-	midExerciseLapBuilderSetLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLapBuilder)), "setLength", "(Landroid/health/connect/datatypes/units/Length;)Landroid/health/connect/datatypes/ExerciseLap$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseLapBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLapBuilder)), "build", "()Landroid/health/connect/datatypes/ExerciseLap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseLapBuilderSetLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseLapBuilder)), "setLength", "(Landroid/health/connect/datatypes/units/Length;)Landroid/health/connect/datatypes/ExerciseLap$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OvulationTestRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.OvulationTestRecord: %w", err)
-	}
-	clsOvulationTestRecord = env.NewGlobalRef(&c.Object)
-
-	midOvulationTestRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsOvulationTestRecord = env.NewGlobalRef(&c.Object)
 
-	midOvulationTestRecordGetResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "getResult", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOvulationTestRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOvulationTestRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midOvulationTestRecordGetResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "getResult", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvulationTestRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OvulationTestRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.OvulationTestRecord$Builder: %w", err)
-	}
-	clsOvulationTestRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midOvulationTestRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "build", "()Landroid/health/connect/datatypes/OvulationTestRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsOvulationTestRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midOvulationTestRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/OvulationTestRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOvulationTestRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "build", "()Landroid/health/connect/datatypes/OvulationTestRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOvulationTestRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/OvulationTestRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midOvulationTestRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/OvulationTestRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvulationTestRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvulationTestRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/OvulationTestRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OvulationTestRecord$OvulationTestResult")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.OvulationTestRecord$OvulationTestResult: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsOvulationTestRecordOvulationTestResult = env.NewGlobalRef(&c.Object)
+
 	}
-	clsOvulationTestRecordOvulationTestResult = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeartRateRecord: %w", err)
-	}
-	clsHeartRateRecord = env.NewGlobalRef(&c.Object)
-
-	midHeartRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeartRateRecord = env.NewGlobalRef(&c.Object)
 
-	midHeartRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeartRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeartRateRecord$Builder: %w", err)
-	}
-	clsHeartRateRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midHeartRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HeartRateRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeartRateRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midHeartRateRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HeartRateRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeartRateRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateRecord$HeartRateSample")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeartRateRecord$HeartRateSample: %w", err)
-	}
-	clsHeartRateRecordHeartRateSample = env.NewGlobalRef(&c.Object)
-
-	midHeartRateRecordHeartRateSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeartRateRecordHeartRateSample = env.NewGlobalRef(&c.Object)
 
-	midHeartRateRecordHeartRateSampleGetBeatsPerMinute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "getBeatsPerMinute", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateRecordHeartRateSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateRecordHeartRateSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateRecordHeartRateSampleGetBeatsPerMinute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "getBeatsPerMinute", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateRecordHeartRateSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeartRateRecordHeartRateSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateRecordHeartRateSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateRecordHeartRateSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MedicalResource")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MedicalResource: %w", err)
-	}
-	clsMedicalResource = env.NewGlobalRef(&c.Object)
-
-	midMedicalResourceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMedicalResource = env.NewGlobalRef(&c.Object)
 
-	midMedicalResourceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceGetDataSourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getDataSourceId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceGetFhirResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getFhirResource", "()Landroid/health/connect/datatypes/FhirResource;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceGetDataSourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getDataSourceId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceGetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getFhirVersion", "()Landroid/health/connect/datatypes/FhirVersion;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceGetFhirResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getFhirResource", "()Landroid/health/connect/datatypes/FhirResource;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getId", "()Landroid/health/connect/MedicalResourceId;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceGetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getFhirVersion", "()Landroid/health/connect/datatypes/FhirVersion;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getId", "()Landroid/health/connect/MedicalResourceId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMedicalResourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMedicalResourceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResource)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MedicalResource$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MedicalResource$Builder: %w", err)
-	}
-	clsMedicalResourceBuilder = env.NewGlobalRef(&c.Object)
-
-	midMedicalResourceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "build", "()Landroid/health/connect/datatypes/MedicalResource;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMedicalResourceBuilder = env.NewGlobalRef(&c.Object)
 
-	midMedicalResourceBuilderSetDataSourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setDataSourceId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "build", "()Landroid/health/connect/datatypes/MedicalResource;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceBuilderSetFhirResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setFhirResource", "(Landroid/health/connect/datatypes/FhirResource;)Landroid/health/connect/datatypes/MedicalResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceBuilderSetDataSourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setDataSourceId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceBuilderSetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setFhirVersion", "(Landroid/health/connect/datatypes/FhirVersion;)Landroid/health/connect/datatypes/MedicalResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalResourceBuilderSetFhirResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setFhirResource", "(Landroid/health/connect/datatypes/FhirResource;)Landroid/health/connect/datatypes/MedicalResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalResourceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/MedicalResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMedicalResourceBuilderSetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setFhirVersion", "(Landroid/health/connect/datatypes/FhirVersion;)Landroid/health/connect/datatypes/MedicalResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMedicalResourceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalResourceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/MedicalResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseBlock")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PlannedExerciseBlock: %w", err)
-	}
-	clsPlannedExerciseBlock = env.NewGlobalRef(&c.Object)
-
-	midPlannedExerciseBlockEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPlannedExerciseBlock = env.NewGlobalRef(&c.Object)
 
-	midPlannedExerciseBlockGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "getDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseBlockEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseBlockGetRepetitions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "getRepetitions", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseBlockGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "getDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseBlockHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPlannedExerciseBlockGetRepetitions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "getRepetitions", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseBlockHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlock)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseBlock$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PlannedExerciseBlock$Builder: %w", err)
-	}
-	clsPlannedExerciseBlockBuilder = env.NewGlobalRef(&c.Object)
-
-	midPlannedExerciseBlockBuilderAddStep, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "addStep", "(Landroid/health/connect/datatypes/PlannedExerciseStep;)Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPlannedExerciseBlockBuilder = env.NewGlobalRef(&c.Object)
 
-	midPlannedExerciseBlockBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "build", "()Landroid/health/connect/datatypes/PlannedExerciseBlock;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseBlockBuilderAddStep, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "addStep", "(Landroid/health/connect/datatypes/PlannedExerciseStep;)Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseBlockBuilderClearSteps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "clearSteps", "()Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseBlockBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "build", "()Landroid/health/connect/datatypes/PlannedExerciseBlock;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseBlockBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseBlockBuilderClearSteps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "clearSteps", "()Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseBlockBuilderSetRepetitions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "setRepetitions", "(I)Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPlannedExerciseBlockBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseBlockBuilderSetRepetitions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseBlockBuilder)), "setRepetitions", "(I)Landroid/health/connect/datatypes/PlannedExerciseBlock$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseRoute")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseRoute: %w", err)
-	}
-	clsExerciseRoute = env.NewGlobalRef(&c.Object)
-
-	midExerciseRouteDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseRoute = env.NewGlobalRef(&c.Object)
 
-	midExerciseRouteEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseRouteHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseRouteWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseRoute$Location")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseRoute$Location: %w", err)
-	}
-	clsExerciseRouteLocation = env.NewGlobalRef(&c.Object)
-
-	midExerciseRouteLocationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseRouteLocation = env.NewGlobalRef(&c.Object)
 
-	midExerciseRouteLocationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationGetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getAltitude", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationGetHorizontalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getHorizontalAccuracy", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationGetAltitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getAltitude", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationGetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getLatitude", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationGetHorizontalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getHorizontalAccuracy", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationGetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getLongitude", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationGetLatitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getLatitude", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationGetLongitude, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getLongitude", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationGetVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getVerticalAccuracy", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseRouteLocationGetVerticalAccuracy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "getVerticalAccuracy", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseRouteLocationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseRouteLocationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseRouteLocationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseRouteLocation)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Record")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Record: %w", err)
-	}
-	clsRecord = env.NewGlobalRef(&c.Object)
-
-	midRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRecord = env.NewGlobalRef(&c.Object)
 
-	midRecordGetMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "getMetadata", "()Landroid/health/connect/datatypes/Metadata;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRecordGetMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "getMetadata", "()Landroid/health/connect/datatypes/Metadata;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CervicalMucusRecord: %w", err)
-	}
-	clsCervicalMucusRecord = env.NewGlobalRef(&c.Object)
-
-	midCervicalMucusRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCervicalMucusRecord = env.NewGlobalRef(&c.Object)
 
-	midCervicalMucusRecordGetAppearance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "getAppearance", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCervicalMucusRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCervicalMucusRecordGetSensation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "getSensation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCervicalMucusRecordGetAppearance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "getAppearance", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCervicalMucusRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCervicalMucusRecordGetSensation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "getSensation", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCervicalMucusRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CervicalMucusRecord$Builder: %w", err)
-	}
-	clsCervicalMucusRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midCervicalMucusRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "build", "()Landroid/health/connect/datatypes/CervicalMucusRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCervicalMucusRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midCervicalMucusRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/CervicalMucusRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCervicalMucusRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "build", "()Landroid/health/connect/datatypes/CervicalMucusRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCervicalMucusRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/CervicalMucusRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCervicalMucusRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/CervicalMucusRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCervicalMucusRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCervicalMucusRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/CervicalMucusRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord$CervicalMucusAppearance")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CervicalMucusRecord$CervicalMucusAppearance: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCervicalMucusRecordCervicalMucusAppearance = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCervicalMucusRecordCervicalMucusAppearance = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/CervicalMucusRecord$CervicalMucusSensation")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CervicalMucusRecord$CervicalMucusSensation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCervicalMucusRecordCervicalMucusSensation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsCervicalMucusRecordCervicalMucusSensation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/FhirVersion")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.FhirVersion: %w", err)
-	}
-	clsFhirVersion = env.NewGlobalRef(&c.Object)
-
-	midFhirVersionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFhirVersion = env.NewGlobalRef(&c.Object)
 
-	midFhirVersionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionGetMajor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "getMajor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionGetMinor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "getMinor", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionGetMajor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "getMajor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionGetPatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "getPatch", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionGetMinor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "getMinor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionGetPatch, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "getPatch", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionIsSupportedFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "isSupportedFhirVersion", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionIsSupportedFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "isSupportedFhirVersion", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirVersionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirVersionParseFhirVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "parseFhirVersion", "(Ljava/lang/String;)Landroid/health/connect/datatypes/FhirVersion;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFhirVersionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFhirVersionParseFhirVersion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsFhirVersion)), "parseFhirVersion", "(Ljava/lang/String;)Landroid/health/connect/datatypes/FhirVersion;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsCadenceRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.StepsCadenceRecord: %w", err)
-	}
-	clsStepsCadenceRecord = env.NewGlobalRef(&c.Object)
-
-	midStepsCadenceRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStepsCadenceRecord = env.NewGlobalRef(&c.Object)
 
-	midStepsCadenceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStepsCadenceRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsCadenceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsCadenceRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.StepsCadenceRecord$Builder: %w", err)
-	}
-	clsStepsCadenceRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midStepsCadenceRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "build", "()Landroid/health/connect/datatypes/StepsCadenceRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStepsCadenceRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midStepsCadenceRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsCadenceRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "build", "()Landroid/health/connect/datatypes/StepsCadenceRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsCadenceRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsCadenceRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsCadenceRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsCadenceRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsCadenceRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStepsCadenceRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsCadenceRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsCadenceRecord$StepsCadenceRecordSample")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.StepsCadenceRecord$StepsCadenceRecordSample: %w", err)
-	}
-	clsStepsCadenceRecordStepsCadenceRecordSample = env.NewGlobalRef(&c.Object)
-
-	midStepsCadenceRecordStepsCadenceRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStepsCadenceRecordStepsCadenceRecordSample = env.NewGlobalRef(&c.Object)
 
-	midStepsCadenceRecordStepsCadenceRecordSampleGetRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "getRate", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsCadenceRecordStepsCadenceRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsCadenceRecordStepsCadenceRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsCadenceRecordStepsCadenceRecordSampleGetRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "getRate", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsCadenceRecordStepsCadenceRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStepsCadenceRecordStepsCadenceRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsCadenceRecordStepsCadenceRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsCadenceRecordStepsCadenceRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/LeanBodyMassRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.LeanBodyMassRecord: %w", err)
-	}
-	clsLeanBodyMassRecord = env.NewGlobalRef(&c.Object)
-
-	midLeanBodyMassRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLeanBodyMassRecord = env.NewGlobalRef(&c.Object)
 
-	midLeanBodyMassRecordGetMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "getMass", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLeanBodyMassRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLeanBodyMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLeanBodyMassRecordGetMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "getMass", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeanBodyMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/LeanBodyMassRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.LeanBodyMassRecord$Builder: %w", err)
-	}
-	clsLeanBodyMassRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midLeanBodyMassRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "build", "()Landroid/health/connect/datatypes/LeanBodyMassRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLeanBodyMassRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midLeanBodyMassRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/LeanBodyMassRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLeanBodyMassRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "build", "()Landroid/health/connect/datatypes/LeanBodyMassRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLeanBodyMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/LeanBodyMassRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLeanBodyMassRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/LeanBodyMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeanBodyMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeanBodyMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/LeanBodyMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/IntervalRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.IntervalRecord: %w", err)
-	}
-	clsIntervalRecord = env.NewGlobalRef(&c.Object)
-
-	midIntervalRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsIntervalRecord = env.NewGlobalRef(&c.Object)
 
-	midIntervalRecordGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getEndTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIntervalRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIntervalRecordGetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getEndZoneOffset", "()Ljava/time/ZoneOffset;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIntervalRecordGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getEndTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIntervalRecordGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getStartTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIntervalRecordGetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getEndZoneOffset", "()Ljava/time/ZoneOffset;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIntervalRecordGetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getStartZoneOffset", "()Ljava/time/ZoneOffset;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIntervalRecordGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getStartTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIntervalRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midIntervalRecordGetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "getStartZoneOffset", "()Ljava/time/ZoneOffset;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntervalRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntervalRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/AppInfo")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.AppInfo: %w", err)
-	}
-	clsAppInfo = env.NewGlobalRef(&c.Object)
-
-	midAppInfoGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getIcon", "()Landroid/graphics/Bitmap;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAppInfo = env.NewGlobalRef(&c.Object)
 
-	midAppInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAppInfoGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getIcon", "()Landroid/graphics/Bitmap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAppInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAppInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ElevationGainedRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ElevationGainedRecord: %w", err)
-	}
-	clsElevationGainedRecord = env.NewGlobalRef(&c.Object)
-
-	midElevationGainedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsElevationGainedRecord = env.NewGlobalRef(&c.Object)
 
-	midElevationGainedRecordGetElevation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "getElevation", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElevationGainedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElevationGainedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midElevationGainedRecordGetElevation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "getElevation", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElevationGainedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ElevationGainedRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ElevationGainedRecord$Builder: %w", err)
-	}
-	clsElevationGainedRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midElevationGainedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ElevationGainedRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsElevationGainedRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midElevationGainedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElevationGainedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ElevationGainedRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElevationGainedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElevationGainedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElevationGainedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midElevationGainedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midElevationGainedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midElevationGainedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midElevationGainedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsElevationGainedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ElevationGainedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MedicalDataSource")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MedicalDataSource: %w", err)
-	}
-	clsMedicalDataSource = env.NewGlobalRef(&c.Object)
-
-	midMedicalDataSourceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMedicalDataSource = env.NewGlobalRef(&c.Object)
 
-	midMedicalDataSourceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceGetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getDisplayName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceGetFhirBaseUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getFhirBaseUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceGetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getDisplayName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceGetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getFhirVersion", "()Landroid/health/connect/datatypes/FhirVersion;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceGetFhirBaseUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getFhirBaseUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceGetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getFhirVersion", "()Landroid/health/connect/datatypes/FhirVersion;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceGetLastDataUpdateTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getLastDataUpdateTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceGetLastDataUpdateTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getLastDataUpdateTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMedicalDataSourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMedicalDataSourceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSource)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MedicalDataSource$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MedicalDataSource$Builder: %w", err)
-	}
-	clsMedicalDataSourceBuilder = env.NewGlobalRef(&c.Object)
-
-	midMedicalDataSourceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "build", "()Landroid/health/connect/datatypes/MedicalDataSource;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMedicalDataSourceBuilder = env.NewGlobalRef(&c.Object)
 
-	midMedicalDataSourceBuilderSetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setDisplayName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "build", "()Landroid/health/connect/datatypes/MedicalDataSource;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceBuilderSetFhirBaseUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setFhirBaseUri", "(Landroid/net/Uri;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceBuilderSetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setDisplayName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceBuilderSetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setFhirVersion", "(Landroid/health/connect/datatypes/FhirVersion;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceBuilderSetFhirBaseUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setFhirBaseUri", "(Landroid/net/Uri;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceBuilderSetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceBuilderSetFhirVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setFhirVersion", "(Landroid/health/connect/datatypes/FhirVersion;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceBuilderSetLastDataUpdateTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setLastDataUpdateTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMedicalDataSourceBuilderSetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMedicalDataSourceBuilderSetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setPackageName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMedicalDataSourceBuilderSetLastDataUpdateTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setLastDataUpdateTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMedicalDataSourceBuilderSetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMedicalDataSourceBuilder)), "setPackageName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/MedicalDataSource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodGlucoseRecord: %w", err)
-	}
-	clsBloodGlucoseRecord = env.NewGlobalRef(&c.Object)
-
-	midBloodGlucoseRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBloodGlucoseRecord = env.NewGlobalRef(&c.Object)
 
-	midBloodGlucoseRecordGetLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getLevel", "()Landroid/health/connect/datatypes/units/BloodGlucose;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodGlucoseRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodGlucoseRecordGetMealType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getMealType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodGlucoseRecordGetLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getLevel", "()Landroid/health/connect/datatypes/units/BloodGlucose;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodGlucoseRecordGetRelationToMeal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getRelationToMeal", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodGlucoseRecordGetMealType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getMealType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodGlucoseRecordGetSpecimenSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getSpecimenSource", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodGlucoseRecordGetRelationToMeal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getRelationToMeal", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodGlucoseRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBloodGlucoseRecordGetSpecimenSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "getSpecimenSource", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBloodGlucoseRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodGlucoseRecord$Builder: %w", err)
-	}
-	clsBloodGlucoseRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBloodGlucoseRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BloodGlucoseRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBloodGlucoseRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBloodGlucoseRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BloodGlucoseRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodGlucoseRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BloodGlucoseRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodGlucoseRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BloodGlucoseRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBloodGlucoseRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BloodGlucoseRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBloodGlucoseRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucoseRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BloodGlucoseRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord$RelationToMealType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodGlucoseRecord$RelationToMealType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBloodGlucoseRecordRelationToMealType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsBloodGlucoseRecordRelationToMealType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodGlucoseRecord$SpecimenSource")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodGlucoseRecord$SpecimenSource: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBloodGlucoseRecordSpecimenSource = env.NewGlobalRef(&c.Object)
+
 	}
-	clsBloodGlucoseRecordSpecimenSource = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/SexualActivityRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SexualActivityRecord: %w", err)
-	}
-	clsSexualActivityRecord = env.NewGlobalRef(&c.Object)
-
-	midSexualActivityRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSexualActivityRecord = env.NewGlobalRef(&c.Object)
 
-	midSexualActivityRecordGetProtectionUsed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "getProtectionUsed", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSexualActivityRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSexualActivityRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSexualActivityRecordGetProtectionUsed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "getProtectionUsed", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSexualActivityRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SexualActivityRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SexualActivityRecord$Builder: %w", err)
-	}
-	clsSexualActivityRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midSexualActivityRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SexualActivityRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSexualActivityRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midSexualActivityRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/SexualActivityRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSexualActivityRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SexualActivityRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSexualActivityRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SexualActivityRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSexualActivityRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/SexualActivityRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSexualActivityRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSexualActivityRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SexualActivityRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SexualActivityRecord$SexualActivityProtectionUsed")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SexualActivityRecord$SexualActivityProtectionUsed: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSexualActivityRecordSexualActivityProtectionUsed = env.NewGlobalRef(&c.Object)
+
 	}
-	clsSexualActivityRecordSexualActivityProtectionUsed = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/SpeedRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SpeedRecord: %w", err)
-	}
-	clsSpeedRecord = env.NewGlobalRef(&c.Object)
-
-	midSpeedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSpeedRecord = env.NewGlobalRef(&c.Object)
 
-	midSpeedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSpeedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpeedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SpeedRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SpeedRecord$Builder: %w", err)
-	}
-	clsSpeedRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midSpeedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SpeedRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSpeedRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midSpeedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/SpeedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpeedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SpeedRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpeedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/SpeedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpeedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/SpeedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpeedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SpeedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpeedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/SpeedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpeedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SpeedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSpeedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SpeedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpeedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SpeedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SpeedRecord$SpeedRecordSample")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SpeedRecord$SpeedRecordSample: %w", err)
-	}
-	clsSpeedRecordSpeedRecordSample = env.NewGlobalRef(&c.Object)
-
-	midSpeedRecordSpeedRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSpeedRecordSpeedRecordSample = env.NewGlobalRef(&c.Object)
 
-	midSpeedRecordSpeedRecordSampleGetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "getSpeed", "()Landroid/health/connect/datatypes/units/Velocity;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpeedRecordSpeedRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpeedRecordSpeedRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSpeedRecordSpeedRecordSampleGetSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "getSpeed", "()Landroid/health/connect/datatypes/units/Velocity;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSpeedRecordSpeedRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSpeedRecordSpeedRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSpeedRecordSpeedRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpeedRecordSpeedRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExercisePerformanceGoal = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExercisePerformanceGoal = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$AmrapGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$AmrapGoal: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExercisePerformanceGoalAmrapGoal = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExercisePerformanceGoalAmrapGoal = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$CadenceGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$CadenceGoal: %w", err)
-	}
-	clsExercisePerformanceGoalCadenceGoal = env.NewGlobalRef(&c.Object)
-
-	midExercisePerformanceGoalCadenceGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExercisePerformanceGoalCadenceGoal = env.NewGlobalRef(&c.Object)
 
-	midExercisePerformanceGoalCadenceGoalGetMaxRpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "getMaxRpm", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalCadenceGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalCadenceGoalGetMinRpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "getMinRpm", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalCadenceGoalGetMaxRpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "getMaxRpm", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalCadenceGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExercisePerformanceGoalCadenceGoalGetMinRpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "getMinRpm", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalCadenceGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalCadenceGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$HeartRateGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$HeartRateGoal: %w", err)
-	}
-	clsExercisePerformanceGoalHeartRateGoal = env.NewGlobalRef(&c.Object)
-
-	midExercisePerformanceGoalHeartRateGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExercisePerformanceGoalHeartRateGoal = env.NewGlobalRef(&c.Object)
 
-	midExercisePerformanceGoalHeartRateGoalGetMaxBpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "getMaxBpm", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalHeartRateGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalHeartRateGoalGetMinBpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "getMinBpm", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalHeartRateGoalGetMaxBpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "getMaxBpm", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalHeartRateGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExercisePerformanceGoalHeartRateGoalGetMinBpm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "getMinBpm", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalHeartRateGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalHeartRateGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$PowerGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$PowerGoal: %w", err)
-	}
-	clsExercisePerformanceGoalPowerGoal = env.NewGlobalRef(&c.Object)
-
-	midExercisePerformanceGoalPowerGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExercisePerformanceGoalPowerGoal = env.NewGlobalRef(&c.Object)
 
-	midExercisePerformanceGoalPowerGoalGetMaxPower, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "getMaxPower", "()Landroid/health/connect/datatypes/units/Power;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalPowerGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalPowerGoalGetMinPower, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "getMinPower", "()Landroid/health/connect/datatypes/units/Power;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalPowerGoalGetMaxPower, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "getMaxPower", "()Landroid/health/connect/datatypes/units/Power;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalPowerGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExercisePerformanceGoalPowerGoalGetMinPower, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "getMinPower", "()Landroid/health/connect/datatypes/units/Power;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalPowerGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalPowerGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$RateOfPerceivedExertionGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$RateOfPerceivedExertionGoal: %w", err)
-	}
-	clsExercisePerformanceGoalRateOfPerceivedExertionGoal = env.NewGlobalRef(&c.Object)
-
-	midExercisePerformanceGoalRateOfPerceivedExertionGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExercisePerformanceGoalRateOfPerceivedExertionGoal = env.NewGlobalRef(&c.Object)
 
-	midExercisePerformanceGoalRateOfPerceivedExertionGoalGetRpe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "getRpe", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalRateOfPerceivedExertionGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalRateOfPerceivedExertionGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExercisePerformanceGoalRateOfPerceivedExertionGoalGetRpe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "getRpe", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalRateOfPerceivedExertionGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalRateOfPerceivedExertionGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$SpeedGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$SpeedGoal: %w", err)
-	}
-	clsExercisePerformanceGoalSpeedGoal = env.NewGlobalRef(&c.Object)
-
-	midExercisePerformanceGoalSpeedGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExercisePerformanceGoalSpeedGoal = env.NewGlobalRef(&c.Object)
 
-	midExercisePerformanceGoalSpeedGoalGetMaxSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "getMaxSpeed", "()Landroid/health/connect/datatypes/units/Velocity;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalSpeedGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalSpeedGoalGetMinSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "getMinSpeed", "()Landroid/health/connect/datatypes/units/Velocity;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalSpeedGoalGetMaxSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "getMaxSpeed", "()Landroid/health/connect/datatypes/units/Velocity;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalSpeedGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExercisePerformanceGoalSpeedGoalGetMinSpeed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "getMinSpeed", "()Landroid/health/connect/datatypes/units/Velocity;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalSpeedGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalSpeedGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$UnknownGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$UnknownGoal: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExercisePerformanceGoalUnknownGoal = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExercisePerformanceGoalUnknownGoal = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExercisePerformanceGoal$WeightGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExercisePerformanceGoal$WeightGoal: %w", err)
-	}
-	clsExercisePerformanceGoalWeightGoal = env.NewGlobalRef(&c.Object)
-
-	midExercisePerformanceGoalWeightGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExercisePerformanceGoalWeightGoal = env.NewGlobalRef(&c.Object)
 
-	midExercisePerformanceGoalWeightGoalGetMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "getMass", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExercisePerformanceGoalWeightGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExercisePerformanceGoalWeightGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExercisePerformanceGoalWeightGoalGetMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "getMass", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExercisePerformanceGoalWeightGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExercisePerformanceGoalWeightGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BasalMetabolicRateRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BasalMetabolicRateRecord: %w", err)
-	}
-	clsBasalMetabolicRateRecord = env.NewGlobalRef(&c.Object)
-
-	midBasalMetabolicRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBasalMetabolicRateRecord = env.NewGlobalRef(&c.Object)
 
-	midBasalMetabolicRateRecordGetBasalMetabolicRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "getBasalMetabolicRate", "()Landroid/health/connect/datatypes/units/Power;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBasalMetabolicRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBasalMetabolicRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBasalMetabolicRateRecordGetBasalMetabolicRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "getBasalMetabolicRate", "()Landroid/health/connect/datatypes/units/Power;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBasalMetabolicRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BasalMetabolicRateRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BasalMetabolicRateRecord$Builder: %w", err)
-	}
-	clsBasalMetabolicRateRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBasalMetabolicRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BasalMetabolicRateRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBasalMetabolicRateRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBasalMetabolicRateRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BasalMetabolicRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBasalMetabolicRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BasalMetabolicRateRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBasalMetabolicRateRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BasalMetabolicRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBasalMetabolicRateRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BasalMetabolicRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBasalMetabolicRateRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalMetabolicRateRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BasalMetabolicRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ActivityIntensityRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ActivityIntensityRecord: %w", err)
-	}
-	clsActivityIntensityRecord = env.NewGlobalRef(&c.Object)
-
-	midActivityIntensityRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsActivityIntensityRecord = env.NewGlobalRef(&c.Object)
 
-	midActivityIntensityRecordGetActivityIntensityType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "getActivityIntensityType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midActivityIntensityRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midActivityIntensityRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midActivityIntensityRecordGetActivityIntensityType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "getActivityIntensityType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityIntensityRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ActivityIntensityRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ActivityIntensityRecord$Builder: %w", err)
-	}
-	clsActivityIntensityRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midActivityIntensityRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ActivityIntensityRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsActivityIntensityRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midActivityIntensityRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActivityIntensityRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midActivityIntensityRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ActivityIntensityRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midActivityIntensityRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActivityIntensityRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midActivityIntensityRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActivityIntensityRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityIntensityRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityIntensityRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActivityIntensityRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationFlowRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MenstruationFlowRecord: %w", err)
-	}
-	clsMenstruationFlowRecord = env.NewGlobalRef(&c.Object)
-
-	midMenstruationFlowRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMenstruationFlowRecord = env.NewGlobalRef(&c.Object)
 
-	midMenstruationFlowRecordGetFlow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "getFlow", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMenstruationFlowRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMenstruationFlowRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMenstruationFlowRecordGetFlow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "getFlow", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationFlowRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationFlowRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MenstruationFlowRecord$Builder: %w", err)
-	}
-	clsMenstruationFlowRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midMenstruationFlowRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "build", "()Landroid/health/connect/datatypes/MenstruationFlowRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMenstruationFlowRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midMenstruationFlowRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/MenstruationFlowRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMenstruationFlowRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "build", "()Landroid/health/connect/datatypes/MenstruationFlowRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMenstruationFlowRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationFlowRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMenstruationFlowRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/MenstruationFlowRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationFlowRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationFlowRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationFlowRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationFlowRecord$MenstruationFlowType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MenstruationFlowRecord$MenstruationFlowType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMenstruationFlowRecordMenstruationFlowType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMenstruationFlowRecordMenstruationFlowType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/TotalCaloriesBurnedRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.TotalCaloriesBurnedRecord: %w", err)
-	}
-	clsTotalCaloriesBurnedRecord = env.NewGlobalRef(&c.Object)
-
-	midTotalCaloriesBurnedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTotalCaloriesBurnedRecord = env.NewGlobalRef(&c.Object)
 
-	midTotalCaloriesBurnedRecordGetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "getEnergy", "()Landroid/health/connect/datatypes/units/Energy;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTotalCaloriesBurnedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTotalCaloriesBurnedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTotalCaloriesBurnedRecordGetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "getEnergy", "()Landroid/health/connect/datatypes/units/Energy;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTotalCaloriesBurnedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.TotalCaloriesBurnedRecord$Builder: %w", err)
-	}
-	clsTotalCaloriesBurnedRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midTotalCaloriesBurnedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTotalCaloriesBurnedRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midTotalCaloriesBurnedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTotalCaloriesBurnedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTotalCaloriesBurnedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTotalCaloriesBurnedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTotalCaloriesBurnedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTotalCaloriesBurnedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTotalCaloriesBurnedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTotalCaloriesBurnedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTotalCaloriesBurnedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTotalCaloriesBurnedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/TotalCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BasalBodyTemperatureRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BasalBodyTemperatureRecord: %w", err)
-	}
-	clsBasalBodyTemperatureRecord = env.NewGlobalRef(&c.Object)
-
-	midBasalBodyTemperatureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBasalBodyTemperatureRecord = env.NewGlobalRef(&c.Object)
 
-	midBasalBodyTemperatureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "getMeasurementLocation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBasalBodyTemperatureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBasalBodyTemperatureRecordGetTemperature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "getTemperature", "()Landroid/health/connect/datatypes/units/Temperature;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBasalBodyTemperatureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "getMeasurementLocation", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBasalBodyTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBasalBodyTemperatureRecordGetTemperature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "getTemperature", "()Landroid/health/connect/datatypes/units/Temperature;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBasalBodyTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BasalBodyTemperatureRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BasalBodyTemperatureRecord$Builder: %w", err)
-	}
-	clsBasalBodyTemperatureRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBasalBodyTemperatureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BasalBodyTemperatureRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBasalBodyTemperatureRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBasalBodyTemperatureRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BasalBodyTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBasalBodyTemperatureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BasalBodyTemperatureRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBasalBodyTemperatureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BasalBodyTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBasalBodyTemperatureRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BasalBodyTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBasalBodyTemperatureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBasalBodyTemperatureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BasalBodyTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BoneMassRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BoneMassRecord: %w", err)
-	}
-	clsBoneMassRecord = env.NewGlobalRef(&c.Object)
-
-	midBoneMassRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBoneMassRecord = env.NewGlobalRef(&c.Object)
 
-	midBoneMassRecordGetMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "getMass", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBoneMassRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBoneMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBoneMassRecordGetMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "getMass", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoneMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BoneMassRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BoneMassRecord$Builder: %w", err)
-	}
-	clsBoneMassRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBoneMassRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BoneMassRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBoneMassRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBoneMassRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BoneMassRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBoneMassRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BoneMassRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBoneMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BoneMassRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBoneMassRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BoneMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoneMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoneMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BoneMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSessionRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseSessionRecord: %w", err)
-	}
-	clsExerciseSessionRecord = env.NewGlobalRef(&c.Object)
-
-	midExerciseSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseSessionRecord = env.NewGlobalRef(&c.Object)
 
-	midExerciseSessionRecordGetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getExerciseType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordGetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getExerciseType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordGetPlannedExerciseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getPlannedExerciseSessionId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordGetRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getRoute", "()Landroid/health/connect/datatypes/ExerciseRoute;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordGetPlannedExerciseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getPlannedExerciseSessionId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordGetRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getRoute", "()Landroid/health/connect/datatypes/ExerciseRoute;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordHasRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "hasRoute", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseSessionRecordHasRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "hasRoute", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSessionRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseSessionRecord$Builder: %w", err)
-	}
-	clsExerciseSessionRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midExerciseSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ExerciseSessionRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseSessionRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midExerciseSessionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ExerciseSessionRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderSetPlannedExerciseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setPlannedExerciseSessionId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderSetRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setRoute", "(Landroid/health/connect/datatypes/ExerciseRoute;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderSetPlannedExerciseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setPlannedExerciseSessionId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSessionRecordBuilderSetRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setRoute", "(Landroid/health/connect/datatypes/ExerciseRoute;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/ExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSegment")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseSegment: %w", err)
-	}
-	clsExerciseSegment = env.NewGlobalRef(&c.Object)
-
-	midExerciseSegmentEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseSegment = env.NewGlobalRef(&c.Object)
 
-	midExerciseSegmentGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getEndTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSegmentEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSegmentGetRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getRepetitionsCount", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSegmentGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getEndTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSegmentGetSegmentType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getSegmentType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSegmentGetRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getRepetitionsCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSegmentGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getStartTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseSegmentGetSegmentType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getSegmentType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseSegmentHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseSegmentGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "getStartTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseSegmentHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegment)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSegment$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseSegment$Builder: %w", err)
-	}
-	clsExerciseSegmentBuilder = env.NewGlobalRef(&c.Object)
-
-	midExerciseSegmentBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentBuilder)), "build", "()Landroid/health/connect/datatypes/ExerciseSegment;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseSegmentBuilder = env.NewGlobalRef(&c.Object)
 
-	midExerciseSegmentBuilderSetRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentBuilder)), "setRepetitionsCount", "(I)Landroid/health/connect/datatypes/ExerciseSegment$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseSegmentBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentBuilder)), "build", "()Landroid/health/connect/datatypes/ExerciseSegment;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseSegmentBuilderSetRepetitionsCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseSegmentBuilder)), "setRepetitionsCount", "(I)Landroid/health/connect/datatypes/ExerciseSegment$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SkinTemperatureRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SkinTemperatureRecord: %w", err)
-	}
-	clsSkinTemperatureRecord = env.NewGlobalRef(&c.Object)
-
-	midSkinTemperatureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSkinTemperatureRecord = env.NewGlobalRef(&c.Object)
 
-	midSkinTemperatureRecordGetBaseline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "getBaseline", "()Landroid/health/connect/datatypes/units/Temperature;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "getMeasurementLocation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordGetBaseline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "getBaseline", "()Landroid/health/connect/datatypes/units/Temperature;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSkinTemperatureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "getMeasurementLocation", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSkinTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SkinTemperatureRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SkinTemperatureRecord$Builder: %w", err)
-	}
-	clsSkinTemperatureRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midSkinTemperatureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SkinTemperatureRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSkinTemperatureRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midSkinTemperatureRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SkinTemperatureRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordBuilderSetBaseline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setBaseline", "(Landroid/health/connect/datatypes/units/Temperature;)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordBuilderSetBaseline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setBaseline", "(Landroid/health/connect/datatypes/units/Temperature;)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordBuilderSetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setMeasurementLocation", "(I)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSkinTemperatureRecordBuilderSetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setMeasurementLocation", "(I)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSkinTemperatureRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SkinTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SkinTemperatureRecord$Delta")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SkinTemperatureRecord$Delta: %w", err)
-	}
-	clsSkinTemperatureRecordDelta = env.NewGlobalRef(&c.Object)
-
-	midSkinTemperatureRecordDeltaEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSkinTemperatureRecordDelta = env.NewGlobalRef(&c.Object)
 
-	midSkinTemperatureRecordDeltaGetDelta, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "getDelta", "()Landroid/health/connect/datatypes/units/TemperatureDelta;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordDeltaEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordDeltaGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSkinTemperatureRecordDeltaGetDelta, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "getDelta", "()Landroid/health/connect/datatypes/units/TemperatureDelta;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSkinTemperatureRecordDeltaHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSkinTemperatureRecordDeltaGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSkinTemperatureRecordDeltaHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSkinTemperatureRecordDelta)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.StepsRecord: %w", err)
-	}
-	clsStepsRecord = env.NewGlobalRef(&c.Object)
-
-	midStepsRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStepsRecord = env.NewGlobalRef(&c.Object)
 
-	midStepsRecordGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "getCount", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStepsRecordGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "getCount", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/StepsRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.StepsRecord$Builder: %w", err)
-	}
-	clsStepsRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midStepsRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "build", "()Landroid/health/connect/datatypes/StepsRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsStepsRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midStepsRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/StepsRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "build", "()Landroid/health/connect/datatypes/StepsRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/StepsRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/StepsRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midStepsRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/StepsRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midStepsRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midStepsRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStepsRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStepsRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/StepsRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/FloorsClimbedRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.FloorsClimbedRecord: %w", err)
-	}
-	clsFloorsClimbedRecord = env.NewGlobalRef(&c.Object)
-
-	midFloorsClimbedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFloorsClimbedRecord = env.NewGlobalRef(&c.Object)
 
-	midFloorsClimbedRecordGetFloors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "getFloors", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFloorsClimbedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFloorsClimbedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFloorsClimbedRecordGetFloors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "getFloors", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFloorsClimbedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/FloorsClimbedRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.FloorsClimbedRecord$Builder: %w", err)
-	}
-	clsFloorsClimbedRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midFloorsClimbedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/FloorsClimbedRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFloorsClimbedRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midFloorsClimbedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFloorsClimbedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/FloorsClimbedRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFloorsClimbedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFloorsClimbedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFloorsClimbedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFloorsClimbedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFloorsClimbedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFloorsClimbedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFloorsClimbedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloorsClimbedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/FloorsClimbedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/AggregationType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.AggregationType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAggregationType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsAggregationType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSegmentType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseSegmentType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExerciseSegmentType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExerciseSegmentType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/RespiratoryRateRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.RespiratoryRateRecord: %w", err)
-	}
-	clsRespiratoryRateRecord = env.NewGlobalRef(&c.Object)
-
-	midRespiratoryRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRespiratoryRateRecord = env.NewGlobalRef(&c.Object)
 
-	midRespiratoryRateRecordGetRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "getRate", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRespiratoryRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRespiratoryRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRespiratoryRateRecordGetRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "getRate", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRespiratoryRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/RespiratoryRateRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.RespiratoryRateRecord$Builder: %w", err)
-	}
-	clsRespiratoryRateRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midRespiratoryRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/RespiratoryRateRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRespiratoryRateRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midRespiratoryRateRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/RespiratoryRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRespiratoryRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/RespiratoryRateRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRespiratoryRateRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/RespiratoryRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRespiratoryRateRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/RespiratoryRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRespiratoryRateRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRespiratoryRateRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/RespiratoryRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseSessionRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PlannedExerciseSessionRecord: %w", err)
-	}
-	clsPlannedExerciseSessionRecord = env.NewGlobalRef(&c.Object)
-
-	midPlannedExerciseSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPlannedExerciseSessionRecord = env.NewGlobalRef(&c.Object)
 
-	midPlannedExerciseSessionRecordGetCompletedExerciseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getCompletedExerciseSessionId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getDuration", "()Ljava/time/Duration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordGetCompletedExerciseSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getCompletedExerciseSessionId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordGetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getExerciseType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getDuration", "()Ljava/time/Duration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordGetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getExerciseType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordGetStartDate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getStartDate", "()Ljava/time/LocalDate;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordGetStartDate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getStartDate", "()Ljava/time/LocalDate;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordHasExplicitTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "hasExplicitTime", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPlannedExerciseSessionRecordHasExplicitTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "hasExplicitTime", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseSessionRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PlannedExerciseSessionRecord$Builder: %w", err)
-	}
-	clsPlannedExerciseSessionRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midPlannedExerciseSessionRecordBuilderAddBlock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "addBlock", "(Landroid/health/connect/datatypes/PlannedExerciseBlock;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPlannedExerciseSessionRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midPlannedExerciseSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderAddBlock, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "addBlock", "(Landroid/health/connect/datatypes/PlannedExerciseBlock;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderClearBlocks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "clearBlocks", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderClearBlocks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "clearBlocks", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setEndTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderSetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setEndTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setExerciseType", "(I)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setMetadata", "(Landroid/health/connect/datatypes/Metadata;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderSetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setExerciseType", "(I)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderSetMetadata, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setMetadata", "(Landroid/health/connect/datatypes/Metadata;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setStartTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseSessionRecordBuilderSetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setStartTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPlannedExerciseSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationPeriodRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MenstruationPeriodRecord: %w", err)
-	}
-	clsMenstruationPeriodRecord = env.NewGlobalRef(&c.Object)
-
-	midMenstruationPeriodRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMenstruationPeriodRecord = env.NewGlobalRef(&c.Object)
 
-	midMenstruationPeriodRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMenstruationPeriodRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationPeriodRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MenstruationPeriodRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MenstruationPeriodRecord$Builder: %w", err)
-	}
-	clsMenstruationPeriodRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midMenstruationPeriodRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "build", "()Landroid/health/connect/datatypes/MenstruationPeriodRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMenstruationPeriodRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midMenstruationPeriodRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMenstruationPeriodRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "build", "()Landroid/health/connect/datatypes/MenstruationPeriodRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMenstruationPeriodRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMenstruationPeriodRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMenstruationPeriodRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMenstruationPeriodRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMenstruationPeriodRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMenstruationPeriodRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMenstruationPeriodRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMenstruationPeriodRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MenstruationPeriodRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Vo2MaxRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Vo2MaxRecord: %w", err)
-	}
-	clsVo2MaxRecord = env.NewGlobalRef(&c.Object)
-
-	midVo2MaxRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsVo2MaxRecord = env.NewGlobalRef(&c.Object)
 
-	midVo2MaxRecordGetMeasurementMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "getMeasurementMethod", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVo2MaxRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVo2MaxRecordGetVo2MillilitersPerMinuteKilogram, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "getVo2MillilitersPerMinuteKilogram", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVo2MaxRecordGetMeasurementMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "getMeasurementMethod", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVo2MaxRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midVo2MaxRecordGetVo2MillilitersPerMinuteKilogram, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "getVo2MillilitersPerMinuteKilogram", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVo2MaxRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Vo2MaxRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Vo2MaxRecord$Builder: %w", err)
-	}
-	clsVo2MaxRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midVo2MaxRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "build", "()Landroid/health/connect/datatypes/Vo2MaxRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsVo2MaxRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midVo2MaxRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/Vo2MaxRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midVo2MaxRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "build", "()Landroid/health/connect/datatypes/Vo2MaxRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midVo2MaxRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/Vo2MaxRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midVo2MaxRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/Vo2MaxRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVo2MaxRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVo2MaxRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/Vo2MaxRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Vo2MaxRecord$Vo2MaxMeasurementMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Vo2MaxRecord$Vo2MaxMeasurementMethod: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVo2MaxRecordVo2MaxMeasurementMethod = env.NewGlobalRef(&c.Object)
+
 	}
-	clsVo2MaxRecordVo2MaxMeasurementMethod = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyTemperatureRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyTemperatureRecord: %w", err)
-	}
-	clsBodyTemperatureRecord = env.NewGlobalRef(&c.Object)
-
-	midBodyTemperatureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBodyTemperatureRecord = env.NewGlobalRef(&c.Object)
 
-	midBodyTemperatureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "getMeasurementLocation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyTemperatureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyTemperatureRecordGetTemperature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "getTemperature", "()Landroid/health/connect/datatypes/units/Temperature;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyTemperatureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "getMeasurementLocation", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBodyTemperatureRecordGetTemperature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "getTemperature", "()Landroid/health/connect/datatypes/units/Temperature;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyTemperatureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyTemperatureRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyTemperatureRecord$Builder: %w", err)
-	}
-	clsBodyTemperatureRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBodyTemperatureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BodyTemperatureRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBodyTemperatureRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBodyTemperatureRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BodyTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyTemperatureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BodyTemperatureRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyTemperatureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyTemperatureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBodyTemperatureRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BodyTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyTemperatureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyTemperatureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyTemperatureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/FhirResource")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.FhirResource: %w", err)
-	}
-	clsFhirResource = env.NewGlobalRef(&c.Object)
-
-	midFhirResourceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFhirResource = env.NewGlobalRef(&c.Object)
 
-	midFhirResourceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "getData", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "getData", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFhirResourceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFhirResourceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResource)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/FhirResource$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.FhirResource$Builder: %w", err)
-	}
-	clsFhirResourceBuilder = env.NewGlobalRef(&c.Object)
-
-	midFhirResourceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "build", "()Landroid/health/connect/datatypes/FhirResource;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsFhirResourceBuilder = env.NewGlobalRef(&c.Object)
 
-	midFhirResourceBuilderSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "setData", "(Ljava/lang/String;)Landroid/health/connect/datatypes/FhirResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "build", "()Landroid/health/connect/datatypes/FhirResource;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceBuilderSetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "setId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/FhirResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midFhirResourceBuilderSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "setData", "(Ljava/lang/String;)Landroid/health/connect/datatypes/FhirResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midFhirResourceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/FhirResource$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midFhirResourceBuilderSetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "setId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/FhirResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFhirResourceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFhirResourceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/FhirResource$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/RestingHeartRateRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.RestingHeartRateRecord: %w", err)
-	}
-	clsRestingHeartRateRecord = env.NewGlobalRef(&c.Object)
-
-	midRestingHeartRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRestingHeartRateRecord = env.NewGlobalRef(&c.Object)
 
-	midRestingHeartRateRecordGetBeatsPerMinute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "getBeatsPerMinute", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRestingHeartRateRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRestingHeartRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRestingHeartRateRecordGetBeatsPerMinute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "getBeatsPerMinute", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRestingHeartRateRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/RestingHeartRateRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.RestingHeartRateRecord$Builder: %w", err)
-	}
-	clsRestingHeartRateRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midRestingHeartRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/RestingHeartRateRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsRestingHeartRateRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midRestingHeartRateRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/RestingHeartRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midRestingHeartRateRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "build", "()Landroid/health/connect/datatypes/RestingHeartRateRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midRestingHeartRateRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/RestingHeartRateRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midRestingHeartRateRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/RestingHeartRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRestingHeartRateRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestingHeartRateRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/RestingHeartRateRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Metadata")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Metadata: %w", err)
-	}
-	clsMetadata = env.NewGlobalRef(&c.Object)
-
-	midMetadataEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMetadata = env.NewGlobalRef(&c.Object)
 
-	midMetadataGetClientRecordId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getClientRecordId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataGetClientRecordVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getClientRecordVersion", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataGetClientRecordId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getClientRecordId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataGetDataOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getDataOrigin", "()Landroid/health/connect/datatypes/DataOrigin;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataGetClientRecordVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getClientRecordVersion", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getDevice", "()Landroid/health/connect/datatypes/Device;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataGetDataOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getDataOrigin", "()Landroid/health/connect/datatypes/DataOrigin;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getId", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataGetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getDevice", "()Landroid/health/connect/datatypes/Device;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataGetLastModifiedTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getLastModifiedTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataGetRecordingMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getRecordingMethod", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataGetLastModifiedTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getLastModifiedTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMetadataGetRecordingMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "getRecordingMethod", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMetadataHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadata)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Metadata$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Metadata$Builder: %w", err)
-	}
-	clsMetadataBuilder = env.NewGlobalRef(&c.Object)
-
-	midMetadataBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "build", "()Landroid/health/connect/datatypes/Metadata;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMetadataBuilder = env.NewGlobalRef(&c.Object)
 
-	midMetadataBuilderSetClientRecordId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setClientRecordId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "build", "()Landroid/health/connect/datatypes/Metadata;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataBuilderSetClientRecordVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setClientRecordVersion", "(J)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataBuilderSetClientRecordId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setClientRecordId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataBuilderSetDataOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setDataOrigin", "(Landroid/health/connect/datatypes/DataOrigin;)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataBuilderSetClientRecordVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setClientRecordVersion", "(J)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataBuilderSetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setDevice", "(Landroid/health/connect/datatypes/Device;)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataBuilderSetDataOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setDataOrigin", "(Landroid/health/connect/datatypes/DataOrigin;)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataBuilderSetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataBuilderSetDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setDevice", "(Landroid/health/connect/datatypes/Device;)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataBuilderSetLastModifiedTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setLastModifiedTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetadataBuilderSetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setId", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetadataBuilderSetRecordingMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setRecordingMethod", "(I)Landroid/health/connect/datatypes/Metadata$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMetadataBuilderSetLastModifiedTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setLastModifiedTime", "(Ljava/time/Instant;)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMetadataBuilderSetRecordingMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetadataBuilder)), "setRecordingMethod", "(I)Landroid/health/connect/datatypes/Metadata$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PowerRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PowerRecord: %w", err)
-	}
-	clsPowerRecord = env.NewGlobalRef(&c.Object)
-
-	midPowerRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPowerRecord = env.NewGlobalRef(&c.Object)
 
-	midPowerRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPowerRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPowerRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PowerRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PowerRecord$Builder: %w", err)
-	}
-	clsPowerRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midPowerRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "build", "()Landroid/health/connect/datatypes/PowerRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPowerRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midPowerRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/PowerRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPowerRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "build", "()Landroid/health/connect/datatypes/PowerRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPowerRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/PowerRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPowerRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/PowerRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPowerRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PowerRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPowerRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/PowerRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPowerRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PowerRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPowerRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PowerRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPowerRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/PowerRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PowerRecord$PowerRecordSample")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PowerRecord$PowerRecordSample: %w", err)
-	}
-	clsPowerRecordPowerRecordSample = env.NewGlobalRef(&c.Object)
-
-	midPowerRecordPowerRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPowerRecordPowerRecordSample = env.NewGlobalRef(&c.Object)
 
-	midPowerRecordPowerRecordSampleGetPower, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "getPower", "()Landroid/health/connect/datatypes/units/Power;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPowerRecordPowerRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPowerRecordPowerRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPowerRecordPowerRecordSampleGetPower, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "getPower", "()Landroid/health/connect/datatypes/units/Power;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPowerRecordPowerRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPowerRecordPowerRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPowerRecordPowerRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPowerRecordPowerRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyWaterMassRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyWaterMassRecord: %w", err)
-	}
-	clsBodyWaterMassRecord = env.NewGlobalRef(&c.Object)
-
-	midBodyWaterMassRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBodyWaterMassRecord = env.NewGlobalRef(&c.Object)
 
-	midBodyWaterMassRecordGetBodyWaterMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "getBodyWaterMass", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyWaterMassRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyWaterMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBodyWaterMassRecordGetBodyWaterMass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "getBodyWaterMass", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyWaterMassRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyWaterMassRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyWaterMassRecord$Builder: %w", err)
-	}
-	clsBodyWaterMassRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBodyWaterMassRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BodyWaterMassRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBodyWaterMassRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBodyWaterMassRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BodyWaterMassRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyWaterMassRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BodyWaterMassRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyWaterMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyWaterMassRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBodyWaterMassRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BodyWaterMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyWaterMassRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyWaterMassRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyWaterMassRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MindfulnessSessionRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MindfulnessSessionRecord: %w", err)
-	}
-	clsMindfulnessSessionRecord = env.NewGlobalRef(&c.Object)
-
-	midMindfulnessSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMindfulnessSessionRecord = env.NewGlobalRef(&c.Object)
 
-	midMindfulnessSessionRecordGetMindfulnessSessionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "getMindfulnessSessionType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMindfulnessSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMindfulnessSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMindfulnessSessionRecordGetMindfulnessSessionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "getMindfulnessSessionType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMindfulnessSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMindfulnessSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMindfulnessSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMindfulnessSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMindfulnessSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MindfulnessSessionRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MindfulnessSessionRecord$Builder: %w", err)
-	}
-	clsMindfulnessSessionRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midMindfulnessSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/MindfulnessSessionRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMindfulnessSessionRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midMindfulnessSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMindfulnessSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/MindfulnessSessionRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMindfulnessSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMindfulnessSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMindfulnessSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMindfulnessSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMindfulnessSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMindfulnessSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMindfulnessSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMindfulnessSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/MindfulnessSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/WheelchairPushesRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.WheelchairPushesRecord: %w", err)
-	}
-	clsWheelchairPushesRecord = env.NewGlobalRef(&c.Object)
-
-	midWheelchairPushesRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWheelchairPushesRecord = env.NewGlobalRef(&c.Object)
 
-	midWheelchairPushesRecordGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "getCount", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWheelchairPushesRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWheelchairPushesRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWheelchairPushesRecordGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "getCount", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWheelchairPushesRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/WheelchairPushesRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.WheelchairPushesRecord$Builder: %w", err)
-	}
-	clsWheelchairPushesRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midWheelchairPushesRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "build", "()Landroid/health/connect/datatypes/WheelchairPushesRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWheelchairPushesRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midWheelchairPushesRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWheelchairPushesRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "build", "()Landroid/health/connect/datatypes/WheelchairPushesRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWheelchairPushesRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWheelchairPushesRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWheelchairPushesRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWheelchairPushesRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWheelchairPushesRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWheelchairPushesRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWheelchairPushesRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWheelchairPushesRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/WheelchairPushesRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ActiveCaloriesBurnedRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ActiveCaloriesBurnedRecord: %w", err)
-	}
-	clsActiveCaloriesBurnedRecord = env.NewGlobalRef(&c.Object)
-
-	midActiveCaloriesBurnedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsActiveCaloriesBurnedRecord = env.NewGlobalRef(&c.Object)
 
-	midActiveCaloriesBurnedRecordGetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "getEnergy", "()Landroid/health/connect/datatypes/units/Energy;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midActiveCaloriesBurnedRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midActiveCaloriesBurnedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midActiveCaloriesBurnedRecordGetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "getEnergy", "()Landroid/health/connect/datatypes/units/Energy;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActiveCaloriesBurnedRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ActiveCaloriesBurnedRecord$Builder: %w", err)
-	}
-	clsActiveCaloriesBurnedRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midActiveCaloriesBurnedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsActiveCaloriesBurnedRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midActiveCaloriesBurnedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midActiveCaloriesBurnedRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "build", "()Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midActiveCaloriesBurnedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midActiveCaloriesBurnedRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midActiveCaloriesBurnedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midActiveCaloriesBurnedRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midActiveCaloriesBurnedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midActiveCaloriesBurnedRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActiveCaloriesBurnedRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveCaloriesBurnedRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/ActiveCaloriesBurnedRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/MealType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.MealType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMealType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsMealType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/InstantRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.InstantRecord: %w", err)
-	}
-	clsInstantRecord = env.NewGlobalRef(&c.Object)
-
-	midInstantRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsInstantRecord = env.NewGlobalRef(&c.Object)
 
-	midInstantRecordGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midInstantRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midInstantRecordGetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "getZoneOffset", "()Ljava/time/ZoneOffset;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midInstantRecordGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midInstantRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midInstantRecordGetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "getZoneOffset", "()Ljava/time/ZoneOffset;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInstantRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstantRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CyclingPedalingCadenceRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CyclingPedalingCadenceRecord: %w", err)
-	}
-	clsCyclingPedalingCadenceRecord = env.NewGlobalRef(&c.Object)
-
-	midCyclingPedalingCadenceRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCyclingPedalingCadenceRecord = env.NewGlobalRef(&c.Object)
 
-	midCyclingPedalingCadenceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCyclingPedalingCadenceRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCyclingPedalingCadenceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CyclingPedalingCadenceRecord$Builder: %w", err)
-	}
-	clsCyclingPedalingCadenceRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midCyclingPedalingCadenceRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "build", "()Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCyclingPedalingCadenceRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midCyclingPedalingCadenceRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCyclingPedalingCadenceRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "build", "()Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCyclingPedalingCadenceRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCyclingPedalingCadenceRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCyclingPedalingCadenceRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCyclingPedalingCadenceRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCyclingPedalingCadenceRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCyclingPedalingCadenceRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCyclingPedalingCadenceRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/CyclingPedalingCadenceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/CyclingPedalingCadenceRecord$CyclingPedalingCadenceRecordSample")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.CyclingPedalingCadenceRecord$CyclingPedalingCadenceRecordSample: %w", err)
-	}
-	clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample = env.NewGlobalRef(&c.Object)
-
-	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample = env.NewGlobalRef(&c.Object)
 
-	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleGetRevolutionsPerMinute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "getRevolutionsPerMinute", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "getTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleGetRevolutionsPerMinute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "getRevolutionsPerMinute", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSampleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCyclingPedalingCadenceRecordCyclingPedalingCadenceRecordSample)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyFatRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyFatRecord: %w", err)
-	}
-	clsBodyFatRecord = env.NewGlobalRef(&c.Object)
-
-	midBodyFatRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBodyFatRecord = env.NewGlobalRef(&c.Object)
 
-	midBodyFatRecordGetPercentage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "getPercentage", "()Landroid/health/connect/datatypes/units/Percentage;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyFatRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyFatRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBodyFatRecordGetPercentage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "getPercentage", "()Landroid/health/connect/datatypes/units/Percentage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyFatRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BodyFatRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BodyFatRecord$Builder: %w", err)
-	}
-	clsBodyFatRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBodyFatRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BodyFatRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBodyFatRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBodyFatRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BodyFatRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBodyFatRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BodyFatRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBodyFatRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyFatRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBodyFatRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BodyFatRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBodyFatRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBodyFatRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BodyFatRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SleepSessionRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SleepSessionRecord: %w", err)
-	}
-	clsSleepSessionRecord = env.NewGlobalRef(&c.Object)
-
-	midSleepSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSleepSessionRecord = env.NewGlobalRef(&c.Object)
 
-	midSleepSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordGetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "getNotes", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSleepSessionRecordGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSleepSessionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SleepSessionRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SleepSessionRecord$Builder: %w", err)
-	}
-	clsSleepSessionRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midSleepSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SleepSessionRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSleepSessionRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midSleepSessionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/SleepSessionRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordBuilderSetNotes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setNotes", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSleepSessionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSleepSessionRecordBuilderSetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordBuilder)), "setTitle", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/SleepSessionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SleepSessionRecord$Stage")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SleepSessionRecord$Stage: %w", err)
-	}
-	clsSleepSessionRecordStage = env.NewGlobalRef(&c.Object)
-
-	midSleepSessionRecordStageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSleepSessionRecordStage = env.NewGlobalRef(&c.Object)
 
-	midSleepSessionRecordStageGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "getEndTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordStageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordStageGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "getStartTime", "()Ljava/time/Instant;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordStageGetEndTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "getEndTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordStageGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSleepSessionRecordStageGetStartTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "getStartTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSleepSessionRecordStageHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSleepSessionRecordStageGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSleepSessionRecordStageHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSleepSessionRecordStage)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/SleepSessionRecord$StageType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.SleepSessionRecord$StageType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSleepSessionRecordStageType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsSleepSessionRecordStageType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseSessionType")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseSessionType: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExerciseSessionType = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExerciseSessionType = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateVariabilityRmssdRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeartRateVariabilityRmssdRecord: %w", err)
-	}
-	clsHeartRateVariabilityRmssdRecord = env.NewGlobalRef(&c.Object)
-
-	midHeartRateVariabilityRmssdRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeartRateVariabilityRmssdRecord = env.NewGlobalRef(&c.Object)
 
-	midHeartRateVariabilityRmssdRecordGetHeartRateVariabilityMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "getHeartRateVariabilityMillis", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateVariabilityRmssdRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateVariabilityRmssdRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeartRateVariabilityRmssdRecordGetHeartRateVariabilityMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "getHeartRateVariabilityMillis", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateVariabilityRmssdRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HeartRateVariabilityRmssdRecord$Builder: %w", err)
-	}
-	clsHeartRateVariabilityRmssdRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midHeartRateVariabilityRmssdRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHeartRateVariabilityRmssdRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midHeartRateVariabilityRmssdRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHeartRateVariabilityRmssdRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHeartRateVariabilityRmssdRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHeartRateVariabilityRmssdRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHeartRateVariabilityRmssdRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHeartRateVariabilityRmssdRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HeartRateVariabilityRmssdRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/NutritionRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.NutritionRecord: %w", err)
-	}
-	clsNutritionRecord = env.NewGlobalRef(&c.Object)
-
-	midNutritionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsNutritionRecord = env.NewGlobalRef(&c.Object)
 
-	midNutritionRecordGetBiotin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getBiotin", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetCaffeine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCaffeine", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetBiotin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getBiotin", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetCalcium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCalcium", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetCaffeine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCaffeine", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetChloride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getChloride", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetCalcium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCalcium", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetCholesterol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCholesterol", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetChloride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getChloride", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetChromium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getChromium", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetCholesterol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCholesterol", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetCopper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCopper", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetChromium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getChromium", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetDietaryFiber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getDietaryFiber", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetCopper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getCopper", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getEnergy", "()Landroid/health/connect/datatypes/units/Energy;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetDietaryFiber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getDietaryFiber", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetEnergyFromFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getEnergyFromFat", "()Landroid/health/connect/datatypes/units/Energy;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getEnergy", "()Landroid/health/connect/datatypes/units/Energy;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetFolate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getFolate", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetEnergyFromFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getEnergyFromFat", "()Landroid/health/connect/datatypes/units/Energy;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetFolicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getFolicAcid", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetFolate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getFolate", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetIodine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getIodine", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetFolicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getFolicAcid", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetIron, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getIron", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetIodine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getIodine", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetMagnesium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMagnesium", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetIron, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getIron", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetManganese, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getManganese", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetMagnesium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMagnesium", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetMealName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMealName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetManganese, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getManganese", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetMealType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMealType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetMealName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMealName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetMolybdenum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMolybdenum", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetMealType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMealType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetMonounsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMonounsaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetMolybdenum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMolybdenum", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetNiacin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getNiacin", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetMonounsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getMonounsaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetPantothenicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPantothenicAcid", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetNiacin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getNiacin", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetPhosphorus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPhosphorus", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetPantothenicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPantothenicAcid", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetPolyunsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPolyunsaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetPhosphorus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPhosphorus", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetPotassium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPotassium", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetPolyunsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPolyunsaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetProtein, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getProtein", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetPotassium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getPotassium", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetRiboflavin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getRiboflavin", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetProtein, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getProtein", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetSaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetRiboflavin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getRiboflavin", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetSelenium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSelenium", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetSaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetSodium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSodium", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetSelenium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSelenium", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetSugar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSugar", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetSodium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSodium", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetThiamin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getThiamin", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetSugar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getSugar", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetTotalCarbohydrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getTotalCarbohydrate", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetThiamin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getThiamin", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetTotalFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getTotalFat", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetTotalCarbohydrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getTotalCarbohydrate", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetTransFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getTransFat", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetTotalFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getTotalFat", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetUnsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getUnsaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetTransFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getTransFat", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminA, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminA", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetUnsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getUnsaturatedFat", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminB12, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminB12", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminA, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminA", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminB6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminB6", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminB12, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminB12", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminC", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminB6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminB6", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminD", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminC", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminE, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminE", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminD", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetVitaminK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminK", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminE, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminE", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordGetZinc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getZinc", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordGetVitaminK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getVitaminK", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midNutritionRecordGetZinc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "getZinc", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNutritionRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/NutritionRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.NutritionRecord$Builder: %w", err)
-	}
-	clsNutritionRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midNutritionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/NutritionRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsNutritionRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midNutritionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "build", "()Landroid/health/connect/datatypes/NutritionRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetBiotin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setBiotin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetCaffeine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCaffeine", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetBiotin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setBiotin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetCalcium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCalcium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetCaffeine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCaffeine", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetChloride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setChloride", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetCalcium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCalcium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetCholesterol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCholesterol", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetChloride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setChloride", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetChromium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setChromium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetCholesterol, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCholesterol", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetCopper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCopper", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetChromium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setChromium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetDietaryFiber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setDietaryFiber", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetCopper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setCopper", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetDietaryFiber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setDietaryFiber", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setEnergy", "(Landroid/health/connect/datatypes/units/Energy;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetEnergyFromFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setEnergyFromFat", "(Landroid/health/connect/datatypes/units/Energy;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetEnergy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setEnergy", "(Landroid/health/connect/datatypes/units/Energy;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetFolate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setFolate", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetEnergyFromFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setEnergyFromFat", "(Landroid/health/connect/datatypes/units/Energy;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetFolicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setFolicAcid", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetFolate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setFolate", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetIodine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setIodine", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetFolicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setFolicAcid", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetIron, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setIron", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetIodine, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setIodine", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetMagnesium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMagnesium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetIron, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setIron", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetManganese, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setManganese", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetMagnesium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMagnesium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetMealName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMealName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetManganese, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setManganese", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetMealType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMealType", "(I)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetMealName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMealName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetMolybdenum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMolybdenum", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetMealType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMealType", "(I)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetMonounsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMonounsaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetMolybdenum, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMolybdenum", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetNiacin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setNiacin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetMonounsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setMonounsaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetPantothenicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPantothenicAcid", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetNiacin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setNiacin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetPhosphorus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPhosphorus", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetPantothenicAcid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPantothenicAcid", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetPolyunsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPolyunsaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetPhosphorus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPhosphorus", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetPotassium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPotassium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetPolyunsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPolyunsaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetProtein, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setProtein", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetPotassium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setPotassium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetRiboflavin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setRiboflavin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetProtein, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setProtein", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetSaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetRiboflavin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setRiboflavin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetSelenium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSelenium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetSaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetSodium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSodium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetSelenium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSelenium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetSodium, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSodium", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetSugar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSugar", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetThiamin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setThiamin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetSugar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setSugar", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetTotalCarbohydrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setTotalCarbohydrate", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetThiamin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setThiamin", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetTotalFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setTotalFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetTotalCarbohydrate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setTotalCarbohydrate", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetTransFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setTransFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetTotalFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setTotalFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetUnsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setUnsaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetTransFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setTransFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminA, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminA", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetUnsaturatedFat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setUnsaturatedFat", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminB12, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminB12", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetVitaminA, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminA", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminB6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminB6", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetVitaminB12, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminB12", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminC", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetVitaminB6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminB6", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminD", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetVitaminC, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminC", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminE, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminE", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetVitaminD, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminD", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetVitaminK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminK", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midNutritionRecordBuilderSetVitaminE, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminE", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midNutritionRecordBuilderSetZinc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setZinc", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midNutritionRecordBuilderSetVitaminK, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setVitaminK", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNutritionRecordBuilderSetZinc, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNutritionRecordBuilder)), "setZinc", "(Landroid/health/connect/datatypes/units/Mass;)Landroid/health/connect/datatypes/NutritionRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseStep")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PlannedExerciseStep: %w", err)
-	}
-	clsPlannedExerciseStep = env.NewGlobalRef(&c.Object)
-
-	midPlannedExerciseStepEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPlannedExerciseStep = env.NewGlobalRef(&c.Object)
 
-	midPlannedExerciseStepGetCompletionGoal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getCompletionGoal", "()Landroid/health/connect/datatypes/ExerciseCompletionGoal;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getDescription", "()Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepGetCompletionGoal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getCompletionGoal", "()Landroid/health/connect/datatypes/ExerciseCompletionGoal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepGetExerciseCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getExerciseCategory", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepGetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getExerciseType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepGetExerciseCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getExerciseCategory", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPlannedExerciseStepGetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "getExerciseType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseStepHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStep)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/PlannedExerciseStep$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.PlannedExerciseStep$Builder: %w", err)
-	}
-	clsPlannedExerciseStepBuilder = env.NewGlobalRef(&c.Object)
-
-	midPlannedExerciseStepBuilderAddPerformanceGoal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "addPerformanceGoal", "(Landroid/health/connect/datatypes/ExercisePerformanceGoal;)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPlannedExerciseStepBuilder = env.NewGlobalRef(&c.Object)
 
-	midPlannedExerciseStepBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "build", "()Landroid/health/connect/datatypes/PlannedExerciseStep;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepBuilderAddPerformanceGoal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "addPerformanceGoal", "(Landroid/health/connect/datatypes/ExercisePerformanceGoal;)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepBuilderClearPerformanceGoals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "clearPerformanceGoals", "()Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "build", "()Landroid/health/connect/datatypes/PlannedExerciseStep;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepBuilderSetCompletionGoal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setCompletionGoal", "(Landroid/health/connect/datatypes/ExerciseCompletionGoal;)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepBuilderClearPerformanceGoals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "clearPerformanceGoals", "()Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepBuilderSetCompletionGoal, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setCompletionGoal", "(Landroid/health/connect/datatypes/ExerciseCompletionGoal;)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepBuilderSetExerciseCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setExerciseCategory", "(I)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPlannedExerciseStepBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setDescription", "(Ljava/lang/CharSequence;)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPlannedExerciseStepBuilderSetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setExerciseType", "(I)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPlannedExerciseStepBuilderSetExerciseCategory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setExerciseCategory", "(I)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPlannedExerciseStepBuilderSetExerciseType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPlannedExerciseStepBuilder)), "setExerciseType", "(I)Landroid/health/connect/datatypes/PlannedExerciseStep$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/DataOrigin")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.DataOrigin: %w", err)
-	}
-	clsDataOrigin = env.NewGlobalRef(&c.Object)
-
-	midDataOriginEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDataOrigin = env.NewGlobalRef(&c.Object)
 
-	midDataOriginGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "getPackageName", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDataOriginEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDataOriginHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDataOriginGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataOriginHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOrigin)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/DataOrigin$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.DataOrigin$Builder: %w", err)
-	}
-	clsDataOriginBuilder = env.NewGlobalRef(&c.Object)
-
-	midDataOriginBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOriginBuilder)), "build", "()Landroid/health/connect/datatypes/DataOrigin;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDataOriginBuilder = env.NewGlobalRef(&c.Object)
 
-	midDataOriginBuilderSetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOriginBuilder)), "setPackageName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/DataOrigin$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDataOriginBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOriginBuilder)), "build", "()Landroid/health/connect/datatypes/DataOrigin;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataOriginBuilderSetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOriginBuilder)), "setPackageName", "(Ljava/lang/String;)Landroid/health/connect/datatypes/DataOrigin$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodPressureRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodPressureRecord: %w", err)
-	}
-	clsBloodPressureRecord = env.NewGlobalRef(&c.Object)
-
-	midBloodPressureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBloodPressureRecord = env.NewGlobalRef(&c.Object)
 
-	midBloodPressureRecordGetBodyPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getBodyPosition", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodPressureRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodPressureRecordGetDiastolic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getDiastolic", "()Landroid/health/connect/datatypes/units/Pressure;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodPressureRecordGetBodyPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getBodyPosition", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodPressureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getMeasurementLocation", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodPressureRecordGetDiastolic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getDiastolic", "()Landroid/health/connect/datatypes/units/Pressure;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodPressureRecordGetSystolic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getSystolic", "()Landroid/health/connect/datatypes/units/Pressure;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodPressureRecordGetMeasurementLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getMeasurementLocation", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodPressureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBloodPressureRecordGetSystolic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "getSystolic", "()Landroid/health/connect/datatypes/units/Pressure;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBloodPressureRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodPressureRecord$BloodPressureMeasurementLocation")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodPressureRecord$BloodPressureMeasurementLocation: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBloodPressureRecordBloodPressureMeasurementLocation = env.NewGlobalRef(&c.Object)
+
 	}
-	clsBloodPressureRecordBloodPressureMeasurementLocation = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodPressureRecord$BodyPosition")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodPressureRecord$BodyPosition: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBloodPressureRecordBodyPosition = env.NewGlobalRef(&c.Object)
+
 	}
-	clsBloodPressureRecordBodyPosition = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/BloodPressureRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.BloodPressureRecord$Builder: %w", err)
-	}
-	clsBloodPressureRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midBloodPressureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BloodPressureRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBloodPressureRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midBloodPressureRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BloodPressureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBloodPressureRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "build", "()Landroid/health/connect/datatypes/BloodPressureRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBloodPressureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BloodPressureRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBloodPressureRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/BloodPressureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBloodPressureRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodPressureRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/BloodPressureRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HydrationRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HydrationRecord: %w", err)
-	}
-	clsHydrationRecord = env.NewGlobalRef(&c.Object)
-
-	midHydrationRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHydrationRecord = env.NewGlobalRef(&c.Object)
 
-	midHydrationRecordGetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "getVolume", "()Landroid/health/connect/datatypes/units/Volume;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHydrationRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHydrationRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHydrationRecordGetVolume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "getVolume", "()Landroid/health/connect/datatypes/units/Volume;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHydrationRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/HydrationRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.HydrationRecord$Builder: %w", err)
-	}
-	clsHydrationRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midHydrationRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HydrationRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsHydrationRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midHydrationRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/HydrationRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHydrationRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "build", "()Landroid/health/connect/datatypes/HydrationRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHydrationRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/HydrationRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHydrationRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/HydrationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHydrationRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HydrationRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midHydrationRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/HydrationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midHydrationRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HydrationRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midHydrationRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HydrationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHydrationRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHydrationRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/HydrationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OxygenSaturationRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.OxygenSaturationRecord: %w", err)
-	}
-	clsOxygenSaturationRecord = env.NewGlobalRef(&c.Object)
-
-	midOxygenSaturationRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsOxygenSaturationRecord = env.NewGlobalRef(&c.Object)
 
-	midOxygenSaturationRecordGetPercentage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "getPercentage", "()Landroid/health/connect/datatypes/units/Percentage;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOxygenSaturationRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOxygenSaturationRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midOxygenSaturationRecordGetPercentage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "getPercentage", "()Landroid/health/connect/datatypes/units/Percentage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOxygenSaturationRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/OxygenSaturationRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.OxygenSaturationRecord$Builder: %w", err)
-	}
-	clsOxygenSaturationRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midOxygenSaturationRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "build", "()Landroid/health/connect/datatypes/OxygenSaturationRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsOxygenSaturationRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midOxygenSaturationRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/OxygenSaturationRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOxygenSaturationRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "build", "()Landroid/health/connect/datatypes/OxygenSaturationRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOxygenSaturationRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/OxygenSaturationRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midOxygenSaturationRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/OxygenSaturationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOxygenSaturationRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOxygenSaturationRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/OxygenSaturationRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Device")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Device: %w", err)
-	}
-	clsDevice = env.NewGlobalRef(&c.Object)
-
-	midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDevice = env.NewGlobalRef(&c.Object)
 
-	midDeviceGetManufacturer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getManufacturer", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetModel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getModel", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetManufacturer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getManufacturer", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceGetModel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getModel", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/Device$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.Device$Builder: %w", err)
-	}
-	clsDeviceBuilder = env.NewGlobalRef(&c.Object)
-
-	midDeviceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "build", "()Landroid/health/connect/datatypes/Device;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDeviceBuilder = env.NewGlobalRef(&c.Object)
 
-	midDeviceBuilderSetManufacturer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setManufacturer", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Device$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "build", "()Landroid/health/connect/datatypes/Device;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceBuilderSetModel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setModel", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Device$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDeviceBuilderSetManufacturer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setManufacturer", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Device$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDeviceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/Device$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDeviceBuilderSetModel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setModel", "(Ljava/lang/String;)Landroid/health/connect/datatypes/Device$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setType", "(I)Landroid/health/connect/datatypes/Device$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/WeightRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.WeightRecord: %w", err)
-	}
-	clsWeightRecord = env.NewGlobalRef(&c.Object)
-
-	midWeightRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWeightRecord = env.NewGlobalRef(&c.Object)
 
-	midWeightRecordGetWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "getWeight", "()Landroid/health/connect/datatypes/units/Mass;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWeightRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWeightRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWeightRecordGetWeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "getWeight", "()Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWeightRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/WeightRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.WeightRecord$Builder: %w", err)
-	}
-	clsWeightRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midWeightRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "build", "()Landroid/health/connect/datatypes/WeightRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsWeightRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midWeightRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/WeightRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midWeightRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "build", "()Landroid/health/connect/datatypes/WeightRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midWeightRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/WeightRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midWeightRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/WeightRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWeightRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWeightRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/WeightRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/IntermenstrualBleedingRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.IntermenstrualBleedingRecord: %w", err)
-	}
-	clsIntermenstrualBleedingRecord = env.NewGlobalRef(&c.Object)
-
-	midIntermenstrualBleedingRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsIntermenstrualBleedingRecord = env.NewGlobalRef(&c.Object)
 
-	midIntermenstrualBleedingRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midIntermenstrualBleedingRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntermenstrualBleedingRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/IntermenstrualBleedingRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.IntermenstrualBleedingRecord$Builder: %w", err)
-	}
-	clsIntermenstrualBleedingRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midIntermenstrualBleedingRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "build", "()Landroid/health/connect/datatypes/IntermenstrualBleedingRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsIntermenstrualBleedingRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midIntermenstrualBleedingRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/IntermenstrualBleedingRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midIntermenstrualBleedingRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "build", "()Landroid/health/connect/datatypes/IntermenstrualBleedingRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midIntermenstrualBleedingRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/IntermenstrualBleedingRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midIntermenstrualBleedingRecordBuilderClearZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "clearZoneOffset", "()Landroid/health/connect/datatypes/IntermenstrualBleedingRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntermenstrualBleedingRecordBuilderSetZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntermenstrualBleedingRecordBuilder)), "setZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/IntermenstrualBleedingRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExerciseCompletionGoal = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExerciseCompletionGoal = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$ActiveCaloriesBurnedGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$ActiveCaloriesBurnedGoal: %w", err)
-	}
-	clsExerciseCompletionGoalActiveCaloriesBurnedGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalActiveCaloriesBurnedGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalActiveCaloriesBurnedGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalActiveCaloriesBurnedGoalGetActiveCalories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "getActiveCalories", "()Landroid/health/connect/datatypes/units/Energy;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalActiveCaloriesBurnedGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalActiveCaloriesBurnedGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalActiveCaloriesBurnedGoalGetActiveCalories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "getActiveCalories", "()Landroid/health/connect/datatypes/units/Energy;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalActiveCaloriesBurnedGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalActiveCaloriesBurnedGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$DistanceGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$DistanceGoal: %w", err)
-	}
-	clsExerciseCompletionGoalDistanceGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalDistanceGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalDistanceGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalDistanceGoalGetDistance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "getDistance", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalDistanceGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalDistanceGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalDistanceGoalGetDistance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "getDistance", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalDistanceGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$DistanceWithVariableRestGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$DistanceWithVariableRestGoal: %w", err)
-	}
-	clsExerciseCompletionGoalDistanceWithVariableRestGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalDistanceWithVariableRestGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalDistanceWithVariableRestGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalDistanceWithVariableRestGoalGetDistance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "getDistance", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalDistanceWithVariableRestGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalDistanceWithVariableRestGoalGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "getDuration", "()Ljava/time/Duration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalDistanceWithVariableRestGoalGetDistance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "getDistance", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalDistanceWithVariableRestGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalDistanceWithVariableRestGoalGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "getDuration", "()Ljava/time/Duration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalDistanceWithVariableRestGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDistanceWithVariableRestGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$DurationGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$DurationGoal: %w", err)
-	}
-	clsExerciseCompletionGoalDurationGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalDurationGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalDurationGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalDurationGoalGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "getDuration", "()Ljava/time/Duration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalDurationGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalDurationGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalDurationGoalGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "getDuration", "()Ljava/time/Duration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalDurationGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalDurationGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$RepetitionsGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$RepetitionsGoal: %w", err)
-	}
-	clsExerciseCompletionGoalRepetitionsGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalRepetitionsGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalRepetitionsGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalRepetitionsGoalGetRepetitions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "getRepetitions", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalRepetitionsGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalRepetitionsGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalRepetitionsGoalGetRepetitions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "getRepetitions", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalRepetitionsGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalRepetitionsGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$StepsGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$StepsGoal: %w", err)
-	}
-	clsExerciseCompletionGoalStepsGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalStepsGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalStepsGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalStepsGoalGetSteps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "getSteps", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalStepsGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalStepsGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalStepsGoalGetSteps, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "getSteps", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalStepsGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalStepsGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$TotalCaloriesBurnedGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$TotalCaloriesBurnedGoal: %w", err)
-	}
-	clsExerciseCompletionGoalTotalCaloriesBurnedGoal = env.NewGlobalRef(&c.Object)
-
-	midExerciseCompletionGoalTotalCaloriesBurnedGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsExerciseCompletionGoalTotalCaloriesBurnedGoal = env.NewGlobalRef(&c.Object)
 
-	midExerciseCompletionGoalTotalCaloriesBurnedGoalGetTotalCalories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "getTotalCalories", "()Landroid/health/connect/datatypes/units/Energy;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midExerciseCompletionGoalTotalCaloriesBurnedGoalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midExerciseCompletionGoalTotalCaloriesBurnedGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midExerciseCompletionGoalTotalCaloriesBurnedGoalGetTotalCalories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "getTotalCalories", "()Landroid/health/connect/datatypes/units/Energy;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExerciseCompletionGoalTotalCaloriesBurnedGoalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExerciseCompletionGoalTotalCaloriesBurnedGoal)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$UnknownGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$UnknownGoal: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExerciseCompletionGoalUnknownGoal = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExerciseCompletionGoalUnknownGoal = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/ExerciseCompletionGoal$UnspecifiedGoal")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.ExerciseCompletionGoal$UnspecifiedGoal: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExerciseCompletionGoalUnspecifiedGoal = env.NewGlobalRef(&c.Object)
+
 	}
-	clsExerciseCompletionGoalUnspecifiedGoal = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/health/connect/datatypes/DistanceRecord")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.DistanceRecord: %w", err)
-	}
-	clsDistanceRecord = env.NewGlobalRef(&c.Object)
-
-	midDistanceRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDistanceRecord = env.NewGlobalRef(&c.Object)
 
-	midDistanceRecordGetDistance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "getDistance", "()Landroid/health/connect/datatypes/units/Length;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDistanceRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDistanceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDistanceRecordGetDistance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "getDistance", "()Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDistanceRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/health/connect/datatypes/DistanceRecord$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.health.connect.datatypes.DistanceRecord$Builder: %w", err)
-	}
-	clsDistanceRecordBuilder = env.NewGlobalRef(&c.Object)
-
-	midDistanceRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "build", "()Landroid/health/connect/datatypes/DistanceRecord;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDistanceRecordBuilder = env.NewGlobalRef(&c.Object)
 
-	midDistanceRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/DistanceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDistanceRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "build", "()Landroid/health/connect/datatypes/DistanceRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDistanceRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/DistanceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDistanceRecordBuilderClearEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "clearEndZoneOffset", "()Landroid/health/connect/datatypes/DistanceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDistanceRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/DistanceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDistanceRecordBuilderClearStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "clearStartZoneOffset", "()Landroid/health/connect/datatypes/DistanceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDistanceRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/DistanceRecord$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDistanceRecordBuilderSetEndZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "setEndZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/DistanceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDistanceRecordBuilderSetStartZoneOffset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDistanceRecordBuilder)), "setStartZoneOffset", "(Ljava/time/ZoneOffset;)Landroid/health/connect/datatypes/DistanceRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

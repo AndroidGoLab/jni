@@ -79,231 +79,239 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/service/wallpaper/WallpaperService")
 	if err != nil {
-		return fmt.Errorf("find class android.service.wallpaper.WallpaperService: %w", err)
-	}
-	clsService = env.NewGlobalRef(&c.Object)
-
-	midServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsService = env.NewGlobalRef(&c.Object)
 
-	midServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onCreate", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceOnCreateEngine0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onCreateEngine", "()Landroid/service/wallpaper/WallpaperService$Engine;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceOnCreateEngine1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onCreateEngine", "(Landroid/app/wallpaper/WallpaperDescription;)Landroid/service/wallpaper/WallpaperService$Engine;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceOnCreateEngine0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onCreateEngine", "()Landroid/service/wallpaper/WallpaperService$Engine;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onDestroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midServiceOnCreateEngine1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onCreateEngine", "(Landroid/app/wallpaper/WallpaperDescription;)Landroid/service/wallpaper/WallpaperService$Engine;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/service/wallpaper/WallpaperService$Engine")
 	if err != nil {
-		return fmt.Errorf("find class android.service.wallpaper.WallpaperService$Engine: %w", err)
-	}
-	clsServiceEngine = env.NewGlobalRef(&c.Object)
-
-	midServiceEngineGetDesiredMinimumHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getDesiredMinimumHeight", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsServiceEngine = env.NewGlobalRef(&c.Object)
 
-	midServiceEngineGetDesiredMinimumWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getDesiredMinimumWidth", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineGetDesiredMinimumHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getDesiredMinimumHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineGetDisplayContext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getDisplayContext", "()Landroid/content/Context;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineGetDesiredMinimumWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getDesiredMinimumWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineGetSurfaceHolder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getSurfaceHolder", "()Landroid/view/SurfaceHolder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineGetDisplayContext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getDisplayContext", "()Landroid/content/Context;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineGetWallpaperFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getWallpaperFlags", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineGetSurfaceHolder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getSurfaceHolder", "()Landroid/view/SurfaceHolder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineIsPreview, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "isPreview", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineGetWallpaperFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "getWallpaperFlags", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineIsVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "isVisible", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineIsPreview, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "isPreview", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineNotifyColorsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "notifyColorsChanged", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineIsVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "isVisible", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnApplyWallpaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onApplyWallpaper", "(I)Landroid/app/wallpaper/WallpaperDescription;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineNotifyColorsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "notifyColorsChanged", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnApplyWindowInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onApplyWindowInsets", "(Landroid/view/WindowInsets;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnApplyWallpaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onApplyWallpaper", "(I)Landroid/app/wallpaper/WallpaperDescription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onCommand", "(Ljava/lang/String;IIILandroid/os/Bundle;Z)Landroid/os/Bundle;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnApplyWindowInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onApplyWindowInsets", "(Landroid/view/WindowInsets;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnComputeColors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onComputeColors", "()Landroid/app/WallpaperColors;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onCommand", "(Ljava/lang/String;IIILandroid/os/Bundle;Z)Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onCreate", "(Landroid/view/SurfaceHolder;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnComputeColors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onComputeColors", "()Landroid/app/WallpaperColors;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnDesiredSizeChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onDesiredSizeChanged", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onCreate", "(Landroid/view/SurfaceHolder;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onDestroy", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnDesiredSizeChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onDesiredSizeChanged", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnOffsetsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onOffsetsChanged", "(FFFFII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnSurfaceChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceChanged", "(Landroid/view/SurfaceHolder;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnOffsetsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onOffsetsChanged", "(FFFFII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnSurfaceCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceCreated", "(Landroid/view/SurfaceHolder;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnSurfaceChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceChanged", "(Landroid/view/SurfaceHolder;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnSurfaceDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceDestroyed", "(Landroid/view/SurfaceHolder;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnSurfaceCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceCreated", "(Landroid/view/SurfaceHolder;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnSurfaceRedrawNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceRedrawNeeded", "(Landroid/view/SurfaceHolder;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnSurfaceDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceDestroyed", "(Landroid/view/SurfaceHolder;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onTouchEvent", "(Landroid/view/MotionEvent;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnSurfaceRedrawNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onSurfaceRedrawNeeded", "(Landroid/view/SurfaceHolder;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnVisibilityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onVisibilityChanged", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onTouchEvent", "(Landroid/view/MotionEvent;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnWallpaperFlagsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onWallpaperFlagsChanged", "(I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnVisibilityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onVisibilityChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineOnZoomChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onZoomChanged", "(F)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnWallpaperFlagsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onWallpaperFlagsChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineSetOffsetNotificationsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "setOffsetNotificationsEnabled", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceEngineOnZoomChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "onZoomChanged", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceEngineSetTouchEventsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "setTouchEventsEnabled", "(Z)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midServiceEngineSetOffsetNotificationsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "setOffsetNotificationsEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceEngineSetTouchEventsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceEngine)), "setTouchEventsEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

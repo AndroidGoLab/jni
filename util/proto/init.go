@@ -68,162 +68,166 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/util/proto/ProtoOutputStream")
 	if err != nil {
-		return fmt.Errorf("find class android.util.proto.ProtoOutputStream: %w", err)
-	}
-	clsOutputStream = env.NewGlobalRef(&c.Object)
-
-	midOutputStreamDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "dump", "(Ljava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsOutputStream = env.NewGlobalRef(&c.Object)
 
-	midOutputStreamEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "end", "(J)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamDump, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "dump", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "flush", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "end", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamGetBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getBytes", "()[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamFlush, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "flush", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamGetRawSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getRawSize", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamGetBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getBytes", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "start", "(J)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamGetRawSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getRawSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JZ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "start", "(J)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(J[B)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JD)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(J[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JF)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JD)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JI)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JLjava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2_4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWrite2_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2_5, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JLjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamWriteTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "writeTag", "(II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWrite2_6, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "write", "(JJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamCheckFieldId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "checkFieldId", "(JJ)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamWriteTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "writeTag", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamGetFieldCountString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getFieldCountString", "(J)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamCheckFieldId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "checkFieldId", "(JJ)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamGetFieldIdString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getFieldIdString", "(J)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamGetFieldCountString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getFieldCountString", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamGetFieldTypeString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getFieldTypeString", "(J)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamGetFieldIdString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getFieldIdString", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamGetWireTypeString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getWireTypeString", "(I)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamGetFieldTypeString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getFieldTypeString", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamMakeFieldId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "makeFieldId", "(IJ)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamGetWireTypeString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "getWireTypeString", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamMakeToken, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "makeToken", "(IZIII)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midOutputStreamMakeFieldId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "makeFieldId", "(IJ)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midOutputStreamToken2String, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "token2String", "(J)Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midOutputStreamMakeToken, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "makeToken", "(IZIII)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOutputStreamToken2String, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "token2String", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

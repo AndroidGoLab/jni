@@ -243,1131 +243,1263 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionOutcome")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionOutcome: %w", err)
-	}
-	clsAdSelectionOutcome = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionOutcomeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionOutcome = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionOutcomeGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "getAdSelectionId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionOutcomeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionOutcomeGetRenderUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "getRenderUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionOutcomeGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionOutcomeGetWinningSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "getWinningSeller", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionOutcomeGetRenderUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "getRenderUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionOutcomeHasOutcome, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "hasOutcome", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionOutcomeGetWinningSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "getWinningSeller", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionOutcomeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionOutcomeHasOutcome, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "hasOutcome", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionOutcomeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcome)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionOutcome$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionOutcome$Builder: %w", err)
-	}
-	clsAdSelectionOutcomeBuilder = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionOutcomeBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "build", "()Landroid/adservices/adselection/AdSelectionOutcome;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionOutcomeBuilder = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionOutcomeBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/AdSelectionOutcome$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionOutcomeBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "build", "()Landroid/adservices/adselection/AdSelectionOutcome;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionOutcomeBuilderSetRenderUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "setRenderUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionOutcome$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionOutcomeBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/AdSelectionOutcome$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionOutcomeBuilderSetRenderUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionOutcomeBuilder)), "setRenderUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionOutcome$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/PersistAdSelectionResultRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.PersistAdSelectionResultRequest: %w", err)
-	}
-	clsPersistAdSelectionResultRequest = env.NewGlobalRef(&c.Object)
-
-	midPersistAdSelectionResultRequestGetAdSelectionDataId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getAdSelectionDataId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPersistAdSelectionResultRequest = env.NewGlobalRef(&c.Object)
 
-	midPersistAdSelectionResultRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getAdSelectionId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPersistAdSelectionResultRequestGetAdSelectionDataId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getAdSelectionDataId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPersistAdSelectionResultRequestGetAdSelectionResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getAdSelectionResult", "()[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPersistAdSelectionResultRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPersistAdSelectionResultRequestGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPersistAdSelectionResultRequestGetAdSelectionResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getAdSelectionResult", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPersistAdSelectionResultRequestGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequest)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/PersistAdSelectionResultRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.PersistAdSelectionResultRequest$Builder: %w", err)
-	}
-	clsPersistAdSelectionResultRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midPersistAdSelectionResultRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "build", "()Landroid/adservices/adselection/PersistAdSelectionResultRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPersistAdSelectionResultRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midPersistAdSelectionResultRequestBuilderSetAdSelectionDataId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setAdSelectionDataId", "(J)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPersistAdSelectionResultRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "build", "()Landroid/adservices/adselection/PersistAdSelectionResultRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPersistAdSelectionResultRequestBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPersistAdSelectionResultRequestBuilderSetAdSelectionDataId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setAdSelectionDataId", "(J)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPersistAdSelectionResultRequestBuilderSetAdSelectionResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setAdSelectionResult", "([B)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPersistAdSelectionResultRequestBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPersistAdSelectionResultRequestBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPersistAdSelectionResultRequestBuilderSetAdSelectionResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setAdSelectionResult", "([B)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPersistAdSelectionResultRequestBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPersistAdSelectionResultRequestBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/PersistAdSelectionResultRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AddAdSelectionOverrideRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AddAdSelectionOverrideRequest: %w", err)
-	}
-	clsAddAdSelectionOverrideRequest = env.NewGlobalRef(&c.Object)
-
-	midAddAdSelectionOverrideRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAddAdSelectionOverrideRequest = env.NewGlobalRef(&c.Object)
 
-	midAddAdSelectionOverrideRequestGetDecisionLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getDecisionLogicJs", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAddAdSelectionOverrideRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAddAdSelectionOverrideRequestGetPerBuyerDecisionLogic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getPerBuyerDecisionLogic", "()Landroid/adservices/adselection/PerBuyerDecisionLogic;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAddAdSelectionOverrideRequestGetDecisionLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getDecisionLogicJs", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAddAdSelectionOverrideRequestGetTrustedScoringSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getTrustedScoringSignals", "()Landroid/adservices/common/AdSelectionSignals;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAddAdSelectionOverrideRequestGetPerBuyerDecisionLogic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getPerBuyerDecisionLogic", "()Landroid/adservices/adselection/PerBuyerDecisionLogic;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddAdSelectionOverrideRequestGetTrustedScoringSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionOverrideRequest)), "getTrustedScoringSignals", "()Landroid/adservices/common/AdSelectionSignals;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/ReportImpressionRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.ReportImpressionRequest: %w", err)
-	}
-	clsReportImpressionRequest = env.NewGlobalRef(&c.Object)
-
-	midReportImpressionRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReportImpressionRequest = env.NewGlobalRef(&c.Object)
 
-	midReportImpressionRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), "getAdSelectionId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReportImpressionRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReportImpressionRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionFromOutcomesConfig")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionFromOutcomesConfig: %w", err)
-	}
-	clsAdSelectionFromOutcomesConfig = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionFromOutcomesConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionFromOutcomesConfig = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionFromOutcomesConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigGetSelectionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "getSelectionLogicUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigGetSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "getSelectionSignals", "()Landroid/adservices/common/AdSelectionSignals;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigGetSelectionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "getSelectionLogicUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigGetSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "getSelectionSignals", "()Landroid/adservices/common/AdSelectionSignals;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionFromOutcomesConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionFromOutcomesConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionFromOutcomesConfig$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionFromOutcomesConfig$Builder: %w", err)
-	}
-	clsAdSelectionFromOutcomesConfigBuilder = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionFromOutcomesConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "build", "()Landroid/adservices/adselection/AdSelectionFromOutcomesConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionFromOutcomesConfigBuilder = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionFromOutcomesConfigBuilderSetSelectionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "setSelectionLogicUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionFromOutcomesConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "build", "()Landroid/adservices/adselection/AdSelectionFromOutcomesConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigBuilderSetSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "setSelectionSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/adselection/AdSelectionFromOutcomesConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionFromOutcomesConfigBuilderSetSelectionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "setSelectionLogicUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionFromOutcomesConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionFromOutcomesConfigBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/AdSelectionFromOutcomesConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionFromOutcomesConfigBuilderSetSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "setSelectionSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/adselection/AdSelectionFromOutcomesConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionFromOutcomesConfigBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionFromOutcomesConfigBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/AdSelectionFromOutcomesConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SignedContextualAds")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.SignedContextualAds: %w", err)
-	}
-	clsSignedContextualAds = env.NewGlobalRef(&c.Object)
-
-	midSignedContextualAdsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSignedContextualAds = env.NewGlobalRef(&c.Object)
 
-	midSignedContextualAdsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsGetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "getDecisionLogicUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsGetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "getSignature", "()[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsGetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "getDecisionLogicUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsGetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "getSignature", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSignedContextualAdsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSignedContextualAdsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAds)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SignedContextualAds$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.SignedContextualAds$Builder: %w", err)
-	}
-	clsSignedContextualAdsBuilder = env.NewGlobalRef(&c.Object)
-
-	midSignedContextualAdsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "build", "()Landroid/adservices/adselection/SignedContextualAds;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSignedContextualAdsBuilder = env.NewGlobalRef(&c.Object)
 
-	midSignedContextualAdsBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/SignedContextualAds$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "build", "()Landroid/adservices/adselection/SignedContextualAds;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsBuilderSetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "setDecisionLogicUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/SignedContextualAds$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSignedContextualAdsBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/SignedContextualAds$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSignedContextualAdsBuilderSetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "setSignature", "([B)Landroid/adservices/adselection/SignedContextualAds$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSignedContextualAdsBuilderSetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "setDecisionLogicUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/SignedContextualAds$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSignedContextualAdsBuilderSetSignature, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSignedContextualAdsBuilder)), "setSignature", "([B)Landroid/adservices/adselection/SignedContextualAds$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/DecisionLogic")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.DecisionLogic: %w", err)
-	}
-	clsDecisionLogic = env.NewGlobalRef(&c.Object)
-
-	midDecisionLogicDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDecisionLogic = env.NewGlobalRef(&c.Object)
 
-	midDecisionLogicEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDecisionLogicDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDecisionLogicGetLogic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "getLogic", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDecisionLogicEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDecisionLogicHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDecisionLogicGetLogic, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "getLogic", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDecisionLogicToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDecisionLogicHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDecisionLogicWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDecisionLogicToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDecisionLogicWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDecisionLogic)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/PerBuyerDecisionLogic")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.PerBuyerDecisionLogic: %w", err)
-	}
-	clsPerBuyerDecisionLogic = env.NewGlobalRef(&c.Object)
-
-	midPerBuyerDecisionLogicDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPerBuyerDecisionLogic = env.NewGlobalRef(&c.Object)
 
-	midPerBuyerDecisionLogicEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerDecisionLogicDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerDecisionLogicHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerDecisionLogicEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerDecisionLogicWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPerBuyerDecisionLogicHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPerBuyerDecisionLogicWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/RemoveAdSelectionOverrideRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.RemoveAdSelectionOverrideRequest: %w", err)
-	}
-	clsRemoveAdSelectionOverrideRequest = env.NewGlobalRef(&c.Object)
-
-	midRemoveAdSelectionOverrideRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionOverrideRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsRemoveAdSelectionOverrideRequest = env.NewGlobalRef(&c.Object)
+
+		midRemoveAdSelectionOverrideRequestGetAdSelectionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionOverrideRequest)), "getAdSelectionConfig", "()Landroid/adservices/adselection/AdSelectionConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/TestAdSelectionManager")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.TestAdSelectionManager: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTestAdSelectionManager = env.NewGlobalRef(&c.Object)
+
 	}
-	clsTestAdSelectionManager = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/adservices/adselection/AdWithBid")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdWithBid: %w", err)
-	}
-	clsAdWithBid = env.NewGlobalRef(&c.Object)
-
-	midAdWithBidDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdWithBid = env.NewGlobalRef(&c.Object)
 
-	midAdWithBidEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdWithBidDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdWithBidGetAdData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "getAdData", "()Landroid/adservices/common/AdData;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdWithBidEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdWithBidGetBid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "getBid", "()D")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdWithBidGetAdData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "getAdData", "()Landroid/adservices/common/AdData;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdWithBidHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdWithBidGetBid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "getBid", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdWithBidWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdWithBidHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdWithBidWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdWithBid)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionManager")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionManager: %w", err)
-	}
-	clsAdSelectionManager = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionManagerGetTestAdSelectionManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionManager)), "getTestAdSelectionManager", "()Landroid/adservices/adselection/TestAdSelectionManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionManager = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionManager)), "get", "(Landroid/content/Context;)Landroid/adservices/adselection/AdSelectionManager;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionManagerGetTestAdSelectionManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionManager)), "getTestAdSelectionManager", "()Landroid/adservices/adselection/TestAdSelectionManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionManager)), "get", "(Landroid/content/Context;)Landroid/adservices/adselection/AdSelectionManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/ReportEventRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.ReportEventRequest: %w", err)
-	}
-	clsReportEventRequest = env.NewGlobalRef(&c.Object)
-
-	midReportEventRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getAdSelectionId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReportEventRequest = env.NewGlobalRef(&c.Object)
 
-	midReportEventRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getData", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestGetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getInputEvent", "()Landroid/view/InputEvent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getData", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getKey", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestGetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getInputEvent", "()Landroid/view/InputEvent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestGetReportingDestinations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getReportingDestinations", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReportEventRequestGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getKey", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReportEventRequestGetReportingDestinations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequest)), "getReportingDestinations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/ReportEventRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.ReportEventRequest$Builder: %w", err)
-	}
-	clsReportEventRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midReportEventRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "build", "()Landroid/adservices/adselection/ReportEventRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReportEventRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midReportEventRequestBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/ReportEventRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "build", "()Landroid/adservices/adselection/ReportEventRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestBuilderSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setData", "(Ljava/lang/String;)Landroid/adservices/adselection/ReportEventRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/ReportEventRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/adselection/ReportEventRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestBuilderSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setData", "(Ljava/lang/String;)Landroid/adservices/adselection/ReportEventRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestBuilderSetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setKey", "(Ljava/lang/String;)Landroid/adservices/adselection/ReportEventRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midReportEventRequestBuilderSetInputEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setInputEvent", "(Landroid/view/InputEvent;)Landroid/adservices/adselection/ReportEventRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midReportEventRequestBuilderSetReportingDestinations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setReportingDestinations", "(I)Landroid/adservices/adselection/ReportEventRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReportEventRequestBuilderSetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setKey", "(Ljava/lang/String;)Landroid/adservices/adselection/ReportEventRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReportEventRequestBuilderSetReportingDestinations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReportEventRequestBuilder)), "setReportingDestinations", "(I)Landroid/adservices/adselection/ReportEventRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SetAppInstallAdvertisersRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.SetAppInstallAdvertisersRequest: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSetAppInstallAdvertisersRequest = env.NewGlobalRef(&c.Object)
+
 	}
-	clsSetAppInstallAdvertisersRequest = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/adservices/adselection/SetAppInstallAdvertisersRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.SetAppInstallAdvertisersRequest$Builder: %w", err)
-	}
-	clsSetAppInstallAdvertisersRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midSetAppInstallAdvertisersRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSetAppInstallAdvertisersRequestBuilder)), "build", "()Landroid/adservices/adselection/SetAppInstallAdvertisersRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsSetAppInstallAdvertisersRequestBuilder = env.NewGlobalRef(&c.Object)
+
+		midSetAppInstallAdvertisersRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSetAppInstallAdvertisersRequestBuilder)), "build", "()Landroid/adservices/adselection/SetAppInstallAdvertisersRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/UpdateAdCounterHistogramRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.UpdateAdCounterHistogramRequest: %w", err)
-	}
-	clsUpdateAdCounterHistogramRequest = env.NewGlobalRef(&c.Object)
-
-	midUpdateAdCounterHistogramRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsUpdateAdCounterHistogramRequest = env.NewGlobalRef(&c.Object)
 
-	midUpdateAdCounterHistogramRequestGetAdEventType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "getAdEventType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateAdCounterHistogramRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateAdCounterHistogramRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "getAdSelectionId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateAdCounterHistogramRequestGetAdEventType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "getAdEventType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateAdCounterHistogramRequestGetCallerAdTech, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "getCallerAdTech", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateAdCounterHistogramRequestGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateAdCounterHistogramRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateAdCounterHistogramRequestGetCallerAdTech, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "getCallerAdTech", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateAdCounterHistogramRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "toString", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midUpdateAdCounterHistogramRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUpdateAdCounterHistogramRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/UpdateAdCounterHistogramRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.UpdateAdCounterHistogramRequest$Builder: %w", err)
-	}
-	clsUpdateAdCounterHistogramRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midUpdateAdCounterHistogramRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "build", "()Landroid/adservices/adselection/UpdateAdCounterHistogramRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsUpdateAdCounterHistogramRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midUpdateAdCounterHistogramRequestBuilderSetAdEventType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setAdEventType", "(I)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateAdCounterHistogramRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "build", "()Landroid/adservices/adselection/UpdateAdCounterHistogramRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateAdCounterHistogramRequestBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midUpdateAdCounterHistogramRequestBuilderSetAdEventType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setAdEventType", "(I)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midUpdateAdCounterHistogramRequestBuilderSetCallerAdTech, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setCallerAdTech", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midUpdateAdCounterHistogramRequestBuilderSetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setAdSelectionId", "(J)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUpdateAdCounterHistogramRequestBuilderSetCallerAdTech, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUpdateAdCounterHistogramRequestBuilder)), "setCallerAdTech", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/UpdateAdCounterHistogramRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/PerBuyerConfiguration")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.PerBuyerConfiguration: %w", err)
-	}
-	clsPerBuyerConfiguration = env.NewGlobalRef(&c.Object)
-
-	midPerBuyerConfigurationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPerBuyerConfiguration = env.NewGlobalRef(&c.Object)
 
-	midPerBuyerConfigurationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerConfigurationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerConfigurationGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerConfigurationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerConfigurationGetTargetInputSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "getTargetInputSizeBytes", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerConfigurationGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerConfigurationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerConfigurationGetTargetInputSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "getTargetInputSizeBytes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerConfigurationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPerBuyerConfigurationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPerBuyerConfigurationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfiguration)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/PerBuyerConfiguration$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.PerBuyerConfiguration$Builder: %w", err)
-	}
-	clsPerBuyerConfigurationBuilder = env.NewGlobalRef(&c.Object)
-
-	midPerBuyerConfigurationBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "build", "()Landroid/adservices/adselection/PerBuyerConfiguration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPerBuyerConfigurationBuilder = env.NewGlobalRef(&c.Object)
 
-	midPerBuyerConfigurationBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/PerBuyerConfiguration$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPerBuyerConfigurationBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "build", "()Landroid/adservices/adselection/PerBuyerConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPerBuyerConfigurationBuilderSetTargetInputSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "setTargetInputSizeBytes", "(I)Landroid/adservices/adselection/PerBuyerConfiguration$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPerBuyerConfigurationBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/PerBuyerConfiguration$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPerBuyerConfigurationBuilderSetTargetInputSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPerBuyerConfigurationBuilder)), "setTargetInputSizeBytes", "(I)Landroid/adservices/adselection/PerBuyerConfiguration$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/GetAdSelectionDataRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.GetAdSelectionDataRequest: %w", err)
-	}
-	clsGetAdSelectionDataRequest = env.NewGlobalRef(&c.Object)
-
-	midGetAdSelectionDataRequestGetCoordinatorOriginUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getCoordinatorOriginUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsGetAdSelectionDataRequest = env.NewGlobalRef(&c.Object)
 
-	midGetAdSelectionDataRequestGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midGetAdSelectionDataRequestGetCoordinatorOriginUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getCoordinatorOriginUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midGetAdSelectionDataRequestGetSellerConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getSellerConfiguration", "()Landroid/adservices/adselection/SellerConfiguration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midGetAdSelectionDataRequestGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetAdSelectionDataRequestGetSellerConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequest)), "getSellerConfiguration", "()Landroid/adservices/adselection/SellerConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/GetAdSelectionDataRequest$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.GetAdSelectionDataRequest$Builder: %w", err)
-	}
-	clsGetAdSelectionDataRequestBuilder = env.NewGlobalRef(&c.Object)
-
-	midGetAdSelectionDataRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "build", "()Landroid/adservices/adselection/GetAdSelectionDataRequest;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsGetAdSelectionDataRequestBuilder = env.NewGlobalRef(&c.Object)
 
-	midGetAdSelectionDataRequestBuilderSetCoordinatorOriginUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setCoordinatorOriginUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midGetAdSelectionDataRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "build", "()Landroid/adservices/adselection/GetAdSelectionDataRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midGetAdSelectionDataRequestBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midGetAdSelectionDataRequestBuilderSetCoordinatorOriginUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setCoordinatorOriginUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midGetAdSelectionDataRequestBuilderSetSellerConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setSellerConfiguration", "(Landroid/adservices/adselection/SellerConfiguration;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midGetAdSelectionDataRequestBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetAdSelectionDataRequestBuilderSetSellerConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataRequestBuilder)), "setSellerConfiguration", "(Landroid/adservices/adselection/SellerConfiguration;)Landroid/adservices/adselection/GetAdSelectionDataRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SellerConfiguration")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.SellerConfiguration: %w", err)
-	}
-	clsSellerConfiguration = env.NewGlobalRef(&c.Object)
-
-	midSellerConfigurationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSellerConfiguration = env.NewGlobalRef(&c.Object)
 
-	midSellerConfigurationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSellerConfigurationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSellerConfigurationGetMaximumPayloadSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "getMaximumPayloadSizeBytes", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSellerConfigurationEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSellerConfigurationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midSellerConfigurationGetMaximumPayloadSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "getMaximumPayloadSizeBytes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midSellerConfigurationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSellerConfigurationHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSellerConfigurationWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfiguration)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/SellerConfiguration$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.SellerConfiguration$Builder: %w", err)
-	}
-	clsSellerConfigurationBuilder = env.NewGlobalRef(&c.Object)
-
-	midSellerConfigurationBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfigurationBuilder)), "build", "()Landroid/adservices/adselection/SellerConfiguration;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsSellerConfigurationBuilder = env.NewGlobalRef(&c.Object)
 
-	midSellerConfigurationBuilderSetMaximumPayloadSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfigurationBuilder)), "setMaximumPayloadSizeBytes", "(I)Landroid/adservices/adselection/SellerConfiguration$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midSellerConfigurationBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfigurationBuilder)), "build", "()Landroid/adservices/adselection/SellerConfiguration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSellerConfigurationBuilderSetMaximumPayloadSizeBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSellerConfigurationBuilder)), "setMaximumPayloadSizeBytes", "(I)Landroid/adservices/adselection/SellerConfiguration$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/GetAdSelectionDataOutcome")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.GetAdSelectionDataOutcome: %w", err)
-	}
-	clsGetAdSelectionDataOutcome = env.NewGlobalRef(&c.Object)
-
-	midGetAdSelectionDataOutcomeGetAdSelectionData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "getAdSelectionData", "()[B")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsGetAdSelectionDataOutcome = env.NewGlobalRef(&c.Object)
 
-	midGetAdSelectionDataOutcomeGetAdSelectionDataId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "getAdSelectionDataId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midGetAdSelectionDataOutcomeGetAdSelectionData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "getAdSelectionData", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midGetAdSelectionDataOutcomeGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "getAdSelectionId", "()J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midGetAdSelectionDataOutcomeGetAdSelectionDataId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "getAdSelectionDataId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetAdSelectionDataOutcomeGetAdSelectionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetAdSelectionDataOutcome)), "getAdSelectionId", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AddAdSelectionFromOutcomesOverrideRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AddAdSelectionFromOutcomesOverrideRequest: %w", err)
-	}
-	clsAddAdSelectionFromOutcomesOverrideRequest = env.NewGlobalRef(&c.Object)
-
-	midAddAdSelectionFromOutcomesOverrideRequestGetAdSelectionFromOutcomesConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "getAdSelectionFromOutcomesConfig", "()Landroid/adservices/adselection/AdSelectionFromOutcomesConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAddAdSelectionFromOutcomesOverrideRequest = env.NewGlobalRef(&c.Object)
 
-	midAddAdSelectionFromOutcomesOverrideRequestGetOutcomeSelectionLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "getOutcomeSelectionLogicJs", "()Ljava/lang/String;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAddAdSelectionFromOutcomesOverrideRequestGetAdSelectionFromOutcomesConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "getAdSelectionFromOutcomesConfig", "()Landroid/adservices/adselection/AdSelectionFromOutcomesConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAddAdSelectionFromOutcomesOverrideRequestGetOutcomeSelectionTrustedSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "getOutcomeSelectionTrustedSignals", "()Landroid/adservices/common/AdSelectionSignals;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAddAdSelectionFromOutcomesOverrideRequestGetOutcomeSelectionLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "getOutcomeSelectionLogicJs", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddAdSelectionFromOutcomesOverrideRequestGetOutcomeSelectionTrustedSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), "getOutcomeSelectionTrustedSignals", "()Landroid/adservices/common/AdSelectionSignals;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionConfig")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionConfig: %w", err)
-	}
-	clsAdSelectionConfig = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "describeContents", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionConfig = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "equals", "(Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigGetAdSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getAdSelectionSignals", "()Landroid/adservices/common/AdSelectionSignals;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigGetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getDecisionLogicUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigGetAdSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getAdSelectionSignals", "()Landroid/adservices/common/AdSelectionSignals;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigGetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getDecisionLogicUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigGetSellerSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getSellerSignals", "()Landroid/adservices/common/AdSelectionSignals;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigGetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getSeller", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigGetTrustedScoringSignalsUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getTrustedScoringSignalsUri", "()Landroid/net/Uri;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigGetSellerSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getSellerSignals", "()Landroid/adservices/common/AdSelectionSignals;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "hashCode", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigGetTrustedScoringSignalsUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "getTrustedScoringSignalsUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/AdSelectionConfig$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.AdSelectionConfig$Builder: %w", err)
-	}
-	clsAdSelectionConfigBuilder = env.NewGlobalRef(&c.Object)
-
-	midAdSelectionConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "build", "()Landroid/adservices/adselection/AdSelectionConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsAdSelectionConfigBuilder = env.NewGlobalRef(&c.Object)
 
-	midAdSelectionConfigBuilderSetAdSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setAdSelectionSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "build", "()Landroid/adservices/adselection/AdSelectionConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigBuilderSetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setDecisionLogicUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigBuilderSetAdSelectionSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setAdSelectionSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigBuilderSetDecisionLogicUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setDecisionLogicUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigBuilderSetSellerSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setSellerSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midAdSelectionConfigBuilderSetSeller, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setSeller", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midAdSelectionConfigBuilderSetTrustedScoringSignalsUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setTrustedScoringSignalsUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midAdSelectionConfigBuilderSetSellerSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setSellerSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdSelectionConfigBuilderSetTrustedScoringSignalsUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdSelectionConfigBuilder)), "setTrustedScoringSignalsUri", "(Landroid/net/Uri;)Landroid/adservices/adselection/AdSelectionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/adservices/adselection/RemoveAdSelectionFromOutcomesOverrideRequest")
 	if err != nil {
-		return fmt.Errorf("find class android.adservices.adselection.RemoveAdSelectionFromOutcomesOverrideRequest: %w", err)
-	}
-	clsRemoveAdSelectionFromOutcomesOverrideRequest = env.NewGlobalRef(&c.Object)
-
-	midRemoveAdSelectionFromOutcomesOverrideRequestGetAdSelectionFromOutcomesConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionFromOutcomesOverrideRequest)), "getAdSelectionFromOutcomesConfig", "()Landroid/adservices/adselection/AdSelectionFromOutcomesConfig;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsRemoveAdSelectionFromOutcomesOverrideRequest = env.NewGlobalRef(&c.Object)
+
+		midRemoveAdSelectionFromOutcomesOverrideRequestGetAdSelectionFromOutcomesConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionFromOutcomesOverrideRequest)), "getAdSelectionFromOutcomesConfig", "()Landroid/adservices/adselection/AdSelectionFromOutcomesConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

@@ -220,1034 +220,1134 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/text/method/MultiTapKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.MultiTapKeyListener: %w", err)
-	}
-	clsMultiTapKeyListener = env.NewGlobalRef(&c.Object)
-
-	midMultiTapKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMultiTapKeyListener = env.NewGlobalRef(&c.Object)
 
-	midMultiTapKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiTapKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiTapKeyListenerOnSpanAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onSpanAdded", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiTapKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiTapKeyListenerOnSpanChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onSpanChanged", "(Landroid/text/Spannable;Ljava/lang/Object;IIII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiTapKeyListenerOnSpanAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onSpanAdded", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiTapKeyListenerOnSpanRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onSpanRemoved", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMultiTapKeyListenerOnSpanChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onSpanChanged", "(Landroid/text/Spannable;Ljava/lang/Object;IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMultiTapKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/MultiTapKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMultiTapKeyListenerOnSpanRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "onSpanRemoved", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMultiTapKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/MultiTapKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/ReplacementTransformationMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.ReplacementTransformationMethod: %w", err)
-	}
-	clsReplacementTransformationMethod = env.NewGlobalRef(&c.Object)
-
-	midReplacementTransformationMethodGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementTransformationMethod)), "getTransformation", "(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsReplacementTransformationMethod = env.NewGlobalRef(&c.Object)
 
-	midReplacementTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midReplacementTransformationMethodGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementTransformationMethod)), "getTransformation", "(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midReplacementTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsReplacementTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/LinkMovementMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.LinkMovementMethod: %w", err)
-	}
-	clsLinkMovementMethod = env.NewGlobalRef(&c.Object)
-
-	midLinkMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "canSelectArbitrarily", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsLinkMovementMethod = env.NewGlobalRef(&c.Object)
 
-	midLinkMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "canSelectArbitrarily", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midLinkMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midLinkMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midLinkMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLinkMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/DigitsKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.DigitsKeyListener: %w", err)
-	}
-	clsDigitsKeyListener = env.NewGlobalRef(&c.Object)
-
-	midDigitsKeyListenerFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "filter", "(Ljava/lang/CharSequence;IILandroid/text/Spanned;II)Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDigitsKeyListener = env.NewGlobalRef(&c.Object)
 
-	midDigitsKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDigitsKeyListenerFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "filter", "(Ljava/lang/CharSequence;IILandroid/text/Spanned;II)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDigitsKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "()Landroid/text/method/DigitsKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDigitsKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDigitsKeyListenerGetInstance2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(ZZ)Landroid/text/method/DigitsKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDigitsKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "()Landroid/text/method/DigitsKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDigitsKeyListenerGetInstance1_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(Ljava/lang/String;)Landroid/text/method/DigitsKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDigitsKeyListenerGetInstance2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(ZZ)Landroid/text/method/DigitsKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDigitsKeyListenerGetInstance1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/DigitsKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDigitsKeyListenerGetInstance1_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(Ljava/lang/String;)Landroid/text/method/DigitsKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDigitsKeyListenerGetInstance3_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(Ljava/util/Locale;ZZ)Landroid/text/method/DigitsKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDigitsKeyListenerGetInstance1_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/DigitsKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDigitsKeyListenerGetInstance3_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), "getInstance", "(Ljava/util/Locale;ZZ)Landroid/text/method/DigitsKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/HideReturnsTransformationMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.HideReturnsTransformationMethod: %w", err)
-	}
-	clsHideReturnsTransformationMethod = env.NewGlobalRef(&c.Object)
-
-	midHideReturnsTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHideReturnsTransformationMethod)), "getInstance", "()Landroid/text/method/HideReturnsTransformationMethod;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsHideReturnsTransformationMethod = env.NewGlobalRef(&c.Object)
+
+		midHideReturnsTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHideReturnsTransformationMethod)), "getInstance", "()Landroid/text/method/HideReturnsTransformationMethod;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/TimeKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.TimeKeyListener: %w", err)
-	}
-	clsTimeKeyListener = env.NewGlobalRef(&c.Object)
-
-	midTimeKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTimeKeyListener = env.NewGlobalRef(&c.Object)
 
-	midTimeKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInstance", "()Landroid/text/method/TimeKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTimeKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTimeKeyListenerGetInstance1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/TimeKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTimeKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInstance", "()Landroid/text/method/TimeKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimeKeyListenerGetInstance1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTimeKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/TimeKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/PasswordTransformationMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.PasswordTransformationMethod: %w", err)
-	}
-	clsPasswordTransformationMethod = env.NewGlobalRef(&c.Object)
-
-	midPasswordTransformationMethodAfterTextChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "afterTextChanged", "(Landroid/text/Editable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsPasswordTransformationMethod = env.NewGlobalRef(&c.Object)
 
-	midPasswordTransformationMethodBeforeTextChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "beforeTextChanged", "(Ljava/lang/CharSequence;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasswordTransformationMethodAfterTextChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "afterTextChanged", "(Landroid/text/Editable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasswordTransformationMethodGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "getTransformation", "(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasswordTransformationMethodBeforeTextChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "beforeTextChanged", "(Ljava/lang/CharSequence;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasswordTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasswordTransformationMethodGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "getTransformation", "(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasswordTransformationMethodOnTextChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "onTextChanged", "(Ljava/lang/CharSequence;III)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midPasswordTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midPasswordTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "getInstance", "()Landroid/text/method/PasswordTransformationMethod;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midPasswordTransformationMethodOnTextChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "onTextChanged", "(Ljava/lang/CharSequence;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPasswordTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), "getInstance", "()Landroid/text/method/PasswordTransformationMethod;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/NumberKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.NumberKeyListener: %w", err)
-	}
-	clsNumberKeyListener = env.NewGlobalRef(&c.Object)
-
-	midNumberKeyListenerFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumberKeyListener)), "filter", "(Ljava/lang/CharSequence;IILandroid/text/Spanned;II)Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsNumberKeyListener = env.NewGlobalRef(&c.Object)
 
-	midNumberKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumberKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midNumberKeyListenerFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumberKeyListener)), "filter", "(Ljava/lang/CharSequence;IILandroid/text/Spanned;II)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNumberKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumberKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/CharacterPickerDialog")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.CharacterPickerDialog: %w", err)
-	}
-	clsCharacterPickerDialog = env.NewGlobalRef(&c.Object)
-
-	midCharacterPickerDialogOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), "onClick", "(Landroid/view/View;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsCharacterPickerDialog = env.NewGlobalRef(&c.Object)
 
-	midCharacterPickerDialogOnItemClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), "onItemClick", "(Landroid/widget/AdapterView;Landroid/view/View;IJ)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midCharacterPickerDialogOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), "onClick", "(Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCharacterPickerDialogOnItemClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), "onItemClick", "(Landroid/widget/AdapterView;Landroid/view/View;IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/Touch")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.Touch: %w", err)
-	}
-	clsTouch = env.NewGlobalRef(&c.Object)
-
-	midTouchGetInitialScrollX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "getInitialScrollX", "(Landroid/widget/TextView;Landroid/text/Spannable;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTouch = env.NewGlobalRef(&c.Object)
 
-	midTouchGetInitialScrollY, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "getInitialScrollY", "(Landroid/widget/TextView;Landroid/text/Spannable;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTouchGetInitialScrollX, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "getInitialScrollX", "(Landroid/widget/TextView;Landroid/text/Spannable;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTouchOnTouchEvent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTouchGetInitialScrollY, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "getInitialScrollY", "(Landroid/widget/TextView;Landroid/text/Spannable;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTouchScrollTo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "scrollTo", "(Landroid/widget/TextView;Landroid/text/Layout;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTouchOnTouchEvent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTouchScrollTo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTouch)), "scrollTo", "(Landroid/widget/TextView;Landroid/text/Layout;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/DateTimeKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.DateTimeKeyListener: %w", err)
-	}
-	clsDateTimeKeyListener = env.NewGlobalRef(&c.Object)
-
-	midDateTimeKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDateTimeKeyListener = env.NewGlobalRef(&c.Object)
 
-	midDateTimeKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInstance", "()Landroid/text/method/DateTimeKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDateTimeKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDateTimeKeyListenerGetInstance1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/DateTimeKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDateTimeKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInstance", "()Landroid/text/method/DateTimeKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateTimeKeyListenerGetInstance1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/DateTimeKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/TextKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.TextKeyListener: %w", err)
-	}
-	clsTextKeyListener = env.NewGlobalRef(&c.Object)
-
-	midTextKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTextKeyListener = env.NewGlobalRef(&c.Object)
 
-	midTextKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onKeyOther", "(Landroid/view/View;Landroid/text/Editable;Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onKeyOther", "(Landroid/view/View;Landroid/text/Editable;Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerOnSpanAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onSpanAdded", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerOnSpanChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onSpanChanged", "(Landroid/text/Spannable;Ljava/lang/Object;IIII)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerOnSpanAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onSpanAdded", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerOnSpanRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onSpanRemoved", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerOnSpanChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onSpanChanged", "(Landroid/text/Spannable;Ljava/lang/Object;IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "release", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerOnSpanRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "onSpanRemoved", "(Landroid/text/Spannable;Ljava/lang/Object;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerClear, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "clear", "(Landroid/text/Editable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "release", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "getInstance", "()Landroid/text/method/TextKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerClear, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "clear", "(Landroid/text/Editable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerGetInstance2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/TextKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midTextKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "getInstance", "()Landroid/text/method/TextKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midTextKeyListenerShouldCap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "shouldCap", "(Landroid/text/method/TextKeyListener$Capitalize;Ljava/lang/CharSequence;I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTextKeyListenerGetInstance2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/TextKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextKeyListenerShouldCap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), "shouldCap", "(Landroid/text/method/TextKeyListener$Capitalize;Ljava/lang/CharSequence;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/TextKeyListener$Capitalize")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.TextKeyListener$Capitalize: %w", err)
-	}
-	clsTextKeyListenerCapitalize = env.NewGlobalRef(&c.Object)
-
-	midTextKeyListenerCapitalizeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListenerCapitalize)), "values", "()[Landroid/text/method/TextKeyListener$Capitalize;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTextKeyListenerCapitalize = env.NewGlobalRef(&c.Object)
 
-	midTextKeyListenerCapitalizeValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListenerCapitalize)), "valueOf", "(Ljava/lang/String;)Landroid/text/method/TextKeyListener$Capitalize;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTextKeyListenerCapitalizeValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListenerCapitalize)), "values", "()[Landroid/text/method/TextKeyListener$Capitalize;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTextKeyListenerCapitalizeValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTextKeyListenerCapitalize)), "valueOf", "(Ljava/lang/String;)Landroid/text/method/TextKeyListener$Capitalize;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/DialerKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.DialerKeyListener: %w", err)
-	}
-	clsDialerKeyListener = env.NewGlobalRef(&c.Object)
-
-	midDialerKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDialerKeyListener = env.NewGlobalRef(&c.Object)
 
-	midDialerKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), "getInstance", "()Landroid/text/method/DialerKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDialerKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialerKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), "getInstance", "()Landroid/text/method/DialerKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/MovementMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.MovementMethod: %w", err)
-	}
-	clsMovementMethod = env.NewGlobalRef(&c.Object)
-
-	midMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "canSelectArbitrarily", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMovementMethod = env.NewGlobalRef(&c.Object)
 
-	midMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "canSelectArbitrarily", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onGenericMotionEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onKeyDown", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodOnGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onGenericMotionEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onKeyOther", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onKeyDown", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onKeyUp", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onKeyOther", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onKeyUp", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMovementMethodOnTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onTrackballEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMovementMethodOnTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMovementMethod)), "onTrackballEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/BaseMovementMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.BaseMovementMethod: %w", err)
-	}
-	clsBaseMovementMethod = env.NewGlobalRef(&c.Object)
-
-	midBaseMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "canSelectArbitrarily", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBaseMovementMethod = env.NewGlobalRef(&c.Object)
 
-	midBaseMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "canSelectArbitrarily", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodNextParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "nextParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onGenericMotionEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodNextParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "nextParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onKeyDown", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodOnGenericMotionEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onGenericMotionEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onKeyOther", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onKeyDown", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onKeyUp", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onKeyOther", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onKeyUp", "(Landroid/widget/TextView;Landroid/text/Spannable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodOnTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onTrackballEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseMovementMethodPreviousParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "previousParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBaseMovementMethodOnTrackballEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "onTrackballEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBaseMovementMethodPreviousParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), "previousParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/SingleLineTransformationMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.SingleLineTransformationMethod: %w", err)
-	}
-	clsSingleLineTransformationMethod = env.NewGlobalRef(&c.Object)
-
-	midSingleLineTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSingleLineTransformationMethod)), "getInstance", "()Landroid/text/method/SingleLineTransformationMethod;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsSingleLineTransformationMethod = env.NewGlobalRef(&c.Object)
+
+		midSingleLineTransformationMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSingleLineTransformationMethod)), "getInstance", "()Landroid/text/method/SingleLineTransformationMethod;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/ArrowKeyMovementMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.ArrowKeyMovementMethod: %w", err)
-	}
-	clsArrowKeyMovementMethod = env.NewGlobalRef(&c.Object)
-
-	midArrowKeyMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "canSelectArbitrarily", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsArrowKeyMovementMethod = env.NewGlobalRef(&c.Object)
 
-	midArrowKeyMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midArrowKeyMovementMethodCanSelectArbitrarily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "canSelectArbitrarily", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midArrowKeyMovementMethodNextParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "nextParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midArrowKeyMovementMethodInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "initialize", "(Landroid/widget/TextView;Landroid/text/Spannable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midArrowKeyMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midArrowKeyMovementMethodNextParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "nextParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midArrowKeyMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midArrowKeyMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midArrowKeyMovementMethodPreviousParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "previousParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midArrowKeyMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midArrowKeyMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midArrowKeyMovementMethodPreviousParagraph, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "previousParagraph", "(Landroid/widget/TextView;Landroid/text/Spannable;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArrowKeyMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/DateKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.DateKeyListener: %w", err)
-	}
-	clsDateKeyListener = env.NewGlobalRef(&c.Object)
-
-	midDateKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsDateKeyListener = env.NewGlobalRef(&c.Object)
 
-	midDateKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInstance", "()Landroid/text/method/DateKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midDateKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midDateKeyListenerGetInstance1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/DateKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midDateKeyListenerGetInstance0, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInstance", "()Landroid/text/method/DateKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateKeyListenerGetInstance1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), "getInstance", "(Ljava/util/Locale;)Landroid/text/method/DateKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/QwertyKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.QwertyKeyListener: %w", err)
-	}
-	clsQwertyKeyListener = env.NewGlobalRef(&c.Object)
-
-	midQwertyKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsQwertyKeyListener = env.NewGlobalRef(&c.Object)
 
-	midQwertyKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQwertyKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQwertyKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/QwertyKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQwertyKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQwertyKeyListenerGetInstanceForFullKeyboard, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "getInstanceForFullKeyboard", "()Landroid/text/method/QwertyKeyListener;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midQwertyKeyListenerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "getInstance", "(ZLandroid/text/method/TextKeyListener$Capitalize;)Landroid/text/method/QwertyKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midQwertyKeyListenerMarkAsReplaced, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "markAsReplaced", "(Landroid/text/Spannable;IILjava/lang/String;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midQwertyKeyListenerGetInstanceForFullKeyboard, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "getInstanceForFullKeyboard", "()Landroid/text/method/QwertyKeyListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midQwertyKeyListenerMarkAsReplaced, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), "markAsReplaced", "(Landroid/text/Spannable;IILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/TransformationMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.TransformationMethod: %w", err)
-	}
-	clsTransformationMethod = env.NewGlobalRef(&c.Object)
-
-	midTransformationMethodGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformationMethod)), "getTransformation", "(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsTransformationMethod = env.NewGlobalRef(&c.Object)
 
-	midTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midTransformationMethodGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformationMethod)), "getTransformation", "(Ljava/lang/CharSequence;Landroid/view/View;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransformationMethodOnFocusChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransformationMethod)), "onFocusChanged", "(Landroid/view/View;Ljava/lang/CharSequence;ZILandroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/KeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.KeyListener: %w", err)
-	}
-	clsKeyListener = env.NewGlobalRef(&c.Object)
-
-	midKeyListenerClearMetaKeyState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "clearMetaKeyState", "(Landroid/view/View;Landroid/text/Editable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsKeyListener = env.NewGlobalRef(&c.Object)
 
-	midKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "getInputType", "()I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midKeyListenerClearMetaKeyState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "clearMetaKeyState", "(Landroid/view/View;Landroid/text/Editable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midKeyListenerGetInputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "getInputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midKeyListenerOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "onKeyOther", "(Landroid/view/View;Landroid/text/Editable;Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midKeyListenerOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "onKeyOther", "(Landroid/view/View;Landroid/text/Editable;Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/BaseKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.BaseKeyListener: %w", err)
-	}
-	clsBaseKeyListener = env.NewGlobalRef(&c.Object)
-
-	midBaseKeyListenerBackspace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "backspace", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsBaseKeyListener = env.NewGlobalRef(&c.Object)
 
-	midBaseKeyListenerForwardDelete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "forwardDelete", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseKeyListenerBackspace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "backspace", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midBaseKeyListenerForwardDelete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "forwardDelete", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midBaseKeyListenerOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "onKeyOther", "(Landroid/view/View;Landroid/text/Editable;Landroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midBaseKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBaseKeyListenerOnKeyOther, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBaseKeyListener)), "onKeyOther", "(Landroid/view/View;Landroid/text/Editable;Landroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/MetaKeyKeyListener")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.MetaKeyKeyListener: %w", err)
-	}
-	clsMetaKeyKeyListener = env.NewGlobalRef(&c.Object)
-
-	midMetaKeyKeyListenerClearMetaKeyState3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "clearMetaKeyState", "(Landroid/view/View;Landroid/text/Editable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsMetaKeyKeyListener = env.NewGlobalRef(&c.Object)
 
-	midMetaKeyKeyListenerClearMetaKeyState2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "clearMetaKeyState", "(JI)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerClearMetaKeyState3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "clearMetaKeyState", "(Landroid/view/View;Landroid/text/Editable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerClearMetaKeyState2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "clearMetaKeyState", "(JI)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerOnKeyDown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "onKeyDown", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerAdjustMetaAfterKeypress1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "adjustMetaAfterKeypress", "(Landroid/text/Spannable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerOnKeyUp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "onKeyUp", "(Landroid/view/View;Landroid/text/Editable;ILandroid/view/KeyEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerAdjustMetaAfterKeypress1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "adjustMetaAfterKeypress", "(J)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerAdjustMetaAfterKeypress1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "adjustMetaAfterKeypress", "(Landroid/text/Spannable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerClearMetaKeyState2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "clearMetaKeyState", "(Landroid/text/Editable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerAdjustMetaAfterKeypress1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "adjustMetaAfterKeypress", "(J)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerGetMetaState1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerClearMetaKeyState2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "clearMetaKeyState", "(Landroid/text/Editable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerGetMetaState2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;Landroid/view/KeyEvent;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerGetMetaState1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerGetMetaState2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;I)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerGetMetaState2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;Landroid/view/KeyEvent;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerGetMetaState3_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;ILandroid/view/KeyEvent;)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerGetMetaState2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerGetMetaState1_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(J)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerGetMetaState3_3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(Ljava/lang/CharSequence;ILandroid/view/KeyEvent;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerGetMetaState2_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(JI)I")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerGetMetaState1_4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(J)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerHandleKeyDown, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "handleKeyDown", "(JILandroid/view/KeyEvent;)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerGetMetaState2_5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "getMetaState", "(JI)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerHandleKeyUp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "handleKeyUp", "(JILandroid/view/KeyEvent;)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerHandleKeyDown, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "handleKeyDown", "(JILandroid/view/KeyEvent;)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerIsMetaTracker, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "isMetaTracker", "(Ljava/lang/CharSequence;Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerHandleKeyUp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "handleKeyUp", "(JILandroid/view/KeyEvent;)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerIsSelectingMetaTracker, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "isSelectingMetaTracker", "(Ljava/lang/CharSequence;Ljava/lang/Object;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerIsMetaTracker, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "isMetaTracker", "(Ljava/lang/CharSequence;Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerResetLockedMeta, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "resetLockedMeta", "(J)J")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midMetaKeyKeyListenerIsSelectingMetaTracker, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "isSelectingMetaTracker", "(Ljava/lang/CharSequence;Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midMetaKeyKeyListenerResetMetaState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "resetMetaState", "(Landroid/text/Spannable;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midMetaKeyKeyListenerResetLockedMeta, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "resetLockedMeta", "(J)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMetaKeyKeyListenerResetMetaState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMetaKeyKeyListener)), "resetMetaState", "(Landroid/text/Spannable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/text/method/ScrollingMovementMethod")
 	if err != nil {
-		return fmt.Errorf("find class android.text.method.ScrollingMovementMethod: %w", err)
-	}
-	clsScrollingMovementMethod = env.NewGlobalRef(&c.Object)
-
-	midScrollingMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsScrollingMovementMethod = env.NewGlobalRef(&c.Object)
 
-	midScrollingMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midScrollingMovementMethodOnTakeFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "onTakeFocus", "(Landroid/widget/TextView;Landroid/text/Spannable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midScrollingMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midScrollingMovementMethodOnTouchEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "onTouchEvent", "(Landroid/widget/TextView;Landroid/text/Spannable;Landroid/view/MotionEvent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScrollingMovementMethodGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), "getInstance", "()Landroid/text/method/MovementMethod;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil

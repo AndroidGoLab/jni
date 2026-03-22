@@ -103,216 +103,316 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/provider/CalendarContract")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract: %w", err)
-	}
-	clsContract = env.NewGlobalRef(&c.Object)
-
-	midContractStartViewCalendarEventInManagedProfile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "startViewCalendarEventInManagedProfile", "(Landroid/content/Context;JJJZI)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContract = env.NewGlobalRef(&c.Object)
+
+		midContractStartViewCalendarEventInManagedProfile, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "startViewCalendarEventInManagedProfile", "(Landroid/content/Context;JJJZI)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$Attendees")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$Attendees: %w", err)
-	}
-	clsContractAttendees = env.NewGlobalRef(&c.Object)
-
-	midContractAttendeesQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractAttendees)), "query", "(Landroid/content/ContentResolver;J[Ljava/lang/String;)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractAttendees = env.NewGlobalRef(&c.Object)
+
+		midContractAttendeesQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractAttendees)), "query", "(Landroid/content/ContentResolver;J[Ljava/lang/String;)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$AttendeesColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$AttendeesColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractAttendeesColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractAttendeesColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarAlerts")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarAlerts: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendarAlerts = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendarAlerts = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarAlertsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarAlertsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendarAlertsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendarAlertsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarCache")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarCache: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendarCache = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendarCache = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarCacheColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarCacheColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendarCacheColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendarCacheColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendarColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendarColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarEntity")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarEntity: %w", err)
-	}
-	clsContractCalendarEntity = env.NewGlobalRef(&c.Object)
-
-	midContractCalendarEntityNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarEntity)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractCalendarEntity = env.NewGlobalRef(&c.Object)
+
+		midContractCalendarEntityNewEntityIterator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractCalendarEntity)), "newEntityIterator", "(Landroid/database/Cursor;)Landroid/content/EntityIterator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$CalendarSyncColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$CalendarSyncColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendarSyncColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendarSyncColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$Calendars")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$Calendars: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractCalendars = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractCalendars = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$Colors")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$Colors: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractColors = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractColors = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$ColorsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$ColorsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractColorsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractColorsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$EventDays")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$EventDays: %w", err)
-	}
-	clsContractEventDays = env.NewGlobalRef(&c.Object)
-
-	midContractEventDaysQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventDays)), "query", "(Landroid/content/ContentResolver;II[Ljava/lang/String;)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractEventDays = env.NewGlobalRef(&c.Object)
+
+		midContractEventDaysQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventDays)), "query", "(Landroid/content/ContentResolver;II[Ljava/lang/String;)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$EventDaysColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$EventDaysColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractEventDaysColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractEventDaysColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$Events")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$Events: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractEvents = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractEvents = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$EventsColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$EventsColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractEventsColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractEventsColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$EventsEntity")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$EventsEntity: %w", err)
-	}
-	clsContractEventsEntity = env.NewGlobalRef(&c.Object)
-
-	midContractEventsEntityNewEntityIterator2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsEntity)), "newEntityIterator", "(Landroid/database/Cursor;Landroid/content/ContentProviderClient;)Landroid/content/EntityIterator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractEventsEntity = env.NewGlobalRef(&c.Object)
 
-	midContractEventsEntityNewEntityIterator2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsEntity)), "newEntityIterator", "(Landroid/database/Cursor;Landroid/content/ContentResolver;)Landroid/content/EntityIterator;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractEventsEntityNewEntityIterator2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsEntity)), "newEntityIterator", "(Landroid/database/Cursor;Landroid/content/ContentProviderClient;)Landroid/content/EntityIterator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractEventsEntityNewEntityIterator2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractEventsEntity)), "newEntityIterator", "(Landroid/database/Cursor;Landroid/content/ContentResolver;)Landroid/content/EntityIterator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$ExtendedProperties")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$ExtendedProperties: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractExtendedProperties = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractExtendedProperties = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$ExtendedPropertiesColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$ExtendedPropertiesColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractExtendedPropertiesColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractExtendedPropertiesColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$Instances")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$Instances: %w", err)
-	}
-	clsContractInstances = env.NewGlobalRef(&c.Object)
-
-	midContractInstancesQuery4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractInstances)), "query", "(Landroid/content/ContentResolver;[Ljava/lang/String;JJ)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsContractInstances = env.NewGlobalRef(&c.Object)
 
-	midContractInstancesQuery5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractInstances)), "query", "(Landroid/content/ContentResolver;[Ljava/lang/String;JJLjava/lang/String;)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midContractInstancesQuery4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractInstances)), "query", "(Landroid/content/ContentResolver;[Ljava/lang/String;JJ)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractInstancesQuery5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractInstances)), "query", "(Landroid/content/ContentResolver;[Ljava/lang/String;JJLjava/lang/String;)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$Reminders")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$Reminders: %w", err)
-	}
-	clsContractReminders = env.NewGlobalRef(&c.Object)
-
-	midContractRemindersQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractReminders)), "query", "(Landroid/content/ContentResolver;J[Ljava/lang/String;)Landroid/database/Cursor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
+	} else {
+		clsContractReminders = env.NewGlobalRef(&c.Object)
+
+		midContractRemindersQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractReminders)), "query", "(Landroid/content/ContentResolver;J[Ljava/lang/String;)Landroid/database/Cursor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/provider/CalendarContract$RemindersColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$RemindersColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractRemindersColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractRemindersColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$SyncColumns")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$SyncColumns: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractSyncColumns = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractSyncColumns = env.NewGlobalRef(&c.Object)
 
 	c, err = env.FindClass("android/provider/CalendarContract$SyncState")
 	if err != nil {
-		return fmt.Errorf("find class android.provider.CalendarContract$SyncState: %w", err)
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContractSyncState = env.NewGlobalRef(&c.Object)
+
 	}
-	clsContractSyncState = env.NewGlobalRef(&c.Object)
 
 	return nil
 }

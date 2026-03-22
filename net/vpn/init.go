@@ -78,224 +78,232 @@ func doInit(env *jni.Env) error {
 
 	c, err = env.FindClass("android/net/VpnService")
 	if err != nil {
-		return fmt.Errorf("find class android.net.VpnService: %w", err)
-	}
-	clsService = env.NewGlobalRef(&c.Object)
-
-	midServiceIsAlwaysOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isAlwaysOn", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsService = env.NewGlobalRef(&c.Object)
 
-	midServiceIsLockdownEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isLockdownEnabled", "()Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceIsAlwaysOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isAlwaysOn", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceIsLockdownEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isLockdownEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceOnRevoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onRevoke", "()V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceProtect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(I)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceOnRevoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "onRevoke", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceProtect1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(Ljava/net/DatagramSocket;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceProtect1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceProtect1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(Ljava/net/Socket;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceProtect1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(Ljava/net/DatagramSocket;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "setUnderlyingNetworks", "([Landroid/net/Network;)Z")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceProtect1_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "protect", "(Ljava/net/Socket;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServicePrepare, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsService)), "prepare", "(Landroid/content/Context;)Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midServiceSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "setUnderlyingNetworks", "([Landroid/net/Network;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServicePrepare, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsService)), "prepare", "(Landroid/content/Context;)Landroid/content/Intent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	c, err = env.FindClass("android/net/VpnService$Builder")
 	if err != nil {
-		return fmt.Errorf("find class android.net.VpnService$Builder: %w", err)
-	}
-	clsServiceBuilder = env.NewGlobalRef(&c.Object)
-
-	midServiceBuilderAddAddress2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addAddress", "(Ljava/lang/String;I)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
+		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
-	}
+	} else {
+		clsServiceBuilder = env.NewGlobalRef(&c.Object)
 
-	midServiceBuilderAddAddress2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addAddress", "(Ljava/net/InetAddress;I)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddAddress2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addAddress", "(Ljava/lang/String;I)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddAllowedApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addAllowedApplication", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddAddress2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addAddress", "(Ljava/net/InetAddress;I)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddDisallowedApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addDisallowedApplication", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddAllowedApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addAllowedApplication", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddDnsServer1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addDnsServer", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddDisallowedApplication, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addDisallowedApplication", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddDnsServer1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addDnsServer", "(Ljava/net/InetAddress;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddDnsServer1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addDnsServer", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddRoute1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addRoute", "(Landroid/net/IpPrefix;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddDnsServer1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addDnsServer", "(Ljava/net/InetAddress;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddRoute2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addRoute", "(Ljava/lang/String;I)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddRoute1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addRoute", "(Landroid/net/IpPrefix;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddRoute2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addRoute", "(Ljava/net/InetAddress;I)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddRoute2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addRoute", "(Ljava/lang/String;I)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAddSearchDomain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addSearchDomain", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddRoute2_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addRoute", "(Ljava/net/InetAddress;I)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAllowBypass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "allowBypass", "()Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAddSearchDomain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "addSearchDomain", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderAllowFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "allowFamily", "(I)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAllowBypass, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "allowBypass", "()Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderEstablish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "establish", "()Landroid/os/ParcelFileDescriptor;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderAllowFamily, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "allowFamily", "(I)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderExcludeRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "excludeRoute", "(Landroid/net/IpPrefix;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderEstablish, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "establish", "()Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetBlocking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setBlocking", "(Z)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderExcludeRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "excludeRoute", "(Landroid/net/IpPrefix;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetConfigureIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setConfigureIntent", "(Landroid/app/PendingIntent;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderSetBlocking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setBlocking", "(Z)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetHttpProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setHttpProxy", "(Landroid/net/ProxyInfo;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderSetConfigureIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setConfigureIntent", "(Landroid/app/PendingIntent;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setMetered", "(Z)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderSetHttpProxy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setHttpProxy", "(Landroid/net/ProxyInfo;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetMtu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setMtu", "(I)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderSetMetered, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setMetered", "(Z)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setSession", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
+		midServiceBuilderSetMtu, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setMtu", "(I)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	midServiceBuilderSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setUnderlyingNetworks", "([Landroid/net/Network;)Landroid/net/VpnService$Builder;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
+		midServiceBuilderSetSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setSession", "(Ljava/lang/String;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceBuilderSetUnderlyingNetworks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceBuilder)), "setUnderlyingNetworks", "([Landroid/net/Network;)Landroid/net/VpnService$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 	}
 
 	return nil
