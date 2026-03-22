@@ -51,7 +51,12 @@ func parseJavap(output string) (*JavapClass, error) {
 			jc.IsAbstract = strings.TrimSpace(m[1]) == "abstract"
 			jc.IsFinal = strings.TrimSpace(m[2]) == "final"
 			jc.IsInterface = m[3] == "interface"
-			jc.FullName = m[4]
+			// Strip generic type parameters (e.g., "Foo<V>" → "Foo").
+			name := m[4]
+			if idx := strings.Index(name, "<"); idx >= 0 {
+				name = name[:idx]
+			}
+			jc.FullName = name
 
 			if im := implementsRe.FindStringSubmatch(line); im != nil {
 				for _, iface := range strings.Split(im[1], ",") {

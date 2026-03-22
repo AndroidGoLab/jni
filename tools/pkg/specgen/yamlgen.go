@@ -152,26 +152,29 @@ func GenerateFromRefDir(
 		cp = refDir + ":" + extraClassPath
 	}
 
-	// Accumulate specs per Go package so that multiple Java classes
-	// mapping to the same package are merged instead of overwritten.
-	specs := make(map[string]*SpecFile) // key: Go package name
+	// Accumulate specs per Go import path so that classes from different
+	// Java packages that share the same Go package name (e.g.,
+	// "android.credentials.*" and "android.service.credentials.*") end up
+	// in separate spec files and Go packages.
+	specs := make(map[string]*SpecFile) // key: GoImport path
 
 	for parentName, entry := range topLevel {
 		mapping := inferClassMapping(parentName, goModule, existingMappings)
 
-		spec, ok := specs[mapping.Package]
+		spec, ok := specs[mapping.GoImport]
 		if !ok {
 			spec = &SpecFile{
 				Package:  mapping.Package,
 				GoImport: mapping.GoImport,
 			}
-			specs[mapping.Package] = spec
+			specs[mapping.GoImport] = spec
 		}
 
-		// Parse the top-level class.
+		// Parse the top-level class. Skip non-public classes (annotations,
+		// package-private types) that cannot be used via JNI.
 		jc, err := RunJavap(cp, entry.className)
 		if err != nil {
-			return fmt.Errorf("javap %s: %w", entry.className, err)
+			continue
 		}
 		cls := classFromJavap(jc, mapping.Package)
 		spec.Classes = append(spec.Classes, cls)
@@ -181,7 +184,7 @@ func GenerateFromRefDir(
 		for _, inner := range innerClasses[parentName] {
 			ijc, err := RunJavap(cp, inner.className)
 			if err != nil {
-				return fmt.Errorf("javap %s: %w", inner.className, err)
+				continue
 			}
 			icls := classFromJavap(ijc, mapping.Package)
 			spec.Classes = append(spec.Classes, icls)
@@ -189,9 +192,27 @@ func GenerateFromRefDir(
 		}
 	}
 
-	for pkgName, spec := range specs {
+	// Build a map from package name to list of GoImport paths so we can
+	// detect when multiple Go import paths share the same package name
+	// and need disambiguated filenames.
+	pkgImports := make(map[string][]string) // package name → []GoImport
+	for goImport, spec := range specs {
+		pkgImports[spec.Package] = append(pkgImports[spec.Package], goImport)
+	}
+
+	for _, spec := range specs {
+		spec.Classes = deduplicateGoTypes(spec.Classes)
 		spec.Constants = deduplicateConstants(spec.Constants)
-		outPath := filepath.Join(outputDir, pkgName+".yaml")
+
+		// Use the package name as the spec filename. When multiple
+		// Go import paths share the same package name, disambiguate
+		// by using the full relative import path (with "/" → "_").
+		specName := spec.Package
+		if len(pkgImports[spec.Package]) > 1 {
+			relPath := strings.TrimPrefix(spec.GoImport, goModule+"/")
+			specName = strings.ReplaceAll(relPath, "/", "_")
+		}
+		outPath := filepath.Join(outputDir, specName+".yaml")
 		if err := writeSpecFile(spec, outPath); err != nil {
 			return fmt.Errorf("write %s: %w", outPath, err)
 		}
@@ -220,6 +241,11 @@ func formatConstantValue(c JavapConstant) string {
 	switch c.JavaType {
 	case "java.lang.String":
 		return strconv.Quote(c.Value)
+	case "boolean":
+		if c.Value == "1" || strings.EqualFold(c.Value, "true") {
+			return "true"
+		}
+		return "false"
 	case "long":
 		// javap outputs long values with a trailing "l" suffix (e.g. "86400000l")
 		// which is not valid Go syntax — strip it.
@@ -307,15 +333,27 @@ func specMethodFromJavap(m JavapMethod) SpecMethod {
 
 // hasUnsupportedParams checks if a method has parameter types that can't
 // be represented in the YAML spec (byte buffers, handlers, complex generics).
+// isTypeVariable returns true if the type string is an unresolved generic
+// type variable (single uppercase letter, optionally with [] suffix).
+func isTypeVariable(t string) bool {
+	t = strings.TrimSuffix(t, "[]")
+	return len(t) == 1 && t[0] >= 'A' && t[0] <= 'Z'
+}
+
 func hasUnsupportedParams(m JavapMethod) bool {
+	if strings.Contains(m.ReturnType, "<") || isTypeVariable(m.ReturnType) {
+		return true
+	}
 	for _, p := range m.Params {
 		switch {
 		case strings.Contains(p.JavaType, "ByteBuffer"):
 			return true
 		case strings.Contains(p.JavaType, "Handler"):
 			return true
-		case strings.Contains(p.JavaType, "[]"):
-			// Array params are fine for primitives but complex for objects.
+		case strings.Contains(p.JavaType, "<"):
+			return true
+		case isTypeVariable(p.JavaType):
+			return true
 		}
 	}
 	return false
@@ -337,59 +375,64 @@ func inferClassMapping(
 }
 
 func inferPackageMapping(className string, goModule string) PackageMapping {
-	// Map known Android package prefixes to Go packages.
-	mappings := []struct {
-		prefix string
-		pkg    string
-		goPath string
-	}{
-		{"android.app.admin.", "admin", "app/admin"},
-		{"android.app.blob.", "blob", "app/blob"},
-		{"android.app.role.", "role", "app/role"},
-		{"android.app.job.", "job", "app/job"},
-		{"android.app.usage.", "usage", "app/usage"},
-		{"android.app.", "app", "app"},
-		{"android.content.", "content", "content"},
-		{"android.hardware.camera2.", "camera", "hardware/camera"},
-		{"android.hardware.lights.", "lights", "hardware/lights"},
-		{"android.hardware.", "hardware", "hardware"},
-		{"android.location.altitude.", "altitude", "location/altitude"},
-		{"android.location.", "location", "location"},
-		{"android.media.session.", "session", "media/session"},
-		{"android.media.", "media", "media"},
-		{"android.net.wifi.p2p.", "wifi_p2p", "net/wifi/p2p"},
-		{"android.net.wifi.rtt.", "wifi_rtt", "net/wifi/rtt"},
-		{"android.net.wifi.", "wifi", "net/wifi"},
-		{"android.net.", "net", "net"},
-		{"android.nfc.", "nfc", "nfc"},
-		{"android.os.storage.", "storage", "os/storage"},
-		{"android.os.", "os", "os"},
-		{"android.provider.", "provider", "provider"},
-		{"android.se.omapi.", "omapi", "se/omapi"},
-		{"android.telecom.", "telecom", "telecom"},
-		{"android.telephony.", "telephony", "telephony"},
-		{"android.view.inputmethod.", "inputmethod", "view/inputmethod"},
-		{"android.view.", "display", "view/display"},
-	}
-
-	for _, m := range mappings {
-		if strings.HasPrefix(className, m.prefix) {
-			return PackageMapping{
-				JavaPrefix: m.prefix,
-				Package:    m.pkg,
-				GoImport:   goModule + "/" + m.goPath,
-			}
+	// Derive Go package from the Java package hierarchy.
+	// E.g., "android.app.appsearch.AppSearchManager" → package "appsearch",
+	//        go_import ".../app/appsearch"
+	//
+	// Strip "android." prefix, then use the Java package segments as the
+	// Go import path. The Go package name is the last segment.
+	parts := strings.Split(className, ".")
+	if len(parts) < 3 {
+		pkg := parts[len(parts)-2]
+		return PackageMapping{
+			Package:  pkg,
+			GoImport: goModule + "/" + pkg,
 		}
 	}
 
-	// Fallback: use last segment of the Java package.
-	parts := strings.Split(className, ".")
-	pkg := parts[len(parts)-2]
-	return PackageMapping{
-		JavaPrefix: strings.Join(parts[:len(parts)-1], ".") + ".",
-		Package:    pkg,
-		GoImport:   goModule + "/" + pkg,
+	// Java package = everything except the class name (last segment).
+	javaPkg := parts[:len(parts)-1] // e.g., [android, app, appsearch]
+
+	// Strip "android" prefix for Go path.
+	goSegments := javaPkg
+	if goSegments[0] == "android" {
+		goSegments = goSegments[1:]
 	}
+
+	goPath := strings.Join(goSegments, "/")
+	pkg := strings.ReplaceAll(goSegments[len(goSegments)-1], "-", "_")
+
+	return PackageMapping{
+		Package:  pkg,
+		GoImport: goModule + "/" + goPath,
+	}
+}
+
+// deduplicateGoTypes detects go_type collisions within a spec and
+// renames colliding entries by restoring their full (unstripped) Java
+// class name. For example, if both "IkeSaProposal" and "SaProposal"
+// in package "ike" map to go_type "SaProposal", the former is renamed
+// to "IkeSaProposal".
+func deduplicateGoTypes(classes []SpecClass) []SpecClass {
+	// Count occurrences of each go_type.
+	counts := make(map[string]int, len(classes))
+	for _, c := range classes {
+		counts[c.GoType]++
+	}
+
+	// For each collision, regenerate go_type without prefix stripping
+	// (i.e., use just the simple class name).
+	for i := range classes {
+		if counts[classes[i].GoType] <= 1 {
+			continue
+		}
+		parts := strings.Split(classes[i].JavaClass, ".")
+		name := parts[len(parts)-1]
+		// Handle inner classes: Foo$Bar → FooBar.
+		name = strings.ReplaceAll(name, "$", "")
+		classes[i].GoType = name
+	}
+	return classes
 }
 
 // deduplicateConstants removes duplicate constants (by GoName) that

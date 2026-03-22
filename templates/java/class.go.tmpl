@@ -21,17 +21,17 @@ var (
 
 {{- if eq .Obtain "system_service"}}
 
-const serviceName = "{{.ServiceName}}"
+const serviceName{{.GoType}} = "{{.ServiceName}}"
 
 // {{.GoType}} wraps {{.JavaClass}}.
 type {{.GoType}} struct {
 	VM  *jni.VM
-	Ctx *app.Context
+	Ctx *{{if ne .Package "app"}}app.{{end}}Context
 	Obj *jni.GlobalRef
 }
 
 // New{{.GoType}} obtains {{.JavaClass}} from the Android system service manager.
-func New{{.GoType}}(ctx *app.Context) (*{{.GoType}}, error) {
+func New{{.GoType}}(ctx *{{if ne .Package "app"}}app.{{end}}Context) (*{{.GoType}}, error) {
 	if ctx == nil {
 		return nil, fmt.Errorf("{{.GoType}}: nil Context")
 	}
@@ -43,12 +43,12 @@ func New{{.GoType}}(ctx *app.Context) (*{{.GoType}}, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		svc, err := ctx.GetSystemService(serviceName)
+		svc, err := ctx.GetSystemService(serviceName{{.GoType}})
 		if err != nil {
 			return err
 		}
 		if svc == nil || svc.Ref() == 0 {
-			return fmt.Errorf("%s service not available", serviceName)
+			return fmt.Errorf("%s service not available", serviceName{{.GoType}})
 		}
 		// GetSystemService already returns a GlobalRef, so use it directly
 		// instead of wrapping again (which would leak the original).
