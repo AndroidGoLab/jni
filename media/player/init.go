@@ -28,20 +28,30 @@ var (
 	midMediaPlayerAddTimedTextSource2_1                 jni.MethodID
 	midMediaPlayerAddTimedTextSource4_2                 jni.MethodID
 	midMediaPlayerAddTimedTextSource2_3                 jni.MethodID
+	midMediaPlayerAttachAuxEffect                       jni.MethodID
 	midMediaPlayerClearOnMediaTimeDiscontinuityListener jni.MethodID
 	midMediaPlayerClearOnSubtitleDataListener           jni.MethodID
 	midMediaPlayerCreateVolumeShaper                    jni.MethodID
 	midMediaPlayerDeselectTrack                         jni.MethodID
+	midMediaPlayerGetAudioSessionId                     jni.MethodID
+	midMediaPlayerGetCurrentPosition                    jni.MethodID
 	midMediaPlayerGetDrmInfo                            jni.MethodID
 	midMediaPlayerGetDrmPropertyString                  jni.MethodID
+	midMediaPlayerGetDuration                           jni.MethodID
 	midMediaPlayerGetKeyRequest                         jni.MethodID
 	midMediaPlayerGetMetrics                            jni.MethodID
+	midMediaPlayerGetPlaybackParams                     jni.MethodID
 	midMediaPlayerGetPreferredDevice                    jni.MethodID
 	midMediaPlayerGetRoutedDevice                       jni.MethodID
 	midMediaPlayerGetRoutedDevices                      jni.MethodID
 	midMediaPlayerGetSelectedTrack                      jni.MethodID
+	midMediaPlayerGetSyncParams                         jni.MethodID
 	midMediaPlayerGetTimestamp                          jni.MethodID
 	midMediaPlayerGetTrackInfo                          jni.MethodID
+	midMediaPlayerGetVideoHeight                        jni.MethodID
+	midMediaPlayerGetVideoWidth                         jni.MethodID
+	midMediaPlayerIsLooping                             jni.MethodID
+	midMediaPlayerIsPlaying                             jni.MethodID
 	midMediaPlayerPause                                 jni.MethodID
 	midMediaPlayerPrepare                               jni.MethodID
 	midMediaPlayerPrepareAsync                          jni.MethodID
@@ -69,6 +79,8 @@ var (
 	midMediaPlayerSetDataSource1_7                      jni.MethodID
 	midMediaPlayerSetDisplay                            jni.MethodID
 	midMediaPlayerSetDrmPropertyString                  jni.MethodID
+	midMediaPlayerSetLooping                            jni.MethodID
+	midMediaPlayerSetNextMediaPlayer                    jni.MethodID
 	midMediaPlayerSetOnBufferingUpdateListener          jni.MethodID
 	midMediaPlayerSetOnCompletionListener               jni.MethodID
 	midMediaPlayerSetOnDrmConfigHelper                  jni.MethodID
@@ -83,9 +95,11 @@ var (
 	midMediaPlayerSetOnTimedMetaDataAvailableListener   jni.MethodID
 	midMediaPlayerSetOnTimedTextListener                jni.MethodID
 	midMediaPlayerSetOnVideoSizeChangedListener         jni.MethodID
+	midMediaPlayerSetPlaybackParams                     jni.MethodID
 	midMediaPlayerSetPreferredDevice                    jni.MethodID
 	midMediaPlayerSetScreenOnWhilePlaying               jni.MethodID
 	midMediaPlayerSetSurface                            jni.MethodID
+	midMediaPlayerSetSyncParams                         jni.MethodID
 	midMediaPlayerSetVideoScalingMode                   jni.MethodID
 	midMediaPlayerSetVolume                             jni.MethodID
 	midMediaPlayerSetWakeMode                           jni.MethodID
@@ -150,6 +164,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	midMediaPlayerAttachAuxEffect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "attachAuxEffect", "(I)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	midMediaPlayerClearOnMediaTimeDiscontinuityListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "clearOnMediaTimeDiscontinuityListener", "()V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
@@ -178,6 +199,20 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	midMediaPlayerGetAudioSessionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getAudioSessionId", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerGetCurrentPosition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getCurrentPosition", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	midMediaPlayerGetDrmInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getDrmInfo", "()Landroid/media/MediaPlayer$DrmInfo;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
@@ -192,6 +227,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	midMediaPlayerGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getDuration", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	midMediaPlayerGetKeyRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getKeyRequest", "([B[BLjava/lang/String;ILjava/util/Map;)Landroid/media/MediaDrm$KeyRequest;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
@@ -200,6 +242,13 @@ func doInit(env *jni.Env) error {
 	}
 
 	midMediaPlayerGetMetrics, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getMetrics", "()Landroid/os/PersistableBundle;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerGetPlaybackParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getPlaybackParams", "()Landroid/media/PlaybackParams;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -234,6 +283,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	midMediaPlayerGetSyncParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getSyncParams", "()Landroid/media/SyncParams;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	midMediaPlayerGetTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getTimestamp", "()Landroid/media/MediaTimestamp;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
@@ -242,6 +298,34 @@ func doInit(env *jni.Env) error {
 	}
 
 	midMediaPlayerGetTrackInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getTrackInfo", "()[Landroid/media/MediaPlayer$TrackInfo;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerGetVideoHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getVideoHeight", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerGetVideoWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getVideoWidth", "()I")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerIsLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "isLooping", "()Z")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerIsPlaying, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "isPlaying", "()Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
@@ -437,6 +521,20 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	midMediaPlayerSetLooping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setLooping", "(Z)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerSetNextMediaPlayer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setNextMediaPlayer", "(Landroid/media/MediaPlayer;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	midMediaPlayerSetOnBufferingUpdateListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setOnBufferingUpdateListener", "(Landroid/media/MediaPlayer$OnBufferingUpdateListener;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
@@ -535,6 +633,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	}
 
+	midMediaPlayerSetPlaybackParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setPlaybackParams", "(Landroid/media/PlaybackParams;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
 	midMediaPlayerSetPreferredDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setPreferredDevice", "(Landroid/media/AudioDeviceInfo;)Z")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
@@ -550,6 +655,13 @@ func doInit(env *jni.Env) error {
 	}
 
 	midMediaPlayerSetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setSurface", "(Landroid/view/Surface;)V")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaPlayerSetSyncParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "setSyncParams", "(Landroid/media/SyncParams;)V")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

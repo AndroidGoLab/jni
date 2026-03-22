@@ -38,12 +38,15 @@ const (
 )
 
 const (
-	Time int = 0
-)
-
-const (
+	Supported32BitAbis    int = 0
+	Supported64BitAbis    int = 0
+	SupportedAbis         int = 0
 	MediaPerformanceClass int = 0
 	PreviewSdkInt         int = 0
 	SdkInt                int = 0
 	SdkIntFull            int = 0
+)
+
+const (
+	Time int = 0
 )

@@ -3,6 +3,7 @@
 package consts
 
 const (
+	Creator                                  int = 0
 	StatusFail                               int = 1
 	StatusResponderDoesNotSupportIeee80211mc int = 2
 	StatusSuccess                            int = 0

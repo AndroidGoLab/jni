@@ -3,6 +3,7 @@
 package consts
 
 const (
+	Creator        int = 0
 	StateBlocked   int = 4
 	StateCanceled  int = 7
 	StateCompleted int = 5

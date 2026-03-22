@@ -65,6 +65,7 @@ const (
 )
 
 const (
+	AuthorityUri        int = 0
 	MatchDefault        int = 0
 	MatchExclude        int = 2
 	MatchInclude        int = 1

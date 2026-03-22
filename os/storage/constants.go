@@ -11,3 +11,8 @@ const (
 	ExtraUuid           = consts.ExtraUuid
 	ExtraStorageVolume  = consts.ExtraStorageVolume
 )
+
+const (
+	UuidDefault = consts.UuidDefault
+	Creator     = consts.Creator
+)

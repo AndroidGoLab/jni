@@ -97,6 +97,15 @@ constants:
     - go_name: SocModel
       value: '""'
       go_type: string
+    - go_name: Supported32BitAbis
+      value: "0"
+      go_type: int
+    - go_name: Supported64BitAbis
+      value: "0"
+      go_type: int
+    - go_name: SupportedAbis
+      value: "0"
+      go_type: int
     - go_name: Tags
       value: '""'
       go_type: string

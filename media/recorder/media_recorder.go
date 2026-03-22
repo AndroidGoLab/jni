@@ -119,6 +119,31 @@ func (m *MediaRecorder) GetLogSessionId() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetMaxAmplitude calls android.media.MediaRecorder.getMaxAmplitude.
+func (m *MediaRecorder) GetMaxAmplitude() (int32, error) {
+	var result int32
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderGetMaxAmplitude == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.getMaxAmplitude is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midMediaRecorderGetMaxAmplitude,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMetrics calls android.media.MediaRecorder.getMetrics.
 func (m *MediaRecorder) GetMetrics() (*jni.Object, error) {
 	var result *jni.Object
@@ -247,6 +272,87 @@ func (m *MediaRecorder) GetRoutedDevices() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetSurface calls android.media.MediaRecorder.getSurface.
+func (m *MediaRecorder) GetSurface() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderGetSurface == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.getSurface is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaRecorderGetSurface,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsPrivacySensitive calls android.media.MediaRecorder.isPrivacySensitive.
+func (m *MediaRecorder) IsPrivacySensitive() (bool, error) {
+	var result bool
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderIsPrivacySensitive == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.isPrivacySensitive is not available on this device")
+			return callErr
+		}
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
+			m.Obj,
+			midMediaRecorderIsPrivacySensitive,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// Pause calls android.media.MediaRecorder.pause.
+func (m *MediaRecorder) Pause() error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderPause == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.pause is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderPause,
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // Prepare calls android.media.MediaRecorder.prepare.
 func (m *MediaRecorder) Prepare() error {
 
@@ -286,6 +392,28 @@ func (m *MediaRecorder) RegisterAudioRecordingCallback(arg0 *jni.Object, arg1 *j
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaRecorderRegisterAudioRecordingCallback, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Release calls android.media.MediaRecorder.release.
+func (m *MediaRecorder) Release() error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderRelease == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.release is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderRelease,
 		)
 		return callErr
 	})
@@ -337,6 +465,28 @@ func (m *MediaRecorder) Reset() error {
 	return callErr
 }
 
+// Resume calls android.media.MediaRecorder.resume.
+func (m *MediaRecorder) Resume() error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderResume == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.resume is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderResume,
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // SetAudioChannels calls android.media.MediaRecorder.setAudioChannels.
 func (m *MediaRecorder) SetAudioChannels(arg0 int32) error {
 
@@ -354,6 +504,29 @@ func (m *MediaRecorder) SetAudioChannels(arg0 int32) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaRecorderSetAudioChannels, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetAudioEncoder calls android.media.MediaRecorder.setAudioEncoder.
+func (m *MediaRecorder) SetAudioEncoder(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetAudioEncoder == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setAudioEncoder is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetAudioEncoder, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -423,6 +596,52 @@ func (m *MediaRecorder) SetAudioSamplingRate(arg0 int32) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaRecorderSetAudioSamplingRate, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetAudioSource calls android.media.MediaRecorder.setAudioSource.
+func (m *MediaRecorder) SetAudioSource(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetAudioSource == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setAudioSource is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetAudioSource, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetCamera calls android.media.MediaRecorder.setCamera.
+func (m *MediaRecorder) SetCamera(arg0 *jni.Object) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetCamera == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setCamera is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetCamera, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -515,6 +734,52 @@ func (m *MediaRecorder) SetLogSessionId(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaRecorderSetLogSessionId, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetMaxDuration calls android.media.MediaRecorder.setMaxDuration.
+func (m *MediaRecorder) SetMaxDuration(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetMaxDuration == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setMaxDuration is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetMaxDuration, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetMaxFileSize calls android.media.MediaRecorder.setMaxFileSize.
+func (m *MediaRecorder) SetMaxFileSize(arg0 int64) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetMaxFileSize == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setMaxFileSize is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetMaxFileSize, jni.LongValue(arg0),
 		)
 		return callErr
 	})
@@ -710,6 +975,29 @@ func (m *MediaRecorder) SetOutputFile1_2(arg0 string) error {
 	return callErr
 }
 
+// SetOutputFormat calls android.media.MediaRecorder.setOutputFormat.
+func (m *MediaRecorder) SetOutputFormat(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetOutputFormat == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setOutputFormat is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetOutputFormat, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // SetPreferredDevice calls android.media.MediaRecorder.setPreferredDevice.
 func (m *MediaRecorder) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 	var result bool
@@ -817,6 +1105,33 @@ func (m *MediaRecorder) SetPreviewDisplay(arg0 *jni.Object) error {
 	return callErr
 }
 
+// SetPrivacySensitive calls android.media.MediaRecorder.setPrivacySensitive.
+func (m *MediaRecorder) SetPrivacySensitive(arg0 bool) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetPrivacySensitive == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setPrivacySensitive is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetPrivacySensitive, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // SetProfile calls android.media.MediaRecorder.setProfile.
 func (m *MediaRecorder) SetProfile(arg0 *jni.Object) error {
 
@@ -834,6 +1149,29 @@ func (m *MediaRecorder) SetProfile(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaRecorderSetProfile, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetVideoEncoder calls android.media.MediaRecorder.setVideoEncoder.
+func (m *MediaRecorder) SetVideoEncoder(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetVideoEncoder == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setVideoEncoder is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetVideoEncoder, jni.IntValue(arg0),
 		)
 		return callErr
 	})
@@ -886,6 +1224,29 @@ func (m *MediaRecorder) SetVideoEncodingProfileLevel(arg0 int32, arg1 int32) err
 	return callErr
 }
 
+// SetVideoFrameRate calls android.media.MediaRecorder.setVideoFrameRate.
+func (m *MediaRecorder) SetVideoFrameRate(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetVideoFrameRate == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setVideoFrameRate is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetVideoFrameRate, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // SetVideoProfile calls android.media.MediaRecorder.setVideoProfile.
 func (m *MediaRecorder) SetVideoProfile(arg0 *jni.Object) error {
 
@@ -903,6 +1264,96 @@ func (m *MediaRecorder) SetVideoProfile(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaRecorderSetVideoProfile, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetVideoSize calls android.media.MediaRecorder.setVideoSize.
+func (m *MediaRecorder) SetVideoSize(arg0 int32, arg1 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetVideoSize == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setVideoSize is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetVideoSize, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetVideoSource calls android.media.MediaRecorder.setVideoSource.
+func (m *MediaRecorder) SetVideoSource(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderSetVideoSource == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.setVideoSource is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderSetVideoSource, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Start calls android.media.MediaRecorder.start.
+func (m *MediaRecorder) Start() error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderStart == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.start is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderStart,
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// Stop calls android.media.MediaRecorder.stop.
+func (m *MediaRecorder) Stop() error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaRecorderStop == nil {
+			callErr = fmt.Errorf("android.media.MediaRecorder.stop is not available on this device")
+			return callErr
+		}
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaRecorderStop,
 		)
 		return callErr
 	})

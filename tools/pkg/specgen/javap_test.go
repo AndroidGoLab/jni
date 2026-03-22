@@ -211,6 +211,77 @@ func TestParseJavap_ImplementsWithoutBrace(t *testing.T) {
 	}
 }
 
+func TestParseJavap_NativeMethods(t *testing.T) {
+	// Native methods like MediaRecorder.start() must be parsed correctly.
+	verboseOutput := strings.Join([]string{
+		`Classfile jar:file:///android.jar!/android/media/MediaRecorder.class`,
+		`  Compiled from "MediaRecorder.java"`,
+		`public class android.media.MediaRecorder`,
+		`{`,
+		`  public native void start() throws java.lang.IllegalStateException;`,
+		`    descriptor: ()V`,
+		`    flags: (0x0101) ACC_PUBLIC, ACC_NATIVE`,
+		``,
+		`  public native void setAudioSource(int) throws java.lang.IllegalStateException;`,
+		`    descriptor: (I)V`,
+		`    flags: (0x0101) ACC_PUBLIC, ACC_NATIVE`,
+		``,
+		`  public native void setVideoSize(int, int) throws java.lang.IllegalStateException;`,
+		`    descriptor: (II)V`,
+		`    flags: (0x0101) ACC_PUBLIC, ACC_NATIVE`,
+		``,
+		`  public native int getMaxAmplitude() throws java.lang.IllegalStateException;`,
+		`    descriptor: ()I`,
+		`    flags: (0x0101) ACC_PUBLIC, ACC_NATIVE`,
+		``,
+		`  public void prepare() throws java.lang.IllegalStateException, java.io.IOException;`,
+		`    descriptor: ()V`,
+		`    flags: (0x0001) ACC_PUBLIC`,
+		`}`,
+	}, "\n")
+
+	jc, err := parseJavap(verboseOutput)
+	if err != nil {
+		t.Fatalf("parseJavap: %v", err)
+	}
+
+	if len(jc.Methods) != 5 {
+		t.Fatalf("len(Methods) = %d, want 5; got: %+v", len(jc.Methods), jc.Methods)
+	}
+
+	want := []struct {
+		name       string
+		retType    string
+		isStatic   bool
+		throws     bool
+		paramCount int
+	}{
+		{"start", "void", false, true, 0},
+		{"setAudioSource", "void", false, true, 1},
+		{"setVideoSize", "void", false, true, 2},
+		{"getMaxAmplitude", "int", false, true, 0},
+		{"prepare", "void", false, true, 0},
+	}
+	for i, w := range want {
+		m := jc.Methods[i]
+		if m.Name != w.name {
+			t.Errorf("[%d] Name = %q, want %q", i, m.Name, w.name)
+		}
+		if m.ReturnType != w.retType {
+			t.Errorf("[%d] ReturnType = %q, want %q", i, m.ReturnType, w.retType)
+		}
+		if m.IsStatic != w.isStatic {
+			t.Errorf("[%d] IsStatic = %v, want %v", i, m.IsStatic, w.isStatic)
+		}
+		if m.Throws != w.throws {
+			t.Errorf("[%d] Throws = %v, want %v", i, m.Throws, w.throws)
+		}
+		if len(m.Params) != w.paramCount {
+			t.Errorf("[%d] len(Params) = %d, want %d", i, len(m.Params), w.paramCount)
+		}
+	}
+}
+
 func TestParseJavap_NonVerboseStillWorks(t *testing.T) {
 	// Non-verbose javap output (no ConstantValue lines).
 	output := strings.Join([]string{

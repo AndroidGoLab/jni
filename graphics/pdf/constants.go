@@ -5,23 +5,6 @@ package pdf
 import "github.com/AndroidGoLab/jni/graphics/pdf/consts"
 
 const (
-	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
-	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
-	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
-	PdfFormTypeNone                     = consts.PdfFormTypeNone
-	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
-	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
-	RenderModeForDisplay                = consts.RenderModeForDisplay
-	RenderModeForPrint                  = consts.RenderModeForPrint
-	AllSaveFlag                         = consts.AllSaveFlag
-	ModeAppend                          = consts.ModeAppend
-	ModeCreate                          = consts.ModeCreate
-	ModeReadOnly                        = consts.ModeReadOnly
-	ModeReadWrite                       = consts.ModeReadWrite
-	ModeTruncate                        = consts.ModeTruncate
-	ModeWorldReadable                   = consts.ModeWorldReadable
-	ModeWorldWriteable                  = consts.ModeWorldWriteable
-	ModeWriteOnly                       = consts.ModeWriteOnly
 	Bold                                = consts.Bold
 	BoldItalic                          = consts.BoldItalic
 	Default                             = consts.Default
@@ -31,6 +14,15 @@ const (
 	Normal                              = consts.Normal
 	SansSerif                           = consts.SansSerif
 	Serif                               = consts.Serif
+	Creator                             = consts.Creator
+	ModeAppend                          = consts.ModeAppend
+	ModeCreate                          = consts.ModeCreate
+	ModeReadOnly                        = consts.ModeReadOnly
+	ModeReadWrite                       = consts.ModeReadWrite
+	ModeTruncate                        = consts.ModeTruncate
+	ModeWorldReadable                   = consts.ModeWorldReadable
+	ModeWorldWriteable                  = consts.ModeWorldWriteable
+	ModeWriteOnly                       = consts.ModeWriteOnly
 	DensityNone                         = consts.DensityNone
 	Alpha8                              = consts.Alpha8
 	Argb4444                            = consts.Argb4444
@@ -39,6 +31,14 @@ const (
 	Rgba1010102                         = consts.Rgba1010102
 	RgbaF16                             = consts.RgbaF16
 	Rgb565                              = consts.Rgb565
+	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
+	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
+	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
+	PdfFormTypeNone                     = consts.PdfFormTypeNone
+	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
+	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
+	RenderModeForDisplay                = consts.RenderModeForDisplay
+	RenderModeForPrint                  = consts.RenderModeForPrint
 	AntiAliasFlag                       = consts.AntiAliasFlag
 	CursorAfter                         = consts.CursorAfter
 	CursorAt                            = consts.CursorAt
@@ -69,4 +69,5 @@ const (
 	TextRunFlagRightEdge                = consts.TextRunFlagRightEdge
 	UnderlineTextFlag                   = consts.UnderlineTextFlag
 	VerticalTextFlag                    = consts.VerticalTextFlag
+	AllSaveFlag                         = consts.AllSaveFlag
 )

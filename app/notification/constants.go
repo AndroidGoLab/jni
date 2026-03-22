@@ -5,6 +5,7 @@ package notification
 import "github.com/AndroidGoLab/jni/app/notification/consts"
 
 const (
+	Creator                        = consts.Creator
 	AudioAttributesDefault         = consts.AudioAttributesDefault
 	BadgeIconLarge                 = consts.BadgeIconLarge
 	BadgeIconNone                  = consts.BadgeIconNone

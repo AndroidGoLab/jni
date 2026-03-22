@@ -41,6 +41,7 @@ const (
 	TypeVpn                              = consts.TypeVpn
 	TypeWifi                             = consts.TypeWifi
 	TypeWimax                            = consts.TypeWimax
+	Creator                              = consts.Creator
 	NetCapabilityCaptivePortal           = consts.NetCapabilityCaptivePortal
 	NetCapabilityCbs                     = consts.NetCapabilityCbs
 	NetCapabilityDun                     = consts.NetCapabilityDun

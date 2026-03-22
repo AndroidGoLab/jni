@@ -23,6 +23,11 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsMediaProjectionManager                             *jni.GlobalRef
+	midMediaProjectionManagerCreateScreenCaptureIntent0   jni.MethodID
+	midMediaProjectionManagerCreateScreenCaptureIntent1_1 jni.MethodID
+	midMediaProjectionManagerGetMediaProjection           jni.MethodID
+
 	clsVirtualDisplay            *jni.GlobalRef
 	midVirtualDisplayGetDisplay  jni.MethodID
 	midVirtualDisplayGetSurface  jni.MethodID
@@ -35,11 +40,6 @@ var (
 	clsMediaProjection                   *jni.GlobalRef
 	midMediaProjectionStop               jni.MethodID
 	midMediaProjectionUnregisterCallback jni.MethodID
-
-	clsMediaProjectionManager                             *jni.GlobalRef
-	midMediaProjectionManagerCreateScreenCaptureIntent0   jni.MethodID
-	midMediaProjectionManagerCreateScreenCaptureIntent1_1 jni.MethodID
-	midMediaProjectionManagerGetMediaProjection           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -59,6 +59,33 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/media/projection/MediaProjectionManager")
+	if err != nil {
+		return fmt.Errorf("find class android.media.projection.MediaProjectionManager: %w", err)
+	}
+	clsMediaProjectionManager = env.NewGlobalRef(&c.Object)
+
+	midMediaProjectionManagerCreateScreenCaptureIntent0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "createScreenCaptureIntent", "()Landroid/content/Intent;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaProjectionManagerCreateScreenCaptureIntent1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "createScreenCaptureIntent", "(Landroid/media/projection/MediaProjectionConfig;)Landroid/content/Intent;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
+
+	midMediaProjectionManagerGetMediaProjection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "getMediaProjection", "(ILandroid/content/Intent;)Landroid/media/projection/MediaProjection;")
+	if err != nil {
+		// Method may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	}
 
 	c, err = env.FindClass("android/hardware/display/VirtualDisplay")
 	if err != nil {
@@ -129,33 +156,6 @@ func doInit(env *jni.Env) error {
 	}
 
 	midMediaProjectionUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjection)), "unregisterCallback", "(Landroid/media/projection/MediaProjection$Callback;)V")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	c, err = env.FindClass("android/media/projection/MediaProjectionManager")
-	if err != nil {
-		return fmt.Errorf("find class android.media.projection.MediaProjectionManager: %w", err)
-	}
-	clsMediaProjectionManager = env.NewGlobalRef(&c.Object)
-
-	midMediaProjectionManagerCreateScreenCaptureIntent0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "createScreenCaptureIntent", "()Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMediaProjectionManagerCreateScreenCaptureIntent1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "createScreenCaptureIntent", "(Landroid/media/projection/MediaProjectionConfig;)Landroid/content/Intent;")
-	if err != nil {
-		// Method may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	}
-
-	midMediaProjectionManagerGetMediaProjection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaProjectionManager)), "getMediaProjection", "(ILandroid/content/Intent;)Landroid/media/projection/MediaProjection;")
 	if err != nil {
 		// Method may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.

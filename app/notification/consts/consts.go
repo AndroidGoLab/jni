@@ -3,6 +3,7 @@
 package consts
 
 const (
+	Creator                        int = 0
 	AudioAttributesDefault         int = 0
 	BadgeIconLarge                 int = 2
 	BadgeIconNone                  int = 0

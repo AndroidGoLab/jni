@@ -53,6 +53,4 @@ const (
 	LanguageSwitchResultNotAttempted                int = 0
 	LanguageSwitchResultSkippedNoModel              int = 3
 	LanguageSwitchResultSucceeded                   int = 1
-	RecognizerErrorNetwork                          int = 2
-	RecognizerErrorNetworkTimeout                   int = 1
 )

@@ -560,12 +560,6 @@ constants:
     - go_name: ResultsRecognition
       value: '"results_recognition"'
       go_type: string
-    - go_name: RecognizerErrorNetwork
-      value: "2"
-      go_type: int
-    - go_name: RecognizerErrorNetworkTimeout
-      value: "1"
-      go_type: int
     - go_name: TopLocaleAlternatives
       value: '"top_locale_alternatives"'
       go_type: string

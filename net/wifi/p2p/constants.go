@@ -5,6 +5,18 @@ package p2p
 import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
+	Creator                                            = consts.Creator
+	NetworkIdPersistent                                = consts.NetworkIdPersistent
+	NetworkIdTemporary                                 = consts.NetworkIdTemporary
+	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
+	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
+	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
+	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
+	Available                                          = consts.Available
+	Connected                                          = consts.Connected
+	Failed                                             = consts.Failed
+	Invited                                            = consts.Invited
+	Unavailable                                        = consts.Unavailable
 	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
 	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
 	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz
@@ -19,11 +31,6 @@ const (
 	PccModeConnectionTypeLegacyOnly                    = consts.PccModeConnectionTypeLegacyOnly
 	PccModeConnectionTypeLegacyOrR2                    = consts.PccModeConnectionTypeLegacyOrR2
 	PccModeConnectionTypeR2Only                        = consts.PccModeConnectionTypeR2Only
-	Available                                          = consts.Available
-	Connected                                          = consts.Connected
-	Failed                                             = consts.Failed
-	Invited                                            = consts.Invited
-	Unavailable                                        = consts.Unavailable
 	Busy                                               = consts.Busy
 	ConnectionRequestAccept                            = consts.ConnectionRequestAccept
 	ConnectionRequestDeferShowPinToService             = consts.ConnectionRequestDeferShowPinToService
@@ -48,12 +55,6 @@ const (
 	WifiP2pScanSocial                                  = consts.WifiP2pScanSocial
 	WifiP2pStateDisabled                               = consts.WifiP2pStateDisabled
 	WifiP2pStateEnabled                                = consts.WifiP2pStateEnabled
-	NetworkIdPersistent                                = consts.NetworkIdPersistent
-	NetworkIdTemporary                                 = consts.NetworkIdTemporary
-	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
-	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
-	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
-	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
 )
 
 const (

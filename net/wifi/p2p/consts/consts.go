@@ -3,6 +3,18 @@
 package consts
 
 const (
+	Creator                                            int = 0
+	NetworkIdPersistent                                int = -2
+	NetworkIdTemporary                                 int = -1
+	SecurityTypeUnknown                                int = -1
+	SecurityTypeWpa2Psk                                int = 0
+	SecurityTypeWpa3Compatibility                      int = 1
+	SecurityTypeWpa3Sae                                int = 2
+	Available                                          int = 3
+	Connected                                          int = 0
+	Failed                                             int = 2
+	Invited                                            int = 1
+	Unavailable                                        int = 4
 	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
 	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
 	GroupOwnerBand2ghz                                 int = 1
@@ -17,11 +29,6 @@ const (
 	PccModeConnectionTypeLegacyOnly                    int = 0
 	PccModeConnectionTypeLegacyOrR2                    int = 1
 	PccModeConnectionTypeR2Only                        int = 2
-	Available                                          int = 3
-	Connected                                          int = 0
-	Failed                                             int = 2
-	Invited                                            int = 1
-	Unavailable                                        int = 4
 	Busy                                               int = 2
 	ConnectionRequestAccept                            int = 0
 	ConnectionRequestDeferShowPinToService             int = 3
@@ -46,12 +53,6 @@ const (
 	WifiP2pScanSocial                                  int = 1
 	WifiP2pStateDisabled                               int = 1
 	WifiP2pStateEnabled                                int = 2
-	NetworkIdPersistent                                int = -2
-	NetworkIdTemporary                                 int = -1
-	SecurityTypeUnknown                                int = -1
-	SecurityTypeWpa2Psk                                int = 0
-	SecurityTypeWpa3Compatibility                      int = 1
-	SecurityTypeWpa3Sae                                int = 2
 )
 
 const (

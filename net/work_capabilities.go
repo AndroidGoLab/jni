@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// NetworkCapabilities wraps android.net.NetworkCapabilities.
-type NetworkCapabilities struct {
+// workCapabilities wraps android.net.NetworkCapabilities.
+type workCapabilities struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
 // DescribeContents calls android.net.NetworkCapabilities.describeContents.
-func (m *NetworkCapabilities) DescribeContents() (int32, error) {
+func (m *workCapabilities) DescribeContents() (int32, error) {
 	var result int32
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -32,13 +32,13 @@ func (m *NetworkCapabilities) DescribeContents() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesDescribeContents == nil {
+		if midworkCapabilitiesDescribeContents == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.describeContents is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midNetworkCapabilitiesDescribeContents,
+			midworkCapabilitiesDescribeContents,
 		)
 		if callErr != nil {
 			return callErr
@@ -49,7 +49,7 @@ func (m *NetworkCapabilities) DescribeContents() (int32, error) {
 }
 
 // Equals calls android.net.NetworkCapabilities.equals.
-func (m *NetworkCapabilities) Equals(arg0 *jni.Object) (bool, error) {
+func (m *workCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -57,7 +57,7 @@ func (m *NetworkCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesEquals == nil {
+		if midworkCapabilitiesEquals == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.equals is not available on this device")
 			return callErr
 		}
@@ -65,7 +65,7 @@ func (m *NetworkCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
-			midNetworkCapabilitiesEquals, jni.ObjectValue(arg0),
+			midworkCapabilitiesEquals, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -77,7 +77,7 @@ func (m *NetworkCapabilities) Equals(arg0 *jni.Object) (bool, error) {
 }
 
 // GetCapabilities calls android.net.NetworkCapabilities.getCapabilities.
-func (m *NetworkCapabilities) GetCapabilities() (*jni.Object, error) {
+func (m *workCapabilities) GetCapabilities() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -85,13 +85,13 @@ func (m *NetworkCapabilities) GetCapabilities() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetCapabilities == nil {
+		if midworkCapabilitiesGetCapabilities == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getCapabilities is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetCapabilities,
+			midworkCapabilitiesGetCapabilities,
 		)
 		if callErr != nil {
 			return callErr
@@ -109,7 +109,7 @@ func (m *NetworkCapabilities) GetCapabilities() (*jni.Object, error) {
 }
 
 // GetEnterpriseIds calls android.net.NetworkCapabilities.getEnterpriseIds.
-func (m *NetworkCapabilities) GetEnterpriseIds() (*jni.Object, error) {
+func (m *workCapabilities) GetEnterpriseIds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -117,13 +117,13 @@ func (m *NetworkCapabilities) GetEnterpriseIds() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetEnterpriseIds == nil {
+		if midworkCapabilitiesGetEnterpriseIds == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getEnterpriseIds is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetEnterpriseIds,
+			midworkCapabilitiesGetEnterpriseIds,
 		)
 		if callErr != nil {
 			return callErr
@@ -141,7 +141,7 @@ func (m *NetworkCapabilities) GetEnterpriseIds() (*jni.Object, error) {
 }
 
 // GetLinkDownstreamBandwidthKbps calls android.net.NetworkCapabilities.getLinkDownstreamBandwidthKbps.
-func (m *NetworkCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
+func (m *workCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
 	var result int32
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -149,13 +149,13 @@ func (m *NetworkCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetLinkDownstreamBandwidthKbps == nil {
+		if midworkCapabilitiesGetLinkDownstreamBandwidthKbps == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getLinkDownstreamBandwidthKbps is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetLinkDownstreamBandwidthKbps,
+			midworkCapabilitiesGetLinkDownstreamBandwidthKbps,
 		)
 		if callErr != nil {
 			return callErr
@@ -166,7 +166,7 @@ func (m *NetworkCapabilities) GetLinkDownstreamBandwidthKbps() (int32, error) {
 }
 
 // GetLinkUpstreamBandwidthKbps calls android.net.NetworkCapabilities.getLinkUpstreamBandwidthKbps.
-func (m *NetworkCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
+func (m *workCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
 	var result int32
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -174,13 +174,13 @@ func (m *NetworkCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetLinkUpstreamBandwidthKbps == nil {
+		if midworkCapabilitiesGetLinkUpstreamBandwidthKbps == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getLinkUpstreamBandwidthKbps is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetLinkUpstreamBandwidthKbps,
+			midworkCapabilitiesGetLinkUpstreamBandwidthKbps,
 		)
 		if callErr != nil {
 			return callErr
@@ -191,7 +191,7 @@ func (m *NetworkCapabilities) GetLinkUpstreamBandwidthKbps() (int32, error) {
 }
 
 // GetNetworkSpecifier calls android.net.NetworkCapabilities.getNetworkSpecifier.
-func (m *NetworkCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
+func (m *workCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -199,13 +199,13 @@ func (m *NetworkCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetNetworkSpecifier == nil {
+		if midworkCapabilitiesGetNetworkSpecifier == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getNetworkSpecifier is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetNetworkSpecifier,
+			midworkCapabilitiesGetNetworkSpecifier,
 		)
 		if callErr != nil {
 			return callErr
@@ -223,7 +223,7 @@ func (m *NetworkCapabilities) GetNetworkSpecifier() (*jni.Object, error) {
 }
 
 // GetOwnerUid calls android.net.NetworkCapabilities.getOwnerUid.
-func (m *NetworkCapabilities) GetOwnerUid() (int32, error) {
+func (m *workCapabilities) GetOwnerUid() (int32, error) {
 	var result int32
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -231,13 +231,13 @@ func (m *NetworkCapabilities) GetOwnerUid() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetOwnerUid == nil {
+		if midworkCapabilitiesGetOwnerUid == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getOwnerUid is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetOwnerUid,
+			midworkCapabilitiesGetOwnerUid,
 		)
 		if callErr != nil {
 			return callErr
@@ -248,7 +248,7 @@ func (m *NetworkCapabilities) GetOwnerUid() (int32, error) {
 }
 
 // GetSignalStrength calls android.net.NetworkCapabilities.getSignalStrength.
-func (m *NetworkCapabilities) GetSignalStrength() (int32, error) {
+func (m *workCapabilities) GetSignalStrength() (int32, error) {
 	var result int32
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -256,13 +256,13 @@ func (m *NetworkCapabilities) GetSignalStrength() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetSignalStrength == nil {
+		if midworkCapabilitiesGetSignalStrength == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getSignalStrength is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetSignalStrength,
+			midworkCapabilitiesGetSignalStrength,
 		)
 		if callErr != nil {
 			return callErr
@@ -273,7 +273,7 @@ func (m *NetworkCapabilities) GetSignalStrength() (int32, error) {
 }
 
 // GetSubscriptionIds calls android.net.NetworkCapabilities.getSubscriptionIds.
-func (m *NetworkCapabilities) GetSubscriptionIds() (*jni.Object, error) {
+func (m *workCapabilities) GetSubscriptionIds() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -281,13 +281,13 @@ func (m *NetworkCapabilities) GetSubscriptionIds() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetSubscriptionIds == nil {
+		if midworkCapabilitiesGetSubscriptionIds == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getSubscriptionIds is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetSubscriptionIds,
+			midworkCapabilitiesGetSubscriptionIds,
 		)
 		if callErr != nil {
 			return callErr
@@ -305,7 +305,7 @@ func (m *NetworkCapabilities) GetSubscriptionIds() (*jni.Object, error) {
 }
 
 // GetTransportInfo calls android.net.NetworkCapabilities.getTransportInfo.
-func (m *NetworkCapabilities) GetTransportInfo() (*jni.Object, error) {
+func (m *workCapabilities) GetTransportInfo() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -313,13 +313,13 @@ func (m *NetworkCapabilities) GetTransportInfo() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesGetTransportInfo == nil {
+		if midworkCapabilitiesGetTransportInfo == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.getTransportInfo is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midNetworkCapabilitiesGetTransportInfo,
+			midworkCapabilitiesGetTransportInfo,
 		)
 		if callErr != nil {
 			return callErr
@@ -337,7 +337,7 @@ func (m *NetworkCapabilities) GetTransportInfo() (*jni.Object, error) {
 }
 
 // HasCapability calls android.net.NetworkCapabilities.hasCapability.
-func (m *NetworkCapabilities) HasCapability(arg0 int32) (bool, error) {
+func (m *workCapabilities) HasCapability(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -345,7 +345,7 @@ func (m *NetworkCapabilities) HasCapability(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesHasCapability == nil {
+		if midworkCapabilitiesHasCapability == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.hasCapability is not available on this device")
 			return callErr
 		}
@@ -353,7 +353,7 @@ func (m *NetworkCapabilities) HasCapability(arg0 int32) (bool, error) {
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
-			midNetworkCapabilitiesHasCapability, jni.IntValue(arg0),
+			midworkCapabilitiesHasCapability, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -365,7 +365,7 @@ func (m *NetworkCapabilities) HasCapability(arg0 int32) (bool, error) {
 }
 
 // HasEnterpriseId calls android.net.NetworkCapabilities.hasEnterpriseId.
-func (m *NetworkCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
+func (m *workCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -373,7 +373,7 @@ func (m *NetworkCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesHasEnterpriseId == nil {
+		if midworkCapabilitiesHasEnterpriseId == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.hasEnterpriseId is not available on this device")
 			return callErr
 		}
@@ -381,7 +381,7 @@ func (m *NetworkCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
-			midNetworkCapabilitiesHasEnterpriseId, jni.IntValue(arg0),
+			midworkCapabilitiesHasEnterpriseId, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -393,7 +393,7 @@ func (m *NetworkCapabilities) HasEnterpriseId(arg0 int32) (bool, error) {
 }
 
 // HasTransport calls android.net.NetworkCapabilities.hasTransport.
-func (m *NetworkCapabilities) HasTransport(arg0 int32) (bool, error) {
+func (m *workCapabilities) HasTransport(arg0 int32) (bool, error) {
 	var result bool
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -401,7 +401,7 @@ func (m *NetworkCapabilities) HasTransport(arg0 int32) (bool, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesHasTransport == nil {
+		if midworkCapabilitiesHasTransport == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.hasTransport is not available on this device")
 			return callErr
 		}
@@ -409,7 +409,7 @@ func (m *NetworkCapabilities) HasTransport(arg0 int32) (bool, error) {
 		var resultRaw uint8
 		resultRaw, callErr = env.CallBooleanMethod(
 			m.Obj,
-			midNetworkCapabilitiesHasTransport, jni.IntValue(arg0),
+			midworkCapabilitiesHasTransport, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -421,7 +421,7 @@ func (m *NetworkCapabilities) HasTransport(arg0 int32) (bool, error) {
 }
 
 // HashCode calls android.net.NetworkCapabilities.hashCode.
-func (m *NetworkCapabilities) HashCode() (int32, error) {
+func (m *workCapabilities) HashCode() (int32, error) {
 	var result int32
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -429,13 +429,13 @@ func (m *NetworkCapabilities) HashCode() (int32, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesHashCode == nil {
+		if midworkCapabilitiesHashCode == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.hashCode is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallIntMethod(
 			m.Obj,
-			midNetworkCapabilitiesHashCode,
+			midworkCapabilitiesHashCode,
 		)
 		if callErr != nil {
 			return callErr
@@ -446,7 +446,7 @@ func (m *NetworkCapabilities) HashCode() (int32, error) {
 }
 
 // ToString calls android.net.NetworkCapabilities.toString.
-func (m *NetworkCapabilities) ToString() (string, error) {
+func (m *workCapabilities) ToString() (string, error) {
 	var result string
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -454,14 +454,14 @@ func (m *NetworkCapabilities) ToString() (string, error) {
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesToString == nil {
+		if midworkCapabilitiesToString == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.toString is not available on this device")
 			return callErr
 		}
 		var resultObj *jni.Object
 		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
-			midNetworkCapabilitiesToString,
+			midworkCapabilitiesToString,
 		)
 		if callErr != nil {
 			return callErr
@@ -473,7 +473,7 @@ func (m *NetworkCapabilities) ToString() (string, error) {
 }
 
 // WriteToParcel calls android.net.NetworkCapabilities.writeToParcel.
-func (m *NetworkCapabilities) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
+func (m *workCapabilities) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -481,14 +481,14 @@ func (m *NetworkCapabilities) WriteToParcel(arg0 *jni.Object, arg1 int32) error 
 			callErr = err
 			return err
 		}
-		if midNetworkCapabilitiesWriteToParcel == nil {
+		if midworkCapabilitiesWriteToParcel == nil {
 			callErr = fmt.Errorf("android.net.NetworkCapabilities.writeToParcel is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midNetworkCapabilitiesWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
+			midworkCapabilitiesWriteToParcel, jni.ObjectValue(arg0), jni.IntValue(arg1),
 		)
 		return callErr
 	})

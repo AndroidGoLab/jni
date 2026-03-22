@@ -3,6 +3,7 @@
 package consts
 
 const (
+	Creator                    int = 0
 	LightCapabilityBrightness  int = 1
 	LightCapabilityColorRgb    int = 2
 	LightCapabilityRgb         int = 0

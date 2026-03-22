@@ -11,6 +11,7 @@ const (
 )
 
 const (
+	Creator                    = consts.Creator
 	DataComplete               = consts.DataComplete
 	DataTruncated              = consts.DataTruncated
 	PeriodicIntervalNotPresent = consts.PeriodicIntervalNotPresent

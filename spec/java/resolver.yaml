@@ -1114,6 +1114,12 @@ classes:
           returns: void
           error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: Empty
+      value: "0"
+      go_type: int
     - go_name: AnyCursorItemType
       value: '"vnd.android.cursor.item/*"'
       go_type: string

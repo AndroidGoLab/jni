@@ -3,6 +3,10 @@
 package consts
 
 const (
+	Creator int = 0
+)
+
+const (
 	ActionUsbAccessoryAttached string = "android.hardware.usb.action.USB_ACCESSORY_ATTACHED"
 	ActionUsbAccessoryDetached string = "android.hardware.usb.action.USB_ACCESSORY_DETACHED"
 	ActionUsbDeviceAttached    string = "android.hardware.usb.action.USB_DEVICE_ATTACHED"

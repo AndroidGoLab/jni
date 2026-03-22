@@ -20,6 +20,10 @@ classes:
           go_name: GetLogSessionId
           returns: android.media.metrics.LogSessionId
           error: true
+        - java_method: getMaxAmplitude
+          go_name: GetMaxAmplitude
+          returns: int
+          error: true
         - java_method: getMetrics
           go_name: GetMetrics
           returns: android.os.PersistableBundle
@@ -36,6 +40,18 @@ classes:
           go_name: GetRoutedDevices
           returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
+        - java_method: getSurface
+          go_name: GetSurface
+          returns: android.view.Surface
+          error: true
+        - java_method: isPrivacySensitive
+          go_name: IsPrivacySensitive
+          returns: boolean
+          error: true
+        - java_method: pause
+          go_name: Pause
+          returns: void
+          error: true
         - java_method: prepare
           go_name: Prepare
           returns: void
@@ -49,6 +65,10 @@ classes:
               go_name: arg1
           returns: void
           error: true
+        - java_method: release
+          go_name: Release
+          returns: void
+          error: true
         - java_method: removeOnRoutingChangedListener
           go_name: RemoveOnRoutingChangedListener
           params:
@@ -60,8 +80,19 @@ classes:
           go_name: Reset
           returns: void
           error: true
+        - java_method: resume
+          go_name: Resume
+          returns: void
+          error: true
         - java_method: setAudioChannels
           go_name: SetAudioChannels
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioEncoder
+          go_name: SetAudioEncoder
           params:
             - java_type: int
               go_name: arg0
@@ -85,6 +116,20 @@ classes:
           go_name: SetAudioSamplingRate
           params:
             - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAudioSource
+          go_name: SetAudioSource
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCamera
+          go_name: SetCamera
+          params:
+            - java_type: android.hardware.Camera
               go_name: arg0
           returns: void
           error: true
@@ -115,6 +160,20 @@ classes:
           go_name: SetLogSessionId
           params:
             - java_type: android.media.metrics.LogSessionId
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMaxDuration
+          go_name: SetMaxDuration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMaxFileSize
+          go_name: SetMaxFileSize
+          params:
+            - java_type: long
               go_name: arg0
           returns: void
           error: true
@@ -174,6 +233,13 @@ classes:
               go_name: arg0
           returns: void
           error: true
+        - java_method: setOutputFormat
+          go_name: SetOutputFormat
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
         - java_method: setPreferredDevice
           go_name: SetPreferredDevice
           params:
@@ -202,10 +268,24 @@ classes:
               go_name: arg0
           returns: void
           error: true
+        - java_method: setPrivacySensitive
+          go_name: SetPrivacySensitive
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
         - java_method: setProfile
           go_name: SetProfile
           params:
             - java_type: android.media.CamcorderProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoEncoder
+          go_name: SetVideoEncoder
+          params:
+            - java_type: int
               go_name: arg0
           returns: void
           error: true
@@ -225,11 +305,42 @@ classes:
               go_name: arg1
           returns: void
           error: true
+        - java_method: setVideoFrameRate
+          go_name: SetVideoFrameRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
         - java_method: setVideoProfile
           go_name: SetVideoProfile
           params:
             - java_type: android.media.EncoderProfiles$VideoProfile
               go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVideoSize
+          go_name: SetVideoSize
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVideoSource
+          go_name: SetVideoSource
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: start
+          go_name: Start
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
           returns: void
           error: true
         - java_method: unregisterAudioRecordingCallback

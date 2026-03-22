@@ -9,3 +9,8 @@ const (
 	ExtraUuid           string = "android.os.storage.extra.UUID"
 	ExtraStorageVolume  string = "android.os.storage.extra.STORAGE_VOLUME"
 )
+
+const (
+	UuidDefault int = 0
+	Creator     int = 0
+)

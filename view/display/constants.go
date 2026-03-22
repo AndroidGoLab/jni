@@ -5,6 +5,9 @@ package display
 import "github.com/AndroidGoLab/jni/view/display/consts"
 
 const (
+	CompatSmallCoverScreenOptIn    = consts.CompatSmallCoverScreenOptIn
+	ScreenRecordingStateNotVisible = consts.ScreenRecordingStateNotVisible
+	ScreenRecordingStateVisible    = consts.ScreenRecordingStateVisible
 	DefaultDisplay                 = consts.DefaultDisplay
 	FlagPresentation               = consts.FlagPresentation
 	FlagPrivate                    = consts.FlagPrivate
@@ -21,9 +24,6 @@ const (
 	StateOnSuspend                 = consts.StateOnSuspend
 	StateUnknown                   = consts.StateUnknown
 	StateVr                        = consts.StateVr
-	CompatSmallCoverScreenOptIn    = consts.CompatSmallCoverScreenOptIn
-	ScreenRecordingStateNotVisible = consts.ScreenRecordingStateNotVisible
-	ScreenRecordingStateVisible    = consts.ScreenRecordingStateVisible
 	Density140                     = consts.Density140
 	Density180                     = consts.Density180
 	Density200                     = consts.Density200

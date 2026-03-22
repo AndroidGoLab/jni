@@ -5,6 +5,7 @@ package rtt
 import "github.com/AndroidGoLab/jni/net/wifi/rtt/consts"
 
 const (
+	Creator                                  = consts.Creator
 	StatusFail                               = consts.StatusFail
 	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
 	StatusSuccess                            = consts.StatusSuccess

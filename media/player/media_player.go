@@ -153,6 +153,29 @@ func (m *MediaPlayer) AddTimedTextSource2_3(arg0 string, arg1 string) error {
 	return callErr
 }
 
+// AttachAuxEffect calls android.media.MediaPlayer.attachAuxEffect.
+func (m *MediaPlayer) AttachAuxEffect(arg0 int32) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerAttachAuxEffect == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.attachAuxEffect is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaPlayerAttachAuxEffect, jni.IntValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // ClearOnMediaTimeDiscontinuityListener calls android.media.MediaPlayer.clearOnMediaTimeDiscontinuityListener.
 func (m *MediaPlayer) ClearOnMediaTimeDiscontinuityListener() error {
 
@@ -253,6 +276,56 @@ func (m *MediaPlayer) DeselectTrack(arg0 int32) error {
 	return callErr
 }
 
+// GetAudioSessionId calls android.media.MediaPlayer.getAudioSessionId.
+func (m *MediaPlayer) GetAudioSessionId() (int32, error) {
+	var result int32
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetAudioSessionId == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getAudioSessionId is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midMediaPlayerGetAudioSessionId,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCurrentPosition calls android.media.MediaPlayer.getCurrentPosition.
+func (m *MediaPlayer) GetCurrentPosition() (int32, error) {
+	var result int32
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetCurrentPosition == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getCurrentPosition is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midMediaPlayerGetCurrentPosition,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDrmInfo calls android.media.MediaPlayer.getDrmInfo.
 func (m *MediaPlayer) GetDrmInfo() (*jni.Object, error) {
 	var result *jni.Object
@@ -313,6 +386,31 @@ func (m *MediaPlayer) GetDrmPropertyString(arg0 string) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDuration calls android.media.MediaPlayer.getDuration.
+func (m *MediaPlayer) GetDuration() (int32, error) {
+	var result int32
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetDuration == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getDuration is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midMediaPlayerGetDuration,
+		)
+		if callErr != nil {
+			return callErr
+		}
 		return callErr
 	})
 	return result, callErr
@@ -379,6 +477,38 @@ func (m *MediaPlayer) GetMetrics() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaPlayerGetMetrics,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPlaybackParams calls android.media.MediaPlayer.getPlaybackParams.
+func (m *MediaPlayer) GetPlaybackParams() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetPlaybackParams == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getPlaybackParams is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaPlayerGetPlaybackParams,
 		)
 		if callErr != nil {
 			return callErr
@@ -517,6 +647,38 @@ func (m *MediaPlayer) GetSelectedTrack(arg0 int32) (int32, error) {
 	return result, callErr
 }
 
+// GetSyncParams calls android.media.MediaPlayer.getSyncParams.
+func (m *MediaPlayer) GetSyncParams() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetSyncParams == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getSyncParams is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaPlayerGetSyncParams,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetTimestamp calls android.media.MediaPlayer.getTimestamp.
 func (m *MediaPlayer) GetTimestamp() (*jni.Object, error) {
 	var result *jni.Object
@@ -576,6 +738,110 @@ func (m *MediaPlayer) GetTrackInfo() (*jni.Object, error) {
 			result = env.NewGlobalRef(localRef)
 			env.DeleteLocalRef(localRef)
 		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVideoHeight calls android.media.MediaPlayer.getVideoHeight.
+func (m *MediaPlayer) GetVideoHeight() (int32, error) {
+	var result int32
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetVideoHeight == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getVideoHeight is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midMediaPlayerGetVideoHeight,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVideoWidth calls android.media.MediaPlayer.getVideoWidth.
+func (m *MediaPlayer) GetVideoWidth() (int32, error) {
+	var result int32
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerGetVideoWidth == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.getVideoWidth is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallIntMethod(
+			m.Obj,
+			midMediaPlayerGetVideoWidth,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsLooping calls android.media.MediaPlayer.isLooping.
+func (m *MediaPlayer) IsLooping() (bool, error) {
+	var result bool
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerIsLooping == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.isLooping is not available on this device")
+			return callErr
+		}
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
+			m.Obj,
+			midMediaPlayerIsLooping,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// IsPlaying calls android.media.MediaPlayer.isPlaying.
+func (m *MediaPlayer) IsPlaying() (bool, error) {
+	var result bool
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerIsPlaying == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.isPlaying is not available on this device")
+			return callErr
+		}
+		var resultRaw uint8
+		resultRaw, callErr = env.CallBooleanMethod(
+			m.Obj,
+			midMediaPlayerIsPlaying,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		result = resultRaw != 0
 		return callErr
 	})
 	return result, callErr
@@ -1235,6 +1501,56 @@ func (m *MediaPlayer) SetDrmPropertyString(arg0 string, arg1 string) error {
 	return callErr
 }
 
+// SetLooping calls android.media.MediaPlayer.setLooping.
+func (m *MediaPlayer) SetLooping(arg0 bool) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerSetLooping == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setLooping is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaPlayerSetLooping, jni.BooleanValue(jArg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetNextMediaPlayer calls android.media.MediaPlayer.setNextMediaPlayer.
+func (m *MediaPlayer) SetNextMediaPlayer(arg0 *jni.Object) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerSetNextMediaPlayer == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setNextMediaPlayer is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaPlayerSetNextMediaPlayer, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // SetOnBufferingUpdateListener calls android.media.MediaPlayer.setOnBufferingUpdateListener.
 func (m *MediaPlayer) SetOnBufferingUpdateListener(arg0 *jni.Object) error {
 
@@ -1557,6 +1873,29 @@ func (m *MediaPlayer) SetOnVideoSizeChangedListener(arg0 *jni.Object) error {
 	return callErr
 }
 
+// SetPlaybackParams calls android.media.MediaPlayer.setPlaybackParams.
+func (m *MediaPlayer) SetPlaybackParams(arg0 *jni.Object) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerSetPlaybackParams == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setPlaybackParams is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaPlayerSetPlaybackParams, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
 // SetPreferredDevice calls android.media.MediaPlayer.setPreferredDevice.
 func (m *MediaPlayer) SetPreferredDevice(arg0 *jni.Object) (bool, error) {
 	var result bool
@@ -1629,6 +1968,29 @@ func (m *MediaPlayer) SetSurface(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midMediaPlayerSetSurface, jni.ObjectValue(arg0),
+		)
+		return callErr
+	})
+	return callErr
+}
+
+// SetSyncParams calls android.media.MediaPlayer.setSyncParams.
+func (m *MediaPlayer) SetSyncParams(arg0 *jni.Object) error {
+
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaPlayerSetSyncParams == nil {
+			callErr = fmt.Errorf("android.media.MediaPlayer.setSyncParams is not available on this device")
+			return callErr
+		}
+
+		callErr = env.CallVoidMethod(
+			m.Obj,
+			midMediaPlayerSetSyncParams, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})

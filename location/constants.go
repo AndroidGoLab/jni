@@ -5,6 +5,7 @@ package location
 import "github.com/AndroidGoLab/jni/location/consts"
 
 const (
+	Creator              = consts.Creator
 	FormatDegrees        = consts.FormatDegrees
 	FormatMinutes        = consts.FormatMinutes
 	FormatSeconds        = consts.FormatSeconds

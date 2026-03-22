@@ -49,4 +49,5 @@ const (
 	VisibilityUserManagedNotVisible = consts.VisibilityUserManagedNotVisible
 	VisibilityUserManagedVisible    = consts.VisibilityUserManagedVisible
 	VisibilityVisible               = consts.VisibilityVisible
+	Creator                         = consts.Creator
 )

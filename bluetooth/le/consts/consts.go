@@ -9,6 +9,7 @@ const (
 )
 
 const (
+	Creator                    int = 0
 	DataComplete               int = 0
 	DataTruncated              int = 2
 	PeriodicIntervalNotPresent int = 0

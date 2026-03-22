@@ -67,6 +67,7 @@ const (
 	VerificationAllow                      int = 1
 	VerificationReject                     int = -1
 	VersionCodeHighest                     int = -1
+	Creator                                int = 0
 	InstallLocationAuto                    int = 0
 	InstallLocationInternalOnly            int = 1
 	InstallLocationPreferExternal          int = 2

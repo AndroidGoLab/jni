@@ -161,6 +161,7 @@ import (
 
 	"github.com/AndroidGoLab/jni"
 	"github.com/AndroidGoLab/jni/examples/common/ui"
+	"github.com/AndroidGoLab/jni/media/recorder"
 )
 
 func main() {}
@@ -188,20 +189,11 @@ func goOnNativeWindowCreated(activity *C.ANativeActivity, window *C.ANativeWindo
 	ui.OnNativeWindowCreated(unsafe.Pointer(window))
 }
 
-// MediaRecorder constants from the Android SDK.
-const (
-	audioSourceMIC     = 1 // MediaRecorder.AudioSource.MIC
-	videoSourceSurface = 2 // MediaRecorder.VideoSource.SURFACE
-	outputFormatMPEG4  = 2 // MediaRecorder.OutputFormat.MPEG_4
-	audioEncoderAAC    = 3 // MediaRecorder.AudioEncoder.AAC
-	videoEncoderH264   = 2 // MediaRecorder.VideoEncoder.H264
-)
-
 func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "=== Camera Record ===")
 	ui.RenderOutput()
 
-	// 1. Get the app context.
+	// 1. Get the app context and cache directory path.
 	ctx, err := ui.GetAppContext(vm)
 	if err != nil {
 		return fmt.Errorf("get context: %w", err)
@@ -209,27 +201,21 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Got app context")
 	ui.RenderOutput()
 
-	// 2. Get the cache directory path.
+	cacheDirObj, err := ctx.GetCacheDir()
+	if err != nil {
+		return fmt.Errorf("getCacheDir: %w", err)
+	}
 	var cacheDir string
 	err = vm.Do(func(env *jni.Env) error {
-		ctxCls := env.GetObjectClass(ctx.Obj)
-		mid, err := env.GetMethodID(ctxCls, "getCacheDir", "()Ljava/io/File;")
-		if err != nil {
-			return fmt.Errorf("get getCacheDir: %w", err)
-		}
-		cacheDirObj, err := env.CallObjectMethod(ctx.Obj, mid)
-		if err != nil {
-			return fmt.Errorf("getCacheDir: %w", err)
-		}
 		fileCls, err := env.FindClass("java/io/File")
 		if err != nil {
 			return fmt.Errorf("find File: %w", err)
 		}
-		getPathMid, err := env.GetMethodID(fileCls, "getAbsolutePath", "()Ljava/lang/String;")
+		mid, err := env.GetMethodID(fileCls, "getAbsolutePath", "()Ljava/lang/String;")
 		if err != nil {
 			return fmt.Errorf("get getAbsolutePath: %w", err)
 		}
-		pathObj, err := env.CallObjectMethod(cacheDirObj, getPathMid)
+		pathObj, err := env.CallObjectMethod(cacheDirObj, mid)
 		if err != nil {
 			return fmt.Errorf("getAbsolutePath: %w", err)
 		}
@@ -243,7 +229,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "Output: %s\n", outputPath)
 	ui.RenderOutput()
 
-	// 3. Create and configure MediaRecorder with SURFACE video source.
+	// 2. Create and configure MediaRecorder with SURFACE video source.
 	var recObj *jni.GlobalRef
 	err = vm.Do(func(env *jni.Env) error {
 		cls, err := env.FindClass("android/media/MediaRecorder")
@@ -264,68 +250,42 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	if err != nil {
 		return fmt.Errorf("create recorder: %w", err)
 	}
-
-	// Helper: call a void method on recObj.
-	callRecVoid := func(name, sig string, args ...jni.Value) error {
-		return vm.Do(func(env *jni.Env) error {
-			cls := env.GetObjectClass(recObj)
-			mid, err := env.GetMethodID(cls, name, sig)
-			if err != nil {
-				return fmt.Errorf("get %s: %w", name, err)
-			}
-			return env.CallVoidMethod(recObj, mid, args...)
-		})
-	}
+	rec := &recorder.MediaRecorder{VM: vm, Obj: recObj}
 
 	// Configure: sources -> format -> encoders -> params -> file.
-	if err := callRecVoid("setAudioSource", "(I)V", jni.IntValue(audioSourceMIC)); err != nil {
+	if err := rec.SetAudioSource(recorder.AudioSourceMIC); err != nil {
 		return fmt.Errorf("setAudioSource: %w", err)
 	}
-	if err := callRecVoid("setVideoSource", "(I)V", jni.IntValue(videoSourceSurface)); err != nil {
+	if err := rec.SetVideoSource(recorder.VideoSourceSurface); err != nil {
 		return fmt.Errorf("setVideoSource: %w", err)
 	}
-	if err := callRecVoid("setOutputFormat", "(I)V", jni.IntValue(outputFormatMPEG4)); err != nil {
+	if err := rec.SetOutputFormat(recorder.OutputFormatMPEG4); err != nil {
 		return fmt.Errorf("setOutputFormat: %w", err)
 	}
-	if err := callRecVoid("setAudioEncoder", "(I)V", jni.IntValue(audioEncoderAAC)); err != nil {
+	if err := rec.SetAudioEncoder(recorder.AudioEncoderAAC); err != nil {
 		return fmt.Errorf("setAudioEncoder: %w", err)
 	}
-	if err := callRecVoid("setVideoEncoder", "(I)V", jni.IntValue(videoEncoderH264)); err != nil {
+	if err := rec.SetVideoEncoder(recorder.VideoEncoderH264); err != nil {
 		return fmt.Errorf("setVideoEncoder: %w", err)
 	}
-	if err := callRecVoid("setVideoSize", "(II)V", jni.IntValue(1920), jni.IntValue(1080)); err != nil {
+	if err := rec.SetVideoSize(1920, 1080); err != nil {
 		return fmt.Errorf("setVideoSize: %w", err)
 	}
-	if err := callRecVoid("setVideoFrameRate", "(I)V", jni.IntValue(60)); err != nil {
+	if err := rec.SetVideoFrameRate(60); err != nil {
 		return fmt.Errorf("setVideoFrameRate: %w", err)
 	}
-	if err := callRecVoid("setVideoEncodingBitRate", "(I)V", jni.IntValue(10_000_000)); err != nil {
+	if err := rec.SetVideoEncodingBitRate(10_000_000); err != nil {
 		return fmt.Errorf("setVideoEncodingBitRate: %w", err)
 	}
-
-	// setOutputFile(String)
-	err = vm.Do(func(env *jni.Env) error {
-		cls := env.GetObjectClass(recObj)
-		mid, err := env.GetMethodID(cls, "setOutputFile", "(Ljava/lang/String;)V")
-		if err != nil {
-			return fmt.Errorf("get setOutputFile: %w", err)
-		}
-		jPath, err := env.NewStringUTF(outputPath)
-		if err != nil {
-			return err
-		}
-		defer env.DeleteLocalRef(&jPath.Object)
-		return env.CallVoidMethod(recObj, mid, jni.ObjectValue(&jPath.Object))
-	})
-	if err != nil {
+	if err := rec.SetOutputFile1_2(outputPath); err != nil {
 		return fmt.Errorf("setOutputFile: %w", err)
 	}
 	fmt.Fprintln(output, "Recorder configured")
 	ui.RenderOutput()
 
-	// 4. Prepare the recorder.
+	// 3. Prepare the recorder.
 	prepStart := time.Now()
-	if err := callRecVoid("prepare", "()V"); err != nil {
+	if err := rec.Prepare(); err != nil {
 		return fmt.Errorf("prepare: %w", err)
 	}
 	prepDur := time.Since(prepStart)
@@ -342,51 +302,42 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "CPU profiling started: %s\n", profilePath)
 	ui.RenderOutput()
 
-	// 5. Get the recorder's input surface as ANativeWindow.
+	// 4. Get the recorder's input surface as ANativeWindow.
+	surfObj, err := rec.GetSurface()
+	if err != nil {
+		return fmt.Errorf("getSurface: %w", err)
+	}
+	if surfObj == nil || surfObj.Ref() == 0 {
+		return fmt.Errorf("getSurface returned null")
+	}
 	var recWindow *C.ANativeWindow
-	err = vm.Do(func(env *jni.Env) error {
-		cls := env.GetObjectClass(recObj)
-		mid, err := env.GetMethodID(cls, "getSurface", "()Landroid/view/Surface;")
-		if err != nil {
-			return fmt.Errorf("get getSurface: %w", err)
-		}
-		surfObj, err := env.CallObjectMethod(recObj, mid)
-		if err != nil {
-			return fmt.Errorf("getSurface: %w", err)
-		}
-		if surfObj == nil || surfObj.Ref() == 0 {
-			return fmt.Errorf("getSurface returned null")
-		}
+	vm.Do(func(env *jni.Env) error {
 		recWindow = C.surfaceToWindow(env.Ptr(), unsafe.Pointer(surfObj.Ref()))
-		if recWindow == nil {
-			return fmt.Errorf("surfaceToWindow returned null")
-		}
 		return nil
 	})
-	if err != nil {
-		return fmt.Errorf("get surface: %w", err)
+	if recWindow == nil {
+		return fmt.Errorf("surfaceToWindow returned null")
 	}
 	fmt.Fprintln(output, "Got recorder surface")
 	ui.RenderOutput()
 
-	// 6. Start the MediaRecorder.
+	// 5. Start the MediaRecorder.
 	startT := time.Now()
-	if err := callRecVoid("start", "()V"); err != nil {
+	if err := rec.Start(); err != nil {
 		return fmt.Errorf("start: %w", err)
 	}
 	startDur := time.Since(startT)
 	fmt.Fprintf(output, "Recording started (%v)\n", startDur)
 	ui.RenderOutput()
 
-	// 7. Open camera and start feeding frames.
+	// 6. Open camera and start feeding frames.
 	var camState C.CameraState
 	ret := C.cameraOpen(&camState, recWindow)
 	if ret != 0 {
 		fmt.Fprintf(output, "NDK camera open err: %d\n", int(ret))
 		ui.RenderOutput()
-		// Try to stop the recorder anyway.
-		callRecVoid("stop", "()V")
-		callRecVoid("release", "()V")
+		_ = rec.Stop()
+		_ = rec.Release()
 		C.ANativeWindow_release(recWindow)
 		vm.Do(func(env *jni.Env) error {
 			env.DeleteGlobalRef(recObj)
@@ -397,12 +348,12 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Camera streaming...")
 	ui.RenderOutput()
 
-	// 8. Record for 5 seconds.
+	// 7. Record for 5 seconds.
 	time.Sleep(5 * time.Second)
 
-	// 9. Stop the MediaRecorder FIRST (while camera is still streaming).
+	// 8. Stop the MediaRecorder FIRST (while camera is still streaming).
 	stopT := time.Now()
-	if err := callRecVoid("stop", "()V"); err != nil {
+	if err := rec.Stop(); err != nil {
 		fmt.Fprintf(output, "stop err: %v\n", err)
 	} else {
 		fmt.Fprintln(output, "Recording stopped")
@@ -417,13 +368,13 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintf(output, "CPU profile written: %s\n", profilePath)
 	ui.RenderOutput()
 
-	// 10. Close the camera.
+	// 9. Close the camera.
 	C.cameraClose(&camState)
 	fmt.Fprintln(output, "Camera closed")
 	ui.RenderOutput()
 
-	// 11. Release recorder and surface.
-	callRecVoid("release", "()V")
+	// 10. Release recorder and surface.
+	_ = rec.Release()
 	C.ANativeWindow_release(recWindow)
 	vm.Do(func(env *jni.Env) error {
 		env.DeleteGlobalRef(recObj)
@@ -432,7 +383,7 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 	fmt.Fprintln(output, "Released resources")
 	ui.RenderOutput()
 
-	// 12. Report file sizes.
+	// 11. Report file sizes.
 	videoInfo, err := os.Stat(outputPath)
 	if err != nil {
 		return fmt.Errorf("stat video: %w", err)
