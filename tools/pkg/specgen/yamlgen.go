@@ -401,6 +401,7 @@ func inferClassMapping(className string, goModule string) PackageMapping {
 		"android.print.PrintJob":                             {"print", "print"},
 		"android.print.PrintJobInfo":                         {"print", "print"},
 		"android.print.PrintManager":                         {"print", "print"},
+		"android.Manifest":                                   {"permission", "content/permission"},
 		"android.provider.CalendarContract":                  {"calendar", "provider/calendar"},
 		"android.provider.ContactsContract":                  {"contacts", "provider/contacts"},
 		"android.provider.DocumentsContract":                 {"documents", "provider/documents"},

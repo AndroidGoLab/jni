@@ -4,13 +4,7 @@ package consts
 
 const (
 	Creator                                    int = 0
-	FlagAllowUnsafeImplicitIntent              int = 16777216
-	FlagCancelCurrent                          int = 268435456
-	FlagImmutable                              int = 67108864
-	FlagMutable                                int = 33554432
-	FlagNoCreate                               int = 536870912
-	FlagOneShot                                int = 1073741824
-	FlagUpdateCurrent                          int = 134217728
+	Empty                                      int = 0
 	BindAboveClient                            int = 8
 	BindAdjustWithActivity                     int = 128
 	BindAllowActivityStarts                    int = 512
@@ -40,6 +34,25 @@ const (
 	ReceiverExported                           int = 2
 	ReceiverNotExported                        int = 4
 	ReceiverVisibleToInstantApps               int = 1
+	DefaultKeysDialer                          int = 1
+	DefaultKeysDisable                         int = 0
+	DefaultKeysSearchGlobal                    int = 4
+	DefaultKeysSearchLocal                     int = 3
+	DefaultKeysShortcut                        int = 2
+	FullscreenModeRequestEnter                 int = 1
+	FullscreenModeRequestExit                  int = 0
+	OverrideTransitionClose                    int = 1
+	OverrideTransitionOpen                     int = 0
+	ResultCanceled                             int = 0
+	ResultFirstUser                            int = 1
+	ResultOk                                   int = -1
+	FlagAllowUnsafeImplicitIntent              int = 16777216
+	FlagCancelCurrent                          int = 268435456
+	FlagImmutable                              int = 67108864
+	FlagMutable                                int = 33554432
+	FlagNoCreate                               int = 536870912
+	FlagOneShot                                int = 1073741824
+	FlagUpdateCurrent                          int = 134217728
 	CaptureContentForNoteBlockedByAdmin        int = 4
 	CaptureContentForNoteFailed                int = 1
 	CaptureContentForNoteSuccess               int = 0
@@ -100,19 +113,6 @@ const (
 	UriAllowUnsafe                             int = 4
 	UriAndroidAppScheme                        int = 2
 	UriIntentScheme                            int = 1
-	Empty                                      int = 0
-	DefaultKeysDialer                          int = 1
-	DefaultKeysDisable                         int = 0
-	DefaultKeysSearchGlobal                    int = 4
-	DefaultKeysSearchLocal                     int = 3
-	DefaultKeysShortcut                        int = 2
-	FullscreenModeRequestEnter                 int = 1
-	FullscreenModeRequestExit                  int = 0
-	OverrideTransitionClose                    int = 1
-	OverrideTransitionOpen                     int = 0
-	ResultCanceled                             int = 0
-	ResultFirstUser                            int = 1
-	ResultOk                                   int = -1
 )
 
 const (

@@ -3,6 +3,14 @@
 package consts
 
 const (
+	Creator                                  int = 0
+	StatusFail                               int = 1
+	StatusResponderDoesNotSupportIeee80211mc int = 2
+	StatusSuccess                            int = 0
+	Unspecified                              int = -1
+)
+
+const (
 	ActionWifiRttStateChanged                                string = "android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED"
 	CharacteristicsKeyBooleanLci                             string = "key_lci"
 	CharacteristicsKeyBooleanLcr                             string = "key_lcr"
@@ -12,12 +20,4 @@ const (
 	CharacteristicsKeyBooleanSecureHeLtfSupported            string = "key_secure_he_ltf_supported"
 	CharacteristicsKeyBooleanStaResponder                    string = "key_sta_responder"
 	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion string = "key_max_supported_secure_he_ltf_proto_ver"
-)
-
-const (
-	Creator                                  int = 0
-	StatusFail                               int = 1
-	StatusResponderDoesNotSupportIeee80211mc int = 2
-	StatusSuccess                            int = 0
-	Unspecified                              int = -1
 )

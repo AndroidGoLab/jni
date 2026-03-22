@@ -38,6 +38,12 @@ func EnvFromUintptr(ptr uintptr) *Env {
 }
 
 // AllocObject wraps the JNI AllocObject function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) AllocObject(cls *Class) (*Object, error) {
 	_ret := capi.AllocObject(e.ptr, capi.Class(cls.Ref()))
 	if err := jnierr.CheckException(e.ptr); err != nil {
@@ -50,6 +56,12 @@ func (e *Env) AllocObject(cls *Class) (*Object, error) {
 }
 
 // CallBooleanMethod wraps the JNI CallBooleanMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallBooleanMethod(
 	obj *Object,
 	method MethodID,
@@ -73,6 +85,12 @@ func (e *Env) CallBooleanMethod(
 }
 
 // CallByteMethod wraps the JNI CallByteMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallByteMethod(
 	obj *Object,
 	method MethodID,
@@ -96,6 +114,12 @@ func (e *Env) CallByteMethod(
 }
 
 // CallCharMethod wraps the JNI CallCharMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallCharMethod(
 	obj *Object,
 	method MethodID,
@@ -119,6 +143,12 @@ func (e *Env) CallCharMethod(
 }
 
 // CallDoubleMethod wraps the JNI CallDoubleMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallDoubleMethod(
 	obj *Object,
 	method MethodID,
@@ -142,6 +172,12 @@ func (e *Env) CallDoubleMethod(
 }
 
 // CallFloatMethod wraps the JNI CallFloatMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallFloatMethod(
 	obj *Object,
 	method MethodID,
@@ -165,6 +201,12 @@ func (e *Env) CallFloatMethod(
 }
 
 // CallIntMethod wraps the JNI CallIntMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallIntMethod(
 	obj *Object,
 	method MethodID,
@@ -188,6 +230,12 @@ func (e *Env) CallIntMethod(
 }
 
 // CallLongMethod wraps the JNI CallLongMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallLongMethod(
 	obj *Object,
 	method MethodID,
@@ -211,6 +259,12 @@ func (e *Env) CallLongMethod(
 }
 
 // CallNonvirtualBooleanMethod wraps the JNI CallNonvirtualBooleanMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualBooleanMethod(
 	obj *Object,
 	cls *Class,
@@ -235,6 +289,12 @@ func (e *Env) CallNonvirtualBooleanMethod(
 }
 
 // CallNonvirtualByteMethod wraps the JNI CallNonvirtualByteMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualByteMethod(
 	obj *Object,
 	cls *Class,
@@ -259,6 +319,12 @@ func (e *Env) CallNonvirtualByteMethod(
 }
 
 // CallNonvirtualCharMethod wraps the JNI CallNonvirtualCharMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualCharMethod(
 	obj *Object,
 	cls *Class,
@@ -283,6 +349,12 @@ func (e *Env) CallNonvirtualCharMethod(
 }
 
 // CallNonvirtualDoubleMethod wraps the JNI CallNonvirtualDoubleMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualDoubleMethod(
 	obj *Object,
 	cls *Class,
@@ -307,6 +379,12 @@ func (e *Env) CallNonvirtualDoubleMethod(
 }
 
 // CallNonvirtualFloatMethod wraps the JNI CallNonvirtualFloatMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualFloatMethod(
 	obj *Object,
 	cls *Class,
@@ -331,6 +409,12 @@ func (e *Env) CallNonvirtualFloatMethod(
 }
 
 // CallNonvirtualIntMethod wraps the JNI CallNonvirtualIntMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualIntMethod(
 	obj *Object,
 	cls *Class,
@@ -355,6 +439,12 @@ func (e *Env) CallNonvirtualIntMethod(
 }
 
 // CallNonvirtualLongMethod wraps the JNI CallNonvirtualLongMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualLongMethod(
 	obj *Object,
 	cls *Class,
@@ -379,6 +469,12 @@ func (e *Env) CallNonvirtualLongMethod(
 }
 
 // CallNonvirtualObjectMethod wraps the JNI CallNonvirtualObjectMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualObjectMethod(
 	obj *Object,
 	cls *Class,
@@ -406,6 +502,12 @@ func (e *Env) CallNonvirtualObjectMethod(
 }
 
 // CallNonvirtualShortMethod wraps the JNI CallNonvirtualShortMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualShortMethod(
 	obj *Object,
 	cls *Class,
@@ -430,6 +532,12 @@ func (e *Env) CallNonvirtualShortMethod(
 }
 
 // CallNonvirtualVoidMethod wraps the JNI CallNonvirtualVoidMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallNonvirtualVoidMethod(
 	obj *Object,
 	cls *Class,
@@ -454,6 +562,12 @@ func (e *Env) CallNonvirtualVoidMethod(
 }
 
 // CallObjectMethod wraps the JNI CallObjectMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallObjectMethod(
 	obj *Object,
 	method MethodID,
@@ -480,6 +594,12 @@ func (e *Env) CallObjectMethod(
 }
 
 // CallShortMethod wraps the JNI CallShortMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallShortMethod(
 	obj *Object,
 	method MethodID,
@@ -503,6 +623,12 @@ func (e *Env) CallShortMethod(
 }
 
 // CallStaticBooleanMethod wraps the JNI CallStaticBooleanMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticBooleanMethod(
 	cls *Class,
 	method MethodID,
@@ -526,6 +652,12 @@ func (e *Env) CallStaticBooleanMethod(
 }
 
 // CallStaticByteMethod wraps the JNI CallStaticByteMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticByteMethod(
 	cls *Class,
 	method MethodID,
@@ -549,6 +681,12 @@ func (e *Env) CallStaticByteMethod(
 }
 
 // CallStaticCharMethod wraps the JNI CallStaticCharMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticCharMethod(
 	cls *Class,
 	method MethodID,
@@ -572,6 +710,12 @@ func (e *Env) CallStaticCharMethod(
 }
 
 // CallStaticDoubleMethod wraps the JNI CallStaticDoubleMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticDoubleMethod(
 	cls *Class,
 	method MethodID,
@@ -595,6 +739,12 @@ func (e *Env) CallStaticDoubleMethod(
 }
 
 // CallStaticFloatMethod wraps the JNI CallStaticFloatMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticFloatMethod(
 	cls *Class,
 	method MethodID,
@@ -618,6 +768,12 @@ func (e *Env) CallStaticFloatMethod(
 }
 
 // CallStaticIntMethod wraps the JNI CallStaticIntMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticIntMethod(
 	cls *Class,
 	method MethodID,
@@ -641,6 +797,12 @@ func (e *Env) CallStaticIntMethod(
 }
 
 // CallStaticLongMethod wraps the JNI CallStaticLongMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticLongMethod(
 	cls *Class,
 	method MethodID,
@@ -664,6 +826,12 @@ func (e *Env) CallStaticLongMethod(
 }
 
 // CallStaticObjectMethod wraps the JNI CallStaticObjectMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticObjectMethod(
 	cls *Class,
 	method MethodID,
@@ -690,6 +858,12 @@ func (e *Env) CallStaticObjectMethod(
 }
 
 // CallStaticShortMethod wraps the JNI CallStaticShortMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticShortMethod(
 	cls *Class,
 	method MethodID,
@@ -713,6 +887,12 @@ func (e *Env) CallStaticShortMethod(
 }
 
 // CallStaticVoidMethod wraps the JNI CallStaticVoidMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallStaticVoidMethod(
 	cls *Class,
 	method MethodID,
@@ -736,6 +916,12 @@ func (e *Env) CallStaticVoidMethod(
 }
 
 // CallVoidMethod wraps the JNI CallVoidMethodA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) CallVoidMethod(
 	obj *Object,
 	method MethodID,
@@ -759,6 +945,12 @@ func (e *Env) CallVoidMethod(
 }
 
 // DefineClass wraps the JNI DefineClass function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) DefineClass(
 	name string,
 	loader *Object,
@@ -831,6 +1023,12 @@ func (e *Env) FatalError(msg string) {
 }
 
 // FindClass wraps the JNI FindClass function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) FindClass(name string) (*Class, error) {
 	cName := append([]byte(name), 0)
 	_ret := capi.FindClass(e.ptr, (*capi.Cchar)(unsafe.Pointer(&cName[0])))
@@ -878,6 +1076,12 @@ func (e *Env) GetBooleanArrayRegion(
 }
 
 // GetBooleanField wraps the JNI GetBooleanField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetBooleanField(obj *Object, field FieldID) uint8 {
 	_ret := capi.GetBooleanField(e.ptr, obj.Ref(), field)
 	return uint8(_ret)
@@ -900,6 +1104,12 @@ func (e *Env) GetByteArrayRegion(
 }
 
 // GetByteField wraps the JNI GetByteField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetByteField(obj *Object, field FieldID) int8 {
 	_ret := capi.GetByteField(e.ptr, obj.Ref(), field)
 	return int8(_ret)
@@ -922,6 +1132,12 @@ func (e *Env) GetCharArrayRegion(
 }
 
 // GetCharField wraps the JNI GetCharField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetCharField(obj *Object, field FieldID) uint16 {
 	_ret := capi.GetCharField(e.ptr, obj.Ref(), field)
 	return uint16(_ret)
@@ -956,12 +1172,24 @@ func (e *Env) GetDoubleArrayRegion(
 }
 
 // GetDoubleField wraps the JNI GetDoubleField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetDoubleField(obj *Object, field FieldID) float64 {
 	_ret := capi.GetDoubleField(e.ptr, obj.Ref(), field)
 	return float64(_ret)
 }
 
 // GetFieldID wraps the JNI GetFieldID function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetFieldID(
 	cls *Class,
 	name string,
@@ -993,6 +1221,12 @@ func (e *Env) GetFloatArrayRegion(
 }
 
 // GetFloatField wraps the JNI GetFloatField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetFloatField(obj *Object, field FieldID) float32 {
 	_ret := capi.GetFloatField(e.ptr, obj.Ref(), field)
 	return float32(_ret)
@@ -1015,6 +1249,12 @@ func (e *Env) GetIntArrayRegion(
 }
 
 // GetIntField wraps the JNI GetIntField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetIntField(obj *Object, field FieldID) int32 {
 	_ret := capi.GetIntField(e.ptr, obj.Ref(), field)
 	return int32(_ret)
@@ -1037,12 +1277,24 @@ func (e *Env) GetLongArrayRegion(
 }
 
 // GetLongField wraps the JNI GetLongField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetLongField(obj *Object, field FieldID) int64 {
 	_ret := capi.GetLongField(e.ptr, obj.Ref(), field)
 	return int64(_ret)
 }
 
 // GetMethodID wraps the JNI GetMethodID function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetMethodID(
 	cls *Class,
 	name string,
@@ -1070,6 +1322,12 @@ func (e *Env) GetObjectArrayElement(array *ObjectArray, index int32) (*Object, e
 }
 
 // GetObjectClass wraps the JNI GetObjectClass function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetObjectClass(obj *Object) *Class {
 	_ret := capi.GetObjectClass(e.ptr, obj.Ref())
 	if _ret == 0 {
@@ -1079,6 +1337,12 @@ func (e *Env) GetObjectClass(obj *Object) *Class {
 }
 
 // GetObjectField wraps the JNI GetObjectField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetObjectField(obj *Object, field FieldID) *Object {
 	_ret := capi.GetObjectField(e.ptr, obj.Ref(), field)
 	if _ret == 0 {
@@ -1116,36 +1380,72 @@ func (e *Env) GetShortArrayRegion(
 }
 
 // GetShortField wraps the JNI GetShortField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetShortField(obj *Object, field FieldID) int16 {
 	_ret := capi.GetShortField(e.ptr, obj.Ref(), field)
 	return int16(_ret)
 }
 
 // GetStaticBooleanField wraps the JNI GetStaticBooleanField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticBooleanField(cls *Class, field FieldID) uint8 {
 	_ret := capi.GetStaticBooleanField(e.ptr, capi.Class(cls.Ref()), field)
 	return uint8(_ret)
 }
 
 // GetStaticByteField wraps the JNI GetStaticByteField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticByteField(cls *Class, field FieldID) int8 {
 	_ret := capi.GetStaticByteField(e.ptr, capi.Class(cls.Ref()), field)
 	return int8(_ret)
 }
 
 // GetStaticCharField wraps the JNI GetStaticCharField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticCharField(cls *Class, field FieldID) uint16 {
 	_ret := capi.GetStaticCharField(e.ptr, capi.Class(cls.Ref()), field)
 	return uint16(_ret)
 }
 
 // GetStaticDoubleField wraps the JNI GetStaticDoubleField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticDoubleField(cls *Class, field FieldID) float64 {
 	_ret := capi.GetStaticDoubleField(e.ptr, capi.Class(cls.Ref()), field)
 	return float64(_ret)
 }
 
 // GetStaticFieldID wraps the JNI GetStaticFieldID function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticFieldID(
 	cls *Class,
 	name string,
@@ -1161,24 +1461,48 @@ func (e *Env) GetStaticFieldID(
 }
 
 // GetStaticFloatField wraps the JNI GetStaticFloatField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticFloatField(cls *Class, field FieldID) float32 {
 	_ret := capi.GetStaticFloatField(e.ptr, capi.Class(cls.Ref()), field)
 	return float32(_ret)
 }
 
 // GetStaticIntField wraps the JNI GetStaticIntField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticIntField(cls *Class, field FieldID) int32 {
 	_ret := capi.GetStaticIntField(e.ptr, capi.Class(cls.Ref()), field)
 	return int32(_ret)
 }
 
 // GetStaticLongField wraps the JNI GetStaticLongField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticLongField(cls *Class, field FieldID) int64 {
 	_ret := capi.GetStaticLongField(e.ptr, capi.Class(cls.Ref()), field)
 	return int64(_ret)
 }
 
 // GetStaticMethodID wraps the JNI GetStaticMethodID function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticMethodID(
 	cls *Class,
 	name string,
@@ -1194,6 +1518,12 @@ func (e *Env) GetStaticMethodID(
 }
 
 // GetStaticObjectField wraps the JNI GetStaticObjectField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticObjectField(cls *Class, field FieldID) *Object {
 	_ret := capi.GetStaticObjectField(e.ptr, capi.Class(cls.Ref()), field)
 	if _ret == 0 {
@@ -1203,6 +1533,12 @@ func (e *Env) GetStaticObjectField(cls *Class, field FieldID) *Object {
 }
 
 // GetStaticShortField wraps the JNI GetStaticShortField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) GetStaticShortField(cls *Class, field FieldID) int16 {
 	_ret := capi.GetStaticShortField(e.ptr, capi.Class(cls.Ref()), field)
 	return int16(_ret)
@@ -1414,6 +1750,12 @@ func (e *Env) NewLongArray(length int32) *LongArray {
 }
 
 // NewObject wraps the JNI NewObjectA function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) NewObject(
 	cls *Class,
 	method MethodID,
@@ -1636,6 +1978,12 @@ func (e *Env) SetBooleanArrayRegion(
 }
 
 // SetBooleanField wraps the JNI SetBooleanField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetBooleanField(
 	obj *Object,
 	field FieldID,
@@ -1655,6 +2003,12 @@ func (e *Env) SetByteArrayRegion(
 }
 
 // SetByteField wraps the JNI SetByteField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetByteField(
 	obj *Object,
 	field FieldID,
@@ -1674,6 +2028,12 @@ func (e *Env) SetCharArrayRegion(
 }
 
 // SetCharField wraps the JNI SetCharField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetCharField(
 	obj *Object,
 	field FieldID,
@@ -1693,6 +2053,12 @@ func (e *Env) SetDoubleArrayRegion(
 }
 
 // SetDoubleField wraps the JNI SetDoubleField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetDoubleField(
 	obj *Object,
 	field FieldID,
@@ -1712,6 +2078,12 @@ func (e *Env) SetFloatArrayRegion(
 }
 
 // SetFloatField wraps the JNI SetFloatField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetFloatField(
 	obj *Object,
 	field FieldID,
@@ -1731,6 +2103,12 @@ func (e *Env) SetIntArrayRegion(
 }
 
 // SetIntField wraps the JNI SetIntField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetIntField(
 	obj *Object,
 	field FieldID,
@@ -1750,6 +2128,12 @@ func (e *Env) SetLongArrayRegion(
 }
 
 // SetLongField wraps the JNI SetLongField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetLongField(
 	obj *Object,
 	field FieldID,
@@ -1772,6 +2156,12 @@ func (e *Env) SetObjectArrayElement(
 }
 
 // SetObjectField wraps the JNI SetObjectField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetObjectField(
 	obj *Object,
 	field FieldID,
@@ -1791,6 +2181,12 @@ func (e *Env) SetShortArrayRegion(
 }
 
 // SetShortField wraps the JNI SetShortField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetShortField(
 	obj *Object,
 	field FieldID,
@@ -1800,6 +2196,12 @@ func (e *Env) SetShortField(
 }
 
 // SetStaticBooleanField wraps the JNI SetStaticBooleanField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticBooleanField(
 	cls *Class,
 	field FieldID,
@@ -1809,6 +2211,12 @@ func (e *Env) SetStaticBooleanField(
 }
 
 // SetStaticByteField wraps the JNI SetStaticByteField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticByteField(
 	cls *Class,
 	field FieldID,
@@ -1818,6 +2226,12 @@ func (e *Env) SetStaticByteField(
 }
 
 // SetStaticCharField wraps the JNI SetStaticCharField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticCharField(
 	cls *Class,
 	field FieldID,
@@ -1827,6 +2241,12 @@ func (e *Env) SetStaticCharField(
 }
 
 // SetStaticDoubleField wraps the JNI SetStaticDoubleField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticDoubleField(
 	cls *Class,
 	field FieldID,
@@ -1836,6 +2256,12 @@ func (e *Env) SetStaticDoubleField(
 }
 
 // SetStaticFloatField wraps the JNI SetStaticFloatField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticFloatField(
 	cls *Class,
 	field FieldID,
@@ -1845,6 +2271,12 @@ func (e *Env) SetStaticFloatField(
 }
 
 // SetStaticIntField wraps the JNI SetStaticIntField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticIntField(
 	cls *Class,
 	field FieldID,
@@ -1854,6 +2286,12 @@ func (e *Env) SetStaticIntField(
 }
 
 // SetStaticLongField wraps the JNI SetStaticLongField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticLongField(
 	cls *Class,
 	field FieldID,
@@ -1863,6 +2301,12 @@ func (e *Env) SetStaticLongField(
 }
 
 // SetStaticObjectField wraps the JNI SetStaticObjectField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticObjectField(
 	cls *Class,
 	field FieldID,
@@ -1872,6 +2316,12 @@ func (e *Env) SetStaticObjectField(
 }
 
 // SetStaticShortField wraps the JNI SetStaticShortField function.
+//
+// This is a low-level call. Prefer the typed wrappers (e.g. packages under
+// app/, content/, provider/) which handle JNI signatures, local/global
+// reference management, and error checking automatically. Use Env methods
+// directly only as a last resort for functionality not yet covered by a
+// typed wrapper.
 func (e *Env) SetStaticShortField(
 	cls *Class,
 	field FieldID,

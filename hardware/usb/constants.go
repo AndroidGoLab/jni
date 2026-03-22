@@ -5,6 +5,10 @@ package usb
 import "github.com/AndroidGoLab/jni/hardware/usb/consts"
 
 const (
+	Creator = consts.Creator
+)
+
+const (
 	ActionUsbAccessoryAttached = consts.ActionUsbAccessoryAttached
 	ActionUsbAccessoryDetached = consts.ActionUsbAccessoryDetached
 	ActionUsbDeviceAttached    = consts.ActionUsbDeviceAttached
@@ -12,8 +16,4 @@ const (
 	ExtraAccessory             = consts.ExtraAccessory
 	ExtraDevice                = consts.ExtraDevice
 	ExtraPermissionGranted     = consts.ExtraPermissionGranted
-)
-
-const (
-	Creator = consts.Creator
 )

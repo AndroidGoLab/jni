@@ -5,45 +5,6 @@ package nfc
 import "github.com/AndroidGoLab/jni/nfc/consts"
 
 const (
-	Creator                    = consts.Creator
-	RtdAlternativeCarrier      = consts.RtdAlternativeCarrier
-	RtdHandoverCarrier         = consts.RtdHandoverCarrier
-	RtdHandoverRequest         = consts.RtdHandoverRequest
-	RtdHandoverSelect          = consts.RtdHandoverSelect
-	RtdSmartPoster             = consts.RtdSmartPoster
-	RtdText                    = consts.RtdText
-	RtdUri                     = consts.RtdUri
-	TnfAbsoluteUri             = consts.TnfAbsoluteUri
-	TnfEmpty                   = consts.TnfEmpty
-	TnfExternalType            = consts.TnfExternalType
-	TnfMimeMedia               = consts.TnfMimeMedia
-	TnfUnchanged               = consts.TnfUnchanged
-	TnfUnknown                 = consts.TnfUnknown
-	TnfWellKnown               = consts.TnfWellKnown
-	FlagListenDisable          = consts.FlagListenDisable
-	FlagListenKeep             = consts.FlagListenKeep
-	FlagListenNfcPassiveA      = consts.FlagListenNfcPassiveA
-	FlagListenNfcPassiveB      = consts.FlagListenNfcPassiveB
-	FlagListenNfcPassiveF      = consts.FlagListenNfcPassiveF
-	FlagReaderDisable          = consts.FlagReaderDisable
-	FlagReaderKeep             = consts.FlagReaderKeep
-	FlagReaderNfcA             = consts.FlagReaderNfcA
-	FlagReaderNfcB             = consts.FlagReaderNfcB
-	FlagReaderNfcBarcode       = consts.FlagReaderNfcBarcode
-	FlagReaderNfcF             = consts.FlagReaderNfcF
-	FlagReaderNfcV             = consts.FlagReaderNfcV
-	FlagReaderNoPlatformSounds = consts.FlagReaderNoPlatformSounds
-	FlagReaderSkipNdefCheck    = consts.FlagReaderSkipNdefCheck
-	PreferredPaymentChanged    = consts.PreferredPaymentChanged
-	PreferredPaymentLoaded     = consts.PreferredPaymentLoaded
-	PreferredPaymentUpdated    = consts.PreferredPaymentUpdated
-	StateOff                   = consts.StateOff
-	StateOn                    = consts.StateOn
-	StateTurningOff            = consts.StateTurningOff
-	StateTurningOn             = consts.StateTurningOn
-)
-
-const (
 	MifareClassic                      = consts.MifareClassic
 	NfcForumType1                      = consts.NfcForumType1
 	NfcForumType2                      = consts.NfcForumType2
@@ -65,4 +26,43 @@ const (
 	ExtraReaderPresenceCheckDelay      = consts.ExtraReaderPresenceCheckDelay
 	ExtraSecureElementName             = consts.ExtraSecureElementName
 	ExtraTag                           = consts.ExtraTag
+)
+
+const (
+	Creator                    = consts.Creator
+	FlagListenDisable          = consts.FlagListenDisable
+	FlagListenKeep             = consts.FlagListenKeep
+	FlagListenNfcPassiveA      = consts.FlagListenNfcPassiveA
+	FlagListenNfcPassiveB      = consts.FlagListenNfcPassiveB
+	FlagListenNfcPassiveF      = consts.FlagListenNfcPassiveF
+	FlagReaderDisable          = consts.FlagReaderDisable
+	FlagReaderKeep             = consts.FlagReaderKeep
+	FlagReaderNfcA             = consts.FlagReaderNfcA
+	FlagReaderNfcB             = consts.FlagReaderNfcB
+	FlagReaderNfcBarcode       = consts.FlagReaderNfcBarcode
+	FlagReaderNfcF             = consts.FlagReaderNfcF
+	FlagReaderNfcV             = consts.FlagReaderNfcV
+	FlagReaderNoPlatformSounds = consts.FlagReaderNoPlatformSounds
+	FlagReaderSkipNdefCheck    = consts.FlagReaderSkipNdefCheck
+	PreferredPaymentChanged    = consts.PreferredPaymentChanged
+	PreferredPaymentLoaded     = consts.PreferredPaymentLoaded
+	PreferredPaymentUpdated    = consts.PreferredPaymentUpdated
+	StateOff                   = consts.StateOff
+	StateOn                    = consts.StateOn
+	StateTurningOff            = consts.StateTurningOff
+	StateTurningOn             = consts.StateTurningOn
+	RtdAlternativeCarrier      = consts.RtdAlternativeCarrier
+	RtdHandoverCarrier         = consts.RtdHandoverCarrier
+	RtdHandoverRequest         = consts.RtdHandoverRequest
+	RtdHandoverSelect          = consts.RtdHandoverSelect
+	RtdSmartPoster             = consts.RtdSmartPoster
+	RtdText                    = consts.RtdText
+	RtdUri                     = consts.RtdUri
+	TnfAbsoluteUri             = consts.TnfAbsoluteUri
+	TnfEmpty                   = consts.TnfEmpty
+	TnfExternalType            = consts.TnfExternalType
+	TnfMimeMedia               = consts.TnfMimeMedia
+	TnfUnchanged               = consts.TnfUnchanged
+	TnfUnknown                 = consts.TnfUnknown
+	TnfWellKnown               = consts.TnfWellKnown
 )

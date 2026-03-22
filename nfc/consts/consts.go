@@ -3,45 +3,6 @@
 package consts
 
 const (
-	Creator                    int = 0
-	RtdAlternativeCarrier      int = 0
-	RtdHandoverCarrier         int = 0
-	RtdHandoverRequest         int = 0
-	RtdHandoverSelect          int = 0
-	RtdSmartPoster             int = 0
-	RtdText                    int = 0
-	RtdUri                     int = 0
-	TnfAbsoluteUri             int = 3
-	TnfEmpty                   int = 0
-	TnfExternalType            int = 4
-	TnfMimeMedia               int = 2
-	TnfUnchanged               int = 6
-	TnfUnknown                 int = 5
-	TnfWellKnown               int = 1
-	FlagListenDisable          int = 0
-	FlagListenKeep             int = -2147483648
-	FlagListenNfcPassiveA      int = 1
-	FlagListenNfcPassiveB      int = 2
-	FlagListenNfcPassiveF      int = 4
-	FlagReaderDisable          int = 0
-	FlagReaderKeep             int = -2147483648
-	FlagReaderNfcA             int = 1
-	FlagReaderNfcB             int = 2
-	FlagReaderNfcBarcode       int = 16
-	FlagReaderNfcF             int = 4
-	FlagReaderNfcV             int = 8
-	FlagReaderNoPlatformSounds int = 256
-	FlagReaderSkipNdefCheck    int = 128
-	PreferredPaymentChanged    int = 2
-	PreferredPaymentLoaded     int = 1
-	PreferredPaymentUpdated    int = 3
-	StateOff                   int = 1
-	StateOn                    int = 3
-	StateTurningOff            int = 4
-	StateTurningOn             int = 2
-)
-
-const (
 	MifareClassic                      string = "com.nxp.ndef.mifareclassic"
 	NfcForumType1                      string = "org.nfcforum.ndef.type1"
 	NfcForumType2                      string = "org.nfcforum.ndef.type2"
@@ -63,4 +24,43 @@ const (
 	ExtraReaderPresenceCheckDelay      string = "presence"
 	ExtraSecureElementName             string = "android.nfc.extra.SECURE_ELEMENT_NAME"
 	ExtraTag                           string = "android.nfc.extra.TAG"
+)
+
+const (
+	Creator                    int = 0
+	FlagListenDisable          int = 0
+	FlagListenKeep             int = -2147483648
+	FlagListenNfcPassiveA      int = 1
+	FlagListenNfcPassiveB      int = 2
+	FlagListenNfcPassiveF      int = 4
+	FlagReaderDisable          int = 0
+	FlagReaderKeep             int = -2147483648
+	FlagReaderNfcA             int = 1
+	FlagReaderNfcB             int = 2
+	FlagReaderNfcBarcode       int = 16
+	FlagReaderNfcF             int = 4
+	FlagReaderNfcV             int = 8
+	FlagReaderNoPlatformSounds int = 256
+	FlagReaderSkipNdefCheck    int = 128
+	PreferredPaymentChanged    int = 2
+	PreferredPaymentLoaded     int = 1
+	PreferredPaymentUpdated    int = 3
+	StateOff                   int = 1
+	StateOn                    int = 3
+	StateTurningOff            int = 4
+	StateTurningOn             int = 2
+	RtdAlternativeCarrier      int = 0
+	RtdHandoverCarrier         int = 0
+	RtdHandoverRequest         int = 0
+	RtdHandoverSelect          int = 0
+	RtdSmartPoster             int = 0
+	RtdText                    int = 0
+	RtdUri                     int = 0
+	TnfAbsoluteUri             int = 3
+	TnfEmpty                   int = 0
+	TnfExternalType            int = 4
+	TnfMimeMedia               int = 2
+	TnfUnchanged               int = 6
+	TnfUnknown                 int = 5
+	TnfWellKnown               int = 1
 )

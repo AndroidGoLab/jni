@@ -5,6 +5,79 @@
 package: print
 go_import: github.com/AndroidGoLab/jni/print
 classes:
+    - java_class: android.print.PrintJobInfo
+      go_type: JobInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAdvancedIntOption
+          go_name: GetAdvancedIntOption
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getAdvancedStringOption
+          go_name: GetAdvancedStringOption
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getAttributes
+          go_name: GetAttributes
+          returns: android.print.PrintAttributes
+          error: true
+        - java_method: getCopies
+          go_name: GetCopies
+          returns: int
+          error: true
+        - java_method: getCreationTime
+          go_name: GetCreationTime
+          returns: long
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: android.print.PrintJobId
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
+          returns: String
+          error: true
+        - java_method: getPages
+          go_name: GetPages
+          returns: android.print.PageRange[]
+          error: true
+        - java_method: getPrinterId
+          go_name: GetPrinterId
+          returns: android.print.PrinterId
+          error: true
+        - java_method: getState
+          go_name: GetState
+          returns: int
+          error: true
+        - java_method: hasAdvancedOption
+          go_name: HasAdvancedOption
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.print.PrintManager
       go_type: Manager
       obtain: system_service
@@ -85,79 +158,6 @@ classes:
           error: true
         - java_method: restart
           go_name: Restart
-          returns: void
-          error: true
-    - java_class: android.print.PrintJobInfo
-      go_type: JobInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAdvancedIntOption
-          go_name: GetAdvancedIntOption
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getAdvancedStringOption
-          go_name: GetAdvancedStringOption
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getAttributes
-          go_name: GetAttributes
-          returns: android.print.PrintAttributes
-          error: true
-        - java_method: getCopies
-          go_name: GetCopies
-          returns: int
-          error: true
-        - java_method: getCreationTime
-          go_name: GetCreationTime
-          returns: long
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: android.print.PrintJobId
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: String
-          error: true
-        - java_method: getPages
-          go_name: GetPages
-          returns: android.print.PageRange[]
-          error: true
-        - java_method: getPrinterId
-          go_name: GetPrinterId
-          returns: android.print.PrinterId
-          error: true
-        - java_method: getState
-          go_name: GetState
-          returns: int
-          error: true
-        - java_method: hasAdvancedOption
-          go_name: HasAdvancedOption
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
           returns: void
           error: true
 constants:

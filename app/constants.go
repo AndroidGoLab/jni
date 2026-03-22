@@ -6,13 +6,7 @@ import "github.com/AndroidGoLab/jni/app/consts"
 
 const (
 	Creator                                    = consts.Creator
-	FlagAllowUnsafeImplicitIntent              = consts.FlagAllowUnsafeImplicitIntent
-	FlagCancelCurrent                          = consts.FlagCancelCurrent
-	FlagImmutable                              = consts.FlagImmutable
-	FlagMutable                                = consts.FlagMutable
-	FlagNoCreate                               = consts.FlagNoCreate
-	FlagOneShot                                = consts.FlagOneShot
-	FlagUpdateCurrent                          = consts.FlagUpdateCurrent
+	Empty                                      = consts.Empty
 	BindAboveClient                            = consts.BindAboveClient
 	BindAdjustWithActivity                     = consts.BindAdjustWithActivity
 	BindAllowActivityStarts                    = consts.BindAllowActivityStarts
@@ -42,6 +36,25 @@ const (
 	ReceiverExported                           = consts.ReceiverExported
 	ReceiverNotExported                        = consts.ReceiverNotExported
 	ReceiverVisibleToInstantApps               = consts.ReceiverVisibleToInstantApps
+	DefaultKeysDialer                          = consts.DefaultKeysDialer
+	DefaultKeysDisable                         = consts.DefaultKeysDisable
+	DefaultKeysSearchGlobal                    = consts.DefaultKeysSearchGlobal
+	DefaultKeysSearchLocal                     = consts.DefaultKeysSearchLocal
+	DefaultKeysShortcut                        = consts.DefaultKeysShortcut
+	FullscreenModeRequestEnter                 = consts.FullscreenModeRequestEnter
+	FullscreenModeRequestExit                  = consts.FullscreenModeRequestExit
+	OverrideTransitionClose                    = consts.OverrideTransitionClose
+	OverrideTransitionOpen                     = consts.OverrideTransitionOpen
+	ResultCanceled                             = consts.ResultCanceled
+	ResultFirstUser                            = consts.ResultFirstUser
+	ResultOk                                   = consts.ResultOk
+	FlagAllowUnsafeImplicitIntent              = consts.FlagAllowUnsafeImplicitIntent
+	FlagCancelCurrent                          = consts.FlagCancelCurrent
+	FlagImmutable                              = consts.FlagImmutable
+	FlagMutable                                = consts.FlagMutable
+	FlagNoCreate                               = consts.FlagNoCreate
+	FlagOneShot                                = consts.FlagOneShot
+	FlagUpdateCurrent                          = consts.FlagUpdateCurrent
 	CaptureContentForNoteBlockedByAdmin        = consts.CaptureContentForNoteBlockedByAdmin
 	CaptureContentForNoteFailed                = consts.CaptureContentForNoteFailed
 	CaptureContentForNoteSuccess               = consts.CaptureContentForNoteSuccess
@@ -102,19 +115,6 @@ const (
 	UriAllowUnsafe                             = consts.UriAllowUnsafe
 	UriAndroidAppScheme                        = consts.UriAndroidAppScheme
 	UriIntentScheme                            = consts.UriIntentScheme
-	Empty                                      = consts.Empty
-	DefaultKeysDialer                          = consts.DefaultKeysDialer
-	DefaultKeysDisable                         = consts.DefaultKeysDisable
-	DefaultKeysSearchGlobal                    = consts.DefaultKeysSearchGlobal
-	DefaultKeysSearchLocal                     = consts.DefaultKeysSearchLocal
-	DefaultKeysShortcut                        = consts.DefaultKeysShortcut
-	FullscreenModeRequestEnter                 = consts.FullscreenModeRequestEnter
-	FullscreenModeRequestExit                  = consts.FullscreenModeRequestExit
-	OverrideTransitionClose                    = consts.OverrideTransitionClose
-	OverrideTransitionOpen                     = consts.OverrideTransitionOpen
-	ResultCanceled                             = consts.ResultCanceled
-	ResultFirstUser                            = consts.ResultFirstUser
-	ResultOk                                   = consts.ResultOk
 )
 
 const (

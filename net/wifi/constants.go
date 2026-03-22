@@ -5,6 +5,8 @@ package wifi
 import "github.com/AndroidGoLab/jni/net/wifi/consts"
 
 const (
+	FrequencyUnits                            = consts.FrequencyUnits
+	LinkSpeedUnits                            = consts.LinkSpeedUnits
 	ActionPickWifiNetwork                     = consts.ActionPickWifiNetwork
 	ActionRequestScanAlwaysAvailable          = consts.ActionRequestScanAlwaysAvailable
 	ActionWifiNetworkSuggestionPostConnection = consts.ActionWifiNetworkSuggestionPostConnection
@@ -31,11 +33,25 @@ const (
 	SupplicantStateChangedAction              = consts.SupplicantStateChangedAction
 	UnknownSsid                               = consts.UnknownSsid
 	WifiStateChangedAction                    = consts.WifiStateChangedAction
-	FrequencyUnits                            = consts.FrequencyUnits
-	LinkSpeedUnits                            = consts.LinkSpeedUnits
 )
 
 const (
+	LinkSpeedUnknown                                   = consts.LinkSpeedUnknown
+	SecurityTypeDpp                                    = consts.SecurityTypeDpp
+	SecurityTypeEap                                    = consts.SecurityTypeEap
+	SecurityTypeEapWpa3Enterprise                      = consts.SecurityTypeEapWpa3Enterprise
+	SecurityTypeEapWpa3Enterprise192Bit                = consts.SecurityTypeEapWpa3Enterprise192Bit
+	SecurityTypeOpen                                   = consts.SecurityTypeOpen
+	SecurityTypeOsen                                   = consts.SecurityTypeOsen
+	SecurityTypeOwe                                    = consts.SecurityTypeOwe
+	SecurityTypePasspointR1R2                          = consts.SecurityTypePasspointR1R2
+	SecurityTypePasspointR3                            = consts.SecurityTypePasspointR3
+	SecurityTypePsk                                    = consts.SecurityTypePsk
+	SecurityTypeSae                                    = consts.SecurityTypeSae
+	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
+	SecurityTypeWapiCert                               = consts.SecurityTypeWapiCert
+	SecurityTypeWapiPsk                                = consts.SecurityTypeWapiPsk
+	SecurityTypeWep                                    = consts.SecurityTypeWep
 	ActionRemoveSuggestionDisconnect                   = consts.ActionRemoveSuggestionDisconnect
 	ActionRemoveSuggestionLinger                       = consts.ActionRemoveSuggestionLinger
 	ErrorAuthenticating                                = consts.ErrorAuthenticating
@@ -114,20 +130,4 @@ const (
 	WifiStandard11n                                    = consts.WifiStandard11n
 	WifiStandardLegacy                                 = consts.WifiStandardLegacy
 	WifiStandardUnknown                                = consts.WifiStandardUnknown
-	LinkSpeedUnknown                                   = consts.LinkSpeedUnknown
-	SecurityTypeDpp                                    = consts.SecurityTypeDpp
-	SecurityTypeEap                                    = consts.SecurityTypeEap
-	SecurityTypeEapWpa3Enterprise                      = consts.SecurityTypeEapWpa3Enterprise
-	SecurityTypeEapWpa3Enterprise192Bit                = consts.SecurityTypeEapWpa3Enterprise192Bit
-	SecurityTypeOpen                                   = consts.SecurityTypeOpen
-	SecurityTypeOsen                                   = consts.SecurityTypeOsen
-	SecurityTypeOwe                                    = consts.SecurityTypeOwe
-	SecurityTypePasspointR1R2                          = consts.SecurityTypePasspointR1R2
-	SecurityTypePasspointR3                            = consts.SecurityTypePasspointR3
-	SecurityTypePsk                                    = consts.SecurityTypePsk
-	SecurityTypeSae                                    = consts.SecurityTypeSae
-	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
-	SecurityTypeWapiCert                               = consts.SecurityTypeWapiCert
-	SecurityTypeWapiPsk                                = consts.SecurityTypeWapiPsk
-	SecurityTypeWep                                    = consts.SecurityTypeWep
 )

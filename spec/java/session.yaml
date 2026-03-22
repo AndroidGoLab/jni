@@ -5,6 +5,91 @@
 package: session
 go_import: github.com/AndroidGoLab/jni/media/session
 classes:
+    - java_class: android.media.session.MediaSessionManager
+      go_type: MediaSessionManager
+      obtain: system_service
+      service_name: media_session
+      close: true
+      methods:
+        - java_method: addOnActiveSessionsChangedListener
+          go_name: AddOnActiveSessionsChangedListener
+          params:
+            - java_type: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addOnMediaKeyEventSessionChangedListener
+          go_name: AddOnMediaKeyEventSessionChangedListener
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.media.session.MediaSessionManager$OnMediaKeyEventSessionChangedListener
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addOnSession2TokensChangedListener
+          go_name: AddOnSession2TokensChangedListener
+          params:
+            - java_type: android.media.session.MediaSessionManager$OnSession2TokensChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getActiveSessions
+          go_name: GetActiveSessions
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: java.util.List<android.media.session.MediaController>
+          error: true
+        - java_method: getMediaKeyEventSession
+          go_name: GetMediaKeyEventSession
+          returns: android.media.session.MediaSession$Token
+          error: true
+        - java_method: getMediaKeyEventSessionPackageName
+          go_name: GetMediaKeyEventSessionPackageName
+          returns: String
+          error: true
+        - java_method: getSession2Tokens
+          go_name: GetSession2Tokens
+          returns: java.util.List<android.media.Session2Token>
+          error: true
+        - java_method: isTrustedForMediaControl
+          go_name: IsTrustedForMediaControl
+          params:
+            - java_type: android.media.session.MediaSessionManager$RemoteUserInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: notifySession2Created
+          go_name: NotifySession2Created
+          params:
+            - java_type: android.media.Session2Token
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeOnActiveSessionsChangedListener
+          go_name: RemoveOnActiveSessionsChangedListener
+          params:
+            - java_type: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeOnMediaKeyEventSessionChangedListener
+          go_name: RemoveOnMediaKeyEventSessionChangedListener
+          params:
+            - java_type: android.media.session.MediaSessionManager$OnMediaKeyEventSessionChangedListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeOnSession2TokensChangedListener
+          go_name: RemoveOnSession2TokensChangedListener
+          params:
+            - java_type: android.media.session.MediaSessionManager$OnSession2TokensChangedListener
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.media.session.MediaController
       go_type: MediaController
       methods:
@@ -111,91 +196,6 @@ classes:
           go_name: UnregisterCallback
           params:
             - java_type: android.media.session.MediaController$Callback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.session.MediaSessionManager
-      go_type: MediaSessionManager
-      obtain: system_service
-      service_name: media_session
-      close: true
-      methods:
-        - java_method: addOnActiveSessionsChangedListener
-          go_name: AddOnActiveSessionsChangedListener
-          params:
-            - java_type: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
-              go_name: arg0
-            - java_type: android.content.ComponentName
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: addOnMediaKeyEventSessionChangedListener
-          go_name: AddOnMediaKeyEventSessionChangedListener
-          params:
-            - java_type: java.util.concurrent.Executor
-              go_name: arg0
-            - java_type: android.media.session.MediaSessionManager$OnMediaKeyEventSessionChangedListener
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: addOnSession2TokensChangedListener
-          go_name: AddOnSession2TokensChangedListener
-          params:
-            - java_type: android.media.session.MediaSessionManager$OnSession2TokensChangedListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getActiveSessions
-          go_name: GetActiveSessions
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: java.util.List<android.media.session.MediaController>
-          error: true
-        - java_method: getMediaKeyEventSession
-          go_name: GetMediaKeyEventSession
-          returns: android.media.session.MediaSession$Token
-          error: true
-        - java_method: getMediaKeyEventSessionPackageName
-          go_name: GetMediaKeyEventSessionPackageName
-          returns: String
-          error: true
-        - java_method: getSession2Tokens
-          go_name: GetSession2Tokens
-          returns: java.util.List<android.media.Session2Token>
-          error: true
-        - java_method: isTrustedForMediaControl
-          go_name: IsTrustedForMediaControl
-          params:
-            - java_type: android.media.session.MediaSessionManager$RemoteUserInfo
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: notifySession2Created
-          go_name: NotifySession2Created
-          params:
-            - java_type: android.media.Session2Token
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeOnActiveSessionsChangedListener
-          go_name: RemoveOnActiveSessionsChangedListener
-          params:
-            - java_type: android.media.session.MediaSessionManager$OnActiveSessionsChangedListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeOnMediaKeyEventSessionChangedListener
-          go_name: RemoveOnMediaKeyEventSessionChangedListener
-          params:
-            - java_type: android.media.session.MediaSessionManager$OnMediaKeyEventSessionChangedListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeOnSession2TokensChangedListener
-          go_name: RemoveOnSession2TokensChangedListener
-          params:
-            - java_type: android.media.session.MediaSessionManager$OnSession2TokensChangedListener
               go_name: arg0
           returns: void
           error: true

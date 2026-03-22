@@ -3,23 +3,6 @@
 package consts
 
 const (
-	DocumentLinearizedTypeLinearized    int = 1
-	DocumentLinearizedTypeNonLinearized int = 0
-	PdfFormTypeAcroForm                 int = 1
-	PdfFormTypeNone                     int = 0
-	PdfFormTypeXfaForeground            int = 3
-	PdfFormTypeXfaFull                  int = 2
-	RenderModeForDisplay                int = 1
-	RenderModeForPrint                  int = 2
-	Bold                                int = 1
-	BoldItalic                          int = 3
-	Default                             int = 0
-	DefaultBold                         int = 0
-	Italic                              int = 2
-	Monospace                           int = 0
-	Normal                              int = 0
-	SansSerif                           int = 0
-	Serif                               int = 0
 	Creator                             int = 0
 	DensityNone                         int = 0
 	Alpha8                              int = 0
@@ -59,6 +42,7 @@ const (
 	TextRunFlagRightEdge                int = 16384
 	UnderlineTextFlag                   int = 8
 	VerticalTextFlag                    int = 4096
+	AllSaveFlag                         int = 31
 	ModeAppend                          int = 33554432
 	ModeCreate                          int = 134217728
 	ModeReadOnly                        int = 268435456
@@ -67,5 +51,21 @@ const (
 	ModeWorldReadable                   int = 1
 	ModeWorldWriteable                  int = 2
 	ModeWriteOnly                       int = 536870912
-	AllSaveFlag                         int = 31
+	DocumentLinearizedTypeLinearized    int = 1
+	DocumentLinearizedTypeNonLinearized int = 0
+	PdfFormTypeAcroForm                 int = 1
+	PdfFormTypeNone                     int = 0
+	PdfFormTypeXfaForeground            int = 3
+	PdfFormTypeXfaFull                  int = 2
+	RenderModeForDisplay                int = 1
+	RenderModeForPrint                  int = 2
+	Bold                                int = 1
+	BoldItalic                          int = 3
+	Default                             int = 0
+	DefaultBold                         int = 0
+	Italic                              int = 2
+	Monospace                           int = 0
+	Normal                              int = 0
+	SansSerif                           int = 0
+	Serif                               int = 0
 )

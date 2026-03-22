@@ -3,6 +3,8 @@
 package consts
 
 const (
+	FrequencyUnits                            string = "MHz"
+	LinkSpeedUnits                            string = "Mbps"
 	ActionPickWifiNetwork                     string = "android.net.wifi.PICK_WIFI_NETWORK"
 	ActionRequestScanAlwaysAvailable          string = "android.net.wifi.action.REQUEST_SCAN_ALWAYS_AVAILABLE"
 	ActionWifiNetworkSuggestionPostConnection string = "android.net.wifi.action.WIFI_NETWORK_SUGGESTION_POST_CONNECTION"
@@ -29,11 +31,25 @@ const (
 	SupplicantStateChangedAction              string = "android.net.wifi.supplicant.STATE_CHANGE"
 	UnknownSsid                               string = "<unknown ssid>"
 	WifiStateChangedAction                    string = "android.net.wifi.WIFI_STATE_CHANGED"
-	FrequencyUnits                            string = "MHz"
-	LinkSpeedUnits                            string = "Mbps"
 )
 
 const (
+	LinkSpeedUnknown                                   int = -1
+	SecurityTypeDpp                                    int = 13
+	SecurityTypeEap                                    int = 3
+	SecurityTypeEapWpa3Enterprise                      int = 9
+	SecurityTypeEapWpa3Enterprise192Bit                int = 5
+	SecurityTypeOpen                                   int = 0
+	SecurityTypeOsen                                   int = 10
+	SecurityTypeOwe                                    int = 6
+	SecurityTypePasspointR1R2                          int = 11
+	SecurityTypePasspointR3                            int = 12
+	SecurityTypePsk                                    int = 2
+	SecurityTypeSae                                    int = 4
+	SecurityTypeUnknown                                int = -1
+	SecurityTypeWapiCert                               int = 8
+	SecurityTypeWapiPsk                                int = 7
+	SecurityTypeWep                                    int = 1
 	ActionRemoveSuggestionDisconnect                   int = 2
 	ActionRemoveSuggestionLinger                       int = 1
 	ErrorAuthenticating                                int = 1
@@ -112,20 +128,4 @@ const (
 	WifiStandard11n                                    int = 4
 	WifiStandardLegacy                                 int = 1
 	WifiStandardUnknown                                int = 0
-	LinkSpeedUnknown                                   int = -1
-	SecurityTypeDpp                                    int = 13
-	SecurityTypeEap                                    int = 3
-	SecurityTypeEapWpa3Enterprise                      int = 9
-	SecurityTypeEapWpa3Enterprise192Bit                int = 5
-	SecurityTypeOpen                                   int = 0
-	SecurityTypeOsen                                   int = 10
-	SecurityTypeOwe                                    int = 6
-	SecurityTypePasspointR1R2                          int = 11
-	SecurityTypePasspointR3                            int = 12
-	SecurityTypePsk                                    int = 2
-	SecurityTypeSae                                    int = 4
-	SecurityTypeUnknown                                int = -1
-	SecurityTypeWapiCert                               int = 8
-	SecurityTypeWapiPsk                                int = 7
-	SecurityTypeWep                                    int = 1
 )

@@ -5,23 +5,6 @@ package pdf
 import "github.com/AndroidGoLab/jni/graphics/pdf/consts"
 
 const (
-	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
-	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
-	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
-	PdfFormTypeNone                     = consts.PdfFormTypeNone
-	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
-	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
-	RenderModeForDisplay                = consts.RenderModeForDisplay
-	RenderModeForPrint                  = consts.RenderModeForPrint
-	Bold                                = consts.Bold
-	BoldItalic                          = consts.BoldItalic
-	Default                             = consts.Default
-	DefaultBold                         = consts.DefaultBold
-	Italic                              = consts.Italic
-	Monospace                           = consts.Monospace
-	Normal                              = consts.Normal
-	SansSerif                           = consts.SansSerif
-	Serif                               = consts.Serif
 	Creator                             = consts.Creator
 	DensityNone                         = consts.DensityNone
 	Alpha8                              = consts.Alpha8
@@ -61,6 +44,7 @@ const (
 	TextRunFlagRightEdge                = consts.TextRunFlagRightEdge
 	UnderlineTextFlag                   = consts.UnderlineTextFlag
 	VerticalTextFlag                    = consts.VerticalTextFlag
+	AllSaveFlag                         = consts.AllSaveFlag
 	ModeAppend                          = consts.ModeAppend
 	ModeCreate                          = consts.ModeCreate
 	ModeReadOnly                        = consts.ModeReadOnly
@@ -69,5 +53,21 @@ const (
 	ModeWorldReadable                   = consts.ModeWorldReadable
 	ModeWorldWriteable                  = consts.ModeWorldWriteable
 	ModeWriteOnly                       = consts.ModeWriteOnly
-	AllSaveFlag                         = consts.AllSaveFlag
+	DocumentLinearizedTypeLinearized    = consts.DocumentLinearizedTypeLinearized
+	DocumentLinearizedTypeNonLinearized = consts.DocumentLinearizedTypeNonLinearized
+	PdfFormTypeAcroForm                 = consts.PdfFormTypeAcroForm
+	PdfFormTypeNone                     = consts.PdfFormTypeNone
+	PdfFormTypeXfaForeground            = consts.PdfFormTypeXfaForeground
+	PdfFormTypeXfaFull                  = consts.PdfFormTypeXfaFull
+	RenderModeForDisplay                = consts.RenderModeForDisplay
+	RenderModeForPrint                  = consts.RenderModeForPrint
+	Bold                                = consts.Bold
+	BoldItalic                          = consts.BoldItalic
+	Default                             = consts.Default
+	DefaultBold                         = consts.DefaultBold
+	Italic                              = consts.Italic
+	Monospace                           = consts.Monospace
+	Normal                              = consts.Normal
+	SansSerif                           = consts.SansSerif
+	Serif                               = consts.Serif
 )

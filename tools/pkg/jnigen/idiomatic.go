@@ -103,6 +103,38 @@ func errorDescription(name string) string {
 	}
 }
 
+// isTypedWrapperReplaced returns true for Env methods whose functionality
+// is fully covered by the typed wrapper packages (app/, content/, provider/,
+// etc.). These are the methods that require JNI class names and method
+// signatures as magic strings.
+func isTypedWrapperReplaced(goName string) bool {
+	switch {
+	case goName == "FindClass",
+		goName == "DefineClass",
+		goName == "GetObjectClass",
+		goName == "NewObject",
+		goName == "AllocObject":
+		return true
+	case strings.HasPrefix(goName, "Call"):
+		return true
+	case strings.HasPrefix(goName, "GetMethodID"),
+		strings.HasPrefix(goName, "GetStaticMethodID"),
+		strings.HasPrefix(goName, "GetFieldID"),
+		strings.HasPrefix(goName, "GetStaticFieldID"):
+		return true
+	case strings.HasPrefix(goName, "Get") && strings.HasSuffix(goName, "Field"):
+		return true
+	case strings.HasPrefix(goName, "Set") && strings.HasSuffix(goName, "Field"):
+		return true
+	case strings.HasPrefix(goName, "GetStatic") && strings.HasSuffix(goName, "Field"):
+		return true
+	case strings.HasPrefix(goName, "SetStatic") && strings.HasSuffix(goName, "Field"):
+		return true
+	default:
+		return false
+	}
+}
+
 func buildRenderMethod(m MergedMethod) RenderMethod {
 	rm := RenderMethod{
 		GoName:         m.GoName,
@@ -112,6 +144,9 @@ func buildRenderMethod(m MergedMethod) RenderMethod {
 
 	// Build doc comment.
 	rm.Doc = fmt.Sprintf("// %s wraps the JNI %s function.", m.GoName, m.CapiCall)
+	if isTypedWrapperReplaced(m.GoName) {
+		rm.Doc += "\n//\n// This is a low-level call. Prefer the typed wrappers (e.g. packages under\n// app/, content/, provider/) which handle JNI signatures, local/global\n// reference management, and error checking automatically. Use Env methods\n// directly only as a last resort for functionality not yet covered by a\n// typed wrapper."
+	}
 
 	// Build Go parameter list.
 	var goParams []string

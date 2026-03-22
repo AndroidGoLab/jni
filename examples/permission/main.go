@@ -19,10 +19,8 @@ import (
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
+	"github.com/AndroidGoLab/jni/content/permission"
 	"github.com/AndroidGoLab/jni/examples/common/ui"
-
-	// Ensure permission JNI bindings are initialized.
-	_ "github.com/AndroidGoLab/jni/content/permission"
 )
 
 func main() {}
@@ -77,14 +75,14 @@ func run(vm *jni.VM, output *bytes.Buffer) error {
 		name  string
 		value string
 	}{
-		{"INTERNET", "android.permission.INTERNET"},
-		{"CAMERA", "android.permission.CAMERA"},
-		{"RECORD_AUDIO", "android.permission.RECORD_AUDIO"},
-		{"ACCESS_FINE_LOCATION", "android.permission.ACCESS_FINE_LOCATION"},
-		{"READ_CONTACTS", "android.permission.READ_CONTACTS"},
-		{"WRITE_EXTERNAL_STORAGE", "android.permission.WRITE_EXTERNAL_STORAGE"},
-		{"READ_PHONE_STATE", "android.permission.READ_PHONE_STATE"},
-		{"BLUETOOTH_CONNECT", "android.permission.BLUETOOTH_CONNECT"},
+		{"INTERNET", permission.Internet},
+		{"CAMERA", permission.Camera},
+		{"RECORD_AUDIO", permission.RecordAudio},
+		{"ACCESS_FINE_LOCATION", permission.AccessFineLocation},
+		{"READ_CONTACTS", permission.ReadContacts},
+		{"WRITE_EXTERNAL_STORAGE", permission.WriteExternalStorage},
+		{"READ_PHONE_STATE", permission.ReadPhoneState},
+		{"BLUETOOTH_CONNECT", permission.BluetoothConnect},
 	}
 
 	for _, p := range perms {

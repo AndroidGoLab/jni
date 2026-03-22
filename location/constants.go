@@ -25,6 +25,10 @@ const (
 )
 
 const (
+	Creator              = consts.Creator
+	FormatDegrees        = consts.FormatDegrees
+	FormatMinutes        = consts.FormatMinutes
+	FormatSeconds        = consts.FormatSeconds
 	ConstellationBeidou  = consts.ConstellationBeidou
 	ConstellationGalileo = consts.ConstellationGalileo
 	ConstellationGlonass = consts.ConstellationGlonass
@@ -33,8 +37,4 @@ const (
 	ConstellationQzss    = consts.ConstellationQzss
 	ConstellationSbas    = consts.ConstellationSbas
 	ConstellationUnknown = consts.ConstellationUnknown
-	Creator              = consts.Creator
-	FormatDegrees        = consts.FormatDegrees
-	FormatMinutes        = consts.FormatMinutes
-	FormatSeconds        = consts.FormatSeconds
 )

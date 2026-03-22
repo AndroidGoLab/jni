@@ -5,6 +5,14 @@ package rtt
 import "github.com/AndroidGoLab/jni/net/wifi/rtt/consts"
 
 const (
+	Creator                                  = consts.Creator
+	StatusFail                               = consts.StatusFail
+	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
+	StatusSuccess                            = consts.StatusSuccess
+	Unspecified                              = consts.Unspecified
+)
+
+const (
 	ActionWifiRttStateChanged                                = consts.ActionWifiRttStateChanged
 	CharacteristicsKeyBooleanLci                             = consts.CharacteristicsKeyBooleanLci
 	CharacteristicsKeyBooleanLcr                             = consts.CharacteristicsKeyBooleanLcr
@@ -14,12 +22,4 @@ const (
 	CharacteristicsKeyBooleanSecureHeLtfSupported            = consts.CharacteristicsKeyBooleanSecureHeLtfSupported
 	CharacteristicsKeyBooleanStaResponder                    = consts.CharacteristicsKeyBooleanStaResponder
 	CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion = consts.CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion
-)
-
-const (
-	Creator                                  = consts.Creator
-	StatusFail                               = consts.StatusFail
-	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
-	StatusSuccess                            = consts.StatusSuccess
-	Unspecified                              = consts.Unspecified
 )
