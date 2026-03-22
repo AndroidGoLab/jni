@@ -4,6 +4,7 @@
 package main
 
 import (
+	"image/color"
 	"log"
 	"os"
 
@@ -11,6 +12,8 @@ import (
 	"gioui.org/font/gofont"
 	"gioui.org/layout"
 	"gioui.org/op"
+	"gioui.org/op/clip"
+	"gioui.org/op/paint"
 	"gioui.org/text"
 	"gioui.org/unit"
 	"gioui.org/widget/material"
@@ -42,8 +45,13 @@ func run() error {
 			return e.Err
 		case app.FrameEvent:
 			gtx := app.NewContext(&ops, e)
+			// Paint a white background (Gio does not fill one by default).
+			paint.FillShape(gtx.Ops,
+				color.NRGBA{R: 0xff, G: 0xff, B: 0xff, A: 0xff},
+				clip.Rect{Max: gtx.Constraints.Max}.Op(),
+			)
 			layout.UniformInset(unit.Dp(16)).Layout(gtx, func(gtx layout.Context) layout.Dimensions {
-				return layout.Flex{Axis: layout.Vertical, Spacing: layout.SpaceStart}.Layout(gtx,
+				return layout.Flex{Axis: layout.Vertical}.Layout(gtx,
 					label(th, "JNI Typed Wrappers + Gio"),
 					label(th, ""),
 					label(th, info),
