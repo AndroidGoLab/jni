@@ -38,7 +38,7 @@ $(BUILD)/AndroidManifest.xml:
 	@printf '    package="%s">\n' '$(PACKAGE_NAME)' >> $@
 	@$(foreach perm,$(EXAMPLE_PERMISSIONS), \
 		printf '    <uses-permission android:name="%s" />\n' '$(perm)' >> $@;)
-	@printf '    <application android:label="%s" android:hasCode="%s">\n' '$(EXAMPLE_NAME)' '$(if $(filter true,$(EXAMPLE_NEEDS_PROXY)),true,false)' >> $@
+	@printf '    <application android:label="%s" android:hasCode="%s" android:debuggable="true">\n' '$(EXAMPLE_NAME)' '$(if $(filter true,$(EXAMPLE_NEEDS_PROXY)),true,false)' >> $@
 	@PERM_CSV="$(subst $(space),$(comma),$(EXAMPLE_PERMISSIONS))"; \
 		if [ -n "$$PERM_CSV" ]; then \
 			printf '        <meta-data android:name="example.permissions" android:value="%s" />\n' "$$PERM_CSV" >> $@; \
