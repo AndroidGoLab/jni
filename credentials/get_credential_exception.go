@@ -17,14 +17,14 @@ var (
 	_ *app.Context
 )
 
-// PublicKeyCredential wraps androidx.credentials.PublicKeyCredential.
-type PublicKeyCredential struct {
+// GetCredentialException wraps android.credentials.GetCredentialException.
+type GetCredentialException struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
-// AuthResponseJSON calls androidx.credentials.PublicKeyCredential.getAuthenticationResponseJson.
-func (m *PublicKeyCredential) AuthResponseJSON() (string, error) {
+// GetType calls android.credentials.GetCredentialException.getType.
+func (m *GetCredentialException) GetType() (string, error) {
 	var result string
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -32,14 +32,14 @@ func (m *PublicKeyCredential) AuthResponseJSON() (string, error) {
 			callErr = err
 			return err
 		}
-		if midPublicKeyCredentialAuthResponseJSON == nil {
-			callErr = fmt.Errorf("androidx.credentials.PublicKeyCredential.getAuthenticationResponseJson is not available on this device")
+		if midGetCredentialExceptionGetType == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialException.getType is not available on this device")
 			return callErr
 		}
 		var resultObj *jni.Object
 		resultObj, callErr = env.CallObjectMethod(
 			m.Obj,
-			midPublicKeyCredentialAuthResponseJSON,
+			midGetCredentialExceptionGetType,
 		)
 		if callErr != nil {
 			return callErr

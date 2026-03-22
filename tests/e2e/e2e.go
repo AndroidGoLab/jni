@@ -155,12 +155,12 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("Init/camera", initTest(camera.Init))
 	run("Init/clipboard", initTest(clipboard.Init))
 	run("Init/companion", initTest(companion.Init))
-	xfail("Init/credentials", initTest(credentials.Init)) // AndroidX: not in framework classpath
+	run("Init/credentials", initTest(credentials.Init))
 	run("Init/display", initTest(display.Init))
 	run("Init/documents", initTest(documents.Init))
 	run("Init/download", initTest(download.Init))
 	run("Init/environment", initTest(environment.Init))
-	xfail("Init/health", initTest(connect.Init)) // AndroidX: not in framework classpath
+	run("Init/health", initTest(connect.Init))
 	run("Init/inputmethod", initTest(inputmethod.Init))
 	run("Init/ir", initTest(ir.Init))
 	run("Init/job", initTest(job.Init))
@@ -206,7 +206,7 @@ func runE2ETests(cvm *C.JavaVM) {
 	run("alarm/AlarmClockInfo", testAlarmClockInfo)
 	run("build/BuildInfo", testBuildWrapper)
 	run("environment/Paths", testEnvironmentWrapper)
-	xfail("keystore/KeyStore", testKeystoreKeyStore) // AndroidKeyStore not registered in app_process
+	run("keystore/KeyStore", testKeystoreKeyStore)
 	run("notification/Channel", testNotificationChannel)
 	run("location/NilContext", testLocationNilContext)
 	run("location/GetLocation", testLocationGetLocation)

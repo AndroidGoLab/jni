@@ -17,36 +17,14 @@ var (
 	_ *app.Context
 )
 
-// getCredentialRequestBuilder wraps androidx.credentials.GetCredentialRequest$Builder.
-type getCredentialRequestBuilder struct {
+// GetCredentialRequestBuilder wraps android.credentials.GetCredentialRequest$Builder.
+type GetCredentialRequestBuilder struct {
 	VM  *jni.VM
 	Obj *jni.GlobalRef
 }
 
-// NewgetCredentialRequestBuilder creates a new androidx.credentials.GetCredentialRequest$Builder instance.
-func NewgetCredentialRequestBuilder(vm *jni.VM) (*getCredentialRequestBuilder, error) {
-	var t getCredentialRequestBuilder
-	t.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsgetCredentialRequestBuilder)), midgetCredentialRequestBuilderInit)
-		if err != nil {
-			return err
-		}
-		t.Obj = env.NewGlobalRef(obj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &t, nil
-}
-
-// addCredentialOption calls androidx.credentials.GetCredentialRequest$Builder.addCredentialOption.
-func (m *getCredentialRequestBuilder) addCredentialOption(option *jni.Object) (*jni.Object, error) {
+// AddCredentialOption calls android.credentials.GetCredentialRequest$Builder.addCredentialOption.
+func (m *GetCredentialRequestBuilder) AddCredentialOption(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -54,14 +32,14 @@ func (m *getCredentialRequestBuilder) addCredentialOption(option *jni.Object) (*
 			callErr = err
 			return err
 		}
-		if midgetCredentialRequestBuilderaddCredentialOption == nil {
-			callErr = fmt.Errorf("androidx.credentials.GetCredentialRequest$Builder.addCredentialOption is not available on this device")
+		if midGetCredentialRequestBuilderAddCredentialOption == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialRequest$Builder.addCredentialOption is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midgetCredentialRequestBuilderaddCredentialOption, jni.ObjectValue(option),
+			midGetCredentialRequestBuilderAddCredentialOption, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -78,8 +56,8 @@ func (m *getCredentialRequestBuilder) addCredentialOption(option *jni.Object) (*
 	return result, callErr
 }
 
-// build calls androidx.credentials.GetCredentialRequest$Builder.build.
-func (m *getCredentialRequestBuilder) build() (*jni.Object, error) {
+// Build calls android.credentials.GetCredentialRequest$Builder.build.
+func (m *GetCredentialRequestBuilder) Build() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -87,13 +65,121 @@ func (m *getCredentialRequestBuilder) build() (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midgetCredentialRequestBuilderbuild == nil {
-			callErr = fmt.Errorf("androidx.credentials.GetCredentialRequest$Builder.build is not available on this device")
+		if midGetCredentialRequestBuilderBuild == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialRequest$Builder.build is not available on this device")
 			return callErr
 		}
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midgetCredentialRequestBuilderbuild,
+			midGetCredentialRequestBuilderBuild,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetAlwaysSendAppInfoToProvider calls android.credentials.GetCredentialRequest$Builder.setAlwaysSendAppInfoToProvider.
+func (m *GetCredentialRequestBuilder) SetAlwaysSendAppInfoToProvider(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGetCredentialRequestBuilderSetAlwaysSendAppInfoToProvider == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialRequest$Builder.setAlwaysSendAppInfoToProvider is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGetCredentialRequestBuilderSetAlwaysSendAppInfoToProvider, jni.BooleanValue(jArg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetCredentialOptions calls android.credentials.GetCredentialRequest$Builder.setCredentialOptions.
+func (m *GetCredentialRequestBuilder) SetCredentialOptions(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGetCredentialRequestBuilderSetCredentialOptions == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialRequest$Builder.setCredentialOptions is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGetCredentialRequestBuilderSetCredentialOptions, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetOrigin calls android.credentials.GetCredentialRequest$Builder.setOrigin.
+func (m *GetCredentialRequestBuilder) SetOrigin(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGetCredentialRequestBuilderSetOrigin == nil {
+			callErr = fmt.Errorf("android.credentials.GetCredentialRequest$Builder.setOrigin is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGetCredentialRequestBuilderSetOrigin, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr

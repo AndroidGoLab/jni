@@ -187,11 +187,70 @@ func testAlarmClockInfo(vm *jni.VM) error {
 	})
 }
 
+// ensureAndroidKeyStoreProvider registers the AndroidKeyStoreProvider if
+// it is not already present. In app_process the framework does not
+// automatically initialise the provider, so we load and install it
+// reflectively.
+func ensureAndroidKeyStoreProvider(env *jni.Env) error {
+	// Check whether the provider is already registered.
+	secCls, err := env.FindClass("java/security/Security")
+	if err != nil {
+		return fmt.Errorf("FindClass Security: %w", err)
+	}
+	getProvMid, err := env.GetStaticMethodID(secCls, "getProvider",
+		"(Ljava/lang/String;)Ljava/security/Provider;")
+	if err != nil {
+		return fmt.Errorf("GetStaticMethodID getProvider: %w", err)
+	}
+	nameStr, err := env.NewStringUTF("AndroidKeyStore")
+	if err != nil {
+		return err
+	}
+	provObj, err := env.CallStaticObjectMethod(secCls, getProvMid,
+		jni.ObjectValue(&nameStr.Object))
+	if err != nil {
+		return fmt.Errorf("Security.getProvider: %w", err)
+	}
+	if provObj != nil {
+		return nil // already registered
+	}
+
+	// Load the hidden provider class and call install().
+	clsCls, err := env.FindClass("java/lang/Class")
+	if err != nil {
+		return fmt.Errorf("FindClass Class: %w", err)
+	}
+	forNameMid, err := env.GetStaticMethodID(clsCls, "forName",
+		"(Ljava/lang/String;)Ljava/lang/Class;")
+	if err != nil {
+		return fmt.Errorf("GetStaticMethodID forName: %w", err)
+	}
+	provClassName, err := env.NewStringUTF("android.security.keystore2.AndroidKeyStoreProvider")
+	if err != nil {
+		return err
+	}
+	provCls, err := env.CallStaticObjectMethod(clsCls, forNameMid,
+		jni.ObjectValue(&provClassName.Object))
+	if err != nil {
+		return fmt.Errorf("Class.forName(AndroidKeyStoreProvider): %w", err)
+	}
+	installMid, err := env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(provCls)), "install", "()V")
+	if err != nil {
+		return fmt.Errorf("GetStaticMethodID install: %w", err)
+	}
+	return env.CallStaticVoidMethod((*jni.Class)(unsafe.Pointer(provCls)), installMid)
+}
+
 // testKeystoreKeyStore obtains a java.security.KeyStore instance for
 // "AndroidKeyStore", loads it, and verifies containsAlias works via raw
 // JNI calls (the generated wrapper types are unexported).
 func testKeystoreKeyStore(vm *jni.VM) error {
 	return vm.Do(func(env *jni.Env) error {
+		// Ensure the provider is available (not automatic in app_process).
+		if err := ensureAndroidKeyStoreProvider(env); err != nil {
+			return fmt.Errorf("ensure AndroidKeyStore provider: %w", err)
+		}
+
 		// Get KeyStore.getInstance("AndroidKeyStore") via static method.
 		ksCls, err := env.FindClass("java/security/KeyStore")
 		if err != nil {
