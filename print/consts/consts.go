@@ -3,24 +3,9 @@
 package consts
 
 const (
-	ContentTypeDocument int = 0
-	ContentTypePhoto    int = 1
-	ContentTypeUnknown  int = -1
-	Creator             int = 0
-	PageCountUnknown    int = -1
-	AllPages            int = 0
-	StatusBusy          int = 2
-	StatusIdle          int = 1
-	StatusUnavailable   int = 3
-	StateBlocked        int = 4
-	StateCanceled       int = 7
-	StateCompleted      int = 5
-	StateCreated        int = 1
-	StateFailed         int = 6
-	StateQueued         int = 2
-	StateStarted        int = 3
 	ColorModeColor      int = 2
 	ColorModeMonochrome int = 1
+	Creator             int = 0
 	DuplexModeLongEdge  int = 2
 	DuplexModeNone      int = 1
 	DuplexModeShortEdge int = 4
@@ -120,6 +105,21 @@ const (
 	Roc8k               int = 0
 	UnknownLandscape    int = 0
 	UnknownPortrait     int = 0
+	AllPages            int = 0
+	StatusBusy          int = 2
+	StatusIdle          int = 1
+	StatusUnavailable   int = 3
+	StateBlocked        int = 4
+	StateCanceled       int = 7
+	StateCompleted      int = 5
+	StateCreated        int = 1
+	StateFailed         int = 6
+	StateQueued         int = 2
+	StateStarted        int = 3
+	ContentTypeDocument int = 0
+	ContentTypePhoto    int = 1
+	ContentTypeUnknown  int = -1
+	PageCountUnknown    int = -1
 )
 
 const (

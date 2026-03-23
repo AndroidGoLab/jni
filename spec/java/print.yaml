@@ -5,554 +5,6 @@
 package: print
 go_import: github.com/AndroidGoLab/jni/print
 classes:
-    - java_class: android.print.PrintDocumentInfo
-      go_type: DocumentInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getContentType
-          go_name: GetContentType
-          returns: int
-          error: true
-        - java_method: getDataSize
-          go_name: GetDataSize
-          returns: long
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getPageCount
-          go_name: GetPageCount
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrintDocumentInfo$Builder
-      go_type: DocumentInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.print.PrintDocumentInfo
-          error: true
-        - java_method: setContentType
-          go_name: SetContentType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.print.PrintDocumentInfo$Builder
-          error: true
-        - java_method: setPageCount
-          go_name: SetPageCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.print.PrintDocumentInfo$Builder
-          error: true
-    - java_class: android.print.PageRange
-      go_type: PageRange
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getEnd
-          go_name: GetEnd
-          returns: int
-          error: true
-        - java_method: getStart
-          go_name: GetStart
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrinterInfo
-      go_type: erInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getCapabilities
-          go_name: GetCapabilities
-          returns: android.print.PrinterCapabilitiesInfo
-          error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: String
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: android.print.PrinterId
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getStatus
-          go_name: GetStatus
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrinterInfo$Builder
-      go_type: erInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.print.PrinterInfo
-          error: true
-        - java_method: setCapabilities
-          go_name: SetCapabilities
-          params:
-            - java_type: android.print.PrinterCapabilitiesInfo
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-        - java_method: setDescription
-          go_name: SetDescription
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-        - java_method: setHasCustomPrinterIcon
-          go_name: SetHasCustomPrinterIcon
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-        - java_method: setIconResourceId
-          go_name: SetIconResourceId
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-        - java_method: setInfoIntent
-          go_name: SetInfoIntent
-          params:
-            - java_type: android.app.PendingIntent
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-        - java_method: setName
-          go_name: SetName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-        - java_method: setStatus
-          go_name: SetStatus
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.print.PrinterInfo$Builder
-          error: true
-    - java_class: android.print.PrintJobInfo
-      go_type: JobInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAdvancedIntOption
-          go_name: GetAdvancedIntOption
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getAdvancedStringOption
-          go_name: GetAdvancedStringOption
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getAttributes
-          go_name: GetAttributes
-          returns: android.print.PrintAttributes
-          error: true
-        - java_method: getCopies
-          go_name: GetCopies
-          returns: int
-          error: true
-        - java_method: getCreationTime
-          go_name: GetCreationTime
-          returns: long
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: android.print.PrintJobId
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: String
-          error: true
-        - java_method: getPages
-          go_name: GetPages
-          returns: android.print.PageRange[]
-          error: true
-        - java_method: getPrinterId
-          go_name: GetPrinterId
-          returns: android.print.PrinterId
-          error: true
-        - java_method: getState
-          go_name: GetState
-          returns: int
-          error: true
-        - java_method: hasAdvancedOption
-          go_name: HasAdvancedOption
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrintJobInfo$Builder
-      go_type: JobInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.print.PrintJobInfo
-          error: true
-        - java_method: putAdvancedOption
-          go_name: PutAdvancedOption2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putAdvancedOption
-          go_name: PutAdvancedOption2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setAttributes
-          go_name: SetAttributes
-          params:
-            - java_type: android.print.PrintAttributes
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCopies
-          go_name: SetCopies
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPages
-          go_name: SetPages
-          params:
-            - java_type: android.print.PageRange[]
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.print.PrinterId
-      go_type: erId
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getLocalId
-          go_name: GetLocalId
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrinterCapabilitiesInfo
-      go_type: erCapabilitiesInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getColorModes
-          go_name: GetColorModes
-          returns: int
-          error: true
-        - java_method: getDefaults
-          go_name: GetDefaults
-          returns: android.print.PrintAttributes
-          error: true
-        - java_method: getDuplexModes
-          go_name: GetDuplexModes
-          returns: int
-          error: true
-        - java_method: getMinMargins
-          go_name: GetMinMargins
-          returns: android.print.PrintAttributes$Margins
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrinterCapabilitiesInfo$Builder
-      go_type: erCapabilitiesInfoBuilder
-      methods:
-        - java_method: addMediaSize
-          go_name: AddMediaSize
-          params:
-            - java_type: android.print.PrintAttributes$MediaSize
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: android.print.PrinterCapabilitiesInfo$Builder
-          error: true
-        - java_method: addResolution
-          go_name: AddResolution
-          params:
-            - java_type: android.print.PrintAttributes$Resolution
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: android.print.PrinterCapabilitiesInfo$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.print.PrinterCapabilitiesInfo
-          error: true
-        - java_method: setColorModes
-          go_name: SetColorModes
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.print.PrinterCapabilitiesInfo$Builder
-          error: true
-        - java_method: setDuplexModes
-          go_name: SetDuplexModes
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.print.PrinterCapabilitiesInfo$Builder
-          error: true
-        - java_method: setMinMargins
-          go_name: SetMinMargins
-          params:
-            - java_type: android.print.PrintAttributes$Margins
-              go_name: arg0
-          returns: android.print.PrinterCapabilitiesInfo$Builder
-          error: true
-    - java_class: android.print.PrintDocumentAdapter
-      go_type: DocumentAdapter
-      methods:
-        - java_method: onFinish
-          go_name: OnFinish
-          returns: void
-          error: true
-        - java_method: onLayout
-          go_name: OnLayout
-          params:
-            - java_type: android.print.PrintAttributes
-              go_name: arg0
-            - java_type: android.print.PrintAttributes
-              go_name: arg1
-            - java_type: android.os.CancellationSignal
-              go_name: arg2
-            - java_type: android.print.PrintDocumentAdapter$LayoutResultCallback
-              go_name: arg3
-            - java_type: android.os.Bundle
-              go_name: arg4
-          returns: void
-          error: true
-        - java_method: onStart
-          go_name: OnStart
-          returns: void
-          error: true
-        - java_method: onWrite
-          go_name: OnWrite
-          params:
-            - java_type: android.print.PageRange[]
-              go_name: arg0
-            - java_type: android.os.ParcelFileDescriptor
-              go_name: arg1
-            - java_type: android.os.CancellationSignal
-              go_name: arg2
-            - java_type: android.print.PrintDocumentAdapter$WriteResultCallback
-              go_name: arg3
-          returns: void
-          error: true
-    - java_class: android.print.PrintDocumentAdapter$LayoutResultCallback
-      go_type: DocumentAdapterLayoutResultCallback
-      methods:
-        - java_method: onLayoutCancelled
-          go_name: OnLayoutCancelled
-          returns: void
-          error: true
-        - java_method: onLayoutFailed
-          go_name: OnLayoutFailed
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onLayoutFinished
-          go_name: OnLayoutFinished
-          params:
-            - java_type: android.print.PrintDocumentInfo
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.print.PrintDocumentAdapter$WriteResultCallback
-      go_type: DocumentAdapterWriteResultCallback
-      methods:
-        - java_method: onWriteCancelled
-          go_name: OnWriteCancelled
-          returns: void
-          error: true
-        - java_method: onWriteFailed
-          go_name: OnWriteFailed
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onWriteFinished
-          go_name: OnWriteFinished
-          params:
-            - java_type: android.print.PageRange[]
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.print.PrintAttributes
       go_type: Attributes
       methods:
@@ -763,6 +215,45 @@ classes:
           go_name: ToString
           returns: String
           error: true
+    - java_class: android.print.PageRange
+      go_type: PageRange
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getEnd
+          go_name: GetEnd
+          returns: int
+          error: true
+        - java_method: getStart
+          go_name: GetStart
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.print.PrintJobId
       go_type: JobId
       methods:
@@ -780,6 +271,138 @@ classes:
         - java_method: hashCode
           go_name: HashCode
           returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.print.PrinterCapabilitiesInfo
+      go_type: erCapabilitiesInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getColorModes
+          go_name: GetColorModes
+          returns: int
+          error: true
+        - java_method: getDefaults
+          go_name: GetDefaults
+          returns: android.print.PrintAttributes
+          error: true
+        - java_method: getDuplexModes
+          go_name: GetDuplexModes
+          returns: int
+          error: true
+        - java_method: getMinMargins
+          go_name: GetMinMargins
+          returns: android.print.PrintAttributes$Margins
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.print.PrinterCapabilitiesInfo$Builder
+      go_type: erCapabilitiesInfoBuilder
+      methods:
+        - java_method: addMediaSize
+          go_name: AddMediaSize
+          params:
+            - java_type: android.print.PrintAttributes$MediaSize
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: android.print.PrinterCapabilitiesInfo$Builder
+          error: true
+        - java_method: addResolution
+          go_name: AddResolution
+          params:
+            - java_type: android.print.PrintAttributes$Resolution
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: android.print.PrinterCapabilitiesInfo$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.print.PrinterCapabilitiesInfo
+          error: true
+        - java_method: setColorModes
+          go_name: SetColorModes
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.print.PrinterCapabilitiesInfo$Builder
+          error: true
+        - java_method: setDuplexModes
+          go_name: SetDuplexModes
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.print.PrinterCapabilitiesInfo$Builder
+          error: true
+        - java_method: setMinMargins
+          go_name: SetMinMargins
+          params:
+            - java_type: android.print.PrintAttributes$Margins
+              go_name: arg0
+          returns: android.print.PrinterCapabilitiesInfo$Builder
+          error: true
+    - java_class: android.print.PrinterId
+      go_type: erId
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getLocalId
+          go_name: GetLocalId
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -868,63 +491,392 @@ classes:
               go_name: arg2
           returns: android.print.PrintJob
           error: true
+    - java_class: android.print.PrinterInfo
+      go_type: erInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCapabilities
+          go_name: GetCapabilities
+          returns: android.print.PrinterCapabilitiesInfo
+          error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: String
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: android.print.PrinterId
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getStatus
+          go_name: GetStatus
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.print.PrinterInfo$Builder
+      go_type: erInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.print.PrinterInfo
+          error: true
+        - java_method: setCapabilities
+          go_name: SetCapabilities
+          params:
+            - java_type: android.print.PrinterCapabilitiesInfo
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+        - java_method: setDescription
+          go_name: SetDescription
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+        - java_method: setHasCustomPrinterIcon
+          go_name: SetHasCustomPrinterIcon
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+        - java_method: setIconResourceId
+          go_name: SetIconResourceId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+        - java_method: setInfoIntent
+          go_name: SetInfoIntent
+          params:
+            - java_type: android.app.PendingIntent
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+        - java_method: setName
+          go_name: SetName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+        - java_method: setStatus
+          go_name: SetStatus
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.print.PrinterInfo$Builder
+          error: true
+    - java_class: android.print.PrintDocumentAdapter
+      go_type: DocumentAdapter
+      methods:
+        - java_method: onFinish
+          go_name: OnFinish
+          returns: void
+          error: true
+        - java_method: onLayout
+          go_name: OnLayout
+          params:
+            - java_type: android.print.PrintAttributes
+              go_name: arg0
+            - java_type: android.print.PrintAttributes
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+            - java_type: android.print.PrintDocumentAdapter$LayoutResultCallback
+              go_name: arg3
+            - java_type: android.os.Bundle
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: onStart
+          go_name: OnStart
+          returns: void
+          error: true
+        - java_method: onWrite
+          go_name: OnWrite
+          params:
+            - java_type: android.print.PageRange[]
+              go_name: arg0
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+            - java_type: android.print.PrintDocumentAdapter$WriteResultCallback
+              go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.print.PrintDocumentAdapter$LayoutResultCallback
+      go_type: DocumentAdapterLayoutResultCallback
+      methods:
+        - java_method: onLayoutCancelled
+          go_name: OnLayoutCancelled
+          returns: void
+          error: true
+        - java_method: onLayoutFailed
+          go_name: OnLayoutFailed
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onLayoutFinished
+          go_name: OnLayoutFinished
+          params:
+            - java_type: android.print.PrintDocumentInfo
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.print.PrintDocumentAdapter$WriteResultCallback
+      go_type: DocumentAdapterWriteResultCallback
+      methods:
+        - java_method: onWriteCancelled
+          go_name: OnWriteCancelled
+          returns: void
+          error: true
+        - java_method: onWriteFailed
+          go_name: OnWriteFailed
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onWriteFinished
+          go_name: OnWriteFinished
+          params:
+            - java_type: android.print.PageRange[]
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.print.PrintJobInfo
+      go_type: JobInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAdvancedIntOption
+          go_name: GetAdvancedIntOption
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getAdvancedStringOption
+          go_name: GetAdvancedStringOption
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getAttributes
+          go_name: GetAttributes
+          returns: android.print.PrintAttributes
+          error: true
+        - java_method: getCopies
+          go_name: GetCopies
+          returns: int
+          error: true
+        - java_method: getCreationTime
+          go_name: GetCreationTime
+          returns: long
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: android.print.PrintJobId
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
+          returns: String
+          error: true
+        - java_method: getPages
+          go_name: GetPages
+          returns: android.print.PageRange[]
+          error: true
+        - java_method: getPrinterId
+          go_name: GetPrinterId
+          returns: android.print.PrinterId
+          error: true
+        - java_method: getState
+          go_name: GetState
+          returns: int
+          error: true
+        - java_method: hasAdvancedOption
+          go_name: HasAdvancedOption
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.print.PrintJobInfo$Builder
+      go_type: JobInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.print.PrintJobInfo
+          error: true
+        - java_method: putAdvancedOption
+          go_name: PutAdvancedOption2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putAdvancedOption
+          go_name: PutAdvancedOption2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setAttributes
+          go_name: SetAttributes
+          params:
+            - java_type: android.print.PrintAttributes
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCopies
+          go_name: SetCopies
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPages
+          go_name: SetPages
+          params:
+            - java_type: android.print.PageRange[]
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.print.PrintDocumentInfo
+      go_type: DocumentInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getContentType
+          go_name: GetContentType
+          returns: int
+          error: true
+        - java_method: getDataSize
+          go_name: GetDataSize
+          returns: long
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getPageCount
+          go_name: GetPageCount
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.print.PrintDocumentInfo$Builder
+      go_type: DocumentInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.print.PrintDocumentInfo
+          error: true
+        - java_method: setContentType
+          go_name: SetContentType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.print.PrintDocumentInfo$Builder
+          error: true
+        - java_method: setPageCount
+          go_name: SetPageCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.print.PrintDocumentInfo$Builder
+          error: true
 constants:
-    - go_name: ContentTypeDocument
-      value: "0"
-      go_type: int
-    - go_name: ContentTypePhoto
-      value: "1"
-      go_type: int
-    - go_name: ContentTypeUnknown
-      value: "-1"
-      go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: PageCountUnknown
-      value: "-1"
-      go_type: int
-    - go_name: AllPages
-      value: "0"
-      go_type: int
-    - go_name: StatusBusy
-      value: "2"
-      go_type: int
-    - go_name: StatusIdle
-      value: "1"
-      go_type: int
-    - go_name: StatusUnavailable
-      value: "3"
-      go_type: int
-    - go_name: StateBlocked
-      value: "4"
-      go_type: int
-    - go_name: StateCanceled
-      value: "7"
-      go_type: int
-    - go_name: StateCompleted
-      value: "5"
-      go_type: int
-    - go_name: StateCreated
-      value: "1"
-      go_type: int
-    - go_name: StateFailed
-      value: "6"
-      go_type: int
-    - go_name: StateQueued
-      value: "2"
-      go_type: int
-    - go_name: StateStarted
-      value: "3"
-      go_type: int
-    - go_name: ExtraPrintPreview
-      value: '"EXTRA_PRINT_PREVIEW"'
-      go_type: string
     - go_name: ColorModeColor
       value: "2"
       go_type: int
     - go_name: ColorModeMonochrome
       value: "1"
+      go_type: int
+    - go_name: Creator
+      value: "0"
       go_type: int
     - go_name: DuplexModeLongEdge
       value: "2"
@@ -1222,4 +1174,52 @@ constants:
       go_type: int
     - go_name: UnknownPortrait
       value: "0"
+      go_type: int
+    - go_name: AllPages
+      value: "0"
+      go_type: int
+    - go_name: StatusBusy
+      value: "2"
+      go_type: int
+    - go_name: StatusIdle
+      value: "1"
+      go_type: int
+    - go_name: StatusUnavailable
+      value: "3"
+      go_type: int
+    - go_name: ExtraPrintPreview
+      value: '"EXTRA_PRINT_PREVIEW"'
+      go_type: string
+    - go_name: StateBlocked
+      value: "4"
+      go_type: int
+    - go_name: StateCanceled
+      value: "7"
+      go_type: int
+    - go_name: StateCompleted
+      value: "5"
+      go_type: int
+    - go_name: StateCreated
+      value: "1"
+      go_type: int
+    - go_name: StateFailed
+      value: "6"
+      go_type: int
+    - go_name: StateQueued
+      value: "2"
+      go_type: int
+    - go_name: StateStarted
+      value: "3"
+      go_type: int
+    - go_name: ContentTypeDocument
+      value: "0"
+      go_type: int
+    - go_name: ContentTypePhoto
+      value: "1"
+      go_type: int
+    - go_name: ContentTypeUnknown
+      value: "-1"
+      go_type: int
+    - go_name: PageCountUnknown
+      value: "-1"
       go_type: int

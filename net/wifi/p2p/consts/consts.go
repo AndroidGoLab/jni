@@ -3,9 +3,9 @@
 package consts
 
 const (
+	Creator                                            int = 0
 	Available                                          int = 3
 	Connected                                          int = 0
-	Creator                                            int = 0
 	Failed                                             int = 2
 	Invited                                            int = 1
 	Unavailable                                        int = 4
@@ -15,20 +15,24 @@ const (
 	SecurityTypeWpa2Psk                                int = 0
 	SecurityTypeWpa3Compatibility                      int = 1
 	SecurityTypeWpa3Sae                                int = 2
-	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
-	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
-	GroupOwnerBand2ghz                                 int = 1
-	GroupOwnerBand5ghz                                 int = 2
-	GroupOwnerBand6ghz                                 int = 3
-	GroupOwnerBandAuto                                 int = 0
-	GroupOwnerIntentAuto                               int = -1
-	GroupOwnerIntentMax                                int = 15
-	GroupOwnerIntentMin                                int = 0
-	P2pVersion1                                        int = 0
-	P2pVersion2                                        int = 1
-	PccModeConnectionTypeLegacyOnly                    int = 0
-	PccModeConnectionTypeLegacyOrR2                    int = 1
-	PccModeConnectionTypeR2Only                        int = 2
+	DeviceInfoAudioOnlySupportAtSource                 int = 2048
+	DeviceInfoAudioUnsupportedAtPrimarySink            int = 1024
+	DeviceInfoContentProtectionSupport                 int = 256
+	DeviceInfoCoupledSinkSupportAtSink                 int = 8
+	DeviceInfoCoupledSinkSupportAtSource               int = 4
+	DeviceInfoDeviceTypeMask                           int = 3
+	DeviceInfoPreferredConnectivityMask                int = 128
+	DeviceInfoSessionAvailableMask                     int = 48
+	DeviceInfoTdlsPersistentGroup                      int = 4096
+	DeviceInfoTdlsPersistentGroupReinvoke              int = 8192
+	DeviceInfoTimeSynchronizationSupport               int = 512
+	DeviceInfoWfdServiceDiscoverySupport               int = 64
+	DeviceTypePrimarySink                              int = 1
+	DeviceTypeSecondarySink                            int = 2
+	DeviceTypeSourceOrPrimarySink                      int = 3
+	DeviceTypeWfdSource                                int = 0
+	PreferredConnectivityP2p                           int = 0
+	PreferredConnectivityTdls                          int = 1
 	Busy                                               int = 2
 	ConnectionRequestAccept                            int = 0
 	ConnectionRequestDeferShowPinToService             int = 3
@@ -53,6 +57,33 @@ const (
 	WifiP2pScanSocial                                  int = 1
 	WifiP2pStateDisabled                               int = 1
 	WifiP2pStateEnabled                                int = 2
+	ApproverDetachReasonClose                          int = 3
+	ApproverDetachReasonFailure                        int = 1
+	ApproverDetachReasonRemove                         int = 0
+	ApproverDetachReasonReplace                        int = 2
+	RequestTypeInvitation                              int = 1
+	RequestTypeJoin                                    int = 2
+	RequestTypeNegotiation                             int = 0
+	PairingBootstrappingMethodDisplayPassphrase        int = 4
+	PairingBootstrappingMethodDisplayPincode           int = 2
+	PairingBootstrappingMethodKeypadPassphrase         int = 16
+	PairingBootstrappingMethodKeypadPincode            int = 8
+	PairingBootstrappingMethodOpportunistic            int = 1
+	PairingBootstrappingMethodOutOfBand                int = 32
+	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
+	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
+	GroupOwnerBand2ghz                                 int = 1
+	GroupOwnerBand5ghz                                 int = 2
+	GroupOwnerBand6ghz                                 int = 3
+	GroupOwnerBandAuto                                 int = 0
+	GroupOwnerIntentAuto                               int = -1
+	GroupOwnerIntentMax                                int = 15
+	GroupOwnerIntentMin                                int = 0
+	P2pVersion1                                        int = 0
+	P2pVersion2                                        int = 1
+	PccModeConnectionTypeLegacyOnly                    int = 0
+	PccModeConnectionTypeLegacyOrR2                    int = 1
+	PccModeConnectionTypeR2Only                        int = 2
 )
 
 const (

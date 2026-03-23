@@ -3,17 +3,26 @@
 package consts
 
 const (
+	ActionAbandon               int = 107
+	ActionCopy                  int = 101
+	ActionCut                   int = 103
+	ActionDrag                  int = 106
+	ActionOther                 int = 108
+	ActionOvertype              int = 100
+	ActionPaste                 int = 102
+	ActionReset                 int = 201
+	ActionSelectAll             int = 200
+	ActionShare                 int = 104
+	ActionSmartShare            int = 105
 	Creator                     int = 0
-	NoOp                        int = 0
-	ApplyStrategyIgnore         int = 0
-	ApplyStrategyReplace        int = 1
-	StatusDifferentText         int = 3
-	StatusLinksApplied          int = 0
-	StatusNoLinksApplied        int = 2
-	StatusNoLinksFound          int = 1
-	StatusUnsupportedCharacter  int = 4
-	PersonUserOthers            int = 0
-	PersonUserSelf              int = 0
+	EventAutoSelection          int = 5
+	EventSelectionModified      int = 2
+	EventSelectionStarted       int = 1
+	EventSmartSelectionMulti    int = 4
+	EventSmartSelectionSingle   int = 3
+	InvocationLink              int = 2
+	InvocationManual            int = 1
+	InvocationUnknown           int = 0
 	CategoryConversationActions int = 3
 	CategoryLanguageDetection   int = 4
 	CategoryLinkify             int = 2
@@ -39,28 +48,29 @@ const (
 	TypeSmartAction             int = 13
 	TypeSmartSelectionMulti     int = 4
 	TypeSmartSelectionSingle    int = 3
-	ActionAbandon               int = 107
-	ActionCopy                  int = 101
-	ActionCut                   int = 103
-	ActionDrag                  int = 106
-	ActionOther                 int = 108
-	ActionOvertype              int = 100
-	ActionPaste                 int = 102
-	ActionReset                 int = 201
-	ActionSelectAll             int = 200
-	ActionShare                 int = 104
-	ActionSmartShare            int = 105
-	EventAutoSelection          int = 5
-	EventSelectionModified      int = 2
-	EventSelectionStarted       int = 1
-	EventSmartSelectionMulti    int = 4
-	EventSmartSelectionSingle   int = 3
-	InvocationLink              int = 2
-	InvocationManual            int = 1
-	InvocationUnknown           int = 0
+	NoOp                        int = 0
+	PersonUserOthers            int = 0
+	PersonUserSelf              int = 0
+	ApplyStrategyIgnore         int = 0
+	ApplyStrategyReplace        int = 1
+	StatusDifferentText         int = 3
+	StatusLinksApplied          int = 0
+	StatusNoLinksApplied        int = 2
+	StatusNoLinksFound          int = 1
+	StatusUnsupportedCharacter  int = 4
 )
 
 const (
+	TypeCallPhone                        string = "call_phone"
+	TypeCreateReminder                   string = "create_reminder"
+	TypeOpenUrl                          string = "open_url"
+	TypeSendEmail                        string = "send_email"
+	TypeSendSms                          string = "send_sms"
+	TypeShareLocation                    string = "share_location"
+	TypeTextReply                        string = "text_reply"
+	TypeTrackFlight                      string = "track_flight"
+	TypeViewCalendar                     string = "view_calendar"
+	TypeViewMap                          string = "view_map"
 	ExtraFromTextClassifier              string = "android.view.textclassifier.extra.FROM_TEXT_CLASSIFIER"
 	ExtraTextOriginPackage               string = "android.view.textclassifier.extra.TEXT_ORIGIN_PACKAGE"
 	HintTextIsEditable                   string = "android.text_is_editable"
@@ -88,14 +98,4 @@ const (
 	WidgetTypeWebview                    string = "webview"
 	HintForInApp                         string = "in_app"
 	HintForNotification                  string = "notification"
-	TypeCallPhone                        string = "call_phone"
-	TypeCreateReminder                   string = "create_reminder"
-	TypeOpenUrl                          string = "open_url"
-	TypeSendEmail                        string = "send_email"
-	TypeSendSms                          string = "send_sms"
-	TypeShareLocation                    string = "share_location"
-	TypeTextReply                        string = "text_reply"
-	TypeTrackFlight                      string = "track_flight"
-	TypeViewCalendar                     string = "view_calendar"
-	TypeViewMap                          string = "view_map"
 )

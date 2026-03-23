@@ -15,12 +15,6 @@ const (
 	SliceStatusRejectedNotAvailableInPlmn           int = 3
 	SliceStatusRejectedNotAvailableInRegisteredArea int = 4
 	SliceStatusUnknown                              int = 0
-	RouteSscMode1                                   int = 1
-	RouteSscMode2                                   int = 2
-	RouteSscMode3                                   int = 3
-	SessionTypeIpv4                                 int = 0
-	SessionTypeIpv4v6                               int = 2
-	SessionTypeIpv6                                 int = 1
 	AuthTypeChap                                    int = 2
 	AuthTypeNone                                    int = 0
 	AuthTypePap                                     int = 1
@@ -53,4 +47,10 @@ const (
 	TypeSupl                                        int = 4
 	TypeVsim                                        int = 4096
 	TypeXcap                                        int = 2048
+	RouteSscMode1                                   int = 1
+	RouteSscMode2                                   int = 2
+	RouteSscMode3                                   int = 3
+	SessionTypeIpv4                                 int = 0
+	SessionTypeIpv4v6                               int = 2
+	SessionTypeIpv6                                 int = 1
 )

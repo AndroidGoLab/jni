@@ -23,15 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsUCharacterEnums *jni.GlobalRef
-
-	clsUCharacterEnumsECharacterCategory *jni.GlobalRef
-
-	clsUCharacterEnumsECharacterDirection *jni.GlobalRef
+	clsUCharacterDirection         *jni.GlobalRef
+	midUCharacterDirectionToString jni.MethodID
 
 	clsUProperty *jni.GlobalRef
 
 	clsUPropertyNameChoice *jni.GlobalRef
+
+	clsUCharacterCategory         *jni.GlobalRef
+	midUCharacterCategoryToString jni.MethodID
 
 	clsUScript                     *jni.GlobalRef
 	midUScriptBreaksBetweenLetters jni.MethodID
@@ -52,12 +52,6 @@ var (
 	clsUScriptScriptUsage        *jni.GlobalRef
 	midUScriptScriptUsageValues  jni.MethodID
 	midUScriptScriptUsageValueOf jni.MethodID
-
-	clsUCharacterCategory         *jni.GlobalRef
-	midUCharacterCategoryToString jni.MethodID
-
-	clsUCharacterDirection         *jni.GlobalRef
-	midUCharacterDirectionToString jni.MethodID
 
 	clsUCharacter                         *jni.GlobalRef
 	midUCharacterCharCount                jni.MethodID
@@ -198,6 +192,12 @@ var (
 	clsUCharacterVerticalOrientation *jni.GlobalRef
 
 	clsUCharacterWordBreak *jni.GlobalRef
+
+	clsUCharacterEnums *jni.GlobalRef
+
+	clsUCharacterEnumsECharacterCategory *jni.GlobalRef
+
+	clsUCharacterEnumsECharacterDirection *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -218,33 +218,20 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/icu/lang/UCharacterEnums")
+	c, err = env.FindClass("android/icu/lang/UCharacterDirection")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsUCharacterEnums = env.NewGlobalRef(&c.Object)
+		clsUCharacterDirection = env.NewGlobalRef(&c.Object)
 
-	}
-
-	c, err = env.FindClass("android/icu/lang/UCharacterEnums$ECharacterCategory")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUCharacterEnumsECharacterCategory = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/icu/lang/UCharacterEnums$ECharacterDirection")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUCharacterEnumsECharacterDirection = env.NewGlobalRef(&c.Object)
+		midUCharacterDirectionToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterDirection)), "toString", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -265,6 +252,23 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUPropertyNameChoice = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/icu/lang/UCharacterCategory")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUCharacterCategory = env.NewGlobalRef(&c.Object)
+
+		midUCharacterCategoryToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterCategory)), "toString", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -392,40 +396,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUScriptScriptUsageValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUScriptScriptUsage)), "valueOf", "(Ljava/lang/String;)Landroid/icu/lang/UScript$ScriptUsage;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/icu/lang/UCharacterCategory")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUCharacterCategory = env.NewGlobalRef(&c.Object)
-
-		midUCharacterCategoryToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterCategory)), "toString", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/icu/lang/UCharacterDirection")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUCharacterDirection = env.NewGlobalRef(&c.Object)
-
-		midUCharacterDirectionToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsUCharacterDirection)), "toString", "(I)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1347,6 +1317,36 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsUCharacterWordBreak = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/icu/lang/UCharacterEnums")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUCharacterEnums = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/icu/lang/UCharacterEnums$ECharacterCategory")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUCharacterEnumsECharacterCategory = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/icu/lang/UCharacterEnums$ECharacterDirection")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUCharacterEnumsECharacterDirection = env.NewGlobalRef(&c.Object)
 
 	}
 

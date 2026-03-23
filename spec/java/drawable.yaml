@@ -5,6 +5,434 @@
 package: drawable
 go_import: github.com/AndroidGoLab/jni/graphics/drawable
 classes:
+    - java_class: android.graphics.drawable.ColorDrawable
+      go_type: ColorDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
+          returns: boolean
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getAlpha
+          go_name: GetAlpha
+          returns: int
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getColor
+          go_name: GetColor
+          returns: int
+          error: true
+        - java_method: getColorFilter
+          go_name: GetColorFilter
+          returns: android.graphics.ColorFilter
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColor
+          go_name: SetColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColorFilter
+          go_name: SetColorFilter
+          params:
+            - java_type: android.graphics.ColorFilter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
+          params:
+            - java_type: android.graphics.BlendMode
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintList
+          go_name: SetTintList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.Animatable
+      go_type: Animatable
+      methods:
+        - java_method: isRunning
+          go_name: IsRunning
+          returns: boolean
+          error: true
+        - java_method: start
+          go_name: Start
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.AnimatedStateListDrawable
+      go_type: AnimatedStateListDrawable
+      methods:
+        - java_method: addState
+          go_name: AddState
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: jumpToCurrentState
+          go_name: JumpToCurrentState
+          returns: void
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: setVisible
+          go_name: SetVisible
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.graphics.drawable.RippleDrawable
+      go_type: RippleDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
+          returns: boolean
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getDirtyBounds
+          go_name: GetDirtyBounds
+          returns: android.graphics.Rect
+          error: true
+        - java_method: getEffectColor
+          go_name: GetEffectColor
+          returns: android.content.res.ColorStateList
+          error: true
+        - java_method: getHotspotBounds
+          go_name: GetHotspotBounds
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getRadius
+          go_name: GetRadius
+          returns: int
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: invalidateSelf
+          go_name: InvalidateSelf
+          returns: void
+          error: true
+        - java_method: isProjected
+          go_name: IsProjected
+          returns: boolean
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: jumpToCurrentState
+          go_name: JumpToCurrentState
+          returns: void
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: setColor
+          go_name: SetColor
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDrawableByLayerId
+          go_name: SetDrawableByLayerId
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setEffectColor
+          go_name: SetEffectColor
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setHotspot
+          go_name: SetHotspot
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setHotspotBounds
+          go_name: SetHotspotBounds
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setPaddingMode
+          go_name: SetPaddingMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRadius
+          go_name: SetRadius
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVisible
+          go_name: SetVisible
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.graphics.drawable.StateListDrawable
+      go_type: StateListDrawable
+      methods:
+        - java_method: addState
+          go_name: AddState
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: findStateDrawableIndex
+          go_name: FindStateDrawableIndex
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getStateCount
+          go_name: GetStateCount
+          returns: int
+          error: true
+        - java_method: getStateDrawable
+          go_name: GetStateDrawable
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getStateSet
+          go_name: GetStateSet
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+    - java_class: android.graphics.drawable.PaintDrawable
+      go_type: PaintDrawable
+      methods:
+        - java_method: setCornerRadii
+          go_name: SetCornerRadii
+          params:
+            - java_type: float[]
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCornerRadius
+          go_name: SetCornerRadius
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.graphics.drawable.PictureDrawable
       go_type: PictureDrawable
       methods:
@@ -52,8 +480,364 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.graphics.drawable.DrawableContainer
-      go_type: Container
+    - java_class: android.graphics.drawable.ShapeDrawable
+      go_type: ShapeDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getAlpha
+          go_name: GetAlpha
+          returns: int
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getIntrinsicHeight
+          go_name: GetIntrinsicHeight
+          returns: int
+          error: true
+        - java_method: getIntrinsicWidth
+          go_name: GetIntrinsicWidth
+          returns: int
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getPadding
+          go_name: GetPadding
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getPaint
+          go_name: GetPaint
+          returns: android.graphics.Paint
+          error: true
+        - java_method: getShaderFactory
+          go_name: GetShaderFactory
+          returns: android.graphics.drawable.ShapeDrawable$ShaderFactory
+          error: true
+        - java_method: getShape
+          go_name: GetShape
+          returns: android.graphics.drawable.shapes.Shape
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColorFilter
+          go_name: SetColorFilter
+          params:
+            - java_type: android.graphics.ColorFilter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDither
+          go_name: SetDither
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setIntrinsicHeight
+          go_name: SetIntrinsicHeight
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setIntrinsicWidth
+          go_name: SetIntrinsicWidth
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPadding
+          go_name: SetPadding1
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPadding
+          go_name: SetPadding4_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setShaderFactory
+          go_name: SetShaderFactory
+          params:
+            - java_type: android.graphics.drawable.ShapeDrawable$ShaderFactory
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setShape
+          go_name: SetShape
+          params:
+            - java_type: android.graphics.drawable.shapes.Shape
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
+          params:
+            - java_type: android.graphics.BlendMode
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintList
+          go_name: SetTintList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.ShapeDrawable$ShaderFactory
+      go_type: ShapeDrawableShaderFactory
+      methods:
+        - java_method: resize
+          go_name: Resize
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.graphics.Shader
+          error: true
+    - java_class: android.graphics.drawable.Icon
+      go_type: Icon
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getResId
+          go_name: GetResId
+          returns: int
+          error: true
+        - java_method: getResPackage
+          go_name: GetResPackage
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getUri
+          go_name: GetUri
+          returns: android.net.Uri
+          error: true
+        - java_method: loadDrawable
+          go_name: LoadDrawable
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: loadDrawableAsync
+          go_name: LoadDrawableAsync
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.os.Message
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setTint
+          go_name: SetTint
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
+          params:
+            - java_type: android.graphics.BlendMode
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: setTintList
+          go_name: SetTintList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: setTintMode
+          go_name: SetTintMode
+          params:
+            - java_type: android.graphics.PorterDuff$Mode
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: createWithAdaptiveBitmap
+          go_name: CreateWithAdaptiveBitmap
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithAdaptiveBitmapContentUri
+          go_name: CreateWithAdaptiveBitmapContentUri1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithAdaptiveBitmapContentUri
+          go_name: CreateWithAdaptiveBitmapContentUri1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithBitmap
+          go_name: CreateWithBitmap
+          params:
+            - java_type: android.graphics.Bitmap
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithContentUri
+          go_name: CreateWithContentUri1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithContentUri
+          go_name: CreateWithContentUri1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithData
+          go_name: CreateWithData
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithFilePath
+          go_name: CreateWithFilePath
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithResource
+          go_name: CreateWithResource2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: createWithResource
+          go_name: CreateWithResource2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.graphics.drawable.Icon
+          error: true
+    - java_class: android.graphics.drawable.Icon$OnDrawableLoadedListener
+      go_type: IconOnDrawableLoadedListener
+      methods:
+        - java_method: onDrawableLoaded
+          go_name: OnDrawableLoaded
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.VectorDrawable
+      go_type: VectorDrawable
       methods:
         - java_method: applyTheme
           go_name: ApplyTheme
@@ -81,20 +865,13 @@ classes:
           go_name: GetChangingConfigurations
           returns: int
           error: true
+        - java_method: getColorFilter
+          go_name: GetColorFilter
+          returns: android.graphics.ColorFilter
+          error: true
         - java_method: getConstantState
           go_name: GetConstantState
           returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getCurrent
-          go_name: GetCurrent
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getHotspotBounds
-          go_name: GetHotspotBounds
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
           error: true
         - java_method: getIntrinsicHeight
           go_name: GetIntrinsicHeight
@@ -102,14 +879,6 @@ classes:
           error: true
         - java_method: getIntrinsicWidth
           go_name: GetIntrinsicWidth
-          returns: int
-          error: true
-        - java_method: getMinimumHeight
-          go_name: GetMinimumHeight
-          returns: int
-          error: true
-        - java_method: getMinimumWidth
-          go_name: GetMinimumWidth
           returns: int
           error: true
         - java_method: getOpacity
@@ -120,29 +889,21 @@ classes:
           go_name: GetOpticalInsets
           returns: android.graphics.Insets
           error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getPadding
-          go_name: GetPadding
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: boolean
-          error: true
         - java_method: hasFocusStateSpecified
           go_name: HasFocusStateSpecified
           returns: boolean
           error: true
-        - java_method: invalidateDrawable
-          go_name: InvalidateDrawable
+        - java_method: inflate
+          go_name: Inflate
           params:
-            - java_type: android.graphics.drawable.Drawable
+            - java_type: android.content.res.Resources
               go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
           returns: void
           error: true
         - java_method: isAutoMirrored
@@ -153,38 +914,9 @@ classes:
           go_name: IsStateful
           returns: boolean
           error: true
-        - java_method: jumpToCurrentState
-          go_name: JumpToCurrentState
-          returns: void
-          error: true
         - java_method: mutate
           go_name: Mutate
           returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: onLayoutDirectionChanged
-          go_name: OnLayoutDirectionChanged
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: scheduleDrawable
-          go_name: ScheduleDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-            - java_type: java.lang.Runnable
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: selectDrawable
-          go_name: SelectDrawable
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
           error: true
         - java_method: setAlpha
           go_name: SetAlpha
@@ -207,24 +939,138 @@ classes:
               go_name: arg0
           returns: void
           error: true
-        - java_method: setDither
-          go_name: SetDither
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
           params:
-            - java_type: boolean
+            - java_type: android.graphics.BlendMode
               go_name: arg0
           returns: void
           error: true
-        - java_method: setEnterFadeDuration
-          go_name: SetEnterFadeDuration
+        - java_method: setTintList
+          go_name: SetTintList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.AnimatedVectorDrawable
+      go_type: AnimatedVectorDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
+          returns: boolean
+          error: true
+        - java_method: clearAnimationCallbacks
+          go_name: ClearAnimationCallbacks
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getAlpha
+          go_name: GetAlpha
+          returns: int
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getColorFilter
+          go_name: GetColorFilter
+          returns: android.graphics.ColorFilter
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getIntrinsicHeight
+          go_name: GetIntrinsicHeight
+          returns: int
+          error: true
+        - java_method: getIntrinsicWidth
+          go_name: GetIntrinsicWidth
+          returns: int
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: getOpticalInsets
+          go_name: GetOpticalInsets
+          returns: android.graphics.Insets
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isRunning
+          go_name: IsRunning
+          returns: boolean
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: onLayoutDirectionChanged
+          go_name: OnLayoutDirectionChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: registerAnimationCallback
+          go_name: RegisterAnimationCallback
+          params:
+            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
           params:
             - java_type: int
               go_name: arg0
           returns: void
           error: true
-        - java_method: setExitFadeDuration
-          go_name: SetExitFadeDuration
+        - java_method: setColorFilter
+          go_name: SetColorFilter
           params:
-            - java_type: int
+            - java_type: android.graphics.ColorFilter
               go_name: arg0
           returns: void
           error: true
@@ -273,6 +1119,177 @@ classes:
               go_name: arg1
           returns: boolean
           error: true
+        - java_method: start
+          go_name: Start
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+        - java_method: unregisterAnimationCallback
+          go_name: UnregisterAnimationCallback
+          params:
+            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.graphics.drawable.Animatable2
+      go_type: Animatable2
+      methods:
+        - java_method: clearAnimationCallbacks
+          go_name: ClearAnimationCallbacks
+          returns: void
+          error: true
+        - java_method: registerAnimationCallback
+          go_name: RegisterAnimationCallback
+          params:
+            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterAnimationCallback
+          go_name: UnregisterAnimationCallback
+          params:
+            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.graphics.drawable.Animatable2$AnimationCallback
+      go_type: Animatable2AnimationCallback
+      methods:
+        - java_method: onAnimationEnd
+          go_name: OnAnimationEnd
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAnimationStart
+          go_name: OnAnimationStart
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.ColorStateListDrawable
+      go_type: ColorStateListDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
+          returns: boolean
+          error: true
+        - java_method: clearAlpha
+          go_name: ClearAlpha
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getAlpha
+          go_name: GetAlpha
+          returns: int
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getColorFilter
+          go_name: GetColorFilter
+          returns: android.graphics.ColorFilter
+          error: true
+        - java_method: getColorStateList
+          go_name: GetColorStateList
+          returns: android.content.res.ColorStateList
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getCurrent
+          go_name: GetCurrent
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: invalidateDrawable
+          go_name: InvalidateDrawable
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: scheduleDrawable
+          go_name: ScheduleDrawable
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: java.lang.Runnable
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColorFilter
+          go_name: SetColorFilter
+          params:
+            - java_type: android.graphics.ColorFilter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColorStateList
+          go_name: SetColorStateList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
+          params:
+            - java_type: android.graphics.BlendMode
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintList
+          go_name: SetTintList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
         - java_method: unscheduleDrawable
           go_name: UnscheduleDrawable
           params:
@@ -280,116 +1297,6 @@ classes:
               go_name: arg0
             - java_type: java.lang.Runnable
               go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.DrawableContainer$DrawableContainerState
-      go_type: ContainerDrawableContainerState
-      methods:
-        - java_method: addChild
-          go_name: AddChild
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getChild
-          go_name: GetChild
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getChildCount
-          go_name: GetChildCount
-          returns: int
-          error: true
-        - java_method: getChildren
-          go_name: GetChildren
-          returns: android.graphics.drawable.Drawable[]
-          error: true
-        - java_method: getConstantHeight
-          go_name: GetConstantHeight
-          returns: int
-          error: true
-        - java_method: getConstantMinimumHeight
-          go_name: GetConstantMinimumHeight
-          returns: int
-          error: true
-        - java_method: getConstantMinimumWidth
-          go_name: GetConstantMinimumWidth
-          returns: int
-          error: true
-        - java_method: getConstantPadding
-          go_name: GetConstantPadding
-          returns: android.graphics.Rect
-          error: true
-        - java_method: getConstantWidth
-          go_name: GetConstantWidth
-          returns: int
-          error: true
-        - java_method: getEnterFadeDuration
-          go_name: GetEnterFadeDuration
-          returns: int
-          error: true
-        - java_method: getExitFadeDuration
-          go_name: GetExitFadeDuration
-          returns: int
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: growArray
-          go_name: GrowArray
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: isConstantSize
-          go_name: IsConstantSize
-          returns: boolean
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: setConstantSize
-          go_name: SetConstantSize
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setEnterFadeDuration
-          go_name: SetEnterFadeDuration
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setExitFadeDuration
-          go_name: SetExitFadeDuration
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setVariablePadding
-          go_name: SetVariablePadding
-          params:
-            - java_type: boolean
-              go_name: arg0
           returns: void
           error: true
     - java_class: android.graphics.drawable.BitmapDrawable
@@ -631,594 +1538,6 @@ classes:
           go_name: SetTintList
           params:
             - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.ColorStateListDrawable
-      go_type: ColorStateListDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: clearAlpha
-          go_name: ClearAlpha
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAlpha
-          go_name: GetAlpha
-          returns: int
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getColorFilter
-          go_name: GetColorFilter
-          returns: android.graphics.ColorFilter
-          error: true
-        - java_method: getColorStateList
-          go_name: GetColorStateList
-          returns: android.content.res.ColorStateList
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getCurrent
-          go_name: GetCurrent
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: invalidateDrawable
-          go_name: InvalidateDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: scheduleDrawable
-          go_name: ScheduleDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-            - java_type: java.lang.Runnable
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorFilter
-          go_name: SetColorFilter
-          params:
-            - java_type: android.graphics.ColorFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorStateList
-          go_name: SetColorStateList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: unscheduleDrawable
-          go_name: UnscheduleDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-            - java_type: java.lang.Runnable
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.TransitionDrawable
-      go_type: TransitionDrawable
-      methods:
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: isCrossFadeEnabled
-          go_name: IsCrossFadeEnabled
-          returns: boolean
-          error: true
-        - java_method: resetTransition
-          go_name: ResetTransition
-          returns: void
-          error: true
-        - java_method: reverseTransition
-          go_name: ReverseTransition
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCrossFadeEnabled
-          go_name: SetCrossFadeEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: startTransition
-          go_name: StartTransition
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.RotateDrawable
-      go_type: RotateDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getFromDegrees
-          go_name: GetFromDegrees
-          returns: float
-          error: true
-        - java_method: getPivotX
-          go_name: GetPivotX
-          returns: float
-          error: true
-        - java_method: getPivotY
-          go_name: GetPivotY
-          returns: float
-          error: true
-        - java_method: getToDegrees
-          go_name: GetToDegrees
-          returns: float
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isPivotXRelative
-          go_name: IsPivotXRelative
-          returns: boolean
-          error: true
-        - java_method: isPivotYRelative
-          go_name: IsPivotYRelative
-          returns: boolean
-          error: true
-        - java_method: setFromDegrees
-          go_name: SetFromDegrees
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPivotX
-          go_name: SetPivotX
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPivotXRelative
-          go_name: SetPivotXRelative
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPivotY
-          go_name: SetPivotY
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPivotYRelative
-          go_name: SetPivotYRelative
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setToDegrees
-          go_name: SetToDegrees
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.AnimatedVectorDrawable
-      go_type: AnimatedVectorDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: clearAnimationCallbacks
-          go_name: ClearAnimationCallbacks
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAlpha
-          go_name: GetAlpha
-          returns: int
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getColorFilter
-          go_name: GetColorFilter
-          returns: android.graphics.ColorFilter
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getIntrinsicHeight
-          go_name: GetIntrinsicHeight
-          returns: int
-          error: true
-        - java_method: getIntrinsicWidth
-          go_name: GetIntrinsicWidth
-          returns: int
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: getOpticalInsets
-          go_name: GetOpticalInsets
-          returns: android.graphics.Insets
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isRunning
-          go_name: IsRunning
-          returns: boolean
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: onLayoutDirectionChanged
-          go_name: OnLayoutDirectionChanged
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: registerAnimationCallback
-          go_name: RegisterAnimationCallback
-          params:
-            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: reset
-          go_name: Reset
-          returns: void
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorFilter
-          go_name: SetColorFilter
-          params:
-            - java_type: android.graphics.ColorFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setHotspot
-          go_name: SetHotspot
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setHotspotBounds
-          go_name: SetHotspotBounds
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setVisible
-          go_name: SetVisible
-          params:
-            - java_type: boolean
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: start
-          go_name: Start
-          returns: void
-          error: true
-        - java_method: stop
-          go_name: Stop
-          returns: void
-          error: true
-        - java_method: unregisterAnimationCallback
-          go_name: UnregisterAnimationCallback
-          params:
-            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.graphics.drawable.Animatable2
-      go_type: Animatable2
-      methods:
-        - java_method: clearAnimationCallbacks
-          go_name: ClearAnimationCallbacks
-          returns: void
-          error: true
-        - java_method: registerAnimationCallback
-          go_name: RegisterAnimationCallback
-          params:
-            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: unregisterAnimationCallback
-          go_name: UnregisterAnimationCallback
-          params:
-            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.graphics.drawable.Animatable2$AnimationCallback
-      go_type: Animatable2AnimationCallback
-      methods:
-        - java_method: onAnimationEnd
-          go_name: OnAnimationEnd
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onAnimationStart
-          go_name: OnAnimationStart
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.AnimationDrawable
-      go_type: AnimationDrawable
-      methods:
-        - java_method: addFrame
-          go_name: AddFrame
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: getDuration
-          go_name: GetDuration
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getFrame
-          go_name: GetFrame
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getNumberOfFrames
-          go_name: GetNumberOfFrames
-          returns: int
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isOneShot
-          go_name: IsOneShot
-          returns: boolean
-          error: true
-        - java_method: isRunning
-          go_name: IsRunning
-          returns: boolean
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: run
-          go_name: Run
-          returns: void
-          error: true
-        - java_method: setOneShot
-          go_name: SetOneShot
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setVisible
-          go_name: SetVisible
-          params:
-            - java_type: boolean
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: start
-          go_name: Start
-          returns: void
-          error: true
-        - java_method: stop
-          go_name: Stop
-          returns: void
-          error: true
-        - java_method: unscheduleSelf
-          go_name: UnscheduleSelf
-          params:
-            - java_type: java.lang.Runnable
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.PaintDrawable
-      go_type: PaintDrawable
-      methods:
-        - java_method: setCornerRadii
-          go_name: SetCornerRadii
-          params:
-            - java_type: float[]
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCornerRadius
-          go_name: SetCornerRadius
-          params:
-            - java_type: float
               go_name: arg0
           returns: void
           error: true
@@ -2134,196 +2453,19 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.graphics.drawable.Animatable
-      go_type: Animatable
+    - java_class: android.graphics.drawable.DrawableContainer
+      go_type: Container
       methods:
-        - java_method: isRunning
-          go_name: IsRunning
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
           returns: boolean
-          error: true
-        - java_method: start
-          go_name: Start
-          returns: void
-          error: true
-        - java_method: stop
-          go_name: Stop
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.Icon
-      go_type: Icon
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getResId
-          go_name: GetResId
-          returns: int
-          error: true
-        - java_method: getResPackage
-          go_name: GetResPackage
-          returns: String
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getUri
-          go_name: GetUri
-          returns: android.net.Uri
-          error: true
-        - java_method: loadDrawable
-          go_name: LoadDrawable
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: loadDrawableAsync
-          go_name: LoadDrawableAsync
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.os.Message
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setTint
-          go_name: SetTint
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: setTintMode
-          go_name: SetTintMode
-          params:
-            - java_type: android.graphics.PorterDuff$Mode
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: createWithAdaptiveBitmap
-          go_name: CreateWithAdaptiveBitmap
-          params:
-            - java_type: android.graphics.Bitmap
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithAdaptiveBitmapContentUri
-          go_name: CreateWithAdaptiveBitmapContentUri1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithAdaptiveBitmapContentUri
-          go_name: CreateWithAdaptiveBitmapContentUri1_1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithBitmap
-          go_name: CreateWithBitmap
-          params:
-            - java_type: android.graphics.Bitmap
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithContentUri
-          go_name: CreateWithContentUri1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithContentUri
-          go_name: CreateWithContentUri1_1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithData
-          go_name: CreateWithData
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithFilePath
-          go_name: CreateWithFilePath
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithResource
-          go_name: CreateWithResource2
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: createWithResource
-          go_name: CreateWithResource2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.graphics.drawable.Icon
-          error: true
-    - java_class: android.graphics.drawable.Icon$OnDrawableLoadedListener
-      go_type: IconOnDrawableLoadedListener
-      methods:
-        - java_method: onDrawableLoaded
-          go_name: OnDrawableLoaded
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.AnimatedImageDrawable
-      go_type: AnimatedImageDrawable
-      methods:
-        - java_method: clearAnimationCallbacks
-          go_name: ClearAnimationCallbacks
-          returns: void
           error: true
         - java_method: draw
           go_name: Draw
@@ -2336,9 +2478,24 @@ classes:
           go_name: GetAlpha
           returns: int
           error: true
-        - java_method: getColorFilter
-          go_name: GetColorFilter
-          returns: android.graphics.ColorFilter
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getCurrent
+          go_name: GetCurrent
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getHotspotBounds
+          go_name: GetHotspotBounds
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: void
           error: true
         - java_method: getIntrinsicHeight
           go_name: GetIntrinsicHeight
@@ -2348,38 +2505,62 @@ classes:
           go_name: GetIntrinsicWidth
           returns: int
           error: true
+        - java_method: getMinimumHeight
+          go_name: GetMinimumHeight
+          returns: int
+          error: true
+        - java_method: getMinimumWidth
+          go_name: GetMinimumWidth
+          returns: int
+          error: true
         - java_method: getOpacity
           go_name: GetOpacity
           returns: int
           error: true
-        - java_method: getRepeatCount
-          go_name: GetRepeatCount
-          returns: int
+        - java_method: getOpticalInsets
+          go_name: GetOpticalInsets
+          returns: android.graphics.Insets
           error: true
-        - java_method: inflate
-          go_name: Inflate
+        - java_method: getOutline
+          go_name: GetOutline
           params:
-            - java_type: android.content.res.Resources
+            - java_type: android.graphics.Outline
               go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
+          returns: void
+          error: true
+        - java_method: getPadding
+          go_name: GetPadding
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: invalidateDrawable
+          go_name: InvalidateDrawable
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
           returns: void
           error: true
         - java_method: isAutoMirrored
           go_name: IsAutoMirrored
           returns: boolean
           error: true
-        - java_method: isFilterBitmap
-          go_name: IsFilterBitmap
+        - java_method: isStateful
+          go_name: IsStateful
           returns: boolean
           error: true
-        - java_method: isRunning
-          go_name: IsRunning
-          returns: boolean
+        - java_method: jumpToCurrentState
+          go_name: JumpToCurrentState
+          returns: void
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
           error: true
         - java_method: onLayoutDirectionChanged
           go_name: OnLayoutDirectionChanged
@@ -2388,12 +2569,23 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: registerAnimationCallback
-          go_name: RegisterAnimationCallback
+        - java_method: scheduleDrawable
+          go_name: ScheduleDrawable
           params:
-            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+            - java_type: android.graphics.drawable.Drawable
               go_name: arg0
+            - java_type: java.lang.Runnable
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
           returns: void
+          error: true
+        - java_method: selectDrawable
+          go_name: SelectDrawable
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
           error: true
         - java_method: setAlpha
           go_name: SetAlpha
@@ -2416,147 +2608,24 @@ classes:
               go_name: arg0
           returns: void
           error: true
-        - java_method: setFilterBitmap
-          go_name: SetFilterBitmap
+        - java_method: setDither
+          go_name: SetDither
           params:
             - java_type: boolean
               go_name: arg0
           returns: void
           error: true
-        - java_method: setRepeatCount
-          go_name: SetRepeatCount
+        - java_method: setEnterFadeDuration
+          go_name: SetEnterFadeDuration
           params:
             - java_type: int
               go_name: arg0
           returns: void
           error: true
-        - java_method: start
-          go_name: Start
-          returns: void
-          error: true
-        - java_method: stop
-          go_name: Stop
-          returns: void
-          error: true
-        - java_method: unregisterAnimationCallback
-          go_name: UnregisterAnimationCallback
-          params:
-            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.graphics.drawable.RippleDrawable
-      go_type: RippleDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getDirtyBounds
-          go_name: GetDirtyBounds
-          returns: android.graphics.Rect
-          error: true
-        - java_method: getEffectColor
-          go_name: GetEffectColor
-          returns: android.content.res.ColorStateList
-          error: true
-        - java_method: getHotspotBounds
-          go_name: GetHotspotBounds
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getRadius
-          go_name: GetRadius
-          returns: int
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: invalidateSelf
-          go_name: InvalidateSelf
-          returns: void
-          error: true
-        - java_method: isProjected
-          go_name: IsProjected
-          returns: boolean
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: jumpToCurrentState
-          go_name: JumpToCurrentState
-          returns: void
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: setColor
-          go_name: SetColor
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDrawableByLayerId
-          go_name: SetDrawableByLayerId
+        - java_method: setExitFadeDuration
+          go_name: SetExitFadeDuration
           params:
             - java_type: int
-              go_name: arg0
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: setEffectColor
-          go_name: SetEffectColor
-          params:
-            - java_type: android.content.res.ColorStateList
               go_name: arg0
           returns: void
           error: true
@@ -2582,17 +2651,17 @@ classes:
               go_name: arg3
           returns: void
           error: true
-        - java_method: setPaddingMode
-          go_name: SetPaddingMode
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
           params:
-            - java_type: int
+            - java_type: android.graphics.BlendMode
               go_name: arg0
           returns: void
           error: true
-        - java_method: setRadius
-          go_name: SetRadius
+        - java_method: setTintList
+          go_name: SetTintList
           params:
-            - java_type: int
+            - java_type: android.content.res.ColorStateList
               go_name: arg0
           returns: void
           error: true
@@ -2605,74 +2674,124 @@ classes:
               go_name: arg1
           returns: boolean
           error: true
-    - java_class: android.graphics.drawable.StateListDrawable
-      go_type: StateListDrawable
-      methods:
-        - java_method: addState
-          go_name: AddState
+        - java_method: unscheduleDrawable
+          go_name: UnscheduleDrawable
           params:
-            - java_type: '[I'
-              go_name: arg0
             - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: java.lang.Runnable
               go_name: arg1
           returns: void
           error: true
-        - java_method: applyTheme
-          go_name: ApplyTheme
+    - java_class: android.graphics.drawable.DrawableContainer$DrawableContainerState
+      go_type: ContainerDrawableContainerState
+      methods:
+        - java_method: addChild
+          go_name: AddChild
           params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: findStateDrawableIndex
-          go_name: FindStateDrawableIndex
-          params:
-            - java_type: '[I'
+            - java_type: android.graphics.drawable.Drawable
               go_name: arg0
           returns: int
           error: true
-        - java_method: getStateCount
-          go_name: GetStateCount
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
+          returns: boolean
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
           returns: int
           error: true
-        - java_method: getStateDrawable
-          go_name: GetStateDrawable
+        - java_method: getChild
+          go_name: GetChild
           params:
             - java_type: int
               go_name: arg0
           returns: android.graphics.drawable.Drawable
           error: true
-        - java_method: getStateSet
-          go_name: GetStateSet
+        - java_method: getChildCount
+          go_name: GetChildCount
+          returns: int
+          error: true
+        - java_method: getChildren
+          go_name: GetChildren
+          returns: android.graphics.drawable.Drawable[]
+          error: true
+        - java_method: getConstantHeight
+          go_name: GetConstantHeight
+          returns: int
+          error: true
+        - java_method: getConstantMinimumHeight
+          go_name: GetConstantMinimumHeight
+          returns: int
+          error: true
+        - java_method: getConstantMinimumWidth
+          go_name: GetConstantMinimumWidth
+          returns: int
+          error: true
+        - java_method: getConstantPadding
+          go_name: GetConstantPadding
+          returns: android.graphics.Rect
+          error: true
+        - java_method: getConstantWidth
+          go_name: GetConstantWidth
+          returns: int
+          error: true
+        - java_method: getEnterFadeDuration
+          go_name: GetEnterFadeDuration
+          returns: int
+          error: true
+        - java_method: getExitFadeDuration
+          go_name: GetExitFadeDuration
+          returns: int
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: growArray
+          go_name: GrowArray
           params:
             - java_type: int
               go_name: arg0
-          returns: '[I'
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
+            - java_type: int
               go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
           returns: void
+          error: true
+        - java_method: isConstantSize
+          go_name: IsConstantSize
+          returns: boolean
           error: true
         - java_method: isStateful
           go_name: IsStateful
           returns: boolean
           error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
+        - java_method: setConstantSize
+          go_name: SetConstantSize
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setEnterFadeDuration
+          go_name: SetEnterFadeDuration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setExitFadeDuration
+          go_name: SetExitFadeDuration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVariablePadding
+          go_name: SetVariablePadding
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
           error: true
     - java_class: android.graphics.drawable.InsetDrawable
       go_type: InsetDrawable
@@ -2725,719 +2844,6 @@ classes:
               go_name: arg2
             - java_type: android.content.res.Resources$Theme
               go_name: arg3
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.ColorDrawable
-      go_type: ColorDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAlpha
-          go_name: GetAlpha
-          returns: int
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getColor
-          go_name: GetColor
-          returns: int
-          error: true
-        - java_method: getColorFilter
-          go_name: GetColorFilter
-          returns: android.graphics.ColorFilter
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColor
-          go_name: SetColor
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorFilter
-          go_name: SetColorFilter
-          params:
-            - java_type: android.graphics.ColorFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.ShapeDrawable
-      go_type: ShapeDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAlpha
-          go_name: GetAlpha
-          returns: int
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getIntrinsicHeight
-          go_name: GetIntrinsicHeight
-          returns: int
-          error: true
-        - java_method: getIntrinsicWidth
-          go_name: GetIntrinsicWidth
-          returns: int
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getPadding
-          go_name: GetPadding
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getPaint
-          go_name: GetPaint
-          returns: android.graphics.Paint
-          error: true
-        - java_method: getShaderFactory
-          go_name: GetShaderFactory
-          returns: android.graphics.drawable.ShapeDrawable$ShaderFactory
-          error: true
-        - java_method: getShape
-          go_name: GetShape
-          returns: android.graphics.drawable.shapes.Shape
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorFilter
-          go_name: SetColorFilter
-          params:
-            - java_type: android.graphics.ColorFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDither
-          go_name: SetDither
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setIntrinsicHeight
-          go_name: SetIntrinsicHeight
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setIntrinsicWidth
-          go_name: SetIntrinsicWidth
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPadding
-          go_name: SetPadding1
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPadding
-          go_name: SetPadding4_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: setShaderFactory
-          go_name: SetShaderFactory
-          params:
-            - java_type: android.graphics.drawable.ShapeDrawable$ShaderFactory
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setShape
-          go_name: SetShape
-          params:
-            - java_type: android.graphics.drawable.shapes.Shape
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.ShapeDrawable$ShaderFactory
-      go_type: ShapeDrawableShaderFactory
-      methods:
-        - java_method: resize
-          go_name: Resize
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.graphics.Shader
-          error: true
-    - java_class: android.graphics.drawable.LevelListDrawable
-      go_type: LevelListDrawable
-      methods:
-        - java_method: addLevel
-          go_name: AddLevel
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-    - java_class: android.graphics.drawable.ClipDrawable
-      go_type: ClipDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-    - java_class: android.graphics.drawable.AdaptiveIconDrawable
-      go_type: AdaptiveIconDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAlpha
-          go_name: GetAlpha
-          returns: int
-          error: true
-        - java_method: getBackground
-          go_name: GetBackground
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getForeground
-          go_name: GetForeground
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getHotspotBounds
-          go_name: GetHotspotBounds
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getIconMask
-          go_name: GetIconMask
-          returns: android.graphics.Path
-          error: true
-        - java_method: getIntrinsicHeight
-          go_name: GetIntrinsicHeight
-          returns: int
-          error: true
-        - java_method: getIntrinsicWidth
-          go_name: GetIntrinsicWidth
-          returns: int
-          error: true
-        - java_method: getMonochrome
-          go_name: GetMonochrome
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getTransparentRegion
-          go_name: GetTransparentRegion
-          returns: android.graphics.Region
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: invalidateDrawable
-          go_name: InvalidateDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: invalidateSelf
-          go_name: InvalidateSelf
-          returns: void
-          error: true
-        - java_method: isAutoMirrored
-          go_name: IsAutoMirrored
-          returns: boolean
-          error: true
-        - java_method: isProjected
-          go_name: IsProjected
-          returns: boolean
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: jumpToCurrentState
-          go_name: JumpToCurrentState
-          returns: void
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: scheduleDrawable
-          go_name: ScheduleDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-            - java_type: java.lang.Runnable
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setAutoMirrored
-          go_name: SetAutoMirrored
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorFilter
-          go_name: SetColorFilter
-          params:
-            - java_type: android.graphics.ColorFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDither
-          go_name: SetDither
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setHotspot
-          go_name: SetHotspot
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setHotspotBounds
-          go_name: SetHotspotBounds
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: setOpacity
-          go_name: SetOpacity
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setVisible
-          go_name: SetVisible
-          params:
-            - java_type: boolean
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: unscheduleDrawable
-          go_name: UnscheduleDrawable
-          params:
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg0
-            - java_type: java.lang.Runnable
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: getExtraInsetFraction
-          go_name: GetExtraInsetFraction
-          returns: float
-          error: true
-    - java_class: android.graphics.drawable.VectorDrawable
-      go_type: VectorDrawable
-      methods:
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: canApplyTheme
-          go_name: CanApplyTheme
-          returns: boolean
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAlpha
-          go_name: GetAlpha
-          returns: int
-          error: true
-        - java_method: getChangingConfigurations
-          go_name: GetChangingConfigurations
-          returns: int
-          error: true
-        - java_method: getColorFilter
-          go_name: GetColorFilter
-          returns: android.graphics.ColorFilter
-          error: true
-        - java_method: getConstantState
-          go_name: GetConstantState
-          returns: android.graphics.drawable.Drawable$ConstantState
-          error: true
-        - java_method: getIntrinsicHeight
-          go_name: GetIntrinsicHeight
-          returns: int
-          error: true
-        - java_method: getIntrinsicWidth
-          go_name: GetIntrinsicWidth
-          returns: int
-          error: true
-        - java_method: getOpacity
-          go_name: GetOpacity
-          returns: int
-          error: true
-        - java_method: getOpticalInsets
-          go_name: GetOpticalInsets
-          returns: android.graphics.Insets
-          error: true
-        - java_method: hasFocusStateSpecified
-          go_name: HasFocusStateSpecified
-          returns: boolean
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isAutoMirrored
-          go_name: IsAutoMirrored
-          returns: boolean
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: setAlpha
-          go_name: SetAlpha
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setAutoMirrored
-          go_name: SetAutoMirrored
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setColorFilter
-          go_name: SetColorFilter
-          params:
-            - java_type: android.graphics.ColorFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintBlendMode
-          go_name: SetTintBlendMode
-          params:
-            - java_type: android.graphics.BlendMode
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTintList
-          go_name: SetTintList
-          params:
-            - java_type: android.content.res.ColorStateList
-              go_name: arg0
           returns: void
           error: true
     - java_class: android.graphics.drawable.DrawableWrapper
@@ -3647,61 +3053,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.graphics.drawable.AnimatedStateListDrawable
-      go_type: AnimatedStateListDrawable
-      methods:
-        - java_method: addState
-          go_name: AddState
-          params:
-            - java_type: '[I'
-              go_name: arg0
-            - java_type: android.graphics.drawable.Drawable
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: applyTheme
-          go_name: ApplyTheme
-          params:
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: inflate
-          go_name: Inflate
-          params:
-            - java_type: android.content.res.Resources
-              go_name: arg0
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg1
-            - java_type: android.util.AttributeSet
-              go_name: arg2
-            - java_type: android.content.res.Resources$Theme
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: isStateful
-          go_name: IsStateful
-          returns: boolean
-          error: true
-        - java_method: jumpToCurrentState
-          go_name: JumpToCurrentState
-          returns: void
-          error: true
-        - java_method: mutate
-          go_name: Mutate
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: setVisible
-          go_name: SetVisible
-          params:
-            - java_type: boolean
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: boolean
-          error: true
     - java_class: android.graphics.drawable.NinePatchDrawable
       go_type: NinePatchDrawable
       methods:
@@ -3873,6 +3224,291 @@ classes:
           go_name: SetTintList
           params:
             - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.ClipDrawable
+      go_type: ClipDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.ScaleDrawable
+      go_type: ScaleDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.LevelListDrawable
+      go_type: LevelListDrawable
+      methods:
+        - java_method: addLevel
+          go_name: AddLevel
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+    - java_class: android.graphics.drawable.RotateDrawable
+      go_type: RotateDrawable
+      methods:
+        - java_method: applyTheme
+          go_name: ApplyTheme
+          params:
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getFromDegrees
+          go_name: GetFromDegrees
+          returns: float
+          error: true
+        - java_method: getPivotX
+          go_name: GetPivotX
+          returns: float
+          error: true
+        - java_method: getPivotY
+          go_name: GetPivotY
+          returns: float
+          error: true
+        - java_method: getToDegrees
+          go_name: GetToDegrees
+          returns: float
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isPivotXRelative
+          go_name: IsPivotXRelative
+          returns: boolean
+          error: true
+        - java_method: isPivotYRelative
+          go_name: IsPivotYRelative
+          returns: boolean
+          error: true
+        - java_method: setFromDegrees
+          go_name: SetFromDegrees
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPivotX
+          go_name: SetPivotX
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPivotXRelative
+          go_name: SetPivotXRelative
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPivotY
+          go_name: SetPivotY
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPivotYRelative
+          go_name: SetPivotYRelative
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setToDegrees
+          go_name: SetToDegrees
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.graphics.drawable.AnimationDrawable
+      go_type: AnimationDrawable
+      methods:
+        - java_method: addFrame
+          go_name: AddFrame
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getDuration
+          go_name: GetDuration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getFrame
+          go_name: GetFrame
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getNumberOfFrames
+          go_name: GetNumberOfFrames
+          returns: int
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isOneShot
+          go_name: IsOneShot
+          returns: boolean
+          error: true
+        - java_method: isRunning
+          go_name: IsRunning
+          returns: boolean
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: run
+          go_name: Run
+          returns: void
+          error: true
+        - java_method: setOneShot
+          go_name: SetOneShot
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVisible
+          go_name: SetVisible
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: start
+          go_name: Start
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+        - java_method: unscheduleSelf
+          go_name: UnscheduleSelf
+          params:
+            - java_type: java.lang.Runnable
               go_name: arg0
           returns: void
           error: true
@@ -4405,14 +4041,243 @@ classes:
               go_name: arg1
           returns: android.graphics.drawable.Drawable
           error: true
-    - java_class: android.graphics.drawable.ScaleDrawable
-      go_type: ScaleDrawable
+    - java_class: android.graphics.drawable.AdaptiveIconDrawable
+      go_type: AdaptiveIconDrawable
       methods:
         - java_method: applyTheme
           go_name: ApplyTheme
           params:
             - java_type: android.content.res.Resources$Theme
               go_name: arg0
+          returns: void
+          error: true
+        - java_method: canApplyTheme
+          go_name: CanApplyTheme
+          returns: boolean
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getAlpha
+          go_name: GetAlpha
+          returns: int
+          error: true
+        - java_method: getBackground
+          go_name: GetBackground
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getChangingConfigurations
+          go_name: GetChangingConfigurations
+          returns: int
+          error: true
+        - java_method: getConstantState
+          go_name: GetConstantState
+          returns: android.graphics.drawable.Drawable$ConstantState
+          error: true
+        - java_method: getForeground
+          go_name: GetForeground
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getHotspotBounds
+          go_name: GetHotspotBounds
+          params:
+            - java_type: android.graphics.Rect
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getIconMask
+          go_name: GetIconMask
+          returns: android.graphics.Path
+          error: true
+        - java_method: getIntrinsicHeight
+          go_name: GetIntrinsicHeight
+          returns: int
+          error: true
+        - java_method: getIntrinsicWidth
+          go_name: GetIntrinsicWidth
+          returns: int
+          error: true
+        - java_method: getMonochrome
+          go_name: GetMonochrome
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getOpacity
+          go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getTransparentRegion
+          go_name: GetTransparentRegion
+          returns: android.graphics.Region
+          error: true
+        - java_method: hasFocusStateSpecified
+          go_name: HasFocusStateSpecified
+          returns: boolean
+          error: true
+        - java_method: inflate
+          go_name: Inflate
+          params:
+            - java_type: android.content.res.Resources
+              go_name: arg0
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg1
+            - java_type: android.util.AttributeSet
+              go_name: arg2
+            - java_type: android.content.res.Resources$Theme
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: invalidateDrawable
+          go_name: InvalidateDrawable
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: invalidateSelf
+          go_name: InvalidateSelf
+          returns: void
+          error: true
+        - java_method: isAutoMirrored
+          go_name: IsAutoMirrored
+          returns: boolean
+          error: true
+        - java_method: isProjected
+          go_name: IsProjected
+          returns: boolean
+          error: true
+        - java_method: isStateful
+          go_name: IsStateful
+          returns: boolean
+          error: true
+        - java_method: jumpToCurrentState
+          go_name: JumpToCurrentState
+          returns: void
+          error: true
+        - java_method: mutate
+          go_name: Mutate
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: scheduleDrawable
+          go_name: ScheduleDrawable
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: java.lang.Runnable
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAutoMirrored
+          go_name: SetAutoMirrored
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColorFilter
+          go_name: SetColorFilter
+          params:
+            - java_type: android.graphics.ColorFilter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDither
+          go_name: SetDither
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setHotspot
+          go_name: SetHotspot
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setHotspotBounds
+          go_name: SetHotspotBounds
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: setOpacity
+          go_name: SetOpacity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintBlendMode
+          go_name: SetTintBlendMode
+          params:
+            - java_type: android.graphics.BlendMode
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTintList
+          go_name: SetTintList
+          params:
+            - java_type: android.content.res.ColorStateList
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setVisible
+          go_name: SetVisible
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: unscheduleDrawable
+          go_name: UnscheduleDrawable
+          params:
+            - java_type: android.graphics.drawable.Drawable
+              go_name: arg0
+            - java_type: java.lang.Runnable
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getExtraInsetFraction
+          go_name: GetExtraInsetFraction
+          returns: float
+          error: true
+    - java_class: android.graphics.drawable.AnimatedImageDrawable
+      go_type: AnimatedImageDrawable
+      methods:
+        - java_method: clearAnimationCallbacks
+          go_name: ClearAnimationCallbacks
           returns: void
           error: true
         - java_method: draw
@@ -4422,8 +4287,28 @@ classes:
               go_name: arg0
           returns: void
           error: true
+        - java_method: getAlpha
+          go_name: GetAlpha
+          returns: int
+          error: true
+        - java_method: getColorFilter
+          go_name: GetColorFilter
+          returns: android.graphics.ColorFilter
+          error: true
+        - java_method: getIntrinsicHeight
+          go_name: GetIntrinsicHeight
+          returns: int
+          error: true
+        - java_method: getIntrinsicWidth
+          go_name: GetIntrinsicWidth
+          returns: int
+          error: true
         - java_method: getOpacity
           go_name: GetOpacity
+          returns: int
+          error: true
+        - java_method: getRepeatCount
+          go_name: GetRepeatCount
           returns: int
           error: true
         - java_method: inflate
@@ -4439,7 +4324,146 @@ classes:
               go_name: arg3
           returns: void
           error: true
+        - java_method: isAutoMirrored
+          go_name: IsAutoMirrored
+          returns: boolean
+          error: true
+        - java_method: isFilterBitmap
+          go_name: IsFilterBitmap
+          returns: boolean
+          error: true
+        - java_method: isRunning
+          go_name: IsRunning
+          returns: boolean
+          error: true
+        - java_method: onLayoutDirectionChanged
+          go_name: OnLayoutDirectionChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: registerAnimationCallback
+          go_name: RegisterAnimationCallback
+          params:
+            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAlpha
+          go_name: SetAlpha
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAutoMirrored
+          go_name: SetAutoMirrored
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setColorFilter
+          go_name: SetColorFilter
+          params:
+            - java_type: android.graphics.ColorFilter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFilterBitmap
+          go_name: SetFilterBitmap
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRepeatCount
+          go_name: SetRepeatCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: start
+          go_name: Start
+          returns: void
+          error: true
+        - java_method: stop
+          go_name: Stop
+          returns: void
+          error: true
+        - java_method: unregisterAnimationCallback
+          go_name: UnregisterAnimationCallback
+          params:
+            - java_type: android.graphics.drawable.Animatable2$AnimationCallback
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.graphics.drawable.TransitionDrawable
+      go_type: TransitionDrawable
+      methods:
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: isCrossFadeEnabled
+          go_name: IsCrossFadeEnabled
+          returns: boolean
+          error: true
+        - java_method: resetTransition
+          go_name: ResetTransition
+          returns: void
+          error: true
+        - java_method: reverseTransition
+          go_name: ReverseTransition
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCrossFadeEnabled
+          go_name: SetCrossFadeEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startTransition
+          go_name: StartTransition
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
 constants:
+    - go_name: RadiusAuto
+      value: "-1"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: TypeAdaptiveBitmap
+      value: "5"
+      go_type: int
+    - go_name: TypeBitmap
+      value: "1"
+      go_type: int
+    - go_name: TypeData
+      value: "3"
+      go_type: int
+    - go_name: TypeResource
+      value: "2"
+      go_type: int
+    - go_name: TypeUri
+      value: "4"
+      go_type: int
+    - go_name: TypeUriAdaptiveBitmap
+      value: "6"
+      go_type: int
     - go_name: Line
       value: "2"
       go_type: int
@@ -4494,36 +4518,12 @@ constants:
     - go_name: PaddingModeStack
       value: "1"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: TypeAdaptiveBitmap
-      value: "5"
-      go_type: int
-    - go_name: TypeBitmap
-      value: "1"
-      go_type: int
-    - go_name: TypeData
-      value: "3"
-      go_type: int
-    - go_name: TypeResource
-      value: "2"
-      go_type: int
-    - go_name: TypeUri
-      value: "4"
-      go_type: int
-    - go_name: TypeUriAdaptiveBitmap
-      value: "6"
-      go_type: int
-    - go_name: RepeatInfinite
-      value: "-1"
-      go_type: int
-    - go_name: RadiusAuto
-      value: "-1"
-      go_type: int
     - go_name: Horizontal
       value: "1"
       go_type: int
     - go_name: Vertical
       value: "2"
+      go_type: int
+    - go_name: RepeatInfinite
+      value: "-1"
       go_type: int

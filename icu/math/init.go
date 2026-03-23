@@ -23,13 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsContext                *jni.GlobalRef
-	midContextGetDigits       jni.MethodID
-	midContextGetForm         jni.MethodID
-	midContextGetLostDigits   jni.MethodID
-	midContextGetRoundingMode jni.MethodID
-	midContextToString        jni.MethodID
-
 	clsBigDecimal                  *jni.GlobalRef
 	midBigDecimalAbs0              jni.MethodID
 	midBigDecimalAbs1_1            jni.MethodID
@@ -87,6 +80,13 @@ var (
 	midBigDecimalValueOf1          jni.MethodID
 	midBigDecimalValueOf1_1        jni.MethodID
 	midBigDecimalValueOf2_2        jni.MethodID
+
+	clsContext                *jni.GlobalRef
+	midContextGetDigits       jni.MethodID
+	midContextGetForm         jni.MethodID
+	midContextGetLostDigits   jni.MethodID
+	midContextGetRoundingMode jni.MethodID
+	midContextToString        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -106,51 +106,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/icu/math/MathContext")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsContext = env.NewGlobalRef(&c.Object)
-
-		midContextGetDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getDigits", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextGetForm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getForm", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextGetLostDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getLostDigits", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextGetRoundingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getRoundingMode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/icu/math/BigDecimal")
 	if err != nil {
@@ -546,6 +501,51 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBigDecimalValueOf2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "valueOf", "(JI)Landroid/icu/math/BigDecimal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/icu/math/MathContext")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsContext = env.NewGlobalRef(&c.Object)
+
+		midContextGetDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getDigits", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextGetForm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getForm", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextGetLostDigits, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getLostDigits", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextGetRoundingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getRoundingMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

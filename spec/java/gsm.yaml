@@ -45,56 +45,6 @@ classes:
           go_name: GetDefault
           returns: android.telephony.gsm.SmsManager
           error: true
-    - java_class: android.telephony.gsm.GsmCellLocation
-      go_type: CellLocation
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: fillInNotifierBundle
-          go_name: FillInNotifierBundle
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getCid
-          go_name: GetCid
-          returns: int
-          error: true
-        - java_method: getLac
-          go_name: GetLac
-          returns: int
-          error: true
-        - java_method: getPsc
-          go_name: GetPsc
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: setLacAndCid
-          go_name: SetLacAndCid
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setStateInvalid
-          go_name: SetStateInvalid
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
     - java_class: android.telephony.gsm.SmsMessage
       go_type: SmsMessage
       methods:
@@ -272,6 +222,56 @@ classes:
     - java_class: android.telephony.gsm.SmsMessage$SubmitPdu
       go_type: SmsMessageSubmitPdu
       methods:
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.telephony.gsm.GsmCellLocation
+      go_type: CellLocation
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: fillInNotifierBundle
+          go_name: FillInNotifierBundle
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getCid
+          go_name: GetCid
+          returns: int
+          error: true
+        - java_method: getLac
+          go_name: GetLac
+          returns: int
+          error: true
+        - java_method: getPsc
+          go_name: GetPsc
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: setLacAndCid
+          go_name: SetLacAndCid
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStateInvalid
+          go_name: SetStateInvalid
+          returns: void
+          error: true
         - java_method: toString
           go_name: ToString
           returns: String

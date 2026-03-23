@@ -23,16 +23,49 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsTrustedBiddingData                     *jni.GlobalRef
-	midTrustedBiddingDataDescribeContents     jni.MethodID
-	midTrustedBiddingDataEquals               jni.MethodID
-	midTrustedBiddingDataGetTrustedBiddingUri jni.MethodID
-	midTrustedBiddingDataHashCode             jni.MethodID
-	midTrustedBiddingDataWriteToParcel        jni.MethodID
+	clsAddCustomAudienceOverrideRequest                         *jni.GlobalRef
+	midAddCustomAudienceOverrideRequestGetBiddingLogicJs        jni.MethodID
+	midAddCustomAudienceOverrideRequestGetBiddingLogicJsVersion jni.MethodID
+	midAddCustomAudienceOverrideRequestGetBuyer                 jni.MethodID
+	midAddCustomAudienceOverrideRequestGetName                  jni.MethodID
+	midAddCustomAudienceOverrideRequestGetTrustedBiddingSignals jni.MethodID
 
-	clsTrustedBiddingDataBuilder                     *jni.GlobalRef
-	midTrustedBiddingDataBuilderBuild                jni.MethodID
-	midTrustedBiddingDataBuilderSetTrustedBiddingUri jni.MethodID
+	clsAddCustomAudienceOverrideRequestBuilder                         *jni.GlobalRef
+	midAddCustomAudienceOverrideRequestBuilderBuild                    jni.MethodID
+	midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJs        jni.MethodID
+	midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJsVersion jni.MethodID
+	midAddCustomAudienceOverrideRequestBuilderSetBuyer                 jni.MethodID
+	midAddCustomAudienceOverrideRequestBuilderSetName                  jni.MethodID
+	midAddCustomAudienceOverrideRequestBuilderSetTrustedBiddingSignals jni.MethodID
+
+	clsJoinCustomAudienceRequest                  *jni.GlobalRef
+	midJoinCustomAudienceRequestEquals            jni.MethodID
+	midJoinCustomAudienceRequestGetCustomAudience jni.MethodID
+	midJoinCustomAudienceRequestHashCode          jni.MethodID
+
+	clsJoinCustomAudienceRequestBuilder                  *jni.GlobalRef
+	midJoinCustomAudienceRequestBuilderBuild             jni.MethodID
+	midJoinCustomAudienceRequestBuilderSetCustomAudience jni.MethodID
+
+	clsLeaveCustomAudienceRequest         *jni.GlobalRef
+	midLeaveCustomAudienceRequestEquals   jni.MethodID
+	midLeaveCustomAudienceRequestGetBuyer jni.MethodID
+	midLeaveCustomAudienceRequestGetName  jni.MethodID
+	midLeaveCustomAudienceRequestHashCode jni.MethodID
+
+	clsLeaveCustomAudienceRequestBuilder         *jni.GlobalRef
+	midLeaveCustomAudienceRequestBuilderBuild    jni.MethodID
+	midLeaveCustomAudienceRequestBuilderSetBuyer jni.MethodID
+	midLeaveCustomAudienceRequestBuilderSetName  jni.MethodID
+
+	clsRemoveCustomAudienceOverrideRequest         *jni.GlobalRef
+	midRemoveCustomAudienceOverrideRequestGetBuyer jni.MethodID
+	midRemoveCustomAudienceOverrideRequestGetName  jni.MethodID
+
+	clsRemoveCustomAudienceOverrideRequestBuilder         *jni.GlobalRef
+	midRemoveCustomAudienceOverrideRequestBuilderBuild    jni.MethodID
+	midRemoveCustomAudienceOverrideRequestBuilderSetBuyer jni.MethodID
+	midRemoveCustomAudienceOverrideRequestBuilderSetName  jni.MethodID
 
 	clsCustomAudience                             *jni.GlobalRef
 	midCustomAudienceDescribeContents             jni.MethodID
@@ -64,56 +97,22 @@ var (
 	midCustomAudienceBuilderSetTrustedBiddingData        jni.MethodID
 	midCustomAudienceBuilderSetUserBiddingSignals        jni.MethodID
 
+	clsTrustedBiddingData                     *jni.GlobalRef
+	midTrustedBiddingDataDescribeContents     jni.MethodID
+	midTrustedBiddingDataEquals               jni.MethodID
+	midTrustedBiddingDataGetTrustedBiddingUri jni.MethodID
+	midTrustedBiddingDataHashCode             jni.MethodID
+	midTrustedBiddingDataWriteToParcel        jni.MethodID
+
+	clsTrustedBiddingDataBuilder                     *jni.GlobalRef
+	midTrustedBiddingDataBuilderBuild                jni.MethodID
+	midTrustedBiddingDataBuilderSetTrustedBiddingUri jni.MethodID
+
 	clsTestCustomAudienceManager *jni.GlobalRef
 
-	clsRemoveCustomAudienceOverrideRequest         *jni.GlobalRef
-	midRemoveCustomAudienceOverrideRequestGetBuyer jni.MethodID
-	midRemoveCustomAudienceOverrideRequestGetName  jni.MethodID
-
-	clsRemoveCustomAudienceOverrideRequestBuilder         *jni.GlobalRef
-	midRemoveCustomAudienceOverrideRequestBuilderBuild    jni.MethodID
-	midRemoveCustomAudienceOverrideRequestBuilderSetBuyer jni.MethodID
-	midRemoveCustomAudienceOverrideRequestBuilderSetName  jni.MethodID
-
-	clsAddCustomAudienceOverrideRequest                         *jni.GlobalRef
-	midAddCustomAudienceOverrideRequestGetBiddingLogicJs        jni.MethodID
-	midAddCustomAudienceOverrideRequestGetBiddingLogicJsVersion jni.MethodID
-	midAddCustomAudienceOverrideRequestGetBuyer                 jni.MethodID
-	midAddCustomAudienceOverrideRequestGetName                  jni.MethodID
-	midAddCustomAudienceOverrideRequestGetTrustedBiddingSignals jni.MethodID
-
-	clsAddCustomAudienceOverrideRequestBuilder                         *jni.GlobalRef
-	midAddCustomAudienceOverrideRequestBuilderBuild                    jni.MethodID
-	midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJs        jni.MethodID
-	midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJsVersion jni.MethodID
-	midAddCustomAudienceOverrideRequestBuilderSetBuyer                 jni.MethodID
-	midAddCustomAudienceOverrideRequestBuilderSetName                  jni.MethodID
-	midAddCustomAudienceOverrideRequestBuilderSetTrustedBiddingSignals jni.MethodID
-
-	clsLeaveCustomAudienceRequest         *jni.GlobalRef
-	midLeaveCustomAudienceRequestEquals   jni.MethodID
-	midLeaveCustomAudienceRequestGetBuyer jni.MethodID
-	midLeaveCustomAudienceRequestGetName  jni.MethodID
-	midLeaveCustomAudienceRequestHashCode jni.MethodID
-
-	clsLeaveCustomAudienceRequestBuilder         *jni.GlobalRef
-	midLeaveCustomAudienceRequestBuilderBuild    jni.MethodID
-	midLeaveCustomAudienceRequestBuilderSetBuyer jni.MethodID
-	midLeaveCustomAudienceRequestBuilderSetName  jni.MethodID
-
-	clsScheduleCustomAudienceUpdateRequest                            *jni.GlobalRef
-	midScheduleCustomAudienceUpdateRequestEquals                      jni.MethodID
-	midScheduleCustomAudienceUpdateRequestGetMinDelay                 jni.MethodID
-	midScheduleCustomAudienceUpdateRequestGetUpdateUri                jni.MethodID
-	midScheduleCustomAudienceUpdateRequestHashCode                    jni.MethodID
-	midScheduleCustomAudienceUpdateRequestShouldReplacePendingUpdates jni.MethodID
-	midScheduleCustomAudienceUpdateRequestToString                    jni.MethodID
-
-	clsScheduleCustomAudienceUpdateRequestBuilder                               *jni.GlobalRef
-	midScheduleCustomAudienceUpdateRequestBuilderBuild                          jni.MethodID
-	midScheduleCustomAudienceUpdateRequestBuilderSetMinDelay                    jni.MethodID
-	midScheduleCustomAudienceUpdateRequestBuilderSetShouldReplacePendingUpdates jni.MethodID
-	midScheduleCustomAudienceUpdateRequestBuilderSetUpdateUri                   jni.MethodID
+	clsCustomAudienceManager                             *jni.GlobalRef
+	midCustomAudienceManagerGetTestCustomAudienceManager jni.MethodID
+	midCustomAudienceManagerGet                          jni.MethodID
 
 	clsFetchAndJoinCustomAudienceRequest                      *jni.GlobalRef
 	midFetchAndJoinCustomAudienceRequestEquals                jni.MethodID
@@ -133,18 +132,19 @@ var (
 	midFetchAndJoinCustomAudienceRequestBuilderSetName               jni.MethodID
 	midFetchAndJoinCustomAudienceRequestBuilderSetUserBiddingSignals jni.MethodID
 
-	clsJoinCustomAudienceRequest                  *jni.GlobalRef
-	midJoinCustomAudienceRequestEquals            jni.MethodID
-	midJoinCustomAudienceRequestGetCustomAudience jni.MethodID
-	midJoinCustomAudienceRequestHashCode          jni.MethodID
+	clsScheduleCustomAudienceUpdateRequest                            *jni.GlobalRef
+	midScheduleCustomAudienceUpdateRequestEquals                      jni.MethodID
+	midScheduleCustomAudienceUpdateRequestGetMinDelay                 jni.MethodID
+	midScheduleCustomAudienceUpdateRequestGetUpdateUri                jni.MethodID
+	midScheduleCustomAudienceUpdateRequestHashCode                    jni.MethodID
+	midScheduleCustomAudienceUpdateRequestShouldReplacePendingUpdates jni.MethodID
+	midScheduleCustomAudienceUpdateRequestToString                    jni.MethodID
 
-	clsJoinCustomAudienceRequestBuilder                  *jni.GlobalRef
-	midJoinCustomAudienceRequestBuilderBuild             jni.MethodID
-	midJoinCustomAudienceRequestBuilderSetCustomAudience jni.MethodID
-
-	clsCustomAudienceManager                             *jni.GlobalRef
-	midCustomAudienceManagerGetTestCustomAudienceManager jni.MethodID
-	midCustomAudienceManagerGet                          jni.MethodID
+	clsScheduleCustomAudienceUpdateRequestBuilder                               *jni.GlobalRef
+	midScheduleCustomAudienceUpdateRequestBuilderBuild                          jni.MethodID
+	midScheduleCustomAudienceUpdateRequestBuilderSetMinDelay                    jni.MethodID
+	midScheduleCustomAudienceUpdateRequestBuilderSetShouldReplacePendingUpdates jni.MethodID
+	midScheduleCustomAudienceUpdateRequestBuilderSetUpdateUri                   jni.MethodID
 
 	clsPartialCustomAudience                      *jni.GlobalRef
 	midPartialCustomAudienceDescribeContents      jni.MethodID
@@ -182,43 +182,43 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/adservices/customaudience/TrustedBiddingData")
+	c, err = env.FindClass("android/adservices/customaudience/AddCustomAudienceOverrideRequest")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTrustedBiddingData = env.NewGlobalRef(&c.Object)
+		clsAddCustomAudienceOverrideRequest = env.NewGlobalRef(&c.Object)
 
-		midTrustedBiddingDataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "describeContents", "()I")
+		midAddCustomAudienceOverrideRequestGetBiddingLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getBiddingLogicJs", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTrustedBiddingDataEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "equals", "(Ljava/lang/Object;)Z")
+		midAddCustomAudienceOverrideRequestGetBiddingLogicJsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getBiddingLogicJsVersion", "()J")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTrustedBiddingDataGetTrustedBiddingUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "getTrustedBiddingUri", "()Landroid/net/Uri;")
+		midAddCustomAudienceOverrideRequestGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTrustedBiddingDataHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "hashCode", "()I")
+		midAddCustomAudienceOverrideRequestGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTrustedBiddingDataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midAddCustomAudienceOverrideRequestGetTrustedBiddingSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getTrustedBiddingSignals", "()Landroid/adservices/common/AdSelectionSignals;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -227,22 +227,229 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/customaudience/TrustedBiddingData$Builder")
+	c, err = env.FindClass("android/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTrustedBiddingDataBuilder = env.NewGlobalRef(&c.Object)
+		clsAddCustomAudienceOverrideRequestBuilder = env.NewGlobalRef(&c.Object)
 
-		midTrustedBiddingDataBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingDataBuilder)), "build", "()Landroid/adservices/customaudience/TrustedBiddingData;")
+		midAddCustomAudienceOverrideRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "build", "()Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTrustedBiddingDataBuilderSetTrustedBiddingUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingDataBuilder)), "setTrustedBiddingUri", "(Landroid/net/Uri;)Landroid/adservices/customaudience/TrustedBiddingData$Builder;")
+		midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setBiddingLogicJs", "(Ljava/lang/String;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setBiddingLogicJsVersion", "(J)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddCustomAudienceOverrideRequestBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddCustomAudienceOverrideRequestBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setName", "(Ljava/lang/String;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddCustomAudienceOverrideRequestBuilderSetTrustedBiddingSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setTrustedBiddingSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/JoinCustomAudienceRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsJoinCustomAudienceRequest = env.NewGlobalRef(&c.Object)
+
+		midJoinCustomAudienceRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midJoinCustomAudienceRequestGetCustomAudience, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequest)), "getCustomAudience", "()Landroid/adservices/customaudience/CustomAudience;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midJoinCustomAudienceRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/JoinCustomAudienceRequest$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsJoinCustomAudienceRequestBuilder = env.NewGlobalRef(&c.Object)
+
+		midJoinCustomAudienceRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequestBuilder)), "build", "()Landroid/adservices/customaudience/JoinCustomAudienceRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midJoinCustomAudienceRequestBuilderSetCustomAudience, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequestBuilder)), "setCustomAudience", "(Landroid/adservices/customaudience/CustomAudience;)Landroid/adservices/customaudience/JoinCustomAudienceRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/LeaveCustomAudienceRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLeaveCustomAudienceRequest = env.NewGlobalRef(&c.Object)
+
+		midLeaveCustomAudienceRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeaveCustomAudienceRequestGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeaveCustomAudienceRequestGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeaveCustomAudienceRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/LeaveCustomAudienceRequest$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLeaveCustomAudienceRequestBuilder = env.NewGlobalRef(&c.Object)
+
+		midLeaveCustomAudienceRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequestBuilder)), "build", "()Landroid/adservices/customaudience/LeaveCustomAudienceRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeaveCustomAudienceRequestBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequestBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/customaudience/LeaveCustomAudienceRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLeaveCustomAudienceRequestBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequestBuilder)), "setName", "(Ljava/lang/String;)Landroid/adservices/customaudience/LeaveCustomAudienceRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/RemoveCustomAudienceOverrideRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRemoveCustomAudienceOverrideRequest = env.NewGlobalRef(&c.Object)
+
+		midRemoveCustomAudienceOverrideRequestGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoveCustomAudienceOverrideRequestGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/RemoveCustomAudienceOverrideRequest$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRemoveCustomAudienceOverrideRequestBuilder = env.NewGlobalRef(&c.Object)
+
+		midRemoveCustomAudienceOverrideRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequestBuilder)), "build", "()Landroid/adservices/customaudience/RemoveCustomAudienceOverrideRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoveCustomAudienceOverrideRequestBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequestBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/customaudience/RemoveCustomAudienceOverrideRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoveCustomAudienceOverrideRequestBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequestBuilder)), "setName", "(Ljava/lang/String;)Landroid/adservices/customaudience/RemoveCustomAudienceOverrideRequest$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -453,6 +660,75 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/adservices/customaudience/TrustedBiddingData")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrustedBiddingData = env.NewGlobalRef(&c.Object)
+
+		midTrustedBiddingDataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrustedBiddingDataEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrustedBiddingDataGetTrustedBiddingUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "getTrustedBiddingUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrustedBiddingDataHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrustedBiddingDataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingData)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/customaudience/TrustedBiddingData$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrustedBiddingDataBuilder = env.NewGlobalRef(&c.Object)
+
+		midTrustedBiddingDataBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingDataBuilder)), "build", "()Landroid/adservices/customaudience/TrustedBiddingData;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrustedBiddingDataBuilderSetTrustedBiddingUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrustedBiddingDataBuilder)), "setTrustedBiddingUri", "(Landroid/net/Uri;)Landroid/adservices/customaudience/TrustedBiddingData$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/adservices/customaudience/TestCustomAudienceManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -463,309 +739,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/customaudience/RemoveCustomAudienceOverrideRequest")
+	c, err = env.FindClass("android/adservices/customaudience/CustomAudienceManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsRemoveCustomAudienceOverrideRequest = env.NewGlobalRef(&c.Object)
+		clsCustomAudienceManager = env.NewGlobalRef(&c.Object)
 
-		midRemoveCustomAudienceOverrideRequestGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
+		midCustomAudienceManagerGetTestCustomAudienceManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomAudienceManager)), "getTestCustomAudienceManager", "()Landroid/adservices/customaudience/TestCustomAudienceManager;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRemoveCustomAudienceOverrideRequestGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), "getName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/RemoveCustomAudienceOverrideRequest$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRemoveCustomAudienceOverrideRequestBuilder = env.NewGlobalRef(&c.Object)
-
-		midRemoveCustomAudienceOverrideRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequestBuilder)), "build", "()Landroid/adservices/customaudience/RemoveCustomAudienceOverrideRequest;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoveCustomAudienceOverrideRequestBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequestBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/customaudience/RemoveCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoveCustomAudienceOverrideRequestBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequestBuilder)), "setName", "(Ljava/lang/String;)Landroid/adservices/customaudience/RemoveCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/AddCustomAudienceOverrideRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAddCustomAudienceOverrideRequest = env.NewGlobalRef(&c.Object)
-
-		midAddCustomAudienceOverrideRequestGetBiddingLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getBiddingLogicJs", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestGetBiddingLogicJsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getBiddingLogicJsVersion", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestGetTrustedBiddingSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequest)), "getTrustedBiddingSignals", "()Landroid/adservices/common/AdSelectionSignals;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAddCustomAudienceOverrideRequestBuilder = env.NewGlobalRef(&c.Object)
-
-		midAddCustomAudienceOverrideRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "build", "()Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setBiddingLogicJs", "(Ljava/lang/String;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestBuilderSetBiddingLogicJsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setBiddingLogicJsVersion", "(J)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setName", "(Ljava/lang/String;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddCustomAudienceOverrideRequestBuilderSetTrustedBiddingSignals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddCustomAudienceOverrideRequestBuilder)), "setTrustedBiddingSignals", "(Landroid/adservices/common/AdSelectionSignals;)Landroid/adservices/customaudience/AddCustomAudienceOverrideRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/LeaveCustomAudienceRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLeaveCustomAudienceRequest = env.NewGlobalRef(&c.Object)
-
-		midLeaveCustomAudienceRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLeaveCustomAudienceRequestGetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "getBuyer", "()Landroid/adservices/common/AdTechIdentifier;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLeaveCustomAudienceRequestGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "getName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLeaveCustomAudienceRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequest)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/LeaveCustomAudienceRequest$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLeaveCustomAudienceRequestBuilder = env.NewGlobalRef(&c.Object)
-
-		midLeaveCustomAudienceRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequestBuilder)), "build", "()Landroid/adservices/customaudience/LeaveCustomAudienceRequest;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLeaveCustomAudienceRequestBuilderSetBuyer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequestBuilder)), "setBuyer", "(Landroid/adservices/common/AdTechIdentifier;)Landroid/adservices/customaudience/LeaveCustomAudienceRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLeaveCustomAudienceRequestBuilderSetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLeaveCustomAudienceRequestBuilder)), "setName", "(Ljava/lang/String;)Landroid/adservices/customaudience/LeaveCustomAudienceRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/ScheduleCustomAudienceUpdateRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsScheduleCustomAudienceUpdateRequest = env.NewGlobalRef(&c.Object)
-
-		midScheduleCustomAudienceUpdateRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestGetMinDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "getMinDelay", "()Ljava/time/Duration;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestGetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "getUpdateUri", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestShouldReplacePendingUpdates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "shouldReplacePendingUpdates", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsScheduleCustomAudienceUpdateRequestBuilder = env.NewGlobalRef(&c.Object)
-
-		midScheduleCustomAudienceUpdateRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "build", "()Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestBuilderSetMinDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "setMinDelay", "(Ljava/time/Duration;)Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestBuilderSetShouldReplacePendingUpdates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "setShouldReplacePendingUpdates", "(Z)Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScheduleCustomAudienceUpdateRequestBuilderSetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "setUpdateUri", "(Landroid/net/Uri;)Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder;")
+		midCustomAudienceManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCustomAudienceManager)), "get", "(Landroid/content/Context;)Landroid/adservices/customaudience/CustomAudienceManager;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -892,29 +881,50 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/customaudience/JoinCustomAudienceRequest")
+	c, err = env.FindClass("android/adservices/customaudience/ScheduleCustomAudienceUpdateRequest")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsJoinCustomAudienceRequest = env.NewGlobalRef(&c.Object)
+		clsScheduleCustomAudienceUpdateRequest = env.NewGlobalRef(&c.Object)
 
-		midJoinCustomAudienceRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequest)), "equals", "(Ljava/lang/Object;)Z")
+		midScheduleCustomAudienceUpdateRequestEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midJoinCustomAudienceRequestGetCustomAudience, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequest)), "getCustomAudience", "()Landroid/adservices/customaudience/CustomAudience;")
+		midScheduleCustomAudienceUpdateRequestGetMinDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "getMinDelay", "()Ljava/time/Duration;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midJoinCustomAudienceRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequest)), "hashCode", "()I")
+		midScheduleCustomAudienceUpdateRequestGetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "getUpdateUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScheduleCustomAudienceUpdateRequestHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScheduleCustomAudienceUpdateRequestShouldReplacePendingUpdates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "shouldReplacePendingUpdates", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScheduleCustomAudienceUpdateRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequest)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -923,46 +933,36 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/customaudience/JoinCustomAudienceRequest$Builder")
+	c, err = env.FindClass("android/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsJoinCustomAudienceRequestBuilder = env.NewGlobalRef(&c.Object)
+		clsScheduleCustomAudienceUpdateRequestBuilder = env.NewGlobalRef(&c.Object)
 
-		midJoinCustomAudienceRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequestBuilder)), "build", "()Landroid/adservices/customaudience/JoinCustomAudienceRequest;")
+		midScheduleCustomAudienceUpdateRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "build", "()Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midJoinCustomAudienceRequestBuilderSetCustomAudience, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJoinCustomAudienceRequestBuilder)), "setCustomAudience", "(Landroid/adservices/customaudience/CustomAudience;)Landroid/adservices/customaudience/JoinCustomAudienceRequest$Builder;")
+		midScheduleCustomAudienceUpdateRequestBuilderSetMinDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "setMinDelay", "(Ljava/time/Duration;)Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-	}
-
-	c, err = env.FindClass("android/adservices/customaudience/CustomAudienceManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCustomAudienceManager = env.NewGlobalRef(&c.Object)
-
-		midCustomAudienceManagerGetTestCustomAudienceManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomAudienceManager)), "getTestCustomAudienceManager", "()Landroid/adservices/customaudience/TestCustomAudienceManager;")
+		midScheduleCustomAudienceUpdateRequestBuilderSetShouldReplacePendingUpdates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "setShouldReplacePendingUpdates", "(Z)Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCustomAudienceManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCustomAudienceManager)), "get", "(Landroid/content/Context;)Landroid/adservices/customaudience/CustomAudienceManager;")
+		midScheduleCustomAudienceUpdateRequestBuilderSetUpdateUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScheduleCustomAudienceUpdateRequestBuilder)), "setUpdateUri", "(Landroid/net/Uri;)Landroid/adservices/customaudience/ScheduleCustomAudienceUpdateRequest$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -23,11 +23,11 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDeviceLockManager *jni.GlobalRef
-
 	clsDeviceId        *jni.GlobalRef
 	midDeviceIdGetId   jni.MethodID
 	midDeviceIdGetType jni.MethodID
+
+	clsDeviceLockManager *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -47,16 +47,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/devicelock/DeviceLockManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDeviceLockManager = env.NewGlobalRef(&c.Object)
-
-	}
 
 	c, err = env.FindClass("android/devicelock/DeviceId")
 	if err != nil {
@@ -79,6 +69,16 @@ func doInit(env *jni.Env) error {
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
+
+	}
+
+	c, err = env.FindClass("android/devicelock/DeviceLockManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDeviceLockManager = env.NewGlobalRef(&c.Object)
 
 	}
 

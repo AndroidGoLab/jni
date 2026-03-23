@@ -3,47 +3,6 @@
 package consts
 
 const (
-	Creator                             int = 0
-	ErrorBlocked                        int = 5
-	ErrorEncrypted                      int = 6
-	ErrorNone                           int = 0
-	ErrorNotSupported                   int = 2
-	ErrorResourceUnavailable            int = 4
-	ErrorUnknown                        int = 1
-	ErrorUnknownChannel                 int = 7
-	ErrorWeakSignal                     int = 3
-	InteractiveAppStateError            int = 3
-	InteractiveAppStateRunning          int = 2
-	InteractiveAppStateStopped          int = 1
-	ServiceStateError                   int = 4
-	ServiceStatePreparing               int = 2
-	ServiceStateReady                   int = 3
-	ServiceStateUnrealized              int = 1
-	TeletextAppStateError               int = 3
-	TeletextAppStateHide                int = 2
-	TeletextAppStateShow                int = 1
-	CommandParameterValueStopModeBlank  int = 1
-	CommandParameterValueStopModeFreeze int = 2
-	InteractiveAppTypeAtsc              int = 2
-	InteractiveAppTypeGinga             int = 4
-	InteractiveAppTypeHbbtv             int = 1
-	InteractiveAppTypeOther             int = -2147483648
-	InteractiveAppTypeTargetedAd        int = 8
-)
-
-const (
-	ActionAppLinkCommand                     string = "android.media.tv.interactive.action.APP_LINK_COMMAND"
-	AppLinkKeyBackUri                        string = "back_uri"
-	AppLinkKeyClassName                      string = "class_name"
-	AppLinkKeyCommandType                    string = "command_type"
-	AppLinkKeyPackageName                    string = "package_name"
-	AppLinkKeyServiceId                      string = "service_id"
-	IntentKeyBiInteractiveAppType            string = "bi_interactive_app_type"
-	IntentKeyBiInteractiveAppUri             string = "bi_interactive_app_uri"
-	IntentKeyChannelUri                      string = "channel_uri"
-	IntentKeyCommandType                     string = "command_type"
-	IntentKeyInteractiveAppServiceId         string = "interactive_app_id"
-	IntentKeyTvInputId                       string = "tv_input_id"
 	CommandParameterKeyChangeChannelQuietly  string = "command_change_channel_quietly"
 	CommandParameterKeyChannelUri            string = "command_channel_uri"
 	CommandParameterKeyInputId               string = "command_input_id"
@@ -69,10 +28,51 @@ const (
 	TimeShiftCommandTypeSeekTo               string = "seek_to"
 	TimeShiftCommandTypeSetMode              string = "set_mode"
 	TimeShiftCommandTypeSetPlaybackParams    string = "set_playback_params"
+	ActionAppLinkCommand                     string = "android.media.tv.interactive.action.APP_LINK_COMMAND"
+	AppLinkKeyBackUri                        string = "back_uri"
+	AppLinkKeyClassName                      string = "class_name"
+	AppLinkKeyCommandType                    string = "command_type"
+	AppLinkKeyPackageName                    string = "package_name"
+	AppLinkKeyServiceId                      string = "service_id"
+	IntentKeyBiInteractiveAppType            string = "bi_interactive_app_type"
+	IntentKeyBiInteractiveAppUri             string = "bi_interactive_app_uri"
+	IntentKeyChannelUri                      string = "channel_uri"
+	IntentKeyCommandType                     string = "command_type"
+	IntentKeyInteractiveAppServiceId         string = "interactive_app_id"
+	IntentKeyTvInputId                       string = "tv_input_id"
 	BiInteractiveAppKeyAlias                 string = "alias"
 	BiInteractiveAppKeyCertificate           string = "certificate"
 	BiInteractiveAppKeyHttpAdditionalHeaders string = "http_additional_headers"
 	BiInteractiveAppKeyHttpUserAgent         string = "http_user_agent"
 	BiInteractiveAppKeyPrivateKey            string = "private_key"
 	ErrorKeyMethodName                       string = "method_name"
+)
+
+const (
+	CommandParameterValueStopModeBlank  int = 1
+	CommandParameterValueStopModeFreeze int = 2
+	ErrorBlocked                        int = 5
+	ErrorEncrypted                      int = 6
+	ErrorNone                           int = 0
+	ErrorNotSupported                   int = 2
+	ErrorResourceUnavailable            int = 4
+	ErrorUnknown                        int = 1
+	ErrorUnknownChannel                 int = 7
+	ErrorWeakSignal                     int = 3
+	InteractiveAppStateError            int = 3
+	InteractiveAppStateRunning          int = 2
+	InteractiveAppStateStopped          int = 1
+	ServiceStateError                   int = 4
+	ServiceStatePreparing               int = 2
+	ServiceStateReady                   int = 3
+	ServiceStateUnrealized              int = 1
+	TeletextAppStateError               int = 3
+	TeletextAppStateHide                int = 2
+	TeletextAppStateShow                int = 1
+	Creator                             int = 0
+	InteractiveAppTypeAtsc              int = 2
+	InteractiveAppTypeGinga             int = 4
+	InteractiveAppTypeHbbtv             int = 1
+	InteractiveAppTypeOther             int = -2147483648
+	InteractiveAppTypeTargetedAd        int = 8
 )

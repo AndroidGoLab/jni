@@ -5,47 +5,6 @@ package interactive
 import "github.com/AndroidGoLab/jni/media/tv/interactive/consts"
 
 const (
-	Creator                             = consts.Creator
-	ErrorBlocked                        = consts.ErrorBlocked
-	ErrorEncrypted                      = consts.ErrorEncrypted
-	ErrorNone                           = consts.ErrorNone
-	ErrorNotSupported                   = consts.ErrorNotSupported
-	ErrorResourceUnavailable            = consts.ErrorResourceUnavailable
-	ErrorUnknown                        = consts.ErrorUnknown
-	ErrorUnknownChannel                 = consts.ErrorUnknownChannel
-	ErrorWeakSignal                     = consts.ErrorWeakSignal
-	InteractiveAppStateError            = consts.InteractiveAppStateError
-	InteractiveAppStateRunning          = consts.InteractiveAppStateRunning
-	InteractiveAppStateStopped          = consts.InteractiveAppStateStopped
-	ServiceStateError                   = consts.ServiceStateError
-	ServiceStatePreparing               = consts.ServiceStatePreparing
-	ServiceStateReady                   = consts.ServiceStateReady
-	ServiceStateUnrealized              = consts.ServiceStateUnrealized
-	TeletextAppStateError               = consts.TeletextAppStateError
-	TeletextAppStateHide                = consts.TeletextAppStateHide
-	TeletextAppStateShow                = consts.TeletextAppStateShow
-	CommandParameterValueStopModeBlank  = consts.CommandParameterValueStopModeBlank
-	CommandParameterValueStopModeFreeze = consts.CommandParameterValueStopModeFreeze
-	InteractiveAppTypeAtsc              = consts.InteractiveAppTypeAtsc
-	InteractiveAppTypeGinga             = consts.InteractiveAppTypeGinga
-	InteractiveAppTypeHbbtv             = consts.InteractiveAppTypeHbbtv
-	InteractiveAppTypeOther             = consts.InteractiveAppTypeOther
-	InteractiveAppTypeTargetedAd        = consts.InteractiveAppTypeTargetedAd
-)
-
-const (
-	ActionAppLinkCommand                     = consts.ActionAppLinkCommand
-	AppLinkKeyBackUri                        = consts.AppLinkKeyBackUri
-	AppLinkKeyClassName                      = consts.AppLinkKeyClassName
-	AppLinkKeyCommandType                    = consts.AppLinkKeyCommandType
-	AppLinkKeyPackageName                    = consts.AppLinkKeyPackageName
-	AppLinkKeyServiceId                      = consts.AppLinkKeyServiceId
-	IntentKeyBiInteractiveAppType            = consts.IntentKeyBiInteractiveAppType
-	IntentKeyBiInteractiveAppUri             = consts.IntentKeyBiInteractiveAppUri
-	IntentKeyChannelUri                      = consts.IntentKeyChannelUri
-	IntentKeyCommandType                     = consts.IntentKeyCommandType
-	IntentKeyInteractiveAppServiceId         = consts.IntentKeyInteractiveAppServiceId
-	IntentKeyTvInputId                       = consts.IntentKeyTvInputId
 	CommandParameterKeyChangeChannelQuietly  = consts.CommandParameterKeyChangeChannelQuietly
 	CommandParameterKeyChannelUri            = consts.CommandParameterKeyChannelUri
 	CommandParameterKeyInputId               = consts.CommandParameterKeyInputId
@@ -71,10 +30,51 @@ const (
 	TimeShiftCommandTypeSeekTo               = consts.TimeShiftCommandTypeSeekTo
 	TimeShiftCommandTypeSetMode              = consts.TimeShiftCommandTypeSetMode
 	TimeShiftCommandTypeSetPlaybackParams    = consts.TimeShiftCommandTypeSetPlaybackParams
+	ActionAppLinkCommand                     = consts.ActionAppLinkCommand
+	AppLinkKeyBackUri                        = consts.AppLinkKeyBackUri
+	AppLinkKeyClassName                      = consts.AppLinkKeyClassName
+	AppLinkKeyCommandType                    = consts.AppLinkKeyCommandType
+	AppLinkKeyPackageName                    = consts.AppLinkKeyPackageName
+	AppLinkKeyServiceId                      = consts.AppLinkKeyServiceId
+	IntentKeyBiInteractiveAppType            = consts.IntentKeyBiInteractiveAppType
+	IntentKeyBiInteractiveAppUri             = consts.IntentKeyBiInteractiveAppUri
+	IntentKeyChannelUri                      = consts.IntentKeyChannelUri
+	IntentKeyCommandType                     = consts.IntentKeyCommandType
+	IntentKeyInteractiveAppServiceId         = consts.IntentKeyInteractiveAppServiceId
+	IntentKeyTvInputId                       = consts.IntentKeyTvInputId
 	BiInteractiveAppKeyAlias                 = consts.BiInteractiveAppKeyAlias
 	BiInteractiveAppKeyCertificate           = consts.BiInteractiveAppKeyCertificate
 	BiInteractiveAppKeyHttpAdditionalHeaders = consts.BiInteractiveAppKeyHttpAdditionalHeaders
 	BiInteractiveAppKeyHttpUserAgent         = consts.BiInteractiveAppKeyHttpUserAgent
 	BiInteractiveAppKeyPrivateKey            = consts.BiInteractiveAppKeyPrivateKey
 	ErrorKeyMethodName                       = consts.ErrorKeyMethodName
+)
+
+const (
+	CommandParameterValueStopModeBlank  = consts.CommandParameterValueStopModeBlank
+	CommandParameterValueStopModeFreeze = consts.CommandParameterValueStopModeFreeze
+	ErrorBlocked                        = consts.ErrorBlocked
+	ErrorEncrypted                      = consts.ErrorEncrypted
+	ErrorNone                           = consts.ErrorNone
+	ErrorNotSupported                   = consts.ErrorNotSupported
+	ErrorResourceUnavailable            = consts.ErrorResourceUnavailable
+	ErrorUnknown                        = consts.ErrorUnknown
+	ErrorUnknownChannel                 = consts.ErrorUnknownChannel
+	ErrorWeakSignal                     = consts.ErrorWeakSignal
+	InteractiveAppStateError            = consts.InteractiveAppStateError
+	InteractiveAppStateRunning          = consts.InteractiveAppStateRunning
+	InteractiveAppStateStopped          = consts.InteractiveAppStateStopped
+	ServiceStateError                   = consts.ServiceStateError
+	ServiceStatePreparing               = consts.ServiceStatePreparing
+	ServiceStateReady                   = consts.ServiceStateReady
+	ServiceStateUnrealized              = consts.ServiceStateUnrealized
+	TeletextAppStateError               = consts.TeletextAppStateError
+	TeletextAppStateHide                = consts.TeletextAppStateHide
+	TeletextAppStateShow                = consts.TeletextAppStateShow
+	Creator                             = consts.Creator
+	InteractiveAppTypeAtsc              = consts.InteractiveAppTypeAtsc
+	InteractiveAppTypeGinga             = consts.InteractiveAppTypeGinga
+	InteractiveAppTypeHbbtv             = consts.InteractiveAppTypeHbbtv
+	InteractiveAppTypeOther             = consts.InteractiveAppTypeOther
+	InteractiveAppTypeTargetedAd        = consts.InteractiveAppTypeTargetedAd
 )

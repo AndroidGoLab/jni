@@ -5,7 +5,6 @@ package audiofx
 import "github.com/AndroidGoLab/jni/media/audiofx/consts"
 
 const (
-	ParamTargetGainMb               = consts.ParamTargetGainMb
 	ParamStrength                   = consts.ParamStrength
 	ParamStrengthSupported          = consts.ParamStrengthSupported
 	VirtualizationModeAuto          = consts.VirtualizationModeAuto
@@ -35,24 +34,6 @@ const (
 	ErrorNoInit                     = consts.ErrorNoInit
 	ErrorNoMemory                   = consts.ErrorNoMemory
 	Success                         = consts.Success
-	ParamPreset                     = consts.ParamPreset
-	PresetLargehall                 = consts.PresetLargehall
-	PresetLargeroom                 = consts.PresetLargeroom
-	PresetMediumhall                = consts.PresetMediumhall
-	PresetMediumroom                = consts.PresetMediumroom
-	PresetNone                      = consts.PresetNone
-	PresetPlate                     = consts.PresetPlate
-	PresetSmallroom                 = consts.PresetSmallroom
-	ParamDecayHfRatio               = consts.ParamDecayHfRatio
-	ParamDecayTime                  = consts.ParamDecayTime
-	ParamDensity                    = consts.ParamDensity
-	ParamDiffusion                  = consts.ParamDiffusion
-	ParamReflectionsDelay           = consts.ParamReflectionsDelay
-	ParamReflectionsLevel           = consts.ParamReflectionsLevel
-	ParamReverbDelay                = consts.ParamReverbDelay
-	ParamReverbLevel                = consts.ParamReverbLevel
-	ParamRoomHfLevel                = consts.ParamRoomHfLevel
-	ParamRoomLevel                  = consts.ParamRoomLevel
 	ParamBandFreqRange              = consts.ParamBandFreqRange
 	ParamBandLevel                  = consts.ParamBandLevel
 	ParamCenterFreq                 = consts.ParamCenterFreq
@@ -63,6 +44,25 @@ const (
 	ParamLevelRange                 = consts.ParamLevelRange
 	ParamNumBands                   = consts.ParamNumBands
 	ParamStringSizeMax              = consts.ParamStringSizeMax
+	ParamDecayHfRatio               = consts.ParamDecayHfRatio
+	ParamDecayTime                  = consts.ParamDecayTime
+	ParamDensity                    = consts.ParamDensity
+	ParamDiffusion                  = consts.ParamDiffusion
+	ParamReflectionsDelay           = consts.ParamReflectionsDelay
+	ParamReflectionsLevel           = consts.ParamReflectionsLevel
+	ParamReverbDelay                = consts.ParamReverbDelay
+	ParamReverbLevel                = consts.ParamReverbLevel
+	ParamRoomHfLevel                = consts.ParamRoomHfLevel
+	ParamRoomLevel                  = consts.ParamRoomLevel
+	ParamTargetGainMb               = consts.ParamTargetGainMb
+	ParamPreset                     = consts.ParamPreset
+	PresetLargehall                 = consts.PresetLargehall
+	PresetLargeroom                 = consts.PresetLargeroom
+	PresetMediumhall                = consts.PresetMediumhall
+	PresetMediumroom                = consts.PresetMediumroom
+	PresetNone                      = consts.PresetNone
+	PresetPlate                     = consts.PresetPlate
+	PresetSmallroom                 = consts.PresetSmallroom
 	VariantFavorFrequencyResolution = consts.VariantFavorFrequencyResolution
 	VariantFavorTimeResolution      = consts.VariantFavorTimeResolution
 	MeasurementModeNone             = consts.MeasurementModeNone

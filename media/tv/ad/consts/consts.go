@@ -28,7 +28,6 @@ const (
 )
 
 const (
-	Creator                  int = 0
 	ErrorBlocked             int = 5
 	ErrorEncrypted           int = 6
 	ErrorNone                int = 0
@@ -40,4 +39,5 @@ const (
 	SessionStateError        int = 3
 	SessionStateRunning      int = 2
 	SessionStateStopped      int = 1
+	Creator                  int = 0
 )

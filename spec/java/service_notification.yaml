@@ -5,407 +5,6 @@
 package: notification
 go_import: github.com/AndroidGoLab/jni/service/notification
 classes:
-    - java_class: android.service.notification.Condition
-      go_type: Condition
-      methods:
-        - java_method: copy
-          go_name: Copy
-          returns: android.service.notification.Condition
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: isValidId
-          go_name: IsValidId
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: newId
-          go_name: NewId
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: android.net.Uri$Builder
-          error: true
-        - java_method: relevanceToString
-          go_name: RelevanceToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: stateToString
-          go_name: StateToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-    - java_class: android.service.notification.ZenPolicy
-      go_type: ZenPolicy
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getPriorityCallSenders
-          go_name: GetPriorityCallSenders
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryAlarms
-          go_name: GetPriorityCategoryAlarms
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryCalls
-          go_name: GetPriorityCategoryCalls
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryConversations
-          go_name: GetPriorityCategoryConversations
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryEvents
-          go_name: GetPriorityCategoryEvents
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryMedia
-          go_name: GetPriorityCategoryMedia
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryMessages
-          go_name: GetPriorityCategoryMessages
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryReminders
-          go_name: GetPriorityCategoryReminders
-          returns: int
-          error: true
-        - java_method: getPriorityCategoryRepeatCallers
-          go_name: GetPriorityCategoryRepeatCallers
-          returns: int
-          error: true
-        - java_method: getPriorityCategorySystem
-          go_name: GetPriorityCategorySystem
-          returns: int
-          error: true
-        - java_method: getPriorityChannelsAllowed
-          go_name: GetPriorityChannelsAllowed
-          returns: int
-          error: true
-        - java_method: getPriorityConversationSenders
-          go_name: GetPriorityConversationSenders
-          returns: int
-          error: true
-        - java_method: getPriorityMessageSenders
-          go_name: GetPriorityMessageSenders
-          returns: int
-          error: true
-        - java_method: getVisualEffectAmbient
-          go_name: GetVisualEffectAmbient
-          returns: int
-          error: true
-        - java_method: getVisualEffectBadge
-          go_name: GetVisualEffectBadge
-          returns: int
-          error: true
-        - java_method: getVisualEffectFullScreenIntent
-          go_name: GetVisualEffectFullScreenIntent
-          returns: int
-          error: true
-        - java_method: getVisualEffectLights
-          go_name: GetVisualEffectLights
-          returns: int
-          error: true
-        - java_method: getVisualEffectNotificationList
-          go_name: GetVisualEffectNotificationList
-          returns: int
-          error: true
-        - java_method: getVisualEffectPeek
-          go_name: GetVisualEffectPeek
-          returns: int
-          error: true
-        - java_method: getVisualEffectStatusBar
-          go_name: GetVisualEffectStatusBar
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.service.notification.ZenPolicy$Builder
-      go_type: ZenPolicyBuilder
-      methods:
-        - java_method: allowAlarms
-          go_name: AllowAlarms
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowAllSounds
-          go_name: AllowAllSounds
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowCalls
-          go_name: AllowCalls
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowConversations
-          go_name: AllowConversations
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowEvents
-          go_name: AllowEvents
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowMedia
-          go_name: AllowMedia
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowMessages
-          go_name: AllowMessages
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowPriorityChannels
-          go_name: AllowPriorityChannels
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowReminders
-          go_name: AllowReminders
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowRepeatCallers
-          go_name: AllowRepeatCallers
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: allowSystem
-          go_name: AllowSystem
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.service.notification.ZenPolicy
-          error: true
-        - java_method: disallowAllSounds
-          go_name: DisallowAllSounds
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: hideAllVisualEffects
-          go_name: HideAllVisualEffects
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showAllVisualEffects
-          go_name: ShowAllVisualEffects
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showBadges
-          go_name: ShowBadges
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showFullScreenIntent
-          go_name: ShowFullScreenIntent
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showInAmbientDisplay
-          go_name: ShowInAmbientDisplay
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showInNotificationList
-          go_name: ShowInNotificationList
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showLights
-          go_name: ShowLights
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showPeeking
-          go_name: ShowPeeking
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-        - java_method: showStatusBarIcons
-          go_name: ShowStatusBarIcons
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenPolicy$Builder
-          error: true
-    - java_class: android.service.notification.ZenDeviceEffects
-      go_type: ZenDeviceEffects
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: shouldDimWallpaper
-          go_name: ShouldDimWallpaper
-          returns: boolean
-          error: true
-        - java_method: shouldDisplayGrayscale
-          go_name: ShouldDisplayGrayscale
-          returns: boolean
-          error: true
-        - java_method: shouldSuppressAmbientDisplay
-          go_name: ShouldSuppressAmbientDisplay
-          returns: boolean
-          error: true
-        - java_method: shouldUseNightMode
-          go_name: ShouldUseNightMode
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.service.notification.ZenDeviceEffects$Builder
-      go_type: ZenDeviceEffectsBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.service.notification.ZenDeviceEffects
-          error: true
-        - java_method: setShouldDimWallpaper
-          go_name: SetShouldDimWallpaper
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
-        - java_method: setShouldDisplayGrayscale
-          go_name: SetShouldDisplayGrayscale
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
-        - java_method: setShouldSuppressAmbientDisplay
-          go_name: SetShouldSuppressAmbientDisplay
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
-        - java_method: setShouldUseNightMode
-          go_name: SetShouldUseNightMode
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
     - java_class: android.service.notification.NotificationListenerService
       go_type: ListenerService
       methods:
@@ -772,6 +371,154 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.service.notification.Condition
+      go_type: Condition
+      methods:
+        - java_method: copy
+          go_name: Copy
+          returns: android.service.notification.Condition
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: isValidId
+          go_name: IsValidId
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: newId
+          go_name: NewId
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.net.Uri$Builder
+          error: true
+        - java_method: relevanceToString
+          go_name: RelevanceToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: stateToString
+          go_name: StateToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+    - java_class: android.service.notification.ZenDeviceEffects
+      go_type: ZenDeviceEffects
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: shouldDimWallpaper
+          go_name: ShouldDimWallpaper
+          returns: boolean
+          error: true
+        - java_method: shouldDisplayGrayscale
+          go_name: ShouldDisplayGrayscale
+          returns: boolean
+          error: true
+        - java_method: shouldSuppressAmbientDisplay
+          go_name: ShouldSuppressAmbientDisplay
+          returns: boolean
+          error: true
+        - java_method: shouldUseNightMode
+          go_name: ShouldUseNightMode
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.service.notification.ZenDeviceEffects$Builder
+      go_type: ZenDeviceEffectsBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.service.notification.ZenDeviceEffects
+          error: true
+        - java_method: setShouldDimWallpaper
+          go_name: SetShouldDimWallpaper
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+        - java_method: setShouldDisplayGrayscale
+          go_name: SetShouldDisplayGrayscale
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+        - java_method: setShouldSuppressAmbientDisplay
+          go_name: SetShouldSuppressAmbientDisplay
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+        - java_method: setShouldUseNightMode
+          go_name: SetShouldUseNightMode
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
     - java_class: android.service.notification.ConditionProviderService
       go_type: ConditionProviderService
       methods:
@@ -833,79 +580,260 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.service.notification.ZenPolicy
+      go_type: ZenPolicy
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getPriorityCallSenders
+          go_name: GetPriorityCallSenders
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryAlarms
+          go_name: GetPriorityCategoryAlarms
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryCalls
+          go_name: GetPriorityCategoryCalls
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryConversations
+          go_name: GetPriorityCategoryConversations
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryEvents
+          go_name: GetPriorityCategoryEvents
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryMedia
+          go_name: GetPriorityCategoryMedia
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryMessages
+          go_name: GetPriorityCategoryMessages
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryReminders
+          go_name: GetPriorityCategoryReminders
+          returns: int
+          error: true
+        - java_method: getPriorityCategoryRepeatCallers
+          go_name: GetPriorityCategoryRepeatCallers
+          returns: int
+          error: true
+        - java_method: getPriorityCategorySystem
+          go_name: GetPriorityCategorySystem
+          returns: int
+          error: true
+        - java_method: getPriorityChannelsAllowed
+          go_name: GetPriorityChannelsAllowed
+          returns: int
+          error: true
+        - java_method: getPriorityConversationSenders
+          go_name: GetPriorityConversationSenders
+          returns: int
+          error: true
+        - java_method: getPriorityMessageSenders
+          go_name: GetPriorityMessageSenders
+          returns: int
+          error: true
+        - java_method: getVisualEffectAmbient
+          go_name: GetVisualEffectAmbient
+          returns: int
+          error: true
+        - java_method: getVisualEffectBadge
+          go_name: GetVisualEffectBadge
+          returns: int
+          error: true
+        - java_method: getVisualEffectFullScreenIntent
+          go_name: GetVisualEffectFullScreenIntent
+          returns: int
+          error: true
+        - java_method: getVisualEffectLights
+          go_name: GetVisualEffectLights
+          returns: int
+          error: true
+        - java_method: getVisualEffectNotificationList
+          go_name: GetVisualEffectNotificationList
+          returns: int
+          error: true
+        - java_method: getVisualEffectPeek
+          go_name: GetVisualEffectPeek
+          returns: int
+          error: true
+        - java_method: getVisualEffectStatusBar
+          go_name: GetVisualEffectStatusBar
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.service.notification.ZenPolicy$Builder
+      go_type: ZenPolicyBuilder
+      methods:
+        - java_method: allowAlarms
+          go_name: AllowAlarms
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowAllSounds
+          go_name: AllowAllSounds
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowCalls
+          go_name: AllowCalls
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowConversations
+          go_name: AllowConversations
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowEvents
+          go_name: AllowEvents
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowMedia
+          go_name: AllowMedia
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowMessages
+          go_name: AllowMessages
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowPriorityChannels
+          go_name: AllowPriorityChannels
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowReminders
+          go_name: AllowReminders
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowRepeatCallers
+          go_name: AllowRepeatCallers
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: allowSystem
+          go_name: AllowSystem
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.service.notification.ZenPolicy
+          error: true
+        - java_method: disallowAllSounds
+          go_name: DisallowAllSounds
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: hideAllVisualEffects
+          go_name: HideAllVisualEffects
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showAllVisualEffects
+          go_name: ShowAllVisualEffects
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showBadges
+          go_name: ShowBadges
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showFullScreenIntent
+          go_name: ShowFullScreenIntent
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showInAmbientDisplay
+          go_name: ShowInAmbientDisplay
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showInNotificationList
+          go_name: ShowInNotificationList
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showLights
+          go_name: ShowLights
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showPeeking
+          go_name: ShowPeeking
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
+        - java_method: showStatusBarIcons
+          go_name: ShowStatusBarIcons
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenPolicy$Builder
+          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: FlagRelevantAlways
-      value: "2"
-      go_type: int
-    - go_name: FlagRelevantNow
-      value: "1"
-      go_type: int
-    - go_name: Scheme
-      value: '"condition"'
-      go_type: string
-    - go_name: SourceContext
-      value: "3"
-      go_type: int
-    - go_name: SourceSchedule
-      value: "2"
-      go_type: int
-    - go_name: SourceUnknown
-      value: "0"
-      go_type: int
-    - go_name: SourceUserAction
-      value: "1"
-      go_type: int
-    - go_name: StateError
-      value: "3"
-      go_type: int
-    - go_name: StateFalse
-      value: "0"
-      go_type: int
-    - go_name: StateTrue
-      value: "1"
-      go_type: int
-    - go_name: StateUnknown
-      value: "2"
-      go_type: int
-    - go_name: ConversationSendersAnyone
-      value: "1"
-      go_type: int
-    - go_name: ConversationSendersImportant
-      value: "2"
-      go_type: int
-    - go_name: ConversationSendersNone
-      value: "3"
-      go_type: int
-    - go_name: ConversationSendersUnset
-      value: "0"
-      go_type: int
-    - go_name: PeopleTypeAnyone
-      value: "1"
-      go_type: int
-    - go_name: PeopleTypeContacts
-      value: "2"
-      go_type: int
-    - go_name: PeopleTypeNone
-      value: "4"
-      go_type: int
-    - go_name: PeopleTypeStarred
-      value: "3"
-      go_type: int
-    - go_name: PeopleTypeUnset
-      value: "0"
-      go_type: int
-    - go_name: StateAllow
-      value: "1"
-      go_type: int
-    - go_name: StateDisallow
-      value: "2"
-      go_type: int
-    - go_name: StateUnset
-      value: "0"
-      go_type: int
     - go_name: ActionSettingsHome
       value: '"android.service.notification.action.SETTINGS_HOME"'
       go_type: string
@@ -1053,6 +981,42 @@ constants:
     - go_name: VisibilityNoOverride
       value: "-1000"
       go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: FlagRelevantAlways
+      value: "2"
+      go_type: int
+    - go_name: FlagRelevantNow
+      value: "1"
+      go_type: int
+    - go_name: Scheme
+      value: '"condition"'
+      go_type: string
+    - go_name: SourceContext
+      value: "3"
+      go_type: int
+    - go_name: SourceSchedule
+      value: "2"
+      go_type: int
+    - go_name: SourceUnknown
+      value: "0"
+      go_type: int
+    - go_name: SourceUserAction
+      value: "1"
+      go_type: int
+    - go_name: StateError
+      value: "3"
+      go_type: int
+    - go_name: StateFalse
+      value: "0"
+      go_type: int
+    - go_name: StateTrue
+      value: "1"
+      go_type: int
+    - go_name: StateUnknown
+      value: "2"
+      go_type: int
     - go_name: ExtraRuleId
       value: '"android.service.notification.extra.RULE_ID"'
       go_type: string
@@ -1065,3 +1029,39 @@ constants:
     - go_name: MetaDataRuleType
       value: '"android.service.zen.automatic.ruleType"'
       go_type: string
+    - go_name: ConversationSendersAnyone
+      value: "1"
+      go_type: int
+    - go_name: ConversationSendersImportant
+      value: "2"
+      go_type: int
+    - go_name: ConversationSendersNone
+      value: "3"
+      go_type: int
+    - go_name: ConversationSendersUnset
+      value: "0"
+      go_type: int
+    - go_name: PeopleTypeAnyone
+      value: "1"
+      go_type: int
+    - go_name: PeopleTypeContacts
+      value: "2"
+      go_type: int
+    - go_name: PeopleTypeNone
+      value: "4"
+      go_type: int
+    - go_name: PeopleTypeStarred
+      value: "3"
+      go_type: int
+    - go_name: PeopleTypeUnset
+      value: "0"
+      go_type: int
+    - go_name: StateAllow
+      value: "1"
+      go_type: int
+    - go_name: StateDisallow
+      value: "2"
+      go_type: int
+    - go_name: StateUnset
+      value: "0"
+      go_type: int

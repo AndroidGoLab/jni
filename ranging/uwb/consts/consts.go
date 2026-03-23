@@ -4,6 +4,8 @@ package consts
 
 const (
 	Creator                                   int = 0
+	ExtendedAddressByteLength                 int = 8
+	ShortAddressByteLength                    int = 2
 	UwbChannel10                              int = 10
 	UwbChannel12                              int = 12
 	UwbChannel13                              int = 13
@@ -33,6 +35,4 @@ const (
 	Duration1Ms                               int = 1
 	Duration2Ms                               int = 2
 	SubSessionUndefined                       int = -1
-	ExtendedAddressByteLength                 int = 8
-	ShortAddressByteLength                    int = 2
 )

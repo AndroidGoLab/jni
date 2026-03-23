@@ -5,10 +5,32 @@ package quality
 import "github.com/AndroidGoLab/jni/media/quality/consts"
 
 const (
-	CapabilityDefault                                = consts.CapabilityDefault
-	CapabilityEnum                                   = consts.CapabilityEnum
-	CapabilityMax                                    = consts.CapabilityMax
-	CapabilityMin                                    = consts.CapabilityMin
+	Creator                                = consts.Creator
+	ErrorDuplicate                         = consts.ErrorDuplicate
+	ErrorInvalidArgument                   = consts.ErrorInvalidArgument
+	ErrorNotAllowlisted                    = consts.ErrorNotAllowlisted
+	ErrorNoPermission                      = consts.ErrorNoPermission
+	ErrorUnknown                           = consts.ErrorUnknown
+	TypeApplication                        = consts.TypeApplication
+	TypeSystem                             = consts.TypeSystem
+	TypeDouble                             = consts.TypeDouble
+	TypeInt                                = consts.TypeInt
+	TypeLong                               = consts.TypeLong
+	TypeNone                               = consts.TypeNone
+	TypeString                             = consts.TypeString
+	SourceAudio                            = consts.SourceAudio
+	SourceAudioVideo                       = consts.SourceAudioVideo
+	SourceNone                             = consts.SourceNone
+	SourceVideo                            = consts.SourceVideo
+	AmbientBacklightEventDisabled          = consts.AmbientBacklightEventDisabled
+	AmbientBacklightEventEnabled           = consts.AmbientBacklightEventEnabled
+	AmbientBacklightEventInterrupted       = consts.AmbientBacklightEventInterrupted
+	AmbientBacklightEventMetadataAvailable = consts.AmbientBacklightEventMetadataAvailable
+	AlgorithmNone                          = consts.AlgorithmNone
+	AlgorithmRle                           = consts.AlgorithmRle
+)
+
+const (
 	LevelHigh                                        = consts.LevelHigh
 	LevelLow                                         = consts.LevelLow
 	LevelMedium                                      = consts.LevelMedium
@@ -63,30 +85,8 @@ const (
 	ParameterSpeakersDelayMillis                     = consts.ParameterSpeakersDelayMillis
 	ParameterSurroundSound                           = consts.ParameterSurroundSound
 	ParameterTreble                                  = consts.ParameterTreble
-)
-
-const (
-	Creator                                = consts.Creator
-	TypeDouble                             = consts.TypeDouble
-	TypeInt                                = consts.TypeInt
-	TypeLong                               = consts.TypeLong
-	TypeNone                               = consts.TypeNone
-	TypeString                             = consts.TypeString
-	ErrorDuplicate                         = consts.ErrorDuplicate
-	ErrorInvalidArgument                   = consts.ErrorInvalidArgument
-	ErrorNotAllowlisted                    = consts.ErrorNotAllowlisted
-	ErrorNoPermission                      = consts.ErrorNoPermission
-	ErrorUnknown                           = consts.ErrorUnknown
-	TypeApplication                        = consts.TypeApplication
-	TypeSystem                             = consts.TypeSystem
-	SourceAudio                            = consts.SourceAudio
-	SourceAudioVideo                       = consts.SourceAudioVideo
-	SourceNone                             = consts.SourceNone
-	SourceVideo                            = consts.SourceVideo
-	AmbientBacklightEventDisabled          = consts.AmbientBacklightEventDisabled
-	AmbientBacklightEventEnabled           = consts.AmbientBacklightEventEnabled
-	AmbientBacklightEventInterrupted       = consts.AmbientBacklightEventInterrupted
-	AmbientBacklightEventMetadataAvailable = consts.AmbientBacklightEventMetadataAvailable
-	AlgorithmNone                          = consts.AlgorithmNone
-	AlgorithmRle                           = consts.AlgorithmRle
+	CapabilityDefault                                = consts.CapabilityDefault
+	CapabilityEnum                                   = consts.CapabilityEnum
+	CapabilityMax                                    = consts.CapabilityMax
+	CapabilityMin                                    = consts.CapabilityMin
 )

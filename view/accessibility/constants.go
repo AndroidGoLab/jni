@@ -5,16 +5,21 @@ package accessibility
 import "github.com/AndroidGoLab/jni/view/accessibility/consts"
 
 const (
+	RequestTypeExtraData                       = consts.RequestTypeExtraData
 	EdgeTypeDepressed                          = consts.EdgeTypeDepressed
 	EdgeTypeDropShadow                         = consts.EdgeTypeDropShadow
 	EdgeTypeNone                               = consts.EdgeTypeNone
 	EdgeTypeOutline                            = consts.EdgeTypeOutline
 	EdgeTypeRaised                             = consts.EdgeTypeRaised
 	EdgeTypeUnspecified                        = consts.EdgeTypeUnspecified
-	FlagContentControls                        = consts.FlagContentControls
-	FlagContentIcons                           = consts.FlagContentIcons
-	FlagContentText                            = consts.FlagContentText
-	HostViewId                                 = consts.HostViewId
+	Creator                                    = consts.Creator
+	TypeAccessibilityOverlay                   = consts.TypeAccessibilityOverlay
+	TypeApplication                            = consts.TypeApplication
+	TypeInputMethod                            = consts.TypeInputMethod
+	TypeMagnificationOverlay                   = consts.TypeMagnificationOverlay
+	TypeSplitScreenDivider                     = consts.TypeSplitScreenDivider
+	TypeSystem                                 = consts.TypeSystem
+	TypeWindowControl                          = consts.TypeWindowControl
 	ActionAccessibilityFocus                   = consts.ActionAccessibilityFocus
 	ActionClearAccessibilityFocus              = consts.ActionClearAccessibilityFocus
 	ActionClearFocus                           = consts.ActionClearFocus
@@ -40,7 +45,6 @@ const (
 	CheckedStateFalse                          = consts.CheckedStateFalse
 	CheckedStatePartial                        = consts.CheckedStatePartial
 	CheckedStateTrue                           = consts.CheckedStateTrue
-	Creator                                    = consts.Creator
 	ExpandedStateCollapsed                     = consts.ExpandedStateCollapsed
 	ExpandedStateFull                          = consts.ExpandedStateFull
 	ExpandedStatePartial                       = consts.ExpandedStatePartial
@@ -91,14 +95,6 @@ const (
 	RangeTypeIndeterminate                     = consts.RangeTypeIndeterminate
 	RangeTypeInt                               = consts.RangeTypeInt
 	RangeTypePercent                           = consts.RangeTypePercent
-	TypeAccessibilityOverlay                   = consts.TypeAccessibilityOverlay
-	TypeApplication                            = consts.TypeApplication
-	TypeInputMethod                            = consts.TypeInputMethod
-	TypeMagnificationOverlay                   = consts.TypeMagnificationOverlay
-	TypeSplitScreenDivider                     = consts.TypeSplitScreenDivider
-	TypeSystem                                 = consts.TypeSystem
-	TypeWindowControl                          = consts.TypeWindowControl
-	RequestTypeExtraData                       = consts.RequestTypeExtraData
 	ContentChangeTypeChecked                   = consts.ContentChangeTypeChecked
 	ContentChangeTypeContentDescription        = consts.ContentChangeTypeContentDescription
 	ContentChangeTypeContentInvalid            = consts.ContentChangeTypeContentInvalid
@@ -161,6 +157,10 @@ const (
 	WindowsChangePip                           = consts.WindowsChangePip
 	WindowsChangeRemoved                       = consts.WindowsChangeRemoved
 	WindowsChangeTitle                         = consts.WindowsChangeTitle
+	HostViewId                                 = consts.HostViewId
+	FlagContentControls                        = consts.FlagContentControls
+	FlagContentIcons                           = consts.FlagContentIcons
+	FlagContentText                            = consts.FlagContentText
 )
 
 const (

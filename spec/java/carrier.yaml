@@ -21,6 +21,48 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.service.carrier.CarrierService
+      go_type: Service
+      methods:
+        - java_method: notifyCarrierNetworkChange
+          go_name: NotifyCarrierNetworkChange1
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: notifyCarrierNetworkChange
+          go_name: NotifyCarrierNetworkChange2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onLoadConfig
+          go_name: OnLoadConfig1
+          params:
+            - java_type: android.service.carrier.CarrierIdentifier
+              go_name: arg0
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: onLoadConfig
+          go_name: OnLoadConfig2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.service.carrier.CarrierIdentifier
+              go_name: arg1
+          returns: android.os.PersistableBundle
+          error: true
     - java_class: android.service.carrier.CarrierIdentifier
       go_type: Identifier
       methods:
@@ -83,48 +125,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-    - java_class: android.service.carrier.CarrierService
-      go_type: Service
-      methods:
-        - java_method: notifyCarrierNetworkChange
-          go_name: NotifyCarrierNetworkChange1
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: notifyCarrierNetworkChange
-          go_name: NotifyCarrierNetworkChange2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onLoadConfig
-          go_name: OnLoadConfig1
-          params:
-            - java_type: android.service.carrier.CarrierIdentifier
-              go_name: arg0
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: onLoadConfig
-          go_name: OnLoadConfig2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.service.carrier.CarrierIdentifier
-              go_name: arg1
-          returns: android.os.PersistableBundle
           error: true
     - java_class: android.service.carrier.CarrierMessagingService
       go_type: MessagingService

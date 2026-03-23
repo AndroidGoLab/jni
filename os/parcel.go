@@ -811,7 +811,7 @@ func (m *Parcel) ReadBundle1_1(arg0 *jni.Object) (*jni.Object, error) {
 	return result, callErr
 }
 
-// ReadByte calls android.os.Parcel.readByte.
+// ReadByteValue calls android.os.Parcel.readByte.
 func (m *Parcel) ReadByteValue() (int8, error) {
 	var result int8
 	var callErr error
@@ -845,14 +845,14 @@ func (m *Parcel) ReadByteArray(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midParcelReadByteValueArray == nil {
+		if midParcelReadByteArray == nil {
 			callErr = fmt.Errorf("android.os.Parcel.readByteArray is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midParcelReadByteValueArray, jni.ObjectValue(arg0),
+			midParcelReadByteArray, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1886,7 +1886,7 @@ func (m *Parcel) WriteBundle(arg0 *jni.Object) error {
 	return callErr
 }
 
-// WriteByte calls android.os.Parcel.writeByte.
+// WriteByteValue calls android.os.Parcel.writeByte.
 func (m *Parcel) WriteByteValue(arg0 int8) error {
 
 	var callErr error
@@ -1918,14 +1918,14 @@ func (m *Parcel) WriteByteArray1(arg0 *jni.Object) error {
 			callErr = err
 			return err
 		}
-		if midParcelWriteByteValueArray1 == nil {
+		if midParcelWriteByteArray1 == nil {
 			callErr = fmt.Errorf("android.os.Parcel.writeByteArray is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midParcelWriteByteValueArray1, jni.ObjectValue(arg0),
+			midParcelWriteByteArray1, jni.ObjectValue(arg0),
 		)
 		return callErr
 	})
@@ -1945,14 +1945,14 @@ func (m *Parcel) WriteByteArray3_1(
 			callErr = err
 			return err
 		}
-		if midParcelWriteByteValueArray3_1 == nil {
+		if midParcelWriteByteArray3_1 == nil {
 			callErr = fmt.Errorf("android.os.Parcel.writeByteArray is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midParcelWriteByteValueArray3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
+			midParcelWriteByteArray3_1, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2),
 		)
 		return callErr
 	})

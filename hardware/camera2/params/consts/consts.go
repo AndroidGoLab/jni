@@ -3,20 +3,13 @@
 package consts
 
 const (
-	MinimumGainFactor float32 = 1.0
-	LevelBlack        float32 = 0.0
-	LevelWhite        float32 = 1.0
-)
-
-const (
-	Blue                             int = 3
-	Count                            int = 4
-	GreenEven                        int = 1
-	GreenOdd                         int = 2
-	Red                              int = 0
-	MeteringWeightDontCare           int = 0
-	MeteringWeightMax                int = 1000
-	MeteringWeightMin                int = 0
+	Unspecified                      int = -1
+	Creator                          int = 0
+	SessionHighSpeed                 int = 1
+	SessionRegular                   int = 0
+	IdUnsupported                    int = -1
+	ScoreMax                         int = 100
+	ScoreMin                         int = 1
 	Usecase10bitOutput               int = 8
 	UsecaseLowLatencySnapshot        int = 6
 	UsecasePreview                   int = 0
@@ -25,15 +18,10 @@ const (
 	UsecaseSnapshot                  int = 3
 	UsecaseVideoSnapshot             int = 2
 	UsecaseZsl                       int = 4
-	IdUnsupported                    int = -1
-	ScoreMax                         int = 100
-	ScoreMin                         int = 1
 	ChannelBlue                      int = 2
 	ChannelGreen                     int = 1
 	ChannelRed                       int = 0
 	PointSize                        int = 2
-	Unspecified                      int = -1
-	Creator                          int = 0
 	MirrorModeAuto                   int = 0
 	MirrorModeH                      int = 2
 	MirrorModeNone                   int = 1
@@ -44,8 +32,14 @@ const (
 	TimestampBaseMonotonic           int = 2
 	TimestampBaseRealtime            int = 3
 	TimestampBaseSensor              int = 1
-	SessionHighSpeed                 int = 1
-	SessionRegular                   int = 0
+	MeteringWeightDontCare           int = 0
+	MeteringWeightMax                int = 1000
+	MeteringWeightMin                int = 0
+	Count                            int = 4
+	Blue                             int = 3
+	GreenEven                        int = 1
+	GreenOdd                         int = 2
+	Red                              int = 0
 )
 
 const (
@@ -64,4 +58,10 @@ const (
 	Hlg10                  int64 = 2
 	PublicMax              int64 = 4096
 	Standard               int64 = 1
+)
+
+const (
+	LevelBlack        float32 = 0.0
+	LevelWhite        float32 = 1.0
+	MinimumGainFactor float32 = 1.0
 )

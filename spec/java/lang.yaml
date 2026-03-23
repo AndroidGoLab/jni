@@ -5,16 +5,30 @@
 package: lang
 go_import: github.com/AndroidGoLab/jni/icu/lang
 classes:
-    - java_class: android.icu.lang.UCharacterEnums
-      go_type: UCharacterEnums
-    - java_class: android.icu.lang.UCharacterEnums$ECharacterCategory
-      go_type: UCharacterEnumsECharacterCategory
-    - java_class: android.icu.lang.UCharacterEnums$ECharacterDirection
-      go_type: UCharacterEnumsECharacterDirection
+    - java_class: android.icu.lang.UCharacterDirection
+      go_type: UCharacterDirection
+      static_methods:
+        - java_method: toString
+          go_name: ToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
     - java_class: android.icu.lang.UProperty
       go_type: UProperty
     - java_class: android.icu.lang.UProperty$NameChoice
       go_type: UPropertyNameChoice
+    - java_class: android.icu.lang.UCharacterCategory
+      go_type: UCharacterCategory
+      static_methods:
+        - java_method: toString
+          go_name: ToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
     - java_class: android.icu.lang.UScript
       go_type: UScript
       static_methods:
@@ -133,26 +147,6 @@ classes:
             - java_type: String
               go_name: arg0
           returns: android.icu.lang.UScript$ScriptUsage
-          error: true
-    - java_class: android.icu.lang.UCharacterCategory
-      go_type: UCharacterCategory
-      static_methods:
-        - java_method: toString
-          go_name: ToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-    - java_class: android.icu.lang.UCharacterDirection
-      go_type: UCharacterDirection
-      static_methods:
-        - java_method: toString
-          go_name: ToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
           error: true
     - java_class: android.icu.lang.UCharacter
       go_type: UCharacter
@@ -1040,235 +1034,13 @@ classes:
       go_type: UCharacterVerticalOrientation
     - java_class: android.icu.lang.UCharacter$WordBreak
       go_type: UCharacterWordBreak
+    - java_class: android.icu.lang.UCharacterEnums
+      go_type: UCharacterEnums
+    - java_class: android.icu.lang.UCharacterEnums$ECharacterCategory
+      go_type: UCharacterEnumsECharacterCategory
+    - java_class: android.icu.lang.UCharacterEnums$ECharacterDirection
+      go_type: UCharacterEnumsECharacterDirection
 constants:
-    - go_name: CombiningSpacingMark
-      value: "8"
-      go_type: int
-    - go_name: ConnectorPunctuation
-      value: "22"
-      go_type: int
-    - go_name: Control
-      value: "15"
-      go_type: int
-    - go_name: CurrencySymbol
-      value: "25"
-      go_type: int
-    - go_name: DashPunctuation
-      value: "19"
-      go_type: int
-    - go_name: DecimalDigitNumber
-      value: "9"
-      go_type: int
-    - go_name: EnclosingMark
-      value: "7"
-      go_type: int
-    - go_name: EndPunctuation
-      value: "21"
-      go_type: int
-    - go_name: FinalPunctuation
-      value: "29"
-      go_type: int
-    - go_name: FinalQuotePunctuation
-      value: "29"
-      go_type: int
-    - go_name: Format
-      value: "16"
-      go_type: int
-    - go_name: GeneralOtherTypes
-      value: "0"
-      go_type: int
-    - go_name: InitialPunctuation
-      value: "28"
-      go_type: int
-    - go_name: InitialQuotePunctuation
-      value: "28"
-      go_type: int
-    - go_name: LetterNumber
-      value: "10"
-      go_type: int
-    - go_name: LineSeparator
-      value: "13"
-      go_type: int
-    - go_name: LowercaseLetter
-      value: "2"
-      go_type: int
-    - go_name: MathSymbol
-      value: "24"
-      go_type: int
-    - go_name: ModifierLetter
-      value: "4"
-      go_type: int
-    - go_name: ModifierSymbol
-      value: "26"
-      go_type: int
-    - go_name: NonSpacingMark
-      value: "6"
-      go_type: int
-    - go_name: OtherLetter
-      value: "5"
-      go_type: int
-    - go_name: OtherNumber
-      value: "11"
-      go_type: int
-    - go_name: OtherPunctuation
-      value: "23"
-      go_type: int
-    - go_name: OtherSymbol
-      value: "27"
-      go_type: int
-    - go_name: ParagraphSeparator
-      value: "14"
-      go_type: int
-    - go_name: PrivateUse
-      value: "17"
-      go_type: int
-    - go_name: SpaceSeparator
-      value: "12"
-      go_type: int
-    - go_name: StartPunctuation
-      value: "20"
-      go_type: int
-    - go_name: Surrogate
-      value: "18"
-      go_type: int
-    - go_name: TitlecaseLetter
-      value: "3"
-      go_type: int
-    - go_name: Unassigned
-      value: "0"
-      go_type: int
-    - go_name: UppercaseLetter
-      value: "1"
-      go_type: int
-    - go_name: ArabicNumber
-      value: "5"
-      go_type: int
-    - go_name: BlockSeparator
-      value: "7"
-      go_type: int
-    - go_name: BoundaryNeutral
-      value: "18"
-      go_type: int
-    - go_name: CommonNumberSeparator
-      value: "6"
-      go_type: int
-    - go_name: DirectionalityArabicNumber
-      value: "5"
-      go_type: int
-    - go_name: DirectionalityBoundaryNeutral
-      value: "18"
-      go_type: int
-    - go_name: DirectionalityCommonNumberSeparator
-      value: "6"
-      go_type: int
-    - go_name: DirectionalityEuropeanNumber
-      value: "2"
-      go_type: int
-    - go_name: DirectionalityEuropeanNumberSeparator
-      value: "3"
-      go_type: int
-    - go_name: DirectionalityEuropeanNumberTerminator
-      value: "4"
-      go_type: int
-    - go_name: DirectionalityLeftToRight
-      value: "0"
-      go_type: int
-    - go_name: DirectionalityLeftToRightEmbedding
-      value: "11"
-      go_type: int
-    - go_name: DirectionalityLeftToRightOverride
-      value: "12"
-      go_type: int
-    - go_name: DirectionalityNonspacingMark
-      value: "17"
-      go_type: int
-    - go_name: DirectionalityOtherNeutrals
-      value: "10"
-      go_type: int
-    - go_name: DirectionalityParagraphSeparator
-      value: "7"
-      go_type: int
-    - go_name: DirectionalityPopDirectionalFormat
-      value: "16"
-      go_type: int
-    - go_name: DirectionalityRightToLeft
-      value: "1"
-      go_type: int
-    - go_name: DirectionalityRightToLeftArabic
-      value: "13"
-      go_type: int
-    - go_name: DirectionalityRightToLeftEmbedding
-      value: "14"
-      go_type: int
-    - go_name: DirectionalityRightToLeftOverride
-      value: "15"
-      go_type: int
-    - go_name: DirectionalitySegmentSeparator
-      value: "8"
-      go_type: int
-    - go_name: DirectionalityUndefined
-      value: "-1"
-      go_type: int
-    - go_name: DirectionalityWhitespace
-      value: "9"
-      go_type: int
-    - go_name: DirNonSpacingMark
-      value: "17"
-      go_type: int
-    - go_name: EuropeanNumber
-      value: "2"
-      go_type: int
-    - go_name: EuropeanNumberSeparator
-      value: "3"
-      go_type: int
-    - go_name: EuropeanNumberTerminator
-      value: "4"
-      go_type: int
-    - go_name: FirstStrongIsolate
-      value: "19"
-      go_type: int
-    - go_name: LeftToRight
-      value: "0"
-      go_type: int
-    - go_name: LeftToRightEmbedding
-      value: "11"
-      go_type: int
-    - go_name: LeftToRightIsolate
-      value: "20"
-      go_type: int
-    - go_name: LeftToRightOverride
-      value: "12"
-      go_type: int
-    - go_name: OtherNeutral
-      value: "10"
-      go_type: int
-    - go_name: PopDirectionalFormat
-      value: "16"
-      go_type: int
-    - go_name: PopDirectionalIsolate
-      value: "22"
-      go_type: int
-    - go_name: RightToLeft
-      value: "1"
-      go_type: int
-    - go_name: RightToLeftArabic
-      value: "13"
-      go_type: int
-    - go_name: RightToLeftEmbedding
-      value: "14"
-      go_type: int
-    - go_name: RightToLeftIsolate
-      value: "21"
-      go_type: int
-    - go_name: RightToLeftOverride
-      value: "15"
-      go_type: int
-    - go_name: SegmentSeparator
-      value: "8"
-      go_type: int
-    - go_name: WhiteSpaceNeutral
-      value: "9"
-      go_type: int
     - go_name: Age
       value: "16384"
       go_type: int
@@ -2427,6 +2199,9 @@ constants:
     - go_name: Neutral
       value: "0"
       go_type: int
+    - go_name: Control
+      value: "1"
+      go_type: int
     - go_name: Cr
       value: "2"
       go_type: int
@@ -3090,6 +2865,9 @@ constants:
     - go_name: Space
       value: "26"
       go_type: int
+    - go_name: Surrogate
+      value: "25"
+      go_type: int
     - go_name: ViramaFinal
       value: "46"
       go_type: int
@@ -3107,6 +2885,9 @@ constants:
       go_type: int
     - go_name: Aterm
       value: "1"
+      go_type: int
+    - go_name: Format
+      value: "3"
       go_type: int
     - go_name: Lower
       value: "4"
@@ -4338,6 +4119,9 @@ constants:
     - go_name: PlayingCardsId
       value: "204"
       go_type: int
+    - go_name: PrivateUse
+      value: "0"
+      go_type: int
     - go_name: PrivateUseArea
       value: "0"
       go_type: int
@@ -4745,4 +4529,220 @@ constants:
       go_type: int
     - go_name: Wsegspace
       value: "22"
+      go_type: int
+    - go_name: CombiningSpacingMark
+      value: "8"
+      go_type: int
+    - go_name: ConnectorPunctuation
+      value: "22"
+      go_type: int
+    - go_name: CurrencySymbol
+      value: "25"
+      go_type: int
+    - go_name: DashPunctuation
+      value: "19"
+      go_type: int
+    - go_name: DecimalDigitNumber
+      value: "9"
+      go_type: int
+    - go_name: EnclosingMark
+      value: "7"
+      go_type: int
+    - go_name: EndPunctuation
+      value: "21"
+      go_type: int
+    - go_name: FinalPunctuation
+      value: "29"
+      go_type: int
+    - go_name: FinalQuotePunctuation
+      value: "29"
+      go_type: int
+    - go_name: GeneralOtherTypes
+      value: "0"
+      go_type: int
+    - go_name: InitialPunctuation
+      value: "28"
+      go_type: int
+    - go_name: InitialQuotePunctuation
+      value: "28"
+      go_type: int
+    - go_name: LetterNumber
+      value: "10"
+      go_type: int
+    - go_name: LineSeparator
+      value: "13"
+      go_type: int
+    - go_name: LowercaseLetter
+      value: "2"
+      go_type: int
+    - go_name: MathSymbol
+      value: "24"
+      go_type: int
+    - go_name: ModifierLetter
+      value: "4"
+      go_type: int
+    - go_name: ModifierSymbol
+      value: "26"
+      go_type: int
+    - go_name: NonSpacingMark
+      value: "6"
+      go_type: int
+    - go_name: OtherLetter
+      value: "5"
+      go_type: int
+    - go_name: OtherNumber
+      value: "11"
+      go_type: int
+    - go_name: OtherPunctuation
+      value: "23"
+      go_type: int
+    - go_name: OtherSymbol
+      value: "27"
+      go_type: int
+    - go_name: ParagraphSeparator
+      value: "14"
+      go_type: int
+    - go_name: SpaceSeparator
+      value: "12"
+      go_type: int
+    - go_name: StartPunctuation
+      value: "20"
+      go_type: int
+    - go_name: TitlecaseLetter
+      value: "3"
+      go_type: int
+    - go_name: Unassigned
+      value: "0"
+      go_type: int
+    - go_name: UppercaseLetter
+      value: "1"
+      go_type: int
+    - go_name: ArabicNumber
+      value: "5"
+      go_type: int
+    - go_name: BlockSeparator
+      value: "7"
+      go_type: int
+    - go_name: BoundaryNeutral
+      value: "18"
+      go_type: int
+    - go_name: CommonNumberSeparator
+      value: "6"
+      go_type: int
+    - go_name: DirectionalityArabicNumber
+      value: "5"
+      go_type: int
+    - go_name: DirectionalityBoundaryNeutral
+      value: "18"
+      go_type: int
+    - go_name: DirectionalityCommonNumberSeparator
+      value: "6"
+      go_type: int
+    - go_name: DirectionalityEuropeanNumber
+      value: "2"
+      go_type: int
+    - go_name: DirectionalityEuropeanNumberSeparator
+      value: "3"
+      go_type: int
+    - go_name: DirectionalityEuropeanNumberTerminator
+      value: "4"
+      go_type: int
+    - go_name: DirectionalityLeftToRight
+      value: "0"
+      go_type: int
+    - go_name: DirectionalityLeftToRightEmbedding
+      value: "11"
+      go_type: int
+    - go_name: DirectionalityLeftToRightOverride
+      value: "12"
+      go_type: int
+    - go_name: DirectionalityNonspacingMark
+      value: "17"
+      go_type: int
+    - go_name: DirectionalityOtherNeutrals
+      value: "10"
+      go_type: int
+    - go_name: DirectionalityParagraphSeparator
+      value: "7"
+      go_type: int
+    - go_name: DirectionalityPopDirectionalFormat
+      value: "16"
+      go_type: int
+    - go_name: DirectionalityRightToLeft
+      value: "1"
+      go_type: int
+    - go_name: DirectionalityRightToLeftArabic
+      value: "13"
+      go_type: int
+    - go_name: DirectionalityRightToLeftEmbedding
+      value: "14"
+      go_type: int
+    - go_name: DirectionalityRightToLeftOverride
+      value: "15"
+      go_type: int
+    - go_name: DirectionalitySegmentSeparator
+      value: "8"
+      go_type: int
+    - go_name: DirectionalityUndefined
+      value: "-1"
+      go_type: int
+    - go_name: DirectionalityWhitespace
+      value: "9"
+      go_type: int
+    - go_name: DirNonSpacingMark
+      value: "17"
+      go_type: int
+    - go_name: EuropeanNumber
+      value: "2"
+      go_type: int
+    - go_name: EuropeanNumberSeparator
+      value: "3"
+      go_type: int
+    - go_name: EuropeanNumberTerminator
+      value: "4"
+      go_type: int
+    - go_name: FirstStrongIsolate
+      value: "19"
+      go_type: int
+    - go_name: LeftToRight
+      value: "0"
+      go_type: int
+    - go_name: LeftToRightEmbedding
+      value: "11"
+      go_type: int
+    - go_name: LeftToRightIsolate
+      value: "20"
+      go_type: int
+    - go_name: LeftToRightOverride
+      value: "12"
+      go_type: int
+    - go_name: OtherNeutral
+      value: "10"
+      go_type: int
+    - go_name: PopDirectionalFormat
+      value: "16"
+      go_type: int
+    - go_name: PopDirectionalIsolate
+      value: "22"
+      go_type: int
+    - go_name: RightToLeft
+      value: "1"
+      go_type: int
+    - go_name: RightToLeftArabic
+      value: "13"
+      go_type: int
+    - go_name: RightToLeftEmbedding
+      value: "14"
+      go_type: int
+    - go_name: RightToLeftIsolate
+      value: "21"
+      go_type: int
+    - go_name: RightToLeftOverride
+      value: "15"
+      go_type: int
+    - go_name: SegmentSeparator
+      value: "8"
+      go_type: int
+    - go_name: WhiteSpaceNeutral
+      value: "9"
       go_type: int

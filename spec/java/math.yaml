@@ -5,29 +5,6 @@
 package: math
 go_import: github.com/AndroidGoLab/jni/icu/math
 classes:
-    - java_class: android.icu.math.MathContext
-      go_type: Context
-      methods:
-        - java_method: getDigits
-          go_name: GetDigits
-          returns: int
-          error: true
-        - java_method: getForm
-          go_name: GetForm
-          returns: int
-          error: true
-        - java_method: getLostDigits
-          go_name: GetLostDigits
-          returns: boolean
-          error: true
-        - java_method: getRoundingMode
-          go_name: GetRoundingMode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
     - java_class: android.icu.math.BigDecimal
       go_type: BigDecimal
       methods:
@@ -406,14 +383,31 @@ classes:
               go_name: arg1
           returns: android.icu.math.BigDecimal
           error: true
+    - java_class: android.icu.math.MathContext
+      go_type: Context
+      methods:
+        - java_method: getDigits
+          go_name: GetDigits
+          returns: int
+          error: true
+        - java_method: getForm
+          go_name: GetForm
+          returns: int
+          error: true
+        - java_method: getLostDigits
+          go_name: GetLostDigits
+          returns: boolean
+          error: true
+        - java_method: getRoundingMode
+          go_name: GetRoundingMode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
 constants:
-    - go_name: Default
-      value: "0"
-      go_type: int
-    - go_name: Engineering
-      value: "2"
-      go_type: int
-    - go_name: Plain
+    - go_name: One
       value: "0"
       go_type: int
     - go_name: RoundCeiling
@@ -440,15 +434,21 @@ constants:
     - go_name: RoundUp
       value: "0"
       go_type: int
-    - go_name: Scientific
-      value: "1"
-      go_type: int
-    - go_name: One
-      value: "0"
-      go_type: int
     - go_name: Ten
       value: "0"
       go_type: int
     - go_name: Zero
       value: "0"
+      go_type: int
+    - go_name: Default
+      value: "0"
+      go_type: int
+    - go_name: Engineering
+      value: "2"
+      go_type: int
+    - go_name: Plain
+      value: "0"
+      go_type: int
+    - go_name: Scientific
+      value: "1"
       go_type: int

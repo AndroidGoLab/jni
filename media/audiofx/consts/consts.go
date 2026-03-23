@@ -3,7 +3,6 @@
 package consts
 
 const (
-	ParamTargetGainMb               int = 0
 	ParamStrength                   int = 1
 	ParamStrengthSupported          int = 0
 	VirtualizationModeAuto          int = 1
@@ -33,24 +32,6 @@ const (
 	ErrorNoInit                     int = -3
 	ErrorNoMemory                   int = -6
 	Success                         int = 0
-	ParamPreset                     int = 0
-	PresetLargehall                 int = 5
-	PresetLargeroom                 int = 3
-	PresetMediumhall                int = 4
-	PresetMediumroom                int = 2
-	PresetNone                      int = 0
-	PresetPlate                     int = 6
-	PresetSmallroom                 int = 1
-	ParamDecayHfRatio               int = 3
-	ParamDecayTime                  int = 2
-	ParamDensity                    int = 9
-	ParamDiffusion                  int = 8
-	ParamReflectionsDelay           int = 5
-	ParamReflectionsLevel           int = 4
-	ParamReverbDelay                int = 7
-	ParamReverbLevel                int = 6
-	ParamRoomHfLevel                int = 1
-	ParamRoomLevel                  int = 0
 	ParamBandFreqRange              int = 4
 	ParamBandLevel                  int = 2
 	ParamCenterFreq                 int = 3
@@ -61,6 +42,25 @@ const (
 	ParamLevelRange                 int = 1
 	ParamNumBands                   int = 0
 	ParamStringSizeMax              int = 32
+	ParamDecayHfRatio               int = 3
+	ParamDecayTime                  int = 2
+	ParamDensity                    int = 9
+	ParamDiffusion                  int = 8
+	ParamReflectionsDelay           int = 5
+	ParamReflectionsLevel           int = 4
+	ParamReverbDelay                int = 7
+	ParamReverbLevel                int = 6
+	ParamRoomHfLevel                int = 1
+	ParamRoomLevel                  int = 0
+	ParamTargetGainMb               int = 0
+	ParamPreset                     int = 0
+	PresetLargehall                 int = 5
+	PresetLargeroom                 int = 3
+	PresetMediumhall                int = 4
+	PresetMediumroom                int = 2
+	PresetNone                      int = 0
+	PresetPlate                     int = 6
+	PresetSmallroom                 int = 1
 	VariantFavorFrequencyResolution int = 0
 	VariantFavorTimeResolution      int = 1
 	MeasurementModeNone             int = 0

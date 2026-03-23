@@ -3,10 +3,7 @@
 package consts
 
 const (
-	Creator int = 0
-)
-
-const (
+	SliceType                 string = "vnd.android.slice"
 	FormatAction              string = "action"
 	FormatBundle              string = "bundle"
 	FormatImage               string = "image"
@@ -15,6 +12,8 @@ const (
 	FormatRemoteInput         string = "input"
 	FormatSlice               string = "slice"
 	FormatText                string = "text"
+	CategorySlice             string = "android.app.slice.category.SLICE"
+	SliceMetadataKey          string = "android.metadata.SLICE_URI"
 	ExtraRangeValue           string = "android.app.slice.extra.RANGE_VALUE"
 	ExtraToggleState          string = "android.app.slice.extra.TOGGLE_STATE"
 	HintActions               string = "actions"
@@ -45,7 +44,8 @@ const (
 	SubtypeSource             string = "source"
 	SubtypeToggle             string = "toggle"
 	SubtypeValue              string = "value"
-	CategorySlice             string = "android.app.slice.category.SLICE"
-	SliceMetadataKey          string = "android.metadata.SLICE_URI"
-	SliceType                 string = "vnd.android.slice"
+)
+
+const (
+	Creator int = 0
 )

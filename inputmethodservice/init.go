@@ -58,6 +58,35 @@ var (
 	midKeyboardViewOnKeyboardActionListenerSwipeRight jni.MethodID
 	midKeyboardViewOnKeyboardActionListenerSwipeUp    jni.MethodID
 
+	clsKeyboard                 *jni.GlobalRef
+	midKeyboardGetHeight        jni.MethodID
+	midKeyboardGetMinWidth      jni.MethodID
+	midKeyboardGetNearestKeys   jni.MethodID
+	midKeyboardGetShiftKeyIndex jni.MethodID
+	midKeyboardIsShifted        jni.MethodID
+	midKeyboardSetShifted       jni.MethodID
+
+	clsKeyboardKey                        *jni.GlobalRef
+	midKeyboardKeyGetCurrentDrawableState jni.MethodID
+	midKeyboardKeyIsInside                jni.MethodID
+	midKeyboardKeyOnPressed               jni.MethodID
+	midKeyboardKeyOnReleased              jni.MethodID
+	midKeyboardKeySquaredDistanceFrom     jni.MethodID
+
+	clsKeyboardRow *jni.GlobalRef
+
+	clsExtractEditText                      *jni.GlobalRef
+	midExtractEditTextFinishInternalChanges jni.MethodID
+	midExtractEditTextHasFocus              jni.MethodID
+	midExtractEditTextHasVerticalScrollBar  jni.MethodID
+	midExtractEditTextHasWindowFocus        jni.MethodID
+	midExtractEditTextIsFocused             jni.MethodID
+	midExtractEditTextIsInputMethodTarget   jni.MethodID
+	midExtractEditTextOnTextContextMenuItem jni.MethodID
+	midExtractEditTextPerformClick          jni.MethodID
+	midExtractEditTextSetExtractedText      jni.MethodID
+	midExtractEditTextStartInternalChanges  jni.MethodID
+
 	clsAbstractInputMethodService                                    *jni.GlobalRef
 	midAbstractInputMethodServiceGetKeyDispatcherState               jni.MethodID
 	midAbstractInputMethodServiceGetSystemService                    jni.MethodID
@@ -88,35 +117,6 @@ var (
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplOnShouldVerifyKeyEvent     jni.MethodID
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplRevokeSelf                 jni.MethodID
 	midAbstractInputMethodServiceAbstractInputMethodSessionImplSetEnabled                 jni.MethodID
-
-	clsKeyboard                 *jni.GlobalRef
-	midKeyboardGetHeight        jni.MethodID
-	midKeyboardGetMinWidth      jni.MethodID
-	midKeyboardGetNearestKeys   jni.MethodID
-	midKeyboardGetShiftKeyIndex jni.MethodID
-	midKeyboardIsShifted        jni.MethodID
-	midKeyboardSetShifted       jni.MethodID
-
-	clsKeyboardKey                        *jni.GlobalRef
-	midKeyboardKeyGetCurrentDrawableState jni.MethodID
-	midKeyboardKeyIsInside                jni.MethodID
-	midKeyboardKeyOnPressed               jni.MethodID
-	midKeyboardKeyOnReleased              jni.MethodID
-	midKeyboardKeySquaredDistanceFrom     jni.MethodID
-
-	clsKeyboardRow *jni.GlobalRef
-
-	clsExtractEditText                      *jni.GlobalRef
-	midExtractEditTextFinishInternalChanges jni.MethodID
-	midExtractEditTextHasFocus              jni.MethodID
-	midExtractEditTextHasVerticalScrollBar  jni.MethodID
-	midExtractEditTextHasWindowFocus        jni.MethodID
-	midExtractEditTextIsFocused             jni.MethodID
-	midExtractEditTextIsInputMethodTarget   jni.MethodID
-	midExtractEditTextOnTextContextMenuItem jni.MethodID
-	midExtractEditTextPerformClick          jni.MethodID
-	midExtractEditTextSetExtractedText      jni.MethodID
-	midExtractEditTextStartInternalChanges  jni.MethodID
 
 	clsInputMethodService                                          *jni.GlobalRef
 	midInputMethodServiceEnableHardwareAcceleration                jni.MethodID
@@ -500,6 +500,193 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/inputmethodservice/Keyboard")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyboard = env.NewGlobalRef(&c.Object)
+
+		midKeyboardGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardGetMinWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getMinWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardGetNearestKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getNearestKeys", "(II)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardGetShiftKeyIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getShiftKeyIndex", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardIsShifted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "isShifted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardSetShifted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "setShifted", "(Z)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/inputmethodservice/Keyboard$Key")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyboardKey = env.NewGlobalRef(&c.Object)
+
+		midKeyboardKeyGetCurrentDrawableState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "getCurrentDrawableState", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardKeyIsInside, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "isInside", "(II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardKeyOnPressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "onPressed", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardKeyOnReleased, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "onReleased", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyboardKeySquaredDistanceFrom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "squaredDistanceFrom", "(II)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/inputmethodservice/Keyboard$Row")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyboardRow = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/inputmethodservice/ExtractEditText")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExtractEditText = env.NewGlobalRef(&c.Object)
+
+		midExtractEditTextFinishInternalChanges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "finishInternalChanges", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextHasFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "hasFocus", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextHasVerticalScrollBar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "hasVerticalScrollBar", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextHasWindowFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "hasWindowFocus", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextIsFocused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "isFocused", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextIsInputMethodTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "isInputMethodTarget", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextOnTextContextMenuItem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "onTextContextMenuItem", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextPerformClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "performClick", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextSetExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "setExtractedText", "(Landroid/view/inputmethod/ExtractedText;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExtractEditTextStartInternalChanges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "startInternalChanges", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/inputmethodservice/AbstractInputMethodService")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -697,193 +884,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAbstractInputMethodServiceAbstractInputMethodSessionImplSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAbstractInputMethodServiceAbstractInputMethodSessionImpl)), "setEnabled", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/inputmethodservice/Keyboard")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyboard = env.NewGlobalRef(&c.Object)
-
-		midKeyboardGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardGetMinWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getMinWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardGetNearestKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getNearestKeys", "(II)[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardGetShiftKeyIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "getShiftKeyIndex", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardIsShifted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "isShifted", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardSetShifted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboard)), "setShifted", "(Z)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/inputmethodservice/Keyboard$Key")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyboardKey = env.NewGlobalRef(&c.Object)
-
-		midKeyboardKeyGetCurrentDrawableState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "getCurrentDrawableState", "()[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardKeyIsInside, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "isInside", "(II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardKeyOnPressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "onPressed", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardKeyOnReleased, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "onReleased", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyboardKeySquaredDistanceFrom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyboardKey)), "squaredDistanceFrom", "(II)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/inputmethodservice/Keyboard$Row")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyboardRow = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/inputmethodservice/ExtractEditText")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsExtractEditText = env.NewGlobalRef(&c.Object)
-
-		midExtractEditTextFinishInternalChanges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "finishInternalChanges", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextHasFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "hasFocus", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextHasVerticalScrollBar, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "hasVerticalScrollBar", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextHasWindowFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "hasWindowFocus", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextIsFocused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "isFocused", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextIsInputMethodTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "isInputMethodTarget", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextOnTextContextMenuItem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "onTextContextMenuItem", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextPerformClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "performClick", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextSetExtractedText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "setExtractedText", "(Landroid/view/inputmethod/ExtractedText;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExtractEditTextStartInternalChanges, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExtractEditText)), "startInternalChanges", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

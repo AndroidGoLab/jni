@@ -5,20 +5,17 @@ package health
 import "github.com/AndroidGoLab/jni/os/health/consts"
 
 const (
-	MeasurementsWakeupAlarmsCount         = consts.MeasurementsWakeupAlarmsCount
-	StatsServices                         = consts.StatsServices
-	MeasurementLaunchCount                = consts.MeasurementLaunchCount
-	MeasurementStartServiceCount          = consts.MeasurementStartServiceCount
-	Creator                               = consts.Creator
-	MeasurementWakeNestingCount           = consts.MeasurementWakeNestingCount
-	MeasurementWakeStartMs                = consts.MeasurementWakeStartMs
-	MeasurementWakeSumMs                  = consts.MeasurementWakeSumMs
 	MeasurementAnrCount                   = consts.MeasurementAnrCount
 	MeasurementCrashesCount               = consts.MeasurementCrashesCount
 	MeasurementForegroundMs               = consts.MeasurementForegroundMs
 	MeasurementStartsCount                = consts.MeasurementStartsCount
 	MeasurementSystemTimeMs               = consts.MeasurementSystemTimeMs
 	MeasurementUserTimeMs                 = consts.MeasurementUserTimeMs
+	MeasurementsWakeupAlarmsCount         = consts.MeasurementsWakeupAlarmsCount
+	StatsServices                         = consts.StatsServices
+	MeasurementWakeNestingCount           = consts.MeasurementWakeNestingCount
+	MeasurementWakeStartMs                = consts.MeasurementWakeStartMs
+	MeasurementWakeSumMs                  = consts.MeasurementWakeSumMs
 	MeasurementBluetoothIdleMs            = consts.MeasurementBluetoothIdleMs
 	MeasurementBluetoothPowerMams         = consts.MeasurementBluetoothPowerMams
 	MeasurementBluetoothRxBytes           = consts.MeasurementBluetoothRxBytes
@@ -82,4 +79,7 @@ const (
 	TimerVibrator                         = consts.TimerVibrator
 	TimerVideo                            = consts.TimerVideo
 	TimerWifiScan                         = consts.TimerWifiScan
+	Creator                               = consts.Creator
+	MeasurementLaunchCount                = consts.MeasurementLaunchCount
+	MeasurementStartServiceCount          = consts.MeasurementStartServiceCount
 )

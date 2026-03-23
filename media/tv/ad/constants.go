@@ -30,7 +30,6 @@ const (
 )
 
 const (
-	Creator                  = consts.Creator
 	ErrorBlocked             = consts.ErrorBlocked
 	ErrorEncrypted           = consts.ErrorEncrypted
 	ErrorNone                = consts.ErrorNone
@@ -42,4 +41,5 @@ const (
 	SessionStateError        = consts.SessionStateError
 	SessionStateRunning      = consts.SessionStateRunning
 	SessionStateStopped      = consts.SessionStateStopped
+	Creator                  = consts.Creator
 )

@@ -31,6 +31,16 @@ var (
 	midTextToSpeechServiceOnIsValidVoiceName       jni.MethodID
 	midTextToSpeechServiceOnLoadVoice              jni.MethodID
 
+	clsUtteranceProgressListener                 *jni.GlobalRef
+	midUtteranceProgressListenerOnAudioAvailable jni.MethodID
+	midUtteranceProgressListenerOnBeginSynthesis jni.MethodID
+	midUtteranceProgressListenerOnDone           jni.MethodID
+	midUtteranceProgressListenerOnError1         jni.MethodID
+	midUtteranceProgressListenerOnError2_1       jni.MethodID
+	midUtteranceProgressListenerOnRangeStart     jni.MethodID
+	midUtteranceProgressListenerOnStart          jni.MethodID
+	midUtteranceProgressListenerOnStop           jni.MethodID
+
 	clsSynthesisRequest                    *jni.GlobalRef
 	midSynthesisRequestGetCallerUid        jni.MethodID
 	midSynthesisRequestGetCharSequenceText jni.MethodID
@@ -43,6 +53,16 @@ var (
 	midSynthesisRequestGetVariant          jni.MethodID
 	midSynthesisRequestGetVoiceName        jni.MethodID
 
+	clsSynthesisCallback                 *jni.GlobalRef
+	midSynthesisCallbackAudioAvailable   jni.MethodID
+	midSynthesisCallbackDone             jni.MethodID
+	midSynthesisCallbackError0           jni.MethodID
+	midSynthesisCallbackError1_1         jni.MethodID
+	midSynthesisCallbackGetMaxBufferSize jni.MethodID
+	midSynthesisCallbackHasFinished      jni.MethodID
+	midSynthesisCallbackHasStarted       jni.MethodID
+	midSynthesisCallbackStart            jni.MethodID
+
 	clsVoice                            *jni.GlobalRef
 	midVoiceDescribeContents            jni.MethodID
 	midVoiceEquals                      jni.MethodID
@@ -54,26 +74,6 @@ var (
 	midVoiceIsNetworkConnectionRequired jni.MethodID
 	midVoiceToString                    jni.MethodID
 	midVoiceWriteToParcel               jni.MethodID
-
-	clsSynthesisCallback                 *jni.GlobalRef
-	midSynthesisCallbackAudioAvailable   jni.MethodID
-	midSynthesisCallbackDone             jni.MethodID
-	midSynthesisCallbackError0           jni.MethodID
-	midSynthesisCallbackError1_1         jni.MethodID
-	midSynthesisCallbackGetMaxBufferSize jni.MethodID
-	midSynthesisCallbackHasFinished      jni.MethodID
-	midSynthesisCallbackHasStarted       jni.MethodID
-	midSynthesisCallbackStart            jni.MethodID
-
-	clsUtteranceProgressListener                 *jni.GlobalRef
-	midUtteranceProgressListenerOnAudioAvailable jni.MethodID
-	midUtteranceProgressListenerOnBeginSynthesis jni.MethodID
-	midUtteranceProgressListenerOnDone           jni.MethodID
-	midUtteranceProgressListenerOnError1         jni.MethodID
-	midUtteranceProgressListenerOnError2_1       jni.MethodID
-	midUtteranceProgressListenerOnRangeStart     jni.MethodID
-	midUtteranceProgressListenerOnStart          jni.MethodID
-	midUtteranceProgressListenerOnStop           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -138,6 +138,72 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTextToSpeechServiceOnLoadVoice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTextToSpeechService)), "onLoadVoice", "(Ljava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/speech/tts/UtteranceProgressListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUtteranceProgressListener = env.NewGlobalRef(&c.Object)
+
+		midUtteranceProgressListenerOnAudioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onAudioAvailable", "(Ljava/lang/String;[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnBeginSynthesis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onBeginSynthesis", "(Ljava/lang/String;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnDone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onDone", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnError1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onError", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnError2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onError", "(Ljava/lang/String;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnRangeStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onRangeStart", "(Ljava/lang/String;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onStart", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUtteranceProgressListenerOnStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onStop", "(Ljava/lang/String;Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -226,6 +292,72 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/speech/tts/SynthesisCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSynthesisCallback = env.NewGlobalRef(&c.Object)
+
+		midSynthesisCallbackAudioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "audioAvailable", "([BII)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackDone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "done", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackError0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "error", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackError1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "error", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackGetMaxBufferSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "getMaxBufferSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackHasFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "hasFinished", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackHasStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "hasStarted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSynthesisCallbackStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "start", "(III)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/speech/tts/Voice")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -298,138 +430,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midVoiceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVoice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/speech/tts/SynthesisCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSynthesisCallback = env.NewGlobalRef(&c.Object)
-
-		midSynthesisCallbackAudioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "audioAvailable", "([BII)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackDone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "done", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackError0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "error", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackError1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "error", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackGetMaxBufferSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "getMaxBufferSize", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackHasFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "hasFinished", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackHasStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "hasStarted", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSynthesisCallbackStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSynthesisCallback)), "start", "(III)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/speech/tts/UtteranceProgressListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUtteranceProgressListener = env.NewGlobalRef(&c.Object)
-
-		midUtteranceProgressListenerOnAudioAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onAudioAvailable", "(Ljava/lang/String;[B)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnBeginSynthesis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onBeginSynthesis", "(Ljava/lang/String;III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnDone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onDone", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnError1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onError", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnError2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onError", "(Ljava/lang/String;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnRangeStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onRangeStart", "(Ljava/lang/String;III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onStart", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUtteranceProgressListenerOnStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUtteranceProgressListener)), "onStop", "(Ljava/lang/String;Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

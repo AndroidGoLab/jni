@@ -5,20 +5,20 @@ package preference
 import "github.com/AndroidGoLab/jni/preference/consts"
 
 const (
+	KeyHasSetDefaultValues      = consts.KeyHasSetDefaultValues
+	MetadataKeyPreferences      = consts.MetadataKeyPreferences
 	ExtraNoHeaders              = consts.ExtraNoHeaders
 	ExtraShowFragment           = consts.ExtraShowFragment
 	ExtraShowFragmentArguments  = consts.ExtraShowFragmentArguments
 	ExtraShowFragmentShortTitle = consts.ExtraShowFragmentShortTitle
 	ExtraShowFragmentTitle      = consts.ExtraShowFragmentTitle
-	KeyHasSetDefaultValues      = consts.KeyHasSetDefaultValues
-	MetadataKeyPreferences      = consts.MetadataKeyPreferences
+)
+
+const (
+	DefaultOrder = consts.DefaultOrder
+	Creator      = consts.Creator
 )
 
 const (
 	HeaderIdUndefined = consts.HeaderIdUndefined
-)
-
-const (
-	Creator      = consts.Creator
-	DefaultOrder = consts.DefaultOrder
 )

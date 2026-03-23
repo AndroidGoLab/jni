@@ -5,6 +5,46 @@
 package: rtp
 go_import: github.com/AndroidGoLab/jni/net/rtp
 classes:
+    - java_class: android.net.rtp.AudioStream
+      go_type: AudioStream
+      methods:
+        - java_method: getCodec
+          go_name: GetCodec
+          returns: android.net.rtp.AudioCodec
+          error: true
+        - java_method: getDtmfType
+          go_name: GetDtmfType
+          returns: int
+          error: true
+        - java_method: getGroup
+          go_name: GetGroup
+          returns: android.net.rtp.AudioGroup
+          error: true
+        - java_method: isBusy
+          go_name: IsBusy
+          returns: boolean
+          error: true
+        - java_method: join
+          go_name: Join
+          params:
+            - java_type: android.net.rtp.AudioGroup
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCodec
+          go_name: SetCodec
+          params:
+            - java_type: android.net.rtp.AudioCodec
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDtmfType
+          go_name: SetDtmfType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.net.rtp.RtpStream
       go_type: Stream
       methods:
@@ -69,46 +109,6 @@ classes:
         - java_method: getCodecs
           go_name: GetCodecs
           returns: android.net.rtp.AudioCodec[]
-          error: true
-    - java_class: android.net.rtp.AudioStream
-      go_type: AudioStream
-      methods:
-        - java_method: getCodec
-          go_name: GetCodec
-          returns: android.net.rtp.AudioCodec
-          error: true
-        - java_method: getDtmfType
-          go_name: GetDtmfType
-          returns: int
-          error: true
-        - java_method: getGroup
-          go_name: GetGroup
-          returns: android.net.rtp.AudioGroup
-          error: true
-        - java_method: isBusy
-          go_name: IsBusy
-          returns: boolean
-          error: true
-        - java_method: join
-          go_name: Join
-          params:
-            - java_type: android.net.rtp.AudioGroup
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCodec
-          go_name: SetCodec
-          params:
-            - java_type: android.net.rtp.AudioCodec
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDtmfType
-          go_name: SetDtmfType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
           error: true
     - java_class: android.net.rtp.AudioGroup
       go_type: AudioGroup

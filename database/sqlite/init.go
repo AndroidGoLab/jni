@@ -23,20 +23,93 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsSQLiteRawStatement                     *jni.GlobalRef
+	midSQLiteRawStatementBindBlob2            jni.MethodID
+	midSQLiteRawStatementBindBlob4_1          jni.MethodID
+	midSQLiteRawStatementBindDouble           jni.MethodID
+	midSQLiteRawStatementBindInt              jni.MethodID
+	midSQLiteRawStatementBindLong             jni.MethodID
+	midSQLiteRawStatementBindNull             jni.MethodID
+	midSQLiteRawStatementBindText             jni.MethodID
+	midSQLiteRawStatementClearBindings        jni.MethodID
+	midSQLiteRawStatementClose                jni.MethodID
+	midSQLiteRawStatementGetColumnBlob        jni.MethodID
+	midSQLiteRawStatementGetColumnDouble      jni.MethodID
+	midSQLiteRawStatementGetColumnInt         jni.MethodID
+	midSQLiteRawStatementGetColumnLength      jni.MethodID
+	midSQLiteRawStatementGetColumnLong        jni.MethodID
+	midSQLiteRawStatementGetColumnName        jni.MethodID
+	midSQLiteRawStatementGetColumnText        jni.MethodID
+	midSQLiteRawStatementGetColumnType        jni.MethodID
+	midSQLiteRawStatementGetParameterCount    jni.MethodID
+	midSQLiteRawStatementGetParameterIndex    jni.MethodID
+	midSQLiteRawStatementGetParameterName     jni.MethodID
+	midSQLiteRawStatementGetResultColumnCount jni.MethodID
+	midSQLiteRawStatementIsOpen               jni.MethodID
+	midSQLiteRawStatementReadColumnBlob       jni.MethodID
+	midSQLiteRawStatementReset                jni.MethodID
+	midSQLiteRawStatementStep                 jni.MethodID
+	midSQLiteRawStatementToString             jni.MethodID
+
+	clsSQLiteBlobTooBigException *jni.GlobalRef
+
+	clsSQLiteDiskIOException *jni.GlobalRef
+
+	clsSQLiteBindOrColumnIndexOutOfRangeException *jni.GlobalRef
+
+	clsSQLiteAbortException *jni.GlobalRef
+
+	clsSQLiteDatabaseCorruptException *jni.GlobalRef
+
+	clsSQLiteStatement                                 *jni.GlobalRef
+	midSQLiteStatementExecute                          jni.MethodID
+	midSQLiteStatementExecuteInsert                    jni.MethodID
+	midSQLiteStatementExecuteUpdateDelete              jni.MethodID
+	midSQLiteStatementSimpleQueryForBlobFileDescriptor jni.MethodID
+	midSQLiteStatementSimpleQueryForLong               jni.MethodID
+	midSQLiteStatementSimpleQueryForString             jni.MethodID
+	midSQLiteStatementToString                         jni.MethodID
+
+	clsSQLiteQuery         *jni.GlobalRef
+	midSQLiteQueryToString jni.MethodID
+
+	clsSQLiteTableLockedException *jni.GlobalRef
+
+	clsSQLiteMisuseException *jni.GlobalRef
+
+	clsSQLiteDoneException *jni.GlobalRef
+
 	clsSQLiteTransactionListener           *jni.GlobalRef
 	midSQLiteTransactionListenerOnBegin    jni.MethodID
 	midSQLiteTransactionListenerOnCommit   jni.MethodID
 	midSQLiteTransactionListenerOnRollback jni.MethodID
 
-	clsSQLiteClosable                              *jni.GlobalRef
-	midSQLiteClosableAcquireReference              jni.MethodID
-	midSQLiteClosableClose                         jni.MethodID
-	midSQLiteClosableReleaseReference              jni.MethodID
-	midSQLiteClosableReleaseReferenceFromContainer jni.MethodID
+	clsSQLiteCursor                         *jni.GlobalRef
+	midSQLiteCursorClose                    jni.MethodID
+	midSQLiteCursorDeactivate               jni.MethodID
+	midSQLiteCursorGetColumnIndex           jni.MethodID
+	midSQLiteCursorGetColumnNames           jni.MethodID
+	midSQLiteCursorGetCount                 jni.MethodID
+	midSQLiteCursorGetDatabase              jni.MethodID
+	midSQLiteCursorOnMove                   jni.MethodID
+	midSQLiteCursorRequery                  jni.MethodID
+	midSQLiteCursorSetFillWindowForwardOnly jni.MethodID
+	midSQLiteCursorSetSelectionArguments    jni.MethodID
+	midSQLiteCursorSetWindow                jni.MethodID
 
-	clsSQLiteDoneException *jni.GlobalRef
+	clsSQLiteProgram                     *jni.GlobalRef
+	midSQLiteProgramBindAllArgsAsStrings jni.MethodID
+	midSQLiteProgramBindBlob             jni.MethodID
+	midSQLiteProgramBindDouble           jni.MethodID
+	midSQLiteProgramBindLong             jni.MethodID
+	midSQLiteProgramBindNull             jni.MethodID
+	midSQLiteProgramBindString           jni.MethodID
+	midSQLiteProgramClearBindings        jni.MethodID
+	midSQLiteProgramGetUniqueId          jni.MethodID
 
 	clsSQLiteDatatypeMismatchException *jni.GlobalRef
+
+	clsSQLiteException *jni.GlobalRef
 
 	clsSQLiteQueryBuilder                        *jni.GlobalRef
 	midSQLiteQueryBuilderAppendWhere             jni.MethodID
@@ -66,15 +139,7 @@ var (
 	midSQLiteQueryBuilderAppendColumns           jni.MethodID
 	midSQLiteQueryBuilderBuildQueryString        jni.MethodID
 
-	clsSQLiteDiskIOException *jni.GlobalRef
-
-	clsSQLiteReadOnlyDatabaseException *jni.GlobalRef
-
-	clsSQLiteBlobTooBigException *jni.GlobalRef
-
-	clsSQLiteTableLockedException *jni.GlobalRef
-
-	clsSQLiteAbortException *jni.GlobalRef
+	clsSQLiteFullException *jni.GlobalRef
 
 	clsSQLiteOpenHelper                            *jni.GlobalRef
 	midSQLiteOpenHelperGetDatabaseName             jni.MethodID
@@ -90,86 +155,21 @@ var (
 	midSQLiteOpenHelperSetOpenParams               jni.MethodID
 	midSQLiteOpenHelperSetWriteAheadLoggingEnabled jni.MethodID
 
-	clsSQLiteCursor                         *jni.GlobalRef
-	midSQLiteCursorClose                    jni.MethodID
-	midSQLiteCursorDeactivate               jni.MethodID
-	midSQLiteCursorGetColumnIndex           jni.MethodID
-	midSQLiteCursorGetColumnNames           jni.MethodID
-	midSQLiteCursorGetCount                 jni.MethodID
-	midSQLiteCursorGetDatabase              jni.MethodID
-	midSQLiteCursorOnMove                   jni.MethodID
-	midSQLiteCursorRequery                  jni.MethodID
-	midSQLiteCursorSetFillWindowForwardOnly jni.MethodID
-	midSQLiteCursorSetSelectionArguments    jni.MethodID
-	midSQLiteCursorSetWindow                jni.MethodID
+	clsSQLiteAccessPermException *jni.GlobalRef
 
 	clsSQLiteOutOfMemoryException *jni.GlobalRef
 
-	clsSQLiteException *jni.GlobalRef
-
-	clsSQLiteFullException *jni.GlobalRef
-
-	clsSQLiteStatement                                 *jni.GlobalRef
-	midSQLiteStatementExecute                          jni.MethodID
-	midSQLiteStatementExecuteInsert                    jni.MethodID
-	midSQLiteStatementExecuteUpdateDelete              jni.MethodID
-	midSQLiteStatementSimpleQueryForBlobFileDescriptor jni.MethodID
-	midSQLiteStatementSimpleQueryForLong               jni.MethodID
-	midSQLiteStatementSimpleQueryForString             jni.MethodID
-	midSQLiteStatementToString                         jni.MethodID
-
-	clsSQLiteDatabaseCorruptException *jni.GlobalRef
-
-	clsSQLiteQuery         *jni.GlobalRef
-	midSQLiteQueryToString jni.MethodID
-
-	clsSQLiteRawStatement                     *jni.GlobalRef
-	midSQLiteRawStatementBindBlob2            jni.MethodID
-	midSQLiteRawStatementBindBlob4_1          jni.MethodID
-	midSQLiteRawStatementBindDouble           jni.MethodID
-	midSQLiteRawStatementBindInt              jni.MethodID
-	midSQLiteRawStatementBindLong             jni.MethodID
-	midSQLiteRawStatementBindNull             jni.MethodID
-	midSQLiteRawStatementBindText             jni.MethodID
-	midSQLiteRawStatementClearBindings        jni.MethodID
-	midSQLiteRawStatementClose                jni.MethodID
-	midSQLiteRawStatementGetColumnBlob        jni.MethodID
-	midSQLiteRawStatementGetColumnDouble      jni.MethodID
-	midSQLiteRawStatementGetColumnInt         jni.MethodID
-	midSQLiteRawStatementGetColumnLength      jni.MethodID
-	midSQLiteRawStatementGetColumnLong        jni.MethodID
-	midSQLiteRawStatementGetColumnName        jni.MethodID
-	midSQLiteRawStatementGetColumnText        jni.MethodID
-	midSQLiteRawStatementGetColumnType        jni.MethodID
-	midSQLiteRawStatementGetParameterCount    jni.MethodID
-	midSQLiteRawStatementGetParameterIndex    jni.MethodID
-	midSQLiteRawStatementGetParameterName     jni.MethodID
-	midSQLiteRawStatementGetResultColumnCount jni.MethodID
-	midSQLiteRawStatementIsOpen               jni.MethodID
-	midSQLiteRawStatementReadColumnBlob       jni.MethodID
-	midSQLiteRawStatementReset                jni.MethodID
-	midSQLiteRawStatementStep                 jni.MethodID
-	midSQLiteRawStatementToString             jni.MethodID
-
-	clsSQLiteMisuseException *jni.GlobalRef
-
 	clsSQLiteConstraintException *jni.GlobalRef
-
-	clsSQLiteBindOrColumnIndexOutOfRangeException *jni.GlobalRef
-
-	clsSQLiteProgram                     *jni.GlobalRef
-	midSQLiteProgramBindAllArgsAsStrings jni.MethodID
-	midSQLiteProgramBindBlob             jni.MethodID
-	midSQLiteProgramBindDouble           jni.MethodID
-	midSQLiteProgramBindLong             jni.MethodID
-	midSQLiteProgramBindNull             jni.MethodID
-	midSQLiteProgramBindString           jni.MethodID
-	midSQLiteProgramClearBindings        jni.MethodID
-	midSQLiteProgramGetUniqueId          jni.MethodID
 
 	clsSQLiteCantOpenDatabaseException *jni.GlobalRef
 
-	clsSQLiteAccessPermException *jni.GlobalRef
+	clsSQLiteDatabaseLockedException *jni.GlobalRef
+
+	clsSQLiteClosable                              *jni.GlobalRef
+	midSQLiteClosableAcquireReference              jni.MethodID
+	midSQLiteClosableClose                         jni.MethodID
+	midSQLiteClosableReleaseReference              jni.MethodID
+	midSQLiteClosableReleaseReferenceFromContainer jni.MethodID
 
 	clsSQLiteCursorDriver                  *jni.GlobalRef
 	midSQLiteCursorDriverCursorClosed      jni.MethodID
@@ -178,7 +178,7 @@ var (
 	midSQLiteCursorDriverQuery             jni.MethodID
 	midSQLiteCursorDriverSetBindArguments  jni.MethodID
 
-	clsSQLiteDatabaseLockedException *jni.GlobalRef
+	clsSQLiteReadOnlyDatabaseException *jni.GlobalRef
 
 	clsSQLiteDatabase                                         *jni.GlobalRef
 	midSQLiteDatabaseBeginTransaction                         jni.MethodID
@@ -285,6 +285,354 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
+	c, err = env.FindClass("android/database/sqlite/SQLiteRawStatement")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteRawStatement = env.NewGlobalRef(&c.Object)
+
+		midSQLiteRawStatementBindBlob2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindBlob", "(I[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementBindBlob4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindBlob", "(I[BII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementBindDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindDouble", "(ID)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementBindInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindInt", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementBindLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindLong", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementBindNull, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindNull", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementBindText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindText", "(ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementClearBindings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "clearBindings", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnBlob", "(I)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnDouble", "(I)D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnInt", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnLength", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnLong", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnName", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnText", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetColumnType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnType", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetParameterCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getParameterCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetParameterIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getParameterIndex", "(Ljava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetParameterName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getParameterName", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementGetResultColumnCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getResultColumnCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementIsOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "isOpen", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementReadColumnBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "readColumnBlob", "(I[BIII)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "reset", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementStep, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "step", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteRawStatementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteBlobTooBigException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteBlobTooBigException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteDiskIOException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteDiskIOException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteBindOrColumnIndexOutOfRangeException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteBindOrColumnIndexOutOfRangeException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteAbortException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteAbortException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteDatabaseCorruptException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteDatabaseCorruptException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteStatement")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteStatement = env.NewGlobalRef(&c.Object)
+
+		midSQLiteStatementExecute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "execute", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteStatementExecuteInsert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "executeInsert", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteStatementExecuteUpdateDelete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "executeUpdateDelete", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteStatementSimpleQueryForBlobFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "simpleQueryForBlobFileDescriptor", "()Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteStatementSimpleQueryForLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "simpleQueryForLong", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteStatementSimpleQueryForString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "simpleQueryForString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteStatementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteQuery")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteQuery = env.NewGlobalRef(&c.Object)
+
+		midSQLiteQueryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteQuery)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteTableLockedException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteTableLockedException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteMisuseException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteMisuseException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteDoneException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteDoneException = env.NewGlobalRef(&c.Object)
+
+	}
+
 	c, err = env.FindClass("android/database/sqlite/SQLiteTransactionListener")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -316,36 +664,85 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteClosable")
+	c, err = env.FindClass("android/database/sqlite/SQLiteCursor")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSQLiteClosable = env.NewGlobalRef(&c.Object)
+		clsSQLiteCursor = env.NewGlobalRef(&c.Object)
 
-		midSQLiteClosableAcquireReference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "acquireReference", "()V")
+		midSQLiteCursorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "close", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midSQLiteClosableClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "close", "()V")
+		midSQLiteCursorDeactivate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "deactivate", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midSQLiteClosableReleaseReference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "releaseReference", "()V")
+		midSQLiteCursorGetColumnIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getColumnIndex", "(Ljava/lang/String;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midSQLiteClosableReleaseReferenceFromContainer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "releaseReferenceFromContainer", "()V")
+		midSQLiteCursorGetColumnNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getColumnNames", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorGetDatabase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getDatabase", "()Landroid/database/sqlite/SQLiteDatabase;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorOnMove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "onMove", "(II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorRequery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "requery", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorSetFillWindowForwardOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "setFillWindowForwardOnly", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorSetSelectionArguments, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "setSelectionArguments", "([Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteCursorSetWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "setWindow", "(Landroid/database/CursorWindow;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -354,13 +751,69 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteDoneException")
+	c, err = env.FindClass("android/database/sqlite/SQLiteProgram")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSQLiteDoneException = env.NewGlobalRef(&c.Object)
+		clsSQLiteProgram = env.NewGlobalRef(&c.Object)
+
+		midSQLiteProgramBindAllArgsAsStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindAllArgsAsStrings", "([Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramBindBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindBlob", "(I[B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramBindDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindDouble", "(ID)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramBindLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindLong", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramBindNull, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindNull", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramBindString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindString", "(ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramClearBindings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "clearBindings", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteProgramGetUniqueId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "getUniqueId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -371,6 +824,16 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSQLiteDatatypeMismatchException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteException = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -566,53 +1029,13 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteDiskIOException")
+	c, err = env.FindClass("android/database/sqlite/SQLiteFullException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSQLiteDiskIOException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteReadOnlyDatabaseException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteReadOnlyDatabaseException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteBlobTooBigException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteBlobTooBigException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteTableLockedException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteTableLockedException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteAbortException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteAbortException = env.NewGlobalRef(&c.Object)
+		clsSQLiteFullException = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -710,90 +1133,13 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteCursor")
+	c, err = env.FindClass("android/database/sqlite/SQLiteAccessPermException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSQLiteCursor = env.NewGlobalRef(&c.Object)
-
-		midSQLiteCursorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "close", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorDeactivate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "deactivate", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorGetColumnIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getColumnIndex", "(Ljava/lang/String;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorGetColumnNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getColumnNames", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorGetDatabase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "getDatabase", "()Landroid/database/sqlite/SQLiteDatabase;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorOnMove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "onMove", "(II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorRequery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "requery", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorSetFillWindowForwardOnly, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "setFillWindowForwardOnly", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorSetSelectionArguments, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "setSelectionArguments", "([Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteCursorSetWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), "setWindow", "(Landroid/database/CursorWindow;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
+		clsSQLiteAccessPermException = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -807,314 +1153,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteFullException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteFullException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteStatement")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteStatement = env.NewGlobalRef(&c.Object)
-
-		midSQLiteStatementExecute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "execute", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteStatementExecuteInsert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "executeInsert", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteStatementExecuteUpdateDelete, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "executeUpdateDelete", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteStatementSimpleQueryForBlobFileDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "simpleQueryForBlobFileDescriptor", "()Landroid/os/ParcelFileDescriptor;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteStatementSimpleQueryForLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "simpleQueryForLong", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteStatementSimpleQueryForString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "simpleQueryForString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteStatementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteStatement)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteDatabaseCorruptException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteDatabaseCorruptException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteQuery")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteQuery = env.NewGlobalRef(&c.Object)
-
-		midSQLiteQueryToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteQuery)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteRawStatement")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteRawStatement = env.NewGlobalRef(&c.Object)
-
-		midSQLiteRawStatementBindBlob2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindBlob", "(I[B)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementBindBlob4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindBlob", "(I[BII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementBindDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindDouble", "(ID)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementBindInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindInt", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementBindLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindLong", "(IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementBindNull, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindNull", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementBindText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "bindText", "(ILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementClearBindings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "clearBindings", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "close", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnBlob", "(I)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnDouble", "(I)D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnInt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnInt", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnLength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnLength", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnLong", "(I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnName", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnText", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetColumnType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getColumnType", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetParameterCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getParameterCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetParameterIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getParameterIndex", "(Ljava/lang/String;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetParameterName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getParameterName", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementGetResultColumnCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "getResultColumnCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementIsOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "isOpen", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementReadColumnBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "readColumnBlob", "(I[BIII)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "reset", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementStep, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "step", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteRawStatementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteRawStatement)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteMisuseException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteMisuseException = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/database/sqlite/SQLiteConstraintException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -1122,82 +1160,6 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSQLiteConstraintException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteBindOrColumnIndexOutOfRangeException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteBindOrColumnIndexOutOfRangeException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/database/sqlite/SQLiteProgram")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSQLiteProgram = env.NewGlobalRef(&c.Object)
-
-		midSQLiteProgramBindAllArgsAsStrings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindAllArgsAsStrings", "([Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramBindBlob, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindBlob", "(I[B)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramBindDouble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindDouble", "(ID)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramBindLong, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindLong", "(IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramBindNull, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindNull", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramBindString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "bindString", "(ILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramClearBindings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "clearBindings", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSQLiteProgramGetUniqueId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteProgram)), "getUniqueId", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
 
 	}
 
@@ -1211,13 +1173,51 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteAccessPermException")
+	c, err = env.FindClass("android/database/sqlite/SQLiteDatabaseLockedException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSQLiteAccessPermException = env.NewGlobalRef(&c.Object)
+		clsSQLiteDatabaseLockedException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/database/sqlite/SQLiteClosable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSQLiteClosable = env.NewGlobalRef(&c.Object)
+
+		midSQLiteClosableAcquireReference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "acquireReference", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteClosableClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteClosableReleaseReference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "releaseReference", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSQLiteClosableReleaseReferenceFromContainer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSQLiteClosable)), "releaseReferenceFromContainer", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -1266,13 +1266,13 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/database/sqlite/SQLiteDatabaseLockedException")
+	c, err = env.FindClass("android/database/sqlite/SQLiteReadOnlyDatabaseException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSQLiteDatabaseLockedException = env.NewGlobalRef(&c.Object)
+		clsSQLiteReadOnlyDatabaseException = env.NewGlobalRef(&c.Object)
 
 	}
 

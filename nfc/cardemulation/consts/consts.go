@@ -9,8 +9,8 @@ const (
 	ExtraCategory                   string = "category"
 	ExtraServiceComponent           string = "component"
 	PropertyAllowSharedRolePriority string = "android.nfc.cardemulation.PROPERTY_ALLOW_SHARED_ROLE_PRIORITY"
-	ServiceInterface                string = "android.nfc.cardemulation.action.HOST_APDU_SERVICE"
-	ServiceMetaData                 string = "android.nfc.cardemulation.host_apdu_service"
+	ServiceInterface                string = "android.nfc.cardemulation.action.OFF_HOST_APDU_SERVICE"
+	ServiceMetaData                 string = "android.nfc.cardemulation.off_host_apdu_service"
 )
 
 const (

@@ -5,15 +5,10 @@ package animation
 import "github.com/AndroidGoLab/jni/view/animation/consts"
 
 const (
-	DirectionBottomToTop    = consts.DirectionBottomToTop
-	DirectionHorizontalMask = consts.DirectionHorizontalMask
-	DirectionLeftToRight    = consts.DirectionLeftToRight
-	DirectionRightToLeft    = consts.DirectionRightToLeft
-	DirectionTopToBottom    = consts.DirectionTopToBottom
-	DirectionVerticalMask   = consts.DirectionVerticalMask
-	PriorityColumn          = consts.PriorityColumn
-	PriorityNone            = consts.PriorityNone
-	PriorityRow             = consts.PriorityRow
+	TypeAlpha               = consts.TypeAlpha
+	TypeBoth                = consts.TypeBoth
+	TypeIdentity            = consts.TypeIdentity
+	TypeMatrix              = consts.TypeMatrix
 	Absolute                = consts.Absolute
 	Infinite                = consts.Infinite
 	RelativeToParent        = consts.RelativeToParent
@@ -24,11 +19,16 @@ const (
 	ZorderBottom            = consts.ZorderBottom
 	ZorderNormal            = consts.ZorderNormal
 	ZorderTop               = consts.ZorderTop
-	TypeAlpha               = consts.TypeAlpha
-	TypeBoth                = consts.TypeBoth
-	TypeIdentity            = consts.TypeIdentity
-	TypeMatrix              = consts.TypeMatrix
 	OrderNormal             = consts.OrderNormal
 	OrderRandom             = consts.OrderRandom
 	OrderReverse            = consts.OrderReverse
+	DirectionBottomToTop    = consts.DirectionBottomToTop
+	DirectionHorizontalMask = consts.DirectionHorizontalMask
+	DirectionLeftToRight    = consts.DirectionLeftToRight
+	DirectionRightToLeft    = consts.DirectionRightToLeft
+	DirectionTopToBottom    = consts.DirectionTopToBottom
+	DirectionVerticalMask   = consts.DirectionVerticalMask
+	PriorityColumn          = consts.PriorityColumn
+	PriorityNone            = consts.PriorityNone
+	PriorityRow             = consts.PriorityRow
 )

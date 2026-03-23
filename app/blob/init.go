@@ -23,18 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsHandle                    *jni.GlobalRef
-	midHandleDescribeContents    jni.MethodID
-	midHandleEquals              jni.MethodID
-	midHandleGetExpiryTimeMillis jni.MethodID
-	midHandleGetLabel            jni.MethodID
-	midHandleGetSha256Digest     jni.MethodID
-	midHandleGetTag              jni.MethodID
-	midHandleHashCode            jni.MethodID
-	midHandleToString            jni.MethodID
-	midHandleWriteToParcel       jni.MethodID
-	midHandleCreateWithSha256    jni.MethodID
-
 	clsStoreManager                            *jni.GlobalRef
 	midStoreManagerAbandonSession              jni.MethodID
 	midStoreManagerAcquireLease2               jni.MethodID
@@ -59,6 +47,18 @@ var (
 	midStoreManagerSessionIsSameSignatureAccessAllowed jni.MethodID
 	midStoreManagerSessionOpenRead                     jni.MethodID
 	midStoreManagerSessionOpenWrite                    jni.MethodID
+
+	clsHandle                    *jni.GlobalRef
+	midHandleDescribeContents    jni.MethodID
+	midHandleEquals              jni.MethodID
+	midHandleGetExpiryTimeMillis jni.MethodID
+	midHandleGetLabel            jni.MethodID
+	midHandleGetSha256Digest     jni.MethodID
+	midHandleGetTag              jni.MethodID
+	midHandleHashCode            jni.MethodID
+	midHandleToString            jni.MethodID
+	midHandleWriteToParcel       jni.MethodID
+	midHandleCreateWithSha256    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -78,86 +78,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/app/blob/BlobHandle")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsHandle = env.NewGlobalRef(&c.Object)
-
-		midHandleDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleGetExpiryTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getExpiryTimeMillis", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getLabel", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleGetSha256Digest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getSha256Digest", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getTag", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHandleCreateWithSha256, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "createWithSha256", "([BLjava/lang/CharSequence;JLjava/lang/String;)Landroid/app/blob/BlobHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/app/blob/BlobStoreManager")
 	if err != nil {
@@ -318,6 +238,86 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStoreManagerSessionOpenWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStoreManagerSession)), "openWrite", "(JJ)Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/app/blob/BlobHandle")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsHandle = env.NewGlobalRef(&c.Object)
+
+		midHandleDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleGetExpiryTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getExpiryTimeMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getLabel", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleGetSha256Digest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getSha256Digest", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleGetTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "getTag", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHandleCreateWithSha256, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHandle)), "createWithSha256", "([BLjava/lang/CharSequence;JLjava/lang/String;)Landroid/app/blob/BlobHandle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

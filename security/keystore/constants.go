@@ -5,7 +5,6 @@ package keystore
 import "github.com/AndroidGoLab/jni/security/keystore/consts"
 
 const (
-	ModuleHash                      = consts.ModuleHash
 	AuthBiometricStrong             = consts.AuthBiometricStrong
 	AuthDeviceCredential            = consts.AuthDeviceCredential
 	OriginGenerated                 = consts.OriginGenerated
@@ -25,6 +24,7 @@ const (
 	SecurityLevelUnknown            = consts.SecurityLevelUnknown
 	SecurityLevelUnknownSecure      = consts.SecurityLevelUnknownSecure
 	UnrestrictedUsageCount          = consts.UnrestrictedUsageCount
+	ModuleHash                      = consts.ModuleHash
 )
 
 const (

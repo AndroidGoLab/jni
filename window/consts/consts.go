@@ -4,11 +4,11 @@ package consts
 
 const (
 	Creator                          int = 0
-	SplashScreenStyleIcon            int = 1
-	SplashScreenStyleSolidColor      int = 0
 	PriorityDefault                  int = 0
 	PriorityOverlay                  int = 1000000
 	PrioritySystemNavigationObserver int = -2
+	SplashScreenStyleIcon            int = 1
+	SplashScreenStyleSolidColor      int = 0
 	EdgeLeft                         int = 0
 	EdgeNone                         int = 2
 	EdgeRight                        int = 1

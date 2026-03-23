@@ -5,13 +5,6 @@ package rtt
 import "github.com/AndroidGoLab/jni/net/wifi/rtt/consts"
 
 const (
-	Creator                                  = consts.Creator
-	StatusFail                               = consts.StatusFail
-	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
-	StatusSuccess                            = consts.StatusSuccess
-	Unspecified                              = consts.Unspecified
-	StatusCodeFail                           = consts.StatusCodeFail
-	StatusCodeFailRttNotAvailable            = consts.StatusCodeFailRttNotAvailable
 	AkmFilsEapSha256                         = consts.AkmFilsEapSha256
 	AkmFilsEapSha384                         = consts.AkmFilsEapSha384
 	AkmFtEapSha256                           = consts.AkmFtEapSha256
@@ -26,8 +19,13 @@ const (
 	CipherGcmp128                            = consts.CipherGcmp128
 	CipherGcmp256                            = consts.CipherGcmp256
 	CipherNone                               = consts.CipherNone
-	ResponderAp                              = consts.ResponderAp
-	ResponderSta                             = consts.ResponderSta
+	Creator                                  = consts.Creator
+	StatusCodeFail                           = consts.StatusCodeFail
+	StatusCodeFailRttNotAvailable            = consts.StatusCodeFailRttNotAvailable
+	StatusFail                               = consts.StatusFail
+	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
+	StatusSuccess                            = consts.StatusSuccess
+	Unspecified                              = consts.Unspecified
 	AltitudeFloors                           = consts.AltitudeFloors
 	AltitudeMeters                           = consts.AltitudeMeters
 	AltitudeUndefined                        = consts.AltitudeUndefined
@@ -75,6 +73,8 @@ const (
 	Sts                                      = consts.Sts
 	SubbranchRoadName                        = consts.SubbranchRoadName
 	TypeOfPlace                              = consts.TypeOfPlace
+	ResponderAp                              = consts.ResponderAp
+	ResponderSta                             = consts.ResponderSta
 )
 
 const (

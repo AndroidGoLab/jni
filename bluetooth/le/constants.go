@@ -5,22 +5,23 @@ package le
 import "github.com/AndroidGoLab/jni/bluetooth/le/consts"
 
 const (
-	Creator                                      = consts.Creator
-	DataComplete                                 = consts.DataComplete
-	DataTruncated                                = consts.DataTruncated
-	PeriodicIntervalNotPresent                   = consts.PeriodicIntervalNotPresent
-	PhyUnused                                    = consts.PhyUnused
-	SidNotPresent                                = consts.SidNotPresent
-	TxPowerNotPresent                            = consts.TxPowerNotPresent
 	AdvertiseFailedAlreadyStarted                = consts.AdvertiseFailedAlreadyStarted
 	AdvertiseFailedDataTooLarge                  = consts.AdvertiseFailedDataTooLarge
 	AdvertiseFailedFeatureUnsupported            = consts.AdvertiseFailedFeatureUnsupported
 	AdvertiseFailedInternalError                 = consts.AdvertiseFailedInternalError
 	AdvertiseFailedTooManyAdvertisers            = consts.AdvertiseFailedTooManyAdvertisers
+	AdvertiseSuccess                             = consts.AdvertiseSuccess
+	ScanFailedAlreadyStarted                     = consts.ScanFailedAlreadyStarted
+	ScanFailedApplicationRegistrationFailed      = consts.ScanFailedApplicationRegistrationFailed
+	ScanFailedFeatureUnsupported                 = consts.ScanFailedFeatureUnsupported
+	ScanFailedInternalError                      = consts.ScanFailedInternalError
+	ScanFailedOutOfHardwareResources             = consts.ScanFailedOutOfHardwareResources
+	ScanFailedScanningTooFrequently              = consts.ScanFailedScanningTooFrequently
 	CallbackTypeAllMatches                       = consts.CallbackTypeAllMatches
 	CallbackTypeAllMatchesAutoBatch              = consts.CallbackTypeAllMatchesAutoBatch
 	CallbackTypeFirstMatch                       = consts.CallbackTypeFirstMatch
 	CallbackTypeMatchLost                        = consts.CallbackTypeMatchLost
+	Creator                                      = consts.Creator
 	MatchModeAggressive                          = consts.MatchModeAggressive
 	MatchModeSticky                              = consts.MatchModeSticky
 	MatchNumFewAdvertisement                     = consts.MatchNumFewAdvertisement
@@ -31,6 +32,12 @@ const (
 	ScanModeLowLatency                           = consts.ScanModeLowLatency
 	ScanModeLowPower                             = consts.ScanModeLowPower
 	ScanModeOpportunistic                        = consts.ScanModeOpportunistic
+	DataComplete                                 = consts.DataComplete
+	DataTruncated                                = consts.DataTruncated
+	PeriodicIntervalNotPresent                   = consts.PeriodicIntervalNotPresent
+	PhyUnused                                    = consts.PhyUnused
+	SidNotPresent                                = consts.SidNotPresent
+	TxPowerNotPresent                            = consts.TxPowerNotPresent
 	DataType3dInformationData                    = consts.DataType3dInformationData
 	DataTypeAdvertisingInterval                  = consts.DataTypeAdvertisingInterval
 	DataTypeAdvertisingIntervalLong              = consts.DataTypeAdvertisingIntervalLong
@@ -85,12 +92,6 @@ const (
 	AdvertiseTxPowerLow                          = consts.AdvertiseTxPowerLow
 	AdvertiseTxPowerMedium                       = consts.AdvertiseTxPowerMedium
 	AdvertiseTxPowerUltraLow                     = consts.AdvertiseTxPowerUltraLow
-	ScanFailedAlreadyStarted                     = consts.ScanFailedAlreadyStarted
-	ScanFailedApplicationRegistrationFailed      = consts.ScanFailedApplicationRegistrationFailed
-	ScanFailedFeatureUnsupported                 = consts.ScanFailedFeatureUnsupported
-	ScanFailedInternalError                      = consts.ScanFailedInternalError
-	ScanFailedOutOfHardwareResources             = consts.ScanFailedOutOfHardwareResources
-	ScanFailedScanningTooFrequently              = consts.ScanFailedScanningTooFrequently
 	IntervalHigh                                 = consts.IntervalHigh
 	IntervalLow                                  = consts.IntervalLow
 	IntervalMax                                  = consts.IntervalMax
@@ -102,15 +103,14 @@ const (
 	TxPowerMedium                                = consts.TxPowerMedium
 	TxPowerMin                                   = consts.TxPowerMin
 	TxPowerUltraLow                              = consts.TxPowerUltraLow
-	AdvertiseSuccess                             = consts.AdvertiseSuccess
+)
+
+const (
+	AutoBatchMinReportDelayMillis = consts.AutoBatchMinReportDelayMillis
 )
 
 const (
 	ExtraCallbackType   = consts.ExtraCallbackType
 	ExtraErrorCode      = consts.ExtraErrorCode
 	ExtraListScanResult = consts.ExtraListScanResult
-)
-
-const (
-	AutoBatchMinReportDelayMillis = consts.AutoBatchMinReportDelayMillis
 )

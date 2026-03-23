@@ -5,6 +5,24 @@
 package: effect
 go_import: github.com/AndroidGoLab/jni/media/effect
 classes:
+    - java_class: android.media.effect.EffectFactory
+      go_type: Factory
+      methods:
+        - java_method: createEffect
+          go_name: CreateEffect
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.media.effect.Effect
+          error: true
+      static_methods:
+        - java_method: isEffectSupported
+          go_name: IsEffectSupported
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
     - java_class: android.media.effect.EffectContext
       go_type: Context
       methods:
@@ -72,24 +90,6 @@ classes:
             - java_type: java.lang.Object
               go_name: arg1
           returns: void
-          error: true
-    - java_class: android.media.effect.EffectFactory
-      go_type: Factory
-      methods:
-        - java_method: createEffect
-          go_name: CreateEffect
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.media.effect.Effect
-          error: true
-      static_methods:
-        - java_method: isEffectSupported
-          go_name: IsEffectSupported
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
           error: true
 constants:
     - go_name: EffectAutofix

@@ -23,6 +23,16 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsAddress                         *jni.GlobalRef
+	midAddressDescribeContents         jni.MethodID
+	midAddressEquals                   jni.MethodID
+	midAddressGetAddressBytes          jni.MethodID
+	midAddressHashCode                 jni.MethodID
+	midAddressToString                 jni.MethodID
+	midAddressWriteToParcel            jni.MethodID
+	midAddressCreateRandomShortAddress jni.MethodID
+	midAddressFromBytes                jni.MethodID
+
 	clsRangingCapabilities                                          *jni.GlobalRef
 	midRangingCapabilitiesDescribeContents                          jni.MethodID
 	midRangingCapabilitiesGetMinimumRangingInterval                 jni.MethodID
@@ -73,16 +83,6 @@ var (
 	midRangingParamsBuilderSetSlotDuration      jni.MethodID
 	midRangingParamsBuilderSetSubSessionId      jni.MethodID
 	midRangingParamsBuilderSetSubSessionKeyInfo jni.MethodID
-
-	clsAddress                         *jni.GlobalRef
-	midAddressDescribeContents         jni.MethodID
-	midAddressEquals                   jni.MethodID
-	midAddressGetAddressBytes          jni.MethodID
-	midAddressHashCode                 jni.MethodID
-	midAddressToString                 jni.MethodID
-	midAddressWriteToParcel            jni.MethodID
-	midAddressCreateRandomShortAddress jni.MethodID
-	midAddressFromBytes                jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -102,6 +102,72 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/ranging/uwb/UwbAddress")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAddress = env.NewGlobalRef(&c.Object)
+
+		midAddressDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressGetAddressBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "getAddressBytes", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressCreateRandomShortAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "createRandomShortAddress", "()Landroid/ranging/uwb/UwbAddress;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAddressFromBytes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "fromBytes", "([B)Landroid/ranging/uwb/UwbAddress;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/ranging/uwb/UwbRangingCapabilities")
 	if err != nil {
@@ -432,72 +498,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRangingParamsBuilderSetSubSessionKeyInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRangingParamsBuilder)), "setSubSessionKeyInfo", "([B)Landroid/ranging/uwb/UwbRangingParams$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/uwb/UwbAddress")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAddress = env.NewGlobalRef(&c.Object)
-
-		midAddressDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressGetAddressBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "getAddressBytes", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressCreateRandomShortAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "createRandomShortAddress", "()Landroid/ranging/uwb/UwbAddress;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAddressFromBytes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAddress)), "fromBytes", "([B)Landroid/ranging/uwb/UwbAddress;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

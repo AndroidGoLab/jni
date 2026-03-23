@@ -5,16 +5,6 @@ package aware
 import "github.com/AndroidGoLab/jni/net/wifi/aware/consts"
 
 const (
-	ActionWifiAwareResourceChanged = consts.ActionWifiAwareResourceChanged
-	ActionWifiAwareStateChanged    = consts.ActionWifiAwareStateChanged
-	ExtraAwareResources            = consts.ExtraAwareResources
-)
-
-const (
-	WifiAwareDataPathRoleInitiator             = consts.WifiAwareDataPathRoleInitiator
-	WifiAwareDataPathRoleResponder             = consts.WifiAwareDataPathRoleResponder
-	WifiAwareDiscoveryLostReasonPeerNotVisible = consts.WifiAwareDiscoveryLostReasonPeerNotVisible
-	WifiAwareDiscoveryLostReasonUnknown        = consts.WifiAwareDiscoveryLostReasonUnknown
 	ClusterChangeEventJoined                   = consts.ClusterChangeEventJoined
 	ClusterChangeEventStarted                  = consts.ClusterChangeEventStarted
 	Creator                                    = consts.Creator
@@ -27,10 +17,6 @@ const (
 	PairingBootstrappingPinCodeKeypad          = consts.PairingBootstrappingPinCodeKeypad
 	PairingBootstrappingQrDisplay              = consts.PairingBootstrappingQrDisplay
 	PairingBootstrappingQrScan                 = consts.PairingBootstrappingQrScan
-	PublishTypeSolicited                       = consts.PublishTypeSolicited
-	PublishTypeUnsolicited                     = consts.PublishTypeUnsolicited
-	SubscribeTypeActive                        = consts.SubscribeTypeActive
-	SubscribeTypePassive                       = consts.SubscribeTypePassive
 	WifiAwareCipherSuiteNcsPk128               = consts.WifiAwareCipherSuiteNcsPk128
 	WifiAwareCipherSuiteNcsPk256               = consts.WifiAwareCipherSuiteNcsPk256
 	WifiAwareCipherSuiteNcsPkPasn128           = consts.WifiAwareCipherSuiteNcsPkPasn128
@@ -38,4 +24,18 @@ const (
 	WifiAwareCipherSuiteNcsSk128               = consts.WifiAwareCipherSuiteNcsSk128
 	WifiAwareCipherSuiteNcsSk256               = consts.WifiAwareCipherSuiteNcsSk256
 	WifiAwareCipherSuiteNone                   = consts.WifiAwareCipherSuiteNone
+	PublishTypeSolicited                       = consts.PublishTypeSolicited
+	PublishTypeUnsolicited                     = consts.PublishTypeUnsolicited
+	SubscribeTypeActive                        = consts.SubscribeTypeActive
+	SubscribeTypePassive                       = consts.SubscribeTypePassive
+	WifiAwareDataPathRoleInitiator             = consts.WifiAwareDataPathRoleInitiator
+	WifiAwareDataPathRoleResponder             = consts.WifiAwareDataPathRoleResponder
+	WifiAwareDiscoveryLostReasonPeerNotVisible = consts.WifiAwareDiscoveryLostReasonPeerNotVisible
+	WifiAwareDiscoveryLostReasonUnknown        = consts.WifiAwareDiscoveryLostReasonUnknown
+)
+
+const (
+	ActionWifiAwareResourceChanged = consts.ActionWifiAwareResourceChanged
+	ActionWifiAwareStateChanged    = consts.ActionWifiAwareStateChanged
+	ExtraAwareResources            = consts.ExtraAwareResources
 )

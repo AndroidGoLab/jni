@@ -419,33 +419,6 @@ func (m *WifiP2pManager) DiscoverUsdBasedServices(
 	return callErr
 }
 
-// GetListenState calls android.net.wifi.p2p.WifiP2pManager.getListenState.
-func (m *WifiP2pManager) GetListenState(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midWifiP2pManagerGetListenState == nil {
-			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.getListenState is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midWifiP2pManagerGetListenState, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // Initialize calls android.net.wifi.p2p.WifiP2pManager.initialize.
 func (m *WifiP2pManager) Initialize(
 	arg0 *jni.Object,
@@ -845,33 +818,6 @@ func (m *WifiP2pManager) RequestDeviceInfo(arg0 *jni.Object, arg1 *jni.Object) e
 	return callErr
 }
 
-// RequestDirInfo calls android.net.wifi.p2p.WifiP2pManager.requestDirInfo.
-func (m *WifiP2pManager) RequestDirInfo(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midWifiP2pManagerRequestDirInfo == nil {
-			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.requestDirInfo is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midWifiP2pManagerRequestDirInfo, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // RequestDiscoveryState calls android.net.wifi.p2p.WifiP2pManager.requestDiscoveryState.
 func (m *WifiP2pManager) RequestDiscoveryState(arg0 *jni.Object, arg1 *jni.Object) error {
 
@@ -1123,33 +1069,6 @@ func (m *WifiP2pManager) SetUpnpServiceResponseListener(arg0 *jni.Object, arg1 *
 	return callErr
 }
 
-// SetVendorElements calls android.net.wifi.p2p.WifiP2pManager.setVendorElements.
-func (m *WifiP2pManager) SetVendorElements(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midWifiP2pManagerSetVendorElements == nil {
-			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.setVendorElements is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midWifiP2pManagerSetVendorElements, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2),
-		)
-		return callErr
-	})
-	return callErr
-}
-
 // SetWfdInfo calls android.net.wifi.p2p.WifiP2pManager.setWfdInfo.
 func (m *WifiP2pManager) SetWfdInfo(
 	arg0 *jni.Object,
@@ -1318,34 +1237,6 @@ func (m *WifiP2pManager) UnregisterWifiP2pListener(arg0 *jni.Object) error {
 		callErr = env.CallVoidMethod(
 			m.Obj,
 			midWifiP2pManagerUnregisterWifiP2pListener, jni.ObjectValue(arg0),
-		)
-		return callErr
-	})
-	return callErr
-}
-
-// ValidateDirInfo calls android.net.wifi.p2p.WifiP2pManager.validateDirInfo.
-func (m *WifiP2pManager) ValidateDirInfo(
-	arg0 *jni.Object,
-	arg1 *jni.Object,
-	arg2 *jni.Object,
-	arg3 *jni.Object,
-) error {
-
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midWifiP2pManagerValidateDirInfo == nil {
-			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pManager.validateDirInfo is not available on this device")
-			return callErr
-		}
-
-		callErr = env.CallVoidMethod(
-			m.Obj,
-			midWifiP2pManagerValidateDirInfo, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})

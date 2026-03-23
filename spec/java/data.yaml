@@ -5,8 +5,8 @@
 package: data
 go_import: github.com/AndroidGoLab/jni/telephony/data
 classes:
-    - java_class: android.telephony.data.NetworkSlicingConfig
-      go_type: NetworkSlicingConfig
+    - java_class: android.telephony.data.UrspRule
+      go_type: UrspRule
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -18,6 +18,10 @@ classes:
             - java_type: java.lang.Object
               go_name: arg0
           returns: boolean
+          error: true
+        - java_method: getPrecedence
+          go_name: GetPrecedence
+          returns: int
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -36,8 +40,8 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.telephony.data.UrspRule
-      go_type: UrspRule
+    - java_class: android.telephony.data.NetworkSlicingConfig
+      go_type: NetworkSlicingConfig
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -49,10 +53,6 @@ classes:
             - java_type: java.lang.Object
               go_name: arg0
           returns: boolean
-          error: true
-        - java_method: getPrecedence
-          go_name: GetPrecedence
-          returns: int
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -164,8 +164,8 @@ classes:
               go_name: arg0
           returns: android.telephony.data.NetworkSliceInfo$Builder
           error: true
-    - java_class: android.telephony.data.RouteSelectionDescriptor
-      go_type: RouteSelectionDescriptor
+    - java_class: android.telephony.data.TrafficDescriptor
+      go_type: TrafficDescriptor
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -178,17 +178,13 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getPrecedence
-          go_name: GetPrecedence
-          returns: int
+        - java_method: getDataNetworkName
+          go_name: GetDataNetworkName
+          returns: String
           error: true
-        - java_method: getSessionType
-          go_name: GetSessionType
-          returns: int
-          error: true
-        - java_method: getSscMode
-          go_name: GetSscMode
-          returns: int
+        - java_method: getOsAppId
+          go_name: GetOsAppId
+          returns: '[B'
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -206,6 +202,27 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
+          error: true
+    - java_class: android.telephony.data.TrafficDescriptor$Builder
+      go_type: TrafficDescriptorBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.telephony.data.TrafficDescriptor
+          error: true
+        - java_method: setDataNetworkName
+          go_name: SetDataNetworkName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telephony.data.TrafficDescriptor$Builder
+          error: true
+        - java_method: setOsAppId
+          go_name: SetOsAppId
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.telephony.data.TrafficDescriptor$Builder
           error: true
     - java_class: android.telephony.data.ApnSetting
       go_type: ApnSetting
@@ -524,8 +541,8 @@ classes:
               go_name: arg0
           returns: android.telephony.data.ApnSetting$Builder
           error: true
-    - java_class: android.telephony.data.TrafficDescriptor
-      go_type: TrafficDescriptor
+    - java_class: android.telephony.data.RouteSelectionDescriptor
+      go_type: RouteSelectionDescriptor
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -538,13 +555,17 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getDataNetworkName
-          go_name: GetDataNetworkName
-          returns: String
+        - java_method: getPrecedence
+          go_name: GetPrecedence
+          returns: int
           error: true
-        - java_method: getOsAppId
-          go_name: GetOsAppId
-          returns: '[B'
+        - java_method: getSessionType
+          go_name: GetSessionType
+          returns: int
+          error: true
+        - java_method: getSscMode
+          go_name: GetSscMode
+          returns: int
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -562,27 +583,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-    - java_class: android.telephony.data.TrafficDescriptor$Builder
-      go_type: TrafficDescriptorBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.telephony.data.TrafficDescriptor
-          error: true
-        - java_method: setDataNetworkName
-          go_name: SetDataNetworkName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.telephony.data.TrafficDescriptor$Builder
-          error: true
-        - java_method: setOsAppId
-          go_name: SetOsAppId
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: android.telephony.data.TrafficDescriptor$Builder
           error: true
 constants:
     - go_name: Creator
@@ -620,24 +620,6 @@ constants:
       go_type: int
     - go_name: SliceStatusUnknown
       value: "0"
-      go_type: int
-    - go_name: RouteSscMode1
-      value: "1"
-      go_type: int
-    - go_name: RouteSscMode2
-      value: "2"
-      go_type: int
-    - go_name: RouteSscMode3
-      value: "3"
-      go_type: int
-    - go_name: SessionTypeIpv4
-      value: "0"
-      go_type: int
-    - go_name: SessionTypeIpv4v6
-      value: "2"
-      go_type: int
-    - go_name: SessionTypeIpv6
-      value: "1"
       go_type: int
     - go_name: AuthTypeChap
       value: "2"
@@ -734,4 +716,22 @@ constants:
       go_type: int
     - go_name: TypeXcap
       value: "2048"
+      go_type: int
+    - go_name: RouteSscMode1
+      value: "1"
+      go_type: int
+    - go_name: RouteSscMode2
+      value: "2"
+      go_type: int
+    - go_name: RouteSscMode3
+      value: "3"
+      go_type: int
+    - go_name: SessionTypeIpv4
+      value: "0"
+      go_type: int
+    - go_name: SessionTypeIpv4v6
+      value: "2"
+      go_type: int
+    - go_name: SessionTypeIpv6
+      value: "1"
       go_type: int

@@ -5,23 +5,54 @@ package util
 import "github.com/AndroidGoLab/jni/util/consts"
 
 const (
-	DomainName                = consts.DomainName
-	EmailAddress              = consts.EmailAddress
-	IpAddress                 = consts.IpAddress
-	Phone                     = consts.Phone
-	TopLevelDomain            = consts.TopLevelDomain
-	WebUrl                    = consts.WebUrl
-	Inherit                   = consts.Inherit
-	Locale                    = consts.Locale
-	Ltr                       = consts.Ltr
-	Rtl                       = consts.Rtl
+	Iso88591                  = consts.Iso88591
+	UsAscii                   = consts.UsAscii
+	Utf16                     = consts.Utf16
+	Utf8                      = consts.Utf8
+	Epsilon                   = consts.Epsilon
+	LowestValue               = consts.LowestValue
+	MaxExponent               = consts.MaxExponent
+	MaxValue                  = consts.MaxValue
+	MinExponent               = consts.MinExponent
+	MinNormal                 = consts.MinNormal
+	MinValue                  = consts.MinValue
+	NegativeInfinity          = consts.NegativeInfinity
+	NegativeZero              = consts.NegativeZero
+	Nan                       = consts.Nan
+	PositiveInfinity          = consts.PositiveInfinity
+	PositiveZero              = consts.PositiveZero
+	SizeConst                 = consts.SizeConst
+	Zero                      = consts.Zero
 	Creator                   = consts.Creator
+	Assert                    = consts.Assert
+	Error                     = consts.Error
+	Info                      = consts.Info
+	Verbose                   = consts.Verbose
+	Warn                      = consts.Warn
+	Nothing                   = consts.Nothing
+	WildCard                  = consts.WildCard
 	Crlf                      = consts.Crlf
 	Default                   = consts.Default
 	NoClose                   = consts.NoClose
 	NoPadding                 = consts.NoPadding
 	NoWrap                    = consts.NoWrap
 	UrlSafe                   = consts.UrlSafe
+	BeginArray                = consts.BeginArray
+	BeginObject               = consts.BeginObject
+	Boolean                   = consts.Boolean
+	EndArray                  = consts.EndArray
+	EndDocument               = consts.EndDocument
+	EndObject                 = consts.EndObject
+	Name                      = consts.Name
+	Null                      = consts.Null
+	Number                    = consts.Number
+	String                    = consts.String
+	DomainName                = consts.DomainName
+	EmailAddress              = consts.EmailAddress
+	IpAddress                 = consts.IpAddress
+	Phone                     = consts.Phone
+	TopLevelDomain            = consts.TopLevelDomain
+	WebUrl                    = consts.WebUrl
 	ComplexMantissaMask       = consts.ComplexMantissaMask
 	ComplexMantissaShift      = consts.ComplexMantissaShift
 	ComplexRadix0p23          = consts.ComplexRadix0p23
@@ -62,53 +93,22 @@ const (
 	TypeNull                  = consts.TypeNull
 	TypeReference             = consts.TypeReference
 	TypeString                = consts.TypeString
-	Assert                    = consts.Assert
-	Debug                     = consts.Debug
-	Error                     = consts.Error
-	Info                      = consts.Info
-	Verbose                   = consts.Verbose
-	Warn                      = consts.Warn
-	BeginArray                = consts.BeginArray
-	BeginObject               = consts.BeginObject
-	Boolean                   = consts.Boolean
-	EndArray                  = consts.EndArray
-	EndDocument               = consts.EndDocument
-	EndObject                 = consts.EndObject
-	Name                      = consts.Name
-	Null                      = consts.Null
-	Number                    = consts.Number
-	String                    = consts.String
-	Epsilon                   = consts.Epsilon
-	LowestValue               = consts.LowestValue
-	MaxExponent               = consts.MaxExponent
-	MaxValue                  = consts.MaxValue
-	MinExponent               = consts.MinExponent
-	MinNormal                 = consts.MinNormal
-	MinValue                  = consts.MinValue
-	NegativeInfinity          = consts.NegativeInfinity
-	NegativeZero              = consts.NegativeZero
-	Nan                       = consts.Nan
-	PositiveInfinity          = consts.PositiveInfinity
-	PositiveZero              = consts.PositiveZero
-	SizeConst                 = consts.SizeConst
-	Nothing                   = consts.Nothing
-	WildCard                  = consts.WildCard
-	Iso88591                  = consts.Iso88591
-	UsAscii                   = consts.UsAscii
-	Utf16                     = consts.Utf16
-	Utf8                      = consts.Utf8
-	Zero                      = consts.Zero
+	Inherit                   = consts.Inherit
+	Locale                    = consts.Locale
+	Ltr                       = consts.Ltr
+	Rtl                       = consts.Rtl
+)
+
+const (
+	Debug   = consts.Debug
+	Logd    = consts.Logd
+	Logv    = consts.Logv
+	Profile = consts.Profile
+	Release = consts.Release
 )
 
 const (
 	GoodIriChar                = consts.GoodIriChar
 	TopLevelDomainStr          = consts.TopLevelDomainStr
 	TopLevelDomainStrForWebUrl = consts.TopLevelDomainStrForWebUrl
-)
-
-const (
-	Logd    = consts.Logd
-	Logv    = consts.Logv
-	Profile = consts.Profile
-	Release = consts.Release
 )

@@ -5,125 +5,6 @@
 package: style
 go_import: github.com/AndroidGoLab/jni/text/style
 classes:
-    - java_class: android.text.style.TabStopSpan
-      go_type: TabStopSpan
-      methods:
-        - java_method: getTabStop
-          go_name: GetTabStop
-          returns: int
-          error: true
-    - java_class: android.text.style.TabStopSpan$Standard
-      go_type: TabStopSpanStandard
-      methods:
-        - java_method: getTabStop
-          go_name: GetTabStop
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.text.style.LineBreakConfigSpan
-      go_type: LineBreakConfigSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getLineBreakConfig
-          go_name: GetLineBreakConfig
-          returns: android.graphics.text.LineBreakConfig
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: createNoBreakSpan
-          go_name: CreateNoBreakSpan
-          returns: android.text.style.LineBreakConfigSpan
-          error: true
-        - java_method: createNoHyphenationSpan
-          go_name: CreateNoHyphenationSpan
-          returns: android.text.style.LineBreakConfigSpan
-          error: true
-    - java_class: android.text.style.UnderlineSpan
-      go_type: UnderlineSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.CharacterStyle
-      go_type: CharacterStyle
-      methods:
-        - java_method: getUnderlying
-          go_name: GetUnderlying
-          returns: android.text.style.CharacterStyle
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-      static_methods:
-        - java_method: wrap
-          go_name: Wrap
-          params:
-            - java_type: android.text.style.CharacterStyle
-              go_name: arg0
-          returns: android.text.style.CharacterStyle
-          error: true
     - java_class: android.text.style.TtsSpan
       go_type: TtsSpan
       methods:
@@ -587,6 +468,299 @@ classes:
               go_name: arg0
           returns: android.text.style.TtsSpan$VerbatimBuilder
           error: true
+    - java_class: android.text.style.UnderlineSpan
+      go_type: UnderlineSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.SubscriptSpan
+      go_type: SubscriptSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.CharacterStyle
+      go_type: CharacterStyle
+      methods:
+        - java_method: getUnderlying
+          go_name: GetUnderlying
+          returns: android.text.style.CharacterStyle
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+      static_methods:
+        - java_method: wrap
+          go_name: Wrap
+          params:
+            - java_type: android.text.style.CharacterStyle
+              go_name: arg0
+          returns: android.text.style.CharacterStyle
+          error: true
+    - java_class: android.text.style.AbsoluteSizeSpan
+      go_type: AbsoluteSizeSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getDip
+          go_name: GetDip
+          returns: boolean
+          error: true
+        - java_method: getSize
+          go_name: GetSize
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.IconMarginSpan
+      go_type: IconMarginSpan
+      methods:
+        - java_method: chooseHeight
+          go_name: ChooseHeight
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: android.graphics.Paint$FontMetricsInt
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: drawLeadingMargin
+          go_name: DrawLeadingMargin
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+            - java_type: android.graphics.Paint
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: java.lang.CharSequence
+              go_name: arg7
+            - java_type: int
+              go_name: arg8
+            - java_type: int
+              go_name: arg9
+            - java_type: boolean
+              go_name: arg10
+            - java_type: android.text.Layout
+              go_name: arg11
+          returns: void
+          error: true
+        - java_method: getBitmap
+          go_name: GetBitmap
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: getLeadingMargin
+          go_name: GetLeadingMargin
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPadding
+          go_name: GetPadding
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.text.style.AlignmentSpan
+      go_type: AlignmentSpan
+      methods:
+        - java_method: getAlignment
+          go_name: GetAlignment
+          returns: android.text.Layout$Alignment
+          error: true
+    - java_class: android.text.style.AlignmentSpan$Standard
+      go_type: AlignmentSpanStandard
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAlignment
+          go_name: GetAlignment
+          returns: android.text.Layout$Alignment
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.DynamicDrawableSpan
+      go_type: DynamicDrawableSpan
+      methods:
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+            - java_type: java.lang.CharSequence
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: float
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: int
+              go_name: arg7
+            - java_type: android.graphics.Paint
+              go_name: arg8
+          returns: void
+          error: true
+        - java_method: getDrawable
+          go_name: GetDrawable
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getSize
+          go_name: GetSize
+          params:
+            - java_type: android.graphics.Paint
+              go_name: arg0
+            - java_type: java.lang.CharSequence
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.graphics.Paint$FontMetricsInt
+              go_name: arg4
+          returns: int
+          error: true
+        - java_method: getVerticalAlignment
+          go_name: GetVerticalAlignment
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
     - java_class: android.text.style.LeadingMarginSpan
       go_type: LeadingMarginSpan
       methods:
@@ -689,8 +863,400 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.text.style.SubscriptSpan
-      go_type: SubscriptSpan
+    - java_class: android.text.style.DrawableMarginSpan
+      go_type: DrawableMarginSpan
+      methods:
+        - java_method: chooseHeight
+          go_name: ChooseHeight
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: android.graphics.Paint$FontMetricsInt
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: drawLeadingMargin
+          go_name: DrawLeadingMargin
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+            - java_type: android.graphics.Paint
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: java.lang.CharSequence
+              go_name: arg7
+            - java_type: int
+              go_name: arg8
+            - java_type: int
+              go_name: arg9
+            - java_type: boolean
+              go_name: arg10
+            - java_type: android.text.Layout
+              go_name: arg11
+          returns: void
+          error: true
+        - java_method: getDrawable
+          go_name: GetDrawable
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getLeadingMargin
+          go_name: GetLeadingMargin
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPadding
+          go_name: GetPadding
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.text.style.TabStopSpan
+      go_type: TabStopSpan
+      methods:
+        - java_method: getTabStop
+          go_name: GetTabStop
+          returns: int
+          error: true
+    - java_class: android.text.style.TabStopSpan$Standard
+      go_type: TabStopSpanStandard
+      methods:
+        - java_method: getTabStop
+          go_name: GetTabStop
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.text.style.TextAppearanceSpan
+      go_type: TextAppearanceSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFamily
+          go_name: GetFamily
+          returns: String
+          error: true
+        - java_method: getFontFeatureSettings
+          go_name: GetFontFeatureSettings
+          returns: String
+          error: true
+        - java_method: getFontVariationSettings
+          go_name: GetFontVariationSettings
+          returns: String
+          error: true
+        - java_method: getLetterSpacing
+          go_name: GetLetterSpacing
+          returns: float
+          error: true
+        - java_method: getLinkTextColor
+          go_name: GetLinkTextColor
+          returns: android.content.res.ColorStateList
+          error: true
+        - java_method: getShadowColor
+          go_name: GetShadowColor
+          returns: int
+          error: true
+        - java_method: getShadowDx
+          go_name: GetShadowDx
+          returns: float
+          error: true
+        - java_method: getShadowDy
+          go_name: GetShadowDy
+          returns: float
+          error: true
+        - java_method: getShadowRadius
+          go_name: GetShadowRadius
+          returns: float
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: getTextColor
+          go_name: GetTextColor
+          returns: android.content.res.ColorStateList
+          error: true
+        - java_method: getTextFontWeight
+          go_name: GetTextFontWeight
+          returns: int
+          error: true
+        - java_method: getTextLocales
+          go_name: GetTextLocales
+          returns: android.os.LocaleList
+          error: true
+        - java_method: getTextSize
+          go_name: GetTextSize
+          returns: int
+          error: true
+        - java_method: getTextStyle
+          go_name: GetTextStyle
+          returns: int
+          error: true
+        - java_method: getTypeface
+          go_name: GetTypeface
+          returns: android.graphics.Typeface
+          error: true
+        - java_method: isElegantTextHeight
+          go_name: IsElegantTextHeight
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.LineBreakConfigSpan
+      go_type: LineBreakConfigSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getLineBreakConfig
+          go_name: GetLineBreakConfig
+          returns: android.graphics.text.LineBreakConfig
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: createNoBreakSpan
+          go_name: CreateNoBreakSpan
+          returns: android.text.style.LineBreakConfigSpan
+          error: true
+        - java_method: createNoHyphenationSpan
+          go_name: CreateNoHyphenationSpan
+          returns: android.text.style.LineBreakConfigSpan
+          error: true
+    - java_class: android.text.style.RelativeSizeSpan
+      go_type: RelativeSizeSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSizeChange
+          go_name: GetSizeChange
+          returns: float
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.BackgroundColorSpan
+      go_type: BackgroundColorSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBackgroundColor
+          go_name: GetBackgroundColor
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.ScaleXSpan
+      go_type: ScaleXSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getScaleX
+          go_name: GetScaleX
+          returns: float
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.URLSpan
+      go_type: URLSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: getURL
+          go_name: GetURL
+          returns: String
+          error: true
+        - java_method: onClick
+          go_name: OnClick
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.UpdateLayout
+      go_type: UpdateLayout
+    - java_class: android.text.style.SuperscriptSpan
+      go_type: SuperscriptSpan
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -727,16 +1293,40 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.text.style.ForegroundColorSpan
-      go_type: ForegroundColorSpan
+    - java_class: android.text.style.UpdateAppearance
+      go_type: UpdateAppearance
+    - java_class: android.text.style.MaskFilterSpan
+      go_type: MaskFilterSpan
+      methods:
+        - java_method: getMaskFilter
+          go_name: GetMaskFilter
+          returns: android.graphics.MaskFilter
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.text.style.LocaleSpan
+      go_type: LocaleSpan
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getForegroundColor
-          go_name: GetForegroundColor
-          returns: int
+        - java_method: getLocale
+          go_name: GetLocale
+          returns: java.util.Locale
+          error: true
+        - java_method: getLocales
+          go_name: GetLocales
+          returns: android.os.LocaleList
           error: true
         - java_method: getSpanTypeId
           go_name: GetSpanTypeId
@@ -745,6 +1335,69 @@ classes:
         - java_method: toString
           go_name: ToString
           returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.MetricAffectingSpan
+      go_type: MetricAffectingSpan
+      methods:
+        - java_method: getUnderlying
+          go_name: GetUnderlying0
+          returns: android.text.style.MetricAffectingSpan
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getUnderlying
+          go_name: GetUnderlying0_1
+          returns: android.text.style.CharacterStyle
+          error: true
+    - java_class: android.text.style.SuggestionRangeSpan
+      go_type: SuggestionRangeSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBackgroundColor
+          go_name: GetBackgroundColor
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: setBackgroundColor
+          go_name: SetBackgroundColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
           error: true
         - java_method: updateDrawState
           go_name: UpdateDrawState
@@ -762,15 +1415,69 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.text.style.SuperscriptSpan
-      go_type: SuperscriptSpan
+    - java_class: android.text.style.TypefaceSpan
+      go_type: TypefaceSpan
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
+        - java_method: getFamily
+          go_name: GetFamily
+          returns: String
+          error: true
         - java_method: getSpanTypeId
           go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: getTypeface
+          go_name: GetTypeface
+          returns: android.graphics.Typeface
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateMeasureState
+          go_name: UpdateMeasureState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.StyleSpan
+      go_type: Span
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFontWeightAdjustment
+          go_name: GetFontWeightAdjustment
+          returns: int
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: getStyle
+          go_name: GetStyle
           returns: int
           error: true
         - java_method: toString
@@ -883,207 +1590,11 @@ classes:
               go_name: arg6
           returns: void
           error: true
-    - java_class: android.text.style.TextAppearanceSpan
-      go_type: TextAppearanceSpan
+    - java_class: android.text.style.LineBackgroundSpan
+      go_type: LineBackgroundSpan
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getFamily
-          go_name: GetFamily
-          returns: String
-          error: true
-        - java_method: getFontFeatureSettings
-          go_name: GetFontFeatureSettings
-          returns: String
-          error: true
-        - java_method: getFontVariationSettings
-          go_name: GetFontVariationSettings
-          returns: String
-          error: true
-        - java_method: getLetterSpacing
-          go_name: GetLetterSpacing
-          returns: float
-          error: true
-        - java_method: getLinkTextColor
-          go_name: GetLinkTextColor
-          returns: android.content.res.ColorStateList
-          error: true
-        - java_method: getShadowColor
-          go_name: GetShadowColor
-          returns: int
-          error: true
-        - java_method: getShadowDx
-          go_name: GetShadowDx
-          returns: float
-          error: true
-        - java_method: getShadowDy
-          go_name: GetShadowDy
-          returns: float
-          error: true
-        - java_method: getShadowRadius
-          go_name: GetShadowRadius
-          returns: float
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: getTextColor
-          go_name: GetTextColor
-          returns: android.content.res.ColorStateList
-          error: true
-        - java_method: getTextFontWeight
-          go_name: GetTextFontWeight
-          returns: int
-          error: true
-        - java_method: getTextLocales
-          go_name: GetTextLocales
-          returns: android.os.LocaleList
-          error: true
-        - java_method: getTextSize
-          go_name: GetTextSize
-          returns: int
-          error: true
-        - java_method: getTextStyle
-          go_name: GetTextStyle
-          returns: int
-          error: true
-        - java_method: getTypeface
-          go_name: GetTypeface
-          returns: android.graphics.Typeface
-          error: true
-        - java_method: isElegantTextHeight
-          go_name: IsElegantTextHeight
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.RelativeSizeSpan
-      go_type: RelativeSizeSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSizeChange
-          go_name: GetSizeChange
-          returns: float
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.URLSpan
-      go_type: URLSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: getURL
-          go_name: GetURL
-          returns: String
-          error: true
-        - java_method: onClick
-          go_name: OnClick
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.DrawableMarginSpan
-      go_type: DrawableMarginSpan
-      methods:
-        - java_method: chooseHeight
-          go_name: ChooseHeight
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-            - java_type: android.graphics.Paint$FontMetricsInt
-              go_name: arg5
-          returns: void
-          error: true
-        - java_method: drawLeadingMargin
-          go_name: DrawLeadingMargin
+        - java_method: drawBackground
+          go_name: DrawBackground
           params:
             - java_type: android.graphics.Canvas
               go_name: arg0
@@ -1105,242 +1616,51 @@ classes:
               go_name: arg8
             - java_type: int
               go_name: arg9
-            - java_type: boolean
+            - java_type: int
               go_name: arg10
-            - java_type: android.text.Layout
-              go_name: arg11
           returns: void
           error: true
-        - java_method: getDrawable
-          go_name: GetDrawable
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getLeadingMargin
-          go_name: GetLeadingMargin
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getPadding
-          go_name: GetPadding
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.text.style.StyleSpan
-      go_type: Span
+    - java_class: android.text.style.LineBackgroundSpan$Standard
+      go_type: LineBackgroundSpanStandard
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getFontWeightAdjustment
-          go_name: GetFontWeightAdjustment
-          returns: int
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: getStyle
-          go_name: GetStyle
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
+        - java_method: drawBackground
+          go_name: DrawBackground
           params:
-            - java_type: android.text.TextPaint
+            - java_type: android.graphics.Canvas
               go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
+            - java_type: android.graphics.Paint
               go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: int
+              go_name: arg6
+            - java_type: java.lang.CharSequence
+              go_name: arg7
+            - java_type: int
+              go_name: arg8
+            - java_type: int
+              go_name: arg9
+            - java_type: int
+              go_name: arg10
           returns: void
           error: true
-    - java_class: android.text.style.UpdateLayout
-      go_type: UpdateLayout
-    - java_class: android.text.style.ParagraphStyle
-      go_type: ParagraphStyle
-    - java_class: android.text.style.SuggestionSpan
-      go_type: SuggestionSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getColor
+          go_name: GetColor
           returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getFlags
-          go_name: GetFlags
-          returns: int
-          error: true
-        - java_method: getLocale
-          go_name: GetLocale
-          returns: String
-          error: true
-        - java_method: getLocaleObject
-          go_name: GetLocaleObject
-          returns: java.util.Locale
           error: true
         - java_method: getSpanTypeId
           go_name: GetSpanTypeId
           returns: int
-          error: true
-        - java_method: getSuggestions
-          go_name: GetSuggestions
-          returns: java.lang.String[]
-          error: true
-        - java_method: getUnderlineColor
-          go_name: GetUnderlineColor
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: setFlags
-          go_name: SetFlags
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.LocaleSpan
-      go_type: LocaleSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getLocale
-          go_name: GetLocale
-          returns: java.util.Locale
-          error: true
-        - java_method: getLocales
-          go_name: GetLocales
-          returns: android.os.LocaleList
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.MaskFilterSpan
-      go_type: MaskFilterSpan
-      methods:
-        - java_method: getMaskFilter
-          go_name: GetMaskFilter
-          returns: android.graphics.MaskFilter
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.text.style.ScaleXSpan
-      go_type: ScaleXSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getScaleX
-          go_name: GetScaleX
-          returns: float
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -1443,59 +1763,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.text.style.DynamicDrawableSpan
-      go_type: DynamicDrawableSpan
-      methods:
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: java.lang.CharSequence
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: float
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-            - java_type: int
-              go_name: arg7
-            - java_type: android.graphics.Paint
-              go_name: arg8
-          returns: void
-          error: true
-        - java_method: getDrawable
-          go_name: GetDrawable
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getSize
-          go_name: GetSize
-          params:
-            - java_type: android.graphics.Paint
-              go_name: arg0
-            - java_type: java.lang.CharSequence
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: android.graphics.Paint$FontMetricsInt
-              go_name: arg4
-          returns: int
-          error: true
-        - java_method: getVerticalAlignment
-          go_name: GetVerticalAlignment
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
     - java_class: android.text.style.NoWritingToolsSpan
       go_type: NoWritingToolsSpan
       methods:
@@ -1586,163 +1853,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.text.style.StrikethroughSpan
-      go_type: StrikethroughSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.SuggestionRangeSpan
-      go_type: SuggestionRangeSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBackgroundColor
-          go_name: GetBackgroundColor
-          returns: int
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: setBackgroundColor
-          go_name: SetBackgroundColor
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.WrapTogetherSpan
-      go_type: WrapTogetherSpan
-    - java_class: android.text.style.IconMarginSpan
-      go_type: IconMarginSpan
-      methods:
-        - java_method: chooseHeight
-          go_name: ChooseHeight
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-            - java_type: android.graphics.Paint$FontMetricsInt
-              go_name: arg5
-          returns: void
-          error: true
-        - java_method: drawLeadingMargin
-          go_name: DrawLeadingMargin
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: android.graphics.Paint
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-            - java_type: java.lang.CharSequence
-              go_name: arg7
-            - java_type: int
-              go_name: arg8
-            - java_type: int
-              go_name: arg9
-            - java_type: boolean
-              go_name: arg10
-            - java_type: android.text.Layout
-              go_name: arg11
-          returns: void
-          error: true
-        - java_method: getBitmap
-          go_name: GetBitmap
-          returns: android.graphics.Bitmap
-          error: true
-        - java_method: getLeadingMargin
-          go_name: GetLeadingMargin
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getPadding
-          go_name: GetPadding
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.text.style.MetricAffectingSpan
-      go_type: MetricAffectingSpan
-      methods:
-        - java_method: getUnderlying
-          go_name: GetUnderlying0
-          returns: android.text.style.MetricAffectingSpan
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getUnderlying
-          go_name: GetUnderlying0_1
-          returns: android.text.style.CharacterStyle
-          error: true
     - java_class: android.text.style.QuoteSpan
       go_type: QuoteSpan
       methods:
@@ -1815,78 +1925,15 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.text.style.ImageSpan
-      go_type: ImageSpan
-      methods:
-        - java_method: getDrawable
-          go_name: GetDrawable
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getSource
-          go_name: GetSource
-          returns: String
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.text.style.UpdateAppearance
-      go_type: UpdateAppearance
-    - java_class: android.text.style.TypefaceSpan
-      go_type: TypefaceSpan
+    - java_class: android.text.style.ForegroundColorSpan
+      go_type: ForegroundColorSpan
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getFamily
-          go_name: GetFamily
-          returns: String
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: getTypeface
-          go_name: GetTypeface
-          returns: android.graphics.Typeface
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: updateDrawState
-          go_name: UpdateDrawState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.BackgroundColorSpan
-      go_type: BackgroundColorSpan
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBackgroundColor
-          go_name: GetBackgroundColor
+        - java_method: getForegroundColor
+          go_name: GetForegroundColor
           returns: int
           error: true
         - java_method: getSpanTypeId
@@ -1913,6 +1960,75 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.text.style.SuggestionSpan
+      go_type: SuggestionSpan
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getFlags
+          go_name: GetFlags
+          returns: int
+          error: true
+        - java_method: getLocale
+          go_name: GetLocale
+          returns: String
+          error: true
+        - java_method: getLocaleObject
+          go_name: GetLocaleObject
+          returns: java.util.Locale
+          error: true
+        - java_method: getSpanTypeId
+          go_name: GetSpanTypeId
+          returns: int
+          error: true
+        - java_method: getSuggestions
+          go_name: GetSuggestions
+          returns: java.lang.String[]
+          error: true
+        - java_method: getUnderlineColor
+          go_name: GetUnderlineColor
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: setFlags
+          go_name: SetFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: updateDrawState
+          go_name: UpdateDrawState
+          params:
+            - java_type: android.text.TextPaint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.text.style.ParagraphStyle
+      go_type: ParagraphStyle
+    - java_class: android.text.style.WrapTogetherSpan
+      go_type: WrapTogetherSpan
     - java_class: android.text.style.ClickableSpan
       go_type: ClickableSpan
       methods:
@@ -1934,19 +2050,26 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.text.style.AbsoluteSizeSpan
-      go_type: AbsoluteSizeSpan
+    - java_class: android.text.style.ImageSpan
+      go_type: ImageSpan
+      methods:
+        - java_method: getDrawable
+          go_name: GetDrawable
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getSource
+          go_name: GetSource
+          returns: String
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.text.style.StrikethroughSpan
+      go_type: StrikethroughSpan
       methods:
         - java_method: describeContents
           go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getDip
-          go_name: GetDip
-          returns: boolean
-          error: true
-        - java_method: getSize
-          go_name: GetSize
           returns: int
           error: true
         - java_method: getSpanTypeId
@@ -1964,129 +2087,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-        - java_method: updateMeasureState
-          go_name: UpdateMeasureState
-          params:
-            - java_type: android.text.TextPaint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.AlignmentSpan
-      go_type: AlignmentSpan
-      methods:
-        - java_method: getAlignment
-          go_name: GetAlignment
-          returns: android.text.Layout$Alignment
-          error: true
-    - java_class: android.text.style.AlignmentSpan$Standard
-      go_type: AlignmentSpanStandard
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAlignment
-          go_name: GetAlignment
-          returns: android.text.Layout$Alignment
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.text.style.LineBackgroundSpan
-      go_type: LineBackgroundSpan
-      methods:
-        - java_method: drawBackground
-          go_name: DrawBackground
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: android.graphics.Paint
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-            - java_type: java.lang.CharSequence
-              go_name: arg7
-            - java_type: int
-              go_name: arg8
-            - java_type: int
-              go_name: arg9
-            - java_type: int
-              go_name: arg10
-          returns: void
-          error: true
-    - java_class: android.text.style.LineBackgroundSpan$Standard
-      go_type: LineBackgroundSpanStandard
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: drawBackground
-          go_name: DrawBackground
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: android.graphics.Paint
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: int
-              go_name: arg6
-            - java_type: java.lang.CharSequence
-              go_name: arg7
-            - java_type: int
-              go_name: arg8
-            - java_type: int
-              go_name: arg9
-            - java_type: int
-              go_name: arg10
-          returns: void
-          error: true
-        - java_method: getColor
-          go_name: GetColor
-          returns: int
-          error: true
-        - java_method: getSpanTypeId
-          go_name: GetSpanTypeId
-          returns: int
-          error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
           params:
@@ -2097,9 +2097,6 @@ classes:
           returns: void
           error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: AnimacyAnimate
       value: '"android.animate"'
       go_type: string
@@ -2346,6 +2343,39 @@ constants:
     - go_name: WeekdayWednesday
       value: "4"
       go_type: int
+    - go_name: AlignBaseline
+      value: "1"
+      go_type: int
+    - go_name: AlignBottom
+      value: "0"
+      go_type: int
+    - go_name: AlignCenter
+      value: "2"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ExtraTextChangedType
+      value: '"android.text.style.EXTRA_TEXT_CHANGED_TYPE"'
+      go_type: string
+    - go_name: TextDeleted
+      value: "1"
+      go_type: int
+    - go_name: TextModified
+      value: "2"
+      go_type: int
+    - go_name: StandardGapWidth
+      value: "2"
+      go_type: int
+    - go_name: StandardColor
+      value: "-16776961"
+      go_type: int
+    - go_name: StandardGapWidthPx
+      value: "2"
+      go_type: int
+    - go_name: StandardStripeWidthPx
+      value: "2"
+      go_type: int
     - go_name: ActionSuggestionPicked
       value: '"android.text.style.SUGGESTION_PICKED"'
       go_type: string
@@ -2373,33 +2403,3 @@ constants:
     - go_name: SuggestionSpanPickedHashcode
       value: '"hashcode"'
       go_type: string
-    - go_name: ExtraTextChangedType
-      value: '"android.text.style.EXTRA_TEXT_CHANGED_TYPE"'
-      go_type: string
-    - go_name: TextDeleted
-      value: "1"
-      go_type: int
-    - go_name: TextModified
-      value: "2"
-      go_type: int
-    - go_name: StandardGapWidth
-      value: "2"
-      go_type: int
-    - go_name: AlignBaseline
-      value: "1"
-      go_type: int
-    - go_name: AlignBottom
-      value: "0"
-      go_type: int
-    - go_name: AlignCenter
-      value: "2"
-      go_type: int
-    - go_name: StandardColor
-      value: "-16776961"
-      go_type: int
-    - go_name: StandardGapWidthPx
-      value: "2"
-      go_type: int
-    - go_name: StandardStripeWidthPx
-      value: "2"
-      go_type: int

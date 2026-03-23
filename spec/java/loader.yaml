@@ -5,8 +5,6 @@
 package: loader
 go_import: github.com/AndroidGoLab/jni/content/res/loader
 classes:
-    - java_class: android.content.res.loader.AssetsProvider
-      go_type: AssetsProvider
     - java_class: android.content.res.loader.ResourcesLoader
       go_type: ResourcesLoader
       methods:
@@ -93,3 +91,5 @@ classes:
               go_name: arg0
           returns: android.content.res.loader.ResourcesProvider
           error: true
+    - java_class: android.content.res.loader.AssetsProvider
+      go_type: AssetsProvider

@@ -23,19 +23,38 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsGetWalletCardsResponse                 *jni.GlobalRef
-	midGetWalletCardsResponseDescribeContents jni.MethodID
-	midGetWalletCardsResponseGetSelectedIndex jni.MethodID
-	midGetWalletCardsResponseWriteToParcel    jni.MethodID
-
 	clsSelectWalletCardRequest                 *jni.GlobalRef
 	midSelectWalletCardRequestDescribeContents jni.MethodID
 	midSelectWalletCardRequestGetCardId        jni.MethodID
 	midSelectWalletCardRequestWriteToParcel    jni.MethodID
 
+	clsWalletServiceEvent                 *jni.GlobalRef
+	midWalletServiceEventDescribeContents jni.MethodID
+	midWalletServiceEventGetEventType     jni.MethodID
+	midWalletServiceEventWriteToParcel    jni.MethodID
+
 	clsGetWalletCardsCallback          *jni.GlobalRef
 	midGetWalletCardsCallbackOnFailure jni.MethodID
 	midGetWalletCardsCallbackOnSuccess jni.MethodID
+
+	clsGetWalletCardsResponse                 *jni.GlobalRef
+	midGetWalletCardsResponseDescribeContents jni.MethodID
+	midGetWalletCardsResponseGetSelectedIndex jni.MethodID
+	midGetWalletCardsResponseWriteToParcel    jni.MethodID
+
+	clsGetWalletCardsError                 *jni.GlobalRef
+	midGetWalletCardsErrorDescribeContents jni.MethodID
+	midGetWalletCardsErrorGetIcon          jni.MethodID
+	midGetWalletCardsErrorGetMessage       jni.MethodID
+	midGetWalletCardsErrorWriteToParcel    jni.MethodID
+
+	clsGetWalletCardsRequest                 *jni.GlobalRef
+	midGetWalletCardsRequestDescribeContents jni.MethodID
+	midGetWalletCardsRequestGetCardHeightPx  jni.MethodID
+	midGetWalletCardsRequestGetCardWidthPx   jni.MethodID
+	midGetWalletCardsRequestGetIconSizePx    jni.MethodID
+	midGetWalletCardsRequestGetMaxCards      jni.MethodID
+	midGetWalletCardsRequestWriteToParcel    jni.MethodID
 
 	clsWalletCard                                *jni.GlobalRef
 	midWalletCardDescribeContents                jni.MethodID
@@ -55,17 +74,6 @@ var (
 	midWalletCardBuilderSetCardLabel                    jni.MethodID
 	midWalletCardBuilderSetNonPaymentCardSecondaryImage jni.MethodID
 
-	clsGetWalletCardsError                 *jni.GlobalRef
-	midGetWalletCardsErrorDescribeContents jni.MethodID
-	midGetWalletCardsErrorGetIcon          jni.MethodID
-	midGetWalletCardsErrorGetMessage       jni.MethodID
-	midGetWalletCardsErrorWriteToParcel    jni.MethodID
-
-	clsWalletServiceEvent                 *jni.GlobalRef
-	midWalletServiceEventDescribeContents jni.MethodID
-	midWalletServiceEventGetEventType     jni.MethodID
-	midWalletServiceEventWriteToParcel    jni.MethodID
-
 	clsQuickAccessWalletService                                      *jni.GlobalRef
 	midQuickAccessWalletServiceGetGestureTargetActivityPendingIntent jni.MethodID
 	midQuickAccessWalletServiceGetTargetActivityPendingIntent        jni.MethodID
@@ -74,14 +82,6 @@ var (
 	midQuickAccessWalletServiceOnWalletCardsRequested                jni.MethodID
 	midQuickAccessWalletServiceOnWalletDismissed                     jni.MethodID
 	midQuickAccessWalletServiceSendWalletServiceEvent                jni.MethodID
-
-	clsGetWalletCardsRequest                 *jni.GlobalRef
-	midGetWalletCardsRequestDescribeContents jni.MethodID
-	midGetWalletCardsRequestGetCardHeightPx  jni.MethodID
-	midGetWalletCardsRequestGetCardWidthPx   jni.MethodID
-	midGetWalletCardsRequestGetIconSizePx    jni.MethodID
-	midGetWalletCardsRequestGetMaxCards      jni.MethodID
-	midGetWalletCardsRequestWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -101,37 +101,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsResponse")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGetWalletCardsResponse = env.NewGlobalRef(&c.Object)
-
-		midGetWalletCardsResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsResponse)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsResponseGetSelectedIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsResponse)), "getSelectedIndex", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/service/quickaccesswallet/SelectWalletCardRequest")
 	if err != nil {
@@ -164,6 +133,37 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/service/quickaccesswallet/WalletServiceEvent")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWalletServiceEvent = env.NewGlobalRef(&c.Object)
+
+		midWalletServiceEventDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWalletServiceEventGetEventType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), "getEventType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWalletServiceEventWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -180,6 +180,127 @@ func doInit(env *jni.Env) error {
 		}
 
 		midGetWalletCardsCallbackOnSuccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsCallback)), "onSuccess", "(Landroid/service/quickaccesswallet/GetWalletCardsResponse;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsResponse")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGetWalletCardsResponse = env.NewGlobalRef(&c.Object)
+
+		midGetWalletCardsResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsResponseGetSelectedIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsResponse)), "getSelectedIndex", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsError")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGetWalletCardsError = env.NewGlobalRef(&c.Object)
+
+		midGetWalletCardsErrorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsErrorGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "getIcon", "()Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsErrorGetMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "getMessage", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsErrorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGetWalletCardsRequest = env.NewGlobalRef(&c.Object)
+
+		midGetWalletCardsRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsRequestGetCardHeightPx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getCardHeightPx", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsRequestGetCardWidthPx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getCardWidthPx", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsRequestGetIconSizePx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getIconSizePx", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsRequestGetMaxCards, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getMaxCards", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetWalletCardsRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -306,75 +427,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsError")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGetWalletCardsError = env.NewGlobalRef(&c.Object)
-
-		midGetWalletCardsErrorDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsErrorGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "getIcon", "()Landroid/graphics/drawable/Icon;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsErrorGetMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "getMessage", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsErrorWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/quickaccesswallet/WalletServiceEvent")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWalletServiceEvent = env.NewGlobalRef(&c.Object)
-
-		midWalletServiceEventDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWalletServiceEventGetEventType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), "getEventType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWalletServiceEventWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/service/quickaccesswallet/QuickAccessWalletService")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -426,58 +478,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midQuickAccessWalletServiceSendWalletServiceEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQuickAccessWalletService)), "sendWalletServiceEvent", "(Landroid/service/quickaccesswallet/WalletServiceEvent;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/quickaccesswallet/GetWalletCardsRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGetWalletCardsRequest = env.NewGlobalRef(&c.Object)
-
-		midGetWalletCardsRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsRequestGetCardHeightPx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getCardHeightPx", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsRequestGetCardWidthPx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getCardWidthPx", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsRequestGetIconSizePx, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getIconSizePx", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsRequestGetMaxCards, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "getMaxCards", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetWalletCardsRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

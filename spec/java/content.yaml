@@ -5,316 +5,26 @@
 package: content
 go_import: github.com/AndroidGoLab/jni/content
 classes:
-    - java_class: android.content.AsyncQueryHandler
-      go_type: AsyncQueryHandler
+    - java_class: android.content.ComponentCallbacks
+      go_type: ComponentCallbacks
       methods:
-        - java_method: cancelOperation
-          go_name: CancelOperation
+        - java_method: onConfigurationChanged
+          go_name: OnConfigurationChanged
           params:
-            - java_type: int
+            - java_type: android.content.res.Configuration
               go_name: arg0
           returns: void
           error: true
-        - java_method: handleMessage
-          go_name: HandleMessage
-          params:
-            - java_type: android.os.Message
-              go_name: arg0
+        - java_method: onLowMemory
+          go_name: OnLowMemory
           returns: void
           error: true
-        - java_method: startDelete
-          go_name: StartDelete
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: android.net.Uri
-              go_name: arg2
-            - java_type: String
-              go_name: arg3
-            - java_type: java.lang.String[]
-              go_name: arg4
-          returns: void
-          error: true
-        - java_method: startInsert
-          go_name: StartInsert
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: android.net.Uri
-              go_name: arg2
-            - java_type: android.content.ContentValues
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: startQuery
-          go_name: StartQuery
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: android.net.Uri
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-            - java_type: String
-              go_name: arg4
-            - java_type: java.lang.String[]
-              go_name: arg5
-            - java_type: String
-              go_name: arg6
-          returns: void
-          error: true
-        - java_method: startUpdate
-          go_name: StartUpdate
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: android.net.Uri
-              go_name: arg2
-            - java_type: android.content.ContentValues
-              go_name: arg3
-            - java_type: String
-              go_name: arg4
-            - java_type: java.lang.String[]
-              go_name: arg5
-          returns: void
-          error: true
-    - java_class: android.content.AsyncQueryHandler$WorkerArgs
-      go_type: AsyncQueryHandlerWorkerArgs
-    - java_class: android.content.AsyncQueryHandler$WorkerHandler
-      go_type: AsyncQueryHandlerWorkerHandler
-      methods:
-        - java_method: handleMessage
-          go_name: HandleMessage
-          params:
-            - java_type: android.os.Message
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.BroadcastReceiver
-      go_type: BroadcastReceiver
-      methods:
-        - java_method: abortBroadcast
-          go_name: AbortBroadcast
-          returns: void
-          error: true
-        - java_method: clearAbortBroadcast
-          go_name: ClearAbortBroadcast
-          returns: void
-          error: true
-        - java_method: getAbortBroadcast
-          go_name: GetAbortBroadcast
-          returns: boolean
-          error: true
-        - java_method: getDebugUnregister
-          go_name: GetDebugUnregister
-          returns: boolean
-          error: true
-        - java_method: getResultCode
-          go_name: GetResultCode
-          returns: int
-          error: true
-        - java_method: getResultData
-          go_name: GetResultData
-          returns: String
-          error: true
-        - java_method: getResultExtras
-          go_name: GetResultExtras
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.os.Bundle
-          error: true
-        - java_method: getSentFromPackage
-          go_name: GetSentFromPackage
-          returns: String
-          error: true
-        - java_method: getSentFromUid
-          go_name: GetSentFromUid
-          returns: int
-          error: true
-        - java_method: goAsync
-          go_name: GoAsync
-          returns: android.content.BroadcastReceiver$PendingResult
-          error: true
-        - java_method: isInitialStickyBroadcast
-          go_name: IsInitialStickyBroadcast
-          returns: boolean
-          error: true
-        - java_method: isOrderedBroadcast
-          go_name: IsOrderedBroadcast
-          returns: boolean
-          error: true
-        - java_method: onReceive
-          go_name: OnReceive
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.content.Intent
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: peekService
-          go_name: PeekService
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.content.Intent
-              go_name: arg1
-          returns: android.os.IBinder
-          error: true
-        - java_method: setDebugUnregister
-          go_name: SetDebugUnregister
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setOrderedHint
-          go_name: SetOrderedHint
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setResult
-          go_name: SetResult
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: setResultCode
-          go_name: SetResultCode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setResultData
-          go_name: SetResultData
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setResultExtras
-          go_name: SetResultExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.BroadcastReceiver$PendingResult
-      go_type: BroadcastReceiverPendingResult
-      methods:
-        - java_method: abortBroadcast
-          go_name: AbortBroadcast
-          returns: void
-          error: true
-        - java_method: clearAbortBroadcast
-          go_name: ClearAbortBroadcast
-          returns: void
-          error: true
-        - java_method: finish
-          go_name: Finish
-          returns: void
-          error: true
-        - java_method: getAbortBroadcast
-          go_name: GetAbortBroadcast
-          returns: boolean
-          error: true
-        - java_method: getResultCode
-          go_name: GetResultCode
-          returns: int
-          error: true
-        - java_method: getResultData
-          go_name: GetResultData
-          returns: String
-          error: true
-        - java_method: getResultExtras
-          go_name: GetResultExtras
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.os.Bundle
-          error: true
-        - java_method: setResult
-          go_name: SetResult
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: setResultCode
-          go_name: SetResultCode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setResultData
-          go_name: SetResultData
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setResultExtras
-          go_name: SetResultExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.ReceiverCallNotAllowedException
-      go_type: ReceiverCallNotAllowedException
-    - java_class: android.content.SyncContext
-      go_type: SyncContext
-      methods:
-        - java_method: getSyncContextBinder
-          go_name: GetSyncContextBinder
-          returns: android.os.IBinder
-          error: true
-        - java_method: onFinished
-          go_name: OnFinished
-          params:
-            - java_type: android.content.SyncResult
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.PeriodicSync
-      go_type: PeriodicSync
+    - java_class: android.content.SyncInfo
+      go_type: SyncInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -325,178 +35,24 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.Entity
-      go_type: Entity
+    - java_class: android.content.ServiceConnection
+      go_type: ServiceConnection
       methods:
-        - java_method: addSubValue
-          go_name: AddSubValue
+        - java_method: onServiceConnected
+          go_name: OnServiceConnected
           params:
-            - java_type: android.net.Uri
+            - java_type: android.content.ComponentName
               go_name: arg0
-            - java_type: android.content.ContentValues
+            - java_type: android.os.IBinder
               go_name: arg1
           returns: void
           error: true
-        - java_method: getEntityValues
-          go_name: GetEntityValues
-          returns: android.content.ContentValues
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.content.Entity$NamedContentValues
-      go_type: EntityNamedContentValues
-    - java_class: android.content.SearchRecentSuggestionsProvider
-      go_type: SearchRecentSuggestionsProvider
-      methods:
-        - java_method: delete
-          go_name: Delete
+        - java_method: onServiceDisconnected
+          go_name: OnServiceDisconnected
           params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: java.lang.String[]
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: getType
-          go_name: GetType
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: insert
-          go_name: Insert
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues
-              go_name: arg1
-          returns: android.net.Uri
-          error: true
-        - java_method: onCreate
-          go_name: OnCreate
-          returns: boolean
-          error: true
-        - java_method: query
-          go_name: Query
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: java.lang.String[]
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-            - java_type: String
-              go_name: arg4
-          returns: android.database.Cursor
-          error: true
-        - java_method: update
-          go_name: Update
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-          returns: int
-          error: true
-    - java_class: android.content.ClipDescription
-      go_type: ClipDescription
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: filterMimeTypes
-          go_name: FilterMimeTypes
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.String[]
-          error: true
-        - java_method: getClassificationStatus
-          go_name: GetClassificationStatus
-          returns: int
-          error: true
-        - java_method: getConfidenceScore
-          go_name: GetConfidenceScore
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: float
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getMimeType
-          go_name: GetMimeType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getMimeTypeCount
-          go_name: GetMimeTypeCount
-          returns: int
-          error: true
-        - java_method: getTimestamp
-          go_name: GetTimestamp
-          returns: long
-          error: true
-        - java_method: hasMimeType
-          go_name: HasMimeType
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isStyledText
-          go_name: IsStyledText
-          returns: boolean
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.PersistableBundle
+            - java_type: android.content.ComponentName
               go_name: arg0
           returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: compareMimeTypes
-          go_name: CompareMimeTypes
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: boolean
           error: true
     - java_class: android.content.UriMatcher
       go_type: UriMatcher
@@ -519,98 +75,95 @@ classes:
               go_name: arg0
           returns: int
           error: true
-    - java_class: android.content.AsyncTaskLoader
-      go_type: AsyncTaskLoader
+    - java_class: android.content.UriPermission
+      go_type: UriPermission
       methods:
-        - java_method: cancelLoadInBackground
-          go_name: CancelLoadInBackground
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getPersistedTime
+          go_name: GetPersistedTime
+          returns: long
+          error: true
+        - java_method: getUri
+          go_name: GetUri
+          returns: android.net.Uri
+          error: true
+        - java_method: isReadPermission
+          go_name: IsReadPermission
+          returns: boolean
+          error: true
+        - java_method: isWritePermission
+          go_name: IsWritePermission
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
           error: true
-        - java_method: dump
-          go_name: Dump
+    - java_class: android.content.AbstractThreadedSyncAdapter
+      go_type: AbstractThreadedSyncAdapter
+      methods:
+        - java_method: getContext
+          go_name: GetContext
+          returns: android.content.Context
+          error: true
+        - java_method: getSyncAdapterBinder
+          go_name: GetSyncAdapterBinder
+          returns: android.os.IBinder
+          error: true
+        - java_method: onPerformSync
+          go_name: OnPerformSync
           params:
-            - java_type: String
+            - java_type: android.accounts.Account
               go_name: arg0
-            - java_type: java.io.FileDescriptor
+            - java_type: android.os.Bundle
               go_name: arg1
-            - java_type: java.io.PrintWriter
+            - java_type: String
               go_name: arg2
-            - java_type: java.lang.String[]
+            - java_type: android.content.ContentProviderClient
+              go_name: arg3
+            - java_type: android.content.SyncResult
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: onSecurityException
+          go_name: OnSecurityException
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.content.SyncResult
               go_name: arg3
           returns: void
           error: true
-        - java_method: isLoadInBackgroundCanceled
-          go_name: IsLoadInBackgroundCanceled
+        - java_method: onSyncCanceled
+          go_name: OnSyncCanceled0
+          returns: void
+          error: true
+        - java_method: onSyncCanceled
+          go_name: OnSyncCanceled1_1
+          params:
+            - java_type: java.lang.Thread
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onUnsyncableAccount
+          go_name: OnUnsyncableAccount
           returns: boolean
-          error: true
-        - java_method: setUpdateThrottle
-          go_name: SetUpdateThrottle
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.SyncStatusObserver
-      go_type: SyncStatusObserver
-      methods:
-        - java_method: onStatusChanged
-          go_name: OnStatusChanged
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.ContentQueryMap
-      go_type: QueryMap
-      methods:
-        - java_method: requery
-          go_name: Requery
-          returns: void
-          error: true
-        - java_method: setKeepUpdated
-          go_name: SetKeepUpdated
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.RestrictionsManager
-      go_type: RestrictionsManager
-      obtain: system_service
-      service_name: restrictions
-      close: true
-      methods:
-        - java_method: createLocalApprovalIntent
-          go_name: CreateLocalApprovalIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: getApplicationRestrictions
-          go_name: GetApplicationRestrictions
-          returns: android.os.Bundle
-          error: true
-        - java_method: hasRestrictionsProvider
-          go_name: HasRestrictionsProvider
-          returns: boolean
-          error: true
-        - java_method: notifyPermissionResponse
-          go_name: NotifyPermissionResponse
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.PersistableBundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: requestPermission
-          go_name: RequestPermission
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.PersistableBundle
-              go_name: arg2
-          returns: void
           error: true
     - java_class: android.content.SyncAdapterType
       go_type: SyncAdapterType
@@ -673,6 +226,138 @@ classes:
               go_name: arg1
           returns: android.content.SyncAdapterType
           error: true
+    - java_class: android.content.SyncRequest
+      go_type: SyncRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.SyncRequest$Builder
+      go_type: SyncRequestBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.content.SyncRequest
+          error: true
+        - java_method: setDisallowMetered
+          go_name: SetDisallowMetered
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setExpedited
+          go_name: SetExpedited
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setIgnoreBackoff
+          go_name: SetIgnoreBackoff
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setIgnoreSettings
+          go_name: SetIgnoreSettings
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setManual
+          go_name: SetManual
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setNoRetry
+          go_name: SetNoRetry
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setRequiresCharging
+          go_name: SetRequiresCharging
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setScheduleAsExpeditedJob
+          go_name: SetScheduleAsExpeditedJob
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: setSyncAdapter
+          go_name: SetSyncAdapter
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: syncOnce
+          go_name: SyncOnce
+          returns: android.content.SyncRequest$Builder
+          error: true
+        - java_method: syncPeriodic
+          go_name: SyncPeriodic
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.content.SyncRequest$Builder
+          error: true
+    - java_class: android.content.SyncStats
+      go_type: SyncStats
+      methods:
+        - java_method: clear
+          go_name: Clear
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.content.UriRelativeFilter
       go_type: UriRelativeFilter
       methods:
@@ -710,312 +395,14 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.content.OperationApplicationException
-      go_type: OperationApplicationException
+    - java_class: android.content.ComponentCallbacks2
+      go_type: ComponentCallbacks2
       methods:
-        - java_method: getNumSuccessfulYieldPoints
-          go_name: GetNumSuccessfulYieldPoints
-          returns: int
-          error: true
-    - java_class: android.content.SyncResult
-      go_type: SyncResult
-      methods:
-        - java_method: clear
-          go_name: Clear
-          returns: void
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: hasError
-          go_name: HasError
-          returns: boolean
-          error: true
-        - java_method: hasHardError
-          go_name: HasHardError
-          returns: boolean
-          error: true
-        - java_method: hasSoftError
-          go_name: HasSoftError
-          returns: boolean
-          error: true
-        - java_method: madeSomeProgress
-          go_name: MadeSomeProgress
-          returns: boolean
-          error: true
-        - java_method: toDebugString
-          go_name: ToDebugString
-          returns: String
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: onTrimMemory
+          go_name: OnTrimMemory
           params:
-            - java_type: android.os.Parcel
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.ContentValues
-      go_type: Values
-      methods:
-        - java_method: clear
-          go_name: Clear
-          returns: void
-          error: true
-        - java_method: containsKey
-          go_name: ContainsKey
-          params:
-            - java_type: String
               go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: get
-          go_name: Get
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Object
-          error: true
-        - java_method: getAsBoolean
-          go_name: GetAsBoolean
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Boolean
-          error: true
-        - java_method: getAsByte
-          go_name: GetAsByte
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Byte
-          error: true
-        - java_method: getAsByteArray
-          go_name: GetAsByteArray
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[B'
-          error: true
-        - java_method: getAsDouble
-          go_name: GetAsDouble
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Double
-          error: true
-        - java_method: getAsFloat
-          go_name: GetAsFloat
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Float
-          error: true
-        - java_method: getAsInteger
-          go_name: GetAsInteger
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Integer
-          error: true
-        - java_method: getAsLong
-          go_name: GetAsLong
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Long
-          error: true
-        - java_method: getAsShort
-          go_name: GetAsShort
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: java.lang.Short
-          error: true
-        - java_method: getAsString
-          go_name: GetAsString
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isEmpty
-          go_name: IsEmpty
-          returns: boolean
-          error: true
-        - java_method: put
-          go_name: Put2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Byte
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_3
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Double
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_4
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Float
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_5
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Integer
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_6
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Long
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_7
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Short
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: put
-          go_name: Put2_8
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: putAll
-          go_name: PutAll
-          params:
-            - java_type: android.content.ContentValues
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: putNull
-          go_name: PutNull
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: remove
-          go_name: Remove
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: size
-          go_name: Size
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.LocusId
-      go_type: LocusId
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
           returns: void
           error: true
     - java_class: android.content.RestrictionEntry
@@ -1199,573 +586,6 @@ classes:
             - java_type: android.content.RestrictionEntry[]
               go_name: arg1
           returns: android.content.RestrictionEntry
-          error: true
-    - java_class: android.content.ComponentCallbacks
-      go_type: ComponentCallbacks
-      methods:
-        - java_method: onConfigurationChanged
-          go_name: OnConfigurationChanged
-          params:
-            - java_type: android.content.res.Configuration
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onLowMemory
-          go_name: OnLowMemory
-          returns: void
-          error: true
-    - java_class: android.content.IntentSender
-      go_type: IntentSender
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getCreatorPackage
-          go_name: GetCreatorPackage
-          returns: String
-          error: true
-        - java_method: getCreatorUid
-          go_name: GetCreatorUid
-          returns: int
-          error: true
-        - java_method: getCreatorUserHandle
-          go_name: GetCreatorUserHandle
-          returns: android.os.UserHandle
-          error: true
-        - java_method: getTargetPackage
-          go_name: GetTargetPackage
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: sendIntent
-          go_name: SendIntent
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.content.Intent
-              go_name: arg2
-            - java_type: String
-              go_name: arg3
-            - java_type: android.os.Bundle
-              go_name: arg4
-            - java_type: java.util.concurrent.Executor
-              go_name: arg5
-            - java_type: android.content.IntentSender$OnFinished
-              go_name: arg6
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: readIntentSenderOrNullFromParcel
-          go_name: ReadIntentSenderOrNullFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: android.content.IntentSender
-          error: true
-        - java_method: writeIntentSenderOrNullToParcel
-          go_name: WriteIntentSenderOrNullToParcel
-          params:
-            - java_type: android.content.IntentSender
-              go_name: arg0
-            - java_type: android.os.Parcel
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.IntentSender$OnFinished
-      go_type: IntentSenderOnFinished
-      methods:
-        - java_method: onSendFinished
-          go_name: OnSendFinished
-          params:
-            - java_type: android.content.IntentSender
-              go_name: arg0
-            - java_type: android.content.Intent
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: String
-              go_name: arg3
-            - java_type: android.os.Bundle
-              go_name: arg4
-          returns: void
-          error: true
-    - java_class: android.content.IntentSender$SendIntentException
-      go_type: IntentSenderSendIntentException
-    - java_class: android.content.EntityIterator
-      go_type: EntityIterator
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: reset
-          go_name: Reset
-          returns: void
-          error: true
-    - java_class: android.content.ComponentName
-      go_type: ComponentName
-      methods:
-        - java_method: clone
-          go_name: Clone0
-          returns: android.content.ComponentName
-          error: true
-        - java_method: compareTo
-          go_name: CompareTo1
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: flattenToShortString
-          go_name: FlattenToShortString
-          returns: String
-          error: true
-        - java_method: flattenToString
-          go_name: FlattenToString
-          returns: String
-          error: true
-        - java_method: getClassName
-          go_name: GetClassName
-          returns: String
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: getShortClassName
-          go_name: GetShortClassName
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toShortString
-          go_name: ToShortString
-          returns: String
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel2_1
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone0_1
-          returns: java.lang.Object
-          error: true
-        - java_method: compareTo
-          go_name: CompareTo1_1
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: int
-          error: true
-      static_methods:
-        - java_method: createRelative
-          go_name: CreateRelative2
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.ComponentName
-          error: true
-        - java_method: createRelative
-          go_name: CreateRelative2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.ComponentName
-          error: true
-        - java_method: readFromParcel
-          go_name: ReadFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: android.content.ComponentName
-          error: true
-        - java_method: unflattenFromString
-          go_name: UnflattenFromString
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.ComponentName
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel2
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-            - java_type: android.os.Parcel
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.ActivityNotFoundException
-      go_type: ActivityNotFoundException
-    - java_class: android.content.ContextParams
-      go_type: ContextParams
-      methods:
-        - java_method: getAttributionTag
-          go_name: GetAttributionTag
-          returns: String
-          error: true
-        - java_method: getNextAttributionSource
-          go_name: GetNextAttributionSource
-          returns: android.content.AttributionSource
-          error: true
-        - java_method: shouldRegisterAttributionSource
-          go_name: ShouldRegisterAttributionSource
-          returns: boolean
-          error: true
-    - java_class: android.content.ContextParams$Builder
-      go_type: ContextParamsBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.content.ContextParams
-          error: true
-        - java_method: setAttributionTag
-          go_name: SetAttributionTag
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.ContextParams$Builder
-          error: true
-        - java_method: setNextAttributionSource
-          go_name: SetNextAttributionSource
-          params:
-            - java_type: android.content.AttributionSource
-              go_name: arg0
-          returns: android.content.ContextParams$Builder
-          error: true
-        - java_method: setShouldRegisterAttributionSource
-          go_name: SetShouldRegisterAttributionSource
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.ContextParams$Builder
-          error: true
-    - java_class: android.content.ContentProviderClient
-      go_type: ProviderClient
-      methods:
-        - java_method: bulkInsert
-          go_name: BulkInsert
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues[]
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: call
-          go_name: Call3
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: android.os.Bundle
-          error: true
-        - java_method: call
-          go_name: Call4_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: android.os.Bundle
-              go_name: arg3
-          returns: android.os.Bundle
-          error: true
-        - java_method: canonicalize
-          go_name: Canonicalize
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: delete
-          go_name: Delete2
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: delete
-          go_name: Delete3_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: java.lang.String[]
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: getLocalContentProvider
-          go_name: GetLocalContentProvider
-          returns: android.content.ContentProvider
-          error: true
-        - java_method: getStreamTypes
-          go_name: GetStreamTypes
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: java.lang.String[]
-          error: true
-        - java_method: getType
-          go_name: GetType
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: insert
-          go_name: Insert2
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues
-              go_name: arg1
-          returns: android.net.Uri
-          error: true
-        - java_method: insert
-          go_name: Insert3_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: android.net.Uri
-          error: true
-        - java_method: openAssetFile
-          go_name: OpenAssetFile2
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.res.AssetFileDescriptor
-          error: true
-        - java_method: openAssetFile
-          go_name: OpenAssetFile3_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.CancellationSignal
-              go_name: arg2
-          returns: android.content.res.AssetFileDescriptor
-          error: true
-        - java_method: openFile
-          go_name: OpenFile2
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.os.ParcelFileDescriptor
-          error: true
-        - java_method: openFile
-          go_name: OpenFile3_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.CancellationSignal
-              go_name: arg2
-          returns: android.os.ParcelFileDescriptor
-          error: true
-        - java_method: openTypedAssetFile
-          go_name: OpenTypedAssetFile
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-            - java_type: android.os.CancellationSignal
-              go_name: arg3
-          returns: android.content.res.AssetFileDescriptor
-          error: true
-        - java_method: openTypedAssetFileDescriptor
-          go_name: OpenTypedAssetFileDescriptor3
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: android.content.res.AssetFileDescriptor
-          error: true
-        - java_method: openTypedAssetFileDescriptor
-          go_name: OpenTypedAssetFileDescriptor4_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-            - java_type: android.os.CancellationSignal
-              go_name: arg3
-          returns: android.content.res.AssetFileDescriptor
-          error: true
-        - java_method: query
-          go_name: Query4
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: java.lang.String[]
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-            - java_type: android.os.CancellationSignal
-              go_name: arg3
-          returns: android.database.Cursor
-          error: true
-        - java_method: query
-          go_name: Query5_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: java.lang.String[]
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-            - java_type: String
-              go_name: arg4
-          returns: android.database.Cursor
-          error: true
-        - java_method: query
-          go_name: Query6_2
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: java.lang.String[]
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-            - java_type: String
-              go_name: arg4
-            - java_type: android.os.CancellationSignal
-              go_name: arg5
-          returns: android.database.Cursor
-          error: true
-        - java_method: refresh
-          go_name: Refresh
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-            - java_type: android.os.CancellationSignal
-              go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: release
-          go_name: Release
-          returns: boolean
-          error: true
-        - java_method: uncanonicalize
-          go_name: Uncanonicalize
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: update
-          go_name: Update3
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: update
-          go_name: Update4_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.content.ContentValues
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-          returns: int
           error: true
     - java_class: android.content.res.Resources
       go_type: Resources
@@ -2333,6 +1153,453 @@ classes:
           go_name: ToString
           returns: String
           error: true
+    - java_class: android.content.IntentFilter
+      go_type: IntentFilter
+      methods:
+        - java_method: addAction
+          go_name: AddAction
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addCategory
+          go_name: AddCategory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addDataAuthority
+          go_name: AddDataAuthority
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addDataPath
+          go_name: AddDataPath
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addDataScheme
+          go_name: AddDataScheme
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addDataSchemeSpecificPart
+          go_name: AddDataSchemeSpecificPart
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addDataType
+          go_name: AddDataType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addUriRelativeFilterGroup
+          go_name: AddUriRelativeFilterGroup
+          params:
+            - java_type: android.content.UriRelativeFilterGroup
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clearUriRelativeFilterGroups
+          go_name: ClearUriRelativeFilterGroups
+          returns: void
+          error: true
+        - java_method: countActions
+          go_name: CountActions
+          returns: int
+          error: true
+        - java_method: countCategories
+          go_name: CountCategories
+          returns: int
+          error: true
+        - java_method: countDataAuthorities
+          go_name: CountDataAuthorities
+          returns: int
+          error: true
+        - java_method: countDataPaths
+          go_name: CountDataPaths
+          returns: int
+          error: true
+        - java_method: countDataSchemeSpecificParts
+          go_name: CountDataSchemeSpecificParts
+          returns: int
+          error: true
+        - java_method: countDataSchemes
+          go_name: CountDataSchemes
+          returns: int
+          error: true
+        - java_method: countDataTypes
+          go_name: CountDataTypes
+          returns: int
+          error: true
+        - java_method: countUriRelativeFilterGroups
+          go_name: CountUriRelativeFilterGroups
+          returns: int
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: android.util.Printer
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getAction
+          go_name: GetAction
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getCategory
+          go_name: GetCategory
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getDataAuthority
+          go_name: GetDataAuthority
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.IntentFilter$AuthorityEntry
+          error: true
+        - java_method: getDataPath
+          go_name: GetDataPath
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.os.PatternMatcher
+          error: true
+        - java_method: getDataScheme
+          go_name: GetDataScheme
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getDataSchemeSpecificPart
+          go_name: GetDataSchemeSpecificPart
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.os.PatternMatcher
+          error: true
+        - java_method: getDataType
+          go_name: GetDataType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getPriority
+          go_name: GetPriority
+          returns: int
+          error: true
+        - java_method: getUriRelativeFilterGroup
+          go_name: GetUriRelativeFilterGroup
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.UriRelativeFilterGroup
+          error: true
+        - java_method: hasAction
+          go_name: HasAction
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasCategory
+          go_name: HasCategory
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasDataAuthority
+          go_name: HasDataAuthority
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasDataPath
+          go_name: HasDataPath
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasDataScheme
+          go_name: HasDataScheme
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasDataSchemeSpecificPart
+          go_name: HasDataSchemeSpecificPart
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasDataType
+          go_name: HasDataType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: match
+          go_name: Match
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: int
+          error: true
+        - java_method: matchAction
+          go_name: MatchAction
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: matchData
+          go_name: MatchData
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: matchDataAuthority
+          go_name: MatchDataAuthority
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: readFromXml
+          go_name: ReadFromXml
+          params:
+            - java_type: org.xmlpull.v1.XmlPullParser
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPriority
+          go_name: SetPriority
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: writeToXml
+          go_name: WriteToXml
+          params:
+            - java_type: org.xmlpull.v1.XmlSerializer
+              go_name: arg0
+          returns: void
+          error: true
+      static_methods:
+        - java_method: create
+          go_name: Create
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.IntentFilter
+          error: true
+    - java_class: android.content.IntentFilter$AuthorityEntry
+      go_type: IntentFilterAuthorityEntry
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getHost
+          go_name: GetHost
+          returns: String
+          error: true
+        - java_method: getPort
+          go_name: GetPort
+          returns: int
+          error: true
+        - java_method: match
+          go_name: Match
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: int
+          error: true
+    - java_class: android.content.IntentFilter$MalformedMimeTypeException
+      go_type: IntentFilterMalformedMimeTypeException
+    - java_class: android.content.ContentQueryMap
+      go_type: QueryMap
+      methods:
+        - java_method: requery
+          go_name: Requery
+          returns: void
+          error: true
+        - java_method: setKeepUpdated
+          go_name: SetKeepUpdated
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.SyncContext
+      go_type: SyncContext
+      methods:
+        - java_method: getSyncContextBinder
+          go_name: GetSyncContextBinder
+          returns: android.os.IBinder
+          error: true
+        - java_method: onFinished
+          go_name: OnFinished
+          params:
+            - java_type: android.content.SyncResult
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.UriRelativeFilterGroup
+      go_type: UriRelativeFilterGroup
+      methods:
+        - java_method: addUriRelativeFilter
+          go_name: AddUriRelativeFilter
+          params:
+            - java_type: android.content.UriRelativeFilter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAction
+          go_name: GetAction
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: matchData
+          go_name: MatchData
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.content.SyncResult
+      go_type: SyncResult
+      methods:
+        - java_method: clear
+          go_name: Clear
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: hasError
+          go_name: HasError
+          returns: boolean
+          error: true
+        - java_method: hasHardError
+          go_name: HasHardError
+          returns: boolean
+          error: true
+        - java_method: hasSoftError
+          go_name: HasSoftError
+          returns: boolean
+          error: true
+        - java_method: madeSomeProgress
+          go_name: MadeSomeProgress
+          returns: boolean
+          error: true
+        - java_method: toDebugString
+          go_name: ToDebugString
+          returns: String
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.EntityIterator
+      go_type: EntityIterator
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
     - java_class: android.content.CursorLoader
       go_type: CursorLoader
       methods:
@@ -2443,461 +1710,6 @@ classes:
             - java_type: java.lang.Object
               go_name: arg0
           returns: void
-          error: true
-    - java_class: android.content.Loader
-      go_type: Loader
-      methods:
-        - java_method: abandon
-          go_name: Abandon
-          returns: void
-          error: true
-        - java_method: cancelLoad
-          go_name: CancelLoad
-          returns: boolean
-          error: true
-        - java_method: commitContentChanged
-          go_name: CommitContentChanged
-          returns: void
-          error: true
-        - java_method: deliverCancellation
-          go_name: DeliverCancellation
-          returns: void
-          error: true
-        - java_method: dump
-          go_name: Dump
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.io.FileDescriptor
-              go_name: arg1
-            - java_type: java.io.PrintWriter
-              go_name: arg2
-            - java_type: java.lang.String[]
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: forceLoad
-          go_name: ForceLoad
-          returns: void
-          error: true
-        - java_method: getContext
-          go_name: GetContext
-          returns: android.content.Context
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: int
-          error: true
-        - java_method: isAbandoned
-          go_name: IsAbandoned
-          returns: boolean
-          error: true
-        - java_method: isReset
-          go_name: IsReset
-          returns: boolean
-          error: true
-        - java_method: isStarted
-          go_name: IsStarted
-          returns: boolean
-          error: true
-        - java_method: onContentChanged
-          go_name: OnContentChanged
-          returns: void
-          error: true
-        - java_method: reset
-          go_name: Reset
-          returns: void
-          error: true
-        - java_method: rollbackContentChanged
-          go_name: RollbackContentChanged
-          returns: void
-          error: true
-        - java_method: startLoading
-          go_name: StartLoading
-          returns: void
-          error: true
-        - java_method: stopLoading
-          go_name: StopLoading
-          returns: void
-          error: true
-        - java_method: takeContentChanged
-          go_name: TakeContentChanged
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.content.Loader$ForceLoadContentObserver
-      go_type: LoaderForceLoadContentObserver
-      methods:
-        - java_method: deliverSelfNotifications
-          go_name: DeliverSelfNotifications
-          returns: boolean
-          error: true
-        - java_method: onChange
-          go_name: OnChange
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.Loader$OnLoadCanceledListener
-      go_type: LoaderOnLoadCanceledListener
-    - java_class: android.content.Loader$OnLoadCompleteListener
-      go_type: LoaderOnLoadCompleteListener
-    - java_class: android.content.UriRelativeFilterGroup
-      go_type: UriRelativeFilterGroup
-      methods:
-        - java_method: addUriRelativeFilter
-          go_name: AddUriRelativeFilter
-          params:
-            - java_type: android.content.UriRelativeFilter
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAction
-          go_name: GetAction
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: matchData
-          go_name: MatchData
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.content.MutableContextWrapper
-      go_type: MutableContextWrapper
-      methods:
-        - java_method: setBaseContext
-          go_name: SetBaseContext
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.ComponentCallbacks2
-      go_type: ComponentCallbacks2
-      methods:
-        - java_method: onTrimMemory
-          go_name: OnTrimMemory
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.ServiceConnection
-      go_type: ServiceConnection
-      methods:
-        - java_method: onServiceConnected
-          go_name: OnServiceConnected
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-            - java_type: android.os.IBinder
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onServiceDisconnected
-          go_name: OnServiceDisconnected
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.DialogInterface
-      go_type: DialogInterface
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: void
-          error: true
-        - java_method: dismiss
-          go_name: Dismiss
-          returns: void
-          error: true
-    - java_class: android.content.DialogInterface$OnCancelListener
-      go_type: DialogInterfaceOnCancelListener
-      methods:
-        - java_method: onCancel
-          go_name: OnCancel
-          params:
-            - java_type: android.content.DialogInterface
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.DialogInterface$OnClickListener
-      go_type: DialogInterfaceOnClickListener
-      methods:
-        - java_method: onClick
-          go_name: OnClick
-          params:
-            - java_type: android.content.DialogInterface
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.DialogInterface$OnDismissListener
-      go_type: DialogInterfaceOnDismissListener
-      methods:
-        - java_method: onDismiss
-          go_name: OnDismiss
-          params:
-            - java_type: android.content.DialogInterface
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.DialogInterface$OnKeyListener
-      go_type: DialogInterfaceOnKeyListener
-      methods:
-        - java_method: onKey
-          go_name: OnKey
-          params:
-            - java_type: android.content.DialogInterface
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.view.KeyEvent
-              go_name: arg2
-          returns: boolean
-          error: true
-    - java_class: android.content.DialogInterface$OnMultiChoiceClickListener
-      go_type: DialogInterfaceOnMultiChoiceClickListener
-      methods:
-        - java_method: onClick
-          go_name: OnClick
-          params:
-            - java_type: android.content.DialogInterface
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.content.DialogInterface$OnShowListener
-      go_type: DialogInterfaceOnShowListener
-      methods:
-        - java_method: onShow
-          go_name: OnShow
-          params:
-            - java_type: android.content.DialogInterface
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.content.AbstractThreadedSyncAdapter
-      go_type: AbstractThreadedSyncAdapter
-      methods:
-        - java_method: getContext
-          go_name: GetContext
-          returns: android.content.Context
-          error: true
-        - java_method: getSyncAdapterBinder
-          go_name: GetSyncAdapterBinder
-          returns: android.os.IBinder
-          error: true
-        - java_method: onPerformSync
-          go_name: OnPerformSync
-          params:
-            - java_type: android.accounts.Account
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: android.content.ContentProviderClient
-              go_name: arg3
-            - java_type: android.content.SyncResult
-              go_name: arg4
-          returns: void
-          error: true
-        - java_method: onSecurityException
-          go_name: OnSecurityException
-          params:
-            - java_type: android.accounts.Account
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: android.content.SyncResult
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onSyncCanceled
-          go_name: OnSyncCanceled0
-          returns: void
-          error: true
-        - java_method: onSyncCanceled
-          go_name: OnSyncCanceled1_1
-          params:
-            - java_type: java.lang.Thread
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onUnsyncableAccount
-          go_name: OnUnsyncableAccount
-          returns: boolean
-          error: true
-    - java_class: android.content.SyncRequest
-      go_type: SyncRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.SyncRequest$Builder
-      go_type: SyncRequestBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.content.SyncRequest
-          error: true
-        - java_method: setDisallowMetered
-          go_name: SetDisallowMetered
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setExpedited
-          go_name: SetExpedited
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setIgnoreBackoff
-          go_name: SetIgnoreBackoff
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setIgnoreSettings
-          go_name: SetIgnoreSettings
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setManual
-          go_name: SetManual
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setNoRetry
-          go_name: SetNoRetry
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setRequiresCharging
-          go_name: SetRequiresCharging
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setScheduleAsExpeditedJob
-          go_name: SetScheduleAsExpeditedJob
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: setSyncAdapter
-          go_name: SetSyncAdapter
-          params:
-            - java_type: android.accounts.Account
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: syncOnce
-          go_name: SyncOnce
-          returns: android.content.SyncRequest$Builder
-          error: true
-        - java_method: syncPeriodic
-          go_name: SyncPeriodic
-          params:
-            - java_type: long
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: android.content.SyncRequest$Builder
-          error: true
-    - java_class: android.content.ContentUris
-      go_type: Uris
-      static_methods:
-        - java_method: appendId
-          go_name: AppendId
-          params:
-            - java_type: android.net.Uri$Builder
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: android.net.Uri$Builder
-          error: true
-        - java_method: parseId
-          go_name: ParseId
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: removeId
-          go_name: RemoveId
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: withAppendedId
-          go_name: WithAppendedId
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: android.net.Uri
           error: true
     - java_class: android.content.ContextWrapper
       go_type: ContextWrapper
@@ -3856,495 +2668,549 @@ classes:
               go_name: arg2
           returns: void
           error: true
-    - java_class: android.content.AttributionSource
-      go_type: AttributionSource
+    - java_class: android.content.BroadcastReceiver
+      go_type: BroadcastReceiver
       methods:
-        - java_method: checkCallingUid
-          go_name: CheckCallingUid
-          returns: boolean
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: enforceCallingUid
-          go_name: EnforceCallingUid
+        - java_method: abortBroadcast
+          go_name: AbortBroadcast
           returns: void
           error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
+        - java_method: clearAbortBroadcast
+          go_name: ClearAbortBroadcast
+          returns: void
+          error: true
+        - java_method: getAbortBroadcast
+          go_name: GetAbortBroadcast
           returns: boolean
           error: true
-        - java_method: getAttributionTag
-          go_name: GetAttributionTag
+        - java_method: getDebugUnregister
+          go_name: GetDebugUnregister
+          returns: boolean
+          error: true
+        - java_method: getResultCode
+          go_name: GetResultCode
+          returns: int
+          error: true
+        - java_method: getResultData
+          go_name: GetResultData
           returns: String
           error: true
-        - java_method: getDeviceId
-          go_name: GetDeviceId
-          returns: int
+        - java_method: getResultExtras
+          go_name: GetResultExtras
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.os.Bundle
           error: true
-        - java_method: getNext
-          go_name: GetNext
-          returns: android.content.AttributionSource
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
+        - java_method: getSentFromPackage
+          go_name: GetSentFromPackage
           returns: String
           error: true
-        - java_method: getPid
-          go_name: GetPid
+        - java_method: getSentFromUid
+          go_name: GetSentFromUid
           returns: int
           error: true
-        - java_method: getUid
-          go_name: GetUid
-          returns: int
+        - java_method: goAsync
+          go_name: GoAsync
+          returns: android.content.BroadcastReceiver$PendingResult
           error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
+        - java_method: isInitialStickyBroadcast
+          go_name: IsInitialStickyBroadcast
+          returns: boolean
           error: true
-        - java_method: isTrusted
-          go_name: IsTrusted
+        - java_method: isOrderedBroadcast
+          go_name: IsOrderedBroadcast
+          returns: boolean
+          error: true
+        - java_method: onReceive
+          go_name: OnReceive
           params:
             - java_type: android.content.Context
               go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
+            - java_type: android.content.Intent
               go_name: arg1
           returns: void
           error: true
-      static_methods:
-        - java_method: myAttributionSource
-          go_name: MyAttributionSource
-          returns: android.content.AttributionSource
-          error: true
-    - java_class: android.content.AttributionSource$Builder
-      go_type: AttributionSourceBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.content.AttributionSource
-          error: true
-        - java_method: setAttributionTag
-          go_name: SetAttributionTag
+        - java_method: peekService
+          go_name: PeekService
           params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+          returns: android.os.IBinder
+          error: true
+        - java_method: setDebugUnregister
+          go_name: SetDebugUnregister
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOrderedHint
+          go_name: SetOrderedHint
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResult
+          go_name: SetResult
+          params:
+            - java_type: int
+              go_name: arg0
             - java_type: String
-              go_name: arg0
-          returns: android.content.AttributionSource$Builder
-          error: true
-        - java_method: setDeviceId
-          go_name: SetDeviceId
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.AttributionSource$Builder
-          error: true
-        - java_method: setNext
-          go_name: SetNext
-          params:
-            - java_type: android.content.AttributionSource
-              go_name: arg0
-          returns: android.content.AttributionSource$Builder
-          error: true
-        - java_method: setPackageName
-          go_name: SetPackageName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.AttributionSource$Builder
-          error: true
-        - java_method: setPid
-          go_name: SetPid
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.AttributionSource$Builder
-          error: true
-    - java_class: android.content.UriPermission
-      go_type: UriPermission
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getPersistedTime
-          go_name: GetPersistedTime
-          returns: long
-          error: true
-        - java_method: getUri
-          go_name: GetUri
-          returns: android.net.Uri
-          error: true
-        - java_method: isReadPermission
-          go_name: IsReadPermission
-          returns: boolean
-          error: true
-        - java_method: isWritePermission
-          go_name: IsWritePermission
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
               go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.SyncInfo
-      go_type: SyncInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.SyncStats
-      go_type: SyncStats
-      methods:
-        - java_method: clear
-          go_name: Clear
-          returns: void
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.ContentProviderOperation
-      go_type: ProviderOperation
-      methods:
-        - java_method: apply
-          go_name: Apply
-          params:
-            - java_type: android.content.ContentProvider
-              go_name: arg0
-            - java_type: android.content.ContentProviderResult[]
-              go_name: arg1
-            - java_type: int
+            - java_type: android.os.Bundle
               go_name: arg2
-          returns: android.content.ContentProviderResult
+          returns: void
           error: true
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: setResultCode
+          go_name: SetResultCode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResultData
+          go_name: SetResultData
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResultExtras
+          go_name: SetResultExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.BroadcastReceiver$PendingResult
+      go_type: BroadcastReceiverPendingResult
+      methods:
+        - java_method: abortBroadcast
+          go_name: AbortBroadcast
+          returns: void
+          error: true
+        - java_method: clearAbortBroadcast
+          go_name: ClearAbortBroadcast
+          returns: void
+          error: true
+        - java_method: finish
+          go_name: Finish
+          returns: void
+          error: true
+        - java_method: getAbortBroadcast
+          go_name: GetAbortBroadcast
+          returns: boolean
+          error: true
+        - java_method: getResultCode
+          go_name: GetResultCode
           returns: int
           error: true
-        - java_method: getUri
-          go_name: GetUri
-          returns: android.net.Uri
+        - java_method: getResultData
+          go_name: GetResultData
+          returns: String
           error: true
-        - java_method: isAssertQuery
-          go_name: IsAssertQuery
-          returns: boolean
-          error: true
-        - java_method: isCall
-          go_name: IsCall
-          returns: boolean
-          error: true
-        - java_method: isDelete
-          go_name: IsDelete
-          returns: boolean
-          error: true
-        - java_method: isExceptionAllowed
-          go_name: IsExceptionAllowed
-          returns: boolean
-          error: true
-        - java_method: isInsert
-          go_name: IsInsert
-          returns: boolean
-          error: true
-        - java_method: isReadOperation
-          go_name: IsReadOperation
-          returns: boolean
-          error: true
-        - java_method: isUpdate
-          go_name: IsUpdate
-          returns: boolean
-          error: true
-        - java_method: isWriteOperation
-          go_name: IsWriteOperation
-          returns: boolean
-          error: true
-        - java_method: isYieldAllowed
-          go_name: IsYieldAllowed
-          returns: boolean
-          error: true
-        - java_method: resolveExtrasBackReferences
-          go_name: ResolveExtrasBackReferences
+        - java_method: getResultExtras
+          go_name: GetResultExtras
           params:
-            - java_type: android.content.ContentProviderResult[]
+            - java_type: boolean
               go_name: arg0
-            - java_type: int
-              go_name: arg1
           returns: android.os.Bundle
           error: true
-        - java_method: resolveSelectionArgsBackReferences
-          go_name: ResolveSelectionArgsBackReferences
+        - java_method: setResult
+          go_name: SetResult
           params:
-            - java_type: android.content.ContentProviderResult[]
-              go_name: arg0
             - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setResultCode
+          go_name: SetResultCode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResultData
+          go_name: SetResultData
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setResultExtras
+          go_name: SetResultExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.ContentProviderClient
+      go_type: ProviderClient
+      methods:
+        - java_method: bulkInsert
+          go_name: BulkInsert
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues[]
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: call
+          go_name: Call3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: android.os.Bundle
+          error: true
+        - java_method: call
+          go_name: Call4_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.os.Bundle
+              go_name: arg3
+          returns: android.os.Bundle
+          error: true
+        - java_method: canonicalize
+          go_name: Canonicalize
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: delete
+          go_name: Delete2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: delete
+          go_name: Delete3_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: java.lang.String[]
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: getLocalContentProvider
+          go_name: GetLocalContentProvider
+          returns: android.content.ContentProvider
+          error: true
+        - java_method: getStreamTypes
+          go_name: GetStreamTypes
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
               go_name: arg1
           returns: java.lang.String[]
           error: true
-        - java_method: resolveValueBackReferences
-          go_name: ResolveValueBackReferences
+        - java_method: getType
+          go_name: GetType
           params:
-            - java_type: android.content.ContentProviderResult[]
+            - java_type: android.net.Uri
               go_name: arg0
-            - java_type: int
+          returns: String
+          error: true
+        - java_method: insert
+          go_name: Insert2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues
               go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: insert
+          go_name: Insert3_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+        - java_method: openAssetFile
+          go_name: OpenAssetFile2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: openAssetFile
+          go_name: OpenAssetFile3_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: openFile
+          go_name: OpenFile2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: openFile
+          go_name: OpenFile3_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: openTypedAssetFile
+          go_name: OpenTypedAssetFile
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: android.os.CancellationSignal
+              go_name: arg3
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: openTypedAssetFileDescriptor
+          go_name: OpenTypedAssetFileDescriptor3
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: openTypedAssetFileDescriptor
+          go_name: OpenTypedAssetFileDescriptor4_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: android.os.CancellationSignal
+              go_name: arg3
+          returns: android.content.res.AssetFileDescriptor
+          error: true
+        - java_method: query
+          go_name: Query4
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+            - java_type: android.os.CancellationSignal
+              go_name: arg3
+          returns: android.database.Cursor
+          error: true
+        - java_method: query
+          go_name: Query5_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+          returns: android.database.Cursor
+          error: true
+        - java_method: query
+          go_name: Query6_2
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: android.os.CancellationSignal
+              go_name: arg5
+          returns: android.database.Cursor
+          error: true
+        - java_method: refresh
+          go_name: Refresh
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+            - java_type: android.os.CancellationSignal
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: release
+          go_name: Release
+          returns: boolean
+          error: true
+        - java_method: uncanonicalize
+          go_name: Uncanonicalize
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: update
+          go_name: Update3
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: update
+          go_name: Update4_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+          returns: int
+          error: true
+    - java_class: android.content.Entity
+      go_type: Entity
+      methods:
+        - java_method: addSubValue
+          go_name: AddSubValue
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getEntityValues
+          go_name: GetEntityValues
           returns: android.content.ContentValues
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: newAssertQuery
-          go_name: NewAssertQuery
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: newCall
-          go_name: NewCall
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: newDelete
-          go_name: NewDelete
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: newInsert
-          go_name: NewInsert
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: newUpdate
-          go_name: NewUpdate
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-    - java_class: android.content.ContentProviderOperation$Builder
-      go_type: ProviderOperationBuilder
+    - java_class: android.content.Entity$NamedContentValues
+      go_type: EntityNamedContentValues
+    - java_class: android.content.SearchRecentSuggestionsProvider
+      go_type: SearchRecentSuggestionsProvider
       methods:
-        - java_method: build
-          go_name: Build
-          returns: android.content.ContentProviderOperation
-          error: true
-        - java_method: withExceptionAllowed
-          go_name: WithExceptionAllowed
+        - java_method: delete
+          go_name: Delete
           params:
-            - java_type: boolean
+            - java_type: android.net.Uri
               go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withExpectedCount
-          go_name: WithExpectedCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withExtra
-          go_name: WithExtra
-          params:
             - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Object
               go_name: arg1
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withExtraBackReference
-          go_name: WithExtraBackReference2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withExtraBackReference
-          go_name: WithExtraBackReference3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: String
+            - java_type: java.lang.String[]
               go_name: arg2
-          returns: android.content.ContentProviderOperation$Builder
+          returns: int
           error: true
-        - java_method: withExtras
-          go_name: WithExtras
+        - java_method: getType
+          go_name: GetType
           params:
-            - java_type: android.os.Bundle
+            - java_type: android.net.Uri
               go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
+          returns: String
           error: true
-        - java_method: withSelection
-          go_name: WithSelection
+        - java_method: insert
+          go_name: Insert
           params:
-            - java_type: String
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.content.ContentValues
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: onCreate
+          go_name: OnCreate
+          returns: boolean
+          error: true
+        - java_method: query
+          go_name: Query
+          params:
+            - java_type: android.net.Uri
               go_name: arg0
             - java_type: java.lang.String[]
               go_name: arg1
-          returns: android.content.ContentProviderOperation$Builder
+            - java_type: String
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+          returns: android.database.Cursor
           error: true
-        - java_method: withSelectionBackReference
-          go_name: WithSelectionBackReference2
+        - java_method: update
+          go_name: Update
           params:
-            - java_type: int
+            - java_type: android.net.Uri
               go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withSelectionBackReference
-          go_name: WithSelectionBackReference3_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
+            - java_type: android.content.ContentValues
               go_name: arg1
             - java_type: String
               go_name: arg2
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withValue
-          go_name: WithValue
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withValueBackReference
-          go_name: WithValueBackReference2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withValueBackReference
-          go_name: WithValueBackReference3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withValueBackReferences
-          go_name: WithValueBackReferences
-          params:
-            - java_type: android.content.ContentValues
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withValues
-          go_name: WithValues
-          params:
-            - java_type: android.content.ContentValues
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-        - java_method: withYieldAllowed
-          go_name: WithYieldAllowed
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.ContentProviderOperation$Builder
-          error: true
-    - java_class: android.content.ContentProviderResult
-      go_type: ProviderResult
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+            - java_type: java.lang.String[]
+              go_name: arg3
           returns: int
           error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.QuickViewConstants
-      go_type: QuickViewConstants
     - java_class: android.content.ContentProvider
       go_type: Provider
       methods:
@@ -4703,280 +3569,96 @@ classes:
       go_type: ProviderCallingIdentity
     - java_class: android.content.ContentProvider$PipeDataWriter
       go_type: ProviderPipeDataWriter
-    - java_class: android.content.IntentFilter
-      go_type: IntentFilter
+    - java_class: android.content.ActivityNotFoundException
+      go_type: ActivityNotFoundException
+    - java_class: android.content.ContentProviderOperation
+      go_type: ProviderOperation
       methods:
-        - java_method: addAction
-          go_name: AddAction
+        - java_method: apply
+          go_name: Apply
           params:
-            - java_type: String
+            - java_type: android.content.ContentProvider
               go_name: arg0
-          returns: void
-          error: true
-        - java_method: addCategory
-          go_name: AddCategory
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: addDataAuthority
-          go_name: AddDataAuthority
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
+            - java_type: android.content.ContentProviderResult[]
               go_name: arg1
-          returns: void
-          error: true
-        - java_method: addDataPath
-          go_name: AddDataPath
-          params:
-            - java_type: String
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: addDataScheme
-          go_name: AddDataScheme
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: addDataSchemeSpecificPart
-          go_name: AddDataSchemeSpecificPart
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: addDataType
-          go_name: AddDataType
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: addUriRelativeFilterGroup
-          go_name: AddUriRelativeFilterGroup
-          params:
-            - java_type: android.content.UriRelativeFilterGroup
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: clearUriRelativeFilterGroups
-          go_name: ClearUriRelativeFilterGroups
-          returns: void
-          error: true
-        - java_method: countActions
-          go_name: CountActions
-          returns: int
-          error: true
-        - java_method: countCategories
-          go_name: CountCategories
-          returns: int
-          error: true
-        - java_method: countDataAuthorities
-          go_name: CountDataAuthorities
-          returns: int
-          error: true
-        - java_method: countDataPaths
-          go_name: CountDataPaths
-          returns: int
-          error: true
-        - java_method: countDataSchemeSpecificParts
-          go_name: CountDataSchemeSpecificParts
-          returns: int
-          error: true
-        - java_method: countDataSchemes
-          go_name: CountDataSchemes
-          returns: int
-          error: true
-        - java_method: countDataTypes
-          go_name: CountDataTypes
-          returns: int
-          error: true
-        - java_method: countUriRelativeFilterGroups
-          go_name: CountUriRelativeFilterGroups
-          returns: int
+              go_name: arg2
+          returns: android.content.ContentProviderResult
           error: true
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: dump
-          go_name: Dump
+        - java_method: getUri
+          go_name: GetUri
+          returns: android.net.Uri
+          error: true
+        - java_method: isAssertQuery
+          go_name: IsAssertQuery
+          returns: boolean
+          error: true
+        - java_method: isCall
+          go_name: IsCall
+          returns: boolean
+          error: true
+        - java_method: isDelete
+          go_name: IsDelete
+          returns: boolean
+          error: true
+        - java_method: isExceptionAllowed
+          go_name: IsExceptionAllowed
+          returns: boolean
+          error: true
+        - java_method: isInsert
+          go_name: IsInsert
+          returns: boolean
+          error: true
+        - java_method: isReadOperation
+          go_name: IsReadOperation
+          returns: boolean
+          error: true
+        - java_method: isUpdate
+          go_name: IsUpdate
+          returns: boolean
+          error: true
+        - java_method: isWriteOperation
+          go_name: IsWriteOperation
+          returns: boolean
+          error: true
+        - java_method: isYieldAllowed
+          go_name: IsYieldAllowed
+          returns: boolean
+          error: true
+        - java_method: resolveExtrasBackReferences
+          go_name: ResolveExtrasBackReferences
           params:
-            - java_type: android.util.Printer
+            - java_type: android.content.ContentProviderResult[]
               go_name: arg0
-            - java_type: String
+            - java_type: int
               go_name: arg1
-          returns: void
+          returns: android.os.Bundle
           error: true
-        - java_method: getAction
-          go_name: GetAction
+        - java_method: resolveSelectionArgsBackReferences
+          go_name: ResolveSelectionArgsBackReferences
           params:
+            - java_type: android.content.ContentProviderResult[]
+              go_name: arg0
             - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getCategory
-          go_name: GetCategory
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getDataAuthority
-          go_name: GetDataAuthority
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.IntentFilter$AuthorityEntry
-          error: true
-        - java_method: getDataPath
-          go_name: GetDataPath
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.os.PatternMatcher
-          error: true
-        - java_method: getDataScheme
-          go_name: GetDataScheme
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getDataSchemeSpecificPart
-          go_name: GetDataSchemeSpecificPart
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.os.PatternMatcher
-          error: true
-        - java_method: getDataType
-          go_name: GetDataType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getPriority
-          go_name: GetPriority
-          returns: int
-          error: true
-        - java_method: getUriRelativeFilterGroup
-          go_name: GetUriRelativeFilterGroup
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.UriRelativeFilterGroup
-          error: true
-        - java_method: hasAction
-          go_name: HasAction
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasCategory
-          go_name: HasCategory
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasDataAuthority
-          go_name: HasDataAuthority
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasDataPath
-          go_name: HasDataPath
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasDataScheme
-          go_name: HasDataScheme
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasDataSchemeSpecificPart
-          go_name: HasDataSchemeSpecificPart
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasDataType
-          go_name: HasDataType
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: match
-          go_name: Match
-          params:
-            - java_type: android.content.ContentResolver
-              go_name: arg0
-            - java_type: android.content.Intent
               go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-            - java_type: String
-              go_name: arg3
-          returns: int
+          returns: java.lang.String[]
           error: true
-        - java_method: matchAction
-          go_name: MatchAction
+        - java_method: resolveValueBackReferences
+          go_name: ResolveValueBackReferences
           params:
-            - java_type: String
+            - java_type: android.content.ContentProviderResult[]
               go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: matchData
-          go_name: MatchData
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.net.Uri
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: matchDataAuthority
-          go_name: MatchDataAuthority
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: readFromXml
-          go_name: ReadFromXml
-          params:
-            - java_type: org.xmlpull.v1.XmlPullParser
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPriority
-          go_name: SetPriority
-          params:
             - java_type: int
-              go_name: arg0
-          returns: void
+              go_name: arg1
+          returns: android.content.ContentValues
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -4987,26 +3669,240 @@ classes:
               go_name: arg1
           returns: void
           error: true
-        - java_method: writeToXml
-          go_name: WriteToXml
-          params:
-            - java_type: org.xmlpull.v1.XmlSerializer
-              go_name: arg0
-          returns: void
-          error: true
       static_methods:
-        - java_method: create
-          go_name: Create
+        - java_method: newAssertQuery
+          go_name: NewAssertQuery
           params:
-            - java_type: String
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: newCall
+          go_name: NewCall
+          params:
+            - java_type: android.net.Uri
               go_name: arg0
             - java_type: String
               go_name: arg1
-          returns: android.content.IntentFilter
+            - java_type: String
+              go_name: arg2
+          returns: android.content.ContentProviderOperation$Builder
           error: true
-    - java_class: android.content.IntentFilter$AuthorityEntry
-      go_type: IntentFilterAuthorityEntry
+        - java_method: newDelete
+          go_name: NewDelete
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: newInsert
+          go_name: NewInsert
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: newUpdate
+          go_name: NewUpdate
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+    - java_class: android.content.ContentProviderOperation$Builder
+      go_type: ProviderOperationBuilder
       methods:
+        - java_method: build
+          go_name: Build
+          returns: android.content.ContentProviderOperation
+          error: true
+        - java_method: withExceptionAllowed
+          go_name: WithExceptionAllowed
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withExpectedCount
+          go_name: WithExpectedCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withExtra
+          go_name: WithExtra
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withExtraBackReference
+          go_name: WithExtraBackReference2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withExtraBackReference
+          go_name: WithExtraBackReference3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withExtras
+          go_name: WithExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withSelection
+          go_name: WithSelection
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.String[]
+              go_name: arg1
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withSelectionBackReference
+          go_name: WithSelectionBackReference2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withSelectionBackReference
+          go_name: WithSelectionBackReference3_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withValue
+          go_name: WithValue
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withValueBackReference
+          go_name: WithValueBackReference2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withValueBackReference
+          go_name: WithValueBackReference3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withValueBackReferences
+          go_name: WithValueBackReferences
+          params:
+            - java_type: android.content.ContentValues
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withValues
+          go_name: WithValues
+          params:
+            - java_type: android.content.ContentValues
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+        - java_method: withYieldAllowed
+          go_name: WithYieldAllowed
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.ContentProviderOperation$Builder
+          error: true
+    - java_class: android.content.AsyncTaskLoader
+      go_type: AsyncTaskLoader
+      methods:
+        - java_method: cancelLoadInBackground
+          go_name: CancelLoadInBackground
+          returns: void
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.FileDescriptor
+              go_name: arg1
+            - java_type: java.io.PrintWriter
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: isLoadInBackgroundCanceled
+          go_name: IsLoadInBackgroundCanceled
+          returns: boolean
+          error: true
+        - java_method: setUpdateThrottle
+          go_name: SetUpdateThrottle
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.ContentProviderResult
+      go_type: ProviderResult
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.LocusId
+      go_type: LocusId
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
         - java_method: equals
           go_name: Equals
           params:
@@ -5014,25 +3910,1252 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getHost
-          go_name: GetHost
+        - java_method: getId
+          go_name: GetId
           returns: String
           error: true
-        - java_method: getPort
-          go_name: GetPort
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
           error: true
-        - java_method: match
-          go_name: Match
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.MutableContextWrapper
+      go_type: MutableContextWrapper
+      methods:
+        - java_method: setBaseContext
+          go_name: SetBaseContext
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.ReceiverCallNotAllowedException
+      go_type: ReceiverCallNotAllowedException
+    - java_class: android.content.ContentUris
+      go_type: Uris
+      static_methods:
+        - java_method: appendId
+          go_name: AppendId
+          params:
+            - java_type: android.net.Uri$Builder
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.net.Uri$Builder
+          error: true
+        - java_method: parseId
+          go_name: ParseId
           params:
             - java_type: android.net.Uri
               go_name: arg0
+          returns: long
+          error: true
+        - java_method: removeId
+          go_name: RemoveId
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: withAppendedId
+          go_name: WithAppendedId
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+    - java_class: android.content.DialogInterface
+      go_type: DialogInterface
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
+        - java_method: dismiss
+          go_name: Dismiss
+          returns: void
+          error: true
+    - java_class: android.content.DialogInterface$OnCancelListener
+      go_type: DialogInterfaceOnCancelListener
+      methods:
+        - java_method: onCancel
+          go_name: OnCancel
+          params:
+            - java_type: android.content.DialogInterface
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.DialogInterface$OnClickListener
+      go_type: DialogInterfaceOnClickListener
+      methods:
+        - java_method: onClick
+          go_name: OnClick
+          params:
+            - java_type: android.content.DialogInterface
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.DialogInterface$OnDismissListener
+      go_type: DialogInterfaceOnDismissListener
+      methods:
+        - java_method: onDismiss
+          go_name: OnDismiss
+          params:
+            - java_type: android.content.DialogInterface
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.DialogInterface$OnKeyListener
+      go_type: DialogInterfaceOnKeyListener
+      methods:
+        - java_method: onKey
+          go_name: OnKey
+          params:
+            - java_type: android.content.DialogInterface
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.view.KeyEvent
+              go_name: arg2
+          returns: boolean
+          error: true
+    - java_class: android.content.DialogInterface$OnMultiChoiceClickListener
+      go_type: DialogInterfaceOnMultiChoiceClickListener
+      methods:
+        - java_method: onClick
+          go_name: OnClick
+          params:
+            - java_type: android.content.DialogInterface
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.content.DialogInterface$OnShowListener
+      go_type: DialogInterfaceOnShowListener
+      methods:
+        - java_method: onShow
+          go_name: OnShow
+          params:
+            - java_type: android.content.DialogInterface
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.AttributionSource
+      go_type: AttributionSource
+      methods:
+        - java_method: checkCallingUid
+          go_name: CheckCallingUid
+          returns: boolean
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
-    - java_class: android.content.IntentFilter$MalformedMimeTypeException
-      go_type: IntentFilterMalformedMimeTypeException
+        - java_method: enforceCallingUid
+          go_name: EnforceCallingUid
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAttributionTag
+          go_name: GetAttributionTag
+          returns: String
+          error: true
+        - java_method: getDeviceId
+          go_name: GetDeviceId
+          returns: int
+          error: true
+        - java_method: getNext
+          go_name: GetNext
+          returns: android.content.AttributionSource
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getPid
+          go_name: GetPid
+          returns: int
+          error: true
+        - java_method: getUid
+          go_name: GetUid
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isTrusted
+          go_name: IsTrusted
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: myAttributionSource
+          go_name: MyAttributionSource
+          returns: android.content.AttributionSource
+          error: true
+    - java_class: android.content.AttributionSource$Builder
+      go_type: AttributionSourceBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.content.AttributionSource
+          error: true
+        - java_method: setAttributionTag
+          go_name: SetAttributionTag
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.AttributionSource$Builder
+          error: true
+        - java_method: setDeviceId
+          go_name: SetDeviceId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.AttributionSource$Builder
+          error: true
+        - java_method: setNext
+          go_name: SetNext
+          params:
+            - java_type: android.content.AttributionSource
+              go_name: arg0
+          returns: android.content.AttributionSource$Builder
+          error: true
+        - java_method: setPackageName
+          go_name: SetPackageName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.AttributionSource$Builder
+          error: true
+        - java_method: setPid
+          go_name: SetPid
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.AttributionSource$Builder
+          error: true
+    - java_class: android.content.QuickViewConstants
+      go_type: QuickViewConstants
+    - java_class: android.content.RestrictionsManager
+      go_type: RestrictionsManager
+      obtain: system_service
+      service_name: restrictions
+      close: true
+      methods:
+        - java_method: createLocalApprovalIntent
+          go_name: CreateLocalApprovalIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: getApplicationRestrictions
+          go_name: GetApplicationRestrictions
+          returns: android.os.Bundle
+          error: true
+        - java_method: hasRestrictionsProvider
+          go_name: HasRestrictionsProvider
+          returns: boolean
+          error: true
+        - java_method: notifyPermissionResponse
+          go_name: NotifyPermissionResponse
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.PersistableBundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: requestPermission
+          go_name: RequestPermission
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.PersistableBundle
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.content.IntentSender
+      go_type: IntentSender
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCreatorPackage
+          go_name: GetCreatorPackage
+          returns: String
+          error: true
+        - java_method: getCreatorUid
+          go_name: GetCreatorUid
+          returns: int
+          error: true
+        - java_method: getCreatorUserHandle
+          go_name: GetCreatorUserHandle
+          returns: android.os.UserHandle
+          error: true
+        - java_method: getTargetPackage
+          go_name: GetTargetPackage
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: sendIntent
+          go_name: SendIntent
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.content.Intent
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: android.os.Bundle
+              go_name: arg4
+            - java_type: java.util.concurrent.Executor
+              go_name: arg5
+            - java_type: android.content.IntentSender$OnFinished
+              go_name: arg6
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: readIntentSenderOrNullFromParcel
+          go_name: ReadIntentSenderOrNullFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: android.content.IntentSender
+          error: true
+        - java_method: writeIntentSenderOrNullToParcel
+          go_name: WriteIntentSenderOrNullToParcel
+          params:
+            - java_type: android.content.IntentSender
+              go_name: arg0
+            - java_type: android.os.Parcel
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.IntentSender$OnFinished
+      go_type: IntentSenderOnFinished
+      methods:
+        - java_method: onSendFinished
+          go_name: OnSendFinished
+          params:
+            - java_type: android.content.IntentSender
+              go_name: arg0
+            - java_type: android.content.Intent
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: android.os.Bundle
+              go_name: arg4
+          returns: void
+          error: true
+    - java_class: android.content.IntentSender$SendIntentException
+      go_type: IntentSenderSendIntentException
+    - java_class: android.content.PeriodicSync
+      go_type: PeriodicSync
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.Loader
+      go_type: Loader
+      methods:
+        - java_method: abandon
+          go_name: Abandon
+          returns: void
+          error: true
+        - java_method: cancelLoad
+          go_name: CancelLoad
+          returns: boolean
+          error: true
+        - java_method: commitContentChanged
+          go_name: CommitContentChanged
+          returns: void
+          error: true
+        - java_method: deliverCancellation
+          go_name: DeliverCancellation
+          returns: void
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.io.FileDescriptor
+              go_name: arg1
+            - java_type: java.io.PrintWriter
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: forceLoad
+          go_name: ForceLoad
+          returns: void
+          error: true
+        - java_method: getContext
+          go_name: GetContext
+          returns: android.content.Context
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: isAbandoned
+          go_name: IsAbandoned
+          returns: boolean
+          error: true
+        - java_method: isReset
+          go_name: IsReset
+          returns: boolean
+          error: true
+        - java_method: isStarted
+          go_name: IsStarted
+          returns: boolean
+          error: true
+        - java_method: onContentChanged
+          go_name: OnContentChanged
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: rollbackContentChanged
+          go_name: RollbackContentChanged
+          returns: void
+          error: true
+        - java_method: startLoading
+          go_name: StartLoading
+          returns: void
+          error: true
+        - java_method: stopLoading
+          go_name: StopLoading
+          returns: void
+          error: true
+        - java_method: takeContentChanged
+          go_name: TakeContentChanged
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.content.Loader$ForceLoadContentObserver
+      go_type: LoaderForceLoadContentObserver
+      methods:
+        - java_method: deliverSelfNotifications
+          go_name: DeliverSelfNotifications
+          returns: boolean
+          error: true
+        - java_method: onChange
+          go_name: OnChange
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.Loader$OnLoadCanceledListener
+      go_type: LoaderOnLoadCanceledListener
+    - java_class: android.content.Loader$OnLoadCompleteListener
+      go_type: LoaderOnLoadCompleteListener
+    - java_class: android.content.AsyncQueryHandler
+      go_type: AsyncQueryHandler
+      methods:
+        - java_method: cancelOperation
+          go_name: CancelOperation
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: handleMessage
+          go_name: HandleMessage
+          params:
+            - java_type: android.os.Message
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startDelete
+          go_name: StartDelete
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+            - java_type: java.lang.String[]
+              go_name: arg4
+          returns: void
+          error: true
+        - java_method: startInsert
+          go_name: StartInsert
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+            - java_type: android.content.ContentValues
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startQuery
+          go_name: StartQuery
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+            - java_type: java.lang.String[]
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: java.lang.String[]
+              go_name: arg5
+            - java_type: String
+              go_name: arg6
+          returns: void
+          error: true
+        - java_method: startUpdate
+          go_name: StartUpdate
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+            - java_type: android.net.Uri
+              go_name: arg2
+            - java_type: android.content.ContentValues
+              go_name: arg3
+            - java_type: String
+              go_name: arg4
+            - java_type: java.lang.String[]
+              go_name: arg5
+          returns: void
+          error: true
+    - java_class: android.content.AsyncQueryHandler$WorkerArgs
+      go_type: AsyncQueryHandlerWorkerArgs
+    - java_class: android.content.AsyncQueryHandler$WorkerHandler
+      go_type: AsyncQueryHandlerWorkerHandler
+      methods:
+        - java_method: handleMessage
+          go_name: HandleMessage
+          params:
+            - java_type: android.os.Message
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.ClipDescription
+      go_type: ClipDescription
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: filterMimeTypes
+          go_name: FilterMimeTypes
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.String[]
+          error: true
+        - java_method: getClassificationStatus
+          go_name: GetClassificationStatus
+          returns: int
+          error: true
+        - java_method: getConfidenceScore
+          go_name: GetConfidenceScore
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: float
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getMimeType
+          go_name: GetMimeType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getMimeTypeCount
+          go_name: GetMimeTypeCount
+          returns: int
+          error: true
+        - java_method: getTimestamp
+          go_name: GetTimestamp
+          returns: long
+          error: true
+        - java_method: hasMimeType
+          go_name: HasMimeType
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isStyledText
+          go_name: IsStyledText
+          returns: boolean
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: compareMimeTypes
+          go_name: CompareMimeTypes
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.content.ComponentName
+      go_type: ComponentName
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.content.ComponentName
+          error: true
+        - java_method: compareTo
+          go_name: CompareTo1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: flattenToShortString
+          go_name: FlattenToShortString
+          returns: String
+          error: true
+        - java_method: flattenToString
+          go_name: FlattenToString
+          returns: String
+          error: true
+        - java_method: getClassName
+          go_name: GetClassName
+          returns: String
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getShortClassName
+          go_name: GetShortClassName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toShortString
+          go_name: ToShortString
+          returns: String
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel2_1
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: java.lang.Object
+          error: true
+        - java_method: compareTo
+          go_name: CompareTo1_1
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: int
+          error: true
+      static_methods:
+        - java_method: createRelative
+          go_name: CreateRelative2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.ComponentName
+          error: true
+        - java_method: createRelative
+          go_name: CreateRelative2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.content.ComponentName
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: android.content.ComponentName
+          error: true
+        - java_method: unflattenFromString
+          go_name: UnflattenFromString
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.ComponentName
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel2
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: android.os.Parcel
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.SyncStatusObserver
+      go_type: SyncStatusObserver
+      methods:
+        - java_method: onStatusChanged
+          go_name: OnStatusChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.content.ContextParams
+      go_type: ContextParams
+      methods:
+        - java_method: getAttributionTag
+          go_name: GetAttributionTag
+          returns: String
+          error: true
+        - java_method: getNextAttributionSource
+          go_name: GetNextAttributionSource
+          returns: android.content.AttributionSource
+          error: true
+        - java_method: shouldRegisterAttributionSource
+          go_name: ShouldRegisterAttributionSource
+          returns: boolean
+          error: true
+    - java_class: android.content.ContextParams$Builder
+      go_type: ContextParamsBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.content.ContextParams
+          error: true
+        - java_method: setAttributionTag
+          go_name: SetAttributionTag
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.ContextParams$Builder
+          error: true
+        - java_method: setNextAttributionSource
+          go_name: SetNextAttributionSource
+          params:
+            - java_type: android.content.AttributionSource
+              go_name: arg0
+          returns: android.content.ContextParams$Builder
+          error: true
+        - java_method: setShouldRegisterAttributionSource
+          go_name: SetShouldRegisterAttributionSource
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.ContextParams$Builder
+          error: true
+    - java_class: android.content.ContentValues
+      go_type: Values
+      methods:
+        - java_method: clear
+          go_name: Clear
+          returns: void
+          error: true
+        - java_method: containsKey
+          go_name: ContainsKey
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Object
+          error: true
+        - java_method: getAsBoolean
+          go_name: GetAsBoolean
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Boolean
+          error: true
+        - java_method: getAsByte
+          go_name: GetAsByte
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Byte
+          error: true
+        - java_method: getAsByteArray
+          go_name: GetAsByteArray
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
+        - java_method: getAsDouble
+          go_name: GetAsDouble
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Double
+          error: true
+        - java_method: getAsFloat
+          go_name: GetAsFloat
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Float
+          error: true
+        - java_method: getAsInteger
+          go_name: GetAsInteger
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Integer
+          error: true
+        - java_method: getAsLong
+          go_name: GetAsLong
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Long
+          error: true
+        - java_method: getAsShort
+          go_name: GetAsShort
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.lang.Short
+          error: true
+        - java_method: getAsString
+          go_name: GetAsString
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isEmpty
+          go_name: IsEmpty
+          returns: boolean
+          error: true
+        - java_method: put
+          go_name: Put2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Byte
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_3
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Double
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_4
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Float
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_5
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Integer
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_6
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_7
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: java.lang.Short
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: put
+          go_name: Put2_8
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: putAll
+          go_name: PutAll
+          params:
+            - java_type: android.content.ContentValues
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: putNull
+          go_name: PutNull
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: size
+          go_name: Size
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.OperationApplicationException
+      go_type: OperationApplicationException
+      methods:
+        - java_method: getNumSuccessfulYieldPoints
+          go_name: GetNumSuccessfulYieldPoints
+          returns: int
+          error: true
 constants:
+    - go_name: NoMatch
+      value: "-1"
+      go_type: int
     - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: InvalidTime
+      value: "-9223372036854775808"
+      go_type: int64
+    - go_name: LogSyncDetails
+      value: "2743"
+      go_type: int
+    - go_name: Fragment
+      value: "2"
+      go_type: int
+    - go_name: Path
+      value: "0"
+      go_type: int
+    - go_name: Query
+      value: "1"
+      go_type: int
+    - go_name: TrimMemoryBackground
+      value: "40"
+      go_type: int
+    - go_name: TrimMemoryComplete
+      value: "80"
+      go_type: int
+    - go_name: TrimMemoryModerate
+      value: "60"
+      go_type: int
+    - go_name: TrimMemoryRunningCritical
+      value: "15"
+      go_type: int
+    - go_name: TrimMemoryRunningLow
+      value: "10"
+      go_type: int
+    - go_name: TrimMemoryRunningModerate
+      value: "5"
+      go_type: int
+    - go_name: TrimMemoryUiHidden
+      value: "20"
+      go_type: int
+    - go_name: TypeBoolean
+      value: "1"
+      go_type: int
+    - go_name: TypeBundle
+      value: "7"
+      go_type: int
+    - go_name: TypeBundleArray
+      value: "8"
+      go_type: int
+    - go_name: TypeChoice
+      value: "2"
+      go_type: int
+    - go_name: TypeInteger
+      value: "5"
+      go_type: int
+    - go_name: TypeMultiSelect
+      value: "4"
+      go_type: int
+    - go_name: TypeNull
+      value: "0"
+      go_type: int
+    - go_name: TypeString
+      value: "6"
+      go_type: int
+    - go_name: IdNull
+      value: "0"
+      go_type: int
+    - go_name: MatchAdjustmentMask
+      value: "65535"
+      go_type: int
+    - go_name: MatchAdjustmentNormal
+      value: "32768"
+      go_type: int
+    - go_name: MatchCategoryEmpty
+      value: "1048576"
+      go_type: int
+    - go_name: MatchCategoryHost
+      value: "3145728"
+      go_type: int
+    - go_name: MatchCategoryMask
+      value: "268369920"
+      go_type: int
+    - go_name: MatchCategoryPath
+      value: "5242880"
+      go_type: int
+    - go_name: MatchCategoryPort
+      value: "4194304"
+      go_type: int
+    - go_name: MatchCategoryScheme
+      value: "2097152"
+      go_type: int
+    - go_name: MatchCategorySchemeSpecificPart
+      value: "5767168"
+      go_type: int
+    - go_name: MatchCategoryType
+      value: "6291456"
+      go_type: int
+    - go_name: NoMatchAction
+      value: "-3"
+      go_type: int
+    - go_name: NoMatchCategory
+      value: "-4"
+      go_type: int
+    - go_name: NoMatchData
+      value: "-2"
+      go_type: int
+    - go_name: NoMatchType
+      value: "-1"
+      go_type: int
+    - go_name: SystemHighPriority
+      value: "1000"
+      go_type: int
+    - go_name: SystemLowPriority
+      value: "-1000"
+      go_type: int
+    - go_name: ActionAllow
+      value: "0"
+      go_type: int
+    - go_name: ActionBlock
+      value: "1"
+      go_type: int
+    - go_name: AlreadyInProgress
       value: "0"
       go_type: int
     - go_name: DatabaseMode2lines
@@ -5041,39 +5164,42 @@ constants:
     - go_name: DatabaseModeQueries
       value: "1"
       go_type: int
-    - go_name: ClassificationComplete
-      value: "3"
-      go_type: int
-    - go_name: ClassificationNotComplete
-      value: "1"
-      go_type: int
-    - go_name: ClassificationNotPerformed
-      value: "2"
-      go_type: int
-    - go_name: ExtraIsRemoteDevice
-      value: '"android.content.extra.IS_REMOTE_DEVICE"'
-      go_type: string
-    - go_name: ExtraIsSensitive
-      value: '"android.content.extra.IS_SENSITIVE"'
-      go_type: string
-    - go_name: MimetypeTextHtml
-      value: '"text/html"'
-      go_type: string
-    - go_name: MimetypeTextIntent
-      value: '"text/vnd.android.intent"'
-      go_type: string
-    - go_name: MimetypeTextPlain
-      value: '"text/plain"'
-      go_type: string
-    - go_name: MimetypeTextUrilist
-      value: '"text/uri-list"'
-      go_type: string
-    - go_name: MimetypeUnknown
-      value: '"application/octet-stream"'
-      go_type: string
-    - go_name: NoMatch
+    - go_name: Button1
       value: "-1"
       go_type: int
+    - go_name: Button2
+      value: "-2"
+      go_type: int
+    - go_name: Button3
+      value: "-3"
+      go_type: int
+    - go_name: ButtonNegative
+      value: "-2"
+      go_type: int
+    - go_name: ButtonNeutral
+      value: "-3"
+      go_type: int
+    - go_name: ButtonPositive
+      value: "-1"
+      go_type: int
+    - go_name: FeatureDelete
+      value: '"android:delete"'
+      go_type: string
+    - go_name: FeatureDownload
+      value: '"android:download"'
+      go_type: string
+    - go_name: FeatureEdit
+      value: '"android:edit"'
+      go_type: string
+    - go_name: FeaturePrint
+      value: '"android:print"'
+      go_type: string
+    - go_name: FeatureSend
+      value: '"android:send"'
+      go_type: string
+    - go_name: FeatureView
+      value: '"android:view"'
+      go_type: string
     - go_name: ActionPermissionResponseReceived
       value: '"android.content.action.PERMISSION_RESPONSE_RECEIVED"'
       go_type: string
@@ -5164,162 +5290,36 @@ constants:
     - go_name: ResultUnknownRequest
       value: "4"
       go_type: int
-    - go_name: Fragment
-      value: "2"
+    - go_name: ClassificationComplete
+      value: "3"
       go_type: int
-    - go_name: Path
-      value: "0"
-      go_type: int
-    - go_name: Query
+    - go_name: ClassificationNotComplete
       value: "1"
       go_type: int
-    - go_name: AlreadyInProgress
-      value: "0"
+    - go_name: ClassificationNotPerformed
+      value: "2"
       go_type: int
+    - go_name: ExtraIsRemoteDevice
+      value: '"android.content.extra.IS_REMOTE_DEVICE"'
+      go_type: string
+    - go_name: ExtraIsSensitive
+      value: '"android.content.extra.IS_SENSITIVE"'
+      go_type: string
+    - go_name: MimetypeTextHtml
+      value: '"text/html"'
+      go_type: string
+    - go_name: MimetypeTextIntent
+      value: '"text/vnd.android.intent"'
+      go_type: string
+    - go_name: MimetypeTextPlain
+      value: '"text/plain"'
+      go_type: string
+    - go_name: MimetypeTextUrilist
+      value: '"text/uri-list"'
+      go_type: string
+    - go_name: MimetypeUnknown
+      value: '"application/octet-stream"'
+      go_type: string
     - go_name: Tag
       value: '"ContentValues"'
       go_type: string
-    - go_name: TypeBoolean
-      value: "1"
-      go_type: int
-    - go_name: TypeBundle
-      value: "7"
-      go_type: int
-    - go_name: TypeBundleArray
-      value: "8"
-      go_type: int
-    - go_name: TypeChoice
-      value: "2"
-      go_type: int
-    - go_name: TypeInteger
-      value: "5"
-      go_type: int
-    - go_name: TypeMultiSelect
-      value: "4"
-      go_type: int
-    - go_name: TypeNull
-      value: "0"
-      go_type: int
-    - go_name: TypeString
-      value: "6"
-      go_type: int
-    - go_name: IdNull
-      value: "0"
-      go_type: int
-    - go_name: ActionAllow
-      value: "0"
-      go_type: int
-    - go_name: ActionBlock
-      value: "1"
-      go_type: int
-    - go_name: TrimMemoryBackground
-      value: "40"
-      go_type: int
-    - go_name: TrimMemoryComplete
-      value: "80"
-      go_type: int
-    - go_name: TrimMemoryModerate
-      value: "60"
-      go_type: int
-    - go_name: TrimMemoryRunningCritical
-      value: "15"
-      go_type: int
-    - go_name: TrimMemoryRunningLow
-      value: "10"
-      go_type: int
-    - go_name: TrimMemoryRunningModerate
-      value: "5"
-      go_type: int
-    - go_name: TrimMemoryUiHidden
-      value: "20"
-      go_type: int
-    - go_name: Button1
-      value: "-1"
-      go_type: int
-    - go_name: Button2
-      value: "-2"
-      go_type: int
-    - go_name: Button3
-      value: "-3"
-      go_type: int
-    - go_name: ButtonNegative
-      value: "-2"
-      go_type: int
-    - go_name: ButtonNeutral
-      value: "-3"
-      go_type: int
-    - go_name: ButtonPositive
-      value: "-1"
-      go_type: int
-    - go_name: LogSyncDetails
-      value: "2743"
-      go_type: int
-    - go_name: InvalidTime
-      value: "-9223372036854775808"
-      go_type: int64
-    - go_name: FeatureDelete
-      value: '"android:delete"'
-      go_type: string
-    - go_name: FeatureDownload
-      value: '"android:download"'
-      go_type: string
-    - go_name: FeatureEdit
-      value: '"android:edit"'
-      go_type: string
-    - go_name: FeaturePrint
-      value: '"android:print"'
-      go_type: string
-    - go_name: FeatureSend
-      value: '"android:send"'
-      go_type: string
-    - go_name: FeatureView
-      value: '"android:view"'
-      go_type: string
-    - go_name: MatchAdjustmentMask
-      value: "65535"
-      go_type: int
-    - go_name: MatchAdjustmentNormal
-      value: "32768"
-      go_type: int
-    - go_name: MatchCategoryEmpty
-      value: "1048576"
-      go_type: int
-    - go_name: MatchCategoryHost
-      value: "3145728"
-      go_type: int
-    - go_name: MatchCategoryMask
-      value: "268369920"
-      go_type: int
-    - go_name: MatchCategoryPath
-      value: "5242880"
-      go_type: int
-    - go_name: MatchCategoryPort
-      value: "4194304"
-      go_type: int
-    - go_name: MatchCategoryScheme
-      value: "2097152"
-      go_type: int
-    - go_name: MatchCategorySchemeSpecificPart
-      value: "5767168"
-      go_type: int
-    - go_name: MatchCategoryType
-      value: "6291456"
-      go_type: int
-    - go_name: NoMatchAction
-      value: "-3"
-      go_type: int
-    - go_name: NoMatchCategory
-      value: "-4"
-      go_type: int
-    - go_name: NoMatchData
-      value: "-2"
-      go_type: int
-    - go_name: NoMatchType
-      value: "-1"
-      go_type: int
-    - go_name: SystemHighPriority
-      value: "1000"
-      go_type: int
-    - go_name: SystemLowPriority
-      value: "-1000"
-      go_type: int

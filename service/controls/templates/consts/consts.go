@@ -3,6 +3,7 @@
 package consts
 
 const (
+	Creator          int = 0
 	FlagModeCool     int = 8
 	FlagModeEco      int = 32
 	FlagModeHeat     int = 4
@@ -22,5 +23,4 @@ const (
 	TypeThumbnail    int = 3
 	TypeToggle       int = 1
 	TypeToggleRange  int = 6
-	Creator          int = 0
 )

@@ -204,6 +204,128 @@ classes:
           go_name: SwipeUp
           returns: void
           error: true
+    - java_class: android.inputmethodservice.Keyboard
+      go_type: Keyboard
+      methods:
+        - java_method: getHeight
+          go_name: GetHeight
+          returns: int
+          error: true
+        - java_method: getMinWidth
+          go_name: GetMinWidth
+          returns: int
+          error: true
+        - java_method: getNearestKeys
+          go_name: GetNearestKeys
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: '[I'
+          error: true
+        - java_method: getShiftKeyIndex
+          go_name: GetShiftKeyIndex
+          returns: int
+          error: true
+        - java_method: isShifted
+          go_name: IsShifted
+          returns: boolean
+          error: true
+        - java_method: setShifted
+          go_name: SetShifted
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.inputmethodservice.Keyboard$Key
+      go_type: KeyboardKey
+      methods:
+        - java_method: getCurrentDrawableState
+          go_name: GetCurrentDrawableState
+          returns: '[I'
+          error: true
+        - java_method: isInside
+          go_name: IsInside
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: onPressed
+          go_name: OnPressed
+          returns: void
+          error: true
+        - java_method: onReleased
+          go_name: OnReleased
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: squaredDistanceFrom
+          go_name: SquaredDistanceFrom
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+    - java_class: android.inputmethodservice.Keyboard$Row
+      go_type: KeyboardRow
+    - java_class: android.inputmethodservice.ExtractEditText
+      go_type: ExtractEditText
+      methods:
+        - java_method: finishInternalChanges
+          go_name: FinishInternalChanges
+          returns: void
+          error: true
+        - java_method: hasFocus
+          go_name: HasFocus
+          returns: boolean
+          error: true
+        - java_method: hasVerticalScrollBar
+          go_name: HasVerticalScrollBar
+          returns: boolean
+          error: true
+        - java_method: hasWindowFocus
+          go_name: HasWindowFocus
+          returns: boolean
+          error: true
+        - java_method: isFocused
+          go_name: IsFocused
+          returns: boolean
+          error: true
+        - java_method: isInputMethodTarget
+          go_name: IsInputMethodTarget
+          returns: boolean
+          error: true
+        - java_method: onTextContextMenuItem
+          go_name: OnTextContextMenuItem
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: performClick
+          go_name: PerformClick
+          returns: boolean
+          error: true
+        - java_method: setExtractedText
+          go_name: SetExtractedText
+          params:
+            - java_type: android.view.inputmethod.ExtractedText
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startInternalChanges
+          go_name: StartInternalChanges
+          returns: void
+          error: true
     - java_class: android.inputmethodservice.AbstractInputMethodService
       go_type: AbstractInputMethodService
       methods:
@@ -376,128 +498,6 @@ classes:
           params:
             - java_type: boolean
               go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.inputmethodservice.Keyboard
-      go_type: Keyboard
-      methods:
-        - java_method: getHeight
-          go_name: GetHeight
-          returns: int
-          error: true
-        - java_method: getMinWidth
-          go_name: GetMinWidth
-          returns: int
-          error: true
-        - java_method: getNearestKeys
-          go_name: GetNearestKeys
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: '[I'
-          error: true
-        - java_method: getShiftKeyIndex
-          go_name: GetShiftKeyIndex
-          returns: int
-          error: true
-        - java_method: isShifted
-          go_name: IsShifted
-          returns: boolean
-          error: true
-        - java_method: setShifted
-          go_name: SetShifted
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.inputmethodservice.Keyboard$Key
-      go_type: KeyboardKey
-      methods:
-        - java_method: getCurrentDrawableState
-          go_name: GetCurrentDrawableState
-          returns: '[I'
-          error: true
-        - java_method: isInside
-          go_name: IsInside
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: onPressed
-          go_name: OnPressed
-          returns: void
-          error: true
-        - java_method: onReleased
-          go_name: OnReleased
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: squaredDistanceFrom
-          go_name: SquaredDistanceFrom
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: int
-          error: true
-    - java_class: android.inputmethodservice.Keyboard$Row
-      go_type: KeyboardRow
-    - java_class: android.inputmethodservice.ExtractEditText
-      go_type: ExtractEditText
-      methods:
-        - java_method: finishInternalChanges
-          go_name: FinishInternalChanges
-          returns: void
-          error: true
-        - java_method: hasFocus
-          go_name: HasFocus
-          returns: boolean
-          error: true
-        - java_method: hasVerticalScrollBar
-          go_name: HasVerticalScrollBar
-          returns: boolean
-          error: true
-        - java_method: hasWindowFocus
-          go_name: HasWindowFocus
-          returns: boolean
-          error: true
-        - java_method: isFocused
-          go_name: IsFocused
-          returns: boolean
-          error: true
-        - java_method: isInputMethodTarget
-          go_name: IsInputMethodTarget
-          returns: boolean
-          error: true
-        - java_method: onTextContextMenuItem
-          go_name: OnTextContextMenuItem
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: performClick
-          go_name: PerformClick
-          returns: boolean
-          error: true
-        - java_method: setExtractedText
-          go_name: SetExtractedText
-          params:
-            - java_type: android.view.inputmethod.ExtractedText
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: startInternalChanges
-          go_name: StartInternalChanges
           returns: void
           error: true
     - java_class: android.inputmethodservice.InputMethodService

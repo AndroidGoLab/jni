@@ -6,7 +6,9 @@ import "github.com/AndroidGoLab/jni/view/inputmethod/consts"
 
 const (
 	Creator                                        = consts.Creator
-	SuggestionCountUnlimited                       = consts.SuggestionCountUnlimited
+	ConnectionlessHandwritingErrorNoTextRecognized = consts.ConnectionlessHandwritingErrorNoTextRecognized
+	ConnectionlessHandwritingErrorOther            = consts.ConnectionlessHandwritingErrorOther
+	ConnectionlessHandwritingErrorUnsupported      = consts.ConnectionlessHandwritingErrorUnsupported
 	CursorUpdateFilterCharacterBounds              = consts.CursorUpdateFilterCharacterBounds
 	CursorUpdateFilterEditorBounds                 = consts.CursorUpdateFilterEditorBounds
 	CursorUpdateFilterInsertionMarker              = consts.CursorUpdateFilterInsertionMarker
@@ -23,16 +25,22 @@ const (
 	HandwritingGestureResultUnknown                = consts.HandwritingGestureResultUnknown
 	HandwritingGestureResultUnsupported            = consts.HandwritingGestureResultUnsupported
 	InputContentGrantReadUriPermission             = consts.InputContentGrantReadUriPermission
+	FlagHasInvisibleRegion                         = consts.FlagHasInvisibleRegion
+	FlagHasVisibleRegion                           = consts.FlagHasVisibleRegion
+	FlagIsRtl                                      = consts.FlagIsRtl
+	SuggestionCountUnlimited                       = consts.SuggestionCountUnlimited
+	GranularityCharacter                           = consts.GranularityCharacter
+	GranularityWord                                = consts.GranularityWord
 	FlagSelecting                                  = consts.FlagSelecting
 	FlagSingleLine                                 = consts.FlagSingleLine
+	FlagCharacterLinefeed                          = consts.FlagCharacterLinefeed
+	FlagCharacterPunctuation                       = consts.FlagCharacterPunctuation
+	FlagCharacterWhitespace                        = consts.FlagCharacterWhitespace
+	FlagLineIsRtl                                  = consts.FlagLineIsRtl
 	CodeCancelled                                  = consts.CodeCancelled
 	CodeFailed                                     = consts.CodeFailed
 	CodeSuccess                                    = consts.CodeSuccess
 	CodeUnsupported                                = consts.CodeUnsupported
-	ShowExplicit                                   = consts.ShowExplicit
-	ShowForced                                     = consts.ShowForced
-	GranularityCharacter                           = consts.GranularityCharacter
-	GranularityWord                                = consts.GranularityWord
 	ImeActionDone                                  = consts.ImeActionDone
 	ImeActionGo                                    = consts.ImeActionGo
 	ImeActionNext                                  = consts.ImeActionNext
@@ -51,9 +59,8 @@ const (
 	ImeFlagNoPersonalizedLearning                  = consts.ImeFlagNoPersonalizedLearning
 	ImeMaskAction                                  = consts.ImeMaskAction
 	ImeNull                                        = consts.ImeNull
-	FlagHasInvisibleRegion                         = consts.FlagHasInvisibleRegion
-	FlagHasVisibleRegion                           = consts.FlagHasVisibleRegion
-	FlagIsRtl                                      = consts.FlagIsRtl
+	ShowExplicit                                   = consts.ShowExplicit
+	ShowForced                                     = consts.ShowForced
 	HandwritingDelegateFlagHomeDelegatorAllowed    = consts.HandwritingDelegateFlagHomeDelegatorAllowed
 	HideImplicitOnly                               = consts.HideImplicitOnly
 	HideNotAlways                                  = consts.HideNotAlways
@@ -62,22 +69,15 @@ const (
 	ResultUnchangedHidden                          = consts.ResultUnchangedHidden
 	ResultUnchangedShown                           = consts.ResultUnchangedShown
 	ShowImplicit                                   = consts.ShowImplicit
-	ConnectionlessHandwritingErrorNoTextRecognized = consts.ConnectionlessHandwritingErrorNoTextRecognized
-	ConnectionlessHandwritingErrorOther            = consts.ConnectionlessHandwritingErrorOther
-	ConnectionlessHandwritingErrorUnsupported      = consts.ConnectionlessHandwritingErrorUnsupported
-	FlagCharacterLinefeed                          = consts.FlagCharacterLinefeed
-	FlagCharacterPunctuation                       = consts.FlagCharacterPunctuation
-	FlagCharacterWhitespace                        = consts.FlagCharacterWhitespace
-	FlagLineIsRtl                                  = consts.FlagLineIsRtl
 )
 
 const (
-	ActionImeLanguageSettings       = consts.ActionImeLanguageSettings
-	ActionStylusHandwritingSettings = consts.ActionStylusHandwritingSettings
 	SourceAutofill                  = consts.SourceAutofill
 	SourcePlatform                  = consts.SourcePlatform
 	TypeAction                      = consts.TypeAction
 	TypeSuggestion                  = consts.TypeSuggestion
+	ActionImeLanguageSettings       = consts.ActionImeLanguageSettings
+	ActionStylusHandwritingSettings = consts.ActionStylusHandwritingSettings
 	ServiceInterface                = consts.ServiceInterface
 	ServiceMetaData                 = consts.ServiceMetaData
 )

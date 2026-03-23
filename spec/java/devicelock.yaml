@@ -5,11 +5,6 @@
 package: devicelock
 go_import: github.com/AndroidGoLab/jni/devicelock
 classes:
-    - java_class: android.devicelock.DeviceLockManager
-      go_type: DeviceLockManager
-      obtain: system_service
-      service_name: device_lock
-      close: true
     - java_class: android.devicelock.DeviceId
       go_type: DeviceId
       methods:
@@ -21,13 +16,18 @@ classes:
           go_name: GetType
           returns: int
           error: true
+    - java_class: android.devicelock.DeviceLockManager
+      go_type: DeviceLockManager
+      obtain: system_service
+      service_name: device_lock
+      close: true
 constants:
-    - go_name: DeviceLockRoleFinancing
-      value: "0"
-      go_type: int
     - go_name: DeviceIdTypeImei
       value: "0"
       go_type: int
     - go_name: DeviceIdTypeMeid
       value: "1"
+      go_type: int
+    - go_name: DeviceLockRoleFinancing
+      value: "0"
       go_type: int

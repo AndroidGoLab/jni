@@ -3,33 +3,10 @@
 package consts
 
 const (
+	Creator                             int = 0
 	ErrorNeedsUserAction                int = 2
 	ErrorOther                          int = 0
 	ErrorUnsupported                    int = 1
-	Creator                             int = 0
-	FlagDelaySave                       int = 4
-	FlagDontSaveOnFinish                int = 2
-	FlagSaveOnAllViewsInvisible         int = 1
-	NegativeButtonStyleCancel           int = 0
-	NegativeButtonStyleNever            int = 2
-	NegativeButtonStyleReject           int = 1
-	PositiveButtonStyleContinue         int = 1
-	PositiveButtonStyleSave             int = 0
-	SaveDataTypeAddress                 int = 2
-	SaveDataTypeCreditCard              int = 4
-	SaveDataTypeDebitCard               int = 32
-	SaveDataTypeEmailAddress            int = 16
-	SaveDataTypeGeneric                 int = 0
-	SaveDataTypeGenericCard             int = 128
-	SaveDataTypePassword                int = 1
-	SaveDataTypePaymentCard             int = 64
-	SaveDataTypeUsername                int = 8
-	FlagDelayFill                       int = 4
-	FlagDisableActivityOnly             int = 2
-	FlagTrackContextCommited            int = 1
-	FlagCompatibilityModeRequest        int = 2
-	FlagManualRequest                   int = 1
-	FlagSupportsFillDialog              int = 64
 	NoSaveUiReasonDatasetMatch          int = 6
 	NoSaveUiReasonFieldValidationFailed int = 5
 	NoSaveUiReasonHasEmptyRequired      int = 3
@@ -50,12 +27,35 @@ const (
 	UiTypeInline                        int = 2
 	UiTypeMenu                          int = 1
 	UiTypeUnknown                       int = 0
+	FlagCompatibilityModeRequest        int = 2
+	FlagManualRequest                   int = 1
+	FlagSupportsFillDialog              int = 64
+	FlagDelaySave                       int = 4
+	FlagDontSaveOnFinish                int = 2
+	FlagSaveOnAllViewsInvisible         int = 1
+	NegativeButtonStyleCancel           int = 0
+	NegativeButtonStyleNever            int = 2
+	NegativeButtonStyleReject           int = 1
+	PositiveButtonStyleContinue         int = 1
+	PositiveButtonStyleSave             int = 0
+	SaveDataTypeAddress                 int = 2
+	SaveDataTypeCreditCard              int = 4
+	SaveDataTypeDebitCard               int = 32
+	SaveDataTypeEmailAddress            int = 16
+	SaveDataTypeGeneric                 int = 0
+	SaveDataTypeGenericCard             int = 128
+	SaveDataTypePassword                int = 1
+	SaveDataTypePaymentCard             int = 64
+	SaveDataTypeUsername                int = 8
+	FlagDelayFill                       int = 4
+	FlagDisableActivityOnly             int = 2
+	FlagTrackContextCommited            int = 1
 )
 
 const (
-	TypeOther         string = "other"
-	TypePasswords     string = "passwords"
 	ExtraFillResponse string = "android.service.autofill.extra.FILL_RESPONSE"
 	ServiceInterface  string = "android.service.autofill.AutofillService"
 	ServiceMetaData   string = "android.autofill"
+	TypeOther         string = "other"
+	TypePasswords     string = "passwords"
 )

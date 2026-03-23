@@ -3,14 +3,38 @@
 package consts
 
 const (
-	Creator                                     int = 0
-	NonRepeatedCardinality                      int = -1
 	AggregationScoringAvgRankingSignal          int = 3
 	AggregationScoringMaxRankingSignal          int = 4
 	AggregationScoringMinRankingSignal          int = 2
 	AggregationScoringOuterResultRankingSignal  int = 0
 	AggregationScoringResultCount               int = 1
 	AggregationScoringSumRankingSignal          int = 5
+	Creator                                     int = 0
+	IndexingTypeNone                            int = 0
+	IndexingTypeSimilarity                      int = 1
+	QuantizationType8Bit                        int = 1
+	QuantizationTypeNone                        int = 0
+	IndexingTypeRange                           int = 1
+	CardinalityOptional                         int = 2
+	CardinalityRepeated                         int = 1
+	CardinalityRequired                         int = 3
+	IndexingTypeExactTerms                      int = 1
+	IndexingTypePrefixes                        int = 2
+	JoinableValueTypeNone                       int = 0
+	JoinableValueTypeQualifiedId                int = 1
+	TokenizerTypeNone                           int = 0
+	TokenizerTypePlain                          int = 1
+	TokenizerTypeRfc822                         int = 3
+	TokenizerTypeVerbatim                       int = 2
+	ReadAssistantAppSearchData                  int = 6
+	ReadCalendar                                int = 2
+	ReadContacts                                int = 3
+	ReadExternalStorage                         int = 4
+	ReadHomeAppSearchData                       int = 5
+	ReadSms                                     int = 1
+	SuggestionRankingStrategyDocumentCount      int = 0
+	SuggestionRankingStrategyNone               int = 2
+	SuggestionRankingStrategyTermFrequency      int = 1
 	ResultAlreadyExists                         int = 12
 	ResultDenied                                int = 9
 	ResultInternalError                         int = 2
@@ -23,9 +47,7 @@ const (
 	ResultRateLimited                           int = 10
 	ResultSecurityError                         int = 8
 	ResultUnknownError                          int = 1
-	SuggestionRankingStrategyDocumentCount      int = 0
-	SuggestionRankingStrategyNone               int = 2
-	SuggestionRankingStrategyTermFrequency      int = 1
+	NonRepeatedCardinality                      int = -1
 	EmbeddingSearchMetricTypeCosine             int = 1
 	EmbeddingSearchMetricTypeDefault            int = 0
 	EmbeddingSearchMetricTypeDotProduct         int = 2
@@ -47,28 +69,6 @@ const (
 	RankingStrategyUsageLastUsedTimestamp       int = 5
 	TermMatchExactOnly                          int = 1
 	TermMatchPrefix                             int = 2
-	ReadAssistantAppSearchData                  int = 6
-	ReadCalendar                                int = 2
-	ReadContacts                                int = 3
-	ReadExternalStorage                         int = 4
-	ReadHomeAppSearchData                       int = 5
-	ReadSms                                     int = 1
-	IndexingTypeNone                            int = 0
-	IndexingTypeSimilarity                      int = 1
-	QuantizationType8Bit                        int = 1
-	QuantizationTypeNone                        int = 0
-	IndexingTypeRange                           int = 1
-	CardinalityOptional                         int = 2
-	CardinalityRepeated                         int = 1
-	CardinalityRequired                         int = 3
-	IndexingTypeExactTerms                      int = 1
-	IndexingTypePrefixes                        int = 2
-	JoinableValueTypeNone                       int = 0
-	JoinableValueTypeQualifiedId                int = 1
-	TokenizerTypeNone                           int = 0
-	TokenizerTypePlain                          int = 1
-	TokenizerTypeRfc822                         int = 3
-	TokenizerTypeVerbatim                       int = 2
 )
 
 const (

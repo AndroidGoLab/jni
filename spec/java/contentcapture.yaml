@@ -5,41 +5,99 @@
 package: contentcapture
 go_import: github.com/AndroidGoLab/jni/view/contentcapture
 classes:
-    - java_class: android.view.contentcapture.ContentCaptureManager
-      go_type: ContentCaptureManager
+    - java_class: android.view.contentcapture.ContentCaptureCondition
+      go_type: ContentCaptureCondition
       methods:
-        - java_method: getServiceComponentName
-          go_name: GetServiceComponentName
-          returns: android.content.ComponentName
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
           error: true
-        - java_method: isContentCaptureEnabled
-          go_name: IsContentCaptureEnabled
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
           returns: boolean
           error: true
-        - java_method: removeData
-          go_name: RemoveData
-          params:
-            - java_type: android.view.contentcapture.DataRemovalRequest
-              go_name: arg0
-          returns: void
+        - java_method: getFlags
+          go_name: GetFlags
+          returns: int
           error: true
-        - java_method: setContentCaptureEnabled
-          go_name: SetContentCaptureEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
+        - java_method: getLocusId
+          go_name: GetLocusId
+          returns: android.content.LocusId
           error: true
-        - java_method: shareData
-          go_name: ShareData
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: android.view.contentcapture.DataShareRequest
+            - java_type: android.os.Parcel
               go_name: arg0
-            - java_type: java.util.concurrent.Executor
+            - java_type: int
               go_name: arg1
-            - java_type: android.view.contentcapture.DataShareWriteAdapter
-              go_name: arg2
           returns: void
+          error: true
+    - java_class: android.view.contentcapture.DataRemovalRequest
+      go_type: DataRemovalRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: isForEverything
+          go_name: IsForEverything
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.contentcapture.DataRemovalRequest$Builder
+      go_type: DataRemovalRequestBuilder
+      methods:
+        - java_method: addLocusId
+          go_name: AddLocusId
+          params:
+            - java_type: android.content.LocusId
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.contentcapture.DataRemovalRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.view.contentcapture.DataRemovalRequest
+          error: true
+        - java_method: forEverything
+          go_name: ForEverything
+          returns: android.view.contentcapture.DataRemovalRequest$Builder
+          error: true
+    - java_class: android.view.contentcapture.DataRemovalRequest$LocusIdRequest
+      go_type: DataRemovalRequestLocusIdRequest
+      methods:
+        - java_method: getFlags
+          go_name: GetFlags
+          returns: int
+          error: true
+        - java_method: getLocusId
+          go_name: GetLocusId
+          returns: android.content.LocusId
           error: true
     - java_class: android.view.contentcapture.ContentCaptureContext
       go_type: ContentCaptureContext
@@ -90,6 +148,130 @@ classes:
             - java_type: android.os.Bundle
               go_name: arg0
           returns: android.view.contentcapture.ContentCaptureContext$Builder
+          error: true
+    - java_class: android.view.contentcapture.DataShareWriteAdapter
+      go_type: DataShareWriteAdapter
+      methods:
+        - java_method: onRejected
+          go_name: OnRejected
+          returns: void
+          error: true
+        - java_method: onWrite
+          go_name: OnWrite
+          params:
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.view.contentcapture.DataShareRequest
+      go_type: DataShareRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getLocusId
+          go_name: GetLocusId
+          returns: android.content.LocusId
+          error: true
+        - java_method: getMimeType
+          go_name: GetMimeType
+          returns: String
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.contentcapture.ContentCaptureSessionId
+      go_type: ContentCaptureSessionId
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.contentcapture.ContentCaptureManager
+      go_type: ContentCaptureManager
+      methods:
+        - java_method: getServiceComponentName
+          go_name: GetServiceComponentName
+          returns: android.content.ComponentName
+          error: true
+        - java_method: isContentCaptureEnabled
+          go_name: IsContentCaptureEnabled
+          returns: boolean
+          error: true
+        - java_method: removeData
+          go_name: RemoveData
+          params:
+            - java_type: android.view.contentcapture.DataRemovalRequest
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setContentCaptureEnabled
+          go_name: SetContentCaptureEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: shareData
+          go_name: ShareData
+          params:
+            - java_type: android.view.contentcapture.DataShareRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.view.contentcapture.DataShareWriteAdapter
+              go_name: arg2
+          returns: void
           error: true
     - java_class: android.view.contentcapture.ContentCaptureSession
       go_type: ContentCaptureSession
@@ -204,189 +386,16 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.view.contentcapture.DataRemovalRequest
-      go_type: DataRemovalRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: isForEverything
-          go_name: IsForEverything
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.contentcapture.DataRemovalRequest$Builder
-      go_type: DataRemovalRequestBuilder
-      methods:
-        - java_method: addLocusId
-          go_name: AddLocusId
-          params:
-            - java_type: android.content.LocusId
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.view.contentcapture.DataRemovalRequest$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.view.contentcapture.DataRemovalRequest
-          error: true
-        - java_method: forEverything
-          go_name: ForEverything
-          returns: android.view.contentcapture.DataRemovalRequest$Builder
-          error: true
-    - java_class: android.view.contentcapture.DataRemovalRequest$LocusIdRequest
-      go_type: DataRemovalRequestLocusIdRequest
-      methods:
-        - java_method: getFlags
-          go_name: GetFlags
-          returns: int
-          error: true
-        - java_method: getLocusId
-          go_name: GetLocusId
-          returns: android.content.LocusId
-          error: true
-    - java_class: android.view.contentcapture.DataShareRequest
-      go_type: DataShareRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getLocusId
-          go_name: GetLocusId
-          returns: android.content.LocusId
-          error: true
-        - java_method: getMimeType
-          go_name: GetMimeType
-          returns: String
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.contentcapture.DataShareWriteAdapter
-      go_type: DataShareWriteAdapter
-      methods:
-        - java_method: onRejected
-          go_name: OnRejected
-          returns: void
-          error: true
-        - java_method: onWrite
-          go_name: OnWrite
-          params:
-            - java_type: android.os.ParcelFileDescriptor
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.contentcapture.ContentCaptureCondition
-      go_type: ContentCaptureCondition
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getFlags
-          go_name: GetFlags
-          returns: int
-          error: true
-        - java_method: getLocusId
-          go_name: GetLocusId
-          returns: android.content.LocusId
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.contentcapture.ContentCaptureSessionId
-      go_type: ContentCaptureSessionId
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: FlagIsRegex
+      value: "2"
+      go_type: int
+    - go_name: FlagIsPrefix
+      value: "1"
+      go_type: int
     - go_name: DataShareErrorConcurrentRequest
       value: "2"
       go_type: int
@@ -395,13 +404,4 @@ constants:
       go_type: int
     - go_name: DataShareErrorUnknown
       value: "1"
-      go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: FlagIsPrefix
-      value: "1"
-      go_type: int
-    - go_name: FlagIsRegex
-      value: "2"
       go_type: int

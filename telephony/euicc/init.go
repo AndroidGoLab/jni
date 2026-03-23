@@ -23,10 +23,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsInfo                 *jni.GlobalRef
-	midInfoDescribeContents jni.MethodID
-	midInfoGetOsVersion     jni.MethodID
-	midInfoWriteToParcel    jni.MethodID
+	clsDownloadableSubscription                         *jni.GlobalRef
+	midDownloadableSubscriptionDescribeContents         jni.MethodID
+	midDownloadableSubscriptionGetConfirmationCode      jni.MethodID
+	midDownloadableSubscriptionGetEncodedActivationCode jni.MethodID
+	midDownloadableSubscriptionWriteToParcel            jni.MethodID
+	midDownloadableSubscriptionForActivationCode        jni.MethodID
+
+	clsDownloadableSubscriptionBuilder                         *jni.GlobalRef
+	midDownloadableSubscriptionBuilderBuild                    jni.MethodID
+	midDownloadableSubscriptionBuilderSetConfirmationCode      jni.MethodID
+	midDownloadableSubscriptionBuilderSetEncodedActivationCode jni.MethodID
 
 	clsManager                           *jni.GlobalRef
 	midManagerCreateForCardId            jni.MethodID
@@ -42,17 +49,10 @@ var (
 	midManagerSwitchToSubscription3_1    jni.MethodID
 	midManagerUpdateSubscriptionNickname jni.MethodID
 
-	clsDownloadableSubscription                         *jni.GlobalRef
-	midDownloadableSubscriptionDescribeContents         jni.MethodID
-	midDownloadableSubscriptionGetConfirmationCode      jni.MethodID
-	midDownloadableSubscriptionGetEncodedActivationCode jni.MethodID
-	midDownloadableSubscriptionWriteToParcel            jni.MethodID
-	midDownloadableSubscriptionForActivationCode        jni.MethodID
-
-	clsDownloadableSubscriptionBuilder                         *jni.GlobalRef
-	midDownloadableSubscriptionBuilderBuild                    jni.MethodID
-	midDownloadableSubscriptionBuilderSetConfirmationCode      jni.MethodID
-	midDownloadableSubscriptionBuilderSetEncodedActivationCode jni.MethodID
+	clsInfo                 *jni.GlobalRef
+	midInfoDescribeContents jni.MethodID
+	midInfoGetOsVersion     jni.MethodID
+	midInfoWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -73,29 +73,74 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/telephony/euicc/EuiccInfo")
+	c, err = env.FindClass("android/telephony/euicc/DownloadableSubscription")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsInfo = env.NewGlobalRef(&c.Object)
+		clsDownloadableSubscription = env.NewGlobalRef(&c.Object)
 
-		midInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "describeContents", "()I")
+		midDownloadableSubscriptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midInfoGetOsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "getOsVersion", "()Ljava/lang/String;")
+		midDownloadableSubscriptionGetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getConfirmationCode", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midDownloadableSubscriptionGetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getEncodedActivationCode", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadableSubscriptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadableSubscriptionForActivationCode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "forActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/euicc/DownloadableSubscription$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDownloadableSubscriptionBuilder = env.NewGlobalRef(&c.Object)
+
+		midDownloadableSubscriptionBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "build", "()Landroid/telephony/euicc/DownloadableSubscription;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadableSubscriptionBuilderSetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setConfirmationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadableSubscriptionBuilderSetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setEncodedActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -198,74 +243,29 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telephony/euicc/DownloadableSubscription")
+	c, err = env.FindClass("android/telephony/euicc/EuiccInfo")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDownloadableSubscription = env.NewGlobalRef(&c.Object)
+		clsInfo = env.NewGlobalRef(&c.Object)
 
-		midDownloadableSubscriptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "describeContents", "()I")
+		midInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDownloadableSubscriptionGetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getConfirmationCode", "()Ljava/lang/String;")
+		midInfoGetOsVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "getOsVersion", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDownloadableSubscriptionGetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "getEncodedActivationCode", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadableSubscriptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadableSubscriptionForActivationCode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscription)), "forActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/euicc/DownloadableSubscription$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDownloadableSubscriptionBuilder = env.NewGlobalRef(&c.Object)
-
-		midDownloadableSubscriptionBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "build", "()Landroid/telephony/euicc/DownloadableSubscription;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadableSubscriptionBuilderSetConfirmationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setConfirmationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadableSubscriptionBuilderSetEncodedActivationCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadableSubscriptionBuilder)), "setEncodedActivationCode", "(Ljava/lang/String;)Landroid/telephony/euicc/DownloadableSubscription$Builder;")
+		midInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

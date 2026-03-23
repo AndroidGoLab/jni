@@ -44,205 +44,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.app.usage.UsageStats
-      go_type: Stats
-      methods:
-        - java_method: add
-          go_name: Add
-          params:
-            - java_type: android.app.usage.UsageStats
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getFirstTimeStamp
-          go_name: GetFirstTimeStamp
-          returns: long
-          error: true
-        - java_method: getLastTimeForegroundServiceUsed
-          go_name: GetLastTimeForegroundServiceUsed
-          returns: long
-          error: true
-        - java_method: getLastTimeStamp
-          go_name: GetLastTimeStamp
-          returns: long
-          error: true
-        - java_method: getLastTimeUsed
-          go_name: GetLastTimeUsed
-          returns: long
-          error: true
-        - java_method: getLastTimeVisible
-          go_name: GetLastTimeVisible
-          returns: long
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: getTotalTimeForegroundServiceUsed
-          go_name: GetTotalTimeForegroundServiceUsed
-          returns: long
-          error: true
-        - java_method: getTotalTimeInForeground
-          go_name: GetTotalTimeInForeground
-          returns: long
-          error: true
-        - java_method: getTotalTimeVisible
-          go_name: GetTotalTimeVisible
-          returns: long
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.app.usage.ConfigurationStats
-      go_type: ConfigurationStats
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getActivationCount
-          go_name: GetActivationCount
-          returns: int
-          error: true
-        - java_method: getConfiguration
-          go_name: GetConfiguration
-          returns: android.content.res.Configuration
-          error: true
-        - java_method: getFirstTimeStamp
-          go_name: GetFirstTimeStamp
-          returns: long
-          error: true
-        - java_method: getLastTimeActive
-          go_name: GetLastTimeActive
-          returns: long
-          error: true
-        - java_method: getLastTimeStamp
-          go_name: GetLastTimeStamp
-          returns: long
-          error: true
-        - java_method: getTotalTimeActive
-          go_name: GetTotalTimeActive
-          returns: long
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.app.usage.StorageStatsManager
-      go_type: StorageStatsManager
-      obtain: system_service
-      service_name: storagestats
-      close: true
-      methods:
-        - java_method: getFreeBytes
-          go_name: GetFreeBytes
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: getTotalBytes
-          go_name: GetTotalBytes
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: queryExternalStatsForUser
-          go_name: QueryExternalStatsForUser
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-            - java_type: android.os.UserHandle
-              go_name: arg1
-          returns: android.app.usage.ExternalStorageStats
-          error: true
-        - java_method: queryStatsForPackage
-          go_name: QueryStatsForPackage
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.UserHandle
-              go_name: arg2
-          returns: android.app.usage.StorageStats
-          error: true
-        - java_method: queryStatsForUid
-          go_name: QueryStatsForUid
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.app.usage.StorageStats
-          error: true
-        - java_method: queryStatsForUser
-          go_name: QueryStatsForUser
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-            - java_type: android.os.UserHandle
-              go_name: arg1
-          returns: android.app.usage.StorageStats
-          error: true
-    - java_class: android.app.usage.UsageStatsManager
-      go_type: StatsManager
-      obtain: system_service
-      service_name: usagestats
-      close: true
-      methods:
-        - java_method: getAppStandbyBucket
-          go_name: GetAppStandbyBucket
-          returns: int
-          error: true
-        - java_method: isAppInactive
-          go_name: IsAppInactive
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: queryEvents
-          go_name: QueryEvents1
-          params:
-            - java_type: android.app.usage.UsageEventsQuery
-              go_name: arg0
-          returns: android.app.usage.UsageEvents
-          error: true
-        - java_method: queryEvents
-          go_name: QueryEvents2_1
-          params:
-            - java_type: long
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: android.app.usage.UsageEvents
-          error: true
-        - java_method: queryEventsForSelf
-          go_name: QueryEventsForSelf
-          params:
-            - java_type: long
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: android.app.usage.UsageEvents
-          error: true
     - java_class: android.app.usage.NetworkStatsManager
       go_type: NetworkStatsManager
       obtain: system_service
@@ -384,55 +185,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.app.usage.UsageEventsQuery
-      go_type: EventsQuery
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBeginTimeMillis
-          go_name: GetBeginTimeMillis
-          returns: long
-          error: true
-        - java_method: getEndTimeMillis
-          go_name: GetEndTimeMillis
-          returns: long
-          error: true
-        - java_method: getEventTypes
-          go_name: GetEventTypes
-          returns: '[I'
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.app.usage.UsageEventsQuery$Builder
-      go_type: EventsQueryBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.app.usage.UsageEventsQuery
-          error: true
-        - java_method: setEventTypes
-          go_name: SetEventTypes
-          params:
-            - java_type: int...
-              go_name: arg0
-          returns: android.app.usage.UsageEventsQuery$Builder
-          error: true
-        - java_method: setPackageNames
-          go_name: SetPackageNames
-          params:
-            - java_type: java.lang.String...
-              go_name: arg0
-          returns: android.app.usage.UsageEventsQuery$Builder
-          error: true
     - java_class: android.app.usage.UsageEvents
       go_type: Events
       methods:
@@ -495,52 +247,47 @@ classes:
           go_name: GetTimeStamp
           returns: long
           error: true
-    - java_class: android.app.usage.EventStats
-      go_type: EventStats
+    - java_class: android.app.usage.UsageStatsManager
+      go_type: StatsManager
+      obtain: system_service
+      service_name: usagestats
+      close: true
       methods:
-        - java_method: add
-          go_name: Add
+        - java_method: getAppStandbyBucket
+          go_name: GetAppStandbyBucket
+          returns: int
+          error: true
+        - java_method: isAppInactive
+          go_name: IsAppInactive
           params:
-            - java_type: android.app.usage.EventStats
+            - java_type: String
               go_name: arg0
-          returns: void
+          returns: boolean
           error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCount
-          go_name: GetCount
-          returns: int
-          error: true
-        - java_method: getEventType
-          go_name: GetEventType
-          returns: int
-          error: true
-        - java_method: getFirstTimeStamp
-          go_name: GetFirstTimeStamp
-          returns: long
-          error: true
-        - java_method: getLastEventTime
-          go_name: GetLastEventTime
-          returns: long
-          error: true
-        - java_method: getLastTimeStamp
-          go_name: GetLastTimeStamp
-          returns: long
-          error: true
-        - java_method: getTotalTime
-          go_name: GetTotalTime
-          returns: long
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: queryEvents
+          go_name: QueryEvents1
           params:
-            - java_type: android.os.Parcel
+            - java_type: android.app.usage.UsageEventsQuery
               go_name: arg0
-            - java_type: int
+          returns: android.app.usage.UsageEvents
+          error: true
+        - java_method: queryEvents
+          go_name: QueryEvents2_1
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
               go_name: arg1
-          returns: void
+          returns: android.app.usage.UsageEvents
+          error: true
+        - java_method: queryEventsForSelf
+          go_name: QueryEventsForSelf
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: android.app.usage.UsageEvents
           error: true
     - java_class: android.app.usage.NetworkStats
       go_type: NetworkStats
@@ -611,6 +358,46 @@ classes:
           go_name: GetUid
           returns: int
           error: true
+    - java_class: android.app.usage.ConfigurationStats
+      go_type: ConfigurationStats
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getActivationCount
+          go_name: GetActivationCount
+          returns: int
+          error: true
+        - java_method: getConfiguration
+          go_name: GetConfiguration
+          returns: android.content.res.Configuration
+          error: true
+        - java_method: getFirstTimeStamp
+          go_name: GetFirstTimeStamp
+          returns: long
+          error: true
+        - java_method: getLastTimeActive
+          go_name: GetLastTimeActive
+          returns: long
+          error: true
+        - java_method: getLastTimeStamp
+          go_name: GetLastTimeStamp
+          returns: long
+          error: true
+        - java_method: getTotalTimeActive
+          go_name: GetTotalTimeActive
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.app.usage.ExternalStorageStats
       go_type: ExternalStorageStats
       methods:
@@ -647,6 +434,219 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.app.usage.UsageStats
+      go_type: Stats
+      methods:
+        - java_method: add
+          go_name: Add
+          params:
+            - java_type: android.app.usage.UsageStats
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFirstTimeStamp
+          go_name: GetFirstTimeStamp
+          returns: long
+          error: true
+        - java_method: getLastTimeForegroundServiceUsed
+          go_name: GetLastTimeForegroundServiceUsed
+          returns: long
+          error: true
+        - java_method: getLastTimeStamp
+          go_name: GetLastTimeStamp
+          returns: long
+          error: true
+        - java_method: getLastTimeUsed
+          go_name: GetLastTimeUsed
+          returns: long
+          error: true
+        - java_method: getLastTimeVisible
+          go_name: GetLastTimeVisible
+          returns: long
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getTotalTimeForegroundServiceUsed
+          go_name: GetTotalTimeForegroundServiceUsed
+          returns: long
+          error: true
+        - java_method: getTotalTimeInForeground
+          go_name: GetTotalTimeInForeground
+          returns: long
+          error: true
+        - java_method: getTotalTimeVisible
+          go_name: GetTotalTimeVisible
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.usage.StorageStatsManager
+      go_type: StorageStatsManager
+      obtain: system_service
+      service_name: storagestats
+      close: true
+      methods:
+        - java_method: getFreeBytes
+          go_name: GetFreeBytes
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getTotalBytes
+          go_name: GetTotalBytes
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: queryExternalStatsForUser
+          go_name: QueryExternalStatsForUser
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: android.app.usage.ExternalStorageStats
+          error: true
+        - java_method: queryStatsForPackage
+          go_name: QueryStatsForPackage
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.UserHandle
+              go_name: arg2
+          returns: android.app.usage.StorageStats
+          error: true
+        - java_method: queryStatsForUid
+          go_name: QueryStatsForUid
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.app.usage.StorageStats
+          error: true
+        - java_method: queryStatsForUser
+          go_name: QueryStatsForUser
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: android.app.usage.StorageStats
+          error: true
+    - java_class: android.app.usage.EventStats
+      go_type: EventStats
+      methods:
+        - java_method: add
+          go_name: Add
+          params:
+            - java_type: android.app.usage.EventStats
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getCount
+          go_name: GetCount
+          returns: int
+          error: true
+        - java_method: getEventType
+          go_name: GetEventType
+          returns: int
+          error: true
+        - java_method: getFirstTimeStamp
+          go_name: GetFirstTimeStamp
+          returns: long
+          error: true
+        - java_method: getLastEventTime
+          go_name: GetLastEventTime
+          returns: long
+          error: true
+        - java_method: getLastTimeStamp
+          go_name: GetLastTimeStamp
+          returns: long
+          error: true
+        - java_method: getTotalTime
+          go_name: GetTotalTime
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.usage.UsageEventsQuery
+      go_type: EventsQuery
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBeginTimeMillis
+          go_name: GetBeginTimeMillis
+          returns: long
+          error: true
+        - java_method: getEndTimeMillis
+          go_name: GetEndTimeMillis
+          returns: long
+          error: true
+        - java_method: getEventTypes
+          go_name: GetEventTypes
+          returns: '[I'
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.usage.UsageEventsQuery$Builder
+      go_type: EventsQueryBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.app.usage.UsageEventsQuery
+          error: true
+        - java_method: setEventTypes
+          go_name: SetEventTypes
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: android.app.usage.UsageEventsQuery$Builder
+          error: true
+        - java_method: setPackageNames
+          go_name: SetPackageNames
+          params:
+            - java_type: java.lang.String...
+              go_name: arg0
+          returns: android.app.usage.UsageEventsQuery$Builder
+          error: true
 constants:
     - go_name: AppDataTypeFileTypeApk
       value: "3"
@@ -668,42 +668,6 @@ constants:
       go_type: int
     - go_name: Creator
       value: "0"
-      go_type: int
-    - go_name: ExtraEventAction
-      value: '"android.app.usage.extra.EVENT_ACTION"'
-      go_type: string
-    - go_name: ExtraEventCategory
-      value: '"android.app.usage.extra.EVENT_CATEGORY"'
-      go_type: string
-    - go_name: IntervalBest
-      value: "4"
-      go_type: int
-    - go_name: IntervalDaily
-      value: "0"
-      go_type: int
-    - go_name: IntervalMonthly
-      value: "2"
-      go_type: int
-    - go_name: IntervalWeekly
-      value: "1"
-      go_type: int
-    - go_name: IntervalYearly
-      value: "3"
-      go_type: int
-    - go_name: StandbyBucketActive
-      value: "10"
-      go_type: int
-    - go_name: StandbyBucketFrequent
-      value: "30"
-      go_type: int
-    - go_name: StandbyBucketRare
-      value: "40"
-      go_type: int
-    - go_name: StandbyBucketRestricted
-      value: "45"
-      go_type: int
-    - go_name: StandbyBucketWorkingSet
-      value: "20"
       go_type: int
     - go_name: ActivityPaused
       value: "2"
@@ -758,6 +722,42 @@ constants:
       go_type: int
     - go_name: UserInteraction
       value: "7"
+      go_type: int
+    - go_name: ExtraEventAction
+      value: '"android.app.usage.extra.EVENT_ACTION"'
+      go_type: string
+    - go_name: ExtraEventCategory
+      value: '"android.app.usage.extra.EVENT_CATEGORY"'
+      go_type: string
+    - go_name: IntervalBest
+      value: "4"
+      go_type: int
+    - go_name: IntervalDaily
+      value: "0"
+      go_type: int
+    - go_name: IntervalMonthly
+      value: "2"
+      go_type: int
+    - go_name: IntervalWeekly
+      value: "1"
+      go_type: int
+    - go_name: IntervalYearly
+      value: "3"
+      go_type: int
+    - go_name: StandbyBucketActive
+      value: "10"
+      go_type: int
+    - go_name: StandbyBucketFrequent
+      value: "30"
+      go_type: int
+    - go_name: StandbyBucketRare
+      value: "40"
+      go_type: int
+    - go_name: StandbyBucketRestricted
+      value: "45"
+      go_type: int
+    - go_name: StandbyBucketWorkingSet
+      value: "20"
       go_type: int
     - go_name: DefaultNetworkAll
       value: "-1"

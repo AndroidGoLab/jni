@@ -5,6 +5,73 @@
 package: fonts
 go_import: github.com/AndroidGoLab/jni/graphics/fonts
 classes:
+    - java_class: android.graphics.fonts.FontVariationAxis
+      go_type: FontVariationAxis
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getStyleValue
+          go_name: GetStyleValue
+          returns: float
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+      static_methods:
+        - java_method: fromFontVariationSettings
+          go_name: FromFontVariationSettings
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.graphics.fonts.FontVariationAxis[]
+          error: true
+        - java_method: toFontVariationSettings
+          go_name: ToFontVariationSettings
+          params:
+            - java_type: android.graphics.fonts.FontVariationAxis[]
+              go_name: arg0
+          returns: String
+          error: true
+    - java_class: android.graphics.fonts.FontStyle
+      go_type: FontStyle
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getSlant
+          go_name: GetSlant
+          returns: int
+          error: true
+        - java_method: getWeight
+          go_name: GetWeight
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
     - java_class: android.graphics.fonts.Font
       go_type: Font
       methods:
@@ -113,75 +180,6 @@ classes:
               go_name: arg0
           returns: android.graphics.fonts.Font$Builder
           error: true
-    - java_class: android.graphics.fonts.SystemFonts
-      go_type: SystemFonts
-    - java_class: android.graphics.fonts.FontStyle
-      go_type: FontStyle
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getSlant
-          go_name: GetSlant
-          returns: int
-          error: true
-        - java_method: getWeight
-          go_name: GetWeight
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.graphics.fonts.FontVariationAxis
-      go_type: FontVariationAxis
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getStyleValue
-          go_name: GetStyleValue
-          returns: float
-          error: true
-        - java_method: getTag
-          go_name: GetTag
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-      static_methods:
-        - java_method: fromFontVariationSettings
-          go_name: FromFontVariationSettings
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.graphics.fonts.FontVariationAxis[]
-          error: true
-        - java_method: toFontVariationSettings
-          go_name: ToFontVariationSettings
-          params:
-            - java_type: android.graphics.fonts.FontVariationAxis[]
-              go_name: arg0
-          returns: String
-          error: true
     - java_class: android.graphics.fonts.FontFamily
       go_type: FontFamily
       methods:
@@ -214,6 +212,8 @@ classes:
           go_name: BuildVariableFamily
           returns: android.graphics.fonts.FontFamily
           error: true
+    - java_class: android.graphics.fonts.SystemFonts
+      go_type: SystemFonts
 constants:
     - go_name: FontSlantItalic
       value: "1"

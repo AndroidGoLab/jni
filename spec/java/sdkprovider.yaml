@@ -5,16 +5,6 @@
 package: sdkprovider
 go_import: github.com/AndroidGoLab/jni/app/sdksandbox/sdkprovider
 classes:
-    - java_class: android.app.sdksandbox.sdkprovider.SdkSandboxActivityHandler
-      go_type: SdkSandboxActivityHandler
-      methods:
-        - java_method: onActivityCreated
-          go_name: OnActivityCreated
-          params:
-            - java_type: android.app.Activity
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.app.sdksandbox.sdkprovider.SdkSandboxClientImportanceListener
       go_type: SdkSandboxClientImportanceListener
       methods:
@@ -49,6 +39,16 @@ classes:
           go_name: UnregisterSdkSandboxClientImportanceListener
           params:
             - java_type: android.app.sdksandbox.sdkprovider.SdkSandboxClientImportanceListener
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.app.sdksandbox.sdkprovider.SdkSandboxActivityHandler
+      go_type: SdkSandboxActivityHandler
+      methods:
+        - java_method: onActivityCreated
+          go_name: OnActivityCreated
+          params:
+            - java_type: android.app.Activity
               go_name: arg0
           returns: void
           error: true

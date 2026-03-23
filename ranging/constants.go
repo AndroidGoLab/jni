@@ -6,22 +6,17 @@ import "github.com/AndroidGoLab/jni/ranging/consts"
 
 const (
 	Creator                          = consts.Creator
-	ConfidenceHigh                   = consts.ConfidenceHigh
-	ConfidenceLow                    = consts.ConfidenceLow
-	ConfidenceMedium                 = consts.ConfidenceMedium
-	NotificationConfigDisable        = consts.NotificationConfigDisable
-	NotificationConfigEnable         = consts.NotificationConfigEnable
-	NotificationConfigProximityEdge  = consts.NotificationConfigProximityEdge
-	NotificationConfigProximityLevel = consts.NotificationConfigProximityLevel
-	BleCs                            = consts.BleCs
-	BleRssi                          = consts.BleRssi
-	Uwb                              = consts.Uwb
-	WifiNanRtt                       = consts.WifiNanRtt
 	DisabledRegulatory               = consts.DisabledRegulatory
 	DisabledUser                     = consts.DisabledUser
 	DisabledUserRestrictions         = consts.DisabledUserRestrictions
 	Enabled                          = consts.Enabled
 	NotSupported                     = consts.NotSupported
+	RangingSessionOob                = consts.RangingSessionOob
+	RangingSessionRaw                = consts.RangingSessionRaw
+	NotificationConfigDisable        = consts.NotificationConfigDisable
+	NotificationConfigEnable         = consts.NotificationConfigEnable
+	NotificationConfigProximityEdge  = consts.NotificationConfigProximityEdge
+	NotificationConfigProximityLevel = consts.NotificationConfigProximityLevel
 	DeviceRoleInitiator              = consts.DeviceRoleInitiator
 	DeviceRoleResponder              = consts.DeviceRoleResponder
 	ReasonLocalRequest               = consts.ReasonLocalRequest
@@ -30,6 +25,11 @@ const (
 	ReasonSystemPolicy               = consts.ReasonSystemPolicy
 	ReasonUnknown                    = consts.ReasonUnknown
 	ReasonUnsupported                = consts.ReasonUnsupported
-	RangingSessionOob                = consts.RangingSessionOob
-	RangingSessionRaw                = consts.RangingSessionRaw
+	BleCs                            = consts.BleCs
+	BleRssi                          = consts.BleRssi
+	Uwb                              = consts.Uwb
+	WifiNanRtt                       = consts.WifiNanRtt
+	ConfidenceHigh                   = consts.ConfidenceHigh
+	ConfidenceLow                    = consts.ConfidenceLow
+	ConfidenceMedium                 = consts.ConfidenceMedium
 )

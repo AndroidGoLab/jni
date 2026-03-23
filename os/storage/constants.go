@@ -5,7 +5,6 @@ package storage
 import "github.com/AndroidGoLab/jni/os/storage/consts"
 
 const (
-	Creator               = consts.Creator
 	ErrorAlreadyMounted   = consts.ErrorAlreadyMounted
 	ErrorCouldNotMount    = consts.ErrorCouldNotMount
 	ErrorCouldNotUnmount  = consts.ErrorCouldNotUnmount
@@ -14,6 +13,7 @@ const (
 	ErrorPermissionDenied = consts.ErrorPermissionDenied
 	Mounted               = consts.Mounted
 	Unmounted             = consts.Unmounted
+	Creator               = consts.Creator
 	UuidDefault           = consts.UuidDefault
 )
 

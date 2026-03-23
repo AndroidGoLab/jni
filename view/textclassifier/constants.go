@@ -5,17 +5,26 @@ package textclassifier
 import "github.com/AndroidGoLab/jni/view/textclassifier/consts"
 
 const (
+	ActionAbandon               = consts.ActionAbandon
+	ActionCopy                  = consts.ActionCopy
+	ActionCut                   = consts.ActionCut
+	ActionDrag                  = consts.ActionDrag
+	ActionOther                 = consts.ActionOther
+	ActionOvertype              = consts.ActionOvertype
+	ActionPaste                 = consts.ActionPaste
+	ActionReset                 = consts.ActionReset
+	ActionSelectAll             = consts.ActionSelectAll
+	ActionShare                 = consts.ActionShare
+	ActionSmartShare            = consts.ActionSmartShare
 	Creator                     = consts.Creator
-	NoOp                        = consts.NoOp
-	ApplyStrategyIgnore         = consts.ApplyStrategyIgnore
-	ApplyStrategyReplace        = consts.ApplyStrategyReplace
-	StatusDifferentText         = consts.StatusDifferentText
-	StatusLinksApplied          = consts.StatusLinksApplied
-	StatusNoLinksApplied        = consts.StatusNoLinksApplied
-	StatusNoLinksFound          = consts.StatusNoLinksFound
-	StatusUnsupportedCharacter  = consts.StatusUnsupportedCharacter
-	PersonUserOthers            = consts.PersonUserOthers
-	PersonUserSelf              = consts.PersonUserSelf
+	EventAutoSelection          = consts.EventAutoSelection
+	EventSelectionModified      = consts.EventSelectionModified
+	EventSelectionStarted       = consts.EventSelectionStarted
+	EventSmartSelectionMulti    = consts.EventSmartSelectionMulti
+	EventSmartSelectionSingle   = consts.EventSmartSelectionSingle
+	InvocationLink              = consts.InvocationLink
+	InvocationManual            = consts.InvocationManual
+	InvocationUnknown           = consts.InvocationUnknown
 	CategoryConversationActions = consts.CategoryConversationActions
 	CategoryLanguageDetection   = consts.CategoryLanguageDetection
 	CategoryLinkify             = consts.CategoryLinkify
@@ -41,28 +50,29 @@ const (
 	TypeSmartAction             = consts.TypeSmartAction
 	TypeSmartSelectionMulti     = consts.TypeSmartSelectionMulti
 	TypeSmartSelectionSingle    = consts.TypeSmartSelectionSingle
-	ActionAbandon               = consts.ActionAbandon
-	ActionCopy                  = consts.ActionCopy
-	ActionCut                   = consts.ActionCut
-	ActionDrag                  = consts.ActionDrag
-	ActionOther                 = consts.ActionOther
-	ActionOvertype              = consts.ActionOvertype
-	ActionPaste                 = consts.ActionPaste
-	ActionReset                 = consts.ActionReset
-	ActionSelectAll             = consts.ActionSelectAll
-	ActionShare                 = consts.ActionShare
-	ActionSmartShare            = consts.ActionSmartShare
-	EventAutoSelection          = consts.EventAutoSelection
-	EventSelectionModified      = consts.EventSelectionModified
-	EventSelectionStarted       = consts.EventSelectionStarted
-	EventSmartSelectionMulti    = consts.EventSmartSelectionMulti
-	EventSmartSelectionSingle   = consts.EventSmartSelectionSingle
-	InvocationLink              = consts.InvocationLink
-	InvocationManual            = consts.InvocationManual
-	InvocationUnknown           = consts.InvocationUnknown
+	NoOp                        = consts.NoOp
+	PersonUserOthers            = consts.PersonUserOthers
+	PersonUserSelf              = consts.PersonUserSelf
+	ApplyStrategyIgnore         = consts.ApplyStrategyIgnore
+	ApplyStrategyReplace        = consts.ApplyStrategyReplace
+	StatusDifferentText         = consts.StatusDifferentText
+	StatusLinksApplied          = consts.StatusLinksApplied
+	StatusNoLinksApplied        = consts.StatusNoLinksApplied
+	StatusNoLinksFound          = consts.StatusNoLinksFound
+	StatusUnsupportedCharacter  = consts.StatusUnsupportedCharacter
 )
 
 const (
+	TypeCallPhone                        = consts.TypeCallPhone
+	TypeCreateReminder                   = consts.TypeCreateReminder
+	TypeOpenUrl                          = consts.TypeOpenUrl
+	TypeSendEmail                        = consts.TypeSendEmail
+	TypeSendSms                          = consts.TypeSendSms
+	TypeShareLocation                    = consts.TypeShareLocation
+	TypeTextReply                        = consts.TypeTextReply
+	TypeTrackFlight                      = consts.TypeTrackFlight
+	TypeViewCalendar                     = consts.TypeViewCalendar
+	TypeViewMap                          = consts.TypeViewMap
 	ExtraFromTextClassifier              = consts.ExtraFromTextClassifier
 	ExtraTextOriginPackage               = consts.ExtraTextOriginPackage
 	HintTextIsEditable                   = consts.HintTextIsEditable
@@ -90,14 +100,4 @@ const (
 	WidgetTypeWebview                    = consts.WidgetTypeWebview
 	HintForInApp                         = consts.HintForInApp
 	HintForNotification                  = consts.HintForNotification
-	TypeCallPhone                        = consts.TypeCallPhone
-	TypeCreateReminder                   = consts.TypeCreateReminder
-	TypeOpenUrl                          = consts.TypeOpenUrl
-	TypeSendEmail                        = consts.TypeSendEmail
-	TypeSendSms                          = consts.TypeSendSms
-	TypeShareLocation                    = consts.TypeShareLocation
-	TypeTextReply                        = consts.TypeTextReply
-	TypeTrackFlight                      = consts.TypeTrackFlight
-	TypeViewCalendar                     = consts.TypeViewCalendar
-	TypeViewMap                          = consts.TypeViewMap
 )

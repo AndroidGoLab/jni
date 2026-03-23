@@ -5,15 +5,19 @@
 package: euicc
 go_import: github.com/AndroidGoLab/jni/telephony/euicc
 classes:
-    - java_class: android.telephony.euicc.EuiccInfo
-      go_type: Info
+    - java_class: android.telephony.euicc.DownloadableSubscription
+      go_type: DownloadableSubscription
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getOsVersion
-          go_name: GetOsVersion
+        - java_method: getConfirmationCode
+          go_name: GetConfirmationCode
+          returns: String
+          error: true
+        - java_method: getEncodedActivationCode
+          go_name: GetEncodedActivationCode
           returns: String
           error: true
         - java_method: writeToParcel
@@ -24,6 +28,35 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
+          error: true
+      static_methods:
+        - java_method: forActivationCode
+          go_name: ForActivationCode
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telephony.euicc.DownloadableSubscription
+          error: true
+    - java_class: android.telephony.euicc.DownloadableSubscription$Builder
+      go_type: DownloadableSubscriptionBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.telephony.euicc.DownloadableSubscription
+          error: true
+        - java_method: setConfirmationCode
+          go_name: SetConfirmationCode
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telephony.euicc.DownloadableSubscription$Builder
+          error: true
+        - java_method: setEncodedActivationCode
+          go_name: SetEncodedActivationCode
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telephony.euicc.DownloadableSubscription$Builder
           error: true
     - java_class: android.telephony.euicc.EuiccManager
       go_type: Manager
@@ -125,19 +158,15 @@ classes:
               go_name: arg2
           returns: void
           error: true
-    - java_class: android.telephony.euicc.DownloadableSubscription
-      go_type: DownloadableSubscription
+    - java_class: android.telephony.euicc.EuiccInfo
+      go_type: Info
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getConfirmationCode
-          go_name: GetConfirmationCode
-          returns: String
-          error: true
-        - java_method: getEncodedActivationCode
-          go_name: GetEncodedActivationCode
+        - java_method: getOsVersion
+          go_name: GetOsVersion
           returns: String
           error: true
         - java_method: writeToParcel
@@ -148,35 +177,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-      static_methods:
-        - java_method: forActivationCode
-          go_name: ForActivationCode
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.telephony.euicc.DownloadableSubscription
-          error: true
-    - java_class: android.telephony.euicc.DownloadableSubscription$Builder
-      go_type: DownloadableSubscriptionBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.telephony.euicc.DownloadableSubscription
-          error: true
-        - java_method: setConfirmationCode
-          go_name: SetConfirmationCode
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.telephony.euicc.DownloadableSubscription$Builder
-          error: true
-        - java_method: setEncodedActivationCode
-          go_name: SetEncodedActivationCode
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.telephony.euicc.DownloadableSubscription$Builder
           error: true
 constants:
     - go_name: Creator

@@ -5,14 +5,14 @@ package method
 import "github.com/AndroidGoLab/jni/text/method/consts"
 
 const (
-	Characters    = consts.Characters
-	None          = consts.None
-	Sentences     = consts.Sentences
-	Words         = consts.Words
 	MetaAltLocked = consts.MetaAltLocked
 	MetaAltOn     = consts.MetaAltOn
 	MetaCapLocked = consts.MetaCapLocked
 	MetaShiftOn   = consts.MetaShiftOn
 	MetaSymLocked = consts.MetaSymLocked
 	MetaSymOn     = consts.MetaSymOn
+	Characters    = consts.Characters
+	None          = consts.None
+	Sentences     = consts.Sentences
+	Words         = consts.Words
 )

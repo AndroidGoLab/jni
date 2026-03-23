@@ -5,7 +5,10 @@ package session
 import "github.com/AndroidGoLab/jni/media/session/consts"
 
 const (
+	FlagHandlesMediaButtons      = consts.FlagHandlesMediaButtons
+	FlagHandlesTransportControls = consts.FlagHandlesTransportControls
 	Creator                      = consts.Creator
+	UnknownId                    = consts.UnknownId
 	PlaybackTypeLocal            = consts.PlaybackTypeLocal
 	PlaybackTypeRemote           = consts.PlaybackTypeRemote
 	StateBuffering               = consts.StateBuffering
@@ -20,9 +23,6 @@ const (
 	StateSkippingToPrevious      = consts.StateSkippingToPrevious
 	StateSkippingToQueueItem     = consts.StateSkippingToQueueItem
 	StateStopped                 = consts.StateStopped
-	FlagHandlesMediaButtons      = consts.FlagHandlesMediaButtons
-	FlagHandlesTransportControls = consts.FlagHandlesTransportControls
-	UnknownId                    = consts.UnknownId
 )
 
 const (

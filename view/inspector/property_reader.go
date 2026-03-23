@@ -51,7 +51,7 @@ func (m *PropertyReader) ReadBoolean(arg0 int32, arg1 bool) error {
 	return callErr
 }
 
-// ReadByte calls android.view.inspector.PropertyReader.readByte.
+// ReadByteValue calls android.view.inspector.PropertyReader.readByte.
 func (m *PropertyReader) ReadByteValue(arg0 int32, arg1 int8) error {
 
 	var callErr error

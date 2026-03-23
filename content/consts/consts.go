@@ -3,25 +3,19 @@
 package consts
 
 const (
-	Creator                         int = 0
-	DatabaseMode2lines              int = 2
-	DatabaseModeQueries             int = 1
-	ClassificationComplete          int = 3
-	ClassificationNotComplete       int = 1
-	ClassificationNotPerformed      int = 2
 	NoMatch                         int = -1
-	ResultApproved                  int = 1
-	ResultDenied                    int = 2
-	ResultError                     int = 5
-	ResultErrorBadRequest           int = 1
-	ResultErrorInternal             int = 3
-	ResultErrorNetwork              int = 2
-	ResultNoResponse                int = 3
-	ResultUnknownRequest            int = 4
+	Creator                         int = 0
+	LogSyncDetails                  int = 2743
 	Fragment                        int = 2
 	Path                            int = 0
 	Query                           int = 1
-	AlreadyInProgress               int = 0
+	TrimMemoryBackground            int = 40
+	TrimMemoryComplete              int = 80
+	TrimMemoryModerate              int = 60
+	TrimMemoryRunningCritical       int = 15
+	TrimMemoryRunningLow            int = 10
+	TrimMemoryRunningModerate       int = 5
+	TrimMemoryUiHidden              int = 20
 	TypeBoolean                     int = 1
 	TypeBundle                      int = 7
 	TypeBundleArray                 int = 8
@@ -31,22 +25,6 @@ const (
 	TypeNull                        int = 0
 	TypeString                      int = 6
 	IdNull                          int = 0
-	ActionAllow                     int = 0
-	ActionBlock                     int = 1
-	TrimMemoryBackground            int = 40
-	TrimMemoryComplete              int = 80
-	TrimMemoryModerate              int = 60
-	TrimMemoryRunningCritical       int = 15
-	TrimMemoryRunningLow            int = 10
-	TrimMemoryRunningModerate       int = 5
-	TrimMemoryUiHidden              int = 20
-	Button1                         int = -1
-	Button2                         int = -2
-	Button3                         int = -3
-	ButtonNegative                  int = -2
-	ButtonNeutral                   int = -3
-	ButtonPositive                  int = -1
-	LogSyncDetails                  int = 2743
 	MatchAdjustmentMask             int = 65535
 	MatchAdjustmentNormal           int = 32768
 	MatchCategoryEmpty              int = 1048576
@@ -63,16 +41,41 @@ const (
 	NoMatchType                     int = -1
 	SystemHighPriority              int = 1000
 	SystemLowPriority               int = -1000
+	ActionAllow                     int = 0
+	ActionBlock                     int = 1
+	AlreadyInProgress               int = 0
+	DatabaseMode2lines              int = 2
+	DatabaseModeQueries             int = 1
+	Button1                         int = -1
+	Button2                         int = -2
+	Button3                         int = -3
+	ButtonNegative                  int = -2
+	ButtonNeutral                   int = -3
+	ButtonPositive                  int = -1
+	ResultApproved                  int = 1
+	ResultDenied                    int = 2
+	ResultError                     int = 5
+	ResultErrorBadRequest           int = 1
+	ResultErrorInternal             int = 3
+	ResultErrorNetwork              int = 2
+	ResultNoResponse                int = 3
+	ResultUnknownRequest            int = 4
+	ClassificationComplete          int = 3
+	ClassificationNotComplete       int = 1
+	ClassificationNotPerformed      int = 2
 )
 
 const (
-	ExtraIsRemoteDevice              string = "android.content.extra.IS_REMOTE_DEVICE"
-	ExtraIsSensitive                 string = "android.content.extra.IS_SENSITIVE"
-	MimetypeTextHtml                 string = "text/html"
-	MimetypeTextIntent               string = "text/vnd.android.intent"
-	MimetypeTextPlain                string = "text/plain"
-	MimetypeTextUrilist              string = "text/uri-list"
-	MimetypeUnknown                  string = "application/octet-stream"
+	InvalidTime int64 = -9223372036854775808
+)
+
+const (
+	FeatureDelete                    string = "android:delete"
+	FeatureDownload                  string = "android:download"
+	FeatureEdit                      string = "android:edit"
+	FeaturePrint                     string = "android:print"
+	FeatureSend                      string = "android:send"
+	FeatureView                      string = "android:view"
 	ActionPermissionResponseReceived string = "android.content.action.PERMISSION_RESPONSE_RECEIVED"
 	ActionRequestLocalApproval       string = "android.content.action.REQUEST_LOCAL_APPROVAL"
 	ActionRequestPermission          string = "android.content.action.REQUEST_PERMISSION"
@@ -95,15 +98,12 @@ const (
 	ResponseKeyMessage               string = "android.response.msg"
 	ResponseKeyResponseTimestamp     string = "android.response.timestamp"
 	ResponseKeyResult                string = "android.response.result"
+	ExtraIsRemoteDevice              string = "android.content.extra.IS_REMOTE_DEVICE"
+	ExtraIsSensitive                 string = "android.content.extra.IS_SENSITIVE"
+	MimetypeTextHtml                 string = "text/html"
+	MimetypeTextIntent               string = "text/vnd.android.intent"
+	MimetypeTextPlain                string = "text/plain"
+	MimetypeTextUrilist              string = "text/uri-list"
+	MimetypeUnknown                  string = "application/octet-stream"
 	Tag                              string = "ContentValues"
-	FeatureDelete                    string = "android:delete"
-	FeatureDownload                  string = "android:download"
-	FeatureEdit                      string = "android:edit"
-	FeaturePrint                     string = "android:print"
-	FeatureSend                      string = "android:send"
-	FeatureView                      string = "android:view"
-)
-
-const (
-	InvalidTime int64 = -9223372036854775808
 )

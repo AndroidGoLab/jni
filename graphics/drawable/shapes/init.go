@@ -23,27 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsArcShape              *jni.GlobalRef
-	midArcShapeClone0        jni.MethodID
-	midArcShapeDraw          jni.MethodID
-	midArcShapeEquals        jni.MethodID
-	midArcShapeGetOutline    jni.MethodID
-	midArcShapeGetStartAngle jni.MethodID
-	midArcShapeGetSweepAngle jni.MethodID
-	midArcShapeHashCode      jni.MethodID
-	midArcShapeClone0_1      jni.MethodID
-	midArcShapeClone0_2      jni.MethodID
-	midArcShapeClone0_3      jni.MethodID
-
-	clsRectShape           *jni.GlobalRef
-	midRectShapeClone0     jni.MethodID
-	midRectShapeDraw       jni.MethodID
-	midRectShapeEquals     jni.MethodID
-	midRectShapeGetOutline jni.MethodID
-	midRectShapeHashCode   jni.MethodID
-	midRectShapeClone0_1   jni.MethodID
-	midRectShapeClone0_2   jni.MethodID
-
 	clsShape           *jni.GlobalRef
 	midShapeClone0     jni.MethodID
 	midShapeDraw       jni.MethodID
@@ -56,6 +35,43 @@ var (
 	midShapeResize     jni.MethodID
 	midShapeClone0_1   jni.MethodID
 
+	clsOvalShape           *jni.GlobalRef
+	midOvalShapeClone0     jni.MethodID
+	midOvalShapeDraw       jni.MethodID
+	midOvalShapeGetOutline jni.MethodID
+	midOvalShapeClone0_1   jni.MethodID
+	midOvalShapeClone0_2   jni.MethodID
+	midOvalShapeClone0_3   jni.MethodID
+
+	clsArcShape              *jni.GlobalRef
+	midArcShapeClone0        jni.MethodID
+	midArcShapeDraw          jni.MethodID
+	midArcShapeEquals        jni.MethodID
+	midArcShapeGetOutline    jni.MethodID
+	midArcShapeGetStartAngle jni.MethodID
+	midArcShapeGetSweepAngle jni.MethodID
+	midArcShapeHashCode      jni.MethodID
+	midArcShapeClone0_1      jni.MethodID
+	midArcShapeClone0_2      jni.MethodID
+	midArcShapeClone0_3      jni.MethodID
+
+	clsPathShape         *jni.GlobalRef
+	midPathShapeClone0   jni.MethodID
+	midPathShapeDraw     jni.MethodID
+	midPathShapeEquals   jni.MethodID
+	midPathShapeHashCode jni.MethodID
+	midPathShapeClone0_1 jni.MethodID
+	midPathShapeClone0_2 jni.MethodID
+
+	clsRectShape           *jni.GlobalRef
+	midRectShapeClone0     jni.MethodID
+	midRectShapeDraw       jni.MethodID
+	midRectShapeEquals     jni.MethodID
+	midRectShapeGetOutline jni.MethodID
+	midRectShapeHashCode   jni.MethodID
+	midRectShapeClone0_1   jni.MethodID
+	midRectShapeClone0_2   jni.MethodID
+
 	clsRoundRectShape           *jni.GlobalRef
 	midRoundRectShapeClone0     jni.MethodID
 	midRoundRectShapeDraw       jni.MethodID
@@ -65,22 +81,6 @@ var (
 	midRoundRectShapeClone0_1   jni.MethodID
 	midRoundRectShapeClone0_2   jni.MethodID
 	midRoundRectShapeClone0_3   jni.MethodID
-
-	clsOvalShape           *jni.GlobalRef
-	midOvalShapeClone0     jni.MethodID
-	midOvalShapeDraw       jni.MethodID
-	midOvalShapeGetOutline jni.MethodID
-	midOvalShapeClone0_1   jni.MethodID
-	midOvalShapeClone0_2   jni.MethodID
-	midOvalShapeClone0_3   jni.MethodID
-
-	clsPathShape         *jni.GlobalRef
-	midPathShapeClone0   jni.MethodID
-	midPathShapeDraw     jni.MethodID
-	midPathShapeEquals   jni.MethodID
-	midPathShapeHashCode jni.MethodID
-	midPathShapeClone0_1 jni.MethodID
-	midPathShapeClone0_2 jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -100,145 +100,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/graphics/drawable/shapes/ArcShape")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsArcShape = env.NewGlobalRef(&c.Object)
-
-		midArcShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Landroid/graphics/drawable/shapes/ArcShape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeGetStartAngle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "getStartAngle", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeGetSweepAngle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "getSweepAngle", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Landroid/graphics/drawable/shapes/RectShape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midArcShapeClone0_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/shapes/RectShape")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRectShape = env.NewGlobalRef(&c.Object)
-
-		midRectShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Landroid/graphics/drawable/shapes/RectShape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRectShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRectShapeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRectShapeGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRectShapeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRectShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRectShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/graphics/drawable/shapes/Shape")
 	if err != nil {
@@ -320,6 +181,249 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/graphics/drawable/shapes/OvalShape")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsOvalShape = env.NewGlobalRef(&c.Object)
+
+		midOvalShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Landroid/graphics/drawable/shapes/OvalShape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvalShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvalShapeGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvalShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Landroid/graphics/drawable/shapes/RectShape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvalShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midOvalShapeClone0_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/shapes/ArcShape")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsArcShape = env.NewGlobalRef(&c.Object)
+
+		midArcShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Landroid/graphics/drawable/shapes/ArcShape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeGetStartAngle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "getStartAngle", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeGetSweepAngle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "getSweepAngle", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Landroid/graphics/drawable/shapes/RectShape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midArcShapeClone0_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArcShape)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/shapes/PathShape")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPathShape = env.NewGlobalRef(&c.Object)
+
+		midPathShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Landroid/graphics/drawable/shapes/PathShape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathShapeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathShapeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPathShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/shapes/RectShape")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRectShape = env.NewGlobalRef(&c.Object)
+
+		midRectShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Landroid/graphics/drawable/shapes/RectShape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectShape)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/graphics/drawable/shapes/RoundRectShape")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -378,110 +482,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRoundRectShapeClone0_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRoundRectShape)), "clone", "()Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/shapes/OvalShape")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsOvalShape = env.NewGlobalRef(&c.Object)
-
-		midOvalShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Landroid/graphics/drawable/shapes/OvalShape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midOvalShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midOvalShapeGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midOvalShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Landroid/graphics/drawable/shapes/RectShape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midOvalShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midOvalShapeClone0_3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOvalShape)), "clone", "()Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/shapes/PathShape")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPathShape = env.NewGlobalRef(&c.Object)
-
-		midPathShapeClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Landroid/graphics/drawable/shapes/PathShape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPathShapeDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "draw", "(Landroid/graphics/Canvas;Landroid/graphics/Paint;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPathShapeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPathShapeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPathShapeClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Landroid/graphics/drawable/shapes/Shape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPathShapeClone0_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPathShape)), "clone", "()Ljava/lang/Object;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -108,38 +108,6 @@ func (m *WifiP2pDevice) GetIpAddress() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetVendorElements calls android.net.wifi.p2p.WifiP2pDevice.getVendorElements.
-func (m *WifiP2pDevice) GetVendorElements() (*jni.Object, error) {
-	var result *jni.Object
-	var callErr error
-	callErr = m.VM.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			callErr = err
-			return err
-		}
-		if midWifiP2pDeviceGetVendorElements == nil {
-			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDevice.getVendorElements is not available on this device")
-			return callErr
-		}
-		result, callErr = env.CallObjectMethod(
-			m.Obj,
-			midWifiP2pDeviceGetVendorElements,
-		)
-		if callErr != nil {
-			return callErr
-		}
-		// Convert the JNI local reference to a global reference so the
-		// returned object remains valid outside this vm.Do scope.
-		if result != nil {
-			localRef := result
-			result = env.NewGlobalRef(localRef)
-			env.DeleteLocalRef(localRef)
-		}
-		return callErr
-	})
-	return result, callErr
-}
-
 // GetWfdInfo calls android.net.wifi.p2p.WifiP2pDevice.getWfdInfo.
 func (m *WifiP2pDevice) GetWfdInfo() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,24 +23,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPromptContentViewWithMoreOptionsButton                             *jni.GlobalRef
-	midPromptContentViewWithMoreOptionsButtonDescribeContents             jni.MethodID
-	midPromptContentViewWithMoreOptionsButtonGetDescription               jni.MethodID
-	midPromptContentViewWithMoreOptionsButtonGetMoreOptionsButtonListener jni.MethodID
-	midPromptContentViewWithMoreOptionsButtonWriteToParcel                jni.MethodID
-
-	clsPromptContentViewWithMoreOptionsButtonBuilder                             *jni.GlobalRef
-	midPromptContentViewWithMoreOptionsButtonBuilderBuild                        jni.MethodID
-	midPromptContentViewWithMoreOptionsButtonBuilderSetDescription               jni.MethodID
-	midPromptContentViewWithMoreOptionsButtonBuilderSetMoreOptionsButtonListener jni.MethodID
-
 	clsPromptContentItemPlainText                 *jni.GlobalRef
 	midPromptContentItemPlainTextDescribeContents jni.MethodID
 	midPromptContentItemPlainTextWriteToParcel    jni.MethodID
 
-	clsPromptContentView *jni.GlobalRef
+	clsPromptContentItemBulletedText                 *jni.GlobalRef
+	midPromptContentItemBulletedTextDescribeContents jni.MethodID
+	midPromptContentItemBulletedTextWriteToParcel    jni.MethodID
 
 	clsPromptContentItem *jni.GlobalRef
+
+	clsPromptContentView *jni.GlobalRef
 
 	clsPromptVerticalListContentView                              *jni.GlobalRef
 	midPromptVerticalListContentViewDescribeContents              jni.MethodID
@@ -55,9 +48,16 @@ var (
 	midPromptVerticalListContentViewBuilderBuild          jni.MethodID
 	midPromptVerticalListContentViewBuilderSetDescription jni.MethodID
 
-	clsPromptContentItemBulletedText                 *jni.GlobalRef
-	midPromptContentItemBulletedTextDescribeContents jni.MethodID
-	midPromptContentItemBulletedTextWriteToParcel    jni.MethodID
+	clsPromptContentViewWithMoreOptionsButton                             *jni.GlobalRef
+	midPromptContentViewWithMoreOptionsButtonDescribeContents             jni.MethodID
+	midPromptContentViewWithMoreOptionsButtonGetDescription               jni.MethodID
+	midPromptContentViewWithMoreOptionsButtonGetMoreOptionsButtonListener jni.MethodID
+	midPromptContentViewWithMoreOptionsButtonWriteToParcel                jni.MethodID
+
+	clsPromptContentViewWithMoreOptionsButtonBuilder                             *jni.GlobalRef
+	midPromptContentViewWithMoreOptionsButtonBuilderBuild                        jni.MethodID
+	midPromptContentViewWithMoreOptionsButtonBuilderSetDescription               jni.MethodID
+	midPromptContentViewWithMoreOptionsButtonBuilderSetMoreOptionsButtonListener jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -77,75 +77,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/hardware/biometrics/PromptContentViewWithMoreOptionsButton")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPromptContentViewWithMoreOptionsButton = env.NewGlobalRef(&c.Object)
-
-		midPromptContentViewWithMoreOptionsButtonDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPromptContentViewWithMoreOptionsButtonGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getDescription", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPromptContentViewWithMoreOptionsButtonGetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getMoreOptionsButtonListener", "()Landroid/content/DialogInterface$OnClickListener;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPromptContentViewWithMoreOptionsButtonWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPromptContentViewWithMoreOptionsButtonBuilder = env.NewGlobalRef(&c.Object)
-
-		midPromptContentViewWithMoreOptionsButtonBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "build", "()Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPromptContentViewWithMoreOptionsButtonBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPromptContentViewWithMoreOptionsButtonBuilderSetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setMoreOptionsButtonListener", "(Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemPlainText")
 	if err != nil {
@@ -171,13 +102,27 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/hardware/biometrics/PromptContentView")
+	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemBulletedText")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPromptContentView = env.NewGlobalRef(&c.Object)
+		clsPromptContentItemBulletedText = env.NewGlobalRef(&c.Object)
+
+		midPromptContentItemBulletedTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentItemBulletedTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -188,6 +133,16 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPromptContentItem = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/hardware/biometrics/PromptContentView")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPromptContentView = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -274,22 +229,67 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemBulletedText")
+	c, err = env.FindClass("android/hardware/biometrics/PromptContentViewWithMoreOptionsButton")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPromptContentItemBulletedText = env.NewGlobalRef(&c.Object)
+		clsPromptContentViewWithMoreOptionsButton = env.NewGlobalRef(&c.Object)
 
-		midPromptContentItemBulletedTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "describeContents", "()I")
+		midPromptContentViewWithMoreOptionsButtonDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPromptContentItemBulletedTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midPromptContentViewWithMoreOptionsButtonGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getDescription", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentViewWithMoreOptionsButtonGetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "getMoreOptionsButtonListener", "()Landroid/content/DialogInterface$OnClickListener;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentViewWithMoreOptionsButtonWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButton)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPromptContentViewWithMoreOptionsButtonBuilder = env.NewGlobalRef(&c.Object)
+
+		midPromptContentViewWithMoreOptionsButtonBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "build", "()Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentViewWithMoreOptionsButtonBuilderSetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setDescription", "(Ljava/lang/String;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentViewWithMoreOptionsButtonBuilderSetMoreOptionsButtonListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentViewWithMoreOptionsButtonBuilder)), "setMoreOptionsButtonListener", "(Ljava/util/concurrent/Executor;Landroid/content/DialogInterface$OnClickListener;)Landroid/hardware/biometrics/PromptContentViewWithMoreOptionsButton$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

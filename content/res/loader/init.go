@@ -23,8 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAssetsProvider *jni.GlobalRef
-
 	clsResourcesLoader               *jni.GlobalRef
 	midResourcesLoaderAddProvider    jni.MethodID
 	midResourcesLoaderClearProviders jni.MethodID
@@ -39,6 +37,8 @@ var (
 	midResourcesProviderLoadFromSplit     jni.MethodID
 	midResourcesProviderLoadFromTable     jni.MethodID
 	midResourcesProviderLoadOverlay       jni.MethodID
+
+	clsAssetsProvider *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -58,16 +58,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/content/res/loader/AssetsProvider")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAssetsProvider = env.NewGlobalRef(&c.Object)
-
-	}
 
 	c, err = env.FindClass("android/content/res/loader/ResourcesLoader")
 	if err != nil {
@@ -163,6 +153,16 @@ func doInit(env *jni.Env) error {
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
+
+	}
+
+	c, err = env.FindClass("android/content/res/loader/AssetsProvider")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAssetsProvider = env.NewGlobalRef(&c.Object)
 
 	}
 

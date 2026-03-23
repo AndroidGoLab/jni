@@ -60,6 +60,54 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.hardware.usb.UsbEndpoint
+      go_type: Endpoint
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAddress
+          go_name: GetAddress
+          returns: int
+          error: true
+        - java_method: getAttributes
+          go_name: GetAttributes
+          returns: int
+          error: true
+        - java_method: getDirection
+          go_name: GetDirection
+          returns: int
+          error: true
+        - java_method: getEndpointNumber
+          go_name: GetEndpointNumber
+          returns: int
+          error: true
+        - java_method: getInterval
+          go_name: GetInterval
+          returns: int
+          error: true
+        - java_method: getMaxPacketSize
+          go_name: GetMaxPacketSize
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.hardware.usb.UsbManager
       go_type: Manager
       obtain: system_service
@@ -130,15 +178,51 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.hardware.usb.UsbConfiguration
-      go_type: Configuration
+    - java_class: android.hardware.usb.UsbConstants
+      go_type: Constants
+    - java_class: android.hardware.usb.UsbDevice
+      go_type: Device
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getId
-          go_name: GetId
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getConfiguration
+          go_name: GetConfiguration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.usb.UsbConfiguration
+          error: true
+        - java_method: getConfigurationCount
+          go_name: GetConfigurationCount
+          returns: int
+          error: true
+        - java_method: getDeviceClass
+          go_name: GetDeviceClass
+          returns: int
+          error: true
+        - java_method: getDeviceId
+          go_name: GetDeviceId0
+          returns: int
+          error: true
+        - java_method: getDeviceName
+          go_name: GetDeviceName0
+          returns: String
+          error: true
+        - java_method: getDeviceProtocol
+          go_name: GetDeviceProtocol
+          returns: int
+          error: true
+        - java_method: getDeviceSubclass
+          go_name: GetDeviceSubclass
           returns: int
           error: true
         - java_method: getInterface
@@ -152,21 +236,33 @@ classes:
           go_name: GetInterfaceCount
           returns: int
           error: true
-        - java_method: getMaxPower
-          go_name: GetMaxPower
-          returns: int
-          error: true
-        - java_method: getName
-          go_name: GetName
+        - java_method: getManufacturerName
+          go_name: GetManufacturerName
           returns: String
           error: true
-        - java_method: isRemoteWakeup
-          go_name: IsRemoteWakeup
-          returns: boolean
+        - java_method: getProductId
+          go_name: GetProductId
+          returns: int
           error: true
-        - java_method: isSelfPowered
-          go_name: IsSelfPowered
-          returns: boolean
+        - java_method: getProductName
+          go_name: GetProductName
+          returns: String
+          error: true
+        - java_method: getSerialNumber
+          go_name: GetSerialNumber
+          returns: String
+          error: true
+        - java_method: getVendorId
+          go_name: GetVendorId
+          returns: int
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
           error: true
         - java_method: toString
           go_name: ToString
@@ -181,95 +277,20 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.hardware.usb.UsbRequest
-      go_type: Request
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: boolean
-          error: true
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getClientData
-          go_name: GetClientData
-          returns: java.lang.Object
-          error: true
-        - java_method: getEndpoint
-          go_name: GetEndpoint
-          returns: android.hardware.usb.UsbEndpoint
-          error: true
-        - java_method: initialize
-          go_name: Initialize
+      static_methods:
+        - java_method: getDeviceId
+          go_name: GetDeviceId1_1
           params:
-            - java_type: android.hardware.usb.UsbDeviceConnection
+            - java_type: String
               go_name: arg0
-            - java_type: android.hardware.usb.UsbEndpoint
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: setClientData
-          go_name: SetClientData
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.hardware.usb.UsbInterface
-      go_type: Interface
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getAlternateSetting
-          go_name: GetAlternateSetting
-          returns: int
-          error: true
-        - java_method: getEndpoint
-          go_name: GetEndpoint
+        - java_method: getDeviceName
+          go_name: GetDeviceName1_1
           params:
             - java_type: int
               go_name: arg0
-          returns: android.hardware.usb.UsbEndpoint
-          error: true
-        - java_method: getEndpointCount
-          go_name: GetEndpointCount
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: int
-          error: true
-        - java_method: getInterfaceClass
-          go_name: GetInterfaceClass
-          returns: int
-          error: true
-        - java_method: getInterfaceProtocol
-          go_name: GetInterfaceProtocol
-          returns: int
-          error: true
-        - java_method: getInterfaceSubclass
-          go_name: GetInterfaceSubclass
-          returns: int
-          error: true
-        - java_method: getName
-          go_name: GetName
           returns: String
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
           error: true
     - java_class: android.hardware.usb.UsbDeviceConnection
       go_type: DeviceConnection
@@ -399,40 +420,82 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.hardware.usb.UsbEndpoint
-      go_type: Endpoint
+    - java_class: android.hardware.usb.UsbRequest
+      go_type: Request
+      methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: boolean
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getClientData
+          go_name: GetClientData
+          returns: java.lang.Object
+          error: true
+        - java_method: getEndpoint
+          go_name: GetEndpoint
+          returns: android.hardware.usb.UsbEndpoint
+          error: true
+        - java_method: initialize
+          go_name: Initialize
+          params:
+            - java_type: android.hardware.usb.UsbDeviceConnection
+              go_name: arg0
+            - java_type: android.hardware.usb.UsbEndpoint
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setClientData
+          go_name: SetClientData
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.usb.UsbInterface
+      go_type: Interface
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getAddress
-          go_name: GetAddress
+        - java_method: getAlternateSetting
+          go_name: GetAlternateSetting
           returns: int
           error: true
-        - java_method: getAttributes
-          go_name: GetAttributes
+        - java_method: getEndpoint
+          go_name: GetEndpoint
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.hardware.usb.UsbEndpoint
+          error: true
+        - java_method: getEndpointCount
+          go_name: GetEndpointCount
           returns: int
           error: true
-        - java_method: getDirection
-          go_name: GetDirection
+        - java_method: getId
+          go_name: GetId
           returns: int
           error: true
-        - java_method: getEndpointNumber
-          go_name: GetEndpointNumber
+        - java_method: getInterfaceClass
+          go_name: GetInterfaceClass
           returns: int
           error: true
-        - java_method: getInterval
-          go_name: GetInterval
+        - java_method: getInterfaceProtocol
+          go_name: GetInterfaceProtocol
           returns: int
           error: true
-        - java_method: getMaxPacketSize
-          go_name: GetMaxPacketSize
+        - java_method: getInterfaceSubclass
+          go_name: GetInterfaceSubclass
           returns: int
           error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
+        - java_method: getName
+          go_name: GetName
+          returns: String
           error: true
         - java_method: toString
           go_name: ToString
@@ -447,51 +510,15 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.hardware.usb.UsbConstants
-      go_type: Constants
-    - java_class: android.hardware.usb.UsbDevice
-      go_type: Device
+    - java_class: android.hardware.usb.UsbConfiguration
+      go_type: Configuration
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getConfiguration
-          go_name: GetConfiguration
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.hardware.usb.UsbConfiguration
-          error: true
-        - java_method: getConfigurationCount
-          go_name: GetConfigurationCount
-          returns: int
-          error: true
-        - java_method: getDeviceClass
-          go_name: GetDeviceClass
-          returns: int
-          error: true
-        - java_method: getDeviceId
-          go_name: GetDeviceId0
-          returns: int
-          error: true
-        - java_method: getDeviceName
-          go_name: GetDeviceName0
-          returns: String
-          error: true
-        - java_method: getDeviceProtocol
-          go_name: GetDeviceProtocol
-          returns: int
-          error: true
-        - java_method: getDeviceSubclass
-          go_name: GetDeviceSubclass
+        - java_method: getId
+          go_name: GetId
           returns: int
           error: true
         - java_method: getInterface
@@ -505,33 +532,21 @@ classes:
           go_name: GetInterfaceCount
           returns: int
           error: true
-        - java_method: getManufacturerName
-          go_name: GetManufacturerName
-          returns: String
-          error: true
-        - java_method: getProductId
-          go_name: GetProductId
+        - java_method: getMaxPower
+          go_name: GetMaxPower
           returns: int
           error: true
-        - java_method: getProductName
-          go_name: GetProductName
+        - java_method: getName
+          go_name: GetName
           returns: String
           error: true
-        - java_method: getSerialNumber
-          go_name: GetSerialNumber
-          returns: String
+        - java_method: isRemoteWakeup
+          go_name: IsRemoteWakeup
+          returns: boolean
           error: true
-        - java_method: getVendorId
-          go_name: GetVendorId
-          returns: int
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
+        - java_method: isSelfPowered
+          go_name: IsSelfPowered
+          returns: boolean
           error: true
         - java_method: toString
           go_name: ToString
@@ -545,21 +560,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-      static_methods:
-        - java_method: getDeviceId
-          go_name: GetDeviceId1_1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getDeviceName
-          go_name: GetDeviceName1_1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
           error: true
 constants:
     - go_name: Creator

@@ -3,9 +3,7 @@
 package consts
 
 const (
-	Default          int = 0
-	Engineering      int = 2
-	Plain            int = 0
+	One              int = 0
 	RoundCeiling     int = 2
 	RoundDown        int = 1
 	RoundFloor       int = 3
@@ -14,8 +12,10 @@ const (
 	RoundHalfUp      int = 4
 	RoundUnnecessary int = 7
 	RoundUp          int = 0
-	Scientific       int = 1
-	One              int = 0
 	Ten              int = 0
 	Zero             int = 0
+	Default          int = 0
+	Engineering      int = 2
+	Plain            int = 0
+	Scientific       int = 1
 )

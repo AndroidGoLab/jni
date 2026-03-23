@@ -5,38 +5,17 @@ package widget
 import "github.com/AndroidGoLab/jni/widget/consts"
 
 const (
-	SourceBoundMaxInSurface      = consts.SourceBoundMaxInSurface
-	SourceBoundMaxVisible        = consts.SourceBoundMaxVisible
-	DefaultBlendMode             = consts.DefaultBlendMode
-	InputMethodFromFocusable     = consts.InputMethodFromFocusable
-	InputMethodNeeded            = consts.InputMethodNeeded
-	InputMethodNotNeeded         = consts.InputMethodNotNeeded
-	ChoiceModeMultiple           = consts.ChoiceModeMultiple
-	ChoiceModeMultipleModal      = consts.ChoiceModeMultipleModal
-	ChoiceModeNone               = consts.ChoiceModeNone
-	ChoiceModeSingle             = consts.ChoiceModeSingle
-	TranscriptModeAlwaysScroll   = consts.TranscriptModeAlwaysScroll
-	TranscriptModeDisabled       = consts.TranscriptModeDisabled
-	TranscriptModeNormal         = consts.TranscriptModeNormal
+	UnspecifiedGravity           = consts.UnspecifiedGravity
 	ScrollStateFling             = consts.ScrollStateFling
 	ScrollStateIdle              = consts.ScrollStateIdle
 	ScrollStateTouchScroll       = consts.ScrollStateTouchScroll
-	FlagAutoRequery              = consts.FlagAutoRequery
-	FlagRegisterContentObserver  = consts.FlagRegisterContentObserver
-	ChildIndicatorInherit        = consts.ChildIndicatorInherit
-	PackedPositionTypeChild      = consts.PackedPositionTypeChild
-	PackedPositionTypeGroup      = consts.PackedPositionTypeGroup
-	PackedPositionTypeNull       = consts.PackedPositionTypeNull
 	DefaultFormat12Hour          = consts.DefaultFormat12Hour
 	DefaultFormat24Hour          = consts.DefaultFormat24Hour
-	InvalidPosition              = consts.InvalidPosition
-	ItemViewTypeHeaderOrFooter   = consts.ItemViewTypeHeaderOrFooter
-	ItemViewTypeIgnore           = consts.ItemViewTypeIgnore
-	AutoFit                      = consts.AutoFit
-	NoStretch                    = consts.NoStretch
-	StretchColumnWidth           = consts.StretchColumnWidth
-	StretchSpacing               = consts.StretchSpacing
-	StretchSpacingUniform        = consts.StretchSpacingUniform
+	DigitsAndLetters             = consts.DigitsAndLetters
+	DigitsAndLettersNoDigits     = consts.DigitsAndLettersNoDigits
+	DigitsAndLettersNoLetters    = consts.DigitsAndLettersNoLetters
+	DigitsOnly                   = consts.DigitsOnly
+	LettersOnly                  = consts.LettersOnly
 	AlignBounds                  = consts.AlignBounds
 	AlignMargins                 = consts.AlignMargins
 	Baseline                     = consts.Baseline
@@ -51,10 +30,31 @@ const (
 	Top                          = consts.Top
 	Undefined                    = consts.Undefined
 	Vertical                     = consts.Vertical
-	ShowDividerBeginning         = consts.ShowDividerBeginning
-	ShowDividerEnd               = consts.ShowDividerEnd
-	ShowDividerMiddle            = consts.ShowDividerMiddle
-	ShowDividerNone              = consts.ShowDividerNone
+	ModeDialog                   = consts.ModeDialog
+	ModeDropdown                 = consts.ModeDropdown
+	FlagAutoRequery              = consts.FlagAutoRequery
+	FlagRegisterContentObserver  = consts.FlagRegisterContentObserver
+	ChoiceModeMultiple           = consts.ChoiceModeMultiple
+	ChoiceModeMultipleModal      = consts.ChoiceModeMultipleModal
+	ChoiceModeNone               = consts.ChoiceModeNone
+	ChoiceModeSingle             = consts.ChoiceModeSingle
+	TranscriptModeAlwaysScroll   = consts.TranscriptModeAlwaysScroll
+	TranscriptModeDisabled       = consts.TranscriptModeDisabled
+	TranscriptModeNormal         = consts.TranscriptModeNormal
+	SourceBoundMaxInSurface      = consts.SourceBoundMaxInSurface
+	SourceBoundMaxVisible        = consts.SourceBoundMaxVisible
+	InputMethodFromFocusable     = consts.InputMethodFromFocusable
+	InputMethodNeeded            = consts.InputMethodNeeded
+	InputMethodNotNeeded         = consts.InputMethodNotNeeded
+	OrientationHorizontal        = consts.OrientationHorizontal
+	OrientationVertical          = consts.OrientationVertical
+	AutoSizeTextTypeNone         = consts.AutoSizeTextTypeNone
+	AutoSizeTextTypeUniform      = consts.AutoSizeTextTypeUniform
+	FocusedSearchResultIndexNone = consts.FocusedSearchResultIndexNone
+	Editable                     = consts.Editable
+	Normal                       = consts.Normal
+	Spannable                    = consts.Spannable
+	Creator                      = consts.Creator
 	Above                        = consts.Above
 	AlignBaseline                = consts.AlignBaseline
 	AlignBottom                  = consts.AlignBottom
@@ -78,23 +78,28 @@ const (
 	RightOf                      = consts.RightOf
 	StartOf                      = consts.StartOf
 	True                         = consts.True
-	OrientationHorizontal        = consts.OrientationHorizontal
-	OrientationVertical          = consts.OrientationVertical
-	Creator                      = consts.Creator
+	ShowDividerBeginning         = consts.ShowDividerBeginning
+	ShowDividerEnd               = consts.ShowDividerEnd
+	ShowDividerMiddle            = consts.ShowDividerMiddle
+	ShowDividerNone              = consts.ShowDividerNone
+	InvalidPosition              = consts.InvalidPosition
+	ItemViewTypeHeaderOrFooter   = consts.ItemViewTypeHeaderOrFooter
+	ItemViewTypeIgnore           = consts.ItemViewTypeIgnore
 	MarginBottom                 = consts.MarginBottom
 	MarginEnd                    = consts.MarginEnd
 	MarginLeft                   = consts.MarginLeft
 	MarginRight                  = consts.MarginRight
 	MarginStart                  = consts.MarginStart
 	MarginTop                    = consts.MarginTop
-	DigitsAndLetters             = consts.DigitsAndLetters
-	DigitsAndLettersNoDigits     = consts.DigitsAndLettersNoDigits
-	DigitsAndLettersNoLetters    = consts.DigitsAndLettersNoLetters
-	DigitsOnly                   = consts.DigitsOnly
-	LettersOnly                  = consts.LettersOnly
-	UnspecifiedGravity           = consts.UnspecifiedGravity
-	IgnoreItemViewType           = consts.IgnoreItemViewType
-	NoSelection                  = consts.NoSelection
+	MatchParent                  = consts.MatchParent
+	PositionPromptAbove          = consts.PositionPromptAbove
+	PositionPromptBelow          = consts.PositionPromptBelow
+	WrapContent                  = consts.WrapContent
+	ChildIndicatorInherit        = consts.ChildIndicatorInherit
+	PackedPositionTypeChild      = consts.PackedPositionTypeChild
+	PackedPositionTypeGroup      = consts.PackedPositionTypeGroup
+	PackedPositionTypeNull       = consts.PackedPositionTypeNull
+	DefaultBlendMode             = consts.DefaultBlendMode
 	CenterCrop                   = consts.CenterCrop
 	CenterInside                 = consts.CenterInside
 	FitCenter                    = consts.FitCenter
@@ -102,18 +107,13 @@ const (
 	FitStart                     = consts.FitStart
 	FitXy                        = consts.FitXy
 	Matrix                       = consts.Matrix
-	MatchParent                  = consts.MatchParent
-	PositionPromptAbove          = consts.PositionPromptAbove
-	PositionPromptBelow          = consts.PositionPromptBelow
-	WrapContent                  = consts.WrapContent
-	ModeDialog                   = consts.ModeDialog
-	ModeDropdown                 = consts.ModeDropdown
-	AutoSizeTextTypeNone         = consts.AutoSizeTextTypeNone
-	AutoSizeTextTypeUniform      = consts.AutoSizeTextTypeUniform
-	FocusedSearchResultIndexNone = consts.FocusedSearchResultIndexNone
-	Editable                     = consts.Editable
-	Normal                       = consts.Normal
-	Spannable                    = consts.Spannable
+	AutoFit                      = consts.AutoFit
+	NoStretch                    = consts.NoStretch
+	StretchColumnWidth           = consts.StretchColumnWidth
+	StretchSpacing               = consts.StretchSpacing
+	StretchSpacingUniform        = consts.StretchSpacingUniform
+	IgnoreItemViewType           = consts.IgnoreItemViewType
+	NoSelection                  = consts.NoSelection
 )
 
 const (
@@ -123,6 +123,6 @@ const (
 )
 
 const (
-	PackedPositionValueNull = consts.PackedPositionValueNull
 	InvalidRowId            = consts.InvalidRowId
+	PackedPositionValueNull = consts.PackedPositionValueNull
 )

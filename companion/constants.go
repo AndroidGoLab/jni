@@ -23,13 +23,13 @@ const (
 )
 
 const (
-	ServiceInterface                   = consts.ServiceInterface
 	DeviceProfileAppStreaming          = consts.DeviceProfileAppStreaming
 	DeviceProfileAutomotiveProjection  = consts.DeviceProfileAutomotiveProjection
 	DeviceProfileComputer              = consts.DeviceProfileComputer
 	DeviceProfileGlasses               = consts.DeviceProfileGlasses
 	DeviceProfileNearbyDeviceStreaming = consts.DeviceProfileNearbyDeviceStreaming
 	DeviceProfileWatch                 = consts.DeviceProfileWatch
+	ServiceInterface                   = consts.ServiceInterface
 	ExtraAssociation                   = consts.ExtraAssociation
 	ExtraDevice                        = consts.ExtraDevice
 )

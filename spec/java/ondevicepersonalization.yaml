@@ -5,206 +5,19 @@
 package: ondevicepersonalization
 go_import: github.com/AndroidGoLab/jni/adservices/ondevicepersonalization
 classes:
-    - java_class: android.adservices.ondevicepersonalization.EventInput
-      go_type: EventInput
+    - java_class: android.adservices.ondevicepersonalization.ExecuteInput
+      go_type: ExecuteInput
       methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getParameters
-          go_name: GetParameters
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: getRequestLogRecord
-          go_name: GetRequestLogRecord
-          returns: android.adservices.ondevicepersonalization.RequestLogRecord
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.MutableKeyValueStore
-      go_type: MutableKeyValueStore
-      methods:
-        - java_method: put
-          go_name: Put
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-          returns: '[B'
-          error: true
-        - java_method: remove
-          go_name: Remove
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: '[B'
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.IsolatedWorker
-      go_type: IsolatedWorker
-    - java_class: android.adservices.ondevicepersonalization.TrainingExampleRecord
-      go_type: TrainingExampleRecord
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getResumptionToken
-          go_name: GetResumptionToken
-          returns: '[B'
-          error: true
-        - java_method: getTrainingExample
-          go_name: GetTrainingExample
-          returns: '[B'
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.TrainingExampleRecord$Builder
-      go_type: TrainingExampleRecordBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.TrainingExampleRecord
-          error: true
-        - java_method: setResumptionToken
-          go_name: SetResumptionToken
-          params:
-            - java_type: byte...
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.TrainingExampleRecord$Builder
-          error: true
-        - java_method: setTrainingExample
-          go_name: SetTrainingExample
-          params:
-            - java_type: byte...
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.TrainingExampleRecord$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.EventLogRecord
-      go_type: EventLogRecord
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getData
-          go_name: GetData
-          returns: android.content.ContentValues
-          error: true
-        - java_method: getRequestLogRecord
-          go_name: GetRequestLogRecord
-          returns: android.adservices.ondevicepersonalization.RequestLogRecord
-          error: true
-        - java_method: getRowIndex
-          go_name: GetRowIndex
-          returns: int
-          error: true
-        - java_method: getTime
-          go_name: GetTime
-          returns: java.time.Instant
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.EventLogRecord$Builder
-      go_type: EventLogRecordBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.EventLogRecord
-          error: true
-        - java_method: setData
-          go_name: SetData
-          params:
-            - java_type: android.content.ContentValues
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
-          error: true
-        - java_method: setRequestLogRecord
-          go_name: SetRequestLogRecord
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestLogRecord
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
-          error: true
-        - java_method: setRowIndex
-          go_name: SetRowIndex
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
-          error: true
-        - java_method: setType
-          go_name: SetType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.WebTriggerInput
-      go_type: WebTriggerInput
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
         - java_method: getAppPackageName
           go_name: GetAppPackageName
           returns: String
           error: true
-        - java_method: getData
-          go_name: GetData
-          returns: '[B'
+        - java_method: getAppParams
+          go_name: GetAppParams
+          returns: android.os.PersistableBundle
           error: true
-        - java_method: getDestinationUrl
-          go_name: GetDestinationUrl
-          returns: android.net.Uri
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.SurfacePackageToken
-      go_type: SurfacePackageToken
-    - java_class: android.adservices.ondevicepersonalization.TrainingExamplesInput
-      go_type: TrainingExamplesInput
+    - java_class: android.adservices.ondevicepersonalization.TrainingExamplesOutput
+      go_type: TrainingExamplesOutput
       methods:
         - java_method: equals
           go_name: Equals
@@ -213,195 +26,71 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getCollectionName
-          go_name: GetCollectionName
-          returns: String
-          error: true
-        - java_method: getPopulationName
-          go_name: GetPopulationName
-          returns: String
-          error: true
-        - java_method: getResumptionToken
-          go_name: GetResumptionToken
-          returns: '[B'
-          error: true
-        - java_method: getTaskName
-          go_name: GetTaskName
-          returns: String
-          error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.adservices.ondevicepersonalization.EventOutput
-      go_type: EventOutput
+    - java_class: android.adservices.ondevicepersonalization.TrainingExamplesOutput$Builder
+      go_type: TrainingExamplesOutputBuilder
       methods:
-        - java_method: equals
-          go_name: Equals
+        - java_method: addTrainingExampleRecord
+          go_name: AddTrainingExampleRecord
           params:
-            - java_type: java.lang.Object
+            - java_type: android.adservices.ondevicepersonalization.TrainingExampleRecord
               go_name: arg0
-          returns: boolean
+          returns: android.adservices.ondevicepersonalization.TrainingExamplesOutput$Builder
           error: true
-        - java_method: getEventLogRecord
-          go_name: GetEventLogRecord
-          returns: android.adservices.ondevicepersonalization.EventLogRecord
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.EventOutput$Builder
-      go_type: EventOutputBuilder
-      methods:
         - java_method: build
           go_name: Build
-          returns: android.adservices.ondevicepersonalization.EventOutput
+          returns: android.adservices.ondevicepersonalization.TrainingExamplesOutput
           error: true
-        - java_method: setEventLogRecord
-          go_name: SetEventLogRecord
-          params:
-            - java_type: android.adservices.ondevicepersonalization.EventLogRecord
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.EventOutput$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.KeyValueStore
-      go_type: KeyValueStore
+    - java_class: android.adservices.ondevicepersonalization.DownloadCompletedOutput
+      go_type: DownloadCompletedOutput
       methods:
-        - java_method: get
-          go_name: Get
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.DownloadCompletedOutput$Builder
+      go_type: DownloadCompletedOutputBuilder
+      methods:
+        - java_method: addRetainedKey
+          go_name: AddRetainedKey
           params:
             - java_type: String
               go_name: arg0
+          returns: android.adservices.ondevicepersonalization.DownloadCompletedOutput$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.DownloadCompletedOutput
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.IsolatedWorker
+      go_type: IsolatedWorker
+    - java_class: android.adservices.ondevicepersonalization.ModelManager
+      go_type: ModelManager
+    - java_class: android.adservices.ondevicepersonalization.OnDevicePersonalizationManager
+      go_type: OnDevicePersonalizationManager
+    - java_class: android.adservices.ondevicepersonalization.OnDevicePersonalizationManager$ExecuteResult
+      go_type: OnDevicePersonalizationManagerExecuteResult
+      methods:
+        - java_method: getOutputData
+          go_name: GetOutputData
           returns: '[B'
           error: true
-    - java_class: android.adservices.ondevicepersonalization.InferenceOutput
-      go_type: InferenceOutput
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
+        - java_method: getSurfacePackageToken
+          go_name: GetSurfacePackageToken
+          returns: android.adservices.ondevicepersonalization.SurfacePackageToken
           error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.InferenceOutput$Builder
-      go_type: InferenceOutputBuilder
-      methods:
-        - java_method: addDataOutput
-          go_name: AddDataOutput
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-          returns: android.adservices.ondevicepersonalization.InferenceOutput$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.InferenceOutput
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.FederatedComputeInput
-      go_type: FederatedComputeInput
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getPopulationName
-          go_name: GetPopulationName
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.FederatedComputeInput$Builder
-      go_type: FederatedComputeInputBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.FederatedComputeInput
-          error: true
-        - java_method: setPopulationName
-          go_name: SetPopulationName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.FederatedComputeInput$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.RenderInput
-      go_type: RenderInput
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getHeight
-          go_name: GetHeight
-          returns: int
-          error: true
-        - java_method: getRenderingConfig
-          go_name: GetRenderingConfig
-          returns: android.adservices.ondevicepersonalization.RenderingConfig
-          error: true
-        - java_method: getWidth
-          go_name: GetWidth
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.WebTriggerOutput
-      go_type: WebTriggerOutput
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getRequestLogRecord
-          go_name: GetRequestLogRecord
-          returns: android.adservices.ondevicepersonalization.RequestLogRecord
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.WebTriggerOutput$Builder
-      go_type: WebTriggerOutputBuilder
-      methods:
-        - java_method: addEventLogRecord
-          go_name: AddEventLogRecord
-          params:
-            - java_type: android.adservices.ondevicepersonalization.EventLogRecord
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.WebTriggerOutput$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.WebTriggerOutput
-          error: true
-        - java_method: setRequestLogRecord
-          go_name: SetRequestLogRecord
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestLogRecord
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.WebTriggerOutput$Builder
-          error: true
+    - java_class: android.adservices.ondevicepersonalization.RequestToken
+      go_type: RequestToken
     - java_class: android.adservices.ondevicepersonalization.UserData
       go_type: UserData
       methods:
@@ -457,8 +146,171 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.adservices.ondevicepersonalization.DownloadCompletedOutput
-      go_type: DownloadCompletedOutput
+    - java_class: android.adservices.ondevicepersonalization.FederatedComputeInput
+      go_type: FederatedComputeInput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getPopulationName
+          go_name: GetPopulationName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.FederatedComputeInput$Builder
+      go_type: FederatedComputeInputBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.FederatedComputeInput
+          error: true
+        - java_method: setPopulationName
+          go_name: SetPopulationName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.FederatedComputeInput$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.EventInput
+      go_type: EventInput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getParameters
+          go_name: GetParameters
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getRequestLogRecord
+          go_name: GetRequestLogRecord
+          returns: android.adservices.ondevicepersonalization.RequestLogRecord
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.MutableKeyValueStore
+      go_type: MutableKeyValueStore
+      methods:
+        - java_method: put
+          go_name: Put
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+          returns: '[B'
+          error: true
+        - java_method: remove
+          go_name: Remove
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.WebTriggerOutput
+      go_type: WebTriggerOutput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getRequestLogRecord
+          go_name: GetRequestLogRecord
+          returns: android.adservices.ondevicepersonalization.RequestLogRecord
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.WebTriggerOutput$Builder
+      go_type: WebTriggerOutputBuilder
+      methods:
+        - java_method: addEventLogRecord
+          go_name: AddEventLogRecord
+          params:
+            - java_type: android.adservices.ondevicepersonalization.EventLogRecord
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.WebTriggerOutput$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.WebTriggerOutput
+          error: true
+        - java_method: setRequestLogRecord
+          go_name: SetRequestLogRecord
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestLogRecord
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.WebTriggerOutput$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.IsolatedServiceException
+      go_type: IsolatedServiceException
+      methods:
+        - java_method: getErrorCode
+          go_name: GetErrorCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.DownloadCompletedInput
+      go_type: DownloadCompletedInput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getDownloadedContents
+          go_name: GetDownloadedContents
+          returns: android.adservices.ondevicepersonalization.KeyValueStore
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.WebTriggerInput
+      go_type: WebTriggerInput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAppPackageName
+          go_name: GetAppPackageName
+          returns: String
+          error: true
+        - java_method: getData
+          go_name: GetData
+          returns: '[B'
+          error: true
+        - java_method: getDestinationUrl
+          go_name: GetDestinationUrl
+          returns: android.net.Uri
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.InferenceOutput
+      go_type: InferenceOutput
       methods:
         - java_method: equals
           go_name: Equals
@@ -471,133 +323,21 @@ classes:
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.adservices.ondevicepersonalization.DownloadCompletedOutput$Builder
-      go_type: DownloadCompletedOutputBuilder
+    - java_class: android.adservices.ondevicepersonalization.InferenceOutput$Builder
+      go_type: InferenceOutputBuilder
       methods:
-        - java_method: addRetainedKey
-          go_name: AddRetainedKey
+        - java_method: addDataOutput
+          go_name: AddDataOutput
           params:
-            - java_type: String
+            - java_type: int
               go_name: arg0
-          returns: android.adservices.ondevicepersonalization.DownloadCompletedOutput$Builder
+            - java_type: java.lang.Object
+              go_name: arg1
+          returns: android.adservices.ondevicepersonalization.InferenceOutput$Builder
           error: true
         - java_method: build
           go_name: Build
-          returns: android.adservices.ondevicepersonalization.DownloadCompletedOutput
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.IsolatedService
-      go_type: IsolatedService
-      methods:
-        - java_method: getEventUrlProvider
-          go_name: GetEventUrlProvider
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.EventUrlProvider
-          error: true
-        - java_method: getFederatedComputeScheduler
-          go_name: GetFederatedComputeScheduler
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.FederatedComputeScheduler
-          error: true
-        - java_method: getLocalData
-          go_name: GetLocalData
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.MutableKeyValueStore
-          error: true
-        - java_method: getLogReader
-          go_name: GetLogReader
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.LogReader
-          error: true
-        - java_method: getModelManager
-          go_name: GetModelManager
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ModelManager
-          error: true
-        - java_method: getRemoteData
-          go_name: GetRemoteData
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.KeyValueStore
-          error: true
-        - java_method: getUserData
-          go_name: GetUserData
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.UserData
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onCreate
-          go_name: OnCreate
-          returns: void
-          error: true
-        - java_method: onRequest
-          go_name: OnRequest
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RequestToken
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.IsolatedWorker
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceResponse
-      go_type: ExecuteInIsolatedServiceResponse
-      methods:
-        - java_method: getBestValue
-          go_name: GetBestValue
-          returns: int
-          error: true
-        - java_method: getSurfacePackageToken
-          go_name: GetSurfacePackageToken
-          returns: android.adservices.ondevicepersonalization.SurfacePackageToken
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.OnDevicePersonalizationException
-      go_type: OnDevicePersonalizationException
-      methods:
-        - java_method: getErrorCode
-          go_name: GetErrorCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.FederatedComputeScheduler
-      go_type: FederatedComputeScheduler
-      methods:
-        - java_method: cancel
-          go_name: Cancel
-          params:
-            - java_type: android.adservices.ondevicepersonalization.FederatedComputeInput
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: schedule
-          go_name: Schedule
-          params:
-            - java_type: android.adservices.ondevicepersonalization.FederatedComputeScheduler$Params
-              go_name: arg0
-            - java_type: android.adservices.ondevicepersonalization.FederatedComputeInput
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.FederatedComputeScheduler$Params
-      go_type: FederatedComputeSchedulerParams
-      methods:
-        - java_method: getTrainingInterval
-          go_name: GetTrainingInterval
-          returns: android.adservices.ondevicepersonalization.TrainingInterval
+          returns: android.adservices.ondevicepersonalization.InferenceOutput
           error: true
     - java_class: android.adservices.ondevicepersonalization.AppInfo
       go_type: AppInfo
@@ -630,128 +370,34 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.adservices.ondevicepersonalization.EventUrlProvider
-      go_type: EventUrlProvider
+    - java_class: android.adservices.ondevicepersonalization.FederatedComputeScheduler
+      go_type: FederatedComputeScheduler
       methods:
-        - java_method: createEventTrackingUrlWithRedirect
-          go_name: CreateEventTrackingUrlWithRedirect
+        - java_method: cancel
+          go_name: Cancel
           params:
-            - java_type: android.os.PersistableBundle
+            - java_type: android.adservices.ondevicepersonalization.FederatedComputeInput
               go_name: arg0
-            - java_type: android.net.Uri
+          returns: void
+          error: true
+        - java_method: schedule
+          go_name: Schedule
+          params:
+            - java_type: android.adservices.ondevicepersonalization.FederatedComputeScheduler$Params
+              go_name: arg0
+            - java_type: android.adservices.ondevicepersonalization.FederatedComputeInput
               go_name: arg1
-          returns: android.net.Uri
+          returns: void
           error: true
-        - java_method: createEventTrackingUrlWithResponse
-          go_name: CreateEventTrackingUrlWithResponse
-          params:
-            - java_type: android.os.PersistableBundle
-              go_name: arg0
-            - java_type: '[B'
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-          returns: android.net.Uri
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.RenderOutput
-      go_type: RenderOutput
+    - java_class: android.adservices.ondevicepersonalization.FederatedComputeScheduler$Params
+      go_type: FederatedComputeSchedulerParams
       methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getContent
-          go_name: GetContent
-          returns: String
-          error: true
-        - java_method: getTemplateId
-          go_name: GetTemplateId
-          returns: String
-          error: true
-        - java_method: getTemplateParams
-          go_name: GetTemplateParams
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.RenderOutput$Builder
-      go_type: RenderOutputBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.RenderOutput
-          error: true
-        - java_method: setContent
-          go_name: SetContent
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.RenderOutput$Builder
-          error: true
-        - java_method: setTemplateId
-          go_name: SetTemplateId
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.RenderOutput$Builder
-          error: true
-        - java_method: setTemplateParams
-          go_name: SetTemplateParams
-          params:
-            - java_type: android.os.PersistableBundle
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.RenderOutput$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.TrainingInterval
-      go_type: TrainingInterval
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getMinimumInterval
-          go_name: GetMinimumInterval
-          returns: java.time.Duration
-          error: true
-        - java_method: getSchedulingMode
-          go_name: GetSchedulingMode
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.TrainingInterval$Builder
-      go_type: TrainingIntervalBuilder
-      methods:
-        - java_method: build
-          go_name: Build
+        - java_method: getTrainingInterval
+          go_name: GetTrainingInterval
           returns: android.adservices.ondevicepersonalization.TrainingInterval
           error: true
-        - java_method: setMinimumInterval
-          go_name: SetMinimumInterval
-          params:
-            - java_type: java.time.Duration
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.TrainingInterval$Builder
-          error: true
-        - java_method: setSchedulingMode
-          go_name: SetSchedulingMode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.TrainingInterval$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest
-      go_type: ExecuteInIsolatedServiceRequest
+    - java_class: android.adservices.ondevicepersonalization.ExecuteOutput
+      go_type: ExecuteOutput
       methods:
         - java_method: equals
           go_name: Equals
@@ -760,75 +406,70 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getAppParams
-          go_name: GetAppParams
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: getOutputSpec
-          go_name: GetOutputSpec
-          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
-          error: true
-        - java_method: getService
-          go_name: GetService
-          returns: android.content.ComponentName
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
+        - java_method: getBestValue
+          go_name: GetBestValue
           returns: int
           error: true
-    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$Builder
-      go_type: ExecuteInIsolatedServiceRequestBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest
-          error: true
-        - java_method: setAppParams
-          go_name: SetAppParams
-          params:
-            - java_type: android.os.PersistableBundle
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$Builder
-          error: true
-        - java_method: setOutputSpec
-          go_name: SetOutputSpec
-          params:
-            - java_type: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$Builder
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
-      go_type: ExecuteInIsolatedServiceRequestOutputSpec
-      methods:
-        - java_method: getMaxIntValue
-          go_name: GetMaxIntValue
-          returns: int
-          error: true
-        - java_method: getOutputType
-          go_name: GetOutputType
-          returns: int
-          error: true
-      static_methods:
-        - java_method: buildBestValueSpec
-          go_name: BuildBestValueSpec
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.OnDevicePersonalizationManager
-      go_type: OnDevicePersonalizationManager
-    - java_class: android.adservices.ondevicepersonalization.OnDevicePersonalizationManager$ExecuteResult
-      go_type: OnDevicePersonalizationManagerExecuteResult
-      methods:
         - java_method: getOutputData
           go_name: GetOutputData
           returns: '[B'
           error: true
-        - java_method: getSurfacePackageToken
-          go_name: GetSurfacePackageToken
-          returns: android.adservices.ondevicepersonalization.SurfacePackageToken
+        - java_method: getRenderingConfig
+          go_name: GetRenderingConfig
+          returns: android.adservices.ondevicepersonalization.RenderingConfig
           error: true
+        - java_method: getRequestLogRecord
+          go_name: GetRequestLogRecord
+          returns: android.adservices.ondevicepersonalization.RequestLogRecord
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+      go_type: ExecuteOutputBuilder
+      methods:
+        - java_method: addEventLogRecord
+          go_name: AddEventLogRecord
+          params:
+            - java_type: android.adservices.ondevicepersonalization.EventLogRecord
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.ExecuteOutput
+          error: true
+        - java_method: setBestValue
+          go_name: SetBestValue
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          error: true
+        - java_method: setOutputData
+          go_name: SetOutputData
+          params:
+            - java_type: byte...
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          error: true
+        - java_method: setRenderingConfig
+          go_name: SetRenderingConfig
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RenderingConfig
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          error: true
+        - java_method: setRequestLogRecord
+          go_name: SetRequestLogRecord
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestLogRecord
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.SurfacePackageToken
+      go_type: SurfacePackageToken
     - java_class: android.adservices.ondevicepersonalization.RequestLogRecord
       go_type: RequestLogRecord
       methods:
@@ -873,34 +514,6 @@ classes:
         - java_method: build
           go_name: Build
           returns: android.adservices.ondevicepersonalization.RequestLogRecord
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.TrainingExamplesOutput
-      go_type: TrainingExamplesOutput
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.TrainingExamplesOutput$Builder
-      go_type: TrainingExamplesOutputBuilder
-      methods:
-        - java_method: addTrainingExampleRecord
-          go_name: AddTrainingExampleRecord
-          params:
-            - java_type: android.adservices.ondevicepersonalization.TrainingExampleRecord
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.TrainingExamplesOutput$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.ondevicepersonalization.TrainingExamplesOutput
           error: true
     - java_class: android.adservices.ondevicepersonalization.InferenceInput
       go_type: InferenceInput
@@ -1001,6 +614,226 @@ classes:
           go_name: HashCode
           returns: int
           error: true
+    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceResponse
+      go_type: ExecuteInIsolatedServiceResponse
+      methods:
+        - java_method: getBestValue
+          go_name: GetBestValue
+          returns: int
+          error: true
+        - java_method: getSurfacePackageToken
+          go_name: GetSurfacePackageToken
+          returns: android.adservices.ondevicepersonalization.SurfacePackageToken
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.RenderInput
+      go_type: RenderInput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getHeight
+          go_name: GetHeight
+          returns: int
+          error: true
+        - java_method: getRenderingConfig
+          go_name: GetRenderingConfig
+          returns: android.adservices.ondevicepersonalization.RenderingConfig
+          error: true
+        - java_method: getWidth
+          go_name: GetWidth
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.EventUrlProvider
+      go_type: EventUrlProvider
+      methods:
+        - java_method: createEventTrackingUrlWithRedirect
+          go_name: CreateEventTrackingUrlWithRedirect
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: android.net.Uri
+          error: true
+        - java_method: createEventTrackingUrlWithResponse
+          go_name: CreateEventTrackingUrlWithResponse
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+            - java_type: '[B'
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest
+      go_type: ExecuteInIsolatedServiceRequest
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAppParams
+          go_name: GetAppParams
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getOutputSpec
+          go_name: GetOutputSpec
+          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
+          error: true
+        - java_method: getService
+          go_name: GetService
+          returns: android.content.ComponentName
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$Builder
+      go_type: ExecuteInIsolatedServiceRequestBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest
+          error: true
+        - java_method: setAppParams
+          go_name: SetAppParams
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$Builder
+          error: true
+        - java_method: setOutputSpec
+          go_name: SetOutputSpec
+          params:
+            - java_type: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
+      go_type: ExecuteInIsolatedServiceRequestOutputSpec
+      methods:
+        - java_method: getMaxIntValue
+          go_name: GetMaxIntValue
+          returns: int
+          error: true
+        - java_method: getOutputType
+          go_name: GetOutputType
+          returns: int
+          error: true
+      static_methods:
+        - java_method: buildBestValueSpec
+          go_name: BuildBestValueSpec
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ExecuteInIsolatedServiceRequest$OutputSpec
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.TrainingInterval
+      go_type: TrainingInterval
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getMinimumInterval
+          go_name: GetMinimumInterval
+          returns: java.time.Duration
+          error: true
+        - java_method: getSchedulingMode
+          go_name: GetSchedulingMode
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.TrainingInterval$Builder
+      go_type: TrainingIntervalBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.TrainingInterval
+          error: true
+        - java_method: setMinimumInterval
+          go_name: SetMinimumInterval
+          params:
+            - java_type: java.time.Duration
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.TrainingInterval$Builder
+          error: true
+        - java_method: setSchedulingMode
+          go_name: SetSchedulingMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.TrainingInterval$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.LogReader
+      go_type: LogReader
+    - java_class: android.adservices.ondevicepersonalization.EventOutput
+      go_type: EventOutput
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getEventLogRecord
+          go_name: GetEventLogRecord
+          returns: android.adservices.ondevicepersonalization.EventLogRecord
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.EventOutput$Builder
+      go_type: EventOutputBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.EventOutput
+          error: true
+        - java_method: setEventLogRecord
+          go_name: SetEventLogRecord
+          params:
+            - java_type: android.adservices.ondevicepersonalization.EventLogRecord
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.EventOutput$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.OnDevicePersonalizationException
+      go_type: OnDevicePersonalizationException
+      methods:
+        - java_method: getErrorCode
+          go_name: GetErrorCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.KeyValueStore
+      go_type: KeyValueStore
+      methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: '[B'
+          error: true
     - java_class: android.adservices.ondevicepersonalization.RenderingConfig
       go_type: RenderingConfig
       methods:
@@ -1042,21 +875,8 @@ classes:
           go_name: Build
           returns: android.adservices.ondevicepersonalization.RenderingConfig
           error: true
-    - java_class: android.adservices.ondevicepersonalization.RequestToken
-      go_type: RequestToken
-    - java_class: android.adservices.ondevicepersonalization.ExecuteInput
-      go_type: ExecuteInput
-      methods:
-        - java_method: getAppPackageName
-          go_name: GetAppPackageName
-          returns: String
-          error: true
-        - java_method: getAppParams
-          go_name: GetAppParams
-          returns: android.os.PersistableBundle
-          error: true
-    - java_class: android.adservices.ondevicepersonalization.DownloadCompletedInput
-      go_type: DownloadCompletedInput
+    - java_class: android.adservices.ondevicepersonalization.RenderOutput
+      go_type: RenderOutput
       methods:
         - java_method: equals
           go_name: Equals
@@ -1065,16 +885,167 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getDownloadedContents
-          go_name: GetDownloadedContents
-          returns: android.adservices.ondevicepersonalization.KeyValueStore
+        - java_method: getContent
+          go_name: GetContent
+          returns: String
+          error: true
+        - java_method: getTemplateId
+          go_name: GetTemplateId
+          returns: String
+          error: true
+        - java_method: getTemplateParams
+          go_name: GetTemplateParams
+          returns: android.os.PersistableBundle
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.adservices.ondevicepersonalization.ExecuteOutput
-      go_type: ExecuteOutput
+    - java_class: android.adservices.ondevicepersonalization.RenderOutput$Builder
+      go_type: RenderOutputBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.RenderOutput
+          error: true
+        - java_method: setContent
+          go_name: SetContent
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.RenderOutput$Builder
+          error: true
+        - java_method: setTemplateId
+          go_name: SetTemplateId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.RenderOutput$Builder
+          error: true
+        - java_method: setTemplateParams
+          go_name: SetTemplateParams
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.RenderOutput$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.IsolatedService
+      go_type: IsolatedService
+      methods:
+        - java_method: getEventUrlProvider
+          go_name: GetEventUrlProvider
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.EventUrlProvider
+          error: true
+        - java_method: getFederatedComputeScheduler
+          go_name: GetFederatedComputeScheduler
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.FederatedComputeScheduler
+          error: true
+        - java_method: getLocalData
+          go_name: GetLocalData
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.MutableKeyValueStore
+          error: true
+        - java_method: getLogReader
+          go_name: GetLogReader
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.LogReader
+          error: true
+        - java_method: getModelManager
+          go_name: GetModelManager
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.ModelManager
+          error: true
+        - java_method: getRemoteData
+          go_name: GetRemoteData
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.KeyValueStore
+          error: true
+        - java_method: getUserData
+          go_name: GetUserData
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.UserData
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onCreate
+          go_name: OnCreate
+          returns: void
+          error: true
+        - java_method: onRequest
+          go_name: OnRequest
+          params:
+            - java_type: android.adservices.ondevicepersonalization.RequestToken
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.IsolatedWorker
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.TrainingExampleRecord
+      go_type: TrainingExampleRecord
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getResumptionToken
+          go_name: GetResumptionToken
+          returns: '[B'
+          error: true
+        - java_method: getTrainingExample
+          go_name: GetTrainingExample
+          returns: '[B'
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.TrainingExampleRecord$Builder
+      go_type: TrainingExampleRecordBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.ondevicepersonalization.TrainingExampleRecord
+          error: true
+        - java_method: setResumptionToken
+          go_name: SetResumptionToken
+          params:
+            - java_type: byte...
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.TrainingExampleRecord$Builder
+          error: true
+        - java_method: setTrainingExample
+          go_name: SetTrainingExample
+          params:
+            - java_type: byte...
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.TrainingExampleRecord$Builder
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.TrainingExamplesInput
+      go_type: TrainingExamplesInput
       methods:
         - java_method: equals
           go_name: Equals
@@ -1083,85 +1054,135 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getBestValue
-          go_name: GetBestValue
-          returns: int
+        - java_method: getCollectionName
+          go_name: GetCollectionName
+          returns: String
           error: true
-        - java_method: getOutputData
-          go_name: GetOutputData
+        - java_method: getPopulationName
+          go_name: GetPopulationName
+          returns: String
+          error: true
+        - java_method: getResumptionToken
+          go_name: GetResumptionToken
           returns: '[B'
           error: true
-        - java_method: getRenderingConfig
-          go_name: GetRenderingConfig
-          returns: android.adservices.ondevicepersonalization.RenderingConfig
+        - java_method: getTaskName
+          go_name: GetTaskName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.ondevicepersonalization.EventLogRecord
+      go_type: EventLogRecord
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getData
+          go_name: GetData
+          returns: android.content.ContentValues
           error: true
         - java_method: getRequestLogRecord
           go_name: GetRequestLogRecord
           returns: android.adservices.ondevicepersonalization.RequestLogRecord
           error: true
+        - java_method: getRowIndex
+          go_name: GetRowIndex
+          returns: int
+          error: true
+        - java_method: getTime
+          go_name: GetTime
+          returns: java.time.Instant
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
-      go_type: ExecuteOutputBuilder
-      methods:
-        - java_method: addEventLogRecord
-          go_name: AddEventLogRecord
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: android.adservices.ondevicepersonalization.EventLogRecord
+            - java_type: android.os.Parcel
               go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
+    - java_class: android.adservices.ondevicepersonalization.EventLogRecord$Builder
+      go_type: EventLogRecordBuilder
+      methods:
         - java_method: build
           go_name: Build
-          returns: android.adservices.ondevicepersonalization.ExecuteOutput
+          returns: android.adservices.ondevicepersonalization.EventLogRecord
           error: true
-        - java_method: setBestValue
-          go_name: SetBestValue
+        - java_method: setData
+          go_name: SetData
           params:
-            - java_type: int
+            - java_type: android.content.ContentValues
               go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
-          error: true
-        - java_method: setOutputData
-          go_name: SetOutputData
-          params:
-            - java_type: byte...
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
-          error: true
-        - java_method: setRenderingConfig
-          go_name: SetRenderingConfig
-          params:
-            - java_type: android.adservices.ondevicepersonalization.RenderingConfig
-              go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
           error: true
         - java_method: setRequestLogRecord
           go_name: SetRequestLogRecord
           params:
             - java_type: android.adservices.ondevicepersonalization.RequestLogRecord
               go_name: arg0
-          returns: android.adservices.ondevicepersonalization.ExecuteOutput$Builder
+          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
           error: true
-    - java_class: android.adservices.ondevicepersonalization.LogReader
-      go_type: LogReader
-    - java_class: android.adservices.ondevicepersonalization.ModelManager
-      go_type: ModelManager
-    - java_class: android.adservices.ondevicepersonalization.IsolatedServiceException
-      go_type: IsolatedServiceException
-      methods:
-        - java_method: getErrorCode
-          go_name: GetErrorCode
-          returns: int
+        - java_method: setRowIndex
+          go_name: SetRowIndex
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
+          error: true
+        - java_method: setType
+          go_name: SetType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.adservices.ondevicepersonalization.EventLogRecord$Builder
           error: true
 constants:
     - go_name: Creator
       value: "0"
       go_type: int
+    - go_name: DelegateCpu
+      value: "1"
+      go_type: int
+    - go_name: ModelTypeTensorflowLite
+      value: "1"
+      go_type: int
     - go_name: DefaultBestValue
       value: "-1"
+      go_type: int
+    - go_name: Default
+      value: "0"
+      go_type: int
+    - go_name: OutputTypeBestValue
+      value: "1"
+      go_type: int
+    - go_name: OutputTypeNull
+      value: "0"
+      go_type: int
+    - go_name: SchedulingModeOneTime
+      value: "1"
+      go_type: int
+    - go_name: SchedulingModeRecurrent
+      value: "2"
       go_type: int
     - go_name: ErrorInferenceFailed
       value: "9"
@@ -1189,25 +1210,4 @@ constants:
       go_type: int
     - go_name: ErrorScheduleTrainingFailed
       value: "6"
-      go_type: int
-    - go_name: SchedulingModeOneTime
-      value: "1"
-      go_type: int
-    - go_name: SchedulingModeRecurrent
-      value: "2"
-      go_type: int
-    - go_name: Default
-      value: "0"
-      go_type: int
-    - go_name: OutputTypeBestValue
-      value: "1"
-      go_type: int
-    - go_name: OutputTypeNull
-      value: "0"
-      go_type: int
-    - go_name: DelegateCpu
-      value: "1"
-      go_type: int
-    - go_name: ModelTypeTensorflowLite
-      value: "1"
       go_type: int

@@ -5,11 +5,11 @@ package display
 import "github.com/AndroidGoLab/jni/hardware/display/consts"
 
 const (
+	Creator                            = consts.Creator
 	ConnectionToSinkBuiltIn            = consts.ConnectionToSinkBuiltIn
 	ConnectionToSinkDirect             = consts.ConnectionToSinkDirect
 	ConnectionToSinkTransitive         = consts.ConnectionToSinkTransitive
 	ConnectionToSinkUnknown            = consts.ConnectionToSinkUnknown
-	Creator                            = consts.Creator
 	HdrConversionForce                 = consts.HdrConversionForce
 	HdrConversionPassthrough           = consts.HdrConversionPassthrough
 	HdrConversionSystem                = consts.HdrConversionSystem

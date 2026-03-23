@@ -3,38 +3,17 @@
 package consts
 
 const (
-	SourceBoundMaxInSurface      int = 0
-	SourceBoundMaxVisible        int = 1
-	DefaultBlendMode             int = 0
-	InputMethodFromFocusable     int = 0
-	InputMethodNeeded            int = 1
-	InputMethodNotNeeded         int = 2
-	ChoiceModeMultiple           int = 2
-	ChoiceModeMultipleModal      int = 3
-	ChoiceModeNone               int = 0
-	ChoiceModeSingle             int = 1
-	TranscriptModeAlwaysScroll   int = 2
-	TranscriptModeDisabled       int = 0
-	TranscriptModeNormal         int = 1
+	UnspecifiedGravity           int = -1
 	ScrollStateFling             int = 2
 	ScrollStateIdle              int = 0
 	ScrollStateTouchScroll       int = 1
-	FlagAutoRequery              int = 1
-	FlagRegisterContentObserver  int = 2
-	ChildIndicatorInherit        int = -1
-	PackedPositionTypeChild      int = 1
-	PackedPositionTypeGroup      int = 0
-	PackedPositionTypeNull       int = 2
 	DefaultFormat12Hour          int = 0
 	DefaultFormat24Hour          int = 0
-	InvalidPosition              int = -1
-	ItemViewTypeHeaderOrFooter   int = -2
-	ItemViewTypeIgnore           int = -1
-	AutoFit                      int = -1
-	NoStretch                    int = 0
-	StretchColumnWidth           int = 2
-	StretchSpacing               int = 1
-	StretchSpacingUniform        int = 3
+	DigitsAndLetters             int = 1
+	DigitsAndLettersNoDigits     int = 2
+	DigitsAndLettersNoLetters    int = 3
+	DigitsOnly                   int = 4
+	LettersOnly                  int = 5
 	AlignBounds                  int = 0
 	AlignMargins                 int = 1
 	Baseline                     int = 0
@@ -49,10 +28,31 @@ const (
 	Top                          int = 0
 	Undefined                    int = -2147483648
 	Vertical                     int = 1
-	ShowDividerBeginning         int = 1
-	ShowDividerEnd               int = 4
-	ShowDividerMiddle            int = 2
-	ShowDividerNone              int = 0
+	ModeDialog                   int = 0
+	ModeDropdown                 int = 1
+	FlagAutoRequery              int = 1
+	FlagRegisterContentObserver  int = 2
+	ChoiceModeMultiple           int = 2
+	ChoiceModeMultipleModal      int = 3
+	ChoiceModeNone               int = 0
+	ChoiceModeSingle             int = 1
+	TranscriptModeAlwaysScroll   int = 2
+	TranscriptModeDisabled       int = 0
+	TranscriptModeNormal         int = 1
+	SourceBoundMaxInSurface      int = 0
+	SourceBoundMaxVisible        int = 1
+	InputMethodFromFocusable     int = 0
+	InputMethodNeeded            int = 1
+	InputMethodNotNeeded         int = 2
+	OrientationHorizontal        int = 0
+	OrientationVertical          int = 1
+	AutoSizeTextTypeNone         int = 0
+	AutoSizeTextTypeUniform      int = 1
+	FocusedSearchResultIndexNone int = -1
+	Editable                     int = 0
+	Normal                       int = 0
+	Spannable                    int = 0
+	Creator                      int = 0
 	Above                        int = 2
 	AlignBaseline                int = 4
 	AlignBottom                  int = 8
@@ -76,23 +76,28 @@ const (
 	RightOf                      int = 1
 	StartOf                      int = 16
 	True                         int = -1
-	OrientationHorizontal        int = 0
-	OrientationVertical          int = 1
-	Creator                      int = 0
+	ShowDividerBeginning         int = 1
+	ShowDividerEnd               int = 4
+	ShowDividerMiddle            int = 2
+	ShowDividerNone              int = 0
+	InvalidPosition              int = -1
+	ItemViewTypeHeaderOrFooter   int = -2
+	ItemViewTypeIgnore           int = -1
 	MarginBottom                 int = 3
 	MarginEnd                    int = 5
 	MarginLeft                   int = 0
 	MarginRight                  int = 2
 	MarginStart                  int = 4
 	MarginTop                    int = 1
-	DigitsAndLetters             int = 1
-	DigitsAndLettersNoDigits     int = 2
-	DigitsAndLettersNoLetters    int = 3
-	DigitsOnly                   int = 4
-	LettersOnly                  int = 5
-	UnspecifiedGravity           int = -1
-	IgnoreItemViewType           int = -1
-	NoSelection                  int = -2147483648
+	MatchParent                  int = -1
+	PositionPromptAbove          int = 0
+	PositionPromptBelow          int = 1
+	WrapContent                  int = -2
+	ChildIndicatorInherit        int = -1
+	PackedPositionTypeChild      int = 1
+	PackedPositionTypeGroup      int = 0
+	PackedPositionTypeNull       int = 2
+	DefaultBlendMode             int = 0
 	CenterCrop                   int = 0
 	CenterInside                 int = 0
 	FitCenter                    int = 0
@@ -100,18 +105,13 @@ const (
 	FitStart                     int = 0
 	FitXy                        int = 0
 	Matrix                       int = 0
-	MatchParent                  int = -1
-	PositionPromptAbove          int = 0
-	PositionPromptBelow          int = 1
-	WrapContent                  int = -2
-	ModeDialog                   int = 0
-	ModeDropdown                 int = 1
-	AutoSizeTextTypeNone         int = 0
-	AutoSizeTextTypeUniform      int = 1
-	FocusedSearchResultIndexNone int = -1
-	Editable                     int = 0
-	Normal                       int = 0
-	Spannable                    int = 0
+	AutoFit                      int = -1
+	NoStretch                    int = 0
+	StretchColumnWidth           int = 2
+	StretchSpacing               int = 1
+	StretchSpacingUniform        int = 3
+	IgnoreItemViewType           int = -1
+	NoSelection                  int = -2147483648
 )
 
 const (
@@ -121,6 +121,6 @@ const (
 )
 
 const (
-	PackedPositionValueNull int64 = 4294967295
 	InvalidRowId            int64 = -9223372036854775808
+	PackedPositionValueNull int64 = 4294967295
 )

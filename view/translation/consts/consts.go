@@ -4,15 +4,6 @@ package consts
 
 const (
 	Creator                             int = 0
-	StatusError                         int = 1
-	StatusSuccess                       int = 0
-	TranslationStatusContextUnsupported int = 2
-	TranslationStatusSuccess            int = 0
-	TranslationStatusUnknownError       int = 1
-	FlagDictionaryResult                int = 2
-	FlagPartialResponses                int = 8
-	FlagTranslationResult               int = 1
-	FlagTransliterationResult           int = 4
 	StateAvailableToDownload            int = 1
 	StateDownloading                    int = 2
 	StateNotAvailable                   int = 4
@@ -20,10 +11,19 @@ const (
 	FlagDefinitions                     int = 4
 	FlagLowLatency                      int = 1
 	FlagTransliteration                 int = 2
+	FlagDictionaryResult                int = 2
+	FlagPartialResponses                int = 8
+	FlagTranslationResult               int = 1
+	FlagTransliterationResult           int = 4
+	TranslationStatusContextUnsupported int = 2
+	TranslationStatusSuccess            int = 0
+	TranslationStatusUnknownError       int = 1
+	StatusError                         int = 1
+	StatusSuccess                       int = 0
 	DataFormatText                      int = 1
 )
 
 const (
-	ExtraDefinitions string = "android.view.translation.extra.DEFINITIONS"
 	IdText           string = "android:text"
+	ExtraDefinitions string = "android.view.translation.extra.DEFINITIONS"
 )

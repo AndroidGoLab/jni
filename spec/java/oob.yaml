@@ -71,51 +71,6 @@ classes:
           go_name: Build
           returns: android.ranging.oob.OobResponderRangingConfig
           error: true
-    - java_class: android.ranging.oob.TransportHandle
-      go_type: TransportHandle
-      methods:
-        - java_method: registerReceiveCallback
-          go_name: RegisterReceiveCallback
-          params:
-            - java_type: java.util.concurrent.Executor
-              go_name: arg0
-            - java_type: android.ranging.oob.TransportHandle$ReceiveCallback
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: sendData
-          go_name: SendData
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.ranging.oob.TransportHandle$ReceiveCallback
-      go_type: TransportHandleReceiveCallback
-      methods:
-        - java_method: onClose
-          go_name: OnClose
-          returns: void
-          error: true
-        - java_method: onDisconnect
-          go_name: OnDisconnect
-          returns: void
-          error: true
-        - java_method: onReceiveData
-          go_name: OnReceiveData
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onReconnect
-          go_name: OnReconnect
-          returns: void
-          error: true
-        - java_method: onSendFailed
-          go_name: OnSendFailed
-          returns: void
-          error: true
     - java_class: android.ranging.oob.OobInitiatorRangingConfig
       go_type: InitiatorRangingConfig
       methods:
@@ -193,6 +148,51 @@ classes:
             - java_type: java.time.Duration
               go_name: arg0
           returns: android.ranging.oob.OobInitiatorRangingConfig$Builder
+          error: true
+    - java_class: android.ranging.oob.TransportHandle
+      go_type: TransportHandle
+      methods:
+        - java_method: registerReceiveCallback
+          go_name: RegisterReceiveCallback
+          params:
+            - java_type: java.util.concurrent.Executor
+              go_name: arg0
+            - java_type: android.ranging.oob.TransportHandle$ReceiveCallback
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: sendData
+          go_name: SendData
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.ranging.oob.TransportHandle$ReceiveCallback
+      go_type: TransportHandleReceiveCallback
+      methods:
+        - java_method: onClose
+          go_name: OnClose
+          returns: void
+          error: true
+        - java_method: onDisconnect
+          go_name: OnDisconnect
+          returns: void
+          error: true
+        - java_method: onReceiveData
+          go_name: OnReceiveData
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onReconnect
+          go_name: OnReconnect
+          returns: void
+          error: true
+        - java_method: onSendFailed
+          go_name: OnSendFailed
+          returns: void
           error: true
 constants:
     - go_name: Creator

@@ -3,24 +3,19 @@
 package consts
 
 const (
-	Debug                              int = 0
-	Error                              int = 0
-	Log                                int = 0
-	Tip                                int = 0
-	Warning                            int = 0
-	ModeOpen                           int = 0
-	ModeOpenMultiple                   int = 1
-	ModeSave                           int = 3
-	CategoriesAll                      int = 1
-	CategoriesAndroidWebview           int = 2
-	CategoriesFrameViewer              int = 64
-	CategoriesInputLatency             int = 8
-	CategoriesJavascriptAndRendering   int = 32
-	CategoriesNone                     int = 0
-	CategoriesRendering                int = 16
-	CategoriesWebDeveloper             int = 4
-	RecordContinuously                 int = 1
-	RecordUntilFull                    int = 0
+	RendererPriorityBound              int = 1
+	RendererPriorityImportant          int = 2
+	RendererPriorityWaived             int = 0
+	AnchorType                         int = 1
+	EditTextType                       int = 9
+	EmailType                          int = 4
+	GeoType                            int = 3
+	ImageAnchorType                    int = 6
+	ImageType                          int = 5
+	PhoneType                          int = 2
+	SrcAnchorType                      int = 7
+	SrcImageAnchorType                 int = 8
+	UnknownType                        int = 0
 	ErrorAuthentication                int = -4
 	ErrorBadUrl                        int = -12
 	ErrorConnect                       int = -6
@@ -42,7 +37,22 @@ const (
 	SafeBrowsingThreatPhishing         int = 2
 	SafeBrowsingThreatUnknown          int = 0
 	SafeBrowsingThreatUnwantedSoftware int = 3
+	Debug                              int = 0
+	Error                              int = 0
+	Log                                int = 0
+	Tip                                int = 0
+	Warning                            int = 0
 	DayCount                           int = 5
+	CategoriesAll                      int = 1
+	CategoriesAndroidWebview           int = 2
+	CategoriesFrameViewer              int = 64
+	CategoriesInputLatency             int = 8
+	CategoriesJavascriptAndRendering   int = 32
+	CategoriesNone                     int = 0
+	CategoriesRendering                int = 16
+	CategoriesWebDeveloper             int = 4
+	RecordContinuously                 int = 1
+	RecordUntilFull                    int = 0
 	ForceDarkAuto                      int = 1
 	ForceDarkOff                       int = 0
 	ForceDarkOn                        int = 2
@@ -74,27 +84,17 @@ const (
 	Close                              int = 0
 	Far                                int = 0
 	Medium                             int = 0
-	RendererPriorityBound              int = 1
-	RendererPriorityImportant          int = 2
-	RendererPriorityWaived             int = 0
-	AnchorType                         int = 1
-	EditTextType                       int = 9
-	EmailType                          int = 4
-	GeoType                            int = 3
-	ImageAnchorType                    int = 6
-	ImageType                          int = 5
-	PhoneType                          int = 2
-	SrcAnchorType                      int = 7
-	SrcImageAnchorType                 int = 8
-	UnknownType                        int = 0
+	ModeOpen                           int = 0
+	ModeOpenMultiple                   int = 1
+	ModeSave                           int = 3
 )
 
 const (
+	SchemeGeo                string = "geo:0,0?q="
+	SchemeMailto             string = "mailto:"
+	SchemeTel                string = "tel:"
 	ResourceAudioCapture     string = "android.webkit.resource.AUDIO_CAPTURE"
 	ResourceMidiSysex        string = "android.webkit.resource.MIDI_SYSEX"
 	ResourceProtectedMediaId string = "android.webkit.resource.PROTECTED_MEDIA_ID"
 	ResourceVideoCapture     string = "android.webkit.resource.VIDEO_CAPTURE"
-	SchemeGeo                string = "geo:0,0?q="
-	SchemeMailto             string = "mailto:"
-	SchemeTel                string = "tel:"
 )

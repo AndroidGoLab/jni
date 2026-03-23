@@ -23,6 +23,84 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsColorDrawable                          *jni.GlobalRef
+	midColorDrawableApplyTheme                jni.MethodID
+	midColorDrawableCanApplyTheme             jni.MethodID
+	midColorDrawableDraw                      jni.MethodID
+	midColorDrawableGetAlpha                  jni.MethodID
+	midColorDrawableGetChangingConfigurations jni.MethodID
+	midColorDrawableGetColor                  jni.MethodID
+	midColorDrawableGetColorFilter            jni.MethodID
+	midColorDrawableGetConstantState          jni.MethodID
+	midColorDrawableGetOpacity                jni.MethodID
+	midColorDrawableGetOutline                jni.MethodID
+	midColorDrawableHasFocusStateSpecified    jni.MethodID
+	midColorDrawableInflate                   jni.MethodID
+	midColorDrawableIsStateful                jni.MethodID
+	midColorDrawableMutate                    jni.MethodID
+	midColorDrawableSetAlpha                  jni.MethodID
+	midColorDrawableSetColor                  jni.MethodID
+	midColorDrawableSetColorFilter            jni.MethodID
+	midColorDrawableSetTintBlendMode          jni.MethodID
+	midColorDrawableSetTintList               jni.MethodID
+
+	clsAnimatable          *jni.GlobalRef
+	midAnimatableIsRunning jni.MethodID
+	midAnimatableStart     jni.MethodID
+	midAnimatableStop      jni.MethodID
+
+	clsAnimatedStateListDrawable                   *jni.GlobalRef
+	midAnimatedStateListDrawableAddState           jni.MethodID
+	midAnimatedStateListDrawableApplyTheme         jni.MethodID
+	midAnimatedStateListDrawableInflate            jni.MethodID
+	midAnimatedStateListDrawableIsStateful         jni.MethodID
+	midAnimatedStateListDrawableJumpToCurrentState jni.MethodID
+	midAnimatedStateListDrawableMutate             jni.MethodID
+	midAnimatedStateListDrawableSetVisible         jni.MethodID
+
+	clsRippleDrawable                       *jni.GlobalRef
+	midRippleDrawableApplyTheme             jni.MethodID
+	midRippleDrawableCanApplyTheme          jni.MethodID
+	midRippleDrawableDraw                   jni.MethodID
+	midRippleDrawableGetConstantState       jni.MethodID
+	midRippleDrawableGetDirtyBounds         jni.MethodID
+	midRippleDrawableGetEffectColor         jni.MethodID
+	midRippleDrawableGetHotspotBounds       jni.MethodID
+	midRippleDrawableGetOpacity             jni.MethodID
+	midRippleDrawableGetOutline             jni.MethodID
+	midRippleDrawableGetRadius              jni.MethodID
+	midRippleDrawableHasFocusStateSpecified jni.MethodID
+	midRippleDrawableInflate                jni.MethodID
+	midRippleDrawableInvalidateSelf         jni.MethodID
+	midRippleDrawableIsProjected            jni.MethodID
+	midRippleDrawableIsStateful             jni.MethodID
+	midRippleDrawableJumpToCurrentState     jni.MethodID
+	midRippleDrawableMutate                 jni.MethodID
+	midRippleDrawableSetColor               jni.MethodID
+	midRippleDrawableSetDrawableByLayerId   jni.MethodID
+	midRippleDrawableSetEffectColor         jni.MethodID
+	midRippleDrawableSetHotspot             jni.MethodID
+	midRippleDrawableSetHotspotBounds       jni.MethodID
+	midRippleDrawableSetPaddingMode         jni.MethodID
+	midRippleDrawableSetRadius              jni.MethodID
+	midRippleDrawableSetVisible             jni.MethodID
+
+	clsStateListDrawable                       *jni.GlobalRef
+	midStateListDrawableAddState               jni.MethodID
+	midStateListDrawableApplyTheme             jni.MethodID
+	midStateListDrawableFindStateDrawableIndex jni.MethodID
+	midStateListDrawableGetStateCount          jni.MethodID
+	midStateListDrawableGetStateDrawable       jni.MethodID
+	midStateListDrawableGetStateSet            jni.MethodID
+	midStateListDrawableHasFocusStateSpecified jni.MethodID
+	midStateListDrawableInflate                jni.MethodID
+	midStateListDrawableIsStateful             jni.MethodID
+	midStateListDrawableMutate                 jni.MethodID
+
+	clsPaintDrawable                *jni.GlobalRef
+	midPaintDrawableSetCornerRadii  jni.MethodID
+	midPaintDrawableSetCornerRadius jni.MethodID
+
 	clsPictureDrawable                   *jni.GlobalRef
 	midPictureDrawableDraw               jni.MethodID
 	midPictureDrawableGetIntrinsicHeight jni.MethodID
@@ -33,67 +111,154 @@ var (
 	midPictureDrawableSetColorFilter     jni.MethodID
 	midPictureDrawableSetPicture         jni.MethodID
 
-	clsContainer                          *jni.GlobalRef
-	midContainerApplyTheme                jni.MethodID
-	midContainerCanApplyTheme             jni.MethodID
-	midContainerDraw                      jni.MethodID
-	midContainerGetAlpha                  jni.MethodID
-	midContainerGetChangingConfigurations jni.MethodID
-	midContainerGetConstantState          jni.MethodID
-	midContainerGetCurrent                jni.MethodID
-	midContainerGetHotspotBounds          jni.MethodID
-	midContainerGetIntrinsicHeight        jni.MethodID
-	midContainerGetIntrinsicWidth         jni.MethodID
-	midContainerGetMinimumHeight          jni.MethodID
-	midContainerGetMinimumWidth           jni.MethodID
-	midContainerGetOpacity                jni.MethodID
-	midContainerGetOpticalInsets          jni.MethodID
-	midContainerGetOutline                jni.MethodID
-	midContainerGetPadding                jni.MethodID
-	midContainerHasFocusStateSpecified    jni.MethodID
-	midContainerInvalidateDrawable        jni.MethodID
-	midContainerIsAutoMirrored            jni.MethodID
-	midContainerIsStateful                jni.MethodID
-	midContainerJumpToCurrentState        jni.MethodID
-	midContainerMutate                    jni.MethodID
-	midContainerOnLayoutDirectionChanged  jni.MethodID
-	midContainerScheduleDrawable          jni.MethodID
-	midContainerSelectDrawable            jni.MethodID
-	midContainerSetAlpha                  jni.MethodID
-	midContainerSetAutoMirrored           jni.MethodID
-	midContainerSetColorFilter            jni.MethodID
-	midContainerSetDither                 jni.MethodID
-	midContainerSetEnterFadeDuration      jni.MethodID
-	midContainerSetExitFadeDuration       jni.MethodID
-	midContainerSetHotspot                jni.MethodID
-	midContainerSetHotspotBounds          jni.MethodID
-	midContainerSetTintBlendMode          jni.MethodID
-	midContainerSetTintList               jni.MethodID
-	midContainerSetVisible                jni.MethodID
-	midContainerUnscheduleDrawable        jni.MethodID
+	clsShapeDrawable                          *jni.GlobalRef
+	midShapeDrawableApplyTheme                jni.MethodID
+	midShapeDrawableDraw                      jni.MethodID
+	midShapeDrawableGetAlpha                  jni.MethodID
+	midShapeDrawableGetChangingConfigurations jni.MethodID
+	midShapeDrawableGetConstantState          jni.MethodID
+	midShapeDrawableGetIntrinsicHeight        jni.MethodID
+	midShapeDrawableGetIntrinsicWidth         jni.MethodID
+	midShapeDrawableGetOpacity                jni.MethodID
+	midShapeDrawableGetOutline                jni.MethodID
+	midShapeDrawableGetPadding                jni.MethodID
+	midShapeDrawableGetPaint                  jni.MethodID
+	midShapeDrawableGetShaderFactory          jni.MethodID
+	midShapeDrawableGetShape                  jni.MethodID
+	midShapeDrawableHasFocusStateSpecified    jni.MethodID
+	midShapeDrawableInflate                   jni.MethodID
+	midShapeDrawableIsStateful                jni.MethodID
+	midShapeDrawableMutate                    jni.MethodID
+	midShapeDrawableSetAlpha                  jni.MethodID
+	midShapeDrawableSetColorFilter            jni.MethodID
+	midShapeDrawableSetDither                 jni.MethodID
+	midShapeDrawableSetIntrinsicHeight        jni.MethodID
+	midShapeDrawableSetIntrinsicWidth         jni.MethodID
+	midShapeDrawableSetPadding1               jni.MethodID
+	midShapeDrawableSetPadding4_1             jni.MethodID
+	midShapeDrawableSetShaderFactory          jni.MethodID
+	midShapeDrawableSetShape                  jni.MethodID
+	midShapeDrawableSetTintBlendMode          jni.MethodID
+	midShapeDrawableSetTintList               jni.MethodID
 
-	clsContainerDrawableContainerState                          *jni.GlobalRef
-	midContainerDrawableContainerStateAddChild                  jni.MethodID
-	midContainerDrawableContainerStateCanApplyTheme             jni.MethodID
-	midContainerDrawableContainerStateGetChangingConfigurations jni.MethodID
-	midContainerDrawableContainerStateGetChild                  jni.MethodID
-	midContainerDrawableContainerStateGetChildCount             jni.MethodID
-	midContainerDrawableContainerStateGetChildren               jni.MethodID
-	midContainerDrawableContainerStateGetConstantHeight         jni.MethodID
-	midContainerDrawableContainerStateGetConstantMinimumHeight  jni.MethodID
-	midContainerDrawableContainerStateGetConstantMinimumWidth   jni.MethodID
-	midContainerDrawableContainerStateGetConstantPadding        jni.MethodID
-	midContainerDrawableContainerStateGetConstantWidth          jni.MethodID
-	midContainerDrawableContainerStateGetEnterFadeDuration      jni.MethodID
-	midContainerDrawableContainerStateGetExitFadeDuration       jni.MethodID
-	midContainerDrawableContainerStateGetOpacity                jni.MethodID
-	midContainerDrawableContainerStateGrowArray                 jni.MethodID
-	midContainerDrawableContainerStateIsConstantSize            jni.MethodID
-	midContainerDrawableContainerStateIsStateful                jni.MethodID
-	midContainerDrawableContainerStateSetConstantSize           jni.MethodID
-	midContainerDrawableContainerStateSetEnterFadeDuration      jni.MethodID
-	midContainerDrawableContainerStateSetExitFadeDuration       jni.MethodID
-	midContainerDrawableContainerStateSetVariablePadding        jni.MethodID
+	clsShapeDrawableShaderFactory       *jni.GlobalRef
+	midShapeDrawableShaderFactoryResize jni.MethodID
+
+	clsIcon                                      *jni.GlobalRef
+	midIconDescribeContents                      jni.MethodID
+	midIconGetResId                              jni.MethodID
+	midIconGetResPackage                         jni.MethodID
+	midIconGetType                               jni.MethodID
+	midIconGetUri                                jni.MethodID
+	midIconLoadDrawable                          jni.MethodID
+	midIconLoadDrawableAsync                     jni.MethodID
+	midIconSetTint                               jni.MethodID
+	midIconSetTintBlendMode                      jni.MethodID
+	midIconSetTintList                           jni.MethodID
+	midIconSetTintMode                           jni.MethodID
+	midIconToString                              jni.MethodID
+	midIconWriteToParcel                         jni.MethodID
+	midIconCreateWithAdaptiveBitmap              jni.MethodID
+	midIconCreateWithAdaptiveBitmapContentUri1   jni.MethodID
+	midIconCreateWithAdaptiveBitmapContentUri1_1 jni.MethodID
+	midIconCreateWithBitmap                      jni.MethodID
+	midIconCreateWithContentUri1                 jni.MethodID
+	midIconCreateWithContentUri1_1               jni.MethodID
+	midIconCreateWithData                        jni.MethodID
+	midIconCreateWithFilePath                    jni.MethodID
+	midIconCreateWithResource2                   jni.MethodID
+	midIconCreateWithResource2_1                 jni.MethodID
+
+	clsIconOnDrawableLoadedListener                 *jni.GlobalRef
+	midIconOnDrawableLoadedListenerOnDrawableLoaded jni.MethodID
+
+	clsVectorDrawable                          *jni.GlobalRef
+	midVectorDrawableApplyTheme                jni.MethodID
+	midVectorDrawableCanApplyTheme             jni.MethodID
+	midVectorDrawableDraw                      jni.MethodID
+	midVectorDrawableGetAlpha                  jni.MethodID
+	midVectorDrawableGetChangingConfigurations jni.MethodID
+	midVectorDrawableGetColorFilter            jni.MethodID
+	midVectorDrawableGetConstantState          jni.MethodID
+	midVectorDrawableGetIntrinsicHeight        jni.MethodID
+	midVectorDrawableGetIntrinsicWidth         jni.MethodID
+	midVectorDrawableGetOpacity                jni.MethodID
+	midVectorDrawableGetOpticalInsets          jni.MethodID
+	midVectorDrawableHasFocusStateSpecified    jni.MethodID
+	midVectorDrawableInflate                   jni.MethodID
+	midVectorDrawableIsAutoMirrored            jni.MethodID
+	midVectorDrawableIsStateful                jni.MethodID
+	midVectorDrawableMutate                    jni.MethodID
+	midVectorDrawableSetAlpha                  jni.MethodID
+	midVectorDrawableSetAutoMirrored           jni.MethodID
+	midVectorDrawableSetColorFilter            jni.MethodID
+	midVectorDrawableSetTintBlendMode          jni.MethodID
+	midVectorDrawableSetTintList               jni.MethodID
+
+	clsAnimatedVectorDrawable                            *jni.GlobalRef
+	midAnimatedVectorDrawableApplyTheme                  jni.MethodID
+	midAnimatedVectorDrawableCanApplyTheme               jni.MethodID
+	midAnimatedVectorDrawableClearAnimationCallbacks     jni.MethodID
+	midAnimatedVectorDrawableDraw                        jni.MethodID
+	midAnimatedVectorDrawableGetAlpha                    jni.MethodID
+	midAnimatedVectorDrawableGetChangingConfigurations   jni.MethodID
+	midAnimatedVectorDrawableGetColorFilter              jni.MethodID
+	midAnimatedVectorDrawableGetConstantState            jni.MethodID
+	midAnimatedVectorDrawableGetIntrinsicHeight          jni.MethodID
+	midAnimatedVectorDrawableGetIntrinsicWidth           jni.MethodID
+	midAnimatedVectorDrawableGetOpacity                  jni.MethodID
+	midAnimatedVectorDrawableGetOpticalInsets            jni.MethodID
+	midAnimatedVectorDrawableGetOutline                  jni.MethodID
+	midAnimatedVectorDrawableInflate                     jni.MethodID
+	midAnimatedVectorDrawableIsRunning                   jni.MethodID
+	midAnimatedVectorDrawableIsStateful                  jni.MethodID
+	midAnimatedVectorDrawableMutate                      jni.MethodID
+	midAnimatedVectorDrawableOnLayoutDirectionChanged    jni.MethodID
+	midAnimatedVectorDrawableRegisterAnimationCallback   jni.MethodID
+	midAnimatedVectorDrawableReset                       jni.MethodID
+	midAnimatedVectorDrawableSetAlpha                    jni.MethodID
+	midAnimatedVectorDrawableSetColorFilter              jni.MethodID
+	midAnimatedVectorDrawableSetHotspot                  jni.MethodID
+	midAnimatedVectorDrawableSetHotspotBounds            jni.MethodID
+	midAnimatedVectorDrawableSetTintBlendMode            jni.MethodID
+	midAnimatedVectorDrawableSetTintList                 jni.MethodID
+	midAnimatedVectorDrawableSetVisible                  jni.MethodID
+	midAnimatedVectorDrawableStart                       jni.MethodID
+	midAnimatedVectorDrawableStop                        jni.MethodID
+	midAnimatedVectorDrawableUnregisterAnimationCallback jni.MethodID
+
+	clsAnimatable2                            *jni.GlobalRef
+	midAnimatable2ClearAnimationCallbacks     jni.MethodID
+	midAnimatable2RegisterAnimationCallback   jni.MethodID
+	midAnimatable2UnregisterAnimationCallback jni.MethodID
+
+	clsAnimatable2AnimationCallback                 *jni.GlobalRef
+	midAnimatable2AnimationCallbackOnAnimationEnd   jni.MethodID
+	midAnimatable2AnimationCallbackOnAnimationStart jni.MethodID
+
+	clsColorStateListDrawable                          *jni.GlobalRef
+	midColorStateListDrawableApplyTheme                jni.MethodID
+	midColorStateListDrawableCanApplyTheme             jni.MethodID
+	midColorStateListDrawableClearAlpha                jni.MethodID
+	midColorStateListDrawableDraw                      jni.MethodID
+	midColorStateListDrawableGetAlpha                  jni.MethodID
+	midColorStateListDrawableGetChangingConfigurations jni.MethodID
+	midColorStateListDrawableGetColorFilter            jni.MethodID
+	midColorStateListDrawableGetColorStateList         jni.MethodID
+	midColorStateListDrawableGetConstantState          jni.MethodID
+	midColorStateListDrawableGetCurrent                jni.MethodID
+	midColorStateListDrawableGetOpacity                jni.MethodID
+	midColorStateListDrawableHasFocusStateSpecified    jni.MethodID
+	midColorStateListDrawableInvalidateDrawable        jni.MethodID
+	midColorStateListDrawableIsStateful                jni.MethodID
+	midColorStateListDrawableMutate                    jni.MethodID
+	midColorStateListDrawableScheduleDrawable          jni.MethodID
+	midColorStateListDrawableSetAlpha                  jni.MethodID
+	midColorStateListDrawableSetColorFilter            jni.MethodID
+	midColorStateListDrawableSetColorStateList         jni.MethodID
+	midColorStateListDrawableSetTintBlendMode          jni.MethodID
+	midColorStateListDrawableSetTintList               jni.MethodID
+	midColorStateListDrawableUnscheduleDrawable        jni.MethodID
 
 	clsBitmapDrawable                          *jni.GlobalRef
 	midBitmapDrawableApplyTheme                jni.MethodID
@@ -138,116 +303,6 @@ var (
 	midBitmapDrawableSetTileModeY              jni.MethodID
 	midBitmapDrawableSetTintBlendMode          jni.MethodID
 	midBitmapDrawableSetTintList               jni.MethodID
-
-	clsColorStateListDrawable                          *jni.GlobalRef
-	midColorStateListDrawableApplyTheme                jni.MethodID
-	midColorStateListDrawableCanApplyTheme             jni.MethodID
-	midColorStateListDrawableClearAlpha                jni.MethodID
-	midColorStateListDrawableDraw                      jni.MethodID
-	midColorStateListDrawableGetAlpha                  jni.MethodID
-	midColorStateListDrawableGetChangingConfigurations jni.MethodID
-	midColorStateListDrawableGetColorFilter            jni.MethodID
-	midColorStateListDrawableGetColorStateList         jni.MethodID
-	midColorStateListDrawableGetConstantState          jni.MethodID
-	midColorStateListDrawableGetCurrent                jni.MethodID
-	midColorStateListDrawableGetOpacity                jni.MethodID
-	midColorStateListDrawableHasFocusStateSpecified    jni.MethodID
-	midColorStateListDrawableInvalidateDrawable        jni.MethodID
-	midColorStateListDrawableIsStateful                jni.MethodID
-	midColorStateListDrawableMutate                    jni.MethodID
-	midColorStateListDrawableScheduleDrawable          jni.MethodID
-	midColorStateListDrawableSetAlpha                  jni.MethodID
-	midColorStateListDrawableSetColorFilter            jni.MethodID
-	midColorStateListDrawableSetColorStateList         jni.MethodID
-	midColorStateListDrawableSetTintBlendMode          jni.MethodID
-	midColorStateListDrawableSetTintList               jni.MethodID
-	midColorStateListDrawableUnscheduleDrawable        jni.MethodID
-
-	clsTransitionDrawable                    *jni.GlobalRef
-	midTransitionDrawableDraw                jni.MethodID
-	midTransitionDrawableIsCrossFadeEnabled  jni.MethodID
-	midTransitionDrawableResetTransition     jni.MethodID
-	midTransitionDrawableReverseTransition   jni.MethodID
-	midTransitionDrawableSetCrossFadeEnabled jni.MethodID
-	midTransitionDrawableStartTransition     jni.MethodID
-
-	clsRotateDrawable                  *jni.GlobalRef
-	midRotateDrawableApplyTheme        jni.MethodID
-	midRotateDrawableDraw              jni.MethodID
-	midRotateDrawableGetFromDegrees    jni.MethodID
-	midRotateDrawableGetPivotX         jni.MethodID
-	midRotateDrawableGetPivotY         jni.MethodID
-	midRotateDrawableGetToDegrees      jni.MethodID
-	midRotateDrawableInflate           jni.MethodID
-	midRotateDrawableIsPivotXRelative  jni.MethodID
-	midRotateDrawableIsPivotYRelative  jni.MethodID
-	midRotateDrawableSetFromDegrees    jni.MethodID
-	midRotateDrawableSetPivotX         jni.MethodID
-	midRotateDrawableSetPivotXRelative jni.MethodID
-	midRotateDrawableSetPivotY         jni.MethodID
-	midRotateDrawableSetPivotYRelative jni.MethodID
-	midRotateDrawableSetToDegrees      jni.MethodID
-
-	clsAnimatedVectorDrawable                            *jni.GlobalRef
-	midAnimatedVectorDrawableApplyTheme                  jni.MethodID
-	midAnimatedVectorDrawableCanApplyTheme               jni.MethodID
-	midAnimatedVectorDrawableClearAnimationCallbacks     jni.MethodID
-	midAnimatedVectorDrawableDraw                        jni.MethodID
-	midAnimatedVectorDrawableGetAlpha                    jni.MethodID
-	midAnimatedVectorDrawableGetChangingConfigurations   jni.MethodID
-	midAnimatedVectorDrawableGetColorFilter              jni.MethodID
-	midAnimatedVectorDrawableGetConstantState            jni.MethodID
-	midAnimatedVectorDrawableGetIntrinsicHeight          jni.MethodID
-	midAnimatedVectorDrawableGetIntrinsicWidth           jni.MethodID
-	midAnimatedVectorDrawableGetOpacity                  jni.MethodID
-	midAnimatedVectorDrawableGetOpticalInsets            jni.MethodID
-	midAnimatedVectorDrawableGetOutline                  jni.MethodID
-	midAnimatedVectorDrawableInflate                     jni.MethodID
-	midAnimatedVectorDrawableIsRunning                   jni.MethodID
-	midAnimatedVectorDrawableIsStateful                  jni.MethodID
-	midAnimatedVectorDrawableMutate                      jni.MethodID
-	midAnimatedVectorDrawableOnLayoutDirectionChanged    jni.MethodID
-	midAnimatedVectorDrawableRegisterAnimationCallback   jni.MethodID
-	midAnimatedVectorDrawableReset                       jni.MethodID
-	midAnimatedVectorDrawableSetAlpha                    jni.MethodID
-	midAnimatedVectorDrawableSetColorFilter              jni.MethodID
-	midAnimatedVectorDrawableSetHotspot                  jni.MethodID
-	midAnimatedVectorDrawableSetHotspotBounds            jni.MethodID
-	midAnimatedVectorDrawableSetTintBlendMode            jni.MethodID
-	midAnimatedVectorDrawableSetTintList                 jni.MethodID
-	midAnimatedVectorDrawableSetVisible                  jni.MethodID
-	midAnimatedVectorDrawableStart                       jni.MethodID
-	midAnimatedVectorDrawableStop                        jni.MethodID
-	midAnimatedVectorDrawableUnregisterAnimationCallback jni.MethodID
-
-	clsAnimatable2                            *jni.GlobalRef
-	midAnimatable2ClearAnimationCallbacks     jni.MethodID
-	midAnimatable2RegisterAnimationCallback   jni.MethodID
-	midAnimatable2UnregisterAnimationCallback jni.MethodID
-
-	clsAnimatable2AnimationCallback                 *jni.GlobalRef
-	midAnimatable2AnimationCallbackOnAnimationEnd   jni.MethodID
-	midAnimatable2AnimationCallbackOnAnimationStart jni.MethodID
-
-	clsAnimationDrawable                  *jni.GlobalRef
-	midAnimationDrawableAddFrame          jni.MethodID
-	midAnimationDrawableGetDuration       jni.MethodID
-	midAnimationDrawableGetFrame          jni.MethodID
-	midAnimationDrawableGetNumberOfFrames jni.MethodID
-	midAnimationDrawableInflate           jni.MethodID
-	midAnimationDrawableIsOneShot         jni.MethodID
-	midAnimationDrawableIsRunning         jni.MethodID
-	midAnimationDrawableMutate            jni.MethodID
-	midAnimationDrawableRun               jni.MethodID
-	midAnimationDrawableSetOneShot        jni.MethodID
-	midAnimationDrawableSetVisible        jni.MethodID
-	midAnimationDrawableStart             jni.MethodID
-	midAnimationDrawableStop              jni.MethodID
-	midAnimationDrawableUnscheduleSelf    jni.MethodID
-
-	clsPaintDrawable                *jni.GlobalRef
-	midPaintDrawableSetCornerRadii  jni.MethodID
-	midPaintDrawableSetCornerRadius jni.MethodID
 
 	clsGradientDrawable                          *jni.GlobalRef
 	midGradientDrawableApplyTheme                jni.MethodID
@@ -389,101 +444,67 @@ var (
 	midLayerDrawableSetVisible                jni.MethodID
 	midLayerDrawableUnscheduleDrawable        jni.MethodID
 
-	clsAnimatable          *jni.GlobalRef
-	midAnimatableIsRunning jni.MethodID
-	midAnimatableStart     jni.MethodID
-	midAnimatableStop      jni.MethodID
+	clsContainer                          *jni.GlobalRef
+	midContainerApplyTheme                jni.MethodID
+	midContainerCanApplyTheme             jni.MethodID
+	midContainerDraw                      jni.MethodID
+	midContainerGetAlpha                  jni.MethodID
+	midContainerGetChangingConfigurations jni.MethodID
+	midContainerGetConstantState          jni.MethodID
+	midContainerGetCurrent                jni.MethodID
+	midContainerGetHotspotBounds          jni.MethodID
+	midContainerGetIntrinsicHeight        jni.MethodID
+	midContainerGetIntrinsicWidth         jni.MethodID
+	midContainerGetMinimumHeight          jni.MethodID
+	midContainerGetMinimumWidth           jni.MethodID
+	midContainerGetOpacity                jni.MethodID
+	midContainerGetOpticalInsets          jni.MethodID
+	midContainerGetOutline                jni.MethodID
+	midContainerGetPadding                jni.MethodID
+	midContainerHasFocusStateSpecified    jni.MethodID
+	midContainerInvalidateDrawable        jni.MethodID
+	midContainerIsAutoMirrored            jni.MethodID
+	midContainerIsStateful                jni.MethodID
+	midContainerJumpToCurrentState        jni.MethodID
+	midContainerMutate                    jni.MethodID
+	midContainerOnLayoutDirectionChanged  jni.MethodID
+	midContainerScheduleDrawable          jni.MethodID
+	midContainerSelectDrawable            jni.MethodID
+	midContainerSetAlpha                  jni.MethodID
+	midContainerSetAutoMirrored           jni.MethodID
+	midContainerSetColorFilter            jni.MethodID
+	midContainerSetDither                 jni.MethodID
+	midContainerSetEnterFadeDuration      jni.MethodID
+	midContainerSetExitFadeDuration       jni.MethodID
+	midContainerSetHotspot                jni.MethodID
+	midContainerSetHotspotBounds          jni.MethodID
+	midContainerSetTintBlendMode          jni.MethodID
+	midContainerSetTintList               jni.MethodID
+	midContainerSetVisible                jni.MethodID
+	midContainerUnscheduleDrawable        jni.MethodID
 
-	clsIcon                                      *jni.GlobalRef
-	midIconDescribeContents                      jni.MethodID
-	midIconGetResId                              jni.MethodID
-	midIconGetResPackage                         jni.MethodID
-	midIconGetType                               jni.MethodID
-	midIconGetUri                                jni.MethodID
-	midIconLoadDrawable                          jni.MethodID
-	midIconLoadDrawableAsync                     jni.MethodID
-	midIconSetTint                               jni.MethodID
-	midIconSetTintBlendMode                      jni.MethodID
-	midIconSetTintList                           jni.MethodID
-	midIconSetTintMode                           jni.MethodID
-	midIconToString                              jni.MethodID
-	midIconWriteToParcel                         jni.MethodID
-	midIconCreateWithAdaptiveBitmap              jni.MethodID
-	midIconCreateWithAdaptiveBitmapContentUri1   jni.MethodID
-	midIconCreateWithAdaptiveBitmapContentUri1_1 jni.MethodID
-	midIconCreateWithBitmap                      jni.MethodID
-	midIconCreateWithContentUri1                 jni.MethodID
-	midIconCreateWithContentUri1_1               jni.MethodID
-	midIconCreateWithData                        jni.MethodID
-	midIconCreateWithFilePath                    jni.MethodID
-	midIconCreateWithResource2                   jni.MethodID
-	midIconCreateWithResource2_1                 jni.MethodID
-
-	clsIconOnDrawableLoadedListener                 *jni.GlobalRef
-	midIconOnDrawableLoadedListenerOnDrawableLoaded jni.MethodID
-
-	clsAnimatedImageDrawable                            *jni.GlobalRef
-	midAnimatedImageDrawableClearAnimationCallbacks     jni.MethodID
-	midAnimatedImageDrawableDraw                        jni.MethodID
-	midAnimatedImageDrawableGetAlpha                    jni.MethodID
-	midAnimatedImageDrawableGetColorFilter              jni.MethodID
-	midAnimatedImageDrawableGetIntrinsicHeight          jni.MethodID
-	midAnimatedImageDrawableGetIntrinsicWidth           jni.MethodID
-	midAnimatedImageDrawableGetOpacity                  jni.MethodID
-	midAnimatedImageDrawableGetRepeatCount              jni.MethodID
-	midAnimatedImageDrawableInflate                     jni.MethodID
-	midAnimatedImageDrawableIsAutoMirrored              jni.MethodID
-	midAnimatedImageDrawableIsFilterBitmap              jni.MethodID
-	midAnimatedImageDrawableIsRunning                   jni.MethodID
-	midAnimatedImageDrawableOnLayoutDirectionChanged    jni.MethodID
-	midAnimatedImageDrawableRegisterAnimationCallback   jni.MethodID
-	midAnimatedImageDrawableSetAlpha                    jni.MethodID
-	midAnimatedImageDrawableSetAutoMirrored             jni.MethodID
-	midAnimatedImageDrawableSetColorFilter              jni.MethodID
-	midAnimatedImageDrawableSetFilterBitmap             jni.MethodID
-	midAnimatedImageDrawableSetRepeatCount              jni.MethodID
-	midAnimatedImageDrawableStart                       jni.MethodID
-	midAnimatedImageDrawableStop                        jni.MethodID
-	midAnimatedImageDrawableUnregisterAnimationCallback jni.MethodID
-
-	clsRippleDrawable                       *jni.GlobalRef
-	midRippleDrawableApplyTheme             jni.MethodID
-	midRippleDrawableCanApplyTheme          jni.MethodID
-	midRippleDrawableDraw                   jni.MethodID
-	midRippleDrawableGetConstantState       jni.MethodID
-	midRippleDrawableGetDirtyBounds         jni.MethodID
-	midRippleDrawableGetEffectColor         jni.MethodID
-	midRippleDrawableGetHotspotBounds       jni.MethodID
-	midRippleDrawableGetOpacity             jni.MethodID
-	midRippleDrawableGetOutline             jni.MethodID
-	midRippleDrawableGetRadius              jni.MethodID
-	midRippleDrawableHasFocusStateSpecified jni.MethodID
-	midRippleDrawableInflate                jni.MethodID
-	midRippleDrawableInvalidateSelf         jni.MethodID
-	midRippleDrawableIsProjected            jni.MethodID
-	midRippleDrawableIsStateful             jni.MethodID
-	midRippleDrawableJumpToCurrentState     jni.MethodID
-	midRippleDrawableMutate                 jni.MethodID
-	midRippleDrawableSetColor               jni.MethodID
-	midRippleDrawableSetDrawableByLayerId   jni.MethodID
-	midRippleDrawableSetEffectColor         jni.MethodID
-	midRippleDrawableSetHotspot             jni.MethodID
-	midRippleDrawableSetHotspotBounds       jni.MethodID
-	midRippleDrawableSetPaddingMode         jni.MethodID
-	midRippleDrawableSetRadius              jni.MethodID
-	midRippleDrawableSetVisible             jni.MethodID
-
-	clsStateListDrawable                       *jni.GlobalRef
-	midStateListDrawableAddState               jni.MethodID
-	midStateListDrawableApplyTheme             jni.MethodID
-	midStateListDrawableFindStateDrawableIndex jni.MethodID
-	midStateListDrawableGetStateCount          jni.MethodID
-	midStateListDrawableGetStateDrawable       jni.MethodID
-	midStateListDrawableGetStateSet            jni.MethodID
-	midStateListDrawableHasFocusStateSpecified jni.MethodID
-	midStateListDrawableInflate                jni.MethodID
-	midStateListDrawableIsStateful             jni.MethodID
-	midStateListDrawableMutate                 jni.MethodID
+	clsContainerDrawableContainerState                          *jni.GlobalRef
+	midContainerDrawableContainerStateAddChild                  jni.MethodID
+	midContainerDrawableContainerStateCanApplyTheme             jni.MethodID
+	midContainerDrawableContainerStateGetChangingConfigurations jni.MethodID
+	midContainerDrawableContainerStateGetChild                  jni.MethodID
+	midContainerDrawableContainerStateGetChildCount             jni.MethodID
+	midContainerDrawableContainerStateGetChildren               jni.MethodID
+	midContainerDrawableContainerStateGetConstantHeight         jni.MethodID
+	midContainerDrawableContainerStateGetConstantMinimumHeight  jni.MethodID
+	midContainerDrawableContainerStateGetConstantMinimumWidth   jni.MethodID
+	midContainerDrawableContainerStateGetConstantPadding        jni.MethodID
+	midContainerDrawableContainerStateGetConstantWidth          jni.MethodID
+	midContainerDrawableContainerStateGetEnterFadeDuration      jni.MethodID
+	midContainerDrawableContainerStateGetExitFadeDuration       jni.MethodID
+	midContainerDrawableContainerStateGetOpacity                jni.MethodID
+	midContainerDrawableContainerStateGrowArray                 jni.MethodID
+	midContainerDrawableContainerStateIsConstantSize            jni.MethodID
+	midContainerDrawableContainerStateIsStateful                jni.MethodID
+	midContainerDrawableContainerStateSetConstantSize           jni.MethodID
+	midContainerDrawableContainerStateSetEnterFadeDuration      jni.MethodID
+	midContainerDrawableContainerStateSetExitFadeDuration       jni.MethodID
+	midContainerDrawableContainerStateSetVariablePadding        jni.MethodID
 
 	clsInsetDrawable                   *jni.GlobalRef
 	midInsetDrawableApplyTheme         jni.MethodID
@@ -494,134 +515,6 @@ var (
 	midInsetDrawableGetOutline         jni.MethodID
 	midInsetDrawableGetPadding         jni.MethodID
 	midInsetDrawableInflate            jni.MethodID
-
-	clsColorDrawable                          *jni.GlobalRef
-	midColorDrawableApplyTheme                jni.MethodID
-	midColorDrawableCanApplyTheme             jni.MethodID
-	midColorDrawableDraw                      jni.MethodID
-	midColorDrawableGetAlpha                  jni.MethodID
-	midColorDrawableGetChangingConfigurations jni.MethodID
-	midColorDrawableGetColor                  jni.MethodID
-	midColorDrawableGetColorFilter            jni.MethodID
-	midColorDrawableGetConstantState          jni.MethodID
-	midColorDrawableGetOpacity                jni.MethodID
-	midColorDrawableGetOutline                jni.MethodID
-	midColorDrawableHasFocusStateSpecified    jni.MethodID
-	midColorDrawableInflate                   jni.MethodID
-	midColorDrawableIsStateful                jni.MethodID
-	midColorDrawableMutate                    jni.MethodID
-	midColorDrawableSetAlpha                  jni.MethodID
-	midColorDrawableSetColor                  jni.MethodID
-	midColorDrawableSetColorFilter            jni.MethodID
-	midColorDrawableSetTintBlendMode          jni.MethodID
-	midColorDrawableSetTintList               jni.MethodID
-
-	clsShapeDrawable                          *jni.GlobalRef
-	midShapeDrawableApplyTheme                jni.MethodID
-	midShapeDrawableDraw                      jni.MethodID
-	midShapeDrawableGetAlpha                  jni.MethodID
-	midShapeDrawableGetChangingConfigurations jni.MethodID
-	midShapeDrawableGetConstantState          jni.MethodID
-	midShapeDrawableGetIntrinsicHeight        jni.MethodID
-	midShapeDrawableGetIntrinsicWidth         jni.MethodID
-	midShapeDrawableGetOpacity                jni.MethodID
-	midShapeDrawableGetOutline                jni.MethodID
-	midShapeDrawableGetPadding                jni.MethodID
-	midShapeDrawableGetPaint                  jni.MethodID
-	midShapeDrawableGetShaderFactory          jni.MethodID
-	midShapeDrawableGetShape                  jni.MethodID
-	midShapeDrawableHasFocusStateSpecified    jni.MethodID
-	midShapeDrawableInflate                   jni.MethodID
-	midShapeDrawableIsStateful                jni.MethodID
-	midShapeDrawableMutate                    jni.MethodID
-	midShapeDrawableSetAlpha                  jni.MethodID
-	midShapeDrawableSetColorFilter            jni.MethodID
-	midShapeDrawableSetDither                 jni.MethodID
-	midShapeDrawableSetIntrinsicHeight        jni.MethodID
-	midShapeDrawableSetIntrinsicWidth         jni.MethodID
-	midShapeDrawableSetPadding1               jni.MethodID
-	midShapeDrawableSetPadding4_1             jni.MethodID
-	midShapeDrawableSetShaderFactory          jni.MethodID
-	midShapeDrawableSetShape                  jni.MethodID
-	midShapeDrawableSetTintBlendMode          jni.MethodID
-	midShapeDrawableSetTintList               jni.MethodID
-
-	clsShapeDrawableShaderFactory       *jni.GlobalRef
-	midShapeDrawableShaderFactoryResize jni.MethodID
-
-	clsLevelListDrawable         *jni.GlobalRef
-	midLevelListDrawableAddLevel jni.MethodID
-	midLevelListDrawableInflate  jni.MethodID
-	midLevelListDrawableMutate   jni.MethodID
-
-	clsClipDrawable           *jni.GlobalRef
-	midClipDrawableApplyTheme jni.MethodID
-	midClipDrawableDraw       jni.MethodID
-	midClipDrawableGetOpacity jni.MethodID
-	midClipDrawableInflate    jni.MethodID
-
-	clsAdaptiveIconDrawable                          *jni.GlobalRef
-	midAdaptiveIconDrawableApplyTheme                jni.MethodID
-	midAdaptiveIconDrawableCanApplyTheme             jni.MethodID
-	midAdaptiveIconDrawableDraw                      jni.MethodID
-	midAdaptiveIconDrawableGetAlpha                  jni.MethodID
-	midAdaptiveIconDrawableGetBackground             jni.MethodID
-	midAdaptiveIconDrawableGetChangingConfigurations jni.MethodID
-	midAdaptiveIconDrawableGetConstantState          jni.MethodID
-	midAdaptiveIconDrawableGetForeground             jni.MethodID
-	midAdaptiveIconDrawableGetHotspotBounds          jni.MethodID
-	midAdaptiveIconDrawableGetIconMask               jni.MethodID
-	midAdaptiveIconDrawableGetIntrinsicHeight        jni.MethodID
-	midAdaptiveIconDrawableGetIntrinsicWidth         jni.MethodID
-	midAdaptiveIconDrawableGetMonochrome             jni.MethodID
-	midAdaptiveIconDrawableGetOpacity                jni.MethodID
-	midAdaptiveIconDrawableGetOutline                jni.MethodID
-	midAdaptiveIconDrawableGetTransparentRegion      jni.MethodID
-	midAdaptiveIconDrawableHasFocusStateSpecified    jni.MethodID
-	midAdaptiveIconDrawableInflate                   jni.MethodID
-	midAdaptiveIconDrawableInvalidateDrawable        jni.MethodID
-	midAdaptiveIconDrawableInvalidateSelf            jni.MethodID
-	midAdaptiveIconDrawableIsAutoMirrored            jni.MethodID
-	midAdaptiveIconDrawableIsProjected               jni.MethodID
-	midAdaptiveIconDrawableIsStateful                jni.MethodID
-	midAdaptiveIconDrawableJumpToCurrentState        jni.MethodID
-	midAdaptiveIconDrawableMutate                    jni.MethodID
-	midAdaptiveIconDrawableScheduleDrawable          jni.MethodID
-	midAdaptiveIconDrawableSetAlpha                  jni.MethodID
-	midAdaptiveIconDrawableSetAutoMirrored           jni.MethodID
-	midAdaptiveIconDrawableSetColorFilter            jni.MethodID
-	midAdaptiveIconDrawableSetDither                 jni.MethodID
-	midAdaptiveIconDrawableSetHotspot                jni.MethodID
-	midAdaptiveIconDrawableSetHotspotBounds          jni.MethodID
-	midAdaptiveIconDrawableSetOpacity                jni.MethodID
-	midAdaptiveIconDrawableSetTintBlendMode          jni.MethodID
-	midAdaptiveIconDrawableSetTintList               jni.MethodID
-	midAdaptiveIconDrawableSetVisible                jni.MethodID
-	midAdaptiveIconDrawableUnscheduleDrawable        jni.MethodID
-	midAdaptiveIconDrawableGetExtraInsetFraction     jni.MethodID
-
-	clsVectorDrawable                          *jni.GlobalRef
-	midVectorDrawableApplyTheme                jni.MethodID
-	midVectorDrawableCanApplyTheme             jni.MethodID
-	midVectorDrawableDraw                      jni.MethodID
-	midVectorDrawableGetAlpha                  jni.MethodID
-	midVectorDrawableGetChangingConfigurations jni.MethodID
-	midVectorDrawableGetColorFilter            jni.MethodID
-	midVectorDrawableGetConstantState          jni.MethodID
-	midVectorDrawableGetIntrinsicHeight        jni.MethodID
-	midVectorDrawableGetIntrinsicWidth         jni.MethodID
-	midVectorDrawableGetOpacity                jni.MethodID
-	midVectorDrawableGetOpticalInsets          jni.MethodID
-	midVectorDrawableHasFocusStateSpecified    jni.MethodID
-	midVectorDrawableInflate                   jni.MethodID
-	midVectorDrawableIsAutoMirrored            jni.MethodID
-	midVectorDrawableIsStateful                jni.MethodID
-	midVectorDrawableMutate                    jni.MethodID
-	midVectorDrawableSetAlpha                  jni.MethodID
-	midVectorDrawableSetAutoMirrored           jni.MethodID
-	midVectorDrawableSetColorFilter            jni.MethodID
-	midVectorDrawableSetTintBlendMode          jni.MethodID
-	midVectorDrawableSetTintList               jni.MethodID
 
 	clsWrapper                          *jni.GlobalRef
 	midWrapperApplyTheme                jni.MethodID
@@ -657,15 +550,6 @@ var (
 	midWrapperSetVisible                jni.MethodID
 	midWrapperUnscheduleDrawable        jni.MethodID
 
-	clsAnimatedStateListDrawable                   *jni.GlobalRef
-	midAnimatedStateListDrawableAddState           jni.MethodID
-	midAnimatedStateListDrawableApplyTheme         jni.MethodID
-	midAnimatedStateListDrawableInflate            jni.MethodID
-	midAnimatedStateListDrawableIsStateful         jni.MethodID
-	midAnimatedStateListDrawableJumpToCurrentState jni.MethodID
-	midAnimatedStateListDrawableMutate             jni.MethodID
-	midAnimatedStateListDrawableSetVisible         jni.MethodID
-
 	clsNinePatchDrawable                          *jni.GlobalRef
 	midNinePatchDrawableApplyTheme                jni.MethodID
 	midNinePatchDrawableCanApplyTheme             jni.MethodID
@@ -697,6 +581,56 @@ var (
 	midNinePatchDrawableSetTargetDensity1_2       jni.MethodID
 	midNinePatchDrawableSetTintBlendMode          jni.MethodID
 	midNinePatchDrawableSetTintList               jni.MethodID
+
+	clsClipDrawable           *jni.GlobalRef
+	midClipDrawableApplyTheme jni.MethodID
+	midClipDrawableDraw       jni.MethodID
+	midClipDrawableGetOpacity jni.MethodID
+	midClipDrawableInflate    jni.MethodID
+
+	clsScaleDrawable           *jni.GlobalRef
+	midScaleDrawableApplyTheme jni.MethodID
+	midScaleDrawableDraw       jni.MethodID
+	midScaleDrawableGetOpacity jni.MethodID
+	midScaleDrawableInflate    jni.MethodID
+
+	clsLevelListDrawable         *jni.GlobalRef
+	midLevelListDrawableAddLevel jni.MethodID
+	midLevelListDrawableInflate  jni.MethodID
+	midLevelListDrawableMutate   jni.MethodID
+
+	clsRotateDrawable                  *jni.GlobalRef
+	midRotateDrawableApplyTheme        jni.MethodID
+	midRotateDrawableDraw              jni.MethodID
+	midRotateDrawableGetFromDegrees    jni.MethodID
+	midRotateDrawableGetPivotX         jni.MethodID
+	midRotateDrawableGetPivotY         jni.MethodID
+	midRotateDrawableGetToDegrees      jni.MethodID
+	midRotateDrawableInflate           jni.MethodID
+	midRotateDrawableIsPivotXRelative  jni.MethodID
+	midRotateDrawableIsPivotYRelative  jni.MethodID
+	midRotateDrawableSetFromDegrees    jni.MethodID
+	midRotateDrawableSetPivotX         jni.MethodID
+	midRotateDrawableSetPivotXRelative jni.MethodID
+	midRotateDrawableSetPivotY         jni.MethodID
+	midRotateDrawableSetPivotYRelative jni.MethodID
+	midRotateDrawableSetToDegrees      jni.MethodID
+
+	clsAnimationDrawable                  *jni.GlobalRef
+	midAnimationDrawableAddFrame          jni.MethodID
+	midAnimationDrawableGetDuration       jni.MethodID
+	midAnimationDrawableGetFrame          jni.MethodID
+	midAnimationDrawableGetNumberOfFrames jni.MethodID
+	midAnimationDrawableInflate           jni.MethodID
+	midAnimationDrawableIsOneShot         jni.MethodID
+	midAnimationDrawableIsRunning         jni.MethodID
+	midAnimationDrawableMutate            jni.MethodID
+	midAnimationDrawableRun               jni.MethodID
+	midAnimationDrawableSetOneShot        jni.MethodID
+	midAnimationDrawableSetVisible        jni.MethodID
+	midAnimationDrawableStart             jni.MethodID
+	midAnimationDrawableStop              jni.MethodID
+	midAnimationDrawableUnscheduleSelf    jni.MethodID
 
 	clsDrawable                            *jni.GlobalRef
 	midDrawableApplyTheme                  jni.MethodID
@@ -782,11 +716,77 @@ var (
 	midConstantStateNewDrawable1_1            jni.MethodID
 	midConstantStateNewDrawable2_2            jni.MethodID
 
-	clsScaleDrawable           *jni.GlobalRef
-	midScaleDrawableApplyTheme jni.MethodID
-	midScaleDrawableDraw       jni.MethodID
-	midScaleDrawableGetOpacity jni.MethodID
-	midScaleDrawableInflate    jni.MethodID
+	clsAdaptiveIconDrawable                          *jni.GlobalRef
+	midAdaptiveIconDrawableApplyTheme                jni.MethodID
+	midAdaptiveIconDrawableCanApplyTheme             jni.MethodID
+	midAdaptiveIconDrawableDraw                      jni.MethodID
+	midAdaptiveIconDrawableGetAlpha                  jni.MethodID
+	midAdaptiveIconDrawableGetBackground             jni.MethodID
+	midAdaptiveIconDrawableGetChangingConfigurations jni.MethodID
+	midAdaptiveIconDrawableGetConstantState          jni.MethodID
+	midAdaptiveIconDrawableGetForeground             jni.MethodID
+	midAdaptiveIconDrawableGetHotspotBounds          jni.MethodID
+	midAdaptiveIconDrawableGetIconMask               jni.MethodID
+	midAdaptiveIconDrawableGetIntrinsicHeight        jni.MethodID
+	midAdaptiveIconDrawableGetIntrinsicWidth         jni.MethodID
+	midAdaptiveIconDrawableGetMonochrome             jni.MethodID
+	midAdaptiveIconDrawableGetOpacity                jni.MethodID
+	midAdaptiveIconDrawableGetOutline                jni.MethodID
+	midAdaptiveIconDrawableGetTransparentRegion      jni.MethodID
+	midAdaptiveIconDrawableHasFocusStateSpecified    jni.MethodID
+	midAdaptiveIconDrawableInflate                   jni.MethodID
+	midAdaptiveIconDrawableInvalidateDrawable        jni.MethodID
+	midAdaptiveIconDrawableInvalidateSelf            jni.MethodID
+	midAdaptiveIconDrawableIsAutoMirrored            jni.MethodID
+	midAdaptiveIconDrawableIsProjected               jni.MethodID
+	midAdaptiveIconDrawableIsStateful                jni.MethodID
+	midAdaptiveIconDrawableJumpToCurrentState        jni.MethodID
+	midAdaptiveIconDrawableMutate                    jni.MethodID
+	midAdaptiveIconDrawableScheduleDrawable          jni.MethodID
+	midAdaptiveIconDrawableSetAlpha                  jni.MethodID
+	midAdaptiveIconDrawableSetAutoMirrored           jni.MethodID
+	midAdaptiveIconDrawableSetColorFilter            jni.MethodID
+	midAdaptiveIconDrawableSetDither                 jni.MethodID
+	midAdaptiveIconDrawableSetHotspot                jni.MethodID
+	midAdaptiveIconDrawableSetHotspotBounds          jni.MethodID
+	midAdaptiveIconDrawableSetOpacity                jni.MethodID
+	midAdaptiveIconDrawableSetTintBlendMode          jni.MethodID
+	midAdaptiveIconDrawableSetTintList               jni.MethodID
+	midAdaptiveIconDrawableSetVisible                jni.MethodID
+	midAdaptiveIconDrawableUnscheduleDrawable        jni.MethodID
+	midAdaptiveIconDrawableGetExtraInsetFraction     jni.MethodID
+
+	clsAnimatedImageDrawable                            *jni.GlobalRef
+	midAnimatedImageDrawableClearAnimationCallbacks     jni.MethodID
+	midAnimatedImageDrawableDraw                        jni.MethodID
+	midAnimatedImageDrawableGetAlpha                    jni.MethodID
+	midAnimatedImageDrawableGetColorFilter              jni.MethodID
+	midAnimatedImageDrawableGetIntrinsicHeight          jni.MethodID
+	midAnimatedImageDrawableGetIntrinsicWidth           jni.MethodID
+	midAnimatedImageDrawableGetOpacity                  jni.MethodID
+	midAnimatedImageDrawableGetRepeatCount              jni.MethodID
+	midAnimatedImageDrawableInflate                     jni.MethodID
+	midAnimatedImageDrawableIsAutoMirrored              jni.MethodID
+	midAnimatedImageDrawableIsFilterBitmap              jni.MethodID
+	midAnimatedImageDrawableIsRunning                   jni.MethodID
+	midAnimatedImageDrawableOnLayoutDirectionChanged    jni.MethodID
+	midAnimatedImageDrawableRegisterAnimationCallback   jni.MethodID
+	midAnimatedImageDrawableSetAlpha                    jni.MethodID
+	midAnimatedImageDrawableSetAutoMirrored             jni.MethodID
+	midAnimatedImageDrawableSetColorFilter              jni.MethodID
+	midAnimatedImageDrawableSetFilterBitmap             jni.MethodID
+	midAnimatedImageDrawableSetRepeatCount              jni.MethodID
+	midAnimatedImageDrawableStart                       jni.MethodID
+	midAnimatedImageDrawableStop                        jni.MethodID
+	midAnimatedImageDrawableUnregisterAnimationCallback jni.MethodID
+
+	clsTransitionDrawable                    *jni.GlobalRef
+	midTransitionDrawableDraw                jni.MethodID
+	midTransitionDrawableIsCrossFadeEnabled  jni.MethodID
+	midTransitionDrawableResetTransition     jni.MethodID
+	midTransitionDrawableReverseTransition   jni.MethodID
+	midTransitionDrawableSetCrossFadeEnabled jni.MethodID
+	midTransitionDrawableStartTransition     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -806,6 +806,528 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/graphics/drawable/ColorDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsColorDrawable = env.NewGlobalRef(&c.Object)
+
+		midColorDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "canApplyTheme", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getChangingConfigurations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getColor", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableSetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setColor", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/Animatable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatable = env.NewGlobalRef(&c.Object)
+
+		midAnimatableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "isRunning", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "start", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/AnimatedStateListDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatedStateListDrawable = env.NewGlobalRef(&c.Object)
+
+		midAnimatedStateListDrawableAddState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "addState", "([ILandroid/graphics/drawable/Drawable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "jumpToCurrentState", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedStateListDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/RippleDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRippleDrawable = env.NewGlobalRef(&c.Object)
+
+		midRippleDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "canApplyTheme", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetDirtyBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getDirtyBounds", "()Landroid/graphics/Rect;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetEffectColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getEffectColor", "()Landroid/content/res/ColorStateList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getHotspotBounds", "(Landroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableGetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getRadius", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableInvalidateSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "invalidateSelf", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableIsProjected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "isProjected", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "jumpToCurrentState", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setColor", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetDrawableByLayerId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setDrawableByLayerId", "(ILandroid/graphics/drawable/Drawable;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetEffectColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setEffectColor", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setHotspot", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setHotspotBounds", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetPaddingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setPaddingMode", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setRadius", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRippleDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/StateListDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsStateListDrawable = env.NewGlobalRef(&c.Object)
+
+		midStateListDrawableAddState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "addState", "([ILandroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableFindStateDrawableIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "findStateDrawableIndex", "([I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableGetStateCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "getStateCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableGetStateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "getStateDrawable", "(I)Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableGetStateSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "getStateSet", "(I)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/PaintDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPaintDrawable = env.NewGlobalRef(&c.Object)
+
+		midPaintDrawableSetCornerRadii, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), "setCornerRadii", "([F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPaintDrawableSetCornerRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), "setCornerRadius", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/graphics/drawable/PictureDrawable")
 	if err != nil {
@@ -873,267 +1395,204 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/graphics/drawable/DrawableContainer")
+	c, err = env.FindClass("android/graphics/drawable/ShapeDrawable")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsContainer = env.NewGlobalRef(&c.Object)
+		clsShapeDrawable = env.NewGlobalRef(&c.Object)
 
-		midContainerApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		midShapeDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "canApplyTheme", "()Z")
+		midShapeDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "draw", "(Landroid/graphics/Canvas;)V")
+		midShapeDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getAlpha", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getAlpha", "()I")
+		midShapeDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getChangingConfigurations", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getChangingConfigurations", "()I")
+		midShapeDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		midShapeDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getIntrinsicHeight", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetCurrent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getCurrent", "()Landroid/graphics/drawable/Drawable;")
+		midShapeDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getIntrinsicWidth", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getHotspotBounds", "(Landroid/graphics/Rect;)V")
+		midShapeDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getOpacity", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getIntrinsicHeight", "()I")
+		midShapeDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getIntrinsicWidth", "()I")
+		midShapeDrawableGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getPadding", "(Landroid/graphics/Rect;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetMinimumHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getMinimumHeight", "()I")
+		midShapeDrawableGetPaint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getPaint", "()Landroid/graphics/Paint;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetMinimumWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getMinimumWidth", "()I")
+		midShapeDrawableGetShaderFactory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getShaderFactory", "()Landroid/graphics/drawable/ShapeDrawable$ShaderFactory;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getOpacity", "()I")
+		midShapeDrawableGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getShape", "()Landroid/graphics/drawable/shapes/Shape;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetOpticalInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getOpticalInsets", "()Landroid/graphics/Insets;")
+		midShapeDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "hasFocusStateSpecified", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getOutline", "(Landroid/graphics/Outline;)V")
+		midShapeDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getPadding", "(Landroid/graphics/Rect;)Z")
+		midShapeDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "isStateful", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "hasFocusStateSpecified", "()Z")
+		midShapeDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerInvalidateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "invalidateDrawable", "(Landroid/graphics/drawable/Drawable;)V")
+		midShapeDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setAlpha", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "isAutoMirrored", "()Z")
+		midShapeDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "isStateful", "()Z")
+		midShapeDrawableSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setDither", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "jumpToCurrentState", "()V")
+		midShapeDrawableSetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setIntrinsicHeight", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		midShapeDrawableSetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setIntrinsicWidth", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerOnLayoutDirectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "onLayoutDirectionChanged", "(I)Z")
+		midShapeDrawableSetPadding1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setPadding", "(Landroid/graphics/Rect;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerScheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "scheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V")
+		midShapeDrawableSetPadding4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setPadding", "(IIII)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerSelectDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "selectDrawable", "(I)Z")
+		midShapeDrawableSetShaderFactory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setShaderFactory", "(Landroid/graphics/drawable/ShapeDrawable$ShaderFactory;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setAlpha", "(I)V")
+		midShapeDrawableSetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setShape", "(Landroid/graphics/drawable/shapes/Shape;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setAutoMirrored", "(Z)V")
+		midShapeDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setDither", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetEnterFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setEnterFadeDuration", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetExitFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setExitFadeDuration", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setHotspot", "(FF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setHotspotBounds", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setVisible", "(ZZ)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContainerUnscheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "unscheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V")
+		midShapeDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1142,155 +1601,799 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/graphics/drawable/DrawableContainer$DrawableContainerState")
+	c, err = env.FindClass("android/graphics/drawable/ShapeDrawable$ShaderFactory")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsContainerDrawableContainerState = env.NewGlobalRef(&c.Object)
+		clsShapeDrawableShaderFactory = env.NewGlobalRef(&c.Object)
 
-		midContainerDrawableContainerStateAddChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "addChild", "(Landroid/graphics/drawable/Drawable;)I")
+		midShapeDrawableShaderFactoryResize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawableShaderFactory)), "resize", "(II)Landroid/graphics/Shader;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "canApplyTheme", "()Z")
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/Icon")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIcon = env.NewGlobalRef(&c.Object)
+
+		midIconDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChangingConfigurations", "()I")
+		midIconGetResId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getResId", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChild", "(I)Landroid/graphics/drawable/Drawable;")
+		midIconGetResPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getResPackage", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetChildCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChildCount", "()I")
+		midIconGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetChildren, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChildren", "()[Landroid/graphics/drawable/Drawable;")
+		midIconGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getUri", "()Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetConstantHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantHeight", "()I")
+		midIconLoadDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "loadDrawable", "(Landroid/content/Context;)Landroid/graphics/drawable/Drawable;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetConstantMinimumHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantMinimumHeight", "()I")
+		midIconLoadDrawableAsync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "loadDrawableAsync", "(Landroid/content/Context;Landroid/os/Message;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetConstantMinimumWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantMinimumWidth", "()I")
+		midIconSetTint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTint", "(I)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetConstantPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantPadding", "()Landroid/graphics/Rect;")
+		midIconSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetConstantWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantWidth", "()I")
+		midIconSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTintList", "(Landroid/content/res/ColorStateList;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetEnterFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getEnterFadeDuration", "()I")
+		midIconSetTintMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTintMode", "(Landroid/graphics/PorterDuff$Mode;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetExitFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getExitFadeDuration", "()I")
+		midIconToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getOpacity", "()I")
+		midIconWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateGrowArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "growArray", "(II)V")
+		midIconCreateWithAdaptiveBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithAdaptiveBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateIsConstantSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "isConstantSize", "()Z")
+		midIconCreateWithAdaptiveBitmapContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithAdaptiveBitmapContentUri", "(Landroid/net/Uri;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "isStateful", "()Z")
+		midIconCreateWithAdaptiveBitmapContentUri1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithAdaptiveBitmapContentUri", "(Ljava/lang/String;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateSetConstantSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setConstantSize", "(Z)V")
+		midIconCreateWithBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateSetEnterFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setEnterFadeDuration", "(I)V")
+		midIconCreateWithContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithContentUri", "(Landroid/net/Uri;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateSetExitFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setExitFadeDuration", "(I)V")
+		midIconCreateWithContentUri1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithContentUri", "(Ljava/lang/String;)Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContainerDrawableContainerStateSetVariablePadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setVariablePadding", "(Z)V")
+		midIconCreateWithData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithData", "([BII)Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIconCreateWithFilePath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithFilePath", "(Ljava/lang/String;)Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIconCreateWithResource2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithResource", "(Landroid/content/Context;I)Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIconCreateWithResource2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithResource", "(Ljava/lang/String;I)Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/Icon$OnDrawableLoadedListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIconOnDrawableLoadedListener = env.NewGlobalRef(&c.Object)
+
+		midIconOnDrawableLoadedListenerOnDrawableLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconOnDrawableLoadedListener)), "onDrawableLoaded", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/VectorDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVectorDrawable = env.NewGlobalRef(&c.Object)
+
+		midVectorDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "canApplyTheme", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getChangingConfigurations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getIntrinsicHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getIntrinsicWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableGetOpticalInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getOpticalInsets", "()Landroid/graphics/Insets;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "isAutoMirrored", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setAutoMirrored", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVectorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/AnimatedVectorDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatedVectorDrawable = env.NewGlobalRef(&c.Object)
+
+		midAnimatedVectorDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "canApplyTheme", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableClearAnimationCallbacks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "clearAnimationCallbacks", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getChangingConfigurations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getIntrinsicHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getIntrinsicWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetOpticalInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getOpticalInsets", "()Landroid/graphics/Insets;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "isRunning", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableOnLayoutDirectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "onLayoutDirectionChanged", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableRegisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "registerAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "reset", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setHotspot", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setHotspotBounds", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "start", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedVectorDrawableUnregisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "unregisterAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/Animatable2")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatable2 = env.NewGlobalRef(&c.Object)
+
+		midAnimatable2ClearAnimationCallbacks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "clearAnimationCallbacks", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatable2RegisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "registerAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatable2UnregisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "unregisterAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/Animatable2$AnimationCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatable2AnimationCallback = env.NewGlobalRef(&c.Object)
+
+		midAnimatable2AnimationCallbackOnAnimationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2AnimationCallback)), "onAnimationEnd", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatable2AnimationCallbackOnAnimationStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2AnimationCallback)), "onAnimationStart", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/ColorStateListDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsColorStateListDrawable = env.NewGlobalRef(&c.Object)
+
+		midColorStateListDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "canApplyTheme", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableClearAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "clearAlpha", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getChangingConfigurations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetColorStateList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getColorStateList", "()Landroid/content/res/ColorStateList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetCurrent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getCurrent", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableInvalidateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "invalidateDrawable", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableScheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "scheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableSetColorStateList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setColorStateList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midColorStateListDrawableUnscheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "unscheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1595,744 +2698,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBitmapDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBitmapDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/ColorStateListDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsColorStateListDrawable = env.NewGlobalRef(&c.Object)
-
-		midColorStateListDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "canApplyTheme", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableClearAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "clearAlpha", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getChangingConfigurations", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetColorStateList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getColorStateList", "()Landroid/content/res/ColorStateList;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetCurrent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getCurrent", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableInvalidateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "invalidateDrawable", "(Landroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableScheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "scheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableSetColorStateList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setColorStateList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorStateListDrawableUnscheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorStateListDrawable)), "unscheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/TransitionDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTransitionDrawable = env.NewGlobalRef(&c.Object)
-
-		midTransitionDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransitionDrawableIsCrossFadeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "isCrossFadeEnabled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransitionDrawableResetTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "resetTransition", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransitionDrawableReverseTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "reverseTransition", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransitionDrawableSetCrossFadeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "setCrossFadeEnabled", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransitionDrawableStartTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "startTransition", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/RotateDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRotateDrawable = env.NewGlobalRef(&c.Object)
-
-		midRotateDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableGetFromDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getFromDegrees", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableGetPivotX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getPivotX", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableGetPivotY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getPivotY", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableGetToDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getToDegrees", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableIsPivotXRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "isPivotXRelative", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableIsPivotYRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "isPivotYRelative", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableSetFromDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setFromDegrees", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableSetPivotX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotX", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableSetPivotXRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotXRelative", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableSetPivotY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotY", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableSetPivotYRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotYRelative", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRotateDrawableSetToDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setToDegrees", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/AnimatedVectorDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatedVectorDrawable = env.NewGlobalRef(&c.Object)
-
-		midAnimatedVectorDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "canApplyTheme", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableClearAnimationCallbacks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "clearAnimationCallbacks", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getChangingConfigurations", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getIntrinsicHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getIntrinsicWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetOpticalInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getOpticalInsets", "()Landroid/graphics/Insets;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "isRunning", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableOnLayoutDirectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "onLayoutDirectionChanged", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableRegisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "registerAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableReset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "reset", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setHotspot", "(FF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setHotspotBounds", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "setVisible", "(ZZ)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "start", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "stop", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedVectorDrawableUnregisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), "unregisterAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/Animatable2")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatable2 = env.NewGlobalRef(&c.Object)
-
-		midAnimatable2ClearAnimationCallbacks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "clearAnimationCallbacks", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatable2RegisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "registerAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatable2UnregisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2)), "unregisterAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/Animatable2$AnimationCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatable2AnimationCallback = env.NewGlobalRef(&c.Object)
-
-		midAnimatable2AnimationCallbackOnAnimationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2AnimationCallback)), "onAnimationEnd", "(Landroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatable2AnimationCallbackOnAnimationStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable2AnimationCallback)), "onAnimationStart", "(Landroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/AnimationDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimationDrawable = env.NewGlobalRef(&c.Object)
-
-		midAnimationDrawableAddFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "addFrame", "(Landroid/graphics/drawable/Drawable;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "getDuration", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableGetFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "getFrame", "(I)Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableGetNumberOfFrames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "getNumberOfFrames", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableIsOneShot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "isOneShot", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "isRunning", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "run", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableSetOneShot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "setOneShot", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "setVisible", "(ZZ)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "start", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "stop", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimationDrawableUnscheduleSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "unscheduleSelf", "(Ljava/lang/Runnable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/PaintDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPaintDrawable = env.NewGlobalRef(&c.Object)
-
-		midPaintDrawableSetCornerRadii, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), "setCornerRadii", "([F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPaintDrawableSetCornerRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), "setCornerRadius", "(F)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3309,29 +3674,267 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/graphics/drawable/Animatable")
+	c, err = env.FindClass("android/graphics/drawable/DrawableContainer")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsAnimatable = env.NewGlobalRef(&c.Object)
+		clsContainer = env.NewGlobalRef(&c.Object)
 
-		midAnimatableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "isRunning", "()Z")
+		midContainerApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midAnimatableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "start", "()V")
+		midContainerCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "canApplyTheme", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midAnimatableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatable)), "stop", "()V")
+		midContainerDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getChangingConfigurations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetCurrent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getCurrent", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getHotspotBounds", "(Landroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getIntrinsicHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getIntrinsicWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetMinimumHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getMinimumHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetMinimumWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getMinimumWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetOpticalInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getOpticalInsets", "()Landroid/graphics/Insets;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "getPadding", "(Landroid/graphics/Rect;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerInvalidateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "invalidateDrawable", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "isAutoMirrored", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "jumpToCurrentState", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerOnLayoutDirectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "onLayoutDirectionChanged", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerScheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "scheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSelectDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "selectDrawable", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setAutoMirrored", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setDither", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetEnterFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setEnterFadeDuration", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetExitFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setExitFadeDuration", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setHotspot", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setHotspotBounds", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContainerUnscheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainer)), "unscheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3340,615 +3943,155 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/graphics/drawable/Icon")
+	c, err = env.FindClass("android/graphics/drawable/DrawableContainer$DrawableContainerState")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsIcon = env.NewGlobalRef(&c.Object)
+		clsContainerDrawableContainerState = env.NewGlobalRef(&c.Object)
 
-		midIconDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "describeContents", "()I")
+		midContainerDrawableContainerStateAddChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "addChild", "(Landroid/graphics/drawable/Drawable;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconGetResId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getResId", "()I")
+		midContainerDrawableContainerStateCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "canApplyTheme", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconGetResPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getResPackage", "()Ljava/lang/String;")
+		midContainerDrawableContainerStateGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChangingConfigurations", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getType", "()I")
+		midContainerDrawableContainerStateGetChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChild", "(I)Landroid/graphics/drawable/Drawable;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "getUri", "()Landroid/net/Uri;")
+		midContainerDrawableContainerStateGetChildCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChildCount", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconLoadDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "loadDrawable", "(Landroid/content/Context;)Landroid/graphics/drawable/Drawable;")
+		midContainerDrawableContainerStateGetChildren, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getChildren", "()[Landroid/graphics/drawable/Drawable;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconLoadDrawableAsync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "loadDrawableAsync", "(Landroid/content/Context;Landroid/os/Message;)V")
+		midContainerDrawableContainerStateGetConstantHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantHeight", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconSetTint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTint", "(I)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateGetConstantMinimumHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantMinimumHeight", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateGetConstantMinimumWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantMinimumWidth", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTintList", "(Landroid/content/res/ColorStateList;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateGetConstantPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantPadding", "()Landroid/graphics/Rect;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconSetTintMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "setTintMode", "(Landroid/graphics/PorterDuff$Mode;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateGetConstantWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getConstantWidth", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "toString", "()Ljava/lang/String;")
+		midContainerDrawableContainerStateGetEnterFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getEnterFadeDuration", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midContainerDrawableContainerStateGetExitFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getExitFadeDuration", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithAdaptiveBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithAdaptiveBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "getOpacity", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithAdaptiveBitmapContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithAdaptiveBitmapContentUri", "(Landroid/net/Uri;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateGrowArray, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "growArray", "(II)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithAdaptiveBitmapContentUri1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithAdaptiveBitmapContentUri", "(Ljava/lang/String;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateIsConstantSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "isConstantSize", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithBitmap, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithBitmap", "(Landroid/graphics/Bitmap;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "isStateful", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithContentUri1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithContentUri", "(Landroid/net/Uri;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateSetConstantSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setConstantSize", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithContentUri1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithContentUri", "(Ljava/lang/String;)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateSetEnterFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setEnterFadeDuration", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithData", "([BII)Landroid/graphics/drawable/Icon;")
+		midContainerDrawableContainerStateSetExitFadeDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setExitFadeDuration", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIconCreateWithFilePath, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithFilePath", "(Ljava/lang/String;)Landroid/graphics/drawable/Icon;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIconCreateWithResource2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithResource", "(Landroid/content/Context;I)Landroid/graphics/drawable/Icon;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIconCreateWithResource2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsIcon)), "createWithResource", "(Ljava/lang/String;I)Landroid/graphics/drawable/Icon;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/Icon$OnDrawableLoadedListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIconOnDrawableLoadedListener = env.NewGlobalRef(&c.Object)
-
-		midIconOnDrawableLoadedListenerOnDrawableLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIconOnDrawableLoadedListener)), "onDrawableLoaded", "(Landroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/AnimatedImageDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatedImageDrawable = env.NewGlobalRef(&c.Object)
-
-		midAnimatedImageDrawableClearAnimationCallbacks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "clearAnimationCallbacks", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getIntrinsicHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getIntrinsicWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableGetRepeatCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getRepeatCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "isAutoMirrored", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableIsFilterBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "isFilterBitmap", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "isRunning", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableOnLayoutDirectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "onLayoutDirectionChanged", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableRegisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "registerAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setAutoMirrored", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableSetFilterBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setFilterBitmap", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableSetRepeatCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setRepeatCount", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "start", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "stop", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedImageDrawableUnregisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "unregisterAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/RippleDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRippleDrawable = env.NewGlobalRef(&c.Object)
-
-		midRippleDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "canApplyTheme", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetDirtyBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getDirtyBounds", "()Landroid/graphics/Rect;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetEffectColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getEffectColor", "()Landroid/content/res/ColorStateList;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getHotspotBounds", "(Landroid/graphics/Rect;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableGetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "getRadius", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableInvalidateSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "invalidateSelf", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableIsProjected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "isProjected", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "jumpToCurrentState", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setColor", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetDrawableByLayerId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setDrawableByLayerId", "(ILandroid/graphics/drawable/Drawable;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetEffectColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setEffectColor", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setHotspot", "(FF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setHotspotBounds", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetPaddingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setPaddingMode", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetRadius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setRadius", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRippleDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRippleDrawable)), "setVisible", "(ZZ)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/StateListDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsStateListDrawable = env.NewGlobalRef(&c.Object)
-
-		midStateListDrawableAddState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "addState", "([ILandroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableFindStateDrawableIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "findStateDrawableIndex", "([I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableGetStateCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "getStateCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableGetStateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "getStateDrawable", "(I)Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableGetStateSet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "getStateSet", "(I)[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		midContainerDrawableContainerStateSetVariablePadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContainerDrawableContainerState)), "setVariablePadding", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -4015,874 +4158,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInsetDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInsetDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/ColorDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsColorDrawable = env.NewGlobalRef(&c.Object)
-
-		midColorDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "canApplyTheme", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getChangingConfigurations", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getColor", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableSetColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setColor", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midColorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsColorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/ShapeDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsShapeDrawable = env.NewGlobalRef(&c.Object)
-
-		midShapeDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getChangingConfigurations", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getIntrinsicHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getIntrinsicWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetPadding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getPadding", "(Landroid/graphics/Rect;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetPaint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getPaint", "()Landroid/graphics/Paint;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetShaderFactory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getShaderFactory", "()Landroid/graphics/drawable/ShapeDrawable$ShaderFactory;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableGetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "getShape", "()Landroid/graphics/drawable/shapes/Shape;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setDither", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setIntrinsicHeight", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setIntrinsicWidth", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetPadding1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setPadding", "(Landroid/graphics/Rect;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetPadding4_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setPadding", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetShaderFactory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setShaderFactory", "(Landroid/graphics/drawable/ShapeDrawable$ShaderFactory;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetShape, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setShape", "(Landroid/graphics/drawable/shapes/Shape;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midShapeDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/ShapeDrawable$ShaderFactory")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsShapeDrawableShaderFactory = env.NewGlobalRef(&c.Object)
-
-		midShapeDrawableShaderFactoryResize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsShapeDrawableShaderFactory)), "resize", "(II)Landroid/graphics/Shader;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/LevelListDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLevelListDrawable = env.NewGlobalRef(&c.Object)
-
-		midLevelListDrawableAddLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "addLevel", "(IILandroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLevelListDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLevelListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/ClipDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsClipDrawable = env.NewGlobalRef(&c.Object)
-
-		midClipDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClipDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClipDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClipDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/AdaptiveIconDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAdaptiveIconDrawable = env.NewGlobalRef(&c.Object)
-
-		midAdaptiveIconDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "canApplyTheme", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getBackground", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getChangingConfigurations", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getForeground", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getHotspotBounds", "(Landroid/graphics/Rect;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetIconMask, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getIconMask", "()Landroid/graphics/Path;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getIntrinsicHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getIntrinsicWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetMonochrome, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getMonochrome", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetTransparentRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getTransparentRegion", "()Landroid/graphics/Region;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableInvalidateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "invalidateDrawable", "(Landroid/graphics/drawable/Drawable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableInvalidateSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "invalidateSelf", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "isAutoMirrored", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableIsProjected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "isProjected", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "jumpToCurrentState", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableScheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "scheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setAutoMirrored", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setDither", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setHotspot", "(FF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setHotspotBounds", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setOpacity", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setVisible", "(ZZ)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableUnscheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "unscheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAdaptiveIconDrawableGetExtraInsetFraction, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getExtraInsetFraction", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/graphics/drawable/VectorDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsVectorDrawable = env.NewGlobalRef(&c.Object)
-
-		midVectorDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "canApplyTheme", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getAlpha", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getChangingConfigurations", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getIntrinsicHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getIntrinsicWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getOpacity", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableGetOpticalInsets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "getOpticalInsets", "()Landroid/graphics/Insets;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "hasFocusStateSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "isAutoMirrored", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setAlpha", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setAutoMirrored", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVectorDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5125,65 +4400,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/graphics/drawable/AnimatedStateListDrawable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatedStateListDrawable = env.NewGlobalRef(&c.Object)
-
-		midAnimatedStateListDrawableAddState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "addState", "([ILandroid/graphics/drawable/Drawable;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedStateListDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedStateListDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedStateListDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "isStateful", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedStateListDrawableJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "jumpToCurrentState", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedStateListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatedStateListDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedStateListDrawable)), "setVisible", "(ZZ)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/graphics/drawable/NinePatchDrawable")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -5396,6 +4612,336 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNinePatchDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNinePatchDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/ClipDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsClipDrawable = env.NewGlobalRef(&c.Object)
+
+		midClipDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClipDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClipDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClipDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/ScaleDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScaleDrawable = env.NewGlobalRef(&c.Object)
+
+		midScaleDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScaleDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScaleDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScaleDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/LevelListDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLevelListDrawable = env.NewGlobalRef(&c.Object)
+
+		midLevelListDrawableAddLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "addLevel", "(IILandroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLevelListDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLevelListDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/RotateDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRotateDrawable = env.NewGlobalRef(&c.Object)
+
+		midRotateDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableGetFromDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getFromDegrees", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableGetPivotX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getPivotX", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableGetPivotY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getPivotY", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableGetToDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "getToDegrees", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableIsPivotXRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "isPivotXRelative", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableIsPivotYRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "isPivotYRelative", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableSetFromDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setFromDegrees", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableSetPivotX, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotX", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableSetPivotXRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotXRelative", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableSetPivotY, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotY", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableSetPivotYRelative, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setPivotYRelative", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRotateDrawableSetToDegrees, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), "setToDegrees", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/AnimationDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimationDrawable = env.NewGlobalRef(&c.Object)
+
+		midAnimationDrawableAddFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "addFrame", "(Landroid/graphics/drawable/Drawable;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "getDuration", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableGetFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "getFrame", "(I)Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableGetNumberOfFrames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "getNumberOfFrames", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableIsOneShot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "isOneShot", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "isRunning", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "run", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableSetOneShot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "setOneShot", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "start", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimationDrawableUnscheduleSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), "unscheduleSelf", "(Ljava/lang/Runnable;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5980,36 +5526,490 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/graphics/drawable/ScaleDrawable")
+	c, err = env.FindClass("android/graphics/drawable/AdaptiveIconDrawable")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsScaleDrawable = env.NewGlobalRef(&c.Object)
+		clsAdaptiveIconDrawable = env.NewGlobalRef(&c.Object)
 
-		midScaleDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
+		midAdaptiveIconDrawableApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "applyTheme", "(Landroid/content/res/Resources$Theme;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midScaleDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		midAdaptiveIconDrawableCanApplyTheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "canApplyTheme", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midScaleDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "getOpacity", "()I")
+		midAdaptiveIconDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midScaleDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		midAdaptiveIconDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetBackground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getBackground", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetChangingConfigurations, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getChangingConfigurations", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetConstantState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getConstantState", "()Landroid/graphics/drawable/Drawable$ConstantState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetForeground, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getForeground", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getHotspotBounds", "(Landroid/graphics/Rect;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetIconMask, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getIconMask", "()Landroid/graphics/Path;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getIntrinsicHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getIntrinsicWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetMonochrome, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getMonochrome", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetOutline, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getOutline", "(Landroid/graphics/Outline;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetTransparentRegion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getTransparentRegion", "()Landroid/graphics/Region;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableHasFocusStateSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "hasFocusStateSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableInvalidateDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "invalidateDrawable", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableInvalidateSelf, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "invalidateSelf", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "isAutoMirrored", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableIsProjected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "isProjected", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableIsStateful, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "isStateful", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "jumpToCurrentState", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableMutate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "mutate", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableScheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "scheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setAutoMirrored", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetDither, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setDither", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetHotspot, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setHotspot", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetHotspotBounds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setHotspotBounds", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setOpacity", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetTintBlendMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setTintBlendMode", "(Landroid/graphics/BlendMode;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetTintList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setTintList", "(Landroid/content/res/ColorStateList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableSetVisible, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "setVisible", "(ZZ)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableUnscheduleDrawable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "unscheduleDrawable", "(Landroid/graphics/drawable/Drawable;Ljava/lang/Runnable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAdaptiveIconDrawableGetExtraInsetFraction, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), "getExtraInsetFraction", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/AnimatedImageDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatedImageDrawable = env.NewGlobalRef(&c.Object)
+
+		midAnimatedImageDrawableClearAnimationCallbacks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "clearAnimationCallbacks", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableGetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getAlpha", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableGetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getColorFilter", "()Landroid/graphics/ColorFilter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableGetIntrinsicHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getIntrinsicHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableGetIntrinsicWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getIntrinsicWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableGetOpacity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getOpacity", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableGetRepeatCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "getRepeatCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableInflate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "inflate", "(Landroid/content/res/Resources;Lorg/xmlpull/v1/XmlPullParser;Landroid/util/AttributeSet;Landroid/content/res/Resources$Theme;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableIsAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "isAutoMirrored", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableIsFilterBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "isFilterBitmap", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "isRunning", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableOnLayoutDirectionChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "onLayoutDirectionChanged", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableRegisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "registerAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableSetAlpha, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setAlpha", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableSetAutoMirrored, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setAutoMirrored", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableSetColorFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setColorFilter", "(Landroid/graphics/ColorFilter;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableSetFilterBitmap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setFilterBitmap", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableSetRepeatCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "setRepeatCount", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "start", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "stop", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatedImageDrawableUnregisterAnimationCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), "unregisterAnimationCallback", "(Landroid/graphics/drawable/Animatable2$AnimationCallback;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/drawable/TransitionDrawable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTransitionDrawable = env.NewGlobalRef(&c.Object)
+
+		midTransitionDrawableDraw, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "draw", "(Landroid/graphics/Canvas;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransitionDrawableIsCrossFadeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "isCrossFadeEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransitionDrawableResetTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "resetTransition", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransitionDrawableReverseTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "reverseTransition", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransitionDrawableSetCrossFadeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "setCrossFadeEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransitionDrawableStartTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), "startTransition", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

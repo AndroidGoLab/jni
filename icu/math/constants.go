@@ -5,9 +5,7 @@ package math
 import "github.com/AndroidGoLab/jni/icu/math/consts"
 
 const (
-	Default          = consts.Default
-	Engineering      = consts.Engineering
-	Plain            = consts.Plain
+	One              = consts.One
 	RoundCeiling     = consts.RoundCeiling
 	RoundDown        = consts.RoundDown
 	RoundFloor       = consts.RoundFloor
@@ -16,8 +14,10 @@ const (
 	RoundHalfUp      = consts.RoundHalfUp
 	RoundUnnecessary = consts.RoundUnnecessary
 	RoundUp          = consts.RoundUp
-	Scientific       = consts.Scientific
-	One              = consts.One
 	Ten              = consts.Ten
 	Zero             = consts.Zero
+	Default          = consts.Default
+	Engineering      = consts.Engineering
+	Plain            = consts.Plain
+	Scientific       = consts.Scientific
 )

@@ -13,18 +13,12 @@ const (
 	TypeRemoveAllRightsFailed             = consts.TypeRemoveAllRightsFailed
 	TypeRightsNotInstalled                = consts.TypeRightsNotInstalled
 	TypeRightsRenewalNotAllowed           = consts.TypeRightsRenewalNotAllowed
-	TypeAccountAlreadyRegistered          = consts.TypeAccountAlreadyRegistered
-	TypeAlreadyRegisteredByAnotherAccount = consts.TypeAlreadyRegisteredByAnotherAccount
-	TypeRemoveRights                      = consts.TypeRemoveRights
-	TypeRightsInstalled                   = consts.TypeRightsInstalled
-	TypeRightsRemoved                     = consts.TypeRightsRemoved
-	TypeWaitForRights                     = consts.TypeWaitForRights
-	TypeRegistrationInfo                  = consts.TypeRegistrationInfo
-	TypeRightsAcquisitionInfo             = consts.TypeRightsAcquisitionInfo
-	TypeRightsAcquisitionProgressInfo     = consts.TypeRightsAcquisitionProgressInfo
-	TypeUnregistrationInfo                = consts.TypeUnregistrationInfo
 	TypeAllRightsRemoved                  = consts.TypeAllRightsRemoved
 	TypeDrmInfoProcessed                  = consts.TypeDrmInfoProcessed
+	StatusError                           = consts.StatusError
+	StatusOk                              = consts.StatusOk
+	ErrorNone                             = consts.ErrorNone
+	ErrorUnknown                          = consts.ErrorUnknown
 	Default                               = consts.Default
 	Display                               = consts.Display
 	Execute                               = consts.Execute
@@ -45,16 +39,20 @@ const (
 	RightsInvalid                         = consts.RightsInvalid
 	RightsNotAcquired                     = consts.RightsNotAcquired
 	RightsValid                           = consts.RightsValid
-	StatusError                           = consts.StatusError
 	StatusInputdataError                  = consts.StatusInputdataError
-	StatusOk                              = consts.StatusOk
-	ErrorNone                             = consts.ErrorNone
-	ErrorUnknown                          = consts.ErrorUnknown
+	TypeRegistrationInfo                  = consts.TypeRegistrationInfo
+	TypeRightsAcquisitionInfo             = consts.TypeRightsAcquisitionInfo
+	TypeRightsAcquisitionProgressInfo     = consts.TypeRightsAcquisitionProgressInfo
+	TypeUnregistrationInfo                = consts.TypeUnregistrationInfo
+	TypeAccountAlreadyRegistered          = consts.TypeAccountAlreadyRegistered
+	TypeAlreadyRegisteredByAnotherAccount = consts.TypeAlreadyRegisteredByAnotherAccount
+	TypeRemoveRights                      = consts.TypeRemoveRights
+	TypeRightsInstalled                   = consts.TypeRightsInstalled
+	TypeRightsRemoved                     = consts.TypeRightsRemoved
+	TypeWaitForRights                     = consts.TypeWaitForRights
 )
 
 const (
-	AccountId            = consts.AccountId
-	SubscriptionId       = consts.SubscriptionId
 	DrmInfoObject        = consts.DrmInfoObject
 	DrmInfoStatusObject  = consts.DrmInfoStatusObject
 	ExtendedMetadata     = consts.ExtendedMetadata
@@ -63,4 +61,6 @@ const (
 	LicenseStartTime     = consts.LicenseStartTime
 	MaxRepeatCount       = consts.MaxRepeatCount
 	RemainingRepeatCount = consts.RemainingRepeatCount
+	AccountId            = consts.AccountId
+	SubscriptionId       = consts.SubscriptionId
 )

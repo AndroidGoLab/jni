@@ -6,6 +6,8 @@ import "github.com/AndroidGoLab/jni/ranging/uwb/consts"
 
 const (
 	Creator                                   = consts.Creator
+	ExtendedAddressByteLength                 = consts.ExtendedAddressByteLength
+	ShortAddressByteLength                    = consts.ShortAddressByteLength
 	UwbChannel10                              = consts.UwbChannel10
 	UwbChannel12                              = consts.UwbChannel12
 	UwbChannel13                              = consts.UwbChannel13
@@ -35,6 +37,4 @@ const (
 	Duration1Ms                               = consts.Duration1Ms
 	Duration2Ms                               = consts.Duration2Ms
 	SubSessionUndefined                       = consts.SubSessionUndefined
-	ExtendedAddressByteLength                 = consts.ExtendedAddressByteLength
-	ShortAddressByteLength                    = consts.ShortAddressByteLength
 )

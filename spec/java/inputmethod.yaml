@@ -5,6 +5,106 @@
 package: inputmethod
 go_import: github.com/AndroidGoLab/jni/view/inputmethod
 classes:
+    - java_class: android.view.inputmethod.SurroundingText
+      go_type: SurroundingText
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getOffset
+          go_name: GetOffset
+          returns: int
+          error: true
+        - java_method: getSelectionEnd
+          go_name: GetSelectionEnd
+          returns: int
+          error: true
+        - java_method: getSelectionStart
+          go_name: GetSelectionStart
+          returns: int
+          error: true
+        - java_method: getText
+          go_name: GetText
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.ConnectionlessHandwritingCallback
+      go_type: ConnectionlessHandwritingCallback
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onResult
+          go_name: OnResult
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.InlineSuggestionInfo
+      go_type: InlineSuggestionInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAutofillHints
+          go_name: GetAutofillHints
+          returns: java.lang.String[]
+          error: true
+        - java_method: getInlinePresentationSpec
+          go_name: GetInlinePresentationSpec
+          returns: android.widget.inline.InlinePresentationSpec
+          error: true
+        - java_method: getSource
+          go_name: GetSource
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isPinned
+          go_name: IsPinned
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.view.inputmethod.InsertModeGesture
       go_type: InsertModeGesture
       methods:
@@ -68,8 +168,42 @@ classes:
               go_name: arg0
           returns: android.view.inputmethod.InsertModeGesture$Builder
           error: true
-    - java_class: android.view.inputmethod.InlineSuggestionsRequest
-      go_type: InlineSuggestionsRequest
+    - java_class: android.view.inputmethod.TextAttribute
+      go_type: TextAttribute
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.TextAttribute$Builder
+      go_type: TextAttributeBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.TextAttribute
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+          returns: android.view.inputmethod.TextAttribute$Builder
+          error: true
+    - java_class: android.view.inputmethod.EditorBoundsInfo
+      go_type: EditorBoundsInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -82,25 +216,13 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
+        - java_method: getEditorBounds
+          go_name: GetEditorBounds
+          returns: android.graphics.RectF
           error: true
-        - java_method: getHostPackageName
-          go_name: GetHostPackageName
-          returns: String
-          error: true
-        - java_method: getInlineTooltipPresentationSpec
-          go_name: GetInlineTooltipPresentationSpec
-          returns: android.widget.inline.InlinePresentationSpec
-          error: true
-        - java_method: getMaxSuggestionCount
-          go_name: GetMaxSuggestionCount
-          returns: int
-          error: true
-        - java_method: getSupportedLocales
-          go_name: GetSupportedLocales
-          returns: android.os.LocaleList
+        - java_method: getHandwritingBounds
+          go_name: GetHandwritingBounds
+          returns: android.graphics.RectF
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -119,110 +241,26 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.view.inputmethod.InlineSuggestionsRequest$Builder
-      go_type: InlineSuggestionsRequestBuilder
-      methods:
-        - java_method: addInlinePresentationSpecs
-          go_name: AddInlinePresentationSpecs
-          params:
-            - java_type: android.widget.inline.InlinePresentationSpec
-              go_name: arg0
-          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.InlineSuggestionsRequest
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
-          error: true
-        - java_method: setInlineTooltipPresentationSpec
-          go_name: SetInlineTooltipPresentationSpec
-          params:
-            - java_type: android.widget.inline.InlinePresentationSpec
-              go_name: arg0
-          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
-          error: true
-        - java_method: setMaxSuggestionCount
-          go_name: SetMaxSuggestionCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
-          error: true
-        - java_method: setSupportedLocales
-          go_name: SetSupportedLocales
-          params:
-            - java_type: android.os.LocaleList
-              go_name: arg0
-          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
-          error: true
-    - java_class: android.view.inputmethod.InsertGesture
-      go_type: InsertGesture
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getInsertionPoint
-          go_name: GetInsertionPoint
-          returns: android.graphics.PointF
-          error: true
-        - java_method: getTextToInsert
-          go_name: GetTextToInsert
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.InsertGesture$Builder
-      go_type: InsertGestureBuilder
+    - java_class: android.view.inputmethod.EditorBoundsInfo$Builder
+      go_type: EditorBoundsInfoBuilder
       methods:
         - java_method: build
           go_name: Build
-          returns: android.view.inputmethod.InsertGesture
+          returns: android.view.inputmethod.EditorBoundsInfo
           error: true
-        - java_method: setFallbackText
-          go_name: SetFallbackText
+        - java_method: setEditorBounds
+          go_name: SetEditorBounds
           params:
-            - java_type: String
+            - java_type: android.graphics.RectF
               go_name: arg0
-          returns: android.view.inputmethod.InsertGesture$Builder
+          returns: android.view.inputmethod.EditorBoundsInfo$Builder
           error: true
-        - java_method: setInsertionPoint
-          go_name: SetInsertionPoint
+        - java_method: setHandwritingBounds
+          go_name: SetHandwritingBounds
           params:
-            - java_type: android.graphics.PointF
+            - java_type: android.graphics.RectF
               go_name: arg0
-          returns: android.view.inputmethod.InsertGesture$Builder
-          error: true
-        - java_method: setTextToInsert
-          go_name: SetTextToInsert
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.view.inputmethod.InsertGesture$Builder
+          returns: android.view.inputmethod.EditorBoundsInfo$Builder
           error: true
     - java_class: android.view.inputmethod.InputConnection
       go_type: InputConnection
@@ -418,539 +456,6 @@ classes:
               go_name: arg1
           returns: boolean
           error: true
-    - java_class: android.view.inputmethod.InputMethodInfo
-      go_type: InputMethodInfo
-      methods:
-        - java_method: createImeLanguageSettingsActivityIntent
-          go_name: CreateImeLanguageSettingsActivityIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: createStylusHandwritingSettingsActivityIntent
-          go_name: CreateStylusHandwritingSettingsActivityIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: dump
-          go_name: Dump
-          params:
-            - java_type: android.util.Printer
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getComponent
-          go_name: GetComponent
-          returns: android.content.ComponentName
-          error: true
-        - java_method: getConfigChanges
-          go_name: GetConfigChanges
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-        - java_method: getIsDefaultResourceId
-          go_name: GetIsDefaultResourceId
-          returns: int
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: getServiceInfo
-          go_name: GetServiceInfo
-          returns: android.content.pm.ServiceInfo
-          error: true
-        - java_method: getServiceName
-          go_name: GetServiceName
-          returns: String
-          error: true
-        - java_method: getSettingsActivity
-          go_name: GetSettingsActivity
-          returns: String
-          error: true
-        - java_method: getSubtypeAt
-          go_name: GetSubtypeAt
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.inputmethod.InputMethodSubtype
-          error: true
-        - java_method: getSubtypeCount
-          go_name: GetSubtypeCount
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: loadIcon
-          go_name: LoadIcon
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: loadLabel
-          go_name: LoadLabel
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: shouldShowInInputMethodPicker
-          go_name: ShouldShowInInputMethodPicker
-          returns: boolean
-          error: true
-        - java_method: supportsConnectionlessStylusHandwriting
-          go_name: SupportsConnectionlessStylusHandwriting
-          returns: boolean
-          error: true
-        - java_method: supportsStylusHandwriting
-          go_name: SupportsStylusHandwriting
-          returns: boolean
-          error: true
-        - java_method: suppressesSpellChecker
-          go_name: SuppressesSpellChecker
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.EditorBoundsInfo
-      go_type: EditorBoundsInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getEditorBounds
-          go_name: GetEditorBounds
-          returns: android.graphics.RectF
-          error: true
-        - java_method: getHandwritingBounds
-          go_name: GetHandwritingBounds
-          returns: android.graphics.RectF
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.EditorBoundsInfo$Builder
-      go_type: EditorBoundsInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.EditorBoundsInfo
-          error: true
-        - java_method: setEditorBounds
-          go_name: SetEditorBounds
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.EditorBoundsInfo$Builder
-          error: true
-        - java_method: setHandwritingBounds
-          go_name: SetHandwritingBounds
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.EditorBoundsInfo$Builder
-          error: true
-    - java_class: android.view.inputmethod.ExtractedText
-      go_type: ExtractedText
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.ExtractedTextRequest
-      go_type: ExtractedTextRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.InlineSuggestionInfo
-      go_type: InlineSuggestionInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAutofillHints
-          go_name: GetAutofillHints
-          returns: java.lang.String[]
-          error: true
-        - java_method: getInlinePresentationSpec
-          go_name: GetInlinePresentationSpec
-          returns: android.widget.inline.InlinePresentationSpec
-          error: true
-        - java_method: getSource
-          go_name: GetSource
-          returns: String
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isPinned
-          go_name: IsPinned
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.InputBinding
-      go_type: InputBinding
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getConnection
-          go_name: GetConnection
-          returns: android.view.inputmethod.InputConnection
-          error: true
-        - java_method: getConnectionToken
-          go_name: GetConnectionToken
-          returns: android.os.IBinder
-          error: true
-        - java_method: getPid
-          go_name: GetPid
-          returns: int
-          error: true
-        - java_method: getUid
-          go_name: GetUid
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.PreviewableHandwritingGesture
-      go_type: PreviewableHandwritingGesture
-    - java_class: android.view.inputmethod.SelectRangeGesture
-      go_type: SelectRangeGesture
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getGranularity
-          go_name: GetGranularity
-          returns: int
-          error: true
-        - java_method: getSelectionEndArea
-          go_name: GetSelectionEndArea
-          returns: android.graphics.RectF
-          error: true
-        - java_method: getSelectionStartArea
-          go_name: GetSelectionStartArea
-          returns: android.graphics.RectF
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.SelectRangeGesture$Builder
-      go_type: SelectRangeGestureBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.SelectRangeGesture
-          error: true
-        - java_method: setFallbackText
-          go_name: SetFallbackText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.view.inputmethod.SelectRangeGesture$Builder
-          error: true
-        - java_method: setGranularity
-          go_name: SetGranularity
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.inputmethod.SelectRangeGesture$Builder
-          error: true
-        - java_method: setSelectionEndArea
-          go_name: SetSelectionEndArea
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.SelectRangeGesture$Builder
-          error: true
-        - java_method: setSelectionStartArea
-          go_name: SetSelectionStartArea
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.SelectRangeGesture$Builder
-          error: true
-    - java_class: android.view.inputmethod.InputContentInfo
-      go_type: InputContentInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getContentUri
-          go_name: GetContentUri
-          returns: android.net.Uri
-          error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: android.content.ClipDescription
-          error: true
-        - java_method: getLinkUri
-          go_name: GetLinkUri
-          returns: android.net.Uri
-          error: true
-        - java_method: releasePermission
-          go_name: ReleasePermission
-          returns: void
-          error: true
-        - java_method: requestPermission
-          go_name: RequestPermission
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.SurroundingText
-      go_type: SurroundingText
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getOffset
-          go_name: GetOffset
-          returns: int
-          error: true
-        - java_method: getSelectionEnd
-          go_name: GetSelectionEnd
-          returns: int
-          error: true
-        - java_method: getSelectionStart
-          go_name: GetSelectionStart
-          returns: int
-          error: true
-        - java_method: getText
-          go_name: GetText
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.InlineSuggestionsResponse
-      go_type: InlineSuggestionsResponse
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.RemoveSpaceGesture
-      go_type: RemoveSpaceGesture
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getEndPoint
-          go_name: GetEndPoint
-          returns: android.graphics.PointF
-          error: true
-        - java_method: getStartPoint
-          go_name: GetStartPoint
-          returns: android.graphics.PointF
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.RemoveSpaceGesture$Builder
-      go_type: RemoveSpaceGestureBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.RemoveSpaceGesture
-          error: true
-        - java_method: setFallbackText
-          go_name: SetFallbackText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.view.inputmethod.RemoveSpaceGesture$Builder
-          error: true
-        - java_method: setPoints
-          go_name: SetPoints
-          params:
-            - java_type: android.graphics.PointF
-              go_name: arg0
-            - java_type: android.graphics.PointF
-              go_name: arg1
-          returns: android.view.inputmethod.RemoveSpaceGesture$Builder
-          error: true
     - java_class: android.view.inputmethod.JoinOrSplitGesture
       go_type: JoinOrSplitGesture
       methods:
@@ -1003,132 +508,159 @@ classes:
               go_name: arg0
           returns: android.view.inputmethod.JoinOrSplitGesture$Builder
           error: true
-    - java_class: android.view.inputmethod.TextBoundsInfoResult
-      go_type: TextBoundsInfoResult
-      methods:
-        - java_method: getResultCode
-          go_name: GetResultCode
-          returns: int
-          error: true
-        - java_method: getTextBoundsInfo
-          go_name: GetTextBoundsInfo
-          returns: android.view.inputmethod.TextBoundsInfo
-          error: true
-    - java_class: android.view.inputmethod.InputMethod
-      go_type: InputMethod
-      methods:
-        - java_method: attachToken
-          go_name: AttachToken
-          params:
-            - java_type: android.os.IBinder
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: bindInput
-          go_name: BindInput
-          params:
-            - java_type: android.view.inputmethod.InputBinding
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: changeInputMethodSubtype
-          go_name: ChangeInputMethodSubtype
-          params:
-            - java_type: android.view.inputmethod.InputMethodSubtype
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: createSession
-          go_name: CreateSession
-          params:
-            - java_type: android.view.inputmethod.InputMethod$SessionCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: hideSoftInput
-          go_name: HideSoftInput
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.os.ResultReceiver
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: restartInput
-          go_name: RestartInput
-          params:
-            - java_type: android.view.inputmethod.InputConnection
-              go_name: arg0
-            - java_type: android.view.inputmethod.EditorInfo
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: revokeSession
-          go_name: RevokeSession
-          params:
-            - java_type: android.view.inputmethod.InputMethodSession
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSessionEnabled
-          go_name: SetSessionEnabled
-          params:
-            - java_type: android.view.inputmethod.InputMethodSession
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: showSoftInput
-          go_name: ShowSoftInput
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.os.ResultReceiver
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: startInput
-          go_name: StartInput
-          params:
-            - java_type: android.view.inputmethod.InputConnection
-              go_name: arg0
-            - java_type: android.view.inputmethod.EditorInfo
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: unbindInput
-          go_name: UnbindInput
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.InputMethod$SessionCallback
-      go_type: InputMethodSessionCallback
-      methods:
-        - java_method: sessionCreated
-          go_name: SessionCreated
-          params:
-            - java_type: android.view.inputmethod.InputMethodSession
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.CorrectionInfo
-      go_type: CorrectionInfo
+    - java_class: android.view.inputmethod.DeleteRangeGesture
+      go_type: DeleteRangeGesture
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getNewText
-          go_name: GetNewText
-          returns: java.lang.CharSequence
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
           error: true
-        - java_method: getOffset
-          go_name: GetOffset
+        - java_method: getDeletionEndArea
+          go_name: GetDeletionEndArea
+          returns: android.graphics.RectF
+          error: true
+        - java_method: getDeletionStartArea
+          go_name: GetDeletionStartArea
+          returns: android.graphics.RectF
+          error: true
+        - java_method: getGranularity
+          go_name: GetGranularity
           returns: int
           error: true
-        - java_method: getOldText
-          go_name: GetOldText
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.DeleteRangeGesture$Builder
+      go_type: DeleteRangeGestureBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.DeleteRangeGesture
+          error: true
+        - java_method: setDeletionEndArea
+          go_name: SetDeletionEndArea
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteRangeGesture$Builder
+          error: true
+        - java_method: setDeletionStartArea
+          go_name: SetDeletionStartArea
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteRangeGesture$Builder
+          error: true
+        - java_method: setFallbackText
+          go_name: SetFallbackText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteRangeGesture$Builder
+          error: true
+        - java_method: setGranularity
+          go_name: SetGranularity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteRangeGesture$Builder
+          error: true
+    - java_class: android.view.inputmethod.CursorAnchorInfo
+      go_type: CursorAnchorInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCharacterBounds
+          go_name: GetCharacterBounds
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.graphics.RectF
+          error: true
+        - java_method: getCharacterBoundsFlags
+          go_name: GetCharacterBoundsFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getComposingText
+          go_name: GetComposingText
           returns: java.lang.CharSequence
+          error: true
+        - java_method: getComposingTextStart
+          go_name: GetComposingTextStart
+          returns: int
+          error: true
+        - java_method: getEditorBoundsInfo
+          go_name: GetEditorBoundsInfo
+          returns: android.view.inputmethod.EditorBoundsInfo
+          error: true
+        - java_method: getInsertionMarkerBaseline
+          go_name: GetInsertionMarkerBaseline
+          returns: float
+          error: true
+        - java_method: getInsertionMarkerBottom
+          go_name: GetInsertionMarkerBottom
+          returns: float
+          error: true
+        - java_method: getInsertionMarkerFlags
+          go_name: GetInsertionMarkerFlags
+          returns: int
+          error: true
+        - java_method: getInsertionMarkerHorizontal
+          go_name: GetInsertionMarkerHorizontal
+          returns: float
+          error: true
+        - java_method: getInsertionMarkerTop
+          go_name: GetInsertionMarkerTop
+          returns: float
+          error: true
+        - java_method: getMatrix
+          go_name: GetMatrix
+          returns: android.graphics.Matrix
+          error: true
+        - java_method: getSelectionEnd
+          go_name: GetSelectionEnd
+          returns: int
+          error: true
+        - java_method: getSelectionStart
+          go_name: GetSelectionStart
+          returns: int
+          error: true
+        - java_method: getTextAppearanceInfo
+          go_name: GetTextAppearanceInfo
+          returns: android.view.inputmethod.TextAppearanceInfo
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
           error: true
         - java_method: toString
           go_name: ToString
@@ -1142,6 +674,369 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
+          error: true
+    - java_class: android.view.inputmethod.CursorAnchorInfo$Builder
+      go_type: CursorAnchorInfoBuilder
+      methods:
+        - java_method: addCharacterBounds
+          go_name: AddCharacterBounds
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+            - java_type: float
+              go_name: arg2
+            - java_type: float
+              go_name: arg3
+            - java_type: float
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: addVisibleLineBounds
+          go_name: AddVisibleLineBounds
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+            - java_type: float
+              go_name: arg2
+            - java_type: float
+              go_name: arg3
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.CursorAnchorInfo
+          error: true
+        - java_method: clearVisibleLineBounds
+          go_name: ClearVisibleLineBounds
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: setComposingText
+          go_name: SetComposingText
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.lang.CharSequence
+              go_name: arg1
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: setEditorBoundsInfo
+          go_name: SetEditorBoundsInfo
+          params:
+            - java_type: android.view.inputmethod.EditorBoundsInfo
+              go_name: arg0
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: setInsertionMarkerLocation
+          go_name: SetInsertionMarkerLocation
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+            - java_type: float
+              go_name: arg2
+            - java_type: float
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: setMatrix
+          go_name: SetMatrix
+          params:
+            - java_type: android.graphics.Matrix
+              go_name: arg0
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: setSelectionRange
+          go_name: SetSelectionRange
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+        - java_method: setTextAppearanceInfo
+          go_name: SetTextAppearanceInfo
+          params:
+            - java_type: android.view.inputmethod.TextAppearanceInfo
+              go_name: arg0
+          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          error: true
+    - java_class: android.view.inputmethod.ExtractedTextRequest
+      go_type: ExtractedTextRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.InlineSuggestionsRequest
+      go_type: InlineSuggestionsRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getHostPackageName
+          go_name: GetHostPackageName
+          returns: String
+          error: true
+        - java_method: getInlineTooltipPresentationSpec
+          go_name: GetInlineTooltipPresentationSpec
+          returns: android.widget.inline.InlinePresentationSpec
+          error: true
+        - java_method: getMaxSuggestionCount
+          go_name: GetMaxSuggestionCount
+          returns: int
+          error: true
+        - java_method: getSupportedLocales
+          go_name: GetSupportedLocales
+          returns: android.os.LocaleList
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.InlineSuggestionsRequest$Builder
+      go_type: InlineSuggestionsRequestBuilder
+      methods:
+        - java_method: addInlinePresentationSpecs
+          go_name: AddInlinePresentationSpecs
+          params:
+            - java_type: android.widget.inline.InlinePresentationSpec
+              go_name: arg0
+          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.InlineSuggestionsRequest
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
+          error: true
+        - java_method: setInlineTooltipPresentationSpec
+          go_name: SetInlineTooltipPresentationSpec
+          params:
+            - java_type: android.widget.inline.InlinePresentationSpec
+              go_name: arg0
+          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
+          error: true
+        - java_method: setMaxSuggestionCount
+          go_name: SetMaxSuggestionCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
+          error: true
+        - java_method: setSupportedLocales
+          go_name: SetSupportedLocales
+          params:
+            - java_type: android.os.LocaleList
+              go_name: arg0
+          returns: android.view.inputmethod.InlineSuggestionsRequest$Builder
+          error: true
+    - java_class: android.view.inputmethod.InsertGesture
+      go_type: InsertGesture
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getInsertionPoint
+          go_name: GetInsertionPoint
+          returns: android.graphics.PointF
+          error: true
+        - java_method: getTextToInsert
+          go_name: GetTextToInsert
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.InsertGesture$Builder
+      go_type: InsertGestureBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.InsertGesture
+          error: true
+        - java_method: setFallbackText
+          go_name: SetFallbackText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.InsertGesture$Builder
+          error: true
+        - java_method: setInsertionPoint
+          go_name: SetInsertionPoint
+          params:
+            - java_type: android.graphics.PointF
+              go_name: arg0
+          returns: android.view.inputmethod.InsertGesture$Builder
+          error: true
+        - java_method: setTextToInsert
+          go_name: SetTextToInsert
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.InsertGesture$Builder
+          error: true
+    - java_class: android.view.inputmethod.DeleteGesture
+      go_type: DeleteGesture
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getDeletionArea
+          go_name: GetDeletionArea
+          returns: android.graphics.RectF
+          error: true
+        - java_method: getGranularity
+          go_name: GetGranularity
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.DeleteGesture$Builder
+      go_type: DeleteGestureBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.DeleteGesture
+          error: true
+        - java_method: setDeletionArea
+          go_name: SetDeletionArea
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteGesture$Builder
+          error: true
+        - java_method: setFallbackText
+          go_name: SetFallbackText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteGesture$Builder
+          error: true
+        - java_method: setGranularity
+          go_name: SetGranularity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.inputmethod.DeleteGesture$Builder
+          error: true
+    - java_class: android.view.inputmethod.PreviewableHandwritingGesture
+      go_type: PreviewableHandwritingGesture
+    - java_class: android.view.inputmethod.TextSnapshot
+      go_type: TextSnapshot
+      methods:
+        - java_method: getCompositionEnd
+          go_name: GetCompositionEnd
+          returns: int
+          error: true
+        - java_method: getCompositionStart
+          go_name: GetCompositionStart
+          returns: int
+          error: true
+        - java_method: getCursorCapsMode
+          go_name: GetCursorCapsMode
+          returns: int
+          error: true
+        - java_method: getSelectionEnd
+          go_name: GetSelectionEnd
+          returns: int
+          error: true
+        - java_method: getSelectionStart
+          go_name: GetSelectionStart
+          returns: int
+          error: true
+        - java_method: getSurroundingText
+          go_name: GetSurroundingText
+          returns: android.view.inputmethod.SurroundingText
           error: true
     - java_class: android.view.inputmethod.InputMethodSession
       go_type: InputMethodSession
@@ -1274,12 +1169,29 @@ classes:
           go_name: GetFallbackText
           returns: String
           error: true
-    - java_class: android.view.inputmethod.InlineSuggestion
-      go_type: InlineSuggestion
+    - java_class: android.view.inputmethod.InputMethodInfo
+      go_type: InputMethodInfo
       methods:
+        - java_method: createImeLanguageSettingsActivityIntent
+          go_name: CreateImeLanguageSettingsActivityIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: createStylusHandwritingSettingsActivityIntent
+          go_name: CreateStylusHandwritingSettingsActivityIntent
+          returns: android.content.Intent
+          error: true
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: android.util.Printer
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
           error: true
         - java_method: equals
           go_name: Equals
@@ -1288,13 +1200,82 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getInfo
-          go_name: GetInfo
-          returns: android.view.inputmethod.InlineSuggestionInfo
+        - java_method: getComponent
+          go_name: GetComponent
+          returns: android.content.ComponentName
+          error: true
+        - java_method: getConfigChanges
+          go_name: GetConfigChanges
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+        - java_method: getIsDefaultResourceId
+          go_name: GetIsDefaultResourceId
+          returns: int
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getServiceInfo
+          go_name: GetServiceInfo
+          returns: android.content.pm.ServiceInfo
+          error: true
+        - java_method: getServiceName
+          go_name: GetServiceName
+          returns: String
+          error: true
+        - java_method: getSettingsActivity
+          go_name: GetSettingsActivity
+          returns: String
+          error: true
+        - java_method: getSubtypeAt
+          go_name: GetSubtypeAt
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.inputmethod.InputMethodSubtype
+          error: true
+        - java_method: getSubtypeCount
+          go_name: GetSubtypeCount
+          returns: int
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
+          error: true
+        - java_method: loadIcon
+          go_name: LoadIcon
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: loadLabel
+          go_name: LoadLabel
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: shouldShowInInputMethodPicker
+          go_name: ShouldShowInInputMethodPicker
+          returns: boolean
+          error: true
+        - java_method: supportsConnectionlessStylusHandwriting
+          go_name: SupportsConnectionlessStylusHandwriting
+          returns: boolean
+          error: true
+        - java_method: supportsStylusHandwriting
+          go_name: SupportsStylusHandwriting
+          returns: boolean
+          error: true
+        - java_method: suppressesSpellChecker
+          go_name: SuppressesSpellChecker
+          returns: boolean
           error: true
         - java_method: toString
           go_name: ToString
@@ -1309,34 +1290,11 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.view.inputmethod.DeleteRangeGesture
-      go_type: DeleteRangeGesture
+    - java_class: android.view.inputmethod.ExtractedText
+      go_type: ExtractedText
       methods:
         - java_method: describeContents
           go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getDeletionEndArea
-          go_name: GetDeletionEndArea
-          returns: android.graphics.RectF
-          error: true
-        - java_method: getDeletionStartArea
-          go_name: GetDeletionStartArea
-          returns: android.graphics.RectF
-          error: true
-        - java_method: getGranularity
-          go_name: GetGranularity
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
           returns: int
           error: true
         - java_method: writeToParcel
@@ -1348,40 +1306,171 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.view.inputmethod.DeleteRangeGesture$Builder
-      go_type: DeleteRangeGestureBuilder
+    - java_class: android.view.inputmethod.TextBoundsInfo
+      go_type: TextBoundsInfo
       methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.DeleteRangeGesture
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
           error: true
-        - java_method: setDeletionEndArea
-          go_name: SetDeletionEndArea
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.DeleteRangeGesture$Builder
-          error: true
-        - java_method: setDeletionStartArea
-          go_name: SetDeletionStartArea
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.DeleteRangeGesture$Builder
-          error: true
-        - java_method: setFallbackText
-          go_name: SetFallbackText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.view.inputmethod.DeleteRangeGesture$Builder
-          error: true
-        - java_method: setGranularity
-          go_name: SetGranularity
+        - java_method: getCharacterBidiLevel
+          go_name: GetCharacterBidiLevel
           params:
             - java_type: int
               go_name: arg0
-          returns: android.view.inputmethod.DeleteRangeGesture$Builder
+          returns: int
+          error: true
+        - java_method: getCharacterBounds
+          go_name: GetCharacterBounds
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.graphics.RectF
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getCharacterFlags
+          go_name: GetCharacterFlags
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getEndIndex
+          go_name: GetEndIndex
+          returns: int
+          error: true
+        - java_method: getGraphemeSegmentFinder
+          go_name: GetGraphemeSegmentFinder
+          returns: android.text.SegmentFinder
+          error: true
+        - java_method: getLineSegmentFinder
+          go_name: GetLineSegmentFinder
+          returns: android.text.SegmentFinder
+          error: true
+        - java_method: getMatrix
+          go_name: GetMatrix
+          params:
+            - java_type: android.graphics.Matrix
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getOffsetForPosition
+          go_name: GetOffsetForPosition
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getRangeForRect
+          go_name: GetRangeForRect
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+            - java_type: android.text.SegmentFinder
+              go_name: arg1
+            - java_type: android.text.Layout$TextInclusionStrategy
+              go_name: arg2
+          returns: '[I'
+          error: true
+        - java_method: getStartIndex
+          go_name: GetStartIndex
+          returns: int
+          error: true
+        - java_method: getWordSegmentFinder
+          go_name: GetWordSegmentFinder
+          returns: android.text.SegmentFinder
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.TextBoundsInfo$Builder
+      go_type: TextBoundsInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.TextBoundsInfo
+          error: true
+        - java_method: clear
+          go_name: Clear
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setCharacterBidiLevel
+          go_name: SetCharacterBidiLevel
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setCharacterBounds
+          go_name: SetCharacterBounds
+          params:
+            - java_type: float[]
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setCharacterFlags
+          go_name: SetCharacterFlags
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setGraphemeSegmentFinder
+          go_name: SetGraphemeSegmentFinder
+          params:
+            - java_type: android.text.SegmentFinder
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setLineSegmentFinder
+          go_name: SetLineSegmentFinder
+          params:
+            - java_type: android.text.SegmentFinder
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setMatrix
+          go_name: SetMatrix
+          params:
+            - java_type: android.graphics.Matrix
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setStartAndEnd
+          go_name: SetStartAndEnd
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+        - java_method: setWordSegmentFinder
+          go_name: SetWordSegmentFinder
+          params:
+            - java_type: android.text.SegmentFinder
+              go_name: arg0
+          returns: android.view.inputmethod.TextBoundsInfo$Builder
+          error: true
+    - java_class: android.view.inputmethod.TextBoundsInfoResult
+      go_type: TextBoundsInfoResult
+      methods:
+        - java_method: getResultCode
+          go_name: GetResultCode
+          returns: int
+          error: true
+        - java_method: getTextBoundsInfo
+          go_name: GetTextBoundsInfo
+          returns: android.view.inputmethod.TextBoundsInfo
           error: true
     - java_class: android.view.inputmethod.TextAppearanceInfo
       go_type: TextAppearanceInfo
@@ -1663,6 +1752,78 @@ classes:
               go_name: arg0
           returns: android.view.inputmethod.TextAppearanceInfo$Builder
           error: true
+    - java_class: android.view.inputmethod.InputContentInfo
+      go_type: InputContentInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getContentUri
+          go_name: GetContentUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: android.content.ClipDescription
+          error: true
+        - java_method: getLinkUri
+          go_name: GetLinkUri
+          returns: android.net.Uri
+          error: true
+        - java_method: releasePermission
+          go_name: ReleasePermission
+          returns: void
+          error: true
+        - java_method: requestPermission
+          go_name: RequestPermission
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.InputBinding
+      go_type: InputBinding
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getConnection
+          go_name: GetConnection
+          returns: android.view.inputmethod.InputConnection
+          error: true
+        - java_method: getConnectionToken
+          go_name: GetConnectionToken
+          returns: android.os.IBinder
+          error: true
+        - java_method: getPid
+          go_name: GetPid
+          returns: int
+          error: true
+        - java_method: getUid
+          go_name: GetUid
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.view.inputmethod.EditorInfo
       go_type: EditorInfo
       methods:
@@ -1791,8 +1952,8 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.view.inputmethod.CursorAnchorInfo
-      go_type: CursorAnchorInfo
+    - java_class: android.view.inputmethod.RemoveSpaceGesture
+      go_type: RemoveSpaceGesture
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -1805,71 +1966,68 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getCharacterBounds
-          go_name: GetCharacterBounds
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.RectF
+        - java_method: getEndPoint
+          go_name: GetEndPoint
+          returns: android.graphics.PointF
           error: true
-        - java_method: getCharacterBoundsFlags
-          go_name: GetCharacterBoundsFlags
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getComposingText
-          go_name: GetComposingText
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getComposingTextStart
-          go_name: GetComposingTextStart
-          returns: int
-          error: true
-        - java_method: getEditorBoundsInfo
-          go_name: GetEditorBoundsInfo
-          returns: android.view.inputmethod.EditorBoundsInfo
-          error: true
-        - java_method: getInsertionMarkerBaseline
-          go_name: GetInsertionMarkerBaseline
-          returns: float
-          error: true
-        - java_method: getInsertionMarkerBottom
-          go_name: GetInsertionMarkerBottom
-          returns: float
-          error: true
-        - java_method: getInsertionMarkerFlags
-          go_name: GetInsertionMarkerFlags
-          returns: int
-          error: true
-        - java_method: getInsertionMarkerHorizontal
-          go_name: GetInsertionMarkerHorizontal
-          returns: float
-          error: true
-        - java_method: getInsertionMarkerTop
-          go_name: GetInsertionMarkerTop
-          returns: float
-          error: true
-        - java_method: getMatrix
-          go_name: GetMatrix
-          returns: android.graphics.Matrix
-          error: true
-        - java_method: getSelectionEnd
-          go_name: GetSelectionEnd
-          returns: int
-          error: true
-        - java_method: getSelectionStart
-          go_name: GetSelectionStart
-          returns: int
-          error: true
-        - java_method: getTextAppearanceInfo
-          go_name: GetTextAppearanceInfo
-          returns: android.view.inputmethod.TextAppearanceInfo
+        - java_method: getStartPoint
+          go_name: GetStartPoint
+          returns: android.graphics.PointF
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.RemoveSpaceGesture$Builder
+      go_type: RemoveSpaceGestureBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.RemoveSpaceGesture
+          error: true
+        - java_method: setFallbackText
+          go_name: SetFallbackText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.RemoveSpaceGesture$Builder
+          error: true
+        - java_method: setPoints
+          go_name: SetPoints
+          params:
+            - java_type: android.graphics.PointF
+              go_name: arg0
+            - java_type: android.graphics.PointF
+              go_name: arg1
+          returns: android.view.inputmethod.RemoveSpaceGesture$Builder
+          error: true
+    - java_class: android.view.inputmethod.CorrectionInfo
+      go_type: CorrectionInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getNewText
+          go_name: GetNewText
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getOffset
+          go_name: GetOffset
+          returns: int
+          error: true
+        - java_method: getOldText
+          go_name: GetOldText
+          returns: java.lang.CharSequence
           error: true
         - java_method: toString
           go_name: ToString
@@ -1884,104 +2042,532 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.view.inputmethod.CursorAnchorInfo$Builder
-      go_type: CursorAnchorInfoBuilder
+    - java_class: android.view.inputmethod.InputMethod
+      go_type: InputMethod
       methods:
-        - java_method: addCharacterBounds
-          go_name: AddCharacterBounds
+        - java_method: attachToken
+          go_name: AttachToken
+          params:
+            - java_type: android.os.IBinder
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: bindInput
+          go_name: BindInput
+          params:
+            - java_type: android.view.inputmethod.InputBinding
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: changeInputMethodSubtype
+          go_name: ChangeInputMethodSubtype
+          params:
+            - java_type: android.view.inputmethod.InputMethodSubtype
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: createSession
+          go_name: CreateSession
+          params:
+            - java_type: android.view.inputmethod.InputMethod$SessionCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: hideSoftInput
+          go_name: HideSoftInput
           params:
             - java_type: int
               go_name: arg0
-            - java_type: float
+            - java_type: android.os.ResultReceiver
               go_name: arg1
-            - java_type: float
-              go_name: arg2
-            - java_type: float
-              go_name: arg3
-            - java_type: float
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          returns: void
           error: true
-        - java_method: addVisibleLineBounds
-          go_name: AddVisibleLineBounds
+        - java_method: restartInput
+          go_name: RestartInput
           params:
-            - java_type: float
+            - java_type: android.view.inputmethod.InputConnection
               go_name: arg0
-            - java_type: float
+            - java_type: android.view.inputmethod.EditorInfo
               go_name: arg1
-            - java_type: float
-              go_name: arg2
-            - java_type: float
-              go_name: arg3
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          returns: void
           error: true
+        - java_method: revokeSession
+          go_name: RevokeSession
+          params:
+            - java_type: android.view.inputmethod.InputMethodSession
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSessionEnabled
+          go_name: SetSessionEnabled
+          params:
+            - java_type: android.view.inputmethod.InputMethodSession
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: showSoftInput
+          go_name: ShowSoftInput
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.os.ResultReceiver
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startInput
+          go_name: StartInput
+          params:
+            - java_type: android.view.inputmethod.InputConnection
+              go_name: arg0
+            - java_type: android.view.inputmethod.EditorInfo
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unbindInput
+          go_name: UnbindInput
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.InputMethod$SessionCallback
+      go_type: InputMethodSessionCallback
+      methods:
+        - java_method: sessionCreated
+          go_name: SessionCreated
+          params:
+            - java_type: android.view.inputmethod.InputMethodSession
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.SelectGesture
+      go_type: SelectGesture
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getGranularity
+          go_name: GetGranularity
+          returns: int
+          error: true
+        - java_method: getSelectionArea
+          go_name: GetSelectionArea
+          returns: android.graphics.RectF
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.SelectGesture$Builder
+      go_type: SelectGestureBuilder
+      methods:
         - java_method: build
           go_name: Build
-          returns: android.view.inputmethod.CursorAnchorInfo
+          returns: android.view.inputmethod.SelectGesture
           error: true
-        - java_method: clearVisibleLineBounds
-          go_name: ClearVisibleLineBounds
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+        - java_method: setFallbackText
+          go_name: SetFallbackText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.SelectGesture$Builder
           error: true
-        - java_method: reset
-          go_name: Reset
+        - java_method: setGranularity
+          go_name: SetGranularity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.inputmethod.SelectGesture$Builder
+          error: true
+        - java_method: setSelectionArea
+          go_name: SetSelectionArea
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+          returns: android.view.inputmethod.SelectGesture$Builder
+          error: true
+    - java_class: android.view.inputmethod.CompletionInfo
+      go_type: CompletionInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: long
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getPosition
+          go_name: GetPosition
+          returns: int
+          error: true
+        - java_method: getText
+          go_name: GetText
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
+          error: true
+    - java_class: android.view.inputmethod.SelectRangeGesture
+      go_type: SelectRangeGesture
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getGranularity
+          go_name: GetGranularity
+          returns: int
+          error: true
+        - java_method: getSelectionEndArea
+          go_name: GetSelectionEndArea
+          returns: android.graphics.RectF
+          error: true
+        - java_method: getSelectionStartArea
+          go_name: GetSelectionStartArea
+          returns: android.graphics.RectF
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.view.inputmethod.SelectRangeGesture$Builder
+      go_type: SelectRangeGestureBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.inputmethod.SelectRangeGesture
+          error: true
+        - java_method: setFallbackText
+          go_name: SetFallbackText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.view.inputmethod.SelectRangeGesture$Builder
+          error: true
+        - java_method: setGranularity
+          go_name: SetGranularity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.inputmethod.SelectRangeGesture$Builder
+          error: true
+        - java_method: setSelectionEndArea
+          go_name: SetSelectionEndArea
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+          returns: android.view.inputmethod.SelectRangeGesture$Builder
+          error: true
+        - java_method: setSelectionStartArea
+          go_name: SetSelectionStartArea
+          params:
+            - java_type: android.graphics.RectF
+              go_name: arg0
+          returns: android.view.inputmethod.SelectRangeGesture$Builder
+          error: true
+    - java_class: android.view.inputmethod.BaseInputConnection
+      go_type: BaseInputConnection
+      methods:
+        - java_method: beginBatchEdit
+          go_name: BeginBatchEdit
+          returns: boolean
+          error: true
+        - java_method: clearMetaKeyStates
+          go_name: ClearMetaKeyStates
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: closeConnection
+          go_name: CloseConnection
+          returns: void
+          error: true
+        - java_method: commitCompletion
+          go_name: CommitCompletion
+          params:
+            - java_type: android.view.inputmethod.CompletionInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: commitContent
+          go_name: CommitContent
+          params:
+            - java_type: android.view.inputmethod.InputContentInfo
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: commitCorrection
+          go_name: CommitCorrection
+          params:
+            - java_type: android.view.inputmethod.CorrectionInfo
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: commitText
+          go_name: CommitText
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: deleteSurroundingText
+          go_name: DeleteSurroundingText
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: deleteSurroundingTextInCodePoints
+          go_name: DeleteSurroundingTextInCodePoints
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: endBatchEdit
+          go_name: EndBatchEdit
+          returns: boolean
+          error: true
+        - java_method: finishComposingText
+          go_name: FinishComposingText
+          returns: boolean
+          error: true
+        - java_method: getCursorCapsMode
+          go_name: GetCursorCapsMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getEditable
+          go_name: GetEditable
+          returns: android.text.Editable
+          error: true
+        - java_method: getExtractedText
+          go_name: GetExtractedText
+          params:
+            - java_type: android.view.inputmethod.ExtractedTextRequest
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.inputmethod.ExtractedText
+          error: true
+        - java_method: getHandler
+          go_name: GetHandler
+          returns: android.os.Handler
+          error: true
+        - java_method: getSelectedText
+          go_name: GetSelectedText
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getSurroundingText
+          go_name: GetSurroundingText
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.view.inputmethod.SurroundingText
+          error: true
+        - java_method: getTextAfterCursor
+          go_name: GetTextAfterCursor
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getTextBeforeCursor
+          go_name: GetTextBeforeCursor
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: performContextMenuAction
+          go_name: PerformContextMenuAction
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: performEditorAction
+          go_name: PerformEditorAction
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: performPrivateCommand
+          go_name: PerformPrivateCommand
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: replaceText
+          go_name: ReplaceText
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: java.lang.CharSequence
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.view.inputmethod.TextAttribute
+              go_name: arg4
+          returns: boolean
+          error: true
+        - java_method: reportFullscreenMode
+          go_name: ReportFullscreenMode
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: requestCursorUpdates
+          go_name: RequestCursorUpdates
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: sendKeyEvent
+          go_name: SendKeyEvent
+          params:
+            - java_type: android.view.KeyEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setComposingRegion
+          go_name: SetComposingRegion
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
           error: true
         - java_method: setComposingText
           go_name: SetComposingText
           params:
-            - java_type: int
-              go_name: arg0
             - java_type: java.lang.CharSequence
-              go_name: arg1
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
-          error: true
-        - java_method: setEditorBoundsInfo
-          go_name: SetEditorBoundsInfo
-          params:
-            - java_type: android.view.inputmethod.EditorBoundsInfo
               go_name: arg0
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
-          error: true
-        - java_method: setInsertionMarkerLocation
-          go_name: SetInsertionMarkerLocation
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-            - java_type: float
-              go_name: arg2
-            - java_type: float
-              go_name: arg3
             - java_type: int
-              go_name: arg4
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+              go_name: arg1
+          returns: boolean
           error: true
-        - java_method: setMatrix
-          go_name: SetMatrix
-          params:
-            - java_type: android.graphics.Matrix
-              go_name: arg0
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
-          error: true
-        - java_method: setSelectionRange
-          go_name: SetSelectionRange
+        - java_method: setSelection
+          go_name: SetSelection
           params:
             - java_type: int
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          returns: boolean
           error: true
-        - java_method: setTextAppearanceInfo
-          go_name: SetTextAppearanceInfo
+        - java_method: takeSnapshot
+          go_name: TakeSnapshot
+          returns: android.view.inputmethod.TextSnapshot
+          error: true
+      static_methods:
+        - java_method: getComposingSpanEnd
+          go_name: GetComposingSpanEnd
           params:
-            - java_type: android.view.inputmethod.TextAppearanceInfo
+            - java_type: android.text.Spannable
               go_name: arg0
-          returns: android.view.inputmethod.CursorAnchorInfo$Builder
+          returns: int
+          error: true
+        - java_method: getComposingSpanStart
+          go_name: GetComposingSpanStart
+          params:
+            - java_type: android.text.Spannable
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: removeComposingSpans
+          go_name: RemoveComposingSpans
+          params:
+            - java_type: android.text.Spannable
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setComposingSpans
+          go_name: SetComposingSpans
+          params:
+            - java_type: android.text.Spannable
+              go_name: arg0
+          returns: void
           error: true
     - java_class: android.view.inputmethod.InputMethodManager
       go_type: InputMethodManager
@@ -2394,498 +2980,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.view.inputmethod.BaseInputConnection
-      go_type: BaseInputConnection
-      methods:
-        - java_method: beginBatchEdit
-          go_name: BeginBatchEdit
-          returns: boolean
-          error: true
-        - java_method: clearMetaKeyStates
-          go_name: ClearMetaKeyStates
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: closeConnection
-          go_name: CloseConnection
-          returns: void
-          error: true
-        - java_method: commitCompletion
-          go_name: CommitCompletion
-          params:
-            - java_type: android.view.inputmethod.CompletionInfo
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: commitContent
-          go_name: CommitContent
-          params:
-            - java_type: android.view.inputmethod.InputContentInfo
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: commitCorrection
-          go_name: CommitCorrection
-          params:
-            - java_type: android.view.inputmethod.CorrectionInfo
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: commitText
-          go_name: CommitText
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: deleteSurroundingText
-          go_name: DeleteSurroundingText
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: deleteSurroundingTextInCodePoints
-          go_name: DeleteSurroundingTextInCodePoints
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: endBatchEdit
-          go_name: EndBatchEdit
-          returns: boolean
-          error: true
-        - java_method: finishComposingText
-          go_name: FinishComposingText
-          returns: boolean
-          error: true
-        - java_method: getCursorCapsMode
-          go_name: GetCursorCapsMode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getEditable
-          go_name: GetEditable
-          returns: android.text.Editable
-          error: true
-        - java_method: getExtractedText
-          go_name: GetExtractedText
-          params:
-            - java_type: android.view.inputmethod.ExtractedTextRequest
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.view.inputmethod.ExtractedText
-          error: true
-        - java_method: getHandler
-          go_name: GetHandler
-          returns: android.os.Handler
-          error: true
-        - java_method: getSelectedText
-          go_name: GetSelectedText
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getSurroundingText
-          go_name: GetSurroundingText
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: android.view.inputmethod.SurroundingText
-          error: true
-        - java_method: getTextAfterCursor
-          go_name: GetTextAfterCursor
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getTextBeforeCursor
-          go_name: GetTextBeforeCursor
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: performContextMenuAction
-          go_name: PerformContextMenuAction
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: performEditorAction
-          go_name: PerformEditorAction
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: performPrivateCommand
-          go_name: PerformPrivateCommand
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: replaceText
-          go_name: ReplaceText
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: java.lang.CharSequence
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: android.view.inputmethod.TextAttribute
-              go_name: arg4
-          returns: boolean
-          error: true
-        - java_method: reportFullscreenMode
-          go_name: ReportFullscreenMode
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: requestCursorUpdates
-          go_name: RequestCursorUpdates
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: sendKeyEvent
-          go_name: SendKeyEvent
-          params:
-            - java_type: android.view.KeyEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setComposingRegion
-          go_name: SetComposingRegion
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: setComposingText
-          go_name: SetComposingText
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: setSelection
-          go_name: SetSelection
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: takeSnapshot
-          go_name: TakeSnapshot
-          returns: android.view.inputmethod.TextSnapshot
-          error: true
-      static_methods:
-        - java_method: getComposingSpanEnd
-          go_name: GetComposingSpanEnd
-          params:
-            - java_type: android.text.Spannable
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getComposingSpanStart
-          go_name: GetComposingSpanStart
-          params:
-            - java_type: android.text.Spannable
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: removeComposingSpans
-          go_name: RemoveComposingSpans
-          params:
-            - java_type: android.text.Spannable
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setComposingSpans
-          go_name: SetComposingSpans
-          params:
-            - java_type: android.text.Spannable
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.DeleteGesture
-      go_type: DeleteGesture
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getDeletionArea
-          go_name: GetDeletionArea
-          returns: android.graphics.RectF
-          error: true
-        - java_method: getGranularity
-          go_name: GetGranularity
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.DeleteGesture$Builder
-      go_type: DeleteGestureBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.DeleteGesture
-          error: true
-        - java_method: setDeletionArea
-          go_name: SetDeletionArea
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.DeleteGesture$Builder
-          error: true
-        - java_method: setFallbackText
-          go_name: SetFallbackText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.view.inputmethod.DeleteGesture$Builder
-          error: true
-        - java_method: setGranularity
-          go_name: SetGranularity
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.inputmethod.DeleteGesture$Builder
-          error: true
-    - java_class: android.view.inputmethod.ConnectionlessHandwritingCallback
-      go_type: ConnectionlessHandwritingCallback
-      methods:
-        - java_method: onError
-          go_name: OnError
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onResult
-          go_name: OnResult
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.TextBoundsInfo
-      go_type: TextBoundsInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCharacterBidiLevel
-          go_name: GetCharacterBidiLevel
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getCharacterBounds
-          go_name: GetCharacterBounds
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.graphics.RectF
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: getCharacterFlags
-          go_name: GetCharacterFlags
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getEndIndex
-          go_name: GetEndIndex
-          returns: int
-          error: true
-        - java_method: getGraphemeSegmentFinder
-          go_name: GetGraphemeSegmentFinder
-          returns: android.text.SegmentFinder
-          error: true
-        - java_method: getLineSegmentFinder
-          go_name: GetLineSegmentFinder
-          returns: android.text.SegmentFinder
-          error: true
-        - java_method: getMatrix
-          go_name: GetMatrix
-          params:
-            - java_type: android.graphics.Matrix
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getOffsetForPosition
-          go_name: GetOffsetForPosition
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: float
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: getRangeForRect
-          go_name: GetRangeForRect
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-            - java_type: android.text.SegmentFinder
-              go_name: arg1
-            - java_type: android.text.Layout$TextInclusionStrategy
-              go_name: arg2
-          returns: '[I'
-          error: true
-        - java_method: getStartIndex
-          go_name: GetStartIndex
-          returns: int
-          error: true
-        - java_method: getWordSegmentFinder
-          go_name: GetWordSegmentFinder
-          returns: android.text.SegmentFinder
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.TextBoundsInfo$Builder
-      go_type: TextBoundsInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.TextBoundsInfo
-          error: true
-        - java_method: clear
-          go_name: Clear
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setCharacterBidiLevel
-          go_name: SetCharacterBidiLevel
-          params:
-            - java_type: '[I'
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setCharacterBounds
-          go_name: SetCharacterBounds
-          params:
-            - java_type: float[]
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setCharacterFlags
-          go_name: SetCharacterFlags
-          params:
-            - java_type: '[I'
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setGraphemeSegmentFinder
-          go_name: SetGraphemeSegmentFinder
-          params:
-            - java_type: android.text.SegmentFinder
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setLineSegmentFinder
-          go_name: SetLineSegmentFinder
-          params:
-            - java_type: android.text.SegmentFinder
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setMatrix
-          go_name: SetMatrix
-          params:
-            - java_type: android.graphics.Matrix
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setStartAndEnd
-          go_name: SetStartAndEnd
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
-        - java_method: setWordSegmentFinder
-          go_name: SetWordSegmentFinder
-          params:
-            - java_type: android.text.SegmentFinder
-              go_name: arg0
-          returns: android.view.inputmethod.TextBoundsInfo$Builder
-          error: true
     - java_class: android.view.inputmethod.InputConnectionWrapper
       go_type: InputConnectionWrapper
       methods:
@@ -3190,32 +3284,36 @@ classes:
           go_name: TakeSnapshot
           returns: android.view.inputmethod.TextSnapshot
           error: true
-    - java_class: android.view.inputmethod.TextSnapshot
-      go_type: TextSnapshot
+    - java_class: android.view.inputmethod.InlineSuggestionsResponse
+      go_type: InlineSuggestionsResponse
       methods:
-        - java_method: getCompositionEnd
-          go_name: GetCompositionEnd
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getCompositionStart
-          go_name: GetCompositionStart
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
           error: true
-        - java_method: getCursorCapsMode
-          go_name: GetCursorCapsMode
-          returns: int
+        - java_method: toString
+          go_name: ToString
+          returns: String
           error: true
-        - java_method: getSelectionEnd
-          go_name: GetSelectionEnd
-          returns: int
-          error: true
-        - java_method: getSelectionStart
-          go_name: GetSelectionStart
-          returns: int
-          error: true
-        - java_method: getSurroundingText
-          go_name: GetSurroundingText
-          returns: android.view.inputmethod.SurroundingText
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
     - java_class: android.view.inputmethod.InputMethodSubtype
       go_type: InputMethodSubtype
@@ -3441,8 +3539,8 @@ classes:
               go_name: arg0
           returns: android.view.inputmethod.InputMethodSubtype$InputMethodSubtypeBuilder
           error: true
-    - java_class: android.view.inputmethod.SelectGesture
-      go_type: SelectGesture
+    - java_class: android.view.inputmethod.InlineSuggestion
+      go_type: InlineSuggestion
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -3455,111 +3553,13 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getGranularity
-          go_name: GetGranularity
-          returns: int
-          error: true
-        - java_method: getSelectionArea
-          go_name: GetSelectionArea
-          returns: android.graphics.RectF
+        - java_method: getInfo
+          go_name: GetInfo
+          returns: android.view.inputmethod.InlineSuggestionInfo
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.SelectGesture$Builder
-      go_type: SelectGestureBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.SelectGesture
-          error: true
-        - java_method: setFallbackText
-          go_name: SetFallbackText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.view.inputmethod.SelectGesture$Builder
-          error: true
-        - java_method: setGranularity
-          go_name: SetGranularity
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.inputmethod.SelectGesture$Builder
-          error: true
-        - java_method: setSelectionArea
-          go_name: SetSelectionArea
-          params:
-            - java_type: android.graphics.RectF
-              go_name: arg0
-          returns: android.view.inputmethod.SelectGesture$Builder
-          error: true
-    - java_class: android.view.inputmethod.TextAttribute
-      go_type: TextAttribute
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.view.inputmethod.TextAttribute$Builder
-      go_type: TextAttributeBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.inputmethod.TextAttribute
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.PersistableBundle
-              go_name: arg0
-          returns: android.view.inputmethod.TextAttribute$Builder
-          error: true
-    - java_class: android.view.inputmethod.CompletionInfo
-      go_type: CompletionInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: long
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getPosition
-          go_name: GetPosition
-          returns: int
-          error: true
-        - java_method: getText
-          go_name: GetText
-          returns: java.lang.CharSequence
           error: true
         - java_method: toString
           go_name: ToString
@@ -3578,9 +3578,27 @@ constants:
     - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: SuggestionCountUnlimited
-      value: "2147483647"
+    - go_name: ConnectionlessHandwritingErrorNoTextRecognized
+      value: "0"
       go_type: int
+    - go_name: ConnectionlessHandwritingErrorOther
+      value: "2"
+      go_type: int
+    - go_name: ConnectionlessHandwritingErrorUnsupported
+      value: "1"
+      go_type: int
+    - go_name: SourceAutofill
+      value: '"android:autofill"'
+      go_type: string
+    - go_name: SourcePlatform
+      value: '"android:platform"'
+      go_type: string
+    - go_name: TypeAction
+      value: '"android:autofill:action"'
+      go_type: string
+    - go_name: TypeSuggestion
+      value: '"android:autofill:suggestion"'
+      go_type: string
     - go_name: CursorUpdateFilterCharacterBounds
       value: "8"
       go_type: int
@@ -3629,6 +3647,24 @@ constants:
     - go_name: InputContentGrantReadUriPermission
       value: "1"
       go_type: int
+    - go_name: FlagHasInvisibleRegion
+      value: "2"
+      go_type: int
+    - go_name: FlagHasVisibleRegion
+      value: "1"
+      go_type: int
+    - go_name: FlagIsRtl
+      value: "4"
+      go_type: int
+    - go_name: SuggestionCountUnlimited
+      value: "2147483647"
+      go_type: int
+    - go_name: GranularityCharacter
+      value: "2"
+      go_type: int
+    - go_name: GranularityWord
+      value: "1"
+      go_type: int
     - go_name: ActionImeLanguageSettings
       value: '"android.view.inputmethod.action.IME_LANGUAGE_SETTINGS"'
       go_type: string
@@ -3641,18 +3677,18 @@ constants:
     - go_name: FlagSingleLine
       value: "1"
       go_type: int
-    - go_name: SourceAutofill
-      value: '"android:autofill"'
-      go_type: string
-    - go_name: SourcePlatform
-      value: '"android:platform"'
-      go_type: string
-    - go_name: TypeAction
-      value: '"android:autofill:action"'
-      go_type: string
-    - go_name: TypeSuggestion
-      value: '"android:autofill:suggestion"'
-      go_type: string
+    - go_name: FlagCharacterLinefeed
+      value: "2"
+      go_type: int
+    - go_name: FlagCharacterPunctuation
+      value: "4"
+      go_type: int
+    - go_name: FlagCharacterWhitespace
+      value: "1"
+      go_type: int
+    - go_name: FlagLineIsRtl
+      value: "8"
+      go_type: int
     - go_name: CodeCancelled
       value: "3"
       go_type: int
@@ -3664,24 +3700,6 @@ constants:
       go_type: int
     - go_name: CodeUnsupported
       value: "0"
-      go_type: int
-    - go_name: ServiceInterface
-      value: '"android.view.InputMethod"'
-      go_type: string
-    - go_name: ServiceMetaData
-      value: '"android.view.im"'
-      go_type: string
-    - go_name: ShowExplicit
-      value: "1"
-      go_type: int
-    - go_name: ShowForced
-      value: "2"
-      go_type: int
-    - go_name: GranularityCharacter
-      value: "2"
-      go_type: int
-    - go_name: GranularityWord
-      value: "1"
       go_type: int
     - go_name: ImeActionDone
       value: "6"
@@ -3737,14 +3755,17 @@ constants:
     - go_name: ImeNull
       value: "0"
       go_type: int
-    - go_name: FlagHasInvisibleRegion
-      value: "2"
-      go_type: int
-    - go_name: FlagHasVisibleRegion
+    - go_name: ServiceInterface
+      value: '"android.view.InputMethod"'
+      go_type: string
+    - go_name: ServiceMetaData
+      value: '"android.view.im"'
+      go_type: string
+    - go_name: ShowExplicit
       value: "1"
       go_type: int
-    - go_name: FlagIsRtl
-      value: "4"
+    - go_name: ShowForced
+      value: "2"
       go_type: int
     - go_name: HandwritingDelegateFlagHomeDelegatorAllowed
       value: "1"
@@ -3769,25 +3790,4 @@ constants:
       go_type: int
     - go_name: ShowImplicit
       value: "1"
-      go_type: int
-    - go_name: ConnectionlessHandwritingErrorNoTextRecognized
-      value: "0"
-      go_type: int
-    - go_name: ConnectionlessHandwritingErrorOther
-      value: "2"
-      go_type: int
-    - go_name: ConnectionlessHandwritingErrorUnsupported
-      value: "1"
-      go_type: int
-    - go_name: FlagCharacterLinefeed
-      value: "2"
-      go_type: int
-    - go_name: FlagCharacterPunctuation
-      value: "4"
-      go_type: int
-    - go_name: FlagCharacterWhitespace
-      value: "1"
-      go_type: int
-    - go_name: FlagLineIsRtl
-      value: "8"
       go_type: int

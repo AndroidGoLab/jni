@@ -3,11 +3,11 @@
 package consts
 
 const (
+	Creator                            int = 0
 	ConnectionToSinkBuiltIn            int = 1
 	ConnectionToSinkDirect             int = 2
 	ConnectionToSinkTransitive         int = 3
 	ConnectionToSinkUnknown            int = 0
-	Creator                            int = 0
 	HdrConversionForce                 int = 3
 	HdrConversionPassthrough           int = 1
 	HdrConversionSystem                int = 2

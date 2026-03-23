@@ -58,6 +58,19 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.view.displayhash.DisplayHashManager
+      go_type: DisplayHashManager
+      obtain: system_service
+      service_name: display_hash
+      close: true
+      methods:
+        - java_method: verifyDisplayHash
+          go_name: VerifyDisplayHash
+          params:
+            - java_type: android.view.displayhash.DisplayHash
+              go_name: arg0
+          returns: android.view.displayhash.VerifiedDisplayHash
+          error: true
     - java_class: android.view.displayhash.DisplayHash
       go_type: DisplayHash
       methods:
@@ -77,19 +90,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-    - java_class: android.view.displayhash.DisplayHashManager
-      go_type: DisplayHashManager
-      obtain: system_service
-      service_name: display_hash
-      close: true
-      methods:
-        - java_method: verifyDisplayHash
-          go_name: VerifyDisplayHash
-          params:
-            - java_type: android.view.displayhash.DisplayHash
-              go_name: arg0
-          returns: android.view.displayhash.VerifiedDisplayHash
           error: true
 constants:
     - go_name: DisplayHashErrorInvalidBounds

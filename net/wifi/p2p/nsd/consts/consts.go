@@ -4,10 +4,10 @@ package consts
 
 const (
 	Creator                    int = 0
-	ServiceProtocolTypeBonjour int = 1
-	ServiceProtocolTypeGeneric int = 2
 	ServiceTypeAll             int = 0
 	ServiceTypeBonjour         int = 1
 	ServiceTypeUpnp            int = 2
 	ServiceTypeVendorSpecific  int = 255
+	ServiceProtocolTypeBonjour int = 1
+	ServiceProtocolTypeGeneric int = 2
 )

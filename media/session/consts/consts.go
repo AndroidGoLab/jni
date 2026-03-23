@@ -3,7 +3,10 @@
 package consts
 
 const (
+	FlagHandlesMediaButtons      int = 1
+	FlagHandlesTransportControls int = 2
 	Creator                      int = 0
+	UnknownId                    int = -1
 	PlaybackTypeLocal            int = 1
 	PlaybackTypeRemote           int = 2
 	StateBuffering               int = 6
@@ -18,9 +21,6 @@ const (
 	StateSkippingToPrevious      int = 9
 	StateSkippingToQueueItem     int = 11
 	StateStopped                 int = 1
-	FlagHandlesMediaButtons      int = 1
-	FlagHandlesTransportControls int = 2
-	UnknownId                    int = -1
 )
 
 const (

@@ -23,9 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsInfo                 *jni.GlobalRef
-	midInfoGetEapMethodType jni.MethodID
-
 	clsAkaInfo            *jni.GlobalRef
 	midAkaInfoGetReauthId jni.MethodID
 
@@ -93,6 +90,9 @@ var (
 	midSessionConfigEapTtlsConfigGetInnerEapSessionConfig jni.MethodID
 	midSessionConfigEapTtlsConfigGetServerCaCert          jni.MethodID
 	midSessionConfigEapTtlsConfigHashCode                 jni.MethodID
+
+	clsInfo                 *jni.GlobalRef
+	midInfoGetEapMethodType jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -112,23 +112,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/net/eap/EapInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsInfo = env.NewGlobalRef(&c.Object)
-
-		midInfoGetEapMethodType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "getEapMethodType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/net/eap/EapAkaInfo")
 	if err != nil {
@@ -554,6 +537,23 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionConfigEapTtlsConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigEapTtlsConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/eap/EapInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsInfo = env.NewGlobalRef(&c.Object)
+
+		midInfoGetEapMethodType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "getEapMethodType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

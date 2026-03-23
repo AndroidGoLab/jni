@@ -5,75 +5,6 @@
 package: vibrator
 go_import: github.com/AndroidGoLab/jni/os/vibrator
 classes:
-    - java_class: android.os.vibrator.VibratorFrequencyProfile
-      go_type: FrequencyProfile
-      methods:
-        - java_method: getMaxFrequencyHz
-          go_name: GetMaxFrequencyHz
-          returns: float
-          error: true
-        - java_method: getMaxOutputAccelerationGs
-          go_name: GetMaxOutputAccelerationGs
-          returns: float
-          error: true
-        - java_method: getMinFrequencyHz
-          go_name: GetMinFrequencyHz
-          returns: float
-          error: true
-        - java_method: getOutputAccelerationGs
-          go_name: GetOutputAccelerationGs
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: float
-          error: true
-    - java_class: android.os.vibrator.VibratorEnvelopeEffectInfo
-      go_type: EnvelopeEffectInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getMaxControlPointDurationMillis
-          go_name: GetMaxControlPointDurationMillis
-          returns: long
-          error: true
-        - java_method: getMaxDurationMillis
-          go_name: GetMaxDurationMillis
-          returns: long
-          error: true
-        - java_method: getMaxSize
-          go_name: GetMaxSize
-          returns: int
-          error: true
-        - java_method: getMinControlPointDurationMillis
-          go_name: GetMinControlPointDurationMillis
-          returns: long
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.os.Vibrator
       go_type: Vibrator
       obtain: system_service
@@ -212,10 +143,76 @@ classes:
               go_name: arg2
           returns: void
           error: true
+    - java_class: android.os.vibrator.VibratorEnvelopeEffectInfo
+      go_type: EnvelopeEffectInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getMaxControlPointDurationMillis
+          go_name: GetMaxControlPointDurationMillis
+          returns: long
+          error: true
+        - java_method: getMaxDurationMillis
+          go_name: GetMaxDurationMillis
+          returns: long
+          error: true
+        - java_method: getMaxSize
+          go_name: GetMaxSize
+          returns: int
+          error: true
+        - java_method: getMinControlPointDurationMillis
+          go_name: GetMinControlPointDurationMillis
+          returns: long
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.os.vibrator.VibratorFrequencyProfile
+      go_type: FrequencyProfile
+      methods:
+        - java_method: getMaxFrequencyHz
+          go_name: GetMaxFrequencyHz
+          returns: float
+          error: true
+        - java_method: getMaxOutputAccelerationGs
+          go_name: GetMaxOutputAccelerationGs
+          returns: float
+          error: true
+        - java_method: getMinFrequencyHz
+          go_name: GetMinFrequencyHz
+          returns: float
+          error: true
+        - java_method: getOutputAccelerationGs
+          go_name: GetOutputAccelerationGs
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: float
+          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: VibrationEffectSupportNo
       value: "2"
       go_type: int
@@ -224,4 +221,7 @@ constants:
       go_type: int
     - go_name: VibrationEffectSupportYes
       value: "1"
+      go_type: int
+    - go_name: Creator
+      value: "0"
       go_type: int

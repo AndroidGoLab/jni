@@ -23,26 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPrintService                  *jni.GlobalRef
-	midPrintServiceGeneratePrinterId jni.MethodID
-	midPrintServiceOnBind            jni.MethodID
-
-	clsPrintDocument        *jni.GlobalRef
-	midPrintDocumentGetData jni.MethodID
-	midPrintDocumentGetInfo jni.MethodID
-
-	clsCustomPrinterIconCallback                          *jni.GlobalRef
-	midCustomPrinterIconCallbackOnCustomPrinterIconLoaded jni.MethodID
-
-	clsPrinterDiscoverySession                            *jni.GlobalRef
-	midPrinterDiscoverySessionIsDestroyed                 jni.MethodID
-	midPrinterDiscoverySessionIsPrinterDiscoveryStarted   jni.MethodID
-	midPrinterDiscoverySessionOnDestroy                   jni.MethodID
-	midPrinterDiscoverySessionOnRequestCustomPrinterIcon  jni.MethodID
-	midPrinterDiscoverySessionOnStartPrinterStateTracking jni.MethodID
-	midPrinterDiscoverySessionOnStopPrinterDiscovery      jni.MethodID
-	midPrinterDiscoverySessionOnStopPrinterStateTracking  jni.MethodID
-
 	clsPrintJob                        *jni.GlobalRef
 	midPrintJobBlock                   jni.MethodID
 	midPrintJobCancel                  jni.MethodID
@@ -68,6 +48,26 @@ var (
 	midPrintJobSetStatus1_1            jni.MethodID
 	midPrintJobSetTag                  jni.MethodID
 	midPrintJobStart                   jni.MethodID
+
+	clsPrintService                  *jni.GlobalRef
+	midPrintServiceGeneratePrinterId jni.MethodID
+	midPrintServiceOnBind            jni.MethodID
+
+	clsCustomPrinterIconCallback                          *jni.GlobalRef
+	midCustomPrinterIconCallbackOnCustomPrinterIconLoaded jni.MethodID
+
+	clsPrinterDiscoverySession                            *jni.GlobalRef
+	midPrinterDiscoverySessionIsDestroyed                 jni.MethodID
+	midPrinterDiscoverySessionIsPrinterDiscoveryStarted   jni.MethodID
+	midPrinterDiscoverySessionOnDestroy                   jni.MethodID
+	midPrinterDiscoverySessionOnRequestCustomPrinterIcon  jni.MethodID
+	midPrinterDiscoverySessionOnStartPrinterStateTracking jni.MethodID
+	midPrinterDiscoverySessionOnStopPrinterDiscovery      jni.MethodID
+	midPrinterDiscoverySessionOnStopPrinterStateTracking  jni.MethodID
+
+	clsPrintDocument        *jni.GlobalRef
+	midPrintDocumentGetData jni.MethodID
+	midPrintDocumentGetInfo jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -87,130 +87,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/printservice/PrintService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPrintService = env.NewGlobalRef(&c.Object)
-
-		midPrintServiceGeneratePrinterId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "generatePrinterId", "(Ljava/lang/String;)Landroid/print/PrinterId;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrintServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/printservice/PrintDocument")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPrintDocument = env.NewGlobalRef(&c.Object)
-
-		midPrintDocumentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getData", "()Landroid/os/ParcelFileDescriptor;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrintDocumentGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getInfo", "()Landroid/print/PrintDocumentInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/printservice/CustomPrinterIconCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCustomPrinterIconCallback = env.NewGlobalRef(&c.Object)
-
-		midCustomPrinterIconCallbackOnCustomPrinterIconLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomPrinterIconCallback)), "onCustomPrinterIconLoaded", "(Landroid/graphics/drawable/Icon;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/printservice/PrinterDiscoverySession")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPrinterDiscoverySession = env.NewGlobalRef(&c.Object)
-
-		midPrinterDiscoverySessionIsDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isDestroyed", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrinterDiscoverySessionIsPrinterDiscoveryStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isPrinterDiscoveryStarted", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrinterDiscoverySessionOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onDestroy", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrinterDiscoverySessionOnRequestCustomPrinterIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onRequestCustomPrinterIcon", "(Landroid/print/PrinterId;Landroid/os/CancellationSignal;Landroid/printservice/CustomPrinterIconCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrinterDiscoverySessionOnStartPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStartPrinterStateTracking", "(Landroid/print/PrinterId;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrinterDiscoverySessionOnStopPrinterDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterDiscovery", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPrinterDiscoverySessionOnStopPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterStateTracking", "(Landroid/print/PrinterId;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/printservice/PrintJob")
 	if err != nil {
@@ -382,6 +258,130 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPrintJobStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintJob)), "start", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/printservice/PrintService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPrintService = env.NewGlobalRef(&c.Object)
+
+		midPrintServiceGeneratePrinterId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "generatePrinterId", "(Ljava/lang/String;)Landroid/print/PrinterId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/printservice/CustomPrinterIconCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCustomPrinterIconCallback = env.NewGlobalRef(&c.Object)
+
+		midCustomPrinterIconCallbackOnCustomPrinterIconLoaded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCustomPrinterIconCallback)), "onCustomPrinterIconLoaded", "(Landroid/graphics/drawable/Icon;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/printservice/PrinterDiscoverySession")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPrinterDiscoverySession = env.NewGlobalRef(&c.Object)
+
+		midPrinterDiscoverySessionIsDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isDestroyed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionIsPrinterDiscoveryStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "isPrinterDiscoveryStarted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionOnRequestCustomPrinterIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onRequestCustomPrinterIcon", "(Landroid/print/PrinterId;Landroid/os/CancellationSignal;Landroid/printservice/CustomPrinterIconCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionOnStartPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStartPrinterStateTracking", "(Landroid/print/PrinterId;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionOnStopPrinterDiscovery, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterDiscovery", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrinterDiscoverySessionOnStopPrinterStateTracking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrinterDiscoverySession)), "onStopPrinterStateTracking", "(Landroid/print/PrinterId;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/printservice/PrintDocument")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPrintDocument = env.NewGlobalRef(&c.Object)
+
+		midPrintDocumentGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getData", "()Landroid/os/ParcelFileDescriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPrintDocumentGetInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintDocument)), "getInfo", "()Landroid/print/PrintDocumentInfo;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

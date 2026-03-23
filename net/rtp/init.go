@@ -23,6 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsAudioStream            *jni.GlobalRef
+	midAudioStreamGetCodec    jni.MethodID
+	midAudioStreamGetDtmfType jni.MethodID
+	midAudioStreamGetGroup    jni.MethodID
+	midAudioStreamIsBusy      jni.MethodID
+	midAudioStreamJoin        jni.MethodID
+	midAudioStreamSetCodec    jni.MethodID
+	midAudioStreamSetDtmfType jni.MethodID
+
 	clsStream                 *jni.GlobalRef
 	midStreamAssociate        jni.MethodID
 	midStreamGetLocalAddress  jni.MethodID
@@ -37,15 +46,6 @@ var (
 	clsAudioCodec          *jni.GlobalRef
 	midAudioCodecGetCodec  jni.MethodID
 	midAudioCodecGetCodecs jni.MethodID
-
-	clsAudioStream            *jni.GlobalRef
-	midAudioStreamGetCodec    jni.MethodID
-	midAudioStreamGetDtmfType jni.MethodID
-	midAudioStreamGetGroup    jni.MethodID
-	midAudioStreamIsBusy      jni.MethodID
-	midAudioStreamJoin        jni.MethodID
-	midAudioStreamSetCodec    jni.MethodID
-	midAudioStreamSetDtmfType jni.MethodID
 
 	clsAudioGroup           *jni.GlobalRef
 	midAudioGroupClear      jni.MethodID
@@ -72,6 +72,65 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/net/rtp/AudioStream")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAudioStream = env.NewGlobalRef(&c.Object)
+
+		midAudioStreamGetCodec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "getCodec", "()Landroid/net/rtp/AudioCodec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamGetDtmfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "getDtmfType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "getGroup", "()Landroid/net/rtp/AudioGroup;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamIsBusy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "isBusy", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamJoin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "join", "(Landroid/net/rtp/AudioGroup;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamSetCodec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "setCodec", "(Landroid/net/rtp/AudioCodec;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioStreamSetDtmfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "setDtmfType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/net/rtp/RtpStream")
 	if err != nil {
@@ -162,65 +221,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAudioCodecGetCodecs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAudioCodec)), "getCodecs", "()[Landroid/net/rtp/AudioCodec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/net/rtp/AudioStream")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAudioStream = env.NewGlobalRef(&c.Object)
-
-		midAudioStreamGetCodec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "getCodec", "()Landroid/net/rtp/AudioCodec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioStreamGetDtmfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "getDtmfType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioStreamGetGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "getGroup", "()Landroid/net/rtp/AudioGroup;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioStreamIsBusy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "isBusy", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioStreamJoin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "join", "(Landroid/net/rtp/AudioGroup;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioStreamSetCodec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "setCodec", "(Landroid/net/rtp/AudioCodec;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioStreamSetDtmfType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioStream)), "setDtmfType", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -3,29 +3,19 @@
 package consts
 
 const (
-	Creator                            int = 0
-	FlagRelevantAlways                 int = 2
-	FlagRelevantNow                    int = 1
-	SourceContext                      int = 3
-	SourceSchedule                     int = 2
-	SourceUnknown                      int = 0
-	SourceUserAction                   int = 1
-	StateError                         int = 3
-	StateFalse                         int = 0
-	StateTrue                          int = 1
-	StateUnknown                       int = 2
-	ConversationSendersAnyone          int = 1
-	ConversationSendersImportant       int = 2
-	ConversationSendersNone            int = 3
-	ConversationSendersUnset           int = 0
-	PeopleTypeAnyone                   int = 1
-	PeopleTypeContacts                 int = 2
-	PeopleTypeNone                     int = 4
-	PeopleTypeStarred                  int = 3
-	PeopleTypeUnset                    int = 0
-	StateAllow                         int = 1
-	StateDisallow                      int = 2
-	StateUnset                         int = 0
+	ActionSettingsHome            string = "android.service.notification.action.SETTINGS_HOME"
+	MetaDataDefaultAutobind       string = "android.service.notification.default_autobind_listenerservice"
+	MetaDataDefaultFilterTypes    string = "android.service.notification.default_filter_types"
+	MetaDataDisabledFilterTypes   string = "android.service.notification.disabled_filter_types"
+	ServiceInterface              string = "android.service.notification.NotificationListenerService"
+	Scheme                        string = "condition"
+	ExtraRuleId                   string = "android.service.notification.extra.RULE_ID"
+	MetaDataConfigurationActivity string = "android.service.zen.automatic.configurationActivity"
+	MetaDataRuleInstanceLimit     string = "android.service.zen.automatic.ruleInstanceLimit"
+	MetaDataRuleType              string = "android.service.zen.automatic.ruleType"
+)
+
+const (
 	FlagFilterTypeAlerting             int = 2
 	FlagFilterTypeConversations        int = 1
 	FlagFilterTypeOngoing              int = 8
@@ -70,17 +60,27 @@ const (
 	UserSentimentNeutral               int = 0
 	UserSentimentPositive              int = 1
 	VisibilityNoOverride               int = -1000
-)
-
-const (
-	Scheme                        string = "condition"
-	ActionSettingsHome            string = "android.service.notification.action.SETTINGS_HOME"
-	MetaDataDefaultAutobind       string = "android.service.notification.default_autobind_listenerservice"
-	MetaDataDefaultFilterTypes    string = "android.service.notification.default_filter_types"
-	MetaDataDisabledFilterTypes   string = "android.service.notification.disabled_filter_types"
-	ServiceInterface              string = "android.service.notification.NotificationListenerService"
-	ExtraRuleId                   string = "android.service.notification.extra.RULE_ID"
-	MetaDataConfigurationActivity string = "android.service.zen.automatic.configurationActivity"
-	MetaDataRuleInstanceLimit     string = "android.service.zen.automatic.ruleInstanceLimit"
-	MetaDataRuleType              string = "android.service.zen.automatic.ruleType"
+	Creator                            int = 0
+	FlagRelevantAlways                 int = 2
+	FlagRelevantNow                    int = 1
+	SourceContext                      int = 3
+	SourceSchedule                     int = 2
+	SourceUnknown                      int = 0
+	SourceUserAction                   int = 1
+	StateError                         int = 3
+	StateFalse                         int = 0
+	StateTrue                          int = 1
+	StateUnknown                       int = 2
+	ConversationSendersAnyone          int = 1
+	ConversationSendersImportant       int = 2
+	ConversationSendersNone            int = 3
+	ConversationSendersUnset           int = 0
+	PeopleTypeAnyone                   int = 1
+	PeopleTypeContacts                 int = 2
+	PeopleTypeNone                     int = 4
+	PeopleTypeStarred                  int = 3
+	PeopleTypeUnset                    int = 0
+	StateAllow                         int = 1
+	StateDisallow                      int = 2
+	StateUnset                         int = 0
 )

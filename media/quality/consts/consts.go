@@ -3,10 +3,32 @@
 package consts
 
 const (
-	CapabilityDefault                                string = "default"
-	CapabilityEnum                                   string = "enum"
-	CapabilityMax                                    string = "max"
-	CapabilityMin                                    string = "min"
+	Creator                                int = 0
+	ErrorDuplicate                         int = 2
+	ErrorInvalidArgument                   int = 3
+	ErrorNotAllowlisted                    int = 4
+	ErrorNoPermission                      int = 1
+	ErrorUnknown                           int = 0
+	TypeApplication                        int = 2
+	TypeSystem                             int = 1
+	TypeDouble                             int = 3
+	TypeInt                                int = 1
+	TypeLong                               int = 2
+	TypeNone                               int = 0
+	TypeString                             int = 4
+	SourceAudio                            int = 1
+	SourceAudioVideo                       int = 3
+	SourceNone                             int = 0
+	SourceVideo                            int = 2
+	AmbientBacklightEventDisabled          int = 2
+	AmbientBacklightEventEnabled           int = 1
+	AmbientBacklightEventInterrupted       int = 4
+	AmbientBacklightEventMetadataAvailable int = 3
+	AlgorithmNone                          int = 0
+	AlgorithmRle                           int = 1
+)
+
+const (
 	LevelHigh                                        string = "level_high"
 	LevelLow                                         string = "level_low"
 	LevelMedium                                      string = "level_medium"
@@ -61,30 +83,8 @@ const (
 	ParameterSpeakersDelayMillis                     string = "speakers_delay_millis"
 	ParameterSurroundSound                           string = "surround_sound"
 	ParameterTreble                                  string = "treble"
-)
-
-const (
-	Creator                                int = 0
-	TypeDouble                             int = 3
-	TypeInt                                int = 1
-	TypeLong                               int = 2
-	TypeNone                               int = 0
-	TypeString                             int = 4
-	ErrorDuplicate                         int = 2
-	ErrorInvalidArgument                   int = 3
-	ErrorNotAllowlisted                    int = 4
-	ErrorNoPermission                      int = 1
-	ErrorUnknown                           int = 0
-	TypeApplication                        int = 2
-	TypeSystem                             int = 1
-	SourceAudio                            int = 1
-	SourceAudioVideo                       int = 3
-	SourceNone                             int = 0
-	SourceVideo                            int = 2
-	AmbientBacklightEventDisabled          int = 2
-	AmbientBacklightEventEnabled           int = 1
-	AmbientBacklightEventInterrupted       int = 4
-	AmbientBacklightEventMetadataAvailable int = 3
-	AlgorithmNone                          int = 0
-	AlgorithmRle                           int = 1
+	CapabilityDefault                                string = "default"
+	CapabilityEnum                                   string = "enum"
+	CapabilityMax                                    string = "max"
+	CapabilityMin                                    string = "min"
 )

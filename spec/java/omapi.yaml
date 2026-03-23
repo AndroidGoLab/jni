@@ -38,6 +38,61 @@ classes:
           go_name: OnConnected
           returns: void
           error: true
+    - java_class: android.se.omapi.Session
+      go_type: Session
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: closeChannels
+          go_name: CloseChannels
+          returns: void
+          error: true
+        - java_method: getATR
+          go_name: GetATR
+          returns: '[B'
+          error: true
+        - java_method: getReader
+          go_name: GetReader
+          returns: android.se.omapi.Reader
+          error: true
+        - java_method: isClosed
+          go_name: IsClosed
+          returns: boolean
+          error: true
+        - java_method: openBasicChannel
+          go_name: OpenBasicChannel1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.se.omapi.Channel
+          error: true
+        - java_method: openBasicChannel
+          go_name: OpenBasicChannel2_1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: android.se.omapi.Channel
+          error: true
+        - java_method: openLogicalChannel
+          go_name: OpenLogicalChannel1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.se.omapi.Channel
+          error: true
+        - java_method: openLogicalChannel
+          go_name: OpenLogicalChannel2_1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: android.se.omapi.Channel
+          error: true
     - java_class: android.se.omapi.Channel
       go_type: Channel
       methods:
@@ -94,61 +149,6 @@ classes:
         - java_method: openSession
           go_name: OpenSession
           returns: android.se.omapi.Session
-          error: true
-    - java_class: android.se.omapi.Session
-      go_type: Session
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: closeChannels
-          go_name: CloseChannels
-          returns: void
-          error: true
-        - java_method: getATR
-          go_name: GetATR
-          returns: '[B'
-          error: true
-        - java_method: getReader
-          go_name: GetReader
-          returns: android.se.omapi.Reader
-          error: true
-        - java_method: isClosed
-          go_name: IsClosed
-          returns: boolean
-          error: true
-        - java_method: openBasicChannel
-          go_name: OpenBasicChannel1
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: android.se.omapi.Channel
-          error: true
-        - java_method: openBasicChannel
-          go_name: OpenBasicChannel2_1
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: android.se.omapi.Channel
-          error: true
-        - java_method: openLogicalChannel
-          go_name: OpenLogicalChannel1
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: android.se.omapi.Channel
-          error: true
-        - java_method: openLogicalChannel
-          go_name: OpenLogicalChannel2_1
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: android.se.omapi.Channel
           error: true
 constants:
     - go_name: ActionSecureElementStateChanged

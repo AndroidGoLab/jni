@@ -6,15 +6,6 @@ import "github.com/AndroidGoLab/jni/view/translation/consts"
 
 const (
 	Creator                             = consts.Creator
-	StatusError                         = consts.StatusError
-	StatusSuccess                       = consts.StatusSuccess
-	TranslationStatusContextUnsupported = consts.TranslationStatusContextUnsupported
-	TranslationStatusSuccess            = consts.TranslationStatusSuccess
-	TranslationStatusUnknownError       = consts.TranslationStatusUnknownError
-	FlagDictionaryResult                = consts.FlagDictionaryResult
-	FlagPartialResponses                = consts.FlagPartialResponses
-	FlagTranslationResult               = consts.FlagTranslationResult
-	FlagTransliterationResult           = consts.FlagTransliterationResult
 	StateAvailableToDownload            = consts.StateAvailableToDownload
 	StateDownloading                    = consts.StateDownloading
 	StateNotAvailable                   = consts.StateNotAvailable
@@ -22,10 +13,19 @@ const (
 	FlagDefinitions                     = consts.FlagDefinitions
 	FlagLowLatency                      = consts.FlagLowLatency
 	FlagTransliteration                 = consts.FlagTransliteration
+	FlagDictionaryResult                = consts.FlagDictionaryResult
+	FlagPartialResponses                = consts.FlagPartialResponses
+	FlagTranslationResult               = consts.FlagTranslationResult
+	FlagTransliterationResult           = consts.FlagTransliterationResult
+	TranslationStatusContextUnsupported = consts.TranslationStatusContextUnsupported
+	TranslationStatusSuccess            = consts.TranslationStatusSuccess
+	TranslationStatusUnknownError       = consts.TranslationStatusUnknownError
+	StatusError                         = consts.StatusError
+	StatusSuccess                       = consts.StatusSuccess
 	DataFormatText                      = consts.DataFormatText
 )
 
 const (
-	ExtraDefinitions = consts.ExtraDefinitions
 	IdText           = consts.IdText
+	ExtraDefinitions = consts.ExtraDefinitions
 )

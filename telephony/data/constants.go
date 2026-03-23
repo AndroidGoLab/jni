@@ -17,12 +17,6 @@ const (
 	SliceStatusRejectedNotAvailableInPlmn           = consts.SliceStatusRejectedNotAvailableInPlmn
 	SliceStatusRejectedNotAvailableInRegisteredArea = consts.SliceStatusRejectedNotAvailableInRegisteredArea
 	SliceStatusUnknown                              = consts.SliceStatusUnknown
-	RouteSscMode1                                   = consts.RouteSscMode1
-	RouteSscMode2                                   = consts.RouteSscMode2
-	RouteSscMode3                                   = consts.RouteSscMode3
-	SessionTypeIpv4                                 = consts.SessionTypeIpv4
-	SessionTypeIpv4v6                               = consts.SessionTypeIpv4v6
-	SessionTypeIpv6                                 = consts.SessionTypeIpv6
 	AuthTypeChap                                    = consts.AuthTypeChap
 	AuthTypeNone                                    = consts.AuthTypeNone
 	AuthTypePap                                     = consts.AuthTypePap
@@ -55,4 +49,10 @@ const (
 	TypeSupl                                        = consts.TypeSupl
 	TypeVsim                                        = consts.TypeVsim
 	TypeXcap                                        = consts.TypeXcap
+	RouteSscMode1                                   = consts.RouteSscMode1
+	RouteSscMode2                                   = consts.RouteSscMode2
+	RouteSscMode3                                   = consts.RouteSscMode3
+	SessionTypeIpv4                                 = consts.SessionTypeIpv4
+	SessionTypeIpv4v6                               = consts.SessionTypeIpv4v6
+	SessionTypeIpv6                                 = consts.SessionTypeIpv6
 )

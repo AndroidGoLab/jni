@@ -5,6 +5,197 @@
 package: measurement
 go_import: github.com/AndroidGoLab/jni/adservices/measurement
 classes:
+    - java_class: android.adservices.measurement.SourceRegistrationRequest
+      go_type: SourceRegistrationRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getInputEvent
+          go_name: GetInputEvent
+          returns: android.view.InputEvent
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.adservices.measurement.SourceRegistrationRequest$Builder
+      go_type: SourceRegistrationRequestBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.measurement.SourceRegistrationRequest
+          error: true
+        - java_method: setInputEvent
+          go_name: SetInputEvent
+          params:
+            - java_type: android.view.InputEvent
+              go_name: arg0
+          returns: android.adservices.measurement.SourceRegistrationRequest$Builder
+          error: true
+    - java_class: android.adservices.measurement.WebTriggerRegistrationRequest
+      go_type: WebTriggerRegistrationRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getDestination
+          go_name: GetDestination
+          returns: android.net.Uri
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.adservices.measurement.WebTriggerRegistrationRequest$Builder
+      go_type: WebTriggerRegistrationRequestBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.measurement.WebTriggerRegistrationRequest
+          error: true
+    - java_class: android.adservices.measurement.WebSourceParams
+      go_type: WebSourceParams
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getRegistrationUri
+          go_name: GetRegistrationUri
+          returns: android.net.Uri
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isDebugKeyAllowed
+          go_name: IsDebugKeyAllowed
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.adservices.measurement.WebSourceParams$Builder
+      go_type: WebSourceParamsBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.measurement.WebSourceParams
+          error: true
+        - java_method: setDebugKeyAllowed
+          go_name: SetDebugKeyAllowed
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.adservices.measurement.WebSourceParams$Builder
+          error: true
+    - java_class: android.adservices.measurement.MeasurementManager
+      go_type: Manager
+      static_methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.adservices.measurement.MeasurementManager
+          error: true
+    - java_class: android.adservices.measurement.WebTriggerParams
+      go_type: WebTriggerParams
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getRegistrationUri
+          go_name: GetRegistrationUri
+          returns: android.net.Uri
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isDebugKeyAllowed
+          go_name: IsDebugKeyAllowed
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.adservices.measurement.WebTriggerParams$Builder
+      go_type: WebTriggerParamsBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.measurement.WebTriggerParams
+          error: true
+        - java_method: setDebugKeyAllowed
+          go_name: SetDebugKeyAllowed
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.adservices.measurement.WebTriggerParams$Builder
+          error: true
     - java_class: android.adservices.measurement.WebSourceRegistrationRequest
       go_type: WebSourceRegistrationRequest
       methods:
@@ -141,200 +332,15 @@ classes:
               go_name: arg0
           returns: android.adservices.measurement.DeletionRequest$Builder
           error: true
-    - java_class: android.adservices.measurement.WebTriggerRegistrationRequest
-      go_type: WebTriggerRegistrationRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getDestination
-          go_name: GetDestination
-          returns: android.net.Uri
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.measurement.WebTriggerRegistrationRequest$Builder
-      go_type: WebTriggerRegistrationRequestBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.measurement.WebTriggerRegistrationRequest
-          error: true
-    - java_class: android.adservices.measurement.MeasurementManager
-      go_type: Manager
-      static_methods:
-        - java_method: get
-          go_name: Get
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: android.adservices.measurement.MeasurementManager
-          error: true
-    - java_class: android.adservices.measurement.WebSourceParams
-      go_type: WebSourceParams
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getRegistrationUri
-          go_name: GetRegistrationUri
-          returns: android.net.Uri
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isDebugKeyAllowed
-          go_name: IsDebugKeyAllowed
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.measurement.WebSourceParams$Builder
-      go_type: WebSourceParamsBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.measurement.WebSourceParams
-          error: true
-        - java_method: setDebugKeyAllowed
-          go_name: SetDebugKeyAllowed
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.adservices.measurement.WebSourceParams$Builder
-          error: true
-    - java_class: android.adservices.measurement.WebTriggerParams
-      go_type: WebTriggerParams
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getRegistrationUri
-          go_name: GetRegistrationUri
-          returns: android.net.Uri
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isDebugKeyAllowed
-          go_name: IsDebugKeyAllowed
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.measurement.WebTriggerParams$Builder
-      go_type: WebTriggerParamsBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.measurement.WebTriggerParams
-          error: true
-        - java_method: setDebugKeyAllowed
-          go_name: SetDebugKeyAllowed
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.adservices.measurement.WebTriggerParams$Builder
-          error: true
-    - java_class: android.adservices.measurement.SourceRegistrationRequest
-      go_type: SourceRegistrationRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getInputEvent
-          go_name: GetInputEvent
-          returns: android.view.InputEvent
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.adservices.measurement.SourceRegistrationRequest$Builder
-      go_type: SourceRegistrationRequestBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.measurement.SourceRegistrationRequest
-          error: true
-        - java_method: setInputEvent
-          go_name: SetInputEvent
-          params:
-            - java_type: android.view.InputEvent
-              go_name: arg0
-          returns: android.adservices.measurement.SourceRegistrationRequest$Builder
-          error: true
 constants:
     - go_name: Creator
       value: "0"
+      go_type: int
+    - go_name: MeasurementApiStateDisabled
+      value: "0"
+      go_type: int
+    - go_name: MeasurementApiStateEnabled
+      value: "1"
       go_type: int
     - go_name: DeletionModeAll
       value: "0"
@@ -346,11 +352,5 @@ constants:
       value: "0"
       go_type: int
     - go_name: MatchBehaviorPreserve
-      value: "1"
-      go_type: int
-    - go_name: MeasurementApiStateDisabled
-      value: "0"
-      go_type: int
-    - go_name: MeasurementApiStateEnabled
       value: "1"
       go_type: int

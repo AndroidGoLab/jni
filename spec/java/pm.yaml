@@ -5,30 +5,11 @@
 package: pm
 go_import: github.com/AndroidGoLab/jni/content/pm
 classes:
-    - java_class: android.content.pm.CapabilityParams
-      go_type: CapabilityParams
+    - java_class: android.content.pm.FeatureGroupInfo
+      go_type: FeatureGroupInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getValue
-          go_name: GetValue
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
           returns: int
           error: true
         - java_method: writeToParcel
@@ -40,73 +21,13 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.CapabilityParams$Builder
-      go_type: CapabilityParamsBuilder
+    - java_class: android.content.pm.ApplicationInfo
+      go_type: ApplicationInfo
       methods:
-        - java_method: addAlias
-          go_name: AddAlias
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.pm.CapabilityParams$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.content.pm.CapabilityParams
-          error: true
-    - java_class: android.content.pm.SigningInfo
-      go_type: SigningInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getApkContentsSigners
-          go_name: GetApkContentsSigners
-          returns: android.content.pm.Signature[]
-          error: true
-        - java_method: getSchemeVersion
-          go_name: GetSchemeVersion
-          returns: int
-          error: true
-        - java_method: getSigningCertificateHistory
-          go_name: GetSigningCertificateHistory
-          returns: android.content.pm.Signature[]
-          error: true
-        - java_method: hasMultipleSigners
-          go_name: HasMultipleSigners
+        - java_method: areAttributionsUserVisible
+          go_name: AreAttributionsUserVisible
           returns: boolean
           error: true
-        - java_method: hasPastSigningCertificates
-          go_name: HasPastSigningCertificates
-          returns: boolean
-          error: true
-        - java_method: signersMatchExactly
-          go_name: SignersMatchExactly
-          params:
-            - java_type: android.content.pm.SigningInfo
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.SigningInfoException
-      go_type: SigningInfoException
-      methods:
-        - java_method: getCode
-          go_name: GetCode
-          returns: int
-          error: true
-    - java_class: android.content.pm.ResolveInfo
-      go_type: ResolveInfo
-      methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
@@ -120,23 +41,40 @@ classes:
               go_name: arg1
           returns: void
           error: true
-        - java_method: getIconResource
-          go_name: GetIconResource
+        - java_method: getGwpAsanMode
+          go_name: GetGwpAsanMode
           returns: int
           error: true
-        - java_method: isCrossProfileIntentForwarderActivity
-          go_name: IsCrossProfileIntentForwarderActivity
+        - java_method: getMemtagMode
+          go_name: GetMemtagMode
+          returns: int
+          error: true
+        - java_method: getNativeHeapZeroInitialized
+          go_name: GetNativeHeapZeroInitialized
+          returns: int
+          error: true
+        - java_method: getRequestRawExternalStorageAccess
+          go_name: GetRequestRawExternalStorageAccess
+          returns: int
+          error: true
+        - java_method: isProfileable
+          go_name: IsProfileable
           returns: boolean
           error: true
-        - java_method: loadIcon
-          go_name: LoadIcon
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
+        - java_method: isProfileableByShell
+          go_name: IsProfileableByShell
+          returns: boolean
           error: true
-        - java_method: loadLabel
-          go_name: LoadLabel
+        - java_method: isResourceOverlay
+          go_name: IsResourceOverlay
+          returns: boolean
+          error: true
+        - java_method: isVirtualPreload
+          go_name: IsVirtualPreload
+          returns: boolean
+          error: true
+        - java_method: loadDescription
+          go_name: LoadDescription
           params:
             - java_type: android.content.pm.PackageManager
               go_name: arg0
@@ -155,15 +93,25 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.ResolveInfo$DisplayNameComparator
-      go_type: ResolveInfoDisplayNameComparator
+      static_methods:
+        - java_method: getCategoryTitle
+          go_name: GetCategoryTitle
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+    - java_class: android.content.pm.ApplicationInfo$DisplayNameComparator
+      go_type: ApplicationInfoDisplayNameComparator
       methods:
         - java_method: compare
           go_name: Compare2
           params:
-            - java_type: android.content.pm.ResolveInfo
+            - java_type: android.content.pm.ApplicationInfo
               go_name: arg0
-            - java_type: android.content.pm.ResolveInfo
+            - java_type: android.content.pm.ApplicationInfo
               go_name: arg1
           returns: int
           error: true
@@ -175,6 +123,66 @@ classes:
             - java_type: java.lang.Object
               go_name: arg1
           returns: int
+          error: true
+    - java_class: android.content.pm.PathPermission
+      go_type: PathPermission
+      methods:
+        - java_method: getReadPermission
+          go_name: GetReadPermission
+          returns: String
+          error: true
+        - java_method: getWritePermission
+          go_name: GetWritePermission
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.InstallSourceInfo
+      go_type: InstallSourceInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getInitiatingPackageName
+          go_name: GetInitiatingPackageName
+          returns: String
+          error: true
+        - java_method: getInitiatingPackageSigningInfo
+          go_name: GetInitiatingPackageSigningInfo
+          returns: android.content.pm.SigningInfo
+          error: true
+        - java_method: getInstallingPackageName
+          go_name: GetInstallingPackageName
+          returns: String
+          error: true
+        - java_method: getOriginatingPackageName
+          go_name: GetOriginatingPackageName
+          returns: String
+          error: true
+        - java_method: getPackageSource
+          go_name: GetPackageSource
+          returns: int
+          error: true
+        - java_method: getUpdateOwnerPackageName
+          go_name: GetUpdateOwnerPackageName
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
     - java_class: android.content.pm.CrossProfileApps
       go_type: CrossProfileApps
@@ -266,6 +274,878 @@ classes:
               go_name: arg2
             - java_type: android.os.Bundle
               go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.content.pm.ChangedPackages
+      go_type: ChangedPackages
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSequenceNumber
+          go_name: GetSequenceNumber
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.Signature
+      go_type: Signature
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toByteArray
+          go_name: ToByteArray
+          returns: '[B'
+          error: true
+        - java_method: toChars
+          go_name: ToChars0
+          returns: char[]
+          error: true
+        - java_method: toChars
+          go_name: ToChars2_1
+          params:
+            - java_type: char[]
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: char[]
+          error: true
+        - java_method: toCharsString
+          go_name: ToCharsString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ProviderInfo
+      go_type: ProviderInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: android.util.Printer
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ResolveInfo
+      go_type: ResolveInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: android.util.Printer
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getIconResource
+          go_name: GetIconResource
+          returns: int
+          error: true
+        - java_method: isCrossProfileIntentForwarderActivity
+          go_name: IsCrossProfileIntentForwarderActivity
+          returns: boolean
+          error: true
+        - java_method: loadIcon
+          go_name: LoadIcon
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: loadLabel
+          go_name: LoadLabel
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ResolveInfo$DisplayNameComparator
+      go_type: ResolveInfoDisplayNameComparator
+      methods:
+        - java_method: compare
+          go_name: Compare2
+          params:
+            - java_type: android.content.pm.ResolveInfo
+              go_name: arg0
+            - java_type: android.content.pm.ResolveInfo
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: compare
+          go_name: Compare2_1
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+          returns: int
+          error: true
+    - java_class: android.content.pm.LabeledIntent
+      go_type: LabeledIntent
+      methods:
+        - java_method: getIconResource
+          go_name: GetIconResource
+          returns: int
+          error: true
+        - java_method: getLabelResource
+          go_name: GetLabelResource
+          returns: int
+          error: true
+        - java_method: getNonLocalizedLabel
+          go_name: GetNonLocalizedLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getSourcePackage
+          go_name: GetSourcePackage
+          returns: String
+          error: true
+        - java_method: loadIcon
+          go_name: LoadIcon
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: loadLabel
+          go_name: LoadLabel
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: readFromParcel
+          go_name: ReadFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ActivityInfo
+      go_type: ActivityInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: android.util.Printer
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getThemeResource
+          go_name: GetThemeResource
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ActivityInfo$WindowLayout
+      go_type: ActivityInfoWindowLayout
+    - java_class: android.content.pm.ServiceInfo
+      go_type: ServiceInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: dump
+          go_name: Dump
+          params:
+            - java_type: android.util.Printer
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getForegroundServiceType
+          go_name: GetForegroundServiceType
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ComponentInfo
+      go_type: ComponentInfo
+      methods:
+        - java_method: getBannerResource
+          go_name: GetBannerResource
+          returns: int
+          error: true
+        - java_method: getIconResource
+          go_name: GetIconResource
+          returns: int
+          error: true
+        - java_method: getLogoResource
+          go_name: GetLogoResource
+          returns: int
+          error: true
+        - java_method: isEnabled
+          go_name: IsEnabled
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ShortcutInfo
+      go_type: ShortcutInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getActivity
+          go_name: GetActivity
+          returns: android.content.ComponentName
+          error: true
+        - java_method: getDisabledMessage
+          go_name: GetDisabledMessage
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getDisabledReason
+          go_name: GetDisabledReason
+          returns: int
+          error: true
+        - java_method: getExcludedFromSurfaces
+          go_name: GetExcludedFromSurfaces
+          returns: int
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+        - java_method: getIntent
+          go_name: GetIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: getIntents
+          go_name: GetIntents
+          returns: android.content.Intent[]
+          error: true
+        - java_method: getLastChangedTimestamp
+          go_name: GetLastChangedTimestamp
+          returns: long
+          error: true
+        - java_method: getLocusId
+          go_name: GetLocusId
+          returns: android.content.LocusId
+          error: true
+        - java_method: getLongLabel
+          go_name: GetLongLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getPackage
+          go_name: GetPackage
+          returns: String
+          error: true
+        - java_method: getRank
+          go_name: GetRank
+          returns: int
+          error: true
+        - java_method: getShortLabel
+          go_name: GetShortLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getUserHandle
+          go_name: GetUserHandle
+          returns: android.os.UserHandle
+          error: true
+        - java_method: hasKeyFieldsOnly
+          go_name: HasKeyFieldsOnly
+          returns: boolean
+          error: true
+        - java_method: isCached
+          go_name: IsCached
+          returns: boolean
+          error: true
+        - java_method: isDeclaredInManifest
+          go_name: IsDeclaredInManifest
+          returns: boolean
+          error: true
+        - java_method: isDynamic
+          go_name: IsDynamic
+          returns: boolean
+          error: true
+        - java_method: isEnabled
+          go_name: IsEnabled
+          returns: boolean
+          error: true
+        - java_method: isExcludedFromSurfaces
+          go_name: IsExcludedFromSurfaces
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isImmutable
+          go_name: IsImmutable
+          returns: boolean
+          error: true
+        - java_method: isPinned
+          go_name: IsPinned
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: createFromGenericDocument
+          go_name: CreateFromGenericDocument
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.app.appsearch.GenericDocument
+              go_name: arg1
+          returns: android.content.pm.ShortcutInfo
+          error: true
+    - java_class: android.content.pm.ShortcutInfo$Builder
+      go_type: ShortcutInfoBuilder
+      methods:
+        - java_method: addCapabilityBinding
+          go_name: AddCapabilityBinding
+          params:
+            - java_type: android.content.pm.Capability
+              go_name: arg0
+            - java_type: android.content.pm.CapabilityParams
+              go_name: arg1
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.content.pm.ShortcutInfo
+          error: true
+        - java_method: setActivity
+          go_name: SetActivity
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setDisabledMessage
+          go_name: SetDisabledMessage
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setExcludedFromSurfaces
+          go_name: SetExcludedFromSurfaces
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.PersistableBundle
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setIcon
+          go_name: SetIcon
+          params:
+            - java_type: android.graphics.drawable.Icon
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setIntent
+          go_name: SetIntent
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setIntents
+          go_name: SetIntents
+          params:
+            - java_type: android.content.Intent[]
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setLocusId
+          go_name: SetLocusId
+          params:
+            - java_type: android.content.LocusId
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setLongLabel
+          go_name: SetLongLabel
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setLongLived
+          go_name: SetLongLived
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setPerson
+          go_name: SetPerson
+          params:
+            - java_type: android.app.Person
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setPersons
+          go_name: SetPersons
+          params:
+            - java_type: android.app.Person[]
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setRank
+          go_name: SetRank
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setShortLabel
+          go_name: SetShortLabel
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+        - java_method: setStartingTheme
+          go_name: SetStartingTheme
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.pm.ShortcutInfo$Builder
+          error: true
+    - java_class: android.content.pm.Checksum
+      go_type: Checksum
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getValue
+          go_name: GetValue
+          returns: '[B'
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.LauncherUserInfo
+      go_type: LauncherUserInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getUserConfig
+          go_name: GetUserConfig
+          returns: android.os.Bundle
+          error: true
+        - java_method: getUserSerialNumber
+          go_name: GetUserSerialNumber
+          returns: int
+          error: true
+        - java_method: getUserType
+          go_name: GetUserType
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ShortcutManager
+      go_type: ShortcutManager
+      obtain: system_service
+      service_name: shortcut
+      close: true
+      methods:
+        - java_method: createShortcutResultIntent
+          go_name: CreateShortcutResultIntent
+          params:
+            - java_type: android.content.pm.ShortcutInfo
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+        - java_method: getIconMaxHeight
+          go_name: GetIconMaxHeight
+          returns: int
+          error: true
+        - java_method: getIconMaxWidth
+          go_name: GetIconMaxWidth
+          returns: int
+          error: true
+        - java_method: getMaxShortcutCountPerActivity
+          go_name: GetMaxShortcutCountPerActivity
+          returns: int
+          error: true
+        - java_method: isRateLimitingActive
+          go_name: IsRateLimitingActive
+          returns: boolean
+          error: true
+        - java_method: isRequestPinShortcutSupported
+          go_name: IsRequestPinShortcutSupported
+          returns: boolean
+          error: true
+        - java_method: pushDynamicShortcut
+          go_name: PushDynamicShortcut
+          params:
+            - java_type: android.content.pm.ShortcutInfo
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeAllDynamicShortcuts
+          go_name: RemoveAllDynamicShortcuts
+          returns: void
+          error: true
+        - java_method: reportShortcutUsed
+          go_name: ReportShortcutUsed
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestPinShortcut
+          go_name: RequestPinShortcut
+          params:
+            - java_type: android.content.pm.ShortcutInfo
+              go_name: arg0
+            - java_type: android.content.IntentSender
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.content.pm.PermissionGroupInfo
+      go_type: PermissionGroupInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: loadDescription
+          go_name: LoadDescription
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.InstrumentationInfo
+      go_type: InstrumentationInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.Capability
+      go_type: Capability
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.Capability$Builder
+      go_type: CapabilityBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.content.pm.Capability
+          error: true
+    - java_class: android.content.pm.PermissionInfo
+      go_type: PermissionInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getProtection
+          go_name: GetProtection
+          returns: int
+          error: true
+        - java_method: getProtectionFlags
+          go_name: GetProtectionFlags
+          returns: int
+          error: true
+        - java_method: loadDescription
+          go_name: LoadDescription
+          params:
+            - java_type: android.content.pm.PackageManager
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.SharedLibraryInfo
+      go_type: SharedLibraryInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getDeclaringPackage
+          go_name: GetDeclaringPackage
+          returns: android.content.pm.VersionedPackage
+          error: true
+        - java_method: getLongVersion
+          go_name: GetLongVersion
+          returns: long
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.content.pm.ApkChecksum
+      go_type: ApkChecksum
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getInstallerCertificate
+          go_name: GetInstallerCertificate
+          returns: java.security.cert.Certificate
+          error: true
+        - java_method: getInstallerPackageName
+          go_name: GetInstallerPackageName
+          returns: String
+          error: true
+        - java_method: getSplitName
+          go_name: GetSplitName
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getValue
+          go_name: GetValue
+          returns: '[B'
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
           error: true
     - java_class: android.content.pm.PackageInstaller
@@ -1102,33 +1982,6 @@ classes:
               go_name: arg1
           returns: android.content.pm.PackageInstaller$UnarchivalState
           error: true
-    - java_class: android.content.pm.PermissionGroupInfo
-      go_type: PermissionGroupInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: loadDescription
-          go_name: LoadDescription
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.content.pm.PackageInfo
       go_type: PackageInfo
       methods:
@@ -1168,24 +2021,31 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.LauncherUserInfo
-      go_type: LauncherUserInfo
+    - java_class: android.content.pm.CapabilityParams
+      go_type: CapabilityParams
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getUserConfig
-          go_name: GetUserConfig
-          returns: android.os.Bundle
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
           error: true
-        - java_method: getUserSerialNumber
-          go_name: GetUserSerialNumber
-          returns: int
-          error: true
-        - java_method: getUserType
-          go_name: GetUserType
+        - java_method: getName
+          go_name: GetName
           returns: String
+          error: true
+        - java_method: getValue
+          go_name: GetValue
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -1196,107 +2056,30 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.ShortcutInfo
-      go_type: ShortcutInfo
+    - java_class: android.content.pm.CapabilityParams$Builder
+      go_type: CapabilityParamsBuilder
+      methods:
+        - java_method: addAlias
+          go_name: AddAlias
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.pm.CapabilityParams$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.content.pm.CapabilityParams
+          error: true
+    - java_class: android.content.pm.FeatureInfo
+      go_type: FeatureInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getActivity
-          go_name: GetActivity
-          returns: android.content.ComponentName
-          error: true
-        - java_method: getDisabledMessage
-          go_name: GetDisabledMessage
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getDisabledReason
-          go_name: GetDisabledReason
-          returns: int
-          error: true
-        - java_method: getExcludedFromSurfaces
-          go_name: GetExcludedFromSurfaces
-          returns: int
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: getId
-          go_name: GetId
+        - java_method: getGlEsVersion
+          go_name: GetGlEsVersion
           returns: String
-          error: true
-        - java_method: getIntent
-          go_name: GetIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: getIntents
-          go_name: GetIntents
-          returns: android.content.Intent[]
-          error: true
-        - java_method: getLastChangedTimestamp
-          go_name: GetLastChangedTimestamp
-          returns: long
-          error: true
-        - java_method: getLocusId
-          go_name: GetLocusId
-          returns: android.content.LocusId
-          error: true
-        - java_method: getLongLabel
-          go_name: GetLongLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getPackage
-          go_name: GetPackage
-          returns: String
-          error: true
-        - java_method: getRank
-          go_name: GetRank
-          returns: int
-          error: true
-        - java_method: getShortLabel
-          go_name: GetShortLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getUserHandle
-          go_name: GetUserHandle
-          returns: android.os.UserHandle
-          error: true
-        - java_method: hasKeyFieldsOnly
-          go_name: HasKeyFieldsOnly
-          returns: boolean
-          error: true
-        - java_method: isCached
-          go_name: IsCached
-          returns: boolean
-          error: true
-        - java_method: isDeclaredInManifest
-          go_name: IsDeclaredInManifest
-          returns: boolean
-          error: true
-        - java_method: isDynamic
-          go_name: IsDynamic
-          returns: boolean
-          error: true
-        - java_method: isEnabled
-          go_name: IsEnabled
-          returns: boolean
-          error: true
-        - java_method: isExcludedFromSurfaces
-          go_name: IsExcludedFromSurfaces
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isImmutable
-          go_name: IsImmutable
-          returns: boolean
-          error: true
-        - java_method: isPinned
-          go_name: IsPinned
-          returns: boolean
           error: true
         - java_method: toString
           go_name: ToString
@@ -1311,207 +2094,39 @@ classes:
               go_name: arg1
           returns: void
           error: true
-      static_methods:
-        - java_method: createFromGenericDocument
-          go_name: CreateFromGenericDocument
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.app.appsearch.GenericDocument
-              go_name: arg1
-          returns: android.content.pm.ShortcutInfo
-          error: true
-    - java_class: android.content.pm.ShortcutInfo$Builder
-      go_type: ShortcutInfoBuilder
-      methods:
-        - java_method: addCapabilityBinding
-          go_name: AddCapabilityBinding
-          params:
-            - java_type: android.content.pm.Capability
-              go_name: arg0
-            - java_type: android.content.pm.CapabilityParams
-              go_name: arg1
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.content.pm.ShortcutInfo
-          error: true
-        - java_method: setActivity
-          go_name: SetActivity
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setDisabledMessage
-          go_name: SetDisabledMessage
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setExcludedFromSurfaces
-          go_name: SetExcludedFromSurfaces
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.PersistableBundle
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setIcon
-          go_name: SetIcon
-          params:
-            - java_type: android.graphics.drawable.Icon
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setIntent
-          go_name: SetIntent
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setIntents
-          go_name: SetIntents
-          params:
-            - java_type: android.content.Intent[]
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setLocusId
-          go_name: SetLocusId
-          params:
-            - java_type: android.content.LocusId
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setLongLabel
-          go_name: SetLongLabel
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setLongLived
-          go_name: SetLongLived
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setPerson
-          go_name: SetPerson
-          params:
-            - java_type: android.app.Person
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setPersons
-          go_name: SetPersons
-          params:
-            - java_type: android.app.Person[]
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setRank
-          go_name: SetRank
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setShortLabel
-          go_name: SetShortLabel
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-        - java_method: setStartingTheme
-          go_name: SetStartingTheme
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.pm.ShortcutInfo$Builder
-          error: true
-    - java_class: android.content.pm.ShortcutManager
-      go_type: ShortcutManager
-      obtain: system_service
-      service_name: shortcut
-      close: true
-      methods:
-        - java_method: createShortcutResultIntent
-          go_name: CreateShortcutResultIntent
-          params:
-            - java_type: android.content.pm.ShortcutInfo
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
-        - java_method: getIconMaxHeight
-          go_name: GetIconMaxHeight
-          returns: int
-          error: true
-        - java_method: getIconMaxWidth
-          go_name: GetIconMaxWidth
-          returns: int
-          error: true
-        - java_method: getMaxShortcutCountPerActivity
-          go_name: GetMaxShortcutCountPerActivity
-          returns: int
-          error: true
-        - java_method: isRateLimitingActive
-          go_name: IsRateLimitingActive
-          returns: boolean
-          error: true
-        - java_method: isRequestPinShortcutSupported
-          go_name: IsRequestPinShortcutSupported
-          returns: boolean
-          error: true
-        - java_method: pushDynamicShortcut
-          go_name: PushDynamicShortcut
-          params:
-            - java_type: android.content.pm.ShortcutInfo
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeAllDynamicShortcuts
-          go_name: RemoveAllDynamicShortcuts
-          returns: void
-          error: true
-        - java_method: reportShortcutUsed
-          go_name: ReportShortcutUsed
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestPinShortcut
-          go_name: RequestPinShortcut
-          params:
-            - java_type: android.content.pm.ShortcutInfo
-              go_name: arg0
-            - java_type: android.content.IntentSender
-              go_name: arg1
-          returns: boolean
-          error: true
-    - java_class: android.content.pm.ChangedPackages
-      go_type: ChangedPackages
+    - java_class: android.content.pm.SigningInfo
+      go_type: SigningInfo
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getSequenceNumber
-          go_name: GetSequenceNumber
+        - java_method: getApkContentsSigners
+          go_name: GetApkContentsSigners
+          returns: android.content.pm.Signature[]
+          error: true
+        - java_method: getSchemeVersion
+          go_name: GetSchemeVersion
           returns: int
+          error: true
+        - java_method: getSigningCertificateHistory
+          go_name: GetSigningCertificateHistory
+          returns: android.content.pm.Signature[]
+          error: true
+        - java_method: hasMultipleSigners
+          go_name: HasMultipleSigners
+          returns: boolean
+          error: true
+        - java_method: hasPastSigningCertificates
+          go_name: HasPastSigningCertificates
+          returns: boolean
+          error: true
+        - java_method: signersMatchExactly
+          go_name: SignersMatchExactly
+          params:
+            - java_type: android.content.pm.SigningInfo
+              go_name: arg0
+          returns: boolean
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -1522,136 +2137,27 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.ArchivedPackageInfo
-      go_type: ArchivedPackageInfo
+    - java_class: android.content.pm.SigningInfoException
+      go_type: SigningInfoException
       methods:
-        - java_method: getDefaultToDeviceProtectedStorage
-          go_name: GetDefaultToDeviceProtectedStorage
-          returns: String
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: getRequestLegacyExternalStorage
-          go_name: GetRequestLegacyExternalStorage
-          returns: String
-          error: true
-        - java_method: getSigningInfo
-          go_name: GetSigningInfo
-          returns: android.content.pm.SigningInfo
-          error: true
-        - java_method: getTargetSdkVersion
-          go_name: GetTargetSdkVersion
+        - java_method: getCode
+          go_name: GetCode
           returns: int
           error: true
-        - java_method: getUserDataFragile
-          go_name: GetUserDataFragile
-          returns: String
-          error: true
-        - java_method: getVersionCode
-          go_name: GetVersionCode
-          returns: int
-          error: true
-        - java_method: getVersionCodeMajor
-          go_name: GetVersionCodeMajor
-          returns: int
-          error: true
-        - java_method: setDefaultToDeviceProtectedStorage
-          go_name: SetDefaultToDeviceProtectedStorage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setPackageName
-          go_name: SetPackageName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setRequestLegacyExternalStorage
-          go_name: SetRequestLegacyExternalStorage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setSigningInfo
-          go_name: SetSigningInfo
-          params:
-            - java_type: android.content.pm.SigningInfo
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setTargetSdkVersion
-          go_name: SetTargetSdkVersion
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setUserDataFragile
-          go_name: SetUserDataFragile
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setVersionCode
-          go_name: SetVersionCode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-        - java_method: setVersionCodeMajor
-          go_name: SetVersionCodeMajor
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.content.pm.ArchivedPackageInfo
-          error: true
-    - java_class: android.content.pm.LabeledIntent
-      go_type: LabeledIntent
+    - java_class: android.content.pm.ConfigurationInfo
+      go_type: ConfigurationInfo
       methods:
-        - java_method: getIconResource
-          go_name: GetIconResource
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getLabelResource
-          go_name: GetLabelResource
-          returns: int
-          error: true
-        - java_method: getNonLocalizedLabel
-          go_name: GetNonLocalizedLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getSourcePackage
-          go_name: GetSourcePackage
+        - java_method: getGlEsVersion
+          go_name: GetGlEsVersion
           returns: String
           error: true
-        - java_method: loadIcon
-          go_name: LoadIcon
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: loadLabel
-          go_name: LoadLabel
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: readFromParcel
-          go_name: ReadFromParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-          returns: void
+        - java_method: toString
+          go_name: ToString
+          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -2090,8 +2596,8 @@ classes:
               go_name: arg0
           returns: android.content.pm.LauncherApps$ShortcutQuery
           error: true
-    - java_class: android.content.pm.Capability
-      go_type: Capability
+    - java_class: android.content.pm.VersionedPackage
+      go_type: VersionedPackage
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -2104,226 +2610,17 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.Capability$Builder
-      go_type: CapabilityBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.content.pm.Capability
-          error: true
-    - java_class: android.content.pm.InstallSourceInfo
-      go_type: InstallSourceInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getInitiatingPackageName
-          go_name: GetInitiatingPackageName
-          returns: String
-          error: true
-        - java_method: getInitiatingPackageSigningInfo
-          go_name: GetInitiatingPackageSigningInfo
-          returns: android.content.pm.SigningInfo
-          error: true
-        - java_method: getInstallingPackageName
-          go_name: GetInstallingPackageName
-          returns: String
-          error: true
-        - java_method: getOriginatingPackageName
-          go_name: GetOriginatingPackageName
-          returns: String
-          error: true
-        - java_method: getPackageSource
-          go_name: GetPackageSource
-          returns: int
-          error: true
-        - java_method: getUpdateOwnerPackageName
-          go_name: GetUpdateOwnerPackageName
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.ApplicationInfo
-      go_type: ApplicationInfo
-      methods:
-        - java_method: areAttributionsUserVisible
-          go_name: AreAttributionsUserVisible
-          returns: boolean
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: dump
-          go_name: Dump
-          params:
-            - java_type: android.util.Printer
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: getGwpAsanMode
-          go_name: GetGwpAsanMode
-          returns: int
-          error: true
-        - java_method: getMemtagMode
-          go_name: GetMemtagMode
-          returns: int
-          error: true
-        - java_method: getNativeHeapZeroInitialized
-          go_name: GetNativeHeapZeroInitialized
-          returns: int
-          error: true
-        - java_method: getRequestRawExternalStorageAccess
-          go_name: GetRequestRawExternalStorageAccess
-          returns: int
-          error: true
-        - java_method: isProfileable
-          go_name: IsProfileable
-          returns: boolean
-          error: true
-        - java_method: isProfileableByShell
-          go_name: IsProfileableByShell
-          returns: boolean
-          error: true
-        - java_method: isResourceOverlay
-          go_name: IsResourceOverlay
-          returns: boolean
-          error: true
-        - java_method: isVirtualPreload
-          go_name: IsVirtualPreload
-          returns: boolean
-          error: true
-        - java_method: loadDescription
-          go_name: LoadDescription
-          params:
-            - java_type: android.content.pm.PackageManager
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: getCategoryTitle
-          go_name: GetCategoryTitle
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-    - java_class: android.content.pm.ApplicationInfo$DisplayNameComparator
-      go_type: ApplicationInfoDisplayNameComparator
-      methods:
-        - java_method: compare
-          go_name: Compare2
-          params:
-            - java_type: android.content.pm.ApplicationInfo
-              go_name: arg0
-            - java_type: android.content.pm.ApplicationInfo
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: compare
-          go_name: Compare2_1
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-          returns: int
-          error: true
-    - java_class: android.content.pm.SharedLibraryInfo
-      go_type: SharedLibraryInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getDeclaringPackage
-          go_name: GetDeclaringPackage
-          returns: android.content.pm.VersionedPackage
-          error: true
-        - java_method: getLongVersion
-          go_name: GetLongVersion
+        - java_method: getLongVersionCode
+          go_name: GetLongVersionCode
           returns: long
           error: true
-        - java_method: getName
-          go_name: GetName
+        - java_method: getPackageName
+          go_name: GetPackageName
           returns: String
           error: true
-        - java_method: getType
-          go_name: GetType
+        - java_method: getVersionCode
+          go_name: GetVersionCode
           returns: int
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.PackageStats
-      go_type: PackageStats
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -2342,113 +2639,145 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.FeatureInfo
-      go_type: FeatureInfo
+    - java_class: android.content.pm.LauncherActivityInfo
+      go_type: LauncherActivityInfo
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
+        - java_method: getActivityInfo
+          go_name: GetActivityInfo
+          returns: android.content.pm.ActivityInfo
           error: true
-        - java_method: getGlEsVersion
-          go_name: GetGlEsVersion
-          returns: String
+        - java_method: getApplicationInfo
+          go_name: GetApplicationInfo
+          returns: android.content.pm.ApplicationInfo
           error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: getBadgedIcon
+          go_name: GetBadgedIcon
           params:
-            - java_type: android.os.Parcel
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.ServiceInfo
-      go_type: ServiceInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: dump
-          go_name: Dump
-          params:
-            - java_type: android.util.Printer
               go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
+          returns: android.graphics.drawable.Drawable
           error: true
-        - java_method: getForegroundServiceType
-          go_name: GetForegroundServiceType
-          returns: int
+        - java_method: getComponentName
+          go_name: GetComponentName
+          returns: android.content.ComponentName
           error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
+        - java_method: getFirstInstallTime
+          go_name: GetFirstInstallTime
+          returns: long
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: getIcon
+          go_name: GetIcon
           params:
-            - java_type: android.os.Parcel
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.PermissionInfo
-      go_type: PermissionInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getProtection
-          go_name: GetProtection
-          returns: int
-          error: true
-        - java_method: getProtectionFlags
-          go_name: GetProtectionFlags
-          returns: int
-          error: true
-        - java_method: loadDescription
-          go_name: LoadDescription
-          params:
-            - java_type: android.content.pm.PackageManager
               go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
           returns: java.lang.CharSequence
           error: true
-        - java_method: toString
-          go_name: ToString
+        - java_method: getLoadingProgress
+          go_name: GetLoadingProgress
+          returns: float
+          error: true
+        - java_method: getName
+          go_name: GetName
           returns: String
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
+        - java_method: getUser
+          go_name: GetUser
+          returns: android.os.UserHandle
           error: true
-    - java_class: android.content.pm.FeatureGroupInfo
-      go_type: FeatureGroupInfo
+    - java_class: android.content.pm.ArchivedPackageInfo
+      go_type: ArchivedPackageInfo
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getDefaultToDeviceProtectedStorage
+          go_name: GetDefaultToDeviceProtectedStorage
+          returns: String
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
+          returns: String
+          error: true
+        - java_method: getRequestLegacyExternalStorage
+          go_name: GetRequestLegacyExternalStorage
+          returns: String
+          error: true
+        - java_method: getSigningInfo
+          go_name: GetSigningInfo
+          returns: android.content.pm.SigningInfo
+          error: true
+        - java_method: getTargetSdkVersion
+          go_name: GetTargetSdkVersion
           returns: int
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: getUserDataFragile
+          go_name: GetUserDataFragile
+          returns: String
+          error: true
+        - java_method: getVersionCode
+          go_name: GetVersionCode
+          returns: int
+          error: true
+        - java_method: getVersionCodeMajor
+          go_name: GetVersionCodeMajor
+          returns: int
+          error: true
+        - java_method: setDefaultToDeviceProtectedStorage
+          go_name: SetDefaultToDeviceProtectedStorage
           params:
-            - java_type: android.os.Parcel
+            - java_type: String
               go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setPackageName
+          go_name: SetPackageName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setRequestLegacyExternalStorage
+          go_name: SetRequestLegacyExternalStorage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setSigningInfo
+          go_name: SetSigningInfo
+          params:
+            - java_type: android.content.pm.SigningInfo
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setTargetSdkVersion
+          go_name: SetTargetSdkVersion
+          params:
             - java_type: int
-              go_name: arg1
-          returns: void
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setUserDataFragile
+          go_name: SetUserDataFragile
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setVersionCode
+          go_name: SetVersionCode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
+          error: true
+        - java_method: setVersionCodeMajor
+          go_name: SetVersionCodeMajor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.content.pm.ArchivedPackageInfo
           error: true
     - java_class: android.content.pm.PackageItemInfo
       go_type: PackageItemInfo
@@ -2527,153 +2856,23 @@ classes:
               go_name: arg1
           returns: int
           error: true
-    - java_class: android.content.pm.ConfigurationInfo
-      go_type: ConfigurationInfo
+    - java_class: android.content.pm.PackageStats
+      go_type: PackageStats
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getGlEsVersion
-          go_name: GetGlEsVersion
-          returns: String
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: equals
+          go_name: Equals
           params:
-            - java_type: android.os.Parcel
+            - java_type: java.lang.Object
               go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
+          returns: boolean
           error: true
-    - java_class: android.content.pm.ActivityInfo
-      go_type: ActivityInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
-          error: true
-        - java_method: dump
-          go_name: Dump
-          params:
-            - java_type: android.util.Printer
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: getThemeResource
-          go_name: GetThemeResource
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.ActivityInfo$WindowLayout
-      go_type: ActivityInfoWindowLayout
-    - java_class: android.content.pm.Checksum
-      go_type: Checksum
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getValue
-          go_name: GetValue
-          returns: '[B'
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.LauncherActivityInfo
-      go_type: LauncherActivityInfo
-      methods:
-        - java_method: getActivityInfo
-          go_name: GetActivityInfo
-          returns: android.content.pm.ActivityInfo
-          error: true
-        - java_method: getApplicationInfo
-          go_name: GetApplicationInfo
-          returns: android.content.pm.ApplicationInfo
-          error: true
-        - java_method: getBadgedIcon
-          go_name: GetBadgedIcon
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getComponentName
-          go_name: GetComponentName
-          returns: android.content.ComponentName
-          error: true
-        - java_method: getFirstInstallTime
-          go_name: GetFirstInstallTime
-          returns: long
-          error: true
-        - java_method: getIcon
-          go_name: GetIcon
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getLoadingProgress
-          go_name: GetLoadingProgress
-          returns: float
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getUser
-          go_name: GetUser
-          returns: android.os.UserHandle
-          error: true
-    - java_class: android.content.pm.ProviderInfo
-      go_type: ProviderInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: dump
-          go_name: Dump
-          params:
-            - java_type: android.util.Printer
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
           error: true
         - java_method: toString
           go_name: ToString
@@ -2734,50 +2933,6 @@ classes:
             - java_type: android.graphics.drawable.Drawable
               go_name: arg0
           returns: android.content.pm.ArchivedActivityInfo
-          error: true
-    - java_class: android.content.pm.PathPermission
-      go_type: PathPermission
-      methods:
-        - java_method: getReadPermission
-          go_name: GetReadPermission
-          returns: String
-          error: true
-        - java_method: getWritePermission
-          go_name: GetWritePermission
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.Attribution
-      go_type: Attribution
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: int
-          error: true
-        - java_method: getTag
-          go_name: GetTag
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
           error: true
     - java_class: android.content.pm.PackageManager
       go_type: PackageManager
@@ -3902,24 +4057,20 @@ classes:
               go_name: arg0
           returns: android.content.pm.PackageManager$ResolveInfoFlags
           error: true
-    - java_class: android.content.pm.ComponentInfo
-      go_type: ComponentInfo
+    - java_class: android.content.pm.Attribution
+      go_type: Attribution
       methods:
-        - java_method: getBannerResource
-          go_name: GetBannerResource
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getIconResource
-          go_name: GetIconResource
+        - java_method: getLabel
+          go_name: GetLabel
           returns: int
           error: true
-        - java_method: getLogoResource
-          go_name: GetLogoResource
-          returns: int
-          error: true
-        - java_method: isEnabled
-          go_name: IsEnabled
-          returns: boolean
+        - java_method: getTag
+          go_name: GetTag
+          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -3973,442 +4124,9 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.content.pm.InstrumentationInfo
-      go_type: InstrumentationInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.Signature
-      go_type: Signature
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toByteArray
-          go_name: ToByteArray
-          returns: '[B'
-          error: true
-        - java_method: toChars
-          go_name: ToChars0
-          returns: char[]
-          error: true
-        - java_method: toChars
-          go_name: ToChars2_1
-          params:
-            - java_type: char[]
-              go_name: arg0
-            - java_type: '[I'
-              go_name: arg1
-          returns: char[]
-          error: true
-        - java_method: toCharsString
-          go_name: ToCharsString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.ApkChecksum
-      go_type: ApkChecksum
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getInstallerCertificate
-          go_name: GetInstallerCertificate
-          returns: java.security.cert.Certificate
-          error: true
-        - java_method: getInstallerPackageName
-          go_name: GetInstallerPackageName
-          returns: String
-          error: true
-        - java_method: getSplitName
-          go_name: GetSplitName
-          returns: String
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getValue
-          go_name: GetValue
-          returns: '[B'
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.content.pm.VersionedPackage
-      go_type: VersionedPackage
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getLongVersionCode
-          go_name: GetLongVersionCode
-          returns: long
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: String
-          error: true
-        - java_method: getVersionCode
-          go_name: GetVersionCode
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
 constants:
     - go_name: Creator
       value: "0"
-      go_type: int
-    - go_name: VersionJar
-      value: "1"
-      go_type: int
-    - go_name: VersionSigningBlockV2
-      value: "2"
-      go_type: int
-    - go_name: VersionSigningBlockV3
-      value: "3"
-      go_type: int
-    - go_name: VersionSigningBlockV4
-      value: "4"
-      go_type: int
-    - go_name: ActionCanInteractAcrossProfilesChanged
-      value: '"android.content.pm.action.CAN_INTERACT_ACROSS_PROFILES_CHANGED"'
-      go_type: string
-    - go_name: ActionSessionCommitted
-      value: '"android.content.pm.action.SESSION_COMMITTED"'
-      go_type: string
-    - go_name: ActionSessionDetails
-      value: '"android.content.pm.action.SESSION_DETAILS"'
-      go_type: string
-    - go_name: ActionSessionUpdated
-      value: '"android.content.pm.action.SESSION_UPDATED"'
-      go_type: string
-    - go_name: ExtraInstallConstraints
-      value: '"android.content.pm.extra.INSTALL_CONSTRAINTS"'
-      go_type: string
-    - go_name: ExtraInstallConstraintsResult
-      value: '"android.content.pm.extra.INSTALL_CONSTRAINTS_RESULT"'
-      go_type: string
-    - go_name: ExtraOtherPackageName
-      value: '"android.content.pm.extra.OTHER_PACKAGE_NAME"'
-      go_type: string
-    - go_name: ExtraPackageName
-      value: '"android.content.pm.extra.PACKAGE_NAME"'
-      go_type: string
-    - go_name: ExtraPreApproval
-      value: '"android.content.pm.extra.PRE_APPROVAL"'
-      go_type: string
-    - go_name: ExtraSession
-      value: '"android.content.pm.extra.SESSION"'
-      go_type: string
-    - go_name: ExtraSessionId
-      value: '"android.content.pm.extra.SESSION_ID"'
-      go_type: string
-    - go_name: ExtraStatus
-      value: '"android.content.pm.extra.STATUS"'
-      go_type: string
-    - go_name: ExtraStatusMessage
-      value: '"android.content.pm.extra.STATUS_MESSAGE"'
-      go_type: string
-    - go_name: ExtraStoragePath
-      value: '"android.content.pm.extra.STORAGE_PATH"'
-      go_type: string
-    - go_name: ExtraUnarchiveAllUsers
-      value: '"android.content.pm.extra.UNARCHIVE_ALL_USERS"'
-      go_type: string
-    - go_name: ExtraUnarchiveId
-      value: '"android.content.pm.extra.UNARCHIVE_ID"'
-      go_type: string
-    - go_name: ExtraUnarchivePackageName
-      value: '"android.content.pm.extra.UNARCHIVE_PACKAGE_NAME"'
-      go_type: string
-    - go_name: ExtraUnarchiveStatus
-      value: '"android.content.pm.extra.UNARCHIVE_STATUS"'
-      go_type: string
-    - go_name: PackageSourceDownloadedFile
-      value: "4"
-      go_type: int
-    - go_name: PackageSourceLocalFile
-      value: "3"
-      go_type: int
-    - go_name: PackageSourceOther
-      value: "1"
-      go_type: int
-    - go_name: PackageSourceStore
-      value: "2"
-      go_type: int
-    - go_name: PackageSourceUnspecified
-      value: "0"
-      go_type: int
-    - go_name: StatusFailure
-      value: "1"
-      go_type: int
-    - go_name: StatusFailureAborted
-      value: "3"
-      go_type: int
-    - go_name: StatusFailureBlocked
-      value: "2"
-      go_type: int
-    - go_name: StatusFailureConflict
-      value: "5"
-      go_type: int
-    - go_name: StatusFailureIncompatible
-      value: "7"
-      go_type: int
-    - go_name: StatusFailureInvalid
-      value: "4"
-      go_type: int
-    - go_name: StatusFailureStorage
-      value: "6"
-      go_type: int
-    - go_name: StatusFailureTimeout
-      value: "8"
-      go_type: int
-    - go_name: StatusPendingUserAction
-      value: "-1"
-      go_type: int
-    - go_name: StatusSuccess
-      value: "0"
-      go_type: int
-    - go_name: UnarchivalErrorInstallerDisabled
-      value: "4"
-      go_type: int
-    - go_name: UnarchivalErrorInstallerUninstalled
-      value: "5"
-      go_type: int
-    - go_name: UnarchivalErrorInsufficientStorage
-      value: "2"
-      go_type: int
-    - go_name: UnarchivalErrorNoConnectivity
-      value: "3"
-      go_type: int
-    - go_name: UnarchivalErrorUserActionNeeded
-      value: "1"
-      go_type: int
-    - go_name: UnarchivalGenericError
-      value: "100"
-      go_type: int
-    - go_name: UnarchivalOk
-      value: "0"
-      go_type: int
-    - go_name: GentleUpdate
-      value: "0"
-      go_type: int
-    - go_name: InvalidId
-      value: "-1"
-      go_type: int
-    - go_name: SessionActivationFailed
-      value: "2"
-      go_type: int
-    - go_name: SessionConflict
-      value: "4"
-      go_type: int
-    - go_name: SessionNoError
-      value: "0"
-      go_type: int
-    - go_name: SessionUnknownError
-      value: "3"
-      go_type: int
-    - go_name: SessionVerificationFailed
-      value: "1"
-      go_type: int
-    - go_name: StagedSessionActivationFailed
-      value: "2"
-      go_type: int
-    - go_name: StagedSessionConflict
-      value: "4"
-      go_type: int
-    - go_name: StagedSessionNoError
-      value: "0"
-      go_type: int
-    - go_name: StagedSessionUnknown
-      value: "3"
-      go_type: int
-    - go_name: StagedSessionVerificationFailed
-      value: "1"
-      go_type: int
-    - go_name: ModeFullInstall
-      value: "1"
-      go_type: int
-    - go_name: ModeInheritExisting
-      value: "2"
-      go_type: int
-    - go_name: PermissionStateDefault
-      value: "0"
-      go_type: int
-    - go_name: PermissionStateDenied
-      value: "2"
-      go_type: int
-    - go_name: PermissionStateGranted
-      value: "1"
-      go_type: int
-    - go_name: RestrictedPermissionsAll
-      value: "0"
-      go_type: int
-    - go_name: UserActionNotRequired
-      value: "2"
-      go_type: int
-    - go_name: UserActionRequired
-      value: "1"
-      go_type: int
-    - go_name: UserActionUnspecified
-      value: "0"
-      go_type: int
-    - go_name: FlagPersonalInfo
-      value: "1"
-      go_type: int
-    - go_name: InstallLocationAuto
-      value: "0"
-      go_type: int
-    - go_name: InstallLocationInternalOnly
-      value: "1"
-      go_type: int
-    - go_name: InstallLocationPreferExternal
-      value: "2"
-      go_type: int
-    - go_name: RequestedPermissionGranted
-      value: "2"
-      go_type: int
-    - go_name: RequestedPermissionImplicit
-      value: "4"
-      go_type: int
-    - go_name: RequestedPermissionNeverForLocation
-      value: "65536"
-      go_type: int
-    - go_name: PrivateSpaceEntrypointHidden
-      value: '"private_space_entrypoint_hidden"'
-      go_type: string
-    - go_name: DisabledReasonAppChanged
-      value: "2"
-      go_type: int
-    - go_name: DisabledReasonBackupNotSupported
-      value: "101"
-      go_type: int
-    - go_name: DisabledReasonByApp
-      value: "1"
-      go_type: int
-    - go_name: DisabledReasonNotDisabled
-      value: "0"
-      go_type: int
-    - go_name: DisabledReasonOtherRestoreIssue
-      value: "103"
-      go_type: int
-    - go_name: DisabledReasonSignatureMismatch
-      value: "102"
-      go_type: int
-    - go_name: DisabledReasonUnknown
-      value: "3"
-      go_type: int
-    - go_name: DisabledReasonVersionLower
-      value: "100"
-      go_type: int
-    - go_name: ShortcutCategoryConversation
-      value: '"android.shortcut.conversation"'
-      go_type: string
-    - go_name: SurfaceLauncher
-      value: "1"
-      go_type: int
-    - go_name: FlagMatchCached
-      value: "8"
-      go_type: int
-    - go_name: FlagMatchDynamic
-      value: "2"
-      go_type: int
-    - go_name: FlagMatchManifest
-      value: "1"
-      go_type: int
-    - go_name: FlagMatchPinned
-      value: "4"
-      go_type: int
-    - go_name: ActionConfirmPinAppwidget
-      value: '"android.content.pm.action.CONFIRM_PIN_APPWIDGET"'
-      go_type: string
-    - go_name: ActionConfirmPinShortcut
-      value: '"android.content.pm.action.CONFIRM_PIN_SHORTCUT"'
-      go_type: string
-    - go_name: ExtraPinItemRequest
-      value: '"android.content.pm.extra.PIN_ITEM_REQUEST"'
-      go_type: string
-    - go_name: RequestTypeAppwidget
-      value: "2"
-      go_type: int
-    - go_name: RequestTypeShortcut
-      value: "1"
-      go_type: int
-    - go_name: FlagGetKeyFieldsOnly
-      value: "4"
-      go_type: int
-    - go_name: FlagMatchPinnedByAnyLauncher
-      value: "1024"
       go_type: int
     - go_name: CategoryAccessibility
       value: "8"
@@ -4575,164 +4293,11 @@ constants:
     - go_name: ZeroinitEnabled
       value: "1"
       go_type: int
-    - go_name: TypeBuiltin
-      value: "0"
-      go_type: int
-    - go_name: TypeDynamic
-      value: "1"
-      go_type: int
-    - go_name: TypeSdkPackage
-      value: "3"
-      go_type: int
-    - go_name: TypeStatic
-      value: "2"
-      go_type: int
-    - go_name: VersionUndefined
-      value: "-1"
-      go_type: int
-    - go_name: FlagRequired
-      value: "1"
-      go_type: int
-    - go_name: GlEsVersionUndefined
-      value: "0"
-      go_type: int
-    - go_name: FlagAllowSharedIsolatedProcess
-      value: "16"
-      go_type: int
-    - go_name: FlagExternalService
-      value: "4"
-      go_type: int
-    - go_name: FlagIsolatedProcess
-      value: "2"
-      go_type: int
+    - go_name: ActionCanInteractAcrossProfilesChanged
+      value: '"android.content.pm.action.CAN_INTERACT_ACROSS_PROFILES_CHANGED"'
+      go_type: string
     - go_name: FlagSingleUser
       value: "1073741824"
-      go_type: int
-    - go_name: FlagStopWithTask
-      value: "1"
-      go_type: int
-    - go_name: FlagUseAppZygote
-      value: "8"
-      go_type: int
-    - go_name: ForegroundServiceTypeCamera
-      value: "64"
-      go_type: int
-    - go_name: ForegroundServiceTypeConnectedDevice
-      value: "16"
-      go_type: int
-    - go_name: ForegroundServiceTypeDataSync
-      value: "1"
-      go_type: int
-    - go_name: ForegroundServiceTypeHealth
-      value: "256"
-      go_type: int
-    - go_name: ForegroundServiceTypeLocation
-      value: "8"
-      go_type: int
-    - go_name: ForegroundServiceTypeManifest
-      value: "-1"
-      go_type: int
-    - go_name: ForegroundServiceTypeMediaPlayback
-      value: "2"
-      go_type: int
-    - go_name: ForegroundServiceTypeMediaProcessing
-      value: "8192"
-      go_type: int
-    - go_name: ForegroundServiceTypeMediaProjection
-      value: "32"
-      go_type: int
-    - go_name: ForegroundServiceTypeMicrophone
-      value: "128"
-      go_type: int
-    - go_name: ForegroundServiceTypeNone
-      value: "0"
-      go_type: int
-    - go_name: ForegroundServiceTypePhoneCall
-      value: "4"
-      go_type: int
-    - go_name: ForegroundServiceTypeRemoteMessaging
-      value: "512"
-      go_type: int
-    - go_name: ForegroundServiceTypeShortService
-      value: "2048"
-      go_type: int
-    - go_name: ForegroundServiceTypeSpecialUse
-      value: "1073741824"
-      go_type: int
-    - go_name: ForegroundServiceTypeSystemExempted
-      value: "1024"
-      go_type: int
-    - go_name: FlagCostsMoney
-      value: "1"
-      go_type: int
-    - go_name: FlagHardRestricted
-      value: "4"
-      go_type: int
-    - go_name: FlagImmutablyRestricted
-      value: "16"
-      go_type: int
-    - go_name: FlagSoftRestricted
-      value: "8"
-      go_type: int
-    - go_name: ProtectionDangerous
-      value: "1"
-      go_type: int
-    - go_name: ProtectionFlagAppop
-      value: "64"
-      go_type: int
-    - go_name: ProtectionFlagDevelopment
-      value: "32"
-      go_type: int
-    - go_name: ProtectionFlagInstaller
-      value: "256"
-      go_type: int
-    - go_name: ProtectionFlagInstant
-      value: "4096"
-      go_type: int
-    - go_name: ProtectionFlagPre23
-      value: "128"
-      go_type: int
-    - go_name: ProtectionFlagPreinstalled
-      value: "1024"
-      go_type: int
-    - go_name: ProtectionFlagPrivileged
-      value: "16"
-      go_type: int
-    - go_name: ProtectionFlagRuntimeOnly
-      value: "8192"
-      go_type: int
-    - go_name: ProtectionFlagSetup
-      value: "2048"
-      go_type: int
-    - go_name: ProtectionFlagSystem
-      value: "16"
-      go_type: int
-    - go_name: ProtectionFlagVerifier
-      value: "512"
-      go_type: int
-    - go_name: ProtectionInternal
-      value: "4"
-      go_type: int
-    - go_name: ProtectionMaskBase
-      value: "15"
-      go_type: int
-    - go_name: ProtectionMaskFlags
-      value: "65520"
-      go_type: int
-    - go_name: ProtectionNormal
-      value: "0"
-      go_type: int
-    - go_name: ProtectionSignature
-      value: "2"
-      go_type: int
-    - go_name: ProtectionSignatureOrSystem
-      value: "3"
-      go_type: int
-    - go_name: InputFeatureFiveWayNav
-      value: "2"
-      go_type: int
-    - go_name: InputFeatureHardKeyboard
-      value: "1"
       go_type: int
     - go_name: ColorModeDefault
       value: "0"
@@ -4935,6 +4500,99 @@ constants:
     - go_name: UioptionSplitActionBarWhenNarrow
       value: "1"
       go_type: int
+    - go_name: FlagAllowSharedIsolatedProcess
+      value: "16"
+      go_type: int
+    - go_name: FlagExternalService
+      value: "4"
+      go_type: int
+    - go_name: FlagIsolatedProcess
+      value: "2"
+      go_type: int
+    - go_name: FlagStopWithTask
+      value: "1"
+      go_type: int
+    - go_name: FlagUseAppZygote
+      value: "8"
+      go_type: int
+    - go_name: ForegroundServiceTypeCamera
+      value: "64"
+      go_type: int
+    - go_name: ForegroundServiceTypeConnectedDevice
+      value: "16"
+      go_type: int
+    - go_name: ForegroundServiceTypeDataSync
+      value: "1"
+      go_type: int
+    - go_name: ForegroundServiceTypeHealth
+      value: "256"
+      go_type: int
+    - go_name: ForegroundServiceTypeLocation
+      value: "8"
+      go_type: int
+    - go_name: ForegroundServiceTypeManifest
+      value: "-1"
+      go_type: int
+    - go_name: ForegroundServiceTypeMediaPlayback
+      value: "2"
+      go_type: int
+    - go_name: ForegroundServiceTypeMediaProcessing
+      value: "8192"
+      go_type: int
+    - go_name: ForegroundServiceTypeMediaProjection
+      value: "32"
+      go_type: int
+    - go_name: ForegroundServiceTypeMicrophone
+      value: "128"
+      go_type: int
+    - go_name: ForegroundServiceTypeNone
+      value: "0"
+      go_type: int
+    - go_name: ForegroundServiceTypePhoneCall
+      value: "4"
+      go_type: int
+    - go_name: ForegroundServiceTypeRemoteMessaging
+      value: "512"
+      go_type: int
+    - go_name: ForegroundServiceTypeShortService
+      value: "2048"
+      go_type: int
+    - go_name: ForegroundServiceTypeSpecialUse
+      value: "1073741824"
+      go_type: int
+    - go_name: ForegroundServiceTypeSystemExempted
+      value: "1024"
+      go_type: int
+    - go_name: DisabledReasonAppChanged
+      value: "2"
+      go_type: int
+    - go_name: DisabledReasonBackupNotSupported
+      value: "101"
+      go_type: int
+    - go_name: DisabledReasonByApp
+      value: "1"
+      go_type: int
+    - go_name: DisabledReasonNotDisabled
+      value: "0"
+      go_type: int
+    - go_name: DisabledReasonOtherRestoreIssue
+      value: "103"
+      go_type: int
+    - go_name: DisabledReasonSignatureMismatch
+      value: "102"
+      go_type: int
+    - go_name: DisabledReasonUnknown
+      value: "3"
+      go_type: int
+    - go_name: DisabledReasonVersionLower
+      value: "100"
+      go_type: int
+    - go_name: ShortcutCategoryConversation
+      value: '"android.shortcut.conversation"'
+      go_type: string
+    - go_name: SurfaceLauncher
+      value: "1"
+      go_type: int
     - go_name: TypePartialMerkleRoot1mSha256
       value: "32"
       go_type: int
@@ -4955,6 +4613,348 @@ constants:
       go_type: int
     - go_name: TypeWholeSha512
       value: "16"
+      go_type: int
+    - go_name: PrivateSpaceEntrypointHidden
+      value: '"private_space_entrypoint_hidden"'
+      go_type: string
+    - go_name: FlagMatchCached
+      value: "8"
+      go_type: int
+    - go_name: FlagMatchDynamic
+      value: "2"
+      go_type: int
+    - go_name: FlagMatchManifest
+      value: "1"
+      go_type: int
+    - go_name: FlagMatchPinned
+      value: "4"
+      go_type: int
+    - go_name: FlagPersonalInfo
+      value: "1"
+      go_type: int
+    - go_name: FlagCostsMoney
+      value: "1"
+      go_type: int
+    - go_name: FlagHardRestricted
+      value: "4"
+      go_type: int
+    - go_name: FlagImmutablyRestricted
+      value: "16"
+      go_type: int
+    - go_name: FlagSoftRestricted
+      value: "8"
+      go_type: int
+    - go_name: ProtectionDangerous
+      value: "1"
+      go_type: int
+    - go_name: ProtectionFlagAppop
+      value: "64"
+      go_type: int
+    - go_name: ProtectionFlagDevelopment
+      value: "32"
+      go_type: int
+    - go_name: ProtectionFlagInstaller
+      value: "256"
+      go_type: int
+    - go_name: ProtectionFlagInstant
+      value: "4096"
+      go_type: int
+    - go_name: ProtectionFlagPre23
+      value: "128"
+      go_type: int
+    - go_name: ProtectionFlagPreinstalled
+      value: "1024"
+      go_type: int
+    - go_name: ProtectionFlagPrivileged
+      value: "16"
+      go_type: int
+    - go_name: ProtectionFlagRuntimeOnly
+      value: "8192"
+      go_type: int
+    - go_name: ProtectionFlagSetup
+      value: "2048"
+      go_type: int
+    - go_name: ProtectionFlagSystem
+      value: "16"
+      go_type: int
+    - go_name: ProtectionFlagVerifier
+      value: "512"
+      go_type: int
+    - go_name: ProtectionInternal
+      value: "4"
+      go_type: int
+    - go_name: ProtectionMaskBase
+      value: "15"
+      go_type: int
+    - go_name: ProtectionMaskFlags
+      value: "65520"
+      go_type: int
+    - go_name: ProtectionNormal
+      value: "0"
+      go_type: int
+    - go_name: ProtectionSignature
+      value: "2"
+      go_type: int
+    - go_name: ProtectionSignatureOrSystem
+      value: "3"
+      go_type: int
+    - go_name: TypeBuiltin
+      value: "0"
+      go_type: int
+    - go_name: TypeDynamic
+      value: "1"
+      go_type: int
+    - go_name: TypeSdkPackage
+      value: "3"
+      go_type: int
+    - go_name: TypeStatic
+      value: "2"
+      go_type: int
+    - go_name: VersionUndefined
+      value: "-1"
+      go_type: int
+    - go_name: ActionSessionCommitted
+      value: '"android.content.pm.action.SESSION_COMMITTED"'
+      go_type: string
+    - go_name: ActionSessionDetails
+      value: '"android.content.pm.action.SESSION_DETAILS"'
+      go_type: string
+    - go_name: ActionSessionUpdated
+      value: '"android.content.pm.action.SESSION_UPDATED"'
+      go_type: string
+    - go_name: ExtraInstallConstraints
+      value: '"android.content.pm.extra.INSTALL_CONSTRAINTS"'
+      go_type: string
+    - go_name: ExtraInstallConstraintsResult
+      value: '"android.content.pm.extra.INSTALL_CONSTRAINTS_RESULT"'
+      go_type: string
+    - go_name: ExtraOtherPackageName
+      value: '"android.content.pm.extra.OTHER_PACKAGE_NAME"'
+      go_type: string
+    - go_name: ExtraPackageName
+      value: '"android.content.pm.extra.PACKAGE_NAME"'
+      go_type: string
+    - go_name: ExtraPreApproval
+      value: '"android.content.pm.extra.PRE_APPROVAL"'
+      go_type: string
+    - go_name: ExtraSession
+      value: '"android.content.pm.extra.SESSION"'
+      go_type: string
+    - go_name: ExtraSessionId
+      value: '"android.content.pm.extra.SESSION_ID"'
+      go_type: string
+    - go_name: ExtraStatus
+      value: '"android.content.pm.extra.STATUS"'
+      go_type: string
+    - go_name: ExtraStatusMessage
+      value: '"android.content.pm.extra.STATUS_MESSAGE"'
+      go_type: string
+    - go_name: ExtraStoragePath
+      value: '"android.content.pm.extra.STORAGE_PATH"'
+      go_type: string
+    - go_name: ExtraUnarchiveAllUsers
+      value: '"android.content.pm.extra.UNARCHIVE_ALL_USERS"'
+      go_type: string
+    - go_name: ExtraUnarchiveId
+      value: '"android.content.pm.extra.UNARCHIVE_ID"'
+      go_type: string
+    - go_name: ExtraUnarchivePackageName
+      value: '"android.content.pm.extra.UNARCHIVE_PACKAGE_NAME"'
+      go_type: string
+    - go_name: ExtraUnarchiveStatus
+      value: '"android.content.pm.extra.UNARCHIVE_STATUS"'
+      go_type: string
+    - go_name: PackageSourceDownloadedFile
+      value: "4"
+      go_type: int
+    - go_name: PackageSourceLocalFile
+      value: "3"
+      go_type: int
+    - go_name: PackageSourceOther
+      value: "1"
+      go_type: int
+    - go_name: PackageSourceStore
+      value: "2"
+      go_type: int
+    - go_name: PackageSourceUnspecified
+      value: "0"
+      go_type: int
+    - go_name: StatusFailure
+      value: "1"
+      go_type: int
+    - go_name: StatusFailureAborted
+      value: "3"
+      go_type: int
+    - go_name: StatusFailureBlocked
+      value: "2"
+      go_type: int
+    - go_name: StatusFailureConflict
+      value: "5"
+      go_type: int
+    - go_name: StatusFailureIncompatible
+      value: "7"
+      go_type: int
+    - go_name: StatusFailureInvalid
+      value: "4"
+      go_type: int
+    - go_name: StatusFailureStorage
+      value: "6"
+      go_type: int
+    - go_name: StatusFailureTimeout
+      value: "8"
+      go_type: int
+    - go_name: StatusPendingUserAction
+      value: "-1"
+      go_type: int
+    - go_name: StatusSuccess
+      value: "0"
+      go_type: int
+    - go_name: UnarchivalErrorInstallerDisabled
+      value: "4"
+      go_type: int
+    - go_name: UnarchivalErrorInstallerUninstalled
+      value: "5"
+      go_type: int
+    - go_name: UnarchivalErrorInsufficientStorage
+      value: "2"
+      go_type: int
+    - go_name: UnarchivalErrorNoConnectivity
+      value: "3"
+      go_type: int
+    - go_name: UnarchivalErrorUserActionNeeded
+      value: "1"
+      go_type: int
+    - go_name: UnarchivalGenericError
+      value: "100"
+      go_type: int
+    - go_name: UnarchivalOk
+      value: "0"
+      go_type: int
+    - go_name: GentleUpdate
+      value: "0"
+      go_type: int
+    - go_name: InvalidId
+      value: "-1"
+      go_type: int
+    - go_name: SessionActivationFailed
+      value: "2"
+      go_type: int
+    - go_name: SessionConflict
+      value: "4"
+      go_type: int
+    - go_name: SessionNoError
+      value: "0"
+      go_type: int
+    - go_name: SessionUnknownError
+      value: "3"
+      go_type: int
+    - go_name: SessionVerificationFailed
+      value: "1"
+      go_type: int
+    - go_name: StagedSessionActivationFailed
+      value: "2"
+      go_type: int
+    - go_name: StagedSessionConflict
+      value: "4"
+      go_type: int
+    - go_name: StagedSessionNoError
+      value: "0"
+      go_type: int
+    - go_name: StagedSessionUnknown
+      value: "3"
+      go_type: int
+    - go_name: StagedSessionVerificationFailed
+      value: "1"
+      go_type: int
+    - go_name: ModeFullInstall
+      value: "1"
+      go_type: int
+    - go_name: ModeInheritExisting
+      value: "2"
+      go_type: int
+    - go_name: PermissionStateDefault
+      value: "0"
+      go_type: int
+    - go_name: PermissionStateDenied
+      value: "2"
+      go_type: int
+    - go_name: PermissionStateGranted
+      value: "1"
+      go_type: int
+    - go_name: RestrictedPermissionsAll
+      value: "0"
+      go_type: int
+    - go_name: UserActionNotRequired
+      value: "2"
+      go_type: int
+    - go_name: UserActionRequired
+      value: "1"
+      go_type: int
+    - go_name: UserActionUnspecified
+      value: "0"
+      go_type: int
+    - go_name: InstallLocationAuto
+      value: "0"
+      go_type: int
+    - go_name: InstallLocationInternalOnly
+      value: "1"
+      go_type: int
+    - go_name: InstallLocationPreferExternal
+      value: "2"
+      go_type: int
+    - go_name: RequestedPermissionGranted
+      value: "2"
+      go_type: int
+    - go_name: RequestedPermissionImplicit
+      value: "4"
+      go_type: int
+    - go_name: RequestedPermissionNeverForLocation
+      value: "65536"
+      go_type: int
+    - go_name: FlagRequired
+      value: "1"
+      go_type: int
+    - go_name: GlEsVersionUndefined
+      value: "0"
+      go_type: int
+    - go_name: VersionJar
+      value: "1"
+      go_type: int
+    - go_name: VersionSigningBlockV2
+      value: "2"
+      go_type: int
+    - go_name: VersionSigningBlockV3
+      value: "3"
+      go_type: int
+    - go_name: VersionSigningBlockV4
+      value: "4"
+      go_type: int
+    - go_name: InputFeatureFiveWayNav
+      value: "2"
+      go_type: int
+    - go_name: InputFeatureHardKeyboard
+      value: "1"
+      go_type: int
+    - go_name: ActionConfirmPinAppwidget
+      value: '"android.content.pm.action.CONFIRM_PIN_APPWIDGET"'
+      go_type: string
+    - go_name: ActionConfirmPinShortcut
+      value: '"android.content.pm.action.CONFIRM_PIN_SHORTCUT"'
+      go_type: string
+    - go_name: ExtraPinItemRequest
+      value: '"android.content.pm.extra.PIN_ITEM_REQUEST"'
+      go_type: string
+    - go_name: RequestTypeAppwidget
+      value: "2"
+      go_type: int
+    - go_name: RequestTypeShortcut
+      value: "1"
+      go_type: int
+    - go_name: FlagGetKeyFieldsOnly
+      value: "4"
+      go_type: int
+    - go_name: FlagMatchPinnedByAnyLauncher
+      value: "1024"
       go_type: int
     - go_name: CertInputRawX509
       value: "0"

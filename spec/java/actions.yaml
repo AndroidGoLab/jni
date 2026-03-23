@@ -5,6 +5,35 @@
 package: actions
 go_import: github.com/AndroidGoLab/jni/service/controls/actions
 classes:
+    - java_class: android.service.controls.actions.CommandAction
+      go_type: CommandAction
+      methods:
+        - java_method: getActionType
+          go_name: GetActionType
+          returns: int
+          error: true
+    - java_class: android.service.controls.actions.ModeAction
+      go_type: ModeAction
+      methods:
+        - java_method: getActionType
+          go_name: GetActionType
+          returns: int
+          error: true
+        - java_method: getNewMode
+          go_name: GetNewMode
+          returns: int
+          error: true
+    - java_class: android.service.controls.actions.BooleanAction
+      go_type: BooleanAction
+      methods:
+        - java_method: getActionType
+          go_name: GetActionType
+          returns: int
+          error: true
+        - java_method: getNewState
+          go_name: GetNewState
+          returns: boolean
+          error: true
     - java_class: android.service.controls.actions.ControlAction
       go_type: ControlAction
       methods:
@@ -32,28 +61,6 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.service.controls.actions.ModeAction
-      go_type: ModeAction
-      methods:
-        - java_method: getActionType
-          go_name: GetActionType
-          returns: int
-          error: true
-        - java_method: getNewMode
-          go_name: GetNewMode
-          returns: int
-          error: true
-    - java_class: android.service.controls.actions.BooleanAction
-      go_type: BooleanAction
-      methods:
-        - java_method: getActionType
-          go_name: GetActionType
-          returns: int
-          error: true
-        - java_method: getNewState
-          go_name: GetNewState
-          returns: boolean
-          error: true
     - java_class: android.service.controls.actions.FloatAction
       go_type: FloatAction
       methods:
@@ -64,13 +71,6 @@ classes:
         - java_method: getNewValue
           go_name: GetNewValue
           returns: float
-          error: true
-    - java_class: android.service.controls.actions.CommandAction
-      go_type: CommandAction
-      methods:
-        - java_method: getActionType
-          go_name: GetActionType
-          returns: int
           error: true
 constants:
     - go_name: ResponseChallengeAck

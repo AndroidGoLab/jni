@@ -313,10 +313,23 @@ func classFromJavap(jc *JavapClass, goPkg string) SpecClass {
 	return cls
 }
 
+// goVetMethodConflicts lists method names that conflict with well-known
+// Go stdlib interface methods (io.ByteReader, io.ByteWriter). These
+// cause "should have signature" vet errors when the generated method
+// has different params or return types. Always suffix to avoid.
+var goVetMethodConflicts = map[string]bool{
+	"ReadByte":  true,
+	"WriteByte": true,
+}
+
 func specMethodFromJavap(m JavapMethod) SpecMethod {
+	goName := javaMethodToGoName(m.Name)
+	if goVetMethodConflicts[goName] {
+		goName += "Value"
+	}
 	sm := SpecMethod{
 		JavaMethod: m.Name,
-		GoName:     javaMethodToGoName(m.Name),
+		GoName:     goName,
 		Returns:    javaTypeToSpecType(m.ReturnType),
 		Error:      true,
 	}

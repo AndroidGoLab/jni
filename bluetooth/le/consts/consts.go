@@ -3,22 +3,23 @@
 package consts
 
 const (
-	Creator                                      int = 0
-	DataComplete                                 int = 0
-	DataTruncated                                int = 2
-	PeriodicIntervalNotPresent                   int = 0
-	PhyUnused                                    int = 0
-	SidNotPresent                                int = 255
-	TxPowerNotPresent                            int = 127
 	AdvertiseFailedAlreadyStarted                int = 3
 	AdvertiseFailedDataTooLarge                  int = 1
 	AdvertiseFailedFeatureUnsupported            int = 5
 	AdvertiseFailedInternalError                 int = 4
 	AdvertiseFailedTooManyAdvertisers            int = 2
+	AdvertiseSuccess                             int = 0
+	ScanFailedAlreadyStarted                     int = 1
+	ScanFailedApplicationRegistrationFailed      int = 2
+	ScanFailedFeatureUnsupported                 int = 4
+	ScanFailedInternalError                      int = 3
+	ScanFailedOutOfHardwareResources             int = 5
+	ScanFailedScanningTooFrequently              int = 6
 	CallbackTypeAllMatches                       int = 1
 	CallbackTypeAllMatchesAutoBatch              int = 8
 	CallbackTypeFirstMatch                       int = 2
 	CallbackTypeMatchLost                        int = 4
+	Creator                                      int = 0
 	MatchModeAggressive                          int = 1
 	MatchModeSticky                              int = 2
 	MatchNumFewAdvertisement                     int = 2
@@ -29,6 +30,12 @@ const (
 	ScanModeLowLatency                           int = 2
 	ScanModeLowPower                             int = 0
 	ScanModeOpportunistic                        int = -1
+	DataComplete                                 int = 0
+	DataTruncated                                int = 2
+	PeriodicIntervalNotPresent                   int = 0
+	PhyUnused                                    int = 0
+	SidNotPresent                                int = 255
+	TxPowerNotPresent                            int = 127
 	DataType3dInformationData                    int = 61
 	DataTypeAdvertisingInterval                  int = 26
 	DataTypeAdvertisingIntervalLong              int = 47
@@ -83,12 +90,6 @@ const (
 	AdvertiseTxPowerLow                          int = 1
 	AdvertiseTxPowerMedium                       int = 2
 	AdvertiseTxPowerUltraLow                     int = 0
-	ScanFailedAlreadyStarted                     int = 1
-	ScanFailedApplicationRegistrationFailed      int = 2
-	ScanFailedFeatureUnsupported                 int = 4
-	ScanFailedInternalError                      int = 3
-	ScanFailedOutOfHardwareResources             int = 5
-	ScanFailedScanningTooFrequently              int = 6
 	IntervalHigh                                 int = 1600
 	IntervalLow                                  int = 160
 	IntervalMax                                  int = 16777215
@@ -100,15 +101,14 @@ const (
 	TxPowerMedium                                int = -7
 	TxPowerMin                                   int = -127
 	TxPowerUltraLow                              int = -21
-	AdvertiseSuccess                             int = 0
+)
+
+const (
+	AutoBatchMinReportDelayMillis int64 = 600000
 )
 
 const (
 	ExtraCallbackType   string = "android.bluetooth.le.extra.CALLBACK_TYPE"
 	ExtraErrorCode      string = "android.bluetooth.le.extra.ERROR_CODE"
 	ExtraListScanResult string = "android.bluetooth.le.extra.LIST_SCAN_RESULT"
-)
-
-const (
-	AutoBatchMinReportDelayMillis int64 = 600000
 )

@@ -5,20 +5,19 @@ package ims
 import "github.com/AndroidGoLab/jni/telephony/ims/consts"
 
 const (
-	Creator                                = consts.Creator
-	MethodPublish                          = consts.MethodPublish
-	MethodRegister                         = consts.MethodRegister
-	MethodSubscribe                        = consts.MethodSubscribe
-	MethodUnknown                          = consts.MethodUnknown
-	ReasonImsServiceDisconnected           = consts.ReasonImsServiceDisconnected
-	ReasonImsServiceNotReady               = consts.ReasonImsServiceNotReady
-	ReasonNoImsServiceConfigured           = consts.ReasonNoImsServiceConfigured
-	ReasonSubscriptionInactive             = consts.ReasonSubscriptionInactive
-	ReasonUnknownPermanentError            = consts.ReasonUnknownPermanentError
-	ReasonUnknownTemporaryError            = consts.ReasonUnknownTemporaryError
 	WifiModeCellularPreferred              = consts.WifiModeCellularPreferred
 	WifiModeWifiOnly                       = consts.WifiModeWifiOnly
 	WifiModeWifiPreferred                  = consts.WifiModeWifiPreferred
+	CodeErrorInvalidSubscription           = consts.CodeErrorInvalidSubscription
+	CodeErrorServiceUnavailable            = consts.CodeErrorServiceUnavailable
+	CodeErrorUnspecified                   = consts.CodeErrorUnspecified
+	CodeErrorUnsupportedOperation          = consts.CodeErrorUnsupportedOperation
+	CapabilityTypeNone                     = consts.CapabilityTypeNone
+	CapabilityTypeOptionsUce               = consts.CapabilityTypeOptionsUce
+	CapabilityTypePresenceUce              = consts.CapabilityTypePresenceUce
+	RegistrationStateNotRegistered         = consts.RegistrationStateNotRegistered
+	RegistrationStateRegistered            = consts.RegistrationStateRegistered
+	RegistrationStateRegistering           = consts.RegistrationStateRegistering
 	CodeAccessClassBlocked                 = consts.CodeAccessClassBlocked
 	CodeAnsweredElsewhere                  = consts.CodeAnsweredElsewhere
 	CodeBlacklistedCallId                  = consts.CodeBlacklistedCallId
@@ -190,26 +189,27 @@ const (
 	CodeUtSsModifiedToSs                   = consts.CodeUtSsModifiedToSs
 	CodeUtSsModifiedToUssd                 = consts.CodeUtSsModifiedToUssd
 	CodeWifiLost                           = consts.CodeWifiLost
+	Creator                                = consts.Creator
 	ExtraCodeCallRetryBySettings           = consts.ExtraCodeCallRetryBySettings
 	ExtraCodeCallRetryEmergency            = consts.ExtraCodeCallRetryEmergency
 	ExtraCodeCallRetryNormal               = consts.ExtraCodeCallRetryNormal
 	ExtraCodeCallRetrySilentRedial         = consts.ExtraCodeCallRetrySilentRedial
-	CapabilityTypeNone                     = consts.CapabilityTypeNone
-	CapabilityTypeOptionsUce               = consts.CapabilityTypeOptionsUce
-	CapabilityTypePresenceUce              = consts.CapabilityTypePresenceUce
-	CodeErrorInvalidSubscription           = consts.CodeErrorInvalidSubscription
-	CodeErrorServiceUnavailable            = consts.CodeErrorServiceUnavailable
-	CodeErrorUnspecified                   = consts.CodeErrorUnspecified
-	CodeErrorUnsupportedOperation          = consts.CodeErrorUnsupportedOperation
-	RegistrationStateNotRegistered         = consts.RegistrationStateNotRegistered
-	RegistrationStateRegistered            = consts.RegistrationStateRegistered
-	RegistrationStateRegistering           = consts.RegistrationStateRegistering
+	MethodPublish                          = consts.MethodPublish
+	MethodRegister                         = consts.MethodRegister
+	MethodSubscribe                        = consts.MethodSubscribe
+	MethodUnknown                          = consts.MethodUnknown
 	AttrEpdgOverCellInternet               = consts.AttrEpdgOverCellInternet
+	ReasonImsServiceDisconnected           = consts.ReasonImsServiceDisconnected
+	ReasonImsServiceNotReady               = consts.ReasonImsServiceNotReady
+	ReasonNoImsServiceConfigured           = consts.ReasonNoImsServiceConfigured
+	ReasonSubscriptionInactive             = consts.ReasonSubscriptionInactive
+	ReasonUnknownPermanentError            = consts.ReasonUnknownPermanentError
+	ReasonUnknownTemporaryError            = consts.ReasonUnknownTemporaryError
 )
 
 const (
+	ActionShowCapabilityDiscoveryOptIn = consts.ActionShowCapabilityDiscoveryOptIn
 	ActionWfcImsRegistrationError      = consts.ActionWfcImsRegistrationError
 	ExtraWfcRegistrationFailureMessage = consts.ExtraWfcRegistrationFailureMessage
 	ExtraWfcRegistrationFailureTitle   = consts.ExtraWfcRegistrationFailureTitle
-	ActionShowCapabilityDiscoveryOptIn = consts.ActionShowCapabilityDiscoveryOptIn
 )

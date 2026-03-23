@@ -63,12 +63,6 @@ var (
 	midTvAdViewTvAdCallbackOnRequestTrackInfoList      jni.MethodID
 	midTvAdViewTvAdCallbackOnStateChanged              jni.MethodID
 
-	clsTvAdServiceInfo                 *jni.GlobalRef
-	midTvAdServiceInfoDescribeContents jni.MethodID
-	midTvAdServiceInfoGetId            jni.MethodID
-	midTvAdServiceInfoGetServiceInfo   jni.MethodID
-	midTvAdServiceInfoWriteToParcel    jni.MethodID
-
 	clsTvAdService                 *jni.GlobalRef
 	midTvAdServiceOnAppLinkCommand jni.MethodID
 	midTvAdServiceOnBind           jni.MethodID
@@ -117,6 +111,12 @@ var (
 	midTvAdManagerTvAdServiceCallbackOnAdServiceAdded   jni.MethodID
 	midTvAdManagerTvAdServiceCallbackOnAdServiceRemoved jni.MethodID
 	midTvAdManagerTvAdServiceCallbackOnAdServiceUpdated jni.MethodID
+
+	clsTvAdServiceInfo                 *jni.GlobalRef
+	midTvAdServiceInfoDescribeContents jni.MethodID
+	midTvAdServiceInfoGetId            jni.MethodID
+	midTvAdServiceInfoGetServiceInfo   jni.MethodID
+	midTvAdServiceInfoWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -397,44 +397,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTvAdViewTvAdCallbackOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdViewTvAdCallback)), "onStateChanged", "(Ljava/lang/String;II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/tv/ad/TvAdServiceInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTvAdServiceInfo = env.NewGlobalRef(&c.Object)
-
-		midTvAdServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvAdServiceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "getId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvAdServiceInfoGetServiceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "getServiceInfo", "()Landroid/content/pm/ServiceInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvAdServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -762,6 +724,44 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTvAdManagerTvAdServiceCallbackOnAdServiceUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdManagerTvAdServiceCallback)), "onAdServiceUpdated", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/tv/ad/TvAdServiceInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTvAdServiceInfo = env.NewGlobalRef(&c.Object)
+
+		midTvAdServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdServiceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdServiceInfoGetServiceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "getServiceInfo", "()Landroid/content/pm/ServiceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvAdServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvAdServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

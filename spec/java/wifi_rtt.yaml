@@ -5,6 +5,120 @@
 package: wifi_rtt
 go_import: github.com/AndroidGoLab/jni/net/wifi/rtt
 classes:
+    - java_class: android.net.wifi.rtt.PasnConfig
+      go_type: PasnConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getBaseAkms
+          go_name: GetBaseAkms
+          returns: int
+          error: true
+        - java_method: getCiphers
+          go_name: GetCiphers
+          returns: int
+          error: true
+        - java_method: getPasnComebackCookie
+          go_name: GetPasnComebackCookie
+          returns: '[B'
+          error: true
+        - java_method: getPassword
+          go_name: GetPassword
+          returns: String
+          error: true
+        - java_method: getWifiSsid
+          go_name: GetWifiSsid
+          returns: android.net.wifi.WifiSsid
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.net.wifi.rtt.PasnConfig$Builder
+      go_type: PasnConfigBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.net.wifi.rtt.PasnConfig
+          error: true
+        - java_method: setPasnComebackCookie
+          go_name: SetPasnComebackCookie
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.net.wifi.rtt.PasnConfig$Builder
+          error: true
+        - java_method: setPassword
+          go_name: SetPassword
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.wifi.rtt.PasnConfig$Builder
+          error: true
+        - java_method: setWifiSsid
+          go_name: SetWifiSsid
+          params:
+            - java_type: android.net.wifi.WifiSsid
+              go_name: arg0
+          returns: android.net.wifi.rtt.PasnConfig$Builder
+          error: true
+    - java_class: android.net.wifi.rtt.WifiRttManager
+      go_type: WifiRttManager
+      obtain: system_service
+      service_name: wifirtt
+      close: true
+      methods:
+        - java_method: getRttCharacteristics
+          go_name: GetRttCharacteristics
+          returns: android.os.Bundle
+          error: true
+        - java_method: isAvailable
+          go_name: IsAvailable
+          returns: boolean
+          error: true
+        - java_method: startRanging
+          go_name: StartRanging
+          params:
+            - java_type: android.net.wifi.rtt.RangingRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.net.wifi.rtt.RangingResultCallback
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.net.wifi.rtt.RangingResultCallback
+      go_type: RangingResultCallback
+      methods:
+        - java_method: onRangingFailure
+          go_name: OnRangingFailure
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.net.wifi.rtt.RangingResult
       go_type: RangingResult
       methods:
@@ -351,340 +465,6 @@ classes:
               go_name: arg0
           returns: android.net.wifi.rtt.RangingResult$Builder
           error: true
-    - java_class: android.net.wifi.rtt.RangingResultCallback
-      go_type: RangingResultCallback
-      methods:
-        - java_method: onRangingFailure
-          go_name: OnRangingFailure
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.net.wifi.rtt.PasnConfig
-      go_type: PasnConfig
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getBaseAkms
-          go_name: GetBaseAkms
-          returns: int
-          error: true
-        - java_method: getCiphers
-          go_name: GetCiphers
-          returns: int
-          error: true
-        - java_method: getPasnComebackCookie
-          go_name: GetPasnComebackCookie
-          returns: '[B'
-          error: true
-        - java_method: getPassword
-          go_name: GetPassword
-          returns: String
-          error: true
-        - java_method: getWifiSsid
-          go_name: GetWifiSsid
-          returns: android.net.wifi.WifiSsid
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.net.wifi.rtt.PasnConfig$Builder
-      go_type: PasnConfigBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.net.wifi.rtt.PasnConfig
-          error: true
-        - java_method: setPasnComebackCookie
-          go_name: SetPasnComebackCookie
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: android.net.wifi.rtt.PasnConfig$Builder
-          error: true
-        - java_method: setPassword
-          go_name: SetPassword
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.net.wifi.rtt.PasnConfig$Builder
-          error: true
-        - java_method: setWifiSsid
-          go_name: SetWifiSsid
-          params:
-            - java_type: android.net.wifi.WifiSsid
-              go_name: arg0
-          returns: android.net.wifi.rtt.PasnConfig$Builder
-          error: true
-    - java_class: android.net.wifi.rtt.ResponderConfig
-      go_type: ResponderConfig
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getCenterFreq0Mhz
-          go_name: GetCenterFreq0Mhz
-          returns: int
-          error: true
-        - java_method: getCenterFreq1Mhz
-          go_name: GetCenterFreq1Mhz
-          returns: int
-          error: true
-        - java_method: getChannelWidth
-          go_name: GetChannelWidth
-          returns: int
-          error: true
-        - java_method: getFrequencyMhz
-          go_name: GetFrequencyMhz
-          returns: int
-          error: true
-        - java_method: getMacAddress
-          go_name: GetMacAddress
-          returns: android.net.MacAddress
-          error: true
-        - java_method: getPreamble
-          go_name: GetPreamble
-          returns: int
-          error: true
-        - java_method: getResponderType
-          go_name: GetResponderType
-          returns: int
-          error: true
-        - java_method: getSecureRangingConfig
-          go_name: GetSecureRangingConfig
-          returns: android.net.wifi.rtt.SecureRangingConfig
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: is80211azNtbSupported
-          go_name: Is80211azNtbSupported
-          returns: boolean
-          error: true
-        - java_method: is80211mcSupported
-          go_name: Is80211mcSupported
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: fromScanResult
-          go_name: FromScanResult
-          params:
-            - java_type: android.net.wifi.ScanResult
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig
-          error: true
-    - java_class: android.net.wifi.rtt.ResponderConfig$Builder
-      go_type: ResponderConfigBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.net.wifi.rtt.ResponderConfig
-          error: true
-        - java_method: set80211azNtbSupported
-          go_name: Set80211azNtbSupported
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: set80211mcSupported
-          go_name: Set80211mcSupported
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setCenterFreq0Mhz
-          go_name: SetCenterFreq0Mhz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setCenterFreq1Mhz
-          go_name: SetCenterFreq1Mhz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setChannelWidth
-          go_name: SetChannelWidth
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setFrequencyMhz
-          go_name: SetFrequencyMhz
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setMacAddress
-          go_name: SetMacAddress
-          params:
-            - java_type: android.net.MacAddress
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setPreamble
-          go_name: SetPreamble
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setResponderType
-          go_name: SetResponderType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-        - java_method: setSecureRangingConfig
-          go_name: SetSecureRangingConfig
-          params:
-            - java_type: android.net.wifi.rtt.SecureRangingConfig
-              go_name: arg0
-          returns: android.net.wifi.rtt.ResponderConfig$Builder
-          error: true
-    - java_class: android.net.wifi.rtt.SecureRangingConfig
-      go_type: SecureRangingConfig
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getPasnConfig
-          go_name: GetPasnConfig
-          returns: android.net.wifi.rtt.PasnConfig
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isRangingFrameProtectionEnabled
-          go_name: IsRangingFrameProtectionEnabled
-          returns: boolean
-          error: true
-        - java_method: isSecureHeLtfEnabled
-          go_name: IsSecureHeLtfEnabled
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.net.wifi.rtt.SecureRangingConfig$Builder
-      go_type: SecureRangingConfigBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.net.wifi.rtt.SecureRangingConfig
-          error: true
-        - java_method: setRangingFrameProtectionEnabled
-          go_name: SetRangingFrameProtectionEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.net.wifi.rtt.SecureRangingConfig$Builder
-          error: true
-        - java_method: setSecureHeLtfEnabled
-          go_name: SetSecureHeLtfEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.net.wifi.rtt.SecureRangingConfig$Builder
-          error: true
-    - java_class: android.net.wifi.rtt.WifiRttManager
-      go_type: WifiRttManager
-      obtain: system_service
-      service_name: wifirtt
-      close: true
-      methods:
-        - java_method: getRttCharacteristics
-          go_name: GetRttCharacteristics
-          returns: android.os.Bundle
-          error: true
-        - java_method: isAvailable
-          go_name: IsAvailable
-          returns: boolean
-          error: true
-        - java_method: startRanging
-          go_name: StartRanging
-          params:
-            - java_type: android.net.wifi.rtt.RangingRequest
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.net.wifi.rtt.RangingResultCallback
-              go_name: arg2
-          returns: void
-          error: true
     - java_class: android.net.wifi.rtt.ResponderLocation
       go_type: ResponderLocation
       methods:
@@ -906,28 +686,227 @@ classes:
           error: true
     - java_class: android.net.wifi.rtt.CivicLocationKeys
       go_type: CivicLocationKeys
+    - java_class: android.net.wifi.rtt.ResponderConfig
+      go_type: ResponderConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCenterFreq0Mhz
+          go_name: GetCenterFreq0Mhz
+          returns: int
+          error: true
+        - java_method: getCenterFreq1Mhz
+          go_name: GetCenterFreq1Mhz
+          returns: int
+          error: true
+        - java_method: getChannelWidth
+          go_name: GetChannelWidth
+          returns: int
+          error: true
+        - java_method: getFrequencyMhz
+          go_name: GetFrequencyMhz
+          returns: int
+          error: true
+        - java_method: getMacAddress
+          go_name: GetMacAddress
+          returns: android.net.MacAddress
+          error: true
+        - java_method: getPreamble
+          go_name: GetPreamble
+          returns: int
+          error: true
+        - java_method: getResponderType
+          go_name: GetResponderType
+          returns: int
+          error: true
+        - java_method: getSecureRangingConfig
+          go_name: GetSecureRangingConfig
+          returns: android.net.wifi.rtt.SecureRangingConfig
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: is80211azNtbSupported
+          go_name: Is80211azNtbSupported
+          returns: boolean
+          error: true
+        - java_method: is80211mcSupported
+          go_name: Is80211mcSupported
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: fromScanResult
+          go_name: FromScanResult
+          params:
+            - java_type: android.net.wifi.ScanResult
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig
+          error: true
+    - java_class: android.net.wifi.rtt.ResponderConfig$Builder
+      go_type: ResponderConfigBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.net.wifi.rtt.ResponderConfig
+          error: true
+        - java_method: set80211azNtbSupported
+          go_name: Set80211azNtbSupported
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: set80211mcSupported
+          go_name: Set80211mcSupported
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setCenterFreq0Mhz
+          go_name: SetCenterFreq0Mhz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setCenterFreq1Mhz
+          go_name: SetCenterFreq1Mhz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setChannelWidth
+          go_name: SetChannelWidth
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setFrequencyMhz
+          go_name: SetFrequencyMhz
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setMacAddress
+          go_name: SetMacAddress
+          params:
+            - java_type: android.net.MacAddress
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setPreamble
+          go_name: SetPreamble
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setResponderType
+          go_name: SetResponderType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+        - java_method: setSecureRangingConfig
+          go_name: SetSecureRangingConfig
+          params:
+            - java_type: android.net.wifi.rtt.SecureRangingConfig
+              go_name: arg0
+          returns: android.net.wifi.rtt.ResponderConfig$Builder
+          error: true
+    - java_class: android.net.wifi.rtt.SecureRangingConfig
+      go_type: SecureRangingConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getPasnConfig
+          go_name: GetPasnConfig
+          returns: android.net.wifi.rtt.PasnConfig
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isRangingFrameProtectionEnabled
+          go_name: IsRangingFrameProtectionEnabled
+          returns: boolean
+          error: true
+        - java_method: isSecureHeLtfEnabled
+          go_name: IsSecureHeLtfEnabled
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.net.wifi.rtt.SecureRangingConfig$Builder
+      go_type: SecureRangingConfigBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.net.wifi.rtt.SecureRangingConfig
+          error: true
+        - java_method: setRangingFrameProtectionEnabled
+          go_name: SetRangingFrameProtectionEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.net.wifi.rtt.SecureRangingConfig$Builder
+          error: true
+        - java_method: setSecureHeLtfEnabled
+          go_name: SetSecureHeLtfEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.net.wifi.rtt.SecureRangingConfig$Builder
+          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: StatusFail
-      value: "1"
-      go_type: int
-    - go_name: StatusResponderDoesNotSupportIeee80211mc
-      value: "2"
-      go_type: int
-    - go_name: StatusSuccess
-      value: "0"
-      go_type: int
-    - go_name: Unspecified
-      value: "-1"
-      go_type: int
-    - go_name: StatusCodeFail
-      value: "1"
-      go_type: int
-    - go_name: StatusCodeFailRttNotAvailable
-      value: "2"
-      go_type: int
     - go_name: AkmFilsEapSha256
       value: "64"
       go_type: int
@@ -970,11 +949,8 @@ constants:
     - go_name: CipherNone
       value: "0"
       go_type: int
-    - go_name: ResponderAp
+    - go_name: Creator
       value: "0"
-      go_type: int
-    - go_name: ResponderSta
-      value: "1"
       go_type: int
     - go_name: ActionWifiRttStateChanged
       value: '"android.net.wifi.rtt.action.WIFI_RTT_STATE_CHANGED"'
@@ -1003,6 +979,24 @@ constants:
     - go_name: CharacteristicsKeyIntMaxSupportedSecureHeLtfProtoVersion
       value: '"key_max_supported_secure_he_ltf_proto_ver"'
       go_type: string
+    - go_name: StatusCodeFail
+      value: "1"
+      go_type: int
+    - go_name: StatusCodeFailRttNotAvailable
+      value: "2"
+      go_type: int
+    - go_name: StatusFail
+      value: "1"
+      go_type: int
+    - go_name: StatusResponderDoesNotSupportIeee80211mc
+      value: "2"
+      go_type: int
+    - go_name: StatusSuccess
+      value: "0"
+      go_type: int
+    - go_name: Unspecified
+      value: "-1"
+      go_type: int
     - go_name: AltitudeFloors
       value: "2"
       go_type: int
@@ -1143,4 +1137,10 @@ constants:
       go_type: int
     - go_name: TypeOfPlace
       value: "29"
+      go_type: int
+    - go_name: ResponderAp
+      value: "0"
+      go_type: int
+    - go_name: ResponderSta
+      value: "1"
       go_type: int

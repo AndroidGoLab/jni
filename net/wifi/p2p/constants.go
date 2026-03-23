@@ -5,9 +5,9 @@ package p2p
 import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
+	Creator                                            = consts.Creator
 	Available                                          = consts.Available
 	Connected                                          = consts.Connected
-	Creator                                            = consts.Creator
 	Failed                                             = consts.Failed
 	Invited                                            = consts.Invited
 	Unavailable                                        = consts.Unavailable
@@ -17,20 +17,24 @@ const (
 	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
 	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
 	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
-	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
-	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
-	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz
-	GroupOwnerBand5ghz                                 = consts.GroupOwnerBand5ghz
-	GroupOwnerBand6ghz                                 = consts.GroupOwnerBand6ghz
-	GroupOwnerBandAuto                                 = consts.GroupOwnerBandAuto
-	GroupOwnerIntentAuto                               = consts.GroupOwnerIntentAuto
-	GroupOwnerIntentMax                                = consts.GroupOwnerIntentMax
-	GroupOwnerIntentMin                                = consts.GroupOwnerIntentMin
-	P2pVersion1                                        = consts.P2pVersion1
-	P2pVersion2                                        = consts.P2pVersion2
-	PccModeConnectionTypeLegacyOnly                    = consts.PccModeConnectionTypeLegacyOnly
-	PccModeConnectionTypeLegacyOrR2                    = consts.PccModeConnectionTypeLegacyOrR2
-	PccModeConnectionTypeR2Only                        = consts.PccModeConnectionTypeR2Only
+	DeviceInfoAudioOnlySupportAtSource                 = consts.DeviceInfoAudioOnlySupportAtSource
+	DeviceInfoAudioUnsupportedAtPrimarySink            = consts.DeviceInfoAudioUnsupportedAtPrimarySink
+	DeviceInfoContentProtectionSupport                 = consts.DeviceInfoContentProtectionSupport
+	DeviceInfoCoupledSinkSupportAtSink                 = consts.DeviceInfoCoupledSinkSupportAtSink
+	DeviceInfoCoupledSinkSupportAtSource               = consts.DeviceInfoCoupledSinkSupportAtSource
+	DeviceInfoDeviceTypeMask                           = consts.DeviceInfoDeviceTypeMask
+	DeviceInfoPreferredConnectivityMask                = consts.DeviceInfoPreferredConnectivityMask
+	DeviceInfoSessionAvailableMask                     = consts.DeviceInfoSessionAvailableMask
+	DeviceInfoTdlsPersistentGroup                      = consts.DeviceInfoTdlsPersistentGroup
+	DeviceInfoTdlsPersistentGroupReinvoke              = consts.DeviceInfoTdlsPersistentGroupReinvoke
+	DeviceInfoTimeSynchronizationSupport               = consts.DeviceInfoTimeSynchronizationSupport
+	DeviceInfoWfdServiceDiscoverySupport               = consts.DeviceInfoWfdServiceDiscoverySupport
+	DeviceTypePrimarySink                              = consts.DeviceTypePrimarySink
+	DeviceTypeSecondarySink                            = consts.DeviceTypeSecondarySink
+	DeviceTypeSourceOrPrimarySink                      = consts.DeviceTypeSourceOrPrimarySink
+	DeviceTypeWfdSource                                = consts.DeviceTypeWfdSource
+	PreferredConnectivityP2p                           = consts.PreferredConnectivityP2p
+	PreferredConnectivityTdls                          = consts.PreferredConnectivityTdls
 	Busy                                               = consts.Busy
 	ConnectionRequestAccept                            = consts.ConnectionRequestAccept
 	ConnectionRequestDeferShowPinToService             = consts.ConnectionRequestDeferShowPinToService
@@ -55,6 +59,33 @@ const (
 	WifiP2pScanSocial                                  = consts.WifiP2pScanSocial
 	WifiP2pStateDisabled                               = consts.WifiP2pStateDisabled
 	WifiP2pStateEnabled                                = consts.WifiP2pStateEnabled
+	ApproverDetachReasonClose                          = consts.ApproverDetachReasonClose
+	ApproverDetachReasonFailure                        = consts.ApproverDetachReasonFailure
+	ApproverDetachReasonRemove                         = consts.ApproverDetachReasonRemove
+	ApproverDetachReasonReplace                        = consts.ApproverDetachReasonReplace
+	RequestTypeInvitation                              = consts.RequestTypeInvitation
+	RequestTypeJoin                                    = consts.RequestTypeJoin
+	RequestTypeNegotiation                             = consts.RequestTypeNegotiation
+	PairingBootstrappingMethodDisplayPassphrase        = consts.PairingBootstrappingMethodDisplayPassphrase
+	PairingBootstrappingMethodDisplayPincode           = consts.PairingBootstrappingMethodDisplayPincode
+	PairingBootstrappingMethodKeypadPassphrase         = consts.PairingBootstrappingMethodKeypadPassphrase
+	PairingBootstrappingMethodKeypadPincode            = consts.PairingBootstrappingMethodKeypadPincode
+	PairingBootstrappingMethodOpportunistic            = consts.PairingBootstrappingMethodOpportunistic
+	PairingBootstrappingMethodOutOfBand                = consts.PairingBootstrappingMethodOutOfBand
+	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
+	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
+	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz
+	GroupOwnerBand5ghz                                 = consts.GroupOwnerBand5ghz
+	GroupOwnerBand6ghz                                 = consts.GroupOwnerBand6ghz
+	GroupOwnerBandAuto                                 = consts.GroupOwnerBandAuto
+	GroupOwnerIntentAuto                               = consts.GroupOwnerIntentAuto
+	GroupOwnerIntentMax                                = consts.GroupOwnerIntentMax
+	GroupOwnerIntentMin                                = consts.GroupOwnerIntentMin
+	P2pVersion1                                        = consts.P2pVersion1
+	P2pVersion2                                        = consts.P2pVersion2
+	PccModeConnectionTypeLegacyOnly                    = consts.PccModeConnectionTypeLegacyOnly
+	PccModeConnectionTypeLegacyOrR2                    = consts.PccModeConnectionTypeLegacyOrR2
+	PccModeConnectionTypeR2Only                        = consts.PccModeConnectionTypeR2Only
 )
 
 const (

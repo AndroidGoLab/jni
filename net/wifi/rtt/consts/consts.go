@@ -3,13 +3,6 @@
 package consts
 
 const (
-	Creator                                  int = 0
-	StatusFail                               int = 1
-	StatusResponderDoesNotSupportIeee80211mc int = 2
-	StatusSuccess                            int = 0
-	Unspecified                              int = -1
-	StatusCodeFail                           int = 1
-	StatusCodeFailRttNotAvailable            int = 2
 	AkmFilsEapSha256                         int = 64
 	AkmFilsEapSha384                         int = 128
 	AkmFtEapSha256                           int = 4
@@ -24,8 +17,13 @@ const (
 	CipherGcmp128                            int = 4
 	CipherGcmp256                            int = 8
 	CipherNone                               int = 0
-	ResponderAp                              int = 0
-	ResponderSta                             int = 1
+	Creator                                  int = 0
+	StatusCodeFail                           int = 1
+	StatusCodeFailRttNotAvailable            int = 2
+	StatusFail                               int = 1
+	StatusResponderDoesNotSupportIeee80211mc int = 2
+	StatusSuccess                            int = 0
+	Unspecified                              int = -1
 	AltitudeFloors                           int = 2
 	AltitudeMeters                           int = 1
 	AltitudeUndefined                        int = 0
@@ -73,6 +71,8 @@ const (
 	Sts                                      int = 18
 	SubbranchRoadName                        int = 37
 	TypeOfPlace                              int = 29
+	ResponderAp                              int = 0
+	ResponderSta                             int = 1
 )
 
 const (

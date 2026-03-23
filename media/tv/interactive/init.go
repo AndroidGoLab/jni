@@ -23,26 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAppLinkInfo                 *jni.GlobalRef
-	midAppLinkInfoDescribeContents jni.MethodID
-	midAppLinkInfoGetComponentName jni.MethodID
-	midAppLinkInfoGetUri           jni.MethodID
-	midAppLinkInfoToString         jni.MethodID
-	midAppLinkInfoWriteToParcel    jni.MethodID
-
-	clsTvInteractiveAppManager                      *jni.GlobalRef
-	midTvInteractiveAppManagerRegisterAppLinkInfo   jni.MethodID
-	midTvInteractiveAppManagerRegisterCallback      jni.MethodID
-	midTvInteractiveAppManagerSendAppLinkCommand    jni.MethodID
-	midTvInteractiveAppManagerUnregisterAppLinkInfo jni.MethodID
-	midTvInteractiveAppManagerUnregisterCallback    jni.MethodID
-
-	clsTvInteractiveAppManagerTvInteractiveAppCallback                                      *jni.GlobalRef
-	midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceAdded          jni.MethodID
-	midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceRemoved        jni.MethodID
-	midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceUpdated        jni.MethodID
-	midTvInteractiveAppManagerTvInteractiveAppCallbackOnTvInteractiveAppServiceStateChanged jni.MethodID
-
 	clsTvInteractiveAppService                        *jni.GlobalRef
 	midTvInteractiveAppServiceNotifyStateChanged      jni.MethodID
 	midTvInteractiveAppServiceOnAppLinkCommand        jni.MethodID
@@ -137,12 +117,25 @@ var (
 	midTvInteractiveAppServiceSessionSetTvRecordingInfo                jni.MethodID
 	midTvInteractiveAppServiceSessionSetVideoBounds                    jni.MethodID
 
-	clsTvInteractiveAppServiceInfo                  *jni.GlobalRef
-	midTvInteractiveAppServiceInfoDescribeContents  jni.MethodID
-	midTvInteractiveAppServiceInfoGetId             jni.MethodID
-	midTvInteractiveAppServiceInfoGetServiceInfo    jni.MethodID
-	midTvInteractiveAppServiceInfoGetSupportedTypes jni.MethodID
-	midTvInteractiveAppServiceInfoWriteToParcel     jni.MethodID
+	clsTvInteractiveAppManager                      *jni.GlobalRef
+	midTvInteractiveAppManagerRegisterAppLinkInfo   jni.MethodID
+	midTvInteractiveAppManagerRegisterCallback      jni.MethodID
+	midTvInteractiveAppManagerSendAppLinkCommand    jni.MethodID
+	midTvInteractiveAppManagerUnregisterAppLinkInfo jni.MethodID
+	midTvInteractiveAppManagerUnregisterCallback    jni.MethodID
+
+	clsTvInteractiveAppManagerTvInteractiveAppCallback                                      *jni.GlobalRef
+	midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceAdded          jni.MethodID
+	midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceRemoved        jni.MethodID
+	midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceUpdated        jni.MethodID
+	midTvInteractiveAppManagerTvInteractiveAppCallbackOnTvInteractiveAppServiceStateChanged jni.MethodID
+
+	clsAppLinkInfo                 *jni.GlobalRef
+	midAppLinkInfoDescribeContents jni.MethodID
+	midAppLinkInfoGetComponentName jni.MethodID
+	midAppLinkInfoGetUri           jni.MethodID
+	midAppLinkInfoToString         jni.MethodID
+	midAppLinkInfoWriteToParcel    jni.MethodID
 
 	clsTvInteractiveAppView                                      *jni.GlobalRef
 	midTvInteractiveAppViewClearCallback                         jni.MethodID
@@ -219,6 +212,13 @@ var (
 	midTvInteractiveAppViewTvInteractiveAppCallbackOnStateChanged                jni.MethodID
 	midTvInteractiveAppViewTvInteractiveAppCallbackOnTeletextAppStateChanged     jni.MethodID
 	midTvInteractiveAppViewTvInteractiveAppCallbackOnTimeShiftCommandRequest     jni.MethodID
+
+	clsTvInteractiveAppServiceInfo                  *jni.GlobalRef
+	midTvInteractiveAppServiceInfoDescribeContents  jni.MethodID
+	midTvInteractiveAppServiceInfoGetId             jni.MethodID
+	midTvInteractiveAppServiceInfoGetServiceInfo    jni.MethodID
+	midTvInteractiveAppServiceInfoGetSupportedTypes jni.MethodID
+	midTvInteractiveAppServiceInfoWriteToParcel     jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -238,134 +238,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/media/tv/interactive/AppLinkInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAppLinkInfo = env.NewGlobalRef(&c.Object)
-
-		midAppLinkInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppLinkInfoGetComponentName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "getComponentName", "()Landroid/content/ComponentName;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppLinkInfoGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "getUri", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppLinkInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppLinkInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTvInteractiveAppManager = env.NewGlobalRef(&c.Object)
-
-		midTvInteractiveAppManagerRegisterAppLinkInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "registerAppLinkInfo", "(Ljava/lang/String;Landroid/media/tv/interactive/AppLinkInfo;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerRegisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "registerCallback", "(Ljava/util/concurrent/Executor;Landroid/media/tv/interactive/TvInteractiveAppManager$TvInteractiveAppCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerSendAppLinkCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "sendAppLinkCommand", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerUnregisterAppLinkInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "unregisterAppLinkInfo", "(Ljava/lang/String;Landroid/media/tv/interactive/AppLinkInfo;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "unregisterCallback", "(Landroid/media/tv/interactive/TvInteractiveAppManager$TvInteractiveAppCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppManager$TvInteractiveAppCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTvInteractiveAppManagerTvInteractiveAppCallback = env.NewGlobalRef(&c.Object)
-
-		midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onInteractiveAppServiceAdded", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onInteractiveAppServiceRemoved", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onInteractiveAppServiceUpdated", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTvInteractiveAppManagerTvInteractiveAppCallbackOnTvInteractiveAppServiceStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onTvInteractiveAppServiceStateChanged", "(Ljava/lang/String;III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppService")
 	if err != nil {
@@ -1017,43 +889,126 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppServiceInfo")
+	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTvInteractiveAppServiceInfo = env.NewGlobalRef(&c.Object)
+		clsTvInteractiveAppManager = env.NewGlobalRef(&c.Object)
 
-		midTvInteractiveAppServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "describeContents", "()I")
+		midTvInteractiveAppManagerRegisterAppLinkInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "registerAppLinkInfo", "(Ljava/lang/String;Landroid/media/tv/interactive/AppLinkInfo;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTvInteractiveAppServiceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "getId", "()Ljava/lang/String;")
+		midTvInteractiveAppManagerRegisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "registerCallback", "(Ljava/util/concurrent/Executor;Landroid/media/tv/interactive/TvInteractiveAppManager$TvInteractiveAppCallback;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTvInteractiveAppServiceInfoGetServiceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "getServiceInfo", "()Landroid/content/pm/ServiceInfo;")
+		midTvInteractiveAppManagerSendAppLinkCommand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "sendAppLinkCommand", "(Ljava/lang/String;Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTvInteractiveAppServiceInfoGetSupportedTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "getSupportedTypes", "()I")
+		midTvInteractiveAppManagerUnregisterAppLinkInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "unregisterAppLinkInfo", "(Ljava/lang/String;Landroid/media/tv/interactive/AppLinkInfo;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTvInteractiveAppServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midTvInteractiveAppManagerUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManager)), "unregisterCallback", "(Landroid/media/tv/interactive/TvInteractiveAppManager$TvInteractiveAppCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppManager$TvInteractiveAppCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTvInteractiveAppManagerTvInteractiveAppCallback = env.NewGlobalRef(&c.Object)
+
+		midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onInteractiveAppServiceAdded", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onInteractiveAppServiceRemoved", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppManagerTvInteractiveAppCallbackOnInteractiveAppServiceUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onInteractiveAppServiceUpdated", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppManagerTvInteractiveAppCallbackOnTvInteractiveAppServiceStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppManagerTvInteractiveAppCallback)), "onTvInteractiveAppServiceStateChanged", "(Ljava/lang/String;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/tv/interactive/AppLinkInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAppLinkInfo = env.NewGlobalRef(&c.Object)
+
+		midAppLinkInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppLinkInfoGetComponentName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "getComponentName", "()Landroid/content/ComponentName;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppLinkInfoGetUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "getUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppLinkInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppLinkInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1574,6 +1529,51 @@ func doInit(env *jni.Env) error {
 		}
 
 		midTvInteractiveAppViewTvInteractiveAppCallbackOnTimeShiftCommandRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppViewTvInteractiveAppCallback)), "onTimeShiftCommandRequest", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/tv/interactive/TvInteractiveAppServiceInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTvInteractiveAppServiceInfo = env.NewGlobalRef(&c.Object)
+
+		midTvInteractiveAppServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppServiceInfoGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppServiceInfoGetServiceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "getServiceInfo", "()Landroid/content/pm/ServiceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppServiceInfoGetSupportedTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "getSupportedTypes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTvInteractiveAppServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

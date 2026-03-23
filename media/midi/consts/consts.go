@@ -3,17 +3,6 @@
 package consts
 
 const (
-	ServiceInterface        string = "android.media.midi.MidiUmpDeviceService"
-	PropertyBluetoothDevice string = "bluetooth_device"
-	PropertyManufacturer    string = "manufacturer"
-	PropertyName            string = "name"
-	PropertyProduct         string = "product"
-	PropertySerialNumber    string = "serial_number"
-	PropertyUsbDevice       string = "usb_device"
-	PropertyVersion         string = "version"
-)
-
-const (
 	TransportMidiByteStream             int = 1
 	TransportUniversalMidiPackets       int = 2
 	Creator                             int = 0
@@ -30,4 +19,15 @@ const (
 	TypeVirtual                         int = 2
 	TypeInput                           int = 1
 	TypeOutput                          int = 2
+)
+
+const (
+	ServiceInterface        string = "android.media.midi.MidiDeviceService"
+	PropertyBluetoothDevice string = "bluetooth_device"
+	PropertyManufacturer    string = "manufacturer"
+	PropertyName            string = "name"
+	PropertyProduct         string = "product"
+	PropertySerialNumber    string = "serial_number"
+	PropertyUsbDevice       string = "usb_device"
+	PropertyVersion         string = "version"
 )

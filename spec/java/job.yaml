@@ -5,6 +5,85 @@
 package: job
 go_import: github.com/AndroidGoLab/jni/app/job
 classes:
+    - java_class: android.app.job.JobParameters
+      go_type: Parameters
+      methods:
+        - java_method: completeWork
+          go_name: CompleteWork
+          params:
+            - java_type: android.app.job.JobWorkItem
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: dequeueWork
+          go_name: DequeueWork
+          returns: android.app.job.JobWorkItem
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getClipData
+          go_name: GetClipData
+          returns: android.content.ClipData
+          error: true
+        - java_method: getClipGrantFlags
+          go_name: GetClipGrantFlags
+          returns: int
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getJobId
+          go_name: GetJobId
+          returns: int
+          error: true
+        - java_method: getJobNamespace
+          go_name: GetJobNamespace
+          returns: String
+          error: true
+        - java_method: getNetwork
+          go_name: GetNetwork
+          returns: android.net.Network
+          error: true
+        - java_method: getStopReason
+          go_name: GetStopReason
+          returns: int
+          error: true
+        - java_method: getTransientExtras
+          go_name: GetTransientExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getTriggeredContentAuthorities
+          go_name: GetTriggeredContentAuthorities
+          returns: java.lang.String[]
+          error: true
+        - java_method: getTriggeredContentUris
+          go_name: GetTriggeredContentUris
+          returns: android.net.Uri[]
+          error: true
+        - java_method: isExpeditedJob
+          go_name: IsExpeditedJob
+          returns: boolean
+          error: true
+        - java_method: isOverrideDeadlineExpired
+          go_name: IsOverrideDeadlineExpired
+          returns: boolean
+          error: true
+        - java_method: isUserInitiatedJob
+          go_name: IsUserInitiatedJob
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.app.job.JobScheduler
       go_type: Scheduler
       obtain: system_service
@@ -158,85 +237,6 @@ classes:
             - java_type: long
               go_name: arg0
           returns: android.app.job.JobWorkItem$Builder
-          error: true
-    - java_class: android.app.job.JobParameters
-      go_type: Parameters
-      methods:
-        - java_method: completeWork
-          go_name: CompleteWork
-          params:
-            - java_type: android.app.job.JobWorkItem
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: dequeueWork
-          go_name: DequeueWork
-          returns: android.app.job.JobWorkItem
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getClipData
-          go_name: GetClipData
-          returns: android.content.ClipData
-          error: true
-        - java_method: getClipGrantFlags
-          go_name: GetClipGrantFlags
-          returns: int
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: getJobId
-          go_name: GetJobId
-          returns: int
-          error: true
-        - java_method: getJobNamespace
-          go_name: GetJobNamespace
-          returns: String
-          error: true
-        - java_method: getNetwork
-          go_name: GetNetwork
-          returns: android.net.Network
-          error: true
-        - java_method: getStopReason
-          go_name: GetStopReason
-          returns: int
-          error: true
-        - java_method: getTransientExtras
-          go_name: GetTransientExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getTriggeredContentAuthorities
-          go_name: GetTriggeredContentAuthorities
-          returns: java.lang.String[]
-          error: true
-        - java_method: getTriggeredContentUris
-          go_name: GetTriggeredContentUris
-          returns: android.net.Uri[]
-          error: true
-        - java_method: isExpeditedJob
-          go_name: IsExpeditedJob
-          returns: boolean
-          error: true
-        - java_method: isOverrideDeadlineExpired
-          go_name: IsOverrideDeadlineExpired
-          returns: boolean
-          error: true
-        - java_method: isUserInitiatedJob
-          go_name: IsUserInitiatedJob
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
           error: true
     - java_class: android.app.job.JobInfo
       go_type: Info
@@ -652,30 +652,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.app.job.PendingJobReasonsInfo
-      go_type: PendingJobReasonsInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getPendingJobReasons
-          go_name: GetPendingJobReasons
-          returns: '[I'
-          error: true
-        - java_method: getTimestampMillis
-          go_name: GetTimestampMillis
-          returns: long
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.app.job.JobServiceEngine
       go_type: ServiceEngine
       methods:
@@ -750,6 +726,30 @@ classes:
               go_name: arg2
             - java_type: long
               go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.app.job.PendingJobReasonsInfo
+      go_type: PendingJobReasonsInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getPendingJobReasons
+          go_name: GetPendingJobReasons
+          returns: '[I'
+          error: true
+        - java_method: getTimestampMillis
+          go_name: GetTimestampMillis
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
           error: true
     - java_class: android.app.job.JobService
@@ -854,6 +854,60 @@ classes:
           returns: void
           error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: StopReasonAppStandby
+      value: "12"
+      go_type: int
+    - go_name: StopReasonBackgroundRestriction
+      value: "11"
+      go_type: int
+    - go_name: StopReasonCancelledByApp
+      value: "1"
+      go_type: int
+    - go_name: StopReasonConstraintBatteryNotLow
+      value: "5"
+      go_type: int
+    - go_name: StopReasonConstraintCharging
+      value: "6"
+      go_type: int
+    - go_name: StopReasonConstraintConnectivity
+      value: "7"
+      go_type: int
+    - go_name: StopReasonConstraintDeviceIdle
+      value: "8"
+      go_type: int
+    - go_name: StopReasonConstraintStorageNotLow
+      value: "9"
+      go_type: int
+    - go_name: StopReasonDeviceState
+      value: "4"
+      go_type: int
+    - go_name: StopReasonEstimatedAppLaunchTimeChanged
+      value: "15"
+      go_type: int
+    - go_name: StopReasonPreempt
+      value: "2"
+      go_type: int
+    - go_name: StopReasonQuota
+      value: "10"
+      go_type: int
+    - go_name: StopReasonSystemProcessing
+      value: "14"
+      go_type: int
+    - go_name: StopReasonTimeout
+      value: "3"
+      go_type: int
+    - go_name: StopReasonTimeoutAbandoned
+      value: "16"
+      go_type: int
+    - go_name: StopReasonUndefined
+      value: "0"
+      go_type: int
+    - go_name: StopReasonUser
+      value: "13"
+      go_type: int
     - go_name: PendingJobReasonApp
       value: "1"
       go_type: int
@@ -916,60 +970,6 @@ constants:
       go_type: int
     - go_name: ResultSuccess
       value: "1"
-      go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: StopReasonAppStandby
-      value: "12"
-      go_type: int
-    - go_name: StopReasonBackgroundRestriction
-      value: "11"
-      go_type: int
-    - go_name: StopReasonCancelledByApp
-      value: "1"
-      go_type: int
-    - go_name: StopReasonConstraintBatteryNotLow
-      value: "5"
-      go_type: int
-    - go_name: StopReasonConstraintCharging
-      value: "6"
-      go_type: int
-    - go_name: StopReasonConstraintConnectivity
-      value: "7"
-      go_type: int
-    - go_name: StopReasonConstraintDeviceIdle
-      value: "8"
-      go_type: int
-    - go_name: StopReasonConstraintStorageNotLow
-      value: "9"
-      go_type: int
-    - go_name: StopReasonDeviceState
-      value: "4"
-      go_type: int
-    - go_name: StopReasonEstimatedAppLaunchTimeChanged
-      value: "15"
-      go_type: int
-    - go_name: StopReasonPreempt
-      value: "2"
-      go_type: int
-    - go_name: StopReasonQuota
-      value: "10"
-      go_type: int
-    - go_name: StopReasonSystemProcessing
-      value: "14"
-      go_type: int
-    - go_name: StopReasonTimeout
-      value: "3"
-      go_type: int
-    - go_name: StopReasonTimeoutAbandoned
-      value: "16"
-      go_type: int
-    - go_name: StopReasonUndefined
-      value: "0"
-      go_type: int
-    - go_name: StopReasonUser
-      value: "13"
       go_type: int
     - go_name: BackoffPolicyExponential
       value: "1"

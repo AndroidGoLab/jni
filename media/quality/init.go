@@ -23,19 +23,19 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsParameterCapability                 *jni.GlobalRef
-	midParameterCapabilityDescribeContents jni.MethodID
-	midParameterCapabilityGetCapabilities  jni.MethodID
-	midParameterCapabilityGetParameterName jni.MethodID
-	midParameterCapabilityGetParameterType jni.MethodID
-	midParameterCapabilityIsSupported      jni.MethodID
-	midParameterCapabilityWriteToParcel    jni.MethodID
+	clsPictureProfile                 *jni.GlobalRef
+	midPictureProfileDescribeContents jni.MethodID
+	midPictureProfileGetInputId       jni.MethodID
+	midPictureProfileGetName          jni.MethodID
+	midPictureProfileGetPackageName   jni.MethodID
+	midPictureProfileGetParameters    jni.MethodID
+	midPictureProfileGetProfileId     jni.MethodID
+	midPictureProfileGetProfileType   jni.MethodID
+	midPictureProfileWriteToParcel    jni.MethodID
 
-	clsMediaQualityContract *jni.GlobalRef
-
-	clsMediaQualityContractPictureQuality *jni.GlobalRef
-
-	clsMediaQualityContractSoundQuality *jni.GlobalRef
+	clsPictureProfileBuilder              *jni.GlobalRef
+	midPictureProfileBuilderBuild         jni.MethodID
+	midPictureProfileBuilderSetParameters jni.MethodID
 
 	clsSoundProfile                 *jni.GlobalRef
 	midSoundProfileDescribeContents jni.MethodID
@@ -51,6 +51,26 @@ var (
 	midSoundProfileBuilderBuild         jni.MethodID
 	midSoundProfileBuilderSetParameters jni.MethodID
 
+	clsActiveProcessingPicture                 *jni.GlobalRef
+	midActiveProcessingPictureDescribeContents jni.MethodID
+	midActiveProcessingPictureGetId            jni.MethodID
+	midActiveProcessingPictureGetProfileId     jni.MethodID
+	midActiveProcessingPictureWriteToParcel    jni.MethodID
+
+	clsMediaQualityContract *jni.GlobalRef
+
+	clsMediaQualityContractPictureQuality *jni.GlobalRef
+
+	clsMediaQualityContractSoundQuality *jni.GlobalRef
+
+	clsParameterCapability                 *jni.GlobalRef
+	midParameterCapabilityDescribeContents jni.MethodID
+	midParameterCapabilityGetCapabilities  jni.MethodID
+	midParameterCapabilityGetParameterName jni.MethodID
+	midParameterCapabilityGetParameterType jni.MethodID
+	midParameterCapabilityIsSupported      jni.MethodID
+	midParameterCapabilityWriteToParcel    jni.MethodID
+
 	clsAmbientBacklightSettings                        *jni.GlobalRef
 	midAmbientBacklightSettingsDescribeContents        jni.MethodID
 	midAmbientBacklightSettingsGetColorFormat          jni.MethodID
@@ -63,26 +83,6 @@ var (
 	midAmbientBacklightSettingsToString                jni.MethodID
 	midAmbientBacklightSettingsWriteToParcel           jni.MethodID
 
-	clsActiveProcessingPicture                 *jni.GlobalRef
-	midActiveProcessingPictureDescribeContents jni.MethodID
-	midActiveProcessingPictureGetId            jni.MethodID
-	midActiveProcessingPictureGetProfileId     jni.MethodID
-	midActiveProcessingPictureWriteToParcel    jni.MethodID
-
-	clsPictureProfile                 *jni.GlobalRef
-	midPictureProfileDescribeContents jni.MethodID
-	midPictureProfileGetInputId       jni.MethodID
-	midPictureProfileGetName          jni.MethodID
-	midPictureProfileGetPackageName   jni.MethodID
-	midPictureProfileGetParameters    jni.MethodID
-	midPictureProfileGetProfileId     jni.MethodID
-	midPictureProfileGetProfileType   jni.MethodID
-	midPictureProfileWriteToParcel    jni.MethodID
-
-	clsPictureProfileBuilder              *jni.GlobalRef
-	midPictureProfileBuilderBuild         jni.MethodID
-	midPictureProfileBuilderSetParameters jni.MethodID
-
 	clsAmbientBacklightEvent                 *jni.GlobalRef
 	midAmbientBacklightEventDescribeContents jni.MethodID
 	midAmbientBacklightEventEquals           jni.MethodID
@@ -91,18 +91,6 @@ var (
 	midAmbientBacklightEventHashCode         jni.MethodID
 	midAmbientBacklightEventToString         jni.MethodID
 	midAmbientBacklightEventWriteToParcel    jni.MethodID
-
-	clsAmbientBacklightMetadata                        *jni.GlobalRef
-	midAmbientBacklightMetadataDescribeContents        jni.MethodID
-	midAmbientBacklightMetadataGetColorFormat          jni.MethodID
-	midAmbientBacklightMetadataGetCompressionAlgorithm jni.MethodID
-	midAmbientBacklightMetadataGetHorizontalZonesCount jni.MethodID
-	midAmbientBacklightMetadataGetPackageName          jni.MethodID
-	midAmbientBacklightMetadataGetSource               jni.MethodID
-	midAmbientBacklightMetadataGetVerticalZonesCount   jni.MethodID
-	midAmbientBacklightMetadataGetZoneColors           jni.MethodID
-	midAmbientBacklightMetadataToString                jni.MethodID
-	midAmbientBacklightMetadataWriteToParcel           jni.MethodID
 
 	clsMediaQualityManager                                   *jni.GlobalRef
 	midMediaQualityManagerCreatePictureProfile               jni.MethodID
@@ -145,6 +133,18 @@ var (
 	midMediaQualityManagerSoundProfileCallbackOnSoundProfileAdded   jni.MethodID
 	midMediaQualityManagerSoundProfileCallbackOnSoundProfileRemoved jni.MethodID
 	midMediaQualityManagerSoundProfileCallbackOnSoundProfileUpdated jni.MethodID
+
+	clsAmbientBacklightMetadata                        *jni.GlobalRef
+	midAmbientBacklightMetadataDescribeContents        jni.MethodID
+	midAmbientBacklightMetadataGetColorFormat          jni.MethodID
+	midAmbientBacklightMetadataGetCompressionAlgorithm jni.MethodID
+	midAmbientBacklightMetadataGetHorizontalZonesCount jni.MethodID
+	midAmbientBacklightMetadataGetPackageName          jni.MethodID
+	midAmbientBacklightMetadataGetSource               jni.MethodID
+	midAmbientBacklightMetadataGetVerticalZonesCount   jni.MethodID
+	midAmbientBacklightMetadataGetZoneColors           jni.MethodID
+	midAmbientBacklightMetadataToString                jni.MethodID
+	midAmbientBacklightMetadataWriteToParcel           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -165,50 +165,64 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/media/quality/ParameterCapability")
+	c, err = env.FindClass("android/media/quality/PictureProfile")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsParameterCapability = env.NewGlobalRef(&c.Object)
+		clsPictureProfile = env.NewGlobalRef(&c.Object)
 
-		midParameterCapabilityDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "describeContents", "()I")
+		midPictureProfileDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midParameterCapabilityGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "getCapabilities", "()Landroid/os/Bundle;")
+		midPictureProfileGetInputId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getInputId", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midParameterCapabilityGetParameterName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "getParameterName", "()Ljava/lang/String;")
+		midPictureProfileGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midParameterCapabilityGetParameterType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "getParameterType", "()I")
+		midPictureProfileGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getPackageName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midParameterCapabilityIsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "isSupported", "()Z")
+		midPictureProfileGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getParameters", "()Landroid/os/PersistableBundle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midParameterCapabilityWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midPictureProfileGetProfileId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getProfileId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPictureProfileGetProfileType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getProfileType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPictureProfileWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -217,33 +231,27 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/quality/MediaQualityContract")
+	c, err = env.FindClass("android/media/quality/PictureProfile$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsMediaQualityContract = env.NewGlobalRef(&c.Object)
+		clsPictureProfileBuilder = env.NewGlobalRef(&c.Object)
 
-	}
+		midPictureProfileBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfileBuilder)), "build", "()Landroid/media/quality/PictureProfile;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
-	c, err = env.FindClass("android/media/quality/MediaQualityContract$PictureQuality")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsMediaQualityContractPictureQuality = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/media/quality/MediaQualityContract$SoundQuality")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsMediaQualityContractSoundQuality = env.NewGlobalRef(&c.Object)
+		midPictureProfileBuilderSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfileBuilder)), "setParameters", "(Landroid/os/PersistableBundle;)Landroid/media/quality/PictureProfile$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -337,6 +345,126 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/media/quality/ActiveProcessingPicture")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsActiveProcessingPicture = env.NewGlobalRef(&c.Object)
+
+		midActiveProcessingPictureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActiveProcessingPictureGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "getId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActiveProcessingPictureGetProfileId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "getProfileId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActiveProcessingPictureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/quality/MediaQualityContract")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaQualityContract = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/media/quality/MediaQualityContract$PictureQuality")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaQualityContractPictureQuality = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/media/quality/MediaQualityContract$SoundQuality")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMediaQualityContractSoundQuality = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/media/quality/ParameterCapability")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsParameterCapability = env.NewGlobalRef(&c.Object)
+
+		midParameterCapabilityDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParameterCapabilityGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "getCapabilities", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParameterCapabilityGetParameterName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "getParameterName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParameterCapabilityGetParameterType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "getParameterType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParameterCapabilityIsSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "isSupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midParameterCapabilityWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsParameterCapability)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/media/quality/AmbientBacklightSettings")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -417,134 +545,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/quality/ActiveProcessingPicture")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsActiveProcessingPicture = env.NewGlobalRef(&c.Object)
-
-		midActiveProcessingPictureDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActiveProcessingPictureGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "getId", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActiveProcessingPictureGetProfileId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "getProfileId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActiveProcessingPictureWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActiveProcessingPicture)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/quality/PictureProfile")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPictureProfile = env.NewGlobalRef(&c.Object)
-
-		midPictureProfileDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileGetInputId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getInputId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getPackageName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getParameters", "()Landroid/os/PersistableBundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileGetProfileId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getProfileId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileGetProfileType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "getProfileType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfile)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/quality/PictureProfile$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPictureProfileBuilder = env.NewGlobalRef(&c.Object)
-
-		midPictureProfileBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfileBuilder)), "build", "()Landroid/media/quality/PictureProfile;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPictureProfileBuilderSetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPictureProfileBuilder)), "setParameters", "(Landroid/os/PersistableBundle;)Landroid/media/quality/PictureProfile$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/media/quality/AmbientBacklightEvent")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -596,86 +596,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAmbientBacklightEventWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightEvent)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/quality/AmbientBacklightMetadata")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAmbientBacklightMetadata = env.NewGlobalRef(&c.Object)
-
-		midAmbientBacklightMetadataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetColorFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getColorFormat", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetCompressionAlgorithm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getCompressionAlgorithm", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetHorizontalZonesCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getHorizontalZonesCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getPackageName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getSource", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetVerticalZonesCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getVerticalZonesCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataGetZoneColors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getZoneColors", "()[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAmbientBacklightMetadataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -950,6 +870,86 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaQualityManagerSoundProfileCallbackOnSoundProfileUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaQualityManagerSoundProfileCallback)), "onSoundProfileUpdated", "(Ljava/lang/String;Landroid/media/quality/SoundProfile;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/quality/AmbientBacklightMetadata")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAmbientBacklightMetadata = env.NewGlobalRef(&c.Object)
+
+		midAmbientBacklightMetadataDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetColorFormat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getColorFormat", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetCompressionAlgorithm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getCompressionAlgorithm", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetHorizontalZonesCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getHorizontalZonesCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getSource", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetVerticalZonesCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getVerticalZonesCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataGetZoneColors, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "getZoneColors", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAmbientBacklightMetadataWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

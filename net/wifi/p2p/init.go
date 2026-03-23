@@ -23,11 +23,28 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsWifiP2pDeviceList                 *jni.GlobalRef
+	midWifiP2pDeviceListDescribeContents jni.MethodID
+	midWifiP2pDeviceListGet              jni.MethodID
+	midWifiP2pDeviceListToString         jni.MethodID
+	midWifiP2pDeviceListWriteToParcel    jni.MethodID
+
+	clsWifiP2pUsdBasedServiceDiscoveryConfig                  *jni.GlobalRef
+	midWifiP2pUsdBasedServiceDiscoveryConfigDescribeContents  jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigGetBand           jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigGetFrequenciesMhz jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigToString          jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigWriteToParcel     jni.MethodID
+
+	clsWifiP2pUsdBasedServiceDiscoveryConfigBuilder                  *jni.GlobalRef
+	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderBuild             jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderSetBand           jni.MethodID
+	midWifiP2pUsdBasedServiceDiscoveryConfigBuilderSetFrequenciesMhz jni.MethodID
+
 	clsWifiP2pDevice                                                *jni.GlobalRef
 	midWifiP2pDeviceDescribeContents                                jni.MethodID
 	midWifiP2pDeviceEquals                                          jni.MethodID
 	midWifiP2pDeviceGetIpAddress                                    jni.MethodID
-	midWifiP2pDeviceGetVendorElements                               jni.MethodID
 	midWifiP2pDeviceGetWfdInfo                                      jni.MethodID
 	midWifiP2pDeviceHashCode                                        jni.MethodID
 	midWifiP2pDeviceIsGroupOwner                                    jni.MethodID
@@ -44,9 +61,16 @@ var (
 	midWifiP2pDeviceWpsPbcSupported                                 jni.MethodID
 	midWifiP2pDeviceWriteToParcel                                   jni.MethodID
 
+	clsWifiP2pDirInfo                 *jni.GlobalRef
+	midWifiP2pDirInfoDescribeContents jni.MethodID
+	midWifiP2pDirInfoGetDirTag        jni.MethodID
+	midWifiP2pDirInfoGetMacAddress    jni.MethodID
+	midWifiP2pDirInfoGetNonce         jni.MethodID
+	midWifiP2pDirInfoToString         jni.MethodID
+	midWifiP2pDirInfoWriteToParcel    jni.MethodID
+
 	clsWifiP2pGroup                   *jni.GlobalRef
 	midWifiP2pGroupDescribeContents   jni.MethodID
-	midWifiP2pGroupGetClientList      jni.MethodID
 	midWifiP2pGroupGetFrequency       jni.MethodID
 	midWifiP2pGroupGetGroupOwnerBssid jni.MethodID
 	midWifiP2pGroupGetInterface       jni.MethodID
@@ -59,20 +83,31 @@ var (
 	midWifiP2pGroupToString           jni.MethodID
 	midWifiP2pGroupWriteToParcel      jni.MethodID
 
-	clsWifiP2pConfig                                     *jni.GlobalRef
-	midWifiP2pConfigDescribeContents                     jni.MethodID
-	midWifiP2pConfigGetGroupClientIpProvisioningMode     jni.MethodID
-	midWifiP2pConfigGetGroupOwnerBand                    jni.MethodID
-	midWifiP2pConfigGetGroupOwnerVersion                 jni.MethodID
-	midWifiP2pConfigGetNetworkId                         jni.MethodID
-	midWifiP2pConfigGetNetworkName                       jni.MethodID
-	midWifiP2pConfigGetPairingBootstrappingConfig        jni.MethodID
-	midWifiP2pConfigGetPassphrase                        jni.MethodID
-	midWifiP2pConfigGetPccModeConnectionType             jni.MethodID
-	midWifiP2pConfigIsAuthorizeConnectionFromPeerEnabled jni.MethodID
-	midWifiP2pConfigSetGroupOwnerVersion                 jni.MethodID
-	midWifiP2pConfigToString                             jni.MethodID
-	midWifiP2pConfigWriteToParcel                        jni.MethodID
+	clsWifiP2pWfdInfo                               *jni.GlobalRef
+	midWifiP2pWfdInfoDescribeContents               jni.MethodID
+	midWifiP2pWfdInfoGetControlPort                 jni.MethodID
+	midWifiP2pWfdInfoGetDeviceInfo                  jni.MethodID
+	midWifiP2pWfdInfoGetDeviceType                  jni.MethodID
+	midWifiP2pWfdInfoGetMaxThroughput               jni.MethodID
+	midWifiP2pWfdInfoGetR2DeviceInfo                jni.MethodID
+	midWifiP2pWfdInfoGetR2DeviceType                jni.MethodID
+	midWifiP2pWfdInfoIsContentProtectionSupported   jni.MethodID
+	midWifiP2pWfdInfoIsCoupledSinkSupportedAtSink   jni.MethodID
+	midWifiP2pWfdInfoIsCoupledSinkSupportedAtSource jni.MethodID
+	midWifiP2pWfdInfoIsEnabled                      jni.MethodID
+	midWifiP2pWfdInfoIsR2Supported                  jni.MethodID
+	midWifiP2pWfdInfoIsSessionAvailable             jni.MethodID
+	midWifiP2pWfdInfoSetContentProtectionSupported  jni.MethodID
+	midWifiP2pWfdInfoSetControlPort                 jni.MethodID
+	midWifiP2pWfdInfoSetCoupledSinkSupportAtSink    jni.MethodID
+	midWifiP2pWfdInfoSetCoupledSinkSupportAtSource  jni.MethodID
+	midWifiP2pWfdInfoSetDeviceType                  jni.MethodID
+	midWifiP2pWfdInfoSetEnabled                     jni.MethodID
+	midWifiP2pWfdInfoSetMaxThroughput               jni.MethodID
+	midWifiP2pWfdInfoSetR2DeviceType                jni.MethodID
+	midWifiP2pWfdInfoSetSessionAvailable            jni.MethodID
+	midWifiP2pWfdInfoToString                       jni.MethodID
+	midWifiP2pWfdInfoWriteToParcel                  jni.MethodID
 
 	clsWifiP2pManager                                          *jni.GlobalRef
 	midWifiP2pManagerAddExternalApprover                       jni.MethodID
@@ -89,7 +124,6 @@ var (
 	midWifiP2pManagerDiscoverPeersOnSpecificFrequency          jni.MethodID
 	midWifiP2pManagerDiscoverServices                          jni.MethodID
 	midWifiP2pManagerDiscoverUsdBasedServices                  jni.MethodID
-	midWifiP2pManagerGetListenState                            jni.MethodID
 	midWifiP2pManagerInitialize                                jni.MethodID
 	midWifiP2pManagerIsChannelConstrainedDiscoverySupported    jni.MethodID
 	midWifiP2pManagerIsGroupClientRemovalSupported             jni.MethodID
@@ -105,7 +139,6 @@ var (
 	midWifiP2pManagerRemoveServiceRequest                      jni.MethodID
 	midWifiP2pManagerRequestConnectionInfo                     jni.MethodID
 	midWifiP2pManagerRequestDeviceInfo                         jni.MethodID
-	midWifiP2pManagerRequestDirInfo                            jni.MethodID
 	midWifiP2pManagerRequestDiscoveryState                     jni.MethodID
 	midWifiP2pManagerRequestGroupInfo                          jni.MethodID
 	midWifiP2pManagerRequestNetworkInfo                        jni.MethodID
@@ -116,7 +149,6 @@ var (
 	midWifiP2pManagerSetDnsSdResponseListeners                 jni.MethodID
 	midWifiP2pManagerSetServiceResponseListener                jni.MethodID
 	midWifiP2pManagerSetUpnpServiceResponseListener            jni.MethodID
-	midWifiP2pManagerSetVendorElements                         jni.MethodID
 	midWifiP2pManagerSetWfdInfo                                jni.MethodID
 	midWifiP2pManagerStartListening                            jni.MethodID
 	midWifiP2pManagerStartPeerDiscovery                        jni.MethodID
@@ -124,8 +156,115 @@ var (
 	midWifiP2pManagerStopListening                             jni.MethodID
 	midWifiP2pManagerStopPeerDiscovery                         jni.MethodID
 	midWifiP2pManagerUnregisterWifiP2pListener                 jni.MethodID
-	midWifiP2pManagerValidateDirInfo                           jni.MethodID
 	midWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytes jni.MethodID
+
+	clsWifiP2pManagerActionListener          *jni.GlobalRef
+	midWifiP2pManagerActionListenerOnFailure jni.MethodID
+	midWifiP2pManagerActionListenerOnSuccess jni.MethodID
+
+	clsWifiP2pManagerChannel      *jni.GlobalRef
+	midWifiP2pManagerChannelClose jni.MethodID
+
+	clsWifiP2pManagerChannelListener                      *jni.GlobalRef
+	midWifiP2pManagerChannelListenerOnChannelDisconnected jni.MethodID
+
+	clsWifiP2pManagerConnectionInfoListener                          *jni.GlobalRef
+	midWifiP2pManagerConnectionInfoListenerOnConnectionInfoAvailable jni.MethodID
+
+	clsWifiP2pManagerDeviceInfoListener                      *jni.GlobalRef
+	midWifiP2pManagerDeviceInfoListenerOnDeviceInfoAvailable jni.MethodID
+
+	clsWifiP2pManagerDiscoveryStateListener                          *jni.GlobalRef
+	midWifiP2pManagerDiscoveryStateListenerOnDiscoveryStateAvailable jni.MethodID
+
+	clsWifiP2pManagerDnsSdServiceResponseListener                        *jni.GlobalRef
+	midWifiP2pManagerDnsSdServiceResponseListenerOnDnsSdServiceAvailable jni.MethodID
+
+	clsWifiP2pManagerDnsSdTxtRecordListener *jni.GlobalRef
+
+	clsWifiP2pManagerExternalApproverRequestListener                      *jni.GlobalRef
+	midWifiP2pManagerExternalApproverRequestListenerOnAttached            jni.MethodID
+	midWifiP2pManagerExternalApproverRequestListenerOnConnectionRequested jni.MethodID
+	midWifiP2pManagerExternalApproverRequestListenerOnDetached            jni.MethodID
+	midWifiP2pManagerExternalApproverRequestListenerOnPinGenerated        jni.MethodID
+
+	clsWifiP2pManagerGroupInfoListener                     *jni.GlobalRef
+	midWifiP2pManagerGroupInfoListenerOnGroupInfoAvailable jni.MethodID
+
+	clsWifiP2pManagerNetworkInfoListener                       *jni.GlobalRef
+	midWifiP2pManagerNetworkInfoListenerOnNetworkInfoAvailable jni.MethodID
+
+	clsWifiP2pManagerP2pStateListener                    *jni.GlobalRef
+	midWifiP2pManagerP2pStateListenerOnP2pStateAvailable jni.MethodID
+
+	clsWifiP2pManagerPeerListListener                 *jni.GlobalRef
+	midWifiP2pManagerPeerListListenerOnPeersAvailable jni.MethodID
+
+	clsWifiP2pManagerServiceResponseListener                   *jni.GlobalRef
+	midWifiP2pManagerServiceResponseListenerOnServiceAvailable jni.MethodID
+
+	clsWifiP2pManagerUpnpServiceResponseListener *jni.GlobalRef
+
+	clsWifiP2pManagerWifiP2pListener *jni.GlobalRef
+
+	clsWifiP2pPairingBootstrappingConfig                 *jni.GlobalRef
+	midWifiP2pPairingBootstrappingConfigDescribeContents jni.MethodID
+	midWifiP2pPairingBootstrappingConfigToString         jni.MethodID
+	midWifiP2pPairingBootstrappingConfigWriteToParcel    jni.MethodID
+
+	clsWifiP2pDiscoveryConfig                 *jni.GlobalRef
+	midWifiP2pDiscoveryConfigDescribeContents jni.MethodID
+	midWifiP2pDiscoveryConfigGetFrequencyMhz  jni.MethodID
+	midWifiP2pDiscoveryConfigGetScanType      jni.MethodID
+	midWifiP2pDiscoveryConfigToString         jni.MethodID
+	midWifiP2pDiscoveryConfigWriteToParcel    jni.MethodID
+
+	clsWifiP2pDiscoveryConfigBuilder                *jni.GlobalRef
+	midWifiP2pDiscoveryConfigBuilderBuild           jni.MethodID
+	midWifiP2pDiscoveryConfigBuilderSetFrequencyMhz jni.MethodID
+
+	clsWifiP2pInfo                 *jni.GlobalRef
+	midWifiP2pInfoDescribeContents jni.MethodID
+	midWifiP2pInfoToString         jni.MethodID
+	midWifiP2pInfoWriteToParcel    jni.MethodID
+
+	clsWifiP2pConfig                                     *jni.GlobalRef
+	midWifiP2pConfigDescribeContents                     jni.MethodID
+	midWifiP2pConfigGetGroupClientIpProvisioningMode     jni.MethodID
+	midWifiP2pConfigGetGroupOwnerBand                    jni.MethodID
+	midWifiP2pConfigGetGroupOwnerVersion                 jni.MethodID
+	midWifiP2pConfigGetNetworkId                         jni.MethodID
+	midWifiP2pConfigGetNetworkName                       jni.MethodID
+	midWifiP2pConfigGetPairingBootstrappingConfig        jni.MethodID
+	midWifiP2pConfigGetPassphrase                        jni.MethodID
+	midWifiP2pConfigGetPccModeConnectionType             jni.MethodID
+	midWifiP2pConfigIsAuthorizeConnectionFromPeerEnabled jni.MethodID
+	midWifiP2pConfigSetGroupOwnerVersion                 jni.MethodID
+	midWifiP2pConfigToString                             jni.MethodID
+	midWifiP2pConfigWriteToParcel                        jni.MethodID
+
+	clsWifiP2pConfigBuilder                                      *jni.GlobalRef
+	midWifiP2pConfigBuilderBuild                                 jni.MethodID
+	midWifiP2pConfigBuilderEnablePersistentMode                  jni.MethodID
+	midWifiP2pConfigBuilderSetAuthorizeConnectionFromPeerEnabled jni.MethodID
+	midWifiP2pConfigBuilderSetDeviceAddress                      jni.MethodID
+	midWifiP2pConfigBuilderSetGroupClientIpProvisioningMode      jni.MethodID
+	midWifiP2pConfigBuilderSetGroupOperatingBand                 jni.MethodID
+	midWifiP2pConfigBuilderSetGroupOperatingFrequency            jni.MethodID
+	midWifiP2pConfigBuilderSetNetworkName                        jni.MethodID
+	midWifiP2pConfigBuilderSetPairingBootstrappingConfig         jni.MethodID
+	midWifiP2pConfigBuilderSetPassphrase                         jni.MethodID
+	midWifiP2pConfigBuilderSetPccModeConnectionType              jni.MethodID
+
+	clsWifiP2pUsdBasedLocalServiceAdvertisementConfig                 *jni.GlobalRef
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigDescribeContents jni.MethodID
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigGetFrequencyMhz  jni.MethodID
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigToString         jni.MethodID
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigWriteToParcel    jni.MethodID
+
+	clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder                *jni.GlobalRef
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderBuild           jni.MethodID
+	midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderSetFrequencyMhz jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -145,6 +284,120 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pDeviceList")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pDeviceList = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pDeviceListDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDeviceList)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDeviceListGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDeviceList)), "get", "(Ljava/lang/String;)Landroid/net/wifi/p2p/WifiP2pDevice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDeviceListToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDeviceList)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDeviceListWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDeviceList)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pUsdBasedServiceDiscoveryConfig")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pUsdBasedServiceDiscoveryConfig = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigGetBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfig)), "getBand", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigGetFrequenciesMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfig)), "getFrequenciesMhz", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pUsdBasedServiceDiscoveryConfig$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pUsdBasedServiceDiscoveryConfigBuilder = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfigBuilder)), "build", "()Landroid/net/wifi/p2p/WifiP2pUsdBasedServiceDiscoveryConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigBuilderSetBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfigBuilder)), "setBand", "(I)Landroid/net/wifi/p2p/WifiP2pUsdBasedServiceDiscoveryConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedServiceDiscoveryConfigBuilderSetFrequenciesMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceDiscoveryConfigBuilder)), "setFrequenciesMhz", "([I)Landroid/net/wifi/p2p/WifiP2pUsdBasedServiceDiscoveryConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pDevice")
 	if err != nil {
@@ -169,13 +422,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWifiP2pDeviceGetIpAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDevice)), "getIpAddress", "()Ljava/net/InetAddress;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWifiP2pDeviceGetVendorElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDevice)), "getVendorElements", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -289,6 +535,58 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pDirInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pDirInfo = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pDirInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDirInfoGetDirTag, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), "getDirTag", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDirInfoGetMacAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), "getMacAddress", "()Landroid/net/MacAddress;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDirInfoGetNonce, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), "getNonce", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDirInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDirInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pGroup")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -298,13 +596,6 @@ func doInit(env *jni.Env) error {
 		clsWifiP2pGroup = env.NewGlobalRef(&c.Object)
 
 		midWifiP2pGroupDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pGroup)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWifiP2pGroupGetClientList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pGroup)), "getClientList", "()Ljava/util/Collection;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -390,99 +681,176 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pConfig")
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pWfdInfo")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWifiP2pConfig = env.NewGlobalRef(&c.Object)
+		clsWifiP2pWfdInfo = env.NewGlobalRef(&c.Object)
 
-		midWifiP2pConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "describeContents", "()I")
+		midWifiP2pWfdInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetGroupClientIpProvisioningMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getGroupClientIpProvisioningMode", "()I")
+		midWifiP2pWfdInfoGetControlPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "getControlPort", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetGroupOwnerBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getGroupOwnerBand", "()I")
+		midWifiP2pWfdInfoGetDeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "getDeviceInfo", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetGroupOwnerVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getGroupOwnerVersion", "()I")
+		midWifiP2pWfdInfoGetDeviceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "getDeviceType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetNetworkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getNetworkId", "()I")
+		midWifiP2pWfdInfoGetMaxThroughput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "getMaxThroughput", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetNetworkName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getNetworkName", "()Ljava/lang/String;")
+		midWifiP2pWfdInfoGetR2DeviceInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "getR2DeviceInfo", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetPairingBootstrappingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getPairingBootstrappingConfig", "()Landroid/net/wifi/p2p/WifiP2pPairingBootstrappingConfig;")
+		midWifiP2pWfdInfoGetR2DeviceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "getR2DeviceType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetPassphrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getPassphrase", "()Ljava/lang/String;")
+		midWifiP2pWfdInfoIsContentProtectionSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "isContentProtectionSupported", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigGetPccModeConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getPccModeConnectionType", "()I")
+		midWifiP2pWfdInfoIsCoupledSinkSupportedAtSink, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "isCoupledSinkSupportedAtSink", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigIsAuthorizeConnectionFromPeerEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "isAuthorizeConnectionFromPeerEnabled", "()Z")
+		midWifiP2pWfdInfoIsCoupledSinkSupportedAtSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "isCoupledSinkSupportedAtSource", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigSetGroupOwnerVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "setGroupOwnerVersion", "(I)V")
+		midWifiP2pWfdInfoIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "isEnabled", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "toString", "()Ljava/lang/String;")
+		midWifiP2pWfdInfoIsR2Supported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "isR2Supported", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midWifiP2pWfdInfoIsSessionAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "isSessionAvailable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetContentProtectionSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setContentProtectionSupported", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetControlPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setControlPort", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetCoupledSinkSupportAtSink, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setCoupledSinkSupportAtSink", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetCoupledSinkSupportAtSource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setCoupledSinkSupportAtSource", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetDeviceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setDeviceType", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetMaxThroughput, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setMaxThroughput", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetR2DeviceType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setR2DeviceType", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoSetSessionAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "setSessionAvailable", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pWfdInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -597,13 +965,6 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
-		midWifiP2pManagerGetListenState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "getListenState", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/concurrent/Executor;Ljava/util/function/Consumer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
 		midWifiP2pManagerInitialize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "initialize", "(Landroid/content/Context;Landroid/os/Looper;Landroid/net/wifi/p2p/WifiP2pManager$ChannelListener;)Landroid/net/wifi/p2p/WifiP2pManager$Channel;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -709,13 +1070,6 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
-		midWifiP2pManagerRequestDirInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "requestDirInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
 		midWifiP2pManagerRequestDiscoveryState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "requestDiscoveryState", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Landroid/net/wifi/p2p/WifiP2pManager$DiscoveryStateListener;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -786,13 +1140,6 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
-		midWifiP2pManagerSetVendorElements, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "setVendorElements", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Ljava/util/List;Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
 		midWifiP2pManagerSetWfdInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "setWfdInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Landroid/net/wifi/p2p/WifiP2pWfdInfo;Landroid/net/wifi/p2p/WifiP2pManager$ActionListener;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -842,14 +1189,667 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
-		midWifiP2pManagerValidateDirInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "validateDirInfo", "(Landroid/net/wifi/p2p/WifiP2pManager$Channel;Landroid/net/wifi/p2p/WifiP2pDirInfo;Ljava/util/concurrent/Executor;Landroid/os/OutcomeReceiver;)V")
+		midWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "getP2pMaxAllowedVendorElementsLengthBytes", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWifiP2pManagerGetP2pMaxAllowedVendorElementsLengthBytes, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManager)), "getP2pMaxAllowedVendorElementsLengthBytes", "()I")
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ActionListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerActionListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerActionListenerOnFailure, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerActionListener)), "onFailure", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerActionListenerOnSuccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerActionListener)), "onSuccess", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$Channel")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerChannel = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerChannelClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerChannel)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ChannelListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerChannelListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerChannelListenerOnChannelDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerChannelListener)), "onChannelDisconnected", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ConnectionInfoListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerConnectionInfoListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerConnectionInfoListenerOnConnectionInfoAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerConnectionInfoListener)), "onConnectionInfoAvailable", "(Landroid/net/wifi/p2p/WifiP2pInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$DeviceInfoListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerDeviceInfoListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerDeviceInfoListenerOnDeviceInfoAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDeviceInfoListener)), "onDeviceInfoAvailable", "(Landroid/net/wifi/p2p/WifiP2pDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$DiscoveryStateListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerDiscoveryStateListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerDiscoveryStateListenerOnDiscoveryStateAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDiscoveryStateListener)), "onDiscoveryStateAvailable", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$DnsSdServiceResponseListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerDnsSdServiceResponseListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerDnsSdServiceResponseListenerOnDnsSdServiceAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerDnsSdServiceResponseListener)), "onDnsSdServiceAvailable", "(Ljava/lang/String;Ljava/lang/String;Landroid/net/wifi/p2p/WifiP2pDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$DnsSdTxtRecordListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerDnsSdTxtRecordListener = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ExternalApproverRequestListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerExternalApproverRequestListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerExternalApproverRequestListenerOnAttached, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerExternalApproverRequestListener)), "onAttached", "(Landroid/net/MacAddress;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerExternalApproverRequestListenerOnConnectionRequested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerExternalApproverRequestListener)), "onConnectionRequested", "(ILandroid/net/wifi/p2p/WifiP2pConfig;Landroid/net/wifi/p2p/WifiP2pDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerExternalApproverRequestListenerOnDetached, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerExternalApproverRequestListener)), "onDetached", "(Landroid/net/MacAddress;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pManagerExternalApproverRequestListenerOnPinGenerated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerExternalApproverRequestListener)), "onPinGenerated", "(Landroid/net/MacAddress;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$GroupInfoListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerGroupInfoListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerGroupInfoListenerOnGroupInfoAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerGroupInfoListener)), "onGroupInfoAvailable", "(Landroid/net/wifi/p2p/WifiP2pGroup;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$NetworkInfoListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerNetworkInfoListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerNetworkInfoListenerOnNetworkInfoAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerNetworkInfoListener)), "onNetworkInfoAvailable", "(Landroid/net/NetworkInfo;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$P2pStateListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerP2pStateListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerP2pStateListenerOnP2pStateAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerP2pStateListener)), "onP2pStateAvailable", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$PeerListListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerPeerListListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerPeerListListenerOnPeersAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerPeerListListener)), "onPeersAvailable", "(Landroid/net/wifi/p2p/WifiP2pDeviceList;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$ServiceResponseListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerServiceResponseListener = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pManagerServiceResponseListenerOnServiceAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pManagerServiceResponseListener)), "onServiceAvailable", "(I[BLandroid/net/wifi/p2p/WifiP2pDevice;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$UpnpServiceResponseListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerUpnpServiceResponseListener = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pManager$WifiP2pListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pManagerWifiP2pListener = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pPairingBootstrappingConfig")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pPairingBootstrappingConfig = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pPairingBootstrappingConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pPairingBootstrappingConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pPairingBootstrappingConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pPairingBootstrappingConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pPairingBootstrappingConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pPairingBootstrappingConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pDiscoveryConfig")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pDiscoveryConfig = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pDiscoveryConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDiscoveryConfigGetFrequencyMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfig)), "getFrequencyMhz", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDiscoveryConfigGetScanType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfig)), "getScanType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDiscoveryConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDiscoveryConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pDiscoveryConfig$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pDiscoveryConfigBuilder = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pDiscoveryConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfigBuilder)), "build", "()Landroid/net/wifi/p2p/WifiP2pDiscoveryConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pDiscoveryConfigBuilderSetFrequencyMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pDiscoveryConfigBuilder)), "setFrequencyMhz", "(I)Landroid/net/wifi/p2p/WifiP2pDiscoveryConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pInfo = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pConfig")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pConfig = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetGroupClientIpProvisioningMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getGroupClientIpProvisioningMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetGroupOwnerBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getGroupOwnerBand", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetGroupOwnerVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getGroupOwnerVersion", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetNetworkId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getNetworkId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetNetworkName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getNetworkName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetPairingBootstrappingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getPairingBootstrappingConfig", "()Landroid/net/wifi/p2p/WifiP2pPairingBootstrappingConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetPassphrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getPassphrase", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigGetPccModeConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "getPccModeConnectionType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigIsAuthorizeConnectionFromPeerEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "isAuthorizeConnectionFromPeerEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigSetGroupOwnerVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "setGroupOwnerVersion", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pConfig$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pConfigBuilder = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "build", "()Landroid/net/wifi/p2p/WifiP2pConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderEnablePersistentMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "enablePersistentMode", "(Z)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetAuthorizeConnectionFromPeerEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setAuthorizeConnectionFromPeerEnabled", "(Z)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetDeviceAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setDeviceAddress", "(Landroid/net/MacAddress;)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetGroupClientIpProvisioningMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setGroupClientIpProvisioningMode", "(I)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetGroupOperatingBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setGroupOperatingBand", "(I)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetGroupOperatingFrequency, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setGroupOperatingFrequency", "(I)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetNetworkName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setNetworkName", "(Ljava/lang/String;)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetPairingBootstrappingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setPairingBootstrappingConfig", "(Landroid/net/wifi/p2p/WifiP2pPairingBootstrappingConfig;)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetPassphrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setPassphrase", "(Ljava/lang/String;)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pConfigBuilderSetPccModeConnectionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pConfigBuilder)), "setPccModeConnectionType", "(I)Landroid/net/wifi/p2p/WifiP2pConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pUsdBasedLocalServiceAdvertisementConfig")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pUsdBasedLocalServiceAdvertisementConfig = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfig)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigGetFrequencyMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfig)), "getFrequencyMhz", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/wifi/p2p/WifiP2pUsdBasedLocalServiceAdvertisementConfig$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder = env.NewGlobalRef(&c.Object)
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder)), "build", "()Landroid/net/wifi/p2p/WifiP2pUsdBasedLocalServiceAdvertisementConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilderSetFrequencyMhz, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedLocalServiceAdvertisementConfigBuilder)), "setFrequencyMhz", "(I)Landroid/net/wifi/p2p/WifiP2pUsdBasedLocalServiceAdvertisementConfig$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

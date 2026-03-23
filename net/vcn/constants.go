@@ -5,8 +5,9 @@ package vcn
 import "github.com/AndroidGoLab/jni/net/vcn/consts"
 
 const (
-	MinUdpPort4500NatTimeoutUnset                       = consts.MinUdpPort4500NatTimeoutUnset
-	VcnGatewayOptionEnableDataStallRecoveryWithMobility = consts.VcnGatewayOptionEnableDataStallRecoveryWithMobility
+	MatchAny                                            = consts.MatchAny
+	MatchForbidden                                      = consts.MatchForbidden
+	MatchRequired                                       = consts.MatchRequired
 	VcnErrorCodeConfigError                             = consts.VcnErrorCodeConfigError
 	VcnErrorCodeInternalError                           = consts.VcnErrorCodeInternalError
 	VcnErrorCodeNetworkError                            = consts.VcnErrorCodeNetworkError
@@ -15,7 +16,6 @@ const (
 	VcnStatusCodeNotConfigured                          = consts.VcnStatusCodeNotConfigured
 	VcnStatusCodeSafeMode                               = consts.VcnStatusCodeSafeMode
 	Creator                                             = consts.Creator
-	MatchAny                                            = consts.MatchAny
-	MatchForbidden                                      = consts.MatchForbidden
-	MatchRequired                                       = consts.MatchRequired
+	MinUdpPort4500NatTimeoutUnset                       = consts.MinUdpPort4500NatTimeoutUnset
+	VcnGatewayOptionEnableDataStallRecoveryWithMobility = consts.VcnGatewayOptionEnableDataStallRecoveryWithMobility
 )

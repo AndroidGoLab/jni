@@ -4,10 +4,10 @@ package consts
 
 const (
 	Creator                         int = 0
+	MeasurementApiStateDisabled     int = 0
+	MeasurementApiStateEnabled      int = 1
 	DeletionModeAll                 int = 0
 	DeletionModeExcludeInternalData int = 1
 	MatchBehaviorDelete             int = 0
 	MatchBehaviorPreserve           int = 1
-	MeasurementApiStateDisabled     int = 0
-	MeasurementApiStateEnabled      int = 1
 )

@@ -6,10 +6,10 @@ import "github.com/AndroidGoLab/jni/net/wifi/p2p/nsd/consts"
 
 const (
 	Creator                    = consts.Creator
-	ServiceProtocolTypeBonjour = consts.ServiceProtocolTypeBonjour
-	ServiceProtocolTypeGeneric = consts.ServiceProtocolTypeGeneric
 	ServiceTypeAll             = consts.ServiceTypeAll
 	ServiceTypeBonjour         = consts.ServiceTypeBonjour
 	ServiceTypeUpnp            = consts.ServiceTypeUpnp
 	ServiceTypeVendorSpecific  = consts.ServiceTypeVendorSpecific
+	ServiceProtocolTypeBonjour = consts.ServiceProtocolTypeBonjour
+	ServiceProtocolTypeGeneric = consts.ServiceProtocolTypeGeneric
 )

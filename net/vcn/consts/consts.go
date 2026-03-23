@@ -3,8 +3,9 @@
 package consts
 
 const (
-	MinUdpPort4500NatTimeoutUnset                       int = -1
-	VcnGatewayOptionEnableDataStallRecoveryWithMobility int = 0
+	MatchAny                                            int = 0
+	MatchForbidden                                      int = 2
+	MatchRequired                                       int = 1
 	VcnErrorCodeConfigError                             int = 1
 	VcnErrorCodeInternalError                           int = 0
 	VcnErrorCodeNetworkError                            int = 2
@@ -13,7 +14,6 @@ const (
 	VcnStatusCodeNotConfigured                          int = 0
 	VcnStatusCodeSafeMode                               int = 3
 	Creator                                             int = 0
-	MatchAny                                            int = 0
-	MatchForbidden                                      int = 2
-	MatchRequired                                       int = 1
+	MinUdpPort4500NatTimeoutUnset                       int = -1
+	VcnGatewayOptionEnableDataStallRecoveryWithMobility int = 0
 )

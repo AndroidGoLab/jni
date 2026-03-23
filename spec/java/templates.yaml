@@ -5,6 +5,32 @@
 package: templates
 go_import: github.com/AndroidGoLab/jni/service/controls/templates
 classes:
+    - java_class: android.service.controls.templates.ToggleRangeTemplate
+      go_type: ToggleRangeTemplate
+      methods:
+        - java_method: getActionDescription
+          go_name: GetActionDescription
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getRange
+          go_name: GetRange
+          returns: android.service.controls.templates.RangeTemplate
+          error: true
+        - java_method: getTemplateType
+          go_name: GetTemplateType
+          returns: int
+          error: true
+        - java_method: isChecked
+          go_name: IsChecked
+          returns: boolean
+          error: true
+    - java_class: android.service.controls.templates.StatelessTemplate
+      go_type: StatelessTemplate
+      methods:
+        - java_method: getTemplateType
+          go_name: GetTemplateType
+          returns: int
+          error: true
     - java_class: android.service.controls.templates.ToggleTemplate
       go_type: ToggleTemplate
       methods:
@@ -19,6 +45,57 @@ classes:
         - java_method: isChecked
           go_name: IsChecked
           returns: boolean
+          error: true
+    - java_class: android.service.controls.templates.RangeTemplate
+      go_type: RangeTemplate
+      methods:
+        - java_method: getCurrentValue
+          go_name: GetCurrentValue
+          returns: float
+          error: true
+        - java_method: getFormatString
+          go_name: GetFormatString
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getMaxValue
+          go_name: GetMaxValue
+          returns: float
+          error: true
+        - java_method: getMinValue
+          go_name: GetMinValue
+          returns: float
+          error: true
+        - java_method: getStepValue
+          go_name: GetStepValue
+          returns: float
+          error: true
+        - java_method: getTemplateType
+          go_name: GetTemplateType
+          returns: int
+          error: true
+    - java_class: android.service.controls.templates.ControlButton
+      go_type: ControlButton
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getActionDescription
+          go_name: GetActionDescription
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: isChecked
+          go_name: IsChecked
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
     - java_class: android.service.controls.templates.TemperatureControlTemplate
       go_type: TemperatureControlTemplate
@@ -62,13 +139,6 @@ classes:
           go_name: IsActive
           returns: boolean
           error: true
-    - java_class: android.service.controls.templates.StatelessTemplate
-      go_type: StatelessTemplate
-      methods:
-        - java_method: getTemplateType
-          go_name: GetTemplateType
-          returns: int
-          error: true
     - java_class: android.service.controls.templates.ControlTemplate
       go_type: ControlTemplate
       methods:
@@ -89,77 +159,10 @@ classes:
           go_name: GetNoTemplateObject
           returns: android.service.controls.templates.ControlTemplate
           error: true
-    - java_class: android.service.controls.templates.RangeTemplate
-      go_type: RangeTemplate
-      methods:
-        - java_method: getCurrentValue
-          go_name: GetCurrentValue
-          returns: float
-          error: true
-        - java_method: getFormatString
-          go_name: GetFormatString
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getMaxValue
-          go_name: GetMaxValue
-          returns: float
-          error: true
-        - java_method: getMinValue
-          go_name: GetMinValue
-          returns: float
-          error: true
-        - java_method: getStepValue
-          go_name: GetStepValue
-          returns: float
-          error: true
-        - java_method: getTemplateType
-          go_name: GetTemplateType
-          returns: int
-          error: true
-    - java_class: android.service.controls.templates.ToggleRangeTemplate
-      go_type: ToggleRangeTemplate
-      methods:
-        - java_method: getActionDescription
-          go_name: GetActionDescription
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getRange
-          go_name: GetRange
-          returns: android.service.controls.templates.RangeTemplate
-          error: true
-        - java_method: getTemplateType
-          go_name: GetTemplateType
-          returns: int
-          error: true
-        - java_method: isChecked
-          go_name: IsChecked
-          returns: boolean
-          error: true
-    - java_class: android.service.controls.templates.ControlButton
-      go_type: ControlButton
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getActionDescription
-          go_name: GetActionDescription
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: isChecked
-          go_name: IsChecked
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
     - go_name: FlagModeCool
       value: "8"
       go_type: int
@@ -216,7 +219,4 @@ constants:
       go_type: int
     - go_name: TypeToggleRange
       value: "6"
-      go_type: int
-    - go_name: Creator
-      value: "0"
       go_type: int

@@ -5,6 +5,88 @@
 package: autofill
 go_import: github.com/AndroidGoLab/jni/view/autofill
 classes:
+    - java_class: android.view.autofill.VirtualViewFillInfo
+      go_type: VirtualViewFillInfo
+      methods:
+        - java_method: getAutofillHints
+          go_name: GetAutofillHints
+          returns: java.lang.String[]
+          error: true
+    - java_class: android.view.autofill.VirtualViewFillInfo$Builder
+      go_type: VirtualViewFillInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.view.autofill.VirtualViewFillInfo
+          error: true
+        - java_method: setAutofillHints
+          go_name: SetAutofillHints
+          params:
+            - java_type: java.lang.String...
+              go_name: arg0
+          returns: android.view.autofill.VirtualViewFillInfo$Builder
+          error: true
+    - java_class: android.view.autofill.AutofillId
+      go_type: Id
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAutofillVirtualId
+          go_name: GetAutofillVirtualId
+          returns: int
+          error: true
+        - java_method: getSessionId
+          go_name: GetSessionId
+          returns: int
+          error: true
+        - java_method: getViewId
+          go_name: GetViewId
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isInAutofillSession
+          go_name: IsInAutofillSession
+          returns: boolean
+          error: true
+        - java_method: isVirtual
+          go_name: IsVirtual
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: create
+          go_name: Create
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.view.autofill.AutofillId
+          error: true
     - java_class: android.view.autofill.AutofillValue
       go_type: Value
       methods:
@@ -96,88 +178,6 @@ classes:
             - java_type: boolean
               go_name: arg0
           returns: android.view.autofill.AutofillValue
-          error: true
-    - java_class: android.view.autofill.AutofillId
-      go_type: Id
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAutofillVirtualId
-          go_name: GetAutofillVirtualId
-          returns: int
-          error: true
-        - java_method: getSessionId
-          go_name: GetSessionId
-          returns: int
-          error: true
-        - java_method: getViewId
-          go_name: GetViewId
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isInAutofillSession
-          go_name: IsInAutofillSession
-          returns: boolean
-          error: true
-        - java_method: isVirtual
-          go_name: IsVirtual
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: create
-          go_name: Create
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.view.autofill.AutofillId
-          error: true
-    - java_class: android.view.autofill.VirtualViewFillInfo
-      go_type: VirtualViewFillInfo
-      methods:
-        - java_method: getAutofillHints
-          go_name: GetAutofillHints
-          returns: java.lang.String[]
-          error: true
-    - java_class: android.view.autofill.VirtualViewFillInfo$Builder
-      go_type: VirtualViewFillInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.view.autofill.VirtualViewFillInfo
-          error: true
-        - java_method: setAutofillHints
-          go_name: SetAutofillHints
-          params:
-            - java_type: java.lang.String...
-              go_name: arg0
-          returns: android.view.autofill.VirtualViewFillInfo$Builder
           error: true
     - java_class: android.view.autofill.AutofillManager
       go_type: Manager

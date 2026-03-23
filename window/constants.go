@@ -6,11 +6,11 @@ import "github.com/AndroidGoLab/jni/window/consts"
 
 const (
 	Creator                          = consts.Creator
-	SplashScreenStyleIcon            = consts.SplashScreenStyleIcon
-	SplashScreenStyleSolidColor      = consts.SplashScreenStyleSolidColor
 	PriorityDefault                  = consts.PriorityDefault
 	PriorityOverlay                  = consts.PriorityOverlay
 	PrioritySystemNavigationObserver = consts.PrioritySystemNavigationObserver
+	SplashScreenStyleIcon            = consts.SplashScreenStyleIcon
+	SplashScreenStyleSolidColor      = consts.SplashScreenStyleSolidColor
 	EdgeLeft                         = consts.EdgeLeft
 	EdgeNone                         = consts.EdgeNone
 	EdgeRight                        = consts.EdgeRight

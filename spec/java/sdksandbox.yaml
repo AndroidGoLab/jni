@@ -5,6 +5,30 @@
 package: sdksandbox
 go_import: github.com/AndroidGoLab/jni/app/sdksandbox
 classes:
+    - java_class: android.app.sdksandbox.LoadSdkException
+      go_type: LoadSdkException
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getExtraInformation
+          go_name: GetExtraInformation
+          returns: android.os.Bundle
+          error: true
+        - java_method: getLoadSdkErrorCode
+          go_name: GetLoadSdkErrorCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.app.sdksandbox.SandboxedSdkProvider
       go_type: SandboxedSdkProvider
       methods:
@@ -43,33 +67,16 @@ classes:
               go_name: arg0
           returns: android.app.sdksandbox.SandboxedSdk
           error: true
-    - java_class: android.app.sdksandbox.AppOwnedSdkSandboxInterface
-      go_type: AppOwnedSdkSandboxInterface
+    - java_class: android.app.sdksandbox.RequestSurfacePackageException
+      go_type: RequestSurfacePackageException
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getExtraErrorInformation
+          go_name: GetExtraErrorInformation
+          returns: android.os.Bundle
+          error: true
+        - java_method: getRequestSurfacePackageErrorCode
+          go_name: GetRequestSurfacePackageErrorCode
           returns: int
-          error: true
-        - java_method: getInterface
-          go_name: GetInterface
-          returns: android.os.IBinder
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: long
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
           error: true
     - java_class: android.app.sdksandbox.SdkSandboxManager
       go_type: SdkSandboxManager
@@ -132,16 +139,33 @@ classes:
           go_name: OnSdkSandboxDied
           returns: void
           error: true
-    - java_class: android.app.sdksandbox.RequestSurfacePackageException
-      go_type: RequestSurfacePackageException
+    - java_class: android.app.sdksandbox.AppOwnedSdkSandboxInterface
+      go_type: AppOwnedSdkSandboxInterface
       methods:
-        - java_method: getExtraErrorInformation
-          go_name: GetExtraErrorInformation
-          returns: android.os.Bundle
-          error: true
-        - java_method: getRequestSurfacePackageErrorCode
-          go_name: GetRequestSurfacePackageErrorCode
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
+          error: true
+        - java_method: getInterface
+          go_name: GetInterface
+          returns: android.os.IBinder
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
     - java_class: android.app.sdksandbox.SandboxedSdk
       go_type: SandboxedSdk
@@ -157,30 +181,6 @@ classes:
         - java_method: getSharedLibraryInfo
           go_name: GetSharedLibraryInfo
           returns: android.content.pm.SharedLibraryInfo
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.app.sdksandbox.LoadSdkException
-      go_type: LoadSdkException
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getExtraInformation
-          go_name: GetExtraInformation
-          returns: android.os.Bundle
-          error: true
-        - java_method: getLoadSdkErrorCode
-          go_name: GetLoadSdkErrorCode
-          returns: int
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel

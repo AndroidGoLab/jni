@@ -5,20 +5,13 @@ package params
 import "github.com/AndroidGoLab/jni/hardware/camera2/params/consts"
 
 const (
-	MinimumGainFactor = consts.MinimumGainFactor
-	LevelBlack        = consts.LevelBlack
-	LevelWhite        = consts.LevelWhite
-)
-
-const (
-	Blue                             = consts.Blue
-	Count                            = consts.Count
-	GreenEven                        = consts.GreenEven
-	GreenOdd                         = consts.GreenOdd
-	Red                              = consts.Red
-	MeteringWeightDontCare           = consts.MeteringWeightDontCare
-	MeteringWeightMax                = consts.MeteringWeightMax
-	MeteringWeightMin                = consts.MeteringWeightMin
+	Unspecified                      = consts.Unspecified
+	Creator                          = consts.Creator
+	SessionHighSpeed                 = consts.SessionHighSpeed
+	SessionRegular                   = consts.SessionRegular
+	IdUnsupported                    = consts.IdUnsupported
+	ScoreMax                         = consts.ScoreMax
+	ScoreMin                         = consts.ScoreMin
 	Usecase10bitOutput               = consts.Usecase10bitOutput
 	UsecaseLowLatencySnapshot        = consts.UsecaseLowLatencySnapshot
 	UsecasePreview                   = consts.UsecasePreview
@@ -27,15 +20,10 @@ const (
 	UsecaseSnapshot                  = consts.UsecaseSnapshot
 	UsecaseVideoSnapshot             = consts.UsecaseVideoSnapshot
 	UsecaseZsl                       = consts.UsecaseZsl
-	IdUnsupported                    = consts.IdUnsupported
-	ScoreMax                         = consts.ScoreMax
-	ScoreMin                         = consts.ScoreMin
 	ChannelBlue                      = consts.ChannelBlue
 	ChannelGreen                     = consts.ChannelGreen
 	ChannelRed                       = consts.ChannelRed
 	PointSize                        = consts.PointSize
-	Unspecified                      = consts.Unspecified
-	Creator                          = consts.Creator
 	MirrorModeAuto                   = consts.MirrorModeAuto
 	MirrorModeH                      = consts.MirrorModeH
 	MirrorModeNone                   = consts.MirrorModeNone
@@ -46,8 +34,14 @@ const (
 	TimestampBaseMonotonic           = consts.TimestampBaseMonotonic
 	TimestampBaseRealtime            = consts.TimestampBaseRealtime
 	TimestampBaseSensor              = consts.TimestampBaseSensor
-	SessionHighSpeed                 = consts.SessionHighSpeed
-	SessionRegular                   = consts.SessionRegular
+	MeteringWeightDontCare           = consts.MeteringWeightDontCare
+	MeteringWeightMax                = consts.MeteringWeightMax
+	MeteringWeightMin                = consts.MeteringWeightMin
+	Count                            = consts.Count
+	Blue                             = consts.Blue
+	GreenEven                        = consts.GreenEven
+	GreenOdd                         = consts.GreenOdd
+	Red                              = consts.Red
 )
 
 const (
@@ -66,4 +60,10 @@ const (
 	Hlg10                  = consts.Hlg10
 	PublicMax              = consts.PublicMax
 	Standard               = consts.Standard
+)
+
+const (
+	LevelBlack        = consts.LevelBlack
+	LevelWhite        = consts.LevelWhite
+	MinimumGainFactor = consts.MinimumGainFactor
 )

@@ -25,26 +25,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.graphics.pdf.content.PdfPageImageContent
-      go_type: PdfPageImageContent
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAltText
-          go_name: GetAltText
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.graphics.pdf.content.PdfPageGotoLinkContent
       go_type: PdfPageGotoLinkContent
       methods:
@@ -87,6 +67,26 @@ classes:
         - java_method: getZoom
           go_name: GetZoom
           returns: float
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.graphics.pdf.content.PdfPageImageContent
+      go_type: PdfPageImageContent
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAltText
+          go_name: GetAltText
+          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel

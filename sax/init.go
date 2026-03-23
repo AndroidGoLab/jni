@@ -23,15 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsStartElementListener      *jni.GlobalRef
-	midStartElementListenerStart jni.MethodID
-
-	clsEndTextElementListener    *jni.GlobalRef
-	midEndTextElementListenerEnd jni.MethodID
-
-	clsRootElement                  *jni.GlobalRef
-	midRootElementGetContentHandler jni.MethodID
-
 	clsElement                          *jni.GlobalRef
 	midElementGetChild1                 jni.MethodID
 	midElementGetChild2_1               jni.MethodID
@@ -44,12 +35,21 @@ var (
 	midElementSetTextElementListener    jni.MethodID
 	midElementToString                  jni.MethodID
 
-	clsEndElementListener    *jni.GlobalRef
-	midEndElementListenerEnd jni.MethodID
+	clsStartElementListener      *jni.GlobalRef
+	midStartElementListenerStart jni.MethodID
+
+	clsTextElementListener *jni.GlobalRef
 
 	clsElementListener *jni.GlobalRef
 
-	clsTextElementListener *jni.GlobalRef
+	clsRootElement                  *jni.GlobalRef
+	midRootElementGetContentHandler jni.MethodID
+
+	clsEndTextElementListener    *jni.GlobalRef
+	midEndTextElementListenerEnd jni.MethodID
+
+	clsEndElementListener    *jni.GlobalRef
+	midEndElementListenerEnd jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -69,57 +69,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/sax/StartElementListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsStartElementListener = env.NewGlobalRef(&c.Object)
-
-		midStartElementListenerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStartElementListener)), "start", "(Lorg/xml/sax/Attributes;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/sax/EndTextElementListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEndTextElementListener = env.NewGlobalRef(&c.Object)
-
-		midEndTextElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndTextElementListener)), "end", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/sax/RootElement")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRootElement = env.NewGlobalRef(&c.Object)
-
-		midRootElementGetContentHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRootElement)), "getContentHandler", "()Lorg/xml/sax/ContentHandler;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/sax/Element")
 	if err != nil {
@@ -201,6 +150,77 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/sax/StartElementListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsStartElementListener = env.NewGlobalRef(&c.Object)
+
+		midStartElementListenerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStartElementListener)), "start", "(Lorg/xml/sax/Attributes;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/sax/TextElementListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTextElementListener = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/sax/ElementListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsElementListener = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/sax/RootElement")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRootElement = env.NewGlobalRef(&c.Object)
+
+		midRootElementGetContentHandler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRootElement)), "getContentHandler", "()Lorg/xml/sax/ContentHandler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/sax/EndTextElementListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEndTextElementListener = env.NewGlobalRef(&c.Object)
+
+		midEndTextElementListenerEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEndTextElementListener)), "end", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/sax/EndElementListener")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -215,26 +235,6 @@ func doInit(env *jni.Env) error {
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
-
-	}
-
-	c, err = env.FindClass("android/sax/ElementListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsElementListener = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/sax/TextElementListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTextElementListener = env.NewGlobalRef(&c.Object)
 
 	}
 

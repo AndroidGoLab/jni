@@ -23,11 +23,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAnimatorInflater                      *jni.GlobalRef
-	midAnimatorInflaterLoadAnimator          jni.MethodID
-	midAnimatorInflaterLoadStateListAnimator jni.MethodID
+	clsFloatArrayEvaluator            *jni.GlobalRef
+	midFloatArrayEvaluatorEvaluate3   jni.MethodID
+	midFloatArrayEvaluatorEvaluate3_1 jni.MethodID
 
-	clsTypeEvaluator *jni.GlobalRef
+	clsTypeConverter *jni.GlobalRef
+
+	clsIntEvaluator            *jni.GlobalRef
+	midIntEvaluatorEvaluate3   jni.MethodID
+	midIntEvaluatorEvaluate3_1 jni.MethodID
+
+	clsBidirectionalTypeConverter *jni.GlobalRef
 
 	clsAnimatorListenerAdapter                  *jni.GlobalRef
 	midAnimatorListenerAdapterOnAnimationCancel jni.MethodID
@@ -37,9 +43,24 @@ var (
 	midAnimatorListenerAdapterOnAnimationResume jni.MethodID
 	midAnimatorListenerAdapterOnAnimationStart  jni.MethodID
 
-	clsIntEvaluator            *jni.GlobalRef
-	midIntEvaluatorEvaluate3   jni.MethodID
-	midIntEvaluatorEvaluate3_1 jni.MethodID
+	clsTimeAnimator                   *jni.GlobalRef
+	midTimeAnimatorSetCurrentPlayTime jni.MethodID
+	midTimeAnimatorSetTimeListener    jni.MethodID
+	midTimeAnimatorStart              jni.MethodID
+
+	clsTimeAnimatorTimeListener             *jni.GlobalRef
+	midTimeAnimatorTimeListenerOnTimeUpdate jni.MethodID
+
+	clsIntArrayEvaluator            *jni.GlobalRef
+	midIntArrayEvaluatorEvaluate3   jni.MethodID
+	midIntArrayEvaluatorEvaluate3_1 jni.MethodID
+
+	clsPointFEvaluator            *jni.GlobalRef
+	midPointFEvaluatorEvaluate3   jni.MethodID
+	midPointFEvaluatorEvaluate3_1 jni.MethodID
+
+	clsTimeInterpolator                 *jni.GlobalRef
+	midTimeInterpolatorGetInterpolation jni.MethodID
 
 	clsAnimatorSet                   *jni.GlobalRef
 	midAnimatorSetCancel             jni.MethodID
@@ -77,6 +98,47 @@ var (
 	midAnimatorSetBuilderBefore   jni.MethodID
 	midAnimatorSetBuilderWith     jni.MethodID
 
+	clsAnimator                    *jni.GlobalRef
+	midAnimatorAddListener         jni.MethodID
+	midAnimatorAddPauseListener    jni.MethodID
+	midAnimatorCancel              jni.MethodID
+	midAnimatorClone0              jni.MethodID
+	midAnimatorEnd                 jni.MethodID
+	midAnimatorGetDuration         jni.MethodID
+	midAnimatorGetInterpolator     jni.MethodID
+	midAnimatorGetStartDelay       jni.MethodID
+	midAnimatorGetTotalDuration    jni.MethodID
+	midAnimatorIsPaused            jni.MethodID
+	midAnimatorIsRunning           jni.MethodID
+	midAnimatorIsStarted           jni.MethodID
+	midAnimatorPause               jni.MethodID
+	midAnimatorRemoveAllListeners  jni.MethodID
+	midAnimatorRemoveListener      jni.MethodID
+	midAnimatorRemovePauseListener jni.MethodID
+	midAnimatorResume              jni.MethodID
+	midAnimatorSetDuration         jni.MethodID
+	midAnimatorSetInterpolator     jni.MethodID
+	midAnimatorSetStartDelay       jni.MethodID
+	midAnimatorSetTarget           jni.MethodID
+	midAnimatorSetupEndValues      jni.MethodID
+	midAnimatorSetupStartValues    jni.MethodID
+	midAnimatorStart               jni.MethodID
+	midAnimatorClone0_1            jni.MethodID
+
+	clsAnimatorAnimatorListener                  *jni.GlobalRef
+	midAnimatorAnimatorListenerOnAnimationCancel jni.MethodID
+	midAnimatorAnimatorListenerOnAnimationEnd    jni.MethodID
+	midAnimatorAnimatorListenerOnAnimationRepeat jni.MethodID
+	midAnimatorAnimatorListenerOnAnimationStart  jni.MethodID
+
+	clsAnimatorAnimatorPauseListener                  *jni.GlobalRef
+	midAnimatorAnimatorPauseListenerOnAnimationPause  jni.MethodID
+	midAnimatorAnimatorPauseListenerOnAnimationResume jni.MethodID
+
+	clsRectEvaluator            *jni.GlobalRef
+	midRectEvaluatorEvaluate3   jni.MethodID
+	midRectEvaluatorEvaluate3_1 jni.MethodID
+
 	clsKeyframe                *jni.GlobalRef
 	midKeyframeClone0          jni.MethodID
 	midKeyframeGetFraction     jni.MethodID
@@ -95,21 +157,49 @@ var (
 	midKeyframeOfObject1       jni.MethodID
 	midKeyframeOfObject2_1     jni.MethodID
 
-	clsFloatArrayEvaluator            *jni.GlobalRef
-	midFloatArrayEvaluatorEvaluate3   jni.MethodID
-	midFloatArrayEvaluatorEvaluate3_1 jni.MethodID
-
-	clsTimeAnimator                   *jni.GlobalRef
-	midTimeAnimatorSetCurrentPlayTime jni.MethodID
-	midTimeAnimatorSetTimeListener    jni.MethodID
-	midTimeAnimatorStart              jni.MethodID
-
-	clsTimeAnimatorTimeListener             *jni.GlobalRef
-	midTimeAnimatorTimeListenerOnTimeUpdate jni.MethodID
+	clsArgbEvaluator         *jni.GlobalRef
+	midArgbEvaluatorEvaluate jni.MethodID
 
 	clsFloatEvaluator            *jni.GlobalRef
 	midFloatEvaluatorEvaluate3   jni.MethodID
 	midFloatEvaluatorEvaluate3_1 jni.MethodID
+
+	clsLayoutTransition                          *jni.GlobalRef
+	midLayoutTransitionAddChild                  jni.MethodID
+	midLayoutTransitionAddTransitionListener     jni.MethodID
+	midLayoutTransitionDisableTransitionType     jni.MethodID
+	midLayoutTransitionEnableTransitionType      jni.MethodID
+	midLayoutTransitionGetAnimator               jni.MethodID
+	midLayoutTransitionGetDuration               jni.MethodID
+	midLayoutTransitionGetInterpolator           jni.MethodID
+	midLayoutTransitionGetStagger                jni.MethodID
+	midLayoutTransitionGetStartDelay             jni.MethodID
+	midLayoutTransitionHideChild2                jni.MethodID
+	midLayoutTransitionHideChild3_1              jni.MethodID
+	midLayoutTransitionIsChangingLayout          jni.MethodID
+	midLayoutTransitionIsRunning                 jni.MethodID
+	midLayoutTransitionIsTransitionTypeEnabled   jni.MethodID
+	midLayoutTransitionRemoveChild               jni.MethodID
+	midLayoutTransitionRemoveTransitionListener  jni.MethodID
+	midLayoutTransitionSetAnimateParentHierarchy jni.MethodID
+	midLayoutTransitionSetAnimator               jni.MethodID
+	midLayoutTransitionSetDuration2              jni.MethodID
+	midLayoutTransitionSetDuration1_1            jni.MethodID
+	midLayoutTransitionSetInterpolator           jni.MethodID
+	midLayoutTransitionSetStagger                jni.MethodID
+	midLayoutTransitionSetStartDelay             jni.MethodID
+	midLayoutTransitionShowChild2                jni.MethodID
+	midLayoutTransitionShowChild3_1              jni.MethodID
+
+	clsLayoutTransitionTransitionListener                *jni.GlobalRef
+	midLayoutTransitionTransitionListenerEndTransition   jni.MethodID
+	midLayoutTransitionTransitionListenerStartTransition jni.MethodID
+
+	clsStateListAnimator                   *jni.GlobalRef
+	midStateListAnimatorAddState           jni.MethodID
+	midStateListAnimatorClone0             jni.MethodID
+	midStateListAnimatorJumpToCurrentState jni.MethodID
+	midStateListAnimatorClone0_1           jni.MethodID
 
 	clsValueAnimator                                      *jni.GlobalRef
 	midValueAnimatorAddUpdateListener                     jni.MethodID
@@ -169,9 +259,6 @@ var (
 	clsValueAnimatorDurationScaleChangeListener          *jni.GlobalRef
 	midValueAnimatorDurationScaleChangeListenerOnChanged jni.MethodID
 
-	clsTimeInterpolator                 *jni.GlobalRef
-	midTimeInterpolatorGetInterpolation jni.MethodID
-
 	clsObjectAnimator                       *jni.GlobalRef
 	midObjectAnimatorClone0                 jni.MethodID
 	midObjectAnimatorGetPropertyName        jni.MethodID
@@ -205,56 +292,6 @@ var (
 	midObjectAnimatorOfObject               jni.MethodID
 	midObjectAnimatorOfPropertyValuesHolder jni.MethodID
 
-	clsTypeConverter *jni.GlobalRef
-
-	clsPointFEvaluator            *jni.GlobalRef
-	midPointFEvaluatorEvaluate3   jni.MethodID
-	midPointFEvaluatorEvaluate3_1 jni.MethodID
-
-	clsIntArrayEvaluator            *jni.GlobalRef
-	midIntArrayEvaluatorEvaluate3   jni.MethodID
-	midIntArrayEvaluatorEvaluate3_1 jni.MethodID
-
-	clsArgbEvaluator         *jni.GlobalRef
-	midArgbEvaluatorEvaluate jni.MethodID
-
-	clsAnimator                    *jni.GlobalRef
-	midAnimatorAddListener         jni.MethodID
-	midAnimatorAddPauseListener    jni.MethodID
-	midAnimatorCancel              jni.MethodID
-	midAnimatorClone0              jni.MethodID
-	midAnimatorEnd                 jni.MethodID
-	midAnimatorGetDuration         jni.MethodID
-	midAnimatorGetInterpolator     jni.MethodID
-	midAnimatorGetStartDelay       jni.MethodID
-	midAnimatorGetTotalDuration    jni.MethodID
-	midAnimatorIsPaused            jni.MethodID
-	midAnimatorIsRunning           jni.MethodID
-	midAnimatorIsStarted           jni.MethodID
-	midAnimatorPause               jni.MethodID
-	midAnimatorRemoveAllListeners  jni.MethodID
-	midAnimatorRemoveListener      jni.MethodID
-	midAnimatorRemovePauseListener jni.MethodID
-	midAnimatorResume              jni.MethodID
-	midAnimatorSetDuration         jni.MethodID
-	midAnimatorSetInterpolator     jni.MethodID
-	midAnimatorSetStartDelay       jni.MethodID
-	midAnimatorSetTarget           jni.MethodID
-	midAnimatorSetupEndValues      jni.MethodID
-	midAnimatorSetupStartValues    jni.MethodID
-	midAnimatorStart               jni.MethodID
-	midAnimatorClone0_1            jni.MethodID
-
-	clsAnimatorAnimatorListener                  *jni.GlobalRef
-	midAnimatorAnimatorListenerOnAnimationCancel jni.MethodID
-	midAnimatorAnimatorListenerOnAnimationEnd    jni.MethodID
-	midAnimatorAnimatorListenerOnAnimationRepeat jni.MethodID
-	midAnimatorAnimatorListenerOnAnimationStart  jni.MethodID
-
-	clsAnimatorAnimatorPauseListener                  *jni.GlobalRef
-	midAnimatorAnimatorPauseListenerOnAnimationPause  jni.MethodID
-	midAnimatorAnimatorPauseListenerOnAnimationResume jni.MethodID
-
 	clsPropertyValuesHolder                *jni.GlobalRef
 	midPropertyValuesHolderClone0          jni.MethodID
 	midPropertyValuesHolderGetPropertyName jni.MethodID
@@ -278,48 +315,11 @@ var (
 	midPropertyValuesHolderOfMultiInt2_1   jni.MethodID
 	midPropertyValuesHolderOfObject        jni.MethodID
 
-	clsBidirectionalTypeConverter *jni.GlobalRef
+	clsTypeEvaluator *jni.GlobalRef
 
-	clsRectEvaluator            *jni.GlobalRef
-	midRectEvaluatorEvaluate3   jni.MethodID
-	midRectEvaluatorEvaluate3_1 jni.MethodID
-
-	clsLayoutTransition                          *jni.GlobalRef
-	midLayoutTransitionAddChild                  jni.MethodID
-	midLayoutTransitionAddTransitionListener     jni.MethodID
-	midLayoutTransitionDisableTransitionType     jni.MethodID
-	midLayoutTransitionEnableTransitionType      jni.MethodID
-	midLayoutTransitionGetAnimator               jni.MethodID
-	midLayoutTransitionGetDuration               jni.MethodID
-	midLayoutTransitionGetInterpolator           jni.MethodID
-	midLayoutTransitionGetStagger                jni.MethodID
-	midLayoutTransitionGetStartDelay             jni.MethodID
-	midLayoutTransitionHideChild2                jni.MethodID
-	midLayoutTransitionHideChild3_1              jni.MethodID
-	midLayoutTransitionIsChangingLayout          jni.MethodID
-	midLayoutTransitionIsRunning                 jni.MethodID
-	midLayoutTransitionIsTransitionTypeEnabled   jni.MethodID
-	midLayoutTransitionRemoveChild               jni.MethodID
-	midLayoutTransitionRemoveTransitionListener  jni.MethodID
-	midLayoutTransitionSetAnimateParentHierarchy jni.MethodID
-	midLayoutTransitionSetAnimator               jni.MethodID
-	midLayoutTransitionSetDuration2              jni.MethodID
-	midLayoutTransitionSetDuration1_1            jni.MethodID
-	midLayoutTransitionSetInterpolator           jni.MethodID
-	midLayoutTransitionSetStagger                jni.MethodID
-	midLayoutTransitionSetStartDelay             jni.MethodID
-	midLayoutTransitionShowChild2                jni.MethodID
-	midLayoutTransitionShowChild3_1              jni.MethodID
-
-	clsLayoutTransitionTransitionListener                *jni.GlobalRef
-	midLayoutTransitionTransitionListenerEndTransition   jni.MethodID
-	midLayoutTransitionTransitionListenerStartTransition jni.MethodID
-
-	clsStateListAnimator                   *jni.GlobalRef
-	midStateListAnimatorAddState           jni.MethodID
-	midStateListAnimatorClone0             jni.MethodID
-	midStateListAnimatorJumpToCurrentState jni.MethodID
-	midStateListAnimatorClone0_1           jni.MethodID
+	clsAnimatorInflater                      *jni.GlobalRef
+	midAnimatorInflaterLoadAnimator          jni.MethodID
+	midAnimatorInflaterLoadStateListAnimator jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -340,22 +340,22 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/animation/AnimatorInflater")
+	c, err = env.FindClass("android/animation/FloatArrayEvaluator")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsAnimatorInflater = env.NewGlobalRef(&c.Object)
+		clsFloatArrayEvaluator = env.NewGlobalRef(&c.Object)
 
-		midAnimatorInflaterLoadAnimator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorInflater)), "loadAnimator", "(Landroid/content/Context;I)Landroid/animation/Animator;")
+		midFloatArrayEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), "evaluate", "(F[F[F)[F")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midAnimatorInflaterLoadStateListAnimator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorInflater)), "loadStateListAnimator", "(Landroid/content/Context;I)Landroid/animation/StateListAnimator;")
+		midFloatArrayEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -364,13 +364,47 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/animation/TypeEvaluator")
+	c, err = env.FindClass("android/animation/TypeConverter")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTypeEvaluator = env.NewGlobalRef(&c.Object)
+		clsTypeConverter = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/animation/IntEvaluator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIntEvaluator = env.NewGlobalRef(&c.Object)
+
+		midIntEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), "evaluate", "(FLjava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/BidirectionalTypeConverter")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBidirectionalTypeConverter = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -426,22 +460,111 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/animation/IntEvaluator")
+	c, err = env.FindClass("android/animation/TimeAnimator")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsIntEvaluator = env.NewGlobalRef(&c.Object)
+		clsTimeAnimator = env.NewGlobalRef(&c.Object)
 
-		midIntEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), "evaluate", "(FLjava/lang/Integer;Ljava/lang/Integer;)Ljava/lang/Integer;")
+		midTimeAnimatorSetCurrentPlayTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), "setCurrentPlayTime", "(J)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midIntEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+		midTimeAnimatorSetTimeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), "setTimeListener", "(Landroid/animation/TimeAnimator$TimeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimeAnimatorStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), "start", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/TimeAnimator$TimeListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTimeAnimatorTimeListener = env.NewGlobalRef(&c.Object)
+
+		midTimeAnimatorTimeListenerOnTimeUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimatorTimeListener)), "onTimeUpdate", "(Landroid/animation/TimeAnimator;JJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/IntArrayEvaluator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIntArrayEvaluator = env.NewGlobalRef(&c.Object)
+
+		midIntArrayEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntArrayEvaluator)), "evaluate", "(F[I[I)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIntArrayEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntArrayEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/PointFEvaluator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPointFEvaluator = env.NewGlobalRef(&c.Object)
+
+		midPointFEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPointFEvaluator)), "evaluate", "(FLandroid/graphics/PointF;Landroid/graphics/PointF;)Landroid/graphics/PointF;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPointFEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPointFEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/TimeInterpolator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTimeInterpolator = env.NewGlobalRef(&c.Object)
+
+		midTimeInterpolatorGetInterpolation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeInterpolator)), "getInterpolation", "(F)F")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -694,6 +817,277 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/animation/Animator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimator = env.NewGlobalRef(&c.Object)
+
+		midAnimatorAddListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "addListener", "(Landroid/animation/Animator$AnimatorListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorAddPauseListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "addPauseListener", "(Landroid/animation/Animator$AnimatorPauseListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "cancel", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "clone", "()Landroid/animation/Animator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "end", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getDuration", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorGetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getInterpolator", "()Landroid/animation/TimeInterpolator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorGetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getStartDelay", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorGetTotalDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getTotalDuration", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorIsPaused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "isPaused", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "isRunning", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorIsStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "isStarted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "pause", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorRemoveAllListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "removeAllListeners", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorRemoveListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "removeListener", "(Landroid/animation/Animator$AnimatorListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorRemovePauseListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "removePauseListener", "(Landroid/animation/Animator$AnimatorPauseListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorResume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "resume", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorSetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setDuration", "(J)Landroid/animation/Animator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorSetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setInterpolator", "(Landroid/animation/TimeInterpolator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorSetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setStartDelay", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorSetTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setTarget", "(Ljava/lang/Object;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorSetupEndValues, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setupEndValues", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorSetupStartValues, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setupStartValues", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "start", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "clone", "()Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/Animator$AnimatorListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatorAnimatorListener = env.NewGlobalRef(&c.Object)
+
+		midAnimatorAnimatorListenerOnAnimationCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationCancel", "(Landroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorAnimatorListenerOnAnimationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationEnd", "(Landroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorAnimatorListenerOnAnimationRepeat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationRepeat", "(Landroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorAnimatorListenerOnAnimationStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationStart", "(Landroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/Animator$AnimatorPauseListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAnimatorAnimatorPauseListener = env.NewGlobalRef(&c.Object)
+
+		midAnimatorAnimatorPauseListenerOnAnimationPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorPauseListener)), "onAnimationPause", "(Landroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAnimatorAnimatorPauseListenerOnAnimationResume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorPauseListener)), "onAnimationResume", "(Landroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/RectEvaluator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRectEvaluator = env.NewGlobalRef(&c.Object)
+
+		midRectEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), "evaluate", "(FLandroid/graphics/Rect;Landroid/graphics/Rect;)Landroid/graphics/Rect;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRectEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/animation/Keyframe")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -816,70 +1210,15 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/animation/FloatArrayEvaluator")
+	c, err = env.FindClass("android/animation/ArgbEvaluator")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFloatArrayEvaluator = env.NewGlobalRef(&c.Object)
+		clsArgbEvaluator = env.NewGlobalRef(&c.Object)
 
-		midFloatArrayEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), "evaluate", "(F[F[F)[F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midFloatArrayEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/TimeAnimator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTimeAnimator = env.NewGlobalRef(&c.Object)
-
-		midTimeAnimatorSetCurrentPlayTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), "setCurrentPlayTime", "(J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimeAnimatorSetTimeListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), "setTimeListener", "(Landroid/animation/TimeAnimator$TimeListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimeAnimatorStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), "start", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/TimeAnimator$TimeListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTimeAnimatorTimeListener = env.NewGlobalRef(&c.Object)
-
-		midTimeAnimatorTimeListenerOnTimeUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeAnimatorTimeListener)), "onTimeUpdate", "(Landroid/animation/TimeAnimator;JJ)V")
+		midArgbEvaluatorEvaluate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArgbEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -904,6 +1243,253 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFloatEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/LayoutTransition")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLayoutTransition = env.NewGlobalRef(&c.Object)
+
+		midLayoutTransitionAddChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "addChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionAddTransitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "addTransitionListener", "(Landroid/animation/LayoutTransition$TransitionListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionDisableTransitionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "disableTransitionType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionEnableTransitionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "enableTransitionType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionGetAnimator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getAnimator", "(I)Landroid/animation/Animator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getDuration", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionGetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getInterpolator", "(I)Landroid/animation/TimeInterpolator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionGetStagger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getStagger", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionGetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getStartDelay", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionHideChild2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "hideChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionHideChild3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "hideChild", "(Landroid/view/ViewGroup;Landroid/view/View;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionIsChangingLayout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "isChangingLayout", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "isRunning", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionIsTransitionTypeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "isTransitionTypeEnabled", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionRemoveChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "removeChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionRemoveTransitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "removeTransitionListener", "(Landroid/animation/LayoutTransition$TransitionListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetAnimateParentHierarchy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setAnimateParentHierarchy", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetAnimator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setAnimator", "(ILandroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetDuration2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setDuration", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetDuration1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setDuration", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setInterpolator", "(ILandroid/animation/TimeInterpolator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetStagger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setStagger", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionSetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setStartDelay", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionShowChild2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "showChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionShowChild3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "showChild", "(Landroid/view/ViewGroup;Landroid/view/View;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/LayoutTransition$TransitionListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLayoutTransitionTransitionListener = env.NewGlobalRef(&c.Object)
+
+		midLayoutTransitionTransitionListenerEndTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransitionTransitionListener)), "endTransition", "(Landroid/animation/LayoutTransition;Landroid/view/ViewGroup;Landroid/view/View;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLayoutTransitionTransitionListenerStartTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransitionTransitionListener)), "startTransition", "(Landroid/animation/LayoutTransition;Landroid/view/ViewGroup;Landroid/view/View;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/animation/StateListAnimator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsStateListAnimator = env.NewGlobalRef(&c.Object)
+
+		midStateListAnimatorAddState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "addState", "([ILandroid/animation/Animator;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListAnimatorClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "clone", "()Landroid/animation/StateListAnimator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListAnimatorJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "jumpToCurrentState", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStateListAnimatorClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "clone", "()Ljava/lang/Object;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1306,23 +1892,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/animation/TimeInterpolator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTimeInterpolator = env.NewGlobalRef(&c.Object)
-
-		midTimeInterpolatorGetInterpolation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimeInterpolator)), "getInterpolation", "(F)F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/animation/ObjectAnimator")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -1550,328 +2119,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/animation/TypeConverter")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTypeConverter = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/animation/PointFEvaluator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPointFEvaluator = env.NewGlobalRef(&c.Object)
-
-		midPointFEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPointFEvaluator)), "evaluate", "(FLandroid/graphics/PointF;Landroid/graphics/PointF;)Landroid/graphics/PointF;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPointFEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPointFEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/IntArrayEvaluator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIntArrayEvaluator = env.NewGlobalRef(&c.Object)
-
-		midIntArrayEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntArrayEvaluator)), "evaluate", "(F[I[I)[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIntArrayEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIntArrayEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/ArgbEvaluator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsArgbEvaluator = env.NewGlobalRef(&c.Object)
-
-		midArgbEvaluatorEvaluate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsArgbEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/Animator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimator = env.NewGlobalRef(&c.Object)
-
-		midAnimatorAddListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "addListener", "(Landroid/animation/Animator$AnimatorListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorAddPauseListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "addPauseListener", "(Landroid/animation/Animator$AnimatorPauseListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "cancel", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "clone", "()Landroid/animation/Animator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "end", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getDuration", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorGetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getInterpolator", "()Landroid/animation/TimeInterpolator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorGetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getStartDelay", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorGetTotalDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "getTotalDuration", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorIsPaused, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "isPaused", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "isRunning", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorIsStarted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "isStarted", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "pause", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorRemoveAllListeners, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "removeAllListeners", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorRemoveListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "removeListener", "(Landroid/animation/Animator$AnimatorListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorRemovePauseListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "removePauseListener", "(Landroid/animation/Animator$AnimatorPauseListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorResume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "resume", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorSetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setDuration", "(J)Landroid/animation/Animator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorSetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setInterpolator", "(Landroid/animation/TimeInterpolator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorSetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setStartDelay", "(J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorSetTarget, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setTarget", "(Ljava/lang/Object;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorSetupEndValues, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setupEndValues", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorSetupStartValues, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "setupStartValues", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "start", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimator)), "clone", "()Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/Animator$AnimatorListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatorAnimatorListener = env.NewGlobalRef(&c.Object)
-
-		midAnimatorAnimatorListenerOnAnimationCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationCancel", "(Landroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorAnimatorListenerOnAnimationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationEnd", "(Landroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorAnimatorListenerOnAnimationRepeat, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationRepeat", "(Landroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorAnimatorListenerOnAnimationStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorListener)), "onAnimationStart", "(Landroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/Animator$AnimatorPauseListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAnimatorAnimatorPauseListener = env.NewGlobalRef(&c.Object)
-
-		midAnimatorAnimatorPauseListenerOnAnimationPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorPauseListener)), "onAnimationPause", "(Landroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAnimatorAnimatorPauseListenerOnAnimationResume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorAnimatorPauseListener)), "onAnimationResume", "(Landroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/animation/PropertyValuesHolder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -2029,279 +2276,32 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/animation/BidirectionalTypeConverter")
+	c, err = env.FindClass("android/animation/TypeEvaluator")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsBidirectionalTypeConverter = env.NewGlobalRef(&c.Object)
+		clsTypeEvaluator = env.NewGlobalRef(&c.Object)
 
 	}
 
-	c, err = env.FindClass("android/animation/RectEvaluator")
+	c, err = env.FindClass("android/animation/AnimatorInflater")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsRectEvaluator = env.NewGlobalRef(&c.Object)
+		clsAnimatorInflater = env.NewGlobalRef(&c.Object)
 
-		midRectEvaluatorEvaluate3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), "evaluate", "(FLandroid/graphics/Rect;Landroid/graphics/Rect;)Landroid/graphics/Rect;")
+		midAnimatorInflaterLoadAnimator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorInflater)), "loadAnimator", "(Landroid/content/Context;I)Landroid/animation/Animator;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRectEvaluatorEvaluate3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), "evaluate", "(FLjava/lang/Object;Ljava/lang/Object;)Ljava/lang/Object;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/LayoutTransition")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLayoutTransition = env.NewGlobalRef(&c.Object)
-
-		midLayoutTransitionAddChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "addChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionAddTransitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "addTransitionListener", "(Landroid/animation/LayoutTransition$TransitionListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionDisableTransitionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "disableTransitionType", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionEnableTransitionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "enableTransitionType", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionGetAnimator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getAnimator", "(I)Landroid/animation/Animator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionGetDuration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getDuration", "(I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionGetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getInterpolator", "(I)Landroid/animation/TimeInterpolator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionGetStagger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getStagger", "(I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionGetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "getStartDelay", "(I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionHideChild2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "hideChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionHideChild3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "hideChild", "(Landroid/view/ViewGroup;Landroid/view/View;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionIsChangingLayout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "isChangingLayout", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionIsRunning, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "isRunning", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionIsTransitionTypeEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "isTransitionTypeEnabled", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionRemoveChild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "removeChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionRemoveTransitionListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "removeTransitionListener", "(Landroid/animation/LayoutTransition$TransitionListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetAnimateParentHierarchy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setAnimateParentHierarchy", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetAnimator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setAnimator", "(ILandroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetDuration2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setDuration", "(IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetDuration1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setDuration", "(J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetInterpolator, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setInterpolator", "(ILandroid/animation/TimeInterpolator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetStagger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setStagger", "(IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionSetStartDelay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "setStartDelay", "(IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionShowChild2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "showChild", "(Landroid/view/ViewGroup;Landroid/view/View;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionShowChild3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransition)), "showChild", "(Landroid/view/ViewGroup;Landroid/view/View;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/LayoutTransition$TransitionListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLayoutTransitionTransitionListener = env.NewGlobalRef(&c.Object)
-
-		midLayoutTransitionTransitionListenerEndTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransitionTransitionListener)), "endTransition", "(Landroid/animation/LayoutTransition;Landroid/view/ViewGroup;Landroid/view/View;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLayoutTransitionTransitionListenerStartTransition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLayoutTransitionTransitionListener)), "startTransition", "(Landroid/animation/LayoutTransition;Landroid/view/ViewGroup;Landroid/view/View;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/animation/StateListAnimator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsStateListAnimator = env.NewGlobalRef(&c.Object)
-
-		midStateListAnimatorAddState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "addState", "([ILandroid/animation/Animator;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListAnimatorClone0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "clone", "()Landroid/animation/StateListAnimator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListAnimatorJumpToCurrentState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "jumpToCurrentState", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStateListAnimatorClone0_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStateListAnimator)), "clone", "()Ljava/lang/Object;")
+		midAnimatorInflaterLoadStateListAnimator, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAnimatorInflater)), "loadStateListAnimator", "(Landroid/content/Context;I)Landroid/animation/StateListAnimator;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
