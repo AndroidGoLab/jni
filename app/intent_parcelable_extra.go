@@ -2,13 +2,17 @@ package app
 
 import (
 	"fmt"
+	"sync"
 	"unsafe"
 
 	"github.com/AndroidGoLab/jni"
 )
 
-// midIntentGetParcelableExtra is lazily initialized on first call.
-var midIntentGetParcelableExtra jni.MethodID
+var (
+	parcelableExtraOnce sync.Once
+	parcelableExtraMid  jni.MethodID
+	parcelableExtraErr  error
+)
 
 // GetParcelableExtra calls android.content.Intent.getParcelableExtra(String).
 // This method is deprecated in API 33 but remains the standard way to extract
@@ -23,17 +27,16 @@ func (m *Intent) GetParcelableExtra(
 			return err
 		}
 
-		if midIntentGetParcelableExtra == nil {
-			mid, err := env.GetMethodID(
+		parcelableExtraOnce.Do(func() {
+			parcelableExtraMid, parcelableExtraErr = env.GetMethodID(
 				(*jni.Class)(unsafe.Pointer(clsIntent)),
 				"getParcelableExtra",
 				"(Ljava/lang/String;)Landroid/os/Parcelable;",
 			)
-			if err != nil {
-				callErr = fmt.Errorf("android.content.Intent.getParcelableExtra is not available on this device")
-				return callErr
-			}
-			midIntentGetParcelableExtra = mid
+		})
+		if parcelableExtraErr != nil {
+			callErr = fmt.Errorf("android.content.Intent.getParcelableExtra is not available on this device")
+			return callErr
 		}
 
 		jKey, err := env.NewStringUTF(key)
@@ -44,7 +47,7 @@ func (m *Intent) GetParcelableExtra(
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midIntentGetParcelableExtra, jni.ObjectValue(&jKey.Object),
+			parcelableExtraMid, jni.ObjectValue(&jKey.Object),
 		)
 		if callErr != nil {
 			return callErr

@@ -61,17 +61,14 @@ func NewHandlerThread(
 
 // Close quits the thread safely and releases the global reference.
 func (m *HandlerThread) Close() {
-	if m.Obj != nil {
-		_ = m.VM.Do(func(env *jni.Env) error {
-			if err := ensureInit(env); err != nil {
-				return err
-			}
-			if midHandlerThreadQuitSafely != nil {
-				_, _ = m.QuitSafely()
-			}
-			env.DeleteGlobalRef(m.Obj)
-			m.Obj = nil
-			return nil
-		})
+	if m.Obj == nil {
+		return
 	}
+	// QuitSafely calls ensureInit and vm.Do internally.
+	_, _ = m.QuitSafely()
+	_ = m.VM.Do(func(env *jni.Env) error {
+		env.DeleteGlobalRef(m.Obj)
+		m.Obj = nil
+		return nil
+	})
 }
