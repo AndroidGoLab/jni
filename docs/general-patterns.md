@@ -34,11 +34,12 @@ func example(ctx *app.Context) error {
         return err
     }
 
-    // Use named constants -- never magic numbers
-    switch phoneType {
-    case int32(telephony.PhoneTypeGsm):
+    // Use named constants -- never magic numbers.
+    // Constants are typed int; cast the int32 return to match.
+    switch int(phoneType) {
+    case telephony.PhoneTypeGsm:
         fmt.Println("GSM")
-    case int32(telephony.PhoneTypeCdma):
+    case telephony.PhoneTypeCdma:
         fmt.Println("CDMA")
     }
 
@@ -80,8 +81,8 @@ name, err := device.GetName()
 addr, err := device.GetAddress()
 devType, err := device.GetType()
 
-// Compare with named constants
-if devType == int32(bluetooth.DeviceTypeLe) {
+// Compare with named constants (cast int32 to int to match constant type)
+if int(devType) == bluetooth.DeviceTypeLe {
     fmt.Println("BLE device")
 }
 ```
@@ -119,7 +120,7 @@ Use it in comparisons, switch statements, and as arguments:
 
 ```go
 // GOOD: named constant
-if bondState == int32(bluetooth.BondBonded) { ... }
+if int(bondState) == bluetooth.BondBonded { ... }
 
 // BAD: magic number
 if bondState == 12 { ... }
