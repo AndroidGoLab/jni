@@ -55,11 +55,12 @@ package main
 
 import (
     "fmt"
-    "log"
     "unsafe"
 
     "github.com/AndroidGoLab/jni"
     "github.com/AndroidGoLab/jni/app"
+    "github.com/AndroidGoLab/jni/content"
+    "github.com/AndroidGoLab/jni/net/wifi"
 )
 
 // listenForWifiStateChanges registers a BroadcastReceiver for
@@ -85,7 +86,7 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
 
             // Read an int extra (e.g. wifi_state).
             const defaultWifiState = -1
-            state, err := intent.GetIntExtra("wifi_state", defaultWifiState)
+            state, err := intent.GetIntExtra(wifi.ExtraWifiState, defaultWifiState)
             if err != nil {
                 return nil, err
             }
@@ -96,7 +97,7 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
     )
 
     // 2. Create an IntentFilter for the desired action.
-    filter, err := content.NewIntentFilter(vm, "android.net.wifi.WIFI_STATE_CHANGED")
+    filter, err := content.NewIntentFilter(vm, wifi.WifiStateChangedAction)
     if err != nil {
         jni.UnregisterProxyHandler(handlerID)
         return nil, fmt.Errorf("new IntentFilter: %w", err)
@@ -207,9 +208,9 @@ call `addAction` for each:
 ```go
 // Create an empty filter and add multiple actions:
 filter, _ := content.NewIntentFilter(vm, "")
-filter.AddAction("android.net.wifi.WIFI_STATE_CHANGED")
-filter.AddAction("android.net.wifi.SCAN_RESULTS")
-filter.AddAction("android.bluetooth.device.action.FOUND")
+filter.AddAction(wifi.WifiStateChangedAction)
+filter.AddAction(wifi.ScanResultsAvailableAction)
+filter.AddAction(bluetooth.ActionFound)
 defer filter.Close()
 
 ctx := &app.Context{VM: vm, Obj: activity}
