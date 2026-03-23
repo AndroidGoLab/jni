@@ -543,8 +543,10 @@ func gattClient(vm *jni.VM, ctx *app.Context, device *bluetooth.Device) error {
     // Enable notifications for a characteristic
     ok, err = gatt.SetCharacteristicNotification(characteristicObj, true)
 
-    // Request MTU change (triggers onMtuChanged callback)
-    ok, err = gatt.RequestMtu(512)
+    // Request MTU change (triggers onMtuChanged callback).
+    // 517 is the maximum ATT MTU for BLE (Android caps at 517).
+    const maxBleMtu = 517
+    ok, err = gatt.RequestMtu(int32(maxBleMtu))
 
     // Read remote RSSI (triggers onReadRemoteRssi callback)
     ok, err = gatt.ReadRemoteRssi()
