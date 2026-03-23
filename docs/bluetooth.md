@@ -24,14 +24,13 @@ func queryAdapter(ctx *app.Context) error {
     defer adapter.Close() // releases the JNI global reference
 
     // Check if Bluetooth hardware is enabled.
-    // Internally: env.CallBooleanMethod(obj, mid) -> uint8, then resultRaw != 0
     enabled, err := adapter.IsEnabled()
     if err != nil {
         return err
     }
     fmt.Printf("Bluetooth enabled: %v\n", enabled)
 
-    // Adapter name and MAC address (both return string via CallObjectMethod + GoString)
+    // Adapter name and MAC address (both return string)
     name, err := adapter.GetName()
     if err != nil {
         return err
@@ -42,12 +41,19 @@ func queryAdapter(ctx *app.Context) error {
     }
     fmt.Printf("Adapter: %s (%s)\n", name, addr)
 
-    // Scan mode (int32)
+    // Scan mode (int32) -- compare against named constants
     scanMode, err := adapter.GetScanMode()
     if err != nil {
         return err
     }
-    fmt.Printf("Scan mode: %d\n", scanMode)
+    switch scanMode {
+    case bluetooth.ScanModeNone:
+        fmt.Println("Scan mode: none")
+    case bluetooth.ScanModeConnectable:
+        fmt.Println("Scan mode: connectable")
+    case bluetooth.ScanModeConnectableDiscoverable:
+        fmt.Println("Scan mode: connectable + discoverable")
+    }
 
     return nil
 }
@@ -110,6 +116,7 @@ import (
     "github.com/AndroidGoLab/jni"
     "github.com/AndroidGoLab/jni/app"
     "github.com/AndroidGoLab/jni/bluetooth"
+    "github.com/AndroidGoLab/jni/content"
 )
 
 func runDiscovery(vm *jni.VM, ctx *app.Context) error {
@@ -136,57 +143,54 @@ func runDiscovery(vm *jni.VM, ctx *app.Context) error {
             if methodName != "onReceive" || len(args) < 2 {
                 return nil, nil
             }
-            // args[0] = Context, args[1] = Intent
-            intentObj := args[1]
+            // args[0] = Context, args[1] = Intent (local ref)
 
-            // Extract the BluetoothDevice from the intent via raw JNI:
-            //   BluetoothDevice device = intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-            intentClass, err := env.FindClass("android/content/Intent")
+            // Wrap the intent in a typed wrapper. Promote to global ref first
+            // because Intent methods call vm.Do() internally.
+            intentGlobal := env.NewGlobalRef(args[1])
+            intent := app.Intent{VM: vm, Obj: intentGlobal}
+            defer env.DeleteGlobalRef(intentGlobal)
+
+            // Use typed wrapper to read the action.
+            action, err := intent.GetAction()
             if err != nil {
                 return nil, err
             }
-            defer env.DeleteLocalRef(&intentClass.Object)
-
-            getParcelableMid, err := env.GetMethodID(intentClass,
-                "getParcelableExtra",
-                "(Ljava/lang/String;)Landroid/os/Parcelable;")
-            if err != nil {
-                return nil, err
+            if action != bluetooth.ActionFound {
+                return nil, nil
             }
 
-            extraKey, err := env.NewStringUTF("android.bluetooth.device.extra.DEVICE")
-            if err != nil {
-                return nil, err
-            }
-            defer env.DeleteLocalRef(&extraKey.Object)
-
-            deviceObj, err := env.CallObjectMethod(intentObj, getParcelableMid,
-                jni.ObjectValue(&extraKey.Object))
+            // Extract the BluetoothDevice from the intent extras.
+            deviceObj, err := intent.GetParcelableExtra(bluetooth.ExtraDevice)
             if err != nil || deviceObj == nil {
                 return nil, err
             }
-            defer env.DeleteLocalRef(deviceObj)
 
             // Wrap in the generated Device type to use typed accessors.
-            // We need a global ref for the Device struct.
             deviceGlobal := env.NewGlobalRef(deviceObj)
             device := bluetooth.Device{VM: vm, Obj: deviceGlobal}
+            defer env.DeleteGlobalRef(deviceGlobal)
 
             name, _ := device.GetName()
             addr, _ := device.GetAddress()
             devType, _ := device.GetType()
             fmt.Printf("Found device: %s (%s) type=%d\n", name, addr, devType)
 
-            env.DeleteGlobalRef(deviceGlobal)
             return nil, nil
         },
     )
     defer jni.UnregisterProxyHandler(handlerID)
 
-    // 2. Instantiate GoBroadcastReceiver and IntentFilter via raw JNI.
+    // 2. Create an IntentFilter for ACTION_FOUND.
+    filter, err := content.NewIntentFilter(vm, bluetooth.ActionFound)
+    if err != nil {
+        return fmt.Errorf("new IntentFilter: %w", err)
+    }
+    defer filter.Close()
+
+    // 3. Instantiate GoBroadcastReceiver (user-defined Java adapter -- raw JNI required).
     var receiverGlobal *jni.GlobalRef
     err = vm.Do(func(env *jni.Env) error {
-        // Create the GoBroadcastReceiver(handlerID)
         recvClass, err := env.FindClass("center/dx/jni/generated/GoBroadcastReceiver")
         if err != nil {
             return fmt.Errorf("find GoBroadcastReceiver: %w", err)
@@ -203,46 +207,22 @@ func runDiscovery(vm *jni.VM, ctx *app.Context) error {
         }
         receiverGlobal = env.NewGlobalRef(recvLocal)
         env.DeleteLocalRef(recvLocal)
-
-        // Create IntentFilter("android.bluetooth.device.action.FOUND")
-        ifClass, err := env.FindClass("android/content/IntentFilter")
-        if err != nil {
-            return err
-        }
-        defer env.DeleteLocalRef(&ifClass.Object)
-
-        ifInit, err := env.GetMethodID(ifClass, "<init>", "(Ljava/lang/String;)V")
-        if err != nil {
-            return err
-        }
-        actionStr, err := env.NewStringUTF("android.bluetooth.device.action.FOUND")
-        if err != nil {
-            return err
-        }
-        defer env.DeleteLocalRef(&actionStr.Object)
-
-        filterLocal, err := env.NewObject(ifClass, ifInit, jni.ObjectValue(&actionStr.Object))
-        if err != nil {
-            return err
-        }
-        filterGlobal := env.NewGlobalRef(filterLocal)
-        env.DeleteLocalRef(filterLocal)
-        defer func() { env.DeleteGlobalRef(filterGlobal) }()
-
-        // Register the receiver with the Context.
-        // ctx.RegisterReceiver2(receiver, filter) -> Intent
-        _, err = ctx.RegisterReceiver2(
-            (*jni.Object)(unsafe.Pointer(receiverGlobal)),
-            (*jni.Object)(unsafe.Pointer(filterGlobal)),
-        )
-        return err
+        return nil
     })
+    if err != nil {
+        return fmt.Errorf("create receiver: %w", err)
+    }
+
+    // 4. Register the receiver with the Context.
+    _, err = ctx.RegisterReceiver2(
+        (*jni.Object)(unsafe.Pointer(receiverGlobal)),
+        filter.Obj,
+    )
     if err != nil {
         return fmt.Errorf("register receiver: %w", err)
     }
 
-    // 3. Start discovery.
-    //    Internally calls env.CallBooleanMethod with JNI signature "()Z".
+    // 5. Start discovery.
     //    Returns (bool, error): true if discovery started successfully.
     started, err := adapter.StartDiscovery()
     if err != nil {
@@ -255,7 +235,7 @@ func runDiscovery(vm *jni.VM, ctx *app.Context) error {
 
     // ... wait for results, e.g. time.Sleep or channel ...
 
-    // 4. Cleanup: cancel discovery + unregister receiver.
+    // 6. Cleanup: cancel discovery + unregister receiver.
     _, _ = adapter.CancelDiscovery()
     _ = ctx.UnregisterReceiver((*jni.Object)(unsafe.Pointer(receiverGlobal)))
     _ = vm.Do(func(env *jni.Env) error {
@@ -304,10 +284,10 @@ type Device struct {
 }
 
 // All accessors follow the same vm.Do + ensureInit + CallXxxMethod pattern.
-name, err := device.GetName()           // string (CallObjectMethod + GoString)
+name, err := device.GetName()           // string
 addr, err := device.GetAddress()        // string
-devType, err := device.GetType()        // int32 (CallIntMethod)
-bondState, err := device.GetBondState() // int32 (CallIntMethod)
+devType, err := device.GetType()        // int32 -- compare with bluetooth.DeviceTypeClassic, etc.
+bondState, err := device.GetBondState() // int32 -- compare with bluetooth.BondNone, etc.
 alias, err := device.GetAlias()         // string
 uuids, err := device.GetUuids()         // *jni.Object (raw ParcelUuid[] array)
 
@@ -417,7 +397,7 @@ public class GoScanCallback extends ScanCallback {
     )
     defer jni.UnregisterProxyHandler(scanHandlerID)
 
-    // Instantiate GoScanCallback via raw JNI.
+    // raw JNI: GoScanCallback is a user-defined Java class with no generated constructor
     var callbackObj *jni.Object
     err = vm.Do(func(env *jni.Env) error {
         cbClass, err := env.FindClass("center/dx/jni/generated/GoScanCallback")
@@ -647,6 +627,15 @@ bluetooth.StateDisconnecting // 3
 bluetooth.ConnectionPriorityBalanced // 0
 bluetooth.ConnectionPriorityHigh     // 1
 bluetooth.ConnectionPriorityLowPower // 2
+
+// Action strings (from BluetoothDevice / BluetoothAdapter)
+bluetooth.ActionFound               // "android.bluetooth.device.action.FOUND"
+bluetooth.ActionBondStateChanged    // "android.bluetooth.device.action.BOND_STATE_CHANGED"
+bluetooth.ActionDiscoveryStarted    // "android.bluetooth.adapter.action.DISCOVERY_STARTED"
+bluetooth.ActionDiscoveryFinished   // "android.bluetooth.adapter.action.DISCOVERY_FINISHED"
+
+// Extra keys (from BluetoothDevice)
+bluetooth.ExtraDevice               // "android.bluetooth.device.extra.DEVICE"
 ```
 
 BLE-specific constants live in `bluetooth/le`:

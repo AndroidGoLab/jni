@@ -74,35 +74,18 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
                 return nil, nil
             }
             // args[0] = Context, args[1] = Intent
-            intent := args[1]
 
-            // Read the intent action.
-            intentCls := env.GetObjectClass(intent)
-            getActionMid, err := env.GetMethodID(intentCls, "getAction",
-                "()Ljava/lang/String;")
+            // Use the typed Intent wrapper to read action and extras.
+            intent := &app.Intent{VM: vm, Obj: args[1]}
+            action, err := intent.GetAction()
             if err != nil {
                 return nil, err
             }
-            actionObj, err := env.CallObjectMethod(intent, getActionMid)
-            if err != nil {
-                return nil, err
-            }
-            action := env.GoString((*jni.String)(unsafe.Pointer(actionObj)))
             fmt.Printf("Broadcast received: action=%s\n", action)
 
             // Read an int extra (e.g. wifi_state).
-            getIntExtraMid, err := env.GetMethodID(intentCls, "getIntExtra",
-                "(Ljava/lang/String;I)I")
-            if err != nil {
-                return nil, err
-            }
-            keyStr, err := env.NewStringUTF("wifi_state")
-            if err != nil {
-                return nil, err
-            }
-            defer env.DeleteLocalRef(&keyStr.Object)
-            state, err := env.CallIntMethod(intent, getIntExtraMid,
-                jni.ObjectValue(&keyStr.Object), jni.IntValue(-1))
+            const defaultWifiState = -1
+            state, err := intent.GetIntExtra("wifi_state", defaultWifiState)
             if err != nil {
                 return nil, err
             }
@@ -112,18 +95,23 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
         },
     )
 
-    var receiverGlobal *jni.Object
-    var filterGlobal *jni.Object
+    // 2. Create an IntentFilter for the desired action.
+    filter, err := content.NewIntentFilter(vm, "android.net.wifi.WIFI_STATE_CHANGED")
+    if err != nil {
+        jni.UnregisterProxyHandler(handlerID)
+        return nil, fmt.Errorf("new IntentFilter: %w", err)
+    }
 
+    // 3. Instantiate GoBroadcastReceiver (custom Java adapter -- raw JNI required).
+    var receiverGlobal *jni.Object
     err = vm.Do(func(env *jni.Env) error {
-        // Ensure proxy native methods are registered.
         if err := jni.EnsureProxyInit(env); err != nil {
             return fmt.Errorf("EnsureProxyInit: %w", err)
         }
 
-        // 2. Load the GoBroadcastReceiver class via ClassLoader.
-        //    In NativeActivity, FindClass uses the boot ClassLoader which
-        //    cannot see APK classes. Use the Activity's ClassLoader instead.
+        // GoBroadcastReceiver is a user-defined Java class. In NativeActivity,
+        // FindClass uses the boot ClassLoader which cannot see APK classes.
+        // Use the Activity's ClassLoader instead.
         actCls := env.GetObjectClass(activity)
         getClassLoaderMid, err := env.GetMethodID(actCls, "getClassLoader",
             "()Ljava/lang/ClassLoader;")
@@ -153,7 +141,6 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
             return fmt.Errorf("loadClass(GoBroadcastReceiver): %w", err)
         }
 
-        // 3. Instantiate GoBroadcastReceiver(handlerID).
         cls := (*jni.Class)(unsafe.Pointer(receiverCls))
         initMid, err := env.GetMethodID(cls, "<init>", "(J)V")
         if err != nil {
@@ -164,50 +151,32 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
             return fmt.Errorf("new GoBroadcastReceiver: %w", err)
         }
         receiverGlobal = env.NewGlobalRef(receiver)
-
-        // 4. Create an IntentFilter with the desired action.
-        ifClass, err := env.FindClass("android/content/IntentFilter")
-        if err != nil {
-            return fmt.Errorf("find IntentFilter: %w", err)
-        }
-        ifInit, err := env.GetMethodID(ifClass, "<init>", "(Ljava/lang/String;)V")
-        if err != nil {
-            return fmt.Errorf("get IntentFilter.<init>: %w", err)
-        }
-        actionStr, err := env.NewStringUTF("android.net.wifi.WIFI_STATE_CHANGED")
-        if err != nil {
-            return err
-        }
-        defer env.DeleteLocalRef(&actionStr.Object)
-        filter, err := env.NewObject(ifClass, ifInit, jni.ObjectValue(&actionStr.Object))
-        if err != nil {
-            return fmt.Errorf("new IntentFilter: %w", err)
-        }
-        filterGlobal = env.NewGlobalRef(filter)
-
-        // 5. Call context.registerReceiver(receiver, filter).
-        ctx := &app.Context{VM: vm, Obj: activity}
-        _, err = ctx.RegisterReceiver2(receiverGlobal, filterGlobal)
-        if err != nil {
-            return fmt.Errorf("registerReceiver: %w", err)
-        }
-
         return nil
     })
     if err != nil {
+        filter.Close()
         jni.UnregisterProxyHandler(handlerID)
         return nil, err
     }
 
-    // 6. Return a cleanup function.
+    // 4. Register the receiver with the Context.
+    ctx := &app.Context{VM: vm, Obj: activity}
+    _, err = ctx.RegisterReceiver2(receiverGlobal, filter.Obj)
+    if err != nil {
+        filter.Close()
+        jni.UnregisterProxyHandler(handlerID)
+        return nil, fmt.Errorf("registerReceiver: %w", err)
+    }
+
+    // 5. Return a cleanup function.
     cleanup = func() {
+        ctx := &app.Context{VM: vm, Obj: activity}
+        ctx.UnregisterReceiver(receiverGlobal)
         vm.Do(func(env *jni.Env) error {
-            ctx := &app.Context{VM: vm, Obj: activity}
-            ctx.UnregisterReceiver(receiverGlobal)
             env.DeleteGlobalRef(receiverGlobal)
-            env.DeleteGlobalRef(filterGlobal)
             return nil
         })
+        filter.Close()
         jni.UnregisterProxyHandler(handlerID)
     }
     return cleanup, nil
@@ -220,6 +189,9 @@ func listenForWifiStateChanges(vm *jni.VM, activity *jni.Object) (cleanup func()
   Java adapter stores and passes to `GoAbstractDispatch.invoke(...)` on each
   call.
 - `jni.UnregisterProxyHandler(id)` removes the handler when done.
+- `app.Intent.GetAction()` and `app.Intent.GetIntExtra(key, default)` replace
+  manual `GetMethodID`/`CallObjectMethod`/`CallIntMethod` chains for reading
+  intent data.
 - `app.Context.RegisterReceiver2(receiver, filter)` calls
   `android.content.Context.registerReceiver(BroadcastReceiver, IntentFilter)`.
 - `app.Context.UnregisterReceiver(receiver)` calls
@@ -233,26 +205,16 @@ To listen for multiple broadcast actions, create a no-arg IntentFilter and
 call `addAction` for each:
 
 ```go
-// Using the content.IntentFilter wrapper:
-vm.Do(func(env *jni.Env) error {
-    ifClass, _ := env.FindClass("android/content/IntentFilter")
-    ifInit, _ := env.GetMethodID(ifClass, "<init>", "()V")
-    filterLocal, _ := env.NewObject(ifClass, ifInit)
-    filterObj := env.NewGlobalRef(filterLocal)
+// Create an empty filter and add multiple actions:
+filter, _ := content.NewIntentFilter(vm, "")
+filter.AddAction("android.net.wifi.WIFI_STATE_CHANGED")
+filter.AddAction("android.net.wifi.SCAN_RESULTS")
+filter.AddAction("android.bluetooth.device.action.FOUND")
+defer filter.Close()
 
-    // Use the typed wrapper for addAction:
-    filter := &content.IntentFilter{VM: vm, Obj: filterObj}
-    filter.AddAction("android.net.wifi.WIFI_STATE_CHANGED")
-    filter.AddAction("android.net.wifi.SCAN_RESULTS")
-    filter.AddAction("android.bluetooth.device.action.FOUND")
-
-    ctx := &app.Context{VM: vm, Obj: activity}
-    ctx.RegisterReceiver2(receiverGlobal, filterObj)
-    return nil
-})
+ctx := &app.Context{VM: vm, Obj: activity}
+ctx.RegisterReceiver2(receiverGlobal, filter.Obj)
 ```
-
-This requires `import "github.com/AndroidGoLab/jni/content"`.
 
 ## Interface-based callbacks with env.NewProxy
 
@@ -271,12 +233,10 @@ vm.Do(func(env *jni.Env) error {
         func(env *jni.Env, methodName string, args []*jni.Object) (*jni.Object, error) {
             switch methodName {
             case "onLocationChanged":
-                // args[0] is android.location.Location
-                locCls := env.GetObjectClass(args[0])
-                getLatMid, _ := env.GetMethodID(locCls, "getLatitude", "()D")
-                getLonMid, _ := env.GetMethodID(locCls, "getLongitude", "()D")
-                lat, _ := env.CallDoubleMethod(args[0], getLatMid)
-                lon, _ := env.CallDoubleMethod(args[0], getLonMid)
+                // Use the typed Location wrapper for latitude/longitude.
+                loc := &location.Location{VM: vm, Obj: args[0]}
+                lat, _ := loc.GetLatitude()
+                lon, _ := loc.GetLongitude()
                 fmt.Printf("Location: %.6f, %.6f\n", lat, lon)
             case "onProviderEnabled":
                 fmt.Println("Provider enabled")
@@ -303,52 +263,26 @@ Android callbacks require a `Looper` thread. Create a `HandlerThread` to
 provide one:
 
 ```go
-var handlerThread *jni.Object // global ref
-var handler *jni.Object       // global ref
+// NewHandlerThread creates and starts the thread in one call.
+ht, err := os.NewHandlerThread(vm, "GoCallbackThread")
+if err != nil {
+    return err
+}
 
-vm.Do(func(env *jni.Env) error {
-    // Create and start a HandlerThread.
-    htClass, _ := env.FindClass("android/os/HandlerThread")
-    htInit, _ := env.GetMethodID(htClass, "<init>", "(Ljava/lang/String;)V")
-    name, _ := env.NewStringUTF("GoCallbackThread")
-    defer env.DeleteLocalRef(&name.Object)
-    ht, _ := env.NewObject(htClass, htInit, jni.ObjectValue(&name.Object))
-    handlerThread = env.NewGlobalRef(ht)
-
-    startMid, _ := env.GetMethodID(htClass, "start", "()V")
-    env.CallVoidMethod(handlerThread, startMid)
-
-    // Get the Looper and create a Handler.
-    getLooperMid, _ := env.GetMethodID(htClass, "getLooper",
-        "()Landroid/os/Looper;")
-    looper, _ := env.CallObjectMethod(handlerThread, getLooperMid)
-
-    hClass, _ := env.FindClass("android/os/Handler")
-    hInit, _ := env.GetMethodID(hClass, "<init>", "(Landroid/os/Looper;)V")
-    h, _ := env.NewObject(hClass, hInit, jni.ObjectValue(looper))
-    handler = env.NewGlobalRef(h)
-
-    return nil
-})
-
-// Use registerReceiver(receiver, filter, null, handler) for delivery
-// on this thread instead of the main thread. The 4-arg overload is
-// RegisterReceiver3_1 in the generated bindings, which takes
-// (BroadcastReceiver, IntentFilter, flags int32) -- or use raw JNI
-// to call the 4-arg registerReceiver.
+// Get its Looper for registering callbacks.
+looperObj, err := ht.GetLooper()
+if err != nil {
+    ht.Close()
+    return err
+}
+// looperObj can be passed to APIs that need a Looper for callback delivery.
+_ = looperObj
 ```
 
 To shut down the thread:
 
 ```go
-vm.Do(func(env *jni.Env) error {
-    htClass := env.GetObjectClass(handlerThread)
-    quitMid, _ := env.GetMethodID(htClass, "quitSafely", "()Z")
-    env.CallBooleanMethod(handlerThread, quitMid)
-    env.DeleteGlobalRef(handlerThread)
-    env.DeleteGlobalRef(handler)
-    return nil
-})
+ht.Close() // quits the thread safely and releases the global ref
 ```
 
 ## Interfaces vs abstract classes reference

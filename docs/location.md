@@ -5,7 +5,11 @@ The `location` package wraps `android.location.LocationManager` for GPS and netw
 ## Query Providers and Cached Location
 
 ```go
-import "github.com/AndroidGoLab/jni/location"
+import (
+    "fmt"
+
+    "github.com/AndroidGoLab/jni/location"
+)
 
 mgr, err := location.NewManager(ctx)
 if err != nil {
@@ -13,20 +17,19 @@ if err != nil {
 }
 defer mgr.Close()
 
-// Check which providers are available
+// Check which providers are available (typed wrapper takes string)
 gpsEnabled, _ := mgr.IsProviderEnabled(location.GpsProvider)      // "gps"
 netEnabled, _ := mgr.IsProviderEnabled(location.NetworkProvider)   // "network"
 
 // Read the last cached location (may be nil if no recent fix)
 locObj, err := mgr.GetLastKnownLocation(location.GpsProvider)
 if locObj != nil {
-    // Extract lat/lon from the Java Location object
-    var loc *location.ExtractedLocation
-    vm.Do(func(env *jni.Env) error {
-        loc, err = location.ExtractLocation(env, locObj)
-        return err
-    })
-    fmt.Printf("lat=%.6f lon=%.6f\n", loc.Latitude, loc.Longitude)
+    // Wrap the returned JNI object in the typed Location wrapper.
+    // GetLastKnownLocation already returns a GlobalRef, so use it directly.
+    loc := &location.Location{VM: mgr.VM, Obj: locObj}
+    lat, _ := loc.GetLatitude()
+    lon, _ := loc.GetLongitude()
+    fmt.Printf("lat=%.6f lon=%.6f\n", lat, lon)
 }
 ```
 
@@ -49,46 +52,47 @@ import (
 
     "github.com/AndroidGoLab/jni"
     "github.com/AndroidGoLab/jni/location"
+    goos "github.com/AndroidGoLab/jni/os"
 )
 
-func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.ExtractedLocation, error) {
+func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Location, error) {
     var mu sync.Mutex
-    var result *location.ExtractedLocation
+    var result *location.Location
     done := make(chan struct{})
 
     var listenerGlobal *jni.Object
-    var handlerThread *jni.Object
     var cleanup func()
 
-    err := vm.Do(func(env *jni.Env) error {
-        // 1. Create a HandlerThread with its own Looper for callbacks
-        htClass, _ := env.FindClass("android/os/HandlerThread")
-        htInit, _ := env.GetMethodID(htClass, "<init>", "(Ljava/lang/String;)V")
-        threadName, _ := env.NewStringUTF("LocationHelper")
-        ht, _ := env.NewObject(htClass, htInit, jni.ObjectValue(&threadName.Object))
-        handlerThread = env.NewGlobalRef(ht)
+    // 1. Create and start a HandlerThread for callback delivery.
+    ht, err := goos.NewHandlerThread(vm, "LocationHelper")
+    if err != nil {
+        return nil, fmt.Errorf("new HandlerThread: %w", err)
+    }
+    looper, err := ht.GetLooper()
+    if err != nil {
+        ht.Close()
+        return nil, fmt.Errorf("get looper: %w", err)
+    }
 
-        startMid, _ := env.GetMethodID(htClass, "start", "()V")
-        env.CallVoidMethod(handlerThread, startMid)
+    err = vm.Do(func(env *jni.Env) error {
 
-        getLooperMid, _ := env.GetMethodID(htClass, "getLooper", "()Landroid/os/Looper;")
-        looper, _ := env.CallObjectMethod(handlerThread, getLooperMid)
-
-        // 2. Create a JNI proxy implementing LocationListener
+        // 2. Create a JNI proxy implementing LocationListener.
+        //    Raw JNI: LocationListener is an interface; env.NewProxy is the
+        //    only way to implement a Java interface callback from Go.
         listenerClass, _ := env.FindClass("android/location/LocationListener")
         proxy, proxyCleanup, err := env.NewProxy(
             []*jni.Class{listenerClass},
             func(env *jni.Env, methodName string, args []*jni.Object) (*jni.Object, error) {
                 if methodName == "onLocationChanged" && len(args) > 0 {
-                    loc, err := location.ExtractLocation(env, args[0])
-                    if err == nil && loc != nil {
-                        mu.Lock()
-                        if result == nil {
-                            result = loc
-                            close(done)
-                        }
-                        mu.Unlock()
+                    // Wrap the callback's Location argument in the typed wrapper
+                    locGlobal := env.NewGlobalRef(args[0])
+                    loc := &location.Location{VM: vm, Obj: locGlobal}
+                    mu.Lock()
+                    if result == nil {
+                        result = loc
+                        close(done)
                     }
+                    mu.Unlock()
                 }
                 return nil, nil
             },
@@ -98,18 +102,17 @@ func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Extracte
         }
         cleanup = proxyCleanup
         listenerGlobal = env.NewGlobalRef(proxy)
+        env.DeleteLocalRef(proxy)
 
-        // 3. Call requestLocationUpdates(String, long, float, LocationListener, Looper)
-        lmClass, _ := env.FindClass("android/location/LocationManager")
-        reqMid, _ := env.GetMethodID(lmClass, "requestLocationUpdates",
-            "(Ljava/lang/String;JFLandroid/location/LocationListener;Landroid/os/Looper;)V")
-        providerStr, _ := env.NewStringUTF(location.GpsProvider)
-        return env.CallVoidMethod(mgr.Obj, reqMid,
-            jni.ObjectValue(&providerStr.Object),
-            jni.LongValue(0),
-            jni.FloatValue(0),
-            jni.ObjectValue(listenerGlobal),
-            jni.ObjectValue(looper))
+        // 3. Use typed RequestLocationUpdates5_4:
+        //    requestLocationUpdates(String, long, float, LocationListener, Looper)
+        return mgr.RequestLocationUpdates5_4(
+            location.GpsProvider, // provider
+            0,                    // minTimeMs
+            0,                    // minDistanceMeters
+            listenerGlobal,       // listener
+            looper,               // looper
+        )
     })
     if err != nil {
         if cleanup != nil { cleanup() }
@@ -122,20 +125,13 @@ func requestFreshLocation(vm *jni.VM, mgr *location.Manager) (*location.Extracte
     case <-time.After(30 * time.Second):
     }
 
-    // 5. Remove updates and clean up
+    // 5. Remove updates and clean up using typed wrappers
+    mgr.RemoveUpdates1(listenerGlobal)
     vm.Do(func(env *jni.Env) error {
-        lmClass, _ := env.FindClass("android/location/LocationManager")
-        removeMid, _ := env.GetMethodID(lmClass, "removeUpdates",
-            "(Landroid/location/LocationListener;)V")
-        env.CallVoidMethod(mgr.Obj, removeMid, jni.ObjectValue(listenerGlobal))
         env.DeleteGlobalRef(listenerGlobal)
-
-        htClass, _ := env.FindClass("android/os/HandlerThread")
-        quitMid, _ := env.GetMethodID(htClass, "quit", "()Z")
-        env.CallBooleanMethod(handlerThread, quitMid)
-        env.DeleteGlobalRef(handlerThread)
         return nil
     })
+    ht.Close()
     if cleanup != nil { cleanup() }
 
     mu.Lock()

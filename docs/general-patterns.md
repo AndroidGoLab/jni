@@ -314,40 +314,32 @@ Rules:
 
 ## 8. HandlerThread for Callbacks
 
-Many callback-based Android APIs require a `Looper` thread. Create a
-`HandlerThread` via raw JNI (no typed wrapper exists for this):
+Many callback-based Android APIs require a `Looper` thread.
+`os.NewHandlerThread` creates and starts the thread in one call:
 
 ```go
-vm.Do(func(env *jni.Env) error {
-    htClass, _ := env.FindClass("android/os/HandlerThread")
-    htInit, _ := env.GetMethodID(htClass, "<init>", "(Ljava/lang/String;)V")
-    name, _ := env.NewStringUTF("GoCallbackThread")
-    ht, _ := env.NewObject(htClass, htInit, jni.ObjectValue(&name.Object))
-    handlerThread := env.NewGlobalRef(ht)
+import "github.com/AndroidGoLab/jni/os"
 
-    startMid, _ := env.GetMethodID(htClass, "start", "()V")
-    env.CallVoidMethod(handlerThread, startMid)
+ht, err := os.NewHandlerThread(vm, "GoCallbackThread")
+if err != nil {
+    return err
+}
+defer ht.Close()
 
-    getLooperMid, _ := env.GetMethodID(htClass, "getLooper", "()Landroid/os/Looper;")
-    looper, _ := env.CallObjectMethod(handlerThread, getLooperMid)
-    // Pass looper when registering callbacks
-    _ = looper
-    return nil
-})
+looperObj, err := ht.GetLooper()
+if err != nil {
+    return err
+}
+// Pass looperObj when registering callbacks...
+
 ```
 
 ---
 
 ## 9. When Raw JNI Is Needed
 
-Raw JNI is the fallback for the few cases not covered by typed wrappers:
-
-- **Constructing objects** that lack a generated factory (e.g., `IntentFilter`,
-  `HandlerThread`)
-- **Static method calls** on utility classes
-- **Reading intent extras** inside callback handlers
-- **Bridging** between typed wrappers from different packages when the
-  generated API uses `*jni.Object`
+Raw JNI is the fallback for the rare cases not covered by typed wrappers:
+- **Class references** for `env.NewProxy()` interface lookups
 
 Even then, prefer typed wrappers for everything they cover and drop to raw JNI
 only for the gap.
