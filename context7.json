@@ -28,6 +28,10 @@
     "Generated packages cache method IDs via ensureInit(); prefer typed wrappers over raw JNI calls",
     "Java exceptions are automatically converted to Go errors by all Call*Method functions",
     "For callbacks on Java interfaces, use env.NewProxy() to create a java.lang.reflect.Proxy",
-    "Create a HandlerThread with its own Looper when registering listener callbacks"
+    "For callbacks on abstract classes (BroadcastReceiver, ScanCallback, etc.), use a Java adapter class with GoAbstractDispatch + jni.RegisterProxyHandler on the Go side",
+    "env.NewProxy() only works for Java interfaces, NOT abstract classes -- see broadcast-receiver.md for the abstract class pattern",
+    "Create a HandlerThread with its own Looper when registering listener callbacks",
+    "CallBooleanMethod returns uint8; convert to Go bool via resultRaw != 0. BooleanValue() takes uint8, not Go bool",
+    "See general-patterns.md for guidance on Android APIs not covered by specific examples"
   ]
 }
