@@ -14,6 +14,8 @@ package main
 
 extern void goOnResume(ANativeActivity*);
 static void _onResume(ANativeActivity* a) { goOnResume(a); }
+static uintptr_t _getVM(ANativeActivity* a) { return (uintptr_t)a->vm; }
+static uintptr_t _getClazz(ANativeActivity* a) { return (uintptr_t)a->clazz; }
 static void _setCallbacks(ANativeActivity* a) {
     a->callbacks->onResume = _onResume;
 }
@@ -45,8 +47,8 @@ var (
 
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
-	vm := jni.VMFromPtr(unsafe.Pointer(activity.vm))
-	actObj := jni.ObjectFromPtr(unsafe.Pointer(activity.clazz))
+	vm := jni.VMFromUintptr(uintptr(C._getVM(activity)))
+	actObj := jni.ObjectFromUintptr(uintptr(C._getClazz(activity)))
 
 	mu.Lock()
 	globalVM = vm

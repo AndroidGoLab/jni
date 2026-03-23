@@ -12,6 +12,8 @@ static void _onResume(ANativeActivity* a) { goOnResume(a); }
 extern void goOnNativeWindowCreated(ANativeActivity*, ANativeWindow*);
 static void _onWindowCreated(ANativeActivity* a, ANativeWindow* w) { goOnNativeWindowCreated(a, w); }
 static void _setCallbacks(ANativeActivity* a) { a->callbacks->onResume = _onResume; a->callbacks->onNativeWindowCreated = _onWindowCreated; }
+static uintptr_t _getVM(ANativeActivity* a) { return (uintptr_t)a->vm; }
+static uintptr_t _getClazz(ANativeActivity* a) { return (uintptr_t)a->clazz; }
 */
 import "C"
 import (
@@ -32,8 +34,8 @@ func init() { ui.Register(run) }
 //export ANativeActivity_onCreate
 func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Pointer, savedStateSize C.size_t) {
 	ui.OnCreate(
-		jni.VMFromPtr(unsafe.Pointer(activity.vm)),
-		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
+		jni.VMFromUintptr(uintptr(C._getVM(activity))),
+		jni.ObjectFromUintptr(uintptr(C._getClazz(activity))),
 	)
 	C._setCallbacks(activity)
 }
@@ -41,7 +43,7 @@ func ANativeActivity_onCreate(activity *C.ANativeActivity, savedState unsafe.Poi
 //export goOnResume
 func goOnResume(activity *C.ANativeActivity) {
 	ui.OnResume(
-		jni.ObjectFromPtr(unsafe.Pointer(activity.clazz)),
+		jni.ObjectFromUintptr(uintptr(C._getClazz(activity))),
 	)
 }
 
