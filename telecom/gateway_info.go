@@ -23,6 +23,34 @@ type GatewayInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGatewayInfo creates a new android.telecom.GatewayInfo instance.
+func NewGatewayInfo(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*GatewayInfo, error) {
+	var t GatewayInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), midGatewayInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telecom.GatewayInfo.describeContents.
 func (m *GatewayInfo) DescribeContents() (int32, error) {
 	var result int32

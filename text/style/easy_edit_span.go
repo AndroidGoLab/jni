@@ -23,6 +23,28 @@ type EasyEditSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEasyEditSpan creates a new android.text.style.EasyEditSpan instance.
+func NewEasyEditSpan(vm *jni.VM) (*EasyEditSpan, error) {
+	var t EasyEditSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), midEasyEditSpanInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.EasyEditSpan.describeContents.
 func (m *EasyEditSpan) DescribeContents() (int32, error) {
 	var result int32

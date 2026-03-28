@@ -23,6 +23,28 @@ type DreamService struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDreamService creates a new android.service.dreams.DreamService instance.
+func NewDreamService(vm *jni.VM) (*DreamService, error) {
+	var t DreamService
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDreamService)), midDreamServiceInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddContentView calls android.service.dreams.DreamService.addContentView.
 func (m *DreamService) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 

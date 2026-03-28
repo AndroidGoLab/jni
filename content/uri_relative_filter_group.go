@@ -23,6 +23,29 @@ type UriRelativeFilterGroup struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUriRelativeFilterGroup creates a new android.content.UriRelativeFilterGroup instance.
+func NewUriRelativeFilterGroup(vm *jni.VM, arg0 int32) (*UriRelativeFilterGroup, error) {
+	var t UriRelativeFilterGroup
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUriRelativeFilterGroup)), midUriRelativeFilterGroupInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddUriRelativeFilter calls android.content.UriRelativeFilterGroup.addUriRelativeFilter.
 func (m *UriRelativeFilterGroup) AddUriRelativeFilter(arg0 *jni.Object) error {
 

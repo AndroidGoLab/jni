@@ -23,6 +23,29 @@ type PathShape struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPathShape creates a new android.graphics.drawable.shapes.PathShape instance.
+func NewPathShape(vm *jni.VM, arg0 *jni.Object, arg1 float32, arg2 float32) (*PathShape, error) {
+	var t PathShape
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathShape)), midPathShapeInit, jni.ObjectValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.graphics.drawable.shapes.PathShape.clone.
 func (m *PathShape) Clone0() (*jni.Object, error) {
 	var result *jni.Object

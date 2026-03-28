@@ -23,6 +23,29 @@ type NumberPicker struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNumberPicker creates a new android.widget.NumberPicker instance.
+func NewNumberPicker(vm *jni.VM, arg0 *jni.Object) (*NumberPicker, error) {
+	var t NumberPicker
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNumberPicker)), midNumberPickerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ComputeScroll calls android.widget.NumberPicker.computeScroll.
 func (m *NumberPicker) ComputeScroll() error {
 

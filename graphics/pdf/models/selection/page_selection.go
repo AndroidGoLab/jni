@@ -23,6 +23,29 @@ type PageSelection struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPageSelection creates a new android.graphics.pdf.models.selection.PageSelection instance.
+func NewPageSelection(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*PageSelection, error) {
+	var t PageSelection
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPageSelection)), midPageSelectionInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.pdf.models.selection.PageSelection.describeContents.
 func (m *PageSelection) DescribeContents() (int32, error) {
 	var result int32

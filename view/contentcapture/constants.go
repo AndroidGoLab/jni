@@ -6,8 +6,8 @@ import "github.com/AndroidGoLab/jni/view/contentcapture/consts"
 
 const (
 	Creator                          = consts.Creator
-	FlagIsRegex                      = consts.FlagIsRegex
 	FlagIsPrefix                     = consts.FlagIsPrefix
+	FlagIsRegex                      = consts.FlagIsRegex
 	DataShareErrorConcurrentRequest  = consts.DataShareErrorConcurrentRequest
 	DataShareErrorTimeoutInterrupted = consts.DataShareErrorTimeoutInterrupted
 	DataShareErrorUnknown            = consts.DataShareErrorUnknown

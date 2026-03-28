@@ -6,6 +6,12 @@ const (
 	ClusterChangeEventJoined                   int = 1
 	ClusterChangeEventStarted                  int = 0
 	Creator                                    int = 0
+	WifiAwareDataPathRoleInitiator             int = 0
+	WifiAwareDataPathRoleResponder             int = 1
+	WifiAwareDiscoveryLostReasonPeerNotVisible int = 1
+	WifiAwareDiscoveryLostReasonUnknown        int = 0
+	PublishTypeSolicited                       int = 1
+	PublishTypeUnsolicited                     int = 0
 	PairingBootstrappingNfcReader              int = 256
 	PairingBootstrappingNfcTag                 int = 16
 	PairingBootstrappingOpportunistic          int = 1
@@ -22,14 +28,8 @@ const (
 	WifiAwareCipherSuiteNcsSk128               int = 1
 	WifiAwareCipherSuiteNcsSk256               int = 2
 	WifiAwareCipherSuiteNone                   int = 0
-	PublishTypeSolicited                       int = 1
-	PublishTypeUnsolicited                     int = 0
 	SubscribeTypeActive                        int = 1
 	SubscribeTypePassive                       int = 0
-	WifiAwareDataPathRoleInitiator             int = 0
-	WifiAwareDataPathRoleResponder             int = 1
-	WifiAwareDiscoveryLostReasonPeerNotVisible int = 1
-	WifiAwareDiscoveryLostReasonUnknown        int = 0
 )
 
 const (

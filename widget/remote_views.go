@@ -23,6 +23,29 @@ type RemoteViews struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoteViews creates a new android.widget.RemoteViews instance.
+func NewRemoteViews(vm *jni.VM, arg0 *jni.Object) (*RemoteViews, error) {
+	var t RemoteViews
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteViews)), midRemoteViewsInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddStableView calls android.widget.RemoteViews.addStableView.
 func (m *RemoteViews) AddStableView(
 	arg0 int32,

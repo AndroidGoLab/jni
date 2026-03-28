@@ -3,7 +3,6 @@
 package consts
 
 const (
-	CiphersuiteEcdheHkdfEcdsaWithAes256GcmSha256 int = 1
 	StatusNotInRequestMessage                    int = 3
 	StatusNotRequested                           int = 2
 	StatusNoAccessControlProfiles                int = 6
@@ -11,4 +10,5 @@ const (
 	StatusOk                                     int = 0
 	StatusReaderAuthenticationFailed             int = 5
 	StatusUserAuthenticationFailed               int = 4
+	CiphersuiteEcdheHkdfEcdsaWithAes256GcmSha256 int = 1
 )

@@ -23,6 +23,29 @@ type ScannerConnection struct {
 	Obj *jni.GlobalRef
 }
 
+// NewScannerConnection creates a new android.media.MediaScannerConnection instance.
+func NewScannerConnection(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ScannerConnection, error) {
+	var t ScannerConnection
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScannerConnection)), midScannerConnectionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Connect calls android.media.MediaScannerConnection.connect.
 func (m *ScannerConnection) Connect() error {
 

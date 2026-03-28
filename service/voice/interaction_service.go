@@ -23,6 +23,28 @@ type InteractionService struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInteractionService creates a new android.service.voice.VoiceInteractionService instance.
+func NewInteractionService(vm *jni.VM) (*InteractionService, error) {
+	var t InteractionService
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInteractionService)), midInteractionServiceInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDisabledShowContext calls android.service.voice.VoiceInteractionService.getDisabledShowContext.
 func (m *InteractionService) GetDisabledShowContext() (int32, error) {
 	var result int32

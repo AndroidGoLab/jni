@@ -23,6 +23,29 @@ type Base64InputStream struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBase64InputStream creates a new android.util.Base64InputStream instance.
+func NewBase64InputStream(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*Base64InputStream, error) {
+	var t Base64InputStream
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBase64InputStream)), midBase64InputStreamInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Available calls android.util.Base64InputStream.available.
 func (m *Base64InputStream) Available() (int32, error) {
 	var result int32

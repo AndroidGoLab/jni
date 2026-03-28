@@ -23,6 +23,29 @@ type PdfPageLinkContent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPdfPageLinkContent creates a new android.graphics.pdf.content.PdfPageLinkContent instance.
+func NewPdfPageLinkContent(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*PdfPageLinkContent, error) {
+	var t PdfPageLinkContent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageLinkContent)), midPdfPageLinkContentInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.pdf.content.PdfPageLinkContent.describeContents.
 func (m *PdfPageLinkContent) DescribeContents() (int32, error) {
 	var result int32

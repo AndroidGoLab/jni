@@ -23,6 +23,28 @@ type ETC1 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewETC1 creates a new android.opengl.ETC1 instance.
+func NewETC1(vm *jni.VM) (*ETC1, error) {
+	var t ETC1
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsETC1)), midETC1Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DecodeBlock calls android.opengl.ETC1.decodeBlock.
 func (m *ETC1) DecodeBlock(arg0 *jni.Object, arg1 *jni.Object) error {
 

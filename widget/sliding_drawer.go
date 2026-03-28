@@ -23,6 +23,29 @@ type SlidingDrawer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSlidingDrawer creates a new android.widget.SlidingDrawer instance.
+func NewSlidingDrawer(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*SlidingDrawer, error) {
+	var t SlidingDrawer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSlidingDrawer)), midSlidingDrawerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AnimateClose calls android.widget.SlidingDrawer.animateClose.
 func (m *SlidingDrawer) AnimateClose() error {
 

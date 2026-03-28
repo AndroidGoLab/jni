@@ -23,6 +23,45 @@ type ThumbnailTemplate struct {
 	Obj *jni.GlobalRef
 }
 
+// NewThumbnailTemplate creates a new android.service.controls.templates.ThumbnailTemplate instance.
+func NewThumbnailTemplate(vm *jni.VM, arg0 string, arg1 bool, arg2 *jni.Object, arg3 string) (*ThumbnailTemplate, error) {
+	var t ThumbnailTemplate
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), midThumbnailTemplateInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetContentDescription calls android.service.controls.templates.ThumbnailTemplate.getContentDescription.
 func (m *ThumbnailTemplate) GetContentDescription() (*jni.Object, error) {
 	var result *jni.Object

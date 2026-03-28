@@ -23,6 +23,35 @@ type RemoveCustomAudienceOverrideRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoveCustomAudienceOverrideRequest creates a new android.adservices.customaudience.RemoveCustomAudienceOverrideRequest instance.
+func NewRemoveCustomAudienceOverrideRequest(vm *jni.VM, arg0 *jni.Object, arg1 string) (*RemoveCustomAudienceOverrideRequest, error) {
+	var t RemoveCustomAudienceOverrideRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), midRemoveCustomAudienceOverrideRequestInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetBuyer calls android.adservices.customaudience.RemoveCustomAudienceOverrideRequest.getBuyer.
 func (m *RemoveCustomAudienceOverrideRequest) GetBuyer() (*jni.Object, error) {
 	var result *jni.Object

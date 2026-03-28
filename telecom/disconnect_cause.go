@@ -23,6 +23,29 @@ type DisconnectCause struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDisconnectCause creates a new android.telecom.DisconnectCause instance.
+func NewDisconnectCause(vm *jni.VM, arg0 int32) (*DisconnectCause, error) {
+	var t DisconnectCause
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), midDisconnectCauseInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telecom.DisconnectCause.describeContents.
 func (m *DisconnectCause) DescribeContents() (int32, error) {
 	var result int32

@@ -50,6 +50,7 @@ var (
 	midManagerUpdateSubscriptionNickname jni.MethodID
 
 	clsInfo                 *jni.GlobalRef
+	midInfoInit             jni.MethodID
 	midInfoDescribeContents jni.MethodID
 	midInfoGetOsVersion     jni.MethodID
 	midInfoWriteToParcel    jni.MethodID
@@ -250,6 +251,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInfo = env.NewGlobalRef(&c.Object)
+		midInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInfo)), "describeContents", "()I")
 		if err != nil {

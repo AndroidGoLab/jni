@@ -23,6 +23,29 @@ type InputConfiguration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInputConfiguration creates a new android.hardware.camera2.params.InputConfiguration instance.
+func NewInputConfiguration(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32) (*InputConfiguration, error) {
+	var t InputConfiguration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputConfiguration)), midInputConfigurationInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.hardware.camera2.params.InputConfiguration.equals.
 func (m *InputConfiguration) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,35 @@ type CompletionInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCompletionInfo creates a new android.view.inputmethod.CompletionInfo instance.
+func NewCompletionInfo(vm *jni.VM, arg0 int64, arg1 int32, arg2 string) (*CompletionInfo, error) {
+	var t CompletionInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), midCompletionInfoInit, jni.LongValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.view.inputmethod.CompletionInfo.describeContents.
 func (m *CompletionInfo) DescribeContents() (int32, error) {
 	var result int32

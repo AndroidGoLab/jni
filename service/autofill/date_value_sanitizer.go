@@ -23,6 +23,29 @@ type DateValueSanitizer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateValueSanitizer creates a new android.service.autofill.DateValueSanitizer instance.
+func NewDateValueSanitizer(vm *jni.VM, arg0 *jni.Object) (*DateValueSanitizer, error) {
+	var t DateValueSanitizer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateValueSanitizer)), midDateValueSanitizerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.autofill.DateValueSanitizer.describeContents.
 func (m *DateValueSanitizer) DescribeContents() (int32, error) {
 	var result int32

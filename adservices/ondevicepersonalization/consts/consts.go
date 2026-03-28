@@ -3,15 +3,6 @@
 package consts
 
 const (
-	Creator                                   int = 0
-	DelegateCpu                               int = 1
-	ModelTypeTensorflowLite                   int = 1
-	DefaultBestValue                          int = -1
-	Default                                   int = 0
-	OutputTypeBestValue                       int = 1
-	OutputTypeNull                            int = 0
-	SchedulingModeOneTime                     int = 1
-	SchedulingModeRecurrent                   int = 2
 	ErrorInferenceFailed                      int = 9
 	ErrorInferenceModelNotFound               int = 8
 	ErrorInvalidTrainingManifest              int = 7
@@ -21,4 +12,13 @@ const (
 	ErrorIsolatedServiceTimeout               int = 5
 	ErrorPersonalizationDisabled              int = 2
 	ErrorScheduleTrainingFailed               int = 6
+	Creator                                   int = 0
+	DelegateCpu                               int = 1
+	ModelTypeTensorflowLite                   int = 1
+	Default                                   int = 0
+	OutputTypeBestValue                       int = 1
+	OutputTypeNull                            int = 0
+	SchedulingModeOneTime                     int = 1
+	SchedulingModeRecurrent                   int = 2
+	DefaultBestValue                          int = -1
 )

@@ -23,6 +23,28 @@ type UnderlineSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUnderlineSpan creates a new android.text.style.UnderlineSpan instance.
+func NewUnderlineSpan(vm *jni.VM) (*UnderlineSpan, error) {
+	var t UnderlineSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), midUnderlineSpanInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.UnderlineSpan.describeContents.
 func (m *UnderlineSpan) DescribeContents() (int32, error) {
 	var result int32

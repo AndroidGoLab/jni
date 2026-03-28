@@ -21,6 +21,28 @@ type ActivityGroup struct {
 	Obj *jni.GlobalRef
 }
 
+// NewActivityGroup creates a new android.app.ActivityGroup instance.
+func NewActivityGroup(vm *jni.VM) (*ActivityGroup, error) {
+	var t ActivityGroup
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivityGroup)), midActivityGroupInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCurrentActivity calls android.app.ActivityGroup.getCurrentActivity.
 func (m *ActivityGroup) GetCurrentActivity() (*jni.Object, error) {
 	var result *jni.Object

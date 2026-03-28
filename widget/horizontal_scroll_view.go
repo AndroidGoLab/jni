@@ -23,6 +23,29 @@ type HorizontalScrollView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewHorizontalScrollView creates a new android.widget.HorizontalScrollView instance.
+func NewHorizontalScrollView(vm *jni.VM, arg0 *jni.Object) (*HorizontalScrollView, error) {
+	var t HorizontalScrollView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHorizontalScrollView)), midHorizontalScrollViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddView1 calls android.widget.HorizontalScrollView.addView.
 func (m *HorizontalScrollView) AddView1(arg0 *jni.Object) error {
 

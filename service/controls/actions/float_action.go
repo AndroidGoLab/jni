@@ -23,6 +23,34 @@ type FloatAction struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFloatAction creates a new android.service.controls.actions.FloatAction instance.
+func NewFloatAction(vm *jni.VM, arg0 string, arg1 float32) (*FloatAction, error) {
+	var t FloatAction
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloatAction)), midFloatActionInit, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetActionType calls android.service.controls.actions.FloatAction.getActionType.
 func (m *FloatAction) GetActionType() (int32, error) {
 	var result int32

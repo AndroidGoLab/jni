@@ -3,13 +3,14 @@
 package consts
 
 const (
-	ActionVoiceSearchResults                            string = "android.speech.action.VOICE_SEARCH_RESULTS"
-	ExtraVoiceSearchResultHtml                          string = "android.speech.extras.VOICE_SEARCH_RESULT_HTML"
-	ExtraVoiceSearchResultHtmlBaseUrls                  string = "android.speech.extras.VOICE_SEARCH_RESULT_HTML_BASE_URLS"
-	ExtraVoiceSearchResultHttpHeaders                   string = "android.speech.extras.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS"
-	ExtraVoiceSearchResultStrings                       string = "android.speech.extras.VOICE_SEARCH_RESULT_STRINGS"
-	ExtraVoiceSearchResultUrls                          string = "android.speech.extras.VOICE_SEARCH_RESULT_URLS"
-	UriSchemeInline                                     string = "inline"
+	ConfidenceScores                                    string = "confidence_scores"
+	DetectedLanguage                                    string = "detected_language"
+	LanguageDetectionConfidenceLevel                    string = "language_detection_confidence_level"
+	LanguageSwitchResult                                string = "language_switch_result"
+	RecognitionParts                                    string = "recognition_parts"
+	ResultsAlternatives                                 string = "results_alternatives"
+	ResultsRecognition                                  string = "results_recognition"
+	TopLocaleAlternatives                               string = "top_locale_alternatives"
 	ActionGetLanguageDetails                            string = "android.speech.action.GET_LANGUAGE_DETAILS"
 	ActionRecognizeSpeech                               string = "android.speech.action.RECOGNIZE_SPEECH"
 	ActionVoiceSearchHandsFree                          string = "android.speech.action.VOICE_SEARCH_HANDS_FREE"
@@ -61,14 +62,13 @@ const (
 	LanguageSwitchBalanced                              string = "balanced"
 	LanguageSwitchHighPrecision                         string = "high_precision"
 	LanguageSwitchQuickResponse                         string = "quick_response"
-	ConfidenceScores                                    string = "confidence_scores"
-	DetectedLanguage                                    string = "detected_language"
-	LanguageDetectionConfidenceLevel                    string = "language_detection_confidence_level"
-	LanguageSwitchResult                                string = "language_switch_result"
-	RecognitionParts                                    string = "recognition_parts"
-	ResultsAlternatives                                 string = "results_alternatives"
-	ResultsRecognition                                  string = "results_recognition"
-	TopLocaleAlternatives                               string = "top_locale_alternatives"
+	ActionVoiceSearchResults                            string = "android.speech.action.VOICE_SEARCH_RESULTS"
+	ExtraVoiceSearchResultHtml                          string = "android.speech.extras.VOICE_SEARCH_RESULT_HTML"
+	ExtraVoiceSearchResultHtmlBaseUrls                  string = "android.speech.extras.VOICE_SEARCH_RESULT_HTML_BASE_URLS"
+	ExtraVoiceSearchResultHttpHeaders                   string = "android.speech.extras.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS"
+	ExtraVoiceSearchResultStrings                       string = "android.speech.extras.VOICE_SEARCH_RESULT_STRINGS"
+	ExtraVoiceSearchResultUrls                          string = "android.speech.extras.VOICE_SEARCH_RESULT_URLS"
+	UriSchemeInline                                     string = "inline"
 	ActionTtsQueueProcessingCompleted                   string = "android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED"
 	ActionCheckTtsData                                  string = "android.speech.tts.engine.CHECK_TTS_DATA"
 	ActionGetSampleText                                 string = "android.speech.tts.engine.GET_SAMPLE_TEXT"
@@ -98,12 +98,6 @@ const (
 )
 
 const (
-	Creator                                         int = 0
-	ResultAudioError                                int = 5
-	ResultClientError                               int = 2
-	ResultNetworkError                              int = 4
-	ResultNoMatch                                   int = 1
-	ResultServerError                               int = 3
 	ErrorAudio                                      int = 3
 	ErrorCannotCheckSupport                         int = 14
 	ErrorCannotListenToDownloadEvents               int = 15
@@ -127,6 +121,18 @@ const (
 	LanguageSwitchResultNotAttempted                int = 0
 	LanguageSwitchResultSkippedNoModel              int = 3
 	LanguageSwitchResultSucceeded                   int = 1
+	ConfidenceLevelHigh                             int = 5
+	ConfidenceLevelLow                              int = 1
+	ConfidenceLevelMedium                           int = 3
+	ConfidenceLevelMediumHigh                       int = 4
+	ConfidenceLevelMediumLow                        int = 2
+	ConfidenceLevelUnknown                          int = 0
+	Creator                                         int = 0
+	ResultAudioError                                int = 5
+	ResultClientError                               int = 2
+	ResultNetworkError                              int = 4
+	ResultNoMatch                                   int = 1
+	ResultServerError                               int = 3
 	Error                                           int = -1
 	ErrorInvalidRequest                             int = -8
 	ErrorNotInstalledYet                            int = -9
@@ -148,10 +154,4 @@ const (
 	CheckVoiceDataMissingVolume                     int = -3
 	CheckVoiceDataPass                              int = 1
 	DefaultStream                                   int = 3
-	ConfidenceLevelHigh                             int = 5
-	ConfidenceLevelLow                              int = 1
-	ConfidenceLevelMedium                           int = 3
-	ConfidenceLevelMediumHigh                       int = 4
-	ConfidenceLevelMediumLow                        int = 2
-	ConfidenceLevelUnknown                          int = 0
 )

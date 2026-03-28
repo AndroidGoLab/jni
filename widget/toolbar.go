@@ -23,6 +23,29 @@ type Toolbar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewToolbar creates a new android.widget.Toolbar instance.
+func NewToolbar(vm *jni.VM, arg0 *jni.Object) (*Toolbar, error) {
+	var t Toolbar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToolbar)), midToolbarInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CollapseActionView calls android.widget.Toolbar.collapseActionView.
 func (m *Toolbar) CollapseActionView() error {
 

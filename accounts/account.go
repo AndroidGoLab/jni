@@ -23,6 +23,29 @@ type Account struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAccount creates a new android.accounts.Account instance.
+func NewAccount(vm *jni.VM, arg0 *jni.Object) (*Account, error) {
+	var t Account
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccount)), midAccountInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.accounts.Account.describeContents.
 func (m *Account) DescribeContents() (int32, error) {
 	var result int32

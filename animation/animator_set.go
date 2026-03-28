@@ -23,6 +23,28 @@ type AnimatorSet struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAnimatorSet creates a new android.animation.AnimatorSet instance.
+func NewAnimatorSet(vm *jni.VM) (*AnimatorSet, error) {
+	var t AnimatorSet
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatorSet)), midAnimatorSetInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Cancel calls android.animation.AnimatorSet.cancel.
 func (m *AnimatorSet) Cancel() error {
 

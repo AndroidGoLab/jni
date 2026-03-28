@@ -23,6 +23,34 @@ type FontVariationAxis struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFontVariationAxis creates a new android.graphics.fonts.FontVariationAxis instance.
+func NewFontVariationAxis(vm *jni.VM, arg0 string, arg1 float32) (*FontVariationAxis, error) {
+	var t FontVariationAxis
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFontVariationAxis)), midFontVariationAxisInit, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.graphics.fonts.FontVariationAxis.equals.
 func (m *FontVariationAxis) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

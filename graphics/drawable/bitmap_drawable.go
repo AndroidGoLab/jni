@@ -23,6 +23,28 @@ type BitmapDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBitmapDrawable creates a new android.graphics.drawable.BitmapDrawable instance.
+func NewBitmapDrawable(vm *jni.VM) (*BitmapDrawable, error) {
+	var t BitmapDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapDrawable)), midBitmapDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.BitmapDrawable.applyTheme.
 func (m *BitmapDrawable) ApplyTheme(arg0 *jni.Object) error {
 

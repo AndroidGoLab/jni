@@ -23,6 +23,28 @@ type OutputStream struct {
 	Obj *jni.GlobalRef
 }
 
+// NewOutputStream creates a new android.util.proto.ProtoOutputStream instance.
+func NewOutputStream(vm *jni.VM) (*OutputStream, error) {
+	var t OutputStream
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutputStream)), midOutputStreamInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Dump calls android.util.proto.ProtoOutputStream.dump.
 func (m *OutputStream) Dump(arg0 string) error {
 

@@ -23,6 +23,29 @@ type ProgressBar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewProgressBar creates a new android.widget.ProgressBar instance.
+func NewProgressBar(vm *jni.VM, arg0 *jni.Object) (*ProgressBar, error) {
+	var t ProgressBar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProgressBar)), midProgressBarInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DrawableHotspotChanged calls android.widget.ProgressBar.drawableHotspotChanged.
 func (m *ProgressBar) DrawableHotspotChanged(arg0 float32, arg1 float32) error {
 

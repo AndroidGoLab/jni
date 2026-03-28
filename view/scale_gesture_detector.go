@@ -23,6 +23,29 @@ type ScaleGestureDetector struct {
 	Obj *jni.GlobalRef
 }
 
+// NewScaleGestureDetector creates a new android.view.ScaleGestureDetector instance.
+func NewScaleGestureDetector(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ScaleGestureDetector, error) {
+	var t ScaleGestureDetector
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleGestureDetector)), midScaleGestureDetectorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCurrentSpan calls android.view.ScaleGestureDetector.getCurrentSpan.
 func (m *ScaleGestureDetector) GetCurrentSpan() (float32, error) {
 	var result float32

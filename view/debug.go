@@ -23,6 +23,28 @@ type Debug struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDebug creates a new android.view.ViewDebug instance.
+func NewDebug(vm *jni.VM) (*Debug, error) {
+	var t Debug
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDebug)), midDebugInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DumpCapturedView calls android.view.ViewDebug.dumpCapturedView.
 func (m *Debug) DumpCapturedView(arg0 string, arg1 *jni.Object) error {
 

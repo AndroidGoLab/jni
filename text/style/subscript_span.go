@@ -23,6 +23,28 @@ type SubscriptSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSubscriptSpan creates a new android.text.style.SubscriptSpan instance.
+func NewSubscriptSpan(vm *jni.VM) (*SubscriptSpan, error) {
+	var t SubscriptSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), midSubscriptSpanInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.SubscriptSpan.describeContents.
 func (m *SubscriptSpan) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,40 @@ type SchemaChangeInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSchemaChangeInfo creates a new android.app.appsearch.observer.SchemaChangeInfo instance.
+func NewSchemaChangeInfo(vm *jni.VM, arg0 string, arg1 string, arg2 *jni.Object) (*SchemaChangeInfo, error) {
+	var t SchemaChangeInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSchemaChangeInfo)), midSchemaChangeInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.app.appsearch.observer.SchemaChangeInfo.equals.
 func (m *SchemaChangeInfo) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

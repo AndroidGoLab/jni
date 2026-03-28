@@ -7,6 +7,10 @@ go_import: github.com/AndroidGoLab/jni/crypto/hpke
 classes:
     - java_class: android.crypto.hpke.XdhKeySpec
       go_type: XdhKeySpec
+      obtain: constructor
+      constructor_params:
+        - java_type: '[B'
+          go_name: arg0
       methods:
         - java_method: equals
           go_name: Equals

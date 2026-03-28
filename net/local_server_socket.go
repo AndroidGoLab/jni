@@ -23,6 +23,29 @@ type LocalServerSocket struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLocalServerSocket creates a new android.net.LocalServerSocket instance.
+func NewLocalServerSocket(vm *jni.VM, arg0 *jni.Object) (*LocalServerSocket, error) {
+	var t LocalServerSocket
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalServerSocket)), midLocalServerSocketInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Accept calls android.net.LocalServerSocket.accept.
 func (m *LocalServerSocket) Accept() (*jni.Object, error) {
 	var result *jni.Object

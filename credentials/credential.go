@@ -23,6 +23,34 @@ type Credential struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCredential creates a new android.credentials.Credential instance.
+func NewCredential(vm *jni.VM, arg0 string, arg1 *jni.Object) (*Credential, error) {
+	var t Credential
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCredential)), midCredentialInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.credentials.Credential.describeContents.
 func (m *Credential) DescribeContents() (int32, error) {
 	var result int32

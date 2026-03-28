@@ -23,6 +23,29 @@ type CodecList struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCodecList creates a new android.media.MediaCodecList instance.
+func NewCodecList(vm *jni.VM, arg0 int32) (*CodecList, error) {
+	var t CodecList
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCodecList)), midCodecListInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FindDecoderForFormat calls android.media.MediaCodecList.findDecoderForFormat.
 func (m *CodecList) FindDecoderForFormat(arg0 *jni.Object) (string, error) {
 	var result string

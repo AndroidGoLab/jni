@@ -23,6 +23,28 @@ type EventLogTags struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEventLogTags creates a new android.util.EventLogTags instance.
+func NewEventLogTags(vm *jni.VM) (*EventLogTags, error) {
+	var t EventLogTags
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventLogTags)), midEventLogTagsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Get1 calls android.util.EventLogTags.get.
 func (m *EventLogTags) Get1(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

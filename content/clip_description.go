@@ -23,6 +23,29 @@ type ClipDescription struct {
 	Obj *jni.GlobalRef
 }
 
+// NewClipDescription creates a new android.content.ClipDescription instance.
+func NewClipDescription(vm *jni.VM, arg0 *jni.Object) (*ClipDescription, error) {
+	var t ClipDescription
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipDescription)), midClipDescriptionInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.ClipDescription.describeContents.
 func (m *ClipDescription) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type SmsMessage struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSmsMessage creates a new android.telephony.gsm.SmsMessage instance.
+func NewSmsMessage(vm *jni.VM) (*SmsMessage, error) {
+	var t SmsMessage
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSmsMessage)), midSmsMessageInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDisplayMessageBody calls android.telephony.gsm.SmsMessage.getDisplayMessageBody.
 func (m *SmsMessage) GetDisplayMessageBody() (string, error) {
 	var result string

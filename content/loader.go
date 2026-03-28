@@ -23,6 +23,29 @@ type Loader struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLoader creates a new android.content.Loader instance.
+func NewLoader(vm *jni.VM, arg0 *jni.Object) (*Loader, error) {
+	var t Loader
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoader)), midLoaderInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Abandon calls android.content.Loader.abandon.
 func (m *Loader) Abandon() error {
 

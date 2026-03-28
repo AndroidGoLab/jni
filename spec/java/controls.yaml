@@ -5,6 +5,16 @@
 package: controls
 go_import: github.com/AndroidGoLab/jni/service/controls
 classes:
+    - java_class: android.service.controls.DeviceTypes
+      go_type: DeviceTypes
+      static_methods:
+        - java_method: validDeviceType
+          go_name: ValidDeviceType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
     - java_class: android.service.controls.Control
       go_type: Control
       methods:
@@ -270,56 +280,7 @@ classes:
               go_name: arg2
           returns: void
           error: true
-    - java_class: android.service.controls.DeviceTypes
-      go_type: DeviceTypes
-      static_methods:
-        - java_method: validDeviceType
-          go_name: ValidDeviceType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
 constants:
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: StatusDisabled
-      value: "4"
-      go_type: int
-    - go_name: StatusError
-      value: "3"
-      go_type: int
-    - go_name: StatusNotFound
-      value: "2"
-      go_type: int
-    - go_name: StatusOk
-      value: "1"
-      go_type: int
-    - go_name: StatusUnknown
-      value: "0"
-      go_type: int
-    - go_name: ControlsSurfaceActivityPanel
-      value: "0"
-      go_type: int
-    - go_name: ControlsSurfaceDream
-      value: "1"
-      go_type: int
-    - go_name: ExtraControlsSurface
-      value: '"android.service.controls.extra.CONTROLS_SURFACE"'
-      go_type: string
-    - go_name: ExtraLockscreenAllowTrivialControls
-      value: '"android.service.controls.extra.LOCKSCREEN_ALLOW_TRIVIAL_CONTROLS"'
-      go_type: string
-    - go_name: MetaDataPanelActivity
-      value: '"android.service.controls.META_DATA_PANEL_ACTIVITY"'
-      go_type: string
-    - go_name: ServiceControls
-      value: '"android.service.controls.ControlsProviderService"'
-      go_type: string
-    - go_name: Tag
-      value: '"ControlsProviderService"'
-      go_type: string
     - go_name: TypeAcHeater
       value: "1"
       go_type: int
@@ -497,3 +458,42 @@ constants:
     - go_name: TypeWindow
       value: "43"
       go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: StatusDisabled
+      value: "4"
+      go_type: int
+    - go_name: StatusError
+      value: "3"
+      go_type: int
+    - go_name: StatusNotFound
+      value: "2"
+      go_type: int
+    - go_name: StatusOk
+      value: "1"
+      go_type: int
+    - go_name: StatusUnknown
+      value: "0"
+      go_type: int
+    - go_name: ControlsSurfaceActivityPanel
+      value: "0"
+      go_type: int
+    - go_name: ControlsSurfaceDream
+      value: "1"
+      go_type: int
+    - go_name: ExtraControlsSurface
+      value: '"android.service.controls.extra.CONTROLS_SURFACE"'
+      go_type: string
+    - go_name: ExtraLockscreenAllowTrivialControls
+      value: '"android.service.controls.extra.LOCKSCREEN_ALLOW_TRIVIAL_CONTROLS"'
+      go_type: string
+    - go_name: MetaDataPanelActivity
+      value: '"android.service.controls.META_DATA_PANEL_ACTIVITY"'
+      go_type: string
+    - go_name: ServiceControls
+      value: '"android.service.controls.ControlsProviderService"'
+      go_type: string
+    - go_name: Tag
+      value: '"ControlsProviderService"'
+      go_type: string

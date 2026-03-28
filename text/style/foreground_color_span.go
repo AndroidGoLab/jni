@@ -23,6 +23,29 @@ type ForegroundColorSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewForegroundColorSpan creates a new android.text.style.ForegroundColorSpan instance.
+func NewForegroundColorSpan(vm *jni.VM, arg0 *jni.Object) (*ForegroundColorSpan, error) {
+	var t ForegroundColorSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsForegroundColorSpan)), midForegroundColorSpanInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.ForegroundColorSpan.describeContents.
 func (m *ForegroundColorSpan) DescribeContents() (int32, error) {
 	var result int32

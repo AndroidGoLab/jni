@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsToast                    *jni.GlobalRef
+	midToastInit                jni.MethodID
 	midToastAddCallback         jni.MethodID
 	midToastCancel              jni.MethodID
 	midToastGetDuration         jni.MethodID
@@ -74,6 +75,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsToast = env.NewGlobalRef(&c.Object)
+		midToastInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midToastAddCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsToast)), "addCallback", "(Landroid/widget/Toast$Callback;)V")
 		if err != nil {

@@ -23,6 +23,29 @@ type SuggestionsInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSuggestionsInfo creates a new android.view.textservice.SuggestionsInfo instance.
+func NewSuggestionsInfo(vm *jni.VM, arg0 *jni.Object) (*SuggestionsInfo, error) {
+	var t SuggestionsInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionsInfo)), midSuggestionsInfoInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.view.textservice.SuggestionsInfo.describeContents.
 func (m *SuggestionsInfo) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type OisSample struct {
 	Obj *jni.GlobalRef
 }
 
+// NewOisSample creates a new android.hardware.camera2.params.OisSample instance.
+func NewOisSample(vm *jni.VM, arg0 int64, arg1 float32, arg2 float32) (*OisSample, error) {
+	var t OisSample
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOisSample)), midOisSampleInit, jni.LongValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.hardware.camera2.params.OisSample.equals.
 func (m *OisSample) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

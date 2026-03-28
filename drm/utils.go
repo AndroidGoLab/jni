@@ -23,6 +23,28 @@ type Utils struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUtils creates a new android.drm.DrmUtils instance.
+func NewUtils(vm *jni.VM) (*Utils, error) {
+	var t Utils
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUtils)), midUtilsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetExtendedMetadataParser calls android.drm.DrmUtils.getExtendedMetadataParser.
 func (m *Utils) GetExtendedMetadataParser(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

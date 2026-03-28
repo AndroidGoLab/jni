@@ -7,6 +7,10 @@ go_import: github.com/AndroidGoLab/jni/media/player
 classes:
     - java_class: android.media.MediaPlayer
       go_type: MediaPlayer
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
       methods:
         - java_method: addTimedTextSource
           go_name: AddTimedTextSource3

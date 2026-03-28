@@ -23,6 +23,28 @@ type FontStyle struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFontStyle creates a new android.graphics.fonts.FontStyle instance.
+func NewFontStyle(vm *jni.VM) (*FontStyle, error) {
+	var t FontStyle
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFontStyle)), midFontStyleInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.graphics.fonts.FontStyle.equals.
 func (m *FontStyle) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

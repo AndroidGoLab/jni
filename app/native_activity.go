@@ -21,6 +21,28 @@ type NativeActivity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNativeActivity creates a new android.app.NativeActivity instance.
+func NewNativeActivity(vm *jni.VM) (*NativeActivity, error) {
+	var t NativeActivity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNativeActivity)), midNativeActivityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnConfigurationChanged calls android.app.NativeActivity.onConfigurationChanged.
 func (m *NativeActivity) OnConfigurationChanged(arg0 *jni.Object) error {
 

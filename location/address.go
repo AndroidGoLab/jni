@@ -23,6 +23,29 @@ type Address struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAddress creates a new android.location.Address instance.
+func NewAddress(vm *jni.VM, arg0 *jni.Object) (*Address, error) {
+	var t Address
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAddress)), midAddressInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearLatitude calls android.location.Address.clearLatitude.
 func (m *Address) ClearLatitude() error {
 

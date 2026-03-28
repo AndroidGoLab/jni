@@ -23,6 +23,29 @@ type ClipDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewClipDrawable creates a new android.graphics.drawable.ClipDrawable instance.
+func NewClipDrawable(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 int32) (*ClipDrawable, error) {
+	var t ClipDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipDrawable)), midClipDrawableInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.ClipDrawable.applyTheme.
 func (m *ClipDrawable) ApplyTheme(arg0 *jni.Object) error {
 

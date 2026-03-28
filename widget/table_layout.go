@@ -23,6 +23,29 @@ type TableLayout struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTableLayout creates a new android.widget.TableLayout instance.
+func NewTableLayout(vm *jni.VM, arg0 *jni.Object) (*TableLayout, error) {
+	var t TableLayout
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableLayout)), midTableLayoutInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddView1 calls android.widget.TableLayout.addView.
 func (m *TableLayout) AddView1(arg0 *jni.Object) error {
 

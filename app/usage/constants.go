@@ -5,12 +5,6 @@ package usage
 import "github.com/AndroidGoLab/jni/app/usage/consts"
 
 const (
-	AppDataTypeFileTypeApk              = consts.AppDataTypeFileTypeApk
-	AppDataTypeFileTypeCurrentProfile   = consts.AppDataTypeFileTypeCurrentProfile
-	AppDataTypeFileTypeDexoptArtifact   = consts.AppDataTypeFileTypeDexoptArtifact
-	AppDataTypeFileTypeDm               = consts.AppDataTypeFileTypeDm
-	AppDataTypeFileTypeReferenceProfile = consts.AppDataTypeFileTypeReferenceProfile
-	AppDataTypeLib                      = consts.AppDataTypeLib
 	Creator                             = consts.Creator
 	ActivityPaused                      = consts.ActivityPaused
 	ActivityResumed                     = consts.ActivityResumed
@@ -30,16 +24,6 @@ const (
 	ShortcutInvocation                  = consts.ShortcutInvocation
 	StandbyBucketChanged                = consts.StandbyBucketChanged
 	UserInteraction                     = consts.UserInteraction
-	IntervalBest                        = consts.IntervalBest
-	IntervalDaily                       = consts.IntervalDaily
-	IntervalMonthly                     = consts.IntervalMonthly
-	IntervalWeekly                      = consts.IntervalWeekly
-	IntervalYearly                      = consts.IntervalYearly
-	StandbyBucketActive                 = consts.StandbyBucketActive
-	StandbyBucketFrequent               = consts.StandbyBucketFrequent
-	StandbyBucketRare                   = consts.StandbyBucketRare
-	StandbyBucketRestricted             = consts.StandbyBucketRestricted
-	StandbyBucketWorkingSet             = consts.StandbyBucketWorkingSet
 	DefaultNetworkAll                   = consts.DefaultNetworkAll
 	DefaultNetworkNo                    = consts.DefaultNetworkNo
 	DefaultNetworkYes                   = consts.DefaultNetworkYes
@@ -56,6 +40,22 @@ const (
 	UidAll                              = consts.UidAll
 	UidRemoved                          = consts.UidRemoved
 	UidTethering                        = consts.UidTethering
+	IntervalBest                        = consts.IntervalBest
+	IntervalDaily                       = consts.IntervalDaily
+	IntervalMonthly                     = consts.IntervalMonthly
+	IntervalWeekly                      = consts.IntervalWeekly
+	IntervalYearly                      = consts.IntervalYearly
+	StandbyBucketActive                 = consts.StandbyBucketActive
+	StandbyBucketFrequent               = consts.StandbyBucketFrequent
+	StandbyBucketRare                   = consts.StandbyBucketRare
+	StandbyBucketRestricted             = consts.StandbyBucketRestricted
+	StandbyBucketWorkingSet             = consts.StandbyBucketWorkingSet
+	AppDataTypeFileTypeApk              = consts.AppDataTypeFileTypeApk
+	AppDataTypeFileTypeCurrentProfile   = consts.AppDataTypeFileTypeCurrentProfile
+	AppDataTypeFileTypeDexoptArtifact   = consts.AppDataTypeFileTypeDexoptArtifact
+	AppDataTypeFileTypeDm               = consts.AppDataTypeFileTypeDm
+	AppDataTypeFileTypeReferenceProfile = consts.AppDataTypeFileTypeReferenceProfile
+	AppDataTypeLib                      = consts.AppDataTypeLib
 )
 
 const (

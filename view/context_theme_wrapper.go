@@ -23,6 +23,29 @@ type ContextThemeWrapper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewContextThemeWrapper creates a new android.view.ContextThemeWrapper instance.
+func NewContextThemeWrapper(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ContextThemeWrapper, error) {
+	var t ContextThemeWrapper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContextThemeWrapper)), midContextThemeWrapperInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyOverrideConfiguration calls android.view.ContextThemeWrapper.applyOverrideConfiguration.
 func (m *ContextThemeWrapper) ApplyOverrideConfiguration(arg0 *jni.Object) error {
 

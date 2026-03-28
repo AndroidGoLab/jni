@@ -23,6 +23,28 @@ type AnimationDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAnimationDrawable creates a new android.graphics.drawable.AnimationDrawable instance.
+func NewAnimationDrawable(vm *jni.VM) (*AnimationDrawable, error) {
+	var t AnimationDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimationDrawable)), midAnimationDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddFrame calls android.graphics.drawable.AnimationDrawable.addFrame.
 func (m *AnimationDrawable) AddFrame(arg0 *jni.Object, arg1 int32) error {
 

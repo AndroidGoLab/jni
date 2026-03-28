@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/provider/settings
 classes:
     - java_class: android.provider.Settings
       go_type: Settings
+      obtain: constructor
       static_methods:
         - java_method: canDrawOverlays
           go_name: CanDrawOverlays

@@ -23,6 +23,29 @@ type Int64Ref struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInt64Ref creates a new android.system.Int64Ref instance.
+func NewInt64Ref(vm *jni.VM, arg0 int64) (*Int64Ref, error) {
+	var t Int64Ref
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt64Ref)), midInt64RefInit, jni.LongValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ToString calls android.system.Int64Ref.toString.
 func (m *Int64Ref) ToString() (string, error) {
 	var result string

@@ -23,6 +23,35 @@ type AppFunctionException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppFunctionException creates a new android.app.appfunctions.AppFunctionException instance.
+func NewAppFunctionException(vm *jni.VM, arg0 int32, arg1 string) (*AppFunctionException, error) {
+	var t AppFunctionException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppFunctionException)), midAppFunctionExceptionInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.appfunctions.AppFunctionException.describeContents.
 func (m *AppFunctionException) DescribeContents() (int32, error) {
 	var result int32

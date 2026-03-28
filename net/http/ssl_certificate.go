@@ -23,6 +23,52 @@ type SslCertificate struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSslCertificate creates a new android.net.http.SslCertificate instance.
+func NewSslCertificate(vm *jni.VM, arg0 string, arg1 string, arg2 string, arg3 string) (*SslCertificate, error) {
+	var t SslCertificate
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSslCertificate)), midSslCertificateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetIssuedBy calls android.net.http.SslCertificate.getIssuedBy.
 func (m *SslCertificate) GetIssuedBy() (*jni.Object, error) {
 	var result *jni.Object

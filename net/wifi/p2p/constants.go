@@ -5,18 +5,18 @@ package p2p
 import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
-	Creator                                            = consts.Creator
 	Available                                          = consts.Available
 	Connected                                          = consts.Connected
+	Creator                                            = consts.Creator
 	Failed                                             = consts.Failed
 	Invited                                            = consts.Invited
 	Unavailable                                        = consts.Unavailable
-	NetworkIdPersistent                                = consts.NetworkIdPersistent
-	NetworkIdTemporary                                 = consts.NetworkIdTemporary
-	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
-	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
-	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
-	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
+	PairingBootstrappingMethodDisplayPassphrase        = consts.PairingBootstrappingMethodDisplayPassphrase
+	PairingBootstrappingMethodDisplayPincode           = consts.PairingBootstrappingMethodDisplayPincode
+	PairingBootstrappingMethodKeypadPassphrase         = consts.PairingBootstrappingMethodKeypadPassphrase
+	PairingBootstrappingMethodKeypadPincode            = consts.PairingBootstrappingMethodKeypadPincode
+	PairingBootstrappingMethodOpportunistic            = consts.PairingBootstrappingMethodOpportunistic
+	PairingBootstrappingMethodOutOfBand                = consts.PairingBootstrappingMethodOutOfBand
 	DeviceInfoAudioOnlySupportAtSource                 = consts.DeviceInfoAudioOnlySupportAtSource
 	DeviceInfoAudioUnsupportedAtPrimarySink            = consts.DeviceInfoAudioUnsupportedAtPrimarySink
 	DeviceInfoContentProtectionSupport                 = consts.DeviceInfoContentProtectionSupport
@@ -35,6 +35,12 @@ const (
 	DeviceTypeWfdSource                                = consts.DeviceTypeWfdSource
 	PreferredConnectivityP2p                           = consts.PreferredConnectivityP2p
 	PreferredConnectivityTdls                          = consts.PreferredConnectivityTdls
+	NetworkIdPersistent                                = consts.NetworkIdPersistent
+	NetworkIdTemporary                                 = consts.NetworkIdTemporary
+	SecurityTypeUnknown                                = consts.SecurityTypeUnknown
+	SecurityTypeWpa2Psk                                = consts.SecurityTypeWpa2Psk
+	SecurityTypeWpa3Compatibility                      = consts.SecurityTypeWpa3Compatibility
+	SecurityTypeWpa3Sae                                = consts.SecurityTypeWpa3Sae
 	Busy                                               = consts.Busy
 	ConnectionRequestAccept                            = consts.ConnectionRequestAccept
 	ConnectionRequestDeferShowPinToService             = consts.ConnectionRequestDeferShowPinToService
@@ -66,12 +72,6 @@ const (
 	RequestTypeInvitation                              = consts.RequestTypeInvitation
 	RequestTypeJoin                                    = consts.RequestTypeJoin
 	RequestTypeNegotiation                             = consts.RequestTypeNegotiation
-	PairingBootstrappingMethodDisplayPassphrase        = consts.PairingBootstrappingMethodDisplayPassphrase
-	PairingBootstrappingMethodDisplayPincode           = consts.PairingBootstrappingMethodDisplayPincode
-	PairingBootstrappingMethodKeypadPassphrase         = consts.PairingBootstrappingMethodKeypadPassphrase
-	PairingBootstrappingMethodKeypadPincode            = consts.PairingBootstrappingMethodKeypadPincode
-	PairingBootstrappingMethodOpportunistic            = consts.PairingBootstrappingMethodOpportunistic
-	PairingBootstrappingMethodOutOfBand                = consts.PairingBootstrappingMethodOutOfBand
 	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
 	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
 	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz

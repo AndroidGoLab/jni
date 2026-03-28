@@ -21,6 +21,33 @@ type GameState struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGameState creates a new android.app.GameState instance.
+func NewGameState(vm *jni.VM, arg0 bool, arg1 int32) (*GameState, error) {
+	var t GameState
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGameState)), midGameStateInit, jni.BooleanValue(jArg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.GameState.describeContents.
 func (m *GameState) DescribeContents() (int32, error) {
 	var result int32

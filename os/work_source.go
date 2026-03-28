@@ -23,6 +23,28 @@ type WorkSource struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWorkSource creates a new android.os.WorkSource instance.
+func NewWorkSource(vm *jni.VM) (*WorkSource, error) {
+	var t WorkSource
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkSource)), midWorkSourceInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Add calls android.os.WorkSource.add.
 func (m *WorkSource) Add(arg0 *jni.Object) (bool, error) {
 	var result bool

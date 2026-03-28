@@ -23,6 +23,29 @@ type Measure struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMeasure creates a new android.icu.util.Measure instance.
+func NewMeasure(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Measure, error) {
+	var t Measure
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMeasure)), midMeasureInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.icu.util.Measure.equals.
 func (m *Measure) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

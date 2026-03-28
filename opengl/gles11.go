@@ -23,6 +23,28 @@ type GLES11 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLES11 creates a new android.opengl.GLES11 instance.
+func NewGLES11(vm *jni.VM) (*GLES11, error) {
+	var t GLES11
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES11)), midGLES11Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GlBindBuffer calls android.opengl.GLES11.glBindBuffer.
 func (m *GLES11) GlBindBuffer(arg0 int32, arg1 int32) error {
 

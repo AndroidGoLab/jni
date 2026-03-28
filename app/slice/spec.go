@@ -23,6 +23,34 @@ type Spec struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpec creates a new android.app.slice.SliceSpec instance.
+func NewSpec(vm *jni.VM, arg0 string, arg1 int32) (*Spec, error) {
+	var t Spec
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpec)), midSpecInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CanRender calls android.app.slice.SliceSpec.canRender.
 func (m *Spec) CanRender(arg0 *jni.Object) (bool, error) {
 	var result bool

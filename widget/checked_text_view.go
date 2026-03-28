@@ -23,6 +23,29 @@ type CheckedTextView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCheckedTextView creates a new android.widget.CheckedTextView instance.
+func NewCheckedTextView(vm *jni.VM, arg0 *jni.Object) (*CheckedTextView, error) {
+	var t CheckedTextView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCheckedTextView)), midCheckedTextViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DrawableHotspotChanged calls android.widget.CheckedTextView.drawableHotspotChanged.
 func (m *CheckedTextView) DrawableHotspotChanged(arg0 float32, arg1 float32) error {
 

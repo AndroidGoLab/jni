@@ -23,6 +23,29 @@ type ExerciseRoute struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExerciseRoute creates a new android.health.connect.datatypes.ExerciseRoute instance.
+func NewExerciseRoute(vm *jni.VM, arg0 *jni.Object) (*ExerciseRoute, error) {
+	var t ExerciseRoute
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExerciseRoute)), midExerciseRouteInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.health.connect.datatypes.ExerciseRoute.describeContents.
 func (m *ExerciseRoute) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type CurrencyAmount struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCurrencyAmount creates a new android.icu.util.CurrencyAmount instance.
+func NewCurrencyAmount(vm *jni.VM, arg0 float64, arg1 *jni.Object) (*CurrencyAmount, error) {
+	var t CurrencyAmount
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCurrencyAmount)), midCurrencyAmountInit, jni.DoubleValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCurrency calls android.icu.util.CurrencyAmount.getCurrency.
 func (m *CurrencyAmount) GetCurrency() (*jni.Object, error) {
 	var result *jni.Object

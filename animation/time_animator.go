@@ -23,6 +23,28 @@ type TimeAnimator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTimeAnimator creates a new android.animation.TimeAnimator instance.
+func NewTimeAnimator(vm *jni.VM) (*TimeAnimator, error) {
+	var t TimeAnimator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), midTimeAnimatorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetCurrentPlayTime calls android.animation.TimeAnimator.setCurrentPlayTime.
 func (m *TimeAnimator) SetCurrentPlayTime(arg0 int64) error {
 

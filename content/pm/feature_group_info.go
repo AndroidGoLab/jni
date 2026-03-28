@@ -23,6 +23,28 @@ type FeatureGroupInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFeatureGroupInfo creates a new android.content.pm.FeatureGroupInfo instance.
+func NewFeatureGroupInfo(vm *jni.VM) (*FeatureGroupInfo, error) {
+	var t FeatureGroupInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFeatureGroupInfo)), midFeatureGroupInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.FeatureGroupInfo.describeContents.
 func (m *FeatureGroupInfo) DescribeContents() (int32, error) {
 	var result int32

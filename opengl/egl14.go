@@ -23,6 +23,28 @@ type EGL14 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEGL14 creates a new android.opengl.EGL14 instance.
+func NewEGL14(vm *jni.VM) (*EGL14, error) {
+	var t EGL14
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEGL14)), midEGL14Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // EglBindAPI calls android.opengl.EGL14.eglBindAPI.
 func (m *EGL14) EglBindAPI(arg0 int32) (bool, error) {
 	var result bool

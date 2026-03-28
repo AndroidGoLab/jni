@@ -23,6 +23,34 @@ type RuntimeColorFilter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRuntimeColorFilter creates a new android.graphics.RuntimeColorFilter instance.
+func NewRuntimeColorFilter(vm *jni.VM, arg0 string) (*RuntimeColorFilter, error) {
+	var t RuntimeColorFilter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeColorFilter)), midRuntimeColorFilterInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetColorUniform2 calls android.graphics.RuntimeColorFilter.setColorUniform.
 func (m *RuntimeColorFilter) SetColorUniform2(arg0 string, arg1 *jni.Object) error {
 

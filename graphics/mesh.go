@@ -23,6 +23,29 @@ type Mesh struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMesh creates a new android.graphics.Mesh instance.
+func NewMesh(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 int32, arg4 *jni.Object) (*Mesh, error) {
+	var t Mesh
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMesh)), midMeshInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetColorUniform2 calls android.graphics.Mesh.setColorUniform.
 func (m *Mesh) SetColorUniform2(arg0 string, arg1 *jni.Object) error {
 

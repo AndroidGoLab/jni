@@ -23,6 +23,29 @@ type Location struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLocation creates a new android.location.Location instance.
+func NewLocation(vm *jni.VM, arg0 *jni.Object) (*Location, error) {
+	var t Location
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocation)), midLocationInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BearingTo calls android.location.Location.bearingTo.
 func (m *Location) BearingTo(arg0 *jni.Object) (float32, error) {
 	var result float32

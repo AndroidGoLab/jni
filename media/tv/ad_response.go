@@ -23,6 +23,29 @@ type AdResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAdResponse creates a new android.media.tv.AdResponse instance.
+func NewAdResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int64) (*AdResponse, error) {
+	var t AdResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdResponse)), midAdResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.LongValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.AdResponse.describeContents.
 func (m *AdResponse) DescribeContents() (int32, error) {
 	var result int32

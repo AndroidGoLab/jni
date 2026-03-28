@@ -23,6 +23,28 @@ type ConfigurationInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewConfigurationInfo creates a new android.content.pm.ConfigurationInfo instance.
+func NewConfigurationInfo(vm *jni.VM) (*ConfigurationInfo, error) {
+	var t ConfigurationInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfigurationInfo)), midConfigurationInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.ConfigurationInfo.describeContents.
 func (m *ConfigurationInfo) DescribeContents() (int32, error) {
 	var result int32

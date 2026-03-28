@@ -23,6 +23,28 @@ type AppWidgetProviderInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppWidgetProviderInfo creates a new android.appwidget.AppWidgetProviderInfo instance.
+func NewAppWidgetProviderInfo(vm *jni.VM) (*AppWidgetProviderInfo, error) {
+	var t AppWidgetProviderInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetProviderInfo)), midAppWidgetProviderInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.appwidget.AppWidgetProviderInfo.clone.
 func (m *AppWidgetProviderInfo) Clone0() (*jni.Object, error) {
 	var result *jni.Object

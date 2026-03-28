@@ -23,6 +23,28 @@ type IntEvaluator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIntEvaluator creates a new android.animation.IntEvaluator instance.
+func NewIntEvaluator(vm *jni.VM) (*IntEvaluator, error) {
+	var t IntEvaluator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), midIntEvaluatorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Evaluate3 calls android.animation.IntEvaluator.evaluate.
 func (m *IntEvaluator) Evaluate3(
 	arg0 float32,

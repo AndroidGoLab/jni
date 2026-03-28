@@ -23,6 +23,40 @@ type ConsoleMessage struct {
 	Obj *jni.GlobalRef
 }
 
+// NewConsoleMessage creates a new android.webkit.ConsoleMessage instance.
+func NewConsoleMessage(vm *jni.VM, arg0 string, arg1 string, arg2 int32, arg3 *jni.Object) (*ConsoleMessage, error) {
+	var t ConsoleMessage
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), midConsoleMessageInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // LineNumber calls android.webkit.ConsoleMessage.lineNumber.
 func (m *ConsoleMessage) LineNumber() (int32, error) {
 	var result int32

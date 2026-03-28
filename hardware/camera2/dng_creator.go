@@ -23,6 +23,29 @@ type DngCreator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDngCreator creates a new android.hardware.camera2.DngCreator instance.
+func NewDngCreator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*DngCreator, error) {
+	var t DngCreator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDngCreator)), midDngCreatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.hardware.camera2.DngCreator.close.
 func (m *DngCreator) Close() error {
 

@@ -3,12 +3,6 @@
 package consts
 
 const (
-	ExtraCallId  string = "android:sipCallID"
-	ExtraOfferSd string = "android:sipOfferSD"
-)
-
-const (
-	IncomingCallResultCode    int = 101
 	Deregistering             int = 2
 	IncomingCall              int = 3
 	IncomingCallAnswering     int = 4
@@ -20,6 +14,8 @@ const (
 	Pinging                   int = 9
 	ReadyToCall               int = 0
 	Registering               int = 1
+	IncomingCallResultCode    int = 101
+	Creator                   int = 0
 	ClientError               int = -4
 	CrossDomainAuthentication int = -11
 	DataConnectionLost        int = -10
@@ -33,5 +29,9 @@ const (
 	SocketError               int = -1
 	TimeOut                   int = -5
 	TransactionTerminted      int = -3
-	Creator                   int = 0
+)
+
+const (
+	ExtraCallId  string = "android:sipCallID"
+	ExtraOfferSd string = "android:sipOfferSD"
 )

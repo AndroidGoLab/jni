@@ -21,6 +21,34 @@ type InvalidForegroundServiceTypeException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInvalidForegroundServiceTypeException creates a new android.app.InvalidForegroundServiceTypeException instance.
+func NewInvalidForegroundServiceTypeException(vm *jni.VM, arg0 string) (*InvalidForegroundServiceTypeException, error) {
+	var t InvalidForegroundServiceTypeException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidForegroundServiceTypeException)), midInvalidForegroundServiceTypeExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.InvalidForegroundServiceTypeException.describeContents.
 func (m *InvalidForegroundServiceTypeException) DescribeContents() (int32, error) {
 	var result int32

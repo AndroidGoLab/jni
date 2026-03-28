@@ -23,6 +23,29 @@ type GetWalletCardsRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGetWalletCardsRequest creates a new android.service.quickaccesswallet.GetWalletCardsRequest instance.
+func NewGetWalletCardsRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 int32) (*GetWalletCardsRequest, error) {
+	var t GetWalletCardsRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGetWalletCardsRequest)), midGetWalletCardsRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.quickaccesswallet.GetWalletCardsRequest.describeContents.
 func (m *GetWalletCardsRequest) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type DeviceAdminReceiver struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDeviceAdminReceiver creates a new android.app.admin.DeviceAdminReceiver instance.
+func NewDeviceAdminReceiver(vm *jni.VM) (*DeviceAdminReceiver, error) {
+	var t DeviceAdminReceiver
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminReceiver)), midDeviceAdminReceiverInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetManager calls android.app.admin.DeviceAdminReceiver.getManager.
 func (m *DeviceAdminReceiver) GetManager(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

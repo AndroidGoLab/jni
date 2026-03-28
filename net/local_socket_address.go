@@ -23,6 +23,34 @@ type LocalSocketAddress struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLocalSocketAddress creates a new android.net.LocalSocketAddress instance.
+func NewLocalSocketAddress(vm *jni.VM, arg0 string) (*LocalSocketAddress, error) {
+	var t LocalSocketAddress
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalSocketAddress)), midLocalSocketAddressInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetName calls android.net.LocalSocketAddress.getName.
 func (m *LocalSocketAddress) GetName() (string, error) {
 	var result string

@@ -23,6 +23,29 @@ type Session2Command struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSession2Command creates a new android.media.Session2Command instance.
+func NewSession2Command(vm *jni.VM, arg0 int32) (*Session2Command, error) {
+	var t Session2Command
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession2Command)), midSession2CommandInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.Session2Command.describeContents.
 func (m *Session2Command) DescribeContents() (int32, error) {
 	var result int32

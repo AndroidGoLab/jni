@@ -23,6 +23,29 @@ type LruCache struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLruCache creates a new android.util.LruCache instance.
+func NewLruCache(vm *jni.VM, arg0 int32) (*LruCache, error) {
+	var t LruCache
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLruCache)), midLruCacheInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // EvictAll calls android.util.LruCache.evictAll.
 func (m *LruCache) EvictAll() error {
 

@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsPrintedPdfDocument                   *jni.GlobalRef
+	midPrintedPdfDocumentInit               jni.MethodID
 	midPrintedPdfDocumentGetPageContentRect jni.MethodID
 	midPrintedPdfDocumentGetPageHeight      jni.MethodID
 	midPrintedPdfDocumentGetPageWidth       jni.MethodID
@@ -55,6 +56,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPrintedPdfDocument = env.NewGlobalRef(&c.Object)
+		midPrintedPdfDocumentInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "<init>", "(Landroid/content/Context;Landroid/print/PrintAttributes;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midPrintedPdfDocumentGetPageContentRect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), "getPageContentRect", "()Landroid/graphics/Rect;")
 		if err != nil {

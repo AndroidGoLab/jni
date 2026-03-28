@@ -23,6 +23,29 @@ type SSLCertificateSocketFactory struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSSLCertificateSocketFactory creates a new android.net.SSLCertificateSocketFactory instance.
+func NewSSLCertificateSocketFactory(vm *jni.VM, arg0 int32) (*SSLCertificateSocketFactory, error) {
+	var t SSLCertificateSocketFactory
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSSLCertificateSocketFactory)), midSSLCertificateSocketFactoryInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CreateSocket0 calls android.net.SSLCertificateSocketFactory.createSocket.
 func (m *SSLCertificateSocketFactory) CreateSocket0() (*jni.Object, error) {
 	var result *jni.Object

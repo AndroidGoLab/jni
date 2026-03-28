@@ -23,6 +23,29 @@ type BackEvent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBackEvent creates a new android.window.BackEvent instance.
+func NewBackEvent(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, arg3 int32) (*BackEvent, error) {
+	var t BackEvent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackEvent)), midBackEventInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.IntValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.window.BackEvent.equals.
 func (m *BackEvent) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,29 @@ type Capability struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCapability creates a new android.hardware.camera2.params.Capability instance.
+func NewCapability(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 *jni.Object) (*Capability, error) {
+	var t Capability
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCapability)), midCapabilityInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.hardware.camera2.params.Capability.equals.
 func (m *Capability) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

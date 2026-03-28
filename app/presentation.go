@@ -21,6 +21,29 @@ type Presentation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPresentation creates a new android.app.Presentation instance.
+func NewPresentation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Presentation, error) {
+	var t Presentation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPresentation)), midPresentationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDisplay calls android.app.Presentation.getDisplay.
 func (m *Presentation) GetDisplay() (*jni.Object, error) {
 	var result *jni.Object

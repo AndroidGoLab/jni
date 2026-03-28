@@ -23,19 +23,21 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsBoundary                 *jni.GlobalRef
-	midBoundaryDescribeContents jni.MethodID
-	midBoundaryGetIndex         jni.MethodID
-	midBoundaryGetIsRtl         jni.MethodID
-	midBoundaryGetPoint         jni.MethodID
-	midBoundaryWriteToParcel    jni.MethodID
-
 	clsPageSelection                 *jni.GlobalRef
+	midPageSelectionInit             jni.MethodID
 	midPageSelectionDescribeContents jni.MethodID
 	midPageSelectionGetPage          jni.MethodID
 	midPageSelectionGetStart         jni.MethodID
 	midPageSelectionGetStop          jni.MethodID
 	midPageSelectionWriteToParcel    jni.MethodID
+
+	clsBoundary                 *jni.GlobalRef
+	midBoundaryInit             jni.MethodID
+	midBoundaryDescribeContents jni.MethodID
+	midBoundaryGetIndex         jni.MethodID
+	midBoundaryGetIsRtl         jni.MethodID
+	midBoundaryGetPoint         jni.MethodID
+	midBoundaryWriteToParcel    jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -56,51 +58,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/graphics/pdf/models/selection/SelectionBoundary")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBoundary = env.NewGlobalRef(&c.Object)
-
-		midBoundaryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBoundaryGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "getIndex", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBoundaryGetIsRtl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "getIsRtl", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBoundaryGetPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "getPoint", "()Landroid/graphics/Point;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBoundaryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/graphics/pdf/models/selection/PageSelection")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -108,6 +65,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPageSelection = env.NewGlobalRef(&c.Object)
+		midPageSelectionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "<init>", "(ILandroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;Ljava/util/List;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midPageSelectionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "describeContents", "()I")
 		if err != nil {
@@ -138,6 +99,55 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPageSelectionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/graphics/pdf/models/selection/SelectionBoundary")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBoundary = env.NewGlobalRef(&c.Object)
+		midBoundaryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "<init>", "(Landroid/graphics/Point;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midBoundaryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoundaryGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "getIndex", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoundaryGetIsRtl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "getIsRtl", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoundaryGetPoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "getPoint", "()Landroid/graphics/Point;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBoundaryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

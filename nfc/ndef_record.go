@@ -23,6 +23,29 @@ type NdefRecord struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNdefRecord creates a new android.nfc.NdefRecord instance.
+func NewNdefRecord(vm *jni.VM, arg0 *jni.Object) (*NdefRecord, error) {
+	var t NdefRecord
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNdefRecord)), midNdefRecordInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.nfc.NdefRecord.describeContents.
 func (m *NdefRecord) DescribeContents() (int32, error) {
 	var result int32

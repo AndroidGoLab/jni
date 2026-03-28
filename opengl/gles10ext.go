@@ -23,6 +23,28 @@ type GLES10Ext struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLES10Ext creates a new android.opengl.GLES10Ext instance.
+func NewGLES10Ext(vm *jni.VM) (*GLES10Ext, error) {
+	var t GLES10Ext
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES10Ext)), midGLES10ExtInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GlQueryMatrixxOES4 calls android.opengl.GLES10Ext.glQueryMatrixxOES.
 func (m *GLES10Ext) GlQueryMatrixxOES4(
 	arg0 *jni.Object,

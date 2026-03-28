@@ -23,6 +23,29 @@ type ColorMatrixColorFilter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewColorMatrixColorFilter creates a new android.graphics.ColorMatrixColorFilter instance.
+func NewColorMatrixColorFilter(vm *jni.VM, arg0 *jni.Object) (*ColorMatrixColorFilter, error) {
+	var t ColorMatrixColorFilter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorMatrixColorFilter)), midColorMatrixColorFilterInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetColorMatrix calls android.graphics.ColorMatrixColorFilter.getColorMatrix.
 func (m *ColorMatrixColorFilter) GetColorMatrix(arg0 *jni.Object) error {
 

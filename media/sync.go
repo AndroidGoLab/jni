@@ -23,6 +23,28 @@ type Sync struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSync creates a new android.media.MediaSync instance.
+func NewSync(vm *jni.VM) (*Sync, error) {
+	var t Sync
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSync)), midSyncInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CreateInputSurface calls android.media.MediaSync.createInputSurface.
 func (m *Sync) CreateInputSurface() (*jni.Object, error) {
 	var result *jni.Object

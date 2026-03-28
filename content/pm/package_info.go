@@ -23,6 +23,28 @@ type PackageInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPackageInfo creates a new android.content.pm.PackageInfo instance.
+func NewPackageInfo(vm *jni.VM) (*PackageInfo, error) {
+	var t PackageInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageInfo)), midPackageInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.PackageInfo.describeContents.
 func (m *PackageInfo) DescribeContents() (int32, error) {
 	var result int32

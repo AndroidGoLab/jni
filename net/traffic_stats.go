@@ -23,6 +23,28 @@ type TrafficStats struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTrafficStats creates a new android.net.TrafficStats instance.
+func NewTrafficStats(vm *jni.VM) (*TrafficStats, error) {
+	var t TrafficStats
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrafficStats)), midTrafficStatsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearThreadStatsTag calls android.net.TrafficStats.clearThreadStatsTag.
 func (m *TrafficStats) ClearThreadStatsTag() error {
 

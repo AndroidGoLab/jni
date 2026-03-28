@@ -5,7 +5,10 @@ package slice
 import "github.com/AndroidGoLab/jni/app/slice/consts"
 
 const (
-	SliceType                 = consts.SliceType
+	Creator = consts.Creator
+)
+
+const (
 	FormatAction              = consts.FormatAction
 	FormatBundle              = consts.FormatBundle
 	FormatImage               = consts.FormatImage
@@ -16,6 +19,7 @@ const (
 	FormatText                = consts.FormatText
 	CategorySlice             = consts.CategorySlice
 	SliceMetadataKey          = consts.SliceMetadataKey
+	SliceType                 = consts.SliceType
 	ExtraRangeValue           = consts.ExtraRangeValue
 	ExtraToggleState          = consts.ExtraToggleState
 	HintActions               = consts.HintActions
@@ -46,8 +50,4 @@ const (
 	SubtypeSource             = consts.SubtypeSource
 	SubtypeToggle             = consts.SubtypeToggle
 	SubtypeValue              = consts.SubtypeValue
-)
-
-const (
-	Creator = consts.Creator
 )

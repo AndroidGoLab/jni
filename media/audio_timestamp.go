@@ -23,6 +23,28 @@ type AudioTimestamp struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAudioTimestamp creates a new android.media.AudioTimestamp instance.
+func NewAudioTimestamp(vm *jni.VM) (*AudioTimestamp, error) {
+	var t AudioTimestamp
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioTimestamp)), midAudioTimestampInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.AudioTimestamp.describeContents.
 func (m *AudioTimestamp) DescribeContents() (int32, error) {
 	var result int32

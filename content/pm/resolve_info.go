@@ -23,6 +23,28 @@ type ResolveInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewResolveInfo creates a new android.content.pm.ResolveInfo instance.
+func NewResolveInfo(vm *jni.VM) (*ResolveInfo, error) {
+	var t ResolveInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResolveInfo)), midResolveInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.ResolveInfo.describeContents.
 func (m *ResolveInfo) DescribeContents() (int32, error) {
 	var result int32

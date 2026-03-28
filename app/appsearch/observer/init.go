@@ -31,7 +31,18 @@ var (
 	midSpecBuilderAddFilterSchemas jni.MethodID
 	midSpecBuilderBuild            jni.MethodID
 
+	clsDocumentChangeInfo                *jni.GlobalRef
+	midDocumentChangeInfoInit            jni.MethodID
+	midDocumentChangeInfoEquals          jni.MethodID
+	midDocumentChangeInfoGetDatabaseName jni.MethodID
+	midDocumentChangeInfoGetNamespace    jni.MethodID
+	midDocumentChangeInfoGetPackageName  jni.MethodID
+	midDocumentChangeInfoGetSchemaName   jni.MethodID
+	midDocumentChangeInfoHashCode        jni.MethodID
+	midDocumentChangeInfoToString        jni.MethodID
+
 	clsSchemaChangeInfo                *jni.GlobalRef
+	midSchemaChangeInfoInit            jni.MethodID
 	midSchemaChangeInfoEquals          jni.MethodID
 	midSchemaChangeInfoGetDatabaseName jni.MethodID
 	midSchemaChangeInfoGetPackageName  jni.MethodID
@@ -41,15 +52,6 @@ var (
 	clsCallback                  *jni.GlobalRef
 	midCallbackOnDocumentChanged jni.MethodID
 	midCallbackOnSchemaChanged   jni.MethodID
-
-	clsDocumentChangeInfo                *jni.GlobalRef
-	midDocumentChangeInfoEquals          jni.MethodID
-	midDocumentChangeInfoGetDatabaseName jni.MethodID
-	midDocumentChangeInfoGetNamespace    jni.MethodID
-	midDocumentChangeInfoGetPackageName  jni.MethodID
-	midDocumentChangeInfoGetSchemaName   jni.MethodID
-	midDocumentChangeInfoHashCode        jni.MethodID
-	midDocumentChangeInfoToString        jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -118,6 +120,69 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/app/appsearch/observer/DocumentChangeInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDocumentChangeInfo = env.NewGlobalRef(&c.Object)
+		midDocumentChangeInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoGetDatabaseName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getDatabaseName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoGetNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getNamespace", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoGetSchemaName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getSchemaName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDocumentChangeInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/app/appsearch/observer/SchemaChangeInfo")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -125,6 +190,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSchemaChangeInfo = env.NewGlobalRef(&c.Object)
+		midSchemaChangeInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSchemaChangeInfo)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/util/Set;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midSchemaChangeInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSchemaChangeInfo)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
@@ -179,65 +248,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCallbackOnSchemaChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallback)), "onSchemaChanged", "(Landroid/app/appsearch/observer/SchemaChangeInfo;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/app/appsearch/observer/DocumentChangeInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDocumentChangeInfo = env.NewGlobalRef(&c.Object)
-
-		midDocumentChangeInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDocumentChangeInfoGetDatabaseName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getDatabaseName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDocumentChangeInfoGetNamespace, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getNamespace", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDocumentChangeInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getPackageName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDocumentChangeInfoGetSchemaName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "getSchemaName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDocumentChangeInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDocumentChangeInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

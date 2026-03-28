@@ -23,6 +23,29 @@ type AccessControlProfileId struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAccessControlProfileId creates a new android.security.identity.AccessControlProfileId instance.
+func NewAccessControlProfileId(vm *jni.VM, arg0 int32) (*AccessControlProfileId, error) {
+	var t AccessControlProfileId
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccessControlProfileId)), midAccessControlProfileIdInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetId calls android.security.identity.AccessControlProfileId.getId.
 func (m *AccessControlProfileId) GetId() (int32, error) {
 	var result int32

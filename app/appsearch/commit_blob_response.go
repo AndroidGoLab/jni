@@ -23,6 +23,29 @@ type CommitBlobResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCommitBlobResponse creates a new android.app.appsearch.CommitBlobResponse instance.
+func NewCommitBlobResponse(vm *jni.VM, arg0 *jni.Object) (*CommitBlobResponse, error) {
+	var t CommitBlobResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCommitBlobResponse)), midCommitBlobResponseInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.appsearch.CommitBlobResponse.describeContents.
 func (m *CommitBlobResponse) DescribeContents() (int32, error) {
 	var result int32

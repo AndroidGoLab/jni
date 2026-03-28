@@ -23,6 +23,29 @@ type ProxyInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewProxyInfo creates a new android.net.ProxyInfo instance.
+func NewProxyInfo(vm *jni.VM, arg0 *jni.Object) (*ProxyInfo, error) {
+	var t ProxyInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProxyInfo)), midProxyInfoInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.ProxyInfo.describeContents.
 func (m *ProxyInfo) DescribeContents() (int32, error) {
 	var result int32

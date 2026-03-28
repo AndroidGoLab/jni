@@ -23,6 +23,28 @@ type GLES10 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLES10 creates a new android.opengl.GLES10 instance.
+func NewGLES10(vm *jni.VM) (*GLES10, error) {
+	var t GLES10
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES10)), midGLES10Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GlActiveTexture calls android.opengl.GLES10.glActiveTexture.
 func (m *GLES10) GlActiveTexture(arg0 int32) error {
 

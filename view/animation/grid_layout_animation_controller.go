@@ -23,6 +23,29 @@ type GridLayoutAnimationController struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGridLayoutAnimationController creates a new android.view.animation.GridLayoutAnimationController instance.
+func NewGridLayoutAnimationController(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*GridLayoutAnimationController, error) {
+	var t GridLayoutAnimationController
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGridLayoutAnimationController)), midGridLayoutAnimationControllerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetColumnDelay calls android.view.animation.GridLayoutAnimationController.getColumnDelay.
 func (m *GridLayoutAnimationController) GetColumnDelay() (float32, error) {
 	var result float32

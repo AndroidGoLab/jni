@@ -23,6 +23,35 @@ type Rights struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRights creates a new android.drm.DrmRights instance.
+func NewRights(vm *jni.VM, arg0 *jni.Object, arg1 string) (*Rights, error) {
+	var t Rights
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRights)), midRightsInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccountId calls android.drm.DrmRights.getAccountId.
 func (m *Rights) GetAccountId() (string, error) {
 	var result string

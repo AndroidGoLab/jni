@@ -23,6 +23,29 @@ type EditTextPreference struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEditTextPreference creates a new android.preference.EditTextPreference instance.
+func NewEditTextPreference(vm *jni.VM, arg0 *jni.Object) (*EditTextPreference, error) {
+	var t EditTextPreference
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), midEditTextPreferenceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetEditText calls android.preference.EditTextPreference.getEditText.
 func (m *EditTextPreference) GetEditText() (*jni.Object, error) {
 	var result *jni.Object

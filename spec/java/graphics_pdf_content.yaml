@@ -5,8 +5,38 @@
 package: content
 go_import: github.com/AndroidGoLab/jni/graphics/pdf/content
 classes:
+    - java_class: android.graphics.pdf.content.PdfPageImageContent
+      go_type: PdfPageImageContent
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAltText
+          go_name: GetAltText
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.graphics.pdf.content.PdfPageLinkContent
       go_type: PdfPageLinkContent
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.List<android.graphics.RectF>
+          go_name: arg0
+        - java_type: android.net.Uri
+          go_name: arg1
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -27,6 +57,12 @@ classes:
           error: true
     - java_class: android.graphics.pdf.content.PdfPageGotoLinkContent
       go_type: PdfPageGotoLinkContent
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.List<android.graphics.RectF>
+          go_name: arg0
+        - java_type: android.graphics.pdf.content.PdfPageGotoLinkContent$Destination
+          go_name: arg1
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -77,28 +113,12 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.graphics.pdf.content.PdfPageImageContent
-      go_type: PdfPageImageContent
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAltText
-          go_name: GetAltText
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.graphics.pdf.content.PdfPageTextContent
       go_type: PdfPageTextContent
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
       methods:
         - java_method: describeContents
           go_name: DescribeContents

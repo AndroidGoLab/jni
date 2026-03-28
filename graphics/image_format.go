@@ -23,6 +23,28 @@ type ImageFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewImageFormat creates a new android.graphics.ImageFormat instance.
+func NewImageFormat(vm *jni.VM) (*ImageFormat, error) {
+	var t ImageFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageFormat)), midImageFormatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetBitsPerPixel calls android.graphics.ImageFormat.getBitsPerPixel.
 func (m *ImageFormat) GetBitsPerPixel(arg0 int32) (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type ActionMenuView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewActionMenuView creates a new android.widget.ActionMenuView instance.
+func NewActionMenuView(vm *jni.VM, arg0 *jni.Object) (*ActionMenuView, error) {
+	var t ActionMenuView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActionMenuView)), midActionMenuViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DismissPopupMenus calls android.widget.ActionMenuView.dismissPopupMenus.
 func (m *ActionMenuView) DismissPopupMenus() error {
 

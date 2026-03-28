@@ -23,6 +23,28 @@ type DelegatedAdminReceiver struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDelegatedAdminReceiver creates a new android.app.admin.DelegatedAdminReceiver instance.
+func NewDelegatedAdminReceiver(vm *jni.VM) (*DelegatedAdminReceiver, error) {
+	var t DelegatedAdminReceiver
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDelegatedAdminReceiver)), midDelegatedAdminReceiverInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnChoosePrivateKeyAlias calls android.app.admin.DelegatedAdminReceiver.onChoosePrivateKeyAlias.
 func (m *DelegatedAdminReceiver) OnChoosePrivateKeyAlias(
 	arg0 *jni.Object,

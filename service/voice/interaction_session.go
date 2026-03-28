@@ -23,6 +23,29 @@ type InteractionSession struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInteractionSession creates a new android.service.voice.VoiceInteractionSession instance.
+func NewInteractionSession(vm *jni.VM, arg0 *jni.Object) (*InteractionSession, error) {
+	var t InteractionSession
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInteractionSession)), midInteractionSessionInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CloseSystemDialogs calls android.service.voice.VoiceInteractionSession.closeSystemDialogs.
 func (m *InteractionSession) CloseSystemDialogs() error {
 

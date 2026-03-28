@@ -23,6 +23,29 @@ type Half struct {
 	Obj *jni.GlobalRef
 }
 
+// NewHalf creates a new android.util.Half instance.
+func NewHalf(vm *jni.VM, arg0 float64) (*Half, error) {
+	var t Half
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHalf)), midHalfInit, jni.DoubleValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ByteValue calls android.util.Half.byteValue.
 func (m *Half) ByteValue() (int8, error) {
 	var result int8

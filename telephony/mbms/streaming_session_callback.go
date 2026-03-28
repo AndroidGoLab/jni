@@ -23,6 +23,28 @@ type StreamingSessionCallback struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStreamingSessionCallback creates a new android.telephony.mbms.MbmsStreamingSessionCallback instance.
+func NewStreamingSessionCallback(vm *jni.VM) (*StreamingSessionCallback, error) {
+	var t StreamingSessionCallback
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStreamingSessionCallback)), midStreamingSessionCallbackInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnError calls android.telephony.mbms.MbmsStreamingSessionCallback.onError.
 func (m *StreamingSessionCallback) OnError(arg0 int32, arg1 string) error {
 

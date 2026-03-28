@@ -23,6 +23,35 @@ type SQLiteCursor struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSQLiteCursor creates a new android.database.sqlite.SQLiteCursor instance.
+func NewSQLiteCursor(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*SQLiteCursor, error) {
+	var t SQLiteCursor
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteCursor)), midSQLiteCursorInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.database.sqlite.SQLiteCursor.close.
 func (m *SQLiteCursor) Close() error {
 

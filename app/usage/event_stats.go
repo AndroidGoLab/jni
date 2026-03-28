@@ -23,6 +23,29 @@ type EventStats struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEventStats creates a new android.app.usage.EventStats instance.
+func NewEventStats(vm *jni.VM, arg0 *jni.Object) (*EventStats, error) {
+	var t EventStats
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventStats)), midEventStatsInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Add calls android.app.usage.EventStats.add.
 func (m *EventStats) Add(arg0 *jni.Object) error {
 

@@ -3,18 +3,18 @@
 package consts
 
 const (
+	Creator                        int = 0
+	ChooserResultCopy              int = 1
+	ChooserResultEdit              int = 2
+	ChooserResultSelectedComponent int = 0
+	ChooserResultUnknown           int = -1
+)
+
+const (
 	Uri                string = "uri"
 	Position           string = "position"
 	OnSelectionChanged string = "onSelectionChanged"
 	BindPermission     string = "android.permission.BIND_CHOOSER_TARGET_SERVICE"
 	MetaDataName       string = "android.service.chooser.chooser_target_service"
 	ServiceInterface   string = "android.service.chooser.ChooserTargetService"
-)
-
-const (
-	ChooserResultCopy              int = 1
-	ChooserResultEdit              int = 2
-	ChooserResultSelectedComponent int = 0
-	ChooserResultUnknown           int = -1
-	Creator                        int = 0
 )

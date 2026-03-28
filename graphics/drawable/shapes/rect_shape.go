@@ -23,6 +23,28 @@ type RectShape struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRectShape creates a new android.graphics.drawable.shapes.RectShape instance.
+func NewRectShape(vm *jni.VM) (*RectShape, error) {
+	var t RectShape
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectShape)), midRectShapeInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.graphics.drawable.shapes.RectShape.clone.
 func (m *RectShape) Clone0() (*jni.Object, error) {
 	var result *jni.Object

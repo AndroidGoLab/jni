@@ -5,28 +5,28 @@ package preferences
 import "github.com/AndroidGoLab/jni/service/settings/preferences/consts"
 
 const (
+	ActionPreferenceService = consts.ActionPreferenceService
+)
+
+const (
 	Creator                    = consts.Creator
-	ResultDisabled             = consts.ResultDisabled
-	ResultDisallow             = consts.ResultDisallow
-	ResultInternalError        = consts.ResultInternalError
-	ResultInvalidRequest       = consts.ResultInvalidRequest
-	ResultOk                   = consts.ResultOk
-	ResultRequireAppPermission = consts.ResultRequireAppPermission
-	ResultRequireUserConsent   = consts.ResultRequireUserConsent
-	ResultRestricted           = consts.ResultRestricted
-	ResultUnavailable          = consts.ResultUnavailable
-	ResultUnsupported          = consts.ResultUnsupported
-	DeeplinkOnly               = consts.DeeplinkOnly
-	ExpectPostConfirmation     = consts.ExpectPostConfirmation
-	NoDirectAccess             = consts.NoDirectAccess
-	NoSensitivity              = consts.NoSensitivity
 	TypeBoolean                = consts.TypeBoolean
 	TypeDouble                 = consts.TypeDouble
 	TypeInt                    = consts.TypeInt
 	TypeLong                   = consts.TypeLong
 	TypeString                 = consts.TypeString
-)
-
-const (
-	ActionPreferenceService = consts.ActionPreferenceService
+	ResultInternalError        = consts.ResultInternalError
+	ResultOk                   = consts.ResultOk
+	ResultUnsupported          = consts.ResultUnsupported
+	ResultDisabled             = consts.ResultDisabled
+	ResultDisallow             = consts.ResultDisallow
+	ResultInvalidRequest       = consts.ResultInvalidRequest
+	ResultRequireAppPermission = consts.ResultRequireAppPermission
+	ResultRequireUserConsent   = consts.ResultRequireUserConsent
+	ResultRestricted           = consts.ResultRestricted
+	ResultUnavailable          = consts.ResultUnavailable
+	DeeplinkOnly               = consts.DeeplinkOnly
+	ExpectPostConfirmation     = consts.ExpectPostConfirmation
+	NoDirectAccess             = consts.NoDirectAccess
+	NoSensitivity              = consts.NoSensitivity
 )

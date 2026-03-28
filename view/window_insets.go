@@ -23,6 +23,29 @@ type WindowInsets struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWindowInsets creates a new android.view.WindowInsets instance.
+func NewWindowInsets(vm *jni.VM, arg0 *jni.Object) (*WindowInsets, error) {
+	var t WindowInsets
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInsets)), midWindowInsetsInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ConsumeDisplayCutout calls android.view.WindowInsets.consumeDisplayCutout.
 func (m *WindowInsets) ConsumeDisplayCutout() (*jni.Object, error) {
 	var result *jni.Object

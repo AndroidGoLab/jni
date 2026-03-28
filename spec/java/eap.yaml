@@ -5,6 +5,13 @@
 package: eap
 go_import: github.com/AndroidGoLab/jni/net/eap
 classes:
+    - java_class: android.net.eap.EapInfo
+      go_type: Info
+      methods:
+        - java_method: getEapMethodType
+          go_name: GetEapMethodType
+          returns: int
+          error: true
     - java_class: android.net.eap.EapAkaInfo
       go_type: AkaInfo
       methods:
@@ -286,13 +293,6 @@ classes:
           error: true
         - java_method: hashCode
           go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.net.eap.EapInfo
-      go_type: Info
-      methods:
-        - java_method: getEapMethodType
-          go_name: GetEapMethodType
           returns: int
           error: true
 constants:

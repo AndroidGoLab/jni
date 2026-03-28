@@ -33,14 +33,16 @@ var (
 	clsDeviceHandleBuilder      *jni.GlobalRef
 	midDeviceHandleBuilderBuild jni.MethodID
 
-	clsResponderRangingConfig                 *jni.GlobalRef
-	midResponderRangingConfigDescribeContents jni.MethodID
-	midResponderRangingConfigGetDeviceHandle  jni.MethodID
-	midResponderRangingConfigToString         jni.MethodID
-	midResponderRangingConfigWriteToParcel    jni.MethodID
+	clsTransportHandle                        *jni.GlobalRef
+	midTransportHandleRegisterReceiveCallback jni.MethodID
+	midTransportHandleSendData                jni.MethodID
 
-	clsResponderRangingConfigBuilder      *jni.GlobalRef
-	midResponderRangingConfigBuilderBuild jni.MethodID
+	clsTransportHandleReceiveCallback              *jni.GlobalRef
+	midTransportHandleReceiveCallbackOnClose       jni.MethodID
+	midTransportHandleReceiveCallbackOnDisconnect  jni.MethodID
+	midTransportHandleReceiveCallbackOnReceiveData jni.MethodID
+	midTransportHandleReceiveCallbackOnReconnect   jni.MethodID
+	midTransportHandleReceiveCallbackOnSendFailed  jni.MethodID
 
 	clsInitiatorRangingConfig                          *jni.GlobalRef
 	midInitiatorRangingConfigDescribeContents          jni.MethodID
@@ -59,16 +61,14 @@ var (
 	midInitiatorRangingConfigBuilderSetSecurityLevel          jni.MethodID
 	midInitiatorRangingConfigBuilderSetSlowestRangingInterval jni.MethodID
 
-	clsTransportHandle                        *jni.GlobalRef
-	midTransportHandleRegisterReceiveCallback jni.MethodID
-	midTransportHandleSendData                jni.MethodID
+	clsResponderRangingConfig                 *jni.GlobalRef
+	midResponderRangingConfigDescribeContents jni.MethodID
+	midResponderRangingConfigGetDeviceHandle  jni.MethodID
+	midResponderRangingConfigToString         jni.MethodID
+	midResponderRangingConfigWriteToParcel    jni.MethodID
 
-	clsTransportHandleReceiveCallback              *jni.GlobalRef
-	midTransportHandleReceiveCallbackOnClose       jni.MethodID
-	midTransportHandleReceiveCallbackOnDisconnect  jni.MethodID
-	midTransportHandleReceiveCallbackOnReceiveData jni.MethodID
-	midTransportHandleReceiveCallbackOnReconnect   jni.MethodID
-	midTransportHandleReceiveCallbackOnSendFailed  jni.MethodID
+	clsResponderRangingConfigBuilder      *jni.GlobalRef
+	midResponderRangingConfigBuilderBuild jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -151,36 +151,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/oob/OobResponderRangingConfig")
+	c, err = env.FindClass("android/ranging/oob/TransportHandle")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsResponderRangingConfig = env.NewGlobalRef(&c.Object)
+		clsTransportHandle = env.NewGlobalRef(&c.Object)
 
-		midResponderRangingConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "describeContents", "()I")
+		midTransportHandleRegisterReceiveCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandle)), "registerReceiveCallback", "(Ljava/util/concurrent/Executor;Landroid/ranging/oob/TransportHandle$ReceiveCallback;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midResponderRangingConfigGetDeviceHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "getDeviceHandle", "()Landroid/ranging/oob/DeviceHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponderRangingConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponderRangingConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midTransportHandleSendData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandle)), "sendData", "([B)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -189,15 +175,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/oob/OobResponderRangingConfig$Builder")
+	c, err = env.FindClass("android/ranging/oob/TransportHandle$ReceiveCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsResponderRangingConfigBuilder = env.NewGlobalRef(&c.Object)
+		clsTransportHandleReceiveCallback = env.NewGlobalRef(&c.Object)
 
-		midResponderRangingConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfigBuilder)), "build", "()Landroid/ranging/oob/OobResponderRangingConfig;")
+		midTransportHandleReceiveCallbackOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onClose", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransportHandleReceiveCallbackOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onDisconnect", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransportHandleReceiveCallbackOnReceiveData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onReceiveData", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransportHandleReceiveCallbackOnReconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onReconnect", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTransportHandleReceiveCallbackOnSendFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onSendFailed", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -317,22 +331,36 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/oob/TransportHandle")
+	c, err = env.FindClass("android/ranging/oob/OobResponderRangingConfig")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTransportHandle = env.NewGlobalRef(&c.Object)
+		clsResponderRangingConfig = env.NewGlobalRef(&c.Object)
 
-		midTransportHandleRegisterReceiveCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandle)), "registerReceiveCallback", "(Ljava/util/concurrent/Executor;Landroid/ranging/oob/TransportHandle$ReceiveCallback;)V")
+		midResponderRangingConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTransportHandleSendData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandle)), "sendData", "([B)V")
+		midResponderRangingConfigGetDeviceHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "getDeviceHandle", "()Landroid/ranging/oob/DeviceHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponderRangingConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponderRangingConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -341,43 +369,15 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/oob/TransportHandle$ReceiveCallback")
+	c, err = env.FindClass("android/ranging/oob/OobResponderRangingConfig$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTransportHandleReceiveCallback = env.NewGlobalRef(&c.Object)
+		clsResponderRangingConfigBuilder = env.NewGlobalRef(&c.Object)
 
-		midTransportHandleReceiveCallbackOnClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onClose", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransportHandleReceiveCallbackOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onDisconnect", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransportHandleReceiveCallbackOnReceiveData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onReceiveData", "([B)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransportHandleReceiveCallbackOnReconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onReconnect", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTransportHandleReceiveCallbackOnSendFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTransportHandleReceiveCallback)), "onSendFailed", "()V")
+		midResponderRangingConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponderRangingConfigBuilder)), "build", "()Landroid/ranging/oob/OobResponderRangingConfig;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

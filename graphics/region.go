@@ -23,6 +23,28 @@ type Region struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRegion creates a new android.graphics.Region instance.
+func NewRegion(vm *jni.VM) (*Region, error) {
+	var t Region
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegion)), midRegionInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Contains calls android.graphics.Region.contains.
 func (m *Region) Contains(arg0 int32, arg1 int32) (bool, error) {
 	var result bool

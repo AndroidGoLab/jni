@@ -23,6 +23,35 @@ type PesResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPesResponse creates a new android.media.tv.PesResponse instance.
+func NewPesResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 string) (*PesResponse, error) {
+	var t PesResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPesResponse)), midPesResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.PesResponse.describeContents.
 func (m *PesResponse) DescribeContents() (int32, error) {
 	var result int32

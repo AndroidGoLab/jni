@@ -23,6 +23,29 @@ type OvershootInterpolator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewOvershootInterpolator creates a new android.view.animation.OvershootInterpolator instance.
+func NewOvershootInterpolator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*OvershootInterpolator, error) {
+	var t OvershootInterpolator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOvershootInterpolator)), midOvershootInterpolatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetInterpolation calls android.view.animation.OvershootInterpolator.getInterpolation.
 func (m *OvershootInterpolator) GetInterpolation(arg0 float32) (float32, error) {
 	var result float32

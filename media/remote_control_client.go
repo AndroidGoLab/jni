@@ -23,6 +23,29 @@ type RemoteControlClient struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoteControlClient creates a new android.media.RemoteControlClient instance.
+func NewRemoteControlClient(vm *jni.VM, arg0 *jni.Object) (*RemoteControlClient, error) {
+	var t RemoteControlClient
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteControlClient)), midRemoteControlClientInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // EditMetadata calls android.media.RemoteControlClient.editMetadata.
 func (m *RemoteControlClient) EditMetadata(arg0 bool) (*jni.Object, error) {
 	var result *jni.Object

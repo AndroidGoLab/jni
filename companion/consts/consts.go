@@ -21,13 +21,13 @@ const (
 )
 
 const (
+	ExtraAssociation                   string = "android.companion.extra.ASSOCIATION"
+	ExtraDevice                        string = "android.companion.extra.DEVICE"
+	ServiceInterface                   string = "android.companion.CompanionDeviceService"
 	DeviceProfileAppStreaming          string = "android.app.role.COMPANION_DEVICE_APP_STREAMING"
 	DeviceProfileAutomotiveProjection  string = "android.app.role.SYSTEM_AUTOMOTIVE_PROJECTION"
 	DeviceProfileComputer              string = "android.app.role.COMPANION_DEVICE_COMPUTER"
 	DeviceProfileGlasses               string = "android.app.role.COMPANION_DEVICE_GLASSES"
 	DeviceProfileNearbyDeviceStreaming string = "android.app.role.COMPANION_DEVICE_NEARBY_DEVICE_STREAMING"
 	DeviceProfileWatch                 string = "android.app.role.COMPANION_DEVICE_WATCH"
-	ServiceInterface                   string = "android.companion.CompanionDeviceService"
-	ExtraAssociation                   string = "android.companion.extra.ASSOCIATION"
-	ExtraDevice                        string = "android.companion.extra.DEVICE"
 )

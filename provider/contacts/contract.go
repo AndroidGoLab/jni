@@ -23,6 +23,28 @@ type Contract struct {
 	Obj *jni.GlobalRef
 }
 
+// NewContract creates a new android.provider.ContactsContract instance.
+func NewContract(vm *jni.VM) (*Contract, error) {
+	var t Contract
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContract)), midContractInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // IsProfileId calls android.provider.ContactsContract.isProfileId.
 func (m *Contract) IsProfileId(arg0 int64) (bool, error) {
 	var result bool

@@ -23,6 +23,29 @@ type CursorLoader struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCursorLoader creates a new android.content.CursorLoader instance.
+func NewCursorLoader(vm *jni.VM, arg0 *jni.Object) (*CursorLoader, error) {
+	var t CursorLoader
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorLoader)), midCursorLoaderInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CancelLoadInBackground calls android.content.CursorLoader.cancelLoadInBackground.
 func (m *CursorLoader) CancelLoadInBackground() error {
 

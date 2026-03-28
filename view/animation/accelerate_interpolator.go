@@ -23,6 +23,29 @@ type AccelerateInterpolator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAccelerateInterpolator creates a new android.view.animation.AccelerateInterpolator instance.
+func NewAccelerateInterpolator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AccelerateInterpolator, error) {
+	var t AccelerateInterpolator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccelerateInterpolator)), midAccelerateInterpolatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetInterpolation calls android.view.animation.AccelerateInterpolator.getInterpolation.
 func (m *AccelerateInterpolator) GetInterpolation(arg0 float32) (float32, error) {
 	var result float32

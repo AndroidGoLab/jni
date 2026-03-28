@@ -23,6 +23,28 @@ type WpsInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWpsInfo creates a new android.net.wifi.WpsInfo instance.
+func NewWpsInfo(vm *jni.VM) (*WpsInfo, error) {
+	var t WpsInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWpsInfo)), midWpsInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.WpsInfo.describeContents.
 func (m *WpsInfo) DescribeContents() (int32, error) {
 	var result int32

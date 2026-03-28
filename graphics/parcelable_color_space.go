@@ -23,6 +23,29 @@ type ParcelableColorSpace struct {
 	Obj *jni.GlobalRef
 }
 
+// NewParcelableColorSpace creates a new android.graphics.ParcelableColorSpace instance.
+func NewParcelableColorSpace(vm *jni.VM, arg0 *jni.Object) (*ParcelableColorSpace, error) {
+	var t ParcelableColorSpace
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelableColorSpace)), midParcelableColorSpaceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.ParcelableColorSpace.describeContents.
 func (m *ParcelableColorSpace) DescribeContents() (int32, error) {
 	var result int32

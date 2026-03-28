@@ -23,6 +23,34 @@ type ClearCredentialStateException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewClearCredentialStateException creates a new android.credentials.ClearCredentialStateException instance.
+func NewClearCredentialStateException(vm *jni.VM, arg0 string) (*ClearCredentialStateException, error) {
+	var t ClearCredentialStateException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClearCredentialStateException)), midClearCredentialStateExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetType calls android.credentials.ClearCredentialStateException.getType.
 func (m *ClearCredentialStateException) GetType() (string, error) {
 	var result string

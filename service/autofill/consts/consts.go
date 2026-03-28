@@ -3,10 +3,18 @@
 package consts
 
 const (
+	ExtraFillResponse string = "android.service.autofill.extra.FILL_RESPONSE"
+	ServiceInterface  string = "android.service.autofill.AutofillService"
+	ServiceMetaData   string = "android.autofill"
+	TypeOther         string = "other"
+	TypePasswords     string = "passwords"
+)
+
+const (
 	Creator                             int = 0
-	ErrorNeedsUserAction                int = 2
-	ErrorOther                          int = 0
-	ErrorUnsupported                    int = 1
+	FlagCompatibilityModeRequest        int = 2
+	FlagManualRequest                   int = 1
+	FlagSupportsFillDialog              int = 64
 	NoSaveUiReasonDatasetMatch          int = 6
 	NoSaveUiReasonFieldValidationFailed int = 5
 	NoSaveUiReasonHasEmptyRequired      int = 3
@@ -27,9 +35,9 @@ const (
 	UiTypeInline                        int = 2
 	UiTypeMenu                          int = 1
 	UiTypeUnknown                       int = 0
-	FlagCompatibilityModeRequest        int = 2
-	FlagManualRequest                   int = 1
-	FlagSupportsFillDialog              int = 64
+	FlagDelayFill                       int = 4
+	FlagDisableActivityOnly             int = 2
+	FlagTrackContextCommited            int = 1
 	FlagDelaySave                       int = 4
 	FlagDontSaveOnFinish                int = 2
 	FlagSaveOnAllViewsInvisible         int = 1
@@ -47,15 +55,7 @@ const (
 	SaveDataTypePassword                int = 1
 	SaveDataTypePaymentCard             int = 64
 	SaveDataTypeUsername                int = 8
-	FlagDelayFill                       int = 4
-	FlagDisableActivityOnly             int = 2
-	FlagTrackContextCommited            int = 1
-)
-
-const (
-	ExtraFillResponse string = "android.service.autofill.extra.FILL_RESPONSE"
-	ServiceInterface  string = "android.service.autofill.AutofillService"
-	ServiceMetaData   string = "android.autofill"
-	TypeOther         string = "other"
-	TypePasswords     string = "passwords"
+	ErrorNeedsUserAction                int = 2
+	ErrorOther                          int = 0
+	ErrorUnsupported                    int = 1
 )

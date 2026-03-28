@@ -23,6 +23,29 @@ type MutableContextWrapper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMutableContextWrapper creates a new android.content.MutableContextWrapper instance.
+func NewMutableContextWrapper(vm *jni.VM, arg0 *jni.Object) (*MutableContextWrapper, error) {
+	var t MutableContextWrapper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableContextWrapper)), midMutableContextWrapperInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetBaseContext calls android.content.MutableContextWrapper.setBaseContext.
 func (m *MutableContextWrapper) SetBaseContext(arg0 *jni.Object) error {
 

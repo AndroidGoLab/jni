@@ -21,6 +21,34 @@ type StartForegroundCalledOnStoppedServiceException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStartForegroundCalledOnStoppedServiceException creates a new android.app.StartForegroundCalledOnStoppedServiceException instance.
+func NewStartForegroundCalledOnStoppedServiceException(vm *jni.VM, arg0 string) (*StartForegroundCalledOnStoppedServiceException, error) {
+	var t StartForegroundCalledOnStoppedServiceException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStartForegroundCalledOnStoppedServiceException)), midStartForegroundCalledOnStoppedServiceExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.StartForegroundCalledOnStoppedServiceException.describeContents.
 func (m *StartForegroundCalledOnStoppedServiceException) DescribeContents() (int32, error) {
 	var result int32

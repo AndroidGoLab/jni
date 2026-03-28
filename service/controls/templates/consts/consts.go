@@ -3,7 +3,6 @@
 package consts
 
 const (
-	Creator          int = 0
 	FlagModeCool     int = 8
 	FlagModeEco      int = 32
 	FlagModeHeat     int = 4
@@ -15,6 +14,7 @@ const (
 	ModeHeatCool     int = 4
 	ModeOff          int = 1
 	ModeUnknown      int = 0
+	Creator          int = 0
 	TypeError        int = -1
 	TypeNoTemplate   int = 0
 	TypeRange        int = 2

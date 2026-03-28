@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsFieldClassification                 *jni.GlobalRef
+	midFieldClassificationInit             jni.MethodID
 	midFieldClassificationDescribeContents jni.MethodID
 	midFieldClassificationGetAutofillId    jni.MethodID
 	midFieldClassificationToString         jni.MethodID
@@ -55,6 +56,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsFieldClassification = env.NewGlobalRef(&c.Object)
+		midFieldClassificationInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "<init>", "(Landroid/view/autofill/AutofillId;Ljava/util/Set;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midFieldClassificationDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFieldClassification)), "describeContents", "()I")
 		if err != nil {

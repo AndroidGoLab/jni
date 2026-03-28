@@ -23,6 +23,34 @@ type RuntimeShader struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRuntimeShader creates a new android.graphics.RuntimeShader instance.
+func NewRuntimeShader(vm *jni.VM, arg0 string) (*RuntimeShader, error) {
+	var t RuntimeShader
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeShader)), midRuntimeShaderInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetColorUniform2 calls android.graphics.RuntimeShader.setColorUniform.
 func (m *RuntimeShader) SetColorUniform2(arg0 string, arg1 *jni.Object) error {
 

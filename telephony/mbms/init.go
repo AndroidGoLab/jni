@@ -23,14 +23,18 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsGroupCallSessionCallback *jni.GlobalRef
-
 	clsStreamingSessionCallback                  *jni.GlobalRef
+	midStreamingSessionCallbackInit              jni.MethodID
 	midStreamingSessionCallbackOnError           jni.MethodID
 	midStreamingSessionCallbackOnMiddlewareReady jni.MethodID
 
-	clsDownloadStatusListener                *jni.GlobalRef
-	midDownloadStatusListenerOnStatusUpdated jni.MethodID
+	clsStreamingServiceCallback                                 *jni.GlobalRef
+	midStreamingServiceCallbackInit                             jni.MethodID
+	midStreamingServiceCallbackOnBroadcastSignalStrengthUpdated jni.MethodID
+	midStreamingServiceCallbackOnError                          jni.MethodID
+	midStreamingServiceCallbackOnMediaDescriptionUpdated        jni.MethodID
+	midStreamingServiceCallbackOnStreamMethodUpdated            jni.MethodID
+	midStreamingServiceCallbackOnStreamStateUpdated             jni.MethodID
 
 	clsServiceInfo                    *jni.GlobalRef
 	midServiceInfoEquals              jni.MethodID
@@ -41,29 +45,10 @@ var (
 	midServiceInfoGetSessionStartTime jni.MethodID
 	midServiceInfoHashCode            jni.MethodID
 
-	clsStreamingServiceCallback                                 *jni.GlobalRef
-	midStreamingServiceCallbackOnBroadcastSignalStrengthUpdated jni.MethodID
-	midStreamingServiceCallbackOnError                          jni.MethodID
-	midStreamingServiceCallbackOnMediaDescriptionUpdated        jni.MethodID
-	midStreamingServiceCallbackOnStreamMethodUpdated            jni.MethodID
-	midStreamingServiceCallbackOnStreamStateUpdated             jni.MethodID
-
-	clsErrors *jni.GlobalRef
-
-	clsErrorsDownloadErrors *jni.GlobalRef
-
-	clsErrorsGeneralErrors *jni.GlobalRef
-
-	clsErrorsGroupCallErrors *jni.GlobalRef
-
-	clsErrorsInitializationErrors *jni.GlobalRef
-
-	clsErrorsStreamingErrors *jni.GlobalRef
-
-	clsDownloadReceiver          *jni.GlobalRef
-	midDownloadReceiverOnReceive jni.MethodID
-
-	clsGroupCallCallback *jni.GlobalRef
+	clsDownloadSessionCallback                  *jni.GlobalRef
+	midDownloadSessionCallbackInit              jni.MethodID
+	midDownloadSessionCallbackOnError           jni.MethodID
+	midDownloadSessionCallbackOnMiddlewareReady jni.MethodID
 
 	clsDownloadRequest                         *jni.GlobalRef
 	midDownloadRequestDescribeContents         jni.MethodID
@@ -86,14 +71,50 @@ var (
 	midDownloadRequestBuilderFromDownloadRequest   jni.MethodID
 	midDownloadRequestBuilderFromSerializedRequest jni.MethodID
 
+	clsGroupCall        *jni.GlobalRef
+	midGroupCallClose   jni.MethodID
+	midGroupCallGetTmgi jni.MethodID
+
+	clsGroupCallSessionCallback *jni.GlobalRef
+
+	clsErrors *jni.GlobalRef
+
+	clsErrorsDownloadErrors *jni.GlobalRef
+
+	clsErrorsGeneralErrors *jni.GlobalRef
+
+	clsErrorsGroupCallErrors *jni.GlobalRef
+
+	clsErrorsInitializationErrors *jni.GlobalRef
+
+	clsErrorsStreamingErrors *jni.GlobalRef
+
 	clsFileServiceInfo                 *jni.GlobalRef
 	midFileServiceInfoDescribeContents jni.MethodID
 	midFileServiceInfoWriteToParcel    jni.MethodID
+
+	clsDownloadProgressListener                  *jni.GlobalRef
+	midDownloadProgressListenerInit              jni.MethodID
+	midDownloadProgressListenerOnProgressUpdated jni.MethodID
+
+	clsGroupCallCallback *jni.GlobalRef
 
 	clsStreamingService               *jni.GlobalRef
 	midStreamingServiceClose          jni.MethodID
 	midStreamingServiceGetInfo        jni.MethodID
 	midStreamingServiceGetPlaybackUri jni.MethodID
+
+	clsDownloadStatusListener                *jni.GlobalRef
+	midDownloadStatusListenerInit            jni.MethodID
+	midDownloadStatusListenerOnStatusUpdated jni.MethodID
+
+	clsStreamingServiceInfo                 *jni.GlobalRef
+	midStreamingServiceInfoDescribeContents jni.MethodID
+	midStreamingServiceInfoWriteToParcel    jni.MethodID
+
+	clsDownloadReceiver          *jni.GlobalRef
+	midDownloadReceiverInit      jni.MethodID
+	midDownloadReceiverOnReceive jni.MethodID
 
 	clsFileInfo                 *jni.GlobalRef
 	midFileInfoDescribeContents jni.MethodID
@@ -102,21 +123,6 @@ var (
 	midFileInfoGetUri           jni.MethodID
 	midFileInfoHashCode         jni.MethodID
 	midFileInfoWriteToParcel    jni.MethodID
-
-	clsDownloadSessionCallback                  *jni.GlobalRef
-	midDownloadSessionCallbackOnError           jni.MethodID
-	midDownloadSessionCallbackOnMiddlewareReady jni.MethodID
-
-	clsStreamingServiceInfo                 *jni.GlobalRef
-	midStreamingServiceInfoDescribeContents jni.MethodID
-	midStreamingServiceInfoWriteToParcel    jni.MethodID
-
-	clsGroupCall        *jni.GlobalRef
-	midGroupCallClose   jni.MethodID
-	midGroupCallGetTmgi jni.MethodID
-
-	clsDownloadProgressListener                  *jni.GlobalRef
-	midDownloadProgressListenerOnProgressUpdated jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -137,16 +143,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/telephony/mbms/MbmsGroupCallSessionCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGroupCallSessionCallback = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/telephony/mbms/MbmsStreamingSessionCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -154,6 +150,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsStreamingSessionCallback = env.NewGlobalRef(&c.Object)
+		midStreamingSessionCallbackInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingSessionCallback)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midStreamingSessionCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingSessionCallback)), "onError", "(ILjava/lang/String;)V")
 		if err != nil {
@@ -171,15 +171,47 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telephony/mbms/DownloadStatusListener")
+	c, err = env.FindClass("android/telephony/mbms/StreamingServiceCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDownloadStatusListener = env.NewGlobalRef(&c.Object)
+		clsStreamingServiceCallback = env.NewGlobalRef(&c.Object)
+		midStreamingServiceCallbackInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midDownloadStatusListenerOnStatusUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadStatusListener)), "onStatusUpdated", "(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;I)V")
+		midStreamingServiceCallbackOnBroadcastSignalStrengthUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onBroadcastSignalStrengthUpdated", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStreamingServiceCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onError", "(ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStreamingServiceCallbackOnMediaDescriptionUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onMediaDescriptionUpdated", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStreamingServiceCallbackOnStreamMethodUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onStreamMethodUpdated", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStreamingServiceCallbackOnStreamStateUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onStreamStateUpdated", "(II)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -247,135 +279,31 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telephony/mbms/StreamingServiceCallback")
+	c, err = env.FindClass("android/telephony/mbms/MbmsDownloadSessionCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsStreamingServiceCallback = env.NewGlobalRef(&c.Object)
+		clsDownloadSessionCallback = env.NewGlobalRef(&c.Object)
+		midDownloadSessionCallbackInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midStreamingServiceCallbackOnBroadcastSignalStrengthUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onBroadcastSignalStrengthUpdated", "(I)V")
+		midDownloadSessionCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), "onError", "(ILjava/lang/String;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midStreamingServiceCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onError", "(ILjava/lang/String;)V")
+		midDownloadSessionCallbackOnMiddlewareReady, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), "onMiddlewareReady", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
-
-		midStreamingServiceCallbackOnMediaDescriptionUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onMediaDescriptionUpdated", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStreamingServiceCallbackOnStreamMethodUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onStreamMethodUpdated", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStreamingServiceCallbackOnStreamStateUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), "onStreamStateUpdated", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsErrors")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsErrors = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$DownloadErrors")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsErrorsDownloadErrors = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$GeneralErrors")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsErrorsGeneralErrors = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$GroupCallErrors")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsErrorsGroupCallErrors = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$InitializationErrors")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsErrorsInitializationErrors = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$StreamingErrors")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsErrorsStreamingErrors = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsDownloadReceiver")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDownloadReceiver = env.NewGlobalRef(&c.Object)
-
-		midDownloadReceiverOnReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadReceiver)), "onReceive", "(Landroid/content/Context;Landroid/content/Intent;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/GroupCallCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGroupCallCallback = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -518,6 +446,100 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/telephony/mbms/GroupCall")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGroupCall = env.NewGlobalRef(&c.Object)
+
+		midGroupCallClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroupCall)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupCallGetTmgi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroupCall)), "getTmgi", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsGroupCallSessionCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGroupCallSessionCallback = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsErrors")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsErrors = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$DownloadErrors")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsErrorsDownloadErrors = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$GeneralErrors")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsErrorsGeneralErrors = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$GroupCallErrors")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsErrorsGroupCallErrors = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$InitializationErrors")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsErrorsInitializationErrors = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsErrors$StreamingErrors")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsErrorsStreamingErrors = env.NewGlobalRef(&c.Object)
+
+	}
+
 	c, err = env.FindClass("android/telephony/mbms/FileServiceInfo")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -539,6 +561,37 @@ func doInit(env *jni.Env) error {
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/DownloadProgressListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDownloadProgressListener = env.NewGlobalRef(&c.Object)
+		midDownloadProgressListenerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadProgressListener)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDownloadProgressListenerOnProgressUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadProgressListener)), "onProgressUpdated", "(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/GroupCallCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGroupCallCallback = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -565,6 +618,72 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStreamingServiceGetPlaybackUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingService)), "getPlaybackUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/DownloadStatusListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDownloadStatusListener = env.NewGlobalRef(&c.Object)
+		midDownloadStatusListenerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadStatusListener)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDownloadStatusListenerOnStatusUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadStatusListener)), "onStatusUpdated", "(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/StreamingServiceInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsStreamingServiceInfo = env.NewGlobalRef(&c.Object)
+
+		midStreamingServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStreamingServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telephony/mbms/MbmsDownloadReceiver")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDownloadReceiver = env.NewGlobalRef(&c.Object)
+		midDownloadReceiverInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadReceiver)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDownloadReceiverOnReceive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadReceiver)), "onReceive", "(Landroid/content/Context;Landroid/content/Intent;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -617,95 +736,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midFileInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/MbmsDownloadSessionCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDownloadSessionCallback = env.NewGlobalRef(&c.Object)
-
-		midDownloadSessionCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), "onError", "(ILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadSessionCallbackOnMiddlewareReady, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), "onMiddlewareReady", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/StreamingServiceInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsStreamingServiceInfo = env.NewGlobalRef(&c.Object)
-
-		midStreamingServiceInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceInfo)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStreamingServiceInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStreamingServiceInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/GroupCall")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGroupCall = env.NewGlobalRef(&c.Object)
-
-		midGroupCallClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroupCall)), "close", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupCallGetTmgi, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroupCall)), "getTmgi", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telephony/mbms/DownloadProgressListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDownloadProgressListener = env.NewGlobalRef(&c.Object)
-
-		midDownloadProgressListenerOnProgressUpdated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadProgressListener)), "onProgressUpdated", "(Landroid/telephony/mbms/DownloadRequest;Landroid/telephony/mbms/FileInfo;IIII)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

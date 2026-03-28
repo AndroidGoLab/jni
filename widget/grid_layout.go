@@ -23,6 +23,29 @@ type GridLayout struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGridLayout creates a new android.widget.GridLayout instance.
+func NewGridLayout(vm *jni.VM, arg0 *jni.Object) (*GridLayout, error) {
+	var t GridLayout
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGridLayout)), midGridLayoutInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GenerateLayoutParams1 calls android.widget.GridLayout.generateLayoutParams.
 func (m *GridLayout) GenerateLayoutParams1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

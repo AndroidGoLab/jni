@@ -5,10 +5,6 @@ package ad
 import "github.com/AndroidGoLab/jni/media/tv/ad/consts"
 
 const (
-	ErrorKeyErrorCode                         = consts.ErrorKeyErrorCode
-	ErrorKeyMethodName                        = consts.ErrorKeyMethodName
-	ServiceInterface                          = consts.ServiceInterface
-	ServiceMetaData                           = consts.ServiceMetaData
 	ActionAppLinkCommand                      = consts.ActionAppLinkCommand
 	AppLinkKeyBackUri                         = consts.AppLinkKeyBackUri
 	AppLinkKeyClassName                       = consts.AppLinkKeyClassName
@@ -27,6 +23,10 @@ const (
 	SessionDataTypeAdRequest                  = consts.SessionDataTypeAdRequest
 	SessionDataTypeBroadcastInfoRequest       = consts.SessionDataTypeBroadcastInfoRequest
 	SessionDataTypeRemoveBroadcastInfoRequest = consts.SessionDataTypeRemoveBroadcastInfoRequest
+	ErrorKeyErrorCode                         = consts.ErrorKeyErrorCode
+	ErrorKeyMethodName                        = consts.ErrorKeyMethodName
+	ServiceInterface                          = consts.ServiceInterface
+	ServiceMetaData                           = consts.ServiceMetaData
 )
 
 const (

@@ -23,6 +23,29 @@ type VideoView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewVideoView creates a new android.widget.VideoView instance.
+func NewVideoView(vm *jni.VM, arg0 *jni.Object) (*VideoView, error) {
+	var t VideoView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVideoView)), midVideoViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddSubtitleSource calls android.widget.VideoView.addSubtitleSource.
 func (m *VideoView) AddSubtitleSource(arg0 *jni.Object, arg1 *jni.Object) error {
 

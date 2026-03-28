@@ -23,6 +23,29 @@ type TextInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTextInfo creates a new android.view.textservice.TextInfo instance.
+func NewTextInfo(vm *jni.VM, arg0 *jni.Object) (*TextInfo, error) {
+	var t TextInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextInfo)), midTextInfoInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.view.textservice.TextInfo.describeContents.
 func (m *TextInfo) DescribeContents() (int32, error) {
 	var result int32

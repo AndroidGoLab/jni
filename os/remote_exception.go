@@ -23,6 +23,28 @@ type RemoteException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoteException creates a new android.os.RemoteException instance.
+func NewRemoteException(vm *jni.VM) (*RemoteException, error) {
+	var t RemoteException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteException)), midRemoteExceptionInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // RethrowAsRuntimeException calls android.os.RemoteException.rethrowAsRuntimeException.
 func (m *RemoteException) RethrowAsRuntimeException() (*jni.Object, error) {
 	var result *jni.Object

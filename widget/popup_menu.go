@@ -23,6 +23,29 @@ type PopupMenu struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPopupMenu creates a new android.widget.PopupMenu instance.
+func NewPopupMenu(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*PopupMenu, error) {
+	var t PopupMenu
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPopupMenu)), midPopupMenuInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Dismiss calls android.widget.PopupMenu.dismiss.
 func (m *PopupMenu) Dismiss() error {
 

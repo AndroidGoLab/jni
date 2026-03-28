@@ -23,6 +23,29 @@ type SyncFence struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSyncFence creates a new android.hardware.SyncFence instance.
+func NewSyncFence(vm *jni.VM, arg0 *jni.Object) (*SyncFence, error) {
+	var t SyncFence
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncFence)), midSyncFenceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Await calls android.hardware.SyncFence.await.
 func (m *SyncFence) Await(arg0 *jni.Object) (bool, error) {
 	var result bool

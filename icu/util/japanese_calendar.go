@@ -23,6 +23,28 @@ type JapaneseCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewJapaneseCalendar creates a new android.icu.util.JapaneseCalendar instance.
+func NewJapaneseCalendar(vm *jni.VM) (*JapaneseCalendar, error) {
+	var t JapaneseCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJapaneseCalendar)), midJapaneseCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetActualMaximum calls android.icu.util.JapaneseCalendar.getActualMaximum.
 func (m *JapaneseCalendar) GetActualMaximum(arg0 int32) (int32, error) {
 	var result int32

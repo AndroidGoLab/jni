@@ -23,6 +23,29 @@ type InvalidKeException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInvalidKeException creates a new android.net.ipsec.ike.exceptions.InvalidKeException instance.
+func NewInvalidKeException(vm *jni.VM, arg0 int32) (*InvalidKeException, error) {
+	var t InvalidKeException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), midInvalidKeExceptionInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDhGroup calls android.net.ipsec.ike.exceptions.InvalidKeException.getDhGroup.
 func (m *InvalidKeException) GetDhGroup() (int32, error) {
 	var result int32

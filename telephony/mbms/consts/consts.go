@@ -4,6 +4,16 @@ package consts
 
 const (
 	SignalStrengthUnavailable             int = -1
+	Creator                               int = 0
+	ReasonByUserRequest                   int = 1
+	ReasonFrequencyConflict               int = 3
+	ReasonLeftMbmsBroadcastArea           int = 6
+	ReasonNone                            int = 0
+	ReasonNotConnectedToHomecarrierLte    int = 5
+	ReasonOutOfMemory                     int = 4
+	StateStalled                          int = 3
+	StateStarted                          int = 2
+	StateStopped                          int = 1
 	ErrorMiddlewareLost                   int = 3
 	ErrorMiddlewareNotBound               int = 2
 	ErrorNoUniqueMiddleware               int = 1
@@ -27,17 +37,7 @@ const (
 	ErrorUnableToInitialize               int = 103
 	ErrorConcurrentServiceLimitReached    int = 301
 	ErrorDuplicateStartStream             int = 303
-	Creator                               int = 0
 	BroadcastMethod                       int = 1
-	ReasonByUserRequest                   int = 1
 	ReasonEndOfSession                    int = 2
-	ReasonFrequencyConflict               int = 3
-	ReasonLeftMbmsBroadcastArea           int = 6
-	ReasonNone                            int = 0
-	ReasonNotConnectedToHomecarrierLte    int = 5
-	ReasonOutOfMemory                     int = 4
-	StateStalled                          int = 3
-	StateStarted                          int = 2
-	StateStopped                          int = 1
 	UnicastMethod                         int = 2
 )

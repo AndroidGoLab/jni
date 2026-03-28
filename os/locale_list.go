@@ -23,6 +23,29 @@ type LocaleList struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLocaleList creates a new android.os.LocaleList instance.
+func NewLocaleList(vm *jni.VM, arg0 *jni.Object) (*LocaleList, error) {
+	var t LocaleList
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocaleList)), midLocaleListInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.os.LocaleList.describeContents.
 func (m *LocaleList) DescribeContents() (int32, error) {
 	var result int32

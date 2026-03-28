@@ -5,6 +5,19 @@
 package: displayhash
 go_import: github.com/AndroidGoLab/jni/view/displayhash
 classes:
+    - java_class: android.view.displayhash.DisplayHashManager
+      go_type: DisplayHashManager
+      obtain: system_service
+      service_name: display_hash
+      close: true
+      methods:
+        - java_method: verifyDisplayHash
+          go_name: VerifyDisplayHash
+          params:
+            - java_type: android.view.displayhash.DisplayHash
+              go_name: arg0
+          returns: android.view.displayhash.VerifiedDisplayHash
+          error: true
     - java_class: android.view.displayhash.DisplayHashResultCallback
       go_type: DisplayHashResultCallback
       methods:
@@ -24,6 +37,16 @@ classes:
           error: true
     - java_class: android.view.displayhash.VerifiedDisplayHash
       go_type: VerifiedDisplayHash
+      obtain: constructor
+      constructor_params:
+        - java_type: long
+          go_name: arg0
+        - java_type: android.graphics.Rect
+          go_name: arg1
+        - java_type: String
+          go_name: arg2
+        - java_type: '[B'
+          go_name: arg3
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -57,19 +80,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-    - java_class: android.view.displayhash.DisplayHashManager
-      go_type: DisplayHashManager
-      obtain: system_service
-      service_name: display_hash
-      close: true
-      methods:
-        - java_method: verifyDisplayHash
-          go_name: VerifyDisplayHash
-          params:
-            - java_type: android.view.displayhash.DisplayHash
-              go_name: arg0
-          returns: android.view.displayhash.VerifiedDisplayHash
           error: true
     - java_class: android.view.displayhash.DisplayHash
       go_type: DisplayHash

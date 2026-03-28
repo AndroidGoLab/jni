@@ -23,6 +23,29 @@ type ZoomButton struct {
 	Obj *jni.GlobalRef
 }
 
+// NewZoomButton creates a new android.widget.ZoomButton instance.
+func NewZoomButton(vm *jni.VM, arg0 *jni.Object) (*ZoomButton, error) {
+	var t ZoomButton
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsZoomButton)), midZoomButtonInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DispatchUnhandledMove calls android.widget.ZoomButton.dispatchUnhandledMove.
 func (m *ZoomButton) DispatchUnhandledMove(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool

@@ -23,6 +23,29 @@ type UnicodeSetSpanner struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUnicodeSetSpanner creates a new android.icu.text.UnicodeSetSpanner instance.
+func NewUnicodeSetSpanner(vm *jni.VM, arg0 *jni.Object) (*UnicodeSetSpanner, error) {
+	var t UnicodeSetSpanner
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnicodeSetSpanner)), midUnicodeSetSpannerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CountIn1 calls android.icu.text.UnicodeSetSpanner.countIn.
 func (m *UnicodeSetSpanner) CountIn1(arg0 string) (int32, error) {
 	var result int32

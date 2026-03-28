@@ -23,6 +23,29 @@ type TableRow struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTableRow creates a new android.widget.TableRow instance.
+func NewTableRow(vm *jni.VM, arg0 *jni.Object) (*TableRow, error) {
+	var t TableRow
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableRow)), midTableRowInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GenerateLayoutParams1 calls android.widget.TableRow.generateLayoutParams.
 func (m *TableRow) GenerateLayoutParams1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

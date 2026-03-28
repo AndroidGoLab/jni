@@ -23,6 +23,29 @@ type GetCredentialResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGetCredentialResponse creates a new android.credentials.GetCredentialResponse instance.
+func NewGetCredentialResponse(vm *jni.VM, arg0 *jni.Object) (*GetCredentialResponse, error) {
+	var t GetCredentialResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGetCredentialResponse)), midGetCredentialResponseInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.credentials.GetCredentialResponse.describeContents.
 func (m *GetCredentialResponse) DescribeContents() (int32, error) {
 	var result int32

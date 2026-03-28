@@ -23,6 +23,113 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsKeyNotYetValidException     *jni.GlobalRef
+	midKeyNotYetValidExceptionInit jni.MethodID
+
+	clsKeyStoreManager                                *jni.GlobalRef
+	midKeyStoreManagerGetGrantedKeyFromId             jni.MethodID
+	midKeyStoreManagerGetGrantedKeyPairFromId         jni.MethodID
+	midKeyStoreManagerGetSupplementaryAttestationInfo jni.MethodID
+	midKeyStoreManagerGrantKeyAccess                  jni.MethodID
+	midKeyStoreManagerRevokeKeyAccess                 jni.MethodID
+
+	clsKeyExpiredException     *jni.GlobalRef
+	midKeyExpiredExceptionInit jni.MethodID
+
+	clsKeyInfo                                                        *jni.GlobalRef
+	midKeyInfoGetBlockModes                                           jni.MethodID
+	midKeyInfoGetDigests                                              jni.MethodID
+	midKeyInfoGetEncryptionPaddings                                   jni.MethodID
+	midKeyInfoGetKeySize                                              jni.MethodID
+	midKeyInfoGetKeyValidityForConsumptionEnd                         jni.MethodID
+	midKeyInfoGetKeyValidityForOriginationEnd                         jni.MethodID
+	midKeyInfoGetKeyValidityStart                                     jni.MethodID
+	midKeyInfoGetKeystoreAlias                                        jni.MethodID
+	midKeyInfoGetOrigin                                               jni.MethodID
+	midKeyInfoGetPurposes                                             jni.MethodID
+	midKeyInfoGetRemainingUsageCount                                  jni.MethodID
+	midKeyInfoGetSecurityLevel                                        jni.MethodID
+	midKeyInfoGetSignaturePaddings                                    jni.MethodID
+	midKeyInfoGetUserAuthenticationType                               jni.MethodID
+	midKeyInfoGetUserAuthenticationValidityDurationSeconds            jni.MethodID
+	midKeyInfoIsInsideSecureHardware                                  jni.MethodID
+	midKeyInfoIsInvalidatedByBiometricEnrollment                      jni.MethodID
+	midKeyInfoIsTrustedUserPresenceRequired                           jni.MethodID
+	midKeyInfoIsUserAuthenticationRequired                            jni.MethodID
+	midKeyInfoIsUserAuthenticationRequirementEnforcedBySecureHardware jni.MethodID
+	midKeyInfoIsUserAuthenticationValidWhileOnBody                    jni.MethodID
+	midKeyInfoIsUserConfirmationRequired                              jni.MethodID
+
+	clsBackendBusyException                     *jni.GlobalRef
+	midBackendBusyExceptionInit                 jni.MethodID
+	midBackendBusyExceptionGetBackOffHintMillis jni.MethodID
+
+	clsKeyProtection                                             *jni.GlobalRef
+	midKeyProtectionGetBlockModes                                jni.MethodID
+	midKeyProtectionGetDigests                                   jni.MethodID
+	midKeyProtectionGetEncryptionPaddings                        jni.MethodID
+	midKeyProtectionGetKeyValidityForConsumptionEnd              jni.MethodID
+	midKeyProtectionGetKeyValidityForOriginationEnd              jni.MethodID
+	midKeyProtectionGetKeyValidityStart                          jni.MethodID
+	midKeyProtectionGetMaxUsageCount                             jni.MethodID
+	midKeyProtectionGetPurposes                                  jni.MethodID
+	midKeyProtectionGetSignaturePaddings                         jni.MethodID
+	midKeyProtectionGetUserAuthenticationType                    jni.MethodID
+	midKeyProtectionGetUserAuthenticationValidityDurationSeconds jni.MethodID
+	midKeyProtectionIsDigestsSpecified                           jni.MethodID
+	midKeyProtectionIsInvalidatedByBiometricEnrollment           jni.MethodID
+	midKeyProtectionIsMgf1DigestsSpecified                       jni.MethodID
+	midKeyProtectionIsRandomizedEncryptionRequired               jni.MethodID
+	midKeyProtectionIsUnlockedDeviceRequired                     jni.MethodID
+	midKeyProtectionIsUserAuthenticationRequired                 jni.MethodID
+	midKeyProtectionIsUserAuthenticationValidWhileOnBody         jni.MethodID
+	midKeyProtectionIsUserConfirmationRequired                   jni.MethodID
+	midKeyProtectionIsUserPresenceRequired                       jni.MethodID
+
+	clsKeyProtectionBuilder                                             *jni.GlobalRef
+	midKeyProtectionBuilderBuild                                        jni.MethodID
+	midKeyProtectionBuilderSetBlockModes                                jni.MethodID
+	midKeyProtectionBuilderSetDigests                                   jni.MethodID
+	midKeyProtectionBuilderSetEncryptionPaddings                        jni.MethodID
+	midKeyProtectionBuilderSetInvalidatedByBiometricEnrollment          jni.MethodID
+	midKeyProtectionBuilderSetIsStrongBoxBacked                         jni.MethodID
+	midKeyProtectionBuilderSetKeyValidityEnd                            jni.MethodID
+	midKeyProtectionBuilderSetKeyValidityForConsumptionEnd              jni.MethodID
+	midKeyProtectionBuilderSetKeyValidityForOriginationEnd              jni.MethodID
+	midKeyProtectionBuilderSetKeyValidityStart                          jni.MethodID
+	midKeyProtectionBuilderSetMaxUsageCount                             jni.MethodID
+	midKeyProtectionBuilderSetMgf1Digests                               jni.MethodID
+	midKeyProtectionBuilderSetRandomizedEncryptionRequired              jni.MethodID
+	midKeyProtectionBuilderSetSignaturePaddings                         jni.MethodID
+	midKeyProtectionBuilderSetUnlockedDeviceRequired                    jni.MethodID
+	midKeyProtectionBuilderSetUserAuthenticationParameters              jni.MethodID
+	midKeyProtectionBuilderSetUserAuthenticationRequired                jni.MethodID
+	midKeyProtectionBuilderSetUserAuthenticationValidWhileOnBody        jni.MethodID
+	midKeyProtectionBuilderSetUserAuthenticationValidityDurationSeconds jni.MethodID
+	midKeyProtectionBuilderSetUserConfirmationRequired                  jni.MethodID
+	midKeyProtectionBuilderSetUserPresenceRequired                      jni.MethodID
+
+	clsKeyPermanentlyInvalidatedException     *jni.GlobalRef
+	midKeyPermanentlyInvalidatedExceptionInit jni.MethodID
+
+	clsUserPresenceUnavailableException     *jni.GlobalRef
+	midUserPresenceUnavailableExceptionInit jni.MethodID
+
+	clsStrongBoxUnavailableException     *jni.GlobalRef
+	midStrongBoxUnavailableExceptionInit jni.MethodID
+
+	clsKeyProperties *jni.GlobalRef
+
+	clsWrappedKeyEntry                          *jni.GlobalRef
+	midWrappedKeyEntryInit                      jni.MethodID
+	midWrappedKeyEntryGetAlgorithmParameterSpec jni.MethodID
+	midWrappedKeyEntryGetTransformation         jni.MethodID
+	midWrappedKeyEntryGetWrappedKeyBytes        jni.MethodID
+	midWrappedKeyEntryGetWrappingKeyAlias       jni.MethodID
+
+	clsUserNotAuthenticatedException     *jni.GlobalRef
+	midUserNotAuthenticatedExceptionInit jni.MethodID
+
 	clsKeyGenParameterSpec                                             *jni.GlobalRef
 	midKeyGenParameterSpecGetAlgorithmParameterSpec                    jni.MethodID
 	midKeyGenParameterSpecGetAttestKeyAlias                            jni.MethodID
@@ -88,106 +195,8 @@ var (
 	midKeyGenParameterSpecBuilderSetUserConfirmationRequired                  jni.MethodID
 	midKeyGenParameterSpecBuilderSetUserPresenceRequired                      jni.MethodID
 
-	clsKeyInfo                                                        *jni.GlobalRef
-	midKeyInfoGetBlockModes                                           jni.MethodID
-	midKeyInfoGetDigests                                              jni.MethodID
-	midKeyInfoGetEncryptionPaddings                                   jni.MethodID
-	midKeyInfoGetKeySize                                              jni.MethodID
-	midKeyInfoGetKeyValidityForConsumptionEnd                         jni.MethodID
-	midKeyInfoGetKeyValidityForOriginationEnd                         jni.MethodID
-	midKeyInfoGetKeyValidityStart                                     jni.MethodID
-	midKeyInfoGetKeystoreAlias                                        jni.MethodID
-	midKeyInfoGetOrigin                                               jni.MethodID
-	midKeyInfoGetPurposes                                             jni.MethodID
-	midKeyInfoGetRemainingUsageCount                                  jni.MethodID
-	midKeyInfoGetSecurityLevel                                        jni.MethodID
-	midKeyInfoGetSignaturePaddings                                    jni.MethodID
-	midKeyInfoGetUserAuthenticationType                               jni.MethodID
-	midKeyInfoGetUserAuthenticationValidityDurationSeconds            jni.MethodID
-	midKeyInfoIsInsideSecureHardware                                  jni.MethodID
-	midKeyInfoIsInvalidatedByBiometricEnrollment                      jni.MethodID
-	midKeyInfoIsTrustedUserPresenceRequired                           jni.MethodID
-	midKeyInfoIsUserAuthenticationRequired                            jni.MethodID
-	midKeyInfoIsUserAuthenticationRequirementEnforcedBySecureHardware jni.MethodID
-	midKeyInfoIsUserAuthenticationValidWhileOnBody                    jni.MethodID
-	midKeyInfoIsUserConfirmationRequired                              jni.MethodID
-
-	clsKeyPermanentlyInvalidatedException *jni.GlobalRef
-
-	clsKeyProperties *jni.GlobalRef
-
-	clsKeyNotYetValidException *jni.GlobalRef
-
-	clsWrappedKeyEntry                          *jni.GlobalRef
-	midWrappedKeyEntryGetAlgorithmParameterSpec jni.MethodID
-	midWrappedKeyEntryGetTransformation         jni.MethodID
-	midWrappedKeyEntryGetWrappedKeyBytes        jni.MethodID
-	midWrappedKeyEntryGetWrappingKeyAlias       jni.MethodID
-
-	clsBackendBusyException                     *jni.GlobalRef
-	midBackendBusyExceptionGetBackOffHintMillis jni.MethodID
-
-	clsStrongBoxUnavailableException *jni.GlobalRef
-
-	clsSecureKeyImportUnavailableException *jni.GlobalRef
-
-	clsKeyExpiredException *jni.GlobalRef
-
-	clsKeyProtection                                             *jni.GlobalRef
-	midKeyProtectionGetBlockModes                                jni.MethodID
-	midKeyProtectionGetDigests                                   jni.MethodID
-	midKeyProtectionGetEncryptionPaddings                        jni.MethodID
-	midKeyProtectionGetKeyValidityForConsumptionEnd              jni.MethodID
-	midKeyProtectionGetKeyValidityForOriginationEnd              jni.MethodID
-	midKeyProtectionGetKeyValidityStart                          jni.MethodID
-	midKeyProtectionGetMaxUsageCount                             jni.MethodID
-	midKeyProtectionGetPurposes                                  jni.MethodID
-	midKeyProtectionGetSignaturePaddings                         jni.MethodID
-	midKeyProtectionGetUserAuthenticationType                    jni.MethodID
-	midKeyProtectionGetUserAuthenticationValidityDurationSeconds jni.MethodID
-	midKeyProtectionIsDigestsSpecified                           jni.MethodID
-	midKeyProtectionIsInvalidatedByBiometricEnrollment           jni.MethodID
-	midKeyProtectionIsMgf1DigestsSpecified                       jni.MethodID
-	midKeyProtectionIsRandomizedEncryptionRequired               jni.MethodID
-	midKeyProtectionIsUnlockedDeviceRequired                     jni.MethodID
-	midKeyProtectionIsUserAuthenticationRequired                 jni.MethodID
-	midKeyProtectionIsUserAuthenticationValidWhileOnBody         jni.MethodID
-	midKeyProtectionIsUserConfirmationRequired                   jni.MethodID
-	midKeyProtectionIsUserPresenceRequired                       jni.MethodID
-
-	clsKeyProtectionBuilder                                             *jni.GlobalRef
-	midKeyProtectionBuilderBuild                                        jni.MethodID
-	midKeyProtectionBuilderSetBlockModes                                jni.MethodID
-	midKeyProtectionBuilderSetDigests                                   jni.MethodID
-	midKeyProtectionBuilderSetEncryptionPaddings                        jni.MethodID
-	midKeyProtectionBuilderSetInvalidatedByBiometricEnrollment          jni.MethodID
-	midKeyProtectionBuilderSetIsStrongBoxBacked                         jni.MethodID
-	midKeyProtectionBuilderSetKeyValidityEnd                            jni.MethodID
-	midKeyProtectionBuilderSetKeyValidityForConsumptionEnd              jni.MethodID
-	midKeyProtectionBuilderSetKeyValidityForOriginationEnd              jni.MethodID
-	midKeyProtectionBuilderSetKeyValidityStart                          jni.MethodID
-	midKeyProtectionBuilderSetMaxUsageCount                             jni.MethodID
-	midKeyProtectionBuilderSetMgf1Digests                               jni.MethodID
-	midKeyProtectionBuilderSetRandomizedEncryptionRequired              jni.MethodID
-	midKeyProtectionBuilderSetSignaturePaddings                         jni.MethodID
-	midKeyProtectionBuilderSetUnlockedDeviceRequired                    jni.MethodID
-	midKeyProtectionBuilderSetUserAuthenticationParameters              jni.MethodID
-	midKeyProtectionBuilderSetUserAuthenticationRequired                jni.MethodID
-	midKeyProtectionBuilderSetUserAuthenticationValidWhileOnBody        jni.MethodID
-	midKeyProtectionBuilderSetUserAuthenticationValidityDurationSeconds jni.MethodID
-	midKeyProtectionBuilderSetUserConfirmationRequired                  jni.MethodID
-	midKeyProtectionBuilderSetUserPresenceRequired                      jni.MethodID
-
-	clsUserNotAuthenticatedException *jni.GlobalRef
-
-	clsKeyStoreManager                                *jni.GlobalRef
-	midKeyStoreManagerGetGrantedKeyFromId             jni.MethodID
-	midKeyStoreManagerGetGrantedKeyPairFromId         jni.MethodID
-	midKeyStoreManagerGetSupplementaryAttestationInfo jni.MethodID
-	midKeyStoreManagerGrantKeyAccess                  jni.MethodID
-	midKeyStoreManagerRevokeKeyAccess                 jni.MethodID
-
-	clsUserPresenceUnavailableException *jni.GlobalRef
+	clsSecureKeyImportUnavailableException     *jni.GlobalRef
+	midSecureKeyImportUnavailableExceptionInit jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -207,6 +216,679 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/security/keystore/KeyNotYetValidException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyNotYetValidException = env.NewGlobalRef(&c.Object)
+		midKeyNotYetValidExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyNotYetValidException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyStoreManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyStoreManager = env.NewGlobalRef(&c.Object)
+
+		midKeyStoreManagerGetGrantedKeyFromId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "getGrantedKeyFromId", "(J)Ljava/security/Key;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyStoreManagerGetGrantedKeyPairFromId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "getGrantedKeyPairFromId", "(J)Ljava/security/KeyPair;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyStoreManagerGetSupplementaryAttestationInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "getSupplementaryAttestationInfo", "(I)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyStoreManagerGrantKeyAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "grantKeyAccess", "(Ljava/lang/String;I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyStoreManagerRevokeKeyAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "revokeKeyAccess", "(Ljava/lang/String;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyExpiredException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyExpiredException = env.NewGlobalRef(&c.Object)
+		midKeyExpiredExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyExpiredException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyInfo = env.NewGlobalRef(&c.Object)
+
+		midKeyInfoGetBlockModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getBlockModes", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetDigests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getDigests", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetEncryptionPaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getEncryptionPaddings", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetKeySize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeySize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetKeyValidityForConsumptionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeyValidityForConsumptionEnd", "()Ljava/util/Date;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetKeyValidityForOriginationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeyValidityForOriginationEnd", "()Ljava/util/Date;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetKeyValidityStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeyValidityStart", "()Ljava/util/Date;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetKeystoreAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeystoreAlias", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getOrigin", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetPurposes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getPurposes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetRemainingUsageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getRemainingUsageCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetSecurityLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getSecurityLevel", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetSignaturePaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getSignaturePaddings", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetUserAuthenticationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getUserAuthenticationType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoGetUserAuthenticationValidityDurationSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getUserAuthenticationValidityDurationSeconds", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsInsideSecureHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isInsideSecureHardware", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsInvalidatedByBiometricEnrollment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isInvalidatedByBiometricEnrollment", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsTrustedUserPresenceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isTrustedUserPresenceRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsUserAuthenticationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserAuthenticationRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsUserAuthenticationRequirementEnforcedBySecureHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserAuthenticationRequirementEnforcedBySecureHardware", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsUserAuthenticationValidWhileOnBody, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserAuthenticationValidWhileOnBody", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyInfoIsUserConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserConfirmationRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/BackendBusyException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBackendBusyException = env.NewGlobalRef(&c.Object)
+		midBackendBusyExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackendBusyException)), "<init>", "(J)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midBackendBusyExceptionGetBackOffHintMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackendBusyException)), "getBackOffHintMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyProtection")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyProtection = env.NewGlobalRef(&c.Object)
+
+		midKeyProtectionGetBlockModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getBlockModes", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetDigests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getDigests", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetEncryptionPaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getEncryptionPaddings", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetKeyValidityForConsumptionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getKeyValidityForConsumptionEnd", "()Ljava/util/Date;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetKeyValidityForOriginationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getKeyValidityForOriginationEnd", "()Ljava/util/Date;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetKeyValidityStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getKeyValidityStart", "()Ljava/util/Date;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetMaxUsageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getMaxUsageCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetPurposes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getPurposes", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetSignaturePaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getSignaturePaddings", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetUserAuthenticationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getUserAuthenticationType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionGetUserAuthenticationValidityDurationSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getUserAuthenticationValidityDurationSeconds", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsDigestsSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isDigestsSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsInvalidatedByBiometricEnrollment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isInvalidatedByBiometricEnrollment", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsMgf1DigestsSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isMgf1DigestsSpecified", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsRandomizedEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isRandomizedEncryptionRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsUnlockedDeviceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUnlockedDeviceRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsUserAuthenticationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserAuthenticationRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsUserAuthenticationValidWhileOnBody, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserAuthenticationValidWhileOnBody", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsUserConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserConfirmationRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionIsUserPresenceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserPresenceRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyProtection$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyProtectionBuilder = env.NewGlobalRef(&c.Object)
+
+		midKeyProtectionBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "build", "()Landroid/security/keystore/KeyProtection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetBlockModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setBlockModes", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetDigests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setDigests", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetEncryptionPaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setEncryptionPaddings", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetInvalidatedByBiometricEnrollment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setInvalidatedByBiometricEnrollment", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetIsStrongBoxBacked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setIsStrongBoxBacked", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetKeyValidityEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityEnd", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetKeyValidityForConsumptionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityForConsumptionEnd", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetKeyValidityForOriginationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityForOriginationEnd", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetKeyValidityStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityStart", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetMaxUsageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setMaxUsageCount", "(I)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetMgf1Digests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setMgf1Digests", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetRandomizedEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setRandomizedEncryptionRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetSignaturePaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setSignaturePaddings", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUnlockedDeviceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUnlockedDeviceRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUserAuthenticationParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationParameters", "(II)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUserAuthenticationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUserAuthenticationValidWhileOnBody, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationValidWhileOnBody", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUserAuthenticationValidityDurationSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationValidityDurationSeconds", "(I)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUserConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserConfirmationRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyProtectionBuilderSetUserPresenceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserPresenceRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyPermanentlyInvalidatedException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyPermanentlyInvalidatedException = env.NewGlobalRef(&c.Object)
+		midKeyPermanentlyInvalidatedExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyPermanentlyInvalidatedException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/UserPresenceUnavailableException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUserPresenceUnavailableException = env.NewGlobalRef(&c.Object)
+		midUserPresenceUnavailableExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUserPresenceUnavailableException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/StrongBoxUnavailableException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsStrongBoxUnavailableException = env.NewGlobalRef(&c.Object)
+		midStrongBoxUnavailableExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStrongBoxUnavailableException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/KeyProperties")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyProperties = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/WrappedKeyEntry")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWrappedKeyEntry = env.NewGlobalRef(&c.Object)
+		midWrappedKeyEntryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "<init>", "([BLjava/lang/String;Ljava/lang/String;Ljava/security/spec/AlgorithmParameterSpec;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midWrappedKeyEntryGetAlgorithmParameterSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getAlgorithmParameterSpec", "()Ljava/security/spec/AlgorithmParameterSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWrappedKeyEntryGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getTransformation", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWrappedKeyEntryGetWrappedKeyBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getWrappedKeyBytes", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWrappedKeyEntryGetWrappingKeyAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getWrappingKeyAlias", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/keystore/UserNotAuthenticatedException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUserNotAuthenticatedException = env.NewGlobalRef(&c.Object)
+		midUserNotAuthenticatedExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUserNotAuthenticatedException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/security/keystore/KeyGenParameterSpec")
 	if err != nil {
@@ -655,265 +1337,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/security/keystore/KeyInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyInfo = env.NewGlobalRef(&c.Object)
-
-		midKeyInfoGetBlockModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getBlockModes", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetDigests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getDigests", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetEncryptionPaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getEncryptionPaddings", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetKeySize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeySize", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetKeyValidityForConsumptionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeyValidityForConsumptionEnd", "()Ljava/util/Date;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetKeyValidityForOriginationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeyValidityForOriginationEnd", "()Ljava/util/Date;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetKeyValidityStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeyValidityStart", "()Ljava/util/Date;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetKeystoreAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getKeystoreAlias", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getOrigin", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetPurposes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getPurposes", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetRemainingUsageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getRemainingUsageCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetSecurityLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getSecurityLevel", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetSignaturePaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getSignaturePaddings", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetUserAuthenticationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getUserAuthenticationType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoGetUserAuthenticationValidityDurationSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "getUserAuthenticationValidityDurationSeconds", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsInsideSecureHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isInsideSecureHardware", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsInvalidatedByBiometricEnrollment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isInvalidatedByBiometricEnrollment", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsTrustedUserPresenceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isTrustedUserPresenceRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsUserAuthenticationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserAuthenticationRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsUserAuthenticationRequirementEnforcedBySecureHardware, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserAuthenticationRequirementEnforcedBySecureHardware", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsUserAuthenticationValidWhileOnBody, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserAuthenticationValidWhileOnBody", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyInfoIsUserConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyInfo)), "isUserConfirmationRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyPermanentlyInvalidatedException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyPermanentlyInvalidatedException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyProperties")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyProperties = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyNotYetValidException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyNotYetValidException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/WrappedKeyEntry")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWrappedKeyEntry = env.NewGlobalRef(&c.Object)
-
-		midWrappedKeyEntryGetAlgorithmParameterSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getAlgorithmParameterSpec", "()Ljava/security/spec/AlgorithmParameterSpec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWrappedKeyEntryGetTransformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getTransformation", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWrappedKeyEntryGetWrappedKeyBytes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getWrappedKeyBytes", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWrappedKeyEntryGetWrappingKeyAlias, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), "getWrappingKeyAlias", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/BackendBusyException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBackendBusyException = env.NewGlobalRef(&c.Object)
-
-		midBackendBusyExceptionGetBackOffHintMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBackendBusyException)), "getBackOffHintMillis", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/StrongBoxUnavailableException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsStrongBoxUnavailableException = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/security/keystore/SecureKeyImportUnavailableException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -921,388 +1344,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSecureKeyImportUnavailableException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyExpiredException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyExpiredException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyProtection")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyProtection = env.NewGlobalRef(&c.Object)
-
-		midKeyProtectionGetBlockModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getBlockModes", "()[Ljava/lang/String;")
+		midSecureKeyImportUnavailableExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSecureKeyImportUnavailableException)), "<init>", "()V")
 		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
-
-		midKeyProtectionGetDigests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getDigests", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetEncryptionPaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getEncryptionPaddings", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetKeyValidityForConsumptionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getKeyValidityForConsumptionEnd", "()Ljava/util/Date;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetKeyValidityForOriginationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getKeyValidityForOriginationEnd", "()Ljava/util/Date;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetKeyValidityStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getKeyValidityStart", "()Ljava/util/Date;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetMaxUsageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getMaxUsageCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetPurposes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getPurposes", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetSignaturePaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getSignaturePaddings", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetUserAuthenticationType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getUserAuthenticationType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionGetUserAuthenticationValidityDurationSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "getUserAuthenticationValidityDurationSeconds", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsDigestsSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isDigestsSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsInvalidatedByBiometricEnrollment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isInvalidatedByBiometricEnrollment", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsMgf1DigestsSpecified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isMgf1DigestsSpecified", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsRandomizedEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isRandomizedEncryptionRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsUnlockedDeviceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUnlockedDeviceRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsUserAuthenticationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserAuthenticationRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsUserAuthenticationValidWhileOnBody, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserAuthenticationValidWhileOnBody", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsUserConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserConfirmationRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionIsUserPresenceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtection)), "isUserPresenceRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyProtection$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyProtectionBuilder = env.NewGlobalRef(&c.Object)
-
-		midKeyProtectionBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "build", "()Landroid/security/keystore/KeyProtection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetBlockModes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setBlockModes", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetDigests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setDigests", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetEncryptionPaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setEncryptionPaddings", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetInvalidatedByBiometricEnrollment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setInvalidatedByBiometricEnrollment", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetIsStrongBoxBacked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setIsStrongBoxBacked", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetKeyValidityEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityEnd", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetKeyValidityForConsumptionEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityForConsumptionEnd", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetKeyValidityForOriginationEnd, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityForOriginationEnd", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetKeyValidityStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setKeyValidityStart", "(Ljava/util/Date;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetMaxUsageCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setMaxUsageCount", "(I)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetMgf1Digests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setMgf1Digests", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetRandomizedEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setRandomizedEncryptionRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetSignaturePaddings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setSignaturePaddings", "([Ljava/lang/String;)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUnlockedDeviceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUnlockedDeviceRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUserAuthenticationParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationParameters", "(II)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUserAuthenticationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUserAuthenticationValidWhileOnBody, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationValidWhileOnBody", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUserAuthenticationValidityDurationSeconds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserAuthenticationValidityDurationSeconds", "(I)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUserConfirmationRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserConfirmationRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyProtectionBuilderSetUserPresenceRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyProtectionBuilder)), "setUserPresenceRequired", "(Z)Landroid/security/keystore/KeyProtection$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/UserNotAuthenticatedException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUserNotAuthenticatedException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/KeyStoreManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyStoreManager = env.NewGlobalRef(&c.Object)
-
-		midKeyStoreManagerGetGrantedKeyFromId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "getGrantedKeyFromId", "(J)Ljava/security/Key;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyStoreManagerGetGrantedKeyPairFromId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "getGrantedKeyPairFromId", "(J)Ljava/security/KeyPair;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyStoreManagerGetSupplementaryAttestationInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "getSupplementaryAttestationInfo", "(I)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyStoreManagerGrantKeyAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "grantKeyAccess", "(Ljava/lang/String;I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyStoreManagerRevokeKeyAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreManager)), "revokeKeyAccess", "(Ljava/lang/String;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/keystore/UserPresenceUnavailableException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUserPresenceUnavailableException = env.NewGlobalRef(&c.Object)
 
 	}
 

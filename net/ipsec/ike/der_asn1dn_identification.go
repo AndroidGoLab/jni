@@ -23,6 +23,29 @@ type DerAsn1DnIdentification struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDerAsn1DnIdentification creates a new android.net.ipsec.ike.IkeDerAsn1DnIdentification instance.
+func NewDerAsn1DnIdentification(vm *jni.VM, arg0 *jni.Object) (*DerAsn1DnIdentification, error) {
+	var t DerAsn1DnIdentification
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDerAsn1DnIdentification)), midDerAsn1DnIdentificationInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.net.ipsec.ike.IkeDerAsn1DnIdentification.equals.
 func (m *DerAsn1DnIdentification) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

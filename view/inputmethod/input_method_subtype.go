@@ -23,6 +23,57 @@ type InputMethodSubtype struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInputMethodSubtype creates a new android.view.inputmethod.InputMethodSubtype instance.
+func NewInputMethodSubtype(vm *jni.VM, arg0 int32, arg1 int32, arg2 string, arg3 string, arg4 string, arg5 bool, arg6 bool) (*InputMethodSubtype, error) {
+	var t InputMethodSubtype
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		jArg4, err := env.NewStringUTF(arg4)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg4.Object)
+
+		var jArg5 uint8
+		if arg5 {
+			jArg5 = jniTrue
+		}
+
+		var jArg6 uint8
+		if arg6 {
+			jArg6 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputMethodSubtype)), midInputMethodSubtypeInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.BooleanValue(jArg5), jni.BooleanValue(jArg6))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ContainsExtraValueKey calls android.view.inputmethod.InputMethodSubtype.containsExtraValueKey.
 func (m *InputMethodSubtype) ContainsExtraValueKey(arg0 string) (bool, error) {
 	var result bool

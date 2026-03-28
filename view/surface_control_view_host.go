@@ -23,6 +23,29 @@ type SurfaceControlViewHost struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSurfaceControlViewHost creates a new android.view.SurfaceControlViewHost instance.
+func NewSurfaceControlViewHost(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*SurfaceControlViewHost, error) {
+	var t SurfaceControlViewHost
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceControlViewHost)), midSurfaceControlViewHostInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetSurfacePackage calls android.view.SurfaceControlViewHost.getSurfacePackage.
 func (m *SurfaceControlViewHost) GetSurfacePackage() (*jni.Object, error) {
 	var result *jni.Object

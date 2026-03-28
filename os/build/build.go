@@ -23,6 +23,28 @@ type Build struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBuild creates a new android.os.Build instance.
+func NewBuild(vm *jni.VM) (*Build, error) {
+	var t Build
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBuild)), midBuildInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetMajorSdkVersion calls android.os.Build.getMajorSdkVersion.
 func (m *Build) GetMajorSdkVersion(arg0 int32) (int32, error) {
 	var result int32

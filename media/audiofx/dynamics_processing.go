@@ -23,6 +23,29 @@ type DynamicsProcessing struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDynamicsProcessing creates a new android.media.audiofx.DynamicsProcessing instance.
+func NewDynamicsProcessing(vm *jni.VM, arg0 int32) (*DynamicsProcessing, error) {
+	var t DynamicsProcessing
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicsProcessing)), midDynamicsProcessingInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetChannelByChannelIndex calls android.media.audiofx.DynamicsProcessing.getChannelByChannelIndex.
 func (m *DynamicsProcessing) GetChannelByChannelIndex(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

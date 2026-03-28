@@ -23,6 +23,28 @@ type Values struct {
 	Obj *jni.GlobalRef
 }
 
+// NewValues creates a new android.transition.TransitionValues instance.
+func NewValues(vm *jni.VM) (*Values, error) {
+	var t Values
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsValues)), midValuesInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.transition.TransitionValues.equals.
 func (m *Values) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

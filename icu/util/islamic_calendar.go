@@ -23,6 +23,28 @@ type IslamicCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIslamicCalendar creates a new android.icu.util.IslamicCalendar instance.
+func NewIslamicCalendar(vm *jni.VM) (*IslamicCalendar, error) {
+	var t IslamicCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIslamicCalendar)), midIslamicCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCalculationType calls android.icu.util.IslamicCalendar.getCalculationType.
 func (m *IslamicCalendar) GetCalculationType() (*jni.Object, error) {
 	var result *jni.Object

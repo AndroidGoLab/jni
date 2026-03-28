@@ -23,6 +23,35 @@ type SettingsPreferenceServiceClient struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSettingsPreferenceServiceClient creates a new android.service.settings.preferences.SettingsPreferenceServiceClient instance.
+func NewSettingsPreferenceServiceClient(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 *jni.Object, arg3 *jni.Object) (*SettingsPreferenceServiceClient, error) {
+	var t SettingsPreferenceServiceClient
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSettingsPreferenceServiceClient)), midSettingsPreferenceServiceClientInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.service.settings.preferences.SettingsPreferenceServiceClient.close.
 func (m *SettingsPreferenceServiceClient) Close() error {
 

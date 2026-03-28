@@ -23,6 +23,34 @@ type EthernetNetworkSpecifier struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEthernetNetworkSpecifier creates a new android.net.EthernetNetworkSpecifier instance.
+func NewEthernetNetworkSpecifier(vm *jni.VM, arg0 string) (*EthernetNetworkSpecifier, error) {
+	var t EthernetNetworkSpecifier
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEthernetNetworkSpecifier)), midEthernetNetworkSpecifierInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CanBeSatisfiedBy calls android.net.EthernetNetworkSpecifier.canBeSatisfiedBy.
 func (m *EthernetNetworkSpecifier) CanBeSatisfiedBy(arg0 *jni.Object) (bool, error) {
 	var result bool

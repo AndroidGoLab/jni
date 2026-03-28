@@ -23,6 +23,34 @@ type MessageFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMessageFormat creates a new android.icu.text.MessageFormat instance.
+func NewMessageFormat(vm *jni.VM, arg0 string) (*MessageFormat, error) {
+	var t MessageFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessageFormat)), midMessageFormatInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyPattern1 calls android.icu.text.MessageFormat.applyPattern.
 func (m *MessageFormat) ApplyPattern1(arg0 string) error {
 

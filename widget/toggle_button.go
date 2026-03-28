@@ -23,6 +23,29 @@ type ToggleButton struct {
 	Obj *jni.GlobalRef
 }
 
+// NewToggleButton creates a new android.widget.ToggleButton instance.
+func NewToggleButton(vm *jni.VM, arg0 *jni.Object) (*ToggleButton, error) {
+	var t ToggleButton
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToggleButton)), midToggleButtonInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.ToggleButton.getAccessibilityClassName.
 func (m *ToggleButton) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type ChangeScroll struct {
 	Obj *jni.GlobalRef
 }
 
+// NewChangeScroll creates a new android.transition.ChangeScroll instance.
+func NewChangeScroll(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ChangeScroll, error) {
+	var t ChangeScroll
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangeScroll)), midChangeScrollInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CaptureEndValues calls android.transition.ChangeScroll.captureEndValues.
 func (m *ChangeScroll) CaptureEndValues(arg0 *jni.Object) error {
 

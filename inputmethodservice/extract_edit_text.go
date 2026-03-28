@@ -23,6 +23,29 @@ type ExtractEditText struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExtractEditText creates a new android.inputmethodservice.ExtractEditText instance.
+func NewExtractEditText(vm *jni.VM, arg0 *jni.Object) (*ExtractEditText, error) {
+	var t ExtractEditText
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtractEditText)), midExtractEditTextInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FinishInternalChanges calls android.inputmethodservice.ExtractEditText.finishInternalChanges.
 func (m *ExtractEditText) FinishInternalChanges() error {
 

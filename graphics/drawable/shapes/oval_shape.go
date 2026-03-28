@@ -23,6 +23,28 @@ type OvalShape struct {
 	Obj *jni.GlobalRef
 }
 
+// NewOvalShape creates a new android.graphics.drawable.shapes.OvalShape instance.
+func NewOvalShape(vm *jni.VM) (*OvalShape, error) {
+	var t OvalShape
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOvalShape)), midOvalShapeInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.graphics.drawable.shapes.OvalShape.clone.
 func (m *OvalShape) Clone0() (*jni.Object, error) {
 	var result *jni.Object

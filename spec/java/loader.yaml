@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/content/res/loader
 classes:
     - java_class: android.content.res.loader.ResourcesLoader
       go_type: ResourcesLoader
+      obtain: constructor
       methods:
         - java_method: addProvider
           go_name: AddProvider

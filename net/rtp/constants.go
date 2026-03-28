@@ -8,12 +8,12 @@ const (
 	ModeNormal          = consts.ModeNormal
 	ModeReceiveOnly     = consts.ModeReceiveOnly
 	ModeSendOnly        = consts.ModeSendOnly
+	ModeEchoSuppression = consts.ModeEchoSuppression
+	ModeMuted           = consts.ModeMuted
+	ModeOnHold          = consts.ModeOnHold
 	Amr                 = consts.Amr
 	Gsm                 = consts.Gsm
 	GsmEfr              = consts.GsmEfr
 	Pcma                = consts.Pcma
 	Pcmu                = consts.Pcmu
-	ModeEchoSuppression = consts.ModeEchoSuppression
-	ModeMuted           = consts.ModeMuted
-	ModeOnHold          = consts.ModeOnHold
 )

@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsMediaPlayer                                      *jni.GlobalRef
+	midMediaPlayerInit                                  jni.MethodID
 	midMediaPlayerAddTimedTextSource3                   jni.MethodID
 	midMediaPlayerAddTimedTextSource2_1                 jni.MethodID
 	midMediaPlayerAddTimedTextSource4_2                 jni.MethodID
@@ -194,6 +195,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaPlayer = env.NewGlobalRef(&c.Object)
+		midMediaPlayerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midMediaPlayerAddTimedTextSource3, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "addTimedTextSource", "(Landroid/content/Context;Landroid/net/Uri;Ljava/lang/String;)V")
 		if err != nil {

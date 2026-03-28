@@ -23,6 +23,29 @@ type MonthDisplayHelper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMonthDisplayHelper creates a new android.util.MonthDisplayHelper instance.
+func NewMonthDisplayHelper(vm *jni.VM, arg0 int32, arg1 int32) (*MonthDisplayHelper, error) {
+	var t MonthDisplayHelper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMonthDisplayHelper)), midMonthDisplayHelperInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetColumnOf calls android.util.MonthDisplayHelper.getColumnOf.
 func (m *MonthDisplayHelper) GetColumnOf(arg0 int32) (int32, error) {
 	var result int32

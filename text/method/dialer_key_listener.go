@@ -23,6 +23,28 @@ type DialerKeyListener struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDialerKeyListener creates a new android.text.method.DialerKeyListener instance.
+func NewDialerKeyListener(vm *jni.VM) (*DialerKeyListener, error) {
+	var t DialerKeyListener
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDialerKeyListener)), midDialerKeyListenerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetInputType calls android.text.method.DialerKeyListener.getInputType.
 func (m *DialerKeyListener) GetInputType() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type SharedPreferencesBackupHelper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSharedPreferencesBackupHelper creates a new android.app.backup.SharedPreferencesBackupHelper instance.
+func NewSharedPreferencesBackupHelper(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*SharedPreferencesBackupHelper, error) {
+	var t SharedPreferencesBackupHelper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), midSharedPreferencesBackupHelperInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // PerformBackup calls android.app.backup.SharedPreferencesBackupHelper.performBackup.
 func (m *SharedPreferencesBackupHelper) PerformBackup(
 	arg0 *jni.Object,

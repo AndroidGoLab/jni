@@ -23,6 +23,29 @@ type AudioCall struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAudioCall creates a new android.net.sip.SipAudioCall instance.
+func NewAudioCall(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AudioCall, error) {
+	var t AudioCall
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioCall)), midAudioCallInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AnswerCall calls android.net.sip.SipAudioCall.answerCall.
 func (m *AudioCall) AnswerCall(arg0 int32) error {
 

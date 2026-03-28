@@ -23,6 +23,28 @@ type SparseBooleanArray struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSparseBooleanArray creates a new android.util.SparseBooleanArray instance.
+func NewSparseBooleanArray(vm *jni.VM) (*SparseBooleanArray, error) {
+	var t SparseBooleanArray
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSparseBooleanArray)), midSparseBooleanArrayInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Append calls android.util.SparseBooleanArray.append.
 func (m *SparseBooleanArray) Append(arg0 int32, arg1 bool) error {
 

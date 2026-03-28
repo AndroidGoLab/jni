@@ -23,6 +23,29 @@ type DevicePresenceEvent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDevicePresenceEvent creates a new android.companion.DevicePresenceEvent instance.
+func NewDevicePresenceEvent(vm *jni.VM, arg0 int32, arg1 int32, arg2 *jni.Object) (*DevicePresenceEvent, error) {
+	var t DevicePresenceEvent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDevicePresenceEvent)), midDevicePresenceEventInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.companion.DevicePresenceEvent.describeContents.
 func (m *DevicePresenceEvent) DescribeContents() (int32, error) {
 	var result int32

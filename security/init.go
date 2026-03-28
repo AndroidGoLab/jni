@@ -23,9 +23,43 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsFileIntegrityManager                              *jni.GlobalRef
-	midFileIntegrityManagerIsApkVeritySupported          jni.MethodID
-	midFileIntegrityManagerIsAppSourceCertificateTrusted jni.MethodID
+	clsConfirmationPrompt              *jni.GlobalRef
+	midConfirmationPromptCancelPrompt  jni.MethodID
+	midConfirmationPromptPresentPrompt jni.MethodID
+	midConfirmationPromptIsSupported   jni.MethodID
+
+	clsConfirmationPromptBuilder              *jni.GlobalRef
+	midConfirmationPromptBuilderBuild         jni.MethodID
+	midConfirmationPromptBuilderSetExtraData  jni.MethodID
+	midConfirmationPromptBuilderSetPromptText jni.MethodID
+
+	clsConfirmationAlreadyPresentingException     *jni.GlobalRef
+	midConfirmationAlreadyPresentingExceptionInit jni.MethodID
+
+	clsKeyStoreParameter                     *jni.GlobalRef
+	midKeyStoreParameterIsEncryptionRequired jni.MethodID
+
+	clsKeyStoreParameterBuilder                      *jni.GlobalRef
+	midKeyStoreParameterBuilderBuild                 jni.MethodID
+	midKeyStoreParameterBuilderSetEncryptionRequired jni.MethodID
+
+	clsAttestedKeyPair           *jni.GlobalRef
+	midAttestedKeyPairInit       jni.MethodID
+	midAttestedKeyPairGetKeyPair jni.MethodID
+
+	clsKeyChainException     *jni.GlobalRef
+	midKeyChainExceptionInit jni.MethodID
+
+	clsAppUriAuthenticationPolicy                 *jni.GlobalRef
+	midAppUriAuthenticationPolicyDescribeContents jni.MethodID
+	midAppUriAuthenticationPolicyEquals           jni.MethodID
+	midAppUriAuthenticationPolicyHashCode         jni.MethodID
+	midAppUriAuthenticationPolicyToString         jni.MethodID
+	midAppUriAuthenticationPolicyWriteToParcel    jni.MethodID
+
+	clsAppUriAuthenticationPolicyBuilder                    *jni.GlobalRef
+	midAppUriAuthenticationPolicyBuilderAddAppAndUriMapping jni.MethodID
+	midAppUriAuthenticationPolicyBuilderBuild               jni.MethodID
 
 	clsKeyPairGeneratorSpec                          *jni.GlobalRef
 	midKeyPairGeneratorSpecGetAlgorithmParameterSpec jni.MethodID
@@ -51,10 +85,21 @@ var (
 	midKeyPairGeneratorSpecBuilderSetStartDate              jni.MethodID
 	midKeyPairGeneratorSpecBuilderSetSubject                jni.MethodID
 
-	clsConfirmationAlreadyPresentingException *jni.GlobalRef
+	clsConfirmationCallback            *jni.GlobalRef
+	midConfirmationCallbackOnCanceled  jni.MethodID
+	midConfirmationCallbackOnConfirmed jni.MethodID
+	midConfirmationCallbackOnDismissed jni.MethodID
+	midConfirmationCallbackOnError     jni.MethodID
+
+	clsFileIntegrityManager                              *jni.GlobalRef
+	midFileIntegrityManagerIsApkVeritySupported          jni.MethodID
+	midFileIntegrityManagerIsAppSourceCertificateTrusted jni.MethodID
 
 	clsKeyChainAliasCallback      *jni.GlobalRef
 	midKeyChainAliasCallbackAlias jni.MethodID
+
+	clsConfirmationNotAvailableException     *jni.GlobalRef
+	midConfirmationNotAvailableExceptionInit jni.MethodID
 
 	clsKeyStoreException                           *jni.GlobalRef
 	midKeyStoreExceptionGetNumericErrorCode        jni.MethodID
@@ -64,43 +109,14 @@ var (
 	midKeyStoreExceptionRequiresUserAuthentication jni.MethodID
 	midKeyStoreExceptionToString                   jni.MethodID
 
-	clsConfirmationPrompt              *jni.GlobalRef
-	midConfirmationPromptCancelPrompt  jni.MethodID
-	midConfirmationPromptPresentPrompt jni.MethodID
-	midConfirmationPromptIsSupported   jni.MethodID
-
-	clsConfirmationPromptBuilder              *jni.GlobalRef
-	midConfirmationPromptBuilderBuild         jni.MethodID
-	midConfirmationPromptBuilderSetExtraData  jni.MethodID
-	midConfirmationPromptBuilderSetPromptText jni.MethodID
-
-	clsConfirmationNotAvailableException *jni.GlobalRef
-
-	clsKeyStoreParameter                     *jni.GlobalRef
-	midKeyStoreParameterIsEncryptionRequired jni.MethodID
-
-	clsKeyStoreParameterBuilder                      *jni.GlobalRef
-	midKeyStoreParameterBuilderBuild                 jni.MethodID
-	midKeyStoreParameterBuilderSetEncryptionRequired jni.MethodID
-
-	clsAttestedKeyPair           *jni.GlobalRef
-	midAttestedKeyPairGetKeyPair jni.MethodID
-
-	clsConfirmationCallback            *jni.GlobalRef
-	midConfirmationCallbackOnCanceled  jni.MethodID
-	midConfirmationCallbackOnConfirmed jni.MethodID
-	midConfirmationCallbackOnDismissed jni.MethodID
-	midConfirmationCallbackOnError     jni.MethodID
-
 	clsNetworkSecurityPolicy                                              *jni.GlobalRef
 	midNetworkSecurityPolicyIsCertificateTransparencyVerificationRequired jni.MethodID
 	midNetworkSecurityPolicyIsCleartextTrafficPermitted0                  jni.MethodID
 	midNetworkSecurityPolicyIsCleartextTrafficPermitted1_1                jni.MethodID
 	midNetworkSecurityPolicyGetInstance                                   jni.MethodID
 
-	clsKeyChainException *jni.GlobalRef
-
 	clsKeyChain                                 *jni.GlobalRef
+	midKeyChainInit                             jni.MethodID
 	midKeyChainChoosePrivateKeyAlias6           jni.MethodID
 	midKeyChainChoosePrivateKeyAlias7_1         jni.MethodID
 	midKeyChainCreateInstallIntent              jni.MethodID
@@ -112,17 +128,6 @@ var (
 	midKeyChainIsCredentialManagementApp        jni.MethodID
 	midKeyChainIsKeyAlgorithmSupported          jni.MethodID
 	midKeyChainRemoveCredentialManagementApp    jni.MethodID
-
-	clsAppUriAuthenticationPolicy                 *jni.GlobalRef
-	midAppUriAuthenticationPolicyDescribeContents jni.MethodID
-	midAppUriAuthenticationPolicyEquals           jni.MethodID
-	midAppUriAuthenticationPolicyHashCode         jni.MethodID
-	midAppUriAuthenticationPolicyToString         jni.MethodID
-	midAppUriAuthenticationPolicyWriteToParcel    jni.MethodID
-
-	clsAppUriAuthenticationPolicyBuilder                    *jni.GlobalRef
-	midAppUriAuthenticationPolicyBuilderAddAppAndUriMapping jni.MethodID
-	midAppUriAuthenticationPolicyBuilderBuild               jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -143,22 +148,219 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/security/FileIntegrityManager")
+	c, err = env.FindClass("android/security/ConfirmationPrompt")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFileIntegrityManager = env.NewGlobalRef(&c.Object)
+		clsConfirmationPrompt = env.NewGlobalRef(&c.Object)
 
-		midFileIntegrityManagerIsApkVeritySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileIntegrityManager)), "isApkVeritySupported", "()Z")
+		midConfirmationPromptCancelPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPrompt)), "cancelPrompt", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFileIntegrityManagerIsAppSourceCertificateTrusted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileIntegrityManager)), "isAppSourceCertificateTrusted", "(Ljava/security/cert/X509Certificate;)Z")
+		midConfirmationPromptPresentPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPrompt)), "presentPrompt", "(Ljava/util/concurrent/Executor;Landroid/security/ConfirmationCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConfirmationPromptIsSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPrompt)), "isSupported", "(Landroid/content/Context;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/ConfirmationPrompt$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConfirmationPromptBuilder = env.NewGlobalRef(&c.Object)
+
+		midConfirmationPromptBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPromptBuilder)), "build", "()Landroid/security/ConfirmationPrompt;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConfirmationPromptBuilderSetExtraData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPromptBuilder)), "setExtraData", "([B)Landroid/security/ConfirmationPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConfirmationPromptBuilderSetPromptText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPromptBuilder)), "setPromptText", "(Ljava/lang/CharSequence;)Landroid/security/ConfirmationPrompt$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/ConfirmationAlreadyPresentingException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConfirmationAlreadyPresentingException = env.NewGlobalRef(&c.Object)
+		midConfirmationAlreadyPresentingExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationAlreadyPresentingException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/KeyStoreParameter")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyStoreParameter = env.NewGlobalRef(&c.Object)
+
+		midKeyStoreParameterIsEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreParameter)), "isEncryptionRequired", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/KeyStoreParameter$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyStoreParameterBuilder = env.NewGlobalRef(&c.Object)
+
+		midKeyStoreParameterBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreParameterBuilder)), "build", "()Landroid/security/KeyStoreParameter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midKeyStoreParameterBuilderSetEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreParameterBuilder)), "setEncryptionRequired", "(Z)Landroid/security/KeyStoreParameter$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/AttestedKeyPair")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAttestedKeyPair = env.NewGlobalRef(&c.Object)
+		midAttestedKeyPairInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttestedKeyPair)), "<init>", "(Ljava/security/KeyPair;Ljava/util/List;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midAttestedKeyPairGetKeyPair, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttestedKeyPair)), "getKeyPair", "()Ljava/security/KeyPair;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/KeyChainException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsKeyChainException = env.NewGlobalRef(&c.Object)
+		midKeyChainExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyChainException)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/AppUriAuthenticationPolicy")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAppUriAuthenticationPolicy = env.NewGlobalRef(&c.Object)
+
+		midAppUriAuthenticationPolicyDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppUriAuthenticationPolicyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppUriAuthenticationPolicyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppUriAuthenticationPolicyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppUriAuthenticationPolicyWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/AppUriAuthenticationPolicy$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAppUriAuthenticationPolicyBuilder = env.NewGlobalRef(&c.Object)
+
+		midAppUriAuthenticationPolicyBuilderAddAppAndUriMapping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicyBuilder)), "addAppAndUriMapping", "(Ljava/lang/String;Landroid/net/Uri;Ljava/lang/String;)Landroid/security/AppUriAuthenticationPolicy$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAppUriAuthenticationPolicyBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicyBuilder)), "build", "()Landroid/security/AppUriAuthenticationPolicy;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -327,13 +529,65 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/security/ConfirmationAlreadyPresentingException")
+	c, err = env.FindClass("android/security/ConfirmationCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsConfirmationAlreadyPresentingException = env.NewGlobalRef(&c.Object)
+		clsConfirmationCallback = env.NewGlobalRef(&c.Object)
+
+		midConfirmationCallbackOnCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onCanceled", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConfirmationCallbackOnConfirmed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onConfirmed", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConfirmationCallbackOnDismissed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onDismissed", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConfirmationCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onError", "(Ljava/lang/Throwable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/FileIntegrityManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFileIntegrityManager = env.NewGlobalRef(&c.Object)
+
+		midFileIntegrityManagerIsApkVeritySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileIntegrityManager)), "isApkVeritySupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFileIntegrityManagerIsAppSourceCertificateTrusted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileIntegrityManager)), "isAppSourceCertificateTrusted", "(Ljava/security/cert/X509Certificate;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -349,6 +603,20 @@ func doInit(env *jni.Env) error {
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/security/ConfirmationNotAvailableException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConfirmationNotAvailableException = env.NewGlobalRef(&c.Object)
+		midConfirmationNotAvailableExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationNotAvailableException)), "<init>", "()V")
+		if err != nil {
 			env.ExceptionClear()
 		}
 
@@ -406,174 +674,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/security/ConfirmationPrompt")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConfirmationPrompt = env.NewGlobalRef(&c.Object)
-
-		midConfirmationPromptCancelPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPrompt)), "cancelPrompt", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationPromptPresentPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPrompt)), "presentPrompt", "(Ljava/util/concurrent/Executor;Landroid/security/ConfirmationCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationPromptIsSupported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPrompt)), "isSupported", "(Landroid/content/Context;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/ConfirmationPrompt$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConfirmationPromptBuilder = env.NewGlobalRef(&c.Object)
-
-		midConfirmationPromptBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPromptBuilder)), "build", "()Landroid/security/ConfirmationPrompt;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationPromptBuilderSetExtraData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPromptBuilder)), "setExtraData", "([B)Landroid/security/ConfirmationPrompt$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationPromptBuilderSetPromptText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationPromptBuilder)), "setPromptText", "(Ljava/lang/CharSequence;)Landroid/security/ConfirmationPrompt$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/ConfirmationNotAvailableException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConfirmationNotAvailableException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/security/KeyStoreParameter")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyStoreParameter = env.NewGlobalRef(&c.Object)
-
-		midKeyStoreParameterIsEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreParameter)), "isEncryptionRequired", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/KeyStoreParameter$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyStoreParameterBuilder = env.NewGlobalRef(&c.Object)
-
-		midKeyStoreParameterBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreParameterBuilder)), "build", "()Landroid/security/KeyStoreParameter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midKeyStoreParameterBuilderSetEncryptionRequired, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyStoreParameterBuilder)), "setEncryptionRequired", "(Z)Landroid/security/KeyStoreParameter$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/AttestedKeyPair")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAttestedKeyPair = env.NewGlobalRef(&c.Object)
-
-		midAttestedKeyPairGetKeyPair, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAttestedKeyPair)), "getKeyPair", "()Ljava/security/KeyPair;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/ConfirmationCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConfirmationCallback = env.NewGlobalRef(&c.Object)
-
-		midConfirmationCallbackOnCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onCanceled", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationCallbackOnConfirmed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onConfirmed", "([B)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationCallbackOnDismissed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onDismissed", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfirmationCallbackOnError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfirmationCallback)), "onError", "(Ljava/lang/Throwable;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/security/NetworkSecurityPolicy")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -612,16 +712,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/security/KeyChainException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyChainException = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/security/KeyChain")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -629,6 +719,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsKeyChain = env.NewGlobalRef(&c.Object)
+		midKeyChainInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyChain)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midKeyChainChoosePrivateKeyAlias6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsKeyChain)), "choosePrivateKeyAlias", "(Landroid/app/Activity;Landroid/security/KeyChainAliasCallback;[Ljava/lang/String;[Ljava/security/Principal;Landroid/net/Uri;Ljava/lang/String;)V")
 		if err != nil {
@@ -701,75 +795,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midKeyChainRemoveCredentialManagementApp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsKeyChain)), "removeCredentialManagementApp", "(Landroid/content/Context;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/AppUriAuthenticationPolicy")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAppUriAuthenticationPolicy = env.NewGlobalRef(&c.Object)
-
-		midAppUriAuthenticationPolicyDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppUriAuthenticationPolicyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppUriAuthenticationPolicyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppUriAuthenticationPolicyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppUriAuthenticationPolicyWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicy)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/security/AppUriAuthenticationPolicy$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAppUriAuthenticationPolicyBuilder = env.NewGlobalRef(&c.Object)
-
-		midAppUriAuthenticationPolicyBuilderAddAppAndUriMapping, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicyBuilder)), "addAppAndUriMapping", "(Ljava/lang/String;Landroid/net/Uri;Ljava/lang/String;)Landroid/security/AppUriAuthenticationPolicy$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppUriAuthenticationPolicyBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppUriAuthenticationPolicyBuilder)), "build", "()Landroid/security/AppUriAuthenticationPolicy;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

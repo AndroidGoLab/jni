@@ -23,6 +23,29 @@ type RegexValidator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRegexValidator creates a new android.service.autofill.RegexValidator instance.
+func NewRegexValidator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*RegexValidator, error) {
+	var t RegexValidator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegexValidator)), midRegexValidatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.autofill.RegexValidator.describeContents.
 func (m *RegexValidator) DescribeContents() (int32, error) {
 	var result int32

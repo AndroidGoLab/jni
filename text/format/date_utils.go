@@ -23,6 +23,28 @@ type DateUtils struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateUtils creates a new android.text.format.DateUtils instance.
+func NewDateUtils(vm *jni.VM) (*DateUtils, error) {
+	var t DateUtils
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateUtils)), midDateUtilsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FormatDateRange5 calls android.text.format.DateUtils.formatDateRange.
 func (m *DateUtils) FormatDateRange5(
 	arg0 *jni.Object,

@@ -23,6 +23,28 @@ type IdentityChangedListener struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIdentityChangedListener creates a new android.net.wifi.aware.IdentityChangedListener instance.
+func NewIdentityChangedListener(vm *jni.VM) (*IdentityChangedListener, error) {
+	var t IdentityChangedListener
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIdentityChangedListener)), midIdentityChangedListenerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnClusterIdChanged calls android.net.wifi.aware.IdentityChangedListener.onClusterIdChanged.
 func (m *IdentityChangedListener) OnClusterIdChanged(arg0 int32, arg1 *jni.Object) error {
 

@@ -23,6 +23,40 @@ type AuthenticatorDescription struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAuthenticatorDescription creates a new android.accounts.AuthenticatorDescription instance.
+func NewAuthenticatorDescription(vm *jni.VM, arg0 string, arg1 string, arg2 int32, arg3 int32, arg4 int32, arg5 int32) (*AuthenticatorDescription, error) {
+	var t AuthenticatorDescription
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), midAuthenticatorDescriptionInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.accounts.AuthenticatorDescription.describeContents.
 func (m *AuthenticatorDescription) DescribeContents() (int32, error) {
 	var result int32

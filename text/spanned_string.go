@@ -23,6 +23,34 @@ type SpannedString struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpannedString creates a new android.text.SpannedString instance.
+func NewSpannedString(vm *jni.VM, arg0 string) (*SpannedString, error) {
+	var t SpannedString
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpannedString)), midSpannedStringInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CharAt calls android.text.SpannedString.charAt.
 func (m *SpannedString) CharAt(arg0 int32) (uint16, error) {
 	var result uint16

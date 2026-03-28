@@ -5,38 +5,16 @@
 package: topics
 go_import: github.com/AndroidGoLab/jni/adservices/topics
 classes:
-    - java_class: android.adservices.topics.Topic
-      go_type: Topic
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getModelVersion
-          go_name: GetModelVersion
-          returns: long
-          error: true
-        - java_method: getTaxonomyVersion
-          go_name: GetTaxonomyVersion
-          returns: long
-          error: true
-        - java_method: getTopicId
-          go_name: GetTopicId
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
     - java_class: android.adservices.topics.EncryptedTopic
       go_type: EncryptedTopic
+      obtain: constructor
+      constructor_params:
+        - java_type: '[B'
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
+        - java_type: '[B'
+          go_name: arg2
       methods:
         - java_method: equals
           go_name: Equals
@@ -64,37 +42,6 @@ classes:
         - java_method: toString
           go_name: ToString
           returns: String
-          error: true
-    - java_class: android.adservices.topics.GetTopicsResponse
-      go_type: GetTopicsResponse
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-    - java_class: android.adservices.topics.GetTopicsResponse$Builder
-      go_type: GetTopicsResponseBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.topics.GetTopicsResponse
-          error: true
-    - java_class: android.adservices.topics.TopicsManager
-      go_type: Manager
-      static_methods:
-        - java_method: get
-          go_name: Get
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: android.adservices.topics.TopicsManager
           error: true
     - java_class: android.adservices.topics.GetTopicsRequest
       go_type: GetTopicsRequest
@@ -127,4 +74,73 @@ classes:
             - java_type: boolean
               go_name: arg0
           returns: android.adservices.topics.GetTopicsRequest$Builder
+          error: true
+    - java_class: android.adservices.topics.TopicsManager
+      go_type: Manager
+      static_methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.adservices.topics.TopicsManager
+          error: true
+    - java_class: android.adservices.topics.Topic
+      go_type: Topic
+      obtain: constructor
+      constructor_params:
+        - java_type: long
+          go_name: arg0
+        - java_type: long
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getModelVersion
+          go_name: GetModelVersion
+          returns: long
+          error: true
+        - java_method: getTaxonomyVersion
+          go_name: GetTaxonomyVersion
+          returns: long
+          error: true
+        - java_method: getTopicId
+          go_name: GetTopicId
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.adservices.topics.GetTopicsResponse
+      go_type: GetTopicsResponse
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.adservices.topics.GetTopicsResponse$Builder
+      go_type: GetTopicsResponseBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.topics.GetTopicsResponse
           error: true

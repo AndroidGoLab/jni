@@ -23,6 +23,28 @@ type PackageItemInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPackageItemInfo creates a new android.content.pm.PackageItemInfo instance.
+func NewPackageItemInfo(vm *jni.VM) (*PackageItemInfo, error) {
+	var t PackageItemInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageItemInfo)), midPackageItemInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // LoadBanner calls android.content.pm.PackageItemInfo.loadBanner.
 func (m *PackageItemInfo) LoadBanner(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

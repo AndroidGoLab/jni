@@ -23,6 +23,34 @@ type ArchivedActivityInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewArchivedActivityInfo creates a new android.content.pm.ArchivedActivityInfo instance.
+func NewArchivedActivityInfo(vm *jni.VM, arg0 string, arg1 *jni.Object) (*ArchivedActivityInfo, error) {
+	var t ArchivedActivityInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArchivedActivityInfo)), midArchivedActivityInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetComponentName calls android.content.pm.ArchivedActivityInfo.getComponentName.
 func (m *ArchivedActivityInfo) GetComponentName() (*jni.Object, error) {
 	var result *jni.Object

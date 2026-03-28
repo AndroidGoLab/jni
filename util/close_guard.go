@@ -23,6 +23,28 @@ type CloseGuard struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCloseGuard creates a new android.util.CloseGuard instance.
+func NewCloseGuard(vm *jni.VM) (*CloseGuard, error) {
+	var t CloseGuard
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCloseGuard)), midCloseGuardInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.util.CloseGuard.close.
 func (m *CloseGuard) Close() error {
 

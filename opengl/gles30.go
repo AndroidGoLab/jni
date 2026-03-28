@@ -23,6 +23,28 @@ type GLES30 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLES30 creates a new android.opengl.GLES30 instance.
+func NewGLES30(vm *jni.VM) (*GLES30, error) {
+	var t GLES30
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES30)), midGLES30Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GlBeginQuery calls android.opengl.GLES30.glBeginQuery.
 func (m *GLES30) GlBeginQuery(arg0 int32, arg1 int32) error {
 

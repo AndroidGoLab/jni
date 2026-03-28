@@ -23,6 +23,29 @@ type AppWidgetHost struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppWidgetHost creates a new android.appwidget.AppWidgetHost instance.
+func NewAppWidgetHost(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*AppWidgetHost, error) {
+	var t AppWidgetHost
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetHost)), midAppWidgetHostInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AllocateAppWidgetId calls android.appwidget.AppWidgetHost.allocateAppWidgetId.
 func (m *AppWidgetHost) AllocateAppWidgetId() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type SubtitleData struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSubtitleData creates a new android.media.SubtitleData instance.
+func NewSubtitleData(vm *jni.VM, arg0 int32, arg1 int64, arg2 int64, arg3 *jni.Object) (*SubtitleData, error) {
+	var t SubtitleData
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSubtitleData)), midSubtitleDataInit, jni.IntValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetData calls android.media.SubtitleData.getData.
 func (m *SubtitleData) GetData() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,28 @@ type Configuration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewConfiguration creates a new android.view.ViewConfiguration instance.
+func NewConfiguration(vm *jni.VM) (*Configuration, error) {
+	var t Configuration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfiguration)), midConfigurationInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetScaledAmbiguousGestureMultiplier calls android.view.ViewConfiguration.getScaledAmbiguousGestureMultiplier.
 func (m *Configuration) GetScaledAmbiguousGestureMultiplier() (float32, error) {
 	var result float32

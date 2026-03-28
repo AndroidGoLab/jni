@@ -23,6 +23,29 @@ type DateIntervalInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateIntervalInfo creates a new android.icu.text.DateIntervalInfo instance.
+func NewDateIntervalInfo(vm *jni.VM, arg0 *jni.Object) (*DateIntervalInfo, error) {
+	var t DateIntervalInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateIntervalInfo)), midDateIntervalInfoInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone calls android.icu.text.DateIntervalInfo.clone.
 func (m *DateIntervalInfo) Clone() (*jni.Object, error) {
 	var result *jni.Object

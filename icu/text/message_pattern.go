@@ -23,6 +23,28 @@ type MessagePattern struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMessagePattern creates a new android.icu.text.MessagePattern instance.
+func NewMessagePattern(vm *jni.VM) (*MessagePattern, error) {
+	var t MessagePattern
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessagePattern)), midMessagePatternInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AutoQuoteApostropheDeep calls android.icu.text.MessagePattern.autoQuoteApostropheDeep.
 func (m *MessagePattern) AutoQuoteApostropheDeep() (string, error) {
 	var result string

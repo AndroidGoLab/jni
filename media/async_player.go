@@ -23,6 +23,34 @@ type AsyncPlayer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAsyncPlayer creates a new android.media.AsyncPlayer instance.
+func NewAsyncPlayer(vm *jni.VM, arg0 string) (*AsyncPlayer, error) {
+	var t AsyncPlayer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAsyncPlayer)), midAsyncPlayerInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Play4 calls android.media.AsyncPlayer.play.
 func (m *AsyncPlayer) Play4(
 	arg0 *jni.Object,

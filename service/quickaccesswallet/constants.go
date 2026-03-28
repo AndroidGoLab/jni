@@ -5,16 +5,16 @@ package quickaccesswallet
 import "github.com/AndroidGoLab/jni/service/quickaccesswallet/consts"
 
 const (
-	Creator               = consts.Creator
-	TypeNfcPaymentStarted = consts.TypeNfcPaymentStarted
-	CardTypeNonPayment    = consts.CardTypeNonPayment
-	CardTypePayment       = consts.CardTypePayment
-	CardTypeUnknown       = consts.CardTypeUnknown
-)
-
-const (
 	ActionViewWallet         = consts.ActionViewWallet
 	ActionViewWalletSettings = consts.ActionViewWalletSettings
 	ServiceInterface         = consts.ServiceInterface
 	ServiceMetaData          = consts.ServiceMetaData
+)
+
+const (
+	CardTypeNonPayment    = consts.CardTypeNonPayment
+	CardTypePayment       = consts.CardTypePayment
+	CardTypeUnknown       = consts.CardTypeUnknown
+	Creator               = consts.Creator
+	TypeNfcPaymentStarted = consts.TypeNfcPaymentStarted
 )

@@ -23,6 +23,28 @@ type Rfc822Tokenizer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRfc822Tokenizer creates a new android.text.util.Rfc822Tokenizer instance.
+func NewRfc822Tokenizer(vm *jni.VM) (*Rfc822Tokenizer, error) {
+	var t Rfc822Tokenizer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), midRfc822TokenizerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FindTokenEnd calls android.text.util.Rfc822Tokenizer.findTokenEnd.
 func (m *Rfc822Tokenizer) FindTokenEnd(arg0 string, arg1 int32) (int32, error) {
 	var result int32

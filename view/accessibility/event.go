@@ -23,6 +23,28 @@ type Event struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEvent creates a new android.view.accessibility.AccessibilityEvent instance.
+func NewEvent(vm *jni.VM) (*Event, error) {
+	var t Event
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEvent)), midEventInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AppendRecord calls android.view.accessibility.AccessibilityEvent.appendRecord.
 func (m *Event) AppendRecord(arg0 *jni.Object) error {
 

@@ -21,6 +21,28 @@ type ComponentFactory struct {
 	Obj *jni.GlobalRef
 }
 
+// NewComponentFactory creates a new android.app.AppComponentFactory instance.
+func NewComponentFactory(vm *jni.VM) (*ComponentFactory, error) {
+	var t ComponentFactory
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentFactory)), midComponentFactoryInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // InstantiateActivity calls android.app.AppComponentFactory.instantiateActivity.
 func (m *ComponentFactory) InstantiateActivity(
 	arg0 *jni.Object,

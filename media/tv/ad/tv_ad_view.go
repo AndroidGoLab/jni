@@ -23,6 +23,29 @@ type TvAdView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTvAdView creates a new android.media.tv.ad.TvAdView instance.
+func NewTvAdView(vm *jni.VM, arg0 *jni.Object) (*TvAdView, error) {
+	var t TvAdView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTvAdView)), midTvAdViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearCallback calls android.media.tv.ad.TvAdView.clearCallback.
 func (m *TvAdView) ClearCallback() error {
 

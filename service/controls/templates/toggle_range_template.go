@@ -23,6 +23,34 @@ type ToggleRangeTemplate struct {
 	Obj *jni.GlobalRef
 }
 
+// NewToggleRangeTemplate creates a new android.service.controls.templates.ToggleRangeTemplate instance.
+func NewToggleRangeTemplate(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*ToggleRangeTemplate, error) {
+	var t ToggleRangeTemplate
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), midToggleRangeTemplateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetActionDescription calls android.service.controls.templates.ToggleRangeTemplate.getActionDescription.
 func (m *ToggleRangeTemplate) GetActionDescription() (*jni.Object, error) {
 	var result *jni.Object

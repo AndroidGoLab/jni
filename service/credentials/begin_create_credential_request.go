@@ -23,6 +23,34 @@ type BeginCreateCredentialRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBeginCreateCredentialRequest creates a new android.service.credentials.BeginCreateCredentialRequest instance.
+func NewBeginCreateCredentialRequest(vm *jni.VM, arg0 string, arg1 *jni.Object) (*BeginCreateCredentialRequest, error) {
+	var t BeginCreateCredentialRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), midBeginCreateCredentialRequestInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.credentials.BeginCreateCredentialRequest.describeContents.
 func (m *BeginCreateCredentialRequest) DescribeContents() (int32, error) {
 	var result int32

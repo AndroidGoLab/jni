@@ -23,6 +23,29 @@ type Span struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpan creates a new android.text.style.StyleSpan instance.
+func NewSpan(vm *jni.VM, arg0 *jni.Object) (*Span, error) {
+	var t Span
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpan)), midSpanInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.StyleSpan.describeContents.
 func (m *Span) DescribeContents() (int32, error) {
 	var result int32

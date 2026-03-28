@@ -3,6 +3,14 @@
 package consts
 
 const (
+	Creator                                  int = 0
+	ResponderAp                              int = 0
+	ResponderSta                             int = 1
+	SecurityModeOpen                         int = 0
+	SecurityModeOpportunistic                int = 1
+	SecurityModeSecureAuth                   int = 2
+	StatusCodeFail                           int = 1
+	StatusCodeFailRttNotAvailable            int = 2
 	AkmFilsEapSha256                         int = 64
 	AkmFilsEapSha384                         int = 128
 	AkmFtEapSha256                           int = 4
@@ -17,28 +25,6 @@ const (
 	CipherGcmp128                            int = 4
 	CipherGcmp256                            int = 8
 	CipherNone                               int = 0
-	Creator                                  int = 0
-	StatusCodeFail                           int = 1
-	StatusCodeFailRttNotAvailable            int = 2
-	StatusFail                               int = 1
-	StatusResponderDoesNotSupportIeee80211mc int = 2
-	StatusSuccess                            int = 0
-	Unspecified                              int = -1
-	AltitudeFloors                           int = 2
-	AltitudeMeters                           int = 1
-	AltitudeUndefined                        int = 0
-	DatumNad83Mllw                           int = 3
-	DatumNad83Nav88                          int = 2
-	DatumUndefined                           int = 0
-	DatumWgs84                               int = 1
-	LciVersion1                              int = 1
-	LocationFixed                            int = 0
-	LocationMovementUnknown                  int = 2
-	LocationReserved                         int = 3
-	LocationVariable                         int = 1
-	SecurityModeOpen                         int = 0
-	SecurityModeOpportunistic                int = 1
-	SecurityModeSecureAuth                   int = 2
 	AdditionalCode                           int = 32
 	Apt                                      int = 26
 	Borough                                  int = 4
@@ -71,8 +57,22 @@ const (
 	Sts                                      int = 18
 	SubbranchRoadName                        int = 37
 	TypeOfPlace                              int = 29
-	ResponderAp                              int = 0
-	ResponderSta                             int = 1
+	StatusFail                               int = 1
+	StatusResponderDoesNotSupportIeee80211mc int = 2
+	StatusSuccess                            int = 0
+	Unspecified                              int = -1
+	AltitudeFloors                           int = 2
+	AltitudeMeters                           int = 1
+	AltitudeUndefined                        int = 0
+	DatumNad83Mllw                           int = 3
+	DatumNad83Nav88                          int = 2
+	DatumUndefined                           int = 0
+	DatumWgs84                               int = 1
+	LciVersion1                              int = 1
+	LocationFixed                            int = 0
+	LocationMovementUnknown                  int = 2
+	LocationReserved                         int = 3
+	LocationVariable                         int = 1
 )
 
 const (

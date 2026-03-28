@@ -23,6 +23,46 @@ type WebResourceResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWebResourceResponse creates a new android.webkit.WebResourceResponse instance.
+func NewWebResourceResponse(vm *jni.VM, arg0 string, arg1 string, arg2 int32, arg3 string, arg4 *jni.Object, arg5 *jni.Object) (*WebResourceResponse, error) {
+	var t WebResourceResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), midWebResourceResponseInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetData calls android.webkit.WebResourceResponse.getData.
 func (m *WebResourceResponse) GetData() (*jni.Object, error) {
 	var result *jni.Object

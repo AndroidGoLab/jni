@@ -3,17 +3,20 @@
 package consts
 
 const (
+	MeasurementWakeNestingCount           int = 20001
+	MeasurementWakeStartMs                int = 20003
+	MeasurementWakeSumMs                  int = 20002
+	MeasurementsWakeupAlarmsCount         int = 40002
+	StatsServices                         int = 40001
+	MeasurementLaunchCount                int = 50002
+	MeasurementStartServiceCount          int = 50001
 	MeasurementAnrCount                   int = 30005
 	MeasurementCrashesCount               int = 30004
 	MeasurementForegroundMs               int = 30006
 	MeasurementStartsCount                int = 30003
 	MeasurementSystemTimeMs               int = 30002
 	MeasurementUserTimeMs                 int = 30001
-	MeasurementsWakeupAlarmsCount         int = 40002
-	StatsServices                         int = 40001
-	MeasurementWakeNestingCount           int = 20001
-	MeasurementWakeStartMs                int = 20003
-	MeasurementWakeSumMs                  int = 20002
+	Creator                               int = 0
 	MeasurementBluetoothIdleMs            int = 10020
 	MeasurementBluetoothPowerMams         int = 10023
 	MeasurementBluetoothRxBytes           int = 10052
@@ -77,7 +80,4 @@ const (
 	TimerVibrator                         int = 10044
 	TimerVideo                            int = 10033
 	TimerWifiScan                         int = 10030
-	Creator                               int = 0
-	MeasurementLaunchCount                int = 50002
-	MeasurementStartServiceCount          int = 50001
 )

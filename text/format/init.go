@@ -23,7 +23,21 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsDateFormat                       *jni.GlobalRef
+	midDateFormatInit                   jni.MethodID
+	midDateFormatFormat2                jni.MethodID
+	midDateFormatFormat2_1              jni.MethodID
+	midDateFormatFormat2_2              jni.MethodID
+	midDateFormatGetBestDateTimePattern jni.MethodID
+	midDateFormatGetDateFormat          jni.MethodID
+	midDateFormatGetDateFormatOrder     jni.MethodID
+	midDateFormatGetLongDateFormat      jni.MethodID
+	midDateFormatGetMediumDateFormat    jni.MethodID
+	midDateFormatGetTimeFormat          jni.MethodID
+	midDateFormatIs24HourFormat         jni.MethodID
+
 	clsDateUtils                             *jni.GlobalRef
+	midDateUtilsInit                         jni.MethodID
 	midDateUtilsFormatDateRange5             jni.MethodID
 	midDateUtilsFormatDateRange6_1           jni.MethodID
 	midDateUtilsFormatDateRange4_2           jni.MethodID
@@ -42,12 +56,8 @@ var (
 	midDateUtilsGetRelativeTimeSpanString4_4 jni.MethodID
 	midDateUtilsIsToday                      jni.MethodID
 
-	clster                    *jni.GlobalRef
-	midterFormatFileSize      jni.MethodID
-	midterFormatIpAddress     jni.MethodID
-	midterFormatShortFileSize jni.MethodID
-
 	clsTime                                   *jni.GlobalRef
+	midTimeInit                               jni.MethodID
 	midTimeAfter                              jni.MethodID
 	midTimeBefore                             jni.MethodID
 	midTimeClear                              jni.MethodID
@@ -75,17 +85,11 @@ var (
 	midTimeGetWeeksSinceEpochFromJulianDay    jni.MethodID
 	midTimeIsEpoch                            jni.MethodID
 
-	clsDateFormat                       *jni.GlobalRef
-	midDateFormatFormat2                jni.MethodID
-	midDateFormatFormat2_1              jni.MethodID
-	midDateFormatFormat2_2              jni.MethodID
-	midDateFormatGetBestDateTimePattern jni.MethodID
-	midDateFormatGetDateFormat          jni.MethodID
-	midDateFormatGetDateFormatOrder     jni.MethodID
-	midDateFormatGetLongDateFormat      jni.MethodID
-	midDateFormatGetMediumDateFormat    jni.MethodID
-	midDateFormatGetTimeFormat          jni.MethodID
-	midDateFormatIs24HourFormat         jni.MethodID
+	clster                    *jni.GlobalRef
+	midterInit                jni.MethodID
+	midterFormatFileSize      jni.MethodID
+	midterFormatIpAddress     jni.MethodID
+	midterFormatShortFileSize jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -106,6 +110,90 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
+	c, err = env.FindClass("android/text/format/DateFormat")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDateFormat = env.NewGlobalRef(&c.Object)
+		midDateFormatInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDateFormatFormat2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "format", "(Ljava/lang/CharSequence;Ljava/util/Calendar;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatFormat2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "format", "(Ljava/lang/CharSequence;Ljava/util/Date;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatFormat2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "format", "(Ljava/lang/CharSequence;J)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatGetBestDateTimePattern, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getBestDateTimePattern", "(Ljava/util/Locale;Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatGetDateFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getDateFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatGetDateFormatOrder, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getDateFormatOrder", "(Landroid/content/Context;)[C")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatGetLongDateFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getLongDateFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatGetMediumDateFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getMediumDateFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatGetTimeFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getTimeFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDateFormatIs24HourFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "is24HourFormat", "(Landroid/content/Context;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/text/format/DateUtils")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -113,6 +201,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDateUtils = env.NewGlobalRef(&c.Object)
+		midDateUtilsInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateUtils)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midDateUtilsFormatDateRange5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateUtils)), "formatDateRange", "(Landroid/content/Context;Ljava/util/Formatter;JJI)Ljava/util/Formatter;")
 		if err != nil {
@@ -235,37 +327,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/text/format/Formatter")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clster = env.NewGlobalRef(&c.Object)
-
-		midterFormatFileSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatFileSize", "(Landroid/content/Context;J)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midterFormatIpAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatIpAddress", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midterFormatShortFileSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatShortFileSize", "(Landroid/content/Context;J)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/text/format/Time")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -273,6 +334,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTime = env.NewGlobalRef(&c.Object)
+		midTimeInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTime)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midTimeAfter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTime)), "after", "(Landroid/text/format/Time;)Z")
 		if err != nil {
@@ -458,78 +523,33 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/text/format/DateFormat")
+	c, err = env.FindClass("android/text/format/Formatter")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDateFormat = env.NewGlobalRef(&c.Object)
+		clster = env.NewGlobalRef(&c.Object)
+		midterInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clster)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midDateFormatFormat2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "format", "(Ljava/lang/CharSequence;Ljava/util/Calendar;)Ljava/lang/CharSequence;")
+		midterFormatFileSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatFileSize", "(Landroid/content/Context;J)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDateFormatFormat2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "format", "(Ljava/lang/CharSequence;Ljava/util/Date;)Ljava/lang/CharSequence;")
+		midterFormatIpAddress, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatIpAddress", "(I)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDateFormatFormat2_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "format", "(Ljava/lang/CharSequence;J)Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatGetBestDateTimePattern, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getBestDateTimePattern", "(Ljava/util/Locale;Ljava/lang/String;)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatGetDateFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getDateFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatGetDateFormatOrder, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getDateFormatOrder", "(Landroid/content/Context;)[C")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatGetLongDateFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getLongDateFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatGetMediumDateFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getMediumDateFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatGetTimeFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "getTimeFormat", "(Landroid/content/Context;)Ljava/text/DateFormat;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateFormatIs24HourFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDateFormat)), "is24HourFormat", "(Landroid/content/Context;)Z")
+		midterFormatShortFileSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clster)), "formatShortFileSize", "(Landroid/content/Context;J)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

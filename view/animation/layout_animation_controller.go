@@ -23,6 +23,29 @@ type LayoutAnimationController struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLayoutAnimationController creates a new android.view.animation.LayoutAnimationController instance.
+func NewLayoutAnimationController(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*LayoutAnimationController, error) {
+	var t LayoutAnimationController
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLayoutAnimationController)), midLayoutAnimationControllerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAnimation calls android.view.animation.LayoutAnimationController.getAnimation.
 func (m *LayoutAnimationController) GetAnimation() (*jni.Object, error) {
 	var result *jni.Object

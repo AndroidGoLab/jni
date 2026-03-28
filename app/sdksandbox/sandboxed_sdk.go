@@ -23,6 +23,29 @@ type SandboxedSdk struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSandboxedSdk creates a new android.app.sdksandbox.SandboxedSdk instance.
+func NewSandboxedSdk(vm *jni.VM, arg0 *jni.Object) (*SandboxedSdk, error) {
+	var t SandboxedSdk
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), midSandboxedSdkInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.sdksandbox.SandboxedSdk.describeContents.
 func (m *SandboxedSdk) DescribeContents() (int32, error) {
 	var result int32

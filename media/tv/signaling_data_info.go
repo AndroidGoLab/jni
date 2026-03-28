@@ -23,6 +23,40 @@ type SignalingDataInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSignalingDataInfo creates a new android.media.tv.SignalingDataInfo instance.
+func NewSignalingDataInfo(vm *jni.VM, arg0 string, arg1 string, arg2 int32, arg3 int32) (*SignalingDataInfo, error) {
+	var t SignalingDataInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignalingDataInfo)), midSignalingDataInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.SignalingDataInfo.describeContents.
 func (m *SignalingDataInfo) DescribeContents() (int32, error) {
 	var result int32

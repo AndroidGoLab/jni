@@ -23,6 +23,28 @@ type Matrix2f struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMatrix2f creates a new android.renderscript.Matrix2f instance.
+func NewMatrix2f(vm *jni.VM) (*Matrix2f, error) {
+	var t Matrix2f
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix2f)), midMatrix2fInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Get calls android.renderscript.Matrix2f.get.
 func (m *Matrix2f) Get(arg0 int32, arg1 int32) (float32, error) {
 	var result float32

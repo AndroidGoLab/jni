@@ -23,6 +23,29 @@ type Rational struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRational creates a new android.util.Rational instance.
+func NewRational(vm *jni.VM, arg0 int32, arg1 int32) (*Rational, error) {
+	var t Rational
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRational)), midRationalInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CompareTo1 calls android.util.Rational.compareTo.
 func (m *Rational) CompareTo1(arg0 *jni.Object) (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type RectF struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRectF creates a new android.graphics.RectF instance.
+func NewRectF(vm *jni.VM) (*RectF, error) {
+	var t RectF
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectF)), midRectFInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CenterX calls android.graphics.RectF.centerX.
 func (m *RectF) CenterX() (float32, error) {
 	var result float32

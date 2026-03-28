@@ -23,6 +23,29 @@ type TrustedPresentationThresholds struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTrustedPresentationThresholds creates a new android.window.TrustedPresentationThresholds instance.
+func NewTrustedPresentationThresholds(vm *jni.VM, arg0 float32, arg1 float32, arg2 int32) (*TrustedPresentationThresholds, error) {
+	var t TrustedPresentationThresholds
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrustedPresentationThresholds)), midTrustedPresentationThresholdsInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.window.TrustedPresentationThresholds.describeContents.
 func (m *TrustedPresentationThresholds) DescribeContents() (int32, error) {
 	var result int32

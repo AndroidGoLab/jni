@@ -23,6 +23,28 @@ type GLU struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLU creates a new android.opengl.GLU instance.
+func NewGLU(vm *jni.VM) (*GLU, error) {
+	var t GLU
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLU)), midGLUInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GluErrorString calls android.opengl.GLU.gluErrorString.
 func (m *GLU) GluErrorString(arg0 int32) (string, error) {
 	var result string

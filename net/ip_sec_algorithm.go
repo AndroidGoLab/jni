@@ -23,6 +23,34 @@ type IpSecAlgorithm struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIpSecAlgorithm creates a new android.net.IpSecAlgorithm instance.
+func NewIpSecAlgorithm(vm *jni.VM, arg0 string, arg1 *jni.Object) (*IpSecAlgorithm, error) {
+	var t IpSecAlgorithm
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIpSecAlgorithm)), midIpSecAlgorithmInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.IpSecAlgorithm.describeContents.
 func (m *IpSecAlgorithm) DescribeContents() (int32, error) {
 	var result int32

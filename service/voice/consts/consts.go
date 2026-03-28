@@ -3,7 +3,13 @@
 package consts
 
 const (
-	Creator                      int = 0
+	KeyForegroundActivities string = "android.service.voice.FOREGROUND_ACTIVITIES"
+	KeyShowSessionId        string = "android.service.voice.SHOW_SESSION_ID"
+	ServiceInterface        string = "android.service.voice.VoiceInteractionService"
+	ServiceMetaData         string = "android.voice_interaction"
+)
+
+const (
 	ShowSourceActivity           int = 16
 	ShowSourceApplication        int = 8
 	ShowSourceAssistGesture      int = 4
@@ -15,11 +21,5 @@ const (
 	TouchableInsetsContent       int = 1
 	TouchableInsetsFrame         int = 0
 	TouchableInsetsRegion        int = 3
-)
-
-const (
-	KeyForegroundActivities string = "android.service.voice.FOREGROUND_ACTIVITIES"
-	KeyShowSessionId        string = "android.service.voice.SHOW_SESSION_ID"
-	ServiceInterface        string = "android.service.voice.VoiceInteractionService"
-	ServiceMetaData         string = "android.voice_interaction"
+	Creator                      int = 0
 )

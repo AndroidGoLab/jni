@@ -60,6 +60,6 @@ const (
 )
 
 const (
-	CarrierServiceInterface string = "android.service.carrier.CarrierService"
 	ServiceInterface        string = "android.service.carrier.CarrierMessagingService"
+	CarrierServiceInterface string = "android.service.carrier.CarrierService"
 )

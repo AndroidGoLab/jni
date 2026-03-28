@@ -21,6 +21,28 @@ type TabActivity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTabActivity creates a new android.app.TabActivity instance.
+func NewTabActivity(vm *jni.VM) (*TabActivity, error) {
+	var t TabActivity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabActivity)), midTabActivityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetTabHost calls android.app.TabActivity.getTabHost.
 func (m *TabActivity) GetTabHost() (*jni.Object, error) {
 	var result *jni.Object

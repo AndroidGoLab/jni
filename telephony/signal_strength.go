@@ -23,6 +23,29 @@ type SignalStrength struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSignalStrength creates a new android.telephony.SignalStrength instance.
+func NewSignalStrength(vm *jni.VM, arg0 *jni.Object) (*SignalStrength, error) {
+	var t SignalStrength
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignalStrength)), midSignalStrengthInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telephony.SignalStrength.describeContents.
 func (m *SignalStrength) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type StackView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStackView creates a new android.widget.StackView instance.
+func NewStackView(vm *jni.VM, arg0 *jni.Object) (*StackView, error) {
+	var t StackView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStackView)), midStackViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Advance calls android.widget.StackView.advance.
 func (m *StackView) Advance() error {
 

@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsAudioRecord                                     *jni.GlobalRef
+	midAudioRecordInit                                 jni.MethodID
 	midAudioRecordGetActiveRecordingConfiguration      jni.MethodID
 	midAudioRecordGetAudioFormat                       jni.MethodID
 	midAudioRecordGetAudioSessionId                    jni.MethodID
@@ -109,6 +110,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAudioRecord = env.NewGlobalRef(&c.Object)
+		midAudioRecordInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioRecord)), "<init>", "(IIIII)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midAudioRecordGetActiveRecordingConfiguration, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioRecord)), "getActiveRecordingConfiguration", "()Landroid/media/AudioRecordingConfiguration;")
 		if err != nil {

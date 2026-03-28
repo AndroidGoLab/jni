@@ -23,6 +23,29 @@ type SignalingDataResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSignalingDataResponse creates a new android.media.tv.SignalingDataResponse instance.
+func NewSignalingDataResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 *jni.Object) (*SignalingDataResponse, error) {
+	var t SignalingDataResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignalingDataResponse)), midSignalingDataResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.SignalingDataResponse.describeContents.
 func (m *SignalingDataResponse) DescribeContents() (int32, error) {
 	var result int32

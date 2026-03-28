@@ -7,3 +7,7 @@ go_import: github.com/AndroidGoLab/jni/adservices/exceptions
 classes:
     - java_class: android.adservices.exceptions.AdServicesException
       go_type: AdServicesException
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0

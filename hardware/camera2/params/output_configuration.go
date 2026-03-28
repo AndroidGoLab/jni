@@ -23,6 +23,29 @@ type OutputConfiguration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewOutputConfiguration creates a new android.hardware.camera2.params.OutputConfiguration instance.
+func NewOutputConfiguration(vm *jni.VM, arg0 *jni.Object) (*OutputConfiguration, error) {
+	var t OutputConfiguration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutputConfiguration)), midOutputConfigurationInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddSensorPixelModeUsed calls android.hardware.camera2.params.OutputConfiguration.addSensorPixelModeUsed.
 func (m *OutputConfiguration) AddSensorPixelModeUsed(arg0 int32) error {
 

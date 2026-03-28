@@ -23,6 +23,34 @@ type PhoneAccountSuggestion struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPhoneAccountSuggestion creates a new android.telecom.PhoneAccountSuggestion instance.
+func NewPhoneAccountSuggestion(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 bool) (*PhoneAccountSuggestion, error) {
+	var t PhoneAccountSuggestion
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg2 uint8
+		if arg2 {
+			jArg2 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), midPhoneAccountSuggestionInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.BooleanValue(jArg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telecom.PhoneAccountSuggestion.describeContents.
 func (m *PhoneAccountSuggestion) DescribeContents() (int32, error) {
 	var result int32

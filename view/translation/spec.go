@@ -23,6 +23,29 @@ type Spec struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpec creates a new android.view.translation.TranslationSpec instance.
+func NewSpec(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*Spec, error) {
+	var t Spec
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpec)), midSpecInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.view.translation.TranslationSpec.describeContents.
 func (m *Spec) DescribeContents() (int32, error) {
 	var result int32

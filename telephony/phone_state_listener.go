@@ -23,6 +23,28 @@ type PhoneStateListener struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPhoneStateListener creates a new android.telephony.PhoneStateListener instance.
+func NewPhoneStateListener(vm *jni.VM) (*PhoneStateListener, error) {
+	var t PhoneStateListener
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneStateListener)), midPhoneStateListenerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnActiveDataSubscriptionIdChanged calls android.telephony.PhoneStateListener.onActiveDataSubscriptionIdChanged.
 func (m *PhoneStateListener) OnActiveDataSubscriptionIdChanged(arg0 int32) error {
 

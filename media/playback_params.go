@@ -23,6 +23,28 @@ type PlaybackParams struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPlaybackParams creates a new android.media.PlaybackParams instance.
+func NewPlaybackParams(vm *jni.VM) (*PlaybackParams, error) {
+	var t PlaybackParams
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPlaybackParams)), midPlaybackParamsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AllowDefaults calls android.media.PlaybackParams.allowDefaults.
 func (m *PlaybackParams) AllowDefaults() (*jni.Object, error) {
 	var result *jni.Object

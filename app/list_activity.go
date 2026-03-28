@@ -21,6 +21,28 @@ type ListActivity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewListActivity creates a new android.app.ListActivity instance.
+func NewListActivity(vm *jni.VM) (*ListActivity, error) {
+	var t ListActivity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListActivity)), midListActivityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetListAdapter calls android.app.ListActivity.getListAdapter.
 func (m *ListActivity) GetListAdapter() (*jni.Object, error) {
 	var result *jni.Object

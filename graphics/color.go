@@ -23,6 +23,28 @@ type Color struct {
 	Obj *jni.GlobalRef
 }
 
+// NewColor creates a new android.graphics.Color instance.
+func NewColor(vm *jni.VM) (*Color, error) {
+	var t Color
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColor)), midColorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Alpha0 calls android.graphics.Color.alpha.
 func (m *Color) Alpha0() (float32, error) {
 	var result float32

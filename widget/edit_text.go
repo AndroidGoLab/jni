@@ -23,6 +23,29 @@ type EditText struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEditText creates a new android.widget.EditText instance.
+func NewEditText(vm *jni.VM, arg0 *jni.Object) (*EditText, error) {
+	var t EditText
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditText)), midEditTextInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ExtendSelection calls android.widget.EditText.extendSelection.
 func (m *EditText) ExtendSelection(arg0 int32) error {
 

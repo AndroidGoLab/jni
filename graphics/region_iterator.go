@@ -23,6 +23,29 @@ type RegionIterator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRegionIterator creates a new android.graphics.RegionIterator instance.
+func NewRegionIterator(vm *jni.VM, arg0 *jni.Object) (*RegionIterator, error) {
+	var t RegionIterator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegionIterator)), midRegionIteratorInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Next calls android.graphics.RegionIterator.next.
 func (m *RegionIterator) Next(arg0 *jni.Object) (bool, error) {
 	var result bool

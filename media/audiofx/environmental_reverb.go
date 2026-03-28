@@ -23,6 +23,29 @@ type EnvironmentalReverb struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEnvironmentalReverb creates a new android.media.audiofx.EnvironmentalReverb instance.
+func NewEnvironmentalReverb(vm *jni.VM, arg0 int32, arg1 int32) (*EnvironmentalReverb, error) {
+	var t EnvironmentalReverb
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEnvironmentalReverb)), midEnvironmentalReverbInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDecayHFRatio calls android.media.audiofx.EnvironmentalReverb.getDecayHFRatio.
 func (m *EnvironmentalReverb) GetDecayHFRatio() (int16, error) {
 	var result int16

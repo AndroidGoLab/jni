@@ -23,6 +23,28 @@ type ConstrainedFieldPosition struct {
 	Obj *jni.GlobalRef
 }
 
+// NewConstrainedFieldPosition creates a new android.icu.text.ConstrainedFieldPosition instance.
+func NewConstrainedFieldPosition(vm *jni.VM) (*ConstrainedFieldPosition, error) {
+	var t ConstrainedFieldPosition
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConstrainedFieldPosition)), midConstrainedFieldPositionInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ConstrainField calls android.icu.text.ConstrainedFieldPosition.constrainField.
 func (m *ConstrainedFieldPosition) ConstrainField(arg0 *jni.Object) error {
 

@@ -23,7 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAdServicesException *jni.GlobalRef
+	clsAdServicesException     *jni.GlobalRef
+	midAdServicesExceptionInit jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -51,6 +52,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAdServicesException = env.NewGlobalRef(&c.Object)
+		midAdServicesExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAdServicesException)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 	}
 

@@ -23,6 +23,29 @@ type RingtonePreference struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRingtonePreference creates a new android.preference.RingtonePreference instance.
+func NewRingtonePreference(vm *jni.VM, arg0 *jni.Object) (*RingtonePreference, error) {
+	var t RingtonePreference
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), midRingtonePreferenceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetRingtoneType calls android.preference.RingtonePreference.getRingtoneType.
 func (m *RingtonePreference) GetRingtoneType() (int32, error) {
 	var result int32

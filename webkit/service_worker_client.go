@@ -23,6 +23,28 @@ type ServiceWorkerClient struct {
 	Obj *jni.GlobalRef
 }
 
+// NewServiceWorkerClient creates a new android.webkit.ServiceWorkerClient instance.
+func NewServiceWorkerClient(vm *jni.VM) (*ServiceWorkerClient, error) {
+	var t ServiceWorkerClient
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsServiceWorkerClient)), midServiceWorkerClientInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ShouldInterceptRequest calls android.webkit.ServiceWorkerClient.shouldInterceptRequest.
 func (m *ServiceWorkerClient) ShouldInterceptRequest(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

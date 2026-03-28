@@ -23,6 +23,29 @@ type AlphabeticIndex struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAlphabeticIndex creates a new android.icu.text.AlphabeticIndex instance.
+func NewAlphabeticIndex(vm *jni.VM, arg0 *jni.Object) (*AlphabeticIndex, error) {
+	var t AlphabeticIndex
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphabeticIndex)), midAlphabeticIndexInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetBucketCount calls android.icu.text.AlphabeticIndex.getBucketCount.
 func (m *AlphabeticIndex) GetBucketCount() (int32, error) {
 	var result int32

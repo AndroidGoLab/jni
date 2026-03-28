@@ -7,6 +7,10 @@ go_import: github.com/AndroidGoLab/jni/app/appsearch/exceptions
 classes:
     - java_class: android.app.appsearch.exceptions.AppSearchException
       go_type: AppSearchException
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
       methods:
         - java_method: getResultCode
           go_name: GetResultCode

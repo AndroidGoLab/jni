@@ -23,6 +23,28 @@ type Service struct {
 	Obj *jni.GlobalRef
 }
 
+// NewService creates a new android.net.VpnService instance.
+func NewService(vm *jni.VM) (*Service, error) {
+	var t Service
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsService)), midServiceInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // IsAlwaysOn calls android.net.VpnService.isAlwaysOn.
 func (m *Service) IsAlwaysOn() (bool, error) {
 	var result bool

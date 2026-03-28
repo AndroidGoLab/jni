@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/content/permission
 classes:
     - java_class: android.Manifest
       go_type: Manifest
+      obtain: constructor
     - java_class: android.Manifest$permission
       go_type: Manifestpermission
     - java_class: android.Manifest$permission_group

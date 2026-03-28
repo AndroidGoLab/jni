@@ -23,6 +23,29 @@ type TimedMetaData struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTimedMetaData creates a new android.media.TimedMetaData instance.
+func NewTimedMetaData(vm *jni.VM, arg0 int64, arg1 *jni.Object) (*TimedMetaData, error) {
+	var t TimedMetaData
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimedMetaData)), midTimedMetaDataInit, jni.LongValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetMetaData calls android.media.TimedMetaData.getMetaData.
 func (m *TimedMetaData) GetMetaData() (*jni.Object, error) {
 	var result *jni.Object

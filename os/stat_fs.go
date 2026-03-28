@@ -23,6 +23,34 @@ type StatFs struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStatFs creates a new android.os.StatFs instance.
+func NewStatFs(vm *jni.VM, arg0 string) (*StatFs, error) {
+	var t StatFs
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStatFs)), midStatFsInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAvailableBlocks calls android.os.StatFs.getAvailableBlocks.
 func (m *StatFs) GetAvailableBlocks() (int32, error) {
 	var result int32

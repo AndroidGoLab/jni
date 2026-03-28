@@ -3,48 +3,6 @@
 package consts
 
 const (
-	Unspecified                      int = -1
-	Creator                          int = 0
-	SessionHighSpeed                 int = 1
-	SessionRegular                   int = 0
-	IdUnsupported                    int = -1
-	ScoreMax                         int = 100
-	ScoreMin                         int = 1
-	Usecase10bitOutput               int = 8
-	UsecaseLowLatencySnapshot        int = 6
-	UsecasePreview                   int = 0
-	UsecaseRaw                       int = 5
-	UsecaseRecord                    int = 1
-	UsecaseSnapshot                  int = 3
-	UsecaseVideoSnapshot             int = 2
-	UsecaseZsl                       int = 4
-	ChannelBlue                      int = 2
-	ChannelGreen                     int = 1
-	ChannelRed                       int = 0
-	PointSize                        int = 2
-	MirrorModeAuto                   int = 0
-	MirrorModeH                      int = 2
-	MirrorModeNone                   int = 1
-	MirrorModeV                      int = 3
-	SurfaceGroupIdNone               int = -1
-	TimestampBaseChoreographerSynced int = 4
-	TimestampBaseDefault             int = 0
-	TimestampBaseMonotonic           int = 2
-	TimestampBaseRealtime            int = 3
-	TimestampBaseSensor              int = 1
-	MeteringWeightDontCare           int = 0
-	MeteringWeightMax                int = 1000
-	MeteringWeightMin                int = 0
-	Count                            int = 4
-	Blue                             int = 3
-	GreenEven                        int = 1
-	GreenOdd                         int = 2
-	Red                              int = 0
-)
-
-const (
-	Folded                 int64 = 4
-	Normal                 int64 = 0
 	DolbyVision10bHdrOem   int64 = 64
 	DolbyVision10bHdrOemPo int64 = 128
 	DolbyVision10bHdrRef   int64 = 16
@@ -58,6 +16,48 @@ const (
 	Hlg10                  int64 = 2
 	PublicMax              int64 = 4096
 	Standard               int64 = 1
+	Folded                 int64 = 4
+	Normal                 int64 = 0
+)
+
+const (
+	Creator                          int = 0
+	SessionHighSpeed                 int = 1
+	SessionRegular                   int = 0
+	ChannelBlue                      int = 2
+	ChannelGreen                     int = 1
+	ChannelRed                       int = 0
+	PointSize                        int = 2
+	Count                            int = 4
+	MeteringWeightDontCare           int = 0
+	MeteringWeightMax                int = 1000
+	MeteringWeightMin                int = 0
+	Usecase10bitOutput               int = 8
+	UsecaseLowLatencySnapshot        int = 6
+	UsecasePreview                   int = 0
+	UsecaseRaw                       int = 5
+	UsecaseRecord                    int = 1
+	UsecaseSnapshot                  int = 3
+	UsecaseVideoSnapshot             int = 2
+	UsecaseZsl                       int = 4
+	MirrorModeAuto                   int = 0
+	MirrorModeH                      int = 2
+	MirrorModeNone                   int = 1
+	MirrorModeV                      int = 3
+	SurfaceGroupIdNone               int = -1
+	TimestampBaseChoreographerSynced int = 4
+	TimestampBaseDefault             int = 0
+	TimestampBaseMonotonic           int = 2
+	TimestampBaseRealtime            int = 3
+	TimestampBaseSensor              int = 1
+	Unspecified                      int = -1
+	IdUnsupported                    int = -1
+	ScoreMax                         int = 100
+	ScoreMin                         int = 1
+	Blue                             int = 3
+	GreenEven                        int = 1
+	GreenOdd                         int = 2
+	Red                              int = 0
 )
 
 const (

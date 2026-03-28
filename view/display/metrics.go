@@ -23,6 +23,28 @@ type Metrics struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMetrics creates a new android.util.DisplayMetrics instance.
+func NewMetrics(vm *jni.VM) (*Metrics, error) {
+	var t Metrics
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMetrics)), midMetricsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals1 calls android.util.DisplayMetrics.equals.
 func (m *Metrics) Equals1(arg0 *jni.Object) (bool, error) {
 	var result bool

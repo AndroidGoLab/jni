@@ -23,6 +23,28 @@ type CameraProfile struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCameraProfile creates a new android.media.CameraProfile instance.
+func NewCameraProfile(vm *jni.VM) (*CameraProfile, error) {
+	var t CameraProfile
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCameraProfile)), midCameraProfileInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetJpegEncodingQualityParameter1 calls android.media.CameraProfile.getJpegEncodingQualityParameter.
 func (m *CameraProfile) GetJpegEncodingQualityParameter1(arg0 int32) (int32, error) {
 	var result int32

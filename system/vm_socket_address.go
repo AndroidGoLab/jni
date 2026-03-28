@@ -23,6 +23,29 @@ type VmSocketAddress struct {
 	Obj *jni.GlobalRef
 }
 
+// NewVmSocketAddress creates a new android.system.VmSocketAddress instance.
+func NewVmSocketAddress(vm *jni.VM, arg0 int32, arg1 int32) (*VmSocketAddress, error) {
+	var t VmSocketAddress
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVmSocketAddress)), midVmSocketAddressInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetSvmCid calls android.system.VmSocketAddress.getSvmCid.
 func (m *VmSocketAddress) GetSvmCid() (int32, error) {
 	var result int32

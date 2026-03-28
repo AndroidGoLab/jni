@@ -5,6 +5,34 @@
 package: media
 go_import: github.com/AndroidGoLab/jni/service/media
 classes:
+    - java_class: android.service.media.CameraPrewarmService
+      go_type: CameraPrewarmService
+      methods:
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onCooldown
+          go_name: OnCooldown
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onPrewarm
+          go_name: OnPrewarm
+          returns: void
+          error: true
+        - java_method: onUnbind
+          go_name: OnUnbind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
     - java_class: android.service.media.MediaBrowserService
       go_type: BrowserService
       methods:
@@ -93,34 +121,6 @@ classes:
         - java_method: detach
           go_name: Detach
           returns: void
-          error: true
-    - java_class: android.service.media.CameraPrewarmService
-      go_type: CameraPrewarmService
-      methods:
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onCooldown
-          go_name: OnCooldown
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onPrewarm
-          go_name: OnPrewarm
-          returns: void
-          error: true
-        - java_method: onUnbind
-          go_name: OnUnbind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: boolean
           error: true
 constants:
     - go_name: ServiceInterface

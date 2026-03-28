@@ -23,6 +23,29 @@ type Timestamp struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTimestamp creates a new android.media.MediaTimestamp instance.
+func NewTimestamp(vm *jni.VM, arg0 int64, arg1 int64, arg2 float32) (*Timestamp, error) {
+	var t Timestamp
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimestamp)), midTimestampInit, jni.LongValue(arg0), jni.LongValue(arg1), jni.FloatValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.media.MediaTimestamp.equals.
 func (m *Timestamp) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

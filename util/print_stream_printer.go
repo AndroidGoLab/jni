@@ -23,6 +23,29 @@ type PrintStreamPrinter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPrintStreamPrinter creates a new android.util.PrintStreamPrinter instance.
+func NewPrintStreamPrinter(vm *jni.VM, arg0 *jni.Object) (*PrintStreamPrinter, error) {
+	var t PrintStreamPrinter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintStreamPrinter)), midPrintStreamPrinterInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Println calls android.util.PrintStreamPrinter.println.
 func (m *PrintStreamPrinter) Println(arg0 string) error {
 

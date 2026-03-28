@@ -23,6 +23,29 @@ type InvalidSelectorsException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInvalidSelectorsException creates a new android.net.ipsec.ike.exceptions.InvalidSelectorsException instance.
+func NewInvalidSelectorsException(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*InvalidSelectorsException, error) {
+	var t InvalidSelectorsException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidSelectorsException)), midInvalidSelectorsExceptionInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetIpSecPacketInfo calls android.net.ipsec.ike.exceptions.InvalidSelectorsException.getIpSecPacketInfo.
 func (m *InvalidSelectorsException) GetIpSecPacketInfo() (*jni.Object, error) {
 	var result *jni.Object

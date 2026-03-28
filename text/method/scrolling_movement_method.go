@@ -23,6 +23,28 @@ type ScrollingMovementMethod struct {
 	Obj *jni.GlobalRef
 }
 
+// NewScrollingMovementMethod creates a new android.text.method.ScrollingMovementMethod instance.
+func NewScrollingMovementMethod(vm *jni.VM) (*ScrollingMovementMethod, error) {
+	var t ScrollingMovementMethod
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), midScrollingMovementMethodInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnTakeFocus calls android.text.method.ScrollingMovementMethod.onTakeFocus.
 func (m *ScrollingMovementMethod) OnTakeFocus(
 	arg0 *jni.Object,

@@ -87,40 +87,6 @@ classes:
               go_name: arg0
           returns: android.ranging.raw.RawRangingDevice$Builder
           error: true
-    - java_class: android.ranging.raw.RawInitiatorRangingConfig
-      go_type: InitiatorRangingConfig
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.ranging.raw.RawInitiatorRangingConfig$Builder
-      go_type: InitiatorRangingConfigBuilder
-      methods:
-        - java_method: addRawRangingDevice
-          go_name: AddRawRangingDevice
-          params:
-            - java_type: android.ranging.raw.RawRangingDevice
-              go_name: arg0
-          returns: android.ranging.raw.RawInitiatorRangingConfig$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.ranging.raw.RawInitiatorRangingConfig
-          error: true
     - java_class: android.ranging.raw.RawResponderRangingConfig
       go_type: ResponderRangingConfig
       methods:
@@ -158,6 +124,40 @@ classes:
             - java_type: android.ranging.raw.RawRangingDevice
               go_name: arg0
           returns: android.ranging.raw.RawResponderRangingConfig$Builder
+          error: true
+    - java_class: android.ranging.raw.RawInitiatorRangingConfig
+      go_type: InitiatorRangingConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.ranging.raw.RawInitiatorRangingConfig$Builder
+      go_type: InitiatorRangingConfigBuilder
+      methods:
+        - java_method: addRawRangingDevice
+          go_name: AddRawRangingDevice
+          params:
+            - java_type: android.ranging.raw.RawRangingDevice
+              go_name: arg0
+          returns: android.ranging.raw.RawInitiatorRangingConfig$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.ranging.raw.RawInitiatorRangingConfig
           error: true
 constants:
     - go_name: Creator

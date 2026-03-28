@@ -23,6 +23,28 @@ type Browser struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBrowser creates a new android.provider.Browser instance.
+func NewBrowser(vm *jni.VM) (*Browser, error) {
+	var t Browser
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBrowser)), midBrowserInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SendString calls android.provider.Browser.sendString.
 func (m *Browser) SendString(arg0 *jni.Object, arg1 string) error {
 

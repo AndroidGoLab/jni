@@ -7,6 +7,10 @@ go_import: github.com/AndroidGoLab/jni/icu/math
 classes:
     - java_class: android.icu.math.BigDecimal
       go_type: BigDecimal
+      obtain: constructor
+      constructor_params:
+        - java_type: char[]
+          go_name: arg0
       methods:
         - java_method: abs
           go_name: Abs0
@@ -385,6 +389,10 @@ classes:
           error: true
     - java_class: android.icu.math.MathContext
       go_type: Context
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
       methods:
         - java_method: getDigits
           go_name: GetDigits

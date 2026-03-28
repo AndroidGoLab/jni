@@ -48,6 +48,7 @@ var (
 	midDescriptionBuilderSetTitle              jni.MethodID
 
 	clsInstance                 *jni.GlobalRef
+	midInstanceInit             jni.MethodID
 	midInstanceDescribeContents jni.MethodID
 	midInstanceEquals           jni.MethodID
 	midInstanceGetDescription   jni.MethodID
@@ -242,6 +243,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInstance = env.NewGlobalRef(&c.Object)
+		midInstanceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstance)), "<init>", "(Landroid/app/WallpaperInfo;Landroid/app/wallpaper/WallpaperDescription;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midInstanceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstance)), "describeContents", "()I")
 		if err != nil {

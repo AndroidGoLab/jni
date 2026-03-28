@@ -23,6 +23,28 @@ type WebChromeClient struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWebChromeClient creates a new android.webkit.WebChromeClient instance.
+func NewWebChromeClient(vm *jni.VM) (*WebChromeClient, error) {
+	var t WebChromeClient
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), midWebChromeClientInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDefaultVideoPoster calls android.webkit.WebChromeClient.getDefaultVideoPoster.
 func (m *WebChromeClient) GetDefaultVideoPoster() (*jni.Object, error) {
 	var result *jni.Object

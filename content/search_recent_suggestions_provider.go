@@ -23,6 +23,28 @@ type SearchRecentSuggestionsProvider struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSearchRecentSuggestionsProvider creates a new android.content.SearchRecentSuggestionsProvider instance.
+func NewSearchRecentSuggestionsProvider(vm *jni.VM) (*SearchRecentSuggestionsProvider, error) {
+	var t SearchRecentSuggestionsProvider
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestionsProvider)), midSearchRecentSuggestionsProviderInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Delete calls android.content.SearchRecentSuggestionsProvider.delete.
 func (m *SearchRecentSuggestionsProvider) Delete(
 	arg0 *jni.Object,

@@ -23,6 +23,29 @@ type TabWidget struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTabWidget creates a new android.widget.TabWidget instance.
+func NewTabWidget(vm *jni.VM, arg0 *jni.Object) (*TabWidget, error) {
+	var t TabWidget
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabWidget)), midTabWidgetInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddView calls android.widget.TabWidget.addView.
 func (m *TabWidget) AddView(arg0 *jni.Object) error {
 

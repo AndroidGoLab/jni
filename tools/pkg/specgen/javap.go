@@ -14,6 +14,7 @@ var (
 	constantRe      = regexp.MustCompile(`^\s+public static final\s+(\S+)\s+(\w+);`)
 	constantValueRe = regexp.MustCompile(`^\s+ConstantValue:\s+(\S+)\s+(.+)$`)
 	methodRe        = regexp.MustCompile(`^\s+public\s+(static\s+)?(abstract\s+)?(final\s+)?(native\s+)?(\S+)\s+(\w+)\(([^)]*)\)(.*);\s*$`)
+	constructorRe   = regexp.MustCompile(`^\s+public\s+([\w.]+)\(([^)]*)\)(.*);\s*$`)
 )
 
 // RunJavap executes javap and parses the output for a single class.
@@ -107,7 +108,22 @@ func parseJavap(output string) (*JavapClass, error) {
 			continue
 		}
 
-		// Skip constructors for now (handled by obtain type).
+		// Parse constructors.
+		// A constructor line looks like: public fully.qualified.ClassName(params);
+		// The constructorRe must be checked after methodRe to avoid
+		// false-matching regular methods whose return type is a class name.
+		if m := constructorRe.FindStringSubmatch(line); m != nil {
+			lastConstIdx = -1
+			// Verify this is actually a constructor: the captured name
+			// must equal the class name we already parsed.
+			if m[1] == jc.FullName {
+				paramsStr := m[2]
+				jc.Constructors = append(jc.Constructors, JavapConstructor{
+					Params: parseParams(paramsStr),
+				})
+			}
+			continue
+		}
 	}
 
 	if jc.FullName == "" {

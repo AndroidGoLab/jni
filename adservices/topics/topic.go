@@ -23,6 +23,29 @@ type Topic struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTopic creates a new android.adservices.topics.Topic instance.
+func NewTopic(vm *jni.VM, arg0 int64, arg1 int64, arg2 int32) (*Topic, error) {
+	var t Topic
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTopic)), midTopicInit, jni.LongValue(arg0), jni.LongValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.adservices.topics.Topic.equals.
 func (m *Topic) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,29 @@ type Stroke struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStroke creates a new android.gesture.GestureStroke instance.
+func NewStroke(vm *jni.VM, arg0 *jni.Object) (*Stroke, error) {
+	var t Stroke
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStroke)), midStrokeInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearPath calls android.gesture.GestureStroke.clearPath.
 func (m *Stroke) ClearPath() error {
 

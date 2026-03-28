@@ -5,101 +5,6 @@
 package: speech
 go_import: github.com/AndroidGoLab/jni/speech
 classes:
-    - java_class: android.speech.RecognizerResultsIntent
-      go_type: RecognizerResultsIntent
-    - java_class: android.speech.RecognitionSupport
-      go_type: RecognitionSupport
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.speech.RecognitionSupport$Builder
-      go_type: RecognitionSupportBuilder
-      methods:
-        - java_method: addInstalledOnDeviceLanguage
-          go_name: AddInstalledOnDeviceLanguage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.speech.RecognitionSupport$Builder
-          error: true
-        - java_method: addOnlineLanguage
-          go_name: AddOnlineLanguage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.speech.RecognitionSupport$Builder
-          error: true
-        - java_method: addPendingOnDeviceLanguage
-          go_name: AddPendingOnDeviceLanguage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.speech.RecognitionSupport$Builder
-          error: true
-        - java_method: addSupportedOnDeviceLanguage
-          go_name: AddSupportedOnDeviceLanguage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.speech.RecognitionSupport$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.speech.RecognitionSupport
-          error: true
-    - java_class: android.speech.RecognitionSupportCallback
-      go_type: RecognitionSupportCallback
-      methods:
-        - java_method: onError
-          go_name: OnError
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSupportResult
-          go_name: OnSupportResult
-          params:
-            - java_type: android.speech.RecognitionSupport
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.speech.RecognizerIntent
-      go_type: RecognizerIntent
-      static_methods:
-        - java_method: getVoiceDetailsIntent
-          go_name: GetVoiceDetailsIntent
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: android.content.Intent
-          error: true
     - java_class: android.speech.SpeechRecognizer
       go_type: Recognizer
       methods:
@@ -196,8 +101,170 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+    - java_class: android.speech.ModelDownloadListener
+      go_type: ModelDownloadListener
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onProgress
+          go_name: OnProgress
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onScheduled
+          go_name: OnScheduled
+          returns: void
+          error: true
+        - java_method: onSuccess
+          go_name: OnSuccess
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionPart
+      go_type: RecognitionPart
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getConfidenceLevel
+          go_name: GetConfidenceLevel
+          returns: int
+          error: true
+        - java_method: getFormattedText
+          go_name: GetFormattedText
+          returns: String
+          error: true
+        - java_method: getRawText
+          go_name: GetRawText
+          returns: String
+          error: true
+        - java_method: getTimestampMillis
+          go_name: GetTimestampMillis
+          returns: long
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.speech.RecognitionPart$Builder
+      go_type: RecognitionPartBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.speech.RecognitionPart
+          error: true
+        - java_method: setConfidenceLevel
+          go_name: SetConfidenceLevel
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+        - java_method: setFormattedText
+          go_name: SetFormattedText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+        - java_method: setRawText
+          go_name: SetRawText
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+        - java_method: setTimestampMillis
+          go_name: SetTimestampMillis
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.speech.RecognitionPart$Builder
+          error: true
+    - java_class: android.speech.RecognizerIntent
+      go_type: RecognizerIntent
+      static_methods:
+        - java_method: getVoiceDetailsIntent
+          go_name: GetVoiceDetailsIntent
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.content.Intent
+          error: true
+    - java_class: android.speech.AlternativeSpans
+      go_type: AlternativeSpans
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.List<android.speech.AlternativeSpan>
+          go_name: arg0
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.speech.RecognizerResultsIntent
+      go_type: RecognizerResultsIntent
     - java_class: android.speech.AlternativeSpan
       go_type: AlternativeSpan
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: java.util.List<java.lang.String>
+          go_name: arg2
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -237,6 +304,12 @@ classes:
           error: true
     - java_class: android.speech.tts.TextToSpeech
       go_type: TextToSpeech
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+        - java_type: android.speech.tts.TextToSpeech$OnInitListener
+          go_name: arg1
       methods:
         - java_method: addEarcon
           go_name: AddEarcon2
@@ -521,8 +594,8 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.speech.RecognitionPart
-      go_type: RecognitionPart
+    - java_class: android.speech.RecognitionSupport
+      go_type: RecognitionSupport
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -534,22 +607,6 @@ classes:
             - java_type: java.lang.Object
               go_name: arg0
           returns: boolean
-          error: true
-        - java_method: getConfidenceLevel
-          go_name: GetConfidenceLevel
-          returns: int
-          error: true
-        - java_method: getFormattedText
-          go_name: GetFormattedText
-          returns: String
-          error: true
-        - java_method: getRawText
-          go_name: GetRawText
-          returns: String
-          error: true
-        - java_method: getTimestampMillis
-          go_name: GetTimestampMillis
-          returns: long
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -568,96 +625,40 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.speech.RecognitionPart$Builder
-      go_type: RecognitionPartBuilder
+    - java_class: android.speech.RecognitionSupport$Builder
+      go_type: RecognitionSupportBuilder
       methods:
+        - java_method: addInstalledOnDeviceLanguage
+          go_name: AddInstalledOnDeviceLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: addOnlineLanguage
+          go_name: AddOnlineLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: addPendingOnDeviceLanguage
+          go_name: AddPendingOnDeviceLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
+        - java_method: addSupportedOnDeviceLanguage
+          go_name: AddSupportedOnDeviceLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.speech.RecognitionSupport$Builder
+          error: true
         - java_method: build
           go_name: Build
-          returns: android.speech.RecognitionPart
-          error: true
-        - java_method: setConfidenceLevel
-          go_name: SetConfidenceLevel
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.speech.RecognitionPart$Builder
-          error: true
-        - java_method: setFormattedText
-          go_name: SetFormattedText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.speech.RecognitionPart$Builder
-          error: true
-        - java_method: setRawText
-          go_name: SetRawText
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.speech.RecognitionPart$Builder
-          error: true
-        - java_method: setTimestampMillis
-          go_name: SetTimestampMillis
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.speech.RecognitionPart$Builder
-          error: true
-    - java_class: android.speech.AlternativeSpans
-      go_type: AlternativeSpans
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.speech.ModelDownloadListener
-      go_type: ModelDownloadListener
-      methods:
-        - java_method: onError
-          go_name: OnError
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onProgress
-          go_name: OnProgress
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onScheduled
-          go_name: OnScheduled
-          returns: void
-          error: true
-        - java_method: onSuccess
-          go_name: OnSuccess
-          returns: void
+          returns: android.speech.RecognitionSupport
           error: true
     - java_class: android.speech.RecognitionService
       go_type: RecognitionService
@@ -889,28 +890,135 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.speech.RecognitionSupportCallback
+      go_type: RecognitionSupportCallback
+      methods:
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSupportResult
+          go_name: OnSupportResult
+          params:
+            - java_type: android.speech.RecognitionSupport
+              go_name: arg0
+          returns: void
+          error: true
 constants:
-    - go_name: ActionVoiceSearchResults
-      value: '"android.speech.action.VOICE_SEARCH_RESULTS"'
+    - go_name: ConfidenceScores
+      value: '"confidence_scores"'
       go_type: string
-    - go_name: ExtraVoiceSearchResultHtml
-      value: '"android.speech.extras.VOICE_SEARCH_RESULT_HTML"'
+    - go_name: DetectedLanguage
+      value: '"detected_language"'
       go_type: string
-    - go_name: ExtraVoiceSearchResultHtmlBaseUrls
-      value: '"android.speech.extras.VOICE_SEARCH_RESULT_HTML_BASE_URLS"'
+    - go_name: ErrorAudio
+      value: "3"
+      go_type: int
+    - go_name: ErrorCannotCheckSupport
+      value: "14"
+      go_type: int
+    - go_name: ErrorCannotListenToDownloadEvents
+      value: "15"
+      go_type: int
+    - go_name: ErrorClient
+      value: "5"
+      go_type: int
+    - go_name: ErrorInsufficientPermissions
+      value: "9"
+      go_type: int
+    - go_name: ErrorLanguageNotSupported
+      value: "12"
+      go_type: int
+    - go_name: ErrorLanguageUnavailable
+      value: "13"
+      go_type: int
+    - go_name: ErrorNetwork
+      value: "2"
+      go_type: int
+    - go_name: ErrorNetworkTimeout
+      value: "1"
+      go_type: int
+    - go_name: ErrorNoMatch
+      value: "7"
+      go_type: int
+    - go_name: ErrorRecognizerBusy
+      value: "8"
+      go_type: int
+    - go_name: ErrorServer
+      value: "4"
+      go_type: int
+    - go_name: ErrorServerDisconnected
+      value: "11"
+      go_type: int
+    - go_name: ErrorSpeechTimeout
+      value: "6"
+      go_type: int
+    - go_name: ErrorTooManyRequests
+      value: "10"
+      go_type: int
+    - go_name: LanguageDetectionConfidenceLevel
+      value: '"language_detection_confidence_level"'
       go_type: string
-    - go_name: ExtraVoiceSearchResultHttpHeaders
-      value: '"android.speech.extras.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS"'
+    - go_name: LanguageDetectionConfidenceLevelConfident
+      value: "2"
+      go_type: int
+    - go_name: LanguageDetectionConfidenceLevelHighlyConfident
+      value: "3"
+      go_type: int
+    - go_name: LanguageDetectionConfidenceLevelNotConfident
+      value: "1"
+      go_type: int
+    - go_name: LanguageDetectionConfidenceLevelUnknown
+      value: "0"
+      go_type: int
+    - go_name: LanguageSwitchResult
+      value: '"language_switch_result"'
       go_type: string
-    - go_name: ExtraVoiceSearchResultStrings
-      value: '"android.speech.extras.VOICE_SEARCH_RESULT_STRINGS"'
+    - go_name: LanguageSwitchResultFailed
+      value: "2"
+      go_type: int
+    - go_name: LanguageSwitchResultNotAttempted
+      value: "0"
+      go_type: int
+    - go_name: LanguageSwitchResultSkippedNoModel
+      value: "3"
+      go_type: int
+    - go_name: LanguageSwitchResultSucceeded
+      value: "1"
+      go_type: int
+    - go_name: RecognitionParts
+      value: '"recognition_parts"'
       go_type: string
-    - go_name: ExtraVoiceSearchResultUrls
-      value: '"android.speech.extras.VOICE_SEARCH_RESULT_URLS"'
+    - go_name: ResultsAlternatives
+      value: '"results_alternatives"'
       go_type: string
-    - go_name: UriSchemeInline
-      value: '"inline"'
+    - go_name: ResultsRecognition
+      value: '"results_recognition"'
       go_type: string
+    - go_name: TopLocaleAlternatives
+      value: '"top_locale_alternatives"'
+      go_type: string
+    - go_name: ConfidenceLevelHigh
+      value: "5"
+      go_type: int
+    - go_name: ConfidenceLevelLow
+      value: "1"
+      go_type: int
+    - go_name: ConfidenceLevelMedium
+      value: "3"
+      go_type: int
+    - go_name: ConfidenceLevelMediumHigh
+      value: "4"
+      go_type: int
+    - go_name: ConfidenceLevelMediumLow
+      value: "2"
+      go_type: int
+    - go_name: ConfidenceLevelUnknown
+      value: "0"
+      go_type: int
     - go_name: Creator
       value: "0"
       go_type: int
@@ -1082,98 +1190,26 @@ constants:
     - go_name: ResultServerError
       value: "3"
       go_type: int
-    - go_name: ConfidenceScores
-      value: '"confidence_scores"'
+    - go_name: ActionVoiceSearchResults
+      value: '"android.speech.action.VOICE_SEARCH_RESULTS"'
       go_type: string
-    - go_name: DetectedLanguage
-      value: '"detected_language"'
+    - go_name: ExtraVoiceSearchResultHtml
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_HTML"'
       go_type: string
-    - go_name: ErrorAudio
-      value: "3"
-      go_type: int
-    - go_name: ErrorCannotCheckSupport
-      value: "14"
-      go_type: int
-    - go_name: ErrorCannotListenToDownloadEvents
-      value: "15"
-      go_type: int
-    - go_name: ErrorClient
-      value: "5"
-      go_type: int
-    - go_name: ErrorInsufficientPermissions
-      value: "9"
-      go_type: int
-    - go_name: ErrorLanguageNotSupported
-      value: "12"
-      go_type: int
-    - go_name: ErrorLanguageUnavailable
-      value: "13"
-      go_type: int
-    - go_name: ErrorNetwork
-      value: "2"
-      go_type: int
-    - go_name: ErrorNetworkTimeout
-      value: "1"
-      go_type: int
-    - go_name: ErrorNoMatch
-      value: "7"
-      go_type: int
-    - go_name: ErrorRecognizerBusy
-      value: "8"
-      go_type: int
-    - go_name: ErrorServer
-      value: "4"
-      go_type: int
-    - go_name: ErrorServerDisconnected
-      value: "11"
-      go_type: int
-    - go_name: ErrorSpeechTimeout
-      value: "6"
-      go_type: int
-    - go_name: ErrorTooManyRequests
-      value: "10"
-      go_type: int
-    - go_name: LanguageDetectionConfidenceLevel
-      value: '"language_detection_confidence_level"'
+    - go_name: ExtraVoiceSearchResultHtmlBaseUrls
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_HTML_BASE_URLS"'
       go_type: string
-    - go_name: LanguageDetectionConfidenceLevelConfident
-      value: "2"
-      go_type: int
-    - go_name: LanguageDetectionConfidenceLevelHighlyConfident
-      value: "3"
-      go_type: int
-    - go_name: LanguageDetectionConfidenceLevelNotConfident
-      value: "1"
-      go_type: int
-    - go_name: LanguageDetectionConfidenceLevelUnknown
-      value: "0"
-      go_type: int
-    - go_name: LanguageSwitchResult
-      value: '"language_switch_result"'
+    - go_name: ExtraVoiceSearchResultHttpHeaders
+      value: '"android.speech.extras.EXTRA_VOICE_SEARCH_RESULT_HTTP_HEADERS"'
       go_type: string
-    - go_name: LanguageSwitchResultFailed
-      value: "2"
-      go_type: int
-    - go_name: LanguageSwitchResultNotAttempted
-      value: "0"
-      go_type: int
-    - go_name: LanguageSwitchResultSkippedNoModel
-      value: "3"
-      go_type: int
-    - go_name: LanguageSwitchResultSucceeded
-      value: "1"
-      go_type: int
-    - go_name: RecognitionParts
-      value: '"recognition_parts"'
+    - go_name: ExtraVoiceSearchResultStrings
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_STRINGS"'
       go_type: string
-    - go_name: ResultsAlternatives
-      value: '"results_alternatives"'
+    - go_name: ExtraVoiceSearchResultUrls
+      value: '"android.speech.extras.VOICE_SEARCH_RESULT_URLS"'
       go_type: string
-    - go_name: ResultsRecognition
-      value: '"results_recognition"'
-      go_type: string
-    - go_name: TopLocaleAlternatives
-      value: '"top_locale_alternatives"'
+    - go_name: UriSchemeInline
+      value: '"inline"'
       go_type: string
     - go_name: ActionTtsQueueProcessingCompleted
       value: '"android.speech.tts.TTS_QUEUE_PROCESSING_COMPLETED"'
@@ -1313,24 +1349,6 @@ constants:
     - go_name: ServiceMetaData
       value: '"android.speech.tts"'
       go_type: string
-    - go_name: ConfidenceLevelHigh
-      value: "5"
-      go_type: int
-    - go_name: ConfidenceLevelLow
-      value: "1"
-      go_type: int
-    - go_name: ConfidenceLevelMedium
-      value: "3"
-      go_type: int
-    - go_name: ConfidenceLevelMediumHigh
-      value: "4"
-      go_type: int
-    - go_name: ConfidenceLevelMediumLow
-      value: "2"
-      go_type: int
-    - go_name: ConfidenceLevelUnknown
-      value: "0"
-      go_type: int
     - go_name: ServiceInterface
       value: '"android.speech.RecognitionService"'
       go_type: string

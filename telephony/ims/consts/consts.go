@@ -3,19 +3,20 @@
 package consts
 
 const (
-	WifiModeCellularPreferred              int = 1
-	WifiModeWifiOnly                       int = 0
-	WifiModeWifiPreferred                  int = 2
-	CodeErrorInvalidSubscription           int = 3
-	CodeErrorServiceUnavailable            int = 1
-	CodeErrorUnspecified                   int = 0
-	CodeErrorUnsupportedOperation          int = 2
-	CapabilityTypeNone                     int = 0
-	CapabilityTypeOptionsUce               int = 1
-	CapabilityTypePresenceUce              int = 2
 	RegistrationStateNotRegistered         int = 0
 	RegistrationStateRegistered            int = 2
 	RegistrationStateRegistering           int = 1
+	AttrEpdgOverCellInternet               int = 1
+	Creator                                int = 0
+	CapabilityTypeNone                     int = 0
+	CapabilityTypeOptionsUce               int = 1
+	CapabilityTypePresenceUce              int = 2
+	ReasonImsServiceDisconnected           int = 3
+	ReasonImsServiceNotReady               int = 6
+	ReasonNoImsServiceConfigured           int = 4
+	ReasonSubscriptionInactive             int = 5
+	ReasonUnknownPermanentError            int = 2
+	ReasonUnknownTemporaryError            int = 1
 	CodeAccessClassBlocked                 int = 1512
 	CodeAnsweredElsewhere                  int = 1014
 	CodeBlacklistedCallId                  int = 506
@@ -187,22 +188,21 @@ const (
 	CodeUtSsModifiedToSs                   int = 824
 	CodeUtSsModifiedToUssd                 int = 823
 	CodeWifiLost                           int = 1407
-	Creator                                int = 0
 	ExtraCodeCallRetryBySettings           int = 3
 	ExtraCodeCallRetryEmergency            int = 4
 	ExtraCodeCallRetryNormal               int = 1
 	ExtraCodeCallRetrySilentRedial         int = 2
+	WifiModeCellularPreferred              int = 1
+	WifiModeWifiOnly                       int = 0
+	WifiModeWifiPreferred                  int = 2
 	MethodPublish                          int = 2
 	MethodRegister                         int = 1
 	MethodSubscribe                        int = 3
 	MethodUnknown                          int = 0
-	AttrEpdgOverCellInternet               int = 1
-	ReasonImsServiceDisconnected           int = 3
-	ReasonImsServiceNotReady               int = 6
-	ReasonNoImsServiceConfigured           int = 4
-	ReasonSubscriptionInactive             int = 5
-	ReasonUnknownPermanentError            int = 2
-	ReasonUnknownTemporaryError            int = 1
+	CodeErrorInvalidSubscription           int = 3
+	CodeErrorServiceUnavailable            int = 1
+	CodeErrorUnspecified                   int = 0
+	CodeErrorUnsupportedOperation          int = 2
 )
 
 const (

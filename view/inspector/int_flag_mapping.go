@@ -23,6 +23,28 @@ type IntFlagMapping struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIntFlagMapping creates a new android.view.inspector.IntFlagMapping instance.
+func NewIntFlagMapping(vm *jni.VM) (*IntFlagMapping, error) {
+	var t IntFlagMapping
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntFlagMapping)), midIntFlagMappingInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Add calls android.view.inspector.IntFlagMapping.add.
 func (m *IntFlagMapping) Add(
 	arg0 int32,

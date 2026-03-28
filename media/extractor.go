@@ -23,6 +23,28 @@ type Extractor struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExtractor creates a new android.media.MediaExtractor instance.
+func NewExtractor(vm *jni.VM) (*Extractor, error) {
+	var t Extractor
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtractor)), midExtractorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Advance calls android.media.MediaExtractor.advance.
 func (m *Extractor) Advance() (bool, error) {
 	var result bool

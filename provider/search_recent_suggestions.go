@@ -23,6 +23,35 @@ type SearchRecentSuggestions struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSearchRecentSuggestions creates a new android.provider.SearchRecentSuggestions instance.
+func NewSearchRecentSuggestions(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 int32) (*SearchRecentSuggestions, error) {
+	var t SearchRecentSuggestions
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestions)), midSearchRecentSuggestionsInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearHistory calls android.provider.SearchRecentSuggestions.clearHistory.
 func (m *SearchRecentSuggestions) ClearHistory() error {
 

@@ -23,6 +23,28 @@ type IllformedLocaleException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIllformedLocaleException creates a new android.icu.util.IllformedLocaleException instance.
+func NewIllformedLocaleException(vm *jni.VM) (*IllformedLocaleException, error) {
+	var t IllformedLocaleException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIllformedLocaleException)), midIllformedLocaleExceptionInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetErrorIndex calls android.icu.util.IllformedLocaleException.getErrorIndex.
 func (m *IllformedLocaleException) GetErrorIndex() (int32, error) {
 	var result int32

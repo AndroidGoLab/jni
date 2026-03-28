@@ -23,6 +23,29 @@ type ViewFlipper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewViewFlipper creates a new android.widget.ViewFlipper instance.
+func NewViewFlipper(vm *jni.VM, arg0 *jni.Object) (*ViewFlipper, error) {
+	var t ViewFlipper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewFlipper)), midViewFlipperInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.ViewFlipper.getAccessibilityClassName.
 func (m *ViewFlipper) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

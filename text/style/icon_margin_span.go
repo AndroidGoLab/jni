@@ -23,6 +23,29 @@ type IconMarginSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIconMarginSpan creates a new android.text.style.IconMarginSpan instance.
+func NewIconMarginSpan(vm *jni.VM, arg0 *jni.Object) (*IconMarginSpan, error) {
+	var t IconMarginSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), midIconMarginSpanInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ChooseHeight calls android.text.style.IconMarginSpan.chooseHeight.
 func (m *IconMarginSpan) ChooseHeight(
 	arg0 string,

@@ -23,6 +23,28 @@ type Matrix4f struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMatrix4f creates a new android.renderscript.Matrix4f instance.
+func NewMatrix4f(vm *jni.VM) (*Matrix4f, error) {
+	var t Matrix4f
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix4f)), midMatrix4fInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Get calls android.renderscript.Matrix4f.get.
 func (m *Matrix4f) Get(arg0 int32, arg1 int32) (float32, error) {
 	var result float32

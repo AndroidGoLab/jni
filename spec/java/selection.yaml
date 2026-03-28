@@ -5,36 +5,18 @@
 package: selection
 go_import: github.com/AndroidGoLab/jni/graphics/pdf/models/selection
 classes:
-    - java_class: android.graphics.pdf.models.selection.SelectionBoundary
-      go_type: Boundary
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getIndex
-          go_name: GetIndex
-          returns: int
-          error: true
-        - java_method: getIsRtl
-          go_name: GetIsRtl
-          returns: boolean
-          error: true
-        - java_method: getPoint
-          go_name: GetPoint
-          returns: android.graphics.Point
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.graphics.pdf.models.selection.PageSelection
       go_type: PageSelection
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: android.graphics.pdf.models.selection.SelectionBoundary
+          go_name: arg1
+        - java_type: android.graphics.pdf.models.selection.SelectionBoundary
+          go_name: arg2
+        - java_type: java.util.List<android.graphics.pdf.content.PdfPageTextContent>
+          go_name: arg3
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -51,6 +33,38 @@ classes:
         - java_method: getStop
           go_name: GetStop
           returns: android.graphics.pdf.models.selection.SelectionBoundary
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.graphics.pdf.models.selection.SelectionBoundary
+      go_type: Boundary
+      obtain: constructor
+      constructor_params:
+        - java_type: android.graphics.Point
+          go_name: arg0
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getIndex
+          go_name: GetIndex
+          returns: int
+          error: true
+        - java_method: getIsRtl
+          go_name: GetIsRtl
+          returns: boolean
+          error: true
+        - java_method: getPoint
+          go_name: GetPoint
+          returns: android.graphics.Point
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel

@@ -23,7 +23,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsChannel                  *jni.GlobalRef
+	midChannelClose             jni.MethodID
+	midChannelGetSelectResponse jni.MethodID
+	midChannelGetSession        jni.MethodID
+	midChannelIsBasicChannel    jni.MethodID
+	midChannelIsOpen            jni.MethodID
+	midChannelSelectNext        jni.MethodID
+	midChannelTransmit          jni.MethodID
+
 	clsSEService              *jni.GlobalRef
+	midSEServiceInit          jni.MethodID
 	midSEServiceGetReaders    jni.MethodID
 	midSEServiceGetUiccReader jni.MethodID
 	midSEServiceGetVersion    jni.MethodID
@@ -43,15 +53,6 @@ var (
 	midSessionOpenBasicChannel2_1   jni.MethodID
 	midSessionOpenLogicalChannel1   jni.MethodID
 	midSessionOpenLogicalChannel2_1 jni.MethodID
-
-	clsChannel                  *jni.GlobalRef
-	midChannelClose             jni.MethodID
-	midChannelGetSelectResponse jni.MethodID
-	midChannelGetSession        jni.MethodID
-	midChannelIsBasicChannel    jni.MethodID
-	midChannelIsOpen            jni.MethodID
-	midChannelSelectNext        jni.MethodID
-	midChannelTransmit          jni.MethodID
 
 	clsReader                       *jni.GlobalRef
 	midReaderCloseSessions          jni.MethodID
@@ -79,6 +80,65 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
+	c, err = env.FindClass("android/se/omapi/Channel")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsChannel = env.NewGlobalRef(&c.Object)
+
+		midChannelClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelGetSelectResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSelectResponse", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelGetSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSession", "()Landroid/se/omapi/Session;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelIsBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBasicChannel", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelIsOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isOpen", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelSelectNext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "selectNext", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midChannelTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "transmit", "([B)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/se/omapi/SEService")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -86,6 +146,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSEService = env.NewGlobalRef(&c.Object)
+		midSEServiceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSEService)), "<init>", "(Landroid/content/Context;Ljava/util/concurrent/Executor;Landroid/se/omapi/SEService$OnConnectedListener;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midSEServiceGetReaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSEService)), "getReaders", "()[Landroid/se/omapi/Reader;")
 		if err != nil {
@@ -206,65 +270,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSessionOpenLogicalChannel2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSession)), "openLogicalChannel", "([BB)Landroid/se/omapi/Channel;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/se/omapi/Channel")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsChannel = env.NewGlobalRef(&c.Object)
-
-		midChannelClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "close", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midChannelGetSelectResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSelectResponse", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midChannelGetSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "getSession", "()Landroid/se/omapi/Session;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midChannelIsBasicChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isBasicChannel", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midChannelIsOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "isOpen", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midChannelSelectNext, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "selectNext", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midChannelTransmit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsChannel)), "transmit", "([B)[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

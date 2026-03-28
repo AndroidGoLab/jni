@@ -23,6 +23,40 @@ type FabricatedOverlay struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFabricatedOverlay creates a new android.content.om.FabricatedOverlay instance.
+func NewFabricatedOverlay(vm *jni.VM, arg0 string, arg1 string) (*FabricatedOverlay, error) {
+	var t FabricatedOverlay
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFabricatedOverlay)), midFabricatedOverlayInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetIdentifier calls android.content.om.FabricatedOverlay.getIdentifier.
 func (m *FabricatedOverlay) GetIdentifier() (*jni.Object, error) {
 	var result *jni.Object

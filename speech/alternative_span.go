@@ -23,6 +23,29 @@ type AlternativeSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAlternativeSpan creates a new android.speech.AlternativeSpan instance.
+func NewAlternativeSpan(vm *jni.VM, arg0 int32, arg1 int32, arg2 *jni.Object) (*AlternativeSpan, error) {
+	var t AlternativeSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlternativeSpan)), midAlternativeSpanInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.speech.AlternativeSpan.describeContents.
 func (m *AlternativeSpan) DescribeContents() (int32, error) {
 	var result int32

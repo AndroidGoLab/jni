@@ -23,6 +23,29 @@ type GLSurfaceView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLSurfaceView creates a new android.opengl.GLSurfaceView instance.
+func NewGLSurfaceView(vm *jni.VM, arg0 *jni.Object) (*GLSurfaceView, error) {
+	var t GLSurfaceView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLSurfaceView)), midGLSurfaceViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDebugFlags calls android.opengl.GLSurfaceView.getDebugFlags.
 func (m *GLSurfaceView) GetDebugFlags() (int32, error) {
 	var result int32

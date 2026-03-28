@@ -23,6 +23,29 @@ type PrintedPdfDocument struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPrintedPdfDocument creates a new android.print.pdf.PrintedPdfDocument instance.
+func NewPrintedPdfDocument(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*PrintedPdfDocument, error) {
+	var t PrintedPdfDocument
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), midPrintedPdfDocumentInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetPageContentRect calls android.print.pdf.PrintedPdfDocument.getPageContentRect.
 func (m *PrintedPdfDocument) GetPageContentRect() (*jni.Object, error) {
 	var result *jni.Object

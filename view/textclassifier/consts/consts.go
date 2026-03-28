@@ -3,26 +3,7 @@
 package consts
 
 const (
-	ActionAbandon               int = 107
-	ActionCopy                  int = 101
-	ActionCut                   int = 103
-	ActionDrag                  int = 106
-	ActionOther                 int = 108
-	ActionOvertype              int = 100
-	ActionPaste                 int = 102
-	ActionReset                 int = 201
-	ActionSelectAll             int = 200
-	ActionShare                 int = 104
-	ActionSmartShare            int = 105
 	Creator                     int = 0
-	EventAutoSelection          int = 5
-	EventSelectionModified      int = 2
-	EventSelectionStarted       int = 1
-	EventSmartSelectionMulti    int = 4
-	EventSmartSelectionSingle   int = 3
-	InvocationLink              int = 2
-	InvocationManual            int = 1
-	InvocationUnknown           int = 0
 	CategoryConversationActions int = 3
 	CategoryLanguageDetection   int = 4
 	CategoryLinkify             int = 2
@@ -48,9 +29,25 @@ const (
 	TypeSmartAction             int = 13
 	TypeSmartSelectionMulti     int = 4
 	TypeSmartSelectionSingle    int = 3
-	NoOp                        int = 0
-	PersonUserOthers            int = 0
-	PersonUserSelf              int = 0
+	ActionAbandon               int = 107
+	ActionCopy                  int = 101
+	ActionCut                   int = 103
+	ActionDrag                  int = 106
+	ActionOther                 int = 108
+	ActionOvertype              int = 100
+	ActionPaste                 int = 102
+	ActionReset                 int = 201
+	ActionSelectAll             int = 200
+	ActionShare                 int = 104
+	ActionSmartShare            int = 105
+	EventAutoSelection          int = 5
+	EventSelectionModified      int = 2
+	EventSelectionStarted       int = 1
+	EventSmartSelectionMulti    int = 4
+	EventSmartSelectionSingle   int = 3
+	InvocationLink              int = 2
+	InvocationManual            int = 1
+	InvocationUnknown           int = 0
 	ApplyStrategyIgnore         int = 0
 	ApplyStrategyReplace        int = 1
 	StatusDifferentText         int = 3
@@ -58,6 +55,9 @@ const (
 	StatusNoLinksApplied        int = 2
 	StatusNoLinksFound          int = 1
 	StatusUnsupportedCharacter  int = 4
+	NoOp                        int = 0
+	PersonUserOthers            int = 0
+	PersonUserSelf              int = 0
 )
 
 const (

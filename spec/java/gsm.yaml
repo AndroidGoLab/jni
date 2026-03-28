@@ -5,48 +5,9 @@
 package: gsm
 go_import: github.com/AndroidGoLab/jni/telephony/gsm
 classes:
-    - java_class: android.telephony.gsm.SmsManager
-      go_type: SmsManager
-      methods:
-        - java_method: sendDataMessage
-          go_name: SendDataMessage
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: short
-              go_name: arg2
-            - java_type: '[B'
-              go_name: arg3
-            - java_type: android.app.PendingIntent
-              go_name: arg4
-            - java_type: android.app.PendingIntent
-              go_name: arg5
-          returns: void
-          error: true
-        - java_method: sendTextMessage
-          go_name: SendTextMessage
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: android.app.PendingIntent
-              go_name: arg3
-            - java_type: android.app.PendingIntent
-              go_name: arg4
-          returns: void
-          error: true
-      static_methods:
-        - java_method: getDefault
-          go_name: GetDefault
-          returns: android.telephony.gsm.SmsManager
-          error: true
     - java_class: android.telephony.gsm.SmsMessage
       go_type: SmsMessage
+      obtain: constructor
       methods:
         - java_method: getDisplayMessageBody
           go_name: GetDisplayMessageBody
@@ -226,8 +187,49 @@ classes:
           go_name: ToString
           returns: String
           error: true
+    - java_class: android.telephony.gsm.SmsManager
+      go_type: SmsManager
+      methods:
+        - java_method: sendDataMessage
+          go_name: SendDataMessage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: short
+              go_name: arg2
+            - java_type: '[B'
+              go_name: arg3
+            - java_type: android.app.PendingIntent
+              go_name: arg4
+            - java_type: android.app.PendingIntent
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: sendTextMessage
+          go_name: SendTextMessage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: android.app.PendingIntent
+              go_name: arg3
+            - java_type: android.app.PendingIntent
+              go_name: arg4
+          returns: void
+          error: true
+      static_methods:
+        - java_method: getDefault
+          go_name: GetDefault
+          returns: android.telephony.gsm.SmsManager
+          error: true
     - java_class: android.telephony.gsm.GsmCellLocation
       go_type: CellLocation
+      obtain: constructor
       methods:
         - java_method: equals
           go_name: Equals
@@ -277,33 +279,6 @@ classes:
           returns: String
           error: true
 constants:
-    - go_name: ResultErrorGenericFailure
-      value: "1"
-      go_type: int
-    - go_name: ResultErrorNoService
-      value: "4"
-      go_type: int
-    - go_name: ResultErrorNullPdu
-      value: "3"
-      go_type: int
-    - go_name: ResultErrorRadioOff
-      value: "2"
-      go_type: int
-    - go_name: StatusOnSimFree
-      value: "0"
-      go_type: int
-    - go_name: StatusOnSimRead
-      value: "1"
-      go_type: int
-    - go_name: StatusOnSimSent
-      value: "5"
-      go_type: int
-    - go_name: StatusOnSimUnread
-      value: "3"
-      go_type: int
-    - go_name: StatusOnSimUnsent
-      value: "7"
-      go_type: int
     - go_name: Encoding16bit
       value: "3"
       go_type: int
@@ -339,4 +314,31 @@ constants:
       go_type: int
     - go_name: Unknown
       value: "0"
+      go_type: int
+    - go_name: ResultErrorGenericFailure
+      value: "1"
+      go_type: int
+    - go_name: ResultErrorNoService
+      value: "4"
+      go_type: int
+    - go_name: ResultErrorNullPdu
+      value: "3"
+      go_type: int
+    - go_name: ResultErrorRadioOff
+      value: "2"
+      go_type: int
+    - go_name: StatusOnSimFree
+      value: "0"
+      go_type: int
+    - go_name: StatusOnSimRead
+      value: "1"
+      go_type: int
+    - go_name: StatusOnSimSent
+      value: "5"
+      go_type: int
+    - go_name: StatusOnSimUnread
+      value: "3"
+      go_type: int
+    - go_name: StatusOnSimUnsent
+      value: "7"
       go_type: int

@@ -21,6 +21,29 @@ type MediaRouteButton struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMediaRouteButton creates a new android.app.MediaRouteButton instance.
+func NewMediaRouteButton(vm *jni.VM, arg0 *jni.Object) (*MediaRouteButton, error) {
+	var t MediaRouteButton
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaRouteButton)), midMediaRouteButtonInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetRouteTypes calls android.app.MediaRouteButton.getRouteTypes.
 func (m *MediaRouteButton) GetRouteTypes() (int32, error) {
 	var result int32

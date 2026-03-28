@@ -23,6 +23,29 @@ type TextureView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTextureView creates a new android.view.TextureView instance.
+func NewTextureView(vm *jni.VM, arg0 *jni.Object) (*TextureView, error) {
+	var t TextureView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextureView)), midTextureViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BuildLayer calls android.view.TextureView.buildLayer.
 func (m *TextureView) BuildLayer() error {
 

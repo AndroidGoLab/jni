@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsMediaStore                                       *jni.GlobalRef
+	midMediaStoreInit                                   jni.MethodID
 	midMediaStoreCanManageMedia                         jni.MethodID
 	midMediaStoreGetDocumentUri                         jni.MethodID
 	midMediaStoreGetGeneration                          jni.MethodID
@@ -94,6 +95,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaStore = env.NewGlobalRef(&c.Object)
+		midMediaStoreInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midMediaStoreCanManageMedia, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "canManageMedia", "(Landroid/content/Context;)Z")
 		if err != nil {

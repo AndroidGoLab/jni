@@ -23,6 +23,28 @@ type NetworkSlicingConfig struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNetworkSlicingConfig creates a new android.telephony.data.NetworkSlicingConfig instance.
+func NewNetworkSlicingConfig(vm *jni.VM) (*NetworkSlicingConfig, error) {
+	var t NetworkSlicingConfig
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkSlicingConfig)), midNetworkSlicingConfigInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telephony.data.NetworkSlicingConfig.describeContents.
 func (m *NetworkSlicingConfig) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type ValueAnimator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewValueAnimator creates a new android.animation.ValueAnimator instance.
+func NewValueAnimator(vm *jni.VM) (*ValueAnimator, error) {
+	var t ValueAnimator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsValueAnimator)), midValueAnimatorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddUpdateListener calls android.animation.ValueAnimator.addUpdateListener.
 func (m *ValueAnimator) AddUpdateListener(arg0 *jni.Object) error {
 

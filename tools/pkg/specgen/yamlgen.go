@@ -272,6 +272,17 @@ func classFromJavap(jc *JavapClass, goPkg string) SpecClass {
 		cls.Close = true
 	}
 
+	// If the class has public constructors and isn't already a system
+	// service, mark it as constructor-obtainable. Choose the best
+	// constructor: prefer one that takes android.content.Context as
+	// first param, then fall back to the no-arg constructor, then
+	// the first available constructor.
+	if cls.Obtain == "" && !jc.IsAbstract && !jc.IsInterface && len(jc.Constructors) > 0 {
+		best := chooseBestConstructor(jc.Constructors)
+		cls.Obtain = "constructor"
+		cls.ConstructorParams = convertConstructorParams(best)
+	}
+
 	// Count method names to detect overloads.
 	nameCounts := make(map[string]int)
 	for _, m := range jc.Methods {
@@ -478,6 +489,44 @@ func writeSpecFile(spec *SpecFile, path string) error {
 	out = append(out, generatedFileHeader...)
 	out = append(out, data...)
 	return os.WriteFile(path, out, filePerm)
+}
+
+// chooseBestConstructor picks the most appropriate constructor from a
+// list of parsed constructors. Preference order:
+//  1. Constructor with android.content.Context as first param.
+//  2. No-arg constructor.
+//  3. First constructor in the list.
+func chooseBestConstructor(ctors []JavapConstructor) JavapConstructor {
+	// Pass 1: prefer a constructor with Context as first param.
+	for _, c := range ctors {
+		if len(c.Params) > 0 && c.Params[0].JavaType == "android.content.Context" {
+			return c
+		}
+	}
+	// Pass 2: prefer a no-arg constructor.
+	for _, c := range ctors {
+		if len(c.Params) == 0 {
+			return c
+		}
+	}
+	// Fallback: first constructor.
+	return ctors[0]
+}
+
+// convertConstructorParams converts JavapParams from a constructor
+// into SpecParam entries for the YAML spec.
+func convertConstructorParams(ctor JavapConstructor) []SpecParam {
+	if len(ctor.Params) == 0 {
+		return nil
+	}
+	params := make([]SpecParam, 0, len(ctor.Params))
+	for i, p := range ctor.Params {
+		params = append(params, SpecParam{
+			JavaType: javaTypeToSpecType(p.JavaType),
+			GoName:   fmt.Sprintf("arg%d", i),
+		})
+	}
+	return params
 }
 
 // ---- Name conversion helpers ----

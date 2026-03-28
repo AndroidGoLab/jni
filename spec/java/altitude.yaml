@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/location/altitude
 classes:
     - java_class: android.location.altitude.AltitudeConverter
       go_type: Converter
+      obtain: constructor
       methods:
         - java_method: addMslAltitudeToLocation
           go_name: AddMslAltitudeToLocation

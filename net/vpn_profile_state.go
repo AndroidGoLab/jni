@@ -23,6 +23,45 @@ type VpnProfileState struct {
 	Obj *jni.GlobalRef
 }
 
+// NewVpnProfileState creates a new android.net.VpnProfileState instance.
+func NewVpnProfileState(vm *jni.VM, arg0 int32, arg1 string, arg2 bool, arg3 bool) (*VpnProfileState, error) {
+	var t VpnProfileState
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		var jArg2 uint8
+		if arg2 {
+			jArg2 = jniTrue
+		}
+
+		var jArg3 uint8
+		if arg3 {
+			jArg3 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVpnProfileState)), midVpnProfileStateInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.BooleanValue(jArg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.VpnProfileState.describeContents.
 func (m *VpnProfileState) DescribeContents() (int32, error) {
 	var result int32

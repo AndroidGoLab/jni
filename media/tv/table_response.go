@@ -23,6 +23,29 @@ type TableResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTableResponse creates a new android.media.tv.TableResponse instance.
+func NewTableResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 *jni.Object, arg4 int32, arg5 int32) (*TableResponse, error) {
+	var t TableResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableResponse)), midTableResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.TableResponse.describeContents.
 func (m *TableResponse) DescribeContents() (int32, error) {
 	var result int32

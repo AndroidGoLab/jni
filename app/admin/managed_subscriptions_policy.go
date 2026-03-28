@@ -23,6 +23,29 @@ type ManagedSubscriptionsPolicy struct {
 	Obj *jni.GlobalRef
 }
 
+// NewManagedSubscriptionsPolicy creates a new android.app.admin.ManagedSubscriptionsPolicy instance.
+func NewManagedSubscriptionsPolicy(vm *jni.VM, arg0 int32) (*ManagedSubscriptionsPolicy, error) {
+	var t ManagedSubscriptionsPolicy
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManagedSubscriptionsPolicy)), midManagedSubscriptionsPolicyInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.admin.ManagedSubscriptionsPolicy.describeContents.
 func (m *ManagedSubscriptionsPolicy) DescribeContents() (int32, error) {
 	var result int32

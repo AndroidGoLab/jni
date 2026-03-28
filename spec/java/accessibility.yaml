@@ -25,261 +25,6 @@ classes:
               go_name: arg3
           returns: void
           error: true
-    - java_class: android.view.accessibility.CaptioningManager
-      go_type: CaptioningManager
-      obtain: system_service
-      service_name: captioning
-      close: true
-      methods:
-        - java_method: addCaptioningChangeListener
-          go_name: AddCaptioningChangeListener
-          params:
-            - java_type: android.view.accessibility.CaptioningManager$CaptioningChangeListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getFontScale
-          go_name: GetFontScale
-          returns: float
-          error: true
-        - java_method: getLocale
-          go_name: GetLocale
-          returns: java.util.Locale
-          error: true
-        - java_method: getUserStyle
-          go_name: GetUserStyle
-          returns: android.view.accessibility.CaptioningManager$CaptionStyle
-          error: true
-        - java_method: isCallCaptioningEnabled
-          go_name: IsCallCaptioningEnabled
-          returns: boolean
-          error: true
-        - java_method: isEnabled
-          go_name: IsEnabled
-          returns: boolean
-          error: true
-        - java_method: isSystemAudioCaptioningEnabled
-          go_name: IsSystemAudioCaptioningEnabled
-          returns: boolean
-          error: true
-        - java_method: isSystemAudioCaptioningUiEnabled
-          go_name: IsSystemAudioCaptioningUiEnabled
-          returns: boolean
-          error: true
-        - java_method: removeCaptioningChangeListener
-          go_name: RemoveCaptioningChangeListener
-          params:
-            - java_type: android.view.accessibility.CaptioningManager$CaptioningChangeListener
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.accessibility.CaptioningManager$CaptionStyle
-      go_type: CaptioningManagerCaptionStyle
-      methods:
-        - java_method: getTypeface
-          go_name: GetTypeface
-          returns: android.graphics.Typeface
-          error: true
-        - java_method: hasBackgroundColor
-          go_name: HasBackgroundColor
-          returns: boolean
-          error: true
-        - java_method: hasEdgeColor
-          go_name: HasEdgeColor
-          returns: boolean
-          error: true
-        - java_method: hasEdgeType
-          go_name: HasEdgeType
-          returns: boolean
-          error: true
-        - java_method: hasForegroundColor
-          go_name: HasForegroundColor
-          returns: boolean
-          error: true
-        - java_method: hasWindowColor
-          go_name: HasWindowColor
-          returns: boolean
-          error: true
-    - java_class: android.view.accessibility.CaptioningManager$CaptioningChangeListener
-      go_type: CaptioningManagerCaptioningChangeListener
-      methods:
-        - java_method: onEnabledChanged
-          go_name: OnEnabledChanged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onFontScaleChanged
-          go_name: OnFontScaleChanged
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onLocaleChanged
-          go_name: OnLocaleChanged
-          params:
-            - java_type: java.util.Locale
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSystemAudioCaptioningChanged
-          go_name: OnSystemAudioCaptioningChanged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSystemAudioCaptioningUiChanged
-          go_name: OnSystemAudioCaptioningUiChanged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onUserStyleChanged
-          go_name: OnUserStyleChanged
-          params:
-            - java_type: android.view.accessibility.CaptioningManager$CaptionStyle
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.view.accessibility.AccessibilityWindowInfo
-      go_type: WindowInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAnchor
-          go_name: GetAnchor
-          returns: android.view.accessibility.AccessibilityNodeInfo
-          error: true
-        - java_method: getBoundsInScreen
-          go_name: GetBoundsInScreen
-          params:
-            - java_type: android.graphics.Rect
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getChild
-          go_name: GetChild
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.accessibility.AccessibilityWindowInfo
-          error: true
-        - java_method: getChildCount
-          go_name: GetChildCount
-          returns: int
-          error: true
-        - java_method: getDisplayId
-          go_name: GetDisplayId
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: int
-          error: true
-        - java_method: getLayer
-          go_name: GetLayer
-          returns: int
-          error: true
-        - java_method: getLocales
-          go_name: GetLocales
-          returns: android.os.LocaleList
-          error: true
-        - java_method: getParent
-          go_name: GetParent
-          returns: android.view.accessibility.AccessibilityWindowInfo
-          error: true
-        - java_method: getRegionInScreen
-          go_name: GetRegionInScreen
-          params:
-            - java_type: android.graphics.Region
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getRoot
-          go_name: GetRoot0
-          returns: android.view.accessibility.AccessibilityNodeInfo
-          error: true
-        - java_method: getRoot
-          go_name: GetRoot1_1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.accessibility.AccessibilityNodeInfo
-          error: true
-        - java_method: getTitle
-          go_name: GetTitle
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getTransitionTimeMillis
-          go_name: GetTransitionTimeMillis
-          returns: long
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isAccessibilityFocused
-          go_name: IsAccessibilityFocused
-          returns: boolean
-          error: true
-        - java_method: isActive
-          go_name: IsActive
-          returns: boolean
-          error: true
-        - java_method: isFocused
-          go_name: IsFocused
-          returns: boolean
-          error: true
-        - java_method: isInPictureInPictureMode
-          go_name: IsInPictureInPictureMode
-          returns: boolean
-          error: true
-        - java_method: recycle
-          go_name: Recycle
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: obtain
-          go_name: Obtain0
-          returns: android.view.accessibility.AccessibilityWindowInfo
-          error: true
-        - java_method: obtain
-          go_name: Obtain1_1
-          params:
-            - java_type: android.view.accessibility.AccessibilityWindowInfo
-              go_name: arg0
-          returns: android.view.accessibility.AccessibilityWindowInfo
-          error: true
     - java_class: android.view.accessibility.AccessibilityEventSource
       go_type: EventSource
       methods:
@@ -297,8 +42,299 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.view.accessibility.AccessibilityRecord
+      go_type: Record
+      obtain: constructor
+      methods:
+        - java_method: getAddedCount
+          go_name: GetAddedCount
+          returns: int
+          error: true
+        - java_method: getBeforeText
+          go_name: GetBeforeText
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getClassName
+          go_name: GetClassName
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getContentDescription
+          go_name: GetContentDescription
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getCurrentItemIndex
+          go_name: GetCurrentItemIndex
+          returns: int
+          error: true
+        - java_method: getDisplayId
+          go_name: GetDisplayId
+          returns: int
+          error: true
+        - java_method: getFromIndex
+          go_name: GetFromIndex
+          returns: int
+          error: true
+        - java_method: getItemCount
+          go_name: GetItemCount
+          returns: int
+          error: true
+        - java_method: getMaxScrollX
+          go_name: GetMaxScrollX
+          returns: int
+          error: true
+        - java_method: getMaxScrollY
+          go_name: GetMaxScrollY
+          returns: int
+          error: true
+        - java_method: getParcelableData
+          go_name: GetParcelableData
+          returns: android.os.Parcelable
+          error: true
+        - java_method: getRemovedCount
+          go_name: GetRemovedCount
+          returns: int
+          error: true
+        - java_method: getScrollDeltaX
+          go_name: GetScrollDeltaX
+          returns: int
+          error: true
+        - java_method: getScrollDeltaY
+          go_name: GetScrollDeltaY
+          returns: int
+          error: true
+        - java_method: getScrollX
+          go_name: GetScrollX
+          returns: int
+          error: true
+        - java_method: getScrollY
+          go_name: GetScrollY
+          returns: int
+          error: true
+        - java_method: getSource
+          go_name: GetSource0
+          returns: android.view.accessibility.AccessibilityNodeInfo
+          error: true
+        - java_method: getSource
+          go_name: GetSource1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.accessibility.AccessibilityNodeInfo
+          error: true
+        - java_method: getToIndex
+          go_name: GetToIndex
+          returns: int
+          error: true
+        - java_method: getWindowId
+          go_name: GetWindowId
+          returns: int
+          error: true
+        - java_method: isChecked
+          go_name: IsChecked
+          returns: boolean
+          error: true
+        - java_method: isEnabled
+          go_name: IsEnabled
+          returns: boolean
+          error: true
+        - java_method: isFullScreen
+          go_name: IsFullScreen
+          returns: boolean
+          error: true
+        - java_method: isPassword
+          go_name: IsPassword
+          returns: boolean
+          error: true
+        - java_method: isScrollable
+          go_name: IsScrollable
+          returns: boolean
+          error: true
+        - java_method: recycle
+          go_name: Recycle
+          returns: void
+          error: true
+        - java_method: setAddedCount
+          go_name: SetAddedCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setBeforeText
+          go_name: SetBeforeText
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setChecked
+          go_name: SetChecked
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setClassName
+          go_name: SetClassName
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setContentDescription
+          go_name: SetContentDescription
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCurrentItemIndex
+          go_name: SetCurrentItemIndex
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setEnabled
+          go_name: SetEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFromIndex
+          go_name: SetFromIndex
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFullScreen
+          go_name: SetFullScreen
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setItemCount
+          go_name: SetItemCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMaxScrollX
+          go_name: SetMaxScrollX
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMaxScrollY
+          go_name: SetMaxScrollY
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setParcelableData
+          go_name: SetParcelableData
+          params:
+            - java_type: android.os.Parcelable
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPassword
+          go_name: SetPassword
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setRemovedCount
+          go_name: SetRemovedCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setScrollDeltaX
+          go_name: SetScrollDeltaX
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setScrollDeltaY
+          go_name: SetScrollDeltaY
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setScrollX
+          go_name: SetScrollX
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setScrollY
+          go_name: SetScrollY
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setScrollable
+          go_name: SetScrollable
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSource
+          go_name: SetSource1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setSource
+          go_name: SetSource2_1
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setToIndex
+          go_name: SetToIndex
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+      static_methods:
+        - java_method: obtain
+          go_name: Obtain0
+          returns: android.view.accessibility.AccessibilityRecord
+          error: true
+        - java_method: obtain
+          go_name: Obtain1_1
+          params:
+            - java_type: android.view.accessibility.AccessibilityRecord
+              go_name: arg0
+          returns: android.view.accessibility.AccessibilityRecord
+          error: true
     - java_class: android.view.accessibility.AccessibilityNodeInfo
       go_type: NodeInfo
+      obtain: constructor
       methods:
         - java_method: addAction
           go_name: AddAction1
@@ -1550,132 +1586,115 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.view.accessibility.AccessibilityEvent
-      go_type: Event
+    - java_class: android.view.accessibility.AccessibilityWindowInfo
+      go_type: WindowInfo
+      obtain: constructor
       methods:
-        - java_method: appendRecord
-          go_name: AppendRecord
-          params:
-            - java_type: android.view.accessibility.AccessibilityRecord
-              go_name: arg0
-          returns: void
-          error: true
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getAction
-          go_name: GetAction
-          returns: int
-          error: true
-        - java_method: getContentChangeTypes
-          go_name: GetContentChangeTypes
-          returns: int
-          error: true
-        - java_method: getEventTime
-          go_name: GetEventTime
-          returns: long
-          error: true
-        - java_method: getEventType
-          go_name: GetEventType
-          returns: int
-          error: true
-        - java_method: getMovementGranularity
-          go_name: GetMovementGranularity
-          returns: int
-          error: true
-        - java_method: getPackageName
-          go_name: GetPackageName
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getRecord
-          go_name: GetRecord
+        - java_method: equals
+          go_name: Equals
           params:
-            - java_type: int
+            - java_type: java.lang.Object
               go_name: arg0
-          returns: android.view.accessibility.AccessibilityRecord
+          returns: boolean
           error: true
-        - java_method: getRecordCount
-          go_name: GetRecordCount
-          returns: int
+        - java_method: getAnchor
+          go_name: GetAnchor
+          returns: android.view.accessibility.AccessibilityNodeInfo
           error: true
-        - java_method: getSpeechStateChangeTypes
-          go_name: GetSpeechStateChangeTypes
-          returns: int
-          error: true
-        - java_method: getWindowChanges
-          go_name: GetWindowChanges
-          returns: int
-          error: true
-        - java_method: initFromParcel
-          go_name: InitFromParcel
+        - java_method: getBoundsInScreen
+          go_name: GetBoundsInScreen
           params:
-            - java_type: android.os.Parcel
+            - java_type: android.graphics.Rect
               go_name: arg0
           returns: void
           error: true
-        - java_method: isAccessibilityDataSensitive
-          go_name: IsAccessibilityDataSensitive
+        - java_method: getChild
+          go_name: GetChild
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.accessibility.AccessibilityWindowInfo
+          error: true
+        - java_method: getChildCount
+          go_name: GetChildCount
+          returns: int
+          error: true
+        - java_method: getDisplayId
+          go_name: GetDisplayId
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getLayer
+          go_name: GetLayer
+          returns: int
+          error: true
+        - java_method: getLocales
+          go_name: GetLocales
+          returns: android.os.LocaleList
+          error: true
+        - java_method: getParent
+          go_name: GetParent
+          returns: android.view.accessibility.AccessibilityWindowInfo
+          error: true
+        - java_method: getRegionInScreen
+          go_name: GetRegionInScreen
+          params:
+            - java_type: android.graphics.Region
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getRoot
+          go_name: GetRoot0
+          returns: android.view.accessibility.AccessibilityNodeInfo
+          error: true
+        - java_method: getRoot
+          go_name: GetRoot1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.accessibility.AccessibilityNodeInfo
+          error: true
+        - java_method: getTitle
+          go_name: GetTitle
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getTransitionTimeMillis
+          go_name: GetTransitionTimeMillis
+          returns: long
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isAccessibilityFocused
+          go_name: IsAccessibilityFocused
+          returns: boolean
+          error: true
+        - java_method: isActive
+          go_name: IsActive
+          returns: boolean
+          error: true
+        - java_method: isFocused
+          go_name: IsFocused
+          returns: boolean
+          error: true
+        - java_method: isInPictureInPictureMode
+          go_name: IsInPictureInPictureMode
           returns: boolean
           error: true
         - java_method: recycle
           go_name: Recycle
-          returns: void
-          error: true
-        - java_method: setAccessibilityDataSensitive
-          go_name: SetAccessibilityDataSensitive
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setAction
-          go_name: SetAction
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setContentChangeTypes
-          go_name: SetContentChangeTypes
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setEventTime
-          go_name: SetEventTime
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setEventType
-          go_name: SetEventType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setMovementGranularity
-          go_name: SetMovementGranularity
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPackageName
-          go_name: SetPackageName
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSpeechStateChangeTypes
-          go_name: SetSpeechStateChangeTypes
-          params:
-            - java_type: int
-              go_name: arg0
           returns: void
           error: true
         - java_method: toString
@@ -1692,30 +1711,16 @@ classes:
           returns: void
           error: true
       static_methods:
-        - java_method: eventTypeToString
-          go_name: EventTypeToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
         - java_method: obtain
           go_name: Obtain0
-          returns: android.view.accessibility.AccessibilityEvent
+          returns: android.view.accessibility.AccessibilityWindowInfo
           error: true
         - java_method: obtain
           go_name: Obtain1_1
           params:
-            - java_type: android.view.accessibility.AccessibilityEvent
+            - java_type: android.view.accessibility.AccessibilityWindowInfo
               go_name: arg0
-          returns: android.view.accessibility.AccessibilityEvent
-          error: true
-        - java_method: obtain
-          go_name: Obtain1_2
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.view.accessibility.AccessibilityEvent
+          returns: android.view.accessibility.AccessibilityWindowInfo
           error: true
     - java_class: android.view.accessibility.AccessibilityNodeProvider
       go_type: NodeProvider
@@ -1757,6 +1762,126 @@ classes:
             - java_type: android.os.Bundle
               go_name: arg2
           returns: boolean
+          error: true
+    - java_class: android.view.accessibility.CaptioningManager
+      go_type: CaptioningManager
+      obtain: system_service
+      service_name: captioning
+      close: true
+      methods:
+        - java_method: addCaptioningChangeListener
+          go_name: AddCaptioningChangeListener
+          params:
+            - java_type: android.view.accessibility.CaptioningManager$CaptioningChangeListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getFontScale
+          go_name: GetFontScale
+          returns: float
+          error: true
+        - java_method: getLocale
+          go_name: GetLocale
+          returns: java.util.Locale
+          error: true
+        - java_method: getUserStyle
+          go_name: GetUserStyle
+          returns: android.view.accessibility.CaptioningManager$CaptionStyle
+          error: true
+        - java_method: isCallCaptioningEnabled
+          go_name: IsCallCaptioningEnabled
+          returns: boolean
+          error: true
+        - java_method: isEnabled
+          go_name: IsEnabled
+          returns: boolean
+          error: true
+        - java_method: isSystemAudioCaptioningEnabled
+          go_name: IsSystemAudioCaptioningEnabled
+          returns: boolean
+          error: true
+        - java_method: isSystemAudioCaptioningUiEnabled
+          go_name: IsSystemAudioCaptioningUiEnabled
+          returns: boolean
+          error: true
+        - java_method: removeCaptioningChangeListener
+          go_name: RemoveCaptioningChangeListener
+          params:
+            - java_type: android.view.accessibility.CaptioningManager$CaptioningChangeListener
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.view.accessibility.CaptioningManager$CaptionStyle
+      go_type: CaptioningManagerCaptionStyle
+      methods:
+        - java_method: getTypeface
+          go_name: GetTypeface
+          returns: android.graphics.Typeface
+          error: true
+        - java_method: hasBackgroundColor
+          go_name: HasBackgroundColor
+          returns: boolean
+          error: true
+        - java_method: hasEdgeColor
+          go_name: HasEdgeColor
+          returns: boolean
+          error: true
+        - java_method: hasEdgeType
+          go_name: HasEdgeType
+          returns: boolean
+          error: true
+        - java_method: hasForegroundColor
+          go_name: HasForegroundColor
+          returns: boolean
+          error: true
+        - java_method: hasWindowColor
+          go_name: HasWindowColor
+          returns: boolean
+          error: true
+    - java_class: android.view.accessibility.CaptioningManager$CaptioningChangeListener
+      go_type: CaptioningManagerCaptioningChangeListener
+      methods:
+        - java_method: onEnabledChanged
+          go_name: OnEnabledChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onFontScaleChanged
+          go_name: OnFontScaleChanged
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onLocaleChanged
+          go_name: OnLocaleChanged
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSystemAudioCaptioningChanged
+          go_name: OnSystemAudioCaptioningChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSystemAudioCaptioningUiChanged
+          go_name: OnSystemAudioCaptioningUiChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onUserStyleChanged
+          go_name: OnUserStyleChanged
+          params:
+            - java_type: android.view.accessibility.CaptioningManager$CaptionStyle
+              go_name: arg0
+          returns: void
           error: true
     - java_class: android.view.accessibility.AccessibilityManager
       go_type: Manager
@@ -1964,274 +2089,130 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.view.accessibility.AccessibilityRecord
-      go_type: Record
+    - java_class: android.view.accessibility.AccessibilityEvent
+      go_type: Event
+      obtain: constructor
       methods:
-        - java_method: getAddedCount
-          go_name: GetAddedCount
+        - java_method: appendRecord
+          go_name: AppendRecord
+          params:
+            - java_type: android.view.accessibility.AccessibilityRecord
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getBeforeText
-          go_name: GetBeforeText
+        - java_method: getAction
+          go_name: GetAction
+          returns: int
+          error: true
+        - java_method: getContentChangeTypes
+          go_name: GetContentChangeTypes
+          returns: int
+          error: true
+        - java_method: getEventTime
+          go_name: GetEventTime
+          returns: long
+          error: true
+        - java_method: getEventType
+          go_name: GetEventType
+          returns: int
+          error: true
+        - java_method: getMovementGranularity
+          go_name: GetMovementGranularity
+          returns: int
+          error: true
+        - java_method: getPackageName
+          go_name: GetPackageName
           returns: java.lang.CharSequence
           error: true
-        - java_method: getClassName
-          go_name: GetClassName
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getContentDescription
-          go_name: GetContentDescription
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getCurrentItemIndex
-          go_name: GetCurrentItemIndex
-          returns: int
-          error: true
-        - java_method: getDisplayId
-          go_name: GetDisplayId
-          returns: int
-          error: true
-        - java_method: getFromIndex
-          go_name: GetFromIndex
-          returns: int
-          error: true
-        - java_method: getItemCount
-          go_name: GetItemCount
-          returns: int
-          error: true
-        - java_method: getMaxScrollX
-          go_name: GetMaxScrollX
-          returns: int
-          error: true
-        - java_method: getMaxScrollY
-          go_name: GetMaxScrollY
-          returns: int
-          error: true
-        - java_method: getParcelableData
-          go_name: GetParcelableData
-          returns: android.os.Parcelable
-          error: true
-        - java_method: getRemovedCount
-          go_name: GetRemovedCount
-          returns: int
-          error: true
-        - java_method: getScrollDeltaX
-          go_name: GetScrollDeltaX
-          returns: int
-          error: true
-        - java_method: getScrollDeltaY
-          go_name: GetScrollDeltaY
-          returns: int
-          error: true
-        - java_method: getScrollX
-          go_name: GetScrollX
-          returns: int
-          error: true
-        - java_method: getScrollY
-          go_name: GetScrollY
-          returns: int
-          error: true
-        - java_method: getSource
-          go_name: GetSource0
-          returns: android.view.accessibility.AccessibilityNodeInfo
-          error: true
-        - java_method: getSource
-          go_name: GetSource1_1
+        - java_method: getRecord
+          go_name: GetRecord
           params:
             - java_type: int
               go_name: arg0
-          returns: android.view.accessibility.AccessibilityNodeInfo
+          returns: android.view.accessibility.AccessibilityRecord
           error: true
-        - java_method: getToIndex
-          go_name: GetToIndex
+        - java_method: getRecordCount
+          go_name: GetRecordCount
           returns: int
           error: true
-        - java_method: getWindowId
-          go_name: GetWindowId
+        - java_method: getSpeechStateChangeTypes
+          go_name: GetSpeechStateChangeTypes
           returns: int
           error: true
-        - java_method: isChecked
-          go_name: IsChecked
-          returns: boolean
+        - java_method: getWindowChanges
+          go_name: GetWindowChanges
+          returns: int
           error: true
-        - java_method: isEnabled
-          go_name: IsEnabled
-          returns: boolean
+        - java_method: initFromParcel
+          go_name: InitFromParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+          returns: void
           error: true
-        - java_method: isFullScreen
-          go_name: IsFullScreen
-          returns: boolean
-          error: true
-        - java_method: isPassword
-          go_name: IsPassword
-          returns: boolean
-          error: true
-        - java_method: isScrollable
-          go_name: IsScrollable
+        - java_method: isAccessibilityDataSensitive
+          go_name: IsAccessibilityDataSensitive
           returns: boolean
           error: true
         - java_method: recycle
           go_name: Recycle
           returns: void
           error: true
-        - java_method: setAddedCount
-          go_name: SetAddedCount
+        - java_method: setAccessibilityDataSensitive
+          go_name: SetAccessibilityDataSensitive
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAction
+          go_name: SetAction
           params:
             - java_type: int
               go_name: arg0
           returns: void
           error: true
-        - java_method: setBeforeText
-          go_name: SetBeforeText
+        - java_method: setContentChangeTypes
+          go_name: SetContentChangeTypes
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setEventTime
+          go_name: SetEventTime
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setEventType
+          go_name: SetEventType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setMovementGranularity
+          go_name: SetMovementGranularity
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPackageName
+          go_name: SetPackageName
           params:
             - java_type: java.lang.CharSequence
               go_name: arg0
           returns: void
           error: true
-        - java_method: setChecked
-          go_name: SetChecked
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setClassName
-          go_name: SetClassName
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setContentDescription
-          go_name: SetContentDescription
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCurrentItemIndex
-          go_name: SetCurrentItemIndex
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setEnabled
-          go_name: SetEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setFromIndex
-          go_name: SetFromIndex
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setFullScreen
-          go_name: SetFullScreen
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setItemCount
-          go_name: SetItemCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setMaxScrollX
-          go_name: SetMaxScrollX
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setMaxScrollY
-          go_name: SetMaxScrollY
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setParcelableData
-          go_name: SetParcelableData
-          params:
-            - java_type: android.os.Parcelable
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPassword
-          go_name: SetPassword
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setRemovedCount
-          go_name: SetRemovedCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setScrollDeltaX
-          go_name: SetScrollDeltaX
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setScrollDeltaY
-          go_name: SetScrollDeltaY
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setScrollX
-          go_name: SetScrollX
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setScrollY
-          go_name: SetScrollY
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setScrollable
-          go_name: SetScrollable
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSource
-          go_name: SetSource1
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setSource
-          go_name: SetSource2_1
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setToIndex
-          go_name: SetToIndex
+        - java_method: setSpeechStateChangeTypes
+          go_name: SetSpeechStateChangeTypes
           params:
             - java_type: int
               go_name: arg0
@@ -2241,63 +2222,44 @@ classes:
           go_name: ToString
           returns: String
           error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
       static_methods:
+        - java_method: eventTypeToString
+          go_name: EventTypeToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
         - java_method: obtain
           go_name: Obtain0
-          returns: android.view.accessibility.AccessibilityRecord
+          returns: android.view.accessibility.AccessibilityEvent
           error: true
         - java_method: obtain
           go_name: Obtain1_1
           params:
-            - java_type: android.view.accessibility.AccessibilityRecord
+            - java_type: android.view.accessibility.AccessibilityEvent
               go_name: arg0
-          returns: android.view.accessibility.AccessibilityRecord
+          returns: android.view.accessibility.AccessibilityEvent
+          error: true
+        - java_method: obtain
+          go_name: Obtain1_2
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.view.accessibility.AccessibilityEvent
           error: true
 constants:
     - go_name: RequestTypeExtraData
       value: "1"
-      go_type: int
-    - go_name: EdgeTypeDepressed
-      value: "4"
-      go_type: int
-    - go_name: EdgeTypeDropShadow
-      value: "2"
-      go_type: int
-    - go_name: EdgeTypeNone
-      value: "0"
-      go_type: int
-    - go_name: EdgeTypeOutline
-      value: "1"
-      go_type: int
-    - go_name: EdgeTypeRaised
-      value: "3"
-      go_type: int
-    - go_name: EdgeTypeUnspecified
-      value: "-1"
-      go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: TypeAccessibilityOverlay
-      value: "4"
-      go_type: int
-    - go_name: TypeApplication
-      value: "1"
-      go_type: int
-    - go_name: TypeInputMethod
-      value: "2"
-      go_type: int
-    - go_name: TypeMagnificationOverlay
-      value: "6"
-      go_type: int
-    - go_name: TypeSplitScreenDivider
-      value: "5"
-      go_type: int
-    - go_name: TypeSystem
-      value: "3"
-      go_type: int
-    - go_name: TypeWindowControl
-      value: "7"
       go_type: int
     - go_name: ActionAccessibilityFocus
       value: "64"
@@ -2415,6 +2377,9 @@ constants:
       go_type: int
     - go_name: CheckedStateTrue
       value: "1"
+      go_type: int
+    - go_name: Creator
+      value: "0"
       go_type: int
     - go_name: ExpandedStateCollapsed
       value: "1"
@@ -2579,6 +2544,57 @@ constants:
       value: "0"
       go_type: int
     - go_name: RangeTypePercent
+      value: "2"
+      go_type: int
+    - go_name: TypeAccessibilityOverlay
+      value: "4"
+      go_type: int
+    - go_name: TypeApplication
+      value: "1"
+      go_type: int
+    - go_name: TypeInputMethod
+      value: "2"
+      go_type: int
+    - go_name: TypeMagnificationOverlay
+      value: "6"
+      go_type: int
+    - go_name: TypeSplitScreenDivider
+      value: "5"
+      go_type: int
+    - go_name: TypeSystem
+      value: "3"
+      go_type: int
+    - go_name: TypeWindowControl
+      value: "7"
+      go_type: int
+    - go_name: HostViewId
+      value: "-1"
+      go_type: int
+    - go_name: EdgeTypeDepressed
+      value: "4"
+      go_type: int
+    - go_name: EdgeTypeDropShadow
+      value: "2"
+      go_type: int
+    - go_name: EdgeTypeNone
+      value: "0"
+      go_type: int
+    - go_name: EdgeTypeOutline
+      value: "1"
+      go_type: int
+    - go_name: EdgeTypeRaised
+      value: "3"
+      go_type: int
+    - go_name: EdgeTypeUnspecified
+      value: "-1"
+      go_type: int
+    - go_name: FlagContentControls
+      value: "4"
+      go_type: int
+    - go_name: FlagContentIcons
+      value: "1"
+      go_type: int
+    - go_name: FlagContentText
       value: "2"
       go_type: int
     - go_name: ContentChangeTypeChecked
@@ -2766,16 +2782,4 @@ constants:
       go_type: int
     - go_name: WindowsChangeTitle
       value: "4"
-      go_type: int
-    - go_name: HostViewId
-      value: "-1"
-      go_type: int
-    - go_name: FlagContentControls
-      value: "4"
-      go_type: int
-    - go_name: FlagContentIcons
-      value: "1"
-      go_type: int
-    - go_name: FlagContentText
-      value: "2"
       go_type: int

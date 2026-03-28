@@ -23,6 +23,29 @@ type UserHandle struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUserHandle creates a new android.os.UserHandle instance.
+func NewUserHandle(vm *jni.VM, arg0 *jni.Object) (*UserHandle, error) {
+	var t UserHandle
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserHandle)), midUserHandleInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.os.UserHandle.describeContents.
 func (m *UserHandle) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type SwitchPreference struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSwitchPreference creates a new android.preference.SwitchPreference instance.
+func NewSwitchPreference(vm *jni.VM, arg0 *jni.Object) (*SwitchPreference, error) {
+	var t SwitchPreference
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), midSwitchPreferenceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetSwitchTextOff calls android.preference.SwitchPreference.getSwitchTextOff.
 func (m *SwitchPreference) GetSwitchTextOff() (*jni.Object, error) {
 	var result *jni.Object

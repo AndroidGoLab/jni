@@ -23,6 +23,29 @@ type UnsafeIntentLaunchViolation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUnsafeIntentLaunchViolation creates a new android.os.strictmode.UnsafeIntentLaunchViolation instance.
+func NewUnsafeIntentLaunchViolation(vm *jni.VM, arg0 *jni.Object) (*UnsafeIntentLaunchViolation, error) {
+	var t UnsafeIntentLaunchViolation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnsafeIntentLaunchViolation)), midUnsafeIntentLaunchViolationInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetIntent calls android.os.strictmode.UnsafeIntentLaunchViolation.getIntent.
 func (m *UnsafeIntentLaunchViolation) GetIntent() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,34 @@ type SelectWalletCardRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSelectWalletCardRequest creates a new android.service.quickaccesswallet.SelectWalletCardRequest instance.
+func NewSelectWalletCardRequest(vm *jni.VM, arg0 string) (*SelectWalletCardRequest, error) {
+	var t SelectWalletCardRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSelectWalletCardRequest)), midSelectWalletCardRequestInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.quickaccesswallet.SelectWalletCardRequest.describeContents.
 func (m *SelectWalletCardRequest) DescribeContents() (int32, error) {
 	var result int32

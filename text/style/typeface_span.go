@@ -23,6 +23,29 @@ type TypefaceSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTypefaceSpan creates a new android.text.style.TypefaceSpan instance.
+func NewTypefaceSpan(vm *jni.VM, arg0 *jni.Object) (*TypefaceSpan, error) {
+	var t TypefaceSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTypefaceSpan)), midTypefaceSpanInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.TypefaceSpan.describeContents.
 func (m *TypefaceSpan) DescribeContents() (int32, error) {
 	var result int32

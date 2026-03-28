@@ -23,6 +23,41 @@ type SpellCheckerSubtype struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpellCheckerSubtype creates a new android.view.textservice.SpellCheckerSubtype instance.
+func NewSpellCheckerSubtype(vm *jni.VM, arg0 int32, arg1 string, arg2 string) (*SpellCheckerSubtype, error) {
+	var t SpellCheckerSubtype
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpellCheckerSubtype)), midSpellCheckerSubtypeInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ContainsExtraValueKey calls android.view.textservice.SpellCheckerSubtype.containsExtraValueKey.
 func (m *SpellCheckerSubtype) ContainsExtraValueKey(arg0 string) (bool, error) {
 	var result bool

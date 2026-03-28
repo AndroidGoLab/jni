@@ -23,6 +23,28 @@ type PathMeasure struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPathMeasure creates a new android.graphics.PathMeasure instance.
+func NewPathMeasure(vm *jni.VM) (*PathMeasure, error) {
+	var t PathMeasure
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathMeasure)), midPathMeasureInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetLength calls android.graphics.PathMeasure.getLength.
 func (m *PathMeasure) GetLength() (float32, error) {
 	var result float32

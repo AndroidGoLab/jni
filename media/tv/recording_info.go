@@ -23,6 +23,46 @@ type RecordingInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRecordingInfo creates a new android.media.tv.TvRecordingInfo instance.
+func NewRecordingInfo(vm *jni.VM, arg0 string, arg1 int64, arg2 int64, arg3 int32, arg4 string, arg5 string, arg6 int64, arg7 int64, arg8 *jni.Object, arg9 *jni.Object, arg10 *jni.Object, arg11 *jni.Object, arg12 int64, arg13 int64) (*RecordingInfo, error) {
+	var t RecordingInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg4, err := env.NewStringUTF(arg4)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg4.Object)
+
+		jArg5, err := env.NewStringUTF(arg5)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg5.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecordingInfo)), midRecordingInfoInit, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1), jni.LongValue(arg2), jni.IntValue(arg3), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(&jArg5.Object), jni.LongValue(arg6), jni.LongValue(arg7), jni.ObjectValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10), jni.ObjectValue(arg11), jni.LongValue(arg12), jni.LongValue(arg13))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.TvRecordingInfo.describeContents.
 func (m *RecordingInfo) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,35 @@ type AconfigStorageReadException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAconfigStorageReadException creates a new android.os.flagging.AconfigStorageReadException instance.
+func NewAconfigStorageReadException(vm *jni.VM, arg0 int32, arg1 string) (*AconfigStorageReadException, error) {
+	var t AconfigStorageReadException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), midAconfigStorageReadExceptionInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetErrorCode calls android.os.flagging.AconfigStorageReadException.getErrorCode.
 func (m *AconfigStorageReadException) GetErrorCode() (int32, error) {
 	var result int32

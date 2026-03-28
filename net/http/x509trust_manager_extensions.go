@@ -23,6 +23,29 @@ type X509TrustManagerExtensions struct {
 	Obj *jni.GlobalRef
 }
 
+// NewX509TrustManagerExtensions creates a new android.net.http.X509TrustManagerExtensions instance.
+func NewX509TrustManagerExtensions(vm *jni.VM, arg0 *jni.Object) (*X509TrustManagerExtensions, error) {
+	var t X509TrustManagerExtensions
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsX509TrustManagerExtensions)), midX509TrustManagerExtensionsInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // IsSameTrustConfiguration calls android.net.http.X509TrustManagerExtensions.isSameTrustConfiguration.
 func (m *X509TrustManagerExtensions) IsSameTrustConfiguration(arg0 string, arg1 string) (bool, error) {
 	var result bool

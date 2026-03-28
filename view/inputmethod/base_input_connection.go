@@ -23,6 +23,34 @@ type BaseInputConnection struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBaseInputConnection creates a new android.view.inputmethod.BaseInputConnection instance.
+func NewBaseInputConnection(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*BaseInputConnection, error) {
+	var t BaseInputConnection
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBaseInputConnection)), midBaseInputConnectionInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BeginBatchEdit calls android.view.inputmethod.BaseInputConnection.beginBatchEdit.
 func (m *BaseInputConnection) BeginBatchEdit() (bool, error) {
 	var result bool

@@ -5,17 +5,15 @@ package cardemulation
 import "github.com/AndroidGoLab/jni/nfc/cardemulation/consts"
 
 const (
-	ActionChangeDefault             = consts.ActionChangeDefault
-	CategoryOther                   = consts.CategoryOther
-	CategoryPayment                 = consts.CategoryPayment
-	ExtraCategory                   = consts.ExtraCategory
-	ExtraServiceComponent           = consts.ExtraServiceComponent
-	PropertyAllowSharedRolePriority = consts.PropertyAllowSharedRolePriority
-	ServiceInterface                = consts.ServiceInterface
-	ServiceMetaData                 = consts.ServiceMetaData
-)
-
-const (
+	DeactivationDeselected            = consts.DeactivationDeselected
+	DeactivationLinkLoss              = consts.DeactivationLinkLoss
+	Creator                           = consts.Creator
+	PollingLoopTypeA                  = consts.PollingLoopTypeA
+	PollingLoopTypeB                  = consts.PollingLoopTypeB
+	PollingLoopTypeF                  = consts.PollingLoopTypeF
+	PollingLoopTypeOff                = consts.PollingLoopTypeOff
+	PollingLoopTypeOn                 = consts.PollingLoopTypeOn
+	PollingLoopTypeUnknown            = consts.PollingLoopTypeUnknown
 	NfcInternalErrorCommandTimeout    = consts.NfcInternalErrorCommandTimeout
 	NfcInternalErrorNfcCrashRestart   = consts.NfcInternalErrorNfcCrashRestart
 	NfcInternalErrorNfcHardwareError  = consts.NfcInternalErrorNfcHardwareError
@@ -28,13 +26,15 @@ const (
 	SelectionModeAlwaysAsk            = consts.SelectionModeAlwaysAsk
 	SelectionModeAskIfConflict        = consts.SelectionModeAskIfConflict
 	SelectionModePreferDefault        = consts.SelectionModePreferDefault
-	DeactivationDeselected            = consts.DeactivationDeselected
-	DeactivationLinkLoss              = consts.DeactivationLinkLoss
-	Creator                           = consts.Creator
-	PollingLoopTypeA                  = consts.PollingLoopTypeA
-	PollingLoopTypeB                  = consts.PollingLoopTypeB
-	PollingLoopTypeF                  = consts.PollingLoopTypeF
-	PollingLoopTypeOff                = consts.PollingLoopTypeOff
-	PollingLoopTypeOn                 = consts.PollingLoopTypeOn
-	PollingLoopTypeUnknown            = consts.PollingLoopTypeUnknown
+)
+
+const (
+	ServiceInterface                = consts.ServiceInterface
+	ServiceMetaData                 = consts.ServiceMetaData
+	ActionChangeDefault             = consts.ActionChangeDefault
+	CategoryOther                   = consts.CategoryOther
+	CategoryPayment                 = consts.CategoryPayment
+	ExtraCategory                   = consts.ExtraCategory
+	ExtraServiceComponent           = consts.ExtraServiceComponent
+	PropertyAllowSharedRolePriority = consts.PropertyAllowSharedRolePriority
 )

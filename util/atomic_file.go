@@ -23,6 +23,29 @@ type AtomicFile struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAtomicFile creates a new android.util.AtomicFile instance.
+func NewAtomicFile(vm *jni.VM, arg0 *jni.Object) (*AtomicFile, error) {
+	var t AtomicFile
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAtomicFile)), midAtomicFileInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Delete calls android.util.AtomicFile.delete.
 func (m *AtomicFile) Delete() error {
 

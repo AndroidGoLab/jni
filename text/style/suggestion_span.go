@@ -23,6 +23,29 @@ type SuggestionSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSuggestionSpan creates a new android.text.style.SuggestionSpan instance.
+func NewSuggestionSpan(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32) (*SuggestionSpan, error) {
+	var t SuggestionSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), midSuggestionSpanInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.SuggestionSpan.describeContents.
 func (m *SuggestionSpan) DescribeContents() (int32, error) {
 	var result int32

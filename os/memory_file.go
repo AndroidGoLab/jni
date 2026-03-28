@@ -23,6 +23,34 @@ type MemoryFile struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMemoryFile creates a new android.os.MemoryFile instance.
+func NewMemoryFile(vm *jni.VM, arg0 string, arg1 int32) (*MemoryFile, error) {
+	var t MemoryFile
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMemoryFile)), midMemoryFileInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.os.MemoryFile.close.
 func (m *MemoryFile) Close() error {
 

@@ -23,6 +23,28 @@ type DateFormatSymbols struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateFormatSymbols creates a new android.icu.text.DateFormatSymbols instance.
+func NewDateFormatSymbols(vm *jni.VM) (*DateFormatSymbols, error) {
+	var t DateFormatSymbols
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateFormatSymbols)), midDateFormatSymbolsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone calls android.icu.text.DateFormatSymbols.clone.
 func (m *DateFormatSymbols) Clone() (*jni.Object, error) {
 	var result *jni.Object

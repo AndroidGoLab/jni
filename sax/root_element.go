@@ -23,6 +23,34 @@ type RootElement struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRootElement creates a new android.sax.RootElement instance.
+func NewRootElement(vm *jni.VM, arg0 string) (*RootElement, error) {
+	var t RootElement
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRootElement)), midRootElementInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetContentHandler calls android.sax.RootElement.getContentHandler.
 func (m *RootElement) GetContentHandler() (*jni.Object, error) {
 	var result *jni.Object

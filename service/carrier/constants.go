@@ -62,6 +62,6 @@ const (
 )
 
 const (
-	CarrierServiceInterface = consts.CarrierServiceInterface
 	ServiceInterface        = consts.ServiceInterface
+	CarrierServiceInterface = consts.CarrierServiceInterface
 )

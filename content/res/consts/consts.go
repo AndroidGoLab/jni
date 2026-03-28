@@ -3,10 +3,6 @@
 package consts
 
 const (
-	AccessBuffer                     int = 3
-	AccessRandom                     int = 1
-	AccessStreaming                  int = 2
-	AccessUnknown                    int = 0
 	ColorModeHdrMask                 int = 12
 	ColorModeHdrNo                   int = 4
 	ColorModeHdrShift                int = 2
@@ -88,6 +84,10 @@ const (
 	UiModeTypeVrHeadset              int = 7
 	UiModeTypeWatch                  int = 6
 	ObbOverlay                       int = 1
+	AccessBuffer                     int = 3
+	AccessRandom                     int = 1
+	AccessStreaming                  int = 2
+	AccessUnknown                    int = 0
 )
 
 const (

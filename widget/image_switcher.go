@@ -23,6 +23,29 @@ type ImageSwitcher struct {
 	Obj *jni.GlobalRef
 }
 
+// NewImageSwitcher creates a new android.widget.ImageSwitcher instance.
+func NewImageSwitcher(vm *jni.VM, arg0 *jni.Object) (*ImageSwitcher, error) {
+	var t ImageSwitcher
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageSwitcher)), midImageSwitcherInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.ImageSwitcher.getAccessibilityClassName.
 func (m *ImageSwitcher) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type VideoProfile struct {
 	Obj *jni.GlobalRef
 }
 
+// NewVideoProfile creates a new android.telecom.VideoProfile instance.
+func NewVideoProfile(vm *jni.VM, arg0 int32) (*VideoProfile, error) {
+	var t VideoProfile
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVideoProfile)), midVideoProfileInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telecom.VideoProfile.describeContents.
 func (m *VideoProfile) DescribeContents() (int32, error) {
 	var result int32

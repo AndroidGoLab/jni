@@ -23,6 +23,28 @@ type PaintDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPaintDrawable creates a new android.graphics.drawable.PaintDrawable instance.
+func NewPaintDrawable(vm *jni.VM) (*PaintDrawable, error) {
+	var t PaintDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPaintDrawable)), midPaintDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetCornerRadii calls android.graphics.drawable.PaintDrawable.setCornerRadii.
 func (m *PaintDrawable) SetCornerRadii(arg0 *jni.Object) error {
 

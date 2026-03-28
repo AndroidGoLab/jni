@@ -23,6 +23,28 @@ type IntentFilter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIntentFilter creates a new android.content.IntentFilter instance.
+func NewIntentFilter(vm *jni.VM) (*IntentFilter, error) {
+	var t IntentFilter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntentFilter)), midIntentFilterInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddAction calls android.content.IntentFilter.addAction.
 func (m *IntentFilter) AddAction(arg0 string) error {
 

@@ -23,6 +23,34 @@ type NetworkScanRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNetworkScanRequest creates a new android.telephony.NetworkScanRequest instance.
+func NewNetworkScanRequest(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 bool, arg5 int32, arg6 *jni.Object) (*NetworkScanRequest, error) {
+	var t NetworkScanRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg4 uint8
+		if arg4 {
+			jArg4 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkScanRequest)), midNetworkScanRequestInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telephony.NetworkScanRequest.describeContents.
 func (m *NetworkScanRequest) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,34 @@ type AppOwnedSdkSandboxInterface struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppOwnedSdkSandboxInterface creates a new android.app.sdksandbox.AppOwnedSdkSandboxInterface instance.
+func NewAppOwnedSdkSandboxInterface(vm *jni.VM, arg0 string, arg1 int64, arg2 *jni.Object) (*AppOwnedSdkSandboxInterface, error) {
+	var t AppOwnedSdkSandboxInterface
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppOwnedSdkSandboxInterface)), midAppOwnedSdkSandboxInterfaceInit, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.sdksandbox.AppOwnedSdkSandboxInterface.describeContents.
 func (m *AppOwnedSdkSandboxInterface) DescribeContents() (int32, error) {
 	var result int32

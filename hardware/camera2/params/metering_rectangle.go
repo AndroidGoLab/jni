@@ -23,6 +23,29 @@ type MeteringRectangle struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMeteringRectangle creates a new android.hardware.camera2.params.MeteringRectangle instance.
+func NewMeteringRectangle(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32) (*MeteringRectangle, error) {
+	var t MeteringRectangle
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMeteringRectangle)), midMeteringRectangleInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals1 calls android.hardware.camera2.params.MeteringRectangle.equals.
 func (m *MeteringRectangle) Equals1(arg0 *jni.Object) (bool, error) {
 	var result bool

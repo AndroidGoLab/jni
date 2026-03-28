@@ -23,6 +23,29 @@ type AmbientBacklightEvent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAmbientBacklightEvent creates a new android.media.quality.AmbientBacklightEvent instance.
+func NewAmbientBacklightEvent(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*AmbientBacklightEvent, error) {
+	var t AmbientBacklightEvent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightEvent)), midAmbientBacklightEventInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.quality.AmbientBacklightEvent.describeContents.
 func (m *AmbientBacklightEvent) DescribeContents() (int32, error) {
 	var result int32

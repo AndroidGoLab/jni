@@ -4,9 +4,22 @@ package consts
 
 const (
 	Creator                                        int = 0
+	ShowExplicit                                   int = 1
+	ShowForced                                     int = 2
+	FlagCharacterLinefeed                          int = 2
+	FlagCharacterPunctuation                       int = 4
+	FlagCharacterWhitespace                        int = 1
+	FlagLineIsRtl                                  int = 8
 	ConnectionlessHandwritingErrorNoTextRecognized int = 0
 	ConnectionlessHandwritingErrorOther            int = 2
 	ConnectionlessHandwritingErrorUnsupported      int = 1
+	FlagHasInvisibleRegion                         int = 2
+	FlagHasVisibleRegion                           int = 1
+	FlagIsRtl                                      int = 4
+	CodeCancelled                                  int = 3
+	CodeFailed                                     int = 2
+	CodeSuccess                                    int = 1
+	CodeUnsupported                                int = 0
 	CursorUpdateFilterCharacterBounds              int = 8
 	CursorUpdateFilterEditorBounds                 int = 4
 	CursorUpdateFilterInsertionMarker              int = 16
@@ -23,22 +36,19 @@ const (
 	HandwritingGestureResultUnknown                int = 0
 	HandwritingGestureResultUnsupported            int = 2
 	InputContentGrantReadUriPermission             int = 1
-	FlagHasInvisibleRegion                         int = 2
-	FlagHasVisibleRegion                           int = 1
-	FlagIsRtl                                      int = 4
-	SuggestionCountUnlimited                       int = 2147483647
 	GranularityCharacter                           int = 2
 	GranularityWord                                int = 1
+	HandwritingDelegateFlagHomeDelegatorAllowed    int = 1
+	HideImplicitOnly                               int = 1
+	HideNotAlways                                  int = 2
+	ResultHidden                                   int = 3
+	ResultShown                                    int = 2
+	ResultUnchangedHidden                          int = 1
+	ResultUnchangedShown                           int = 0
+	ShowImplicit                                   int = 1
 	FlagSelecting                                  int = 2
 	FlagSingleLine                                 int = 1
-	FlagCharacterLinefeed                          int = 2
-	FlagCharacterPunctuation                       int = 4
-	FlagCharacterWhitespace                        int = 1
-	FlagLineIsRtl                                  int = 8
-	CodeCancelled                                  int = 3
-	CodeFailed                                     int = 2
-	CodeSuccess                                    int = 1
-	CodeUnsupported                                int = 0
+	SuggestionCountUnlimited                       int = 2147483647
 	ImeActionDone                                  int = 6
 	ImeActionGo                                    int = 2
 	ImeActionNext                                  int = 5
@@ -57,16 +67,6 @@ const (
 	ImeFlagNoPersonalizedLearning                  int = 16777216
 	ImeMaskAction                                  int = 255
 	ImeNull                                        int = 0
-	ShowExplicit                                   int = 1
-	ShowForced                                     int = 2
-	HandwritingDelegateFlagHomeDelegatorAllowed    int = 1
-	HideImplicitOnly                               int = 1
-	HideNotAlways                                  int = 2
-	ResultHidden                                   int = 3
-	ResultShown                                    int = 2
-	ResultUnchangedHidden                          int = 1
-	ResultUnchangedShown                           int = 0
-	ShowImplicit                                   int = 1
 )
 
 const (
@@ -74,8 +74,8 @@ const (
 	SourcePlatform                  string = "android:platform"
 	TypeAction                      string = "android:autofill:action"
 	TypeSuggestion                  string = "android:autofill:suggestion"
-	ActionImeLanguageSettings       string = "android.view.inputmethod.action.IME_LANGUAGE_SETTINGS"
-	ActionStylusHandwritingSettings string = "android.view.inputmethod.action.STYLUS_HANDWRITING_SETTINGS"
 	ServiceInterface                string = "android.view.InputMethod"
 	ServiceMetaData                 string = "android.view.im"
+	ActionImeLanguageSettings       string = "android.view.inputmethod.action.IME_LANGUAGE_SETTINGS"
+	ActionStylusHandwritingSettings string = "android.view.inputmethod.action.STYLUS_HANDWRITING_SETTINGS"
 )

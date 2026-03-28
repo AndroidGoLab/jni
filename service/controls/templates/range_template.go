@@ -23,6 +23,40 @@ type RangeTemplate struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRangeTemplate creates a new android.service.controls.templates.RangeTemplate instance.
+func NewRangeTemplate(vm *jni.VM, arg0 string, arg1 float32, arg2 float32, arg3 float32, arg4 float32, arg5 string) (*RangeTemplate, error) {
+	var t RangeTemplate
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg5, err := env.NewStringUTF(arg5)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg5.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), midRangeTemplateInit, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.FloatValue(arg4), jni.ObjectValue(&jArg5.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCurrentValue calls android.service.controls.templates.RangeTemplate.getCurrentValue.
 func (m *RangeTemplate) GetCurrentValue() (float32, error) {
 	var result float32

@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/util/proto
 classes:
     - java_class: android.util.proto.ProtoOutputStream
       go_type: OutputStream
+      obtain: constructor
       methods:
         - java_method: dump
           go_name: Dump

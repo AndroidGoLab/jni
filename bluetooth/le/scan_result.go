@@ -23,6 +23,29 @@ type ScanResult struct {
 	Obj *jni.GlobalRef
 }
 
+// NewScanResult creates a new android.bluetooth.le.ScanResult instance.
+func NewScanResult(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int64) (*ScanResult, error) {
+	var t ScanResult
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScanResult)), midScanResultInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.LongValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.bluetooth.le.ScanResult.describeContents.
 func (m *ScanResult) DescribeContents() (int32, error) {
 	var result int32

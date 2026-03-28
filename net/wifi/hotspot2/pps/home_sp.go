@@ -23,6 +23,28 @@ type HomeSp struct {
 	Obj *jni.GlobalRef
 }
 
+// NewHomeSp creates a new android.net.wifi.hotspot2.pps.HomeSp instance.
+func NewHomeSp(vm *jni.VM) (*HomeSp, error) {
+	var t HomeSp
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHomeSp)), midHomeSpInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.hotspot2.pps.HomeSp.describeContents.
 func (m *HomeSp) DescribeContents() (int32, error) {
 	var result int32

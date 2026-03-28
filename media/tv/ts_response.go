@@ -23,6 +23,35 @@ type TsResponse struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTsResponse creates a new android.media.tv.TsResponse instance.
+func NewTsResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 string) (*TsResponse, error) {
+	var t TsResponse
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTsResponse)), midTsResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.TsResponse.describeContents.
 func (m *TsResponse) DescribeContents() (int32, error) {
 	var result int32

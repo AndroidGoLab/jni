@@ -23,6 +23,34 @@ type CreateCredentialException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCreateCredentialException creates a new android.credentials.CreateCredentialException instance.
+func NewCreateCredentialException(vm *jni.VM, arg0 string) (*CreateCredentialException, error) {
+	var t CreateCredentialException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateCredentialException)), midCreateCredentialExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetType calls android.credentials.CreateCredentialException.getType.
 func (m *CreateCredentialException) GetType() (string, error) {
 	var result string

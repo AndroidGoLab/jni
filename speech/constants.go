@@ -5,13 +5,14 @@ package speech
 import "github.com/AndroidGoLab/jni/speech/consts"
 
 const (
-	ActionVoiceSearchResults                            = consts.ActionVoiceSearchResults
-	ExtraVoiceSearchResultHtml                          = consts.ExtraVoiceSearchResultHtml
-	ExtraVoiceSearchResultHtmlBaseUrls                  = consts.ExtraVoiceSearchResultHtmlBaseUrls
-	ExtraVoiceSearchResultHttpHeaders                   = consts.ExtraVoiceSearchResultHttpHeaders
-	ExtraVoiceSearchResultStrings                       = consts.ExtraVoiceSearchResultStrings
-	ExtraVoiceSearchResultUrls                          = consts.ExtraVoiceSearchResultUrls
-	UriSchemeInline                                     = consts.UriSchemeInline
+	ConfidenceScores                                    = consts.ConfidenceScores
+	DetectedLanguage                                    = consts.DetectedLanguage
+	LanguageDetectionConfidenceLevel                    = consts.LanguageDetectionConfidenceLevel
+	LanguageSwitchResult                                = consts.LanguageSwitchResult
+	RecognitionParts                                    = consts.RecognitionParts
+	ResultsAlternatives                                 = consts.ResultsAlternatives
+	ResultsRecognition                                  = consts.ResultsRecognition
+	TopLocaleAlternatives                               = consts.TopLocaleAlternatives
 	ActionGetLanguageDetails                            = consts.ActionGetLanguageDetails
 	ActionRecognizeSpeech                               = consts.ActionRecognizeSpeech
 	ActionVoiceSearchHandsFree                          = consts.ActionVoiceSearchHandsFree
@@ -63,14 +64,13 @@ const (
 	LanguageSwitchBalanced                              = consts.LanguageSwitchBalanced
 	LanguageSwitchHighPrecision                         = consts.LanguageSwitchHighPrecision
 	LanguageSwitchQuickResponse                         = consts.LanguageSwitchQuickResponse
-	ConfidenceScores                                    = consts.ConfidenceScores
-	DetectedLanguage                                    = consts.DetectedLanguage
-	LanguageDetectionConfidenceLevel                    = consts.LanguageDetectionConfidenceLevel
-	LanguageSwitchResult                                = consts.LanguageSwitchResult
-	RecognitionParts                                    = consts.RecognitionParts
-	ResultsAlternatives                                 = consts.ResultsAlternatives
-	ResultsRecognition                                  = consts.ResultsRecognition
-	TopLocaleAlternatives                               = consts.TopLocaleAlternatives
+	ActionVoiceSearchResults                            = consts.ActionVoiceSearchResults
+	ExtraVoiceSearchResultHtml                          = consts.ExtraVoiceSearchResultHtml
+	ExtraVoiceSearchResultHtmlBaseUrls                  = consts.ExtraVoiceSearchResultHtmlBaseUrls
+	ExtraVoiceSearchResultHttpHeaders                   = consts.ExtraVoiceSearchResultHttpHeaders
+	ExtraVoiceSearchResultStrings                       = consts.ExtraVoiceSearchResultStrings
+	ExtraVoiceSearchResultUrls                          = consts.ExtraVoiceSearchResultUrls
+	UriSchemeInline                                     = consts.UriSchemeInline
 	ActionTtsQueueProcessingCompleted                   = consts.ActionTtsQueueProcessingCompleted
 	ActionCheckTtsData                                  = consts.ActionCheckTtsData
 	ActionGetSampleText                                 = consts.ActionGetSampleText
@@ -100,12 +100,6 @@ const (
 )
 
 const (
-	Creator                                         = consts.Creator
-	ResultAudioError                                = consts.ResultAudioError
-	ResultClientError                               = consts.ResultClientError
-	ResultNetworkError                              = consts.ResultNetworkError
-	ResultNoMatch                                   = consts.ResultNoMatch
-	ResultServerError                               = consts.ResultServerError
 	ErrorAudio                                      = consts.ErrorAudio
 	ErrorCannotCheckSupport                         = consts.ErrorCannotCheckSupport
 	ErrorCannotListenToDownloadEvents               = consts.ErrorCannotListenToDownloadEvents
@@ -129,6 +123,18 @@ const (
 	LanguageSwitchResultNotAttempted                = consts.LanguageSwitchResultNotAttempted
 	LanguageSwitchResultSkippedNoModel              = consts.LanguageSwitchResultSkippedNoModel
 	LanguageSwitchResultSucceeded                   = consts.LanguageSwitchResultSucceeded
+	ConfidenceLevelHigh                             = consts.ConfidenceLevelHigh
+	ConfidenceLevelLow                              = consts.ConfidenceLevelLow
+	ConfidenceLevelMedium                           = consts.ConfidenceLevelMedium
+	ConfidenceLevelMediumHigh                       = consts.ConfidenceLevelMediumHigh
+	ConfidenceLevelMediumLow                        = consts.ConfidenceLevelMediumLow
+	ConfidenceLevelUnknown                          = consts.ConfidenceLevelUnknown
+	Creator                                         = consts.Creator
+	ResultAudioError                                = consts.ResultAudioError
+	ResultClientError                               = consts.ResultClientError
+	ResultNetworkError                              = consts.ResultNetworkError
+	ResultNoMatch                                   = consts.ResultNoMatch
+	ResultServerError                               = consts.ResultServerError
 	Error                                           = consts.Error
 	ErrorInvalidRequest                             = consts.ErrorInvalidRequest
 	ErrorNotInstalledYet                            = consts.ErrorNotInstalledYet
@@ -150,10 +156,4 @@ const (
 	CheckVoiceDataMissingVolume                     = consts.CheckVoiceDataMissingVolume
 	CheckVoiceDataPass                              = consts.CheckVoiceDataPass
 	DefaultStream                                   = consts.DefaultStream
-	ConfidenceLevelHigh                             = consts.ConfidenceLevelHigh
-	ConfidenceLevelLow                              = consts.ConfidenceLevelLow
-	ConfidenceLevelMedium                           = consts.ConfidenceLevelMedium
-	ConfidenceLevelMediumHigh                       = consts.ConfidenceLevelMediumHigh
-	ConfidenceLevelMediumLow                        = consts.ConfidenceLevelMediumLow
-	ConfidenceLevelUnknown                          = consts.ConfidenceLevelUnknown
 )

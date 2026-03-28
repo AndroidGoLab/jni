@@ -23,6 +23,41 @@ type Identifier struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIdentifier creates a new android.service.carrier.CarrierIdentifier instance.
+func NewIdentifier(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 string) (*Identifier, error) {
+	var t Identifier
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIdentifier)), midIdentifierInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.carrier.CarrierIdentifier.describeContents.
 func (m *Identifier) DescribeContents() (int32, error) {
 	var result int32

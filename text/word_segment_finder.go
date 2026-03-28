@@ -23,6 +23,34 @@ type WordSegmentFinder struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWordSegmentFinder creates a new android.text.WordSegmentFinder instance.
+func NewWordSegmentFinder(vm *jni.VM, arg0 string, arg1 *jni.Object) (*WordSegmentFinder, error) {
+	var t WordSegmentFinder
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWordSegmentFinder)), midWordSegmentFinderInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // NextEndBoundary calls android.text.WordSegmentFinder.nextEndBoundary.
 func (m *WordSegmentFinder) NextEndBoundary(arg0 int32) (int32, error) {
 	var result int32

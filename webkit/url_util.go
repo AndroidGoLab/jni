@@ -23,6 +23,28 @@ type URLUtil struct {
 	Obj *jni.GlobalRef
 }
 
+// NewURLUtil creates a new android.webkit.URLUtil instance.
+func NewURLUtil(vm *jni.VM) (*URLUtil, error) {
+	var t URLUtil
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsURLUtil)), midURLUtilInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ComposeSearchUrl calls android.webkit.URLUtil.composeSearchUrl.
 func (m *URLUtil) ComposeSearchUrl(
 	arg0 string,

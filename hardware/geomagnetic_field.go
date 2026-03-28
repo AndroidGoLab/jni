@@ -23,6 +23,29 @@ type GeomagneticField struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGeomagneticField creates a new android.hardware.GeomagneticField instance.
+func NewGeomagneticField(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, arg3 int64) (*GeomagneticField, error) {
+	var t GeomagneticField
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGeomagneticField)), midGeomagneticFieldInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.LongValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDeclination calls android.hardware.GeomagneticField.getDeclination.
 func (m *GeomagneticField) GetDeclination() (float32, error) {
 	var result float32

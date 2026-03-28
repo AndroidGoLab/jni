@@ -23,6 +23,35 @@ type LabeledIntent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLabeledIntent creates a new android.content.pm.LabeledIntent instance.
+func NewLabeledIntent(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 int32, arg3 int32) (*LabeledIntent, error) {
+	var t LabeledIntent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLabeledIntent)), midLabeledIntentInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetIconResource calls android.content.pm.LabeledIntent.getIconResource.
 func (m *LabeledIntent) GetIconResource() (int32, error) {
 	var result int32

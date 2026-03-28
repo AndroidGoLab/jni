@@ -23,6 +23,28 @@ type WebViewFragment struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWebViewFragment creates a new android.webkit.WebViewFragment instance.
+func NewWebViewFragment(vm *jni.VM) (*WebViewFragment, error) {
+	var t WebViewFragment
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), midWebViewFragmentInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetWebView calls android.webkit.WebViewFragment.getWebView.
 func (m *WebViewFragment) GetWebView() (*jni.Object, error) {
 	var result *jni.Object

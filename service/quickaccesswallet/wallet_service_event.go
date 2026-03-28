@@ -23,6 +23,29 @@ type WalletServiceEvent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWalletServiceEvent creates a new android.service.quickaccesswallet.WalletServiceEvent instance.
+func NewWalletServiceEvent(vm *jni.VM, arg0 int32) (*WalletServiceEvent, error) {
+	var t WalletServiceEvent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), midWalletServiceEventInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.quickaccesswallet.WalletServiceEvent.describeContents.
 func (m *WalletServiceEvent) DescribeContents() (int32, error) {
 	var result int32

@@ -119,6 +119,12 @@ classes:
           error: true
     - java_class: android.app.wallpaper.WallpaperInstance
       go_type: Instance
+      obtain: constructor
+      constructor_params:
+        - java_type: android.app.WallpaperInfo
+          go_name: arg0
+        - java_type: android.app.wallpaper.WallpaperDescription
+          go_name: arg1
       methods:
         - java_method: describeContents
           go_name: DescribeContents

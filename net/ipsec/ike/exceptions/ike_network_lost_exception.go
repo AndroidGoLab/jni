@@ -23,6 +23,29 @@ type IkeNetworkLostException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIkeNetworkLostException creates a new android.net.ipsec.ike.exceptions.IkeNetworkLostException instance.
+func NewIkeNetworkLostException(vm *jni.VM, arg0 *jni.Object) (*IkeNetworkLostException, error) {
+	var t IkeNetworkLostException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), midIkeNetworkLostExceptionInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetNetwork calls android.net.ipsec.ike.exceptions.IkeNetworkLostException.getNetwork.
 func (m *IkeNetworkLostException) GetNetwork() (*jni.Object, error) {
 	var result *jni.Object

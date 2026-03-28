@@ -4,23 +4,6 @@ package consts
 
 const (
 	Creator                                  int = 0
-	StopReasonAppStandby                     int = 12
-	StopReasonBackgroundRestriction          int = 11
-	StopReasonCancelledByApp                 int = 1
-	StopReasonConstraintBatteryNotLow        int = 5
-	StopReasonConstraintCharging             int = 6
-	StopReasonConstraintConnectivity         int = 7
-	StopReasonConstraintDeviceIdle           int = 8
-	StopReasonConstraintStorageNotLow        int = 9
-	StopReasonDeviceState                    int = 4
-	StopReasonEstimatedAppLaunchTimeChanged  int = 15
-	StopReasonPreempt                        int = 2
-	StopReasonQuota                          int = 10
-	StopReasonSystemProcessing               int = 14
-	StopReasonTimeout                        int = 3
-	StopReasonTimeoutAbandoned               int = 16
-	StopReasonUndefined                      int = 0
-	StopReasonUser                           int = 13
 	PendingJobReasonApp                      int = 1
 	PendingJobReasonAppStandby               int = 2
 	PendingJobReasonBackgroundRestriction    int = 3
@@ -42,6 +25,8 @@ const (
 	PendingJobReasonUser                     int = 15
 	ResultFailure                            int = 0
 	ResultSuccess                            int = 1
+	JobEndNotificationPolicyDetach           int = 0
+	JobEndNotificationPolicyRemove           int = 1
 	BackoffPolicyExponential                 int = 1
 	BackoffPolicyLinear                      int = 0
 	NetworkBytesUnknown                      int = -1
@@ -57,15 +42,30 @@ const (
 	PriorityMax                              int = 500
 	PriorityMin                              int = 100
 	FlagNotifyForDescendants                 int = 1
-	JobEndNotificationPolicyDetach           int = 0
-	JobEndNotificationPolicyRemove           int = 1
+	StopReasonAppStandby                     int = 12
+	StopReasonBackgroundRestriction          int = 11
+	StopReasonCancelledByApp                 int = 1
+	StopReasonConstraintBatteryNotLow        int = 5
+	StopReasonConstraintCharging             int = 6
+	StopReasonConstraintConnectivity         int = 7
+	StopReasonConstraintDeviceIdle           int = 8
+	StopReasonConstraintStorageNotLow        int = 9
+	StopReasonDeviceState                    int = 4
+	StopReasonEstimatedAppLaunchTimeChanged  int = 15
+	StopReasonPreempt                        int = 2
+	StopReasonQuota                          int = 10
+	StopReasonSystemProcessing               int = 14
+	StopReasonTimeout                        int = 3
+	StopReasonTimeoutAbandoned               int = 16
+	StopReasonUndefined                      int = 0
+	StopReasonUser                           int = 13
+)
+
+const (
+	PermissionBind string = "android.permission.BIND_JOB_SERVICE"
 )
 
 const (
 	DefaultInitialBackoffMillis int64 = 30000
 	MaxBackoffDelayMillis       int64 = 18000000
-)
-
-const (
-	PermissionBind string = "android.permission.BIND_JOB_SERVICE"
 )

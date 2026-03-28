@@ -15,10 +15,10 @@ const (
 )
 
 const (
-	DefaultOrder = consts.DefaultOrder
-	Creator      = consts.Creator
+	HeaderIdUndefined = consts.HeaderIdUndefined
 )
 
 const (
-	HeaderIdUndefined = consts.HeaderIdUndefined
+	Creator      = consts.Creator
+	DefaultOrder = consts.DefaultOrder
 )

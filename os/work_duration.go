@@ -23,6 +23,28 @@ type WorkDuration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWorkDuration creates a new android.os.WorkDuration instance.
+func NewWorkDuration(vm *jni.VM) (*WorkDuration, error) {
+	var t WorkDuration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkDuration)), midWorkDurationInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.os.WorkDuration.equals.
 func (m *WorkDuration) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

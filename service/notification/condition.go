@@ -23,6 +23,35 @@ type Condition struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCondition creates a new android.service.notification.Condition instance.
+func NewCondition(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 int32) (*Condition, error) {
+	var t Condition
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCondition)), midConditionInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Copy calls android.service.notification.Condition.copy.
 func (m *Condition) Copy() (*jni.Object, error) {
 	var result *jni.Object

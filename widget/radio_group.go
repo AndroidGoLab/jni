@@ -23,6 +23,29 @@ type RadioGroup struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRadioGroup creates a new android.widget.RadioGroup instance.
+func NewRadioGroup(vm *jni.VM, arg0 *jni.Object) (*RadioGroup, error) {
+	var t RadioGroup
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRadioGroup)), midRadioGroupInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddView calls android.widget.RadioGroup.addView.
 func (m *RadioGroup) AddView(
 	arg0 *jni.Object,

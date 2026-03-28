@@ -23,6 +23,28 @@ type IndianCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIndianCalendar creates a new android.icu.util.IndianCalendar instance.
+func NewIndianCalendar(vm *jni.VM) (*IndianCalendar, error) {
+	var t IndianCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIndianCalendar)), midIndianCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetType calls android.icu.util.IndianCalendar.getType.
 func (m *IndianCalendar) GetType() (string, error) {
 	var result string

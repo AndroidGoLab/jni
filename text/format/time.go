@@ -23,6 +23,28 @@ type Time struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTime creates a new android.text.format.Time instance.
+func NewTime(vm *jni.VM) (*Time, error) {
+	var t Time
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTime)), midTimeInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // After calls android.text.format.Time.after.
 func (m *Time) After(arg0 *jni.Object) (bool, error) {
 	var result bool

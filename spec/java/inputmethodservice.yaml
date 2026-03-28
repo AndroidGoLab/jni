@@ -5,207 +5,14 @@
 package: inputmethodservice
 go_import: github.com/AndroidGoLab/jni/inputmethodservice
 classes:
-    - java_class: android.inputmethodservice.KeyboardView
-      go_type: KeyboardView
-      methods:
-        - java_method: closing
-          go_name: Closing
-          returns: void
-          error: true
-        - java_method: getKeyboard
-          go_name: GetKeyboard
-          returns: android.inputmethodservice.Keyboard
-          error: true
-        - java_method: handleBack
-          go_name: HandleBack
-          returns: boolean
-          error: true
-        - java_method: invalidateAllKeys
-          go_name: InvalidateAllKeys
-          returns: void
-          error: true
-        - java_method: invalidateKey
-          go_name: InvalidateKey
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: isPreviewEnabled
-          go_name: IsPreviewEnabled
-          returns: boolean
-          error: true
-        - java_method: isProximityCorrectionEnabled
-          go_name: IsProximityCorrectionEnabled
-          returns: boolean
-          error: true
-        - java_method: isShifted
-          go_name: IsShifted
-          returns: boolean
-          error: true
-        - java_method: onClick
-          go_name: OnClick
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDetachedFromWindow
-          go_name: OnDetachedFromWindow
-          returns: void
-          error: true
-        - java_method: onDraw
-          go_name: OnDraw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onHoverEvent
-          go_name: OnHoverEvent
-          params:
-            - java_type: android.view.MotionEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: onMeasure
-          go_name: OnMeasure
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onSizeChanged
-          go_name: OnSizeChanged
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onTouchEvent
-          go_name: OnTouchEvent
-          params:
-            - java_type: android.view.MotionEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setKeyboard
-          go_name: SetKeyboard
-          params:
-            - java_type: android.inputmethodservice.Keyboard
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setOnKeyboardActionListener
-          go_name: SetOnKeyboardActionListener
-          params:
-            - java_type: android.inputmethodservice.KeyboardView$OnKeyboardActionListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPopupOffset
-          go_name: SetPopupOffset
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setPopupParent
-          go_name: SetPopupParent
-          params:
-            - java_type: android.view.View
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPreviewEnabled
-          go_name: SetPreviewEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setProximityCorrectionEnabled
-          go_name: SetProximityCorrectionEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setShifted
-          go_name: SetShifted
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setVerticalCorrection
-          go_name: SetVerticalCorrection
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.inputmethodservice.KeyboardView$OnKeyboardActionListener
-      go_type: KeyboardViewOnKeyboardActionListener
-      methods:
-        - java_method: onKey
-          go_name: OnKey
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: '[I'
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onPress
-          go_name: OnPress
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onRelease
-          go_name: OnRelease
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onText
-          go_name: OnText
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: swipeDown
-          go_name: SwipeDown
-          returns: void
-          error: true
-        - java_method: swipeLeft
-          go_name: SwipeLeft
-          returns: void
-          error: true
-        - java_method: swipeRight
-          go_name: SwipeRight
-          returns: void
-          error: true
-        - java_method: swipeUp
-          go_name: SwipeUp
-          returns: void
-          error: true
     - java_class: android.inputmethodservice.Keyboard
       go_type: Keyboard
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
       methods:
         - java_method: getHeight
           go_name: GetHeight
@@ -277,55 +84,6 @@ classes:
           error: true
     - java_class: android.inputmethodservice.Keyboard$Row
       go_type: KeyboardRow
-    - java_class: android.inputmethodservice.ExtractEditText
-      go_type: ExtractEditText
-      methods:
-        - java_method: finishInternalChanges
-          go_name: FinishInternalChanges
-          returns: void
-          error: true
-        - java_method: hasFocus
-          go_name: HasFocus
-          returns: boolean
-          error: true
-        - java_method: hasVerticalScrollBar
-          go_name: HasVerticalScrollBar
-          returns: boolean
-          error: true
-        - java_method: hasWindowFocus
-          go_name: HasWindowFocus
-          returns: boolean
-          error: true
-        - java_method: isFocused
-          go_name: IsFocused
-          returns: boolean
-          error: true
-        - java_method: isInputMethodTarget
-          go_name: IsInputMethodTarget
-          returns: boolean
-          error: true
-        - java_method: onTextContextMenuItem
-          go_name: OnTextContextMenuItem
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: performClick
-          go_name: PerformClick
-          returns: boolean
-          error: true
-        - java_method: setExtractedText
-          go_name: SetExtractedText
-          params:
-            - java_type: android.view.inputmethod.ExtractedText
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: startInternalChanges
-          go_name: StartInternalChanges
-          returns: void
-          error: true
     - java_class: android.inputmethodservice.AbstractInputMethodService
       go_type: AbstractInputMethodService
       methods:
@@ -502,6 +260,7 @@ classes:
           error: true
     - java_class: android.inputmethodservice.InputMethodService
       go_type: InputMethodService
+      obtain: constructor
       methods:
         - java_method: enableHardwareAcceleration
           go_name: EnableHardwareAcceleration
@@ -1268,6 +1027,264 @@ classes:
           error: true
     - java_class: android.inputmethodservice.InputMethodService$Insets
       go_type: InputMethodServiceInsets
+    - java_class: android.inputmethodservice.ExtractEditText
+      go_type: ExtractEditText
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+      methods:
+        - java_method: finishInternalChanges
+          go_name: FinishInternalChanges
+          returns: void
+          error: true
+        - java_method: hasFocus
+          go_name: HasFocus
+          returns: boolean
+          error: true
+        - java_method: hasVerticalScrollBar
+          go_name: HasVerticalScrollBar
+          returns: boolean
+          error: true
+        - java_method: hasWindowFocus
+          go_name: HasWindowFocus
+          returns: boolean
+          error: true
+        - java_method: isFocused
+          go_name: IsFocused
+          returns: boolean
+          error: true
+        - java_method: isInputMethodTarget
+          go_name: IsInputMethodTarget
+          returns: boolean
+          error: true
+        - java_method: onTextContextMenuItem
+          go_name: OnTextContextMenuItem
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: performClick
+          go_name: PerformClick
+          returns: boolean
+          error: true
+        - java_method: setExtractedText
+          go_name: SetExtractedText
+          params:
+            - java_type: android.view.inputmethod.ExtractedText
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startInternalChanges
+          go_name: StartInternalChanges
+          returns: void
+          error: true
+    - java_class: android.inputmethodservice.KeyboardView
+      go_type: KeyboardView
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+        - java_type: android.util.AttributeSet
+          go_name: arg1
+      methods:
+        - java_method: closing
+          go_name: Closing
+          returns: void
+          error: true
+        - java_method: getKeyboard
+          go_name: GetKeyboard
+          returns: android.inputmethodservice.Keyboard
+          error: true
+        - java_method: handleBack
+          go_name: HandleBack
+          returns: boolean
+          error: true
+        - java_method: invalidateAllKeys
+          go_name: InvalidateAllKeys
+          returns: void
+          error: true
+        - java_method: invalidateKey
+          go_name: InvalidateKey
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: isPreviewEnabled
+          go_name: IsPreviewEnabled
+          returns: boolean
+          error: true
+        - java_method: isProximityCorrectionEnabled
+          go_name: IsProximityCorrectionEnabled
+          returns: boolean
+          error: true
+        - java_method: isShifted
+          go_name: IsShifted
+          returns: boolean
+          error: true
+        - java_method: onClick
+          go_name: OnClick
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDetachedFromWindow
+          go_name: OnDetachedFromWindow
+          returns: void
+          error: true
+        - java_method: onDraw
+          go_name: OnDraw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onHoverEvent
+          go_name: OnHoverEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onMeasure
+          go_name: OnMeasure
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onSizeChanged
+          go_name: OnSizeChanged
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onTouchEvent
+          go_name: OnTouchEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setKeyboard
+          go_name: SetKeyboard
+          params:
+            - java_type: android.inputmethodservice.Keyboard
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnKeyboardActionListener
+          go_name: SetOnKeyboardActionListener
+          params:
+            - java_type: android.inputmethodservice.KeyboardView$OnKeyboardActionListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPopupOffset
+          go_name: SetPopupOffset
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setPopupParent
+          go_name: SetPopupParent
+          params:
+            - java_type: android.view.View
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreviewEnabled
+          go_name: SetPreviewEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setProximityCorrectionEnabled
+          go_name: SetProximityCorrectionEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setShifted
+          go_name: SetShifted
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setVerticalCorrection
+          go_name: SetVerticalCorrection
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.inputmethodservice.KeyboardView$OnKeyboardActionListener
+      go_type: KeyboardViewOnKeyboardActionListener
+      methods:
+        - java_method: onKey
+          go_name: OnKey
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPress
+          go_name: OnPress
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onRelease
+          go_name: OnRelease
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onText
+          go_name: OnText
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: swipeDown
+          go_name: SwipeDown
+          returns: void
+          error: true
+        - java_method: swipeLeft
+          go_name: SwipeLeft
+          returns: void
+          error: true
+        - java_method: swipeRight
+          go_name: SwipeRight
+          returns: void
+          error: true
+        - java_method: swipeUp
+          go_name: SwipeUp
+          returns: void
+          error: true
 constants:
     - go_name: EdgeBottom
       value: "8"

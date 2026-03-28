@@ -23,6 +23,28 @@ type NumberingSystem struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNumberingSystem creates a new android.icu.text.NumberingSystem instance.
+func NewNumberingSystem(vm *jni.VM) (*NumberingSystem, error) {
+	var t NumberingSystem
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNumberingSystem)), midNumberingSystemInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDescription calls android.icu.text.NumberingSystem.getDescription.
 func (m *NumberingSystem) GetDescription() (string, error) {
 	var result string

@@ -23,6 +23,29 @@ type ListView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewListView creates a new android.widget.ListView instance.
+func NewListView(vm *jni.VM, arg0 *jni.Object) (*ListView, error) {
+	var t ListView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListView)), midListViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddFooterView1 calls android.widget.ListView.addFooterView.
 func (m *ListView) AddFooterView1(arg0 *jni.Object) error {
 

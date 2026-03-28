@@ -23,6 +23,28 @@ type ProviderInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewProviderInfo creates a new android.content.pm.ProviderInfo instance.
+func NewProviderInfo(vm *jni.VM) (*ProviderInfo, error) {
+	var t ProviderInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProviderInfo)), midProviderInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.ProviderInfo.describeContents.
 func (m *ProviderInfo) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type LeAudioCodecStatus struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLeAudioCodecStatus creates a new android.bluetooth.BluetoothLeAudioCodecStatus instance.
+func NewLeAudioCodecStatus(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object, arg4 *jni.Object, arg5 *jni.Object) (*LeAudioCodecStatus, error) {
+	var t LeAudioCodecStatus
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLeAudioCodecStatus)), midLeAudioCodecStatusInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.bluetooth.BluetoothLeAudioCodecStatus.describeContents.
 func (m *LeAudioCodecStatus) DescribeContents() (int32, error) {
 	var result int32

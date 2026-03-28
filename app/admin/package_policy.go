@@ -23,6 +23,29 @@ type PackagePolicy struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPackagePolicy creates a new android.app.admin.PackagePolicy instance.
+func NewPackagePolicy(vm *jni.VM, arg0 int32) (*PackagePolicy, error) {
+	var t PackagePolicy
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackagePolicy)), midPackagePolicyInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.admin.PackagePolicy.describeContents.
 func (m *PackagePolicy) DescribeContents() (int32, error) {
 	var result int32

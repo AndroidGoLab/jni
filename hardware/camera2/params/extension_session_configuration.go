@@ -23,6 +23,29 @@ type ExtensionSessionConfiguration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExtensionSessionConfiguration creates a new android.hardware.camera2.params.ExtensionSessionConfiguration instance.
+func NewExtensionSessionConfiguration(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*ExtensionSessionConfiguration, error) {
+	var t ExtensionSessionConfiguration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtensionSessionConfiguration)), midExtensionSessionConfigurationInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearColorSpace calls android.hardware.camera2.params.ExtensionSessionConfiguration.clearColorSpace.
 func (m *ExtensionSessionConfiguration) ClearColorSpace() error {
 

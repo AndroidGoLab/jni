@@ -23,6 +23,29 @@ type Spinner struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpinner creates a new android.widget.Spinner instance.
+func NewSpinner(vm *jni.VM, arg0 *jni.Object) (*Spinner, error) {
+	var t Spinner
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpinner)), midSpinnerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.Spinner.getAccessibilityClassName.
 func (m *Spinner) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

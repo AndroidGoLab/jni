@@ -3,6 +3,14 @@
 package consts
 
 const (
+	IkeDpdDelaySecDisabled              int = 2147483647
+	IkeOptionAcceptAnyRemoteId          int = 0
+	IkeOptionEapOnlyAuth                int = 1
+	IkeOptionForcePort4500              int = 3
+	IkeOptionInitialContact             int = 4
+	IkeOptionMobike                     int = 2
+	ExtensionTypeFragmentation          int = 1
+	ExtensionTypeMobike                 int = 2
 	DhGroup1024BitModp                  int = 2
 	DhGroup1536BitModp                  int = 5
 	DhGroup2048BitModp                  int = 14
@@ -34,12 +42,4 @@ const (
 	PseudorandomFunctionSha2256         int = 5
 	PseudorandomFunctionSha2384         int = 6
 	PseudorandomFunctionSha2512         int = 7
-	ExtensionTypeFragmentation          int = 1
-	ExtensionTypeMobike                 int = 2
-	IkeDpdDelaySecDisabled              int = 2147483647
-	IkeOptionAcceptAnyRemoteId          int = 0
-	IkeOptionEapOnlyAuth                int = 1
-	IkeOptionForcePort4500              int = 3
-	IkeOptionInitialContact             int = 4
-	IkeOptionMobike                     int = 2
 )

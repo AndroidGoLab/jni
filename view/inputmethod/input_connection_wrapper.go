@@ -23,6 +23,34 @@ type InputConnectionWrapper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInputConnectionWrapper creates a new android.view.inputmethod.InputConnectionWrapper instance.
+func NewInputConnectionWrapper(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*InputConnectionWrapper, error) {
+	var t InputConnectionWrapper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), midInputConnectionWrapperInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BeginBatchEdit calls android.view.inputmethod.InputConnectionWrapper.beginBatchEdit.
 func (m *InputConnectionWrapper) BeginBatchEdit() (bool, error) {
 	var result bool

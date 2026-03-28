@@ -7,6 +7,10 @@ go_import: github.com/AndroidGoLab/jni/content/clipboard
 classes:
     - java_class: android.content.ClipData
       go_type: ClipData
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.ClipData
+          go_name: arg0
       methods:
         - java_method: addItem
           go_name: AddItem1

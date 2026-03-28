@@ -5,6 +5,14 @@ package rtt
 import "github.com/AndroidGoLab/jni/net/wifi/rtt/consts"
 
 const (
+	Creator                                  = consts.Creator
+	ResponderAp                              = consts.ResponderAp
+	ResponderSta                             = consts.ResponderSta
+	SecurityModeOpen                         = consts.SecurityModeOpen
+	SecurityModeOpportunistic                = consts.SecurityModeOpportunistic
+	SecurityModeSecureAuth                   = consts.SecurityModeSecureAuth
+	StatusCodeFail                           = consts.StatusCodeFail
+	StatusCodeFailRttNotAvailable            = consts.StatusCodeFailRttNotAvailable
 	AkmFilsEapSha256                         = consts.AkmFilsEapSha256
 	AkmFilsEapSha384                         = consts.AkmFilsEapSha384
 	AkmFtEapSha256                           = consts.AkmFtEapSha256
@@ -19,28 +27,6 @@ const (
 	CipherGcmp128                            = consts.CipherGcmp128
 	CipherGcmp256                            = consts.CipherGcmp256
 	CipherNone                               = consts.CipherNone
-	Creator                                  = consts.Creator
-	StatusCodeFail                           = consts.StatusCodeFail
-	StatusCodeFailRttNotAvailable            = consts.StatusCodeFailRttNotAvailable
-	StatusFail                               = consts.StatusFail
-	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
-	StatusSuccess                            = consts.StatusSuccess
-	Unspecified                              = consts.Unspecified
-	AltitudeFloors                           = consts.AltitudeFloors
-	AltitudeMeters                           = consts.AltitudeMeters
-	AltitudeUndefined                        = consts.AltitudeUndefined
-	DatumNad83Mllw                           = consts.DatumNad83Mllw
-	DatumNad83Nav88                          = consts.DatumNad83Nav88
-	DatumUndefined                           = consts.DatumUndefined
-	DatumWgs84                               = consts.DatumWgs84
-	LciVersion1                              = consts.LciVersion1
-	LocationFixed                            = consts.LocationFixed
-	LocationMovementUnknown                  = consts.LocationMovementUnknown
-	LocationReserved                         = consts.LocationReserved
-	LocationVariable                         = consts.LocationVariable
-	SecurityModeOpen                         = consts.SecurityModeOpen
-	SecurityModeOpportunistic                = consts.SecurityModeOpportunistic
-	SecurityModeSecureAuth                   = consts.SecurityModeSecureAuth
 	AdditionalCode                           = consts.AdditionalCode
 	Apt                                      = consts.Apt
 	Borough                                  = consts.Borough
@@ -73,8 +59,22 @@ const (
 	Sts                                      = consts.Sts
 	SubbranchRoadName                        = consts.SubbranchRoadName
 	TypeOfPlace                              = consts.TypeOfPlace
-	ResponderAp                              = consts.ResponderAp
-	ResponderSta                             = consts.ResponderSta
+	StatusFail                               = consts.StatusFail
+	StatusResponderDoesNotSupportIeee80211mc = consts.StatusResponderDoesNotSupportIeee80211mc
+	StatusSuccess                            = consts.StatusSuccess
+	Unspecified                              = consts.Unspecified
+	AltitudeFloors                           = consts.AltitudeFloors
+	AltitudeMeters                           = consts.AltitudeMeters
+	AltitudeUndefined                        = consts.AltitudeUndefined
+	DatumNad83Mllw                           = consts.DatumNad83Mllw
+	DatumNad83Nav88                          = consts.DatumNad83Nav88
+	DatumUndefined                           = consts.DatumUndefined
+	DatumWgs84                               = consts.DatumWgs84
+	LciVersion1                              = consts.LciVersion1
+	LocationFixed                            = consts.LocationFixed
+	LocationMovementUnknown                  = consts.LocationMovementUnknown
+	LocationReserved                         = consts.LocationReserved
+	LocationVariable                         = consts.LocationVariable
 )
 
 const (

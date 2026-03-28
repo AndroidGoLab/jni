@@ -6,6 +6,16 @@ import "github.com/AndroidGoLab/jni/telephony/mbms/consts"
 
 const (
 	SignalStrengthUnavailable             = consts.SignalStrengthUnavailable
+	Creator                               = consts.Creator
+	ReasonByUserRequest                   = consts.ReasonByUserRequest
+	ReasonFrequencyConflict               = consts.ReasonFrequencyConflict
+	ReasonLeftMbmsBroadcastArea           = consts.ReasonLeftMbmsBroadcastArea
+	ReasonNone                            = consts.ReasonNone
+	ReasonNotConnectedToHomecarrierLte    = consts.ReasonNotConnectedToHomecarrierLte
+	ReasonOutOfMemory                     = consts.ReasonOutOfMemory
+	StateStalled                          = consts.StateStalled
+	StateStarted                          = consts.StateStarted
+	StateStopped                          = consts.StateStopped
 	ErrorMiddlewareLost                   = consts.ErrorMiddlewareLost
 	ErrorMiddlewareNotBound               = consts.ErrorMiddlewareNotBound
 	ErrorNoUniqueMiddleware               = consts.ErrorNoUniqueMiddleware
@@ -29,17 +39,7 @@ const (
 	ErrorUnableToInitialize               = consts.ErrorUnableToInitialize
 	ErrorConcurrentServiceLimitReached    = consts.ErrorConcurrentServiceLimitReached
 	ErrorDuplicateStartStream             = consts.ErrorDuplicateStartStream
-	Creator                               = consts.Creator
 	BroadcastMethod                       = consts.BroadcastMethod
-	ReasonByUserRequest                   = consts.ReasonByUserRequest
 	ReasonEndOfSession                    = consts.ReasonEndOfSession
-	ReasonFrequencyConflict               = consts.ReasonFrequencyConflict
-	ReasonLeftMbmsBroadcastArea           = consts.ReasonLeftMbmsBroadcastArea
-	ReasonNone                            = consts.ReasonNone
-	ReasonNotConnectedToHomecarrierLte    = consts.ReasonNotConnectedToHomecarrierLte
-	ReasonOutOfMemory                     = consts.ReasonOutOfMemory
-	StateStalled                          = consts.StateStalled
-	StateStarted                          = consts.StateStarted
-	StateStopped                          = consts.StateStopped
 	UnicastMethod                         = consts.UnicastMethod
 )

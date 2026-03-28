@@ -23,6 +23,40 @@ type QueryMap struct {
 	Obj *jni.GlobalRef
 }
 
+// NewQueryMap creates a new android.content.ContentQueryMap instance.
+func NewQueryMap(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 bool, arg3 *jni.Object) (*QueryMap, error) {
+	var t QueryMap
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		var jArg2 uint8
+		if arg2 {
+			jArg2 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQueryMap)), midQueryMapInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Requery calls android.content.ContentQueryMap.requery.
 func (m *QueryMap) Requery() error {
 

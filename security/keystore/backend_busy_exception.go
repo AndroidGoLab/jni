@@ -23,6 +23,29 @@ type BackendBusyException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBackendBusyException creates a new android.security.keystore.BackendBusyException instance.
+func NewBackendBusyException(vm *jni.VM, arg0 int64) (*BackendBusyException, error) {
+	var t BackendBusyException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackendBusyException)), midBackendBusyExceptionInit, jni.LongValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetBackOffHintMillis calls android.security.keystore.BackendBusyException.getBackOffHintMillis.
 func (m *BackendBusyException) GetBackOffHintMillis() (int64, error) {
 	var result int64

@@ -23,6 +23,28 @@ type SyncParams struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSyncParams creates a new android.media.SyncParams instance.
+func NewSyncParams(vm *jni.VM) (*SyncParams, error) {
+	var t SyncParams
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncParams)), midSyncParamsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AllowDefaults calls android.media.SyncParams.allowDefaults.
 func (m *SyncParams) AllowDefaults() (*jni.Object, error) {
 	var result *jni.Object

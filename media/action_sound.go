@@ -23,6 +23,28 @@ type ActionSound struct {
 	Obj *jni.GlobalRef
 }
 
+// NewActionSound creates a new android.media.MediaActionSound instance.
+func NewActionSound(vm *jni.VM) (*ActionSound, error) {
+	var t ActionSound
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActionSound)), midActionSoundInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Load calls android.media.MediaActionSound.load.
 func (m *ActionSound) Load(arg0 int32) error {
 

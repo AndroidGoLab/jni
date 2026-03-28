@@ -160,6 +160,10 @@ classes:
           error: true
     - java_class: android.telephony.euicc.EuiccInfo
       go_type: Info
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
       methods:
         - java_method: describeContents
           go_name: DescribeContents

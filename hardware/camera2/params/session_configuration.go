@@ -23,6 +23,29 @@ type SessionConfiguration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSessionConfiguration creates a new android.hardware.camera2.params.SessionConfiguration instance.
+func NewSessionConfiguration(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*SessionConfiguration, error) {
+	var t SessionConfiguration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSessionConfiguration)), midSessionConfigurationInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearColorSpace calls android.hardware.camera2.params.SessionConfiguration.clearColorSpace.
 func (m *SessionConfiguration) ClearColorSpace() error {
 

@@ -23,6 +23,29 @@ type MediaPlayer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMediaPlayer creates a new android.media.MediaPlayer instance.
+func NewMediaPlayer(vm *jni.VM, arg0 *jni.Object) (*MediaPlayer, error) {
+	var t MediaPlayer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), midMediaPlayerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddTimedTextSource3 calls android.media.MediaPlayer.addTimedTextSource.
 func (m *MediaPlayer) AddTimedTextSource3(
 	arg0 *jni.Object,

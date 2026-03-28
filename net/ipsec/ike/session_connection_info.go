@@ -23,6 +23,29 @@ type SessionConnectionInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSessionConnectionInfo creates a new android.net.ipsec.ike.IkeSessionConnectionInfo instance.
+func NewSessionConnectionInfo(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*SessionConnectionInfo, error) {
+	var t SessionConnectionInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSessionConnectionInfo)), midSessionConnectionInfoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetLocalAddress calls android.net.ipsec.ike.IkeSessionConnectionInfo.getLocalAddress.
 func (m *SessionConnectionInfo) GetLocalAddress() (*jni.Object, error) {
 	var result *jni.Object

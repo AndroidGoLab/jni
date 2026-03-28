@@ -21,6 +21,34 @@ type LocalActivityManager struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLocalActivityManager creates a new android.app.LocalActivityManager instance.
+func NewLocalActivityManager(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*LocalActivityManager, error) {
+	var t LocalActivityManager
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalActivityManager)), midLocalActivityManagerInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DestroyActivity calls android.app.LocalActivityManager.destroyActivity.
 func (m *LocalActivityManager) DestroyActivity(arg0 string, arg1 bool) (*jni.Object, error) {
 	var result *jni.Object

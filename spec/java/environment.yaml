@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/os/environment
 classes:
     - java_class: android.os.Environment
       go_type: Environment
+      obtain: constructor
       static_methods:
         - java_method: getDataDirectory
           go_name: GetDataDirectory

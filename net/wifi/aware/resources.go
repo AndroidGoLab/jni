@@ -23,6 +23,29 @@ type Resources struct {
 	Obj *jni.GlobalRef
 }
 
+// NewResources creates a new android.net.wifi.aware.AwareResources instance.
+func NewResources(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32) (*Resources, error) {
+	var t Resources
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResources)), midResourcesInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.aware.AwareResources.describeContents.
 func (m *Resources) DescribeContents() (int32, error) {
 	var result int32

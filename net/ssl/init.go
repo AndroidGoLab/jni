@@ -23,15 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsSSLEngines                     *jni.GlobalRef
-	midSSLEnginesExportKeyingMaterial jni.MethodID
-	midSSLEnginesIsSupportedEngine    jni.MethodID
-	midSSLEnginesSetUseSessionTickets jni.MethodID
-
 	clsSSLSockets                     *jni.GlobalRef
 	midSSLSocketsExportKeyingMaterial jni.MethodID
 	midSSLSocketsIsSupportedSocket    jni.MethodID
 	midSSLSocketsSetUseSessionTickets jni.MethodID
+
+	clsSSLEngines                     *jni.GlobalRef
+	midSSLEnginesExportKeyingMaterial jni.MethodID
+	midSSLEnginesIsSupportedEngine    jni.MethodID
+	midSSLEnginesSetUseSessionTickets jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -51,37 +51,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/net/ssl/SSLEngines")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSSLEngines = env.NewGlobalRef(&c.Object)
-
-		midSSLEnginesExportKeyingMaterial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "exportKeyingMaterial", "(Ljavax/net/ssl/SSLEngine;Ljava/lang/String;[BI)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSSLEnginesIsSupportedEngine, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "isSupportedEngine", "(Ljavax/net/ssl/SSLEngine;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSSLEnginesSetUseSessionTickets, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "setUseSessionTickets", "(Ljavax/net/ssl/SSLEngine;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/net/ssl/SSLSockets")
 	if err != nil {
@@ -106,6 +75,37 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSSLSocketsSetUseSessionTickets, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLSockets)), "setUseSessionTickets", "(Ljavax/net/ssl/SSLSocket;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/ssl/SSLEngines")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSSLEngines = env.NewGlobalRef(&c.Object)
+
+		midSSLEnginesExportKeyingMaterial, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "exportKeyingMaterial", "(Ljavax/net/ssl/SSLEngine;Ljava/lang/String;[BI)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSSLEnginesIsSupportedEngine, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "isSupportedEngine", "(Ljavax/net/ssl/SSLEngine;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSSLEnginesSetUseSessionTickets, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSSLEngines)), "setUseSessionTickets", "(Ljavax/net/ssl/SSLEngine;Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

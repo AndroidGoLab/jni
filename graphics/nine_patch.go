@@ -23,6 +23,29 @@ type NinePatch struct {
 	Obj *jni.GlobalRef
 }
 
+// NewNinePatch creates a new android.graphics.NinePatch instance.
+func NewNinePatch(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*NinePatch, error) {
+	var t NinePatch
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNinePatch)), midNinePatchInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Draw2 calls android.graphics.NinePatch.draw.
 func (m *NinePatch) Draw2(arg0 *jni.Object, arg1 *jni.Object) error {
 

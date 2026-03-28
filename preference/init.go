@@ -23,28 +23,37 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDialogPreference                         *jni.GlobalRef
-	midDialogPreferenceGetDialog                jni.MethodID
-	midDialogPreferenceGetDialogIcon            jni.MethodID
-	midDialogPreferenceGetDialogLayoutResource  jni.MethodID
-	midDialogPreferenceGetDialogMessage         jni.MethodID
-	midDialogPreferenceGetDialogTitle           jni.MethodID
-	midDialogPreferenceGetNegativeButtonText    jni.MethodID
-	midDialogPreferenceGetPositiveButtonText    jni.MethodID
-	midDialogPreferenceOnActivityDestroy        jni.MethodID
-	midDialogPreferenceOnClick                  jni.MethodID
-	midDialogPreferenceOnDismiss                jni.MethodID
-	midDialogPreferenceSetDialogIcon1           jni.MethodID
-	midDialogPreferenceSetDialogIcon1_1         jni.MethodID
-	midDialogPreferenceSetDialogLayoutResource  jni.MethodID
-	midDialogPreferenceSetDialogMessage1        jni.MethodID
-	midDialogPreferenceSetDialogMessage1_1      jni.MethodID
-	midDialogPreferenceSetDialogTitle1          jni.MethodID
-	midDialogPreferenceSetDialogTitle1_1        jni.MethodID
-	midDialogPreferenceSetNegativeButtonText1   jni.MethodID
-	midDialogPreferenceSetNegativeButtonText1_1 jni.MethodID
-	midDialogPreferenceSetPositiveButtonText1   jni.MethodID
-	midDialogPreferenceSetPositiveButtonText1_1 jni.MethodID
+	clsFragment                           *jni.GlobalRef
+	midFragmentAddPreferencesFromIntent   jni.MethodID
+	midFragmentAddPreferencesFromResource jni.MethodID
+	midFragmentFindPreference             jni.MethodID
+	midFragmentGetPreferenceManager       jni.MethodID
+	midFragmentGetPreferenceScreen        jni.MethodID
+	midFragmentOnActivityCreated          jni.MethodID
+	midFragmentOnActivityResult           jni.MethodID
+	midFragmentOnCreate                   jni.MethodID
+	midFragmentOnCreateView               jni.MethodID
+	midFragmentOnDestroy                  jni.MethodID
+	midFragmentOnDestroyView              jni.MethodID
+	midFragmentOnPreferenceTreeClick      jni.MethodID
+	midFragmentOnSaveInstanceState        jni.MethodID
+	midFragmentOnStart                    jni.MethodID
+	midFragmentOnStop                     jni.MethodID
+	midFragmentOnViewCreated              jni.MethodID
+	midFragmentSetPreferenceScreen        jni.MethodID
+
+	clsFragmentOnPreferenceStartFragmentCallback                          *jni.GlobalRef
+	midFragmentOnPreferenceStartFragmentCallbackOnPreferenceStartFragment jni.MethodID
+
+	clsMultiSelectListPreference                  *jni.GlobalRef
+	midMultiSelectListPreferenceInit              jni.MethodID
+	midMultiSelectListPreferenceFindIndexOfValue  jni.MethodID
+	midMultiSelectListPreferenceGetEntries        jni.MethodID
+	midMultiSelectListPreferenceGetEntryValues    jni.MethodID
+	midMultiSelectListPreferenceSetEntries1       jni.MethodID
+	midMultiSelectListPreferenceSetEntries1_1     jni.MethodID
+	midMultiSelectListPreferenceSetEntryValues1   jni.MethodID
+	midMultiSelectListPreferenceSetEntryValues1_1 jni.MethodID
 
 	clsManager                                *jni.GlobalRef
 	midManagerCreatePreferenceScreen          jni.MethodID
@@ -74,7 +83,24 @@ var (
 	clsManagerOnActivityStopListener               *jni.GlobalRef
 	midManagerOnActivityStopListenerOnActivityStop jni.MethodID
 
+	clsSwitchPreference                    *jni.GlobalRef
+	midSwitchPreferenceInit                jni.MethodID
+	midSwitchPreferenceGetSwitchTextOff    jni.MethodID
+	midSwitchPreferenceGetSwitchTextOn     jni.MethodID
+	midSwitchPreferenceSetSwitchTextOff1   jni.MethodID
+	midSwitchPreferenceSetSwitchTextOff1_1 jni.MethodID
+	midSwitchPreferenceSetSwitchTextOn1    jni.MethodID
+	midSwitchPreferenceSetSwitchTextOn1_1  jni.MethodID
+
+	clsEditTextPreference                        *jni.GlobalRef
+	midEditTextPreferenceInit                    jni.MethodID
+	midEditTextPreferenceGetEditText             jni.MethodID
+	midEditTextPreferenceGetText                 jni.MethodID
+	midEditTextPreferenceSetText                 jni.MethodID
+	midEditTextPreferenceShouldDisableDependents jni.MethodID
+
 	clsListPreference                  *jni.GlobalRef
+	midListPreferenceInit              jni.MethodID
 	midListPreferenceFindIndexOfValue  jni.MethodID
 	midListPreferenceGetEntries        jni.MethodID
 	midListPreferenceGetEntry          jni.MethodID
@@ -89,29 +115,119 @@ var (
 	midListPreferenceSetValue          jni.MethodID
 	midListPreferenceSetValueIndex     jni.MethodID
 
-	clsFragment                           *jni.GlobalRef
-	midFragmentAddPreferencesFromIntent   jni.MethodID
-	midFragmentAddPreferencesFromResource jni.MethodID
-	midFragmentFindPreference             jni.MethodID
-	midFragmentGetPreferenceManager       jni.MethodID
-	midFragmentGetPreferenceScreen        jni.MethodID
-	midFragmentOnActivityCreated          jni.MethodID
-	midFragmentOnActivityResult           jni.MethodID
-	midFragmentOnCreate                   jni.MethodID
-	midFragmentOnCreateView               jni.MethodID
-	midFragmentOnDestroy                  jni.MethodID
-	midFragmentOnDestroyView              jni.MethodID
-	midFragmentOnPreferenceTreeClick      jni.MethodID
-	midFragmentOnSaveInstanceState        jni.MethodID
-	midFragmentOnStart                    jni.MethodID
-	midFragmentOnStop                     jni.MethodID
-	midFragmentOnViewCreated              jni.MethodID
-	midFragmentSetPreferenceScreen        jni.MethodID
+	clsActivity                           *jni.GlobalRef
+	midActivityAddPreferencesFromIntent   jni.MethodID
+	midActivityAddPreferencesFromResource jni.MethodID
+	midActivityFindPreference             jni.MethodID
+	midActivityFinishPreferencePanel      jni.MethodID
+	midActivityGetPreferenceManager       jni.MethodID
+	midActivityGetPreferenceScreen        jni.MethodID
+	midActivityHasHeaders                 jni.MethodID
+	midActivityInvalidateHeaders          jni.MethodID
+	midActivityIsMultiPane                jni.MethodID
+	midActivityOnBackPressed              jni.MethodID
+	midActivityOnBuildStartFragmentIntent jni.MethodID
+	midActivityOnContentChanged           jni.MethodID
+	midActivityOnGetInitialHeader         jni.MethodID
+	midActivityOnGetNewHeader             jni.MethodID
+	midActivityOnHeaderClick              jni.MethodID
+	midActivityOnIsHidingHeaders          jni.MethodID
+	midActivityOnIsMultiPane              jni.MethodID
+	midActivityOnOptionsItemSelected      jni.MethodID
+	midActivityOnPreferenceStartFragment  jni.MethodID
+	midActivityOnPreferenceTreeClick      jni.MethodID
+	midActivitySetListFooter              jni.MethodID
+	midActivitySetParentTitle             jni.MethodID
+	midActivitySetPreferenceScreen        jni.MethodID
+	midActivityShowBreadCrumbs            jni.MethodID
+	midActivityStartPreferenceFragment    jni.MethodID
+	midActivityStartPreferencePanel       jni.MethodID
+	midActivityStartWithFragment4         jni.MethodID
+	midActivityStartWithFragment6_1       jni.MethodID
+	midActivitySwitchToHeader1            jni.MethodID
+	midActivitySwitchToHeader2_1          jni.MethodID
 
-	clsFragmentOnPreferenceStartFragmentCallback                          *jni.GlobalRef
-	midFragmentOnPreferenceStartFragmentCallbackOnPreferenceStartFragment jni.MethodID
+	clsActivityHeader                        *jni.GlobalRef
+	midActivityHeaderDescribeContents        jni.MethodID
+	midActivityHeaderGetBreadCrumbShortTitle jni.MethodID
+	midActivityHeaderGetBreadCrumbTitle      jni.MethodID
+	midActivityHeaderGetSummary              jni.MethodID
+	midActivityHeaderGetTitle                jni.MethodID
+	midActivityHeaderReadFromParcel          jni.MethodID
+	midActivityHeaderWriteToParcel           jni.MethodID
+
+	clsTwoStatePreference                          *jni.GlobalRef
+	midTwoStatePreferenceGetDisableDependentsState jni.MethodID
+	midTwoStatePreferenceGetSummaryOff             jni.MethodID
+	midTwoStatePreferenceGetSummaryOn              jni.MethodID
+	midTwoStatePreferenceIsChecked                 jni.MethodID
+	midTwoStatePreferenceSetChecked                jni.MethodID
+	midTwoStatePreferenceSetDisableDependentsState jni.MethodID
+	midTwoStatePreferenceSetSummaryOff1            jni.MethodID
+	midTwoStatePreferenceSetSummaryOff1_1          jni.MethodID
+	midTwoStatePreferenceSetSummaryOn1             jni.MethodID
+	midTwoStatePreferenceSetSummaryOn1_1           jni.MethodID
+	midTwoStatePreferenceShouldDisableDependents   jni.MethodID
+
+	clsDialogPreference                         *jni.GlobalRef
+	midDialogPreferenceGetDialog                jni.MethodID
+	midDialogPreferenceGetDialogIcon            jni.MethodID
+	midDialogPreferenceGetDialogLayoutResource  jni.MethodID
+	midDialogPreferenceGetDialogMessage         jni.MethodID
+	midDialogPreferenceGetDialogTitle           jni.MethodID
+	midDialogPreferenceGetNegativeButtonText    jni.MethodID
+	midDialogPreferenceGetPositiveButtonText    jni.MethodID
+	midDialogPreferenceOnActivityDestroy        jni.MethodID
+	midDialogPreferenceOnClick                  jni.MethodID
+	midDialogPreferenceOnDismiss                jni.MethodID
+	midDialogPreferenceSetDialogIcon1           jni.MethodID
+	midDialogPreferenceSetDialogIcon1_1         jni.MethodID
+	midDialogPreferenceSetDialogLayoutResource  jni.MethodID
+	midDialogPreferenceSetDialogMessage1        jni.MethodID
+	midDialogPreferenceSetDialogMessage1_1      jni.MethodID
+	midDialogPreferenceSetDialogTitle1          jni.MethodID
+	midDialogPreferenceSetDialogTitle1_1        jni.MethodID
+	midDialogPreferenceSetNegativeButtonText1   jni.MethodID
+	midDialogPreferenceSetNegativeButtonText1_1 jni.MethodID
+	midDialogPreferenceSetPositiveButtonText1   jni.MethodID
+	midDialogPreferenceSetPositiveButtonText1_1 jni.MethodID
+
+	clsScreen               *jni.GlobalRef
+	midScreenBind           jni.MethodID
+	midScreenGetDialog      jni.MethodID
+	midScreenGetRootAdapter jni.MethodID
+	midScreenOnDismiss      jni.MethodID
+	midScreenOnItemClick    jni.MethodID
+
+	clsGroup                       *jni.GlobalRef
+	midGroupAddItemFromInflater    jni.MethodID
+	midGroupAddPreference          jni.MethodID
+	midGroupFindPreference         jni.MethodID
+	midGroupGetPreference          jni.MethodID
+	midGroupGetPreferenceCount     jni.MethodID
+	midGroupIsOrderingAsAdded      jni.MethodID
+	midGroupNotifyDependencyChange jni.MethodID
+	midGroupRemoveAll              jni.MethodID
+	midGroupRemovePreference       jni.MethodID
+	midGroupSetOrderingAsAdded     jni.MethodID
+
+	clsDataStore *jni.GlobalRef
+
+	clsCheckBoxPreference     *jni.GlobalRef
+	midCheckBoxPreferenceInit jni.MethodID
+
+	clsRingtonePreference                 *jni.GlobalRef
+	midRingtonePreferenceInit             jni.MethodID
+	midRingtonePreferenceGetRingtoneType  jni.MethodID
+	midRingtonePreferenceGetShowDefault   jni.MethodID
+	midRingtonePreferenceGetShowSilent    jni.MethodID
+	midRingtonePreferenceOnActivityResult jni.MethodID
+	midRingtonePreferenceSetRingtoneType  jni.MethodID
+	midRingtonePreferenceSetShowDefault   jni.MethodID
+	midRingtonePreferenceSetShowSilent    jni.MethodID
 
 	clsPreference                              *jni.GlobalRef
+	midPreferenceInit                          jni.MethodID
 	midPreferenceCompareTo1                    jni.MethodID
 	midPreferenceGetContext                    jni.MethodID
 	midPreferenceGetDependency                 jni.MethodID
@@ -185,116 +301,8 @@ var (
 	clsOnPreferenceClickListener                  *jni.GlobalRef
 	midOnPreferenceClickListenerOnPreferenceClick jni.MethodID
 
-	clsMultiSelectListPreference                  *jni.GlobalRef
-	midMultiSelectListPreferenceFindIndexOfValue  jni.MethodID
-	midMultiSelectListPreferenceGetEntries        jni.MethodID
-	midMultiSelectListPreferenceGetEntryValues    jni.MethodID
-	midMultiSelectListPreferenceSetEntries1       jni.MethodID
-	midMultiSelectListPreferenceSetEntries1_1     jni.MethodID
-	midMultiSelectListPreferenceSetEntryValues1   jni.MethodID
-	midMultiSelectListPreferenceSetEntryValues1_1 jni.MethodID
-
-	clsSwitchPreference                    *jni.GlobalRef
-	midSwitchPreferenceGetSwitchTextOff    jni.MethodID
-	midSwitchPreferenceGetSwitchTextOn     jni.MethodID
-	midSwitchPreferenceSetSwitchTextOff1   jni.MethodID
-	midSwitchPreferenceSetSwitchTextOff1_1 jni.MethodID
-	midSwitchPreferenceSetSwitchTextOn1    jni.MethodID
-	midSwitchPreferenceSetSwitchTextOn1_1  jni.MethodID
-
-	clsGroup                       *jni.GlobalRef
-	midGroupAddItemFromInflater    jni.MethodID
-	midGroupAddPreference          jni.MethodID
-	midGroupFindPreference         jni.MethodID
-	midGroupGetPreference          jni.MethodID
-	midGroupGetPreferenceCount     jni.MethodID
-	midGroupIsOrderingAsAdded      jni.MethodID
-	midGroupNotifyDependencyChange jni.MethodID
-	midGroupRemoveAll              jni.MethodID
-	midGroupRemovePreference       jni.MethodID
-	midGroupSetOrderingAsAdded     jni.MethodID
-
-	clsEditTextPreference                        *jni.GlobalRef
-	midEditTextPreferenceGetEditText             jni.MethodID
-	midEditTextPreferenceGetText                 jni.MethodID
-	midEditTextPreferenceSetText                 jni.MethodID
-	midEditTextPreferenceShouldDisableDependents jni.MethodID
-
-	clsCheckBoxPreference *jni.GlobalRef
-
-	clsTwoStatePreference                          *jni.GlobalRef
-	midTwoStatePreferenceGetDisableDependentsState jni.MethodID
-	midTwoStatePreferenceGetSummaryOff             jni.MethodID
-	midTwoStatePreferenceGetSummaryOn              jni.MethodID
-	midTwoStatePreferenceIsChecked                 jni.MethodID
-	midTwoStatePreferenceSetChecked                jni.MethodID
-	midTwoStatePreferenceSetDisableDependentsState jni.MethodID
-	midTwoStatePreferenceSetSummaryOff1            jni.MethodID
-	midTwoStatePreferenceSetSummaryOff1_1          jni.MethodID
-	midTwoStatePreferenceSetSummaryOn1             jni.MethodID
-	midTwoStatePreferenceSetSummaryOn1_1           jni.MethodID
-	midTwoStatePreferenceShouldDisableDependents   jni.MethodID
-
-	clsDataStore *jni.GlobalRef
-
-	clsScreen               *jni.GlobalRef
-	midScreenBind           jni.MethodID
-	midScreenGetDialog      jni.MethodID
-	midScreenGetRootAdapter jni.MethodID
-	midScreenOnDismiss      jni.MethodID
-	midScreenOnItemClick    jni.MethodID
-
-	clsActivity                           *jni.GlobalRef
-	midActivityAddPreferencesFromIntent   jni.MethodID
-	midActivityAddPreferencesFromResource jni.MethodID
-	midActivityFindPreference             jni.MethodID
-	midActivityFinishPreferencePanel      jni.MethodID
-	midActivityGetPreferenceManager       jni.MethodID
-	midActivityGetPreferenceScreen        jni.MethodID
-	midActivityHasHeaders                 jni.MethodID
-	midActivityInvalidateHeaders          jni.MethodID
-	midActivityIsMultiPane                jni.MethodID
-	midActivityOnBackPressed              jni.MethodID
-	midActivityOnBuildStartFragmentIntent jni.MethodID
-	midActivityOnContentChanged           jni.MethodID
-	midActivityOnGetInitialHeader         jni.MethodID
-	midActivityOnGetNewHeader             jni.MethodID
-	midActivityOnHeaderClick              jni.MethodID
-	midActivityOnIsHidingHeaders          jni.MethodID
-	midActivityOnIsMultiPane              jni.MethodID
-	midActivityOnOptionsItemSelected      jni.MethodID
-	midActivityOnPreferenceStartFragment  jni.MethodID
-	midActivityOnPreferenceTreeClick      jni.MethodID
-	midActivitySetListFooter              jni.MethodID
-	midActivitySetParentTitle             jni.MethodID
-	midActivitySetPreferenceScreen        jni.MethodID
-	midActivityShowBreadCrumbs            jni.MethodID
-	midActivityStartPreferenceFragment    jni.MethodID
-	midActivityStartPreferencePanel       jni.MethodID
-	midActivityStartWithFragment4         jni.MethodID
-	midActivityStartWithFragment6_1       jni.MethodID
-	midActivitySwitchToHeader1            jni.MethodID
-	midActivitySwitchToHeader2_1          jni.MethodID
-
-	clsActivityHeader                        *jni.GlobalRef
-	midActivityHeaderDescribeContents        jni.MethodID
-	midActivityHeaderGetBreadCrumbShortTitle jni.MethodID
-	midActivityHeaderGetBreadCrumbTitle      jni.MethodID
-	midActivityHeaderGetSummary              jni.MethodID
-	midActivityHeaderGetTitle                jni.MethodID
-	midActivityHeaderReadFromParcel          jni.MethodID
-	midActivityHeaderWriteToParcel           jni.MethodID
-
-	clsRingtonePreference                 *jni.GlobalRef
-	midRingtonePreferenceGetRingtoneType  jni.MethodID
-	midRingtonePreferenceGetShowDefault   jni.MethodID
-	midRingtonePreferenceGetShowSilent    jni.MethodID
-	midRingtonePreferenceOnActivityResult jni.MethodID
-	midRingtonePreferenceSetRingtoneType  jni.MethodID
-	midRingtonePreferenceSetShowDefault   jni.MethodID
-	midRingtonePreferenceSetShowSilent    jni.MethodID
-
 	clsCategory                        *jni.GlobalRef
+	midCategoryInit                    jni.MethodID
 	midCategoryIsEnabled               jni.MethodID
 	midCategoryShouldDisableDependents jni.MethodID
 )
@@ -317,155 +325,207 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/preference/DialogPreference")
+	c, err = env.FindClass("android/preference/PreferenceFragment")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDialogPreference = env.NewGlobalRef(&c.Object)
+		clsFragment = env.NewGlobalRef(&c.Object)
 
-		midDialogPreferenceGetDialog, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialog", "()Landroid/app/Dialog;")
+		midFragmentAddPreferencesFromIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "addPreferencesFromIntent", "(Landroid/content/Intent;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceGetDialogIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogIcon", "()Landroid/graphics/drawable/Drawable;")
+		midFragmentAddPreferencesFromResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "addPreferencesFromResource", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceGetDialogLayoutResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogLayoutResource", "()I")
+		midFragmentFindPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "findPreference", "(Ljava/lang/CharSequence;)Landroid/preference/Preference;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceGetDialogMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogMessage", "()Ljava/lang/CharSequence;")
+		midFragmentGetPreferenceManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "getPreferenceManager", "()Landroid/preference/PreferenceManager;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceGetDialogTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogTitle", "()Ljava/lang/CharSequence;")
+		midFragmentGetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "getPreferenceScreen", "()Landroid/preference/PreferenceScreen;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceGetNegativeButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getNegativeButtonText", "()Ljava/lang/CharSequence;")
+		midFragmentOnActivityCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onActivityCreated", "(Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceGetPositiveButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getPositiveButtonText", "()Ljava/lang/CharSequence;")
+		midFragmentOnActivityResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onActivityResult", "(IILandroid/content/Intent;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceOnActivityDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "onActivityDestroy", "()V")
+		midFragmentOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onCreate", "(Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "onClick", "(Landroid/content/DialogInterface;I)V")
+		midFragmentOnCreateView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onCreateView", "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceOnDismiss, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "onDismiss", "(Landroid/content/DialogInterface;)V")
+		midFragmentOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onDestroy", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogIcon1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogIcon", "(Landroid/graphics/drawable/Drawable;)V")
+		midFragmentOnDestroyView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onDestroyView", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogIcon1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogIcon", "(I)V")
+		midFragmentOnPreferenceTreeClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onPreferenceTreeClick", "(Landroid/preference/PreferenceScreen;Landroid/preference/Preference;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogLayoutResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogLayoutResource", "(I)V")
+		midFragmentOnSaveInstanceState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onSaveInstanceState", "(Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogMessage1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogMessage", "(I)V")
+		midFragmentOnStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onStart", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogMessage1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogMessage", "(Ljava/lang/CharSequence;)V")
+		midFragmentOnStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onStop", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogTitle1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogTitle", "(I)V")
+		midFragmentOnViewCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onViewCreated", "(Landroid/view/View;Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetDialogTitle1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogTitle", "(Ljava/lang/CharSequence;)V")
+		midFragmentSetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "setPreferenceScreen", "(Landroid/preference/PreferenceScreen;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetNegativeButtonText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setNegativeButtonText", "(I)V")
+	}
+
+	c, err = env.FindClass("android/preference/PreferenceFragment$OnPreferenceStartFragmentCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFragmentOnPreferenceStartFragmentCallback = env.NewGlobalRef(&c.Object)
+
+		midFragmentOnPreferenceStartFragmentCallbackOnPreferenceStartFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragmentOnPreferenceStartFragmentCallback)), "onPreferenceStartFragment", "(Landroid/preference/PreferenceFragment;Landroid/preference/Preference;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetNegativeButtonText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setNegativeButtonText", "(Ljava/lang/CharSequence;)V")
+	}
+
+	c, err = env.FindClass("android/preference/MultiSelectListPreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMultiSelectListPreference = env.NewGlobalRef(&c.Object)
+		midMultiSelectListPreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midMultiSelectListPreferenceFindIndexOfValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "findIndexOfValue", "(Ljava/lang/String;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetPositiveButtonText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setPositiveButtonText", "(I)V")
+		midMultiSelectListPreferenceGetEntries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "getEntries", "()[Ljava/lang/CharSequence;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDialogPreferenceSetPositiveButtonText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setPositiveButtonText", "(Ljava/lang/CharSequence;)V")
+		midMultiSelectListPreferenceGetEntryValues, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "getEntryValues", "()[Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMultiSelectListPreferenceSetEntries1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntries", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMultiSelectListPreferenceSetEntries1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntries", "([Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMultiSelectListPreferenceSetEntryValues1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntryValues", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMultiSelectListPreferenceSetEntryValues1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntryValues", "([Ljava/lang/CharSequence;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -654,6 +714,104 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/preference/SwitchPreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSwitchPreference = env.NewGlobalRef(&c.Object)
+		midSwitchPreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSwitchPreferenceGetSwitchTextOff, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "getSwitchTextOff", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSwitchPreferenceGetSwitchTextOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "getSwitchTextOn", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSwitchPreferenceSetSwitchTextOff1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOff", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSwitchPreferenceSetSwitchTextOff1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOff", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSwitchPreferenceSetSwitchTextOn1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOn", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSwitchPreferenceSetSwitchTextOn1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOn", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/EditTextPreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEditTextPreference = env.NewGlobalRef(&c.Object)
+		midEditTextPreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midEditTextPreferenceGetEditText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "getEditText", "()Landroid/widget/EditText;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEditTextPreferenceGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "getText", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEditTextPreferenceSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "setText", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEditTextPreferenceShouldDisableDependents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "shouldDisableDependents", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/preference/ListPreference")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -661,6 +819,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsListPreference = env.NewGlobalRef(&c.Object)
+		midListPreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListPreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midListPreferenceFindIndexOfValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListPreference)), "findIndexOfValue", "(Ljava/lang/String;)I")
 		if err != nil {
@@ -755,127 +917,218 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/preference/PreferenceFragment")
+	c, err = env.FindClass("android/preference/PreferenceActivity")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFragment = env.NewGlobalRef(&c.Object)
+		clsActivity = env.NewGlobalRef(&c.Object)
 
-		midFragmentAddPreferencesFromIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "addPreferencesFromIntent", "(Landroid/content/Intent;)V")
+		midActivityAddPreferencesFromIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "addPreferencesFromIntent", "(Landroid/content/Intent;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentAddPreferencesFromResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "addPreferencesFromResource", "(I)V")
+		midActivityAddPreferencesFromResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "addPreferencesFromResource", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentFindPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "findPreference", "(Ljava/lang/CharSequence;)Landroid/preference/Preference;")
+		midActivityFindPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "findPreference", "(Ljava/lang/CharSequence;)Landroid/preference/Preference;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentGetPreferenceManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "getPreferenceManager", "()Landroid/preference/PreferenceManager;")
+		midActivityFinishPreferencePanel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "finishPreferencePanel", "(Landroid/app/Fragment;ILandroid/content/Intent;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentGetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "getPreferenceScreen", "()Landroid/preference/PreferenceScreen;")
+		midActivityGetPreferenceManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getPreferenceManager", "()Landroid/preference/PreferenceManager;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnActivityCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onActivityCreated", "(Landroid/os/Bundle;)V")
+		midActivityGetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getPreferenceScreen", "()Landroid/preference/PreferenceScreen;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnActivityResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onActivityResult", "(IILandroid/content/Intent;)V")
+		midActivityHasHeaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "hasHeaders", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onCreate", "(Landroid/os/Bundle;)V")
+		midActivityInvalidateHeaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "invalidateHeaders", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnCreateView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onCreateView", "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;")
+		midActivityIsMultiPane, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "isMultiPane", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onDestroy", "()V")
+		midActivityOnBackPressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onBackPressed", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnDestroyView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onDestroyView", "()V")
+		midActivityOnBuildStartFragmentIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onBuildStartFragmentIntent", "(Ljava/lang/String;Landroid/os/Bundle;II)Landroid/content/Intent;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnPreferenceTreeClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onPreferenceTreeClick", "(Landroid/preference/PreferenceScreen;Landroid/preference/Preference;)Z")
+		midActivityOnContentChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onContentChanged", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnSaveInstanceState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onSaveInstanceState", "(Landroid/os/Bundle;)V")
+		midActivityOnGetInitialHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onGetInitialHeader", "()Landroid/preference/PreferenceActivity$Header;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onStart", "()V")
+		midActivityOnGetNewHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onGetNewHeader", "()Landroid/preference/PreferenceActivity$Header;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onStop", "()V")
+		midActivityOnHeaderClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onHeaderClick", "(Landroid/preference/PreferenceActivity$Header;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentOnViewCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "onViewCreated", "(Landroid/view/View;Landroid/os/Bundle;)V")
+		midActivityOnIsHidingHeaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onIsHidingHeaders", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFragmentSetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragment)), "setPreferenceScreen", "(Landroid/preference/PreferenceScreen;)V")
+		midActivityOnIsMultiPane, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onIsMultiPane", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityOnOptionsItemSelected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onOptionsItemSelected", "(Landroid/view/MenuItem;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityOnPreferenceStartFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onPreferenceStartFragment", "(Landroid/preference/PreferenceFragment;Landroid/preference/Preference;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityOnPreferenceTreeClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onPreferenceTreeClick", "(Landroid/preference/PreferenceScreen;Landroid/preference/Preference;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivitySetListFooter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setListFooter", "(Landroid/view/View;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivitySetParentTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setParentTitle", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/view/View$OnClickListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivitySetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setPreferenceScreen", "(Landroid/preference/PreferenceScreen;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityShowBreadCrumbs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "showBreadCrumbs", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityStartPreferenceFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startPreferenceFragment", "(Landroid/app/Fragment;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityStartPreferencePanel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startPreferencePanel", "(Ljava/lang/String;Landroid/os/Bundle;ILjava/lang/CharSequence;Landroid/app/Fragment;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityStartWithFragment4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startWithFragment", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/app/Fragment;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityStartWithFragment6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startWithFragment", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/app/Fragment;III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivitySwitchToHeader1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "switchToHeader", "(Landroid/preference/PreferenceActivity$Header;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivitySwitchToHeader2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "switchToHeader", "(Ljava/lang/String;Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -884,15 +1137,513 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/preference/PreferenceFragment$OnPreferenceStartFragmentCallback")
+	c, err = env.FindClass("android/preference/PreferenceActivity$Header")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFragmentOnPreferenceStartFragmentCallback = env.NewGlobalRef(&c.Object)
+		clsActivityHeader = env.NewGlobalRef(&c.Object)
 
-		midFragmentOnPreferenceStartFragmentCallbackOnPreferenceStartFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFragmentOnPreferenceStartFragmentCallback)), "onPreferenceStartFragment", "(Landroid/preference/PreferenceFragment;Landroid/preference/Preference;)Z")
+		midActivityHeaderDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderGetBreadCrumbShortTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getBreadCrumbShortTitle", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderGetBreadCrumbTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getBreadCrumbTitle", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderGetSummary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getSummary", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getTitle", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "readFromParcel", "(Landroid/os/Parcel;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActivityHeaderWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/TwoStatePreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTwoStatePreference = env.NewGlobalRef(&c.Object)
+
+		midTwoStatePreferenceGetDisableDependentsState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "getDisableDependentsState", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceGetSummaryOff, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "getSummaryOff", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceGetSummaryOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "getSummaryOn", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "isChecked", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceSetChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setChecked", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceSetDisableDependentsState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setDisableDependentsState", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceSetSummaryOff1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOff", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceSetSummaryOff1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOff", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceSetSummaryOn1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOn", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceSetSummaryOn1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOn", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTwoStatePreferenceShouldDisableDependents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "shouldDisableDependents", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/DialogPreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDialogPreference = env.NewGlobalRef(&c.Object)
+
+		midDialogPreferenceGetDialog, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialog", "()Landroid/app/Dialog;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceGetDialogIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogIcon", "()Landroid/graphics/drawable/Drawable;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceGetDialogLayoutResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogLayoutResource", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceGetDialogMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogMessage", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceGetDialogTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getDialogTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceGetNegativeButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getNegativeButtonText", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceGetPositiveButtonText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "getPositiveButtonText", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceOnActivityDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "onActivityDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceOnClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "onClick", "(Landroid/content/DialogInterface;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceOnDismiss, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "onDismiss", "(Landroid/content/DialogInterface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogIcon1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogIcon", "(Landroid/graphics/drawable/Drawable;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogIcon1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogIcon", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogLayoutResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogLayoutResource", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogMessage1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogMessage", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogMessage1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogMessage", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogTitle1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogTitle", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetDialogTitle1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setDialogTitle", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetNegativeButtonText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setNegativeButtonText", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetNegativeButtonText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setNegativeButtonText", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetPositiveButtonText1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setPositiveButtonText", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDialogPreferenceSetPositiveButtonText1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDialogPreference)), "setPositiveButtonText", "(Ljava/lang/CharSequence;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/PreferenceScreen")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsScreen = env.NewGlobalRef(&c.Object)
+
+		midScreenBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "bind", "(Landroid/widget/ListView;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScreenGetDialog, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "getDialog", "()Landroid/app/Dialog;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScreenGetRootAdapter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "getRootAdapter", "()Landroid/widget/ListAdapter;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScreenOnDismiss, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "onDismiss", "(Landroid/content/DialogInterface;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midScreenOnItemClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "onItemClick", "(Landroid/widget/AdapterView;Landroid/view/View;IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/PreferenceGroup")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGroup = env.NewGlobalRef(&c.Object)
+
+		midGroupAddItemFromInflater, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "addItemFromInflater", "(Landroid/preference/Preference;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupAddPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "addPreference", "(Landroid/preference/Preference;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupFindPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "findPreference", "(Ljava/lang/CharSequence;)Landroid/preference/Preference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupGetPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "getPreference", "(I)Landroid/preference/Preference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupGetPreferenceCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "getPreferenceCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupIsOrderingAsAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "isOrderingAsAdded", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupNotifyDependencyChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "notifyDependencyChange", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupRemoveAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "removeAll", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupRemovePreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "removePreference", "(Landroid/preference/Preference;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGroupSetOrderingAsAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "setOrderingAsAdded", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/PreferenceDataStore")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDataStore = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/preference/CheckBoxPreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCheckBoxPreference = env.NewGlobalRef(&c.Object)
+		midCheckBoxPreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCheckBoxPreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/preference/RingtonePreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRingtonePreference = env.NewGlobalRef(&c.Object)
+		midRingtonePreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceGetRingtoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "getRingtoneType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceGetShowDefault, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "getShowDefault", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceGetShowSilent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "getShowSilent", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceOnActivityResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "onActivityResult", "(IILandroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceSetRingtoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setRingtoneType", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceSetShowDefault, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setShowDefault", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRingtonePreferenceSetShowSilent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setShowSilent", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -908,6 +1659,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPreference = env.NewGlobalRef(&c.Object)
+		midPreferenceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midPreferenceCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "compareTo", "(Landroid/preference/Preference;)I")
 		if err != nil {
@@ -1403,725 +2158,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/preference/MultiSelectListPreference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsMultiSelectListPreference = env.NewGlobalRef(&c.Object)
-
-		midMultiSelectListPreferenceFindIndexOfValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "findIndexOfValue", "(Ljava/lang/String;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMultiSelectListPreferenceGetEntries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "getEntries", "()[Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMultiSelectListPreferenceGetEntryValues, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "getEntryValues", "()[Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMultiSelectListPreferenceSetEntries1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntries", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMultiSelectListPreferenceSetEntries1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntries", "([Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMultiSelectListPreferenceSetEntryValues1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntryValues", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMultiSelectListPreferenceSetEntryValues1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), "setEntryValues", "([Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/SwitchPreference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSwitchPreference = env.NewGlobalRef(&c.Object)
-
-		midSwitchPreferenceGetSwitchTextOff, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "getSwitchTextOff", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSwitchPreferenceGetSwitchTextOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "getSwitchTextOn", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSwitchPreferenceSetSwitchTextOff1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOff", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSwitchPreferenceSetSwitchTextOff1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOff", "(Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSwitchPreferenceSetSwitchTextOn1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOn", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSwitchPreferenceSetSwitchTextOn1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), "setSwitchTextOn", "(Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/PreferenceGroup")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGroup = env.NewGlobalRef(&c.Object)
-
-		midGroupAddItemFromInflater, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "addItemFromInflater", "(Landroid/preference/Preference;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupAddPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "addPreference", "(Landroid/preference/Preference;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupFindPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "findPreference", "(Ljava/lang/CharSequence;)Landroid/preference/Preference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupGetPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "getPreference", "(I)Landroid/preference/Preference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupGetPreferenceCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "getPreferenceCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupIsOrderingAsAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "isOrderingAsAdded", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupNotifyDependencyChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "notifyDependencyChange", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupRemoveAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "removeAll", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupRemovePreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "removePreference", "(Landroid/preference/Preference;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGroupSetOrderingAsAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGroup)), "setOrderingAsAdded", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/EditTextPreference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEditTextPreference = env.NewGlobalRef(&c.Object)
-
-		midEditTextPreferenceGetEditText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "getEditText", "()Landroid/widget/EditText;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEditTextPreferenceGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "getText", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEditTextPreferenceSetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "setText", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEditTextPreferenceShouldDisableDependents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), "shouldDisableDependents", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/CheckBoxPreference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCheckBoxPreference = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/preference/TwoStatePreference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTwoStatePreference = env.NewGlobalRef(&c.Object)
-
-		midTwoStatePreferenceGetDisableDependentsState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "getDisableDependentsState", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceGetSummaryOff, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "getSummaryOff", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceGetSummaryOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "getSummaryOn", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceIsChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "isChecked", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceSetChecked, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setChecked", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceSetDisableDependentsState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setDisableDependentsState", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceSetSummaryOff1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOff", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceSetSummaryOff1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOff", "(Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceSetSummaryOn1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOn", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceSetSummaryOn1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "setSummaryOn", "(Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTwoStatePreferenceShouldDisableDependents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTwoStatePreference)), "shouldDisableDependents", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/PreferenceDataStore")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDataStore = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/preference/PreferenceScreen")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsScreen = env.NewGlobalRef(&c.Object)
-
-		midScreenBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "bind", "(Landroid/widget/ListView;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScreenGetDialog, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "getDialog", "()Landroid/app/Dialog;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScreenGetRootAdapter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "getRootAdapter", "()Landroid/widget/ListAdapter;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScreenOnDismiss, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "onDismiss", "(Landroid/content/DialogInterface;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midScreenOnItemClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsScreen)), "onItemClick", "(Landroid/widget/AdapterView;Landroid/view/View;IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/PreferenceActivity")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsActivity = env.NewGlobalRef(&c.Object)
-
-		midActivityAddPreferencesFromIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "addPreferencesFromIntent", "(Landroid/content/Intent;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityAddPreferencesFromResource, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "addPreferencesFromResource", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityFindPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "findPreference", "(Ljava/lang/CharSequence;)Landroid/preference/Preference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityFinishPreferencePanel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "finishPreferencePanel", "(Landroid/app/Fragment;ILandroid/content/Intent;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityGetPreferenceManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getPreferenceManager", "()Landroid/preference/PreferenceManager;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityGetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "getPreferenceScreen", "()Landroid/preference/PreferenceScreen;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHasHeaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "hasHeaders", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityInvalidateHeaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "invalidateHeaders", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityIsMultiPane, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "isMultiPane", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnBackPressed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onBackPressed", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnBuildStartFragmentIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onBuildStartFragmentIntent", "(Ljava/lang/String;Landroid/os/Bundle;II)Landroid/content/Intent;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnContentChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onContentChanged", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnGetInitialHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onGetInitialHeader", "()Landroid/preference/PreferenceActivity$Header;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnGetNewHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onGetNewHeader", "()Landroid/preference/PreferenceActivity$Header;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnHeaderClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onHeaderClick", "(Landroid/preference/PreferenceActivity$Header;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnIsHidingHeaders, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onIsHidingHeaders", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnIsMultiPane, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onIsMultiPane", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnOptionsItemSelected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onOptionsItemSelected", "(Landroid/view/MenuItem;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnPreferenceStartFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onPreferenceStartFragment", "(Landroid/preference/PreferenceFragment;Landroid/preference/Preference;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityOnPreferenceTreeClick, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "onPreferenceTreeClick", "(Landroid/preference/PreferenceScreen;Landroid/preference/Preference;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivitySetListFooter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setListFooter", "(Landroid/view/View;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivitySetParentTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setParentTitle", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;Landroid/view/View$OnClickListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivitySetPreferenceScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "setPreferenceScreen", "(Landroid/preference/PreferenceScreen;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityShowBreadCrumbs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "showBreadCrumbs", "(Ljava/lang/CharSequence;Ljava/lang/CharSequence;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityStartPreferenceFragment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startPreferenceFragment", "(Landroid/app/Fragment;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityStartPreferencePanel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startPreferencePanel", "(Ljava/lang/String;Landroid/os/Bundle;ILjava/lang/CharSequence;Landroid/app/Fragment;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityStartWithFragment4, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startWithFragment", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/app/Fragment;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityStartWithFragment6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "startWithFragment", "(Ljava/lang/String;Landroid/os/Bundle;Landroid/app/Fragment;III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivitySwitchToHeader1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "switchToHeader", "(Landroid/preference/PreferenceActivity$Header;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivitySwitchToHeader2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivity)), "switchToHeader", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/PreferenceActivity$Header")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsActivityHeader = env.NewGlobalRef(&c.Object)
-
-		midActivityHeaderDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHeaderGetBreadCrumbShortTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getBreadCrumbShortTitle", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHeaderGetBreadCrumbTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getBreadCrumbTitle", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHeaderGetSummary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getSummary", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHeaderGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "getTitle", "(Landroid/content/res/Resources;)Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHeaderReadFromParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "readFromParcel", "(Landroid/os/Parcel;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActivityHeaderWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsActivityHeader)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/preference/RingtonePreference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRingtonePreference = env.NewGlobalRef(&c.Object)
-
-		midRingtonePreferenceGetRingtoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "getRingtoneType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRingtonePreferenceGetShowDefault, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "getShowDefault", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRingtonePreferenceGetShowSilent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "getShowSilent", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRingtonePreferenceOnActivityResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "onActivityResult", "(IILandroid/content/Intent;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRingtonePreferenceSetRingtoneType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setRingtoneType", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRingtonePreferenceSetShowDefault, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setShowDefault", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRingtonePreferenceSetShowSilent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), "setShowSilent", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/preference/PreferenceCategory")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -2129,6 +2165,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCategory = env.NewGlobalRef(&c.Object)
+		midCategoryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCategory)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midCategoryIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCategory)), "isEnabled", "()Z")
 		if err != nil {

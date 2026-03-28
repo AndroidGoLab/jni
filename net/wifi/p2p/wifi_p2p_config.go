@@ -23,6 +23,28 @@ type WifiP2pConfig struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWifiP2pConfig creates a new android.net.wifi.p2p.WifiP2pConfig instance.
+func NewWifiP2pConfig(vm *jni.VM) (*WifiP2pConfig, error) {
+	var t WifiP2pConfig
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pConfig)), midWifiP2pConfigInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.p2p.WifiP2pConfig.describeContents.
 func (m *WifiP2pConfig) DescribeContents() (int32, error) {
 	var result int32

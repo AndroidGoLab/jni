@@ -7,6 +7,16 @@ go_import: github.com/AndroidGoLab/jni/media/browse
 classes:
     - java_class: android.media.browse.MediaBrowser
       go_type: MediaBrowser
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+        - java_type: android.content.ComponentName
+          go_name: arg1
+        - java_type: android.media.browse.MediaBrowser$ConnectionCallback
+          go_name: arg2
+        - java_type: android.os.Bundle
+          go_name: arg3
       methods:
         - java_method: connect
           go_name: Connect

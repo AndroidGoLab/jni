@@ -23,6 +23,28 @@ type TaiwanCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTaiwanCalendar creates a new android.icu.util.TaiwanCalendar instance.
+func NewTaiwanCalendar(vm *jni.VM) (*TaiwanCalendar, error) {
+	var t TaiwanCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTaiwanCalendar)), midTaiwanCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetType calls android.icu.util.TaiwanCalendar.getType.
 func (m *TaiwanCalendar) GetType() (string, error) {
 	var result string

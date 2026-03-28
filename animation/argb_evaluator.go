@@ -23,6 +23,28 @@ type ArgbEvaluator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewArgbEvaluator creates a new android.animation.ArgbEvaluator instance.
+func NewArgbEvaluator(vm *jni.VM) (*ArgbEvaluator, error) {
+	var t ArgbEvaluator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArgbEvaluator)), midArgbEvaluatorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Evaluate calls android.animation.ArgbEvaluator.evaluate.
 func (m *ArgbEvaluator) Evaluate(
 	arg0 float32,

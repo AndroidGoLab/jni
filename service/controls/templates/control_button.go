@@ -23,6 +23,39 @@ type ControlButton struct {
 	Obj *jni.GlobalRef
 }
 
+// NewControlButton creates a new android.service.controls.templates.ControlButton instance.
+func NewControlButton(vm *jni.VM, arg0 bool, arg1 string) (*ControlButton, error) {
+	var t ControlButton
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsControlButton)), midControlButtonInit, jni.BooleanValue(jArg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.controls.templates.ControlButton.describeContents.
 func (m *ControlButton) DescribeContents() (int32, error) {
 	var result int32

@@ -23,16 +23,24 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsCommandAction              *jni.GlobalRef
-	midCommandActionGetActionType jni.MethodID
+	clsFloatAction              *jni.GlobalRef
+	midFloatActionInit          jni.MethodID
+	midFloatActionGetActionType jni.MethodID
+	midFloatActionGetNewValue   jni.MethodID
 
 	clsModeAction              *jni.GlobalRef
+	midModeActionInit          jni.MethodID
 	midModeActionGetActionType jni.MethodID
 	midModeActionGetNewMode    jni.MethodID
 
 	clsBooleanAction              *jni.GlobalRef
+	midBooleanActionInit          jni.MethodID
 	midBooleanActionGetActionType jni.MethodID
 	midBooleanActionGetNewState   jni.MethodID
+
+	clsCommandAction              *jni.GlobalRef
+	midCommandActionInit          jni.MethodID
+	midCommandActionGetActionType jni.MethodID
 
 	clsControlAction                  *jni.GlobalRef
 	midControlActionGetActionType     jni.MethodID
@@ -40,10 +48,6 @@ var (
 	midControlActionGetTemplateId     jni.MethodID
 	midControlActionGetErrorAction    jni.MethodID
 	midControlActionIsValidResponse   jni.MethodID
-
-	clsFloatAction              *jni.GlobalRef
-	midFloatActionGetActionType jni.MethodID
-	midFloatActionGetNewValue   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -64,15 +68,26 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/service/controls/actions/CommandAction")
+	c, err = env.FindClass("android/service/controls/actions/FloatAction")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsCommandAction = env.NewGlobalRef(&c.Object)
+		clsFloatAction = env.NewGlobalRef(&c.Object)
+		midFloatActionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatAction)), "<init>", "(Ljava/lang/String;F)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midCommandActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCommandAction)), "getActionType", "()I")
+		midFloatActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatAction)), "getActionType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFloatActionGetNewValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatAction)), "getNewValue", "()F")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -88,6 +103,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsModeAction = env.NewGlobalRef(&c.Object)
+		midModeActionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsModeAction)), "<init>", "(Ljava/lang/String;I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midModeActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsModeAction)), "getActionType", "()I")
 		if err != nil {
@@ -112,6 +131,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBooleanAction = env.NewGlobalRef(&c.Object)
+		midBooleanActionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBooleanAction)), "<init>", "(Ljava/lang/String;Z)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midBooleanActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBooleanAction)), "getActionType", "()I")
 		if err != nil {
@@ -121,6 +144,27 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBooleanActionGetNewState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBooleanAction)), "getNewState", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/controls/actions/CommandAction")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCommandAction = env.NewGlobalRef(&c.Object)
+		midCommandActionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCommandAction)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCommandActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCommandAction)), "getActionType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -166,30 +210,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midControlActionIsValidResponse, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsControlAction)), "isValidResponse", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/controls/actions/FloatAction")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsFloatAction = env.NewGlobalRef(&c.Object)
-
-		midFloatActionGetActionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatAction)), "getActionType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midFloatActionGetNewValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFloatAction)), "getNewValue", "()F")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -3,6 +3,12 @@
 package consts
 
 const (
+	Debug                              int = 0
+	Error                              int = 0
+	Log                                int = 0
+	Tip                                int = 0
+	Warning                            int = 0
+	DayCount                           int = 5
 	RendererPriorityBound              int = 1
 	RendererPriorityImportant          int = 2
 	RendererPriorityWaived             int = 0
@@ -16,6 +22,19 @@ const (
 	SrcAnchorType                      int = 7
 	SrcImageAnchorType                 int = 8
 	UnknownType                        int = 0
+	CategoriesAll                      int = 1
+	CategoriesAndroidWebview           int = 2
+	CategoriesFrameViewer              int = 64
+	CategoriesInputLatency             int = 8
+	CategoriesJavascriptAndRendering   int = 32
+	CategoriesNone                     int = 0
+	CategoriesRendering                int = 16
+	CategoriesWebDeveloper             int = 4
+	RecordContinuously                 int = 1
+	RecordUntilFull                    int = 0
+	ModeOpen                           int = 0
+	ModeOpenMultiple                   int = 1
+	ModeSave                           int = 3
 	ErrorAuthentication                int = -4
 	ErrorBadUrl                        int = -12
 	ErrorConnect                       int = -6
@@ -37,22 +56,6 @@ const (
 	SafeBrowsingThreatPhishing         int = 2
 	SafeBrowsingThreatUnknown          int = 0
 	SafeBrowsingThreatUnwantedSoftware int = 3
-	Debug                              int = 0
-	Error                              int = 0
-	Log                                int = 0
-	Tip                                int = 0
-	Warning                            int = 0
-	DayCount                           int = 5
-	CategoriesAll                      int = 1
-	CategoriesAndroidWebview           int = 2
-	CategoriesFrameViewer              int = 64
-	CategoriesInputLatency             int = 8
-	CategoriesJavascriptAndRendering   int = 32
-	CategoriesNone                     int = 0
-	CategoriesRendering                int = 16
-	CategoriesWebDeveloper             int = 4
-	RecordContinuously                 int = 1
-	RecordUntilFull                    int = 0
 	ForceDarkAuto                      int = 1
 	ForceDarkOff                       int = 0
 	ForceDarkOn                        int = 2
@@ -84,9 +87,6 @@ const (
 	Close                              int = 0
 	Far                                int = 0
 	Medium                             int = 0
-	ModeOpen                           int = 0
-	ModeOpenMultiple                   int = 1
-	ModeSave                           int = 3
 )
 
 const (

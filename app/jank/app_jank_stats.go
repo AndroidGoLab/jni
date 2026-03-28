@@ -23,6 +23,53 @@ type AppJankStats struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppJankStats creates a new android.app.jank.AppJankStats instance.
+func NewAppJankStats(vm *jni.VM, arg0 int32, arg1 string, arg2 string, arg3 string, arg4 string, arg5 int64, arg6 int64, arg7 *jni.Object) (*AppJankStats, error) {
+	var t AppJankStats
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		jArg4, err := env.NewStringUTF(arg4)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg4.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppJankStats)), midAppJankStatsInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.LongValue(arg5), jni.LongValue(arg6), jni.ObjectValue(arg7))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetJankyFrameCount calls android.app.jank.AppJankStats.getJankyFrameCount.
 func (m *AppJankStats) GetJankyFrameCount() (int64, error) {
 	var result int64

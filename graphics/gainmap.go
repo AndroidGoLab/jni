@@ -23,6 +23,29 @@ type Gainmap struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGainmap creates a new android.graphics.Gainmap instance.
+func NewGainmap(vm *jni.VM, arg0 *jni.Object) (*Gainmap, error) {
+	var t Gainmap
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGainmap)), midGainmapInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.Gainmap.describeContents.
 func (m *Gainmap) DescribeContents() (int32, error) {
 	var result int32

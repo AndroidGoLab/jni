@@ -3,10 +3,10 @@
 package consts
 
 const (
+	Creator                         int = 0
 	AppFunctionStateDefault         int = 0
 	AppFunctionStateDisabled        int = 2
 	AppFunctionStateEnabled         int = 1
-	Creator                         int = 0
 	ErrorAppUnknownError            int = 3000
 	ErrorCancelled                  int = 2001
 	ErrorCategoryApp                int = 3

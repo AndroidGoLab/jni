@@ -23,6 +23,28 @@ type ContentObservable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewContentObservable creates a new android.database.ContentObservable instance.
+func NewContentObservable(vm *jni.VM) (*ContentObservable, error) {
+	var t ContentObservable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContentObservable)), midContentObservableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DispatchChange1 calls android.database.ContentObservable.dispatchChange.
 func (m *ContentObservable) DispatchChange1(arg0 bool) error {
 

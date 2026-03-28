@@ -23,6 +23,29 @@ type ZoomButtonsController struct {
 	Obj *jni.GlobalRef
 }
 
+// NewZoomButtonsController creates a new android.widget.ZoomButtonsController instance.
+func NewZoomButtonsController(vm *jni.VM, arg0 *jni.Object) (*ZoomButtonsController, error) {
+	var t ZoomButtonsController
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsZoomButtonsController)), midZoomButtonsControllerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetContainer calls android.widget.ZoomButtonsController.getContainer.
 func (m *ZoomButtonsController) GetContainer() (*jni.Object, error) {
 	var result *jni.Object

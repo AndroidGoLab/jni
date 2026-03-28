@@ -23,6 +23,28 @@ type TileService struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTileService creates a new android.service.quicksettings.TileService instance.
+func NewTileService(vm *jni.VM) (*TileService, error) {
+	var t TileService
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTileService)), midTileServiceInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetQsTile calls android.service.quicksettings.TileService.getQsTile.
 func (m *TileService) GetQsTile() (*jni.Object, error) {
 	var result *jni.Object

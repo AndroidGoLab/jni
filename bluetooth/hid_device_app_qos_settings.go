@@ -23,6 +23,29 @@ type HidDeviceAppQosSettings struct {
 	Obj *jni.GlobalRef
 }
 
+// NewHidDeviceAppQosSettings creates a new android.bluetooth.BluetoothHidDeviceAppQosSettings instance.
+func NewHidDeviceAppQosSettings(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 int32, arg4 int32, arg5 int32) (*HidDeviceAppQosSettings, error) {
+	var t HidDeviceAppQosSettings
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHidDeviceAppQosSettings)), midHidDeviceAppQosSettingsInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.bluetooth.BluetoothHidDeviceAppQosSettings.describeContents.
 func (m *HidDeviceAppQosSettings) DescribeContents() (int32, error) {
 	var result int32

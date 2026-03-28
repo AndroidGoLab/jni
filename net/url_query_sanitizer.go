@@ -23,6 +23,28 @@ type UrlQuerySanitizer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUrlQuerySanitizer creates a new android.net.UrlQuerySanitizer instance.
+func NewUrlQuerySanitizer(vm *jni.VM) (*UrlQuerySanitizer, error) {
+	var t UrlQuerySanitizer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizer)), midUrlQuerySanitizerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAllowUnregisteredParamaters calls android.net.UrlQuerySanitizer.getAllowUnregisteredParamaters.
 func (m *UrlQuerySanitizer) GetAllowUnregisteredParamaters() (bool, error) {
 	var result bool

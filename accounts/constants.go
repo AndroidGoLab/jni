@@ -22,6 +22,7 @@ const (
 )
 
 const (
+	KeyCustomTokenExpiry            = consts.KeyCustomTokenExpiry
 	ActionAccountRemoved            = consts.ActionAccountRemoved
 	ActionAuthenticatorIntent       = consts.ActionAuthenticatorIntent
 	AuthenticatorAttributesName     = consts.AuthenticatorAttributesName
@@ -50,5 +51,4 @@ const (
 	LoginAccountsChangedAction      = consts.LoginAccountsChangedAction
 	PackageNameKeyLegacyNotVisible  = consts.PackageNameKeyLegacyNotVisible
 	PackageNameKeyLegacyVisible     = consts.PackageNameKeyLegacyVisible
-	KeyCustomTokenExpiry            = consts.KeyCustomTokenExpiry
 )

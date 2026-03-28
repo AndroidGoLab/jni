@@ -21,6 +21,29 @@ type AuthenticationRequiredException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAuthenticationRequiredException creates a new android.app.AuthenticationRequiredException instance.
+func NewAuthenticationRequiredException(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AuthenticationRequiredException, error) {
+	var t AuthenticationRequiredException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAuthenticationRequiredException)), midAuthenticationRequiredExceptionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.AuthenticationRequiredException.describeContents.
 func (m *AuthenticationRequiredException) DescribeContents() (int32, error) {
 	var result int32

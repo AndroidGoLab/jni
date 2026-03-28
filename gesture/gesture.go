@@ -23,6 +23,28 @@ type Gesture struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGesture creates a new android.gesture.Gesture instance.
+func NewGesture(vm *jni.VM) (*Gesture, error) {
+	var t Gesture
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGesture)), midGestureInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddStroke calls android.gesture.Gesture.addStroke.
 func (m *Gesture) AddStroke(arg0 *jni.Object) error {
 

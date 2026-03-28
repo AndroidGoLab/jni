@@ -23,6 +23,29 @@ type LensIntrinsicsSample struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLensIntrinsicsSample creates a new android.hardware.camera2.params.LensIntrinsicsSample instance.
+func NewLensIntrinsicsSample(vm *jni.VM, arg0 int64, arg1 *jni.Object) (*LensIntrinsicsSample, error) {
+	var t LensIntrinsicsSample
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLensIntrinsicsSample)), midLensIntrinsicsSampleInit, jni.LongValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.hardware.camera2.params.LensIntrinsicsSample.equals.
 func (m *LensIntrinsicsSample) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

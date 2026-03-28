@@ -23,6 +23,28 @@ type Matrix struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMatrix creates a new android.graphics.Matrix instance.
+func NewMatrix(vm *jni.VM) (*Matrix, error) {
+	var t Matrix
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix)), midMatrixInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Dump calls android.graphics.Matrix.dump.
 func (m *Matrix) Dump(arg0 *jni.Object) error {
 

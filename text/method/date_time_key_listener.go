@@ -23,6 +23,28 @@ type DateTimeKeyListener struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateTimeKeyListener creates a new android.text.method.DateTimeKeyListener instance.
+func NewDateTimeKeyListener(vm *jni.VM) (*DateTimeKeyListener, error) {
+	var t DateTimeKeyListener
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateTimeKeyListener)), midDateTimeKeyListenerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetInputType calls android.text.method.DateTimeKeyListener.getInputType.
 func (m *DateTimeKeyListener) GetInputType() (int32, error) {
 	var result int32

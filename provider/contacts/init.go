@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsContract            *jni.GlobalRef
+	midContractInit        jni.MethodID
 	midContractIsProfileId jni.MethodID
 
 	clsContractAggregationExceptions *jni.GlobalRef
@@ -179,6 +180,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContract = env.NewGlobalRef(&c.Object)
+		midContractInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midContractIsProfileId, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "isProfileId", "(J)Z")
 		if err != nil {

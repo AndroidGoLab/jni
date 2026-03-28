@@ -6,19 +6,15 @@ import "github.com/AndroidGoLab/jni/ranging/consts"
 
 const (
 	Creator                          = consts.Creator
-	DisabledRegulatory               = consts.DisabledRegulatory
-	DisabledUser                     = consts.DisabledUser
-	DisabledUserRestrictions         = consts.DisabledUserRestrictions
-	Enabled                          = consts.Enabled
-	NotSupported                     = consts.NotSupported
-	RangingSessionOob                = consts.RangingSessionOob
-	RangingSessionRaw                = consts.RangingSessionRaw
+	ConfidenceHigh                   = consts.ConfidenceHigh
+	ConfidenceLow                    = consts.ConfidenceLow
+	ConfidenceMedium                 = consts.ConfidenceMedium
 	NotificationConfigDisable        = consts.NotificationConfigDisable
 	NotificationConfigEnable         = consts.NotificationConfigEnable
 	NotificationConfigProximityEdge  = consts.NotificationConfigProximityEdge
 	NotificationConfigProximityLevel = consts.NotificationConfigProximityLevel
-	DeviceRoleInitiator              = consts.DeviceRoleInitiator
-	DeviceRoleResponder              = consts.DeviceRoleResponder
+	RangingSessionOob                = consts.RangingSessionOob
+	RangingSessionRaw                = consts.RangingSessionRaw
 	ReasonLocalRequest               = consts.ReasonLocalRequest
 	ReasonNoPeersFound               = consts.ReasonNoPeersFound
 	ReasonRemoteRequest              = consts.ReasonRemoteRequest
@@ -29,7 +25,11 @@ const (
 	BleRssi                          = consts.BleRssi
 	Uwb                              = consts.Uwb
 	WifiNanRtt                       = consts.WifiNanRtt
-	ConfidenceHigh                   = consts.ConfidenceHigh
-	ConfidenceLow                    = consts.ConfidenceLow
-	ConfidenceMedium                 = consts.ConfidenceMedium
+	DeviceRoleInitiator              = consts.DeviceRoleInitiator
+	DeviceRoleResponder              = consts.DeviceRoleResponder
+	DisabledRegulatory               = consts.DisabledRegulatory
+	DisabledUser                     = consts.DisabledUser
+	DisabledUserRestrictions         = consts.DisabledUserRestrictions
+	Enabled                          = consts.Enabled
+	NotSupported                     = consts.NotSupported
 )

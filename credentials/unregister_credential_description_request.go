@@ -23,6 +23,29 @@ type UnregisterCredentialDescriptionRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUnregisterCredentialDescriptionRequest creates a new android.credentials.UnregisterCredentialDescriptionRequest instance.
+func NewUnregisterCredentialDescriptionRequest(vm *jni.VM, arg0 *jni.Object) (*UnregisterCredentialDescriptionRequest, error) {
+	var t UnregisterCredentialDescriptionRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnregisterCredentialDescriptionRequest)), midUnregisterCredentialDescriptionRequestInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.credentials.UnregisterCredentialDescriptionRequest.describeContents.
 func (m *UnregisterCredentialDescriptionRequest) DescribeContents() (int32, error) {
 	var result int32

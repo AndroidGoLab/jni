@@ -7,6 +7,12 @@ go_import: github.com/AndroidGoLab/jni/print/pdf
 classes:
     - java_class: android.print.pdf.PrintedPdfDocument
       go_type: PrintedPdfDocument
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+        - java_type: android.print.PrintAttributes
+          go_name: arg1
       methods:
         - java_method: getPageContentRect
           go_name: GetPageContentRect

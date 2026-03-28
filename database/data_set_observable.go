@@ -23,6 +23,28 @@ type DataSetObservable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDataSetObservable creates a new android.database.DataSetObservable instance.
+func NewDataSetObservable(vm *jni.VM) (*DataSetObservable, error) {
+	var t DataSetObservable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDataSetObservable)), midDataSetObservableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // NotifyChanged calls android.database.DataSetObservable.notifyChanged.
 func (m *DataSetObservable) NotifyChanged() error {
 

@@ -23,6 +23,29 @@ type Fade struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFade creates a new android.transition.Fade instance.
+func NewFade(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Fade, error) {
+	var t Fade
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFade)), midFadeInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CaptureStartValues calls android.transition.Fade.captureStartValues.
 func (m *Fade) CaptureStartValues(arg0 *jni.Object) error {
 

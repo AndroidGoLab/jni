@@ -23,6 +23,29 @@ type KeyEvent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewKeyEvent creates a new android.view.KeyEvent instance.
+func NewKeyEvent(vm *jni.VM, arg0 *jni.Object) (*KeyEvent, error) {
+	var t KeyEvent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyEvent)), midKeyEventInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Dispatch1 calls android.view.KeyEvent.dispatch.
 func (m *KeyEvent) Dispatch1(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsDeviceTypes                *jni.GlobalRef
+	midDeviceTypesValidDeviceType jni.MethodID
+
 	clsControl                   *jni.GlobalRef
 	midControlDescribeContents   jni.MethodID
 	midControlGetAppIntent       jni.MethodID
@@ -72,9 +75,6 @@ var (
 	midProviderServiceOnBind            jni.MethodID
 	midProviderServiceOnUnbind          jni.MethodID
 	midProviderServiceRequestAddControl jni.MethodID
-
-	clsDeviceTypes                *jni.GlobalRef
-	midDeviceTypesValidDeviceType jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -94,6 +94,23 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/service/controls/DeviceTypes")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDeviceTypes = env.NewGlobalRef(&c.Object)
+
+		midDeviceTypesValidDeviceType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDeviceTypes)), "validDeviceType", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/service/controls/Control")
 	if err != nil {
@@ -421,23 +438,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midProviderServiceRequestAddControl, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "requestAddControl", "(Landroid/content/Context;Landroid/content/ComponentName;Landroid/service/controls/Control;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/controls/DeviceTypes")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDeviceTypes = env.NewGlobalRef(&c.Object)
-
-		midDeviceTypesValidDeviceType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDeviceTypes)), "validDeviceType", "(I)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

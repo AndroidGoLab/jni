@@ -23,6 +23,29 @@ type ImageView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewImageView creates a new android.widget.ImageView instance.
+func NewImageView(vm *jni.VM, arg0 *jni.Object) (*ImageView, error) {
+	var t ImageView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageView)), midImageViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AnimateTransform calls android.widget.ImageView.animateTransform.
 func (m *ImageView) AnimateTransform(arg0 *jni.Object) error {
 

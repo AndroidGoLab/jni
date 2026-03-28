@@ -23,6 +23,28 @@ type DecimalFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDecimalFormat creates a new android.icu.text.DecimalFormat instance.
+func NewDecimalFormat(vm *jni.VM) (*DecimalFormat, error) {
+	var t DecimalFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDecimalFormat)), midDecimalFormatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone calls android.icu.text.DecimalFormat.clone.
 func (m *DecimalFormat) Clone() (*jni.Object, error) {
 	var result *jni.Object

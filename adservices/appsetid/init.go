@@ -23,14 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsAppSetIdManager    *jni.GlobalRef
-	midAppSetIdManagerGet jni.MethodID
-
 	clsAppSetId         *jni.GlobalRef
+	midAppSetIdInit     jni.MethodID
 	midAppSetIdEquals   jni.MethodID
 	midAppSetIdGetId    jni.MethodID
 	midAppSetIdGetScope jni.MethodID
 	midAppSetIdHashCode jni.MethodID
+
+	clsAppSetIdManager    *jni.GlobalRef
+	midAppSetIdManagerGet jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -51,23 +52,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/adservices/appsetid/AppSetIdManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAppSetIdManager = env.NewGlobalRef(&c.Object)
-
-		midAppSetIdManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAppSetIdManager)), "get", "(Landroid/content/Context;)Landroid/adservices/appsetid/AppSetIdManager;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/adservices/appsetid/AppSetId")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -75,6 +59,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAppSetId = env.NewGlobalRef(&c.Object)
+		midAppSetIdInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "<init>", "(Ljava/lang/String;I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midAppSetIdEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
@@ -98,6 +86,23 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAppSetIdHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSetId)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/appsetid/AppSetIdManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAppSetIdManager = env.NewGlobalRef(&c.Object)
+
+		midAppSetIdManagerGet, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAppSetIdManager)), "get", "(Landroid/content/Context;)Landroid/adservices/appsetid/AppSetIdManager;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

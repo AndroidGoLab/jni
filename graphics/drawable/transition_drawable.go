@@ -23,6 +23,29 @@ type TransitionDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTransitionDrawable creates a new android.graphics.drawable.TransitionDrawable instance.
+func NewTransitionDrawable(vm *jni.VM, arg0 *jni.Object) (*TransitionDrawable, error) {
+	var t TransitionDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTransitionDrawable)), midTransitionDrawableInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Draw calls android.graphics.drawable.TransitionDrawable.draw.
 func (m *TransitionDrawable) Draw(arg0 *jni.Object) error {
 

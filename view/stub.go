@@ -23,6 +23,29 @@ type Stub struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStub creates a new android.view.ViewStub instance.
+func NewStub(vm *jni.VM, arg0 *jni.Object) (*Stub, error) {
+	var t Stub
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStub)), midStubInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Draw calls android.view.ViewStub.draw.
 func (m *Stub) Draw(arg0 *jni.Object) error {
 

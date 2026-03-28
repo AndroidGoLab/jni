@@ -23,6 +23,34 @@ type ErrnoException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewErrnoException creates a new android.system.ErrnoException instance.
+func NewErrnoException(vm *jni.VM, arg0 string, arg1 int32) (*ErrnoException, error) {
+	var t ErrnoException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsErrnoException)), midErrnoExceptionInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetMessage calls android.system.ErrnoException.getMessage.
 func (m *ErrnoException) GetMessage() (string, error) {
 	var result string

@@ -23,6 +23,28 @@ type RotateDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRotateDrawable creates a new android.graphics.drawable.RotateDrawable instance.
+func NewRotateDrawable(vm *jni.VM) (*RotateDrawable, error) {
+	var t RotateDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), midRotateDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.RotateDrawable.applyTheme.
 func (m *RotateDrawable) ApplyTheme(arg0 *jni.Object) error {
 

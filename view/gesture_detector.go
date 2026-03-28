@@ -23,6 +23,29 @@ type GestureDetector struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGestureDetector creates a new android.view.GestureDetector instance.
+func NewGestureDetector(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*GestureDetector, error) {
+	var t GestureDetector
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGestureDetector)), midGestureDetectorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // IsLongpressEnabled calls android.view.GestureDetector.isLongpressEnabled.
 func (m *GestureDetector) IsLongpressEnabled() (bool, error) {
 	var result bool

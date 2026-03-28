@@ -5,42 +5,21 @@
 package: telecom
 go_import: github.com/AndroidGoLab/jni/telecom
 classes:
-    - java_class: android.telecom.CallScreeningService
-      go_type: CallScreeningService
+    - java_class: android.telecom.PhoneAccountSuggestion
+      go_type: PhoneAccountSuggestion
+      obtain: constructor
+      constructor_params:
+        - java_type: android.telecom.PhoneAccountHandle
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: boolean
+          go_name: arg2
       methods:
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
           error: true
-        - java_method: onScreenCall
-          go_name: OnScreenCall
-          params:
-            - java_type: android.telecom.Call$Details
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onUnbind
-          go_name: OnUnbind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: respondToCall
-          go_name: RespondToCall
-          params:
-            - java_type: android.telecom.Call$Details
-              go_name: arg0
-            - java_type: android.telecom.CallScreeningService$CallResponse
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallScreeningService$CallResponse
-      go_type: CallScreeningServiceCallResponse
-      methods:
         - java_method: equals
           go_name: Equals
           params:
@@ -48,278 +27,30 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getCallComposerAttachmentsToShow
-          go_name: GetCallComposerAttachmentsToShow
+        - java_method: getPhoneAccountHandle
+          go_name: GetPhoneAccountHandle
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getReason
+          go_name: GetReason
           returns: int
-          error: true
-        - java_method: getDisallowCall
-          go_name: GetDisallowCall
-          returns: boolean
-          error: true
-        - java_method: getRejectCall
-          go_name: GetRejectCall
-          returns: boolean
-          error: true
-        - java_method: getSilenceCall
-          go_name: GetSilenceCall
-          returns: boolean
-          error: true
-        - java_method: getSkipCallLog
-          go_name: GetSkipCallLog
-          returns: boolean
-          error: true
-        - java_method: getSkipNotification
-          go_name: GetSkipNotification
-          returns: boolean
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.telecom.CallEventCallback
-      go_type: CallEventCallback
-      methods:
-        - java_method: onCallEndpointChanged
-          go_name: OnCallEndpointChanged
-          params:
-            - java_type: android.telecom.CallEndpoint
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onCallStreamingFailed
-          go_name: OnCallStreamingFailed
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onEvent
-          go_name: OnEvent
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onMuteStateChanged
-          go_name: OnMuteStateChanged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.telecom.ConnectionService
-      go_type: ConnectionService
-      methods:
-        - java_method: addConference
-          go_name: AddConference
-          params:
-            - java_type: android.telecom.Conference
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: addExistingConnection
-          go_name: AddExistingConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.Connection
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: conferenceRemoteConnections
-          go_name: ConferenceRemoteConnections
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: connectionServiceFocusReleased
-          go_name: ConnectionServiceFocusReleased
-          returns: void
-          error: true
-        - java_method: createRemoteIncomingConference
-          go_name: CreateRemoteIncomingConference
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.RemoteConference
-          error: true
-        - java_method: createRemoteIncomingConnection
-          go_name: CreateRemoteIncomingConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.RemoteConnection
-          error: true
-        - java_method: createRemoteOutgoingConference
-          go_name: CreateRemoteOutgoingConference
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.RemoteConference
-          error: true
-        - java_method: createRemoteOutgoingConnection
-          go_name: CreateRemoteOutgoingConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.RemoteConnection
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onConference
-          go_name: OnConference
-          params:
-            - java_type: android.telecom.Connection
-              go_name: arg0
-            - java_type: android.telecom.Connection
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onConnectionServiceFocusGained
-          go_name: OnConnectionServiceFocusGained
-          returns: void
-          error: true
-        - java_method: onConnectionServiceFocusLost
-          go_name: OnConnectionServiceFocusLost
-          returns: void
-          error: true
-        - java_method: onCreateIncomingConference
-          go_name: OnCreateIncomingConference
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.Conference
-          error: true
-        - java_method: onCreateIncomingConferenceFailed
-          go_name: OnCreateIncomingConferenceFailed
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCreateIncomingConnection
-          go_name: OnCreateIncomingConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.Connection
-          error: true
-        - java_method: onCreateIncomingConnectionFailed
-          go_name: OnCreateIncomingConnectionFailed
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCreateIncomingHandoverConnection
-          go_name: OnCreateIncomingHandoverConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.Connection
-          error: true
-        - java_method: onCreateOutgoingConference
-          go_name: OnCreateOutgoingConference
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.Conference
-          error: true
-        - java_method: onCreateOutgoingConferenceFailed
-          go_name: OnCreateOutgoingConferenceFailed
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCreateOutgoingConnection
-          go_name: OnCreateOutgoingConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.Connection
-          error: true
-        - java_method: onCreateOutgoingConnectionFailed
-          go_name: OnCreateOutgoingConnectionFailed
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCreateOutgoingHandoverConnection
-          go_name: OnCreateOutgoingHandoverConnection
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg1
-          returns: android.telecom.Connection
-          error: true
-        - java_method: onHandoverFailed
-          go_name: OnHandoverFailed
-          params:
-            - java_type: android.telecom.ConnectionRequest
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onRemoteConferenceAdded
-          go_name: OnRemoteConferenceAdded
-          params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onRemoteExistingConnectionAdded
-          go_name: OnRemoteExistingConnectionAdded
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onUnbind
-          go_name: OnUnbind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
+        - java_method: shouldAutoSelect
+          go_name: ShouldAutoSelect
           returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
     - java_class: android.telecom.Conference
       go_type: Conference
@@ -623,12 +354,331 @@ classes:
               go_name: arg1
           returns: android.telecom.Conference
           error: true
-    - java_class: android.telecom.PhoneAccount
-      go_type: PhoneAccount
+    - java_class: android.telecom.Call
+      go_type: Call
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: answer
+          go_name: Answer
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: conference
+          go_name: Conference
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: deflect
+          go_name: Deflect
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: disconnect
+          go_name: Disconnect
+          returns: void
+          error: true
+        - java_method: getDetails
+          go_name: GetDetails
+          returns: android.telecom.Call$Details
+          error: true
+        - java_method: getGenericConferenceActiveChildCall
+          go_name: GetGenericConferenceActiveChildCall
+          returns: android.telecom.Call
+          error: true
+        - java_method: getParent
+          go_name: GetParent
+          returns: android.telecom.Call
+          error: true
+        - java_method: getRemainingPostDialSequence
+          go_name: GetRemainingPostDialSequence
+          returns: String
+          error: true
+        - java_method: getRttCall
+          go_name: GetRttCall
+          returns: android.telecom.Call$RttCall
+          error: true
+        - java_method: getState
+          go_name: GetState
           returns: int
+          error: true
+        - java_method: getVideoCall
+          go_name: GetVideoCall
+          returns: android.telecom.InCallService$VideoCall
+          error: true
+        - java_method: handoverTo
+          go_name: HandoverTo
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: hold
+          go_name: Hold
+          returns: void
+          error: true
+        - java_method: isRttActive
+          go_name: IsRttActive
+          returns: boolean
+          error: true
+        - java_method: mergeConference
+          go_name: MergeConference
+          returns: void
+          error: true
+        - java_method: phoneAccountSelected
+          go_name: PhoneAccountSelected
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: playDtmfTone
+          go_name: PlayDtmfTone
+          params:
+            - java_type: char
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: postDialContinue
+          go_name: PostDialContinue
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: pullExternalCall
+          go_name: PullExternalCall
+          returns: void
+          error: true
+        - java_method: putExtras
+          go_name: PutExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerCallback
+          go_name: RegisterCallback
+          params:
+            - java_type: android.telecom.Call$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reject
+          go_name: Reject2
+          params:
+            - java_type: boolean
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: reject
+          go_name: Reject1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: removeExtras
+          go_name: RemoveExtras
+          params:
+            - java_type: java.lang.String...
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: respondToRttRequest
+          go_name: RespondToRttRequest
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: sendCallEvent
+          go_name: SendCallEvent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: sendRttRequest
+          go_name: SendRttRequest
+          returns: void
+          error: true
+        - java_method: splitFromConference
+          go_name: SplitFromConference
+          returns: void
+          error: true
+        - java_method: stopDtmfTone
+          go_name: StopDtmfTone
+          returns: void
+          error: true
+        - java_method: stopRtt
+          go_name: StopRtt
+          returns: void
+          error: true
+        - java_method: swapConference
+          go_name: SwapConference
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: unhold
+          go_name: Unhold
+          returns: void
+          error: true
+        - java_method: unregisterCallback
+          go_name: UnregisterCallback
+          params:
+            - java_type: android.telecom.Call$Callback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.telecom.Call$Callback
+      go_type: CallCallback
+      methods:
+        - java_method: onCallDestroyed
+          go_name: OnCallDestroyed
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onConnectionEvent
+          go_name: OnConnectionEvent
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onDetailsChanged
+          go_name: OnDetailsChanged
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: android.telecom.Call$Details
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onHandoverComplete
+          go_name: OnHandoverComplete
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onHandoverFailed
+          go_name: OnHandoverFailed
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onParentChanged
+          go_name: OnParentChanged
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: android.telecom.Call
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPostDialWait
+          go_name: OnPostDialWait
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRttInitiationFailure
+          go_name: OnRttInitiationFailure
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRttModeChanged
+          go_name: OnRttModeChanged
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRttRequest
+          go_name: OnRttRequest
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRttStatusChanged
+          go_name: OnRttStatusChanged
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: android.telecom.Call$RttCall
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onStateChanged
+          go_name: OnStateChanged
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onVideoCallChanged
+          go_name: OnVideoCallChanged
+          params:
+            - java_type: android.telecom.Call
+              go_name: arg0
+            - java_type: android.telecom.InCallService$VideoCall
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.Call$Details
+      go_type: CallDetails
+      methods:
+        - java_method: can
+          go_name: Can1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
           error: true
         - java_method: equals
           go_name: Equals
@@ -641,172 +691,45 @@ classes:
           go_name: GetAccountHandle
           returns: android.telecom.PhoneAccountHandle
           error: true
-        - java_method: getAddress
-          go_name: GetAddress
-          returns: android.net.Uri
-          error: true
-        - java_method: getCapabilities
-          go_name: GetCapabilities
+        - java_method: getCallCapabilities
+          go_name: GetCallCapabilities
           returns: int
           error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getHighlightColor
-          go_name: GetHighlightColor
+        - java_method: getCallDirection
+          go_name: GetCallDirection
           returns: int
           error: true
-        - java_method: getIcon
-          go_name: GetIcon
-          returns: android.graphics.drawable.Icon
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getShortDescription
-          go_name: GetShortDescription
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getSubscriptionAddress
-          go_name: GetSubscriptionAddress
-          returns: android.net.Uri
-          error: true
-        - java_method: hasCapabilities
-          go_name: HasCapabilities
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hasSimultaneousCallingRestriction
-          go_name: HasSimultaneousCallingRestriction
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
+        - java_method: getCallProperties
+          go_name: GetCallProperties
           returns: int
           error: true
-        - java_method: isEnabled
-          go_name: IsEnabled
-          returns: boolean
-          error: true
-        - java_method: supportsUriScheme
-          go_name: SupportsUriScheme
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toBuilder
-          go_name: ToBuilder
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: toString
-          go_name: ToString
+        - java_method: getCallerDisplayName
+          go_name: GetCallerDisplayName
           returns: String
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: builder
-          go_name: Builder
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: java.lang.CharSequence
-              go_name: arg1
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-    - java_class: android.telecom.PhoneAccount$Builder
-      go_type: PhoneAccountBuilder
-      methods:
-        - java_method: addSupportedUriScheme
-          go_name: AddSupportedUriScheme
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.telecom.PhoneAccount
-          error: true
-        - java_method: clearSimultaneousCallingRestriction
-          go_name: ClearSimultaneousCallingRestriction
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setAddress
-          go_name: SetAddress
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setCapabilities
-          go_name: SetCapabilities
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setHighlightColor
-          go_name: SetHighlightColor
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setIcon
-          go_name: SetIcon
-          params:
-            - java_type: android.graphics.drawable.Icon
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setShortDescription
-          go_name: SetShortDescription
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-        - java_method: setSubscriptionAddress
-          go_name: SetSubscriptionAddress
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.telecom.PhoneAccount$Builder
-          error: true
-    - java_class: android.telecom.RemoteConference
-      go_type: RemoteConference
-      methods:
-        - java_method: disconnect
-          go_name: Disconnect
-          returns: void
-          error: true
-        - java_method: getConnectionCapabilities
-          go_name: GetConnectionCapabilities
+        - java_method: getCallerDisplayNamePresentation
+          go_name: GetCallerDisplayNamePresentation
           returns: int
           error: true
-        - java_method: getConnectionProperties
-          go_name: GetConnectionProperties
+        - java_method: getCallerNumberVerificationStatus
+          go_name: GetCallerNumberVerificationStatus
           returns: int
+          error: true
+        - java_method: getConnectTimeMillis
+          go_name: GetConnectTimeMillis
+          returns: long
+          error: true
+        - java_method: getContactDisplayName
+          go_name: GetContactDisplayName
+          returns: String
+          error: true
+        - java_method: getContactPhotoUri
+          go_name: GetContactPhotoUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getCreationTimeMillis
+          go_name: GetCreationTimeMillis
+          returns: long
           error: true
         - java_method: getDisconnectCause
           go_name: GetDisconnectCause
@@ -816,142 +739,123 @@ classes:
           go_name: GetExtras
           returns: android.os.Bundle
           error: true
+        - java_method: getGatewayInfo
+          go_name: GetGatewayInfo
+          returns: android.telecom.GatewayInfo
+          error: true
+        - java_method: getHandle
+          go_name: GetHandle
+          returns: android.net.Uri
+          error: true
+        - java_method: getHandlePresentation
+          go_name: GetHandlePresentation
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+        - java_method: getIntentExtras
+          go_name: GetIntentExtras
+          returns: android.os.Bundle
+          error: true
         - java_method: getState
           go_name: GetState
           returns: int
           error: true
-        - java_method: hold
-          go_name: Hold
-          returns: void
+        - java_method: getStatusHints
+          go_name: GetStatusHints
+          returns: android.telecom.StatusHints
           error: true
-        - java_method: merge
-          go_name: Merge
-          returns: void
+        - java_method: getVideoState
+          go_name: GetVideoState
+          returns: int
           error: true
-        - java_method: playDtmfTone
-          go_name: PlayDtmfTone
+        - java_method: hasProperty
+          go_name: HasProperty1
           params:
-            - java_type: char
+            - java_type: int
               go_name: arg0
-          returns: void
+          returns: boolean
           error: true
-        - java_method: registerCallback
-          go_name: RegisterCallback
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+      static_methods:
+        - java_method: can
+          go_name: Can2_1
           params:
-            - java_type: android.telecom.RemoteConference$Callback
+            - java_type: int
               go_name: arg0
-          returns: void
+            - java_type: int
+              go_name: arg1
+          returns: boolean
           error: true
-        - java_method: separate
-          go_name: Separate
+        - java_method: capabilitiesToString
+          go_name: CapabilitiesToString
           params:
-            - java_type: android.telecom.RemoteConnection
+            - java_type: int
               go_name: arg0
-          returns: void
+          returns: String
           error: true
-        - java_method: setCallAudioState
-          go_name: SetCallAudioState
+        - java_method: hasProperty
+          go_name: HasProperty2_1
           params:
-            - java_type: android.telecom.CallAudioState
+            - java_type: int
               go_name: arg0
-          returns: void
+            - java_type: int
+              go_name: arg1
+          returns: boolean
           error: true
-        - java_method: stopDtmfTone
-          go_name: StopDtmfTone
-          returns: void
-          error: true
-        - java_method: swap
-          go_name: Swap
-          returns: void
-          error: true
-        - java_method: unhold
-          go_name: Unhold
-          returns: void
-          error: true
-        - java_method: unregisterCallback
-          go_name: UnregisterCallback
+        - java_method: propertiesToString
+          go_name: PropertiesToString
           params:
-            - java_type: android.telecom.RemoteConference$Callback
+            - java_type: int
               go_name: arg0
-          returns: void
+          returns: String
           error: true
-    - java_class: android.telecom.RemoteConference$Callback
-      go_type: RemoteConferenceCallback
+    - java_class: android.telecom.Call$RttCall
+      go_type: CallRttCall
       methods:
-        - java_method: onConnectionAdded
-          go_name: OnConnectionAdded
-          params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg1
-          returns: void
+        - java_method: getRttAudioMode
+          go_name: GetRttAudioMode
+          returns: int
           error: true
-        - java_method: onConnectionCapabilitiesChanged
-          go_name: OnConnectionCapabilitiesChanged
+        - java_method: read
+          go_name: Read
+          returns: String
+          error: true
+        - java_method: readImmediately
+          go_name: ReadImmediately
+          returns: String
+          error: true
+        - java_method: setRttMode
+          go_name: SetRttMode
           params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onConnectionPropertiesChanged
-          go_name: OnConnectionPropertiesChanged
-          params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onConnectionRemoved
-          go_name: OnConnectionRemoved
-          params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onDestroyed
-          go_name: OnDestroyed
-          params:
-            - java_type: android.telecom.RemoteConference
               go_name: arg0
           returns: void
           error: true
-        - java_method: onDisconnected
-          go_name: OnDisconnected
+        - java_method: write
+          go_name: Write
           params:
-            - java_type: android.telecom.RemoteConference
+            - java_type: String
               go_name: arg0
-            - java_type: android.telecom.DisconnectCause
-              go_name: arg1
           returns: void
           error: true
-        - java_method: onExtrasChanged
-          go_name: OnExtrasChanged
-          params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onStateChanged
-          go_name: OnStateChanged
-          params:
-            - java_type: android.telecom.RemoteConference
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.telecom.DisconnectCause
-      go_type: DisconnectCause
+    - java_class: android.telecom.PhoneAccountHandle
+      go_type: PhoneAccountHandle
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.ComponentName
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -964,25 +868,17 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getCode
-          go_name: GetCode
-          returns: int
+        - java_method: getComponentName
+          go_name: GetComponentName
+          returns: android.content.ComponentName
           error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getLabel
-          go_name: GetLabel
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getReason
-          go_name: GetReason
+        - java_method: getId
+          go_name: GetId
           returns: String
           error: true
-        - java_method: getTone
-          go_name: GetTone
-          returns: int
+        - java_method: getUserHandle
+          go_name: GetUserHandle
+          returns: android.os.UserHandle
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -1001,19 +897,113 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.telecom.VideoProfile
-      go_type: VideoProfile
+    - java_class: android.telecom.CallScreeningService
+      go_type: CallScreeningService
+      methods:
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onScreenCall
+          go_name: OnScreenCall
+          params:
+            - java_type: android.telecom.Call$Details
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onUnbind
+          go_name: OnUnbind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: respondToCall
+          go_name: RespondToCall
+          params:
+            - java_type: android.telecom.Call$Details
+              go_name: arg0
+            - java_type: android.telecom.CallScreeningService$CallResponse
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.CallScreeningService$CallResponse
+      go_type: CallScreeningServiceCallResponse
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCallComposerAttachmentsToShow
+          go_name: GetCallComposerAttachmentsToShow
+          returns: int
+          error: true
+        - java_method: getDisallowCall
+          go_name: GetDisallowCall
+          returns: boolean
+          error: true
+        - java_method: getRejectCall
+          go_name: GetRejectCall
+          returns: boolean
+          error: true
+        - java_method: getSilenceCall
+          go_name: GetSilenceCall
+          returns: boolean
+          error: true
+        - java_method: getSkipCallLog
+          go_name: GetSkipCallLog
+          returns: boolean
+          error: true
+        - java_method: getSkipNotification
+          go_name: GetSkipNotification
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+    - java_class: android.telecom.CallEndpoint
+      go_type: CallEndpoint
+      obtain: constructor
+      constructor_params:
+        - java_type: java.lang.CharSequence
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: android.os.ParcelUuid
+          go_name: arg2
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getQuality
-          go_name: GetQuality
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getEndpointName
+          go_name: GetEndpointName
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getEndpointType
+          go_name: GetEndpointType
           returns: int
           error: true
-        - java_method: getVideoState
-          go_name: GetVideoState
+        - java_method: getIdentifier
+          go_name: GetIdentifier
+          returns: android.os.ParcelUuid
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
           error: true
         - java_method: toString
@@ -1029,90 +1019,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-      static_methods:
-        - java_method: isAudioOnly
-          go_name: IsAudioOnly
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isBidirectional
-          go_name: IsBidirectional
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isPaused
-          go_name: IsPaused
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isReceptionEnabled
-          go_name: IsReceptionEnabled
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isTransmissionEnabled
-          go_name: IsTransmissionEnabled
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isVideo
-          go_name: IsVideo
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: videoStateToString
-          go_name: VideoStateToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-    - java_class: android.telecom.VideoProfile$CameraCapabilities
-      go_type: VideoProfileCameraCapabilities
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getHeight
-          go_name: GetHeight
-          returns: int
-          error: true
-        - java_method: getMaxZoom
-          go_name: GetMaxZoom
-          returns: float
-          error: true
-        - java_method: getWidth
-          go_name: GetWidth
-          returns: int
-          error: true
-        - java_method: isZoomSupported
-          go_name: IsZoomSupported
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallControlCallback
-      go_type: CallControlCallback
     - java_class: android.telecom.InCallService
       go_type: InCallService
       methods:
@@ -1308,8 +1214,843 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.telecom.PhoneAccount
+      go_type: PhoneAccount
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAccountHandle
+          go_name: GetAccountHandle
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getAddress
+          go_name: GetAddress
+          returns: android.net.Uri
+          error: true
+        - java_method: getCapabilities
+          go_name: GetCapabilities
+          returns: int
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getHighlightColor
+          go_name: GetHighlightColor
+          returns: int
+          error: true
+        - java_method: getIcon
+          go_name: GetIcon
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getShortDescription
+          go_name: GetShortDescription
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getSubscriptionAddress
+          go_name: GetSubscriptionAddress
+          returns: android.net.Uri
+          error: true
+        - java_method: hasCapabilities
+          go_name: HasCapabilities
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hasSimultaneousCallingRestriction
+          go_name: HasSimultaneousCallingRestriction
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isEnabled
+          go_name: IsEnabled
+          returns: boolean
+          error: true
+        - java_method: supportsUriScheme
+          go_name: SupportsUriScheme
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toBuilder
+          go_name: ToBuilder
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: builder
+          go_name: Builder
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: java.lang.CharSequence
+              go_name: arg1
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+    - java_class: android.telecom.PhoneAccount$Builder
+      go_type: PhoneAccountBuilder
+      methods:
+        - java_method: addSupportedUriScheme
+          go_name: AddSupportedUriScheme
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.telecom.PhoneAccount
+          error: true
+        - java_method: clearSimultaneousCallingRestriction
+          go_name: ClearSimultaneousCallingRestriction
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setAddress
+          go_name: SetAddress
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setCapabilities
+          go_name: SetCapabilities
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setHighlightColor
+          go_name: SetHighlightColor
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setIcon
+          go_name: SetIcon
+          params:
+            - java_type: android.graphics.drawable.Icon
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setShortDescription
+          go_name: SetShortDescription
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+        - java_method: setSubscriptionAddress
+          go_name: SetSubscriptionAddress
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.telecom.PhoneAccount$Builder
+          error: true
+    - java_class: android.telecom.CallEndpointException
+      go_type: CallEndpointException
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getCode
+          go_name: GetCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.TelecomManager
+      go_type: Manager
+      obtain: system_service
+      service_name: telecom
+      close: true
+      methods:
+        - java_method: acceptHandover
+          go_name: AcceptHandover
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: acceptRingingCall
+          go_name: AcceptRingingCall0
+          returns: void
+          error: true
+        - java_method: acceptRingingCall
+          go_name: AcceptRingingCall1_1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addNewIncomingCall
+          go_name: AddNewIncomingCall
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addNewIncomingConference
+          go_name: AddNewIncomingConference
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: cancelMissedCallsNotification
+          go_name: CancelMissedCallsNotification
+          returns: void
+          error: true
+        - java_method: createManageBlockedNumbersIntent
+          go_name: CreateManageBlockedNumbersIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: endCall
+          go_name: EndCall
+          returns: boolean
+          error: true
+        - java_method: getAdnUriForPhoneAccount
+          go_name: GetAdnUriForPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: getDefaultDialerPackage
+          go_name: GetDefaultDialerPackage
+          returns: String
+          error: true
+        - java_method: getDefaultOutgoingPhoneAccount
+          go_name: GetDefaultOutgoingPhoneAccount
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getLine1Number
+          go_name: GetLine1Number
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getPhoneAccount
+          go_name: GetPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: android.telecom.PhoneAccount
+          error: true
+        - java_method: getSimCallManager
+          go_name: GetSimCallManager
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getSimCallManagerForSubscription
+          go_name: GetSimCallManagerForSubscription
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getSystemDialerPackage
+          go_name: GetSystemDialerPackage
+          returns: String
+          error: true
+        - java_method: getUserSelectedOutgoingPhoneAccount
+          go_name: GetUserSelectedOutgoingPhoneAccount
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: getVoiceMailNumber
+          go_name: GetVoiceMailNumber
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: handleMmi
+          go_name: HandleMmi1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: handleMmi
+          go_name: HandleMmi2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: hasManageOngoingCallsPermission
+          go_name: HasManageOngoingCallsPermission
+          returns: boolean
+          error: true
+        - java_method: isInCall
+          go_name: IsInCall
+          returns: boolean
+          error: true
+        - java_method: isInManagedCall
+          go_name: IsInManagedCall
+          returns: boolean
+          error: true
+        - java_method: isIncomingCallPermitted
+          go_name: IsIncomingCallPermitted
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isOutgoingCallPermitted
+          go_name: IsOutgoingCallPermitted
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isTtySupported
+          go_name: IsTtySupported
+          returns: boolean
+          error: true
+        - java_method: isVoiceMailNumber
+          go_name: IsVoiceMailNumber
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: placeCall
+          go_name: PlaceCall
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: registerPhoneAccount
+          go_name: RegisterPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccount
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: showInCallScreen
+          go_name: ShowInCallScreen
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: silenceRinger
+          go_name: SilenceRinger
+          returns: void
+          error: true
+        - java_method: unregisterPhoneAccount
+          go_name: UnregisterPhoneAccount
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.telecom.CallControlCallback
+      go_type: CallControlCallback
+    - java_class: android.telecom.CallEventCallback
+      go_type: CallEventCallback
+      methods:
+        - java_method: onCallEndpointChanged
+          go_name: OnCallEndpointChanged
+          params:
+            - java_type: android.telecom.CallEndpoint
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onCallStreamingFailed
+          go_name: OnCallStreamingFailed
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onEvent
+          go_name: OnEvent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onMuteStateChanged
+          go_name: OnMuteStateChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.telecom.Conferenceable
+      go_type: Conferenceable
+    - java_class: android.telecom.RemoteConnection
+      go_type: RemoteConnection
+      methods:
+        - java_method: abort
+          go_name: Abort
+          returns: void
+          error: true
+        - java_method: answer
+          go_name: Answer
+          returns: void
+          error: true
+        - java_method: disconnect
+          go_name: Disconnect
+          returns: void
+          error: true
+        - java_method: getAddress
+          go_name: GetAddress
+          returns: android.net.Uri
+          error: true
+        - java_method: getAddressPresentation
+          go_name: GetAddressPresentation
+          returns: int
+          error: true
+        - java_method: getCallerDisplayName
+          go_name: GetCallerDisplayName
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getCallerDisplayNamePresentation
+          go_name: GetCallerDisplayNamePresentation
+          returns: int
+          error: true
+        - java_method: getConference
+          go_name: GetConference
+          returns: android.telecom.RemoteConference
+          error: true
+        - java_method: getConnectionCapabilities
+          go_name: GetConnectionCapabilities
+          returns: int
+          error: true
+        - java_method: getConnectionProperties
+          go_name: GetConnectionProperties
+          returns: int
+          error: true
+        - java_method: getDisconnectCause
+          go_name: GetDisconnectCause
+          returns: android.telecom.DisconnectCause
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getState
+          go_name: GetState
+          returns: int
+          error: true
+        - java_method: getStatusHints
+          go_name: GetStatusHints
+          returns: android.telecom.StatusHints
+          error: true
+        - java_method: getVideoProvider
+          go_name: GetVideoProvider
+          returns: android.telecom.RemoteConnection$VideoProvider
+          error: true
+        - java_method: getVideoState
+          go_name: GetVideoState
+          returns: int
+          error: true
+        - java_method: hold
+          go_name: Hold
+          returns: void
+          error: true
+        - java_method: isRingbackRequested
+          go_name: IsRingbackRequested
+          returns: boolean
+          error: true
+        - java_method: isVoipAudioMode
+          go_name: IsVoipAudioMode
+          returns: boolean
+          error: true
+        - java_method: playDtmfTone
+          go_name: PlayDtmfTone
+          params:
+            - java_type: char
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: postDialContinue
+          go_name: PostDialContinue
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: pullExternalCall
+          go_name: PullExternalCall
+          returns: void
+          error: true
+        - java_method: registerCallback
+          go_name: RegisterCallback
+          params:
+            - java_type: android.telecom.RemoteConnection$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reject
+          go_name: Reject
+          returns: void
+          error: true
+        - java_method: setCallAudioState
+          go_name: SetCallAudioState
+          params:
+            - java_type: android.telecom.CallAudioState
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopDtmfTone
+          go_name: StopDtmfTone
+          returns: void
+          error: true
+        - java_method: unhold
+          go_name: Unhold
+          returns: void
+          error: true
+        - java_method: unregisterCallback
+          go_name: UnregisterCallback
+          params:
+            - java_type: android.telecom.RemoteConnection$Callback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.telecom.RemoteConnection$Callback
+      go_type: RemoteConnectionCallback
+      methods:
+        - java_method: onAddressChanged
+          go_name: OnAddressChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCallerDisplayNameChanged
+          go_name: OnCallerDisplayNameChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onConferenceChanged
+          go_name: OnConferenceChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.telecom.RemoteConference
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionCapabilitiesChanged
+          go_name: OnConnectionCapabilitiesChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionEvent
+          go_name: OnConnectionEvent
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onConnectionPropertiesChanged
+          go_name: OnConnectionPropertiesChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onDestroyed
+          go_name: OnDestroyed
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDisconnected
+          go_name: OnDisconnected
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.telecom.DisconnectCause
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onExtrasChanged
+          go_name: OnExtrasChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPostDialChar
+          go_name: OnPostDialChar
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: char
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onPostDialWait
+          go_name: OnPostDialWait
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRingbackRequested
+          go_name: OnRingbackRequested
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onStateChanged
+          go_name: OnStateChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onStatusHintsChanged
+          go_name: OnStatusHintsChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.telecom.StatusHints
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onVideoProviderChanged
+          go_name: OnVideoProviderChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.telecom.RemoteConnection$VideoProvider
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onVideoStateChanged
+          go_name: OnVideoStateChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onVoipAudioChanged
+          go_name: OnVoipAudioChanged
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.RemoteConnection$VideoProvider
+      go_type: RemoteConnectionVideoProvider
+      methods:
+        - java_method: registerCallback
+          go_name: RegisterCallback
+          params:
+            - java_type: android.telecom.RemoteConnection$VideoProvider$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestCallDataUsage
+          go_name: RequestCallDataUsage
+          returns: void
+          error: true
+        - java_method: requestCameraCapabilities
+          go_name: RequestCameraCapabilities
+          returns: void
+          error: true
+        - java_method: sendSessionModifyRequest
+          go_name: SendSessionModifyRequest
+          params:
+            - java_type: android.telecom.VideoProfile
+              go_name: arg0
+            - java_type: android.telecom.VideoProfile
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: sendSessionModifyResponse
+          go_name: SendSessionModifyResponse
+          params:
+            - java_type: android.telecom.VideoProfile
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCamera
+          go_name: SetCamera
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDeviceOrientation
+          go_name: SetDeviceOrientation
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setDisplaySurface
+          go_name: SetDisplaySurface
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPauseImage
+          go_name: SetPauseImage
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPreviewSurface
+          go_name: SetPreviewSurface
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setZoom
+          go_name: SetZoom
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: unregisterCallback
+          go_name: UnregisterCallback
+          params:
+            - java_type: android.telecom.RemoteConnection$VideoProvider$Callback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.telecom.CallControl
+      go_type: CallControl
+      methods:
+        - java_method: getCallId
+          go_name: GetCallId
+          returns: android.os.ParcelUuid
+          error: true
+        - java_method: sendEvent
+          go_name: SendEvent
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.telecom.ConnectionRequest
       go_type: ConnectionRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: android.telecom.PhoneAccountHandle
+          go_name: arg0
+        - java_type: android.net.Uri
+          go_name: arg1
+        - java_type: android.os.Bundle
+          go_name: arg2
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -1346,6 +2087,812 @@ classes:
         - java_method: toString
           go_name: ToString
           returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.StatusHints
+      go_type: StatusHints
+      obtain: constructor
+      constructor_params:
+        - java_type: java.lang.CharSequence
+          go_name: arg0
+        - java_type: android.graphics.drawable.Icon
+          go_name: arg1
+        - java_type: android.os.Bundle
+          go_name: arg2
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getIcon
+          go_name: GetIcon
+          returns: android.graphics.drawable.Icon
+          error: true
+        - java_method: getLabel
+          go_name: GetLabel
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.CallAudioState
+      go_type: CallAudioState
+      obtain: constructor
+      constructor_params:
+        - java_type: boolean
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getActiveBluetoothDevice
+          go_name: GetActiveBluetoothDevice
+          returns: android.bluetooth.BluetoothDevice
+          error: true
+        - java_method: getRoute
+          go_name: GetRoute
+          returns: int
+          error: true
+        - java_method: getSupportedRouteMask
+          go_name: GetSupportedRouteMask
+          returns: int
+          error: true
+        - java_method: isMuted
+          go_name: IsMuted
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: audioRouteToString
+          go_name: AudioRouteToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+    - java_class: android.telecom.CallAttributes
+      go_type: CallAttributes
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAddress
+          go_name: GetAddress
+          returns: android.net.Uri
+          error: true
+        - java_method: getCallCapabilities
+          go_name: GetCallCapabilities
+          returns: int
+          error: true
+        - java_method: getCallType
+          go_name: GetCallType
+          returns: int
+          error: true
+        - java_method: getDirection
+          go_name: GetDirection
+          returns: int
+          error: true
+        - java_method: getDisplayName
+          go_name: GetDisplayName
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getPhoneAccountHandle
+          go_name: GetPhoneAccountHandle
+          returns: android.telecom.PhoneAccountHandle
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.CallAttributes$Builder
+      go_type: CallAttributesBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.telecom.CallAttributes
+          error: true
+        - java_method: setCallCapabilities
+          go_name: SetCallCapabilities
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telecom.CallAttributes$Builder
+          error: true
+        - java_method: setCallType
+          go_name: SetCallType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.telecom.CallAttributes$Builder
+          error: true
+    - java_class: android.telecom.ConnectionService
+      go_type: ConnectionService
+      methods:
+        - java_method: addConference
+          go_name: AddConference
+          params:
+            - java_type: android.telecom.Conference
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: addExistingConnection
+          go_name: AddExistingConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.Connection
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: conferenceRemoteConnections
+          go_name: ConferenceRemoteConnections
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: connectionServiceFocusReleased
+          go_name: ConnectionServiceFocusReleased
+          returns: void
+          error: true
+        - java_method: createRemoteIncomingConference
+          go_name: CreateRemoteIncomingConference
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.RemoteConference
+          error: true
+        - java_method: createRemoteIncomingConnection
+          go_name: CreateRemoteIncomingConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.RemoteConnection
+          error: true
+        - java_method: createRemoteOutgoingConference
+          go_name: CreateRemoteOutgoingConference
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.RemoteConference
+          error: true
+        - java_method: createRemoteOutgoingConnection
+          go_name: CreateRemoteOutgoingConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.RemoteConnection
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onConference
+          go_name: OnConference
+          params:
+            - java_type: android.telecom.Connection
+              go_name: arg0
+            - java_type: android.telecom.Connection
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionServiceFocusGained
+          go_name: OnConnectionServiceFocusGained
+          returns: void
+          error: true
+        - java_method: onConnectionServiceFocusLost
+          go_name: OnConnectionServiceFocusLost
+          returns: void
+          error: true
+        - java_method: onCreateIncomingConference
+          go_name: OnCreateIncomingConference
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.Conference
+          error: true
+        - java_method: onCreateIncomingConferenceFailed
+          go_name: OnCreateIncomingConferenceFailed
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCreateIncomingConnection
+          go_name: OnCreateIncomingConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.Connection
+          error: true
+        - java_method: onCreateIncomingConnectionFailed
+          go_name: OnCreateIncomingConnectionFailed
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCreateIncomingHandoverConnection
+          go_name: OnCreateIncomingHandoverConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.Connection
+          error: true
+        - java_method: onCreateOutgoingConference
+          go_name: OnCreateOutgoingConference
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.Conference
+          error: true
+        - java_method: onCreateOutgoingConferenceFailed
+          go_name: OnCreateOutgoingConferenceFailed
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCreateOutgoingConnection
+          go_name: OnCreateOutgoingConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.Connection
+          error: true
+        - java_method: onCreateOutgoingConnectionFailed
+          go_name: OnCreateOutgoingConnectionFailed
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCreateOutgoingHandoverConnection
+          go_name: OnCreateOutgoingHandoverConnection
+          params:
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg0
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg1
+          returns: android.telecom.Connection
+          error: true
+        - java_method: onHandoverFailed
+          go_name: OnHandoverFailed
+          params:
+            - java_type: android.telecom.ConnectionRequest
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onRemoteConferenceAdded
+          go_name: OnRemoteConferenceAdded
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onRemoteExistingConnectionAdded
+          go_name: OnRemoteExistingConnectionAdded
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onUnbind
+          go_name: OnUnbind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.telecom.GatewayInfo
+      go_type: GatewayInfo
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: android.net.Uri
+          go_name: arg1
+        - java_type: android.net.Uri
+          go_name: arg2
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getGatewayAddress
+          go_name: GetGatewayAddress
+          returns: android.net.Uri
+          error: true
+        - java_method: getGatewayProviderPackageName
+          go_name: GetGatewayProviderPackageName
+          returns: String
+          error: true
+        - java_method: getOriginalAddress
+          go_name: GetOriginalAddress
+          returns: android.net.Uri
+          error: true
+        - java_method: isEmpty
+          go_name: IsEmpty
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.CallException
+      go_type: CallException
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getCode
+          go_name: GetCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.CallRedirectionService
+      go_type: CallRedirectionService
+      methods:
+        - java_method: cancelCall
+          go_name: CancelCall
+          returns: void
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onPlaceCall
+          go_name: OnPlaceCall
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onRedirectionTimeout
+          go_name: OnRedirectionTimeout
+          returns: void
+          error: true
+        - java_method: onUnbind
+          go_name: OnUnbind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: placeCallUnmodified
+          go_name: PlaceCallUnmodified
+          returns: void
+          error: true
+        - java_method: redirectCall
+          go_name: RedirectCall
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.telecom.PhoneAccountHandle
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.telecom.QueryLocationException
+      go_type: QueryLocationException
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getCode
+          go_name: GetCode
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.telecom.RemoteConference
+      go_type: RemoteConference
+      methods:
+        - java_method: disconnect
+          go_name: Disconnect
+          returns: void
+          error: true
+        - java_method: getConnectionCapabilities
+          go_name: GetConnectionCapabilities
+          returns: int
+          error: true
+        - java_method: getConnectionProperties
+          go_name: GetConnectionProperties
+          returns: int
+          error: true
+        - java_method: getDisconnectCause
+          go_name: GetDisconnectCause
+          returns: android.telecom.DisconnectCause
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getState
+          go_name: GetState
+          returns: int
+          error: true
+        - java_method: hold
+          go_name: Hold
+          returns: void
+          error: true
+        - java_method: merge
+          go_name: Merge
+          returns: void
+          error: true
+        - java_method: playDtmfTone
+          go_name: PlayDtmfTone
+          params:
+            - java_type: char
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerCallback
+          go_name: RegisterCallback
+          params:
+            - java_type: android.telecom.RemoteConference$Callback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: separate
+          go_name: Separate
+          params:
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCallAudioState
+          go_name: SetCallAudioState
+          params:
+            - java_type: android.telecom.CallAudioState
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopDtmfTone
+          go_name: StopDtmfTone
+          returns: void
+          error: true
+        - java_method: swap
+          go_name: Swap
+          returns: void
+          error: true
+        - java_method: unhold
+          go_name: Unhold
+          returns: void
+          error: true
+        - java_method: unregisterCallback
+          go_name: UnregisterCallback
+          params:
+            - java_type: android.telecom.RemoteConference$Callback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.telecom.RemoteConference$Callback
+      go_type: RemoteConferenceCallback
+      methods:
+        - java_method: onConnectionAdded
+          go_name: OnConnectionAdded
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionCapabilitiesChanged
+          go_name: OnConnectionCapabilitiesChanged
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionPropertiesChanged
+          go_name: OnConnectionPropertiesChanged
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionRemoved
+          go_name: OnConnectionRemoved
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: android.telecom.RemoteConnection
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onDestroyed
+          go_name: OnDestroyed
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDisconnected
+          go_name: OnDisconnected
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: android.telecom.DisconnectCause
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onExtrasChanged
+          go_name: OnExtrasChanged
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onStateChanged
+          go_name: OnStateChanged
+          params:
+            - java_type: android.telecom.RemoteConference
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.telecom.VideoProfile
+      go_type: VideoProfile
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getQuality
+          go_name: GetQuality
+          returns: int
+          error: true
+        - java_method: getVideoState
+          go_name: GetVideoState
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+      static_methods:
+        - java_method: isAudioOnly
+          go_name: IsAudioOnly
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isBidirectional
+          go_name: IsBidirectional
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isPaused
+          go_name: IsPaused
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isReceptionEnabled
+          go_name: IsReceptionEnabled
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isTransmissionEnabled
+          go_name: IsTransmissionEnabled
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isVideo
+          go_name: IsVideo
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: videoStateToString
+          go_name: VideoStateToString
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+    - java_class: android.telecom.VideoProfile$CameraCapabilities
+      go_type: VideoProfileCameraCapabilities
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getHeight
+          go_name: GetHeight
+          returns: int
+          error: true
+        - java_method: getMaxZoom
+          go_name: GetMaxZoom
+          returns: float
+          error: true
+        - java_method: getWidth
+          go_name: GetWidth
+          returns: int
+          error: true
+        - java_method: isZoomSupported
+          go_name: IsZoomSupported
+          returns: boolean
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -1968,8 +3515,12 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.telecom.StatusHints
-      go_type: StatusHints
+    - java_class: android.telecom.DisconnectCause
+      go_type: DisconnectCause
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -1982,1252 +3533,25 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
+        - java_method: getCode
+          go_name: GetCode
+          returns: int
           error: true
-        - java_method: getIcon
-          go_name: GetIcon
-          returns: android.graphics.drawable.Icon
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: java.lang.CharSequence
           error: true
         - java_method: getLabel
           go_name: GetLabel
           returns: java.lang.CharSequence
           error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.GatewayInfo
-      go_type: GatewayInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getGatewayAddress
-          go_name: GetGatewayAddress
-          returns: android.net.Uri
-          error: true
-        - java_method: getGatewayProviderPackageName
-          go_name: GetGatewayProviderPackageName
-          returns: String
-          error: true
-        - java_method: getOriginalAddress
-          go_name: GetOriginalAddress
-          returns: android.net.Uri
-          error: true
-        - java_method: isEmpty
-          go_name: IsEmpty
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallAudioState
-      go_type: CallAudioState
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getActiveBluetoothDevice
-          go_name: GetActiveBluetoothDevice
-          returns: android.bluetooth.BluetoothDevice
-          error: true
-        - java_method: getRoute
-          go_name: GetRoute
-          returns: int
-          error: true
-        - java_method: getSupportedRouteMask
-          go_name: GetSupportedRouteMask
-          returns: int
-          error: true
-        - java_method: isMuted
-          go_name: IsMuted
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-      static_methods:
-        - java_method: audioRouteToString
-          go_name: AudioRouteToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-    - java_class: android.telecom.RemoteConnection
-      go_type: RemoteConnection
-      methods:
-        - java_method: abort
-          go_name: Abort
-          returns: void
-          error: true
-        - java_method: answer
-          go_name: Answer
-          returns: void
-          error: true
-        - java_method: disconnect
-          go_name: Disconnect
-          returns: void
-          error: true
-        - java_method: getAddress
-          go_name: GetAddress
-          returns: android.net.Uri
-          error: true
-        - java_method: getAddressPresentation
-          go_name: GetAddressPresentation
-          returns: int
-          error: true
-        - java_method: getCallerDisplayName
-          go_name: GetCallerDisplayName
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getCallerDisplayNamePresentation
-          go_name: GetCallerDisplayNamePresentation
-          returns: int
-          error: true
-        - java_method: getConference
-          go_name: GetConference
-          returns: android.telecom.RemoteConference
-          error: true
-        - java_method: getConnectionCapabilities
-          go_name: GetConnectionCapabilities
-          returns: int
-          error: true
-        - java_method: getConnectionProperties
-          go_name: GetConnectionProperties
-          returns: int
-          error: true
-        - java_method: getDisconnectCause
-          go_name: GetDisconnectCause
-          returns: android.telecom.DisconnectCause
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getState
-          go_name: GetState
-          returns: int
-          error: true
-        - java_method: getStatusHints
-          go_name: GetStatusHints
-          returns: android.telecom.StatusHints
-          error: true
-        - java_method: getVideoProvider
-          go_name: GetVideoProvider
-          returns: android.telecom.RemoteConnection$VideoProvider
-          error: true
-        - java_method: getVideoState
-          go_name: GetVideoState
-          returns: int
-          error: true
-        - java_method: hold
-          go_name: Hold
-          returns: void
-          error: true
-        - java_method: isRingbackRequested
-          go_name: IsRingbackRequested
-          returns: boolean
-          error: true
-        - java_method: isVoipAudioMode
-          go_name: IsVoipAudioMode
-          returns: boolean
-          error: true
-        - java_method: playDtmfTone
-          go_name: PlayDtmfTone
-          params:
-            - java_type: char
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: postDialContinue
-          go_name: PostDialContinue
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: pullExternalCall
-          go_name: PullExternalCall
-          returns: void
-          error: true
-        - java_method: registerCallback
-          go_name: RegisterCallback
-          params:
-            - java_type: android.telecom.RemoteConnection$Callback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: reject
-          go_name: Reject
-          returns: void
-          error: true
-        - java_method: setCallAudioState
-          go_name: SetCallAudioState
-          params:
-            - java_type: android.telecom.CallAudioState
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: stopDtmfTone
-          go_name: StopDtmfTone
-          returns: void
-          error: true
-        - java_method: unhold
-          go_name: Unhold
-          returns: void
-          error: true
-        - java_method: unregisterCallback
-          go_name: UnregisterCallback
-          params:
-            - java_type: android.telecom.RemoteConnection$Callback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.telecom.RemoteConnection$Callback
-      go_type: RemoteConnectionCallback
-      methods:
-        - java_method: onAddressChanged
-          go_name: OnAddressChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onCallerDisplayNameChanged
-          go_name: OnCallerDisplayNameChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onConferenceChanged
-          go_name: OnConferenceChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.telecom.RemoteConference
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onConnectionCapabilitiesChanged
-          go_name: OnConnectionCapabilitiesChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onConnectionEvent
-          go_name: OnConnectionEvent
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onConnectionPropertiesChanged
-          go_name: OnConnectionPropertiesChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onDestroyed
-          go_name: OnDestroyed
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDisconnected
-          go_name: OnDisconnected
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.telecom.DisconnectCause
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onExtrasChanged
-          go_name: OnExtrasChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onPostDialChar
-          go_name: OnPostDialChar
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: char
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onPostDialWait
-          go_name: OnPostDialWait
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onRingbackRequested
-          go_name: OnRingbackRequested
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onStateChanged
-          go_name: OnStateChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onStatusHintsChanged
-          go_name: OnStatusHintsChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.telecom.StatusHints
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onVideoProviderChanged
-          go_name: OnVideoProviderChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: android.telecom.RemoteConnection$VideoProvider
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onVideoStateChanged
-          go_name: OnVideoStateChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onVoipAudioChanged
-          go_name: OnVoipAudioChanged
-          params:
-            - java_type: android.telecom.RemoteConnection
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.RemoteConnection$VideoProvider
-      go_type: RemoteConnectionVideoProvider
-      methods:
-        - java_method: registerCallback
-          go_name: RegisterCallback
-          params:
-            - java_type: android.telecom.RemoteConnection$VideoProvider$Callback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestCallDataUsage
-          go_name: RequestCallDataUsage
-          returns: void
-          error: true
-        - java_method: requestCameraCapabilities
-          go_name: RequestCameraCapabilities
-          returns: void
-          error: true
-        - java_method: sendSessionModifyRequest
-          go_name: SendSessionModifyRequest
-          params:
-            - java_type: android.telecom.VideoProfile
-              go_name: arg0
-            - java_type: android.telecom.VideoProfile
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: sendSessionModifyResponse
-          go_name: SendSessionModifyResponse
-          params:
-            - java_type: android.telecom.VideoProfile
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCamera
-          go_name: SetCamera
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDeviceOrientation
-          go_name: SetDeviceOrientation
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDisplaySurface
-          go_name: SetDisplaySurface
-          params:
-            - java_type: android.view.Surface
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPauseImage
-          go_name: SetPauseImage
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setPreviewSurface
-          go_name: SetPreviewSurface
-          params:
-            - java_type: android.view.Surface
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setZoom
-          go_name: SetZoom
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: unregisterCallback
-          go_name: UnregisterCallback
-          params:
-            - java_type: android.telecom.RemoteConnection$VideoProvider$Callback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.telecom.Conferenceable
-      go_type: Conferenceable
-    - java_class: android.telecom.CallRedirectionService
-      go_type: CallRedirectionService
-      methods:
-        - java_method: cancelCall
-          go_name: CancelCall
-          returns: void
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onPlaceCall
-          go_name: OnPlaceCall
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onRedirectionTimeout
-          go_name: OnRedirectionTimeout
-          returns: void
-          error: true
-        - java_method: onUnbind
-          go_name: OnUnbind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: placeCallUnmodified
-          go_name: PlaceCallUnmodified
-          returns: void
-          error: true
-        - java_method: redirectCall
-          go_name: RedirectCall
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.telecom.CallEndpoint
-      go_type: CallEndpoint
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getEndpointName
-          go_name: GetEndpointName
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getEndpointType
-          go_name: GetEndpointType
-          returns: int
-          error: true
-        - java_method: getIdentifier
-          go_name: GetIdentifier
-          returns: android.os.ParcelUuid
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallException
-      go_type: CallException
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCode
-          go_name: GetCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.QueryLocationException
-      go_type: QueryLocationException
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCode
-          go_name: GetCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.PhoneAccountHandle
-      go_type: PhoneAccountHandle
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getComponentName
-          go_name: GetComponentName
-          returns: android.content.ComponentName
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-        - java_method: getUserHandle
-          go_name: GetUserHandle
-          returns: android.os.UserHandle
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.Call
-      go_type: Call
-      methods:
-        - java_method: answer
-          go_name: Answer
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: conference
-          go_name: Conference
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: deflect
-          go_name: Deflect
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: disconnect
-          go_name: Disconnect
-          returns: void
-          error: true
-        - java_method: getDetails
-          go_name: GetDetails
-          returns: android.telecom.Call$Details
-          error: true
-        - java_method: getGenericConferenceActiveChildCall
-          go_name: GetGenericConferenceActiveChildCall
-          returns: android.telecom.Call
-          error: true
-        - java_method: getParent
-          go_name: GetParent
-          returns: android.telecom.Call
-          error: true
-        - java_method: getRemainingPostDialSequence
-          go_name: GetRemainingPostDialSequence
-          returns: String
-          error: true
-        - java_method: getRttCall
-          go_name: GetRttCall
-          returns: android.telecom.Call$RttCall
-          error: true
-        - java_method: getState
-          go_name: GetState
-          returns: int
-          error: true
-        - java_method: getVideoCall
-          go_name: GetVideoCall
-          returns: android.telecom.InCallService$VideoCall
-          error: true
-        - java_method: handoverTo
-          go_name: HandoverTo
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: hold
-          go_name: Hold
-          returns: void
-          error: true
-        - java_method: isRttActive
-          go_name: IsRttActive
-          returns: boolean
-          error: true
-        - java_method: mergeConference
-          go_name: MergeConference
-          returns: void
-          error: true
-        - java_method: phoneAccountSelected
-          go_name: PhoneAccountSelected
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: playDtmfTone
-          go_name: PlayDtmfTone
-          params:
-            - java_type: char
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: postDialContinue
-          go_name: PostDialContinue
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: pullExternalCall
-          go_name: PullExternalCall
-          returns: void
-          error: true
-        - java_method: putExtras
-          go_name: PutExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: registerCallback
-          go_name: RegisterCallback
-          params:
-            - java_type: android.telecom.Call$Callback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: reject
-          go_name: Reject2
-          params:
-            - java_type: boolean
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: reject
-          go_name: Reject1_1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: removeExtras
-          go_name: RemoveExtras
-          params:
-            - java_type: java.lang.String...
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: respondToRttRequest
-          go_name: RespondToRttRequest
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: sendCallEvent
-          go_name: SendCallEvent
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: sendRttRequest
-          go_name: SendRttRequest
-          returns: void
-          error: true
-        - java_method: splitFromConference
-          go_name: SplitFromConference
-          returns: void
-          error: true
-        - java_method: stopDtmfTone
-          go_name: StopDtmfTone
-          returns: void
-          error: true
-        - java_method: stopRtt
-          go_name: StopRtt
-          returns: void
-          error: true
-        - java_method: swapConference
-          go_name: SwapConference
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: unhold
-          go_name: Unhold
-          returns: void
-          error: true
-        - java_method: unregisterCallback
-          go_name: UnregisterCallback
-          params:
-            - java_type: android.telecom.Call$Callback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.telecom.Call$Callback
-      go_type: CallCallback
-      methods:
-        - java_method: onCallDestroyed
-          go_name: OnCallDestroyed
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onConnectionEvent
-          go_name: OnConnectionEvent
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onDetailsChanged
-          go_name: OnDetailsChanged
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: android.telecom.Call$Details
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onHandoverComplete
-          go_name: OnHandoverComplete
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onHandoverFailed
-          go_name: OnHandoverFailed
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onParentChanged
-          go_name: OnParentChanged
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: android.telecom.Call
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onPostDialWait
-          go_name: OnPostDialWait
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onRttInitiationFailure
-          go_name: OnRttInitiationFailure
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onRttModeChanged
-          go_name: OnRttModeChanged
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onRttRequest
-          go_name: OnRttRequest
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onRttStatusChanged
-          go_name: OnRttStatusChanged
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-            - java_type: android.telecom.Call$RttCall
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onStateChanged
-          go_name: OnStateChanged
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onVideoCallChanged
-          go_name: OnVideoCallChanged
-          params:
-            - java_type: android.telecom.Call
-              go_name: arg0
-            - java_type: android.telecom.InCallService$VideoCall
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.Call$Details
-      go_type: CallDetails
-      methods:
-        - java_method: can
-          go_name: Can1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAccountHandle
-          go_name: GetAccountHandle
-          returns: android.telecom.PhoneAccountHandle
-          error: true
-        - java_method: getCallCapabilities
-          go_name: GetCallCapabilities
-          returns: int
-          error: true
-        - java_method: getCallDirection
-          go_name: GetCallDirection
-          returns: int
-          error: true
-        - java_method: getCallProperties
-          go_name: GetCallProperties
-          returns: int
-          error: true
-        - java_method: getCallerDisplayName
-          go_name: GetCallerDisplayName
-          returns: String
-          error: true
-        - java_method: getCallerDisplayNamePresentation
-          go_name: GetCallerDisplayNamePresentation
-          returns: int
-          error: true
-        - java_method: getCallerNumberVerificationStatus
-          go_name: GetCallerNumberVerificationStatus
-          returns: int
-          error: true
-        - java_method: getConnectTimeMillis
-          go_name: GetConnectTimeMillis
-          returns: long
-          error: true
-        - java_method: getContactDisplayName
-          go_name: GetContactDisplayName
-          returns: String
-          error: true
-        - java_method: getContactPhotoUri
-          go_name: GetContactPhotoUri
-          returns: android.net.Uri
-          error: true
-        - java_method: getCreationTimeMillis
-          go_name: GetCreationTimeMillis
-          returns: long
-          error: true
-        - java_method: getDisconnectCause
-          go_name: GetDisconnectCause
-          returns: android.telecom.DisconnectCause
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getGatewayInfo
-          go_name: GetGatewayInfo
-          returns: android.telecom.GatewayInfo
-          error: true
-        - java_method: getHandle
-          go_name: GetHandle
-          returns: android.net.Uri
-          error: true
-        - java_method: getHandlePresentation
-          go_name: GetHandlePresentation
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-        - java_method: getIntentExtras
-          go_name: GetIntentExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getState
-          go_name: GetState
-          returns: int
-          error: true
-        - java_method: getStatusHints
-          go_name: GetStatusHints
-          returns: android.telecom.StatusHints
-          error: true
-        - java_method: getVideoState
-          go_name: GetVideoState
-          returns: int
-          error: true
-        - java_method: hasProperty
-          go_name: HasProperty1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-      static_methods:
-        - java_method: can
-          go_name: Can2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: capabilitiesToString
-          go_name: CapabilitiesToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: hasProperty
-          go_name: HasProperty2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: propertiesToString
-          go_name: PropertiesToString
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-    - java_class: android.telecom.Call$RttCall
-      go_type: CallRttCall
-      methods:
-        - java_method: getRttAudioMode
-          go_name: GetRttAudioMode
-          returns: int
-          error: true
-        - java_method: read
-          go_name: Read
-          returns: String
-          error: true
-        - java_method: readImmediately
-          go_name: ReadImmediately
-          returns: String
-          error: true
-        - java_method: setRttMode
-          go_name: SetRttMode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: write
-          go_name: Write
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.telecom.PhoneAccountSuggestion
-      go_type: PhoneAccountSuggestion
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getPhoneAccountHandle
-          go_name: GetPhoneAccountHandle
-          returns: android.telecom.PhoneAccountHandle
-          error: true
         - java_method: getReason
           go_name: GetReason
+          returns: String
+          error: true
+        - java_method: getTone
+          go_name: GetTone
           returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: shouldAutoSelect
-          go_name: ShouldAutoSelect
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallControl
-      go_type: CallControl
-      methods:
-        - java_method: getCallId
-          go_name: GetCallId
-          returns: android.os.ParcelUuid
-          error: true
-        - java_method: sendEvent
-          go_name: SendEvent
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallAttributes
-      go_type: CallAttributes
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAddress
-          go_name: GetAddress
-          returns: android.net.Uri
-          error: true
-        - java_method: getCallCapabilities
-          go_name: GetCallCapabilities
-          returns: int
-          error: true
-        - java_method: getCallType
-          go_name: GetCallType
-          returns: int
-          error: true
-        - java_method: getDirection
-          go_name: GetDirection
-          returns: int
-          error: true
-        - java_method: getDisplayName
-          go_name: GetDisplayName
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getPhoneAccountHandle
-          go_name: GetPhoneAccountHandle
-          returns: android.telecom.PhoneAccountHandle
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -3236,252 +3560,6 @@ classes:
         - java_method: toString
           go_name: ToString
           returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.telecom.CallAttributes$Builder
-      go_type: CallAttributesBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.telecom.CallAttributes
-          error: true
-        - java_method: setCallCapabilities
-          go_name: SetCallCapabilities
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.telecom.CallAttributes$Builder
-          error: true
-        - java_method: setCallType
-          go_name: SetCallType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.telecom.CallAttributes$Builder
-          error: true
-    - java_class: android.telecom.TelecomManager
-      go_type: Manager
-      obtain: system_service
-      service_name: telecom
-      close: true
-      methods:
-        - java_method: acceptHandover
-          go_name: AcceptHandover
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: acceptRingingCall
-          go_name: AcceptRingingCall0
-          returns: void
-          error: true
-        - java_method: acceptRingingCall
-          go_name: AcceptRingingCall1_1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: addNewIncomingCall
-          go_name: AddNewIncomingCall
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: addNewIncomingConference
-          go_name: AddNewIncomingConference
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: cancelMissedCallsNotification
-          go_name: CancelMissedCallsNotification
-          returns: void
-          error: true
-        - java_method: createManageBlockedNumbersIntent
-          go_name: CreateManageBlockedNumbersIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: endCall
-          go_name: EndCall
-          returns: boolean
-          error: true
-        - java_method: getAdnUriForPhoneAccount
-          go_name: GetAdnUriForPhoneAccount
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: getDefaultDialerPackage
-          go_name: GetDefaultDialerPackage
-          returns: String
-          error: true
-        - java_method: getDefaultOutgoingPhoneAccount
-          go_name: GetDefaultOutgoingPhoneAccount
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.telecom.PhoneAccountHandle
-          error: true
-        - java_method: getLine1Number
-          go_name: GetLine1Number
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getPhoneAccount
-          go_name: GetPhoneAccount
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: android.telecom.PhoneAccount
-          error: true
-        - java_method: getSimCallManager
-          go_name: GetSimCallManager
-          returns: android.telecom.PhoneAccountHandle
-          error: true
-        - java_method: getSimCallManagerForSubscription
-          go_name: GetSimCallManagerForSubscription
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.telecom.PhoneAccountHandle
-          error: true
-        - java_method: getSystemDialerPackage
-          go_name: GetSystemDialerPackage
-          returns: String
-          error: true
-        - java_method: getUserSelectedOutgoingPhoneAccount
-          go_name: GetUserSelectedOutgoingPhoneAccount
-          returns: android.telecom.PhoneAccountHandle
-          error: true
-        - java_method: getVoiceMailNumber
-          go_name: GetVoiceMailNumber
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: handleMmi
-          go_name: HandleMmi1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: handleMmi
-          go_name: HandleMmi2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: hasManageOngoingCallsPermission
-          go_name: HasManageOngoingCallsPermission
-          returns: boolean
-          error: true
-        - java_method: isInCall
-          go_name: IsInCall
-          returns: boolean
-          error: true
-        - java_method: isInManagedCall
-          go_name: IsInManagedCall
-          returns: boolean
-          error: true
-        - java_method: isIncomingCallPermitted
-          go_name: IsIncomingCallPermitted
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isOutgoingCallPermitted
-          go_name: IsOutgoingCallPermitted
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isTtySupported
-          go_name: IsTtySupported
-          returns: boolean
-          error: true
-        - java_method: isVoiceMailNumber
-          go_name: IsVoiceMailNumber
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: placeCall
-          go_name: PlaceCall
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: registerPhoneAccount
-          go_name: RegisterPhoneAccount
-          params:
-            - java_type: android.telecom.PhoneAccount
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: showInCallScreen
-          go_name: ShowInCallScreen
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: silenceRinger
-          go_name: SilenceRinger
-          returns: void
-          error: true
-        - java_method: unregisterPhoneAccount
-          go_name: UnregisterPhoneAccount
-          params:
-            - java_type: android.telecom.PhoneAccountHandle
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.telecom.CallEndpointException
-      go_type: CallEndpointException
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCode
-          go_name: GetCode
-          returns: int
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -3493,6 +3571,246 @@ classes:
           returns: void
           error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ReasonFrequent
+      value: "2"
+      go_type: int
+    - go_name: ReasonIntraCarrier
+      value: "1"
+      go_type: int
+    - go_name: ReasonNone
+      value: "0"
+      go_type: int
+    - go_name: ReasonOther
+      value: "4"
+      go_type: int
+    - go_name: ReasonUserSet
+      value: "3"
+      go_type: int
+    - go_name: ConnectTimeNotSpecified
+      value: "0"
+      go_type: int64
+    - go_name: AvailablePhoneAccounts
+      value: '"selectPhoneAccountAccounts"'
+      go_type: string
+    - go_name: EventClearDiagnosticMessage
+      value: '"android.telecom.event.CLEAR_DIAGNOSTIC_MESSAGE"'
+      go_type: string
+    - go_name: EventDisplayDiagnosticMessage
+      value: '"android.telecom.event.DISPLAY_DIAGNOSTIC_MESSAGE"'
+      go_type: string
+    - go_name: ExtraAssertedDisplayName
+      value: '"android.telecom.extra.ASSERTED_DISPLAY_NAME"'
+      go_type: string
+    - go_name: ExtraDiagnosticMessage
+      value: '"android.telecom.extra.DIAGNOSTIC_MESSAGE"'
+      go_type: string
+    - go_name: ExtraDiagnosticMessageId
+      value: '"android.telecom.extra.DIAGNOSTIC_MESSAGE_ID"'
+      go_type: string
+    - go_name: ExtraIsBusinessCall
+      value: '"android.telecom.extra.IS_BUSINESS_CALL"'
+      go_type: string
+    - go_name: ExtraIsSuppressedByDoNotDisturb
+      value: '"android.telecom.extra.IS_SUPPRESSED_BY_DO_NOT_DISTURB"'
+      go_type: string
+    - go_name: ExtraLastEmergencyCallbackTimeMillis
+      value: '"android.telecom.extra.LAST_EMERGENCY_CALLBACK_TIME_MILLIS"'
+      go_type: string
+    - go_name: ExtraSilentRingingRequested
+      value: '"android.telecom.extra.SILENT_RINGING_REQUESTED"'
+      go_type: string
+    - go_name: ExtraSuggestedPhoneAccounts
+      value: '"android.telecom.extra.SUGGESTED_PHONE_ACCOUNTS"'
+      go_type: string
+    - go_name: RejectReasonDeclined
+      value: "1"
+      go_type: int
+    - go_name: RejectReasonUnwanted
+      value: "2"
+      go_type: int
+    - go_name: StateActive
+      value: "4"
+      go_type: int
+    - go_name: StateAudioProcessing
+      value: "12"
+      go_type: int
+    - go_name: StateConnecting
+      value: "9"
+      go_type: int
+    - go_name: StateDialing
+      value: "1"
+      go_type: int
+    - go_name: StateDisconnected
+      value: "7"
+      go_type: int
+    - go_name: StateDisconnecting
+      value: "10"
+      go_type: int
+    - go_name: StateHolding
+      value: "3"
+      go_type: int
+    - go_name: StateNew
+      value: "0"
+      go_type: int
+    - go_name: StatePullingCall
+      value: "11"
+      go_type: int
+    - go_name: StateRinging
+      value: "2"
+      go_type: int
+    - go_name: StateSelectPhoneAccount
+      value: "8"
+      go_type: int
+    - go_name: StateSimulatedRinging
+      value: "13"
+      go_type: int
+    - go_name: HandoverFailureDestAppRejected
+      value: "1"
+      go_type: int
+    - go_name: HandoverFailureNotSupported
+      value: "2"
+      go_type: int
+    - go_name: HandoverFailureOngoingEmergencyCall
+      value: "4"
+      go_type: int
+    - go_name: HandoverFailureUnknown
+      value: "5"
+      go_type: int
+    - go_name: HandoverFailureUserRejected
+      value: "3"
+      go_type: int
+    - go_name: CapabilityAddParticipant
+      value: "33554432"
+      go_type: int
+    - go_name: CapabilityCannotDowngradeVideoToAudio
+      value: "4194304"
+      go_type: int
+    - go_name: CapabilityCanPauseVideo
+      value: "1048576"
+      go_type: int
+    - go_name: CapabilityCanPullCall
+      value: "8388608"
+      go_type: int
+    - go_name: CapabilityDisconnectFromConference
+      value: "8192"
+      go_type: int
+    - go_name: CapabilityHold
+      value: "1"
+      go_type: int
+    - go_name: CapabilityManageConference
+      value: "128"
+      go_type: int
+    - go_name: CapabilityMergeConference
+      value: "4"
+      go_type: int
+    - go_name: CapabilityMute
+      value: "64"
+      go_type: int
+    - go_name: CapabilityRemotePartySupportsRtt
+      value: "268435456"
+      go_type: int
+    - go_name: CapabilityRespondViaText
+      value: "32"
+      go_type: int
+    - go_name: CapabilitySeparateFromConference
+      value: "4096"
+      go_type: int
+    - go_name: CapabilitySupportsVtLocalBidirectional
+      value: "768"
+      go_type: int
+    - go_name: CapabilitySupportsVtLocalRx
+      value: "256"
+      go_type: int
+    - go_name: CapabilitySupportsVtLocalTx
+      value: "512"
+      go_type: int
+    - go_name: CapabilitySupportsVtRemoteBidirectional
+      value: "3072"
+      go_type: int
+    - go_name: CapabilitySupportsVtRemoteRx
+      value: "1024"
+      go_type: int
+    - go_name: CapabilitySupportsVtRemoteTx
+      value: "2048"
+      go_type: int
+    - go_name: CapabilitySupportDeflect
+      value: "16777216"
+      go_type: int
+    - go_name: CapabilitySupportHold
+      value: "2"
+      go_type: int
+    - go_name: CapabilitySwapConference
+      value: "8"
+      go_type: int
+    - go_name: DirectionIncoming
+      value: "0"
+      go_type: int
+    - go_name: DirectionOutgoing
+      value: "1"
+      go_type: int
+    - go_name: DirectionUnknown
+      value: "-1"
+      go_type: int
+    - go_name: PropertyAssistedDialing
+      value: "512"
+      go_type: int
+    - go_name: PropertyConference
+      value: "1"
+      go_type: int
+    - go_name: PropertyCrossSim
+      value: "16384"
+      go_type: int
+    - go_name: PropertyEmergencyCallbackMode
+      value: "4"
+      go_type: int
+    - go_name: PropertyEnterpriseCall
+      value: "32"
+      go_type: int
+    - go_name: PropertyGenericConference
+      value: "2"
+      go_type: int
+    - go_name: PropertyHasCdmaVoicePrivacy
+      value: "128"
+      go_type: int
+    - go_name: PropertyHighDefAudio
+      value: "16"
+      go_type: int
+    - go_name: PropertyIsAdhocConference
+      value: "8192"
+      go_type: int
+    - go_name: PropertyIsExternalCall
+      value: "64"
+      go_type: int
+    - go_name: PropertyIsTransactional
+      value: "32768"
+      go_type: int
+    - go_name: PropertyNetworkIdentifiedEmergencyCall
+      value: "2048"
+      go_type: int
+    - go_name: PropertyRtt
+      value: "1024"
+      go_type: int
+    - go_name: PropertySelfManaged
+      value: "256"
+      go_type: int
+    - go_name: PropertyVoipAudioMode
+      value: "4096"
+      go_type: int
+    - go_name: PropertyWifi
+      value: "8"
+      go_type: int
+    - go_name: RttModeFull
+      value: "1"
+      go_type: int
+    - go_name: RttModeHco
+      value: "2"
+      go_type: int
+    - go_name: RttModeVco
+      value: "3"
+      go_type: int
     - go_name: ServiceInterface
       value: '"android.telecom.CallScreeningService"'
       go_type: string
@@ -3508,9 +3826,24 @@ constants:
     - go_name: CallComposerAttachmentSubject
       value: "4"
       go_type: int
-    - go_name: ConnectTimeNotSpecified
-      value: "0"
-      go_type: int64
+    - go_name: TypeBluetooth
+      value: "2"
+      go_type: int
+    - go_name: TypeEarpiece
+      value: "1"
+      go_type: int
+    - go_name: TypeSpeaker
+      value: "4"
+      go_type: int
+    - go_name: TypeStreaming
+      value: "5"
+      go_type: int
+    - go_name: TypeUnknown
+      value: "-1"
+      go_type: int
+    - go_name: TypeWiredHeadset
+      value: "3"
+      go_type: int
     - go_name: CapabilityAdhocConferenceCalling
       value: "16384"
       go_type: int
@@ -3559,9 +3892,6 @@ constants:
     - go_name: CapabilityVoiceCallingAvailable
       value: "131072"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
     - go_name: ExtraAddSelfManagedCallsToIncallservice
       value: '"android.telecom.extra.ADD_SELF_MANAGED_CALLS_TO_INCALLSERVICE"'
       go_type: string
@@ -3598,593 +3928,17 @@ constants:
     - go_name: SchemeVoicemail
       value: '"voicemail"'
       go_type: string
-    - go_name: AnsweredElsewhere
-      value: "11"
-      go_type: int
-    - go_name: Busy
-      value: "7"
-      go_type: int
-    - go_name: CallPulled
-      value: "12"
-      go_type: int
-    - go_name: Canceled
-      value: "4"
-      go_type: int
-    - go_name: ConnectionManagerNotSupported
-      value: "10"
-      go_type: int
-    - go_name: Error
-      value: "1"
-      go_type: int
-    - go_name: Local
-      value: "2"
-      go_type: int
-    - go_name: Missed
-      value: "5"
-      go_type: int
-    - go_name: Other
-      value: "9"
-      go_type: int
-    - go_name: ReasonEmergencyCallPlaced
-      value: '"REASON_EMERGENCY_CALL_PLACED"'
-      go_type: string
-    - go_name: ReasonEmulatingSingleCall
-      value: '"EMULATING_SINGLE_CALL"'
-      go_type: string
-    - go_name: ReasonImsAccessBlocked
-      value: '"REASON_IMS_ACCESS_BLOCKED"'
-      go_type: string
-    - go_name: ReasonWifiOnButWfcOff
-      value: '"REASON_WIFI_ON_BUT_WFC_OFF"'
-      go_type: string
-    - go_name: Rejected
-      value: "6"
-      go_type: int
-    - go_name: Remote
+    - go_name: ErrorAnotherRequest
       value: "3"
       go_type: int
-    - go_name: Restricted
-      value: "8"
-      go_type: int
-    - go_name: Unknown
-      value: "0"
-      go_type: int
-    - go_name: QualityDefault
-      value: "4"
-      go_type: int
-    - go_name: QualityHigh
+    - go_name: ErrorEndpointDoesNotExist
       value: "1"
-      go_type: int
-    - go_name: QualityLow
-      value: "3"
-      go_type: int
-    - go_name: QualityMedium
-      value: "2"
-      go_type: int
-    - go_name: StateAudioOnly
-      value: "0"
-      go_type: int
-    - go_name: StateBidirectional
-      value: "3"
-      go_type: int
-    - go_name: StatePaused
-      value: "4"
-      go_type: int
-    - go_name: StateRxEnabled
-      value: "2"
-      go_type: int
-    - go_name: StateTxEnabled
-      value: "1"
-      go_type: int
-    - go_name: AudioCodecAmr
-      value: "1"
-      go_type: int
-    - go_name: AudioCodecAmrWb
-      value: "2"
-      go_type: int
-    - go_name: AudioCodecEvrc
-      value: "4"
-      go_type: int
-    - go_name: AudioCodecEvrcB
-      value: "5"
-      go_type: int
-    - go_name: AudioCodecEvrcNw
-      value: "7"
-      go_type: int
-    - go_name: AudioCodecEvrcWb
-      value: "6"
-      go_type: int
-    - go_name: AudioCodecEvsFb
-      value: "20"
-      go_type: int
-    - go_name: AudioCodecEvsNb
-      value: "17"
-      go_type: int
-    - go_name: AudioCodecEvsSwb
-      value: "19"
-      go_type: int
-    - go_name: AudioCodecEvsWb
-      value: "18"
-      go_type: int
-    - go_name: AudioCodecG711a
-      value: "13"
-      go_type: int
-    - go_name: AudioCodecG711ab
-      value: "15"
-      go_type: int
-    - go_name: AudioCodecG711u
-      value: "11"
-      go_type: int
-    - go_name: AudioCodecG722
-      value: "14"
-      go_type: int
-    - go_name: AudioCodecG723
-      value: "12"
-      go_type: int
-    - go_name: AudioCodecG729
-      value: "16"
-      go_type: int
-    - go_name: AudioCodecGsmEfr
-      value: "8"
-      go_type: int
-    - go_name: AudioCodecGsmFr
-      value: "9"
-      go_type: int
-    - go_name: AudioCodecGsmHr
-      value: "10"
-      go_type: int
-    - go_name: AudioCodecNone
-      value: "0"
-      go_type: int
-    - go_name: AudioCodecQcelp13k
-      value: "3"
-      go_type: int
-    - go_name: CapabilityAddParticipant
-      value: "67108864"
-      go_type: int
-    - go_name: CapabilityCannotDowngradeVideoToAudio
-      value: "8388608"
-      go_type: int
-    - go_name: CapabilityCanPauseVideo
-      value: "1048576"
-      go_type: int
-    - go_name: CapabilityCanPullCall
-      value: "16777216"
-      go_type: int
-    - go_name: CapabilityCanSendResponseViaConnection
-      value: "4194304"
-      go_type: int
-    - go_name: CapabilityCanUpgradeToVideo
-      value: "524288"
-      go_type: int
-    - go_name: CapabilityDisconnectFromConference
-      value: "8192"
-      go_type: int
-    - go_name: CapabilityHold
-      value: "1"
-      go_type: int
-    - go_name: CapabilityManageConference
-      value: "128"
-      go_type: int
-    - go_name: CapabilityMergeConference
-      value: "4"
-      go_type: int
-    - go_name: CapabilityMute
-      value: "64"
-      go_type: int
-    - go_name: CapabilityRemotePartySupportsRtt
-      value: "536870912"
-      go_type: int
-    - go_name: CapabilityRespondViaText
-      value: "32"
-      go_type: int
-    - go_name: CapabilitySeparateFromConference
-      value: "4096"
-      go_type: int
-    - go_name: CapabilitySupportsVtLocalBidirectional
-      value: "768"
-      go_type: int
-    - go_name: CapabilitySupportsVtLocalRx
-      value: "256"
-      go_type: int
-    - go_name: CapabilitySupportsVtLocalTx
-      value: "512"
-      go_type: int
-    - go_name: CapabilitySupportsVtRemoteBidirectional
-      value: "3072"
-      go_type: int
-    - go_name: CapabilitySupportsVtRemoteRx
-      value: "1024"
-      go_type: int
-    - go_name: CapabilitySupportsVtRemoteTx
-      value: "2048"
-      go_type: int
-    - go_name: CapabilitySupportDeflect
-      value: "33554432"
-      go_type: int
-    - go_name: CapabilitySupportHold
-      value: "2"
-      go_type: int
-    - go_name: CapabilitySwapConference
-      value: "8"
-      go_type: int
-    - go_name: EventCallHoldFailed
-      value: '"android.telecom.event.CALL_HOLD_FAILED"'
-      go_type: string
-    - go_name: EventCallMergeFailed
-      value: '"android.telecom.event.CALL_MERGE_FAILED"'
-      go_type: string
-    - go_name: EventCallPullFailed
-      value: '"android.telecom.event.CALL_PULL_FAILED"'
-      go_type: string
-    - go_name: EventCallRemotelyHeld
-      value: '"android.telecom.event.CALL_REMOTELY_HELD"'
-      go_type: string
-    - go_name: EventCallRemotelyUnheld
-      value: '"android.telecom.event.CALL_REMOTELY_UNHELD"'
-      go_type: string
-    - go_name: EventCallSwitchFailed
-      value: '"android.telecom.event.CALL_SWITCH_FAILED"'
-      go_type: string
-    - go_name: EventMergeComplete
-      value: '"android.telecom.event.MERGE_COMPLETE"'
-      go_type: string
-    - go_name: EventMergeStart
-      value: '"android.telecom.event.MERGE_START"'
-      go_type: string
-    - go_name: EventOnHoldToneEnd
-      value: '"android.telecom.event.ON_HOLD_TONE_END"'
-      go_type: string
-    - go_name: EventOnHoldToneStart
-      value: '"android.telecom.event.ON_HOLD_TONE_START"'
-      go_type: string
-    - go_name: EventRttAudioIndicationChanged
-      value: '"android.telecom.event.RTT_AUDIO_INDICATION_CHANGED"'
-      go_type: string
-    - go_name: ExtraAnsweringDropsFgCall
-      value: '"android.telecom.extra.ANSWERING_DROPS_FG_CALL"'
-      go_type: string
-    - go_name: ExtraAnsweringDropsFgCallAppName
-      value: '"android.telecom.extra.ANSWERING_DROPS_FG_CALL_APP_NAME"'
-      go_type: string
-    - go_name: ExtraAudioCodec
-      value: '"android.telecom.extra.AUDIO_CODEC"'
-      go_type: string
-    - go_name: ExtraAudioCodecBandwidthKhz
-      value: '"android.telecom.extra.AUDIO_CODEC_BANDWIDTH_KHZ"'
-      go_type: string
-    - go_name: ExtraAudioCodecBitrateKbps
-      value: '"android.telecom.extra.AUDIO_CODEC_BITRATE_KBPS"'
-      go_type: string
-    - go_name: ExtraCallSubject
-      value: '"android.telecom.extra.CALL_SUBJECT"'
-      go_type: string
-    - go_name: ExtraChildAddress
-      value: '"android.telecom.extra.CHILD_ADDRESS"'
-      go_type: string
-    - go_name: ExtraIsRttAudioPresent
-      value: '"android.telecom.extra.IS_RTT_AUDIO_PRESENT"'
-      go_type: string
-    - go_name: ExtraLastForwardedNumber
-      value: '"android.telecom.extra.LAST_FORWARDED_NUMBER"'
-      go_type: string
-    - go_name: ExtraLastKnownCellIdentity
-      value: '"android.telecom.extra.LAST_KNOWN_CELL_IDENTITY"'
-      go_type: string
-    - go_name: ExtraSipInvite
-      value: '"android.telecom.extra.SIP_INVITE"'
-      go_type: string
-    - go_name: PropertyAssistedDialing
-      value: "512"
-      go_type: int
-    - go_name: PropertyCrossSim
-      value: "8192"
-      go_type: int
-    - go_name: PropertyHasCdmaVoicePrivacy
-      value: "32"
-      go_type: int
-    - go_name: PropertyHighDefAudio
-      value: "4"
-      go_type: int
-    - go_name: PropertyIsAdhocConference
-      value: "4096"
-      go_type: int
-    - go_name: PropertyIsExternalCall
-      value: "16"
-      go_type: int
-    - go_name: PropertyIsRtt
-      value: "256"
-      go_type: int
-    - go_name: PropertyNetworkIdentifiedEmergencyCall
-      value: "1024"
-      go_type: int
-    - go_name: PropertySelfManaged
-      value: "128"
-      go_type: int
-    - go_name: PropertyWifi
-      value: "8"
-      go_type: int
-    - go_name: StateActive
-      value: "4"
-      go_type: int
-    - go_name: StateDialing
-      value: "3"
-      go_type: int
-    - go_name: StateDisconnected
-      value: "6"
-      go_type: int
-    - go_name: StateHolding
-      value: "5"
-      go_type: int
-    - go_name: StateInitializing
-      value: "0"
-      go_type: int
-    - go_name: StateNew
-      value: "1"
-      go_type: int
-    - go_name: StatePullingCall
-      value: "7"
-      go_type: int
-    - go_name: StateRinging
-      value: "2"
-      go_type: int
-    - go_name: VerificationStatusFailed
-      value: "2"
-      go_type: int
-    - go_name: VerificationStatusNotVerified
-      value: "0"
-      go_type: int
-    - go_name: VerificationStatusPassed
-      value: "1"
-      go_type: int
-    - go_name: SessionModifyRequestFail
-      value: "2"
-      go_type: int
-    - go_name: SessionModifyRequestInvalid
-      value: "3"
-      go_type: int
-    - go_name: SessionModifyRequestRejectedByRemote
-      value: "5"
-      go_type: int
-    - go_name: SessionModifyRequestSuccess
-      value: "1"
-      go_type: int
-    - go_name: SessionModifyRequestTimedOut
-      value: "4"
-      go_type: int
-    - go_name: SessionEventCameraFailure
-      value: "5"
-      go_type: int
-    - go_name: SessionEventCameraPermissionError
-      value: "7"
-      go_type: int
-    - go_name: SessionEventCameraReady
-      value: "6"
-      go_type: int
-    - go_name: SessionEventRxPause
-      value: "1"
-      go_type: int
-    - go_name: SessionEventRxResume
-      value: "2"
-      go_type: int
-    - go_name: SessionEventTxStart
-      value: "3"
-      go_type: int
-    - go_name: SessionEventTxStop
-      value: "4"
-      go_type: int
-    - go_name: RouteBluetooth
-      value: "2"
-      go_type: int
-    - go_name: RouteEarpiece
-      value: "1"
-      go_type: int
-    - go_name: RouteSpeaker
-      value: "8"
-      go_type: int
-    - go_name: RouteStreaming
-      value: "16"
-      go_type: int
-    - go_name: RouteWiredHeadset
-      value: "4"
-      go_type: int
-    - go_name: RouteWiredOrEarpiece
-      value: "5"
-      go_type: int
-    - go_name: TypeBluetooth
-      value: "2"
-      go_type: int
-    - go_name: TypeEarpiece
-      value: "1"
-      go_type: int
-    - go_name: TypeSpeaker
-      value: "4"
-      go_type: int
-    - go_name: TypeStreaming
-      value: "5"
-      go_type: int
-    - go_name: TypeUnknown
-      value: "-1"
-      go_type: int
-    - go_name: TypeWiredHeadset
-      value: "3"
-      go_type: int
-    - go_name: CodeCallCannotBeSetToActive
-      value: "4"
-      go_type: int
-    - go_name: CodeCallIsNotBeingTracked
-      value: "3"
-      go_type: int
-    - go_name: CodeCallNotPermittedAtPresentTime
-      value: "5"
-      go_type: int
-    - go_name: CodeCannotHoldCurrentActiveCall
-      value: "2"
-      go_type: int
-    - go_name: CodeErrorUnknown
-      value: "1"
-      go_type: int
-    - go_name: CodeOperationTimedOut
-      value: "6"
-      go_type: int
-    - go_name: ErrorNotAllowedForNonEmergencyConnections
-      value: "4"
-      go_type: int
-    - go_name: ErrorNotPermitted
-      value: "3"
-      go_type: int
-    - go_name: ErrorPreviousRequestExists
-      value: "2"
       go_type: int
     - go_name: ErrorRequestTimeOut
-      value: "1"
-      go_type: int
-    - go_name: ErrorServiceUnavailable
-      value: "5"
+      value: "2"
       go_type: int
     - go_name: ErrorUnspecified
-      value: "6"
-      go_type: int
-    - go_name: AvailablePhoneAccounts
-      value: '"selectPhoneAccountAccounts"'
-      go_type: string
-    - go_name: EventClearDiagnosticMessage
-      value: '"android.telecom.event.CLEAR_DIAGNOSTIC_MESSAGE"'
-      go_type: string
-    - go_name: EventDisplayDiagnosticMessage
-      value: '"android.telecom.event.DISPLAY_DIAGNOSTIC_MESSAGE"'
-      go_type: string
-    - go_name: ExtraAssertedDisplayName
-      value: '"android.telecom.extra.ASSERTED_DISPLAY_NAME"'
-      go_type: string
-    - go_name: ExtraDiagnosticMessage
-      value: '"android.telecom.extra.DIAGNOSTIC_MESSAGE"'
-      go_type: string
-    - go_name: ExtraDiagnosticMessageId
-      value: '"android.telecom.extra.DIAGNOSTIC_MESSAGE_ID"'
-      go_type: string
-    - go_name: ExtraIsBusinessCall
-      value: '"android.telecom.extra.IS_BUSINESS_CALL"'
-      go_type: string
-    - go_name: ExtraIsSuppressedByDoNotDisturb
-      value: '"android.telecom.extra.IS_SUPPRESSED_BY_DO_NOT_DISTURB"'
-      go_type: string
-    - go_name: ExtraLastEmergencyCallbackTimeMillis
-      value: '"android.telecom.extra.LAST_EMERGENCY_CALLBACK_TIME_MILLIS"'
-      go_type: string
-    - go_name: ExtraSilentRingingRequested
-      value: '"android.telecom.extra.SILENT_RINGING_REQUESTED"'
-      go_type: string
-    - go_name: ExtraSuggestedPhoneAccounts
-      value: '"android.telecom.extra.SUGGESTED_PHONE_ACCOUNTS"'
-      go_type: string
-    - go_name: RejectReasonDeclined
-      value: "1"
-      go_type: int
-    - go_name: RejectReasonUnwanted
-      value: "2"
-      go_type: int
-    - go_name: StateAudioProcessing
-      value: "12"
-      go_type: int
-    - go_name: StateConnecting
-      value: "9"
-      go_type: int
-    - go_name: StateDisconnecting
-      value: "10"
-      go_type: int
-    - go_name: StateSelectPhoneAccount
-      value: "8"
-      go_type: int
-    - go_name: StateSimulatedRinging
-      value: "13"
-      go_type: int
-    - go_name: HandoverFailureDestAppRejected
-      value: "1"
-      go_type: int
-    - go_name: HandoverFailureNotSupported
-      value: "2"
-      go_type: int
-    - go_name: HandoverFailureOngoingEmergencyCall
       value: "4"
-      go_type: int
-    - go_name: HandoverFailureUnknown
-      value: "5"
-      go_type: int
-    - go_name: HandoverFailureUserRejected
-      value: "3"
-      go_type: int
-    - go_name: DirectionIncoming
-      value: "0"
-      go_type: int
-    - go_name: DirectionOutgoing
-      value: "1"
-      go_type: int
-    - go_name: DirectionUnknown
-      value: "-1"
-      go_type: int
-    - go_name: PropertyConference
-      value: "1"
-      go_type: int
-    - go_name: PropertyEmergencyCallbackMode
-      value: "4"
-      go_type: int
-    - go_name: PropertyEnterpriseCall
-      value: "32"
-      go_type: int
-    - go_name: PropertyGenericConference
-      value: "2"
-      go_type: int
-    - go_name: PropertyIsTransactional
-      value: "32768"
-      go_type: int
-    - go_name: PropertyRtt
-      value: "1024"
-      go_type: int
-    - go_name: PropertyVoipAudioMode
-      value: "4096"
-      go_type: int
-    - go_name: RttModeFull
-      value: "1"
-      go_type: int
-    - go_name: RttModeHco
-      value: "2"
-      go_type: int
-    - go_name: RttModeVco
-      value: "3"
-      go_type: int
-    - go_name: ReasonFrequent
-      value: "2"
-      go_type: int
-    - go_name: ReasonIntraCarrier
-      value: "1"
-      go_type: int
-    - go_name: ReasonNone
-      value: "0"
-      go_type: int
-    - go_name: ReasonOther
-      value: "4"
-      go_type: int
-    - go_name: ReasonUserSet
-      value: "3"
-      go_type: int
-    - go_name: AudioCall
-      value: "1"
-      go_type: int
-    - go_name: SupportsSetInactive
-      value: "2"
-      go_type: int
-    - go_name: SupportsStream
-      value: "4"
-      go_type: int
-    - go_name: SupportsTransfer
-      value: "8"
-      go_type: int
-    - go_name: SupportsVideoCalling
-      value: "16"
-      go_type: int
-    - go_name: VideoCall
-      value: "2"
       go_type: int
     - go_name: ActionChangeDefaultDialer
       value: '"android.telecom.action.CHANGE_DEFAULT_DIALER"'
@@ -4260,6 +4014,9 @@ constants:
       go_type: string
     - go_name: ExtraCallNetworkType
       value: '"android.telecom.extra.CALL_NETWORK_TYPE"'
+      go_type: string
+    - go_name: ExtraCallSubject
+      value: '"android.telecom.extra.CALL_SUBJECT"'
       go_type: string
     - go_name: ExtraChangeDefaultDialerPackageName
       value: '"android.telecom.extra.CHANGE_DEFAULT_DIALER_PACKAGE_NAME"'
@@ -4366,9 +4123,330 @@ constants:
     - go_name: PriorityUrgent
       value: "1"
       go_type: int
-    - go_name: ErrorAnotherRequest
+    - go_name: RouteBluetooth
+      value: "2"
+      go_type: int
+    - go_name: RouteEarpiece
+      value: "1"
+      go_type: int
+    - go_name: RouteSpeaker
+      value: "8"
+      go_type: int
+    - go_name: RouteStreaming
+      value: "16"
+      go_type: int
+    - go_name: RouteWiredHeadset
+      value: "4"
+      go_type: int
+    - go_name: RouteWiredOrEarpiece
+      value: "5"
+      go_type: int
+    - go_name: AudioCall
+      value: "1"
+      go_type: int
+    - go_name: SupportsSetInactive
+      value: "2"
+      go_type: int
+    - go_name: SupportsStream
+      value: "4"
+      go_type: int
+    - go_name: SupportsTransfer
+      value: "8"
+      go_type: int
+    - go_name: SupportsVideoCalling
+      value: "16"
+      go_type: int
+    - go_name: VideoCall
+      value: "2"
+      go_type: int
+    - go_name: CodeCallCannotBeSetToActive
+      value: "4"
+      go_type: int
+    - go_name: CodeCallIsNotBeingTracked
       value: "3"
       go_type: int
-    - go_name: ErrorEndpointDoesNotExist
+    - go_name: CodeCallNotPermittedAtPresentTime
+      value: "5"
+      go_type: int
+    - go_name: CodeCannotHoldCurrentActiveCall
+      value: "2"
+      go_type: int
+    - go_name: CodeErrorUnknown
       value: "1"
+      go_type: int
+    - go_name: CodeOperationTimedOut
+      value: "6"
+      go_type: int
+    - go_name: ErrorNotAllowedForNonEmergencyConnections
+      value: "4"
+      go_type: int
+    - go_name: ErrorNotPermitted
+      value: "3"
+      go_type: int
+    - go_name: ErrorPreviousRequestExists
+      value: "2"
+      go_type: int
+    - go_name: ErrorServiceUnavailable
+      value: "5"
+      go_type: int
+    - go_name: QualityDefault
+      value: "4"
+      go_type: int
+    - go_name: QualityHigh
+      value: "1"
+      go_type: int
+    - go_name: QualityLow
+      value: "3"
+      go_type: int
+    - go_name: QualityMedium
+      value: "2"
+      go_type: int
+    - go_name: StateAudioOnly
+      value: "0"
+      go_type: int
+    - go_name: StateBidirectional
+      value: "3"
+      go_type: int
+    - go_name: StatePaused
+      value: "4"
+      go_type: int
+    - go_name: StateRxEnabled
+      value: "2"
+      go_type: int
+    - go_name: StateTxEnabled
+      value: "1"
+      go_type: int
+    - go_name: AudioCodecAmr
+      value: "1"
+      go_type: int
+    - go_name: AudioCodecAmrWb
+      value: "2"
+      go_type: int
+    - go_name: AudioCodecEvrc
+      value: "4"
+      go_type: int
+    - go_name: AudioCodecEvrcB
+      value: "5"
+      go_type: int
+    - go_name: AudioCodecEvrcNw
+      value: "7"
+      go_type: int
+    - go_name: AudioCodecEvrcWb
+      value: "6"
+      go_type: int
+    - go_name: AudioCodecEvsFb
+      value: "20"
+      go_type: int
+    - go_name: AudioCodecEvsNb
+      value: "17"
+      go_type: int
+    - go_name: AudioCodecEvsSwb
+      value: "19"
+      go_type: int
+    - go_name: AudioCodecEvsWb
+      value: "18"
+      go_type: int
+    - go_name: AudioCodecG711a
+      value: "13"
+      go_type: int
+    - go_name: AudioCodecG711ab
+      value: "15"
+      go_type: int
+    - go_name: AudioCodecG711u
+      value: "11"
+      go_type: int
+    - go_name: AudioCodecG722
+      value: "14"
+      go_type: int
+    - go_name: AudioCodecG723
+      value: "12"
+      go_type: int
+    - go_name: AudioCodecG729
+      value: "16"
+      go_type: int
+    - go_name: AudioCodecGsmEfr
+      value: "8"
+      go_type: int
+    - go_name: AudioCodecGsmFr
+      value: "9"
+      go_type: int
+    - go_name: AudioCodecGsmHr
+      value: "10"
+      go_type: int
+    - go_name: AudioCodecNone
+      value: "0"
+      go_type: int
+    - go_name: AudioCodecQcelp13k
+      value: "3"
+      go_type: int
+    - go_name: CapabilityCanSendResponseViaConnection
+      value: "4194304"
+      go_type: int
+    - go_name: CapabilityCanUpgradeToVideo
+      value: "524288"
+      go_type: int
+    - go_name: EventCallHoldFailed
+      value: '"android.telecom.event.CALL_HOLD_FAILED"'
+      go_type: string
+    - go_name: EventCallMergeFailed
+      value: '"android.telecom.event.CALL_MERGE_FAILED"'
+      go_type: string
+    - go_name: EventCallPullFailed
+      value: '"android.telecom.event.CALL_PULL_FAILED"'
+      go_type: string
+    - go_name: EventCallRemotelyHeld
+      value: '"android.telecom.event.CALL_REMOTELY_HELD"'
+      go_type: string
+    - go_name: EventCallRemotelyUnheld
+      value: '"android.telecom.event.CALL_REMOTELY_UNHELD"'
+      go_type: string
+    - go_name: EventCallSwitchFailed
+      value: '"android.telecom.event.CALL_SWITCH_FAILED"'
+      go_type: string
+    - go_name: EventMergeComplete
+      value: '"android.telecom.event.MERGE_COMPLETE"'
+      go_type: string
+    - go_name: EventMergeStart
+      value: '"android.telecom.event.MERGE_START"'
+      go_type: string
+    - go_name: EventOnHoldToneEnd
+      value: '"android.telecom.event.ON_HOLD_TONE_END"'
+      go_type: string
+    - go_name: EventOnHoldToneStart
+      value: '"android.telecom.event.ON_HOLD_TONE_START"'
+      go_type: string
+    - go_name: EventRttAudioIndicationChanged
+      value: '"android.telecom.event.RTT_AUDIO_INDICATION_CHANGED"'
+      go_type: string
+    - go_name: ExtraAnsweringDropsFgCall
+      value: '"android.telecom.extra.ANSWERING_DROPS_FG_CALL"'
+      go_type: string
+    - go_name: ExtraAnsweringDropsFgCallAppName
+      value: '"android.telecom.extra.ANSWERING_DROPS_FG_CALL_APP_NAME"'
+      go_type: string
+    - go_name: ExtraAudioCodec
+      value: '"android.telecom.extra.AUDIO_CODEC"'
+      go_type: string
+    - go_name: ExtraAudioCodecBandwidthKhz
+      value: '"android.telecom.extra.AUDIO_CODEC_BANDWIDTH_KHZ"'
+      go_type: string
+    - go_name: ExtraAudioCodecBitrateKbps
+      value: '"android.telecom.extra.AUDIO_CODEC_BITRATE_KBPS"'
+      go_type: string
+    - go_name: ExtraChildAddress
+      value: '"android.telecom.extra.CHILD_ADDRESS"'
+      go_type: string
+    - go_name: ExtraIsRttAudioPresent
+      value: '"android.telecom.extra.IS_RTT_AUDIO_PRESENT"'
+      go_type: string
+    - go_name: ExtraLastForwardedNumber
+      value: '"android.telecom.extra.LAST_FORWARDED_NUMBER"'
+      go_type: string
+    - go_name: ExtraLastKnownCellIdentity
+      value: '"android.telecom.extra.LAST_KNOWN_CELL_IDENTITY"'
+      go_type: string
+    - go_name: ExtraSipInvite
+      value: '"android.telecom.extra.SIP_INVITE"'
+      go_type: string
+    - go_name: PropertyIsRtt
+      value: "256"
+      go_type: int
+    - go_name: StateInitializing
+      value: "0"
+      go_type: int
+    - go_name: VerificationStatusFailed
+      value: "2"
+      go_type: int
+    - go_name: VerificationStatusNotVerified
+      value: "0"
+      go_type: int
+    - go_name: VerificationStatusPassed
+      value: "1"
+      go_type: int
+    - go_name: SessionModifyRequestFail
+      value: "2"
+      go_type: int
+    - go_name: SessionModifyRequestInvalid
+      value: "3"
+      go_type: int
+    - go_name: SessionModifyRequestRejectedByRemote
+      value: "5"
+      go_type: int
+    - go_name: SessionModifyRequestSuccess
+      value: "1"
+      go_type: int
+    - go_name: SessionModifyRequestTimedOut
+      value: "4"
+      go_type: int
+    - go_name: SessionEventCameraFailure
+      value: "5"
+      go_type: int
+    - go_name: SessionEventCameraPermissionError
+      value: "7"
+      go_type: int
+    - go_name: SessionEventCameraReady
+      value: "6"
+      go_type: int
+    - go_name: SessionEventRxPause
+      value: "1"
+      go_type: int
+    - go_name: SessionEventRxResume
+      value: "2"
+      go_type: int
+    - go_name: SessionEventTxStart
+      value: "3"
+      go_type: int
+    - go_name: SessionEventTxStop
+      value: "4"
+      go_type: int
+    - go_name: AnsweredElsewhere
+      value: "11"
+      go_type: int
+    - go_name: Busy
+      value: "7"
+      go_type: int
+    - go_name: CallPulled
+      value: "12"
+      go_type: int
+    - go_name: Canceled
+      value: "4"
+      go_type: int
+    - go_name: ConnectionManagerNotSupported
+      value: "10"
+      go_type: int
+    - go_name: Error
+      value: "1"
+      go_type: int
+    - go_name: Local
+      value: "2"
+      go_type: int
+    - go_name: Missed
+      value: "5"
+      go_type: int
+    - go_name: Other
+      value: "9"
+      go_type: int
+    - go_name: ReasonEmergencyCallPlaced
+      value: '"REASON_EMERGENCY_CALL_PLACED"'
+      go_type: string
+    - go_name: ReasonEmulatingSingleCall
+      value: '"EMULATING_SINGLE_CALL"'
+      go_type: string
+    - go_name: ReasonImsAccessBlocked
+      value: '"REASON_IMS_ACCESS_BLOCKED"'
+      go_type: string
+    - go_name: ReasonWifiOnButWfcOff
+      value: '"REASON_WIFI_ON_BUT_WFC_OFF"'
+      go_type: string
+    - go_name: Rejected
+      value: "6"
+      go_type: int
+    - go_name: Remote
+      value: "3"
+      go_type: int
+    - go_name: Restricted
+      value: "8"
+      go_type: int
+    - go_name: Unknown
+      value: "0"
       go_type: int

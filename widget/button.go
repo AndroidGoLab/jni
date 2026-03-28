@@ -23,6 +23,29 @@ type Button struct {
 	Obj *jni.GlobalRef
 }
 
+// NewButton creates a new android.widget.Button instance.
+func NewButton(vm *jni.VM, arg0 *jni.Object) (*Button, error) {
+	var t Button
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsButton)), midButtonInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.Button.getAccessibilityClassName.
 func (m *Button) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

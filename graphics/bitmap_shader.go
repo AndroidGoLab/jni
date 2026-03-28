@@ -23,6 +23,29 @@ type BitmapShader struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBitmapShader creates a new android.graphics.BitmapShader instance.
+func NewBitmapShader(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*BitmapShader, error) {
+	var t BitmapShader
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapShader)), midBitmapShaderInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetFilterMode calls android.graphics.BitmapShader.getFilterMode.
 func (m *BitmapShader) GetFilterMode() (int32, error) {
 	var result int32

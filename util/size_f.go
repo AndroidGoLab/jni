@@ -23,6 +23,29 @@ type SizeF struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSizeF creates a new android.util.SizeF instance.
+func NewSizeF(vm *jni.VM, arg0 float32, arg1 float32) (*SizeF, error) {
+	var t SizeF
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSizeF)), midSizeFInit, jni.FloatValue(arg0), jni.FloatValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.util.SizeF.describeContents.
 func (m *SizeF) DescribeContents() (int32, error) {
 	var result int32

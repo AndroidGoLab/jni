@@ -23,6 +23,33 @@ type CursorWindow struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCursorWindow creates a new android.database.CursorWindow instance.
+func NewCursorWindow(vm *jni.VM, arg0 bool) (*CursorWindow, error) {
+	var t CursorWindow
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorWindow)), midCursorWindowInit, jni.BooleanValue(jArg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AllocRow calls android.database.CursorWindow.allocRow.
 func (m *CursorWindow) AllocRow() (bool, error) {
 	var result bool

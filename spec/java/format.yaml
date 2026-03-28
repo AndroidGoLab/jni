@@ -5,8 +5,91 @@
 package: format
 go_import: github.com/AndroidGoLab/jni/text/format
 classes:
+    - java_class: android.text.format.DateFormat
+      go_type: DateFormat
+      obtain: constructor
+      static_methods:
+        - java_method: format
+          go_name: Format2
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+            - java_type: java.util.Calendar
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: format
+          go_name: Format2_1
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+            - java_type: java.util.Date
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: format
+          go_name: Format2_2
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getBestDateTimePattern
+          go_name: GetBestDateTimePattern
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: getDateFormat
+          go_name: GetDateFormat
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.text.DateFormat
+          error: true
+        - java_method: getDateFormatOrder
+          go_name: GetDateFormatOrder
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: char[]
+          error: true
+        - java_method: getLongDateFormat
+          go_name: GetLongDateFormat
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.text.DateFormat
+          error: true
+        - java_method: getMediumDateFormat
+          go_name: GetMediumDateFormat
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.text.DateFormat
+          error: true
+        - java_method: getTimeFormat
+          go_name: GetTimeFormat
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.text.DateFormat
+          error: true
+        - java_method: is24HourFormat
+          go_name: Is24HourFormat
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: boolean
+          error: true
     - java_class: android.text.format.DateUtils
       go_type: DateUtils
+      obtain: constructor
       static_methods:
         - java_method: formatDateRange
           go_name: FormatDateRange5
@@ -191,36 +274,9 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.text.format.Formatter
-      go_type: ter
-      static_methods:
-        - java_method: formatFileSize
-          go_name: FormatFileSize
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: String
-          error: true
-        - java_method: formatIpAddress
-          go_name: FormatIpAddress
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: formatShortFileSize
-          go_name: FormatShortFileSize
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: String
-          error: true
     - java_class: android.text.format.Time
       go_type: Time
+      obtain: constructor
       methods:
         - java_method: after
           go_name: After
@@ -410,86 +466,34 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.text.format.DateFormat
-      go_type: DateFormat
+    - java_class: android.text.format.Formatter
+      go_type: ter
+      obtain: constructor
       static_methods:
-        - java_method: format
-          go_name: Format2
+        - java_method: formatFileSize
+          go_name: FormatFileSize
           params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-            - java_type: java.util.Calendar
-              go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: format
-          go_name: Format2_1
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-            - java_type: java.util.Date
-              go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: format
-          go_name: Format2_2
-          params:
-            - java_type: java.lang.CharSequence
+            - java_type: android.content.Context
               go_name: arg0
             - java_type: long
               go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getBestDateTimePattern
-          go_name: GetBestDateTimePattern
-          params:
-            - java_type: java.util.Locale
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
           returns: String
           error: true
-        - java_method: getDateFormat
-          go_name: GetDateFormat
+        - java_method: formatIpAddress
+          go_name: FormatIpAddress
           params:
-            - java_type: android.content.Context
+            - java_type: int
               go_name: arg0
-          returns: java.text.DateFormat
+          returns: String
           error: true
-        - java_method: getDateFormatOrder
-          go_name: GetDateFormatOrder
+        - java_method: formatShortFileSize
+          go_name: FormatShortFileSize
           params:
             - java_type: android.content.Context
               go_name: arg0
-          returns: char[]
-          error: true
-        - java_method: getLongDateFormat
-          go_name: GetLongDateFormat
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.text.DateFormat
-          error: true
-        - java_method: getMediumDateFormat
-          go_name: GetMediumDateFormat
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.text.DateFormat
-          error: true
-        - java_method: getTimeFormat
-          go_name: GetTimeFormat
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.text.DateFormat
-          error: true
-        - java_method: is24HourFormat
-          go_name: Is24HourFormat
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: boolean
+            - java_type: long
+              go_name: arg1
+          returns: String
           error: true
 constants:
     - go_name: AbbrevMonthFormat

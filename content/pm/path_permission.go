@@ -23,6 +23,29 @@ type PathPermission struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPathPermission creates a new android.content.pm.PathPermission instance.
+func NewPathPermission(vm *jni.VM, arg0 *jni.Object) (*PathPermission, error) {
+	var t PathPermission
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathPermission)), midPathPermissionInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetReadPermission calls android.content.pm.PathPermission.getReadPermission.
 func (m *PathPermission) GetReadPermission() (string, error) {
 	var result string

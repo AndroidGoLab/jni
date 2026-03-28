@@ -23,6 +23,28 @@ type GradientDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGradientDrawable creates a new android.graphics.drawable.GradientDrawable instance.
+func NewGradientDrawable(vm *jni.VM) (*GradientDrawable, error) {
+	var t GradientDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGradientDrawable)), midGradientDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.GradientDrawable.applyTheme.
 func (m *GradientDrawable) ApplyTheme(arg0 *jni.Object) error {
 

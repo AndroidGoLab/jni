@@ -23,6 +23,28 @@ type ExtractedTextRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExtractedTextRequest creates a new android.view.inputmethod.ExtractedTextRequest instance.
+func NewExtractedTextRequest(vm *jni.VM) (*ExtractedTextRequest, error) {
+	var t ExtractedTextRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtractedTextRequest)), midExtractedTextRequestInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.view.inputmethod.ExtractedTextRequest.describeContents.
 func (m *ExtractedTextRequest) DescribeContents() (int32, error) {
 	var result int32

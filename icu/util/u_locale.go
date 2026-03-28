@@ -23,6 +23,34 @@ type ULocale struct {
 	Obj *jni.GlobalRef
 }
 
+// NewULocale creates a new android.icu.util.ULocale instance.
+func NewULocale(vm *jni.VM, arg0 string) (*ULocale, error) {
+	var t ULocale
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsULocale)), midULocaleInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone calls android.icu.util.ULocale.clone.
 func (m *ULocale) Clone() (*jni.Object, error) {
 	var result *jni.Object

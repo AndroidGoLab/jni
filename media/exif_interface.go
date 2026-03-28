@@ -23,6 +23,29 @@ type ExifInterface struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExifInterface creates a new android.media.ExifInterface instance.
+func NewExifInterface(vm *jni.VM, arg0 *jni.Object) (*ExifInterface, error) {
+	var t ExifInterface
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExifInterface)), midExifInterfaceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAltitude calls android.media.ExifInterface.getAltitude.
 func (m *ExifInterface) GetAltitude(arg0 float64) (float64, error) {
 	var result float64

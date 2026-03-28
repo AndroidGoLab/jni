@@ -23,6 +23,28 @@ type SidePropagation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSidePropagation creates a new android.transition.SidePropagation instance.
+func NewSidePropagation(vm *jni.VM) (*SidePropagation, error) {
+	var t SidePropagation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSidePropagation)), midSidePropagationInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetStartDelay calls android.transition.SidePropagation.getStartDelay.
 func (m *SidePropagation) GetStartDelay(
 	arg0 *jni.Object,

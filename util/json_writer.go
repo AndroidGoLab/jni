@@ -23,6 +23,29 @@ type JsonWriter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewJsonWriter creates a new android.util.JsonWriter instance.
+func NewJsonWriter(vm *jni.VM, arg0 *jni.Object) (*JsonWriter, error) {
+	var t JsonWriter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJsonWriter)), midJsonWriterInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BeginArray calls android.util.JsonWriter.beginArray.
 func (m *JsonWriter) BeginArray() (*jni.Object, error) {
 	var result *jni.Object

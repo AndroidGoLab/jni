@@ -23,6 +23,28 @@ type PasswordTransformationMethod struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPasswordTransformationMethod creates a new android.text.method.PasswordTransformationMethod instance.
+func NewPasswordTransformationMethod(vm *jni.VM) (*PasswordTransformationMethod, error) {
+	var t PasswordTransformationMethod
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), midPasswordTransformationMethodInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AfterTextChanged calls android.text.method.PasswordTransformationMethod.afterTextChanged.
 func (m *PasswordTransformationMethod) AfterTextChanged(arg0 *jni.Object) error {
 

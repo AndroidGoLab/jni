@@ -23,6 +23,28 @@ type SpannableStringBuilder struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpannableStringBuilder creates a new android.text.SpannableStringBuilder instance.
+func NewSpannableStringBuilder(vm *jni.VM) (*SpannableStringBuilder, error) {
+	var t SpannableStringBuilder
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpannableStringBuilder)), midSpannableStringBuilderInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Append1 calls android.text.SpannableStringBuilder.append.
 func (m *SpannableStringBuilder) Append1(arg0 uint16) (*jni.Object, error) {
 	var result *jni.Object

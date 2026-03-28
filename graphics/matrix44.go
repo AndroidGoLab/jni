@@ -23,6 +23,28 @@ type Matrix44 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMatrix44 creates a new android.graphics.Matrix44 instance.
+func NewMatrix44(vm *jni.VM) (*Matrix44, error) {
+	var t Matrix44
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix44)), midMatrix44Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Concat calls android.graphics.Matrix44.concat.
 func (m *Matrix44) Concat(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type ViewAnimator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewViewAnimator creates a new android.widget.ViewAnimator instance.
+func NewViewAnimator(vm *jni.VM, arg0 *jni.Object) (*ViewAnimator, error) {
+	var t ViewAnimator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewAnimator)), midViewAnimatorInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddView calls android.widget.ViewAnimator.addView.
 func (m *ViewAnimator) AddView(
 	arg0 *jni.Object,

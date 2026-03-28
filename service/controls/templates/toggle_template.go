@@ -23,6 +23,34 @@ type ToggleTemplate struct {
 	Obj *jni.GlobalRef
 }
 
+// NewToggleTemplate creates a new android.service.controls.templates.ToggleTemplate instance.
+func NewToggleTemplate(vm *jni.VM, arg0 string, arg1 *jni.Object) (*ToggleTemplate, error) {
+	var t ToggleTemplate
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToggleTemplate)), midToggleTemplateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetContentDescription calls android.service.controls.templates.ToggleTemplate.getContentDescription.
 func (m *ToggleTemplate) GetContentDescription() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,39 @@ type AdId struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAdId creates a new android.adservices.adid.AdId instance.
+func NewAdId(vm *jni.VM, arg0 string, arg1 bool) (*AdId, error) {
+	var t AdId
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdId)), midAdIdInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.adservices.adid.AdId.equals.
 func (m *AdId) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

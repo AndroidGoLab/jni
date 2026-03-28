@@ -23,6 +23,29 @@ type Manager struct {
 	Obj *jni.GlobalRef
 }
 
+// NewManager creates a new android.app.backup.BackupManager instance.
+func NewManager(vm *jni.VM, arg0 *jni.Object) (*Manager, error) {
+	var t Manager
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManager)), midManagerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DataChanged0 calls android.app.backup.BackupManager.dataChanged.
 func (m *Manager) DataChanged0() error {
 

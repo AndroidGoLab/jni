@@ -23,6 +23,29 @@ type ArcShape struct {
 	Obj *jni.GlobalRef
 }
 
+// NewArcShape creates a new android.graphics.drawable.shapes.ArcShape instance.
+func NewArcShape(vm *jni.VM, arg0 float32, arg1 float32) (*ArcShape, error) {
+	var t ArcShape
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArcShape)), midArcShapeInit, jni.FloatValue(arg0), jni.FloatValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.graphics.drawable.shapes.ArcShape.clone.
 func (m *ArcShape) Clone0() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type WifiP2pServiceRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWifiP2pServiceRequest creates a new android.net.wifi.p2p.nsd.WifiP2pServiceRequest instance.
+func NewWifiP2pServiceRequest(vm *jni.VM, arg0 *jni.Object) (*WifiP2pServiceRequest, error) {
+	var t WifiP2pServiceRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pServiceRequest)), midWifiP2pServiceRequestInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.p2p.nsd.WifiP2pServiceRequest.describeContents.
 func (m *WifiP2pServiceRequest) DescribeContents() (int32, error) {
 	var result int32

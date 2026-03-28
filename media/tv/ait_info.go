@@ -23,6 +23,29 @@ type AitInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAitInfo creates a new android.media.tv.AitInfo instance.
+func NewAitInfo(vm *jni.VM, arg0 int32, arg1 int32) (*AitInfo, error) {
+	var t AitInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAitInfo)), midAitInfoInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.AitInfo.describeContents.
 func (m *AitInfo) DescribeContents() (int32, error) {
 	var result int32

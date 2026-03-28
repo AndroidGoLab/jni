@@ -23,6 +23,34 @@ type DrmException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDrmException creates a new android.media.MediaDrmException instance.
+func NewDrmException(vm *jni.VM, arg0 string) (*DrmException, error) {
+	var t DrmException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrmException)), midDrmExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetErrorContext calls android.media.MediaDrmException.getErrorContext.
 func (m *DrmException) GetErrorContext() (int32, error) {
 	var result int32

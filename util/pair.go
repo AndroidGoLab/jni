@@ -23,6 +23,29 @@ type Pair struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPair creates a new android.util.Pair instance.
+func NewPair(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Pair, error) {
+	var t Pair
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPair)), midPairInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.util.Pair.equals.
 func (m *Pair) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

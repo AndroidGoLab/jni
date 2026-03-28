@@ -23,6 +23,28 @@ type StructPollfd struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStructPollfd creates a new android.system.StructPollfd instance.
+func NewStructPollfd(vm *jni.VM) (*StructPollfd, error) {
+	var t StructPollfd
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructPollfd)), midStructPollfdInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ToString calls android.system.StructPollfd.toString.
 func (m *StructPollfd) ToString() (string, error) {
 	var result string

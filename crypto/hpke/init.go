@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsXdhKeySpec          *jni.GlobalRef
+	midXdhKeySpecInit      jni.MethodID
 	midXdhKeySpecEquals    jni.MethodID
 	midXdhKeySpecGetFormat jni.MethodID
 	midXdhKeySpecGetKey    jni.MethodID
@@ -64,6 +65,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsXdhKeySpec = env.NewGlobalRef(&c.Object)
+		midXdhKeySpecInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsXdhKeySpec)), "<init>", "([B)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midXdhKeySpecEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsXdhKeySpec)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {

@@ -23,6 +23,35 @@ type Cas struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCas creates a new android.media.MediaCas instance.
+func NewCas(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 string, arg3 int32) (*Cas, error) {
+	var t Cas
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCas)), midCasInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.media.MediaCas.close.
 func (m *Cas) Close() error {
 

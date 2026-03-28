@@ -23,6 +23,28 @@ type BuddhistCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBuddhistCalendar creates a new android.icu.util.BuddhistCalendar instance.
+func NewBuddhistCalendar(vm *jni.VM) (*BuddhistCalendar, error) {
+	var t BuddhistCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBuddhistCalendar)), midBuddhistCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetType calls android.icu.util.BuddhistCalendar.getType.
 func (m *BuddhistCalendar) GetType() (string, error) {
 	var result string

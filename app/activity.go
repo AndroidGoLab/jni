@@ -21,6 +21,28 @@ type Activity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewActivity creates a new android.app.Activity instance.
+func NewActivity(vm *jni.VM) (*Activity, error) {
+	var t Activity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivity)), midActivityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddContentView calls android.app.Activity.addContentView.
 func (m *Activity) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 

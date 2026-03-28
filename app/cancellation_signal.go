@@ -21,6 +21,28 @@ type CancellationSignal struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCancellationSignal creates a new android.os.CancellationSignal instance.
+func NewCancellationSignal(vm *jni.VM) (*CancellationSignal, error) {
+	var t CancellationSignal
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), midCancellationSignalInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Cancel calls android.os.CancellationSignal.cancel.
 func (m *CancellationSignal) Cancel() error {
 

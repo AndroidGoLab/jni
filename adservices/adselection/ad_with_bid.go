@@ -23,6 +23,29 @@ type AdWithBid struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAdWithBid creates a new android.adservices.adselection.AdWithBid instance.
+func NewAdWithBid(vm *jni.VM, arg0 *jni.Object, arg1 float64) (*AdWithBid, error) {
+	var t AdWithBid
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdWithBid)), midAdWithBidInit, jni.ObjectValue(arg0), jni.DoubleValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.adservices.adselection.AdWithBid.describeContents.
 func (m *AdWithBid) DescribeContents() (int32, error) {
 	var result int32

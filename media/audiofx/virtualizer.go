@@ -23,6 +23,29 @@ type Virtualizer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewVirtualizer creates a new android.media.audiofx.Virtualizer instance.
+func NewVirtualizer(vm *jni.VM, arg0 int32, arg1 int32) (*Virtualizer, error) {
+	var t Virtualizer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVirtualizer)), midVirtualizerInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CanVirtualize calls android.media.audiofx.Virtualizer.canVirtualize.
 func (m *Virtualizer) CanVirtualize(arg0 int32, arg1 int32) (bool, error) {
 	var result bool

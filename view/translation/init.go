@@ -23,14 +23,22 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsTranslator            *jni.GlobalRef
-	midTranslatorDestroy     jni.MethodID
-	midTranslatorIsDestroyed jni.MethodID
+	clsViewTranslationResponse                 *jni.GlobalRef
+	midViewTranslationResponseDescribeContents jni.MethodID
+	midViewTranslationResponseEquals           jni.MethodID
+	midViewTranslationResponseGetAutofillId    jni.MethodID
+	midViewTranslationResponseGetValue         jni.MethodID
+	midViewTranslationResponseHashCode         jni.MethodID
+	midViewTranslationResponseToString         jni.MethodID
+	midViewTranslationResponseWriteToParcel    jni.MethodID
 
-	clsViewTranslationCallback                   *jni.GlobalRef
-	midViewTranslationCallbackOnClearTranslation jni.MethodID
-	midViewTranslationCallbackOnHideTranslation  jni.MethodID
-	midViewTranslationCallbackOnShowTranslation  jni.MethodID
+	clsViewTranslationResponseBuilder         *jni.GlobalRef
+	midViewTranslationResponseBuilderBuild    jni.MethodID
+	midViewTranslationResponseBuilderSetValue jni.MethodID
+
+	clsUiTranslationManager                                     *jni.GlobalRef
+	midUiTranslationManagerRegisterUiTranslationStateCallback   jni.MethodID
+	midUiTranslationManagerUnregisterUiTranslationStateCallback jni.MethodID
 
 	clsViewTranslationRequest                 *jni.GlobalRef
 	midViewTranslationRequestDescribeContents jni.MethodID
@@ -44,64 +52,6 @@ var (
 	clsViewTranslationRequestBuilder         *jni.GlobalRef
 	midViewTranslationRequestBuilderBuild    jni.MethodID
 	midViewTranslationRequestBuilderSetValue jni.MethodID
-
-	clsCapability                             *jni.GlobalRef
-	midCapabilityDescribeContents             jni.MethodID
-	midCapabilityGetSourceSpec                jni.MethodID
-	midCapabilityGetState                     jni.MethodID
-	midCapabilityGetSupportedTranslationFlags jni.MethodID
-	midCapabilityGetTargetSpec                jni.MethodID
-	midCapabilityIsUiTranslationEnabled       jni.MethodID
-	midCapabilityToString                     jni.MethodID
-	midCapabilityWriteToParcel                jni.MethodID
-
-	clsUiTranslationManager                                     *jni.GlobalRef
-	midUiTranslationManagerRegisterUiTranslationStateCallback   jni.MethodID
-	midUiTranslationManagerUnregisterUiTranslationStateCallback jni.MethodID
-
-	clsContext                    *jni.GlobalRef
-	midContextDescribeContents    jni.MethodID
-	midContextGetSourceSpec       jni.MethodID
-	midContextGetTargetSpec       jni.MethodID
-	midContextGetTranslationFlags jni.MethodID
-	midContextToString            jni.MethodID
-	midContextWriteToParcel       jni.MethodID
-
-	clsContextBuilder                    *jni.GlobalRef
-	midContextBuilderBuild               jni.MethodID
-	midContextBuilderSetTranslationFlags jni.MethodID
-
-	clsRequestValue                 *jni.GlobalRef
-	midRequestValueDescribeContents jni.MethodID
-	midRequestValueEquals           jni.MethodID
-	midRequestValueGetText          jni.MethodID
-	midRequestValueHashCode         jni.MethodID
-	midRequestValueToString         jni.MethodID
-	midRequestValueWriteToParcel    jni.MethodID
-	midRequestValueForText          jni.MethodID
-
-	clsRequest                 *jni.GlobalRef
-	midRequestDescribeContents jni.MethodID
-	midRequestGetFlags         jni.MethodID
-	midRequestToString         jni.MethodID
-	midRequestWriteToParcel    jni.MethodID
-
-	clsRequestBuilder         *jni.GlobalRef
-	midRequestBuilderBuild    jni.MethodID
-	midRequestBuilderSetFlags jni.MethodID
-
-	clsResponse                     *jni.GlobalRef
-	midResponseDescribeContents     jni.MethodID
-	midResponseGetTranslationStatus jni.MethodID
-	midResponseIsFinalResponse      jni.MethodID
-	midResponseToString             jni.MethodID
-	midResponseWriteToParcel        jni.MethodID
-
-	clsResponseBuilder                            *jni.GlobalRef
-	midResponseBuilderBuild                       jni.MethodID
-	midResponseBuilderSetFinalResponse            jni.MethodID
-	midResponseBuilderSetTranslationResponseValue jni.MethodID
-	midResponseBuilderSetViewTranslationResponse  jni.MethodID
 
 	clsResponseValue                   *jni.GlobalRef
 	midResponseValueDescribeContents   jni.MethodID
@@ -121,11 +71,52 @@ var (
 	midResponseValueBuilderSetText            jni.MethodID
 	midResponseValueBuilderSetTransliteration jni.MethodID
 
+	clsResponse                     *jni.GlobalRef
+	midResponseDescribeContents     jni.MethodID
+	midResponseGetTranslationStatus jni.MethodID
+	midResponseIsFinalResponse      jni.MethodID
+	midResponseToString             jni.MethodID
+	midResponseWriteToParcel        jni.MethodID
+
+	clsResponseBuilder                            *jni.GlobalRef
+	midResponseBuilderBuild                       jni.MethodID
+	midResponseBuilderSetFinalResponse            jni.MethodID
+	midResponseBuilderSetTranslationResponseValue jni.MethodID
+	midResponseBuilderSetViewTranslationResponse  jni.MethodID
+
+	clsRequestValue                 *jni.GlobalRef
+	midRequestValueDescribeContents jni.MethodID
+	midRequestValueEquals           jni.MethodID
+	midRequestValueGetText          jni.MethodID
+	midRequestValueHashCode         jni.MethodID
+	midRequestValueToString         jni.MethodID
+	midRequestValueWriteToParcel    jni.MethodID
+	midRequestValueForText          jni.MethodID
+
+	clsManager                                             *jni.GlobalRef
+	midManagerGetOnDeviceTranslationSettingsActivityIntent jni.MethodID
+
+	clsRequest                 *jni.GlobalRef
+	midRequestDescribeContents jni.MethodID
+	midRequestGetFlags         jni.MethodID
+	midRequestToString         jni.MethodID
+	midRequestWriteToParcel    jni.MethodID
+
+	clsRequestBuilder         *jni.GlobalRef
+	midRequestBuilderBuild    jni.MethodID
+	midRequestBuilderSetFlags jni.MethodID
+
 	clsUiTranslationStateCallback           *jni.GlobalRef
 	midUiTranslationStateCallbackOnFinished jni.MethodID
 	midUiTranslationStateCallbackOnPaused   jni.MethodID
 
+	clsViewTranslationCallback                   *jni.GlobalRef
+	midViewTranslationCallbackOnClearTranslation jni.MethodID
+	midViewTranslationCallbackOnHideTranslation  jni.MethodID
+	midViewTranslationCallbackOnShowTranslation  jni.MethodID
+
 	clsSpec                 *jni.GlobalRef
+	midSpecInit             jni.MethodID
 	midSpecDescribeContents jni.MethodID
 	midSpecEquals           jni.MethodID
 	midSpecGetDataFormat    jni.MethodID
@@ -134,21 +125,31 @@ var (
 	midSpecToString         jni.MethodID
 	midSpecWriteToParcel    jni.MethodID
 
-	clsManager                                             *jni.GlobalRef
-	midManagerGetOnDeviceTranslationSettingsActivityIntent jni.MethodID
+	clsContext                    *jni.GlobalRef
+	midContextDescribeContents    jni.MethodID
+	midContextGetSourceSpec       jni.MethodID
+	midContextGetTargetSpec       jni.MethodID
+	midContextGetTranslationFlags jni.MethodID
+	midContextToString            jni.MethodID
+	midContextWriteToParcel       jni.MethodID
 
-	clsViewTranslationResponse                 *jni.GlobalRef
-	midViewTranslationResponseDescribeContents jni.MethodID
-	midViewTranslationResponseEquals           jni.MethodID
-	midViewTranslationResponseGetAutofillId    jni.MethodID
-	midViewTranslationResponseGetValue         jni.MethodID
-	midViewTranslationResponseHashCode         jni.MethodID
-	midViewTranslationResponseToString         jni.MethodID
-	midViewTranslationResponseWriteToParcel    jni.MethodID
+	clsContextBuilder                    *jni.GlobalRef
+	midContextBuilderBuild               jni.MethodID
+	midContextBuilderSetTranslationFlags jni.MethodID
 
-	clsViewTranslationResponseBuilder         *jni.GlobalRef
-	midViewTranslationResponseBuilderBuild    jni.MethodID
-	midViewTranslationResponseBuilderSetValue jni.MethodID
+	clsTranslator            *jni.GlobalRef
+	midTranslatorDestroy     jni.MethodID
+	midTranslatorIsDestroyed jni.MethodID
+
+	clsCapability                             *jni.GlobalRef
+	midCapabilityDescribeContents             jni.MethodID
+	midCapabilityGetSourceSpec                jni.MethodID
+	midCapabilityGetState                     jni.MethodID
+	midCapabilityGetSupportedTranslationFlags jni.MethodID
+	midCapabilityGetTargetSpec                jni.MethodID
+	midCapabilityIsUiTranslationEnabled       jni.MethodID
+	midCapabilityToString                     jni.MethodID
+	midCapabilityWriteToParcel                jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -169,22 +170,57 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/view/translation/Translator")
+	c, err = env.FindClass("android/view/translation/ViewTranslationResponse")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTranslator = env.NewGlobalRef(&c.Object)
+		clsViewTranslationResponse = env.NewGlobalRef(&c.Object)
 
-		midTranslatorDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTranslator)), "destroy", "()V")
+		midViewTranslationResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTranslatorIsDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTranslator)), "isDestroyed", "()Z")
+		midViewTranslationResponseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationResponseGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationResponseGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "getValue", "(Ljava/lang/String;)Landroid/view/translation/TranslationResponseValue;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationResponseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -193,29 +229,46 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/translation/ViewTranslationCallback")
+	c, err = env.FindClass("android/view/translation/ViewTranslationResponse$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsViewTranslationCallback = env.NewGlobalRef(&c.Object)
+		clsViewTranslationResponseBuilder = env.NewGlobalRef(&c.Object)
 
-		midViewTranslationCallbackOnClearTranslation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationCallback)), "onClearTranslation", "(Landroid/view/View;)Z")
+		midViewTranslationResponseBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponseBuilder)), "build", "()Landroid/view/translation/ViewTranslationResponse;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midViewTranslationCallbackOnHideTranslation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationCallback)), "onHideTranslation", "(Landroid/view/View;)Z")
+		midViewTranslationResponseBuilderSetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponseBuilder)), "setValue", "(Ljava/lang/String;Landroid/view/translation/TranslationResponseValue;)Landroid/view/translation/ViewTranslationResponse$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midViewTranslationCallbackOnShowTranslation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationCallback)), "onShowTranslation", "(Landroid/view/View;)Z")
+	}
+
+	c, err = env.FindClass("android/view/translation/UiTranslationManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUiTranslationManager = env.NewGlobalRef(&c.Object)
+
+		midUiTranslationManagerRegisterUiTranslationStateCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUiTranslationManager)), "registerUiTranslationStateCallback", "(Ljava/util/concurrent/Executor;Landroid/view/translation/UiTranslationStateCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUiTranslationManagerUnregisterUiTranslationStateCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUiTranslationManager)), "unregisterUiTranslationStateCallback", "(Landroid/view/translation/UiTranslationStateCallback;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -299,376 +352,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midViewTranslationRequestBuilderSetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationRequestBuilder)), "setValue", "(Ljava/lang/String;Landroid/view/translation/TranslationRequestValue;)Landroid/view/translation/ViewTranslationRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationCapability")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCapability = env.NewGlobalRef(&c.Object)
-
-		midCapabilityDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityGetSourceSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getSourceSpec", "()Landroid/view/translation/TranslationSpec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getState", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityGetSupportedTranslationFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getSupportedTranslationFlags", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityGetTargetSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getTargetSpec", "()Landroid/view/translation/TranslationSpec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityIsUiTranslationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "isUiTranslationEnabled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilityWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/UiTranslationManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUiTranslationManager = env.NewGlobalRef(&c.Object)
-
-		midUiTranslationManagerRegisterUiTranslationStateCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUiTranslationManager)), "registerUiTranslationStateCallback", "(Ljava/util/concurrent/Executor;Landroid/view/translation/UiTranslationStateCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midUiTranslationManagerUnregisterUiTranslationStateCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUiTranslationManager)), "unregisterUiTranslationStateCallback", "(Landroid/view/translation/UiTranslationStateCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationContext")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsContext = env.NewGlobalRef(&c.Object)
-
-		midContextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextGetSourceSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getSourceSpec", "()Landroid/view/translation/TranslationSpec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextGetTargetSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getTargetSpec", "()Landroid/view/translation/TranslationSpec;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextGetTranslationFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getTranslationFlags", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationContext$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsContextBuilder = env.NewGlobalRef(&c.Object)
-
-		midContextBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextBuilder)), "build", "()Landroid/view/translation/TranslationContext;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContextBuilderSetTranslationFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextBuilder)), "setTranslationFlags", "(I)Landroid/view/translation/TranslationContext$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationRequestValue")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequestValue = env.NewGlobalRef(&c.Object)
-
-		midRequestValueDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestValueEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestValueGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "getText", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestValueHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestValueToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestValueWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestValueForText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "forText", "(Ljava/lang/CharSequence;)Landroid/view/translation/TranslationRequestValue;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequest = env.NewGlobalRef(&c.Object)
-
-		midRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "getFlags", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationRequest$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequestBuilder = env.NewGlobalRef(&c.Object)
-
-		midRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestBuilder)), "build", "()Landroid/view/translation/TranslationRequest;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestBuilderSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestBuilder)), "setFlags", "(I)Landroid/view/translation/TranslationRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationResponse")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsResponse = env.NewGlobalRef(&c.Object)
-
-		midResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseGetTranslationStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "getTranslationStatus", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseIsFinalResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "isFinalResponse", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/translation/TranslationResponse$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsResponseBuilder = env.NewGlobalRef(&c.Object)
-
-		midResponseBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "build", "()Landroid/view/translation/TranslationResponse;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseBuilderSetFinalResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "setFinalResponse", "(Z)Landroid/view/translation/TranslationResponse$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseBuilderSetTranslationResponseValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "setTranslationResponseValue", "(ILandroid/view/translation/TranslationResponseValue;)Landroid/view/translation/TranslationResponse$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midResponseBuilderSetViewTranslationResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "setViewTranslationResponse", "(ILandroid/view/translation/ViewTranslationResponse;)Landroid/view/translation/TranslationResponse$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -795,6 +478,227 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/view/translation/TranslationResponse")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsResponse = env.NewGlobalRef(&c.Object)
+
+		midResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseGetTranslationStatus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "getTranslationStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseIsFinalResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "isFinalResponse", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/translation/TranslationResponse$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsResponseBuilder = env.NewGlobalRef(&c.Object)
+
+		midResponseBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "build", "()Landroid/view/translation/TranslationResponse;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseBuilderSetFinalResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "setFinalResponse", "(Z)Landroid/view/translation/TranslationResponse$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseBuilderSetTranslationResponseValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "setTranslationResponseValue", "(ILandroid/view/translation/TranslationResponseValue;)Landroid/view/translation/TranslationResponse$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midResponseBuilderSetViewTranslationResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResponseBuilder)), "setViewTranslationResponse", "(ILandroid/view/translation/ViewTranslationResponse;)Landroid/view/translation/TranslationResponse$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/translation/TranslationRequestValue")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRequestValue = env.NewGlobalRef(&c.Object)
+
+		midRequestValueDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestValueEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestValueGetText, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "getText", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestValueHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestValueToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestValueWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestValueForText, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsRequestValue)), "forText", "(Ljava/lang/CharSequence;)Landroid/view/translation/TranslationRequestValue;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/translation/TranslationManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
+
+		midManagerGetOnDeviceTranslationSettingsActivityIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getOnDeviceTranslationSettingsActivityIntent", "()Landroid/app/PendingIntent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/translation/TranslationRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRequest = env.NewGlobalRef(&c.Object)
+
+		midRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "getFlags", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/translation/TranslationRequest$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRequestBuilder = env.NewGlobalRef(&c.Object)
+
+		midRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestBuilder)), "build", "()Landroid/view/translation/TranslationRequest;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestBuilderSetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestBuilder)), "setFlags", "(I)Landroid/view/translation/TranslationRequest$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/view/translation/UiTranslationStateCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -819,6 +723,37 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/view/translation/ViewTranslationCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsViewTranslationCallback = env.NewGlobalRef(&c.Object)
+
+		midViewTranslationCallbackOnClearTranslation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationCallback)), "onClearTranslation", "(Landroid/view/View;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationCallbackOnHideTranslation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationCallback)), "onHideTranslation", "(Landroid/view/View;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midViewTranslationCallbackOnShowTranslation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationCallback)), "onShowTranslation", "(Landroid/view/View;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/view/translation/TranslationSpec")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -826,6 +761,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSpec = env.NewGlobalRef(&c.Object)
+		midSpecInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpec)), "<init>", "(Landroid/icu/util/ULocale;I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midSpecDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSpec)), "describeContents", "()I")
 		if err != nil {
@@ -878,15 +817,50 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/translation/TranslationManager")
+	c, err = env.FindClass("android/view/translation/TranslationContext")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsManager = env.NewGlobalRef(&c.Object)
+		clsContext = env.NewGlobalRef(&c.Object)
 
-		midManagerGetOnDeviceTranslationSettingsActivityIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getOnDeviceTranslationSettingsActivityIntent", "()Landroid/app/PendingIntent;")
+		midContextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextGetSourceSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getSourceSpec", "()Landroid/view/translation/TranslationSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextGetTargetSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getTargetSpec", "()Landroid/view/translation/TranslationSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextGetTranslationFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "getTranslationFlags", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -895,57 +869,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/translation/ViewTranslationResponse")
+	c, err = env.FindClass("android/view/translation/TranslationContext$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsViewTranslationResponse = env.NewGlobalRef(&c.Object)
+		clsContextBuilder = env.NewGlobalRef(&c.Object)
 
-		midViewTranslationResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "describeContents", "()I")
+		midContextBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextBuilder)), "build", "()Landroid/view/translation/TranslationContext;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midViewTranslationResponseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midViewTranslationResponseGetAutofillId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "getAutofillId", "()Landroid/view/autofill/AutofillId;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midViewTranslationResponseGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "getValue", "(Ljava/lang/String;)Landroid/view/translation/TranslationResponseValue;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midViewTranslationResponseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midViewTranslationResponseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midViewTranslationResponseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponse)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midContextBuilderSetTranslationFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContextBuilder)), "setTranslationFlags", "(I)Landroid/view/translation/TranslationContext$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -954,22 +893,88 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/translation/ViewTranslationResponse$Builder")
+	c, err = env.FindClass("android/view/translation/Translator")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsViewTranslationResponseBuilder = env.NewGlobalRef(&c.Object)
+		clsTranslator = env.NewGlobalRef(&c.Object)
 
-		midViewTranslationResponseBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponseBuilder)), "build", "()Landroid/view/translation/ViewTranslationResponse;")
+		midTranslatorDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTranslator)), "destroy", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midViewTranslationResponseBuilderSetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsViewTranslationResponseBuilder)), "setValue", "(Ljava/lang/String;Landroid/view/translation/TranslationResponseValue;)Landroid/view/translation/ViewTranslationResponse$Builder;")
+		midTranslatorIsDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTranslator)), "isDestroyed", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/translation/TranslationCapability")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCapability = env.NewGlobalRef(&c.Object)
+
+		midCapabilityDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityGetSourceSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getSourceSpec", "()Landroid/view/translation/TranslationSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getState", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityGetSupportedTranslationFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getSupportedTranslationFlags", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityGetTargetSpec, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "getTargetSpec", "()Landroid/view/translation/TranslationSpec;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityIsUiTranslationEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "isUiTranslationEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilityWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapability)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

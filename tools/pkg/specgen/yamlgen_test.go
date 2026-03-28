@@ -96,6 +96,118 @@ func TestInferPackageMapping(t *testing.T) {
 	}
 }
 
+func TestChooseBestConstructor(t *testing.T) {
+	t.Run("prefers Context param", func(t *testing.T) {
+		ctors := []JavapConstructor{
+			{Params: nil},
+			{Params: []JavapParam{{JavaType: "android.content.Context"}}},
+			{Params: []JavapParam{{JavaType: "int"}, {JavaType: "int"}}},
+		}
+		best := chooseBestConstructor(ctors)
+		if len(best.Params) != 1 || best.Params[0].JavaType != "android.content.Context" {
+			t.Errorf("expected Context constructor, got %+v", best)
+		}
+	})
+
+	t.Run("falls back to no-arg", func(t *testing.T) {
+		ctors := []JavapConstructor{
+			{Params: []JavapParam{{JavaType: "int"}, {JavaType: "int"}}},
+			{Params: nil},
+		}
+		best := chooseBestConstructor(ctors)
+		if len(best.Params) != 0 {
+			t.Errorf("expected no-arg constructor, got %+v", best)
+		}
+	})
+
+	t.Run("falls back to first", func(t *testing.T) {
+		ctors := []JavapConstructor{
+			{Params: []JavapParam{{JavaType: "int"}}},
+			{Params: []JavapParam{{JavaType: "int"}, {JavaType: "int"}}},
+		}
+		best := chooseBestConstructor(ctors)
+		if len(best.Params) != 1 {
+			t.Errorf("expected first constructor (1 param), got %+v", best)
+		}
+	})
+}
+
+func TestClassFromJavap_ConstructorObtain(t *testing.T) {
+	// Reset AndroidServiceName so the test doesn't depend on runtime state.
+	origSvc := AndroidServiceName
+	AndroidServiceName = nil
+	defer func() { AndroidServiceName = origSvc }()
+
+	t.Run("concrete class with constructors gets obtain=constructor", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName: "android.media.MediaRecorder",
+			Constructors: []JavapConstructor{
+				{Params: nil},
+				{Params: []JavapParam{{JavaType: "android.content.Context"}}},
+			},
+			Methods: []JavapMethod{
+				{Name: "start", ReturnType: "void"},
+			},
+		}
+		cls := classFromJavap(jc, "media")
+		if cls.Obtain != "constructor" {
+			t.Errorf("Obtain = %q, want %q", cls.Obtain, "constructor")
+		}
+		// Should pick the Context constructor.
+		if len(cls.ConstructorParams) != 1 {
+			t.Fatalf("len(ConstructorParams) = %d, want 1", len(cls.ConstructorParams))
+		}
+		if cls.ConstructorParams[0].JavaType != "android.content.Context" {
+			t.Errorf("ConstructorParams[0].JavaType = %q, want %q",
+				cls.ConstructorParams[0].JavaType, "android.content.Context")
+		}
+	})
+
+	t.Run("abstract class does not get obtain=constructor", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName:   "android.app.AbstractThing",
+			IsAbstract: true,
+			Constructors: []JavapConstructor{
+				{Params: nil},
+			},
+		}
+		cls := classFromJavap(jc, "app")
+		if cls.Obtain != "" {
+			t.Errorf("Obtain = %q, want empty for abstract class", cls.Obtain)
+		}
+	})
+
+	t.Run("interface does not get obtain=constructor", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName:    "android.app.SomeInterface",
+			IsInterface: true,
+		}
+		cls := classFromJavap(jc, "app")
+		if cls.Obtain != "" {
+			t.Errorf("Obtain = %q, want empty for interface", cls.Obtain)
+		}
+	})
+
+	t.Run("system service class keeps obtain=system_service", func(t *testing.T) {
+		AndroidServiceName = map[string]string{
+			"android.app.AlarmManager": "alarm",
+		}
+		jc := &JavapClass{
+			FullName: "android.app.AlarmManager",
+			Constructors: []JavapConstructor{
+				{Params: nil},
+			},
+		}
+		cls := classFromJavap(jc, "alarm")
+		if cls.Obtain != "system_service" {
+			t.Errorf("Obtain = %q, want %q", cls.Obtain, "system_service")
+		}
+		if cls.ServiceName != "alarm" {
+			t.Errorf("ServiceName = %q, want %q", cls.ServiceName, "alarm")
+		}
+	})
+}
+
 func TestDeduplicateGoTypes(t *testing.T) {
 	t.Run("no collision", func(t *testing.T) {
 		classes := []SpecClass{

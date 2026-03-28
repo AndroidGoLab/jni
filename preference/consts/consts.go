@@ -13,10 +13,10 @@ const (
 )
 
 const (
-	DefaultOrder int = 2147483647
-	Creator      int = 0
+	HeaderIdUndefined int64 = -1
 )
 
 const (
-	HeaderIdUndefined int64 = -1
+	Creator      int = 0
+	DefaultOrder int = 2147483647
 )

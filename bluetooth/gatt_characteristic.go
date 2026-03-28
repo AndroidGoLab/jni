@@ -23,6 +23,29 @@ type GattCharacteristic struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGattCharacteristic creates a new android.bluetooth.BluetoothGattCharacteristic instance.
+func NewGattCharacteristic(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 int32) (*GattCharacteristic, error) {
+	var t GattCharacteristic
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), midGattCharacteristicInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddDescriptor calls android.bluetooth.BluetoothGattCharacteristic.addDescriptor.
 func (m *GattCharacteristic) AddDescriptor(arg0 *jni.Object) (bool, error) {
 	var result bool

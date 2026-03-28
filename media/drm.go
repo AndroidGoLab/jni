@@ -23,6 +23,29 @@ type Drm struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDrm creates a new android.media.MediaDrm instance.
+func NewDrm(vm *jni.VM, arg0 *jni.Object) (*Drm, error) {
+	var t Drm
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrm)), midDrmInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearOnEventListener calls android.media.MediaDrm.clearOnEventListener.
 func (m *Drm) ClearOnEventListener() error {
 

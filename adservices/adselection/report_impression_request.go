@@ -23,6 +23,29 @@ type ReportImpressionRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewReportImpressionRequest creates a new android.adservices.adselection.ReportImpressionRequest instance.
+func NewReportImpressionRequest(vm *jni.VM, arg0 int64) (*ReportImpressionRequest, error) {
+	var t ReportImpressionRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), midReportImpressionRequestInit, jni.LongValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAdSelectionConfig calls android.adservices.adselection.ReportImpressionRequest.getAdSelectionConfig.
 func (m *ReportImpressionRequest) GetAdSelectionConfig() (*jni.Object, error) {
 	var result *jni.Object

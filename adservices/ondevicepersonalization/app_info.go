@@ -23,6 +23,33 @@ type AppInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppInfo creates a new android.adservices.ondevicepersonalization.AppInfo instance.
+func NewAppInfo(vm *jni.VM, arg0 bool) (*AppInfo, error) {
+	var t AppInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppInfo)), midAppInfoInit, jni.BooleanValue(jArg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.adservices.ondevicepersonalization.AppInfo.describeContents.
 func (m *AppInfo) DescribeContents() (int32, error) {
 	var result int32

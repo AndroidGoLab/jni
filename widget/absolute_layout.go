@@ -23,6 +23,29 @@ type AbsoluteLayout struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAbsoluteLayout creates a new android.widget.AbsoluteLayout instance.
+func NewAbsoluteLayout(vm *jni.VM, arg0 *jni.Object) (*AbsoluteLayout, error) {
+	var t AbsoluteLayout
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAbsoluteLayout)), midAbsoluteLayoutInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GenerateLayoutParams calls android.widget.AbsoluteLayout.generateLayoutParams.
 func (m *AbsoluteLayout) GenerateLayoutParams(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

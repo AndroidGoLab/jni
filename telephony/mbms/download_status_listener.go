@@ -23,6 +23,28 @@ type DownloadStatusListener struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDownloadStatusListener creates a new android.telephony.mbms.DownloadStatusListener instance.
+func NewDownloadStatusListener(vm *jni.VM) (*DownloadStatusListener, error) {
+	var t DownloadStatusListener
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadStatusListener)), midDownloadStatusListenerInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnStatusUpdated calls android.telephony.mbms.DownloadStatusListener.onStatusUpdated.
 func (m *DownloadStatusListener) OnStatusUpdated(
 	arg0 *jni.Object,

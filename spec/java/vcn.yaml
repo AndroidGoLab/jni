@@ -5,9 +5,13 @@
 package: vcn
 go_import: github.com/AndroidGoLab/jni/net/vcn
 classes:
-    - java_class: android.net.vcn.VcnUnderlyingNetworkTemplate
-      go_type: UnderlyingNetworkTemplate
+    - java_class: android.net.vcn.VcnConfig
+      go_type: Config
       methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
         - java_method: equals
           go_name: Equals
           params:
@@ -15,87 +19,32 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getMetered
-          go_name: GetMetered
-          returns: int
-          error: true
-        - java_method: getMinEntryDownstreamBandwidthKbps
-          go_name: GetMinEntryDownstreamBandwidthKbps
-          returns: int
-          error: true
-        - java_method: getMinEntryUpstreamBandwidthKbps
-          go_name: GetMinEntryUpstreamBandwidthKbps
-          returns: int
-          error: true
-        - java_method: getMinExitDownstreamBandwidthKbps
-          go_name: GetMinExitDownstreamBandwidthKbps
-          returns: int
-          error: true
-        - java_method: getMinExitUpstreamBandwidthKbps
-          go_name: GetMinExitUpstreamBandwidthKbps
-          returns: int
-          error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.net.vcn.VcnManager
-      go_type: Manager
-      methods:
-        - java_method: clearVcnConfig
-          go_name: ClearVcnConfig
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: android.os.ParcelUuid
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: registerVcnStatusCallback
-          go_name: RegisterVcnStatusCallback
-          params:
-            - java_type: android.os.ParcelUuid
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.net.vcn.VcnManager$VcnStatusCallback
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: setVcnConfig
-          go_name: SetVcnConfig
-          params:
-            - java_type: android.os.ParcelUuid
-              go_name: arg0
-            - java_type: android.net.vcn.VcnConfig
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: unregisterVcnStatusCallback
-          go_name: UnregisterVcnStatusCallback
-          params:
-            - java_type: android.net.vcn.VcnManager$VcnStatusCallback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.net.vcn.VcnManager$VcnStatusCallback
-      go_type: ManagerVcnStatusCallback
-      methods:
-        - java_method: onGatewayConnectionError
-          go_name: OnGatewayConnectionError
-          params:
-            - java_type: String
+            - java_type: android.os.Parcel
               go_name: arg0
             - java_type: int
               go_name: arg1
-            - java_type: java.lang.Throwable
-              go_name: arg2
           returns: void
           error: true
-        - java_method: onStatusChanged
-          go_name: OnStatusChanged
+    - java_class: android.net.vcn.VcnConfig$Builder
+      go_type: ConfigBuilder
+      methods:
+        - java_method: addGatewayConnectionConfig
+          go_name: AddGatewayConnectionConfig
           params:
-            - java_type: int
+            - java_type: android.net.vcn.VcnGatewayConnectionConfig
               go_name: arg0
-          returns: void
+          returns: android.net.vcn.VcnConfig$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.net.vcn.VcnConfig
           error: true
     - java_class: android.net.vcn.VcnCellUnderlyingNetworkTemplate
       go_type: CellUnderlyingNetworkTemplate
@@ -230,47 +179,6 @@ classes:
             - java_type: int
               go_name: arg0
           returns: android.net.vcn.VcnCellUnderlyingNetworkTemplate$Builder
-          error: true
-    - java_class: android.net.vcn.VcnConfig
-      go_type: Config
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.net.vcn.VcnConfig$Builder
-      go_type: ConfigBuilder
-      methods:
-        - java_method: addGatewayConnectionConfig
-          go_name: AddGatewayConnectionConfig
-          params:
-            - java_type: android.net.vcn.VcnGatewayConnectionConfig
-              go_name: arg0
-          returns: android.net.vcn.VcnConfig$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.net.vcn.VcnConfig
           error: true
     - java_class: android.net.vcn.VcnWifiUnderlyingNetworkTemplate
       go_type: WifiUnderlyingNetworkTemplate
@@ -426,15 +334,107 @@ classes:
               go_name: arg0
           returns: android.net.vcn.VcnGatewayConnectionConfig$Builder
           error: true
+    - java_class: android.net.vcn.VcnManager
+      go_type: Manager
+      methods:
+        - java_method: clearVcnConfig
+          go_name: ClearVcnConfig
+          params:
+            - java_type: android.os.ParcelUuid
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: registerVcnStatusCallback
+          go_name: RegisterVcnStatusCallback
+          params:
+            - java_type: android.os.ParcelUuid
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.net.vcn.VcnManager$VcnStatusCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: setVcnConfig
+          go_name: SetVcnConfig
+          params:
+            - java_type: android.os.ParcelUuid
+              go_name: arg0
+            - java_type: android.net.vcn.VcnConfig
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: unregisterVcnStatusCallback
+          go_name: UnregisterVcnStatusCallback
+          params:
+            - java_type: android.net.vcn.VcnManager$VcnStatusCallback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.net.vcn.VcnManager$VcnStatusCallback
+      go_type: ManagerVcnStatusCallback
+      methods:
+        - java_method: onGatewayConnectionError
+          go_name: OnGatewayConnectionError
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: java.lang.Throwable
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onStatusChanged
+          go_name: OnStatusChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.net.vcn.VcnUnderlyingNetworkTemplate
+      go_type: UnderlyingNetworkTemplate
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getMetered
+          go_name: GetMetered
+          returns: int
+          error: true
+        - java_method: getMinEntryDownstreamBandwidthKbps
+          go_name: GetMinEntryDownstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getMinEntryUpstreamBandwidthKbps
+          go_name: GetMinEntryUpstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getMinExitDownstreamBandwidthKbps
+          go_name: GetMinExitDownstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: getMinExitUpstreamBandwidthKbps
+          go_name: GetMinExitUpstreamBandwidthKbps
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
 constants:
-    - go_name: MatchAny
+    - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: MatchForbidden
-      value: "2"
+    - go_name: MinUdpPort4500NatTimeoutUnset
+      value: "-1"
       go_type: int
-    - go_name: MatchRequired
-      value: "1"
+    - go_name: VcnGatewayOptionEnableDataStallRecoveryWithMobility
+      value: "0"
       go_type: int
     - go_name: VcnErrorCodeConfigError
       value: "1"
@@ -457,12 +457,12 @@ constants:
     - go_name: VcnStatusCodeSafeMode
       value: "3"
       go_type: int
-    - go_name: Creator
+    - go_name: MatchAny
       value: "0"
       go_type: int
-    - go_name: MinUdpPort4500NatTimeoutUnset
-      value: "-1"
+    - go_name: MatchForbidden
+      value: "2"
       go_type: int
-    - go_name: VcnGatewayOptionEnableDataStallRecoveryWithMobility
-      value: "0"
+    - go_name: MatchRequired
+      value: "1"
       go_type: int

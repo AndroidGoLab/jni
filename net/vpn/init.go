@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsService                      *jni.GlobalRef
+	midServiceInit                  jni.MethodID
 	midServiceIsAlwaysOn            jni.MethodID
 	midServiceIsLockdownEnabled     jni.MethodID
 	midServiceOnBind                jni.MethodID
@@ -83,6 +84,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsService = env.NewGlobalRef(&c.Object)
+		midServiceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midServiceIsAlwaysOn, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsService)), "isAlwaysOn", "()Z")
 		if err != nil {

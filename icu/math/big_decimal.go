@@ -23,6 +23,29 @@ type BigDecimal struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBigDecimal creates a new android.icu.math.BigDecimal instance.
+func NewBigDecimal(vm *jni.VM, arg0 *jni.Object) (*BigDecimal, error) {
+	var t BigDecimal
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBigDecimal)), midBigDecimalInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Abs0 calls android.icu.math.BigDecimal.abs.
 func (m *BigDecimal) Abs0() (*jni.Object, error) {
 	var result *jni.Object

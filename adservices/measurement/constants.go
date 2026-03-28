@@ -5,9 +5,9 @@ package measurement
 import "github.com/AndroidGoLab/jni/adservices/measurement/consts"
 
 const (
-	Creator                         = consts.Creator
 	MeasurementApiStateDisabled     = consts.MeasurementApiStateDisabled
 	MeasurementApiStateEnabled      = consts.MeasurementApiStateEnabled
+	Creator                         = consts.Creator
 	DeletionModeAll                 = consts.DeletionModeAll
 	DeletionModeExcludeInternalData = consts.DeletionModeExcludeInternalData
 	MatchBehaviorDelete             = consts.MatchBehaviorDelete

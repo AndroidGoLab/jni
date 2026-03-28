@@ -23,6 +23,28 @@ type ArraySet struct {
 	Obj *jni.GlobalRef
 }
 
+// NewArraySet creates a new android.util.ArraySet instance.
+func NewArraySet(vm *jni.VM) (*ArraySet, error) {
+	var t ArraySet
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArraySet)), midArraySetInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clear calls android.util.ArraySet.clear.
 func (m *ArraySet) Clear() error {
 

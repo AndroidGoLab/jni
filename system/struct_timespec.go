@@ -23,6 +23,29 @@ type StructTimespec struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStructTimespec creates a new android.system.StructTimespec instance.
+func NewStructTimespec(vm *jni.VM, arg0 int64, arg1 int64) (*StructTimespec, error) {
+	var t StructTimespec
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructTimespec)), midStructTimespecInit, jni.LongValue(arg0), jni.LongValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CompareTo1 calls android.system.StructTimespec.compareTo.
 func (m *StructTimespec) CompareTo1(arg0 *jni.Object) (int32, error) {
 	var result int32

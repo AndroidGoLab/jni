@@ -23,6 +23,35 @@ type LogPrinter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLogPrinter creates a new android.util.LogPrinter instance.
+func NewLogPrinter(vm *jni.VM, arg0 int32, arg1 string) (*LogPrinter, error) {
+	var t LogPrinter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLogPrinter)), midLogPrinterInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Println calls android.util.LogPrinter.println.
 func (m *LogPrinter) Println(arg0 string) error {
 

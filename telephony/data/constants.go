@@ -6,6 +6,12 @@ import "github.com/AndroidGoLab/jni/telephony/data/consts"
 
 const (
 	Creator                                         = consts.Creator
+	RouteSscMode1                                   = consts.RouteSscMode1
+	RouteSscMode2                                   = consts.RouteSscMode2
+	RouteSscMode3                                   = consts.RouteSscMode3
+	SessionTypeIpv4                                 = consts.SessionTypeIpv4
+	SessionTypeIpv4v6                               = consts.SessionTypeIpv4v6
+	SessionTypeIpv6                                 = consts.SessionTypeIpv6
 	SliceDifferentiatorNoSlice                      = consts.SliceDifferentiatorNoSlice
 	SliceServiceTypeEmbb                            = consts.SliceServiceTypeEmbb
 	SliceServiceTypeMiot                            = consts.SliceServiceTypeMiot
@@ -49,10 +55,4 @@ const (
 	TypeSupl                                        = consts.TypeSupl
 	TypeVsim                                        = consts.TypeVsim
 	TypeXcap                                        = consts.TypeXcap
-	RouteSscMode1                                   = consts.RouteSscMode1
-	RouteSscMode2                                   = consts.RouteSscMode2
-	RouteSscMode3                                   = consts.RouteSscMode3
-	SessionTypeIpv4                                 = consts.SessionTypeIpv4
-	SessionTypeIpv4v6                               = consts.SessionTypeIpv4v6
-	SessionTypeIpv6                                 = consts.SessionTypeIpv6
 )

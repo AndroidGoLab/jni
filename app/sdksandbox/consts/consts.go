@@ -3,7 +3,15 @@
 package consts
 
 const (
-	Creator                                int = 0
+	ExtraDisplayId      string = "android.app.sdksandbox.extra.DISPLAY_ID"
+	ExtraHeightInPixels string = "android.app.sdksandbox.extra.HEIGHT_IN_PIXELS"
+	ExtraHostToken      string = "android.app.sdksandbox.extra.HOST_TOKEN"
+	ExtraSurfacePackage string = "android.app.sdksandbox.extra.SURFACE_PACKAGE"
+	ExtraWidthInPixels  string = "android.app.sdksandbox.extra.WIDTH_IN_PIXELS"
+	SdkSandboxService   string = "sdk_sandbox"
+)
+
+const (
 	LoadSdkAlreadyLoaded                   int = 101
 	LoadSdkInternalError                   int = 500
 	LoadSdkNotFound                        int = 100
@@ -14,13 +22,5 @@ const (
 	SdkSandboxProcessNotAvailable          int = 503
 	SdkSandboxStateDisabled                int = 0
 	SdkSandboxStateEnabledProcessIsolation int = 2
-)
-
-const (
-	ExtraDisplayId      string = "android.app.sdksandbox.extra.DISPLAY_ID"
-	ExtraHeightInPixels string = "android.app.sdksandbox.extra.HEIGHT_IN_PIXELS"
-	ExtraHostToken      string = "android.app.sdksandbox.extra.HOST_TOKEN"
-	ExtraSurfacePackage string = "android.app.sdksandbox.extra.SURFACE_PACKAGE"
-	ExtraWidthInPixels  string = "android.app.sdksandbox.extra.WIDTH_IN_PIXELS"
-	SdkSandboxService   string = "sdk_sandbox"
+	Creator                                int = 0
 )

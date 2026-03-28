@@ -23,6 +23,34 @@ type Info struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInfo creates a new android.telephony.euicc.EuiccInfo instance.
+func NewInfo(vm *jni.VM, arg0 string) (*Info, error) {
+	var t Info
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInfo)), midInfoInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telephony.euicc.EuiccInfo.describeContents.
 func (m *Info) DescribeContents() (int32, error) {
 	var result int32

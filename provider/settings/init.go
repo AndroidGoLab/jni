@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsSettings                *jni.GlobalRef
+	midSettingsInit            jni.MethodID
 	midSettingsCanDrawOverlays jni.MethodID
 
 	clsGlobal            *jni.GlobalRef
@@ -108,6 +109,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSettings = env.NewGlobalRef(&c.Object)
+		midSettingsInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettings)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midSettingsCanDrawOverlays, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsSettings)), "canDrawOverlays", "(Landroid/content/Context;)Z")
 		if err != nil {

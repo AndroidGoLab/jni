@@ -3,10 +3,6 @@
 package consts
 
 const (
-	ErrorKeyErrorCode                         string = "error_code"
-	ErrorKeyMethodName                        string = "method_name"
-	ServiceInterface                          string = "android.media.tv.ad.TvAdService"
-	ServiceMetaData                           string = "android.media.tv.ad.service"
 	ActionAppLinkCommand                      string = "android.media.tv.ad.action.APP_LINK_COMMAND"
 	AppLinkKeyBackUri                         string = "back_uri"
 	AppLinkKeyClassName                       string = "class_name"
@@ -25,6 +21,10 @@ const (
 	SessionDataTypeAdRequest                  string = "ad_request"
 	SessionDataTypeBroadcastInfoRequest       string = "broadcast_info_request"
 	SessionDataTypeRemoveBroadcastInfoRequest string = "remove_broadcast_info_request"
+	ErrorKeyErrorCode                         string = "error_code"
+	ErrorKeyMethodName                        string = "method_name"
+	ServiceInterface                          string = "android.media.tv.ad.TvAdService"
+	ServiceMetaData                           string = "android.media.tv.ad.service"
 )
 
 const (

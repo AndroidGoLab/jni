@@ -23,6 +23,34 @@ type RuntimeXfermode struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRuntimeXfermode creates a new android.graphics.RuntimeXfermode instance.
+func NewRuntimeXfermode(vm *jni.VM, arg0 string) (*RuntimeXfermode, error) {
+	var t RuntimeXfermode
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeXfermode)), midRuntimeXfermodeInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // SetColorUniform2 calls android.graphics.RuntimeXfermode.setColorUniform.
 func (m *RuntimeXfermode) SetColorUniform2(arg0 string, arg1 *jni.Object) error {
 

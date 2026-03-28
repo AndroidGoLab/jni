@@ -5,128 +5,89 @@
 package: number
 go_import: github.com/AndroidGoLab/jni/icu/number
 classes:
-    - java_class: android.icu.number.NumberRangeFormatter
-      go_type: RangeFormatter
-      static_methods:
-        - java_method: with
-          go_name: With
-          returns: android.icu.number.UnlocalizedNumberRangeFormatter
-          error: true
-        - java_method: withLocale
-          go_name: WithLocale1
+    - java_class: android.icu.number.ScientificNotation
+      go_type: ScientificNotation
+      methods:
+        - java_method: withExponentSignDisplay
+          go_name: WithExponentSignDisplay
           params:
-            - java_type: android.icu.util.ULocale
+            - java_type: android.icu.number.NumberFormatter$SignDisplay
               go_name: arg0
-          returns: android.icu.number.LocalizedNumberRangeFormatter
+          returns: android.icu.number.ScientificNotation
           error: true
-        - java_method: withLocale
-          go_name: WithLocale1_1
+        - java_method: withMinExponentDigits
+          go_name: WithMinExponentDigits
           params:
-            - java_type: java.util.Locale
+            - java_type: int
               go_name: arg0
-          returns: android.icu.number.LocalizedNumberRangeFormatter
-          error: true
-    - java_class: android.icu.number.NumberRangeFormatter$RangeCollapse
-      go_type: RangeFormatterRangeCollapse
-      static_methods:
-        - java_method: values
-          go_name: Values
-          returns: android.icu.number.NumberRangeFormatter$RangeCollapse[]
-          error: true
-        - java_method: valueOf
-          go_name: ValueOf
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.icu.number.NumberRangeFormatter$RangeCollapse
-          error: true
-    - java_class: android.icu.number.NumberRangeFormatter$RangeIdentityFallback
-      go_type: RangeFormatterRangeIdentityFallback
-      static_methods:
-        - java_method: values
-          go_name: Values
-          returns: android.icu.number.NumberRangeFormatter$RangeIdentityFallback[]
-          error: true
-        - java_method: valueOf
-          go_name: ValueOf
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.icu.number.NumberRangeFormatter$RangeIdentityFallback
-          error: true
-    - java_class: android.icu.number.NumberRangeFormatter$RangeIdentityResult
-      go_type: RangeFormatterRangeIdentityResult
-      static_methods:
-        - java_method: values
-          go_name: Values
-          returns: android.icu.number.NumberRangeFormatter$RangeIdentityResult[]
-          error: true
-        - java_method: valueOf
-          go_name: ValueOf
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.icu.number.NumberRangeFormatter$RangeIdentityResult
+          returns: android.icu.number.ScientificNotation
           error: true
     - java_class: android.icu.number.CompactNotation
       go_type: CompactNotation
-    - java_class: android.icu.number.UnlocalizedNumberRangeFormatter
-      go_type: UnlocalizedNumberRangeFormatter
-      methods:
-        - java_method: locale
-          go_name: Locale1
+    - java_class: android.icu.number.Scale
+      go_type: Scale
+      static_methods:
+        - java_method: byBigDecimal
+          go_name: ByBigDecimal
           params:
-            - java_type: android.icu.util.ULocale
+            - java_type: java.math.BigDecimal
               go_name: arg0
-          returns: android.icu.number.LocalizedNumberRangeFormatter
+          returns: android.icu.number.Scale
           error: true
-        - java_method: locale
-          go_name: Locale1_1
-          params:
-            - java_type: java.util.Locale
-              go_name: arg0
-          returns: android.icu.number.LocalizedNumberRangeFormatter
-          error: true
-    - java_class: android.icu.number.SimpleNotation
-      go_type: SimpleNotation
-    - java_class: android.icu.number.LocalizedNumberFormatter
-      go_type: LocalizedNumberFormatter
-      methods:
-        - java_method: format
-          go_name: Format1
-          params:
-            - java_type: android.icu.util.Measure
-              go_name: arg0
-          returns: android.icu.number.FormattedNumber
-          error: true
-        - java_method: format
-          go_name: Format1_1
+        - java_method: byDouble
+          go_name: ByDouble
           params:
             - java_type: double
               go_name: arg0
-          returns: android.icu.number.FormattedNumber
+          returns: android.icu.number.Scale
           error: true
-        - java_method: format
-          go_name: Format1_2
+        - java_method: byDoubleAndPowerOfTen
+          go_name: ByDoubleAndPowerOfTen
           params:
-            - java_type: java.lang.Number
+            - java_type: double
               go_name: arg0
-          returns: android.icu.number.FormattedNumber
+            - java_type: int
+              go_name: arg1
+          returns: android.icu.number.Scale
           error: true
-        - java_method: format
-          go_name: Format1_3
+        - java_method: none
+          go_name: None
+          returns: android.icu.number.Scale
+          error: true
+        - java_method: powerOfTen
+          go_name: PowerOfTen
           params:
-            - java_type: long
+            - java_type: int
               go_name: arg0
-          returns: android.icu.number.FormattedNumber
+          returns: android.icu.number.Scale
           error: true
-        - java_method: toFormat
-          go_name: ToFormat
-          returns: java.text.Format
+    - java_class: android.icu.number.FractionPrecision
+      go_type: FractionPrecision
+      methods:
+        - java_method: withMaxDigits
+          go_name: WithMaxDigits
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.icu.number.Precision
           error: true
-        - java_method: withoutLocale
-          go_name: WithoutLocale
-          returns: android.icu.number.UnlocalizedNumberFormatter
+        - java_method: withMinDigits
+          go_name: WithMinDigits
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.icu.number.Precision
+          error: true
+        - java_method: withSignificantDigits
+          go_name: WithSignificantDigits
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.icu.number.NumberFormatter$RoundingPriority
+              go_name: arg2
+          returns: android.icu.number.Precision
           error: true
     - java_class: android.icu.number.Precision
       go_type: Precision
@@ -220,6 +181,40 @@ classes:
         - java_method: unlimited
           go_name: Unlimited
           returns: android.icu.number.Precision
+          error: true
+    - java_class: android.icu.number.LocalizedNumberRangeFormatter
+      go_type: LocalizedNumberRangeFormatter
+      methods:
+        - java_method: formatRange
+          go_name: FormatRange2
+          params:
+            - java_type: double
+              go_name: arg0
+            - java_type: double
+              go_name: arg1
+          returns: android.icu.number.FormattedNumberRange
+          error: true
+        - java_method: formatRange
+          go_name: FormatRange2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.icu.number.FormattedNumberRange
+          error: true
+        - java_method: formatRange
+          go_name: FormatRange2_2
+          params:
+            - java_type: java.lang.Number
+              go_name: arg0
+            - java_type: java.lang.Number
+              go_name: arg1
+          returns: android.icu.number.FormattedNumberRange
+          error: true
+        - java_method: withoutLocale
+          go_name: WithoutLocale
+          returns: android.icu.number.UnlocalizedNumberRangeFormatter
           error: true
     - java_class: android.icu.number.NumberFormatter
       go_type: Formatter
@@ -326,45 +321,47 @@ classes:
               go_name: arg0
           returns: android.icu.number.NumberFormatter$UnitWidth
           error: true
-    - java_class: android.icu.number.Scale
-      go_type: Scale
-      static_methods:
-        - java_method: byBigDecimal
-          go_name: ByBigDecimal
+    - java_class: android.icu.number.LocalizedNumberFormatter
+      go_type: LocalizedNumberFormatter
+      methods:
+        - java_method: format
+          go_name: Format1
           params:
-            - java_type: java.math.BigDecimal
+            - java_type: android.icu.util.Measure
               go_name: arg0
-          returns: android.icu.number.Scale
+          returns: android.icu.number.FormattedNumber
           error: true
-        - java_method: byDouble
-          go_name: ByDouble
-          params:
-            - java_type: double
-              go_name: arg0
-          returns: android.icu.number.Scale
-          error: true
-        - java_method: byDoubleAndPowerOfTen
-          go_name: ByDoubleAndPowerOfTen
+        - java_method: format
+          go_name: Format1_1
           params:
             - java_type: double
               go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.icu.number.Scale
+          returns: android.icu.number.FormattedNumber
           error: true
-        - java_method: none
-          go_name: None
-          returns: android.icu.number.Scale
-          error: true
-        - java_method: powerOfTen
-          go_name: PowerOfTen
+        - java_method: format
+          go_name: Format1_2
           params:
-            - java_type: int
+            - java_type: java.lang.Number
               go_name: arg0
-          returns: android.icu.number.Scale
+          returns: android.icu.number.FormattedNumber
           error: true
-    - java_class: android.icu.number.NumberFormatterSettings
-      go_type: FormatterSettings
+        - java_method: format
+          go_name: Format1_3
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.icu.number.FormattedNumber
+          error: true
+        - java_method: toFormat
+          go_name: ToFormat
+          returns: java.text.Format
+          error: true
+        - java_method: withoutLocale
+          go_name: WithoutLocale
+          returns: android.icu.number.UnlocalizedNumberFormatter
+          error: true
+    - java_class: android.icu.number.NumberRangeFormatterSettings
+      go_type: RangeFormatterSettings
       methods:
         - java_method: equals
           go_name: Equals
@@ -395,82 +392,22 @@ classes:
               go_name: arg0
           returns: android.icu.number.IntegerWidth
           error: true
-    - java_class: android.icu.number.CurrencyPrecision
-      go_type: CurrencyPrecision
+    - java_class: android.icu.number.UnlocalizedNumberFormatter
+      go_type: UnlocalizedNumberFormatter
       methods:
-        - java_method: withCurrency
-          go_name: WithCurrency
+        - java_method: locale
+          go_name: Locale1
           params:
-            - java_type: android.icu.util.Currency
+            - java_type: android.icu.util.ULocale
               go_name: arg0
-          returns: android.icu.number.Precision
+          returns: android.icu.number.LocalizedNumberFormatter
           error: true
-    - java_class: android.icu.number.FormattedNumber
-      go_type: FormattedNumber
-      methods:
-        - java_method: charAt
-          go_name: CharAt
+        - java_method: locale
+          go_name: Locale1_1
           params:
-            - java_type: int
+            - java_type: java.util.Locale
               go_name: arg0
-          returns: char
-          error: true
-        - java_method: getNounClass
-          go_name: GetNounClass
-          returns: android.icu.text.DisplayOptions$NounClass
-          error: true
-        - java_method: getOutputUnit
-          go_name: GetOutputUnit
-          returns: android.icu.util.MeasureUnit
-          error: true
-        - java_method: length
-          go_name: Length
-          returns: int
-          error: true
-        - java_method: nextPosition
-          go_name: NextPosition
-          params:
-            - java_type: android.icu.text.ConstrainedFieldPosition
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: subSequence
-          go_name: SubSequence
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: toBigDecimal
-          go_name: ToBigDecimal
-          returns: java.math.BigDecimal
-          error: true
-        - java_method: toCharacterIterator
-          go_name: ToCharacterIterator
-          returns: java.text.AttributedCharacterIterator
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.icu.number.ScientificNotation
-      go_type: ScientificNotation
-      methods:
-        - java_method: withExponentSignDisplay
-          go_name: WithExponentSignDisplay
-          params:
-            - java_type: android.icu.number.NumberFormatter$SignDisplay
-              go_name: arg0
-          returns: android.icu.number.ScientificNotation
-          error: true
-        - java_method: withMinExponentDigits
-          go_name: WithMinExponentDigits
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.icu.number.ScientificNotation
+          returns: android.icu.number.LocalizedNumberFormatter
           error: true
     - java_class: android.icu.number.Notation
       go_type: Notation
@@ -495,23 +432,8 @@ classes:
           go_name: Simple
           returns: android.icu.number.SimpleNotation
           error: true
-    - java_class: android.icu.number.UnlocalizedNumberFormatter
-      go_type: UnlocalizedNumberFormatter
-      methods:
-        - java_method: locale
-          go_name: Locale1
-          params:
-            - java_type: android.icu.util.ULocale
-              go_name: arg0
-          returns: android.icu.number.LocalizedNumberFormatter
-          error: true
-        - java_method: locale
-          go_name: Locale1_1
-          params:
-            - java_type: java.util.Locale
-              go_name: arg0
-          returns: android.icu.number.LocalizedNumberFormatter
-          error: true
+    - java_class: android.icu.number.SimpleNotation
+      go_type: SimpleNotation
     - java_class: android.icu.number.FormattedNumberRange
       go_type: FormattedNumberRange
       methods:
@@ -573,42 +495,138 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.icu.number.LocalizedNumberRangeFormatter
-      go_type: LocalizedNumberRangeFormatter
-      methods:
-        - java_method: formatRange
-          go_name: FormatRange2
-          params:
-            - java_type: double
-              go_name: arg0
-            - java_type: double
-              go_name: arg1
-          returns: android.icu.number.FormattedNumberRange
-          error: true
-        - java_method: formatRange
-          go_name: FormatRange2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.icu.number.FormattedNumberRange
-          error: true
-        - java_method: formatRange
-          go_name: FormatRange2_2
-          params:
-            - java_type: java.lang.Number
-              go_name: arg0
-            - java_type: java.lang.Number
-              go_name: arg1
-          returns: android.icu.number.FormattedNumberRange
-          error: true
-        - java_method: withoutLocale
-          go_name: WithoutLocale
+    - java_class: android.icu.number.NumberRangeFormatter
+      go_type: RangeFormatter
+      static_methods:
+        - java_method: with
+          go_name: With
           returns: android.icu.number.UnlocalizedNumberRangeFormatter
           error: true
-    - java_class: android.icu.number.NumberRangeFormatterSettings
-      go_type: RangeFormatterSettings
+        - java_method: withLocale
+          go_name: WithLocale1
+          params:
+            - java_type: android.icu.util.ULocale
+              go_name: arg0
+          returns: android.icu.number.LocalizedNumberRangeFormatter
+          error: true
+        - java_method: withLocale
+          go_name: WithLocale1_1
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+          returns: android.icu.number.LocalizedNumberRangeFormatter
+          error: true
+    - java_class: android.icu.number.NumberRangeFormatter$RangeCollapse
+      go_type: RangeFormatterRangeCollapse
+      static_methods:
+        - java_method: values
+          go_name: Values
+          returns: android.icu.number.NumberRangeFormatter$RangeCollapse[]
+          error: true
+        - java_method: valueOf
+          go_name: ValueOf
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.icu.number.NumberRangeFormatter$RangeCollapse
+          error: true
+    - java_class: android.icu.number.NumberRangeFormatter$RangeIdentityFallback
+      go_type: RangeFormatterRangeIdentityFallback
+      static_methods:
+        - java_method: values
+          go_name: Values
+          returns: android.icu.number.NumberRangeFormatter$RangeIdentityFallback[]
+          error: true
+        - java_method: valueOf
+          go_name: ValueOf
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.icu.number.NumberRangeFormatter$RangeIdentityFallback
+          error: true
+    - java_class: android.icu.number.NumberRangeFormatter$RangeIdentityResult
+      go_type: RangeFormatterRangeIdentityResult
+      static_methods:
+        - java_method: values
+          go_name: Values
+          returns: android.icu.number.NumberRangeFormatter$RangeIdentityResult[]
+          error: true
+        - java_method: valueOf
+          go_name: ValueOf
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.icu.number.NumberRangeFormatter$RangeIdentityResult
+          error: true
+    - java_class: android.icu.number.UnlocalizedNumberRangeFormatter
+      go_type: UnlocalizedNumberRangeFormatter
+      methods:
+        - java_method: locale
+          go_name: Locale1
+          params:
+            - java_type: android.icu.util.ULocale
+              go_name: arg0
+          returns: android.icu.number.LocalizedNumberRangeFormatter
+          error: true
+        - java_method: locale
+          go_name: Locale1_1
+          params:
+            - java_type: java.util.Locale
+              go_name: arg0
+          returns: android.icu.number.LocalizedNumberRangeFormatter
+          error: true
+    - java_class: android.icu.number.FormattedNumber
+      go_type: FormattedNumber
+      methods:
+        - java_method: charAt
+          go_name: CharAt
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: char
+          error: true
+        - java_method: getNounClass
+          go_name: GetNounClass
+          returns: android.icu.text.DisplayOptions$NounClass
+          error: true
+        - java_method: getOutputUnit
+          go_name: GetOutputUnit
+          returns: android.icu.util.MeasureUnit
+          error: true
+        - java_method: length
+          go_name: Length
+          returns: int
+          error: true
+        - java_method: nextPosition
+          go_name: NextPosition
+          params:
+            - java_type: android.icu.text.ConstrainedFieldPosition
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: subSequence
+          go_name: SubSequence
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toBigDecimal
+          go_name: ToBigDecimal
+          returns: java.math.BigDecimal
+          error: true
+        - java_method: toCharacterIterator
+          go_name: ToCharacterIterator
+          returns: java.text.AttributedCharacterIterator
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.icu.number.NumberFormatterSettings
+      go_type: FormatterSettings
       methods:
         - java_method: equals
           go_name: Equals
@@ -621,69 +639,21 @@ classes:
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.icu.number.FractionPrecision
-      go_type: FractionPrecision
+    - java_class: android.icu.number.CurrencyPrecision
+      go_type: CurrencyPrecision
       methods:
-        - java_method: withMaxDigits
-          go_name: WithMaxDigits
+        - java_method: withCurrency
+          go_name: WithCurrency
           params:
-            - java_type: int
+            - java_type: android.icu.util.Currency
               go_name: arg0
-          returns: android.icu.number.Precision
-          error: true
-        - java_method: withMinDigits
-          go_name: WithMinDigits
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.icu.number.Precision
-          error: true
-        - java_method: withSignificantDigits
-          go_name: WithSignificantDigits
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.icu.number.NumberFormatter$RoundingPriority
-              go_name: arg2
           returns: android.icu.number.Precision
           error: true
 constants:
-    - go_name: All
+    - go_name: Always
       value: "0"
       go_type: int
     - go_name: Auto
-      value: "0"
-      go_type: int
-    - go_name: None
-      value: "0"
-      go_type: int
-    - go_name: Unit
-      value: "0"
-      go_type: int
-    - go_name: Approximately
-      value: "0"
-      go_type: int
-    - go_name: ApproximatelyOrSingleValue
-      value: "0"
-      go_type: int
-    - go_name: Range
-      value: "0"
-      go_type: int
-    - go_name: SingleValue
-      value: "0"
-      go_type: int
-    - go_name: EqualAfterRounding
-      value: "0"
-      go_type: int
-    - go_name: EqualBeforeRounding
-      value: "0"
-      go_type: int
-    - go_name: NotEqual
-      value: "0"
-      go_type: int
-    - go_name: Always
       value: "0"
       go_type: int
     - go_name: Min2
@@ -747,5 +717,35 @@ constants:
       value: "0"
       go_type: int
     - go_name: Variant
+      value: "0"
+      go_type: int
+    - go_name: All
+      value: "0"
+      go_type: int
+    - go_name: None
+      value: "0"
+      go_type: int
+    - go_name: Unit
+      value: "0"
+      go_type: int
+    - go_name: Approximately
+      value: "0"
+      go_type: int
+    - go_name: ApproximatelyOrSingleValue
+      value: "0"
+      go_type: int
+    - go_name: Range
+      value: "0"
+      go_type: int
+    - go_name: SingleValue
+      value: "0"
+      go_type: int
+    - go_name: EqualAfterRounding
+      value: "0"
+      go_type: int
+    - go_name: EqualBeforeRounding
+      value: "0"
+      go_type: int
+    - go_name: NotEqual
       value: "0"
       go_type: int

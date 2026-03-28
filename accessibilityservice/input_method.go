@@ -23,6 +23,29 @@ type InputMethod struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInputMethod creates a new android.accessibilityservice.InputMethod instance.
+func NewInputMethod(vm *jni.VM, arg0 *jni.Object) (*InputMethod, error) {
+	var t InputMethod
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputMethod)), midInputMethodInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCurrentInputConnection calls android.accessibilityservice.InputMethod.getCurrentInputConnection.
 func (m *InputMethod) GetCurrentInputConnection() (*jni.Object, error) {
 	var result *jni.Object

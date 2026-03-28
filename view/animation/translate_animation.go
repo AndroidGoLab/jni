@@ -23,6 +23,29 @@ type TranslateAnimation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTranslateAnimation creates a new android.view.animation.TranslateAnimation instance.
+func NewTranslateAnimation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*TranslateAnimation, error) {
+	var t TranslateAnimation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTranslateAnimation)), midTranslateAnimationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Initialize calls android.view.animation.TranslateAnimation.initialize.
 func (m *TranslateAnimation) Initialize(
 	arg0 int32,

@@ -23,6 +23,28 @@ type workCapabilities struct {
 	Obj *jni.GlobalRef
 }
 
+// NewworkCapabilities creates a new android.net.NetworkCapabilities instance.
+func NewworkCapabilities(vm *jni.VM) (*workCapabilities, error) {
+	var t workCapabilities
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsworkCapabilities)), midworkCapabilitiesInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.NetworkCapabilities.describeContents.
 func (m *workCapabilities) DescribeContents() (int32, error) {
 	var result int32

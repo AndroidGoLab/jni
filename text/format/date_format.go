@@ -23,6 +23,28 @@ type DateFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateFormat creates a new android.text.format.DateFormat instance.
+func NewDateFormat(vm *jni.VM) (*DateFormat, error) {
+	var t DateFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateFormat)), midDateFormatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Format2 calls android.text.format.DateFormat.format.
 func (m *DateFormat) Format2(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

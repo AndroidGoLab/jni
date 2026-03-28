@@ -23,6 +23,28 @@ type SyncStats struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSyncStats creates a new android.content.SyncStats instance.
+func NewSyncStats(vm *jni.VM) (*SyncStats, error) {
+	var t SyncStats
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncStats)), midSyncStatsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clear calls android.content.SyncStats.clear.
 func (m *SyncStats) Clear() error {
 

@@ -1,42 +1,6 @@
 package app
 
-import (
-	"fmt"
-
-	"github.com/AndroidGoLab/jni"
-)
-
-// NewIntent creates a new android.content.Intent via its no-arg constructor.
-func NewIntent(vm *jni.VM) (*Intent, error) {
-	var intent Intent
-	intent.VM = vm
-
-	err := vm.Do(func(env *jni.Env) error {
-		if err := ensureInit(env); err != nil {
-			return err
-		}
-		cls, err := env.FindClass("android/content/Intent")
-		if err != nil {
-			return fmt.Errorf("find Intent: %w", err)
-		}
-		defer env.DeleteLocalRef(&cls.Object)
-		mid, err := env.GetMethodID(cls, "<init>", "()V")
-		if err != nil {
-			return fmt.Errorf("get Intent.<init>: %w", err)
-		}
-		obj, err := env.NewObject(cls, mid)
-		if err != nil {
-			return fmt.Errorf("new Intent: %w", err)
-		}
-		intent.Obj = env.NewGlobalRef(obj)
-		env.DeleteLocalRef(obj)
-		return nil
-	})
-	if err != nil {
-		return nil, err
-	}
-	return &intent, nil
-}
+import "github.com/AndroidGoLab/jni"
 
 // PutStringExtra calls Intent.putExtra(key, value) for string values.
 func (i *Intent) PutStringExtra(

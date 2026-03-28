@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsResourcesLoader               *jni.GlobalRef
+	midResourcesLoaderInit           jni.MethodID
 	midResourcesLoaderAddProvider    jni.MethodID
 	midResourcesLoaderClearProviders jni.MethodID
 	midResourcesLoaderRemoveProvider jni.MethodID
@@ -66,6 +67,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsResourcesLoader = env.NewGlobalRef(&c.Object)
+		midResourcesLoaderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourcesLoader)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midResourcesLoaderAddProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsResourcesLoader)), "addProvider", "(Landroid/content/res/loader/ResourcesProvider;)V")
 		if err != nil {

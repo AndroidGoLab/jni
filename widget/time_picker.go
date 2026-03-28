@@ -23,6 +23,29 @@ type TimePicker struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTimePicker creates a new android.widget.TimePicker instance.
+func NewTimePicker(vm *jni.VM, arg0 *jni.Object) (*TimePicker, error) {
+	var t TimePicker
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimePicker)), midTimePickerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Autofill calls android.widget.TimePicker.autofill.
 func (m *TimePicker) Autofill(arg0 *jni.Object) error {
 

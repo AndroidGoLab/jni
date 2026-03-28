@@ -21,6 +21,29 @@ type FragmentBreadCrumbs struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFragmentBreadCrumbs creates a new android.app.FragmentBreadCrumbs instance.
+func NewFragmentBreadCrumbs(vm *jni.VM, arg0 *jni.Object) (*FragmentBreadCrumbs, error) {
+	var t FragmentBreadCrumbs
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFragmentBreadCrumbs)), midFragmentBreadCrumbsInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnBackStackChanged calls android.app.FragmentBreadCrumbs.onBackStackChanged.
 func (m *FragmentBreadCrumbs) OnBackStackChanged() error {
 

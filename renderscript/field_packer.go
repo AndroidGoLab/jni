@@ -23,6 +23,29 @@ type FieldPacker struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFieldPacker creates a new android.renderscript.FieldPacker instance.
+func NewFieldPacker(vm *jni.VM, arg0 *jni.Object) (*FieldPacker, error) {
+	var t FieldPacker
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFieldPacker)), midFieldPackerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddBoolean calls android.renderscript.FieldPacker.addBoolean.
 func (m *FieldPacker) AddBoolean(arg0 bool) error {
 

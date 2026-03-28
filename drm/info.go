@@ -23,6 +23,35 @@ type Info struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInfo creates a new android.drm.DrmInfo instance.
+func NewInfo(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 string) (*Info, error) {
+	var t Info
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInfo)), midInfoInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Get calls android.drm.DrmInfo.get.
 func (m *Info) Get(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

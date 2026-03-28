@@ -23,6 +23,29 @@ type EventInput struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEventInput creates a new android.adservices.ondevicepersonalization.EventInput instance.
+func NewEventInput(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*EventInput, error) {
+	var t EventInput
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventInput)), midEventInputInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.adservices.ondevicepersonalization.EventInput.equals.
 func (m *EventInput) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

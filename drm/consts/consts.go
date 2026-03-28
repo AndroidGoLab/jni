@@ -3,20 +3,18 @@
 package consts
 
 const (
-	TypeAcquireDrmInfoFailed              int = 2008
-	TypeNotSupported                      int = 2003
-	TypeNoInternetConnection              int = 2005
-	TypeOutOfMemory                       int = 2004
-	TypeProcessDrmInfoFailed              int = 2006
-	TypeRemoveAllRightsFailed             int = 2007
-	TypeRightsNotInstalled                int = 2001
-	TypeRightsRenewalNotAllowed           int = 2002
-	TypeAllRightsRemoved                  int = 1001
-	TypeDrmInfoProcessed                  int = 1002
-	StatusError                           int = 2
-	StatusOk                              int = 1
+	TypeAccountAlreadyRegistered          int = 5
+	TypeAlreadyRegisteredByAnotherAccount int = 1
+	TypeRemoveRights                      int = 2
+	TypeRightsInstalled                   int = 3
+	TypeRightsRemoved                     int = 6
+	TypeWaitForRights                     int = 4
 	ErrorNone                             int = 0
 	ErrorUnknown                          int = -2000
+	TypeRegistrationInfo                  int = 1
+	TypeRightsAcquisitionInfo             int = 3
+	TypeRightsAcquisitionProgressInfo     int = 4
+	TypeUnregistrationInfo                int = 2
 	Default                               int = 0
 	Display                               int = 7
 	Execute                               int = 6
@@ -37,28 +35,30 @@ const (
 	RightsInvalid                         int = 1
 	RightsNotAcquired                     int = 3
 	RightsValid                           int = 0
+	StatusError                           int = 2
+	StatusOk                              int = 1
+	TypeAllRightsRemoved                  int = 1001
+	TypeDrmInfoProcessed                  int = 1002
+	TypeAcquireDrmInfoFailed              int = 2008
+	TypeNotSupported                      int = 2003
+	TypeNoInternetConnection              int = 2005
+	TypeOutOfMemory                       int = 2004
+	TypeProcessDrmInfoFailed              int = 2006
+	TypeRemoveAllRightsFailed             int = 2007
+	TypeRightsNotInstalled                int = 2001
+	TypeRightsRenewalNotAllowed           int = 2002
 	StatusInputdataError                  int = 2
-	TypeRegistrationInfo                  int = 1
-	TypeRightsAcquisitionInfo             int = 3
-	TypeRightsAcquisitionProgressInfo     int = 4
-	TypeUnregistrationInfo                int = 2
-	TypeAccountAlreadyRegistered          int = 5
-	TypeAlreadyRegisteredByAnotherAccount int = 1
-	TypeRemoveRights                      int = 2
-	TypeRightsInstalled                   int = 3
-	TypeRightsRemoved                     int = 6
-	TypeWaitForRights                     int = 4
 )
 
 const (
-	DrmInfoObject        string = "drm_info_object"
-	DrmInfoStatusObject  string = "drm_info_status_object"
+	AccountId            string = "account_id"
+	SubscriptionId       string = "subscription_id"
 	ExtendedMetadata     string = "extended_metadata"
 	LicenseAvailableTime string = "license_available_time"
 	LicenseExpiryTime    string = "license_expiry_time"
 	LicenseStartTime     string = "license_start_time"
 	MaxRepeatCount       string = "max_repeat_count"
 	RemainingRepeatCount string = "remaining_repeat_count"
-	AccountId            string = "account_id"
-	SubscriptionId       string = "subscription_id"
+	DrmInfoObject        string = "drm_info_object"
+	DrmInfoStatusObject  string = "drm_info_status_object"
 )

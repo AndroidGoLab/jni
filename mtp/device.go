@@ -23,6 +23,29 @@ type Device struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDevice creates a new android.mtp.MtpDevice instance.
+func NewDevice(vm *jni.VM, arg0 *jni.Object) (*Device, error) {
+	var t Device
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDevice)), midDeviceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.mtp.MtpDevice.close.
 func (m *Device) Close() error {
 

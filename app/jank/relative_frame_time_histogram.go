@@ -23,6 +23,28 @@ type RelativeFrameTimeHistogram struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRelativeFrameTimeHistogram creates a new android.app.jank.RelativeFrameTimeHistogram instance.
+func NewRelativeFrameTimeHistogram(vm *jni.VM) (*RelativeFrameTimeHistogram, error) {
+	var t RelativeFrameTimeHistogram
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), midRelativeFrameTimeHistogramInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddRelativeFrameTimeMillis calls android.app.jank.RelativeFrameTimeHistogram.addRelativeFrameTimeMillis.
 func (m *RelativeFrameTimeHistogram) AddRelativeFrameTimeMillis(arg0 int32) error {
 

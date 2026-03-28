@@ -23,6 +23,29 @@ type Action struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAction creates a new android.service.credentials.Action instance.
+func NewAction(vm *jni.VM, arg0 *jni.Object) (*Action, error) {
+	var t Action
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAction)), midActionInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.credentials.Action.describeContents.
 func (m *Action) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type CursorWrapper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCursorWrapper creates a new android.database.CursorWrapper instance.
+func NewCursorWrapper(vm *jni.VM, arg0 *jni.Object) (*CursorWrapper, error) {
+	var t CursorWrapper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorWrapper)), midCursorWrapperInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Close calls android.database.CursorWrapper.close.
 func (m *CursorWrapper) Close() error {
 

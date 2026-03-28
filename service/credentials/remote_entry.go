@@ -23,6 +23,29 @@ type RemoteEntry struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoteEntry creates a new android.service.credentials.RemoteEntry instance.
+func NewRemoteEntry(vm *jni.VM, arg0 *jni.Object) (*RemoteEntry, error) {
+	var t RemoteEntry
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), midRemoteEntryInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.credentials.RemoteEntry.describeContents.
 func (m *RemoteEntry) DescribeContents() (int32, error) {
 	var result int32

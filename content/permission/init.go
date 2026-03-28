@@ -23,7 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsManifest *jni.GlobalRef
+	clsManifest     *jni.GlobalRef
+	midManifestInit jni.MethodID
 
 	clsManifestpermission *jni.GlobalRef
 
@@ -55,6 +56,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsManifest = env.NewGlobalRef(&c.Object)
+		midManifestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManifest)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 	}
 

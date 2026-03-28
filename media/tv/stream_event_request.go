@@ -23,6 +23,35 @@ type StreamEventRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStreamEventRequest creates a new android.media.tv.StreamEventRequest instance.
+func NewStreamEventRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 *jni.Object, arg3 string) (*StreamEventRequest, error) {
+	var t StreamEventRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStreamEventRequest)), midStreamEventRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.StreamEventRequest.describeContents.
 func (m *StreamEventRequest) DescribeContents() (int32, error) {
 	var result int32

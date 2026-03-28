@@ -23,6 +23,28 @@ type FloatArrayEvaluator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFloatArrayEvaluator creates a new android.animation.FloatArrayEvaluator instance.
+func NewFloatArrayEvaluator(vm *jni.VM) (*FloatArrayEvaluator, error) {
+	var t FloatArrayEvaluator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), midFloatArrayEvaluatorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Evaluate3 calls android.animation.FloatArrayEvaluator.evaluate.
 func (m *FloatArrayEvaluator) Evaluate3(
 	arg0 float32,

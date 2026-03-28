@@ -23,6 +23,28 @@ type ServiceInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewServiceInfo creates a new android.content.pm.ServiceInfo instance.
+func NewServiceInfo(vm *jni.VM) (*ServiceInfo, error) {
+	var t ServiceInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsServiceInfo)), midServiceInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.ServiceInfo.describeContents.
 func (m *ServiceInfo) DescribeContents() (int32, error) {
 	var result int32

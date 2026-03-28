@@ -23,169 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsEGLObjectHandle                *jni.GlobalRef
-	midEGLObjectHandleGetHandle       jni.MethodID
-	midEGLObjectHandleGetNativeHandle jni.MethodID
-	midEGLObjectHandleHashCode        jni.MethodID
-
-	clsEGLSync       *jni.GlobalRef
-	midEGLSyncEquals jni.MethodID
-
-	clsGLES10                          *jni.GlobalRef
-	midGLES10GlActiveTexture           jni.MethodID
-	midGLES10GlAlphaFunc               jni.MethodID
-	midGLES10GlAlphaFuncx              jni.MethodID
-	midGLES10GlBindTexture             jni.MethodID
-	midGLES10GlBlendFunc               jni.MethodID
-	midGLES10GlClear                   jni.MethodID
-	midGLES10GlClearColor              jni.MethodID
-	midGLES10GlClearColorx             jni.MethodID
-	midGLES10GlClearDepthf             jni.MethodID
-	midGLES10GlClearDepthx             jni.MethodID
-	midGLES10GlClearStencil            jni.MethodID
-	midGLES10GlClientActiveTexture     jni.MethodID
-	midGLES10GlColor4f                 jni.MethodID
-	midGLES10GlColor4x                 jni.MethodID
-	midGLES10GlColorMask               jni.MethodID
-	midGLES10GlColorPointer            jni.MethodID
-	midGLES10GlCompressedTexImage2D    jni.MethodID
-	midGLES10GlCompressedTexSubImage2D jni.MethodID
-	midGLES10GlCopyTexImage2D          jni.MethodID
-	midGLES10GlCopyTexSubImage2D       jni.MethodID
-	midGLES10GlCullFace                jni.MethodID
-	midGLES10GlDeleteTextures3         jni.MethodID
-	midGLES10GlDeleteTextures2_1       jni.MethodID
-	midGLES10GlDepthFunc               jni.MethodID
-	midGLES10GlDepthMask               jni.MethodID
-	midGLES10GlDepthRangef             jni.MethodID
-	midGLES10GlDepthRangex             jni.MethodID
-	midGLES10GlDisable                 jni.MethodID
-	midGLES10GlDisableClientState      jni.MethodID
-	midGLES10GlDrawArrays              jni.MethodID
-	midGLES10GlDrawElements            jni.MethodID
-	midGLES10GlEnable                  jni.MethodID
-	midGLES10GlEnableClientState       jni.MethodID
-	midGLES10GlFinish                  jni.MethodID
-	midGLES10GlFlush                   jni.MethodID
-	midGLES10GlFogf                    jni.MethodID
-	midGLES10GlFogfv3                  jni.MethodID
-	midGLES10GlFogfv2_1                jni.MethodID
-	midGLES10GlFogx                    jni.MethodID
-	midGLES10GlFogxv3                  jni.MethodID
-	midGLES10GlFogxv2_1                jni.MethodID
-	midGLES10GlFrontFace               jni.MethodID
-	midGLES10GlFrustumf                jni.MethodID
-	midGLES10GlFrustumx                jni.MethodID
-	midGLES10GlGenTextures3            jni.MethodID
-	midGLES10GlGenTextures2_1          jni.MethodID
-	midGLES10GlGetError                jni.MethodID
-	midGLES10GlGetIntegerv3            jni.MethodID
-	midGLES10GlGetIntegerv2_1          jni.MethodID
-	midGLES10GlGetString               jni.MethodID
-	midGLES10GlHint                    jni.MethodID
-	midGLES10GlLightModelf             jni.MethodID
-	midGLES10GlLightModelfv3           jni.MethodID
-	midGLES10GlLightModelfv2_1         jni.MethodID
-	midGLES10GlLightModelx             jni.MethodID
-	midGLES10GlLightModelxv3           jni.MethodID
-	midGLES10GlLightModelxv2_1         jni.MethodID
-	midGLES10GlLightf                  jni.MethodID
-	midGLES10GlLightfv4                jni.MethodID
-	midGLES10GlLightfv3_1              jni.MethodID
-	midGLES10GlLightx                  jni.MethodID
-	midGLES10GlLightxv4                jni.MethodID
-	midGLES10GlLightxv3_1              jni.MethodID
-	midGLES10GlLineWidth               jni.MethodID
-	midGLES10GlLineWidthx              jni.MethodID
-	midGLES10GlLoadIdentity            jni.MethodID
-	midGLES10GlLoadMatrixf2            jni.MethodID
-	midGLES10GlLoadMatrixf1_1          jni.MethodID
-	midGLES10GlLoadMatrixx2            jni.MethodID
-	midGLES10GlLoadMatrixx1_1          jni.MethodID
-	midGLES10GlLogicOp                 jni.MethodID
-	midGLES10GlMaterialf               jni.MethodID
-	midGLES10GlMaterialfv4             jni.MethodID
-	midGLES10GlMaterialfv3_1           jni.MethodID
-	midGLES10GlMaterialx               jni.MethodID
-	midGLES10GlMaterialxv4             jni.MethodID
-	midGLES10GlMaterialxv3_1           jni.MethodID
-	midGLES10GlMatrixMode              jni.MethodID
-	midGLES10GlMultMatrixf2            jni.MethodID
-	midGLES10GlMultMatrixf1_1          jni.MethodID
-	midGLES10GlMultMatrixx2            jni.MethodID
-	midGLES10GlMultMatrixx1_1          jni.MethodID
-	midGLES10GlMultiTexCoord4f         jni.MethodID
-	midGLES10GlMultiTexCoord4x         jni.MethodID
-	midGLES10GlNormal3f                jni.MethodID
-	midGLES10GlNormal3x                jni.MethodID
-	midGLES10GlNormalPointer           jni.MethodID
-	midGLES10GlOrthof                  jni.MethodID
-	midGLES10GlOrthox                  jni.MethodID
-	midGLES10GlPixelStorei             jni.MethodID
-	midGLES10GlPointSize               jni.MethodID
-	midGLES10GlPointSizex              jni.MethodID
-	midGLES10GlPolygonOffset           jni.MethodID
-	midGLES10GlPolygonOffsetx          jni.MethodID
-	midGLES10GlPopMatrix               jni.MethodID
-	midGLES10GlPushMatrix              jni.MethodID
-	midGLES10GlReadPixels              jni.MethodID
-	midGLES10GlRotatef                 jni.MethodID
-	midGLES10GlRotatex                 jni.MethodID
-	midGLES10GlSampleCoverage          jni.MethodID
-	midGLES10GlSampleCoveragex         jni.MethodID
-	midGLES10GlScalef                  jni.MethodID
-	midGLES10GlScalex                  jni.MethodID
-	midGLES10GlScissor                 jni.MethodID
-	midGLES10GlShadeModel              jni.MethodID
-	midGLES10GlStencilFunc             jni.MethodID
-	midGLES10GlStencilMask             jni.MethodID
-	midGLES10GlStencilOp               jni.MethodID
-	midGLES10GlTexCoordPointer         jni.MethodID
-	midGLES10GlTexEnvf                 jni.MethodID
-	midGLES10GlTexEnvfv4               jni.MethodID
-	midGLES10GlTexEnvfv3_1             jni.MethodID
-	midGLES10GlTexEnvx                 jni.MethodID
-	midGLES10GlTexEnvxv4               jni.MethodID
-	midGLES10GlTexEnvxv3_1             jni.MethodID
-	midGLES10GlTexImage2D              jni.MethodID
-	midGLES10GlTexParameterf           jni.MethodID
-	midGLES10GlTexParameterx           jni.MethodID
-	midGLES10GlTexSubImage2D           jni.MethodID
-	midGLES10GlTranslatef              jni.MethodID
-	midGLES10GlTranslatex              jni.MethodID
-	midGLES10GlVertexPointer           jni.MethodID
-	midGLES10GlViewport                jni.MethodID
-
-	clsEGL15                               *jni.GlobalRef
-	midEGL15EglClientWaitSync              jni.MethodID
-	midEGL15EglCreateImage                 jni.MethodID
-	midEGL15EglCreatePlatformPixmapSurface jni.MethodID
-	midEGL15EglCreatePlatformWindowSurface jni.MethodID
-	midEGL15EglCreateSync                  jni.MethodID
-	midEGL15EglDestroyImage                jni.MethodID
-	midEGL15EglDestroySync                 jni.MethodID
-	midEGL15EglGetPlatformDisplay          jni.MethodID
-	midEGL15EglGetSyncAttrib               jni.MethodID
-	midEGL15EglWaitSync                    jni.MethodID
-
-	clsEGLExt                           *jni.GlobalRef
-	midEGLExtEglDupNativeFenceFDANDROID jni.MethodID
-	midEGLExtEglPresentationTimeANDROID jni.MethodID
-
-	clsETC1Util                *jni.GlobalRef
-	midETC1UtilCompressTexture jni.MethodID
-	midETC1UtilCreateTexture   jni.MethodID
-	midETC1UtilIsETC1Supported jni.MethodID
-	midETC1UtilLoadTexture6    jni.MethodID
-	midETC1UtilLoadTexture6_1  jni.MethodID
-	midETC1UtilWriteTexture    jni.MethodID
-
-	clsETC1UtilETC1Texture          *jni.GlobalRef
-	midETC1UtilETC1TextureGetData   jni.MethodID
-	midETC1UtilETC1TextureGetHeight jni.MethodID
-	midETC1UtilETC1TextureGetWidth  jni.MethodID
-
 	clsGLU               *jni.GlobalRef
+	midGLUInit           jni.MethodID
 	midGLUGluErrorString jni.MethodID
 	midGLUGluLookAt      jni.MethodID
 	midGLUGluOrtho2D     jni.MethodID
@@ -193,157 +32,8 @@ var (
 	midGLUGluProject     jni.MethodID
 	midGLUGluUnProject   jni.MethodID
 
-	clsEGLImage       *jni.GlobalRef
-	midEGLImageEquals jni.MethodID
-
-	clsGLES32                                     *jni.GlobalRef
-	midGLES32GlBlendBarrier                       jni.MethodID
-	midGLES32GlBlendEquationSeparatei             jni.MethodID
-	midGLES32GlBlendEquationi                     jni.MethodID
-	midGLES32GlBlendFuncSeparatei                 jni.MethodID
-	midGLES32GlBlendFunci                         jni.MethodID
-	midGLES32GlColorMaski                         jni.MethodID
-	midGLES32GlCopyImageSubData                   jni.MethodID
-	midGLES32GlDebugMessageCallback               jni.MethodID
-	midGLES32GlDebugMessageControl7               jni.MethodID
-	midGLES32GlDebugMessageControl6_1             jni.MethodID
-	midGLES32GlDebugMessageInsert                 jni.MethodID
-	midGLES32GlDisablei                           jni.MethodID
-	midGLES32GlDrawElementsBaseVertex             jni.MethodID
-	midGLES32GlDrawElementsInstancedBaseVertex6   jni.MethodID
-	midGLES32GlDrawElementsInstancedBaseVertex6_1 jni.MethodID
-	midGLES32GlDrawRangeElementsBaseVertex        jni.MethodID
-	midGLES32GlEnablei                            jni.MethodID
-	midGLES32GlFramebufferTexture                 jni.MethodID
-	midGLES32GlGetDebugMessageLog14               jni.MethodID
-	midGLES32GlGetDebugMessageLog9_1              jni.MethodID
-	midGLES32GlGetDebugMessageLog5_2              jni.MethodID
-	midGLES32GlGetGraphicsResetStatus             jni.MethodID
-	midGLES32GlGetObjectLabel                     jni.MethodID
-	midGLES32GlGetObjectPtrLabel                  jni.MethodID
-	midGLES32GlGetPointerv                        jni.MethodID
-	midGLES32GlGetSamplerParameterIiv4            jni.MethodID
-	midGLES32GlGetSamplerParameterIiv3_1          jni.MethodID
-	midGLES32GlGetSamplerParameterIuiv4           jni.MethodID
-	midGLES32GlGetSamplerParameterIuiv3_1         jni.MethodID
-	midGLES32GlGetTexParameterIiv4                jni.MethodID
-	midGLES32GlGetTexParameterIiv3_1              jni.MethodID
-	midGLES32GlGetTexParameterIuiv4               jni.MethodID
-	midGLES32GlGetTexParameterIuiv3_1             jni.MethodID
-	midGLES32GlGetnUniformfv5                     jni.MethodID
-	midGLES32GlGetnUniformfv4_1                   jni.MethodID
-	midGLES32GlGetnUniformiv5                     jni.MethodID
-	midGLES32GlGetnUniformiv4_1                   jni.MethodID
-	midGLES32GlGetnUniformuiv5                    jni.MethodID
-	midGLES32GlGetnUniformuiv4_1                  jni.MethodID
-	midGLES32GlIsEnabledi                         jni.MethodID
-	midGLES32GlMinSampleShading                   jni.MethodID
-	midGLES32GlObjectLabel                        jni.MethodID
-	midGLES32GlObjectPtrLabel                     jni.MethodID
-	midGLES32GlPatchParameteri                    jni.MethodID
-	midGLES32GlPopDebugGroup                      jni.MethodID
-	midGLES32GlPrimitiveBoundingBox               jni.MethodID
-	midGLES32GlPushDebugGroup                     jni.MethodID
-	midGLES32GlReadnPixels                        jni.MethodID
-	midGLES32GlSamplerParameterIiv4               jni.MethodID
-	midGLES32GlSamplerParameterIiv3_1             jni.MethodID
-	midGLES32GlSamplerParameterIuiv4              jni.MethodID
-	midGLES32GlSamplerParameterIuiv3_1            jni.MethodID
-	midGLES32GlTexBuffer                          jni.MethodID
-	midGLES32GlTexBufferRange                     jni.MethodID
-	midGLES32GlTexParameterIiv4                   jni.MethodID
-	midGLES32GlTexParameterIiv3_1                 jni.MethodID
-	midGLES32GlTexParameterIuiv4                  jni.MethodID
-	midGLES32GlTexParameterIuiv3_1                jni.MethodID
-	midGLES32GlTexStorage3DMultisample            jni.MethodID
-
-	clsGLES32DebugProc          *jni.GlobalRef
-	midGLES32DebugProcOnMessage jni.MethodID
-
-	clsGLException *jni.GlobalRef
-
-	clsGLUtils                  *jni.GlobalRef
-	midGLUtilsGetEGLErrorString jni.MethodID
-	midGLUtilsGetInternalFormat jni.MethodID
-	midGLUtilsGetType           jni.MethodID
-	midGLUtilsTexImage2D4       jni.MethodID
-	midGLUtilsTexImage2D5_1     jni.MethodID
-	midGLUtilsTexImage2D6_2     jni.MethodID
-	midGLUtilsTexSubImage2D5    jni.MethodID
-	midGLUtilsTexSubImage2D7_1  jni.MethodID
-
-	clsGLES11                          *jni.GlobalRef
-	midGLES11GlBindBuffer              jni.MethodID
-	midGLES11GlBufferData              jni.MethodID
-	midGLES11GlBufferSubData           jni.MethodID
-	midGLES11GlClipPlanef3             jni.MethodID
-	midGLES11GlClipPlanef2_1           jni.MethodID
-	midGLES11GlClipPlanex3             jni.MethodID
-	midGLES11GlClipPlanex2_1           jni.MethodID
-	midGLES11GlColor4ub                jni.MethodID
-	midGLES11GlColorPointer            jni.MethodID
-	midGLES11GlDeleteBuffers3          jni.MethodID
-	midGLES11GlDeleteBuffers2_1        jni.MethodID
-	midGLES11GlDrawElements            jni.MethodID
-	midGLES11GlGenBuffers3             jni.MethodID
-	midGLES11GlGenBuffers2_1           jni.MethodID
-	midGLES11GlGetBooleanv3            jni.MethodID
-	midGLES11GlGetBooleanv2_1          jni.MethodID
-	midGLES11GlGetBufferParameteriv4   jni.MethodID
-	midGLES11GlGetBufferParameteriv3_1 jni.MethodID
-	midGLES11GlGetClipPlanef3          jni.MethodID
-	midGLES11GlGetClipPlanef2_1        jni.MethodID
-	midGLES11GlGetClipPlanex3          jni.MethodID
-	midGLES11GlGetClipPlanex2_1        jni.MethodID
-	midGLES11GlGetFixedv3              jni.MethodID
-	midGLES11GlGetFixedv2_1            jni.MethodID
-	midGLES11GlGetFloatv3              jni.MethodID
-	midGLES11GlGetFloatv2_1            jni.MethodID
-	midGLES11GlGetLightfv4             jni.MethodID
-	midGLES11GlGetLightfv3_1           jni.MethodID
-	midGLES11GlGetLightxv4             jni.MethodID
-	midGLES11GlGetLightxv3_1           jni.MethodID
-	midGLES11GlGetMaterialfv4          jni.MethodID
-	midGLES11GlGetMaterialfv3_1        jni.MethodID
-	midGLES11GlGetMaterialxv4          jni.MethodID
-	midGLES11GlGetMaterialxv3_1        jni.MethodID
-	midGLES11GlGetTexEnvfv4            jni.MethodID
-	midGLES11GlGetTexEnvfv3_1          jni.MethodID
-	midGLES11GlGetTexEnviv4            jni.MethodID
-	midGLES11GlGetTexEnviv3_1          jni.MethodID
-	midGLES11GlGetTexEnvxv4            jni.MethodID
-	midGLES11GlGetTexEnvxv3_1          jni.MethodID
-	midGLES11GlGetTexParameterfv4      jni.MethodID
-	midGLES11GlGetTexParameterfv3_1    jni.MethodID
-	midGLES11GlGetTexParameteriv4      jni.MethodID
-	midGLES11GlGetTexParameteriv3_1    jni.MethodID
-	midGLES11GlGetTexParameterxv4      jni.MethodID
-	midGLES11GlGetTexParameterxv3_1    jni.MethodID
-	midGLES11GlIsBuffer                jni.MethodID
-	midGLES11GlIsEnabled               jni.MethodID
-	midGLES11GlIsTexture               jni.MethodID
-	midGLES11GlNormalPointer           jni.MethodID
-	midGLES11GlPointParameterf         jni.MethodID
-	midGLES11GlPointParameterfv3       jni.MethodID
-	midGLES11GlPointParameterfv2_1     jni.MethodID
-	midGLES11GlPointParameterx         jni.MethodID
-	midGLES11GlPointParameterxv3       jni.MethodID
-	midGLES11GlPointParameterxv2_1     jni.MethodID
-	midGLES11GlPointSizePointerOES     jni.MethodID
-	midGLES11GlTexCoordPointer         jni.MethodID
-	midGLES11GlTexEnvi                 jni.MethodID
-	midGLES11GlTexEnviv4               jni.MethodID
-	midGLES11GlTexEnviv3_1             jni.MethodID
-	midGLES11GlTexParameterfv4         jni.MethodID
-	midGLES11GlTexParameterfv3_1       jni.MethodID
-	midGLES11GlTexParameteri           jni.MethodID
-	midGLES11GlTexParameteriv4         jni.MethodID
-	midGLES11GlTexParameteriv3_1       jni.MethodID
-	midGLES11GlTexParameterxv4         jni.MethodID
-	midGLES11GlTexParameterxv3_1       jni.MethodID
-	midGLES11GlVertexPointer           jni.MethodID
-
 	clsGLES20                                         *jni.GlobalRef
+	midGLES20Init                                     jni.MethodID
 	midGLES20GlActiveTexture                          jni.MethodID
 	midGLES20GlAttachShader                           jni.MethodID
 	midGLES20GlBindAttribLocation                     jni.MethodID
@@ -536,11 +226,303 @@ var (
 	midGLES20GlViewport                               jni.MethodID
 
 	clsVisibility                      *jni.GlobalRef
+	midVisibilityInit                  jni.MethodID
 	midVisibilityComputeBoundingSphere jni.MethodID
 	midVisibilityFrustumCullSpheres    jni.MethodID
 	midVisibilityVisibilityTest        jni.MethodID
 
+	clsGLException     *jni.GlobalRef
+	midGLExceptionInit jni.MethodID
+
+	clsGLES31                               *jni.GlobalRef
+	midGLES31GlActiveShaderProgram          jni.MethodID
+	midGLES31GlBindImageTexture             jni.MethodID
+	midGLES31GlBindProgramPipeline          jni.MethodID
+	midGLES31GlBindVertexBuffer             jni.MethodID
+	midGLES31GlCreateShaderProgramv         jni.MethodID
+	midGLES31GlDeleteProgramPipelines3      jni.MethodID
+	midGLES31GlDeleteProgramPipelines2_1    jni.MethodID
+	midGLES31GlDispatchCompute              jni.MethodID
+	midGLES31GlDispatchComputeIndirect      jni.MethodID
+	midGLES31GlDrawArraysIndirect           jni.MethodID
+	midGLES31GlDrawElementsIndirect         jni.MethodID
+	midGLES31GlFramebufferParameteri        jni.MethodID
+	midGLES31GlGenProgramPipelines3         jni.MethodID
+	midGLES31GlGenProgramPipelines2_1       jni.MethodID
+	midGLES31GlGetBooleani_v4               jni.MethodID
+	midGLES31GlGetBooleani_v3_1             jni.MethodID
+	midGLES31GlGetFramebufferParameteriv4   jni.MethodID
+	midGLES31GlGetFramebufferParameteriv3_1 jni.MethodID
+	midGLES31GlGetMultisamplefv4            jni.MethodID
+	midGLES31GlGetMultisamplefv3_1          jni.MethodID
+	midGLES31GlGetProgramInterfaceiv5       jni.MethodID
+	midGLES31GlGetProgramInterfaceiv4_1     jni.MethodID
+	midGLES31GlGetProgramPipelineInfoLog    jni.MethodID
+	midGLES31GlGetProgramPipelineiv4        jni.MethodID
+	midGLES31GlGetProgramPipelineiv3_1      jni.MethodID
+	midGLES31GlGetProgramResourceIndex      jni.MethodID
+	midGLES31GlGetProgramResourceLocation   jni.MethodID
+	midGLES31GlGetProgramResourceName       jni.MethodID
+	midGLES31GlGetProgramResourceiv11       jni.MethodID
+	midGLES31GlGetProgramResourceiv8_1      jni.MethodID
+	midGLES31GlGetTexLevelParameterfv5      jni.MethodID
+	midGLES31GlGetTexLevelParameterfv4_1    jni.MethodID
+	midGLES31GlGetTexLevelParameteriv5      jni.MethodID
+	midGLES31GlGetTexLevelParameteriv4_1    jni.MethodID
+	midGLES31GlIsProgramPipeline            jni.MethodID
+	midGLES31GlMemoryBarrier                jni.MethodID
+	midGLES31GlMemoryBarrierByRegion        jni.MethodID
+	midGLES31GlProgramUniform1f             jni.MethodID
+	midGLES31GlProgramUniform1fv5           jni.MethodID
+	midGLES31GlProgramUniform1fv4_1         jni.MethodID
+	midGLES31GlProgramUniform1i             jni.MethodID
+	midGLES31GlProgramUniform1iv5           jni.MethodID
+	midGLES31GlProgramUniform1iv4_1         jni.MethodID
+	midGLES31GlProgramUniform1ui            jni.MethodID
+	midGLES31GlProgramUniform1uiv5          jni.MethodID
+	midGLES31GlProgramUniform1uiv4_1        jni.MethodID
+	midGLES31GlProgramUniform2f             jni.MethodID
+	midGLES31GlProgramUniform2fv5           jni.MethodID
+	midGLES31GlProgramUniform2fv4_1         jni.MethodID
+	midGLES31GlProgramUniform2i             jni.MethodID
+	midGLES31GlProgramUniform2iv5           jni.MethodID
+	midGLES31GlProgramUniform2iv4_1         jni.MethodID
+	midGLES31GlProgramUniform2ui            jni.MethodID
+	midGLES31GlProgramUniform2uiv5          jni.MethodID
+	midGLES31GlProgramUniform2uiv4_1        jni.MethodID
+	midGLES31GlProgramUniform3f             jni.MethodID
+	midGLES31GlProgramUniform3fv5           jni.MethodID
+	midGLES31GlProgramUniform3fv4_1         jni.MethodID
+	midGLES31GlProgramUniform3i             jni.MethodID
+	midGLES31GlProgramUniform3iv5           jni.MethodID
+	midGLES31GlProgramUniform3iv4_1         jni.MethodID
+	midGLES31GlProgramUniform3ui            jni.MethodID
+	midGLES31GlProgramUniform3uiv5          jni.MethodID
+	midGLES31GlProgramUniform3uiv4_1        jni.MethodID
+	midGLES31GlProgramUniform4f             jni.MethodID
+	midGLES31GlProgramUniform4fv5           jni.MethodID
+	midGLES31GlProgramUniform4fv4_1         jni.MethodID
+	midGLES31GlProgramUniform4i             jni.MethodID
+	midGLES31GlProgramUniform4iv5           jni.MethodID
+	midGLES31GlProgramUniform4iv4_1         jni.MethodID
+	midGLES31GlProgramUniform4ui            jni.MethodID
+	midGLES31GlProgramUniform4uiv5          jni.MethodID
+	midGLES31GlProgramUniform4uiv4_1        jni.MethodID
+	midGLES31GlProgramUniformMatrix2fv6     jni.MethodID
+	midGLES31GlProgramUniformMatrix2fv5_1   jni.MethodID
+	midGLES31GlProgramUniformMatrix2x3fv6   jni.MethodID
+	midGLES31GlProgramUniformMatrix2x3fv5_1 jni.MethodID
+	midGLES31GlProgramUniformMatrix2x4fv6   jni.MethodID
+	midGLES31GlProgramUniformMatrix2x4fv5_1 jni.MethodID
+	midGLES31GlProgramUniformMatrix3fv6     jni.MethodID
+	midGLES31GlProgramUniformMatrix3fv5_1   jni.MethodID
+	midGLES31GlProgramUniformMatrix3x2fv6   jni.MethodID
+	midGLES31GlProgramUniformMatrix3x2fv5_1 jni.MethodID
+	midGLES31GlProgramUniformMatrix3x4fv6   jni.MethodID
+	midGLES31GlProgramUniformMatrix3x4fv5_1 jni.MethodID
+	midGLES31GlProgramUniformMatrix4fv6     jni.MethodID
+	midGLES31GlProgramUniformMatrix4fv5_1   jni.MethodID
+	midGLES31GlProgramUniformMatrix4x2fv6   jni.MethodID
+	midGLES31GlProgramUniformMatrix4x2fv5_1 jni.MethodID
+	midGLES31GlProgramUniformMatrix4x3fv6   jni.MethodID
+	midGLES31GlProgramUniformMatrix4x3fv5_1 jni.MethodID
+	midGLES31GlSampleMaski                  jni.MethodID
+	midGLES31GlTexStorage2DMultisample      jni.MethodID
+	midGLES31GlUseProgramStages             jni.MethodID
+	midGLES31GlValidateProgramPipeline      jni.MethodID
+	midGLES31GlVertexAttribBinding          jni.MethodID
+	midGLES31GlVertexAttribFormat           jni.MethodID
+	midGLES31GlVertexAttribIFormat          jni.MethodID
+	midGLES31GlVertexBindingDivisor         jni.MethodID
+
+	clsEGLObjectHandle                *jni.GlobalRef
+	midEGLObjectHandleGetHandle       jni.MethodID
+	midEGLObjectHandleGetNativeHandle jni.MethodID
+	midEGLObjectHandleHashCode        jni.MethodID
+
+	clsGLES31Ext                                *jni.GlobalRef
+	midGLES31ExtGlBlendBarrierKHR               jni.MethodID
+	midGLES31ExtGlBlendEquationSeparateiEXT     jni.MethodID
+	midGLES31ExtGlBlendEquationiEXT             jni.MethodID
+	midGLES31ExtGlBlendFuncSeparateiEXT         jni.MethodID
+	midGLES31ExtGlBlendFunciEXT                 jni.MethodID
+	midGLES31ExtGlColorMaskiEXT                 jni.MethodID
+	midGLES31ExtGlCopyImageSubDataEXT           jni.MethodID
+	midGLES31ExtGlDebugMessageCallbackKHR       jni.MethodID
+	midGLES31ExtGlDebugMessageControlKHR7       jni.MethodID
+	midGLES31ExtGlDebugMessageControlKHR6_1     jni.MethodID
+	midGLES31ExtGlDebugMessageInsertKHR         jni.MethodID
+	midGLES31ExtGlDisableiEXT                   jni.MethodID
+	midGLES31ExtGlEnableiEXT                    jni.MethodID
+	midGLES31ExtGlFramebufferTextureEXT         jni.MethodID
+	midGLES31ExtGlGetDebugMessageCallbackKHR    jni.MethodID
+	midGLES31ExtGlGetDebugMessageLogKHR14       jni.MethodID
+	midGLES31ExtGlGetDebugMessageLogKHR9_1      jni.MethodID
+	midGLES31ExtGlGetDebugMessageLogKHR5_2      jni.MethodID
+	midGLES31ExtGlGetObjectLabelKHR             jni.MethodID
+	midGLES31ExtGlGetObjectPtrLabelKHR          jni.MethodID
+	midGLES31ExtGlGetSamplerParameterIivEXT4    jni.MethodID
+	midGLES31ExtGlGetSamplerParameterIivEXT3_1  jni.MethodID
+	midGLES31ExtGlGetSamplerParameterIuivEXT4   jni.MethodID
+	midGLES31ExtGlGetSamplerParameterIuivEXT3_1 jni.MethodID
+	midGLES31ExtGlGetTexParameterIivEXT4        jni.MethodID
+	midGLES31ExtGlGetTexParameterIivEXT3_1      jni.MethodID
+	midGLES31ExtGlGetTexParameterIuivEXT4       jni.MethodID
+	midGLES31ExtGlGetTexParameterIuivEXT3_1     jni.MethodID
+	midGLES31ExtGlIsEnablediEXT                 jni.MethodID
+	midGLES31ExtGlMinSampleShadingOES           jni.MethodID
+	midGLES31ExtGlObjectLabelKHR                jni.MethodID
+	midGLES31ExtGlObjectPtrLabelKHR             jni.MethodID
+	midGLES31ExtGlPatchParameteriEXT            jni.MethodID
+	midGLES31ExtGlPopDebugGroupKHR              jni.MethodID
+	midGLES31ExtGlPrimitiveBoundingBoxEXT       jni.MethodID
+	midGLES31ExtGlPushDebugGroupKHR             jni.MethodID
+	midGLES31ExtGlSamplerParameterIivEXT4       jni.MethodID
+	midGLES31ExtGlSamplerParameterIivEXT3_1     jni.MethodID
+	midGLES31ExtGlSamplerParameterIuivEXT4      jni.MethodID
+	midGLES31ExtGlSamplerParameterIuivEXT3_1    jni.MethodID
+	midGLES31ExtGlTexBufferEXT                  jni.MethodID
+	midGLES31ExtGlTexBufferRangeEXT             jni.MethodID
+	midGLES31ExtGlTexParameterIivEXT4           jni.MethodID
+	midGLES31ExtGlTexParameterIivEXT3_1         jni.MethodID
+	midGLES31ExtGlTexParameterIuivEXT4          jni.MethodID
+	midGLES31ExtGlTexParameterIuivEXT3_1        jni.MethodID
+	midGLES31ExtGlTexStorage3DMultisampleOES    jni.MethodID
+
+	clsGLES31ExtDebugProcKHR          *jni.GlobalRef
+	midGLES31ExtDebugProcKHROnMessage jni.MethodID
+
+	clsGLES10                          *jni.GlobalRef
+	midGLES10Init                      jni.MethodID
+	midGLES10GlActiveTexture           jni.MethodID
+	midGLES10GlAlphaFunc               jni.MethodID
+	midGLES10GlAlphaFuncx              jni.MethodID
+	midGLES10GlBindTexture             jni.MethodID
+	midGLES10GlBlendFunc               jni.MethodID
+	midGLES10GlClear                   jni.MethodID
+	midGLES10GlClearColor              jni.MethodID
+	midGLES10GlClearColorx             jni.MethodID
+	midGLES10GlClearDepthf             jni.MethodID
+	midGLES10GlClearDepthx             jni.MethodID
+	midGLES10GlClearStencil            jni.MethodID
+	midGLES10GlClientActiveTexture     jni.MethodID
+	midGLES10GlColor4f                 jni.MethodID
+	midGLES10GlColor4x                 jni.MethodID
+	midGLES10GlColorMask               jni.MethodID
+	midGLES10GlColorPointer            jni.MethodID
+	midGLES10GlCompressedTexImage2D    jni.MethodID
+	midGLES10GlCompressedTexSubImage2D jni.MethodID
+	midGLES10GlCopyTexImage2D          jni.MethodID
+	midGLES10GlCopyTexSubImage2D       jni.MethodID
+	midGLES10GlCullFace                jni.MethodID
+	midGLES10GlDeleteTextures3         jni.MethodID
+	midGLES10GlDeleteTextures2_1       jni.MethodID
+	midGLES10GlDepthFunc               jni.MethodID
+	midGLES10GlDepthMask               jni.MethodID
+	midGLES10GlDepthRangef             jni.MethodID
+	midGLES10GlDepthRangex             jni.MethodID
+	midGLES10GlDisable                 jni.MethodID
+	midGLES10GlDisableClientState      jni.MethodID
+	midGLES10GlDrawArrays              jni.MethodID
+	midGLES10GlDrawElements            jni.MethodID
+	midGLES10GlEnable                  jni.MethodID
+	midGLES10GlEnableClientState       jni.MethodID
+	midGLES10GlFinish                  jni.MethodID
+	midGLES10GlFlush                   jni.MethodID
+	midGLES10GlFogf                    jni.MethodID
+	midGLES10GlFogfv3                  jni.MethodID
+	midGLES10GlFogfv2_1                jni.MethodID
+	midGLES10GlFogx                    jni.MethodID
+	midGLES10GlFogxv3                  jni.MethodID
+	midGLES10GlFogxv2_1                jni.MethodID
+	midGLES10GlFrontFace               jni.MethodID
+	midGLES10GlFrustumf                jni.MethodID
+	midGLES10GlFrustumx                jni.MethodID
+	midGLES10GlGenTextures3            jni.MethodID
+	midGLES10GlGenTextures2_1          jni.MethodID
+	midGLES10GlGetError                jni.MethodID
+	midGLES10GlGetIntegerv3            jni.MethodID
+	midGLES10GlGetIntegerv2_1          jni.MethodID
+	midGLES10GlGetString               jni.MethodID
+	midGLES10GlHint                    jni.MethodID
+	midGLES10GlLightModelf             jni.MethodID
+	midGLES10GlLightModelfv3           jni.MethodID
+	midGLES10GlLightModelfv2_1         jni.MethodID
+	midGLES10GlLightModelx             jni.MethodID
+	midGLES10GlLightModelxv3           jni.MethodID
+	midGLES10GlLightModelxv2_1         jni.MethodID
+	midGLES10GlLightf                  jni.MethodID
+	midGLES10GlLightfv4                jni.MethodID
+	midGLES10GlLightfv3_1              jni.MethodID
+	midGLES10GlLightx                  jni.MethodID
+	midGLES10GlLightxv4                jni.MethodID
+	midGLES10GlLightxv3_1              jni.MethodID
+	midGLES10GlLineWidth               jni.MethodID
+	midGLES10GlLineWidthx              jni.MethodID
+	midGLES10GlLoadIdentity            jni.MethodID
+	midGLES10GlLoadMatrixf2            jni.MethodID
+	midGLES10GlLoadMatrixf1_1          jni.MethodID
+	midGLES10GlLoadMatrixx2            jni.MethodID
+	midGLES10GlLoadMatrixx1_1          jni.MethodID
+	midGLES10GlLogicOp                 jni.MethodID
+	midGLES10GlMaterialf               jni.MethodID
+	midGLES10GlMaterialfv4             jni.MethodID
+	midGLES10GlMaterialfv3_1           jni.MethodID
+	midGLES10GlMaterialx               jni.MethodID
+	midGLES10GlMaterialxv4             jni.MethodID
+	midGLES10GlMaterialxv3_1           jni.MethodID
+	midGLES10GlMatrixMode              jni.MethodID
+	midGLES10GlMultMatrixf2            jni.MethodID
+	midGLES10GlMultMatrixf1_1          jni.MethodID
+	midGLES10GlMultMatrixx2            jni.MethodID
+	midGLES10GlMultMatrixx1_1          jni.MethodID
+	midGLES10GlMultiTexCoord4f         jni.MethodID
+	midGLES10GlMultiTexCoord4x         jni.MethodID
+	midGLES10GlNormal3f                jni.MethodID
+	midGLES10GlNormal3x                jni.MethodID
+	midGLES10GlNormalPointer           jni.MethodID
+	midGLES10GlOrthof                  jni.MethodID
+	midGLES10GlOrthox                  jni.MethodID
+	midGLES10GlPixelStorei             jni.MethodID
+	midGLES10GlPointSize               jni.MethodID
+	midGLES10GlPointSizex              jni.MethodID
+	midGLES10GlPolygonOffset           jni.MethodID
+	midGLES10GlPolygonOffsetx          jni.MethodID
+	midGLES10GlPopMatrix               jni.MethodID
+	midGLES10GlPushMatrix              jni.MethodID
+	midGLES10GlReadPixels              jni.MethodID
+	midGLES10GlRotatef                 jni.MethodID
+	midGLES10GlRotatex                 jni.MethodID
+	midGLES10GlSampleCoverage          jni.MethodID
+	midGLES10GlSampleCoveragex         jni.MethodID
+	midGLES10GlScalef                  jni.MethodID
+	midGLES10GlScalex                  jni.MethodID
+	midGLES10GlScissor                 jni.MethodID
+	midGLES10GlShadeModel              jni.MethodID
+	midGLES10GlStencilFunc             jni.MethodID
+	midGLES10GlStencilMask             jni.MethodID
+	midGLES10GlStencilOp               jni.MethodID
+	midGLES10GlTexCoordPointer         jni.MethodID
+	midGLES10GlTexEnvf                 jni.MethodID
+	midGLES10GlTexEnvfv4               jni.MethodID
+	midGLES10GlTexEnvfv3_1             jni.MethodID
+	midGLES10GlTexEnvx                 jni.MethodID
+	midGLES10GlTexEnvxv4               jni.MethodID
+	midGLES10GlTexEnvxv3_1             jni.MethodID
+	midGLES10GlTexImage2D              jni.MethodID
+	midGLES10GlTexParameterf           jni.MethodID
+	midGLES10GlTexParameterx           jni.MethodID
+	midGLES10GlTexSubImage2D           jni.MethodID
+	midGLES10GlTranslatef              jni.MethodID
+	midGLES10GlTranslatex              jni.MethodID
+	midGLES10GlVertexPointer           jni.MethodID
+	midGLES10GlViewport                jni.MethodID
+
+	clsEGLContext       *jni.GlobalRef
+	midEGLContextEquals jni.MethodID
+
 	clsGLES30                                 *jni.GlobalRef
+	midGLES30Init                             jni.MethodID
 	midGLES30GlBeginQuery                     jni.MethodID
 	midGLES30GlBeginTransformFeedback         jni.MethodID
 	midGLES30GlBindBufferBase                 jni.MethodID
@@ -704,227 +686,13 @@ var (
 	midGLES30GlVertexAttribIPointer5_1        jni.MethodID
 	midGLES30GlWaitSync                       jni.MethodID
 
-	clsEGL14                                 *jni.GlobalRef
-	midEGL14EglBindAPI                       jni.MethodID
-	midEGL14EglBindTexImage                  jni.MethodID
-	midEGL14EglChooseConfig                  jni.MethodID
-	midEGL14EglCopyBuffers                   jni.MethodID
-	midEGL14EglCreateContext                 jni.MethodID
-	midEGL14EglCreatePbufferFromClientBuffer jni.MethodID
-	midEGL14EglCreatePbufferSurface          jni.MethodID
-	midEGL14EglCreatePixmapSurface           jni.MethodID
-	midEGL14EglCreateWindowSurface           jni.MethodID
-	midEGL14EglDestroyContext                jni.MethodID
-	midEGL14EglDestroySurface                jni.MethodID
-	midEGL14EglGetConfigAttrib               jni.MethodID
-	midEGL14EglGetConfigs                    jni.MethodID
-	midEGL14EglGetCurrentContext             jni.MethodID
-	midEGL14EglGetCurrentDisplay             jni.MethodID
-	midEGL14EglGetCurrentSurface             jni.MethodID
-	midEGL14EglGetDisplay                    jni.MethodID
-	midEGL14EglGetError                      jni.MethodID
-	midEGL14EglInitialize                    jni.MethodID
-	midEGL14EglMakeCurrent                   jni.MethodID
-	midEGL14EglQueryAPI                      jni.MethodID
-	midEGL14EglQueryContext                  jni.MethodID
-	midEGL14EglQueryString                   jni.MethodID
-	midEGL14EglQuerySurface                  jni.MethodID
-	midEGL14EglReleaseTexImage               jni.MethodID
-	midEGL14EglReleaseThread                 jni.MethodID
-	midEGL14EglSurfaceAttrib                 jni.MethodID
-	midEGL14EglSwapBuffers                   jni.MethodID
-	midEGL14EglSwapInterval                  jni.MethodID
-	midEGL14EglTerminate                     jni.MethodID
-	midEGL14EglWaitClient                    jni.MethodID
-	midEGL14EglWaitGL                        jni.MethodID
-	midEGL14EglWaitNative                    jni.MethodID
-
-	clsGLES31                               *jni.GlobalRef
-	midGLES31GlActiveShaderProgram          jni.MethodID
-	midGLES31GlBindImageTexture             jni.MethodID
-	midGLES31GlBindProgramPipeline          jni.MethodID
-	midGLES31GlBindVertexBuffer             jni.MethodID
-	midGLES31GlCreateShaderProgramv         jni.MethodID
-	midGLES31GlDeleteProgramPipelines3      jni.MethodID
-	midGLES31GlDeleteProgramPipelines2_1    jni.MethodID
-	midGLES31GlDispatchCompute              jni.MethodID
-	midGLES31GlDispatchComputeIndirect      jni.MethodID
-	midGLES31GlDrawArraysIndirect           jni.MethodID
-	midGLES31GlDrawElementsIndirect         jni.MethodID
-	midGLES31GlFramebufferParameteri        jni.MethodID
-	midGLES31GlGenProgramPipelines3         jni.MethodID
-	midGLES31GlGenProgramPipelines2_1       jni.MethodID
-	midGLES31GlGetBooleani_v4               jni.MethodID
-	midGLES31GlGetBooleani_v3_1             jni.MethodID
-	midGLES31GlGetFramebufferParameteriv4   jni.MethodID
-	midGLES31GlGetFramebufferParameteriv3_1 jni.MethodID
-	midGLES31GlGetMultisamplefv4            jni.MethodID
-	midGLES31GlGetMultisamplefv3_1          jni.MethodID
-	midGLES31GlGetProgramInterfaceiv5       jni.MethodID
-	midGLES31GlGetProgramInterfaceiv4_1     jni.MethodID
-	midGLES31GlGetProgramPipelineInfoLog    jni.MethodID
-	midGLES31GlGetProgramPipelineiv4        jni.MethodID
-	midGLES31GlGetProgramPipelineiv3_1      jni.MethodID
-	midGLES31GlGetProgramResourceIndex      jni.MethodID
-	midGLES31GlGetProgramResourceLocation   jni.MethodID
-	midGLES31GlGetProgramResourceName       jni.MethodID
-	midGLES31GlGetProgramResourceiv11       jni.MethodID
-	midGLES31GlGetProgramResourceiv8_1      jni.MethodID
-	midGLES31GlGetTexLevelParameterfv5      jni.MethodID
-	midGLES31GlGetTexLevelParameterfv4_1    jni.MethodID
-	midGLES31GlGetTexLevelParameteriv5      jni.MethodID
-	midGLES31GlGetTexLevelParameteriv4_1    jni.MethodID
-	midGLES31GlIsProgramPipeline            jni.MethodID
-	midGLES31GlMemoryBarrier                jni.MethodID
-	midGLES31GlMemoryBarrierByRegion        jni.MethodID
-	midGLES31GlProgramUniform1f             jni.MethodID
-	midGLES31GlProgramUniform1fv5           jni.MethodID
-	midGLES31GlProgramUniform1fv4_1         jni.MethodID
-	midGLES31GlProgramUniform1i             jni.MethodID
-	midGLES31GlProgramUniform1iv5           jni.MethodID
-	midGLES31GlProgramUniform1iv4_1         jni.MethodID
-	midGLES31GlProgramUniform1ui            jni.MethodID
-	midGLES31GlProgramUniform1uiv5          jni.MethodID
-	midGLES31GlProgramUniform1uiv4_1        jni.MethodID
-	midGLES31GlProgramUniform2f             jni.MethodID
-	midGLES31GlProgramUniform2fv5           jni.MethodID
-	midGLES31GlProgramUniform2fv4_1         jni.MethodID
-	midGLES31GlProgramUniform2i             jni.MethodID
-	midGLES31GlProgramUniform2iv5           jni.MethodID
-	midGLES31GlProgramUniform2iv4_1         jni.MethodID
-	midGLES31GlProgramUniform2ui            jni.MethodID
-	midGLES31GlProgramUniform2uiv5          jni.MethodID
-	midGLES31GlProgramUniform2uiv4_1        jni.MethodID
-	midGLES31GlProgramUniform3f             jni.MethodID
-	midGLES31GlProgramUniform3fv5           jni.MethodID
-	midGLES31GlProgramUniform3fv4_1         jni.MethodID
-	midGLES31GlProgramUniform3i             jni.MethodID
-	midGLES31GlProgramUniform3iv5           jni.MethodID
-	midGLES31GlProgramUniform3iv4_1         jni.MethodID
-	midGLES31GlProgramUniform3ui            jni.MethodID
-	midGLES31GlProgramUniform3uiv5          jni.MethodID
-	midGLES31GlProgramUniform3uiv4_1        jni.MethodID
-	midGLES31GlProgramUniform4f             jni.MethodID
-	midGLES31GlProgramUniform4fv5           jni.MethodID
-	midGLES31GlProgramUniform4fv4_1         jni.MethodID
-	midGLES31GlProgramUniform4i             jni.MethodID
-	midGLES31GlProgramUniform4iv5           jni.MethodID
-	midGLES31GlProgramUniform4iv4_1         jni.MethodID
-	midGLES31GlProgramUniform4ui            jni.MethodID
-	midGLES31GlProgramUniform4uiv5          jni.MethodID
-	midGLES31GlProgramUniform4uiv4_1        jni.MethodID
-	midGLES31GlProgramUniformMatrix2fv6     jni.MethodID
-	midGLES31GlProgramUniformMatrix2fv5_1   jni.MethodID
-	midGLES31GlProgramUniformMatrix2x3fv6   jni.MethodID
-	midGLES31GlProgramUniformMatrix2x3fv5_1 jni.MethodID
-	midGLES31GlProgramUniformMatrix2x4fv6   jni.MethodID
-	midGLES31GlProgramUniformMatrix2x4fv5_1 jni.MethodID
-	midGLES31GlProgramUniformMatrix3fv6     jni.MethodID
-	midGLES31GlProgramUniformMatrix3fv5_1   jni.MethodID
-	midGLES31GlProgramUniformMatrix3x2fv6   jni.MethodID
-	midGLES31GlProgramUniformMatrix3x2fv5_1 jni.MethodID
-	midGLES31GlProgramUniformMatrix3x4fv6   jni.MethodID
-	midGLES31GlProgramUniformMatrix3x4fv5_1 jni.MethodID
-	midGLES31GlProgramUniformMatrix4fv6     jni.MethodID
-	midGLES31GlProgramUniformMatrix4fv5_1   jni.MethodID
-	midGLES31GlProgramUniformMatrix4x2fv6   jni.MethodID
-	midGLES31GlProgramUniformMatrix4x2fv5_1 jni.MethodID
-	midGLES31GlProgramUniformMatrix4x3fv6   jni.MethodID
-	midGLES31GlProgramUniformMatrix4x3fv5_1 jni.MethodID
-	midGLES31GlSampleMaski                  jni.MethodID
-	midGLES31GlTexStorage2DMultisample      jni.MethodID
-	midGLES31GlUseProgramStages             jni.MethodID
-	midGLES31GlValidateProgramPipeline      jni.MethodID
-	midGLES31GlVertexAttribBinding          jni.MethodID
-	midGLES31GlVertexAttribFormat           jni.MethodID
-	midGLES31GlVertexAttribIFormat          jni.MethodID
-	midGLES31GlVertexBindingDivisor         jni.MethodID
-
-	clsGLES31Ext                                *jni.GlobalRef
-	midGLES31ExtGlBlendBarrierKHR               jni.MethodID
-	midGLES31ExtGlBlendEquationSeparateiEXT     jni.MethodID
-	midGLES31ExtGlBlendEquationiEXT             jni.MethodID
-	midGLES31ExtGlBlendFuncSeparateiEXT         jni.MethodID
-	midGLES31ExtGlBlendFunciEXT                 jni.MethodID
-	midGLES31ExtGlColorMaskiEXT                 jni.MethodID
-	midGLES31ExtGlCopyImageSubDataEXT           jni.MethodID
-	midGLES31ExtGlDebugMessageCallbackKHR       jni.MethodID
-	midGLES31ExtGlDebugMessageControlKHR7       jni.MethodID
-	midGLES31ExtGlDebugMessageControlKHR6_1     jni.MethodID
-	midGLES31ExtGlDebugMessageInsertKHR         jni.MethodID
-	midGLES31ExtGlDisableiEXT                   jni.MethodID
-	midGLES31ExtGlEnableiEXT                    jni.MethodID
-	midGLES31ExtGlFramebufferTextureEXT         jni.MethodID
-	midGLES31ExtGlGetDebugMessageCallbackKHR    jni.MethodID
-	midGLES31ExtGlGetDebugMessageLogKHR14       jni.MethodID
-	midGLES31ExtGlGetDebugMessageLogKHR9_1      jni.MethodID
-	midGLES31ExtGlGetDebugMessageLogKHR5_2      jni.MethodID
-	midGLES31ExtGlGetObjectLabelKHR             jni.MethodID
-	midGLES31ExtGlGetObjectPtrLabelKHR          jni.MethodID
-	midGLES31ExtGlGetSamplerParameterIivEXT4    jni.MethodID
-	midGLES31ExtGlGetSamplerParameterIivEXT3_1  jni.MethodID
-	midGLES31ExtGlGetSamplerParameterIuivEXT4   jni.MethodID
-	midGLES31ExtGlGetSamplerParameterIuivEXT3_1 jni.MethodID
-	midGLES31ExtGlGetTexParameterIivEXT4        jni.MethodID
-	midGLES31ExtGlGetTexParameterIivEXT3_1      jni.MethodID
-	midGLES31ExtGlGetTexParameterIuivEXT4       jni.MethodID
-	midGLES31ExtGlGetTexParameterIuivEXT3_1     jni.MethodID
-	midGLES31ExtGlIsEnablediEXT                 jni.MethodID
-	midGLES31ExtGlMinSampleShadingOES           jni.MethodID
-	midGLES31ExtGlObjectLabelKHR                jni.MethodID
-	midGLES31ExtGlObjectPtrLabelKHR             jni.MethodID
-	midGLES31ExtGlPatchParameteriEXT            jni.MethodID
-	midGLES31ExtGlPopDebugGroupKHR              jni.MethodID
-	midGLES31ExtGlPrimitiveBoundingBoxEXT       jni.MethodID
-	midGLES31ExtGlPushDebugGroupKHR             jni.MethodID
-	midGLES31ExtGlSamplerParameterIivEXT4       jni.MethodID
-	midGLES31ExtGlSamplerParameterIivEXT3_1     jni.MethodID
-	midGLES31ExtGlSamplerParameterIuivEXT4      jni.MethodID
-	midGLES31ExtGlSamplerParameterIuivEXT3_1    jni.MethodID
-	midGLES31ExtGlTexBufferEXT                  jni.MethodID
-	midGLES31ExtGlTexBufferRangeEXT             jni.MethodID
-	midGLES31ExtGlTexParameterIivEXT4           jni.MethodID
-	midGLES31ExtGlTexParameterIivEXT3_1         jni.MethodID
-	midGLES31ExtGlTexParameterIuivEXT4          jni.MethodID
-	midGLES31ExtGlTexParameterIuivEXT3_1        jni.MethodID
-	midGLES31ExtGlTexStorage3DMultisampleOES    jni.MethodID
-
-	clsGLES31ExtDebugProcKHR          *jni.GlobalRef
-	midGLES31ExtDebugProcKHROnMessage jni.MethodID
-
-	clsMatrix                 *jni.GlobalRef
-	midMatrixFrustumM         jni.MethodID
-	midMatrixInvertM          jni.MethodID
-	midMatrixLength           jni.MethodID
-	midMatrixMultiplyMM       jni.MethodID
-	midMatrixMultiplyMV       jni.MethodID
-	midMatrixOrthoM           jni.MethodID
-	midMatrixPerspectiveM     jni.MethodID
-	midMatrixRotateM6         jni.MethodID
-	midMatrixRotateM8_1       jni.MethodID
-	midMatrixScaleM5          jni.MethodID
-	midMatrixScaleM7_1        jni.MethodID
-	midMatrixSetIdentityM     jni.MethodID
-	midMatrixSetLookAtM       jni.MethodID
-	midMatrixSetRotateEulerM  jni.MethodID
-	midMatrixSetRotateEulerM2 jni.MethodID
-	midMatrixSetRotateM       jni.MethodID
-	midMatrixTranslateM5      jni.MethodID
-	midMatrixTranslateM7_1    jni.MethodID
-	midMatrixTransposeM       jni.MethodID
-
-	clsETC1                   *jni.GlobalRef
-	midETC1DecodeBlock        jni.MethodID
-	midETC1DecodeImage        jni.MethodID
-	midETC1EncodeBlock        jni.MethodID
-	midETC1EncodeImage        jni.MethodID
-	midETC1FormatHeader       jni.MethodID
-	midETC1GetEncodedDataSize jni.MethodID
-	midETC1GetHeight          jni.MethodID
-	midETC1GetWidth           jni.MethodID
-	midETC1IsValid            jni.MethodID
+	clsGLDebugHelper        *jni.GlobalRef
+	midGLDebugHelperInit    jni.MethodID
+	midGLDebugHelperWrap3   jni.MethodID
+	midGLDebugHelperWrap3_1 jni.MethodID
 
 	clsGLSurfaceView                             *jni.GlobalRef
+	midGLSurfaceViewInit                         jni.MethodID
 	midGLSurfaceViewGetDebugFlags                jni.MethodID
 	midGLSurfaceViewGetPreserveEGLContextOnPause jni.MethodID
 	midGLSurfaceViewGetRenderMode                jni.MethodID
@@ -968,23 +736,146 @@ var (
 	midGLSurfaceViewRendererOnSurfaceChanged jni.MethodID
 	midGLSurfaceViewRendererOnSurfaceCreated jni.MethodID
 
+	clsMatrix                 *jni.GlobalRef
+	midMatrixInit             jni.MethodID
+	midMatrixFrustumM         jni.MethodID
+	midMatrixInvertM          jni.MethodID
+	midMatrixLength           jni.MethodID
+	midMatrixMultiplyMM       jni.MethodID
+	midMatrixMultiplyMV       jni.MethodID
+	midMatrixOrthoM           jni.MethodID
+	midMatrixPerspectiveM     jni.MethodID
+	midMatrixRotateM6         jni.MethodID
+	midMatrixRotateM8_1       jni.MethodID
+	midMatrixScaleM5          jni.MethodID
+	midMatrixScaleM7_1        jni.MethodID
+	midMatrixSetIdentityM     jni.MethodID
+	midMatrixSetLookAtM       jni.MethodID
+	midMatrixSetRotateEulerM  jni.MethodID
+	midMatrixSetRotateEulerM2 jni.MethodID
+	midMatrixSetRotateM       jni.MethodID
+	midMatrixTranslateM5      jni.MethodID
+	midMatrixTranslateM7_1    jni.MethodID
+	midMatrixTransposeM       jni.MethodID
+
+	clsETC1Util                *jni.GlobalRef
+	midETC1UtilInit            jni.MethodID
+	midETC1UtilCompressTexture jni.MethodID
+	midETC1UtilCreateTexture   jni.MethodID
+	midETC1UtilIsETC1Supported jni.MethodID
+	midETC1UtilLoadTexture6    jni.MethodID
+	midETC1UtilLoadTexture6_1  jni.MethodID
+	midETC1UtilWriteTexture    jni.MethodID
+
+	clsETC1UtilETC1Texture          *jni.GlobalRef
+	midETC1UtilETC1TextureGetData   jni.MethodID
+	midETC1UtilETC1TextureGetHeight jni.MethodID
+	midETC1UtilETC1TextureGetWidth  jni.MethodID
+
+	clsEGL15                               *jni.GlobalRef
+	midEGL15EglClientWaitSync              jni.MethodID
+	midEGL15EglCreateImage                 jni.MethodID
+	midEGL15EglCreatePlatformPixmapSurface jni.MethodID
+	midEGL15EglCreatePlatformWindowSurface jni.MethodID
+	midEGL15EglCreateSync                  jni.MethodID
+	midEGL15EglDestroyImage                jni.MethodID
+	midEGL15EglDestroySync                 jni.MethodID
+	midEGL15EglGetPlatformDisplay          jni.MethodID
+	midEGL15EglGetSyncAttrib               jni.MethodID
+	midEGL15EglWaitSync                    jni.MethodID
+
+	clsEGLImage       *jni.GlobalRef
+	midEGLImageEquals jni.MethodID
+
+	clsGLUtils                  *jni.GlobalRef
+	midGLUtilsGetEGLErrorString jni.MethodID
+	midGLUtilsGetInternalFormat jni.MethodID
+	midGLUtilsGetType           jni.MethodID
+	midGLUtilsTexImage2D4       jni.MethodID
+	midGLUtilsTexImage2D5_1     jni.MethodID
+	midGLUtilsTexImage2D6_2     jni.MethodID
+	midGLUtilsTexSubImage2D5    jni.MethodID
+	midGLUtilsTexSubImage2D7_1  jni.MethodID
+
+	clsEGLExt                           *jni.GlobalRef
+	midEGLExtInit                       jni.MethodID
+	midEGLExtEglDupNativeFenceFDANDROID jni.MethodID
+	midEGLExtEglPresentationTimeANDROID jni.MethodID
+
 	clsEGLSurface       *jni.GlobalRef
 	midEGLSurfaceEquals jni.MethodID
 
-	clsEGLContext       *jni.GlobalRef
-	midEGLContextEquals jni.MethodID
+	clsGLES32                                     *jni.GlobalRef
+	midGLES32GlBlendBarrier                       jni.MethodID
+	midGLES32GlBlendEquationSeparatei             jni.MethodID
+	midGLES32GlBlendEquationi                     jni.MethodID
+	midGLES32GlBlendFuncSeparatei                 jni.MethodID
+	midGLES32GlBlendFunci                         jni.MethodID
+	midGLES32GlColorMaski                         jni.MethodID
+	midGLES32GlCopyImageSubData                   jni.MethodID
+	midGLES32GlDebugMessageCallback               jni.MethodID
+	midGLES32GlDebugMessageControl7               jni.MethodID
+	midGLES32GlDebugMessageControl6_1             jni.MethodID
+	midGLES32GlDebugMessageInsert                 jni.MethodID
+	midGLES32GlDisablei                           jni.MethodID
+	midGLES32GlDrawElementsBaseVertex             jni.MethodID
+	midGLES32GlDrawElementsInstancedBaseVertex6   jni.MethodID
+	midGLES32GlDrawElementsInstancedBaseVertex6_1 jni.MethodID
+	midGLES32GlDrawRangeElementsBaseVertex        jni.MethodID
+	midGLES32GlEnablei                            jni.MethodID
+	midGLES32GlFramebufferTexture                 jni.MethodID
+	midGLES32GlGetDebugMessageLog14               jni.MethodID
+	midGLES32GlGetDebugMessageLog9_1              jni.MethodID
+	midGLES32GlGetDebugMessageLog5_2              jni.MethodID
+	midGLES32GlGetGraphicsResetStatus             jni.MethodID
+	midGLES32GlGetObjectLabel                     jni.MethodID
+	midGLES32GlGetObjectPtrLabel                  jni.MethodID
+	midGLES32GlGetPointerv                        jni.MethodID
+	midGLES32GlGetSamplerParameterIiv4            jni.MethodID
+	midGLES32GlGetSamplerParameterIiv3_1          jni.MethodID
+	midGLES32GlGetSamplerParameterIuiv4           jni.MethodID
+	midGLES32GlGetSamplerParameterIuiv3_1         jni.MethodID
+	midGLES32GlGetTexParameterIiv4                jni.MethodID
+	midGLES32GlGetTexParameterIiv3_1              jni.MethodID
+	midGLES32GlGetTexParameterIuiv4               jni.MethodID
+	midGLES32GlGetTexParameterIuiv3_1             jni.MethodID
+	midGLES32GlGetnUniformfv5                     jni.MethodID
+	midGLES32GlGetnUniformfv4_1                   jni.MethodID
+	midGLES32GlGetnUniformiv5                     jni.MethodID
+	midGLES32GlGetnUniformiv4_1                   jni.MethodID
+	midGLES32GlGetnUniformuiv5                    jni.MethodID
+	midGLES32GlGetnUniformuiv4_1                  jni.MethodID
+	midGLES32GlIsEnabledi                         jni.MethodID
+	midGLES32GlMinSampleShading                   jni.MethodID
+	midGLES32GlObjectLabel                        jni.MethodID
+	midGLES32GlObjectPtrLabel                     jni.MethodID
+	midGLES32GlPatchParameteri                    jni.MethodID
+	midGLES32GlPopDebugGroup                      jni.MethodID
+	midGLES32GlPrimitiveBoundingBox               jni.MethodID
+	midGLES32GlPushDebugGroup                     jni.MethodID
+	midGLES32GlReadnPixels                        jni.MethodID
+	midGLES32GlSamplerParameterIiv4               jni.MethodID
+	midGLES32GlSamplerParameterIiv3_1             jni.MethodID
+	midGLES32GlSamplerParameterIuiv4              jni.MethodID
+	midGLES32GlSamplerParameterIuiv3_1            jni.MethodID
+	midGLES32GlTexBuffer                          jni.MethodID
+	midGLES32GlTexBufferRange                     jni.MethodID
+	midGLES32GlTexParameterIiv4                   jni.MethodID
+	midGLES32GlTexParameterIiv3_1                 jni.MethodID
+	midGLES32GlTexParameterIuiv4                  jni.MethodID
+	midGLES32GlTexParameterIuiv3_1                jni.MethodID
+	midGLES32GlTexStorage3DMultisample            jni.MethodID
+
+	clsGLES32DebugProc          *jni.GlobalRef
+	midGLES32DebugProcOnMessage jni.MethodID
 
 	clsGLES10Ext                     *jni.GlobalRef
+	midGLES10ExtInit                 jni.MethodID
 	midGLES10ExtGlQueryMatrixxOES4   jni.MethodID
 	midGLES10ExtGlQueryMatrixxOES2_1 jni.MethodID
 
-	clsEGLDisplay       *jni.GlobalRef
-	midEGLDisplayEquals jni.MethodID
-
-	clsEGLConfig       *jni.GlobalRef
-	midEGLConfigEquals jni.MethodID
-
 	clsGLES11Ext                                            *jni.GlobalRef
+	midGLES11ExtInit                                        jni.MethodID
 	midGLES11ExtGlAlphaFuncxOES                             jni.MethodID
 	midGLES11ExtGlBindFramebufferOES                        jni.MethodID
 	midGLES11ExtGlBindRenderbufferOES                       jni.MethodID
@@ -1106,9 +997,134 @@ var (
 	midGLES11ExtGlTranslatexOES                             jni.MethodID
 	midGLES11ExtGlWeightPointerOES                          jni.MethodID
 
-	clsGLDebugHelper        *jni.GlobalRef
-	midGLDebugHelperWrap3   jni.MethodID
-	midGLDebugHelperWrap3_1 jni.MethodID
+	clsEGLSync       *jni.GlobalRef
+	midEGLSyncEquals jni.MethodID
+
+	clsGLES11                          *jni.GlobalRef
+	midGLES11Init                      jni.MethodID
+	midGLES11GlBindBuffer              jni.MethodID
+	midGLES11GlBufferData              jni.MethodID
+	midGLES11GlBufferSubData           jni.MethodID
+	midGLES11GlClipPlanef3             jni.MethodID
+	midGLES11GlClipPlanef2_1           jni.MethodID
+	midGLES11GlClipPlanex3             jni.MethodID
+	midGLES11GlClipPlanex2_1           jni.MethodID
+	midGLES11GlColor4ub                jni.MethodID
+	midGLES11GlColorPointer            jni.MethodID
+	midGLES11GlDeleteBuffers3          jni.MethodID
+	midGLES11GlDeleteBuffers2_1        jni.MethodID
+	midGLES11GlDrawElements            jni.MethodID
+	midGLES11GlGenBuffers3             jni.MethodID
+	midGLES11GlGenBuffers2_1           jni.MethodID
+	midGLES11GlGetBooleanv3            jni.MethodID
+	midGLES11GlGetBooleanv2_1          jni.MethodID
+	midGLES11GlGetBufferParameteriv4   jni.MethodID
+	midGLES11GlGetBufferParameteriv3_1 jni.MethodID
+	midGLES11GlGetClipPlanef3          jni.MethodID
+	midGLES11GlGetClipPlanef2_1        jni.MethodID
+	midGLES11GlGetClipPlanex3          jni.MethodID
+	midGLES11GlGetClipPlanex2_1        jni.MethodID
+	midGLES11GlGetFixedv3              jni.MethodID
+	midGLES11GlGetFixedv2_1            jni.MethodID
+	midGLES11GlGetFloatv3              jni.MethodID
+	midGLES11GlGetFloatv2_1            jni.MethodID
+	midGLES11GlGetLightfv4             jni.MethodID
+	midGLES11GlGetLightfv3_1           jni.MethodID
+	midGLES11GlGetLightxv4             jni.MethodID
+	midGLES11GlGetLightxv3_1           jni.MethodID
+	midGLES11GlGetMaterialfv4          jni.MethodID
+	midGLES11GlGetMaterialfv3_1        jni.MethodID
+	midGLES11GlGetMaterialxv4          jni.MethodID
+	midGLES11GlGetMaterialxv3_1        jni.MethodID
+	midGLES11GlGetTexEnvfv4            jni.MethodID
+	midGLES11GlGetTexEnvfv3_1          jni.MethodID
+	midGLES11GlGetTexEnviv4            jni.MethodID
+	midGLES11GlGetTexEnviv3_1          jni.MethodID
+	midGLES11GlGetTexEnvxv4            jni.MethodID
+	midGLES11GlGetTexEnvxv3_1          jni.MethodID
+	midGLES11GlGetTexParameterfv4      jni.MethodID
+	midGLES11GlGetTexParameterfv3_1    jni.MethodID
+	midGLES11GlGetTexParameteriv4      jni.MethodID
+	midGLES11GlGetTexParameteriv3_1    jni.MethodID
+	midGLES11GlGetTexParameterxv4      jni.MethodID
+	midGLES11GlGetTexParameterxv3_1    jni.MethodID
+	midGLES11GlIsBuffer                jni.MethodID
+	midGLES11GlIsEnabled               jni.MethodID
+	midGLES11GlIsTexture               jni.MethodID
+	midGLES11GlNormalPointer           jni.MethodID
+	midGLES11GlPointParameterf         jni.MethodID
+	midGLES11GlPointParameterfv3       jni.MethodID
+	midGLES11GlPointParameterfv2_1     jni.MethodID
+	midGLES11GlPointParameterx         jni.MethodID
+	midGLES11GlPointParameterxv3       jni.MethodID
+	midGLES11GlPointParameterxv2_1     jni.MethodID
+	midGLES11GlPointSizePointerOES     jni.MethodID
+	midGLES11GlTexCoordPointer         jni.MethodID
+	midGLES11GlTexEnvi                 jni.MethodID
+	midGLES11GlTexEnviv4               jni.MethodID
+	midGLES11GlTexEnviv3_1             jni.MethodID
+	midGLES11GlTexParameterfv4         jni.MethodID
+	midGLES11GlTexParameterfv3_1       jni.MethodID
+	midGLES11GlTexParameteri           jni.MethodID
+	midGLES11GlTexParameteriv4         jni.MethodID
+	midGLES11GlTexParameteriv3_1       jni.MethodID
+	midGLES11GlTexParameterxv4         jni.MethodID
+	midGLES11GlTexParameterxv3_1       jni.MethodID
+	midGLES11GlVertexPointer           jni.MethodID
+
+	clsEGL14                                 *jni.GlobalRef
+	midEGL14Init                             jni.MethodID
+	midEGL14EglBindAPI                       jni.MethodID
+	midEGL14EglBindTexImage                  jni.MethodID
+	midEGL14EglChooseConfig                  jni.MethodID
+	midEGL14EglCopyBuffers                   jni.MethodID
+	midEGL14EglCreateContext                 jni.MethodID
+	midEGL14EglCreatePbufferFromClientBuffer jni.MethodID
+	midEGL14EglCreatePbufferSurface          jni.MethodID
+	midEGL14EglCreatePixmapSurface           jni.MethodID
+	midEGL14EglCreateWindowSurface           jni.MethodID
+	midEGL14EglDestroyContext                jni.MethodID
+	midEGL14EglDestroySurface                jni.MethodID
+	midEGL14EglGetConfigAttrib               jni.MethodID
+	midEGL14EglGetConfigs                    jni.MethodID
+	midEGL14EglGetCurrentContext             jni.MethodID
+	midEGL14EglGetCurrentDisplay             jni.MethodID
+	midEGL14EglGetCurrentSurface             jni.MethodID
+	midEGL14EglGetDisplay                    jni.MethodID
+	midEGL14EglGetError                      jni.MethodID
+	midEGL14EglInitialize                    jni.MethodID
+	midEGL14EglMakeCurrent                   jni.MethodID
+	midEGL14EglQueryAPI                      jni.MethodID
+	midEGL14EglQueryContext                  jni.MethodID
+	midEGL14EglQueryString                   jni.MethodID
+	midEGL14EglQuerySurface                  jni.MethodID
+	midEGL14EglReleaseTexImage               jni.MethodID
+	midEGL14EglReleaseThread                 jni.MethodID
+	midEGL14EglSurfaceAttrib                 jni.MethodID
+	midEGL14EglSwapBuffers                   jni.MethodID
+	midEGL14EglSwapInterval                  jni.MethodID
+	midEGL14EglTerminate                     jni.MethodID
+	midEGL14EglWaitClient                    jni.MethodID
+	midEGL14EglWaitGL                        jni.MethodID
+	midEGL14EglWaitNative                    jni.MethodID
+
+	clsETC1                   *jni.GlobalRef
+	midETC1Init               jni.MethodID
+	midETC1DecodeBlock        jni.MethodID
+	midETC1DecodeImage        jni.MethodID
+	midETC1EncodeBlock        jni.MethodID
+	midETC1EncodeImage        jni.MethodID
+	midETC1FormatHeader       jni.MethodID
+	midETC1GetEncodedDataSize jni.MethodID
+	midETC1GetHeight          jni.MethodID
+	midETC1GetWidth           jni.MethodID
+	midETC1IsValid            jni.MethodID
+
+	clsEGLDisplay       *jni.GlobalRef
+	midEGLDisplayEquals jni.MethodID
+
+	clsEGLConfig       *jni.GlobalRef
+	midEGLConfigEquals jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -1129,1112 +1145,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/opengl/EGLObjectHandle")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGLObjectHandle = env.NewGlobalRef(&c.Object)
-
-		midEGLObjectHandleGetHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "getHandle", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGLObjectHandleGetNativeHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "getNativeHandle", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGLObjectHandleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/EGLSync")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGLSync = env.NewGlobalRef(&c.Object)
-
-		midEGLSyncEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLSync)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES10")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES10 = env.NewGlobalRef(&c.Object)
-
-		midGLES10GlActiveTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glActiveTexture", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlAlphaFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glAlphaFunc", "(IF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlAlphaFuncx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glAlphaFuncx", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlBindTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glBindTexture", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlBlendFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glBlendFunc", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClear, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClear", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClearColor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearColor", "(FFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClearColorx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearColorx", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClearDepthf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearDepthf", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClearDepthx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearDepthx", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClearStencil, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearStencil", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlClientActiveTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClientActiveTexture", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlColor4f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColor4f", "(FFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlColor4x, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColor4x", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlColorMask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColorMask", "(ZZZZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlColorPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColorPointer", "(IIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlCompressedTexImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCompressedTexImage2D", "(IIIIIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlCompressedTexSubImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCompressedTexSubImage2D", "(IIIIIIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlCopyTexImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCopyTexImage2D", "(IIIIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlCopyTexSubImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCopyTexSubImage2D", "(IIIIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlCullFace, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCullFace", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDeleteTextures3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDeleteTextures", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDeleteTextures2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDeleteTextures", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDepthFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthFunc", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDepthMask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthMask", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDepthRangef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthRangef", "(FF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDepthRangex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthRangex", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDisable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDisable", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDisableClientState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDisableClientState", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDrawArrays, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDrawArrays", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlDrawElements, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDrawElements", "(IIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlEnable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glEnable", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlEnableClientState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glEnableClientState", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFinish, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFinish", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFlush, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFlush", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFogf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogf", "(IF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFogfv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogfv", "(I[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFogfv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogfv", "(ILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFogx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogx", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFogxv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogxv", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFogxv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogxv", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFrontFace, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFrontFace", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFrustumf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFrustumf", "(FFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlFrustumx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFrustumx", "(IIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlGenTextures3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGenTextures", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlGenTextures2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGenTextures", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlGetError, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetError", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlGetIntegerv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetIntegerv", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlGetIntegerv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetIntegerv", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlGetString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetString", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlHint, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glHint", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightModelf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelf", "(IF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightModelfv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelfv", "(I[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightModelfv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelfv", "(ILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightModelx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelx", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightModelxv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelxv", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightModelxv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelxv", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightf", "(IIF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightx", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLightxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLineWidth, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLineWidth", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLineWidthx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLineWidthx", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLoadIdentity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadIdentity", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLoadMatrixf2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixf", "([FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLoadMatrixf1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixf", "(Ljava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLoadMatrixx2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixx", "([II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLoadMatrixx1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixx", "(Ljava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlLogicOp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLogicOp", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMaterialf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialf", "(IIF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMaterialfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMaterialfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMaterialx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialx", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMaterialxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMaterialxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMatrixMode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMatrixMode", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMultMatrixf2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixf", "([FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMultMatrixf1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixf", "(Ljava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMultMatrixx2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixx", "([II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMultMatrixx1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixx", "(Ljava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMultiTexCoord4f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultiTexCoord4f", "(IFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlMultiTexCoord4x, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultiTexCoord4x", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlNormal3f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glNormal3f", "(FFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlNormal3x, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glNormal3x", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlNormalPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glNormalPointer", "(IILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlOrthof, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glOrthof", "(FFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlOrthox, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glOrthox", "(IIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPixelStorei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPixelStorei", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPointSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPointSize", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPointSizex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPointSizex", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPolygonOffset, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPolygonOffset", "(FF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPolygonOffsetx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPolygonOffsetx", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPopMatrix, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPopMatrix", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlPushMatrix, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPushMatrix", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlReadPixels, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glReadPixels", "(IIIIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlRotatef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glRotatef", "(FFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlRotatex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glRotatex", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlSampleCoverage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glSampleCoverage", "(FZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlSampleCoveragex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glSampleCoveragex", "(IZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlScalef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glScalef", "(FFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlScalex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glScalex", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlScissor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glScissor", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlShadeModel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glShadeModel", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlStencilFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glStencilFunc", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlStencilMask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glStencilMask", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlStencilOp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glStencilOp", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexCoordPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexCoordPointer", "(IIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexEnvf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvf", "(IIF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexEnvfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexEnvfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexEnvx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvx", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexEnvxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexEnvxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexImage2D", "(IIIIIIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexParameterf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexParameterf", "(IIF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexParameterx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexParameterx", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTexSubImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexSubImage2D", "(IIIIIIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTranslatef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTranslatef", "(FFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlTranslatex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTranslatex", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlVertexPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glVertexPointer", "(IIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES10GlViewport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glViewport", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/EGL15")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGL15 = env.NewGlobalRef(&c.Object)
-
-		midEGL15EglClientWaitSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglClientWaitSync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;IJ)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglCreateImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreateImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLContext;IJ[JI)Landroid/opengl/EGLImage;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglCreatePlatformPixmapSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreatePlatformPixmapSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Ljava/nio/Buffer;[JI)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglCreatePlatformWindowSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreatePlatformWindowSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Ljava/nio/Buffer;[JI)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglCreateSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreateSync", "(Landroid/opengl/EGLDisplay;I[JI)Landroid/opengl/EGLSync;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglDestroyImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglDestroyImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLImage;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglDestroySync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglDestroySync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglGetPlatformDisplay, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglGetPlatformDisplay", "(IJ[JI)Landroid/opengl/EGLDisplay;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglGetSyncAttrib, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglGetSyncAttrib", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;I[JI)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL15EglWaitSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglWaitSync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/EGLExt")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGLExt = env.NewGlobalRef(&c.Object)
-
-		midEGLExtEglDupNativeFenceFDANDROID, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "eglDupNativeFenceFDANDROID", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;)Landroid/hardware/SyncFence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGLExtEglPresentationTimeANDROID, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "eglPresentationTimeANDROID", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;J)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/ETC1Util")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsETC1Util = env.NewGlobalRef(&c.Object)
-
-		midETC1UtilCompressTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "compressTexture", "(Ljava/nio/Buffer;IIII)Landroid/opengl/ETC1Util$ETC1Texture;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilCreateTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "createTexture", "(Ljava/io/InputStream;)Landroid/opengl/ETC1Util$ETC1Texture;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilIsETC1Supported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "isETC1Supported", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilLoadTexture6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "loadTexture", "(IIIIILandroid/opengl/ETC1Util$ETC1Texture;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilLoadTexture6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "loadTexture", "(IIIIILjava/io/InputStream;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilWriteTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "writeTexture", "(Landroid/opengl/ETC1Util$ETC1Texture;Ljava/io/OutputStream;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/ETC1Util$ETC1Texture")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsETC1UtilETC1Texture = env.NewGlobalRef(&c.Object)
-
-		midETC1UtilETC1TextureGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "getData", "()Ljava/nio/ByteBuffer;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilETC1TextureGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "getHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1UtilETC1TextureGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "getWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/opengl/GLU")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -2242,6 +1152,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLU = env.NewGlobalRef(&c.Object)
+		midGLUInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLU)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midGLUGluErrorString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLU)), "gluErrorString", "(I)Ljava/lang/String;")
 		if err != nil {
@@ -2287,1032 +1201,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/opengl/EGLImage")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGLImage = env.NewGlobalRef(&c.Object)
-
-		midEGLImageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLImage)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES32")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES32 = env.NewGlobalRef(&c.Object)
-
-		midGLES32GlBlendBarrier, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendBarrier", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlBlendEquationSeparatei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendEquationSeparatei", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlBlendEquationi, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendEquationi", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlBlendFuncSeparatei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendFuncSeparatei", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlBlendFunci, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendFunci", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlColorMaski, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glColorMaski", "(IZZZZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlCopyImageSubData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glCopyImageSubData", "(IIIIIIIIIIIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDebugMessageCallback, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageCallback", "(Landroid/opengl/GLES32$DebugProc;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDebugMessageControl7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageControl", "(IIII[IIZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDebugMessageControl6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageControl", "(IIIILjava/nio/IntBuffer;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDebugMessageInsert, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageInsert", "(IIIIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDisablei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDisablei", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDrawElementsBaseVertex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawElementsBaseVertex", "(IIILjava/nio/Buffer;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDrawElementsInstancedBaseVertex6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawElementsInstancedBaseVertex", "(IIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDrawElementsInstancedBaseVertex6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawElementsInstancedBaseVertex", "(IIILjava/nio/Buffer;II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlDrawRangeElementsBaseVertex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawRangeElementsBaseVertex", "(IIIIILjava/nio/Buffer;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlEnablei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glEnablei", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlFramebufferTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glFramebufferTexture", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetDebugMessageLog14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetDebugMessageLog", "(II[II[II[II[II[II[BI)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetDebugMessageLog9_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetDebugMessageLog", "(I[II[II[II[II)[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetDebugMessageLog5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetDebugMessageLog", "(ILjava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;)[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetGraphicsResetStatus, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetGraphicsResetStatus", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetObjectLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetObjectLabel", "(II)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetObjectPtrLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetObjectPtrLabel", "(J)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetPointerv, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetPointerv", "(I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetSamplerParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetSamplerParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetSamplerParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIuiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetSamplerParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIuiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetTexParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetTexParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetTexParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIuiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetTexParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIuiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetnUniformfv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformfv", "(III[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetnUniformfv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformfv", "(IIILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetnUniformiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetnUniformiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetnUniformuiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformuiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlGetnUniformuiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformuiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlIsEnabledi, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glIsEnabledi", "(II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlMinSampleShading, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glMinSampleShading", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlObjectLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glObjectLabel", "(IIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlObjectPtrLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glObjectPtrLabel", "(JLjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlPatchParameteri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPatchParameteri", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlPopDebugGroup, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPopDebugGroup", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlPrimitiveBoundingBox, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPrimitiveBoundingBox", "(FFFFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlPushDebugGroup, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPushDebugGroup", "(IIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlReadnPixels, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glReadnPixels", "(IIIIIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlSamplerParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlSamplerParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlSamplerParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIuiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlSamplerParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIuiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexBuffer", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexBufferRange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexBufferRange", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIuiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIuiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES32GlTexStorage3DMultisample, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexStorage3DMultisample", "(IIIIIIZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES32$DebugProc")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES32DebugProc = env.NewGlobalRef(&c.Object)
-
-		midGLES32DebugProcOnMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES32DebugProc)), "onMessage", "(IIIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLUtils")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLUtils = env.NewGlobalRef(&c.Object)
-
-		midGLUtilsGetEGLErrorString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getEGLErrorString", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsGetInternalFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getInternalFormat", "(Landroid/graphics/Bitmap;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsGetType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getType", "(Landroid/graphics/Bitmap;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsTexImage2D4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texImage2D", "(IILandroid/graphics/Bitmap;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsTexImage2D5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texImage2D", "(IIILandroid/graphics/Bitmap;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsTexImage2D6_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texImage2D", "(IIILandroid/graphics/Bitmap;II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsTexSubImage2D5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texSubImage2D", "(IIIILandroid/graphics/Bitmap;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLUtilsTexSubImage2D7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texSubImage2D", "(IIIILandroid/graphics/Bitmap;II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES11")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES11 = env.NewGlobalRef(&c.Object)
-
-		midGLES11GlBindBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glBindBuffer", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlBufferData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glBufferData", "(IILjava/nio/Buffer;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlBufferSubData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glBufferSubData", "(IIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlClipPlanef3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanef", "(I[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlClipPlanef2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanef", "(ILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlClipPlanex3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanex", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlClipPlanex2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanex", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlColor4ub, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glColor4ub", "(BBBB)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlColorPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glColorPointer", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlDeleteBuffers3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glDeleteBuffers", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlDeleteBuffers2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glDeleteBuffers", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlDrawElements, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glDrawElements", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGenBuffers3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGenBuffers", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGenBuffers2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGenBuffers", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetBooleanv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBooleanv", "(I[ZI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetBooleanv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBooleanv", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetBufferParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBufferParameteriv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetBufferParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBufferParameteriv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetClipPlanef3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanef", "(I[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetClipPlanef2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanef", "(ILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetClipPlanex3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanex", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetClipPlanex2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanex", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetFixedv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFixedv", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetFixedv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFixedv", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetFloatv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFloatv", "(I[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetFloatv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFloatv", "(ILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetLightfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetLightfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetLightxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetLightxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetMaterialfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetMaterialfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetMaterialxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetMaterialxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexEnvfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexEnvfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexEnviv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnviv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexEnviv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnviv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexEnvxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexEnvxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexParameterfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexParameterfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameteriv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameteriv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexParameterxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlGetTexParameterxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlIsBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glIsBuffer", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlIsEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glIsEnabled", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlIsTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glIsTexture", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlNormalPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glNormalPointer", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointParameterf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterf", "(IF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointParameterfv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterfv", "(I[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointParameterfv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterfv", "(ILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointParameterx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterx", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointParameterxv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterxv", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointParameterxv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterxv", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlPointSizePointerOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointSizePointerOES", "(IILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexCoordPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexCoordPointer", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexEnvi, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexEnvi", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexEnviv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexEnviv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexEnviv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexEnviv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameterfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterfv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameterfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterfv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameteri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameteri", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameteriv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameteriv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameterxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterxv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlTexParameterxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterxv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES11GlVertexPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glVertexPointer", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/opengl/GLES20")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -3320,6 +1208,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLES20 = env.NewGlobalRef(&c.Object)
+		midGLES20Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES20)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midGLES20GlActiveTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES20)), "glActiveTexture", "(I)V")
 		if err != nil {
@@ -4660,6 +2552,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVisibility = env.NewGlobalRef(&c.Object)
+		midVisibilityInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisibility)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midVisibilityComputeBoundingSphere, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVisibility)), "computeBoundingSphere", "([FII[FI)V")
 		if err != nil {
@@ -4684,6 +2580,2002 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/opengl/GLException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLException = env.NewGlobalRef(&c.Object)
+		midGLExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLException)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/GLES31")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLES31 = env.NewGlobalRef(&c.Object)
+
+		midGLES31GlActiveShaderProgram, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glActiveShaderProgram", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlBindImageTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glBindImageTexture", "(IIIZIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlBindProgramPipeline, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glBindProgramPipeline", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlBindVertexBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glBindVertexBuffer", "(IIJI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlCreateShaderProgramv, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glCreateShaderProgramv", "(I[Ljava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlDeleteProgramPipelines3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDeleteProgramPipelines", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlDeleteProgramPipelines2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDeleteProgramPipelines", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlDispatchCompute, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDispatchCompute", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlDispatchComputeIndirect, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDispatchComputeIndirect", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlDrawArraysIndirect, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDrawArraysIndirect", "(IJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlDrawElementsIndirect, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDrawElementsIndirect", "(IIJ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlFramebufferParameteri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glFramebufferParameteri", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGenProgramPipelines3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGenProgramPipelines", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGenProgramPipelines2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGenProgramPipelines", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetBooleani_v4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetBooleani_v", "(II[ZI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetBooleani_v3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetBooleani_v", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetFramebufferParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetFramebufferParameteriv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetFramebufferParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetFramebufferParameteriv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetMultisamplefv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetMultisamplefv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetMultisamplefv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetMultisamplefv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramInterfaceiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramInterfaceiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramInterfaceiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramInterfaceiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramPipelineInfoLog, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramPipelineInfoLog", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramPipelineiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramPipelineiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramPipelineiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramPipelineiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramResourceIndex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceIndex", "(IILjava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramResourceLocation, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceLocation", "(IILjava/lang/String;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramResourceName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceName", "(III)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramResourceiv11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceiv", "(IIII[III[II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetProgramResourceiv8_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceiv", "(IIIILjava/nio/IntBuffer;ILjava/nio/IntBuffer;Ljava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetTexLevelParameterfv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameterfv", "(III[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetTexLevelParameterfv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameterfv", "(IIILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetTexLevelParameteriv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameteriv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlGetTexLevelParameteriv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameteriv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlIsProgramPipeline, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glIsProgramPipeline", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlMemoryBarrier, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glMemoryBarrier", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlMemoryBarrierByRegion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glMemoryBarrierByRegion", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1f", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1fv", "(III[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1fv", "(IIILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1i", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1iv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1iv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1ui", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1uiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform1uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1uiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2f", "(IIFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2fv", "(III[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2fv", "(IIILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2i", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2iv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2iv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2ui", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2uiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform2uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2uiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3f", "(IIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3fv", "(III[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3fv", "(IIILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3i", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3iv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3iv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3ui", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3uiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform3uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3uiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4f", "(IIFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4fv", "(III[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4fv", "(IIILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4i", "(IIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4iv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4iv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4ui", "(IIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4uiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniform4uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4uiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix2fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix2fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix2x3fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x3fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix2x3fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x3fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix2x4fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x4fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix2x4fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x4fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix3fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix3fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix3x2fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x2fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix3x2fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x2fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix3x4fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x4fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix3x4fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x4fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix4fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix4fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix4x2fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x2fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix4x2fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x2fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix4x3fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x3fv", "(IIIZ[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlProgramUniformMatrix4x3fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x3fv", "(IIIZLjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlSampleMaski, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glSampleMaski", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlTexStorage2DMultisample, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glTexStorage2DMultisample", "(IIIIIZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlUseProgramStages, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glUseProgramStages", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlValidateProgramPipeline, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glValidateProgramPipeline", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlVertexAttribBinding, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexAttribBinding", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlVertexAttribFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexAttribFormat", "(IIIZI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlVertexAttribIFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexAttribIFormat", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31GlVertexBindingDivisor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexBindingDivisor", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGLObjectHandle")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGLObjectHandle = env.NewGlobalRef(&c.Object)
+
+		midEGLObjectHandleGetHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "getHandle", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGLObjectHandleGetNativeHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "getNativeHandle", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGLObjectHandleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLObjectHandle)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/GLES31Ext")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLES31Ext = env.NewGlobalRef(&c.Object)
+
+		midGLES31ExtGlBlendBarrierKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendBarrierKHR", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlBlendEquationSeparateiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendEquationSeparateiEXT", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlBlendEquationiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendEquationiEXT", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlBlendFuncSeparateiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendFuncSeparateiEXT", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlBlendFunciEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendFunciEXT", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlColorMaskiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glColorMaskiEXT", "(IZZZZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlCopyImageSubDataEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glCopyImageSubDataEXT", "(IIIIIIIIIIIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlDebugMessageCallbackKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageCallbackKHR", "(Landroid/opengl/GLES31Ext$DebugProcKHR;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlDebugMessageControlKHR7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageControlKHR", "(IIII[IIZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlDebugMessageControlKHR6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageControlKHR", "(IIIILjava/nio/IntBuffer;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlDebugMessageInsertKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageInsertKHR", "(IIIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlDisableiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDisableiEXT", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlEnableiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glEnableiEXT", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlFramebufferTextureEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glFramebufferTextureEXT", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetDebugMessageCallbackKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageCallbackKHR", "()Landroid/opengl/GLES31Ext$DebugProcKHR;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetDebugMessageLogKHR14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageLogKHR", "(II[II[II[II[II[II[BI)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetDebugMessageLogKHR9_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageLogKHR", "(I[II[II[II[II)[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetDebugMessageLogKHR5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageLogKHR", "(ILjava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;)[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetObjectLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetObjectLabelKHR", "(II)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetObjectPtrLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetObjectPtrLabelKHR", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetSamplerParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetSamplerParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetSamplerParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIuivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetSamplerParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetTexParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetTexParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetTexParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIuivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlGetTexParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlIsEnablediEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glIsEnablediEXT", "(II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlMinSampleShadingOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glMinSampleShadingOES", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlObjectLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glObjectLabelKHR", "(IIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlObjectPtrLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glObjectPtrLabelKHR", "(JLjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlPatchParameteriEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPatchParameteriEXT", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlPopDebugGroupKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPopDebugGroupKHR", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlPrimitiveBoundingBoxEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPrimitiveBoundingBoxEXT", "(FFFFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlPushDebugGroupKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPushDebugGroupKHR", "(IIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlSamplerParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlSamplerParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlSamplerParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIuivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlSamplerParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexBufferEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexBufferEXT", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexBufferRangeEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexBufferRangeEXT", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIuivEXT", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES31ExtGlTexStorage3DMultisampleOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexStorage3DMultisampleOES", "(IIIIIIZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/GLES31Ext$DebugProcKHR")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLES31ExtDebugProcKHR = env.NewGlobalRef(&c.Object)
+
+		midGLES31ExtDebugProcKHROnMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES31ExtDebugProcKHR)), "onMessage", "(IIIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/GLES10")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLES10 = env.NewGlobalRef(&c.Object)
+		midGLES10Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES10GlActiveTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glActiveTexture", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlAlphaFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glAlphaFunc", "(IF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlAlphaFuncx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glAlphaFuncx", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlBindTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glBindTexture", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlBlendFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glBlendFunc", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClear, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClear", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClearColor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearColor", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClearColorx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearColorx", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClearDepthf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearDepthf", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClearDepthx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearDepthx", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClearStencil, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClearStencil", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlClientActiveTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glClientActiveTexture", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlColor4f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColor4f", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlColor4x, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColor4x", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlColorMask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColorMask", "(ZZZZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlColorPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glColorPointer", "(IIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlCompressedTexImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCompressedTexImage2D", "(IIIIIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlCompressedTexSubImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCompressedTexSubImage2D", "(IIIIIIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlCopyTexImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCopyTexImage2D", "(IIIIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlCopyTexSubImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCopyTexSubImage2D", "(IIIIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlCullFace, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glCullFace", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDeleteTextures3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDeleteTextures", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDeleteTextures2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDeleteTextures", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDepthFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthFunc", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDepthMask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthMask", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDepthRangef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthRangef", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDepthRangex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDepthRangex", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDisable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDisable", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDisableClientState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDisableClientState", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDrawArrays, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDrawArrays", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlDrawElements, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glDrawElements", "(IIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlEnable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glEnable", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlEnableClientState, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glEnableClientState", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFinish, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFinish", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFlush, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFlush", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFogf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogf", "(IF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFogfv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogfv", "(I[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFogfv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogfv", "(ILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFogx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogx", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFogxv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogxv", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFogxv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFogxv", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFrontFace, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFrontFace", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFrustumf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFrustumf", "(FFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlFrustumx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glFrustumx", "(IIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlGenTextures3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGenTextures", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlGenTextures2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGenTextures", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlGetError, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetError", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlGetIntegerv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetIntegerv", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlGetIntegerv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetIntegerv", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlGetString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glGetString", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlHint, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glHint", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightModelf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelf", "(IF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightModelfv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelfv", "(I[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightModelfv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelfv", "(ILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightModelx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelx", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightModelxv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelxv", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightModelxv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightModelxv", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightf", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightx", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLightxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLightxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLineWidth, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLineWidth", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLineWidthx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLineWidthx", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLoadIdentity, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadIdentity", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLoadMatrixf2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixf", "([FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLoadMatrixf1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixf", "(Ljava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLoadMatrixx2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixx", "([II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLoadMatrixx1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLoadMatrixx", "(Ljava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlLogicOp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glLogicOp", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMaterialf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialf", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMaterialfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMaterialfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMaterialx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialx", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMaterialxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMaterialxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMaterialxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMatrixMode, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMatrixMode", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMultMatrixf2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixf", "([FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMultMatrixf1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixf", "(Ljava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMultMatrixx2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixx", "([II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMultMatrixx1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultMatrixx", "(Ljava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMultiTexCoord4f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultiTexCoord4f", "(IFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlMultiTexCoord4x, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glMultiTexCoord4x", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlNormal3f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glNormal3f", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlNormal3x, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glNormal3x", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlNormalPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glNormalPointer", "(IILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlOrthof, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glOrthof", "(FFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlOrthox, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glOrthox", "(IIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPixelStorei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPixelStorei", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPointSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPointSize", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPointSizex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPointSizex", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPolygonOffset, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPolygonOffset", "(FF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPolygonOffsetx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPolygonOffsetx", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPopMatrix, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPopMatrix", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlPushMatrix, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glPushMatrix", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlReadPixels, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glReadPixels", "(IIIIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlRotatef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glRotatef", "(FFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlRotatex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glRotatex", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlSampleCoverage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glSampleCoverage", "(FZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlSampleCoveragex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glSampleCoveragex", "(IZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlScalef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glScalef", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlScalex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glScalex", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlScissor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glScissor", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlShadeModel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glShadeModel", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlStencilFunc, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glStencilFunc", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlStencilMask, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glStencilMask", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlStencilOp, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glStencilOp", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexCoordPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexCoordPointer", "(IIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexEnvf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvf", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexEnvfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexEnvfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexEnvx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvx", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexEnvxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexEnvxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexEnvxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexImage2D", "(IIIIIIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexParameterf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexParameterf", "(IIF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexParameterx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexParameterx", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTexSubImage2D, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTexSubImage2D", "(IIIIIIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTranslatef, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTranslatef", "(FFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlTranslatex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glTranslatex", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlVertexPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glVertexPointer", "(IIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES10GlViewport, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10)), "glViewport", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGLContext")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGLContext = env.NewGlobalRef(&c.Object)
+
+		midEGLContextEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLContext)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/opengl/GLES30")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -4691,6 +4583,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLES30 = env.NewGlobalRef(&c.Object)
+		midGLES30Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES30)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midGLES30GlBeginQuery, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES30)), "glBeginQuery", "(II)V")
 		if err != nil {
@@ -5828,1514 +5724,26 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/opengl/EGL14")
+	c, err = env.FindClass("android/opengl/GLDebugHelper")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsEGL14 = env.NewGlobalRef(&c.Object)
-
-		midEGL14EglBindAPI, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglBindAPI", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglBindTexImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglBindTexImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglChooseConfig, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglChooseConfig", "(Landroid/opengl/EGLDisplay;[II[Landroid/opengl/EGLConfig;II[II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglCopyBuffers, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCopyBuffers", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglCreateContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreateContext", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Landroid/opengl/EGLContext;[II)Landroid/opengl/EGLContext;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglCreatePbufferFromClientBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreatePbufferFromClientBuffer", "(Landroid/opengl/EGLDisplay;IILandroid/opengl/EGLConfig;[II)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglCreatePbufferSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreatePbufferSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;[II)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglCreatePixmapSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreatePixmapSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;I[II)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglCreateWindowSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreateWindowSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Ljava/lang/Object;[II)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglDestroyContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglDestroyContext", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLContext;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglDestroySurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglDestroySurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetConfigAttrib, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetConfigAttrib", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;I[II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetConfigs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetConfigs", "(Landroid/opengl/EGLDisplay;[Landroid/opengl/EGLConfig;II[II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetCurrentContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetCurrentContext", "()Landroid/opengl/EGLContext;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetCurrentDisplay, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetCurrentDisplay", "()Landroid/opengl/EGLDisplay;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetCurrentSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetCurrentSurface", "(I)Landroid/opengl/EGLSurface;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetDisplay, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetDisplay", "(I)Landroid/opengl/EGLDisplay;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglGetError, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetError", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglInitialize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglInitialize", "(Landroid/opengl/EGLDisplay;[II[II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglMakeCurrent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglMakeCurrent", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;Landroid/opengl/EGLSurface;Landroid/opengl/EGLContext;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglQueryAPI, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQueryAPI", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglQueryContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQueryContext", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLContext;I[II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglQueryString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQueryString", "(Landroid/opengl/EGLDisplay;I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglQuerySurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQuerySurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I[II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglReleaseTexImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglReleaseTexImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglReleaseThread, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglReleaseThread", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglSurfaceAttrib, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglSurfaceAttrib", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglSwapBuffers, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglSwapBuffers", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglSwapInterval, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglSwapInterval", "(Landroid/opengl/EGLDisplay;I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglTerminate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglTerminate", "(Landroid/opengl/EGLDisplay;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglWaitClient, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglWaitClient", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglWaitGL, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglWaitGL", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEGL14EglWaitNative, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglWaitNative", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES31")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES31 = env.NewGlobalRef(&c.Object)
-
-		midGLES31GlActiveShaderProgram, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glActiveShaderProgram", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlBindImageTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glBindImageTexture", "(IIIZIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlBindProgramPipeline, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glBindProgramPipeline", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlBindVertexBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glBindVertexBuffer", "(IIJI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlCreateShaderProgramv, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glCreateShaderProgramv", "(I[Ljava/lang/String;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlDeleteProgramPipelines3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDeleteProgramPipelines", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlDeleteProgramPipelines2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDeleteProgramPipelines", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlDispatchCompute, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDispatchCompute", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlDispatchComputeIndirect, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDispatchComputeIndirect", "(J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlDrawArraysIndirect, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDrawArraysIndirect", "(IJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlDrawElementsIndirect, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glDrawElementsIndirect", "(IIJ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlFramebufferParameteri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glFramebufferParameteri", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGenProgramPipelines3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGenProgramPipelines", "(I[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGenProgramPipelines2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGenProgramPipelines", "(ILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetBooleani_v4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetBooleani_v", "(II[ZI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetBooleani_v3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetBooleani_v", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetFramebufferParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetFramebufferParameteriv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetFramebufferParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetFramebufferParameteriv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetMultisamplefv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetMultisamplefv", "(II[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetMultisamplefv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetMultisamplefv", "(IILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramInterfaceiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramInterfaceiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramInterfaceiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramInterfaceiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramPipelineInfoLog, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramPipelineInfoLog", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramPipelineiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramPipelineiv", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramPipelineiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramPipelineiv", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramResourceIndex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceIndex", "(IILjava/lang/String;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramResourceLocation, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceLocation", "(IILjava/lang/String;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramResourceName, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceName", "(III)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramResourceiv11, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceiv", "(IIII[III[II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetProgramResourceiv8_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetProgramResourceiv", "(IIIILjava/nio/IntBuffer;ILjava/nio/IntBuffer;Ljava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetTexLevelParameterfv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameterfv", "(III[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetTexLevelParameterfv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameterfv", "(IIILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetTexLevelParameteriv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameteriv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlGetTexLevelParameteriv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glGetTexLevelParameteriv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlIsProgramPipeline, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glIsProgramPipeline", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlMemoryBarrier, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glMemoryBarrier", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlMemoryBarrierByRegion, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glMemoryBarrierByRegion", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1f", "(IIF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1fv", "(III[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1fv", "(IIILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1i", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1iv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1iv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1ui", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1uiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform1uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform1uiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2f", "(IIFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2fv", "(III[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2fv", "(IIILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2i", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2iv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2iv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2ui", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2uiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform2uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform2uiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3f", "(IIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3fv", "(III[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3fv", "(IIILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3i", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3iv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3iv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3ui", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3uiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform3uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform3uiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4f, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4f", "(IIFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4fv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4fv", "(III[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4fv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4fv", "(IIILjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4i, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4i", "(IIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4iv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4iv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4iv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4iv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4ui, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4ui", "(IIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4uiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4uiv", "(III[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniform4uiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniform4uiv", "(IIILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix2fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix2fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix2x3fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x3fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix2x3fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x3fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix2x4fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x4fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix2x4fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix2x4fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix3fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix3fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix3x2fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x2fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix3x2fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x2fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix3x4fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x4fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix3x4fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix3x4fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix4fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix4fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix4x2fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x2fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix4x2fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x2fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix4x3fv6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x3fv", "(IIIZ[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlProgramUniformMatrix4x3fv5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glProgramUniformMatrix4x3fv", "(IIIZLjava/nio/FloatBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlSampleMaski, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glSampleMaski", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlTexStorage2DMultisample, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glTexStorage2DMultisample", "(IIIIIZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlUseProgramStages, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glUseProgramStages", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlValidateProgramPipeline, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glValidateProgramPipeline", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlVertexAttribBinding, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexAttribBinding", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlVertexAttribFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexAttribFormat", "(IIIZI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlVertexAttribIFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexAttribIFormat", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31GlVertexBindingDivisor, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31)), "glVertexBindingDivisor", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES31Ext")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES31Ext = env.NewGlobalRef(&c.Object)
-
-		midGLES31ExtGlBlendBarrierKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendBarrierKHR", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlBlendEquationSeparateiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendEquationSeparateiEXT", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlBlendEquationiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendEquationiEXT", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlBlendFuncSeparateiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendFuncSeparateiEXT", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlBlendFunciEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glBlendFunciEXT", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlColorMaskiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glColorMaskiEXT", "(IZZZZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlCopyImageSubDataEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glCopyImageSubDataEXT", "(IIIIIIIIIIIIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlDebugMessageCallbackKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageCallbackKHR", "(Landroid/opengl/GLES31Ext$DebugProcKHR;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlDebugMessageControlKHR7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageControlKHR", "(IIII[IIZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlDebugMessageControlKHR6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageControlKHR", "(IIIILjava/nio/IntBuffer;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlDebugMessageInsertKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDebugMessageInsertKHR", "(IIIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlDisableiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glDisableiEXT", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlEnableiEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glEnableiEXT", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlFramebufferTextureEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glFramebufferTextureEXT", "(IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetDebugMessageCallbackKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageCallbackKHR", "()Landroid/opengl/GLES31Ext$DebugProcKHR;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetDebugMessageLogKHR14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageLogKHR", "(II[II[II[II[II[II[BI)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetDebugMessageLogKHR9_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageLogKHR", "(I[II[II[II[II)[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetDebugMessageLogKHR5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetDebugMessageLogKHR", "(ILjava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;)[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetObjectLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetObjectLabelKHR", "(II)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetObjectPtrLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetObjectPtrLabelKHR", "(J)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetSamplerParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetSamplerParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetSamplerParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIuivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetSamplerParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetSamplerParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetTexParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetTexParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetTexParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIuivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlGetTexParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glGetTexParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlIsEnablediEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glIsEnablediEXT", "(II)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlMinSampleShadingOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glMinSampleShadingOES", "(F)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlObjectLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glObjectLabelKHR", "(IIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlObjectPtrLabelKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glObjectPtrLabelKHR", "(JLjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlPatchParameteriEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPatchParameteriEXT", "(II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlPopDebugGroupKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPopDebugGroupKHR", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlPrimitiveBoundingBoxEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPrimitiveBoundingBoxEXT", "(FFFFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlPushDebugGroupKHR, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glPushDebugGroupKHR", "(IIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlSamplerParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlSamplerParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlSamplerParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIuivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlSamplerParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glSamplerParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexBufferEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexBufferEXT", "(III)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexBufferRangeEXT, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexBufferRangeEXT", "(IIIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexParameterIivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexParameterIivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexParameterIuivEXT4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIuivEXT", "(II[II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexParameterIuivEXT3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexParameterIuivEXT", "(IILjava/nio/IntBuffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGLES31ExtGlTexStorage3DMultisampleOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES31Ext)), "glTexStorage3DMultisampleOES", "(IIIIIIZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/GLES31Ext$DebugProcKHR")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGLES31ExtDebugProcKHR = env.NewGlobalRef(&c.Object)
-
-		midGLES31ExtDebugProcKHROnMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES31ExtDebugProcKHR)), "onMessage", "(IIIILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/Matrix")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsMatrix = env.NewGlobalRef(&c.Object)
-
-		midMatrixFrustumM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "frustumM", "([FIFFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixInvertM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "invertM", "([FI[FI)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixLength, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "length", "(FFF)F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixMultiplyMM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "multiplyMM", "([FI[FI[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixMultiplyMV, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "multiplyMV", "([FI[FI[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixOrthoM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "orthoM", "([FIFFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixPerspectiveM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "perspectiveM", "([FIFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixRotateM6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "rotateM", "([FIFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixRotateM8_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "rotateM", "([FI[FIFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixScaleM5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "scaleM", "([FIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixScaleM7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "scaleM", "([FI[FIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixSetIdentityM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setIdentityM", "([FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixSetLookAtM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setLookAtM", "([FIFFFFFFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixSetRotateEulerM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setRotateEulerM", "([FIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixSetRotateEulerM2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setRotateEulerM2", "([FIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixSetRotateM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setRotateM", "([FIFFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixTranslateM5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "translateM", "([FIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixTranslateM7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "translateM", "([FI[FIFFF)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMatrixTransposeM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "transposeM", "([FI[FI)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/ETC1")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsETC1 = env.NewGlobalRef(&c.Object)
-
-		midETC1DecodeBlock, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "decodeBlock", "(Ljava/nio/Buffer;Ljava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1DecodeImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "decodeImage", "(Ljava/nio/Buffer;Ljava/nio/Buffer;IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1EncodeBlock, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "encodeBlock", "(Ljava/nio/Buffer;ILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1EncodeImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "encodeImage", "(Ljava/nio/Buffer;IIIILjava/nio/Buffer;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1FormatHeader, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "formatHeader", "(Ljava/nio/Buffer;II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1GetEncodedDataSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "getEncodedDataSize", "(II)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midETC1GetHeight, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "getHeight", "(Ljava/nio/Buffer;)I")
+		clsGLDebugHelper = env.NewGlobalRef(&c.Object)
+		midGLDebugHelperInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "<init>", "()V")
 		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midETC1GetWidth, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "getWidth", "(Ljava/nio/Buffer;)I")
+		midGLDebugHelperWrap3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "wrap", "(Ljavax/microedition/khronos/egl/EGL;ILjava/io/Writer;)Ljavax/microedition/khronos/egl/EGL;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midETC1IsValid, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "isValid", "(Ljava/nio/Buffer;)Z")
+		midGLDebugHelperWrap3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "wrap", "(Ljavax/microedition/khronos/opengles/GL;ILjava/io/Writer;)Ljavax/microedition/khronos/opengles/GL;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -7351,6 +5759,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLSurfaceView = env.NewGlobalRef(&c.Object)
+		midGLSurfaceViewInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceView)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midGLSurfaceViewGetDebugFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLSurfaceView)), "getDebugFlags", "()I")
 		if err != nil {
@@ -7628,6 +6040,431 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/opengl/Matrix")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMatrix = env.NewGlobalRef(&c.Object)
+		midMatrixInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midMatrixFrustumM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "frustumM", "([FIFFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixInvertM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "invertM", "([FI[FI)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixLength, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "length", "(FFF)F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixMultiplyMM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "multiplyMM", "([FI[FI[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixMultiplyMV, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "multiplyMV", "([FI[FI[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixOrthoM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "orthoM", "([FIFFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixPerspectiveM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "perspectiveM", "([FIFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixRotateM6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "rotateM", "([FIFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixRotateM8_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "rotateM", "([FI[FIFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixScaleM5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "scaleM", "([FIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixScaleM7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "scaleM", "([FI[FIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixSetIdentityM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setIdentityM", "([FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixSetLookAtM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setLookAtM", "([FIFFFFFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixSetRotateEulerM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setRotateEulerM", "([FIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixSetRotateEulerM2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setRotateEulerM2", "([FIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixSetRotateM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "setRotateM", "([FIFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixTranslateM5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "translateM", "([FIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixTranslateM7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "translateM", "([FI[FIFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMatrixTransposeM, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMatrix)), "transposeM", "([FI[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/ETC1Util")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsETC1Util = env.NewGlobalRef(&c.Object)
+		midETC1UtilInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midETC1UtilCompressTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "compressTexture", "(Ljava/nio/Buffer;IIII)Landroid/opengl/ETC1Util$ETC1Texture;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilCreateTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "createTexture", "(Ljava/io/InputStream;)Landroid/opengl/ETC1Util$ETC1Texture;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilIsETC1Supported, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "isETC1Supported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilLoadTexture6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "loadTexture", "(IIIIILandroid/opengl/ETC1Util$ETC1Texture;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilLoadTexture6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "loadTexture", "(IIIIILjava/io/InputStream;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilWriteTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1Util)), "writeTexture", "(Landroid/opengl/ETC1Util$ETC1Texture;Ljava/io/OutputStream;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/ETC1Util$ETC1Texture")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsETC1UtilETC1Texture = env.NewGlobalRef(&c.Object)
+
+		midETC1UtilETC1TextureGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "getData", "()Ljava/nio/ByteBuffer;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilETC1TextureGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1UtilETC1TextureGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1UtilETC1Texture)), "getWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGL15")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGL15 = env.NewGlobalRef(&c.Object)
+
+		midEGL15EglClientWaitSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglClientWaitSync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;IJ)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglCreateImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreateImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLContext;IJ[JI)Landroid/opengl/EGLImage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglCreatePlatformPixmapSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreatePlatformPixmapSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Ljava/nio/Buffer;[JI)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglCreatePlatformWindowSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreatePlatformWindowSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Ljava/nio/Buffer;[JI)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglCreateSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglCreateSync", "(Landroid/opengl/EGLDisplay;I[JI)Landroid/opengl/EGLSync;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglDestroyImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglDestroyImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLImage;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglDestroySync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglDestroySync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglGetPlatformDisplay, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglGetPlatformDisplay", "(IJ[JI)Landroid/opengl/EGLDisplay;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglGetSyncAttrib, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglGetSyncAttrib", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;I[JI)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL15EglWaitSync, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL15)), "eglWaitSync", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGLImage")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGLImage = env.NewGlobalRef(&c.Object)
+
+		midEGLImageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLImage)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/GLUtils")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLUtils = env.NewGlobalRef(&c.Object)
+
+		midGLUtilsGetEGLErrorString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getEGLErrorString", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsGetInternalFormat, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getInternalFormat", "(Landroid/graphics/Bitmap;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsGetType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "getType", "(Landroid/graphics/Bitmap;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsTexImage2D4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texImage2D", "(IILandroid/graphics/Bitmap;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsTexImage2D5_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texImage2D", "(IIILandroid/graphics/Bitmap;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsTexImage2D6_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texImage2D", "(IIILandroid/graphics/Bitmap;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsTexSubImage2D5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texSubImage2D", "(IIIILandroid/graphics/Bitmap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLUtilsTexSubImage2D7_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLUtils)), "texSubImage2D", "(IIIILandroid/graphics/Bitmap;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGLExt")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGLExt = env.NewGlobalRef(&c.Object)
+		midEGLExtInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midEGLExtEglDupNativeFenceFDANDROID, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "eglDupNativeFenceFDANDROID", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSync;)Landroid/hardware/SyncFence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGLExtEglPresentationTimeANDROID, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGLExt)), "eglPresentationTimeANDROID", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;J)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/opengl/EGLSurface")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -7645,15 +6482,438 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/opengl/EGLContext")
+	c, err = env.FindClass("android/opengl/GLES32")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsEGLContext = env.NewGlobalRef(&c.Object)
+		clsGLES32 = env.NewGlobalRef(&c.Object)
 
-		midEGLContextEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLContext)), "equals", "(Ljava/lang/Object;)Z")
+		midGLES32GlBlendBarrier, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendBarrier", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlBlendEquationSeparatei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendEquationSeparatei", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlBlendEquationi, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendEquationi", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlBlendFuncSeparatei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendFuncSeparatei", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlBlendFunci, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glBlendFunci", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlColorMaski, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glColorMaski", "(IZZZZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlCopyImageSubData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glCopyImageSubData", "(IIIIIIIIIIIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDebugMessageCallback, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageCallback", "(Landroid/opengl/GLES32$DebugProc;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDebugMessageControl7, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageControl", "(IIII[IIZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDebugMessageControl6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageControl", "(IIIILjava/nio/IntBuffer;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDebugMessageInsert, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDebugMessageInsert", "(IIIIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDisablei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDisablei", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDrawElementsBaseVertex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawElementsBaseVertex", "(IIILjava/nio/Buffer;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDrawElementsInstancedBaseVertex6, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawElementsInstancedBaseVertex", "(IIIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDrawElementsInstancedBaseVertex6_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawElementsInstancedBaseVertex", "(IIILjava/nio/Buffer;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlDrawRangeElementsBaseVertex, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glDrawRangeElementsBaseVertex", "(IIIIILjava/nio/Buffer;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlEnablei, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glEnablei", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlFramebufferTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glFramebufferTexture", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetDebugMessageLog14, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetDebugMessageLog", "(II[II[II[II[II[II[BI)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetDebugMessageLog9_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetDebugMessageLog", "(I[II[II[II[II)[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetDebugMessageLog5_2, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetDebugMessageLog", "(ILjava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;Ljava/nio/IntBuffer;)[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetGraphicsResetStatus, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetGraphicsResetStatus", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetObjectLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetObjectLabel", "(II)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetObjectPtrLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetObjectPtrLabel", "(J)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetPointerv, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetPointerv", "(I)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetSamplerParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetSamplerParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetSamplerParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIuiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetSamplerParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetSamplerParameterIuiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetTexParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetTexParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetTexParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIuiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetTexParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetTexParameterIuiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetnUniformfv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformfv", "(III[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetnUniformfv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformfv", "(IIILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetnUniformiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetnUniformiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetnUniformuiv5, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformuiv", "(III[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlGetnUniformuiv4_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glGetnUniformuiv", "(IIILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlIsEnabledi, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glIsEnabledi", "(II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlMinSampleShading, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glMinSampleShading", "(F)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlObjectLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glObjectLabel", "(IIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlObjectPtrLabel, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glObjectPtrLabel", "(JLjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlPatchParameteri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPatchParameteri", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlPopDebugGroup, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPopDebugGroup", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlPrimitiveBoundingBox, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPrimitiveBoundingBox", "(FFFFFFFF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlPushDebugGroup, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glPushDebugGroup", "(IIILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlReadnPixels, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glReadnPixels", "(IIIIIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlSamplerParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlSamplerParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlSamplerParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIuiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlSamplerParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glSamplerParameterIuiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexBuffer", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexBufferRange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexBufferRange", "(IIIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexParameterIiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexParameterIiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexParameterIuiv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIuiv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexParameterIuiv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexParameterIuiv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES32GlTexStorage3DMultisample, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES32)), "glTexStorage3DMultisample", "(IIIIIIZ)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/GLES32$DebugProc")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLES32DebugProc = env.NewGlobalRef(&c.Object)
+
+		midGLES32DebugProcOnMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES32DebugProc)), "onMessage", "(IIIILjava/lang/String;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -7669,6 +6929,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLES10Ext = env.NewGlobalRef(&c.Object)
+		midGLES10ExtInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES10Ext)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midGLES10ExtGlQueryMatrixxOES4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES10Ext)), "glQueryMatrixxOES", "([II[II)I")
 		if err != nil {
@@ -7686,40 +6950,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/opengl/EGLDisplay")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGLDisplay = env.NewGlobalRef(&c.Object)
-
-		midEGLDisplayEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLDisplay)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/opengl/EGLConfig")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEGLConfig = env.NewGlobalRef(&c.Object)
-
-		midEGLConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLConfig)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/opengl/GLES11Ext")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -7727,6 +6957,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsGLES11Ext = env.NewGlobalRef(&c.Object)
+		midGLES11ExtInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midGLES11ExtGlAlphaFuncxOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), "glAlphaFuncxOES", "(II)V")
 		if err != nil {
@@ -8570,22 +7804,868 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/opengl/GLDebugHelper")
+	c, err = env.FindClass("android/opengl/EGLSync")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsGLDebugHelper = env.NewGlobalRef(&c.Object)
+		clsEGLSync = env.NewGlobalRef(&c.Object)
 
-		midGLDebugHelperWrap3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "wrap", "(Ljavax/microedition/khronos/egl/EGL;ILjava/io/Writer;)Ljavax/microedition/khronos/egl/EGL;")
+		midEGLSyncEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLSync)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midGLDebugHelperWrap3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), "wrap", "(Ljavax/microedition/khronos/opengles/GL;ILjava/io/Writer;)Ljavax/microedition/khronos/opengles/GL;")
+	}
+
+	c, err = env.FindClass("android/opengl/GLES11")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGLES11 = env.NewGlobalRef(&c.Object)
+		midGLES11Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGLES11GlBindBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glBindBuffer", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlBufferData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glBufferData", "(IILjava/nio/Buffer;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlBufferSubData, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glBufferSubData", "(IIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlClipPlanef3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanef", "(I[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlClipPlanef2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanef", "(ILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlClipPlanex3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanex", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlClipPlanex2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glClipPlanex", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlColor4ub, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glColor4ub", "(BBBB)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlColorPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glColorPointer", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlDeleteBuffers3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glDeleteBuffers", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlDeleteBuffers2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glDeleteBuffers", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlDrawElements, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glDrawElements", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGenBuffers3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGenBuffers", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGenBuffers2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGenBuffers", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetBooleanv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBooleanv", "(I[ZI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetBooleanv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBooleanv", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetBufferParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBufferParameteriv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetBufferParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetBufferParameteriv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetClipPlanef3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanef", "(I[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetClipPlanef2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanef", "(ILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetClipPlanex3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanex", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetClipPlanex2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetClipPlanex", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetFixedv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFixedv", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetFixedv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFixedv", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetFloatv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFloatv", "(I[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetFloatv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetFloatv", "(ILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetLightfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetLightfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetLightxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetLightxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetLightxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetMaterialfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetMaterialfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetMaterialxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetMaterialxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetMaterialxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexEnvfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexEnvfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexEnviv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnviv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexEnviv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnviv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexEnvxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexEnvxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexEnvxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexParameterfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexParameterfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameteriv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameteriv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexParameterxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlGetTexParameterxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glGetTexParameterxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlIsBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glIsBuffer", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlIsEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glIsEnabled", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlIsTexture, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glIsTexture", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlNormalPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glNormalPointer", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointParameterf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterf", "(IF)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointParameterfv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterfv", "(I[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointParameterfv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterfv", "(ILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointParameterx, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterx", "(II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointParameterxv3, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterxv", "(I[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointParameterxv2_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointParameterxv", "(ILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlPointSizePointerOES, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glPointSizePointerOES", "(IILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexCoordPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexCoordPointer", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexEnvi, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexEnvi", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexEnviv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexEnviv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexEnviv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexEnviv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameterfv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterfv", "(II[FI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameterfv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterfv", "(IILjava/nio/FloatBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameteri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameteri", "(III)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameteriv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameteriv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameteriv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameteriv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameterxv4, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterxv", "(II[II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlTexParameterxv3_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glTexParameterxv", "(IILjava/nio/IntBuffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGLES11GlVertexPointer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGLES11)), "glVertexPointer", "(IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGL14")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGL14 = env.NewGlobalRef(&c.Object)
+		midEGL14Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midEGL14EglBindAPI, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglBindAPI", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglBindTexImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglBindTexImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglChooseConfig, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglChooseConfig", "(Landroid/opengl/EGLDisplay;[II[Landroid/opengl/EGLConfig;II[II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglCopyBuffers, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCopyBuffers", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglCreateContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreateContext", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Landroid/opengl/EGLContext;[II)Landroid/opengl/EGLContext;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglCreatePbufferFromClientBuffer, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreatePbufferFromClientBuffer", "(Landroid/opengl/EGLDisplay;IILandroid/opengl/EGLConfig;[II)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglCreatePbufferSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreatePbufferSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;[II)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglCreatePixmapSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreatePixmapSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;I[II)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglCreateWindowSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglCreateWindowSurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;Ljava/lang/Object;[II)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglDestroyContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglDestroyContext", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLContext;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglDestroySurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglDestroySurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetConfigAttrib, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetConfigAttrib", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLConfig;I[II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetConfigs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetConfigs", "(Landroid/opengl/EGLDisplay;[Landroid/opengl/EGLConfig;II[II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetCurrentContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetCurrentContext", "()Landroid/opengl/EGLContext;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetCurrentDisplay, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetCurrentDisplay", "()Landroid/opengl/EGLDisplay;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetCurrentSurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetCurrentSurface", "(I)Landroid/opengl/EGLSurface;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetDisplay, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetDisplay", "(I)Landroid/opengl/EGLDisplay;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglGetError, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglGetError", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglInitialize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglInitialize", "(Landroid/opengl/EGLDisplay;[II[II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglMakeCurrent, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglMakeCurrent", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;Landroid/opengl/EGLSurface;Landroid/opengl/EGLContext;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglQueryAPI, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQueryAPI", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglQueryContext, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQueryContext", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLContext;I[II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglQueryString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQueryString", "(Landroid/opengl/EGLDisplay;I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglQuerySurface, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglQuerySurface", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I[II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglReleaseTexImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglReleaseTexImage", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglReleaseThread, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglReleaseThread", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglSurfaceAttrib, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglSurfaceAttrib", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;II)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglSwapBuffers, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglSwapBuffers", "(Landroid/opengl/EGLDisplay;Landroid/opengl/EGLSurface;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglSwapInterval, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglSwapInterval", "(Landroid/opengl/EGLDisplay;I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglTerminate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglTerminate", "(Landroid/opengl/EGLDisplay;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglWaitClient, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglWaitClient", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglWaitGL, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglWaitGL", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEGL14EglWaitNative, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEGL14)), "eglWaitNative", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/ETC1")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsETC1 = env.NewGlobalRef(&c.Object)
+		midETC1Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midETC1DecodeBlock, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "decodeBlock", "(Ljava/nio/Buffer;Ljava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1DecodeImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "decodeImage", "(Ljava/nio/Buffer;Ljava/nio/Buffer;IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1EncodeBlock, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "encodeBlock", "(Ljava/nio/Buffer;ILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1EncodeImage, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "encodeImage", "(Ljava/nio/Buffer;IIIILjava/nio/Buffer;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1FormatHeader, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "formatHeader", "(Ljava/nio/Buffer;II)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1GetEncodedDataSize, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "getEncodedDataSize", "(II)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1GetHeight, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "getHeight", "(Ljava/nio/Buffer;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1GetWidth, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "getWidth", "(Ljava/nio/Buffer;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midETC1IsValid, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsETC1)), "isValid", "(Ljava/nio/Buffer;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGLDisplay")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGLDisplay = env.NewGlobalRef(&c.Object)
+
+		midEGLDisplayEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLDisplay)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/opengl/EGLConfig")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEGLConfig = env.NewGlobalRef(&c.Object)
+
+		midEGLConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEGLConfig)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

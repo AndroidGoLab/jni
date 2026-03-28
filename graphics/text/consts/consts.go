@@ -3,6 +3,13 @@
 package consts
 
 const (
+	NoOverride float32 = 1.4e-45
+)
+
+const (
+	HyphenationModeFast             int = 2
+	HyphenationModeNone             int = 0
+	HyphenationModeNormal           int = 1
 	Creator                         int = 0
 	HyphenationDisabled             int = 0
 	HyphenationEnabled              int = 1
@@ -27,11 +34,4 @@ const (
 	JustificationModeInterCharacter int = 2
 	JustificationModeInterWord      int = 1
 	JustificationModeNone           int = 0
-	HyphenationModeFast             int = 2
-	HyphenationModeNone             int = 0
-	HyphenationModeNormal           int = 1
-)
-
-const (
-	NoOverride float32 = 1.4e-45
 )

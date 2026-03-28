@@ -23,6 +23,28 @@ type RectEvaluator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRectEvaluator creates a new android.animation.RectEvaluator instance.
+func NewRectEvaluator(vm *jni.VM) (*RectEvaluator, error) {
+	var t RectEvaluator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), midRectEvaluatorInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Evaluate3 calls android.animation.RectEvaluator.evaluate.
 func (m *RectEvaluator) Evaluate3(
 	arg0 float32,

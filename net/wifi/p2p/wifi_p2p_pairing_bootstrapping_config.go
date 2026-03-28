@@ -23,6 +23,35 @@ type WifiP2pPairingBootstrappingConfig struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWifiP2pPairingBootstrappingConfig creates a new android.net.wifi.p2p.WifiP2pPairingBootstrappingConfig instance.
+func NewWifiP2pPairingBootstrappingConfig(vm *jni.VM, arg0 int32, arg1 string) (*WifiP2pPairingBootstrappingConfig, error) {
+	var t WifiP2pPairingBootstrappingConfig
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pPairingBootstrappingConfig)), midWifiP2pPairingBootstrappingConfigInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.p2p.WifiP2pPairingBootstrappingConfig.describeContents.
 func (m *WifiP2pPairingBootstrappingConfig) DescribeContents() (int32, error) {
 	var result int32

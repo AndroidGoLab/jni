@@ -3,12 +3,6 @@
 package consts
 
 const (
-	AppDataTypeFileTypeApk              int = 3
-	AppDataTypeFileTypeCurrentProfile   int = 2
-	AppDataTypeFileTypeDexoptArtifact   int = 0
-	AppDataTypeFileTypeDm               int = 4
-	AppDataTypeFileTypeReferenceProfile int = 1
-	AppDataTypeLib                      int = 5
 	Creator                             int = 0
 	ActivityPaused                      int = 2
 	ActivityResumed                     int = 1
@@ -28,16 +22,6 @@ const (
 	ShortcutInvocation                  int = 8
 	StandbyBucketChanged                int = 11
 	UserInteraction                     int = 7
-	IntervalBest                        int = 4
-	IntervalDaily                       int = 0
-	IntervalMonthly                     int = 2
-	IntervalWeekly                      int = 1
-	IntervalYearly                      int = 3
-	StandbyBucketActive                 int = 10
-	StandbyBucketFrequent               int = 30
-	StandbyBucketRare                   int = 40
-	StandbyBucketRestricted             int = 45
-	StandbyBucketWorkingSet             int = 20
 	DefaultNetworkAll                   int = -1
 	DefaultNetworkNo                    int = 1
 	DefaultNetworkYes                   int = 2
@@ -54,6 +38,22 @@ const (
 	UidAll                              int = -1
 	UidRemoved                          int = -4
 	UidTethering                        int = -5
+	IntervalBest                        int = 4
+	IntervalDaily                       int = 0
+	IntervalMonthly                     int = 2
+	IntervalWeekly                      int = 1
+	IntervalYearly                      int = 3
+	StandbyBucketActive                 int = 10
+	StandbyBucketFrequent               int = 30
+	StandbyBucketRare                   int = 40
+	StandbyBucketRestricted             int = 45
+	StandbyBucketWorkingSet             int = 20
+	AppDataTypeFileTypeApk              int = 3
+	AppDataTypeFileTypeCurrentProfile   int = 2
+	AppDataTypeFileTypeDexoptArtifact   int = 0
+	AppDataTypeFileTypeDm               int = 4
+	AppDataTypeFileTypeReferenceProfile int = 1
+	AppDataTypeLib                      int = 5
 )
 
 const (

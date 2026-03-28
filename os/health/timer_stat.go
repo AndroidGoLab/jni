@@ -23,6 +23,28 @@ type TimerStat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTimerStat creates a new android.os.health.TimerStat instance.
+func NewTimerStat(vm *jni.VM) (*TimerStat, error) {
+	var t TimerStat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimerStat)), midTimerStatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.os.health.TimerStat.describeContents.
 func (m *TimerStat) DescribeContents() (int32, error) {
 	var result int32

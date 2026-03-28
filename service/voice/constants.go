@@ -5,7 +5,13 @@ package voice
 import "github.com/AndroidGoLab/jni/service/voice/consts"
 
 const (
-	Creator                      = consts.Creator
+	KeyForegroundActivities = consts.KeyForegroundActivities
+	KeyShowSessionId        = consts.KeyShowSessionId
+	ServiceInterface        = consts.ServiceInterface
+	ServiceMetaData         = consts.ServiceMetaData
+)
+
+const (
 	ShowSourceActivity           = consts.ShowSourceActivity
 	ShowSourceApplication        = consts.ShowSourceApplication
 	ShowSourceAssistGesture      = consts.ShowSourceAssistGesture
@@ -17,11 +23,5 @@ const (
 	TouchableInsetsContent       = consts.TouchableInsetsContent
 	TouchableInsetsFrame         = consts.TouchableInsetsFrame
 	TouchableInsetsRegion        = consts.TouchableInsetsRegion
-)
-
-const (
-	KeyForegroundActivities = consts.KeyForegroundActivities
-	KeyShowSessionId        = consts.KeyShowSessionId
-	ServiceInterface        = consts.ServiceInterface
-	ServiceMetaData         = consts.ServiceMetaData
+	Creator                      = consts.Creator
 )

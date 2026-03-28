@@ -23,6 +23,29 @@ type ImageButton struct {
 	Obj *jni.GlobalRef
 }
 
+// NewImageButton creates a new android.widget.ImageButton instance.
+func NewImageButton(vm *jni.VM, arg0 *jni.Object) (*ImageButton, error) {
+	var t ImageButton
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageButton)), midImageButtonInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.ImageButton.getAccessibilityClassName.
 func (m *ImageButton) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,39 @@ type BooleanAction struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBooleanAction creates a new android.service.controls.actions.BooleanAction instance.
+func NewBooleanAction(vm *jni.VM, arg0 string, arg1 bool) (*BooleanAction, error) {
+	var t BooleanAction
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBooleanAction)), midBooleanActionInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetActionType calls android.service.controls.actions.BooleanAction.getActionType.
 func (m *BooleanAction) GetActionType() (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type Rect struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRect creates a new android.graphics.Rect instance.
+func NewRect(vm *jni.VM) (*Rect, error) {
+	var t Rect
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRect)), midRectInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CenterX calls android.graphics.Rect.centerX.
 func (m *Rect) CenterX() (int32, error) {
 	var result int32

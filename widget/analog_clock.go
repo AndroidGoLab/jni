@@ -23,6 +23,29 @@ type AnalogClock struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAnalogClock creates a new android.widget.AnalogClock instance.
+func NewAnalogClock(vm *jni.VM, arg0 *jni.Object) (*AnalogClock, error) {
+	var t AnalogClock
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnalogClock)), midAnalogClockInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDialTintBlendMode calls android.widget.AnalogClock.getDialTintBlendMode.
 func (m *AnalogClock) GetDialTintBlendMode() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type MaskFilterSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMaskFilterSpan creates a new android.text.style.MaskFilterSpan instance.
+func NewMaskFilterSpan(vm *jni.VM, arg0 *jni.Object) (*MaskFilterSpan, error) {
+	var t MaskFilterSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), midMaskFilterSpanInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetMaskFilter calls android.text.style.MaskFilterSpan.getMaskFilter.
 func (m *MaskFilterSpan) GetMaskFilter() (*jni.Object, error) {
 	var result *jni.Object

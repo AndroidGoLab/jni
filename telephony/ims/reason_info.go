@@ -23,6 +23,35 @@ type ReasonInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewReasonInfo creates a new android.telephony.ims.ImsReasonInfo instance.
+func NewReasonInfo(vm *jni.VM, arg0 int32, arg1 int32, arg2 string) (*ReasonInfo, error) {
+	var t ReasonInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReasonInfo)), midReasonInfoInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telephony.ims.ImsReasonInfo.describeContents.
 func (m *ReasonInfo) DescribeContents() (int32, error) {
 	var result int32

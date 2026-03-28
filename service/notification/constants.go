@@ -5,19 +5,29 @@ package notification
 import "github.com/AndroidGoLab/jni/service/notification/consts"
 
 const (
-	ActionSettingsHome            = consts.ActionSettingsHome
-	MetaDataDefaultAutobind       = consts.MetaDataDefaultAutobind
-	MetaDataDefaultFilterTypes    = consts.MetaDataDefaultFilterTypes
-	MetaDataDisabledFilterTypes   = consts.MetaDataDisabledFilterTypes
-	ServiceInterface              = consts.ServiceInterface
-	Scheme                        = consts.Scheme
-	ExtraRuleId                   = consts.ExtraRuleId
-	MetaDataConfigurationActivity = consts.MetaDataConfigurationActivity
-	MetaDataRuleInstanceLimit     = consts.MetaDataRuleInstanceLimit
-	MetaDataRuleType              = consts.MetaDataRuleType
-)
-
-const (
+	Creator                            = consts.Creator
+	FlagRelevantAlways                 = consts.FlagRelevantAlways
+	FlagRelevantNow                    = consts.FlagRelevantNow
+	SourceContext                      = consts.SourceContext
+	SourceSchedule                     = consts.SourceSchedule
+	SourceUnknown                      = consts.SourceUnknown
+	SourceUserAction                   = consts.SourceUserAction
+	StateError                         = consts.StateError
+	StateFalse                         = consts.StateFalse
+	StateTrue                          = consts.StateTrue
+	StateUnknown                       = consts.StateUnknown
+	ConversationSendersAnyone          = consts.ConversationSendersAnyone
+	ConversationSendersImportant       = consts.ConversationSendersImportant
+	ConversationSendersNone            = consts.ConversationSendersNone
+	ConversationSendersUnset           = consts.ConversationSendersUnset
+	PeopleTypeAnyone                   = consts.PeopleTypeAnyone
+	PeopleTypeContacts                 = consts.PeopleTypeContacts
+	PeopleTypeNone                     = consts.PeopleTypeNone
+	PeopleTypeStarred                  = consts.PeopleTypeStarred
+	PeopleTypeUnset                    = consts.PeopleTypeUnset
+	StateAllow                         = consts.StateAllow
+	StateDisallow                      = consts.StateDisallow
+	StateUnset                         = consts.StateUnset
 	FlagFilterTypeAlerting             = consts.FlagFilterTypeAlerting
 	FlagFilterTypeConversations        = consts.FlagFilterTypeConversations
 	FlagFilterTypeOngoing              = consts.FlagFilterTypeOngoing
@@ -62,27 +72,17 @@ const (
 	UserSentimentNeutral               = consts.UserSentimentNeutral
 	UserSentimentPositive              = consts.UserSentimentPositive
 	VisibilityNoOverride               = consts.VisibilityNoOverride
-	Creator                            = consts.Creator
-	FlagRelevantAlways                 = consts.FlagRelevantAlways
-	FlagRelevantNow                    = consts.FlagRelevantNow
-	SourceContext                      = consts.SourceContext
-	SourceSchedule                     = consts.SourceSchedule
-	SourceUnknown                      = consts.SourceUnknown
-	SourceUserAction                   = consts.SourceUserAction
-	StateError                         = consts.StateError
-	StateFalse                         = consts.StateFalse
-	StateTrue                          = consts.StateTrue
-	StateUnknown                       = consts.StateUnknown
-	ConversationSendersAnyone          = consts.ConversationSendersAnyone
-	ConversationSendersImportant       = consts.ConversationSendersImportant
-	ConversationSendersNone            = consts.ConversationSendersNone
-	ConversationSendersUnset           = consts.ConversationSendersUnset
-	PeopleTypeAnyone                   = consts.PeopleTypeAnyone
-	PeopleTypeContacts                 = consts.PeopleTypeContacts
-	PeopleTypeNone                     = consts.PeopleTypeNone
-	PeopleTypeStarred                  = consts.PeopleTypeStarred
-	PeopleTypeUnset                    = consts.PeopleTypeUnset
-	StateAllow                         = consts.StateAllow
-	StateDisallow                      = consts.StateDisallow
-	StateUnset                         = consts.StateUnset
+)
+
+const (
+	Scheme                        = consts.Scheme
+	ExtraRuleId                   = consts.ExtraRuleId
+	MetaDataConfigurationActivity = consts.MetaDataConfigurationActivity
+	MetaDataRuleInstanceLimit     = consts.MetaDataRuleInstanceLimit
+	MetaDataRuleType              = consts.MetaDataRuleType
+	ServiceInterface              = consts.ServiceInterface
+	ActionSettingsHome            = consts.ActionSettingsHome
+	MetaDataDefaultAutobind       = consts.MetaDataDefaultAutobind
+	MetaDataDefaultFilterTypes    = consts.MetaDataDefaultFilterTypes
+	MetaDataDisabledFilterTypes   = consts.MetaDataDisabledFilterTypes
 )

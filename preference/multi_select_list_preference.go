@@ -23,6 +23,29 @@ type MultiSelectListPreference struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMultiSelectListPreference creates a new android.preference.MultiSelectListPreference instance.
+func NewMultiSelectListPreference(vm *jni.VM, arg0 *jni.Object) (*MultiSelectListPreference, error) {
+	var t MultiSelectListPreference
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMultiSelectListPreference)), midMultiSelectListPreferenceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FindIndexOfValue calls android.preference.MultiSelectListPreference.findIndexOfValue.
 func (m *MultiSelectListPreference) FindIndexOfValue(arg0 string) (int32, error) {
 	var result int32

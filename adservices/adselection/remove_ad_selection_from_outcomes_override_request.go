@@ -23,6 +23,29 @@ type RemoveAdSelectionFromOutcomesOverrideRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoveAdSelectionFromOutcomesOverrideRequest creates a new android.adservices.adselection.RemoveAdSelectionFromOutcomesOverrideRequest instance.
+func NewRemoveAdSelectionFromOutcomesOverrideRequest(vm *jni.VM, arg0 *jni.Object) (*RemoveAdSelectionFromOutcomesOverrideRequest, error) {
+	var t RemoveAdSelectionFromOutcomesOverrideRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionFromOutcomesOverrideRequest)), midRemoveAdSelectionFromOutcomesOverrideRequestInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAdSelectionFromOutcomesConfig calls android.adservices.adselection.RemoveAdSelectionFromOutcomesOverrideRequest.getAdSelectionFromOutcomesConfig.
 func (m *RemoveAdSelectionFromOutcomesOverrideRequest) GetAdSelectionFromOutcomesConfig() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type WifiP2pDirInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWifiP2pDirInfo creates a new android.net.wifi.p2p.WifiP2pDirInfo instance.
+func NewWifiP2pDirInfo(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object) (*WifiP2pDirInfo, error) {
+	var t WifiP2pDirInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), midWifiP2pDirInfoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.p2p.WifiP2pDirInfo.describeContents.
 func (m *WifiP2pDirInfo) DescribeContents() (int32, error) {
 	var result int32

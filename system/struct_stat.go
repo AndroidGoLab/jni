@@ -23,6 +23,29 @@ type StructStat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStructStat creates a new android.system.StructStat instance.
+func NewStructStat(vm *jni.VM, arg0 int64, arg1 int64, arg2 int32, arg3 int64, arg4 int32, arg5 int32, arg6 int64, arg7 int64, arg8 *jni.Object, arg9 *jni.Object, arg10 *jni.Object, arg11 int64, arg12 int64) (*StructStat, error) {
+	var t StructStat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructStat)), midStructStatInit, jni.LongValue(arg0), jni.LongValue(arg1), jni.IntValue(arg2), jni.LongValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.LongValue(arg6), jni.LongValue(arg7), jni.ObjectValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10), jni.LongValue(arg11), jni.LongValue(arg12))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ToString calls android.system.StructStat.toString.
 func (m *StructStat) ToString() (string, error) {
 	var result string

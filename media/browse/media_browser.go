@@ -23,6 +23,29 @@ type MediaBrowser struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMediaBrowser creates a new android.media.browse.MediaBrowser instance.
+func NewMediaBrowser(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*MediaBrowser, error) {
+	var t MediaBrowser
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaBrowser)), midMediaBrowserInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Connect calls android.media.browse.MediaBrowser.connect.
 func (m *MediaBrowser) Connect() error {
 

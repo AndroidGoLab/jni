@@ -23,6 +23,29 @@ type PendingJobReasonsInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPendingJobReasonsInfo creates a new android.app.job.PendingJobReasonsInfo instance.
+func NewPendingJobReasonsInfo(vm *jni.VM, arg0 int64, arg1 *jni.Object) (*PendingJobReasonsInfo, error) {
+	var t PendingJobReasonsInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPendingJobReasonsInfo)), midPendingJobReasonsInfoInit, jni.LongValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.job.PendingJobReasonsInfo.describeContents.
 func (m *PendingJobReasonsInfo) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type LinkMovementMethod struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLinkMovementMethod creates a new android.text.method.LinkMovementMethod instance.
+func NewLinkMovementMethod(vm *jni.VM) (*LinkMovementMethod, error) {
+	var t LinkMovementMethod
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), midLinkMovementMethodInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CanSelectArbitrarily calls android.text.method.LinkMovementMethod.canSelectArbitrarily.
 func (m *LinkMovementMethod) CanSelectArbitrarily() (bool, error) {
 	var result bool

@@ -21,6 +21,28 @@ type Bundle struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBundle creates a new android.os.Bundle instance.
+func NewBundle(vm *jni.VM) (*Bundle, error) {
+	var t Bundle
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBundle)), midBundleInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clear calls android.os.Bundle.clear.
 func (m *Bundle) Clear() error {
 

@@ -23,6 +23,28 @@ type LinkProperties struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLinkProperties creates a new android.net.LinkProperties instance.
+func NewLinkProperties(vm *jni.VM) (*LinkProperties, error) {
+	var t LinkProperties
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkProperties)), midLinkPropertiesInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddRoute calls android.net.LinkProperties.addRoute.
 func (m *LinkProperties) AddRoute(arg0 *jni.Object) (bool, error) {
 	var result bool

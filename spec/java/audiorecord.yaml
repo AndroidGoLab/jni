@@ -7,6 +7,18 @@ go_import: github.com/AndroidGoLab/jni/media/audiorecord
 classes:
     - java_class: android.media.AudioRecord
       go_type: AudioRecord
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+        - java_type: int
+          go_name: arg4
       methods:
         - java_method: getActiveRecordingConfiguration
           go_name: GetActiveRecordingConfiguration

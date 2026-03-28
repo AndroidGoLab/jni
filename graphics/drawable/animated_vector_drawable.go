@@ -23,6 +23,28 @@ type AnimatedVectorDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAnimatedVectorDrawable creates a new android.graphics.drawable.AnimatedVectorDrawable instance.
+func NewAnimatedVectorDrawable(vm *jni.VM) (*AnimatedVectorDrawable, error) {
+	var t AnimatedVectorDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), midAnimatedVectorDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.AnimatedVectorDrawable.applyTheme.
 func (m *AnimatedVectorDrawable) ApplyTheme(arg0 *jni.Object) error {
 

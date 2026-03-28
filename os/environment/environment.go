@@ -23,6 +23,28 @@ type Environment struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEnvironment creates a new android.os.Environment instance.
+func NewEnvironment(vm *jni.VM) (*Environment, error) {
+	var t Environment
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEnvironment)), midEnvironmentInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDataDirectory calls android.os.Environment.getDataDirectory.
 func (m *Environment) GetDataDirectory() (*jni.Object, error) {
 	var result *jni.Object

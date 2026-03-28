@@ -23,6 +23,29 @@ type Boundary struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBoundary creates a new android.graphics.pdf.models.selection.SelectionBoundary instance.
+func NewBoundary(vm *jni.VM, arg0 *jni.Object) (*Boundary, error) {
+	var t Boundary
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBoundary)), midBoundaryInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.pdf.models.selection.SelectionBoundary.describeContents.
 func (m *Boundary) DescribeContents() (int32, error) {
 	var result int32

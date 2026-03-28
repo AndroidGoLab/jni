@@ -23,6 +23,28 @@ type DiscoverySessionCallback struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDiscoverySessionCallback creates a new android.net.wifi.aware.DiscoverySessionCallback instance.
+func NewDiscoverySessionCallback(vm *jni.VM) (*DiscoverySessionCallback, error) {
+	var t DiscoverySessionCallback
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDiscoverySessionCallback)), midDiscoverySessionCallbackInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnBootstrappingFailed calls android.net.wifi.aware.DiscoverySessionCallback.onBootstrappingFailed.
 func (m *DiscoverySessionCallback) OnBootstrappingFailed(arg0 *jni.Object) error {
 

@@ -23,6 +23,33 @@ type CallAudioState struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCallAudioState creates a new android.telecom.CallAudioState instance.
+func NewCallAudioState(vm *jni.VM, arg0 bool, arg1 int32, arg2 int32) (*CallAudioState, error) {
+	var t CallAudioState
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallAudioState)), midCallAudioStateInit, jni.BooleanValue(jArg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telecom.CallAudioState.describeContents.
 func (m *CallAudioState) DescribeContents() (int32, error) {
 	var result int32

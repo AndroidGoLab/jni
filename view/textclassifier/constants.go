@@ -5,26 +5,7 @@ package textclassifier
 import "github.com/AndroidGoLab/jni/view/textclassifier/consts"
 
 const (
-	ActionAbandon               = consts.ActionAbandon
-	ActionCopy                  = consts.ActionCopy
-	ActionCut                   = consts.ActionCut
-	ActionDrag                  = consts.ActionDrag
-	ActionOther                 = consts.ActionOther
-	ActionOvertype              = consts.ActionOvertype
-	ActionPaste                 = consts.ActionPaste
-	ActionReset                 = consts.ActionReset
-	ActionSelectAll             = consts.ActionSelectAll
-	ActionShare                 = consts.ActionShare
-	ActionSmartShare            = consts.ActionSmartShare
 	Creator                     = consts.Creator
-	EventAutoSelection          = consts.EventAutoSelection
-	EventSelectionModified      = consts.EventSelectionModified
-	EventSelectionStarted       = consts.EventSelectionStarted
-	EventSmartSelectionMulti    = consts.EventSmartSelectionMulti
-	EventSmartSelectionSingle   = consts.EventSmartSelectionSingle
-	InvocationLink              = consts.InvocationLink
-	InvocationManual            = consts.InvocationManual
-	InvocationUnknown           = consts.InvocationUnknown
 	CategoryConversationActions = consts.CategoryConversationActions
 	CategoryLanguageDetection   = consts.CategoryLanguageDetection
 	CategoryLinkify             = consts.CategoryLinkify
@@ -50,9 +31,25 @@ const (
 	TypeSmartAction             = consts.TypeSmartAction
 	TypeSmartSelectionMulti     = consts.TypeSmartSelectionMulti
 	TypeSmartSelectionSingle    = consts.TypeSmartSelectionSingle
-	NoOp                        = consts.NoOp
-	PersonUserOthers            = consts.PersonUserOthers
-	PersonUserSelf              = consts.PersonUserSelf
+	ActionAbandon               = consts.ActionAbandon
+	ActionCopy                  = consts.ActionCopy
+	ActionCut                   = consts.ActionCut
+	ActionDrag                  = consts.ActionDrag
+	ActionOther                 = consts.ActionOther
+	ActionOvertype              = consts.ActionOvertype
+	ActionPaste                 = consts.ActionPaste
+	ActionReset                 = consts.ActionReset
+	ActionSelectAll             = consts.ActionSelectAll
+	ActionShare                 = consts.ActionShare
+	ActionSmartShare            = consts.ActionSmartShare
+	EventAutoSelection          = consts.EventAutoSelection
+	EventSelectionModified      = consts.EventSelectionModified
+	EventSelectionStarted       = consts.EventSelectionStarted
+	EventSmartSelectionMulti    = consts.EventSmartSelectionMulti
+	EventSmartSelectionSingle   = consts.EventSmartSelectionSingle
+	InvocationLink              = consts.InvocationLink
+	InvocationManual            = consts.InvocationManual
+	InvocationUnknown           = consts.InvocationUnknown
 	ApplyStrategyIgnore         = consts.ApplyStrategyIgnore
 	ApplyStrategyReplace        = consts.ApplyStrategyReplace
 	StatusDifferentText         = consts.StatusDifferentText
@@ -60,6 +57,9 @@ const (
 	StatusNoLinksApplied        = consts.StatusNoLinksApplied
 	StatusNoLinksFound          = consts.StatusNoLinksFound
 	StatusUnsupportedCharacter  = consts.StatusUnsupportedCharacter
+	NoOp                        = consts.NoOp
+	PersonUserOthers            = consts.PersonUserOthers
+	PersonUserSelf              = consts.PersonUserSelf
 )
 
 const (

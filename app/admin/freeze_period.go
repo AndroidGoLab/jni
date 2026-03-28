@@ -23,6 +23,29 @@ type FreezePeriod struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFreezePeriod creates a new android.app.admin.FreezePeriod instance.
+func NewFreezePeriod(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*FreezePeriod, error) {
+	var t FreezePeriod
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFreezePeriod)), midFreezePeriodInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetEnd calls android.app.admin.FreezePeriod.getEnd.
 func (m *FreezePeriod) GetEnd() (*jni.Object, error) {
 	var result *jni.Object

@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsConverter                            *jni.GlobalRef
+	midConverterInit                        jni.MethodID
 	midConverterAddMslAltitudeToLocation    jni.MethodID
 	midConverterTryAddMslAltitudeToLocation jni.MethodID
 )
@@ -53,6 +54,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsConverter = env.NewGlobalRef(&c.Object)
+		midConverterInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midConverterAddMslAltitudeToLocation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConverter)), "addMslAltitudeToLocation", "(Landroid/content/Context;Landroid/location/Location;)V")
 		if err != nil {

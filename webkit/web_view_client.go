@@ -23,6 +23,28 @@ type WebViewClient struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWebViewClient creates a new android.webkit.WebViewClient instance.
+func NewWebViewClient(vm *jni.VM) (*WebViewClient, error) {
+	var t WebViewClient
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebViewClient)), midWebViewClientInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DoUpdateVisitedHistory calls android.webkit.WebViewClient.doUpdateVisitedHistory.
 func (m *WebViewClient) DoUpdateVisitedHistory(
 	arg0 *jni.Object,

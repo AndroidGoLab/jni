@@ -23,6 +23,34 @@ type TemperatureControlTemplate struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTemperatureControlTemplate creates a new android.service.controls.templates.TemperatureControlTemplate instance.
+func NewTemperatureControlTemplate(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 int32) (*TemperatureControlTemplate, error) {
+	var t TemperatureControlTemplate
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), midTemperatureControlTemplateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCurrentActiveMode calls android.service.controls.templates.TemperatureControlTemplate.getCurrentActiveMode.
 func (m *TemperatureControlTemplate) GetCurrentActiveMode() (int32, error) {
 	var result int32

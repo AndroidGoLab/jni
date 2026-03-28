@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsAppSearchException              *jni.GlobalRef
+	midAppSearchExceptionInit          jni.MethodID
 	midAppSearchExceptionGetResultCode jni.MethodID
 )
 
@@ -52,6 +53,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAppSearchException = env.NewGlobalRef(&c.Object)
+		midAppSearchExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSearchException)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midAppSearchExceptionGetResultCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppSearchException)), "getResultCode", "()I")
 		if err != nil {

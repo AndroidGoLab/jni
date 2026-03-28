@@ -23,6 +23,29 @@ type ClipData struct {
 	Obj *jni.GlobalRef
 }
 
+// NewClipData creates a new android.content.ClipData instance.
+func NewClipData(vm *jni.VM, arg0 *jni.Object) (*ClipData, error) {
+	var t ClipData
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipData)), midClipDataInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddItem1 calls android.content.ClipData.addItem.
 func (m *ClipData) AddItem1(arg0 *jni.Object) error {
 

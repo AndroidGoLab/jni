@@ -23,6 +23,35 @@ type AlphabetIndexer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAlphabetIndexer creates a new android.widget.AlphabetIndexer instance.
+func NewAlphabetIndexer(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 string) (*AlphabetIndexer, error) {
+	var t AlphabetIndexer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphabetIndexer)), midAlphabetIndexerInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetPositionForSection calls android.widget.AlphabetIndexer.getPositionForSection.
 func (m *AlphabetIndexer) GetPositionForSection(arg0 int32) (int32, error) {
 	var result int32

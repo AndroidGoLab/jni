@@ -23,6 +23,29 @@ type FrameLayout struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFrameLayout creates a new android.widget.FrameLayout instance.
+func NewFrameLayout(vm *jni.VM, arg0 *jni.Object) (*FrameLayout, error) {
+	var t FrameLayout
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFrameLayout)), midFrameLayoutInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GenerateLayoutParams1 calls android.widget.FrameLayout.generateLayoutParams.
 func (m *FrameLayout) GenerateLayoutParams1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

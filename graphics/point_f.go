@@ -23,6 +23,28 @@ type PointF struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPointF creates a new android.graphics.PointF instance.
+func NewPointF(vm *jni.VM) (*PointF, error) {
+	var t PointF
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPointF)), midPointFInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.PointF.describeContents.
 func (m *PointF) DescribeContents() (int32, error) {
 	var result int32

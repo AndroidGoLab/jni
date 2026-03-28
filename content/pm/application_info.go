@@ -23,6 +23,28 @@ type ApplicationInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewApplicationInfo creates a new android.content.pm.ApplicationInfo instance.
+func NewApplicationInfo(vm *jni.VM) (*ApplicationInfo, error) {
+	var t ApplicationInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsApplicationInfo)), midApplicationInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AreAttributionsUserVisible calls android.content.pm.ApplicationInfo.areAttributionsUserVisible.
 func (m *ApplicationInfo) AreAttributionsUserVisible() (bool, error) {
 	var result bool

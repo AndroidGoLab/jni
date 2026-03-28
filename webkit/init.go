@@ -23,38 +23,62 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPluginStub                  *jni.GlobalRef
-	midPluginStubGetEmbeddedView   jni.MethodID
-	midPluginStubGetFullScreenView jni.MethodID
+	clsWebIconDatabase                      *jni.GlobalRef
+	midWebIconDatabaseClose                 jni.MethodID
+	midWebIconDatabaseOpen                  jni.MethodID
+	midWebIconDatabaseReleaseIconForPageUrl jni.MethodID
+	midWebIconDatabaseRemoveAllIcons        jni.MethodID
+	midWebIconDatabaseRequestIconForPageUrl jni.MethodID
+	midWebIconDatabaseRetainIconForPageUrl  jni.MethodID
+	midWebIconDatabaseGetInstance           jni.MethodID
 
-	clsMimeTypeMap                         *jni.GlobalRef
-	midMimeTypeMapGetExtensionFromMimeType jni.MethodID
-	midMimeTypeMapGetMimeTypeFromExtension jni.MethodID
-	midMimeTypeMapHasExtension             jni.MethodID
-	midMimeTypeMapHasMimeType              jni.MethodID
-	midMimeTypeMapGetFileExtensionFromUrl  jni.MethodID
-	midMimeTypeMapGetSingleton             jni.MethodID
+	clsWebIconDatabaseIconListener               *jni.GlobalRef
+	midWebIconDatabaseIconListenerOnReceivedIcon jni.MethodID
 
-	clsServiceWorkerClient                       *jni.GlobalRef
-	midServiceWorkerClientShouldInterceptRequest jni.MethodID
+	clsConsoleMessage             *jni.GlobalRef
+	midConsoleMessageInit         jni.MethodID
+	midConsoleMessageLineNumber   jni.MethodID
+	midConsoleMessageMessage      jni.MethodID
+	midConsoleMessageMessageLevel jni.MethodID
+	midConsoleMessageSourceId     jni.MethodID
 
-	clsWebHistoryItem               *jni.GlobalRef
-	midWebHistoryItemGetFavicon     jni.MethodID
-	midWebHistoryItemGetOriginalUrl jni.MethodID
-	midWebHistoryItemGetTitle       jni.MethodID
-	midWebHistoryItemGetUrl         jni.MethodID
+	clsConsoleMessageMessageLevel        *jni.GlobalRef
+	midConsoleMessageMessageLevelValues  jni.MethodID
+	midConsoleMessageMessageLevelValueOf jni.MethodID
 
-	clsServiceWorkerWebSettings                      *jni.GlobalRef
-	midServiceWorkerWebSettingsGetAllowContentAccess jni.MethodID
-	midServiceWorkerWebSettingsGetAllowFileAccess    jni.MethodID
-	midServiceWorkerWebSettingsGetBlockNetworkLoads  jni.MethodID
-	midServiceWorkerWebSettingsGetCacheMode          jni.MethodID
-	midServiceWorkerWebSettingsSetAllowContentAccess jni.MethodID
-	midServiceWorkerWebSettingsSetAllowFileAccess    jni.MethodID
-	midServiceWorkerWebSettingsSetBlockNetworkLoads  jni.MethodID
-	midServiceWorkerWebSettingsSetCacheMode          jni.MethodID
+	clsRenderProcessGoneDetail                       *jni.GlobalRef
+	midRenderProcessGoneDetailDidCrash               jni.MethodID
+	midRenderProcessGoneDetailRendererPriorityAtExit jni.MethodID
+
+	clsDateSorter            *jni.GlobalRef
+	midDateSorterInit        jni.MethodID
+	midDateSorterGetBoundary jni.MethodID
+	midDateSorterGetIndex    jni.MethodID
+	midDateSorterGetLabel    jni.MethodID
+
+	clsClientCertRequest              *jni.GlobalRef
+	midClientCertRequestCancel        jni.MethodID
+	midClientCertRequestGetHost       jni.MethodID
+	midClientCertRequestGetKeyTypes   jni.MethodID
+	midClientCertRequestGetPort       jni.MethodID
+	midClientCertRequestGetPrincipals jni.MethodID
+	midClientCertRequestIgnore        jni.MethodID
+	midClientCertRequestProceed       jni.MethodID
+
+	clsWebResourceRequest               *jni.GlobalRef
+	midWebResourceRequestGetMethod      jni.MethodID
+	midWebResourceRequestGetUrl         jni.MethodID
+	midWebResourceRequestHasGesture     jni.MethodID
+	midWebResourceRequestIsForMainFrame jni.MethodID
+	midWebResourceRequestIsRedirect     jni.MethodID
+
+	clsServiceWorkerController                            *jni.GlobalRef
+	midServiceWorkerControllerGetServiceWorkerWebSettings jni.MethodID
+	midServiceWorkerControllerSetServiceWorkerClient      jni.MethodID
+	midServiceWorkerControllerGetInstance                 jni.MethodID
 
 	clsURLUtil                     *jni.GlobalRef
+	midURLUtilInit                 jni.MethodID
 	midURLUtilComposeSearchUrl     jni.MethodID
 	midURLUtilDecode               jni.MethodID
 	midURLUtilGuessFileName        jni.MethodID
@@ -72,7 +96,24 @@ var (
 	midURLUtilIsValidUrl           jni.MethodID
 	midURLUtilStripAnchor          jni.MethodID
 
+	clsWebResourceResponse                             *jni.GlobalRef
+	midWebResourceResponseInit                         jni.MethodID
+	midWebResourceResponseGetData                      jni.MethodID
+	midWebResourceResponseGetEncoding                  jni.MethodID
+	midWebResourceResponseGetMimeType                  jni.MethodID
+	midWebResourceResponseGetReasonPhrase              jni.MethodID
+	midWebResourceResponseGetStatusCode                jni.MethodID
+	midWebResourceResponseSetData                      jni.MethodID
+	midWebResourceResponseSetEncoding                  jni.MethodID
+	midWebResourceResponseSetMimeType                  jni.MethodID
+	midWebResourceResponseSetStatusCodeAndReasonPhrase jni.MethodID
+
+	clsWebViewRenderProcessClient                            *jni.GlobalRef
+	midWebViewRenderProcessClientOnRenderProcessResponsive   jni.MethodID
+	midWebViewRenderProcessClientOnRenderProcessUnresponsive jni.MethodID
+
 	clsWebView                                        *jni.GlobalRef
+	midWebViewInit                                    jni.MethodID
 	midWebViewAddJavascriptInterface                  jni.MethodID
 	midWebViewCanGoBack                               jni.MethodID
 	midWebViewCanGoBackOrForward                      jni.MethodID
@@ -226,11 +267,15 @@ var (
 
 	clsWebViewWebViewTransport *jni.GlobalRef
 
-	clsWebBackForwardList                *jni.GlobalRef
-	midWebBackForwardListGetCurrentIndex jni.MethodID
-	midWebBackForwardListGetCurrentItem  jni.MethodID
-	midWebBackForwardListGetItemAtIndex  jni.MethodID
-	midWebBackForwardListGetSize         jni.MethodID
+	clsTracingConfig                        *jni.GlobalRef
+	midTracingConfigGetPredefinedCategories jni.MethodID
+	midTracingConfigGetTracingMode          jni.MethodID
+
+	clsTracingConfigBuilder                 *jni.GlobalRef
+	midTracingConfigBuilderAddCategories1   jni.MethodID
+	midTracingConfigBuilderAddCategories1_1 jni.MethodID
+	midTracingConfigBuilderBuild            jni.MethodID
+	midTracingConfigBuilderSetTracingMode   jni.MethodID
 
 	clsWebMessagePort                      *jni.GlobalRef
 	midWebMessagePortClose                 jni.MethodID
@@ -239,6 +284,68 @@ var (
 
 	clsWebMessagePortWebMessageCallback          *jni.GlobalRef
 	midWebMessagePortWebMessageCallbackOnMessage jni.MethodID
+
+	clsJsPromptResult        *jni.GlobalRef
+	midJsPromptResultConfirm jni.MethodID
+
+	clsWebStorage                  *jni.GlobalRef
+	midWebStorageDeleteAllData     jni.MethodID
+	midWebStorageDeleteOrigin      jni.MethodID
+	midWebStorageSetQuotaForOrigin jni.MethodID
+	midWebStorageGetInstance       jni.MethodID
+
+	clsWebStorageOrigin          *jni.GlobalRef
+	midWebStorageOriginGetOrigin jni.MethodID
+	midWebStorageOriginGetQuota  jni.MethodID
+	midWebStorageOriginGetUsage  jni.MethodID
+
+	clsWebStorageQuotaUpdater            *jni.GlobalRef
+	midWebStorageQuotaUpdaterUpdateQuota jni.MethodID
+
+	clsSslErrorHandler        *jni.GlobalRef
+	midSslErrorHandlerCancel  jni.MethodID
+	midSslErrorHandlerProceed jni.MethodID
+
+	clsWebViewFragment              *jni.GlobalRef
+	midWebViewFragmentInit          jni.MethodID
+	midWebViewFragmentGetWebView    jni.MethodID
+	midWebViewFragmentOnCreateView  jni.MethodID
+	midWebViewFragmentOnDestroy     jni.MethodID
+	midWebViewFragmentOnDestroyView jni.MethodID
+	midWebViewFragmentOnPause       jni.MethodID
+	midWebViewFragmentOnResume      jni.MethodID
+
+	clsHttpAuthHandler                            *jni.GlobalRef
+	midHttpAuthHandlerCancel                      jni.MethodID
+	midHttpAuthHandlerProceed                     jni.MethodID
+	midHttpAuthHandlerUseHttpAuthUsernamePassword jni.MethodID
+
+	clsWebResourceError               *jni.GlobalRef
+	midWebResourceErrorGetDescription jni.MethodID
+	midWebResourceErrorGetErrorCode   jni.MethodID
+
+	clsPluginStub                  *jni.GlobalRef
+	midPluginStubGetEmbeddedView   jni.MethodID
+	midPluginStubGetFullScreenView jni.MethodID
+
+	clsMimeTypeMap                         *jni.GlobalRef
+	midMimeTypeMapGetExtensionFromMimeType jni.MethodID
+	midMimeTypeMapGetMimeTypeFromExtension jni.MethodID
+	midMimeTypeMapHasExtension             jni.MethodID
+	midMimeTypeMapHasMimeType              jni.MethodID
+	midMimeTypeMapGetFileExtensionFromUrl  jni.MethodID
+	midMimeTypeMapGetSingleton             jni.MethodID
+
+	clsWebViewDatabase                              *jni.GlobalRef
+	midWebViewDatabaseClearFormData                 jni.MethodID
+	midWebViewDatabaseClearHttpAuthUsernamePassword jni.MethodID
+	midWebViewDatabaseClearUsernamePassword         jni.MethodID
+	midWebViewDatabaseGetHttpAuthUsernamePassword   jni.MethodID
+	midWebViewDatabaseHasFormData                   jni.MethodID
+	midWebViewDatabaseHasHttpAuthUsernamePassword   jni.MethodID
+	midWebViewDatabaseHasUsernamePassword           jni.MethodID
+	midWebViewDatabaseSetHttpAuthUsernamePassword   jni.MethodID
+	midWebViewDatabaseGetInstance                   jni.MethodID
 
 	clsCookieManager                           *jni.GlobalRef
 	midCookieManagerAcceptCookie               jni.MethodID
@@ -256,16 +363,110 @@ var (
 	midCookieManagerGetInstance                jni.MethodID
 	midCookieManagerSetAcceptFileSchemeCookies jni.MethodID
 
+	clsDownloadListener                *jni.GlobalRef
+	midDownloadListenerOnDownloadStart jni.MethodID
+
+	clsServiceWorkerWebSettings                      *jni.GlobalRef
+	midServiceWorkerWebSettingsGetAllowContentAccess jni.MethodID
+	midServiceWorkerWebSettingsGetAllowFileAccess    jni.MethodID
+	midServiceWorkerWebSettingsGetBlockNetworkLoads  jni.MethodID
+	midServiceWorkerWebSettingsGetCacheMode          jni.MethodID
+	midServiceWorkerWebSettingsSetAllowContentAccess jni.MethodID
+	midServiceWorkerWebSettingsSetAllowFileAccess    jni.MethodID
+	midServiceWorkerWebSettingsSetBlockNetworkLoads  jni.MethodID
+	midServiceWorkerWebSettingsSetCacheMode          jni.MethodID
+
 	clsPermissionRequest             *jni.GlobalRef
 	midPermissionRequestDeny         jni.MethodID
 	midPermissionRequestGetOrigin    jni.MethodID
 	midPermissionRequestGetResources jni.MethodID
 	midPermissionRequestGrant        jni.MethodID
 
-	clsDownloadListener                *jni.GlobalRef
-	midDownloadListenerOnDownloadStart jni.MethodID
+	clsWebBackForwardList                *jni.GlobalRef
+	midWebBackForwardListGetCurrentIndex jni.MethodID
+	midWebBackForwardListGetCurrentItem  jni.MethodID
+	midWebBackForwardListGetItemAtIndex  jni.MethodID
+	midWebBackForwardListGetSize         jni.MethodID
+
+	clsWebMessage         *jni.GlobalRef
+	midWebMessageInit     jni.MethodID
+	midWebMessageGetData  jni.MethodID
+	midWebMessageGetPorts jni.MethodID
+
+	clsCookieSyncManager               *jni.GlobalRef
+	midCookieSyncManagerResetSync      jni.MethodID
+	midCookieSyncManagerRun            jni.MethodID
+	midCookieSyncManagerStartSync      jni.MethodID
+	midCookieSyncManagerStopSync       jni.MethodID
+	midCookieSyncManagerSync           jni.MethodID
+	midCookieSyncManagerCreateInstance jni.MethodID
+	midCookieSyncManagerGetInstance    jni.MethodID
+
+	clsValueCallback *jni.GlobalRef
+
+	clsJsResult        *jni.GlobalRef
+	midJsResultCancel  jni.MethodID
+	midJsResultConfirm jni.MethodID
+
+	clsServiceWorkerClient                       *jni.GlobalRef
+	midServiceWorkerClientInit                   jni.MethodID
+	midServiceWorkerClientShouldInterceptRequest jni.MethodID
+
+	clsTracingController            *jni.GlobalRef
+	midTracingControllerIsTracing   jni.MethodID
+	midTracingControllerStart       jni.MethodID
+	midTracingControllerStop        jni.MethodID
+	midTracingControllerGetInstance jni.MethodID
+
+	clsJavascriptInterface *jni.GlobalRef
+
+	clsWebChromeClient                                   *jni.GlobalRef
+	midWebChromeClientInit                               jni.MethodID
+	midWebChromeClientGetDefaultVideoPoster              jni.MethodID
+	midWebChromeClientGetVideoLoadingProgressView        jni.MethodID
+	midWebChromeClientOnCloseWindow                      jni.MethodID
+	midWebChromeClientOnConsoleMessage1                  jni.MethodID
+	midWebChromeClientOnConsoleMessage3_1                jni.MethodID
+	midWebChromeClientOnCreateWindow                     jni.MethodID
+	midWebChromeClientOnExceededDatabaseQuota            jni.MethodID
+	midWebChromeClientOnGeolocationPermissionsHidePrompt jni.MethodID
+	midWebChromeClientOnGeolocationPermissionsShowPrompt jni.MethodID
+	midWebChromeClientOnHideCustomView                   jni.MethodID
+	midWebChromeClientOnJsAlert                          jni.MethodID
+	midWebChromeClientOnJsBeforeUnload                   jni.MethodID
+	midWebChromeClientOnJsConfirm                        jni.MethodID
+	midWebChromeClientOnJsPrompt                         jni.MethodID
+	midWebChromeClientOnJsTimeout                        jni.MethodID
+	midWebChromeClientOnPermissionRequest                jni.MethodID
+	midWebChromeClientOnPermissionRequestCanceled        jni.MethodID
+	midWebChromeClientOnProgressChanged                  jni.MethodID
+	midWebChromeClientOnReceivedIcon                     jni.MethodID
+	midWebChromeClientOnReceivedTitle                    jni.MethodID
+	midWebChromeClientOnReceivedTouchIconUrl             jni.MethodID
+	midWebChromeClientOnRequestFocus                     jni.MethodID
+	midWebChromeClientOnShowCustomView2                  jni.MethodID
+	midWebChromeClientOnShowCustomView3_1                jni.MethodID
+
+	clsWebChromeClientCustomViewCallback                   *jni.GlobalRef
+	midWebChromeClientCustomViewCallbackOnCustomViewHidden jni.MethodID
+
+	clsWebChromeClientFileChooserParams                 *jni.GlobalRef
+	midWebChromeClientFileChooserParamsCreateIntent     jni.MethodID
+	midWebChromeClientFileChooserParamsGetAcceptTypes   jni.MethodID
+	midWebChromeClientFileChooserParamsGetFilenameHint  jni.MethodID
+	midWebChromeClientFileChooserParamsGetMode          jni.MethodID
+	midWebChromeClientFileChooserParamsGetTitle         jni.MethodID
+	midWebChromeClientFileChooserParamsIsCaptureEnabled jni.MethodID
+	midWebChromeClientFileChooserParamsParseResult      jni.MethodID
+
+	clsWebHistoryItem               *jni.GlobalRef
+	midWebHistoryItemGetFavicon     jni.MethodID
+	midWebHistoryItemGetOriginalUrl jni.MethodID
+	midWebHistoryItemGetTitle       jni.MethodID
+	midWebHistoryItemGetUrl         jni.MethodID
 
 	clsWebViewClient                            *jni.GlobalRef
+	midWebViewClientInit                        jni.MethodID
 	midWebViewClientDoUpdateVisitedHistory      jni.MethodID
 	midWebViewClientOnFormResubmission          jni.MethodID
 	midWebViewClientOnLoadResource              jni.MethodID
@@ -288,123 +489,22 @@ var (
 	midWebViewClientShouldOverrideUrlLoading2   jni.MethodID
 	midWebViewClientShouldOverrideUrlLoading2_1 jni.MethodID
 
-	clsWebResourceRequest               *jni.GlobalRef
-	midWebResourceRequestGetMethod      jni.MethodID
-	midWebResourceRequestGetUrl         jni.MethodID
-	midWebResourceRequestHasGesture     jni.MethodID
-	midWebResourceRequestIsForMainFrame jni.MethodID
-	midWebResourceRequestIsRedirect     jni.MethodID
+	clsGeolocationPermissions            *jni.GlobalRef
+	midGeolocationPermissionsAllow       jni.MethodID
+	midGeolocationPermissionsClear       jni.MethodID
+	midGeolocationPermissionsClearAll    jni.MethodID
+	midGeolocationPermissionsGetInstance jni.MethodID
 
-	clsWebStorage                  *jni.GlobalRef
-	midWebStorageDeleteAllData     jni.MethodID
-	midWebStorageDeleteOrigin      jni.MethodID
-	midWebStorageSetQuotaForOrigin jni.MethodID
-	midWebStorageGetInstance       jni.MethodID
+	clsGeolocationPermissionsCallback       *jni.GlobalRef
+	midGeolocationPermissionsCallbackInvoke jni.MethodID
 
-	clsWebStorageOrigin          *jni.GlobalRef
-	midWebStorageOriginGetOrigin jni.MethodID
-	midWebStorageOriginGetQuota  jni.MethodID
-	midWebStorageOriginGetUsage  jni.MethodID
+	clsSafeBrowsingResponse                 *jni.GlobalRef
+	midSafeBrowsingResponseBackToSafety     jni.MethodID
+	midSafeBrowsingResponseProceed          jni.MethodID
+	midSafeBrowsingResponseShowInterstitial jni.MethodID
 
-	clsWebStorageQuotaUpdater            *jni.GlobalRef
-	midWebStorageQuotaUpdaterUpdateQuota jni.MethodID
-
-	clsConsoleMessage             *jni.GlobalRef
-	midConsoleMessageLineNumber   jni.MethodID
-	midConsoleMessageMessage      jni.MethodID
-	midConsoleMessageMessageLevel jni.MethodID
-	midConsoleMessageSourceId     jni.MethodID
-
-	clsConsoleMessageMessageLevel        *jni.GlobalRef
-	midConsoleMessageMessageLevelValues  jni.MethodID
-	midConsoleMessageMessageLevelValueOf jni.MethodID
-
-	clsWebViewFragment              *jni.GlobalRef
-	midWebViewFragmentGetWebView    jni.MethodID
-	midWebViewFragmentOnCreateView  jni.MethodID
-	midWebViewFragmentOnDestroy     jni.MethodID
-	midWebViewFragmentOnDestroyView jni.MethodID
-	midWebViewFragmentOnPause       jni.MethodID
-	midWebViewFragmentOnResume      jni.MethodID
-
-	clsServiceWorkerController                            *jni.GlobalRef
-	midServiceWorkerControllerGetServiceWorkerWebSettings jni.MethodID
-	midServiceWorkerControllerSetServiceWorkerClient      jni.MethodID
-	midServiceWorkerControllerGetInstance                 jni.MethodID
-
-	clsSslErrorHandler        *jni.GlobalRef
-	midSslErrorHandlerCancel  jni.MethodID
-	midSslErrorHandlerProceed jni.MethodID
-
-	clsWebViewDatabase                              *jni.GlobalRef
-	midWebViewDatabaseClearFormData                 jni.MethodID
-	midWebViewDatabaseClearHttpAuthUsernamePassword jni.MethodID
-	midWebViewDatabaseClearUsernamePassword         jni.MethodID
-	midWebViewDatabaseGetHttpAuthUsernamePassword   jni.MethodID
-	midWebViewDatabaseHasFormData                   jni.MethodID
-	midWebViewDatabaseHasHttpAuthUsernamePassword   jni.MethodID
-	midWebViewDatabaseHasUsernamePassword           jni.MethodID
-	midWebViewDatabaseSetHttpAuthUsernamePassword   jni.MethodID
-	midWebViewDatabaseGetInstance                   jni.MethodID
-
-	clsWebMessage         *jni.GlobalRef
-	midWebMessageGetData  jni.MethodID
-	midWebMessageGetPorts jni.MethodID
-
-	clsRenderProcessGoneDetail                       *jni.GlobalRef
-	midRenderProcessGoneDetailDidCrash               jni.MethodID
-	midRenderProcessGoneDetailRendererPriorityAtExit jni.MethodID
-
-	clsCookieSyncManager               *jni.GlobalRef
-	midCookieSyncManagerResetSync      jni.MethodID
-	midCookieSyncManagerRun            jni.MethodID
-	midCookieSyncManagerStartSync      jni.MethodID
-	midCookieSyncManagerStopSync       jni.MethodID
-	midCookieSyncManagerSync           jni.MethodID
-	midCookieSyncManagerCreateInstance jni.MethodID
-	midCookieSyncManagerGetInstance    jni.MethodID
-
-	clsDateSorter            *jni.GlobalRef
-	midDateSorterGetBoundary jni.MethodID
-	midDateSorterGetIndex    jni.MethodID
-	midDateSorterGetLabel    jni.MethodID
-
-	clsTracingConfig                        *jni.GlobalRef
-	midTracingConfigGetPredefinedCategories jni.MethodID
-	midTracingConfigGetTracingMode          jni.MethodID
-
-	clsTracingConfigBuilder                 *jni.GlobalRef
-	midTracingConfigBuilderAddCategories1   jni.MethodID
-	midTracingConfigBuilderAddCategories1_1 jni.MethodID
-	midTracingConfigBuilderBuild            jni.MethodID
-	midTracingConfigBuilderSetTracingMode   jni.MethodID
-
-	clsWebResourceError               *jni.GlobalRef
-	midWebResourceErrorGetDescription jni.MethodID
-	midWebResourceErrorGetErrorCode   jni.MethodID
-
-	clsWebResourceResponse                             *jni.GlobalRef
-	midWebResourceResponseGetData                      jni.MethodID
-	midWebResourceResponseGetEncoding                  jni.MethodID
-	midWebResourceResponseGetMimeType                  jni.MethodID
-	midWebResourceResponseGetReasonPhrase              jni.MethodID
-	midWebResourceResponseGetStatusCode                jni.MethodID
-	midWebResourceResponseSetData                      jni.MethodID
-	midWebResourceResponseSetEncoding                  jni.MethodID
-	midWebResourceResponseSetMimeType                  jni.MethodID
-	midWebResourceResponseSetStatusCodeAndReasonPhrase jni.MethodID
-
-	clsWebIconDatabase                      *jni.GlobalRef
-	midWebIconDatabaseClose                 jni.MethodID
-	midWebIconDatabaseOpen                  jni.MethodID
-	midWebIconDatabaseReleaseIconForPageUrl jni.MethodID
-	midWebIconDatabaseRemoveAllIcons        jni.MethodID
-	midWebIconDatabaseRequestIconForPageUrl jni.MethodID
-	midWebIconDatabaseRetainIconForPageUrl  jni.MethodID
-	midWebIconDatabaseGetInstance           jni.MethodID
-
-	clsWebIconDatabaseIconListener               *jni.GlobalRef
-	midWebIconDatabaseIconListenerOnReceivedIcon jni.MethodID
+	clsWebViewRenderProcess          *jni.GlobalRef
+	midWebViewRenderProcessTerminate jni.MethodID
 
 	clsWebSettings                                         *jni.GlobalRef
 	midWebSettingsEnableSmoothTransition                   jni.MethodID
@@ -524,96 +624,6 @@ var (
 	clsWebSettingsZoomDensity        *jni.GlobalRef
 	midWebSettingsZoomDensityValues  jni.MethodID
 	midWebSettingsZoomDensityValueOf jni.MethodID
-
-	clsJavascriptInterface *jni.GlobalRef
-
-	clsJsPromptResult        *jni.GlobalRef
-	midJsPromptResultConfirm jni.MethodID
-
-	clsSafeBrowsingResponse                 *jni.GlobalRef
-	midSafeBrowsingResponseBackToSafety     jni.MethodID
-	midSafeBrowsingResponseProceed          jni.MethodID
-	midSafeBrowsingResponseShowInterstitial jni.MethodID
-
-	clsClientCertRequest              *jni.GlobalRef
-	midClientCertRequestCancel        jni.MethodID
-	midClientCertRequestGetHost       jni.MethodID
-	midClientCertRequestGetKeyTypes   jni.MethodID
-	midClientCertRequestGetPort       jni.MethodID
-	midClientCertRequestGetPrincipals jni.MethodID
-	midClientCertRequestIgnore        jni.MethodID
-	midClientCertRequestProceed       jni.MethodID
-
-	clsWebViewRenderProcess          *jni.GlobalRef
-	midWebViewRenderProcessTerminate jni.MethodID
-
-	clsWebViewRenderProcessClient                            *jni.GlobalRef
-	midWebViewRenderProcessClientOnRenderProcessResponsive   jni.MethodID
-	midWebViewRenderProcessClientOnRenderProcessUnresponsive jni.MethodID
-
-	clsJsResult        *jni.GlobalRef
-	midJsResultCancel  jni.MethodID
-	midJsResultConfirm jni.MethodID
-
-	clsTracingController            *jni.GlobalRef
-	midTracingControllerIsTracing   jni.MethodID
-	midTracingControllerStart       jni.MethodID
-	midTracingControllerStop        jni.MethodID
-	midTracingControllerGetInstance jni.MethodID
-
-	clsValueCallback *jni.GlobalRef
-
-	clsHttpAuthHandler                            *jni.GlobalRef
-	midHttpAuthHandlerCancel                      jni.MethodID
-	midHttpAuthHandlerProceed                     jni.MethodID
-	midHttpAuthHandlerUseHttpAuthUsernamePassword jni.MethodID
-
-	clsGeolocationPermissions            *jni.GlobalRef
-	midGeolocationPermissionsAllow       jni.MethodID
-	midGeolocationPermissionsClear       jni.MethodID
-	midGeolocationPermissionsClearAll    jni.MethodID
-	midGeolocationPermissionsGetInstance jni.MethodID
-
-	clsGeolocationPermissionsCallback       *jni.GlobalRef
-	midGeolocationPermissionsCallbackInvoke jni.MethodID
-
-	clsWebChromeClient                                   *jni.GlobalRef
-	midWebChromeClientGetDefaultVideoPoster              jni.MethodID
-	midWebChromeClientGetVideoLoadingProgressView        jni.MethodID
-	midWebChromeClientOnCloseWindow                      jni.MethodID
-	midWebChromeClientOnConsoleMessage1                  jni.MethodID
-	midWebChromeClientOnConsoleMessage3_1                jni.MethodID
-	midWebChromeClientOnCreateWindow                     jni.MethodID
-	midWebChromeClientOnExceededDatabaseQuota            jni.MethodID
-	midWebChromeClientOnGeolocationPermissionsHidePrompt jni.MethodID
-	midWebChromeClientOnGeolocationPermissionsShowPrompt jni.MethodID
-	midWebChromeClientOnHideCustomView                   jni.MethodID
-	midWebChromeClientOnJsAlert                          jni.MethodID
-	midWebChromeClientOnJsBeforeUnload                   jni.MethodID
-	midWebChromeClientOnJsConfirm                        jni.MethodID
-	midWebChromeClientOnJsPrompt                         jni.MethodID
-	midWebChromeClientOnJsTimeout                        jni.MethodID
-	midWebChromeClientOnPermissionRequest                jni.MethodID
-	midWebChromeClientOnPermissionRequestCanceled        jni.MethodID
-	midWebChromeClientOnProgressChanged                  jni.MethodID
-	midWebChromeClientOnReceivedIcon                     jni.MethodID
-	midWebChromeClientOnReceivedTitle                    jni.MethodID
-	midWebChromeClientOnReceivedTouchIconUrl             jni.MethodID
-	midWebChromeClientOnRequestFocus                     jni.MethodID
-	midWebChromeClientOnShowCustomView2                  jni.MethodID
-	midWebChromeClientOnShowCustomView3_1                jni.MethodID
-
-	clsWebChromeClientCustomViewCallback                   *jni.GlobalRef
-	midWebChromeClientCustomViewCallbackOnCustomViewHidden jni.MethodID
-
-	clsWebChromeClientFileChooserParams                 *jni.GlobalRef
-	midWebChromeClientFileChooserParamsCreateIntent     jni.MethodID
-	midWebChromeClientFileChooserParamsGetAcceptTypes   jni.MethodID
-	midWebChromeClientFileChooserParamsGetFilenameHint  jni.MethodID
-	midWebChromeClientFileChooserParamsGetMode          jni.MethodID
-	midWebChromeClientFileChooserParamsGetTitle         jni.MethodID
-	midWebChromeClientFileChooserParamsIsCaptureEnabled jni.MethodID
-	midWebChromeClientFileChooserParamsParseResult      jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -634,22 +644,57 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/webkit/PluginStub")
+	c, err = env.FindClass("android/webkit/WebIconDatabase")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPluginStub = env.NewGlobalRef(&c.Object)
+		clsWebIconDatabase = env.NewGlobalRef(&c.Object)
 
-		midPluginStubGetEmbeddedView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPluginStub)), "getEmbeddedView", "(ILandroid/content/Context;)Landroid/view/View;")
+		midWebIconDatabaseClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "close", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPluginStubGetFullScreenView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPluginStub)), "getFullScreenView", "(ILandroid/content/Context;)Landroid/view/View;")
+		midWebIconDatabaseOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "open", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebIconDatabaseReleaseIconForPageUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "releaseIconForPageUrl", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebIconDatabaseRemoveAllIcons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "removeAllIcons", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebIconDatabaseRequestIconForPageUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "requestIconForPageUrl", "(Ljava/lang/String;Landroid/webkit/WebIconDatabase$IconListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebIconDatabaseRetainIconForPageUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "retainIconForPageUrl", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebIconDatabaseGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "getInstance", "()Landroid/webkit/WebIconDatabase;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -658,50 +703,15 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/MimeTypeMap")
+	c, err = env.FindClass("android/webkit/WebIconDatabase$IconListener")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsMimeTypeMap = env.NewGlobalRef(&c.Object)
+		clsWebIconDatabaseIconListener = env.NewGlobalRef(&c.Object)
 
-		midMimeTypeMapGetExtensionFromMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getExtensionFromMimeType", "(Ljava/lang/String;)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMimeTypeMapGetMimeTypeFromExtension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getMimeTypeFromExtension", "(Ljava/lang/String;)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMimeTypeMapHasExtension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "hasExtension", "(Ljava/lang/String;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMimeTypeMapHasMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "hasMimeType", "(Ljava/lang/String;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMimeTypeMapGetFileExtensionFromUrl, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getFileExtensionFromUrl", "(Ljava/lang/String;)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMimeTypeMapGetSingleton, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getSingleton", "()Landroid/webkit/MimeTypeMap;")
+		midWebIconDatabaseIconListenerOnReceivedIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabaseIconListener)), "onReceivedIcon", "(Ljava/lang/String;Landroid/graphics/Bitmap;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -710,15 +720,40 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/ServiceWorkerClient")
+	c, err = env.FindClass("android/webkit/ConsoleMessage")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsServiceWorkerClient = env.NewGlobalRef(&c.Object)
+		clsConsoleMessage = env.NewGlobalRef(&c.Object)
+		midConsoleMessageInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "<init>", "(Ljava/lang/String;Ljava/lang/String;ILandroid/webkit/ConsoleMessage$MessageLevel;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midServiceWorkerClientShouldInterceptRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerClient)), "shouldInterceptRequest", "(Landroid/webkit/WebResourceRequest;)Landroid/webkit/WebResourceResponse;")
+		midConsoleMessageLineNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "lineNumber", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConsoleMessageMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "message", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConsoleMessageMessageLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "messageLevel", "()Landroid/webkit/ConsoleMessage$MessageLevel;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConsoleMessageSourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "sourceId", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -727,36 +762,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/WebHistoryItem")
+	c, err = env.FindClass("android/webkit/ConsoleMessage$MessageLevel")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebHistoryItem = env.NewGlobalRef(&c.Object)
+		clsConsoleMessageMessageLevel = env.NewGlobalRef(&c.Object)
 
-		midWebHistoryItemGetFavicon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getFavicon", "()Landroid/graphics/Bitmap;")
+		midConsoleMessageMessageLevelValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessageMessageLevel)), "values", "()[Landroid/webkit/ConsoleMessage$MessageLevel;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebHistoryItemGetOriginalUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getOriginalUrl", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebHistoryItemGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getTitle", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebHistoryItemGetUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getUrl", "()Ljava/lang/String;")
+		midConsoleMessageMessageLevelValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessageMessageLevel)), "valueOf", "(Ljava/lang/String;)Landroid/webkit/ConsoleMessage$MessageLevel;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -765,64 +786,192 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/ServiceWorkerWebSettings")
+	c, err = env.FindClass("android/webkit/RenderProcessGoneDetail")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsServiceWorkerWebSettings = env.NewGlobalRef(&c.Object)
+		clsRenderProcessGoneDetail = env.NewGlobalRef(&c.Object)
 
-		midServiceWorkerWebSettingsGetAllowContentAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getAllowContentAccess", "()Z")
+		midRenderProcessGoneDetailDidCrash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderProcessGoneDetail)), "didCrash", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsGetAllowFileAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getAllowFileAccess", "()Z")
+		midRenderProcessGoneDetailRendererPriorityAtExit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderProcessGoneDetail)), "rendererPriorityAtExit", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsGetBlockNetworkLoads, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getBlockNetworkLoads", "()Z")
+	}
+
+	c, err = env.FindClass("android/webkit/DateSorter")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDateSorter = env.NewGlobalRef(&c.Object)
+		midDateSorterInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDateSorterGetBoundary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "getBoundary", "(I)J")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsGetCacheMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getCacheMode", "()I")
+		midDateSorterGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "getIndex", "(J)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsSetAllowContentAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setAllowContentAccess", "(Z)V")
+		midDateSorterGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "getLabel", "(I)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsSetAllowFileAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setAllowFileAccess", "(Z)V")
+	}
+
+	c, err = env.FindClass("android/webkit/ClientCertRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsClientCertRequest = env.NewGlobalRef(&c.Object)
+
+		midClientCertRequestCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "cancel", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsSetBlockNetworkLoads, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setBlockNetworkLoads", "(Z)V")
+		midClientCertRequestGetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getHost", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midServiceWorkerWebSettingsSetCacheMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setCacheMode", "(I)V")
+		midClientCertRequestGetKeyTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getKeyTypes", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClientCertRequestGetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getPort", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClientCertRequestGetPrincipals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getPrincipals", "()[Ljava/security/Principal;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClientCertRequestIgnore, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "ignore", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClientCertRequestProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "proceed", "(Ljava/security/PrivateKey;[Ljava/security/cert/X509Certificate;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebResourceRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebResourceRequest = env.NewGlobalRef(&c.Object)
+
+		midWebResourceRequestGetMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "getMethod", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceRequestGetUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "getUrl", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceRequestHasGesture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "hasGesture", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceRequestIsForMainFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "isForMainFrame", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceRequestIsRedirect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "isRedirect", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/ServiceWorkerController")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsServiceWorkerController = env.NewGlobalRef(&c.Object)
+
+		midServiceWorkerControllerGetServiceWorkerWebSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerController)), "getServiceWorkerWebSettings", "()Landroid/webkit/ServiceWorkerWebSettings;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerControllerSetServiceWorkerClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerController)), "setServiceWorkerClient", "(Landroid/webkit/ServiceWorkerClient;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerControllerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerController)), "getInstance", "()Landroid/webkit/ServiceWorkerController;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -838,6 +987,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsURLUtil = env.NewGlobalRef(&c.Object)
+		midURLUtilInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsURLUtil)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midURLUtilComposeSearchUrl, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsURLUtil)), "composeSearchUrl", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;")
 		if err != nil {
@@ -953,6 +1106,107 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/webkit/WebResourceResponse")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebResourceResponse = env.NewGlobalRef(&c.Object)
+		midWebResourceResponseInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "<init>", "(Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;Ljava/util/Map;Ljava/io/InputStream;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getData", "()Ljava/io/InputStream;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseGetEncoding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getEncoding", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseGetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getMimeType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseGetReasonPhrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getReasonPhrase", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseGetStatusCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getStatusCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setData", "(Ljava/io/InputStream;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseSetEncoding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setEncoding", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setMimeType", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceResponseSetStatusCodeAndReasonPhrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setStatusCodeAndReasonPhrase", "(ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebViewRenderProcessClient")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebViewRenderProcessClient = env.NewGlobalRef(&c.Object)
+
+		midWebViewRenderProcessClientOnRenderProcessResponsive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewRenderProcessClient)), "onRenderProcessResponsive", "(Landroid/webkit/WebView;Landroid/webkit/WebViewRenderProcess;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewRenderProcessClientOnRenderProcessUnresponsive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewRenderProcessClient)), "onRenderProcessUnresponsive", "(Landroid/webkit/WebView;Landroid/webkit/WebViewRenderProcess;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/webkit/WebView")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -960,6 +1214,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsWebView = env.NewGlobalRef(&c.Object)
+		midWebViewInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebView)), "<init>", "(Landroid/content/Context;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midWebViewAddJavascriptInterface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebView)), "addJavascriptInterface", "(Ljava/lang/Object;Ljava/lang/String;)V")
 		if err != nil {
@@ -2007,36 +2265,60 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/WebBackForwardList")
+	c, err = env.FindClass("android/webkit/TracingConfig")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebBackForwardList = env.NewGlobalRef(&c.Object)
+		clsTracingConfig = env.NewGlobalRef(&c.Object)
 
-		midWebBackForwardListGetCurrentIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getCurrentIndex", "()I")
+		midTracingConfigGetPredefinedCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfig)), "getPredefinedCategories", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebBackForwardListGetCurrentItem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getCurrentItem", "()Landroid/webkit/WebHistoryItem;")
+		midTracingConfigGetTracingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfig)), "getTracingMode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebBackForwardListGetItemAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getItemAtIndex", "(I)Landroid/webkit/WebHistoryItem;")
+	}
+
+	c, err = env.FindClass("android/webkit/TracingConfig$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTracingConfigBuilder = env.NewGlobalRef(&c.Object)
+
+		midTracingConfigBuilderAddCategories1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "addCategories", "([I)Landroid/webkit/TracingConfig$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebBackForwardListGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getSize", "()I")
+		midTracingConfigBuilderAddCategories1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "addCategories", "([Ljava/lang/String;)Landroid/webkit/TracingConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTracingConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "build", "()Landroid/webkit/TracingConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTracingConfigBuilderSetTracingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "setTracingMode", "(I)Landroid/webkit/TracingConfig$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2085,6 +2367,393 @@ func doInit(env *jni.Env) error {
 		clsWebMessagePortWebMessageCallback = env.NewGlobalRef(&c.Object)
 
 		midWebMessagePortWebMessageCallbackOnMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebMessagePortWebMessageCallback)), "onMessage", "(Landroid/webkit/WebMessagePort;Landroid/webkit/WebMessage;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/JsPromptResult")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsJsPromptResult = env.NewGlobalRef(&c.Object)
+
+		midJsPromptResultConfirm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJsPromptResult)), "confirm", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebStorage")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebStorage = env.NewGlobalRef(&c.Object)
+
+		midWebStorageDeleteAllData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "deleteAllData", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebStorageDeleteOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "deleteOrigin", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebStorageSetQuotaForOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "setQuotaForOrigin", "(Ljava/lang/String;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebStorageGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "getInstance", "()Landroid/webkit/WebStorage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebStorage$Origin")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebStorageOrigin = env.NewGlobalRef(&c.Object)
+
+		midWebStorageOriginGetOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageOrigin)), "getOrigin", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebStorageOriginGetQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageOrigin)), "getQuota", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebStorageOriginGetUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageOrigin)), "getUsage", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebStorage$QuotaUpdater")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebStorageQuotaUpdater = env.NewGlobalRef(&c.Object)
+
+		midWebStorageQuotaUpdaterUpdateQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageQuotaUpdater)), "updateQuota", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/SslErrorHandler")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSslErrorHandler = env.NewGlobalRef(&c.Object)
+
+		midSslErrorHandlerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSslErrorHandler)), "cancel", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSslErrorHandlerProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSslErrorHandler)), "proceed", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebViewFragment")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebViewFragment = env.NewGlobalRef(&c.Object)
+		midWebViewFragmentInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midWebViewFragmentGetWebView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "getWebView", "()Landroid/webkit/WebView;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewFragmentOnCreateView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onCreateView", "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewFragmentOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewFragmentOnDestroyView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onDestroyView", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewFragmentOnPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onPause", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewFragmentOnResume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onResume", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/HttpAuthHandler")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsHttpAuthHandler = env.NewGlobalRef(&c.Object)
+
+		midHttpAuthHandlerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHttpAuthHandler)), "cancel", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHttpAuthHandlerProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHttpAuthHandler)), "proceed", "(Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHttpAuthHandlerUseHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHttpAuthHandler)), "useHttpAuthUsernamePassword", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebResourceError")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebResourceError = env.NewGlobalRef(&c.Object)
+
+		midWebResourceErrorGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceError)), "getDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebResourceErrorGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceError)), "getErrorCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/PluginStub")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPluginStub = env.NewGlobalRef(&c.Object)
+
+		midPluginStubGetEmbeddedView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPluginStub)), "getEmbeddedView", "(ILandroid/content/Context;)Landroid/view/View;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPluginStubGetFullScreenView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPluginStub)), "getFullScreenView", "(ILandroid/content/Context;)Landroid/view/View;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/MimeTypeMap")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMimeTypeMap = env.NewGlobalRef(&c.Object)
+
+		midMimeTypeMapGetExtensionFromMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getExtensionFromMimeType", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMimeTypeMapGetMimeTypeFromExtension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getMimeTypeFromExtension", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMimeTypeMapHasExtension, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "hasExtension", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMimeTypeMapHasMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "hasMimeType", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMimeTypeMapGetFileExtensionFromUrl, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getFileExtensionFromUrl", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMimeTypeMapGetSingleton, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMimeTypeMap)), "getSingleton", "()Landroid/webkit/MimeTypeMap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebViewDatabase")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebViewDatabase = env.NewGlobalRef(&c.Object)
+
+		midWebViewDatabaseClearFormData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "clearFormData", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseClearHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "clearHttpAuthUsernamePassword", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseClearUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "clearUsernamePassword", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseGetHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "getHttpAuthUsernamePassword", "(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseHasFormData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "hasFormData", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseHasHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "hasHttpAuthUsernamePassword", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseHasUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "hasUsernamePassword", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseSetHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "setHttpAuthUsernamePassword", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebViewDatabaseGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "getInstance", "(Landroid/content/Context;)Landroid/webkit/WebViewDatabase;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2201,6 +2870,89 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/webkit/DownloadListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDownloadListener = env.NewGlobalRef(&c.Object)
+
+		midDownloadListenerOnDownloadStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadListener)), "onDownloadStart", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/ServiceWorkerWebSettings")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsServiceWorkerWebSettings = env.NewGlobalRef(&c.Object)
+
+		midServiceWorkerWebSettingsGetAllowContentAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getAllowContentAccess", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsGetAllowFileAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getAllowFileAccess", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsGetBlockNetworkLoads, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getBlockNetworkLoads", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsGetCacheMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "getCacheMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsSetAllowContentAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setAllowContentAccess", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsSetAllowFileAccess, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setAllowFileAccess", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsSetBlockNetworkLoads, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setBlockNetworkLoads", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerWebSettingsSetCacheMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerWebSettings)), "setCacheMode", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/webkit/PermissionRequest")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -2239,15 +2991,522 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/DownloadListener")
+	c, err = env.FindClass("android/webkit/WebBackForwardList")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDownloadListener = env.NewGlobalRef(&c.Object)
+		clsWebBackForwardList = env.NewGlobalRef(&c.Object)
 
-		midDownloadListenerOnDownloadStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadListener)), "onDownloadStart", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V")
+		midWebBackForwardListGetCurrentIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getCurrentIndex", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebBackForwardListGetCurrentItem, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getCurrentItem", "()Landroid/webkit/WebHistoryItem;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebBackForwardListGetItemAtIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getItemAtIndex", "(I)Landroid/webkit/WebHistoryItem;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebBackForwardListGetSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebBackForwardList)), "getSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebMessage")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebMessage = env.NewGlobalRef(&c.Object)
+		midWebMessageInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebMessage)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midWebMessageGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebMessage)), "getData", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebMessageGetPorts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebMessage)), "getPorts", "()[Landroid/webkit/WebMessagePort;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/CookieSyncManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCookieSyncManager = env.NewGlobalRef(&c.Object)
+
+		midCookieSyncManagerResetSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "resetSync", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCookieSyncManagerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "run", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCookieSyncManagerStartSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "startSync", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCookieSyncManagerStopSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "stopSync", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCookieSyncManagerSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "sync", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCookieSyncManagerCreateInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "createInstance", "(Landroid/content/Context;)Landroid/webkit/CookieSyncManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCookieSyncManagerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "getInstance", "()Landroid/webkit/CookieSyncManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/ValueCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsValueCallback = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/webkit/JsResult")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsJsResult = env.NewGlobalRef(&c.Object)
+
+		midJsResultCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJsResult)), "cancel", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midJsResultConfirm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJsResult)), "confirm", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/ServiceWorkerClient")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsServiceWorkerClient = env.NewGlobalRef(&c.Object)
+		midServiceWorkerClientInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerClient)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midServiceWorkerClientShouldInterceptRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerClient)), "shouldInterceptRequest", "(Landroid/webkit/WebResourceRequest;)Landroid/webkit/WebResourceResponse;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/TracingController")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTracingController = env.NewGlobalRef(&c.Object)
+
+		midTracingControllerIsTracing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "isTracing", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTracingControllerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "start", "(Landroid/webkit/TracingConfig;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTracingControllerStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "stop", "(Ljava/io/OutputStream;Ljava/util/concurrent/Executor;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTracingControllerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "getInstance", "()Landroid/webkit/TracingController;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/JavascriptInterface")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsJavascriptInterface = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebChromeClient")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebChromeClient = env.NewGlobalRef(&c.Object)
+		midWebChromeClientInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientGetDefaultVideoPoster, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "getDefaultVideoPoster", "()Landroid/graphics/Bitmap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientGetVideoLoadingProgressView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "getVideoLoadingProgressView", "()Landroid/view/View;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnCloseWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onCloseWindow", "(Landroid/webkit/WebView;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnConsoleMessage1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onConsoleMessage", "(Landroid/webkit/ConsoleMessage;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnConsoleMessage3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onConsoleMessage", "(Ljava/lang/String;ILjava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnCreateWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onCreateWindow", "(Landroid/webkit/WebView;ZZLandroid/os/Message;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnExceededDatabaseQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onExceededDatabaseQuota", "(Ljava/lang/String;Ljava/lang/String;JJJLandroid/webkit/WebStorage$QuotaUpdater;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnGeolocationPermissionsHidePrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onGeolocationPermissionsHidePrompt", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnGeolocationPermissionsShowPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onGeolocationPermissionsShowPrompt", "(Ljava/lang/String;Landroid/webkit/GeolocationPermissions$Callback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnHideCustomView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onHideCustomView", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnJsAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsAlert", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsResult;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnJsBeforeUnload, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsBeforeUnload", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsResult;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnJsConfirm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsConfirm", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsResult;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnJsPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsPrompt", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsPromptResult;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnJsTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsTimeout", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnPermissionRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onPermissionRequest", "(Landroid/webkit/PermissionRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnPermissionRequestCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onPermissionRequestCanceled", "(Landroid/webkit/PermissionRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnProgressChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onProgressChanged", "(Landroid/webkit/WebView;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnReceivedIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onReceivedIcon", "(Landroid/webkit/WebView;Landroid/graphics/Bitmap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnReceivedTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onReceivedTitle", "(Landroid/webkit/WebView;Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnReceivedTouchIconUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onReceivedTouchIconUrl", "(Landroid/webkit/WebView;Ljava/lang/String;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnRequestFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onRequestFocus", "(Landroid/webkit/WebView;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnShowCustomView2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onShowCustomView", "(Landroid/view/View;Landroid/webkit/WebChromeClient$CustomViewCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientOnShowCustomView3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onShowCustomView", "(Landroid/view/View;ILandroid/webkit/WebChromeClient$CustomViewCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebChromeClient$CustomViewCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebChromeClientCustomViewCallback = env.NewGlobalRef(&c.Object)
+
+		midWebChromeClientCustomViewCallbackOnCustomViewHidden, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientCustomViewCallback)), "onCustomViewHidden", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebChromeClient$FileChooserParams")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebChromeClientFileChooserParams = env.NewGlobalRef(&c.Object)
+
+		midWebChromeClientFileChooserParamsCreateIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "createIntent", "()Landroid/content/Intent;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientFileChooserParamsGetAcceptTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getAcceptTypes", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientFileChooserParamsGetFilenameHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getFilenameHint", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientFileChooserParamsGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientFileChooserParamsGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getTitle", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientFileChooserParamsIsCaptureEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "isCaptureEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebChromeClientFileChooserParamsParseResult, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "parseResult", "(ILandroid/content/Intent;)[Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/webkit/WebHistoryItem")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebHistoryItem = env.NewGlobalRef(&c.Object)
+
+		midWebHistoryItemGetFavicon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getFavicon", "()Landroid/graphics/Bitmap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebHistoryItemGetOriginalUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getOriginalUrl", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebHistoryItemGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getTitle", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebHistoryItemGetUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebHistoryItem)), "getUrl", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2263,6 +3522,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsWebViewClient = env.NewGlobalRef(&c.Object)
+		midWebViewClientInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewClient)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midWebViewClientDoUpdateVisitedHistory, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewClient)), "doUpdateVisitedHistory", "(Landroid/webkit/WebView;Ljava/lang/String;Z)V")
 		if err != nil {
@@ -2413,43 +3676,36 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/WebResourceRequest")
+	c, err = env.FindClass("android/webkit/GeolocationPermissions")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebResourceRequest = env.NewGlobalRef(&c.Object)
+		clsGeolocationPermissions = env.NewGlobalRef(&c.Object)
 
-		midWebResourceRequestGetMethod, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "getMethod", "()Ljava/lang/String;")
+		midGeolocationPermissionsAllow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "allow", "(Ljava/lang/String;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebResourceRequestGetUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "getUrl", "()Landroid/net/Uri;")
+		midGeolocationPermissionsClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "clear", "(Ljava/lang/String;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebResourceRequestHasGesture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "hasGesture", "()Z")
+		midGeolocationPermissionsClearAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "clearAll", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebResourceRequestIsForMainFrame, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "isForMainFrame", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceRequestIsRedirect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceRequest)), "isRedirect", "()Z")
+		midGeolocationPermissionsGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "getInstance", "()Landroid/webkit/GeolocationPermissions;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2458,36 +3714,15 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/WebStorage")
+	c, err = env.FindClass("android/webkit/GeolocationPermissions$Callback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebStorage = env.NewGlobalRef(&c.Object)
+		clsGeolocationPermissionsCallback = env.NewGlobalRef(&c.Object)
 
-		midWebStorageDeleteAllData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "deleteAllData", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebStorageDeleteOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "deleteOrigin", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebStorageSetQuotaForOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "setQuotaForOrigin", "(Ljava/lang/String;J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebStorageGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebStorage)), "getInstance", "()Landroid/webkit/WebStorage;")
+		midGeolocationPermissionsCallbackInvoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissionsCallback)), "invoke", "(Ljava/lang/String;ZZ)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2496,29 +3731,29 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/WebStorage$Origin")
+	c, err = env.FindClass("android/webkit/SafeBrowsingResponse")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebStorageOrigin = env.NewGlobalRef(&c.Object)
+		clsSafeBrowsingResponse = env.NewGlobalRef(&c.Object)
 
-		midWebStorageOriginGetOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageOrigin)), "getOrigin", "()Ljava/lang/String;")
+		midSafeBrowsingResponseBackToSafety, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSafeBrowsingResponse)), "backToSafety", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebStorageOriginGetQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageOrigin)), "getQuota", "()J")
+		midSafeBrowsingResponseProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSafeBrowsingResponse)), "proceed", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebStorageOriginGetUsage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageOrigin)), "getUsage", "()J")
+		midSafeBrowsingResponseShowInterstitial, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSafeBrowsingResponse)), "showInterstitial", "(Z)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2527,630 +3762,15 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/webkit/WebStorage$QuotaUpdater")
+	c, err = env.FindClass("android/webkit/WebViewRenderProcess")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebStorageQuotaUpdater = env.NewGlobalRef(&c.Object)
+		clsWebViewRenderProcess = env.NewGlobalRef(&c.Object)
 
-		midWebStorageQuotaUpdaterUpdateQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebStorageQuotaUpdater)), "updateQuota", "(J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/ConsoleMessage")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConsoleMessage = env.NewGlobalRef(&c.Object)
-
-		midConsoleMessageLineNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "lineNumber", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConsoleMessageMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "message", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConsoleMessageMessageLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "messageLevel", "()Landroid/webkit/ConsoleMessage$MessageLevel;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConsoleMessageSourceId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), "sourceId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/ConsoleMessage$MessageLevel")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConsoleMessageMessageLevel = env.NewGlobalRef(&c.Object)
-
-		midConsoleMessageMessageLevelValues, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessageMessageLevel)), "values", "()[Landroid/webkit/ConsoleMessage$MessageLevel;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConsoleMessageMessageLevelValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConsoleMessageMessageLevel)), "valueOf", "(Ljava/lang/String;)Landroid/webkit/ConsoleMessage$MessageLevel;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebViewFragment")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebViewFragment = env.NewGlobalRef(&c.Object)
-
-		midWebViewFragmentGetWebView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "getWebView", "()Landroid/webkit/WebView;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewFragmentOnCreateView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onCreateView", "(Landroid/view/LayoutInflater;Landroid/view/ViewGroup;Landroid/os/Bundle;)Landroid/view/View;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewFragmentOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onDestroy", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewFragmentOnDestroyView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onDestroyView", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewFragmentOnPause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onPause", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewFragmentOnResume, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), "onResume", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/ServiceWorkerController")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsServiceWorkerController = env.NewGlobalRef(&c.Object)
-
-		midServiceWorkerControllerGetServiceWorkerWebSettings, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerController)), "getServiceWorkerWebSettings", "()Landroid/webkit/ServiceWorkerWebSettings;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midServiceWorkerControllerSetServiceWorkerClient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerController)), "setServiceWorkerClient", "(Landroid/webkit/ServiceWorkerClient;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midServiceWorkerControllerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsServiceWorkerController)), "getInstance", "()Landroid/webkit/ServiceWorkerController;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/SslErrorHandler")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSslErrorHandler = env.NewGlobalRef(&c.Object)
-
-		midSslErrorHandlerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSslErrorHandler)), "cancel", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSslErrorHandlerProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSslErrorHandler)), "proceed", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebViewDatabase")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebViewDatabase = env.NewGlobalRef(&c.Object)
-
-		midWebViewDatabaseClearFormData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "clearFormData", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseClearHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "clearHttpAuthUsernamePassword", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseClearUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "clearUsernamePassword", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseGetHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "getHttpAuthUsernamePassword", "(Ljava/lang/String;Ljava/lang/String;)[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseHasFormData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "hasFormData", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseHasHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "hasHttpAuthUsernamePassword", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseHasUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "hasUsernamePassword", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseSetHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "setHttpAuthUsernamePassword", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewDatabaseGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebViewDatabase)), "getInstance", "(Landroid/content/Context;)Landroid/webkit/WebViewDatabase;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebMessage")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebMessage = env.NewGlobalRef(&c.Object)
-
-		midWebMessageGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebMessage)), "getData", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebMessageGetPorts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebMessage)), "getPorts", "()[Landroid/webkit/WebMessagePort;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/RenderProcessGoneDetail")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRenderProcessGoneDetail = env.NewGlobalRef(&c.Object)
-
-		midRenderProcessGoneDetailDidCrash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderProcessGoneDetail)), "didCrash", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderProcessGoneDetailRendererPriorityAtExit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderProcessGoneDetail)), "rendererPriorityAtExit", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/CookieSyncManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCookieSyncManager = env.NewGlobalRef(&c.Object)
-
-		midCookieSyncManagerResetSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "resetSync", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCookieSyncManagerRun, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "run", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCookieSyncManagerStartSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "startSync", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCookieSyncManagerStopSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "stopSync", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCookieSyncManagerSync, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "sync", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCookieSyncManagerCreateInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "createInstance", "(Landroid/content/Context;)Landroid/webkit/CookieSyncManager;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCookieSyncManagerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCookieSyncManager)), "getInstance", "()Landroid/webkit/CookieSyncManager;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/DateSorter")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDateSorter = env.NewGlobalRef(&c.Object)
-
-		midDateSorterGetBoundary, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "getBoundary", "(I)J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateSorterGetIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "getIndex", "(J)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDateSorterGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDateSorter)), "getLabel", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/TracingConfig")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTracingConfig = env.NewGlobalRef(&c.Object)
-
-		midTracingConfigGetPredefinedCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfig)), "getPredefinedCategories", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingConfigGetTracingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfig)), "getTracingMode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/TracingConfig$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTracingConfigBuilder = env.NewGlobalRef(&c.Object)
-
-		midTracingConfigBuilderAddCategories1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "addCategories", "([I)Landroid/webkit/TracingConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingConfigBuilderAddCategories1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "addCategories", "([Ljava/lang/String;)Landroid/webkit/TracingConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "build", "()Landroid/webkit/TracingConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingConfigBuilderSetTracingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingConfigBuilder)), "setTracingMode", "(I)Landroid/webkit/TracingConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebResourceError")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebResourceError = env.NewGlobalRef(&c.Object)
-
-		midWebResourceErrorGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceError)), "getDescription", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceErrorGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceError)), "getErrorCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebResourceResponse")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebResourceResponse = env.NewGlobalRef(&c.Object)
-
-		midWebResourceResponseGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getData", "()Ljava/io/InputStream;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseGetEncoding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getEncoding", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseGetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getMimeType", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseGetReasonPhrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getReasonPhrase", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseGetStatusCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "getStatusCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setData", "(Ljava/io/InputStream;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseSetEncoding, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setEncoding", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseSetMimeType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setMimeType", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebResourceResponseSetStatusCodeAndReasonPhrase, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), "setStatusCodeAndReasonPhrase", "(ILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebIconDatabase")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebIconDatabase = env.NewGlobalRef(&c.Object)
-
-		midWebIconDatabaseClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "close", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebIconDatabaseOpen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "open", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebIconDatabaseReleaseIconForPageUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "releaseIconForPageUrl", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebIconDatabaseRemoveAllIcons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "removeAllIcons", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebIconDatabaseRequestIconForPageUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "requestIconForPageUrl", "(Ljava/lang/String;Landroid/webkit/WebIconDatabase$IconListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebIconDatabaseRetainIconForPageUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "retainIconForPageUrl", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebIconDatabaseGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabase)), "getInstance", "()Landroid/webkit/WebIconDatabase;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebIconDatabase$IconListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebIconDatabaseIconListener = env.NewGlobalRef(&c.Object)
-
-		midWebIconDatabaseIconListenerOnReceivedIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebIconDatabaseIconListener)), "onReceivedIcon", "(Ljava/lang/String;Landroid/graphics/Bitmap;)V")
+		midWebViewRenderProcessTerminate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewRenderProcess)), "terminate", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3960,576 +4580,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midWebSettingsZoomDensityValueOf, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebSettingsZoomDensity)), "valueOf", "(Ljava/lang/String;)Landroid/webkit/WebSettings$ZoomDensity;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/JavascriptInterface")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsJavascriptInterface = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/webkit/JsPromptResult")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsJsPromptResult = env.NewGlobalRef(&c.Object)
-
-		midJsPromptResultConfirm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJsPromptResult)), "confirm", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/SafeBrowsingResponse")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSafeBrowsingResponse = env.NewGlobalRef(&c.Object)
-
-		midSafeBrowsingResponseBackToSafety, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSafeBrowsingResponse)), "backToSafety", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSafeBrowsingResponseProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSafeBrowsingResponse)), "proceed", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSafeBrowsingResponseShowInterstitial, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSafeBrowsingResponse)), "showInterstitial", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/ClientCertRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsClientCertRequest = env.NewGlobalRef(&c.Object)
-
-		midClientCertRequestCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "cancel", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClientCertRequestGetHost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getHost", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClientCertRequestGetKeyTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getKeyTypes", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClientCertRequestGetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getPort", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClientCertRequestGetPrincipals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "getPrincipals", "()[Ljava/security/Principal;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClientCertRequestIgnore, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "ignore", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClientCertRequestProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClientCertRequest)), "proceed", "(Ljava/security/PrivateKey;[Ljava/security/cert/X509Certificate;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebViewRenderProcess")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebViewRenderProcess = env.NewGlobalRef(&c.Object)
-
-		midWebViewRenderProcessTerminate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewRenderProcess)), "terminate", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebViewRenderProcessClient")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebViewRenderProcessClient = env.NewGlobalRef(&c.Object)
-
-		midWebViewRenderProcessClientOnRenderProcessResponsive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewRenderProcessClient)), "onRenderProcessResponsive", "(Landroid/webkit/WebView;Landroid/webkit/WebViewRenderProcess;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebViewRenderProcessClientOnRenderProcessUnresponsive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebViewRenderProcessClient)), "onRenderProcessUnresponsive", "(Landroid/webkit/WebView;Landroid/webkit/WebViewRenderProcess;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/JsResult")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsJsResult = env.NewGlobalRef(&c.Object)
-
-		midJsResultCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJsResult)), "cancel", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midJsResultConfirm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsJsResult)), "confirm", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/TracingController")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTracingController = env.NewGlobalRef(&c.Object)
-
-		midTracingControllerIsTracing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "isTracing", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingControllerStart, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "start", "(Landroid/webkit/TracingConfig;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingControllerStop, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "stop", "(Ljava/io/OutputStream;Ljava/util/concurrent/Executor;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTracingControllerGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTracingController)), "getInstance", "()Landroid/webkit/TracingController;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/ValueCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsValueCallback = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/webkit/HttpAuthHandler")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsHttpAuthHandler = env.NewGlobalRef(&c.Object)
-
-		midHttpAuthHandlerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHttpAuthHandler)), "cancel", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHttpAuthHandlerProceed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHttpAuthHandler)), "proceed", "(Ljava/lang/String;Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHttpAuthHandlerUseHttpAuthUsernamePassword, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHttpAuthHandler)), "useHttpAuthUsernamePassword", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/GeolocationPermissions")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGeolocationPermissions = env.NewGlobalRef(&c.Object)
-
-		midGeolocationPermissionsAllow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "allow", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGeolocationPermissionsClear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "clear", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGeolocationPermissionsClearAll, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "clearAll", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGeolocationPermissionsGetInstance, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissions)), "getInstance", "()Landroid/webkit/GeolocationPermissions;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/GeolocationPermissions$Callback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGeolocationPermissionsCallback = env.NewGlobalRef(&c.Object)
-
-		midGeolocationPermissionsCallbackInvoke, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGeolocationPermissionsCallback)), "invoke", "(Ljava/lang/String;ZZ)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebChromeClient")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebChromeClient = env.NewGlobalRef(&c.Object)
-
-		midWebChromeClientGetDefaultVideoPoster, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "getDefaultVideoPoster", "()Landroid/graphics/Bitmap;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientGetVideoLoadingProgressView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "getVideoLoadingProgressView", "()Landroid/view/View;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnCloseWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onCloseWindow", "(Landroid/webkit/WebView;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnConsoleMessage1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onConsoleMessage", "(Landroid/webkit/ConsoleMessage;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnConsoleMessage3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onConsoleMessage", "(Ljava/lang/String;ILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnCreateWindow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onCreateWindow", "(Landroid/webkit/WebView;ZZLandroid/os/Message;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnExceededDatabaseQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onExceededDatabaseQuota", "(Ljava/lang/String;Ljava/lang/String;JJJLandroid/webkit/WebStorage$QuotaUpdater;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnGeolocationPermissionsHidePrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onGeolocationPermissionsHidePrompt", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnGeolocationPermissionsShowPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onGeolocationPermissionsShowPrompt", "(Ljava/lang/String;Landroid/webkit/GeolocationPermissions$Callback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnHideCustomView, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onHideCustomView", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnJsAlert, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsAlert", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsResult;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnJsBeforeUnload, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsBeforeUnload", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsResult;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnJsConfirm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsConfirm", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsResult;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnJsPrompt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsPrompt", "(Landroid/webkit/WebView;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Landroid/webkit/JsPromptResult;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnJsTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onJsTimeout", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnPermissionRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onPermissionRequest", "(Landroid/webkit/PermissionRequest;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnPermissionRequestCanceled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onPermissionRequestCanceled", "(Landroid/webkit/PermissionRequest;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnProgressChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onProgressChanged", "(Landroid/webkit/WebView;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnReceivedIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onReceivedIcon", "(Landroid/webkit/WebView;Landroid/graphics/Bitmap;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnReceivedTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onReceivedTitle", "(Landroid/webkit/WebView;Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnReceivedTouchIconUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onReceivedTouchIconUrl", "(Landroid/webkit/WebView;Ljava/lang/String;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnRequestFocus, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onRequestFocus", "(Landroid/webkit/WebView;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnShowCustomView2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onShowCustomView", "(Landroid/view/View;Landroid/webkit/WebChromeClient$CustomViewCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientOnShowCustomView3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), "onShowCustomView", "(Landroid/view/View;ILandroid/webkit/WebChromeClient$CustomViewCallback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebChromeClient$CustomViewCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebChromeClientCustomViewCallback = env.NewGlobalRef(&c.Object)
-
-		midWebChromeClientCustomViewCallbackOnCustomViewHidden, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientCustomViewCallback)), "onCustomViewHidden", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/webkit/WebChromeClient$FileChooserParams")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsWebChromeClientFileChooserParams = env.NewGlobalRef(&c.Object)
-
-		midWebChromeClientFileChooserParamsCreateIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "createIntent", "()Landroid/content/Intent;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientFileChooserParamsGetAcceptTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getAcceptTypes", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientFileChooserParamsGetFilenameHint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getFilenameHint", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientFileChooserParamsGetMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getMode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientFileChooserParamsGetTitle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "getTitle", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientFileChooserParamsIsCaptureEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "isCaptureEnabled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebChromeClientFileChooserParamsParseResult, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsWebChromeClientFileChooserParams)), "parseResult", "(ILandroid/content/Intent;)[Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

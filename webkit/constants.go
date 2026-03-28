@@ -5,6 +5,12 @@ package webkit
 import "github.com/AndroidGoLab/jni/webkit/consts"
 
 const (
+	Debug                              = consts.Debug
+	Error                              = consts.Error
+	Log                                = consts.Log
+	Tip                                = consts.Tip
+	Warning                            = consts.Warning
+	DayCount                           = consts.DayCount
 	RendererPriorityBound              = consts.RendererPriorityBound
 	RendererPriorityImportant          = consts.RendererPriorityImportant
 	RendererPriorityWaived             = consts.RendererPriorityWaived
@@ -18,6 +24,19 @@ const (
 	SrcAnchorType                      = consts.SrcAnchorType
 	SrcImageAnchorType                 = consts.SrcImageAnchorType
 	UnknownType                        = consts.UnknownType
+	CategoriesAll                      = consts.CategoriesAll
+	CategoriesAndroidWebview           = consts.CategoriesAndroidWebview
+	CategoriesFrameViewer              = consts.CategoriesFrameViewer
+	CategoriesInputLatency             = consts.CategoriesInputLatency
+	CategoriesJavascriptAndRendering   = consts.CategoriesJavascriptAndRendering
+	CategoriesNone                     = consts.CategoriesNone
+	CategoriesRendering                = consts.CategoriesRendering
+	CategoriesWebDeveloper             = consts.CategoriesWebDeveloper
+	RecordContinuously                 = consts.RecordContinuously
+	RecordUntilFull                    = consts.RecordUntilFull
+	ModeOpen                           = consts.ModeOpen
+	ModeOpenMultiple                   = consts.ModeOpenMultiple
+	ModeSave                           = consts.ModeSave
 	ErrorAuthentication                = consts.ErrorAuthentication
 	ErrorBadUrl                        = consts.ErrorBadUrl
 	ErrorConnect                       = consts.ErrorConnect
@@ -39,22 +58,6 @@ const (
 	SafeBrowsingThreatPhishing         = consts.SafeBrowsingThreatPhishing
 	SafeBrowsingThreatUnknown          = consts.SafeBrowsingThreatUnknown
 	SafeBrowsingThreatUnwantedSoftware = consts.SafeBrowsingThreatUnwantedSoftware
-	Debug                              = consts.Debug
-	Error                              = consts.Error
-	Log                                = consts.Log
-	Tip                                = consts.Tip
-	Warning                            = consts.Warning
-	DayCount                           = consts.DayCount
-	CategoriesAll                      = consts.CategoriesAll
-	CategoriesAndroidWebview           = consts.CategoriesAndroidWebview
-	CategoriesFrameViewer              = consts.CategoriesFrameViewer
-	CategoriesInputLatency             = consts.CategoriesInputLatency
-	CategoriesJavascriptAndRendering   = consts.CategoriesJavascriptAndRendering
-	CategoriesNone                     = consts.CategoriesNone
-	CategoriesRendering                = consts.CategoriesRendering
-	CategoriesWebDeveloper             = consts.CategoriesWebDeveloper
-	RecordContinuously                 = consts.RecordContinuously
-	RecordUntilFull                    = consts.RecordUntilFull
 	ForceDarkAuto                      = consts.ForceDarkAuto
 	ForceDarkOff                       = consts.ForceDarkOff
 	ForceDarkOn                        = consts.ForceDarkOn
@@ -86,9 +89,6 @@ const (
 	Close                              = consts.Close
 	Far                                = consts.Far
 	Medium                             = consts.Medium
-	ModeOpen                           = consts.ModeOpen
-	ModeOpenMultiple                   = consts.ModeOpenMultiple
-	ModeSave                           = consts.ModeSave
 )
 
 const (

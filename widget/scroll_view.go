@@ -23,6 +23,29 @@ type ScrollView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewScrollView creates a new android.widget.ScrollView instance.
+func NewScrollView(vm *jni.VM, arg0 *jni.Object) (*ScrollView, error) {
+	var t ScrollView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollView)), midScrollViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddView1 calls android.widget.ScrollView.addView.
 func (m *ScrollView) AddView1(arg0 *jni.Object) error {
 

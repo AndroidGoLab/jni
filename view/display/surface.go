@@ -23,6 +23,29 @@ type Surface struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSurface creates a new android.view.Surface instance.
+func NewSurface(vm *jni.VM, arg0 *jni.Object) (*Surface, error) {
+	var t Surface
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurface)), midSurfaceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearFrameRate calls android.view.Surface.clearFrameRate.
 func (m *Surface) ClearFrameRate() error {
 

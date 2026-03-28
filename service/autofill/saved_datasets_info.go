@@ -23,6 +23,34 @@ type SavedDatasetsInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSavedDatasetsInfo creates a new android.service.autofill.SavedDatasetsInfo instance.
+func NewSavedDatasetsInfo(vm *jni.VM, arg0 string, arg1 int32) (*SavedDatasetsInfo, error) {
+	var t SavedDatasetsInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSavedDatasetsInfo)), midSavedDatasetsInfoInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.service.autofill.SavedDatasetsInfo.equals.
 func (m *SavedDatasetsInfo) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,29 @@ type AlternativeSpans struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAlternativeSpans creates a new android.speech.AlternativeSpans instance.
+func NewAlternativeSpans(vm *jni.VM, arg0 *jni.Object) (*AlternativeSpans, error) {
+	var t AlternativeSpans
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlternativeSpans)), midAlternativeSpansInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.speech.AlternativeSpans.describeContents.
 func (m *AlternativeSpans) DescribeContents() (int32, error) {
 	var result int32

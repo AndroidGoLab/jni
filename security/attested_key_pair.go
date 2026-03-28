@@ -23,6 +23,29 @@ type AttestedKeyPair struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAttestedKeyPair creates a new android.security.AttestedKeyPair instance.
+func NewAttestedKeyPair(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AttestedKeyPair, error) {
+	var t AttestedKeyPair
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAttestedKeyPair)), midAttestedKeyPairInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetKeyPair calls android.security.AttestedKeyPair.getKeyPair.
 func (m *AttestedKeyPair) GetKeyPair() (*jni.Object, error) {
 	var result *jni.Object

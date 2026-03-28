@@ -23,6 +23,28 @@ type DhcpInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDhcpInfo creates a new android.net.DhcpInfo instance.
+func NewDhcpInfo(vm *jni.VM) (*DhcpInfo, error) {
+	var t DhcpInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDhcpInfo)), midDhcpInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.DhcpInfo.describeContents.
 func (m *DhcpInfo) DescribeContents() (int32, error) {
 	var result int32

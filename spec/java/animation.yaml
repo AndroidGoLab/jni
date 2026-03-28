@@ -5,107 +5,11 @@
 package: animation
 go_import: github.com/AndroidGoLab/jni/animation
 classes:
-    - java_class: android.animation.FloatArrayEvaluator
-      go_type: FloatArrayEvaluator
-      methods:
-        - java_method: evaluate
-          go_name: Evaluate3
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: float[]
-              go_name: arg1
-            - java_type: float[]
-              go_name: arg2
-          returns: float[]
-          error: true
-        - java_method: evaluate
-          go_name: Evaluate3_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: java.lang.Object
-              go_name: arg2
-          returns: java.lang.Object
-          error: true
-    - java_class: android.animation.TypeConverter
-      go_type: TypeConverter
-    - java_class: android.animation.IntEvaluator
-      go_type: IntEvaluator
-      methods:
-        - java_method: evaluate
-          go_name: Evaluate3
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: java.lang.Integer
-              go_name: arg1
-            - java_type: java.lang.Integer
-              go_name: arg2
-          returns: java.lang.Integer
-          error: true
-        - java_method: evaluate
-          go_name: Evaluate3_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: java.lang.Object
-              go_name: arg2
-          returns: java.lang.Object
-          error: true
-    - java_class: android.animation.BidirectionalTypeConverter
-      go_type: BidirectionalTypeConverter
-    - java_class: android.animation.AnimatorListenerAdapter
-      go_type: AnimatorListenerAdapter
-      methods:
-        - java_method: onAnimationCancel
-          go_name: OnAnimationCancel
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onAnimationEnd
-          go_name: OnAnimationEnd
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onAnimationPause
-          go_name: OnAnimationPause
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onAnimationRepeat
-          go_name: OnAnimationRepeat
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onAnimationResume
-          go_name: OnAnimationResume
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onAnimationStart
-          go_name: OnAnimationStart
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: void
-          error: true
+    - java_class: android.animation.TypeEvaluator
+      go_type: TypeEvaluator
     - java_class: android.animation.TimeAnimator
       go_type: TimeAnimator
+      obtain: constructor
       methods:
         - java_method: setCurrentPlayTime
           go_name: SetCurrentPlayTime
@@ -139,56 +43,6 @@ classes:
               go_name: arg2
           returns: void
           error: true
-    - java_class: android.animation.IntArrayEvaluator
-      go_type: IntArrayEvaluator
-      methods:
-        - java_method: evaluate
-          go_name: Evaluate3
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: '[I'
-              go_name: arg1
-            - java_type: '[I'
-              go_name: arg2
-          returns: '[I'
-          error: true
-        - java_method: evaluate
-          go_name: Evaluate3_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: java.lang.Object
-              go_name: arg2
-          returns: java.lang.Object
-          error: true
-    - java_class: android.animation.PointFEvaluator
-      go_type: PointFEvaluator
-      methods:
-        - java_method: evaluate
-          go_name: Evaluate3
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: android.graphics.PointF
-              go_name: arg1
-            - java_type: android.graphics.PointF
-              go_name: arg2
-          returns: android.graphics.PointF
-          error: true
-        - java_method: evaluate
-          go_name: Evaluate3_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: java.lang.Object
-              go_name: arg1
-            - java_type: java.lang.Object
-              go_name: arg2
-          returns: java.lang.Object
-          error: true
     - java_class: android.animation.TimeInterpolator
       go_type: TimeInterpolator
       methods:
@@ -199,178 +53,31 @@ classes:
               go_name: arg0
           returns: float
           error: true
-    - java_class: android.animation.AnimatorSet
-      go_type: AnimatorSet
+    - java_class: android.animation.RectEvaluator
+      go_type: RectEvaluator
+      obtain: constructor
       methods:
-        - java_method: cancel
-          go_name: Cancel
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone0
-          returns: android.animation.AnimatorSet
-          error: true
-        - java_method: end
-          go_name: End
-          returns: void
-          error: true
-        - java_method: getCurrentPlayTime
-          go_name: GetCurrentPlayTime
-          returns: long
-          error: true
-        - java_method: getDuration
-          go_name: GetDuration
-          returns: long
-          error: true
-        - java_method: getInterpolator
-          go_name: GetInterpolator
-          returns: android.animation.TimeInterpolator
-          error: true
-        - java_method: getStartDelay
-          go_name: GetStartDelay
-          returns: long
-          error: true
-        - java_method: getTotalDuration
-          go_name: GetTotalDuration
-          returns: long
-          error: true
-        - java_method: isRunning
-          go_name: IsRunning
-          returns: boolean
-          error: true
-        - java_method: isStarted
-          go_name: IsStarted
-          returns: boolean
-          error: true
-        - java_method: pause
-          go_name: Pause
-          returns: void
-          error: true
-        - java_method: play
-          go_name: Play
+        - java_method: evaluate
+          go_name: Evaluate3
           params:
-            - java_type: android.animation.Animator
+            - java_type: float
               go_name: arg0
-          returns: android.animation.AnimatorSet$Builder
+            - java_type: android.graphics.Rect
+              go_name: arg1
+            - java_type: android.graphics.Rect
+              go_name: arg2
+          returns: android.graphics.Rect
           error: true
-        - java_method: playSequentially
-          go_name: PlaySequentially
+        - java_method: evaluate
+          go_name: Evaluate3_1
           params:
-            - java_type: android.animation.Animator...
+            - java_type: float
               go_name: arg0
-          returns: void
-          error: true
-        - java_method: playTogether
-          go_name: PlayTogether
-          params:
-            - java_type: android.animation.Animator...
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: resume
-          go_name: Resume
-          returns: void
-          error: true
-        - java_method: reverse
-          go_name: Reverse
-          returns: void
-          error: true
-        - java_method: setCurrentPlayTime
-          go_name: SetCurrentPlayTime
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setDuration
-          go_name: SetDuration1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.animation.AnimatorSet
-          error: true
-        - java_method: setInterpolator
-          go_name: SetInterpolator
-          params:
-            - java_type: android.animation.TimeInterpolator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setStartDelay
-          go_name: SetStartDelay
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTarget
-          go_name: SetTarget
-          params:
             - java_type: java.lang.Object
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setupEndValues
-          go_name: SetupEndValues
-          returns: void
-          error: true
-        - java_method: setupStartValues
-          go_name: SetupStartValues
-          returns: void
-          error: true
-        - java_method: start
-          go_name: Start
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: setDuration
-          go_name: SetDuration1_1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.animation.Animator
-          error: true
-        - java_method: clone
-          go_name: Clone0_1
-          returns: android.animation.Animator
-          error: true
-        - java_method: clone
-          go_name: Clone0_2
+              go_name: arg1
+            - java_type: java.lang.Object
+              go_name: arg2
           returns: java.lang.Object
-          error: true
-    - java_class: android.animation.AnimatorSet$Builder
-      go_type: AnimatorSetBuilder
-      methods:
-        - java_method: after
-          go_name: After1
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: android.animation.AnimatorSet$Builder
-          error: true
-        - java_method: after
-          go_name: After1_1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.animation.AnimatorSet$Builder
-          error: true
-        - java_method: before
-          go_name: Before
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: android.animation.AnimatorSet$Builder
-          error: true
-        - java_method: with
-          go_name: With
-          params:
-            - java_type: android.animation.Animator
-              go_name: arg0
-          returns: android.animation.AnimatorSet$Builder
           error: true
     - java_class: android.animation.Animator
       go_type: Animator
@@ -547,19 +254,20 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.animation.RectEvaluator
-      go_type: RectEvaluator
+    - java_class: android.animation.FloatArrayEvaluator
+      go_type: FloatArrayEvaluator
+      obtain: constructor
       methods:
         - java_method: evaluate
           go_name: Evaluate3
           params:
             - java_type: float
               go_name: arg0
-            - java_type: android.graphics.Rect
+            - java_type: float[]
               go_name: arg1
-            - java_type: android.graphics.Rect
+            - java_type: float[]
               go_name: arg2
-          returns: android.graphics.Rect
+          returns: float[]
           error: true
         - java_method: evaluate
           go_name: Evaluate3_1
@@ -572,112 +280,98 @@ classes:
               go_name: arg2
           returns: java.lang.Object
           error: true
-    - java_class: android.animation.Keyframe
-      go_type: Keyframe
+    - java_class: android.animation.BidirectionalTypeConverter
+      go_type: BidirectionalTypeConverter
+    - java_class: android.animation.StateListAnimator
+      go_type: StateListAnimator
+      obtain: constructor
       methods:
+        - java_method: addState
+          go_name: AddState
+          params:
+            - java_type: '[I'
+              go_name: arg0
+            - java_type: android.animation.Animator
+              go_name: arg1
+          returns: void
+          error: true
         - java_method: clone
           go_name: Clone0
-          returns: android.animation.Keyframe
+          returns: android.animation.StateListAnimator
           error: true
-        - java_method: getFraction
-          go_name: GetFraction
-          returns: float
-          error: true
-        - java_method: getInterpolator
-          go_name: GetInterpolator
-          returns: android.animation.TimeInterpolator
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: java.lang.Class
-          error: true
-        - java_method: getValue
-          go_name: GetValue
-          returns: java.lang.Object
-          error: true
-        - java_method: hasValue
-          go_name: HasValue
-          returns: boolean
-          error: true
-        - java_method: setFraction
-          go_name: SetFraction
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setInterpolator
-          go_name: SetInterpolator
-          params:
-            - java_type: android.animation.TimeInterpolator
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setValue
-          go_name: SetValue
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
+        - java_method: jumpToCurrentState
+          go_name: JumpToCurrentState
           returns: void
           error: true
         - java_method: clone
           go_name: Clone0_1
           returns: java.lang.Object
           error: true
-      static_methods:
-        - java_method: ofFloat
-          go_name: OfFloat1
+    - java_class: android.animation.IntEvaluator
+      go_type: IntEvaluator
+      obtain: constructor
+      methods:
+        - java_method: evaluate
+          go_name: Evaluate3
           params:
             - java_type: float
               go_name: arg0
-          returns: android.animation.Keyframe
-          error: true
-        - java_method: ofFloat
-          go_name: OfFloat2_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: float
+            - java_type: java.lang.Integer
               go_name: arg1
-          returns: android.animation.Keyframe
+            - java_type: java.lang.Integer
+              go_name: arg2
+          returns: java.lang.Integer
           error: true
-        - java_method: ofInt
-          go_name: OfInt1
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: android.animation.Keyframe
-          error: true
-        - java_method: ofInt
-          go_name: OfInt2_1
-          params:
-            - java_type: float
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.animation.Keyframe
-          error: true
-        - java_method: ofObject
-          go_name: OfObject1
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: android.animation.Keyframe
-          error: true
-        - java_method: ofObject
-          go_name: OfObject2_1
+        - java_method: evaluate
+          go_name: Evaluate3_1
           params:
             - java_type: float
               go_name: arg0
             - java_type: java.lang.Object
               go_name: arg1
-          returns: android.animation.Keyframe
+            - java_type: java.lang.Object
+              go_name: arg2
+          returns: java.lang.Object
           error: true
-    - java_class: android.animation.ArgbEvaluator
-      go_type: ArgbEvaluator
+    - java_class: android.animation.AnimatorInflater
+      go_type: AnimatorInflater
+      obtain: constructor
+      static_methods:
+        - java_method: loadAnimator
+          go_name: LoadAnimator
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.animation.Animator
+          error: true
+        - java_method: loadStateListAnimator
+          go_name: LoadStateListAnimator
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.animation.StateListAnimator
+          error: true
+    - java_class: android.animation.PointFEvaluator
+      go_type: PointFEvaluator
+      obtain: constructor
       methods:
         - java_method: evaluate
-          go_name: Evaluate
+          go_name: Evaluate3
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: android.graphics.PointF
+              go_name: arg1
+            - java_type: android.graphics.PointF
+              go_name: arg2
+          returns: android.graphics.PointF
+          error: true
+        - java_method: evaluate
+          go_name: Evaluate3_1
           params:
             - java_type: float
               go_name: arg0
@@ -689,6 +383,7 @@ classes:
           error: true
     - java_class: android.animation.FloatEvaluator
       go_type: FloatEvaluator
+      obtain: constructor
       methods:
         - java_method: evaluate
           go_name: Evaluate3
@@ -712,259 +407,9 @@ classes:
               go_name: arg2
           returns: java.lang.Object
           error: true
-    - java_class: android.animation.LayoutTransition
-      go_type: LayoutTransition
-      methods:
-        - java_method: addChild
-          go_name: AddChild
-          params:
-            - java_type: android.view.ViewGroup
-              go_name: arg0
-            - java_type: android.view.View
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: addTransitionListener
-          go_name: AddTransitionListener
-          params:
-            - java_type: android.animation.LayoutTransition$TransitionListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: disableTransitionType
-          go_name: DisableTransitionType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: enableTransitionType
-          go_name: EnableTransitionType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: getAnimator
-          go_name: GetAnimator
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.animation.Animator
-          error: true
-        - java_method: getDuration
-          go_name: GetDuration
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: getInterpolator
-          go_name: GetInterpolator
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.animation.TimeInterpolator
-          error: true
-        - java_method: getStagger
-          go_name: GetStagger
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: getStartDelay
-          go_name: GetStartDelay
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: hideChild
-          go_name: HideChild2
-          params:
-            - java_type: android.view.ViewGroup
-              go_name: arg0
-            - java_type: android.view.View
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: hideChild
-          go_name: HideChild3_1
-          params:
-            - java_type: android.view.ViewGroup
-              go_name: arg0
-            - java_type: android.view.View
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: isChangingLayout
-          go_name: IsChangingLayout
-          returns: boolean
-          error: true
-        - java_method: isRunning
-          go_name: IsRunning
-          returns: boolean
-          error: true
-        - java_method: isTransitionTypeEnabled
-          go_name: IsTransitionTypeEnabled
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: removeChild
-          go_name: RemoveChild
-          params:
-            - java_type: android.view.ViewGroup
-              go_name: arg0
-            - java_type: android.view.View
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: removeTransitionListener
-          go_name: RemoveTransitionListener
-          params:
-            - java_type: android.animation.LayoutTransition$TransitionListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setAnimateParentHierarchy
-          go_name: SetAnimateParentHierarchy
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setAnimator
-          go_name: SetAnimator
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.animation.Animator
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setDuration
-          go_name: SetDuration2
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setDuration
-          go_name: SetDuration1_1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setInterpolator
-          go_name: SetInterpolator
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.animation.TimeInterpolator
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setStagger
-          go_name: SetStagger
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setStartDelay
-          go_name: SetStartDelay
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: showChild
-          go_name: ShowChild2
-          params:
-            - java_type: android.view.ViewGroup
-              go_name: arg0
-            - java_type: android.view.View
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: showChild
-          go_name: ShowChild3_1
-          params:
-            - java_type: android.view.ViewGroup
-              go_name: arg0
-            - java_type: android.view.View
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.animation.LayoutTransition$TransitionListener
-      go_type: LayoutTransitionTransitionListener
-      methods:
-        - java_method: endTransition
-          go_name: EndTransition
-          params:
-            - java_type: android.animation.LayoutTransition
-              go_name: arg0
-            - java_type: android.view.ViewGroup
-              go_name: arg1
-            - java_type: android.view.View
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: startTransition
-          go_name: StartTransition
-          params:
-            - java_type: android.animation.LayoutTransition
-              go_name: arg0
-            - java_type: android.view.ViewGroup
-              go_name: arg1
-            - java_type: android.view.View
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-    - java_class: android.animation.StateListAnimator
-      go_type: StateListAnimator
-      methods:
-        - java_method: addState
-          go_name: AddState
-          params:
-            - java_type: '[I'
-              go_name: arg0
-            - java_type: android.animation.Animator
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone0
-          returns: android.animation.StateListAnimator
-          error: true
-        - java_method: jumpToCurrentState
-          go_name: JumpToCurrentState
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone0_1
-          returns: java.lang.Object
-          error: true
     - java_class: android.animation.ValueAnimator
       go_type: ValueAnimator
+      obtain: constructor
       methods:
         - java_method: addUpdateListener
           go_name: AddUpdateListener
@@ -1261,8 +706,484 @@ classes:
               go_name: arg0
           returns: void
           error: true
+    - java_class: android.animation.TypeConverter
+      go_type: TypeConverter
+    - java_class: android.animation.IntArrayEvaluator
+      go_type: IntArrayEvaluator
+      obtain: constructor
+      methods:
+        - java_method: evaluate
+          go_name: Evaluate3
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+            - java_type: '[I'
+              go_name: arg2
+          returns: '[I'
+          error: true
+        - java_method: evaluate
+          go_name: Evaluate3_1
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+            - java_type: java.lang.Object
+              go_name: arg2
+          returns: java.lang.Object
+          error: true
+    - java_class: android.animation.ArgbEvaluator
+      go_type: ArgbEvaluator
+      obtain: constructor
+      methods:
+        - java_method: evaluate
+          go_name: Evaluate
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: java.lang.Object
+              go_name: arg1
+            - java_type: java.lang.Object
+              go_name: arg2
+          returns: java.lang.Object
+          error: true
+    - java_class: android.animation.AnimatorListenerAdapter
+      go_type: AnimatorListenerAdapter
+      methods:
+        - java_method: onAnimationCancel
+          go_name: OnAnimationCancel
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAnimationEnd
+          go_name: OnAnimationEnd
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAnimationPause
+          go_name: OnAnimationPause
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAnimationRepeat
+          go_name: OnAnimationRepeat
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAnimationResume
+          go_name: OnAnimationResume
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onAnimationStart
+          go_name: OnAnimationStart
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.animation.PropertyValuesHolder
+      go_type: PropertyValuesHolder
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: getPropertyName
+          go_name: GetPropertyName
+          returns: String
+          error: true
+        - java_method: setConverter
+          go_name: SetConverter
+          params:
+            - java_type: android.animation.TypeConverter
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setEvaluator
+          go_name: SetEvaluator
+          params:
+            - java_type: android.animation.TypeEvaluator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setFloatValues
+          go_name: SetFloatValues
+          params:
+            - java_type: float...
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setIntValues
+          go_name: SetIntValues
+          params:
+            - java_type: int...
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setKeyframes
+          go_name: SetKeyframes
+          params:
+            - java_type: android.animation.Keyframe...
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setObjectValues
+          go_name: SetObjectValues
+          params:
+            - java_type: java.lang.Object...
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setProperty
+          go_name: SetProperty
+          params:
+            - java_type: android.util.Property
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setPropertyName
+          go_name: SetPropertyName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: java.lang.Object
+          error: true
+      static_methods:
+        - java_method: ofFloat
+          go_name: OfFloat
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float...
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofInt
+          go_name: OfInt
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int...
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofKeyframe
+          go_name: OfKeyframe2
+          params:
+            - java_type: android.util.Property
+              go_name: arg0
+            - java_type: android.animation.Keyframe...
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofKeyframe
+          go_name: OfKeyframe2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.animation.Keyframe...
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofMultiFloat
+          go_name: OfMultiFloat2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.graphics.Path
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofMultiFloat
+          go_name: OfMultiFloat2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float[][]
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofMultiInt
+          go_name: OfMultiInt2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.graphics.Path
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofMultiInt
+          go_name: OfMultiInt2_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int[][]
+              go_name: arg1
+          returns: android.animation.PropertyValuesHolder
+          error: true
+        - java_method: ofObject
+          go_name: OfObject
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.animation.TypeEvaluator
+              go_name: arg1
+            - java_type: java.lang.Object...
+              go_name: arg2
+          returns: android.animation.PropertyValuesHolder
+          error: true
+    - java_class: android.animation.LayoutTransition
+      go_type: LayoutTransition
+      obtain: constructor
+      methods:
+        - java_method: addChild
+          go_name: AddChild
+          params:
+            - java_type: android.view.ViewGroup
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: addTransitionListener
+          go_name: AddTransitionListener
+          params:
+            - java_type: android.animation.LayoutTransition$TransitionListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: disableTransitionType
+          go_name: DisableTransitionType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: enableTransitionType
+          go_name: EnableTransitionType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getAnimator
+          go_name: GetAnimator
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.animation.Animator
+          error: true
+        - java_method: getDuration
+          go_name: GetDuration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getInterpolator
+          go_name: GetInterpolator
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.animation.TimeInterpolator
+          error: true
+        - java_method: getStagger
+          go_name: GetStagger
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getStartDelay
+          go_name: GetStartDelay
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: hideChild
+          go_name: HideChild2
+          params:
+            - java_type: android.view.ViewGroup
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: hideChild
+          go_name: HideChild3_1
+          params:
+            - java_type: android.view.ViewGroup
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: isChangingLayout
+          go_name: IsChangingLayout
+          returns: boolean
+          error: true
+        - java_method: isRunning
+          go_name: IsRunning
+          returns: boolean
+          error: true
+        - java_method: isTransitionTypeEnabled
+          go_name: IsTransitionTypeEnabled
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: removeChild
+          go_name: RemoveChild
+          params:
+            - java_type: android.view.ViewGroup
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: removeTransitionListener
+          go_name: RemoveTransitionListener
+          params:
+            - java_type: android.animation.LayoutTransition$TransitionListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAnimateParentHierarchy
+          go_name: SetAnimateParentHierarchy
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setAnimator
+          go_name: SetAnimator
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.animation.Animator
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setDuration
+          go_name: SetDuration2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setDuration
+          go_name: SetDuration1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInterpolator
+          go_name: SetInterpolator
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.animation.TimeInterpolator
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStagger
+          go_name: SetStagger
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setStartDelay
+          go_name: SetStartDelay
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: showChild
+          go_name: ShowChild2
+          params:
+            - java_type: android.view.ViewGroup
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: showChild
+          go_name: ShowChild3_1
+          params:
+            - java_type: android.view.ViewGroup
+              go_name: arg0
+            - java_type: android.view.View
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.animation.LayoutTransition$TransitionListener
+      go_type: LayoutTransitionTransitionListener
+      methods:
+        - java_method: endTransition
+          go_name: EndTransition
+          params:
+            - java_type: android.animation.LayoutTransition
+              go_name: arg0
+            - java_type: android.view.ViewGroup
+              go_name: arg1
+            - java_type: android.view.View
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: startTransition
+          go_name: StartTransition
+          params:
+            - java_type: android.animation.LayoutTransition
+              go_name: arg0
+            - java_type: android.view.ViewGroup
+              go_name: arg1
+            - java_type: android.view.View
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
     - java_class: android.animation.ObjectAnimator
       go_type: ObjectAnimator
+      obtain: constructor
       methods:
         - java_method: clone
           go_name: Clone0
@@ -1500,76 +1421,227 @@ classes:
               go_name: arg1
           returns: android.animation.ObjectAnimator
           error: true
-    - java_class: android.animation.PropertyValuesHolder
-      go_type: PropertyValuesHolder
+    - java_class: android.animation.AnimatorSet
+      go_type: AnimatorSet
+      obtain: constructor
       methods:
+        - java_method: cancel
+          go_name: Cancel
+          returns: void
+          error: true
         - java_method: clone
           go_name: Clone0
-          returns: android.animation.PropertyValuesHolder
+          returns: android.animation.AnimatorSet
           error: true
-        - java_method: getPropertyName
-          go_name: GetPropertyName
-          returns: String
+        - java_method: end
+          go_name: End
+          returns: void
           error: true
-        - java_method: setConverter
-          go_name: SetConverter
+        - java_method: getCurrentPlayTime
+          go_name: GetCurrentPlayTime
+          returns: long
+          error: true
+        - java_method: getDuration
+          go_name: GetDuration
+          returns: long
+          error: true
+        - java_method: getInterpolator
+          go_name: GetInterpolator
+          returns: android.animation.TimeInterpolator
+          error: true
+        - java_method: getStartDelay
+          go_name: GetStartDelay
+          returns: long
+          error: true
+        - java_method: getTotalDuration
+          go_name: GetTotalDuration
+          returns: long
+          error: true
+        - java_method: isRunning
+          go_name: IsRunning
+          returns: boolean
+          error: true
+        - java_method: isStarted
+          go_name: IsStarted
+          returns: boolean
+          error: true
+        - java_method: pause
+          go_name: Pause
+          returns: void
+          error: true
+        - java_method: play
+          go_name: Play
           params:
-            - java_type: android.animation.TypeConverter
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: android.animation.AnimatorSet$Builder
+          error: true
+        - java_method: playSequentially
+          go_name: PlaySequentially
+          params:
+            - java_type: android.animation.Animator...
               go_name: arg0
           returns: void
           error: true
-        - java_method: setEvaluator
-          go_name: SetEvaluator
+        - java_method: playTogether
+          go_name: PlayTogether
           params:
-            - java_type: android.animation.TypeEvaluator
+            - java_type: android.animation.Animator...
               go_name: arg0
           returns: void
           error: true
-        - java_method: setFloatValues
-          go_name: SetFloatValues
+        - java_method: resume
+          go_name: Resume
+          returns: void
+          error: true
+        - java_method: reverse
+          go_name: Reverse
+          returns: void
+          error: true
+        - java_method: setCurrentPlayTime
+          go_name: SetCurrentPlayTime
           params:
-            - java_type: float...
+            - java_type: long
               go_name: arg0
           returns: void
           error: true
-        - java_method: setIntValues
-          go_name: SetIntValues
+        - java_method: setDuration
+          go_name: SetDuration1
           params:
-            - java_type: int...
+            - java_type: long
+              go_name: arg0
+          returns: android.animation.AnimatorSet
+          error: true
+        - java_method: setInterpolator
+          go_name: SetInterpolator
+          params:
+            - java_type: android.animation.TimeInterpolator
               go_name: arg0
           returns: void
           error: true
-        - java_method: setKeyframes
-          go_name: SetKeyframes
+        - java_method: setStartDelay
+          go_name: SetStartDelay
           params:
-            - java_type: android.animation.Keyframe...
+            - java_type: long
               go_name: arg0
           returns: void
           error: true
-        - java_method: setObjectValues
-          go_name: SetObjectValues
+        - java_method: setTarget
+          go_name: SetTarget
           params:
-            - java_type: java.lang.Object...
+            - java_type: java.lang.Object
               go_name: arg0
           returns: void
           error: true
-        - java_method: setProperty
-          go_name: SetProperty
-          params:
-            - java_type: android.util.Property
-              go_name: arg0
+        - java_method: setupEndValues
+          go_name: SetupEndValues
           returns: void
           error: true
-        - java_method: setPropertyName
-          go_name: SetPropertyName
-          params:
-            - java_type: String
-              go_name: arg0
+        - java_method: setupStartValues
+          go_name: SetupStartValues
+          returns: void
+          error: true
+        - java_method: start
+          go_name: Start
           returns: void
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
+          error: true
+        - java_method: setDuration
+          go_name: SetDuration1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.animation.Animator
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: android.animation.Animator
+          error: true
+        - java_method: clone
+          go_name: Clone0_2
+          returns: java.lang.Object
+          error: true
+    - java_class: android.animation.AnimatorSet$Builder
+      go_type: AnimatorSetBuilder
+      methods:
+        - java_method: after
+          go_name: After1
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: android.animation.AnimatorSet$Builder
+          error: true
+        - java_method: after
+          go_name: After1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.animation.AnimatorSet$Builder
+          error: true
+        - java_method: before
+          go_name: Before
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: android.animation.AnimatorSet$Builder
+          error: true
+        - java_method: with
+          go_name: With
+          params:
+            - java_type: android.animation.Animator
+              go_name: arg0
+          returns: android.animation.AnimatorSet$Builder
+          error: true
+    - java_class: android.animation.Keyframe
+      go_type: Keyframe
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.animation.Keyframe
+          error: true
+        - java_method: getFraction
+          go_name: GetFraction
+          returns: float
+          error: true
+        - java_method: getInterpolator
+          go_name: GetInterpolator
+          returns: android.animation.TimeInterpolator
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: java.lang.Class
+          error: true
+        - java_method: getValue
+          go_name: GetValue
+          returns: java.lang.Object
+          error: true
+        - java_method: hasValue
+          go_name: HasValue
+          returns: boolean
+          error: true
+        - java_method: setFraction
+          go_name: SetFraction
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInterpolator
+          go_name: SetInterpolator
+          params:
+            - java_type: android.animation.TimeInterpolator
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setValue
+          go_name: SetValue
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: void
           error: true
         - java_method: clone
           go_name: Clone0_1
@@ -1577,115 +1649,66 @@ classes:
           error: true
       static_methods:
         - java_method: ofFloat
-          go_name: OfFloat
+          go_name: OfFloat1
           params:
-            - java_type: String
+            - java_type: float
               go_name: arg0
-            - java_type: float...
+          returns: android.animation.Keyframe
+          error: true
+        - java_method: ofFloat
+          go_name: OfFloat2_1
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
               go_name: arg1
-          returns: android.animation.PropertyValuesHolder
+          returns: android.animation.Keyframe
           error: true
         - java_method: ofInt
-          go_name: OfInt
+          go_name: OfInt1
           params:
-            - java_type: String
+            - java_type: float
               go_name: arg0
-            - java_type: int...
-              go_name: arg1
-          returns: android.animation.PropertyValuesHolder
+          returns: android.animation.Keyframe
           error: true
-        - java_method: ofKeyframe
-          go_name: OfKeyframe2
+        - java_method: ofInt
+          go_name: OfInt2_1
           params:
-            - java_type: android.util.Property
+            - java_type: float
               go_name: arg0
-            - java_type: android.animation.Keyframe...
+            - java_type: int
               go_name: arg1
-          returns: android.animation.PropertyValuesHolder
-          error: true
-        - java_method: ofKeyframe
-          go_name: OfKeyframe2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.animation.Keyframe...
-              go_name: arg1
-          returns: android.animation.PropertyValuesHolder
-          error: true
-        - java_method: ofMultiFloat
-          go_name: OfMultiFloat2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.graphics.Path
-              go_name: arg1
-          returns: android.animation.PropertyValuesHolder
-          error: true
-        - java_method: ofMultiFloat
-          go_name: OfMultiFloat2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float[][]
-              go_name: arg1
-          returns: android.animation.PropertyValuesHolder
-          error: true
-        - java_method: ofMultiInt
-          go_name: OfMultiInt2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.graphics.Path
-              go_name: arg1
-          returns: android.animation.PropertyValuesHolder
-          error: true
-        - java_method: ofMultiInt
-          go_name: OfMultiInt2_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int[][]
-              go_name: arg1
-          returns: android.animation.PropertyValuesHolder
+          returns: android.animation.Keyframe
           error: true
         - java_method: ofObject
-          go_name: OfObject
+          go_name: OfObject1
           params:
-            - java_type: String
+            - java_type: float
               go_name: arg0
-            - java_type: android.animation.TypeEvaluator
-              go_name: arg1
-            - java_type: java.lang.Object...
-              go_name: arg2
-          returns: android.animation.PropertyValuesHolder
+          returns: android.animation.Keyframe
           error: true
-    - java_class: android.animation.TypeEvaluator
-      go_type: TypeEvaluator
-    - java_class: android.animation.AnimatorInflater
-      go_type: AnimatorInflater
-      static_methods:
-        - java_method: loadAnimator
-          go_name: LoadAnimator
+        - java_method: ofObject
+          go_name: OfObject2_1
           params:
-            - java_type: android.content.Context
+            - java_type: float
               go_name: arg0
-            - java_type: int
+            - java_type: java.lang.Object
               go_name: arg1
-          returns: android.animation.Animator
-          error: true
-        - java_method: loadStateListAnimator
-          go_name: LoadStateListAnimator
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.animation.StateListAnimator
+          returns: android.animation.Keyframe
           error: true
 constants:
     - go_name: DurationInfinite
       value: "-1"
       go_type: int64
+    - go_name: Infinite
+      value: "-1"
+      go_type: int
+    - go_name: Restart
+      value: "1"
+      go_type: int
+    - go_name: Reverse
+      value: "2"
+      go_type: int
     - go_name: Appearing
       value: "2"
       go_type: int
@@ -1700,13 +1723,4 @@ constants:
       go_type: int
     - go_name: Disappearing
       value: "3"
-      go_type: int
-    - go_name: Infinite
-      value: "-1"
-      go_type: int
-    - go_name: Restart
-      value: "1"
-      go_type: int
-    - go_name: Reverse
-      value: "2"
       go_type: int

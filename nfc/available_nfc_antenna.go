@@ -23,6 +23,29 @@ type AvailableNfcAntenna struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAvailableNfcAntenna creates a new android.nfc.AvailableNfcAntenna instance.
+func NewAvailableNfcAntenna(vm *jni.VM, arg0 int32, arg1 int32) (*AvailableNfcAntenna, error) {
+	var t AvailableNfcAntenna
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAvailableNfcAntenna)), midAvailableNfcAntennaInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.nfc.AvailableNfcAntenna.describeContents.
 func (m *AvailableNfcAntenna) DescribeContents() (int32, error) {
 	var result int32

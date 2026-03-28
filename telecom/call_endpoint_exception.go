@@ -23,6 +23,34 @@ type CallEndpointException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCallEndpointException creates a new android.telecom.CallEndpointException instance.
+func NewCallEndpointException(vm *jni.VM, arg0 string, arg1 int32) (*CallEndpointException, error) {
+	var t CallEndpointException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), midCallEndpointExceptionInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.telecom.CallEndpointException.describeContents.
 func (m *CallEndpointException) DescribeContents() (int32, error) {
 	var result int32

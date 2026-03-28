@@ -23,6 +23,34 @@ type PromptContentItemBulletedText struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPromptContentItemBulletedText creates a new android.hardware.biometrics.PromptContentItemBulletedText instance.
+func NewPromptContentItemBulletedText(vm *jni.VM, arg0 string) (*PromptContentItemBulletedText, error) {
+	var t PromptContentItemBulletedText
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), midPromptContentItemBulletedTextInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.hardware.biometrics.PromptContentItemBulletedText.describeContents.
 func (m *PromptContentItemBulletedText) DescribeContents() (int32, error) {
 	var result int32

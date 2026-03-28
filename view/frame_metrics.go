@@ -23,6 +23,29 @@ type FrameMetrics struct {
 	Obj *jni.GlobalRef
 }
 
+// NewFrameMetrics creates a new android.view.FrameMetrics instance.
+func NewFrameMetrics(vm *jni.VM, arg0 *jni.Object) (*FrameMetrics, error) {
+	var t FrameMetrics
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFrameMetrics)), midFrameMetricsInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetMetric calls android.view.FrameMetrics.getMetric.
 func (m *FrameMetrics) GetMetric(arg0 int32) (int64, error) {
 	var result int64

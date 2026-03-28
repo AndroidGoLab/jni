@@ -23,6 +23,29 @@ type MediaController struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMediaController creates a new android.widget.MediaController instance.
+func NewMediaController(vm *jni.VM, arg0 *jni.Object) (*MediaController, error) {
+	var t MediaController
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaController)), midMediaControllerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DispatchKeyEvent calls android.widget.MediaController.dispatchKeyEvent.
 func (m *MediaController) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 	var result bool

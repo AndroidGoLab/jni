@@ -5,8 +5,6 @@ package midi
 import "github.com/AndroidGoLab/jni/media/midi/consts"
 
 const (
-	TransportMidiByteStream             = consts.TransportMidiByteStream
-	TransportUniversalMidiPackets       = consts.TransportUniversalMidiPackets
 	Creator                             = consts.Creator
 	ProtocolUmpMidi10UpTo128Bits        = consts.ProtocolUmpMidi10UpTo128Bits
 	ProtocolUmpMidi10UpTo128BitsAndJrts = consts.ProtocolUmpMidi10UpTo128BitsAndJrts
@@ -21,10 +19,11 @@ const (
 	TypeVirtual                         = consts.TypeVirtual
 	TypeInput                           = consts.TypeInput
 	TypeOutput                          = consts.TypeOutput
+	TransportMidiByteStream             = consts.TransportMidiByteStream
+	TransportUniversalMidiPackets       = consts.TransportUniversalMidiPackets
 )
 
 const (
-	ServiceInterface        = consts.ServiceInterface
 	PropertyBluetoothDevice = consts.PropertyBluetoothDevice
 	PropertyManufacturer    = consts.PropertyManufacturer
 	PropertyName            = consts.PropertyName
@@ -32,4 +31,5 @@ const (
 	PropertySerialNumber    = consts.PropertySerialNumber
 	PropertyUsbDevice       = consts.PropertyUsbDevice
 	PropertyVersion         = consts.PropertyVersion
+	ServiceInterface        = consts.ServiceInterface
 )

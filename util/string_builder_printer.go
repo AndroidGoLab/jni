@@ -23,6 +23,29 @@ type StringBuilderPrinter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStringBuilderPrinter creates a new android.util.StringBuilderPrinter instance.
+func NewStringBuilderPrinter(vm *jni.VM, arg0 *jni.Object) (*StringBuilderPrinter, error) {
+	var t StringBuilderPrinter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStringBuilderPrinter)), midStringBuilderPrinterInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Println calls android.util.StringBuilderPrinter.println.
 func (m *StringBuilderPrinter) Println(arg0 string) error {
 

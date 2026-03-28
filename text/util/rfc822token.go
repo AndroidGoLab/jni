@@ -23,6 +23,46 @@ type Rfc822Token struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRfc822Token creates a new android.text.util.Rfc822Token instance.
+func NewRfc822Token(vm *jni.VM, arg0 string, arg1 string, arg2 string) (*Rfc822Token, error) {
+	var t Rfc822Token
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822Token)), midRfc822TokenInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.text.util.Rfc822Token.equals.
 func (m *Rfc822Token) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

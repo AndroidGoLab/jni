@@ -23,6 +23,29 @@ type Gallery struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGallery creates a new android.widget.Gallery instance.
+func NewGallery(vm *jni.VM, arg0 *jni.Object) (*Gallery, error) {
+	var t Gallery
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGallery)), midGalleryInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DispatchKeyEvent calls android.widget.Gallery.dispatchKeyEvent.
 func (m *Gallery) DispatchKeyEvent(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,34 @@ type KeyboardShortcutGroup struct {
 	Obj *jni.GlobalRef
 }
 
+// NewKeyboardShortcutGroup creates a new android.view.KeyboardShortcutGroup instance.
+func NewKeyboardShortcutGroup(vm *jni.VM, arg0 string) (*KeyboardShortcutGroup, error) {
+	var t KeyboardShortcutGroup
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyboardShortcutGroup)), midKeyboardShortcutGroupInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddItem calls android.view.KeyboardShortcutGroup.addItem.
 func (m *KeyboardShortcutGroup) AddItem(arg0 *jni.Object) error {
 

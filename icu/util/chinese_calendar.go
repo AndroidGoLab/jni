@@ -23,6 +23,28 @@ type ChineseCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewChineseCalendar creates a new android.icu.util.ChineseCalendar instance.
+func NewChineseCalendar(vm *jni.VM) (*ChineseCalendar, error) {
+	var t ChineseCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChineseCalendar)), midChineseCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Add calls android.icu.util.ChineseCalendar.add.
 func (m *ChineseCalendar) Add(arg0 int32, arg1 int32) error {
 

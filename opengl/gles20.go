@@ -23,6 +23,28 @@ type GLES20 struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLES20 creates a new android.opengl.GLES20 instance.
+func NewGLES20(vm *jni.VM) (*GLES20, error) {
+	var t GLES20
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES20)), midGLES20Init)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GlActiveTexture calls android.opengl.GLES20.glActiveTexture.
 func (m *GLES20) GlActiveTexture(arg0 int32) error {
 

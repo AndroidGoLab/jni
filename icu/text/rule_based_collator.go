@@ -23,6 +23,34 @@ type RuleBasedCollator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRuleBasedCollator creates a new android.icu.text.RuleBasedCollator instance.
+func NewRuleBasedCollator(vm *jni.VM, arg0 string) (*RuleBasedCollator, error) {
+	var t RuleBasedCollator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuleBasedCollator)), midRuleBasedCollatorInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone calls android.icu.text.RuleBasedCollator.clone.
 func (m *RuleBasedCollator) Clone() (*jni.Object, error) {
 	var result *jni.Object

@@ -23,6 +23,29 @@ type StructStatVfs struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStructStatVfs creates a new android.system.StructStatVfs instance.
+func NewStructStatVfs(vm *jni.VM, arg0 int64, arg1 int64, arg2 int64, arg3 int64, arg4 int64, arg5 int64, arg6 int64, arg7 int64, arg8 int64, arg9 int64, arg10 int64) (*StructStatVfs, error) {
+	var t StructStatVfs
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructStatVfs)), midStructStatVfsInit, jni.LongValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2), jni.LongValue(arg3), jni.LongValue(arg4), jni.LongValue(arg5), jni.LongValue(arg6), jni.LongValue(arg7), jni.LongValue(arg8), jni.LongValue(arg9), jni.LongValue(arg10))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ToString calls android.system.StructStatVfs.toString.
 func (m *StructStatVfs) ToString() (string, error) {
 	var result string

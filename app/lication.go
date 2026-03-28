@@ -21,6 +21,28 @@ type lication struct {
 	Obj *jni.GlobalRef
 }
 
+// Newlication creates a new android.app.Application instance.
+func Newlication(vm *jni.VM) (*lication, error) {
+	var t lication
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clslication)), midlicationInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnConfigurationChanged calls android.app.Application.onConfigurationChanged.
 func (m *lication) OnConfigurationChanged(arg0 *jni.Object) error {
 

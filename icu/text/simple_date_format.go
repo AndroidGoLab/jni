@@ -23,6 +23,28 @@ type SimpleDateFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSimpleDateFormat creates a new android.icu.text.SimpleDateFormat instance.
+func NewSimpleDateFormat(vm *jni.VM) (*SimpleDateFormat, error) {
+	var t SimpleDateFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleDateFormat)), midSimpleDateFormatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyLocalizedPattern calls android.icu.text.SimpleDateFormat.applyLocalizedPattern.
 func (m *SimpleDateFormat) ApplyLocalizedPattern(arg0 string) error {
 

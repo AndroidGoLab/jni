@@ -23,6 +23,28 @@ type StrikethroughSpan struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStrikethroughSpan creates a new android.text.style.StrikethroughSpan instance.
+func NewStrikethroughSpan(vm *jni.VM) (*StrikethroughSpan, error) {
+	var t StrikethroughSpan
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), midStrikethroughSpanInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.text.style.StrikethroughSpan.describeContents.
 func (m *StrikethroughSpan) DescribeContents() (int32, error) {
 	var result int32

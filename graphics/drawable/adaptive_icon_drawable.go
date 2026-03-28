@@ -23,6 +23,29 @@ type AdaptiveIconDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAdaptiveIconDrawable creates a new android.graphics.drawable.AdaptiveIconDrawable instance.
+func NewAdaptiveIconDrawable(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AdaptiveIconDrawable, error) {
+	var t AdaptiveIconDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), midAdaptiveIconDrawableInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.AdaptiveIconDrawable.applyTheme.
 func (m *AdaptiveIconDrawable) ApplyTheme(arg0 *jni.Object) error {
 

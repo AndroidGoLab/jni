@@ -23,6 +23,29 @@ type ChangeClipBounds struct {
 	Obj *jni.GlobalRef
 }
 
+// NewChangeClipBounds creates a new android.transition.ChangeClipBounds instance.
+func NewChangeClipBounds(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ChangeClipBounds, error) {
+	var t ChangeClipBounds
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangeClipBounds)), midChangeClipBoundsInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CaptureEndValues calls android.transition.ChangeClipBounds.captureEndValues.
 func (m *ChangeClipBounds) CaptureEndValues(arg0 *jni.Object) error {
 

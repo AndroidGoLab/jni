@@ -5,13 +5,34 @@ package location
 import "github.com/AndroidGoLab/jni/location/consts"
 
 const (
+	Creator                       = consts.Creator
+	PassiveInterval               = consts.PassiveInterval
+	AccuracyCoarse                = consts.AccuracyCoarse
+	AccuracyFine                  = consts.AccuracyFine
+	AccuracyHigh                  = consts.AccuracyHigh
+	AccuracyLow                   = consts.AccuracyLow
+	AccuracyMedium                = consts.AccuracyMedium
+	NoRequirement                 = consts.NoRequirement
+	PowerHigh                     = consts.PowerHigh
+	PowerLow                      = consts.PowerLow
+	PowerMedium                   = consts.PowerMedium
+	CapabilitySupported           = consts.CapabilitySupported
+	CapabilityUnknown             = consts.CapabilityUnknown
+	CapabilityUnsupported         = consts.CapabilityUnsupported
+	ConstellationBeidou           = consts.ConstellationBeidou
+	ConstellationGalileo          = consts.ConstellationGalileo
+	ConstellationGlonass          = consts.ConstellationGlonass
+	ConstellationGps              = consts.ConstellationGps
+	ConstellationIrnss            = consts.ConstellationIrnss
+	ConstellationQzss             = consts.ConstellationQzss
+	ConstellationSbas             = consts.ConstellationSbas
+	ConstellationUnknown          = consts.ConstellationUnknown
 	AdrStateCycleSlip             = consts.AdrStateCycleSlip
 	AdrStateHalfCycleReported     = consts.AdrStateHalfCycleReported
 	AdrStateHalfCycleResolved     = consts.AdrStateHalfCycleResolved
 	AdrStateReset                 = consts.AdrStateReset
 	AdrStateUnknown               = consts.AdrStateUnknown
 	AdrStateValid                 = consts.AdrStateValid
-	Creator                       = consts.Creator
 	MultipathIndicatorDetected    = consts.MultipathIndicatorDetected
 	MultipathIndicatorNotDetected = consts.MultipathIndicatorNotDetected
 	MultipathIndicatorUnknown     = consts.MultipathIndicatorUnknown
@@ -33,18 +54,10 @@ const (
 	StateTowDecoded               = consts.StateTowDecoded
 	StateTowKnown                 = consts.StateTowKnown
 	StateUnknown                  = consts.StateUnknown
-	AccuracyCoarse                = consts.AccuracyCoarse
-	AccuracyFine                  = consts.AccuracyFine
-	AccuracyHigh                  = consts.AccuracyHigh
-	AccuracyLow                   = consts.AccuracyLow
-	AccuracyMedium                = consts.AccuracyMedium
-	NoRequirement                 = consts.NoRequirement
-	PowerHigh                     = consts.PowerHigh
-	PowerLow                      = consts.PowerLow
-	PowerMedium                   = consts.PowerMedium
-	Available                     = consts.Available
-	OutOfService                  = consts.OutOfService
-	TemporarilyUnavailable        = consts.TemporarilyUnavailable
+	StatusLocationDisabled        = consts.StatusLocationDisabled
+	StatusNotAllowed              = consts.StatusNotAllowed
+	StatusNotSupported            = consts.StatusNotSupported
+	StatusReady                   = consts.StatusReady
 	StatusParityPassed            = consts.StatusParityPassed
 	StatusParityRebuilt           = consts.StatusParityRebuilt
 	StatusUnknown                 = consts.StatusUnknown
@@ -65,35 +78,26 @@ const (
 	TypeQzsL1ca                   = consts.TypeQzsL1ca
 	TypeSbs                       = consts.TypeSbs
 	TypeUnknown                   = consts.TypeUnknown
-	StatusLocationDisabled        = consts.StatusLocationDisabled
-	StatusNotSupported            = consts.StatusNotSupported
-	StatusReady                   = consts.StatusReady
-	CapabilitySupported           = consts.CapabilitySupported
-	CapabilityUnknown             = consts.CapabilityUnknown
-	CapabilityUnsupported         = consts.CapabilityUnsupported
 	FormatDegrees                 = consts.FormatDegrees
 	FormatMinutes                 = consts.FormatMinutes
 	FormatSeconds                 = consts.FormatSeconds
-	PassiveInterval               = consts.PassiveInterval
+	QualityBalancedPowerAccuracy  = consts.QualityBalancedPowerAccuracy
+	QualityHighAccuracy           = consts.QualityHighAccuracy
+	QualityLowPower               = consts.QualityLowPower
 	GpsEventFirstFix              = consts.GpsEventFirstFix
 	GpsEventSatelliteStatus       = consts.GpsEventSatelliteStatus
 	GpsEventStarted               = consts.GpsEventStarted
 	GpsEventStopped               = consts.GpsEventStopped
-	ConstellationBeidou           = consts.ConstellationBeidou
-	ConstellationGalileo          = consts.ConstellationGalileo
-	ConstellationGlonass          = consts.ConstellationGlonass
-	ConstellationGps              = consts.ConstellationGps
-	ConstellationIrnss            = consts.ConstellationIrnss
-	ConstellationQzss             = consts.ConstellationQzss
-	ConstellationSbas             = consts.ConstellationSbas
-	ConstellationUnknown          = consts.ConstellationUnknown
-	QualityBalancedPowerAccuracy  = consts.QualityBalancedPowerAccuracy
-	QualityHighAccuracy           = consts.QualityHighAccuracy
-	QualityLowPower               = consts.QualityLowPower
-	StatusNotAllowed              = consts.StatusNotAllowed
+	Available                     = consts.Available
+	OutOfService                  = consts.OutOfService
+	TemporarilyUnavailable        = consts.TemporarilyUnavailable
 )
 
 const (
+	ActionInjectedSettingChanged  = consts.ActionInjectedSettingChanged
+	ActionServiceIntent           = consts.ActionServiceIntent
+	AttributesName                = consts.AttributesName
+	MetaDataName                  = consts.MetaDataName
 	ActionGnssCapabilitiesChanged = consts.ActionGnssCapabilitiesChanged
 	ExtraGnssCapabilities         = consts.ExtraGnssCapabilities
 	ExtraLocationEnabled          = consts.ExtraLocationEnabled
@@ -111,8 +115,4 @@ const (
 	NetworkProvider               = consts.NetworkProvider
 	PassiveProvider               = consts.PassiveProvider
 	ProvidersChangedAction        = consts.ProvidersChangedAction
-	ActionInjectedSettingChanged  = consts.ActionInjectedSettingChanged
-	ActionServiceIntent           = consts.ActionServiceIntent
-	AttributesName                = consts.AttributesName
-	MetaDataName                  = consts.MetaDataName
 )

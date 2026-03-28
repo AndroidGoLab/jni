@@ -23,6 +23,34 @@ type InlinePresentation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInlinePresentation creates a new android.service.autofill.InlinePresentation instance.
+func NewInlinePresentation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 bool) (*InlinePresentation, error) {
+	var t InlinePresentation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg2 uint8
+		if arg2 {
+			jArg2 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInlinePresentation)), midInlinePresentationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.autofill.InlinePresentation.describeContents.
 func (m *InlinePresentation) DescribeContents() (int32, error) {
 	var result int32

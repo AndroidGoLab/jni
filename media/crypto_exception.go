@@ -23,6 +23,34 @@ type CryptoException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCryptoException creates a new android.media.MediaCryptoException instance.
+func NewCryptoException(vm *jni.VM, arg0 string) (*CryptoException, error) {
+	var t CryptoException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCryptoException)), midCryptoExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetErrorContext calls android.media.MediaCryptoException.getErrorContext.
 func (m *CryptoException) GetErrorContext() (int32, error) {
 	var result int32

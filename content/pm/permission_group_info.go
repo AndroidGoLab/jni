@@ -23,6 +23,28 @@ type PermissionGroupInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPermissionGroupInfo creates a new android.content.pm.PermissionGroupInfo instance.
+func NewPermissionGroupInfo(vm *jni.VM) (*PermissionGroupInfo, error) {
+	var t PermissionGroupInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPermissionGroupInfo)), midPermissionGroupInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.PermissionGroupInfo.describeContents.
 func (m *PermissionGroupInfo) DescribeContents() (int32, error) {
 	var result int32

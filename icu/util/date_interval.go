@@ -23,6 +23,29 @@ type DateInterval struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateInterval creates a new android.icu.util.DateInterval instance.
+func NewDateInterval(vm *jni.VM, arg0 int64, arg1 int64) (*DateInterval, error) {
+	var t DateInterval
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateInterval)), midDateIntervalInit, jni.LongValue(arg0), jni.LongValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.icu.util.DateInterval.equals.
 func (m *DateInterval) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -23,6 +23,29 @@ type ListPreference struct {
 	Obj *jni.GlobalRef
 }
 
+// NewListPreference creates a new android.preference.ListPreference instance.
+func NewListPreference(vm *jni.VM, arg0 *jni.Object) (*ListPreference, error) {
+	var t ListPreference
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListPreference)), midListPreferenceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FindIndexOfValue calls android.preference.ListPreference.findIndexOfValue.
 func (m *ListPreference) FindIndexOfValue(arg0 string) (int32, error) {
 	var result int32

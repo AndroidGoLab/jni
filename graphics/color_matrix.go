@@ -23,6 +23,28 @@ type ColorMatrix struct {
 	Obj *jni.GlobalRef
 }
 
+// NewColorMatrix creates a new android.graphics.ColorMatrix instance.
+func NewColorMatrix(vm *jni.VM) (*ColorMatrix, error) {
+	var t ColorMatrix
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorMatrix)), midColorMatrixInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.graphics.ColorMatrix.equals.
 func (m *ColorMatrix) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

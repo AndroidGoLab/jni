@@ -23,6 +23,47 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsManager                                       *jni.GlobalRef
+	midManagerCreateVirtualDisplay1                  jni.MethodID
+	midManagerCreateVirtualDisplay6_1                jni.MethodID
+	midManagerGetDisplay                             jni.MethodID
+	midManagerGetDisplays0                           jni.MethodID
+	midManagerGetDisplays1_1                         jni.MethodID
+	midManagerGetHdrConversionMode                   jni.MethodID
+	midManagerGetMatchContentFrameRateUserPreference jni.MethodID
+	midManagerRegisterDisplayListener                jni.MethodID
+	midManagerUnregisterDisplayListener              jni.MethodID
+
+	clsManagerDisplayListener                 *jni.GlobalRef
+	midManagerDisplayListenerOnDisplayAdded   jni.MethodID
+	midManagerDisplayListenerOnDisplayChanged jni.MethodID
+	midManagerDisplayListenerOnDisplayRemoved jni.MethodID
+
+	clsDeviceProductInfo                        *jni.GlobalRef
+	midDeviceProductInfoInit                    jni.MethodID
+	midDeviceProductInfoDescribeContents        jni.MethodID
+	midDeviceProductInfoEquals                  jni.MethodID
+	midDeviceProductInfoGetConnectionToSinkType jni.MethodID
+	midDeviceProductInfoGetManufactureWeek      jni.MethodID
+	midDeviceProductInfoGetManufactureYear      jni.MethodID
+	midDeviceProductInfoGetManufacturerPnpId    jni.MethodID
+	midDeviceProductInfoGetModelYear            jni.MethodID
+	midDeviceProductInfoGetName                 jni.MethodID
+	midDeviceProductInfoGetProductId            jni.MethodID
+	midDeviceProductInfoHashCode                jni.MethodID
+	midDeviceProductInfoToString                jni.MethodID
+	midDeviceProductInfoWriteToParcel           jni.MethodID
+
+	clsHdrConversionMode                          *jni.GlobalRef
+	midHdrConversionModeInit                      jni.MethodID
+	midHdrConversionModeDescribeContents          jni.MethodID
+	midHdrConversionModeEquals                    jni.MethodID
+	midHdrConversionModeGetConversionMode         jni.MethodID
+	midHdrConversionModeGetPreferredHdrOutputType jni.MethodID
+	midHdrConversionModeHashCode                  jni.MethodID
+	midHdrConversionModeToString                  jni.MethodID
+	midHdrConversionModeWriteToParcel             jni.MethodID
+
 	clsVirtualDisplayConfig                        *jni.GlobalRef
 	midVirtualDisplayConfigDescribeContents        jni.MethodID
 	midVirtualDisplayConfigEquals                  jni.MethodID
@@ -51,45 +92,6 @@ var (
 	midVirtualDisplayConfigBuilderSetFlags                jni.MethodID
 	midVirtualDisplayConfigBuilderSetRequestedRefreshRate jni.MethodID
 	midVirtualDisplayConfigBuilderSetSurface              jni.MethodID
-
-	clsDeviceProductInfo                        *jni.GlobalRef
-	midDeviceProductInfoDescribeContents        jni.MethodID
-	midDeviceProductInfoEquals                  jni.MethodID
-	midDeviceProductInfoGetConnectionToSinkType jni.MethodID
-	midDeviceProductInfoGetManufactureWeek      jni.MethodID
-	midDeviceProductInfoGetManufactureYear      jni.MethodID
-	midDeviceProductInfoGetManufacturerPnpId    jni.MethodID
-	midDeviceProductInfoGetModelYear            jni.MethodID
-	midDeviceProductInfoGetName                 jni.MethodID
-	midDeviceProductInfoGetProductId            jni.MethodID
-	midDeviceProductInfoHashCode                jni.MethodID
-	midDeviceProductInfoToString                jni.MethodID
-	midDeviceProductInfoWriteToParcel           jni.MethodID
-
-	clsHdrConversionMode                          *jni.GlobalRef
-	midHdrConversionModeDescribeContents          jni.MethodID
-	midHdrConversionModeEquals                    jni.MethodID
-	midHdrConversionModeGetConversionMode         jni.MethodID
-	midHdrConversionModeGetPreferredHdrOutputType jni.MethodID
-	midHdrConversionModeHashCode                  jni.MethodID
-	midHdrConversionModeToString                  jni.MethodID
-	midHdrConversionModeWriteToParcel             jni.MethodID
-
-	clsManager                                       *jni.GlobalRef
-	midManagerCreateVirtualDisplay1                  jni.MethodID
-	midManagerCreateVirtualDisplay6_1                jni.MethodID
-	midManagerGetDisplay                             jni.MethodID
-	midManagerGetDisplays0                           jni.MethodID
-	midManagerGetDisplays1_1                         jni.MethodID
-	midManagerGetHdrConversionMode                   jni.MethodID
-	midManagerGetMatchContentFrameRateUserPreference jni.MethodID
-	midManagerRegisterDisplayListener                jni.MethodID
-	midManagerUnregisterDisplayListener              jni.MethodID
-
-	clsManagerDisplayListener                 *jni.GlobalRef
-	midManagerDisplayListenerOnDisplayAdded   jni.MethodID
-	midManagerDisplayListenerOnDisplayChanged jni.MethodID
-	midManagerDisplayListenerOnDisplayRemoved jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -109,6 +111,271 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/hardware/display/DisplayManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManager = env.NewGlobalRef(&c.Object)
+
+		midManagerCreateVirtualDisplay1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createVirtualDisplay", "(Landroid/hardware/display/VirtualDisplayConfig;)Landroid/hardware/display/VirtualDisplay;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerCreateVirtualDisplay6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createVirtualDisplay", "(Ljava/lang/String;IIILandroid/view/Surface;I)Landroid/hardware/display/VirtualDisplay;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDisplay", "(I)Landroid/view/Display;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetDisplays0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDisplays", "()[Landroid/view/Display;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetDisplays1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDisplays", "(Ljava/lang/String;)[Landroid/view/Display;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetHdrConversionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getHdrConversionMode", "()Landroid/hardware/display/HdrConversionMode;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetMatchContentFrameRateUserPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMatchContentFrameRateUserPreference", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerRegisterDisplayListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerDisplayListener", "(Ljava/util/concurrent/Executor;JLandroid/hardware/display/DisplayManager$DisplayListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerUnregisterDisplayListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterDisplayListener", "(Landroid/hardware/display/DisplayManager$DisplayListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/hardware/display/DisplayManager$DisplayListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsManagerDisplayListener = env.NewGlobalRef(&c.Object)
+
+		midManagerDisplayListenerOnDisplayAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayAdded", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerDisplayListenerOnDisplayChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerDisplayListenerOnDisplayRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayRemoved", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/hardware/display/DeviceProductInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDeviceProductInfo = env.NewGlobalRef(&c.Object)
+		midDeviceProductInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;II)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetConnectionToSinkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getConnectionToSinkType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetManufactureWeek, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getManufactureWeek", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetManufactureYear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getManufactureYear", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetManufacturerPnpId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getManufacturerPnpId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetModelYear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getModelYear", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoGetProductId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getProductId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceProductInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/hardware/display/HdrConversionMode")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsHdrConversionMode = env.NewGlobalRef(&c.Object)
+		midHdrConversionModeInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeGetConversionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "getConversionMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeGetPreferredHdrOutputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "getPreferredHdrOutputType", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHdrConversionModeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/hardware/display/VirtualDisplayConfig")
 	if err != nil {
@@ -293,263 +560,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midVirtualDisplayConfigBuilderSetSurface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualDisplayConfigBuilder)), "setSurface", "(Landroid/view/Surface;)Landroid/hardware/display/VirtualDisplayConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/hardware/display/DeviceProductInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDeviceProductInfo = env.NewGlobalRef(&c.Object)
-
-		midDeviceProductInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetConnectionToSinkType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getConnectionToSinkType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetManufactureWeek, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getManufactureWeek", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetManufactureYear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getManufactureYear", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetManufacturerPnpId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getManufacturerPnpId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetModelYear, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getModelYear", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoGetProductId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "getProductId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDeviceProductInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/hardware/display/HdrConversionMode")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsHdrConversionMode = env.NewGlobalRef(&c.Object)
-
-		midHdrConversionModeDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHdrConversionModeEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHdrConversionModeGetConversionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "getConversionMode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHdrConversionModeGetPreferredHdrOutputType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "getPreferredHdrOutputType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHdrConversionModeHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHdrConversionModeToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHdrConversionModeWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/hardware/display/DisplayManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsManager = env.NewGlobalRef(&c.Object)
-
-		midManagerCreateVirtualDisplay1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createVirtualDisplay", "(Landroid/hardware/display/VirtualDisplayConfig;)Landroid/hardware/display/VirtualDisplay;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerCreateVirtualDisplay6_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createVirtualDisplay", "(Ljava/lang/String;IIILandroid/view/Surface;I)Landroid/hardware/display/VirtualDisplay;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDisplay", "(I)Landroid/view/Display;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetDisplays0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDisplays", "()[Landroid/view/Display;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetDisplays1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDisplays", "(Ljava/lang/String;)[Landroid/view/Display;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetHdrConversionMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getHdrConversionMode", "()Landroid/hardware/display/HdrConversionMode;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetMatchContentFrameRateUserPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getMatchContentFrameRateUserPreference", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerRegisterDisplayListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerDisplayListener", "(Ljava/util/concurrent/Executor;JLandroid/hardware/display/DisplayManager$DisplayListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerUnregisterDisplayListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterDisplayListener", "(Landroid/hardware/display/DisplayManager$DisplayListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/hardware/display/DisplayManager$DisplayListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsManagerDisplayListener = env.NewGlobalRef(&c.Object)
-
-		midManagerDisplayListenerOnDisplayAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayAdded", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerDisplayListenerOnDisplayChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayChanged", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerDisplayListenerOnDisplayRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManagerDisplayListener)), "onDisplayRemoved", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

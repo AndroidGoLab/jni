@@ -23,6 +23,40 @@ type TimingLogger struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTimingLogger creates a new android.util.TimingLogger instance.
+func NewTimingLogger(vm *jni.VM, arg0 string, arg1 string) (*TimingLogger, error) {
+	var t TimingLogger
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimingLogger)), midTimingLoggerInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddSplit calls android.util.TimingLogger.addSplit.
 func (m *TimingLogger) AddSplit(arg0 string) error {
 

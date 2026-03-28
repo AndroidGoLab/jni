@@ -23,6 +23,29 @@ type Ipv4AddrIdentification struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIpv4AddrIdentification creates a new android.net.ipsec.ike.IkeIpv4AddrIdentification instance.
+func NewIpv4AddrIdentification(vm *jni.VM, arg0 *jni.Object) (*Ipv4AddrIdentification, error) {
+	var t Ipv4AddrIdentification
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIpv4AddrIdentification)), midIpv4AddrIdentificationInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.net.ipsec.ike.IkeIpv4AddrIdentification.equals.
 func (m *Ipv4AddrIdentification) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

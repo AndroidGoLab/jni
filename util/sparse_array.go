@@ -23,6 +23,28 @@ type SparseArray struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSparseArray creates a new android.util.SparseArray instance.
+func NewSparseArray(vm *jni.VM) (*SparseArray, error) {
+	var t SparseArray
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSparseArray)), midSparseArrayInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clear calls android.util.SparseArray.clear.
 func (m *SparseArray) Clear() error {
 

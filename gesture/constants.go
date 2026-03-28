@@ -6,12 +6,12 @@ import "github.com/AndroidGoLab/jni/gesture/consts"
 
 const (
 	Creator                   = consts.Creator
-	GestureStrokeTypeMultiple = consts.GestureStrokeTypeMultiple
-	GestureStrokeTypeSingle   = consts.GestureStrokeTypeSingle
-	OrientationHorizontal     = consts.OrientationHorizontal
-	OrientationVertical       = consts.OrientationVertical
 	OrientationInvariant      = consts.OrientationInvariant
 	OrientationSensitive      = consts.OrientationSensitive
 	SequenceInvariant         = consts.SequenceInvariant
 	SequenceSensitive         = consts.SequenceSensitive
+	GestureStrokeTypeMultiple = consts.GestureStrokeTypeMultiple
+	GestureStrokeTypeSingle   = consts.GestureStrokeTypeSingle
+	OrientationHorizontal     = consts.OrientationHorizontal
+	OrientationVertical       = consts.OrientationVertical
 )

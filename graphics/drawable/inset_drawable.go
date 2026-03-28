@@ -23,6 +23,29 @@ type InsetDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInsetDrawable creates a new android.graphics.drawable.InsetDrawable instance.
+func NewInsetDrawable(vm *jni.VM, arg0 *jni.Object, arg1 float32) (*InsetDrawable, error) {
+	var t InsetDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInsetDrawable)), midInsetDrawableInit, jni.ObjectValue(arg0), jni.FloatValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyTheme calls android.graphics.drawable.InsetDrawable.applyTheme.
 func (m *InsetDrawable) ApplyTheme(arg0 *jni.Object) error {
 

@@ -23,6 +23,34 @@ type QwertyKeyListener struct {
 	Obj *jni.GlobalRef
 }
 
+// NewQwertyKeyListener creates a new android.text.method.QwertyKeyListener instance.
+func NewQwertyKeyListener(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*QwertyKeyListener, error) {
+	var t QwertyKeyListener
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), midQwertyKeyListenerInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetInputType calls android.text.method.QwertyKeyListener.getInputType.
 func (m *QwertyKeyListener) GetInputType() (int32, error) {
 	var result int32

@@ -23,6 +23,28 @@ type AppWidgetProvider struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAppWidgetProvider creates a new android.appwidget.AppWidgetProvider instance.
+func NewAppWidgetProvider(vm *jni.VM) (*AppWidgetProvider, error) {
+	var t AppWidgetProvider
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetProvider)), midAppWidgetProviderInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnAppWidgetOptionsChanged calls android.appwidget.AppWidgetProvider.onAppWidgetOptionsChanged.
 func (m *AppWidgetProvider) OnAppWidgetOptionsChanged(
 	arg0 *jni.Object,

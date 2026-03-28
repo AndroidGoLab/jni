@@ -23,6 +23,29 @@ type IkeIOException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewIkeIOException creates a new android.net.ipsec.ike.exceptions.IkeIOException instance.
+func NewIkeIOException(vm *jni.VM, arg0 *jni.Object) (*IkeIOException, error) {
+	var t IkeIOException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeIOException)), midIkeIOExceptionInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCause0 calls android.net.ipsec.ike.exceptions.IkeIOException.getCause.
 func (m *IkeIOException) GetCause0() (*jni.Object, error) {
 	var result *jni.Object

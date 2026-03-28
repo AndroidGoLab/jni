@@ -23,6 +23,34 @@ type PackageIdentifier struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPackageIdentifier creates a new android.app.appsearch.PackageIdentifier instance.
+func NewPackageIdentifier(vm *jni.VM, arg0 string, arg1 *jni.Object) (*PackageIdentifier, error) {
+	var t PackageIdentifier
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageIdentifier)), midPackageIdentifierInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.app.appsearch.PackageIdentifier.equals.
 func (m *PackageIdentifier) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

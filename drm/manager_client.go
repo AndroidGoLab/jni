@@ -23,6 +23,29 @@ type ManagerClient struct {
 	Obj *jni.GlobalRef
 }
 
+// NewManagerClient creates a new android.drm.DrmManagerClient instance.
+func NewManagerClient(vm *jni.VM, arg0 *jni.Object) (*ManagerClient, error) {
+	var t ManagerClient
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManagerClient)), midManagerClientInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AcquireDrmInfo calls android.drm.DrmManagerClient.acquireDrmInfo.
 func (m *ManagerClient) AcquireDrmInfo(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

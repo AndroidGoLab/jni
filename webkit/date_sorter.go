@@ -23,6 +23,29 @@ type DateSorter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDateSorter creates a new android.webkit.DateSorter instance.
+func NewDateSorter(vm *jni.VM, arg0 *jni.Object) (*DateSorter, error) {
+	var t DateSorter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateSorter)), midDateSorterInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetBoundary calls android.webkit.DateSorter.getBoundary.
 func (m *DateSorter) GetBoundary(arg0 int32) (int64, error) {
 	var result int64

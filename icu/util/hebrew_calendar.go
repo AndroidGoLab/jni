@@ -23,6 +23,28 @@ type HebrewCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewHebrewCalendar creates a new android.icu.util.HebrewCalendar instance.
+func NewHebrewCalendar(vm *jni.VM) (*HebrewCalendar, error) {
+	var t HebrewCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHebrewCalendar)), midHebrewCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Add calls android.icu.util.HebrewCalendar.add.
 func (m *HebrewCalendar) Add(arg0 int32, arg1 int32) error {
 

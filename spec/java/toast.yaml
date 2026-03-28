@@ -7,6 +7,10 @@ go_import: github.com/AndroidGoLab/jni/widget/toast
 classes:
     - java_class: android.widget.Toast
       go_type: Toast
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
       methods:
         - java_method: addCallback
           go_name: AddCallback

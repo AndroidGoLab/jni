@@ -23,6 +23,29 @@ type MenuInflater struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMenuInflater creates a new android.view.MenuInflater instance.
+func NewMenuInflater(vm *jni.VM, arg0 *jni.Object) (*MenuInflater, error) {
+	var t MenuInflater
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMenuInflater)), midMenuInflaterInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Inflate calls android.view.MenuInflater.inflate.
 func (m *MenuInflater) Inflate(arg0 int32, arg1 *jni.Object) error {
 

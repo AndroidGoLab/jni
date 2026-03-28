@@ -23,6 +23,29 @@ type WindowInsetsAnimation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWindowInsetsAnimation creates a new android.view.WindowInsetsAnimation instance.
+func NewWindowInsetsAnimation(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 int64) (*WindowInsetsAnimation, error) {
+	var t WindowInsetsAnimation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInsetsAnimation)), midWindowInsetsAnimationInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.LongValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAlpha calls android.view.WindowInsetsAnimation.getAlpha.
 func (m *WindowInsetsAnimation) GetAlpha() (float32, error) {
 	var result float32

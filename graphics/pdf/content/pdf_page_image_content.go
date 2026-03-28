@@ -23,6 +23,34 @@ type PdfPageImageContent struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPdfPageImageContent creates a new android.graphics.pdf.content.PdfPageImageContent instance.
+func NewPdfPageImageContent(vm *jni.VM, arg0 string) (*PdfPageImageContent, error) {
+	var t PdfPageImageContent
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageImageContent)), midPdfPageImageContentInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.graphics.pdf.content.PdfPageImageContent.describeContents.
 func (m *PdfPageImageContent) DescribeContents() (int32, error) {
 	var result int32

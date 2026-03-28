@@ -23,6 +23,29 @@ type ToneGenerator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewToneGenerator creates a new android.media.ToneGenerator instance.
+func NewToneGenerator(vm *jni.VM, arg0 int32, arg1 int32) (*ToneGenerator, error) {
+	var t ToneGenerator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToneGenerator)), midToneGeneratorInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAudioSessionId calls android.media.ToneGenerator.getAudioSessionId.
 func (m *ToneGenerator) GetAudioSessionId() (int32, error) {
 	var result int32

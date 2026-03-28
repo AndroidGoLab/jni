@@ -23,6 +23,34 @@ type ArchivedPackageInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewArchivedPackageInfo creates a new android.content.pm.ArchivedPackageInfo instance.
+func NewArchivedPackageInfo(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 *jni.Object) (*ArchivedPackageInfo, error) {
+	var t ArchivedPackageInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArchivedPackageInfo)), midArchivedPackageInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDefaultToDeviceProtectedStorage calls android.content.pm.ArchivedPackageInfo.getDefaultToDeviceProtectedStorage.
 func (m *ArchivedPackageInfo) GetDefaultToDeviceProtectedStorage() (string, error) {
 	var result string

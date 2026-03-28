@@ -23,6 +23,28 @@ type ResourcesLoader struct {
 	Obj *jni.GlobalRef
 }
 
+// NewResourcesLoader creates a new android.content.res.loader.ResourcesLoader instance.
+func NewResourcesLoader(vm *jni.VM) (*ResourcesLoader, error) {
+	var t ResourcesLoader
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResourcesLoader)), midResourcesLoaderInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddProvider calls android.content.res.loader.ResourcesLoader.addProvider.
 func (m *ResourcesLoader) AddProvider(arg0 *jni.Object) error {
 

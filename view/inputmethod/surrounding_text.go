@@ -23,6 +23,34 @@ type SurroundingText struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSurroundingText creates a new android.view.inputmethod.SurroundingText instance.
+func NewSurroundingText(vm *jni.VM, arg0 string, arg1 int32, arg2 int32, arg3 int32) (*SurroundingText, error) {
+	var t SurroundingText
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurroundingText)), midSurroundingTextInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.view.inputmethod.SurroundingText.describeContents.
 func (m *SurroundingText) DescribeContents() (int32, error) {
 	var result int32

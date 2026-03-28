@@ -23,6 +23,29 @@ type ProviderResult struct {
 	Obj *jni.GlobalRef
 }
 
+// NewProviderResult creates a new android.content.ContentProviderResult instance.
+func NewProviderResult(vm *jni.VM, arg0 *jni.Object) (*ProviderResult, error) {
+	var t ProviderResult
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProviderResult)), midProviderResultInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.ContentProviderResult.describeContents.
 func (m *ProviderResult) DescribeContents() (int32, error) {
 	var result int32

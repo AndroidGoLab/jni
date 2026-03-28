@@ -23,6 +23,41 @@ type WrappedKeyEntry struct {
 	Obj *jni.GlobalRef
 }
 
+// NewWrappedKeyEntry creates a new android.security.keystore.WrappedKeyEntry instance.
+func NewWrappedKeyEntry(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 string, arg3 *jni.Object) (*WrappedKeyEntry, error) {
+	var t WrappedKeyEntry
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWrappedKeyEntry)), midWrappedKeyEntryInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAlgorithmParameterSpec calls android.security.keystore.WrappedKeyEntry.getAlgorithmParameterSpec.
 func (m *WrappedKeyEntry) GetAlgorithmParameterSpec() (*jni.Object, error) {
 	var result *jni.Object

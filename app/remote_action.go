@@ -21,6 +21,41 @@ type RemoteAction struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRemoteAction creates a new android.app.RemoteAction instance.
+func NewRemoteAction(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 string, arg3 *jni.Object) (*RemoteAction, error) {
+	var t RemoteAction
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteAction)), midRemoteActionInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.app.RemoteAction.clone.
 func (m *RemoteAction) Clone0() (*jni.Object, error) {
 	var result *jni.Object

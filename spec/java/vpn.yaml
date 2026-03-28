@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/net/vpn
 classes:
     - java_class: android.net.VpnService
       go_type: Service
+      obtain: constructor
       methods:
         - java_method: isAlwaysOn
           go_name: IsAlwaysOn

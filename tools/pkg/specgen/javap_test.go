@@ -282,6 +282,94 @@ func TestParseJavap_NativeMethods(t *testing.T) {
 	}
 }
 
+func TestParseJavap_Constructors(t *testing.T) {
+	// Simulates javap output for a class with multiple constructors.
+	verboseOutput := strings.Join([]string{
+		`Classfile jar:file:///android.jar!/android/media/MediaRecorder.class`,
+		`  Compiled from "MediaRecorder.java"`,
+		`public class android.media.MediaRecorder`,
+		`{`,
+		`  public android.media.MediaRecorder();`,
+		`    descriptor: ()V`,
+		`    flags: (0x0001) ACC_PUBLIC`,
+		``,
+		`  public android.media.MediaRecorder(android.content.Context);`,
+		`    descriptor: (Landroid/content/Context;)V`,
+		`    flags: (0x0001) ACC_PUBLIC`,
+		``,
+		`  public native void start() throws java.lang.IllegalStateException;`,
+		`    descriptor: ()V`,
+		`    flags: (0x0101) ACC_PUBLIC, ACC_NATIVE`,
+		`}`,
+	}, "\n")
+
+	jc, err := parseJavap(verboseOutput)
+	if err != nil {
+		t.Fatalf("parseJavap: %v", err)
+	}
+
+	// Verify constructors were parsed.
+	if len(jc.Constructors) != 2 {
+		t.Fatalf("len(Constructors) = %d, want 2; got: %+v", len(jc.Constructors), jc.Constructors)
+	}
+
+	// First constructor: no-arg.
+	if len(jc.Constructors[0].Params) != 0 {
+		t.Errorf("Constructors[0].Params = %v, want empty", jc.Constructors[0].Params)
+	}
+
+	// Second constructor: Context param.
+	if len(jc.Constructors[1].Params) != 1 {
+		t.Fatalf("len(Constructors[1].Params) = %d, want 1", len(jc.Constructors[1].Params))
+	}
+	if jc.Constructors[1].Params[0].JavaType != "android.content.Context" {
+		t.Errorf("Constructors[1].Params[0].JavaType = %q, want %q",
+			jc.Constructors[1].Params[0].JavaType, "android.content.Context")
+	}
+
+	// Methods should still parse correctly alongside constructors.
+	if len(jc.Methods) != 1 {
+		t.Fatalf("len(Methods) = %d, want 1", len(jc.Methods))
+	}
+	if jc.Methods[0].Name != "start" {
+		t.Errorf("Methods[0].Name = %q, want %q", jc.Methods[0].Name, "start")
+	}
+}
+
+func TestParseJavap_ConstructorNotConfusedWithMethod(t *testing.T) {
+	// A class where the "constructor-like" line does NOT match the class name
+	// should not be parsed as a constructor.
+	verboseOutput := strings.Join([]string{
+		`Classfile jar:file:///android.jar!/android/app/Activity.class`,
+		`  Compiled from "Activity.java"`,
+		`public class android.app.Activity`,
+		`{`,
+		`  public android.app.Activity();`,
+		`    descriptor: ()V`,
+		`    flags: (0x0001) ACC_PUBLIC`,
+		``,
+		`  public void finish();`,
+		`    descriptor: ()V`,
+		`    flags: (0x0001) ACC_PUBLIC`,
+		`}`,
+	}, "\n")
+
+	jc, err := parseJavap(verboseOutput)
+	if err != nil {
+		t.Fatalf("parseJavap: %v", err)
+	}
+
+	if len(jc.Constructors) != 1 {
+		t.Fatalf("len(Constructors) = %d, want 1", len(jc.Constructors))
+	}
+	if len(jc.Constructors[0].Params) != 0 {
+		t.Errorf("expected no-arg constructor, got params: %v", jc.Constructors[0].Params)
+	}
+	if len(jc.Methods) != 1 {
+		t.Fatalf("len(Methods) = %d, want 1", len(jc.Methods))
+	}
+}
+
 func TestParseJavap_NonVerboseStillWorks(t *testing.T) {
 	// Non-verbose javap output (no ConstantValue lines).
 	output := strings.Join([]string{

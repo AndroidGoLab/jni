@@ -23,6 +23,28 @@ type PhoneNumberFormattingTextWatcher struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPhoneNumberFormattingTextWatcher creates a new android.telephony.PhoneNumberFormattingTextWatcher instance.
+func NewPhoneNumberFormattingTextWatcher(vm *jni.VM) (*PhoneNumberFormattingTextWatcher, error) {
+	var t PhoneNumberFormattingTextWatcher
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneNumberFormattingTextWatcher)), midPhoneNumberFormattingTextWatcherInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BeforeTextChanged calls android.telephony.PhoneNumberFormattingTextWatcher.beforeTextChanged.
 func (m *PhoneNumberFormattingTextWatcher) BeforeTextChanged(
 	arg0 string,

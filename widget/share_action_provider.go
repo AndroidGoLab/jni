@@ -23,6 +23,29 @@ type ShareActionProvider struct {
 	Obj *jni.GlobalRef
 }
 
+// NewShareActionProvider creates a new android.widget.ShareActionProvider instance.
+func NewShareActionProvider(vm *jni.VM, arg0 *jni.Object) (*ShareActionProvider, error) {
+	var t ShareActionProvider
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShareActionProvider)), midShareActionProviderInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // HasSubMenu calls android.widget.ShareActionProvider.hasSubMenu.
 func (m *ShareActionProvider) HasSubMenu() (bool, error) {
 	var result bool

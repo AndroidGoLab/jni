@@ -23,6 +23,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsCameraPrewarmService           *jni.GlobalRef
+	midCameraPrewarmServiceOnBind     jni.MethodID
+	midCameraPrewarmServiceOnCooldown jni.MethodID
+	midCameraPrewarmServiceOnPrewarm  jni.MethodID
+	midCameraPrewarmServiceOnUnbind   jni.MethodID
+
 	clsBrowserService                         *jni.GlobalRef
 	midBrowserServiceDump                     jni.MethodID
 	midBrowserServiceGetBrowserRootHints      jni.MethodID
@@ -41,12 +47,6 @@ var (
 
 	clsBrowserServiceResult       *jni.GlobalRef
 	midBrowserServiceResultDetach jni.MethodID
-
-	clsCameraPrewarmService           *jni.GlobalRef
-	midCameraPrewarmServiceOnBind     jni.MethodID
-	midCameraPrewarmServiceOnCooldown jni.MethodID
-	midCameraPrewarmServiceOnPrewarm  jni.MethodID
-	midCameraPrewarmServiceOnUnbind   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -66,6 +66,44 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/service/media/CameraPrewarmService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCameraPrewarmService = env.NewGlobalRef(&c.Object)
+
+		midCameraPrewarmServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraPrewarmServiceOnCooldown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onCooldown", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraPrewarmServiceOnPrewarm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onPrewarm", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCameraPrewarmServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/service/media/MediaBrowserService")
 	if err != nil {
@@ -180,44 +218,6 @@ func doInit(env *jni.Env) error {
 		clsBrowserServiceResult = env.NewGlobalRef(&c.Object)
 
 		midBrowserServiceResultDetach, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBrowserServiceResult)), "detach", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/media/CameraPrewarmService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCameraPrewarmService = env.NewGlobalRef(&c.Object)
-
-		midCameraPrewarmServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCameraPrewarmServiceOnCooldown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onCooldown", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCameraPrewarmServiceOnPrewarm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onPrewarm", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCameraPrewarmServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCameraPrewarmService)), "onUnbind", "(Landroid/content/Intent;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

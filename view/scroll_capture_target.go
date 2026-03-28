@@ -23,6 +23,29 @@ type ScrollCaptureTarget struct {
 	Obj *jni.GlobalRef
 }
 
+// NewScrollCaptureTarget creates a new android.view.ScrollCaptureTarget instance.
+func NewScrollCaptureTarget(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 *jni.Object) (*ScrollCaptureTarget, error) {
+	var t ScrollCaptureTarget
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollCaptureTarget)), midScrollCaptureTargetInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCallback calls android.view.ScrollCaptureTarget.getCallback.
 func (m *ScrollCaptureTarget) GetCallback() (*jni.Object, error) {
 	var result *jni.Object

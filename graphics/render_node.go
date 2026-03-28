@@ -23,6 +23,34 @@ type RenderNode struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRenderNode creates a new android.graphics.RenderNode instance.
+func NewRenderNode(vm *jni.VM, arg0 string) (*RenderNode, error) {
+	var t RenderNode
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRenderNode)), midRenderNodeInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // BeginRecording0 calls android.graphics.RenderNode.beginRecording.
 func (m *RenderNode) BeginRecording0() (*jni.Object, error) {
 	var result *jni.Object

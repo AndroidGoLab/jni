@@ -23,6 +23,28 @@ type Matrix3f struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMatrix3f creates a new android.renderscript.Matrix3f instance.
+func NewMatrix3f(vm *jni.VM) (*Matrix3f, error) {
+	var t Matrix3f
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix3f)), midMatrix3fInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Get calls android.renderscript.Matrix3f.get.
 func (m *Matrix3f) Get(arg0 int32, arg1 int32) (float32, error) {
 	var result float32

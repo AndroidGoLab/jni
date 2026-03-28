@@ -23,6 +23,28 @@ type ArrowKeyMovementMethod struct {
 	Obj *jni.GlobalRef
 }
 
+// NewArrowKeyMovementMethod creates a new android.text.method.ArrowKeyMovementMethod instance.
+func NewArrowKeyMovementMethod(vm *jni.VM) (*ArrowKeyMovementMethod, error) {
+	var t ArrowKeyMovementMethod
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), midArrowKeyMovementMethodInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CanSelectArbitrarily calls android.text.method.ArrowKeyMovementMethod.canSelectArbitrarily.
 func (m *ArrowKeyMovementMethod) CanSelectArbitrarily() (bool, error) {
 	var result bool

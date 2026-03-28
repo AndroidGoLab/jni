@@ -23,6 +23,29 @@ type EdgeEffect struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEdgeEffect creates a new android.widget.EdgeEffect instance.
+func NewEdgeEffect(vm *jni.VM, arg0 *jni.Object) (*EdgeEffect, error) {
+	var t EdgeEffect
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEdgeEffect)), midEdgeEffectInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Draw calls android.widget.EdgeEffect.draw.
 func (m *EdgeEffect) Draw(arg0 *jni.Object) (bool, error) {
 	var result bool

@@ -5,177 +5,6 @@
 package: connect
 go_import: github.com/AndroidGoLab/jni/health/connect
 classes:
-    - java_class: android.health.connect.HealthPermissions
-      go_type: HealthPermissions
-    - java_class: android.health.connect.AggregateRecordsResponse
-      go_type: AggregateRecordsResponse
-    - java_class: android.health.connect.HealthConnectManager
-      go_type: HealthConnectManager
-      obtain: system_service
-      service_name: healthconnect
-      close: true
-    - java_class: android.health.connect.ReadMedicalResourcesPageRequest
-      go_type: ReadMedicalResourcesPageRequest
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getPageToken
-          go_name: GetPageToken
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.health.connect.ReadMedicalResourcesPageRequest$Builder
-      go_type: ReadMedicalResourcesPageRequestBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.health.connect.ReadMedicalResourcesPageRequest
-          error: true
-        - java_method: setPageSize
-          go_name: SetPageSize
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.health.connect.ReadMedicalResourcesPageRequest$Builder
-          error: true
-        - java_method: setPageToken
-          go_name: SetPageToken
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.health.connect.ReadMedicalResourcesPageRequest$Builder
-          error: true
-    - java_class: android.health.connect.ReadRecordsRequestUsingFilters
-      go_type: ReadRecordsRequestUsingFilters
-      methods:
-        - java_method: getPageSize
-          go_name: GetPageSize
-          returns: int
-          error: true
-        - java_method: getPageToken
-          go_name: GetPageToken
-          returns: long
-          error: true
-        - java_method: getTimeRangeFilter
-          go_name: GetTimeRangeFilter
-          returns: android.health.connect.TimeRangeFilter
-          error: true
-        - java_method: isAscending
-          go_name: IsAscending
-          returns: boolean
-          error: true
-    - java_class: android.health.connect.ReadRecordsRequestUsingFilters$Builder
-      go_type: ReadRecordsRequestUsingFiltersBuilder
-    - java_class: android.health.connect.LocalTimeRangeFilter
-      go_type: LocalTimeRangeFilter
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getEndTime
-          go_name: GetEndTime
-          returns: java.time.LocalDateTime
-          error: true
-        - java_method: getStartTime
-          go_name: GetStartTime
-          returns: java.time.LocalDateTime
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isBounded
-          go_name: IsBounded
-          returns: boolean
-          error: true
-    - java_class: android.health.connect.LocalTimeRangeFilter$Builder
-      go_type: LocalTimeRangeFilterBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.health.connect.LocalTimeRangeFilter
-          error: true
-        - java_method: setEndTime
-          go_name: SetEndTime
-          params:
-            - java_type: java.time.LocalDateTime
-              go_name: arg0
-          returns: android.health.connect.LocalTimeRangeFilter$Builder
-          error: true
-        - java_method: setStartTime
-          go_name: SetStartTime
-          params:
-            - java_type: java.time.LocalDateTime
-              go_name: arg0
-          returns: android.health.connect.LocalTimeRangeFilter$Builder
-          error: true
-    - java_class: android.health.connect.InsertRecordsResponse
-      go_type: InsertRecordsResponse
-    - java_class: android.health.connect.GetMedicalDataSourcesRequest
-      go_type: GetMedicalDataSourcesRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.health.connect.GetMedicalDataSourcesRequest$Builder
-      go_type: GetMedicalDataSourcesRequestBuilder
-      methods:
-        - java_method: addPackageName
-          go_name: AddPackageName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.health.connect.GetMedicalDataSourcesRequest$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.health.connect.GetMedicalDataSourcesRequest
-          error: true
-        - java_method: clearPackageNames
-          go_name: ClearPackageNames
-          returns: android.health.connect.GetMedicalDataSourcesRequest$Builder
-          error: true
     - java_class: android.health.connect.DeleteMedicalResourcesRequest
       go_type: DeleteMedicalResourcesRequest
       methods:
@@ -236,24 +65,9 @@ classes:
           go_name: ClearMedicalResourceTypes
           returns: android.health.connect.DeleteMedicalResourcesRequest$Builder
           error: true
-    - java_class: android.health.connect.RecordIdFilter
-      go_type: RecordIdFilter
+    - java_class: android.health.connect.TimeInstantRangeFilter
+      go_type: TimeInstantRangeFilter
       methods:
-        - java_method: getClientRecordId
-          go_name: GetClientRecordId
-          returns: String
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-    - java_class: android.health.connect.UpsertMedicalResourceRequest
-      go_type: UpsertMedicalResourceRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
         - java_method: equals
           go_name: Equals
           params:
@@ -261,17 +75,93 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getData
-          go_name: GetData
-          returns: String
+        - java_method: getEndTime
+          go_name: GetEndTime
+          returns: java.time.Instant
           error: true
-        - java_method: getDataSourceId
-          go_name: GetDataSourceId
-          returns: String
+        - java_method: getStartTime
+          go_name: GetStartTime
+          returns: java.time.Instant
           error: true
-        - java_method: getFhirVersion
-          go_name: GetFhirVersion
-          returns: android.health.connect.datatypes.FhirVersion
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isBounded
+          go_name: IsBounded
+          returns: boolean
+          error: true
+    - java_class: android.health.connect.TimeInstantRangeFilter$Builder
+      go_type: TimeInstantRangeFilterBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.health.connect.TimeInstantRangeFilter
+          error: true
+        - java_method: setEndTime
+          go_name: SetEndTime
+          params:
+            - java_type: java.time.Instant
+              go_name: arg0
+          returns: android.health.connect.TimeInstantRangeFilter$Builder
+          error: true
+        - java_method: setStartTime
+          go_name: SetStartTime
+          params:
+            - java_type: java.time.Instant
+              go_name: arg0
+          returns: android.health.connect.TimeInstantRangeFilter$Builder
+          error: true
+    - java_class: android.health.connect.AggregateRecordsRequest
+      go_type: AggregateRecordsRequest
+      methods:
+        - java_method: getTimeRangeFilter
+          go_name: GetTimeRangeFilter
+          returns: android.health.connect.TimeRangeFilter
+          error: true
+    - java_class: android.health.connect.AggregateRecordsRequest$Builder
+      go_type: AggregateRecordsRequestBuilder
+    - java_class: android.health.connect.ReadRecordsRequestUsingFilters
+      go_type: ReadRecordsRequestUsingFilters
+      methods:
+        - java_method: getPageSize
+          go_name: GetPageSize
+          returns: int
+          error: true
+        - java_method: getPageToken
+          go_name: GetPageToken
+          returns: long
+          error: true
+        - java_method: getTimeRangeFilter
+          go_name: GetTimeRangeFilter
+          returns: android.health.connect.TimeRangeFilter
+          error: true
+        - java_method: isAscending
+          go_name: IsAscending
+          returns: boolean
+          error: true
+    - java_class: android.health.connect.ReadRecordsRequestUsingFilters$Builder
+      go_type: ReadRecordsRequestUsingFiltersBuilder
+    - java_class: android.health.connect.ReadRecordsResponse
+      go_type: ReadRecordsResponse
+      methods:
+        - java_method: getNextPageToken
+          go_name: GetNextPageToken
+          returns: long
+          error: true
+    - java_class: android.health.connect.ReadMedicalResourcesInitialRequest
+      go_type: ReadMedicalResourcesInitialRequest
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getMedicalResourceType
+          go_name: GetMedicalResourceType
+          returns: int
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -281,53 +171,48 @@ classes:
           go_name: ToString
           returns: String
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.health.connect.UpsertMedicalResourceRequest$Builder
-      go_type: UpsertMedicalResourceRequestBuilder
+    - java_class: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
+      go_type: ReadMedicalResourcesInitialRequestBuilder
       methods:
+        - java_method: addDataSourceId
+          go_name: AddDataSourceId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
+          error: true
         - java_method: build
           go_name: Build
-          returns: android.health.connect.UpsertMedicalResourceRequest
+          returns: android.health.connect.ReadMedicalResourcesInitialRequest
           error: true
-        - java_method: setData
-          go_name: SetData
+        - java_method: clearDataSourceIds
+          go_name: ClearDataSourceIds
+          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
+          error: true
+        - java_method: setMedicalResourceType
+          go_name: SetMedicalResourceType
           params:
-            - java_type: String
+            - java_type: int
               go_name: arg0
-          returns: android.health.connect.UpsertMedicalResourceRequest$Builder
+          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
           error: true
-        - java_method: setDataSourceId
-          go_name: SetDataSourceId
+        - java_method: setPageSize
+          go_name: SetPageSize
           params:
-            - java_type: String
+            - java_type: int
               go_name: arg0
-          returns: android.health.connect.UpsertMedicalResourceRequest$Builder
+          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
           error: true
-        - java_method: setFhirVersion
-          go_name: SetFhirVersion
-          params:
-            - java_type: android.health.connect.datatypes.FhirVersion
-              go_name: arg0
-          returns: android.health.connect.UpsertMedicalResourceRequest$Builder
-          error: true
-    - java_class: android.health.connect.ReadRecordsRequestUsingIds
-      go_type: ReadRecordsRequestUsingIds
-    - java_class: android.health.connect.ReadRecordsRequestUsingIds$Builder
-      go_type: ReadRecordsRequestUsingIdsBuilder
-    - java_class: android.health.connect.HealthConnectException
-      go_type: HealthConnectException
+    - java_class: android.health.connect.AggregateRecordsGroupedByPeriodResponse
+      go_type: AggregateRecordsGroupedByPeriodResponse
       methods:
-        - java_method: getErrorCode
-          go_name: GetErrorCode
-          returns: int
+        - java_method: getEndTime
+          go_name: GetEndTime
+          returns: java.time.LocalDateTime
+          error: true
+        - java_method: getStartTime
+          go_name: GetStartTime
+          returns: java.time.LocalDateTime
           error: true
     - java_class: android.health.connect.CreateMedicalDataSourceRequest
       go_type: CreateMedicalDataSourceRequest
@@ -400,24 +285,6 @@ classes:
               go_name: arg0
           returns: android.health.connect.CreateMedicalDataSourceRequest$Builder
           error: true
-    - java_class: android.health.connect.ReadRecordsResponse
-      go_type: ReadRecordsResponse
-      methods:
-        - java_method: getNextPageToken
-          go_name: GetNextPageToken
-          returns: long
-          error: true
-    - java_class: android.health.connect.AggregateRecordsGroupedByPeriodResponse
-      go_type: AggregateRecordsGroupedByPeriodResponse
-      methods:
-        - java_method: getEndTime
-          go_name: GetEndTime
-          returns: java.time.LocalDateTime
-          error: true
-        - java_method: getStartTime
-          go_name: GetStartTime
-          returns: java.time.LocalDateTime
-          error: true
     - java_class: android.health.connect.ReadMedicalResourcesRequest
       go_type: ReadMedicalResourcesRequest
       methods:
@@ -425,8 +292,15 @@ classes:
           go_name: GetPageSize
           returns: int
           error: true
-    - java_class: android.health.connect.ReadMedicalResourcesInitialRequest
-      go_type: ReadMedicalResourcesInitialRequest
+    - java_class: android.health.connect.HealthConnectException
+      go_type: HealthConnectException
+      methods:
+        - java_method: getErrorCode
+          go_name: GetErrorCode
+          returns: int
+          error: true
+    - java_class: android.health.connect.ReadMedicalResourcesPageRequest
+      go_type: ReadMedicalResourcesPageRequest
       methods:
         - java_method: equals
           go_name: Equals
@@ -435,9 +309,9 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getMedicalResourceType
-          go_name: GetMedicalResourceType
-          returns: int
+        - java_method: getPageToken
+          go_name: GetPageToken
+          returns: String
           error: true
         - java_method: hashCode
           go_name: HashCode
@@ -447,40 +321,163 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
-      go_type: ReadMedicalResourcesInitialRequestBuilder
+    - java_class: android.health.connect.ReadMedicalResourcesPageRequest$Builder
+      go_type: ReadMedicalResourcesPageRequestBuilder
       methods:
-        - java_method: addDataSourceId
-          go_name: AddDataSourceId
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
-          error: true
         - java_method: build
           go_name: Build
-          returns: android.health.connect.ReadMedicalResourcesInitialRequest
-          error: true
-        - java_method: clearDataSourceIds
-          go_name: ClearDataSourceIds
-          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
-          error: true
-        - java_method: setMedicalResourceType
-          go_name: SetMedicalResourceType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
+          returns: android.health.connect.ReadMedicalResourcesPageRequest
           error: true
         - java_method: setPageSize
           go_name: SetPageSize
           params:
             - java_type: int
               go_name: arg0
-          returns: android.health.connect.ReadMedicalResourcesInitialRequest$Builder
+          returns: android.health.connect.ReadMedicalResourcesPageRequest$Builder
+          error: true
+        - java_method: setPageToken
+          go_name: SetPageToken
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.health.connect.ReadMedicalResourcesPageRequest$Builder
+          error: true
+    - java_class: android.health.connect.TimeRangeFilter
+      go_type: TimeRangeFilter
+    - java_class: android.health.connect.HealthConnectManager
+      go_type: HealthConnectManager
+      obtain: system_service
+      service_name: healthconnect
+      close: true
+    - java_class: android.health.connect.RecordIdFilter
+      go_type: RecordIdFilter
+      methods:
+        - java_method: getClientRecordId
+          go_name: GetClientRecordId
+          returns: String
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+    - java_class: android.health.connect.AggregateRecordsResponse
+      go_type: AggregateRecordsResponse
+    - java_class: android.health.connect.ReadRecordsRequestUsingIds
+      go_type: ReadRecordsRequestUsingIds
+    - java_class: android.health.connect.ReadRecordsRequestUsingIds$Builder
+      go_type: ReadRecordsRequestUsingIdsBuilder
+    - java_class: android.health.connect.ReadRecordsRequest
+      go_type: ReadRecordsRequest
+    - java_class: android.health.connect.HealthPermissions
+      go_type: HealthPermissions
+    - java_class: android.health.connect.InsertRecordsResponse
+      go_type: InsertRecordsResponse
+    - java_class: android.health.connect.GetMedicalDataSourcesRequest
+      go_type: GetMedicalDataSourcesRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.health.connect.GetMedicalDataSourcesRequest$Builder
+      go_type: GetMedicalDataSourcesRequestBuilder
+      methods:
+        - java_method: addPackageName
+          go_name: AddPackageName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.health.connect.GetMedicalDataSourcesRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.health.connect.GetMedicalDataSourcesRequest
+          error: true
+        - java_method: clearPackageNames
+          go_name: ClearPackageNames
+          returns: android.health.connect.GetMedicalDataSourcesRequest$Builder
+          error: true
+    - java_class: android.health.connect.LocalTimeRangeFilter
+      go_type: LocalTimeRangeFilter
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getEndTime
+          go_name: GetEndTime
+          returns: java.time.LocalDateTime
+          error: true
+        - java_method: getStartTime
+          go_name: GetStartTime
+          returns: java.time.LocalDateTime
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isBounded
+          go_name: IsBounded
+          returns: boolean
+          error: true
+    - java_class: android.health.connect.LocalTimeRangeFilter$Builder
+      go_type: LocalTimeRangeFilterBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.health.connect.LocalTimeRangeFilter
+          error: true
+        - java_method: setEndTime
+          go_name: SetEndTime
+          params:
+            - java_type: java.time.LocalDateTime
+              go_name: arg0
+          returns: android.health.connect.LocalTimeRangeFilter$Builder
+          error: true
+        - java_method: setStartTime
+          go_name: SetStartTime
+          params:
+            - java_type: java.time.LocalDateTime
+              go_name: arg0
+          returns: android.health.connect.LocalTimeRangeFilter$Builder
           error: true
     - java_class: android.health.connect.ReadMedicalResourcesResponse
       go_type: ReadMedicalResourcesResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.List<android.health.connect.datatypes.MedicalResource>
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -518,66 +515,6 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.health.connect.TimeRangeFilter
-      go_type: TimeRangeFilter
-    - java_class: android.health.connect.ReadRecordsRequest
-      go_type: ReadRecordsRequest
-    - java_class: android.health.connect.TimeInstantRangeFilter
-      go_type: TimeInstantRangeFilter
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getEndTime
-          go_name: GetEndTime
-          returns: java.time.Instant
-          error: true
-        - java_method: getStartTime
-          go_name: GetStartTime
-          returns: java.time.Instant
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isBounded
-          go_name: IsBounded
-          returns: boolean
-          error: true
-    - java_class: android.health.connect.TimeInstantRangeFilter$Builder
-      go_type: TimeInstantRangeFilterBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.health.connect.TimeInstantRangeFilter
-          error: true
-        - java_method: setEndTime
-          go_name: SetEndTime
-          params:
-            - java_type: java.time.Instant
-              go_name: arg0
-          returns: android.health.connect.TimeInstantRangeFilter$Builder
-          error: true
-        - java_method: setStartTime
-          go_name: SetStartTime
-          params:
-            - java_type: java.time.Instant
-              go_name: arg0
-          returns: android.health.connect.TimeInstantRangeFilter$Builder
-          error: true
-    - java_class: android.health.connect.AggregateRecordsRequest
-      go_type: AggregateRecordsRequest
-      methods:
-        - java_method: getTimeRangeFilter
-          go_name: GetTimeRangeFilter
-          returns: android.health.connect.TimeRangeFilter
-          error: true
-    - java_class: android.health.connect.AggregateRecordsRequest$Builder
-      go_type: AggregateRecordsRequestBuilder
     - java_class: android.health.connect.AggregateRecordsGroupedByDurationResponse
       go_type: AggregateRecordsGroupedByDurationResponse
       methods:
@@ -591,6 +528,14 @@ classes:
           error: true
     - java_class: android.health.connect.MedicalResourceId
       go_type: MedicalResourceId
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: String
+          go_name: arg2
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -642,7 +587,123 @@ classes:
               go_name: arg1
           returns: android.health.connect.MedicalResourceId
           error: true
+    - java_class: android.health.connect.UpsertMedicalResourceRequest
+      go_type: UpsertMedicalResourceRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getData
+          go_name: GetData
+          returns: String
+          error: true
+        - java_method: getDataSourceId
+          go_name: GetDataSourceId
+          returns: String
+          error: true
+        - java_method: getFhirVersion
+          go_name: GetFhirVersion
+          returns: android.health.connect.datatypes.FhirVersion
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.health.connect.UpsertMedicalResourceRequest$Builder
+      go_type: UpsertMedicalResourceRequestBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.health.connect.UpsertMedicalResourceRequest
+          error: true
+        - java_method: setData
+          go_name: SetData
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.health.connect.UpsertMedicalResourceRequest$Builder
+          error: true
+        - java_method: setDataSourceId
+          go_name: SetDataSourceId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.health.connect.UpsertMedicalResourceRequest$Builder
+          error: true
+        - java_method: setFhirVersion
+          go_name: SetFhirVersion
+          params:
+            - java_type: android.health.connect.datatypes.FhirVersion
+              go_name: arg0
+          returns: android.health.connect.UpsertMedicalResourceRequest$Builder
+          error: true
 constants:
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ErrorDataSyncInProgress
+      value: "8"
+      go_type: int
+    - go_name: ErrorInternal
+      value: "2"
+      go_type: int
+    - go_name: ErrorInvalidArgument
+      value: "3"
+      go_type: int
+    - go_name: ErrorIo
+      value: "4"
+      go_type: int
+    - go_name: ErrorRateLimitExceeded
+      value: "7"
+      go_type: int
+    - go_name: ErrorRemote
+      value: "6"
+      go_type: int
+    - go_name: ErrorSecurity
+      value: "5"
+      go_type: int
+    - go_name: ErrorUnknown
+      value: "1"
+      go_type: int
+    - go_name: ErrorUnsupportedOperation
+      value: "9"
+      go_type: int
+    - go_name: ActionManageHealthPermissions
+      value: '"android.health.connect.action.MANAGE_HEALTH_PERMISSIONS"'
+      go_type: string
+    - go_name: ActionRequestExerciseRoute
+      value: '"android.health.connect.action.REQUEST_EXERCISE_ROUTE"'
+      go_type: string
+    - go_name: CategoryHealthPermissions
+      value: '"android.intent.category.HEALTH_PERMISSIONS"'
+      go_type: string
+    - go_name: ExtraExerciseRoute
+      value: '"android.health.connect.extra.EXERCISE_ROUTE"'
+      go_type: string
+    - go_name: ExtraSessionId
+      value: '"android.health.connect.extra.SESSION_ID"'
+      go_type: string
     - go_name: ReadActiveCaloriesBurned
       value: '"android.permission.health.READ_ACTIVE_CALORIES_BURNED"'
       go_type: string
@@ -928,48 +989,3 @@ constants:
     - go_name: WriteWheelchairPushes
       value: '"android.permission.health.WRITE_WHEELCHAIR_PUSHES"'
       go_type: string
-    - go_name: ActionManageHealthPermissions
-      value: '"android.health.connect.action.MANAGE_HEALTH_PERMISSIONS"'
-      go_type: string
-    - go_name: ActionRequestExerciseRoute
-      value: '"android.health.connect.action.REQUEST_EXERCISE_ROUTE"'
-      go_type: string
-    - go_name: CategoryHealthPermissions
-      value: '"android.intent.category.HEALTH_PERMISSIONS"'
-      go_type: string
-    - go_name: ExtraExerciseRoute
-      value: '"android.health.connect.extra.EXERCISE_ROUTE"'
-      go_type: string
-    - go_name: ExtraSessionId
-      value: '"android.health.connect.extra.SESSION_ID"'
-      go_type: string
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: ErrorDataSyncInProgress
-      value: "8"
-      go_type: int
-    - go_name: ErrorInternal
-      value: "2"
-      go_type: int
-    - go_name: ErrorInvalidArgument
-      value: "3"
-      go_type: int
-    - go_name: ErrorIo
-      value: "4"
-      go_type: int
-    - go_name: ErrorRateLimitExceeded
-      value: "7"
-      go_type: int
-    - go_name: ErrorRemote
-      value: "6"
-      go_type: int
-    - go_name: ErrorSecurity
-      value: "5"
-      go_type: int
-    - go_name: ErrorUnknown
-      value: "1"
-      go_type: int
-    - go_name: ErrorUnsupportedOperation
-      value: "9"
-      go_type: int

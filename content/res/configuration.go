@@ -23,6 +23,28 @@ type Configuration struct {
 	Obj *jni.GlobalRef
 }
 
+// NewConfiguration creates a new android.content.res.Configuration instance.
+func NewConfiguration(vm *jni.VM) (*Configuration, error) {
+	var t Configuration
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfiguration)), midConfigurationInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CompareTo1 calls android.content.res.Configuration.compareTo.
 func (m *Configuration) CompareTo1(arg0 *jni.Object) (int32, error) {
 	var result int32

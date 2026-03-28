@@ -23,6 +23,33 @@ type SurfaceTexture struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSurfaceTexture creates a new android.graphics.SurfaceTexture instance.
+func NewSurfaceTexture(vm *jni.VM, arg0 bool) (*SurfaceTexture, error) {
+	var t SurfaceTexture
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceTexture)), midSurfaceTextureInit, jni.BooleanValue(jArg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AttachToGLContext calls android.graphics.SurfaceTexture.attachToGLContext.
 func (m *SurfaceTexture) AttachToGLContext(arg0 int32) error {
 

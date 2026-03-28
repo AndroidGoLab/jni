@@ -21,6 +21,28 @@ type ExpandableListActivity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewExpandableListActivity creates a new android.app.ExpandableListActivity instance.
+func NewExpandableListActivity(vm *jni.VM) (*ExpandableListActivity, error) {
+	var t ExpandableListActivity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExpandableListActivity)), midExpandableListActivityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetExpandableListAdapter calls android.app.ExpandableListActivity.getExpandableListAdapter.
 func (m *ExpandableListActivity) GetExpandableListAdapter() (*jni.Object, error) {
 	var result *jni.Object

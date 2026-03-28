@@ -23,11 +23,15 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsDisplayHashManager                  *jni.GlobalRef
+	midDisplayHashManagerVerifyDisplayHash jni.MethodID
+
 	clsDisplayHashResultCallback                    *jni.GlobalRef
 	midDisplayHashResultCallbackOnDisplayHashError  jni.MethodID
 	midDisplayHashResultCallbackOnDisplayHashResult jni.MethodID
 
 	clsVerifiedDisplayHash                  *jni.GlobalRef
+	midVerifiedDisplayHashInit              jni.MethodID
 	midVerifiedDisplayHashDescribeContents  jni.MethodID
 	midVerifiedDisplayHashGetBoundsInWindow jni.MethodID
 	midVerifiedDisplayHashGetHashAlgorithm  jni.MethodID
@@ -35,9 +39,6 @@ var (
 	midVerifiedDisplayHashGetTimeMillis     jni.MethodID
 	midVerifiedDisplayHashToString          jni.MethodID
 	midVerifiedDisplayHashWriteToParcel     jni.MethodID
-
-	clsDisplayHashManager                  *jni.GlobalRef
-	midDisplayHashManagerVerifyDisplayHash jni.MethodID
 
 	clsDisplayHash                 *jni.GlobalRef
 	midDisplayHashDescribeContents jni.MethodID
@@ -62,6 +63,23 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/view/displayhash/DisplayHashManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDisplayHashManager = env.NewGlobalRef(&c.Object)
+
+		midDisplayHashManagerVerifyDisplayHash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashManager)), "verifyDisplayHash", "(Landroid/view/displayhash/DisplayHash;)Landroid/view/displayhash/VerifiedDisplayHash;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/view/displayhash/DisplayHashResultCallback")
 	if err != nil {
@@ -94,6 +112,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVerifiedDisplayHash = env.NewGlobalRef(&c.Object)
+		midVerifiedDisplayHashInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), "<init>", "(JLandroid/graphics/Rect;Ljava/lang/String;[B)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midVerifiedDisplayHashDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), "describeContents", "()I")
 		if err != nil {
@@ -138,23 +160,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midVerifiedDisplayHashWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/displayhash/DisplayHashManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDisplayHashManager = env.NewGlobalRef(&c.Object)
-
-		midDisplayHashManagerVerifyDisplayHash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashManager)), "verifyDisplayHash", "(Landroid/view/displayhash/DisplayHash;)Landroid/view/displayhash/VerifiedDisplayHash;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

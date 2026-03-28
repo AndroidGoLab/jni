@@ -7,6 +7,12 @@ go_import: github.com/AndroidGoLab/jni/service/assist/classification
 classes:
     - java_class: android.service.assist.classification.FieldClassification
       go_type: FieldClassification
+      obtain: constructor
+      constructor_params:
+        - java_type: android.view.autofill.AutofillId
+          go_name: arg0
+        - java_type: java.util.Set<java.lang.String>
+          go_name: arg1
       methods:
         - java_method: describeContents
           go_name: DescribeContents

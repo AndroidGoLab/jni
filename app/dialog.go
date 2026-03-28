@@ -21,6 +21,29 @@ type Dialog struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDialog creates a new android.app.Dialog instance.
+func NewDialog(vm *jni.VM, arg0 *jni.Object) (*Dialog, error) {
+	var t Dialog
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDialog)), midDialogInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddContentView calls android.app.Dialog.addContentView.
 func (m *Dialog) AddContentView(arg0 *jni.Object, arg1 *jni.Object) error {
 

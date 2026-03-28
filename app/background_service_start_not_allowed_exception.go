@@ -21,6 +21,34 @@ type BackgroundServiceStartNotAllowedException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBackgroundServiceStartNotAllowedException creates a new android.app.BackgroundServiceStartNotAllowedException instance.
+func NewBackgroundServiceStartNotAllowedException(vm *jni.VM, arg0 string) (*BackgroundServiceStartNotAllowedException, error) {
+	var t BackgroundServiceStartNotAllowedException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackgroundServiceStartNotAllowedException)), midBackgroundServiceStartNotAllowedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.BackgroundServiceStartNotAllowedException.describeContents.
 func (m *BackgroundServiceStartNotAllowedException) DescribeContents() (int32, error) {
 	var result int32

@@ -23,6 +23,29 @@ type InvalidMajorVersionException struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInvalidMajorVersionException creates a new android.net.ipsec.ike.exceptions.InvalidMajorVersionException instance.
+func NewInvalidMajorVersionException(vm *jni.VM, arg0 int8) (*InvalidMajorVersionException, error) {
+	var t InvalidMajorVersionException
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), midInvalidMajorVersionExceptionInit, jni.ByteValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetMajorVersion calls android.net.ipsec.ike.exceptions.InvalidMajorVersionException.getMajorVersion.
 func (m *InvalidMajorVersionException) GetMajorVersion() (int8, error) {
 	var result int8

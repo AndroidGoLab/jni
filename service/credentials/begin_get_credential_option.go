@@ -23,6 +23,40 @@ type BeginGetCredentialOption struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBeginGetCredentialOption creates a new android.service.credentials.BeginGetCredentialOption instance.
+func NewBeginGetCredentialOption(vm *jni.VM, arg0 string, arg1 string, arg2 *jni.Object) (*BeginGetCredentialOption, error) {
+	var t BeginGetCredentialOption
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), midBeginGetCredentialOptionInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.credentials.BeginGetCredentialOption.describeContents.
 func (m *BeginGetCredentialOption) DescribeContents() (int32, error) {
 	var result int32

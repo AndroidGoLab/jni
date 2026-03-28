@@ -23,6 +23,34 @@ type Rfc822AddrIdentification struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRfc822AddrIdentification creates a new android.net.ipsec.ike.IkeRfc822AddrIdentification instance.
+func NewRfc822AddrIdentification(vm *jni.VM, arg0 string) (*Rfc822AddrIdentification, error) {
+	var t Rfc822AddrIdentification
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822AddrIdentification)), midRfc822AddrIdentificationInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.net.ipsec.ike.IkeRfc822AddrIdentification.equals.
 func (m *Rfc822AddrIdentification) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

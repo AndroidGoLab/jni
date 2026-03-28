@@ -8,6 +8,12 @@ const (
 	ClusterChangeEventJoined                   = consts.ClusterChangeEventJoined
 	ClusterChangeEventStarted                  = consts.ClusterChangeEventStarted
 	Creator                                    = consts.Creator
+	WifiAwareDataPathRoleInitiator             = consts.WifiAwareDataPathRoleInitiator
+	WifiAwareDataPathRoleResponder             = consts.WifiAwareDataPathRoleResponder
+	WifiAwareDiscoveryLostReasonPeerNotVisible = consts.WifiAwareDiscoveryLostReasonPeerNotVisible
+	WifiAwareDiscoveryLostReasonUnknown        = consts.WifiAwareDiscoveryLostReasonUnknown
+	PublishTypeSolicited                       = consts.PublishTypeSolicited
+	PublishTypeUnsolicited                     = consts.PublishTypeUnsolicited
 	PairingBootstrappingNfcReader              = consts.PairingBootstrappingNfcReader
 	PairingBootstrappingNfcTag                 = consts.PairingBootstrappingNfcTag
 	PairingBootstrappingOpportunistic          = consts.PairingBootstrappingOpportunistic
@@ -24,14 +30,8 @@ const (
 	WifiAwareCipherSuiteNcsSk128               = consts.WifiAwareCipherSuiteNcsSk128
 	WifiAwareCipherSuiteNcsSk256               = consts.WifiAwareCipherSuiteNcsSk256
 	WifiAwareCipherSuiteNone                   = consts.WifiAwareCipherSuiteNone
-	PublishTypeSolicited                       = consts.PublishTypeSolicited
-	PublishTypeUnsolicited                     = consts.PublishTypeUnsolicited
 	SubscribeTypeActive                        = consts.SubscribeTypeActive
 	SubscribeTypePassive                       = consts.SubscribeTypePassive
-	WifiAwareDataPathRoleInitiator             = consts.WifiAwareDataPathRoleInitiator
-	WifiAwareDataPathRoleResponder             = consts.WifiAwareDataPathRoleResponder
-	WifiAwareDiscoveryLostReasonPeerNotVisible = consts.WifiAwareDiscoveryLostReasonPeerNotVisible
-	WifiAwareDiscoveryLostReasonUnknown        = consts.WifiAwareDiscoveryLostReasonUnknown
 )
 
 const (

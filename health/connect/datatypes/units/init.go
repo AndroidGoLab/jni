@@ -23,23 +23,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPercentage             *jni.GlobalRef
-	midPercentageCompareTo1   jni.MethodID
-	midPercentageEquals       jni.MethodID
-	midPercentageGetValue     jni.MethodID
-	midPercentageHashCode     jni.MethodID
-	midPercentageToString     jni.MethodID
-	midPercentageCompareTo1_1 jni.MethodID
-	midPercentageFromValue    jni.MethodID
-
-	clsTemperatureDelta             *jni.GlobalRef
-	midTemperatureDeltaCompareTo1   jni.MethodID
-	midTemperatureDeltaEquals       jni.MethodID
-	midTemperatureDeltaGetInCelsius jni.MethodID
-	midTemperatureDeltaHashCode     jni.MethodID
-	midTemperatureDeltaToString     jni.MethodID
-	midTemperatureDeltaCompareTo1_1 jni.MethodID
-	midTemperatureDeltaFromCelsius  jni.MethodID
+	clsBloodGlucose                        *jni.GlobalRef
+	midBloodGlucoseCompareTo1              jni.MethodID
+	midBloodGlucoseEquals                  jni.MethodID
+	midBloodGlucoseGetInMillimolesPerLiter jni.MethodID
+	midBloodGlucoseHashCode                jni.MethodID
+	midBloodGlucoseToString                jni.MethodID
+	midBloodGlucoseCompareTo1_1            jni.MethodID
+	midBloodGlucoseFromMillimolesPerLiter  jni.MethodID
 
 	clsVolume             *jni.GlobalRef
 	midVolumeCompareTo1   jni.MethodID
@@ -50,50 +41,14 @@ var (
 	midVolumeCompareTo1_1 jni.MethodID
 	midVolumeFromLiters   jni.MethodID
 
-	clsTemperature             *jni.GlobalRef
-	midTemperatureCompareTo1   jni.MethodID
-	midTemperatureEquals       jni.MethodID
-	midTemperatureGetInCelsius jni.MethodID
-	midTemperatureHashCode     jni.MethodID
-	midTemperatureToString     jni.MethodID
-	midTemperatureCompareTo1_1 jni.MethodID
-	midTemperatureFromCelsius  jni.MethodID
-
-	clsVelocity                     *jni.GlobalRef
-	midVelocityCompareTo1           jni.MethodID
-	midVelocityEquals               jni.MethodID
-	midVelocityGetInMetersPerSecond jni.MethodID
-	midVelocityHashCode             jni.MethodID
-	midVelocityToString             jni.MethodID
-	midVelocityCompareTo1_1         jni.MethodID
-	midVelocityFromMetersPerSecond  jni.MethodID
-
-	clsEnergy              *jni.GlobalRef
-	midEnergyCompareTo1    jni.MethodID
-	midEnergyEquals        jni.MethodID
-	midEnergyGetInCalories jni.MethodID
-	midEnergyHashCode      jni.MethodID
-	midEnergyToString      jni.MethodID
-	midEnergyCompareTo1_1  jni.MethodID
-	midEnergyFromCalories  jni.MethodID
-
-	clsPressure                          *jni.GlobalRef
-	midPressureCompareTo1                jni.MethodID
-	midPressureEquals                    jni.MethodID
-	midPressureGetInMillimetersOfMercury jni.MethodID
-	midPressureHashCode                  jni.MethodID
-	midPressureToString                  jni.MethodID
-	midPressureCompareTo1_1              jni.MethodID
-	midPressureFromMillimetersOfMercury  jni.MethodID
-
-	clsMass             *jni.GlobalRef
-	midMassCompareTo1   jni.MethodID
-	midMassEquals       jni.MethodID
-	midMassGetInGrams   jni.MethodID
-	midMassHashCode     jni.MethodID
-	midMassToString     jni.MethodID
-	midMassCompareTo1_1 jni.MethodID
-	midMassFromGrams    jni.MethodID
+	clsTemperatureDelta             *jni.GlobalRef
+	midTemperatureDeltaCompareTo1   jni.MethodID
+	midTemperatureDeltaEquals       jni.MethodID
+	midTemperatureDeltaGetInCelsius jni.MethodID
+	midTemperatureDeltaHashCode     jni.MethodID
+	midTemperatureDeltaToString     jni.MethodID
+	midTemperatureDeltaCompareTo1_1 jni.MethodID
+	midTemperatureDeltaFromCelsius  jni.MethodID
 
 	clsPower             *jni.GlobalRef
 	midPowerCompareTo1   jni.MethodID
@@ -104,15 +59,6 @@ var (
 	midPowerCompareTo1_1 jni.MethodID
 	midPowerFromWatts    jni.MethodID
 
-	clsBloodGlucose                        *jni.GlobalRef
-	midBloodGlucoseCompareTo1              jni.MethodID
-	midBloodGlucoseEquals                  jni.MethodID
-	midBloodGlucoseGetInMillimolesPerLiter jni.MethodID
-	midBloodGlucoseHashCode                jni.MethodID
-	midBloodGlucoseToString                jni.MethodID
-	midBloodGlucoseCompareTo1_1            jni.MethodID
-	midBloodGlucoseFromMillimolesPerLiter  jni.MethodID
-
 	clsLength             *jni.GlobalRef
 	midLengthCompareTo1   jni.MethodID
 	midLengthEquals       jni.MethodID
@@ -121,6 +67,60 @@ var (
 	midLengthToString     jni.MethodID
 	midLengthCompareTo1_1 jni.MethodID
 	midLengthFromMeters   jni.MethodID
+
+	clsPercentage             *jni.GlobalRef
+	midPercentageCompareTo1   jni.MethodID
+	midPercentageEquals       jni.MethodID
+	midPercentageGetValue     jni.MethodID
+	midPercentageHashCode     jni.MethodID
+	midPercentageToString     jni.MethodID
+	midPercentageCompareTo1_1 jni.MethodID
+	midPercentageFromValue    jni.MethodID
+
+	clsTemperature             *jni.GlobalRef
+	midTemperatureCompareTo1   jni.MethodID
+	midTemperatureEquals       jni.MethodID
+	midTemperatureGetInCelsius jni.MethodID
+	midTemperatureHashCode     jni.MethodID
+	midTemperatureToString     jni.MethodID
+	midTemperatureCompareTo1_1 jni.MethodID
+	midTemperatureFromCelsius  jni.MethodID
+
+	clsPressure                          *jni.GlobalRef
+	midPressureCompareTo1                jni.MethodID
+	midPressureEquals                    jni.MethodID
+	midPressureGetInMillimetersOfMercury jni.MethodID
+	midPressureHashCode                  jni.MethodID
+	midPressureToString                  jni.MethodID
+	midPressureCompareTo1_1              jni.MethodID
+	midPressureFromMillimetersOfMercury  jni.MethodID
+
+	clsVelocity                     *jni.GlobalRef
+	midVelocityCompareTo1           jni.MethodID
+	midVelocityEquals               jni.MethodID
+	midVelocityGetInMetersPerSecond jni.MethodID
+	midVelocityHashCode             jni.MethodID
+	midVelocityToString             jni.MethodID
+	midVelocityCompareTo1_1         jni.MethodID
+	midVelocityFromMetersPerSecond  jni.MethodID
+
+	clsMass             *jni.GlobalRef
+	midMassCompareTo1   jni.MethodID
+	midMassEquals       jni.MethodID
+	midMassGetInGrams   jni.MethodID
+	midMassHashCode     jni.MethodID
+	midMassToString     jni.MethodID
+	midMassCompareTo1_1 jni.MethodID
+	midMassFromGrams    jni.MethodID
+
+	clsEnergy              *jni.GlobalRef
+	midEnergyCompareTo1    jni.MethodID
+	midEnergyEquals        jni.MethodID
+	midEnergyGetInCalories jni.MethodID
+	midEnergyHashCode      jni.MethodID
+	midEnergyToString      jni.MethodID
+	midEnergyCompareTo1_1  jni.MethodID
+	midEnergyFromCalories  jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -141,116 +141,57 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/health/connect/datatypes/units/Percentage")
+	c, err = env.FindClass("android/health/connect/datatypes/units/BloodGlucose")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPercentage = env.NewGlobalRef(&c.Object)
+		clsBloodGlucose = env.NewGlobalRef(&c.Object)
 
-		midPercentageCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "compareTo", "(Landroid/health/connect/datatypes/units/Percentage;)I")
+		midBloodGlucoseCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "compareTo", "(Landroid/health/connect/datatypes/units/BloodGlucose;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPercentageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "equals", "(Ljava/lang/Object;)Z")
+		midBloodGlucoseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPercentageGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "getValue", "()D")
+		midBloodGlucoseGetInMillimolesPerLiter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "getInMillimolesPerLiter", "()D")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPercentageHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "hashCode", "()I")
+		midBloodGlucoseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPercentageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "toString", "()Ljava/lang/String;")
+		midBloodGlucoseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPercentageCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "compareTo", "(Ljava/lang/Object;)I")
+		midBloodGlucoseCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "compareTo", "(Ljava/lang/Object;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPercentageFromValue, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "fromValue", "(D)Landroid/health/connect/datatypes/units/Percentage;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/health/connect/datatypes/units/TemperatureDelta")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTemperatureDelta = env.NewGlobalRef(&c.Object)
-
-		midTemperatureDeltaCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "compareTo", "(Landroid/health/connect/datatypes/units/TemperatureDelta;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTemperatureDeltaEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTemperatureDeltaGetInCelsius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "getInCelsius", "()D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTemperatureDeltaHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTemperatureDeltaToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTemperatureDeltaCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "compareTo", "(Ljava/lang/Object;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTemperatureDeltaFromCelsius, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "fromCelsius", "(D)Landroid/health/connect/datatypes/units/TemperatureDelta;")
+		midBloodGlucoseFromMillimolesPerLiter, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "fromMillimolesPerLiter", "(D)Landroid/health/connect/datatypes/units/BloodGlucose;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -318,293 +259,57 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/health/connect/datatypes/units/Temperature")
+	c, err = env.FindClass("android/health/connect/datatypes/units/TemperatureDelta")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsTemperature = env.NewGlobalRef(&c.Object)
+		clsTemperatureDelta = env.NewGlobalRef(&c.Object)
 
-		midTemperatureCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "compareTo", "(Landroid/health/connect/datatypes/units/Temperature;)I")
+		midTemperatureDeltaCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "compareTo", "(Landroid/health/connect/datatypes/units/TemperatureDelta;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTemperatureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "equals", "(Ljava/lang/Object;)Z")
+		midTemperatureDeltaEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTemperatureGetInCelsius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "getInCelsius", "()D")
+		midTemperatureDeltaGetInCelsius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "getInCelsius", "()D")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTemperatureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "hashCode", "()I")
+		midTemperatureDeltaHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTemperatureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "toString", "()Ljava/lang/String;")
+		midTemperatureDeltaToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTemperatureCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "compareTo", "(Ljava/lang/Object;)I")
+		midTemperatureDeltaCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "compareTo", "(Ljava/lang/Object;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midTemperatureFromCelsius, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "fromCelsius", "(D)Landroid/health/connect/datatypes/units/Temperature;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/health/connect/datatypes/units/Velocity")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsVelocity = env.NewGlobalRef(&c.Object)
-
-		midVelocityCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "compareTo", "(Landroid/health/connect/datatypes/units/Velocity;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVelocityEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVelocityGetInMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "getInMetersPerSecond", "()D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVelocityHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVelocityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVelocityCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "compareTo", "(Ljava/lang/Object;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVelocityFromMetersPerSecond, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "fromMetersPerSecond", "(D)Landroid/health/connect/datatypes/units/Velocity;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/health/connect/datatypes/units/Energy")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEnergy = env.NewGlobalRef(&c.Object)
-
-		midEnergyCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "compareTo", "(Landroid/health/connect/datatypes/units/Energy;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEnergyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEnergyGetInCalories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "getInCalories", "()D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEnergyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEnergyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEnergyCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "compareTo", "(Ljava/lang/Object;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEnergyFromCalories, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "fromCalories", "(D)Landroid/health/connect/datatypes/units/Energy;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/health/connect/datatypes/units/Pressure")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPressure = env.NewGlobalRef(&c.Object)
-
-		midPressureCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "compareTo", "(Landroid/health/connect/datatypes/units/Pressure;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPressureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPressureGetInMillimetersOfMercury, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "getInMillimetersOfMercury", "()D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPressureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPressureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPressureCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "compareTo", "(Ljava/lang/Object;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPressureFromMillimetersOfMercury, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "fromMillimetersOfMercury", "(D)Landroid/health/connect/datatypes/units/Pressure;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/health/connect/datatypes/units/Mass")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsMass = env.NewGlobalRef(&c.Object)
-
-		midMassCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "compareTo", "(Landroid/health/connect/datatypes/units/Mass;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMassEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMassGetInGrams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "getInGrams", "()D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMassHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMassToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMassCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "compareTo", "(Ljava/lang/Object;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMassFromGrams, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "fromGrams", "(D)Landroid/health/connect/datatypes/units/Mass;")
+		midTemperatureDeltaFromCelsius, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTemperatureDelta)), "fromCelsius", "(D)Landroid/health/connect/datatypes/units/TemperatureDelta;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -672,65 +377,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/health/connect/datatypes/units/BloodGlucose")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBloodGlucose = env.NewGlobalRef(&c.Object)
-
-		midBloodGlucoseCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "compareTo", "(Landroid/health/connect/datatypes/units/BloodGlucose;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBloodGlucoseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBloodGlucoseGetInMillimolesPerLiter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "getInMillimolesPerLiter", "()D")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBloodGlucoseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBloodGlucoseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBloodGlucoseCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "compareTo", "(Ljava/lang/Object;)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBloodGlucoseFromMillimolesPerLiter, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBloodGlucose)), "fromMillimolesPerLiter", "(D)Landroid/health/connect/datatypes/units/BloodGlucose;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/health/connect/datatypes/units/Length")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -782,6 +428,360 @@ func doInit(env *jni.Env) error {
 		}
 
 		midLengthFromMeters, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsLength)), "fromMeters", "(D)Landroid/health/connect/datatypes/units/Length;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/health/connect/datatypes/units/Percentage")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPercentage = env.NewGlobalRef(&c.Object)
+
+		midPercentageCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "compareTo", "(Landroid/health/connect/datatypes/units/Percentage;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPercentageEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPercentageGetValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "getValue", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPercentageHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPercentageToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPercentageCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPercentageFromValue, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPercentage)), "fromValue", "(D)Landroid/health/connect/datatypes/units/Percentage;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/health/connect/datatypes/units/Temperature")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTemperature = env.NewGlobalRef(&c.Object)
+
+		midTemperatureCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "compareTo", "(Landroid/health/connect/datatypes/units/Temperature;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureGetInCelsius, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "getInCelsius", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTemperatureFromCelsius, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsTemperature)), "fromCelsius", "(D)Landroid/health/connect/datatypes/units/Temperature;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/health/connect/datatypes/units/Pressure")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPressure = env.NewGlobalRef(&c.Object)
+
+		midPressureCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "compareTo", "(Landroid/health/connect/datatypes/units/Pressure;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPressureEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPressureGetInMillimetersOfMercury, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "getInMillimetersOfMercury", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPressureHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPressureToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPressureCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPressureFromMillimetersOfMercury, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPressure)), "fromMillimetersOfMercury", "(D)Landroid/health/connect/datatypes/units/Pressure;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/health/connect/datatypes/units/Velocity")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVelocity = env.NewGlobalRef(&c.Object)
+
+		midVelocityCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "compareTo", "(Landroid/health/connect/datatypes/units/Velocity;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVelocityEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVelocityGetInMetersPerSecond, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "getInMetersPerSecond", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVelocityHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVelocityToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVelocityCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVelocityFromMetersPerSecond, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVelocity)), "fromMetersPerSecond", "(D)Landroid/health/connect/datatypes/units/Velocity;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/health/connect/datatypes/units/Mass")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMass = env.NewGlobalRef(&c.Object)
+
+		midMassCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "compareTo", "(Landroid/health/connect/datatypes/units/Mass;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMassEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMassGetInGrams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "getInGrams", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMassHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMassToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMassCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMassFromGrams, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMass)), "fromGrams", "(D)Landroid/health/connect/datatypes/units/Mass;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/health/connect/datatypes/units/Energy")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEnergy = env.NewGlobalRef(&c.Object)
+
+		midEnergyCompareTo1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "compareTo", "(Landroid/health/connect/datatypes/units/Energy;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnergyEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnergyGetInCalories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "getInCalories", "()D")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnergyHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnergyToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnergyCompareTo1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "compareTo", "(Ljava/lang/Object;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEnergyFromCalories, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsEnergy)), "fromCalories", "(D)Landroid/health/connect/datatypes/units/Energy;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

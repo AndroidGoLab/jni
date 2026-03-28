@@ -23,6 +23,28 @@ type Content struct {
 	Obj *jni.GlobalRef
 }
 
+// NewContent creates a new android.app.assist.AssistContent instance.
+func NewContent(vm *jni.VM) (*Content, error) {
+	var t Content
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContent)), midContentInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.app.assist.AssistContent.describeContents.
 func (m *Content) DescribeContents() (int32, error) {
 	var result int32

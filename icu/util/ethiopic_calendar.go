@@ -23,6 +23,28 @@ type EthiopicCalendar struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEthiopicCalendar creates a new android.icu.util.EthiopicCalendar instance.
+func NewEthiopicCalendar(vm *jni.VM) (*EthiopicCalendar, error) {
+	var t EthiopicCalendar
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEthiopicCalendar)), midEthiopicCalendarInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetTemporalMonthCode calls android.icu.util.EthiopicCalendar.getTemporalMonthCode.
 func (m *EthiopicCalendar) GetTemporalMonthCode() (string, error) {
 	var result string

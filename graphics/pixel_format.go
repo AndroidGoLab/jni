@@ -23,6 +23,28 @@ type PixelFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPixelFormat creates a new android.graphics.PixelFormat instance.
+func NewPixelFormat(vm *jni.VM) (*PixelFormat, error) {
+	var t PixelFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPixelFormat)), midPixelFormatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // FormatHasAlpha calls android.graphics.PixelFormat.formatHasAlpha.
 func (m *PixelFormat) FormatHasAlpha(arg0 int32) (bool, error) {
 	var result bool

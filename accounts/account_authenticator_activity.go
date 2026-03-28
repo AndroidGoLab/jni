@@ -23,6 +23,28 @@ type AccountAuthenticatorActivity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAccountAuthenticatorActivity creates a new android.accounts.AccountAuthenticatorActivity instance.
+func NewAccountAuthenticatorActivity(vm *jni.VM) (*AccountAuthenticatorActivity, error) {
+	var t AccountAuthenticatorActivity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), midAccountAuthenticatorActivityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Finish calls android.accounts.AccountAuthenticatorActivity.finish.
 func (m *AccountAuthenticatorActivity) Finish() error {
 

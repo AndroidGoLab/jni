@@ -23,6 +23,28 @@ type Camera struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCamera creates a new android.graphics.Camera instance.
+func NewCamera(vm *jni.VM) (*Camera, error) {
+	var t Camera
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCamera)), midCameraInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyToCanvas calls android.graphics.Camera.applyToCanvas.
 func (m *Camera) ApplyToCanvas(arg0 *jni.Object) error {
 

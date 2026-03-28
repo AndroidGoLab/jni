@@ -23,6 +23,29 @@ type AnticipateInterpolator struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAnticipateInterpolator creates a new android.view.animation.AnticipateInterpolator instance.
+func NewAnticipateInterpolator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AnticipateInterpolator, error) {
+	var t AnticipateInterpolator
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnticipateInterpolator)), midAnticipateInterpolatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetInterpolation calls android.view.animation.AnticipateInterpolator.getInterpolation.
 func (m *AnticipateInterpolator) GetInterpolation(arg0 float32) (float32, error) {
 	var result float32

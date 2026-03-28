@@ -23,6 +23,29 @@ type MessagePdu struct {
 	Obj *jni.GlobalRef
 }
 
+// NewMessagePdu creates a new android.service.carrier.MessagePdu instance.
+func NewMessagePdu(vm *jni.VM, arg0 *jni.Object) (*MessagePdu, error) {
+	var t MessagePdu
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessagePdu)), midMessagePduInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.carrier.MessagePdu.describeContents.
 func (m *MessagePdu) DescribeContents() (int32, error) {
 	var result int32

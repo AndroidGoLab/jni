@@ -23,6 +23,28 @@ type Shader struct {
 	Obj *jni.GlobalRef
 }
 
+// NewShader creates a new android.graphics.Shader instance.
+func NewShader(vm *jni.VM) (*Shader, error) {
+	var t Shader
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShader)), midShaderInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetLocalMatrix calls android.graphics.Shader.getLocalMatrix.
 func (m *Shader) GetLocalMatrix(arg0 *jni.Object) (bool, error) {
 	var result bool

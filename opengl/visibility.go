@@ -23,6 +23,28 @@ type Visibility struct {
 	Obj *jni.GlobalRef
 }
 
+// NewVisibility creates a new android.opengl.Visibility instance.
+func NewVisibility(vm *jni.VM) (*Visibility, error) {
+	var t Visibility
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVisibility)), midVisibilityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ComputeBoundingSphere calls android.opengl.Visibility.computeBoundingSphere.
 func (m *Visibility) ComputeBoundingSphere(
 	arg0 *jni.Object,

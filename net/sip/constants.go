@@ -5,12 +5,6 @@ package sip
 import "github.com/AndroidGoLab/jni/net/sip/consts"
 
 const (
-	ExtraCallId  = consts.ExtraCallId
-	ExtraOfferSd = consts.ExtraOfferSd
-)
-
-const (
-	IncomingCallResultCode    = consts.IncomingCallResultCode
 	Deregistering             = consts.Deregistering
 	IncomingCall              = consts.IncomingCall
 	IncomingCallAnswering     = consts.IncomingCallAnswering
@@ -22,6 +16,8 @@ const (
 	Pinging                   = consts.Pinging
 	ReadyToCall               = consts.ReadyToCall
 	Registering               = consts.Registering
+	IncomingCallResultCode    = consts.IncomingCallResultCode
+	Creator                   = consts.Creator
 	ClientError               = consts.ClientError
 	CrossDomainAuthentication = consts.CrossDomainAuthentication
 	DataConnectionLost        = consts.DataConnectionLost
@@ -35,5 +31,9 @@ const (
 	SocketError               = consts.SocketError
 	TimeOut                   = consts.TimeOut
 	TransactionTerminted      = consts.TransactionTerminted
-	Creator                   = consts.Creator
+)
+
+const (
+	ExtraCallId  = consts.ExtraCallId
+	ExtraOfferSd = consts.ExtraOfferSd
 )

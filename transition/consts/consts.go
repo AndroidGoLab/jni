@@ -5,12 +5,12 @@ package consts
 const (
 	OrderingSequential int = 1
 	OrderingTogether   int = 0
-	ModeIn             int = 1
-	ModeOut            int = 2
-	In                 int = 1
-	Out                int = 2
 	MatchId            int = 3
 	MatchInstance      int = 1
 	MatchItemId        int = 4
 	MatchName          int = 2
+	ModeIn             int = 1
+	ModeOut            int = 2
+	In                 int = 1
+	Out                int = 2
 )

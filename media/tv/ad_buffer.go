@@ -23,6 +23,35 @@ type AdBuffer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAdBuffer creates a new android.media.tv.AdBuffer instance.
+func NewAdBuffer(vm *jni.VM, arg0 int32, arg1 string, arg2 *jni.Object, arg3 int32, arg4 int32, arg5 int64, arg6 int32) (*AdBuffer, error) {
+	var t AdBuffer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdBuffer)), midAdBufferInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.LongValue(arg5), jni.IntValue(arg6))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.AdBuffer.describeContents.
 func (m *AdBuffer) DescribeContents() (int32, error) {
 	var result int32

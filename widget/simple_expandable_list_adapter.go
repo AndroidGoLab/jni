@@ -23,6 +23,29 @@ type SimpleExpandableListAdapter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSimpleExpandableListAdapter creates a new android.widget.SimpleExpandableListAdapter instance.
+func NewSimpleExpandableListAdapter(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32, arg3 int32, arg4 *jni.Object, arg5 *jni.Object, arg6 *jni.Object, arg7 int32, arg8 int32, arg9 *jni.Object, arg10 *jni.Object) (*SimpleExpandableListAdapter, error) {
+	var t SimpleExpandableListAdapter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleExpandableListAdapter)), midSimpleExpandableListAdapterInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5), jni.ObjectValue(arg6), jni.IntValue(arg7), jni.IntValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetChild calls android.widget.SimpleExpandableListAdapter.getChild.
 func (m *SimpleExpandableListAdapter) GetChild(arg0 int32, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object

@@ -5,160 +5,12 @@
 package: job
 go_import: github.com/AndroidGoLab/jni/app/job
 classes:
-    - java_class: android.app.job.JobParameters
-      go_type: Parameters
-      methods:
-        - java_method: completeWork
-          go_name: CompleteWork
-          params:
-            - java_type: android.app.job.JobWorkItem
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: dequeueWork
-          go_name: DequeueWork
-          returns: android.app.job.JobWorkItem
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getClipData
-          go_name: GetClipData
-          returns: android.content.ClipData
-          error: true
-        - java_method: getClipGrantFlags
-          go_name: GetClipGrantFlags
-          returns: int
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.PersistableBundle
-          error: true
-        - java_method: getJobId
-          go_name: GetJobId
-          returns: int
-          error: true
-        - java_method: getJobNamespace
-          go_name: GetJobNamespace
-          returns: String
-          error: true
-        - java_method: getNetwork
-          go_name: GetNetwork
-          returns: android.net.Network
-          error: true
-        - java_method: getStopReason
-          go_name: GetStopReason
-          returns: int
-          error: true
-        - java_method: getTransientExtras
-          go_name: GetTransientExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getTriggeredContentAuthorities
-          go_name: GetTriggeredContentAuthorities
-          returns: java.lang.String[]
-          error: true
-        - java_method: getTriggeredContentUris
-          go_name: GetTriggeredContentUris
-          returns: android.net.Uri[]
-          error: true
-        - java_method: isExpeditedJob
-          go_name: IsExpeditedJob
-          returns: boolean
-          error: true
-        - java_method: isOverrideDeadlineExpired
-          go_name: IsOverrideDeadlineExpired
-          returns: boolean
-          error: true
-        - java_method: isUserInitiatedJob
-          go_name: IsUserInitiatedJob
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.app.job.JobScheduler
-      go_type: Scheduler
-      obtain: system_service
-      service_name: jobscheduler
-      close: true
-      methods:
-        - java_method: canRunUserInitiatedJobs
-          go_name: CanRunUserInitiatedJobs
-          returns: boolean
-          error: true
-        - java_method: cancel
-          go_name: Cancel
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: cancelAll
-          go_name: CancelAll
-          returns: void
-          error: true
-        - java_method: cancelInAllNamespaces
-          go_name: CancelInAllNamespaces
-          returns: void
-          error: true
-        - java_method: enqueue
-          go_name: Enqueue
-          params:
-            - java_type: android.app.job.JobInfo
-              go_name: arg0
-            - java_type: android.app.job.JobWorkItem
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: forNamespace
-          go_name: ForNamespace
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.app.job.JobScheduler
-          error: true
-        - java_method: getNamespace
-          go_name: GetNamespace
-          returns: String
-          error: true
-        - java_method: getPendingJob
-          go_name: GetPendingJob
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.app.job.JobInfo
-          error: true
-        - java_method: getPendingJobReason
-          go_name: GetPendingJobReason
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getPendingJobReasons
-          go_name: GetPendingJobReasons
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: '[I'
-          error: true
-        - java_method: schedule
-          go_name: Schedule
-          params:
-            - java_type: android.app.job.JobInfo
-              go_name: arg0
-          returns: int
-          error: true
     - java_class: android.app.job.JobWorkItem
       go_type: WorkItem
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Intent
+          go_name: arg0
       methods:
         - java_method: describeContents
           go_name: DescribeContents
@@ -237,6 +89,286 @@ classes:
             - java_type: long
               go_name: arg0
           returns: android.app.job.JobWorkItem$Builder
+          error: true
+    - java_class: android.app.job.JobScheduler
+      go_type: Scheduler
+      obtain: system_service
+      service_name: jobscheduler
+      close: true
+      methods:
+        - java_method: canRunUserInitiatedJobs
+          go_name: CanRunUserInitiatedJobs
+          returns: boolean
+          error: true
+        - java_method: cancel
+          go_name: Cancel
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancelAll
+          go_name: CancelAll
+          returns: void
+          error: true
+        - java_method: cancelInAllNamespaces
+          go_name: CancelInAllNamespaces
+          returns: void
+          error: true
+        - java_method: enqueue
+          go_name: Enqueue
+          params:
+            - java_type: android.app.job.JobInfo
+              go_name: arg0
+            - java_type: android.app.job.JobWorkItem
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: forNamespace
+          go_name: ForNamespace
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.app.job.JobScheduler
+          error: true
+        - java_method: getNamespace
+          go_name: GetNamespace
+          returns: String
+          error: true
+        - java_method: getPendingJob
+          go_name: GetPendingJob
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.app.job.JobInfo
+          error: true
+        - java_method: getPendingJobReason
+          go_name: GetPendingJobReason
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getPendingJobReasons
+          go_name: GetPendingJobReasons
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: '[I'
+          error: true
+        - java_method: schedule
+          go_name: Schedule
+          params:
+            - java_type: android.app.job.JobInfo
+              go_name: arg0
+          returns: int
+          error: true
+    - java_class: android.app.job.JobService
+      go_type: Service
+      methods:
+        - java_method: jobFinished
+          go_name: JobFinished
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onNetworkChanged
+          go_name: OnNetworkChanged
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onStartJob
+          go_name: OnStartJob
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onStopJob
+          go_name: OnStopJob
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setNotification
+          go_name: SetNotification
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.app.Notification
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: updateEstimatedNetworkBytes
+          go_name: UpdateEstimatedNetworkBytes4
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: android.app.job.JobWorkItem
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: updateEstimatedNetworkBytes
+          go_name: UpdateEstimatedNetworkBytes3_1
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: updateTransferredNetworkBytes
+          go_name: UpdateTransferredNetworkBytes4
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: android.app.job.JobWorkItem
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: updateTransferredNetworkBytes
+          go_name: UpdateTransferredNetworkBytes3_1
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.app.job.PendingJobReasonsInfo
+      go_type: PendingJobReasonsInfo
+      obtain: constructor
+      constructor_params:
+        - java_type: long
+          go_name: arg0
+        - java_type: '[I'
+          go_name: arg1
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getPendingJobReasons
+          go_name: GetPendingJobReasons
+          returns: '[I'
+          error: true
+        - java_method: getTimestampMillis
+          go_name: GetTimestampMillis
+          returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.app.job.JobServiceEngine
+      go_type: ServiceEngine
+      methods:
+        - java_method: getBinder
+          go_name: GetBinder
+          returns: android.os.IBinder
+          error: true
+        - java_method: jobFinished
+          go_name: JobFinished
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onNetworkChanged
+          go_name: OnNetworkChanged
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onStartJob
+          go_name: OnStartJob
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: onStopJob
+          go_name: OnStopJob
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setNotification
+          go_name: SetNotification
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.app.Notification
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: updateEstimatedNetworkBytes
+          go_name: UpdateEstimatedNetworkBytes
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: android.app.job.JobWorkItem
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: updateTransferredNetworkBytes
+          go_name: UpdateTransferredNetworkBytes
+          params:
+            - java_type: android.app.job.JobParameters
+              go_name: arg0
+            - java_type: android.app.job.JobWorkItem
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
           error: true
     - java_class: android.app.job.JobInfo
       go_type: Info
@@ -652,96 +784,75 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.app.job.JobServiceEngine
-      go_type: ServiceEngine
+    - java_class: android.app.job.JobParameters
+      go_type: Parameters
       methods:
-        - java_method: getBinder
-          go_name: GetBinder
-          returns: android.os.IBinder
-          error: true
-        - java_method: jobFinished
-          go_name: JobFinished
+        - java_method: completeWork
+          go_name: CompleteWork
           params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onNetworkChanged
-          go_name: OnNetworkChanged
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onStartJob
-          go_name: OnStartJob
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: onStopJob
-          go_name: OnStopJob
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setNotification
-          go_name: SetNotification
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.app.Notification
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: updateEstimatedNetworkBytes
-          go_name: UpdateEstimatedNetworkBytes
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
             - java_type: android.app.job.JobWorkItem
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: updateTransferredNetworkBytes
-          go_name: UpdateTransferredNetworkBytes
-          params:
-            - java_type: android.app.job.JobParameters
               go_name: arg0
-            - java_type: android.app.job.JobWorkItem
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
           returns: void
           error: true
-    - java_class: android.app.job.PendingJobReasonsInfo
-      go_type: PendingJobReasonsInfo
-      methods:
+        - java_method: dequeueWork
+          go_name: DequeueWork
+          returns: android.app.job.JobWorkItem
+          error: true
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getPendingJobReasons
-          go_name: GetPendingJobReasons
-          returns: '[I'
+        - java_method: getClipData
+          go_name: GetClipData
+          returns: android.content.ClipData
           error: true
-        - java_method: getTimestampMillis
-          go_name: GetTimestampMillis
-          returns: long
+        - java_method: getClipGrantFlags
+          go_name: GetClipGrantFlags
+          returns: int
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.PersistableBundle
+          error: true
+        - java_method: getJobId
+          go_name: GetJobId
+          returns: int
+          error: true
+        - java_method: getJobNamespace
+          go_name: GetJobNamespace
+          returns: String
+          error: true
+        - java_method: getNetwork
+          go_name: GetNetwork
+          returns: android.net.Network
+          error: true
+        - java_method: getStopReason
+          go_name: GetStopReason
+          returns: int
+          error: true
+        - java_method: getTransientExtras
+          go_name: GetTransientExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getTriggeredContentAuthorities
+          go_name: GetTriggeredContentAuthorities
+          returns: java.lang.String[]
+          error: true
+        - java_method: getTriggeredContentUris
+          go_name: GetTriggeredContentUris
+          returns: android.net.Uri[]
+          error: true
+        - java_method: isExpeditedJob
+          go_name: IsExpeditedJob
+          returns: boolean
+          error: true
+        - java_method: isOverrideDeadlineExpired
+          go_name: IsOverrideDeadlineExpired
+          returns: boolean
+          error: true
+        - java_method: isUserInitiatedJob
+          go_name: IsUserInitiatedJob
+          returns: boolean
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -752,161 +863,9 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.app.job.JobService
-      go_type: Service
-      methods:
-        - java_method: jobFinished
-          go_name: JobFinished
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onNetworkChanged
-          go_name: OnNetworkChanged
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onStartJob
-          go_name: OnStartJob
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: onStopJob
-          go_name: OnStopJob
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: setNotification
-          go_name: SetNotification
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.app.Notification
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: updateEstimatedNetworkBytes
-          go_name: UpdateEstimatedNetworkBytes4
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: android.app.job.JobWorkItem
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: updateEstimatedNetworkBytes
-          go_name: UpdateEstimatedNetworkBytes3_1
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: updateTransferredNetworkBytes
-          go_name: UpdateTransferredNetworkBytes4
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: android.app.job.JobWorkItem
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: updateTransferredNetworkBytes
-          go_name: UpdateTransferredNetworkBytes3_1
-          params:
-            - java_type: android.app.job.JobParameters
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: void
-          error: true
 constants:
     - go_name: Creator
       value: "0"
-      go_type: int
-    - go_name: StopReasonAppStandby
-      value: "12"
-      go_type: int
-    - go_name: StopReasonBackgroundRestriction
-      value: "11"
-      go_type: int
-    - go_name: StopReasonCancelledByApp
-      value: "1"
-      go_type: int
-    - go_name: StopReasonConstraintBatteryNotLow
-      value: "5"
-      go_type: int
-    - go_name: StopReasonConstraintCharging
-      value: "6"
-      go_type: int
-    - go_name: StopReasonConstraintConnectivity
-      value: "7"
-      go_type: int
-    - go_name: StopReasonConstraintDeviceIdle
-      value: "8"
-      go_type: int
-    - go_name: StopReasonConstraintStorageNotLow
-      value: "9"
-      go_type: int
-    - go_name: StopReasonDeviceState
-      value: "4"
-      go_type: int
-    - go_name: StopReasonEstimatedAppLaunchTimeChanged
-      value: "15"
-      go_type: int
-    - go_name: StopReasonPreempt
-      value: "2"
-      go_type: int
-    - go_name: StopReasonQuota
-      value: "10"
-      go_type: int
-    - go_name: StopReasonSystemProcessing
-      value: "14"
-      go_type: int
-    - go_name: StopReasonTimeout
-      value: "3"
-      go_type: int
-    - go_name: StopReasonTimeoutAbandoned
-      value: "16"
-      go_type: int
-    - go_name: StopReasonUndefined
-      value: "0"
-      go_type: int
-    - go_name: StopReasonUser
-      value: "13"
       go_type: int
     - go_name: PendingJobReasonApp
       value: "1"
@@ -971,6 +930,15 @@ constants:
     - go_name: ResultSuccess
       value: "1"
       go_type: int
+    - go_name: JobEndNotificationPolicyDetach
+      value: "0"
+      go_type: int
+    - go_name: JobEndNotificationPolicyRemove
+      value: "1"
+      go_type: int
+    - go_name: PermissionBind
+      value: '"android.permission.BIND_JOB_SERVICE"'
+      go_type: string
     - go_name: BackoffPolicyExponential
       value: "1"
       go_type: int
@@ -1022,12 +990,54 @@ constants:
     - go_name: FlagNotifyForDescendants
       value: "1"
       go_type: int
-    - go_name: JobEndNotificationPolicyDetach
-      value: "0"
+    - go_name: StopReasonAppStandby
+      value: "12"
       go_type: int
-    - go_name: JobEndNotificationPolicyRemove
+    - go_name: StopReasonBackgroundRestriction
+      value: "11"
+      go_type: int
+    - go_name: StopReasonCancelledByApp
       value: "1"
       go_type: int
-    - go_name: PermissionBind
-      value: '"android.permission.BIND_JOB_SERVICE"'
-      go_type: string
+    - go_name: StopReasonConstraintBatteryNotLow
+      value: "5"
+      go_type: int
+    - go_name: StopReasonConstraintCharging
+      value: "6"
+      go_type: int
+    - go_name: StopReasonConstraintConnectivity
+      value: "7"
+      go_type: int
+    - go_name: StopReasonConstraintDeviceIdle
+      value: "8"
+      go_type: int
+    - go_name: StopReasonConstraintStorageNotLow
+      value: "9"
+      go_type: int
+    - go_name: StopReasonDeviceState
+      value: "4"
+      go_type: int
+    - go_name: StopReasonEstimatedAppLaunchTimeChanged
+      value: "15"
+      go_type: int
+    - go_name: StopReasonPreempt
+      value: "2"
+      go_type: int
+    - go_name: StopReasonQuota
+      value: "10"
+      go_type: int
+    - go_name: StopReasonSystemProcessing
+      value: "14"
+      go_type: int
+    - go_name: StopReasonTimeout
+      value: "3"
+      go_type: int
+    - go_name: StopReasonTimeoutAbandoned
+      value: "16"
+      go_type: int
+    - go_name: StopReasonUndefined
+      value: "0"
+      go_type: int
+    - go_name: StopReasonUser
+      value: "13"
+      go_type: int

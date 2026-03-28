@@ -5,6 +5,31 @@
 package: lights
 go_import: github.com/AndroidGoLab/jni/hardware/lights
 classes:
+    - java_class: android.hardware.lights.LightsRequest
+      go_type: Request
+    - java_class: android.hardware.lights.LightsRequest$Builder
+      go_type: RequestBuilder
+      methods:
+        - java_method: addLight
+          go_name: AddLight
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+            - java_type: android.hardware.lights.LightState
+              go_name: arg1
+          returns: android.hardware.lights.LightsRequest$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.hardware.lights.LightsRequest
+          error: true
+        - java_method: clearLight
+          go_name: ClearLight
+          params:
+            - java_type: android.hardware.lights.Light
+              go_name: arg0
+          returns: android.hardware.lights.LightsRequest$Builder
+          error: true
     - java_class: android.hardware.lights.LightState
       go_type: LightState
       methods:
@@ -108,31 +133,6 @@ classes:
             - java_type: int
               go_name: arg1
           returns: void
-          error: true
-    - java_class: android.hardware.lights.LightsRequest
-      go_type: Request
-    - java_class: android.hardware.lights.LightsRequest$Builder
-      go_type: RequestBuilder
-      methods:
-        - java_method: addLight
-          go_name: AddLight
-          params:
-            - java_type: android.hardware.lights.Light
-              go_name: arg0
-            - java_type: android.hardware.lights.LightState
-              go_name: arg1
-          returns: android.hardware.lights.LightsRequest$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.hardware.lights.LightsRequest
-          error: true
-        - java_method: clearLight
-          go_name: ClearLight
-          params:
-            - java_type: android.hardware.lights.Light
-              go_name: arg0
-          returns: android.hardware.lights.LightsRequest$Builder
           error: true
     - java_class: android.hardware.lights.LightsManager
       go_type: Manager

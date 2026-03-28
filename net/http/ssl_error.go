@@ -23,6 +23,29 @@ type SslError struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSslError creates a new android.net.http.SslError instance.
+func NewSslError(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*SslError, error) {
+	var t SslError
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSslError)), midSslErrorInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddError calls android.net.http.SslError.addError.
 func (m *SslError) AddError(arg0 int32) (bool, error) {
 	var result bool

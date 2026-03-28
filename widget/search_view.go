@@ -23,6 +23,29 @@ type SearchView struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSearchView creates a new android.widget.SearchView instance.
+func NewSearchView(vm *jni.VM, arg0 *jni.Object) (*SearchView, error) {
+	var t SearchView
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchView)), midSearchViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearFocus calls android.widget.SearchView.clearFocus.
 func (m *SearchView) ClearFocus() error {
 

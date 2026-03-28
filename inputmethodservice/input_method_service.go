@@ -23,6 +23,28 @@ type InputMethodService struct {
 	Obj *jni.GlobalRef
 }
 
+// NewInputMethodService creates a new android.inputmethodservice.InputMethodService instance.
+func NewInputMethodService(vm *jni.VM) (*InputMethodService, error) {
+	var t InputMethodService
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputMethodService)), midInputMethodServiceInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // EnableHardwareAcceleration calls android.inputmethodservice.InputMethodService.enableHardwareAcceleration.
 func (m *InputMethodService) EnableHardwareAcceleration() (bool, error) {
 	var result bool

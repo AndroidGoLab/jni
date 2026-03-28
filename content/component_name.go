@@ -23,6 +23,29 @@ type ComponentName struct {
 	Obj *jni.GlobalRef
 }
 
+// NewComponentName creates a new android.content.ComponentName instance.
+func NewComponentName(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ComponentName, error) {
+	var t ComponentName
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentName)), midComponentNameInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone0 calls android.content.ComponentName.clone.
 func (m *ComponentName) Clone0() (*jni.Object, error) {
 	var result *jni.Object

@@ -5,353 +5,6 @@
 package: midi
 go_import: github.com/AndroidGoLab/jni/media/midi
 classes:
-    - java_class: android.media.midi.MidiInputPort
-      go_type: InputPort
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getPortNumber
-          go_name: GetPortNumber
-          returns: int
-          error: true
-        - java_method: onFlush
-          go_name: OnFlush
-          returns: void
-          error: true
-        - java_method: onSend
-          go_name: OnSend
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiManager
-      go_type: Manager
-      obtain: system_service
-      service_name: midi
-      close: true
-      methods:
-        - java_method: getDevices
-          go_name: GetDevices
-          returns: android.media.midi.MidiDeviceInfo[]
-          error: true
-        - java_method: registerDeviceCallback
-          go_name: RegisterDeviceCallback
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.media.midi.MidiManager$DeviceCallback
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: unregisterDeviceCallback
-          go_name: UnregisterDeviceCallback
-          params:
-            - java_type: android.media.midi.MidiManager$DeviceCallback
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiManager$DeviceCallback
-      go_type: ManagerDeviceCallback
-      methods:
-        - java_method: onDeviceAdded
-          go_name: OnDeviceAdded
-          params:
-            - java_type: android.media.midi.MidiDeviceInfo
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDeviceRemoved
-          go_name: OnDeviceRemoved
-          params:
-            - java_type: android.media.midi.MidiDeviceInfo
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDeviceStatusChanged
-          go_name: OnDeviceStatusChanged
-          params:
-            - java_type: android.media.midi.MidiDeviceStatus
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiManager$OnDeviceOpenedListener
-      go_type: ManagerOnDeviceOpenedListener
-      methods:
-        - java_method: onDeviceOpened
-          go_name: OnDeviceOpened
-          params:
-            - java_type: android.media.midi.MidiDevice
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiDeviceService
-      go_type: DeviceService
-      methods:
-        - java_method: getDeviceInfo
-          go_name: GetDeviceInfo
-          returns: android.media.midi.MidiDeviceInfo
-          error: true
-        - java_method: getOutputPortReceivers
-          go_name: GetOutputPortReceivers
-          returns: android.media.midi.MidiReceiver[]
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onClose
-          go_name: OnClose
-          returns: void
-          error: true
-        - java_method: onCreate
-          go_name: OnCreate
-          returns: void
-          error: true
-        - java_method: onDeviceStatusChanged
-          go_name: OnDeviceStatusChanged
-          params:
-            - java_type: android.media.midi.MidiDeviceStatus
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onGetInputPortReceivers
-          go_name: OnGetInputPortReceivers
-          returns: android.media.midi.MidiReceiver[]
-          error: true
-    - java_class: android.media.midi.MidiDevice
-      go_type: Device
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: connectPorts
-          go_name: ConnectPorts
-          params:
-            - java_type: android.media.midi.MidiInputPort
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: android.media.midi.MidiDevice$MidiConnection
-          error: true
-        - java_method: getInfo
-          go_name: GetInfo
-          returns: android.media.midi.MidiDeviceInfo
-          error: true
-        - java_method: openInputPort
-          go_name: OpenInputPort
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.midi.MidiInputPort
-          error: true
-        - java_method: openOutputPort
-          go_name: OpenOutputPort
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.midi.MidiOutputPort
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.media.midi.MidiDevice$MidiConnection
-      go_type: DeviceMidiConnection
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiOutputPort
-      go_type: OutputPort
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getPortNumber
-          go_name: GetPortNumber
-          returns: int
-          error: true
-        - java_method: onConnect
-          go_name: OnConnect
-          params:
-            - java_type: android.media.midi.MidiReceiver
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDisconnect
-          go_name: OnDisconnect
-          params:
-            - java_type: android.media.midi.MidiReceiver
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiReceiver
-      go_type: Receiver
-      methods:
-        - java_method: flush
-          go_name: Flush
-          returns: void
-          error: true
-        - java_method: getMaxMessageSize
-          go_name: GetMaxMessageSize
-          returns: int
-          error: true
-        - java_method: onFlush
-          go_name: OnFlush
-          returns: void
-          error: true
-        - java_method: onSend
-          go_name: OnSend
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: send
-          go_name: Send3
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: send
-          go_name: Send4_1
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: long
-              go_name: arg3
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiDeviceStatus
-      go_type: DeviceStatus
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getDeviceInfo
-          go_name: GetDeviceInfo
-          returns: android.media.midi.MidiDeviceInfo
-          error: true
-        - java_method: getOutputPortOpenCount
-          go_name: GetOutputPortOpenCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: isInputPortOpen
-          go_name: IsInputPortOpen
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiSender
-      go_type: Sender
-      methods:
-        - java_method: connect
-          go_name: Connect
-          params:
-            - java_type: android.media.midi.MidiReceiver
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: disconnect
-          go_name: Disconnect
-          params:
-            - java_type: android.media.midi.MidiReceiver
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onConnect
-          go_name: OnConnect
-          params:
-            - java_type: android.media.midi.MidiReceiver
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDisconnect
-          go_name: OnDisconnect
-          params:
-            - java_type: android.media.midi.MidiReceiver
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.midi.MidiUmpDeviceService
-      go_type: UmpDeviceService
-      methods:
-        - java_method: getDeviceInfo
-          go_name: GetDeviceInfo
-          returns: android.media.midi.MidiDeviceInfo
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onClose
-          go_name: OnClose
-          returns: void
-          error: true
-        - java_method: onCreate
-          go_name: OnCreate
-          returns: void
-          error: true
-        - java_method: onDeviceStatusChanged
-          go_name: OnDeviceStatusChanged
-          params:
-            - java_type: android.media.midi.MidiDeviceStatus
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.media.midi.MidiDeviceInfo
       go_type: DeviceInfo
       methods:
@@ -430,16 +83,354 @@ classes:
           go_name: GetType
           returns: int
           error: true
+    - java_class: android.media.midi.MidiInputPort
+      go_type: InputPort
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getPortNumber
+          go_name: GetPortNumber
+          returns: int
+          error: true
+        - java_method: onFlush
+          go_name: OnFlush
+          returns: void
+          error: true
+        - java_method: onSend
+          go_name: OnSend
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiReceiver
+      go_type: Receiver
+      methods:
+        - java_method: flush
+          go_name: Flush
+          returns: void
+          error: true
+        - java_method: getMaxMessageSize
+          go_name: GetMaxMessageSize
+          returns: int
+          error: true
+        - java_method: onFlush
+          go_name: OnFlush
+          returns: void
+          error: true
+        - java_method: onSend
+          go_name: OnSend
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: send
+          go_name: Send3
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: send
+          go_name: Send4_1
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: long
+              go_name: arg3
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiManager
+      go_type: Manager
+      obtain: system_service
+      service_name: midi
+      close: true
+      methods:
+        - java_method: getDevices
+          go_name: GetDevices
+          returns: android.media.midi.MidiDeviceInfo[]
+          error: true
+        - java_method: registerDeviceCallback
+          go_name: RegisterDeviceCallback
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.media.midi.MidiManager$DeviceCallback
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: unregisterDeviceCallback
+          go_name: UnregisterDeviceCallback
+          params:
+            - java_type: android.media.midi.MidiManager$DeviceCallback
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiManager$DeviceCallback
+      go_type: ManagerDeviceCallback
+      methods:
+        - java_method: onDeviceAdded
+          go_name: OnDeviceAdded
+          params:
+            - java_type: android.media.midi.MidiDeviceInfo
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDeviceRemoved
+          go_name: OnDeviceRemoved
+          params:
+            - java_type: android.media.midi.MidiDeviceInfo
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDeviceStatusChanged
+          go_name: OnDeviceStatusChanged
+          params:
+            - java_type: android.media.midi.MidiDeviceStatus
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiManager$OnDeviceOpenedListener
+      go_type: ManagerOnDeviceOpenedListener
+      methods:
+        - java_method: onDeviceOpened
+          go_name: OnDeviceOpened
+          params:
+            - java_type: android.media.midi.MidiDevice
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiSender
+      go_type: Sender
+      methods:
+        - java_method: connect
+          go_name: Connect
+          params:
+            - java_type: android.media.midi.MidiReceiver
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: disconnect
+          go_name: Disconnect
+          params:
+            - java_type: android.media.midi.MidiReceiver
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onConnect
+          go_name: OnConnect
+          params:
+            - java_type: android.media.midi.MidiReceiver
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDisconnect
+          go_name: OnDisconnect
+          params:
+            - java_type: android.media.midi.MidiReceiver
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiUmpDeviceService
+      go_type: UmpDeviceService
+      methods:
+        - java_method: getDeviceInfo
+          go_name: GetDeviceInfo
+          returns: android.media.midi.MidiDeviceInfo
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onClose
+          go_name: OnClose
+          returns: void
+          error: true
+        - java_method: onCreate
+          go_name: OnCreate
+          returns: void
+          error: true
+        - java_method: onDeviceStatusChanged
+          go_name: OnDeviceStatusChanged
+          params:
+            - java_type: android.media.midi.MidiDeviceStatus
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiDeviceService
+      go_type: DeviceService
+      methods:
+        - java_method: getDeviceInfo
+          go_name: GetDeviceInfo
+          returns: android.media.midi.MidiDeviceInfo
+          error: true
+        - java_method: getOutputPortReceivers
+          go_name: GetOutputPortReceivers
+          returns: android.media.midi.MidiReceiver[]
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onClose
+          go_name: OnClose
+          returns: void
+          error: true
+        - java_method: onCreate
+          go_name: OnCreate
+          returns: void
+          error: true
+        - java_method: onDeviceStatusChanged
+          go_name: OnDeviceStatusChanged
+          params:
+            - java_type: android.media.midi.MidiDeviceStatus
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onGetInputPortReceivers
+          go_name: OnGetInputPortReceivers
+          returns: android.media.midi.MidiReceiver[]
+          error: true
+    - java_class: android.media.midi.MidiOutputPort
+      go_type: OutputPort
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getPortNumber
+          go_name: GetPortNumber
+          returns: int
+          error: true
+        - java_method: onConnect
+          go_name: OnConnect
+          params:
+            - java_type: android.media.midi.MidiReceiver
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDisconnect
+          go_name: OnDisconnect
+          params:
+            - java_type: android.media.midi.MidiReceiver
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiDeviceStatus
+      go_type: DeviceStatus
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getDeviceInfo
+          go_name: GetDeviceInfo
+          returns: android.media.midi.MidiDeviceInfo
+          error: true
+        - java_method: getOutputPortOpenCount
+          go_name: GetOutputPortOpenCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: isInputPortOpen
+          go_name: IsInputPortOpen
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.midi.MidiDevice
+      go_type: Device
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: connectPorts
+          go_name: ConnectPorts
+          params:
+            - java_type: android.media.midi.MidiInputPort
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.media.midi.MidiDevice$MidiConnection
+          error: true
+        - java_method: getInfo
+          go_name: GetInfo
+          returns: android.media.midi.MidiDeviceInfo
+          error: true
+        - java_method: openInputPort
+          go_name: OpenInputPort
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.midi.MidiInputPort
+          error: true
+        - java_method: openOutputPort
+          go_name: OpenOutputPort
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.midi.MidiOutputPort
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.media.midi.MidiDevice$MidiConnection
+      go_type: DeviceMidiConnection
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
 constants:
-    - go_name: TransportMidiByteStream
-      value: "1"
-      go_type: int
-    - go_name: TransportUniversalMidiPackets
-      value: "2"
-      go_type: int
-    - go_name: ServiceInterface
-      value: '"android.media.midi.MidiDeviceService"'
-      go_type: string
     - go_name: Creator
       value: "0"
       go_type: int
@@ -503,3 +494,12 @@ constants:
     - go_name: TypeOutput
       value: "2"
       go_type: int
+    - go_name: TransportMidiByteStream
+      value: "1"
+      go_type: int
+    - go_name: TransportUniversalMidiPackets
+      value: "2"
+      go_type: int
+    - go_name: ServiceInterface
+      value: '"android.media.midi.MidiUmpDeviceService"'
+      go_type: string

@@ -23,6 +23,29 @@ type PorterDuffColorFilter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPorterDuffColorFilter creates a new android.graphics.PorterDuffColorFilter instance.
+func NewPorterDuffColorFilter(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*PorterDuffColorFilter, error) {
+	var t PorterDuffColorFilter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuffColorFilter)), midPorterDuffColorFilterInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.graphics.PorterDuffColorFilter.equals.
 func (m *PorterDuffColorFilter) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

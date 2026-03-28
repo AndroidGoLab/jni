@@ -5,9 +5,21 @@ package print
 import "github.com/AndroidGoLab/jni/print/consts"
 
 const (
+	ExtraPrintPreview = consts.ExtraPrintPreview
+)
+
+const (
+	Creator             = consts.Creator
+	AllPages            = consts.AllPages
+	StateBlocked        = consts.StateBlocked
+	StateCanceled       = consts.StateCanceled
+	StateCompleted      = consts.StateCompleted
+	StateCreated        = consts.StateCreated
+	StateFailed         = consts.StateFailed
+	StateQueued         = consts.StateQueued
+	StateStarted        = consts.StateStarted
 	ColorModeColor      = consts.ColorModeColor
 	ColorModeMonochrome = consts.ColorModeMonochrome
-	Creator             = consts.Creator
 	DuplexModeLongEdge  = consts.DuplexModeLongEdge
 	DuplexModeNone      = consts.DuplexModeNone
 	DuplexModeShortEdge = consts.DuplexModeShortEdge
@@ -107,23 +119,11 @@ const (
 	Roc8k               = consts.Roc8k
 	UnknownLandscape    = consts.UnknownLandscape
 	UnknownPortrait     = consts.UnknownPortrait
-	AllPages            = consts.AllPages
 	StatusBusy          = consts.StatusBusy
 	StatusIdle          = consts.StatusIdle
 	StatusUnavailable   = consts.StatusUnavailable
-	StateBlocked        = consts.StateBlocked
-	StateCanceled       = consts.StateCanceled
-	StateCompleted      = consts.StateCompleted
-	StateCreated        = consts.StateCreated
-	StateFailed         = consts.StateFailed
-	StateQueued         = consts.StateQueued
-	StateStarted        = consts.StateStarted
 	ContentTypeDocument = consts.ContentTypeDocument
 	ContentTypePhoto    = consts.ContentTypePhoto
 	ContentTypeUnknown  = consts.ContentTypeUnknown
 	PageCountUnknown    = consts.PageCountUnknown
-)
-
-const (
-	ExtraPrintPreview = consts.ExtraPrintPreview
 )

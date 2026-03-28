@@ -23,6 +23,29 @@ type ResultReceiver struct {
 	Obj *jni.GlobalRef
 }
 
+// NewResultReceiver creates a new android.os.ResultReceiver instance.
+func NewResultReceiver(vm *jni.VM, arg0 *jni.Object) (*ResultReceiver, error) {
+	var t ResultReceiver
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResultReceiver)), midResultReceiverInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.os.ResultReceiver.describeContents.
 func (m *ResultReceiver) DescribeContents() (int32, error) {
 	var result int32

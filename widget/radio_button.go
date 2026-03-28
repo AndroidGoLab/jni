@@ -23,6 +23,29 @@ type RadioButton struct {
 	Obj *jni.GlobalRef
 }
 
+// NewRadioButton creates a new android.widget.RadioButton instance.
+func NewRadioButton(vm *jni.VM, arg0 *jni.Object) (*RadioButton, error) {
+	var t RadioButton
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRadioButton)), midRadioButtonInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.RadioButton.getAccessibilityClassName.
 func (m *RadioButton) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

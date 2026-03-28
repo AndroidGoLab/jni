@@ -23,6 +23,29 @@ type LoudnessEnhancer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLoudnessEnhancer creates a new android.media.audiofx.LoudnessEnhancer instance.
+func NewLoudnessEnhancer(vm *jni.VM, arg0 int32) (*LoudnessEnhancer, error) {
+	var t LoudnessEnhancer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), midLoudnessEnhancerInit, jni.IntValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetTargetGain calls android.media.audiofx.LoudnessEnhancer.getTargetGain.
 func (m *LoudnessEnhancer) GetTargetGain() (float32, error) {
 	var result float32

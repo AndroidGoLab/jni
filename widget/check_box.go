@@ -23,6 +23,29 @@ type CheckBox struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCheckBox creates a new android.widget.CheckBox instance.
+func NewCheckBox(vm *jni.VM, arg0 *jni.Object) (*CheckBox, error) {
+	var t CheckBox
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCheckBox)), midCheckBoxInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetAccessibilityClassName calls android.widget.CheckBox.getAccessibilityClassName.
 func (m *CheckBox) GetAccessibilityClassName() (*jni.Object, error) {
 	var result *jni.Object

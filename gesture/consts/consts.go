@@ -4,12 +4,12 @@ package consts
 
 const (
 	Creator                   int = 0
-	GestureStrokeTypeMultiple int = 1
-	GestureStrokeTypeSingle   int = 0
-	OrientationHorizontal     int = 0
-	OrientationVertical       int = 1
 	OrientationInvariant      int = 1
 	OrientationSensitive      int = 2
 	SequenceInvariant         int = 1
 	SequenceSensitive         int = 2
+	GestureStrokeTypeMultiple int = 1
+	GestureStrokeTypeSingle   int = 0
+	OrientationHorizontal     int = 0
+	OrientationVertical       int = 1
 )

@@ -23,6 +23,29 @@ type TsRequest struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTsRequest creates a new android.media.tv.TsRequest instance.
+func NewTsRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32) (*TsRequest, error) {
+	var t TsRequest
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTsRequest)), midTsRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.media.tv.TsRequest.describeContents.
 func (m *TsRequest) DescribeContents() (int32, error) {
 	var result int32

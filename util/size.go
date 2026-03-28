@@ -23,6 +23,29 @@ type Size struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSize creates a new android.util.Size instance.
+func NewSize(vm *jni.VM, arg0 int32, arg1 int32) (*Size, error) {
+	var t Size
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSize)), midSizeInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.util.Size.equals.
 func (m *Size) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

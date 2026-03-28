@@ -23,6 +23,29 @@ type Point struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPoint creates a new android.gesture.GesturePoint instance.
+func NewPoint(vm *jni.VM, arg0 float32, arg1 float32, arg2 int64) (*Point, error) {
+	var t Point
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPoint)), midPointInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.LongValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clone calls android.gesture.GesturePoint.clone.
 func (m *Point) Clone() (*jni.Object, error) {
 	var result *jni.Object

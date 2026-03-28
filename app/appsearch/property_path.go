@@ -23,6 +23,34 @@ type PropertyPath struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPropertyPath creates a new android.app.appsearch.PropertyPath instance.
+func NewPropertyPath(vm *jni.VM, arg0 string) (*PropertyPath, error) {
+	var t PropertyPath
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPropertyPath)), midPropertyPathInit, jni.ObjectValue(&jArg0.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.app.appsearch.PropertyPath.equals.
 func (m *PropertyPath) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

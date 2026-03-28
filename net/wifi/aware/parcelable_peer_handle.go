@@ -23,6 +23,29 @@ type ParcelablePeerHandle struct {
 	Obj *jni.GlobalRef
 }
 
+// NewParcelablePeerHandle creates a new android.net.wifi.aware.ParcelablePeerHandle instance.
+func NewParcelablePeerHandle(vm *jni.VM, arg0 *jni.Object) (*ParcelablePeerHandle, error) {
+	var t ParcelablePeerHandle
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelablePeerHandle)), midParcelablePeerHandleInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.net.wifi.aware.ParcelablePeerHandle.describeContents.
 func (m *ParcelablePeerHandle) DescribeContents() (int32, error) {
 	var result int32

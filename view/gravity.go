@@ -23,6 +23,28 @@ type Gravity struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGravity creates a new android.view.Gravity instance.
+func NewGravity(vm *jni.VM) (*Gravity, error) {
+	var t Gravity
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGravity)), midGravityInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Apply5 calls android.view.Gravity.apply.
 func (m *Gravity) Apply5(
 	arg0 int32,

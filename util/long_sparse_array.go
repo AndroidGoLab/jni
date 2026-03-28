@@ -23,6 +23,28 @@ type LongSparseArray struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLongSparseArray creates a new android.util.LongSparseArray instance.
+func NewLongSparseArray(vm *jni.VM) (*LongSparseArray, error) {
+	var t LongSparseArray
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLongSparseArray)), midLongSparseArrayInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clear calls android.util.LongSparseArray.clear.
 func (m *LongSparseArray) Clear() error {
 

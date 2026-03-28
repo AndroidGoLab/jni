@@ -23,6 +23,35 @@ type EncryptedTopic struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEncryptedTopic creates a new android.adservices.topics.EncryptedTopic instance.
+func NewEncryptedTopic(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 *jni.Object) (*EncryptedTopic, error) {
+	var t EncryptedTopic
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEncryptedTopic)), midEncryptedTopicInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.adservices.topics.EncryptedTopic.equals.
 func (m *EncryptedTopic) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

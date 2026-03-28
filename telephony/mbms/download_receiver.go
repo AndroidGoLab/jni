@@ -23,6 +23,28 @@ type DownloadReceiver struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDownloadReceiver creates a new android.telephony.mbms.MbmsDownloadReceiver instance.
+func NewDownloadReceiver(vm *jni.VM) (*DownloadReceiver, error) {
+	var t DownloadReceiver
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadReceiver)), midDownloadReceiverInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnReceive calls android.telephony.mbms.MbmsDownloadReceiver.onReceive.
 func (m *DownloadReceiver) OnReceive(arg0 *jni.Object, arg1 *jni.Object) error {
 

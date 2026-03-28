@@ -5,6 +5,13 @@ package text
 import "github.com/AndroidGoLab/jni/graphics/text/consts"
 
 const (
+	NoOverride = consts.NoOverride
+)
+
+const (
+	HyphenationModeFast             = consts.HyphenationModeFast
+	HyphenationModeNone             = consts.HyphenationModeNone
+	HyphenationModeNormal           = consts.HyphenationModeNormal
 	Creator                         = consts.Creator
 	HyphenationDisabled             = consts.HyphenationDisabled
 	HyphenationEnabled              = consts.HyphenationEnabled
@@ -29,11 +36,4 @@ const (
 	JustificationModeInterCharacter = consts.JustificationModeInterCharacter
 	JustificationModeInterWord      = consts.JustificationModeInterWord
 	JustificationModeNone           = consts.JustificationModeNone
-	HyphenationModeFast             = consts.HyphenationModeFast
-	HyphenationModeNone             = consts.HyphenationModeNone
-	HyphenationModeNormal           = consts.HyphenationModeNormal
-)
-
-const (
-	NoOverride = consts.NoOverride
 )

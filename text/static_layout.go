@@ -23,6 +23,39 @@ type StaticLayout struct {
 	Obj *jni.GlobalRef
 }
 
+// NewStaticLayout creates a new android.text.StaticLayout instance.
+func NewStaticLayout(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 int32, arg3 *jni.Object, arg4 float32, arg5 float32, arg6 bool) (*StaticLayout, error) {
+	var t StaticLayout
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		var jArg6 uint8
+		if arg6 {
+			jArg6 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStaticLayout)), midStaticLayoutInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.BooleanValue(jArg6))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ComputeDrawingBoundingBox calls android.text.StaticLayout.computeDrawingBoundingBox.
 func (m *StaticLayout) ComputeDrawingBoundingBox() (*jni.Object, error) {
 	var result *jni.Object

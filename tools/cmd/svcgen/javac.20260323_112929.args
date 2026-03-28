@@ -1,0 +1,3 @@
+-cp
+/dev/null
+/home/streaming/go/src/github.com/xaionaro-go/jni/tools/cmd/svcgen/Main.java

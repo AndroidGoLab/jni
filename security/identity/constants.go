@@ -5,7 +5,6 @@ package identity
 import "github.com/AndroidGoLab/jni/security/identity/consts"
 
 const (
-	CiphersuiteEcdheHkdfEcdsaWithAes256GcmSha256 = consts.CiphersuiteEcdheHkdfEcdsaWithAes256GcmSha256
 	StatusNotInRequestMessage                    = consts.StatusNotInRequestMessage
 	StatusNotRequested                           = consts.StatusNotRequested
 	StatusNoAccessControlProfiles                = consts.StatusNoAccessControlProfiles
@@ -13,4 +12,5 @@ const (
 	StatusOk                                     = consts.StatusOk
 	StatusReaderAuthenticationFailed             = consts.StatusReaderAuthenticationFailed
 	StatusUserAuthenticationFailed               = consts.StatusUserAuthenticationFailed
+	CiphersuiteEcdheHkdfEcdsaWithAes256GcmSha256 = consts.CiphersuiteEcdheHkdfEcdsaWithAes256GcmSha256
 )

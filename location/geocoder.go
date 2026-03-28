@@ -23,6 +23,29 @@ type Geocoder struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGeocoder creates a new android.location.Geocoder instance.
+func NewGeocoder(vm *jni.VM, arg0 *jni.Object) (*Geocoder, error) {
+	var t Geocoder
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGeocoder)), midGeocoderInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetFromLocation calls android.location.Geocoder.getFromLocation.
 func (m *Geocoder) GetFromLocation(
 	arg0 float64,

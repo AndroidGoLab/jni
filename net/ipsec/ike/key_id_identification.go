@@ -23,6 +23,29 @@ type KeyIdIdentification struct {
 	Obj *jni.GlobalRef
 }
 
+// NewKeyIdIdentification creates a new android.net.ipsec.ike.IkeKeyIdIdentification instance.
+func NewKeyIdIdentification(vm *jni.VM, arg0 *jni.Object) (*KeyIdIdentification, error) {
+	var t KeyIdIdentification
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyIdIdentification)), midKeyIdIdentificationInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Equals calls android.net.ipsec.ike.IkeKeyIdIdentification.equals.
 func (m *KeyIdIdentification) Equals(arg0 *jni.Object) (bool, error) {
 	var result bool

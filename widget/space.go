@@ -23,6 +23,29 @@ type Space struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSpace creates a new android.widget.Space instance.
+func NewSpace(vm *jni.VM, arg0 *jni.Object) (*Space, error) {
+	var t Space
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpace)), midSpaceInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Draw calls android.widget.Space.draw.
 func (m *Space) Draw(arg0 *jni.Object) error {
 

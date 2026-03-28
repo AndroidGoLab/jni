@@ -23,6 +23,28 @@ type AnimatedImageDrawable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAnimatedImageDrawable creates a new android.graphics.drawable.AnimatedImageDrawable instance.
+func NewAnimatedImageDrawable(vm *jni.VM) (*AnimatedImageDrawable, error) {
+	var t AnimatedImageDrawable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatedImageDrawable)), midAnimatedImageDrawableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ClearAnimationCallbacks calls android.graphics.drawable.AnimatedImageDrawable.clearAnimationCallbacks.
 func (m *AnimatedImageDrawable) ClearAnimationCallbacks() error {
 

@@ -23,6 +23,28 @@ type SigningInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSigningInfo creates a new android.content.pm.SigningInfo instance.
+func NewSigningInfo(vm *jni.VM) (*SigningInfo, error) {
+	var t SigningInfo
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSigningInfo)), midSigningInfoInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.SigningInfo.describeContents.
 func (m *SigningInfo) DescribeContents() (int32, error) {
 	var result int32

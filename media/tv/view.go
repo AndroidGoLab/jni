@@ -23,6 +23,29 @@ type View struct {
 	Obj *jni.GlobalRef
 }
 
+// NewView creates a new android.media.tv.TvView instance.
+func NewView(vm *jni.VM, arg0 *jni.Object) (*View, error) {
+	var t View
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsView)), midViewInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DispatchGenericMotionEvent calls android.media.tv.TvView.dispatchGenericMotionEvent.
 func (m *View) DispatchGenericMotionEvent(arg0 *jni.Object) (bool, error) {
 	var result bool

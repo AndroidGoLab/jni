@@ -23,6 +23,35 @@ type TextValueSanitizer struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTextValueSanitizer creates a new android.service.autofill.TextValueSanitizer instance.
+func NewTextValueSanitizer(vm *jni.VM, arg0 *jni.Object, arg1 string) (*TextValueSanitizer, error) {
+	var t TextValueSanitizer
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextValueSanitizer)), midTextValueSanitizerInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.service.autofill.TextValueSanitizer.describeContents.
 func (m *TextValueSanitizer) DescribeContents() (int32, error) {
 	var result int32

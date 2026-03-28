@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/service/dreams
 classes:
     - java_class: android.service.dreams.DreamService
       go_type: DreamService
+      obtain: constructor
       methods:
         - java_method: addContentView
           go_name: AddContentView

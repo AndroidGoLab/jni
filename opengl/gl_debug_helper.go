@@ -23,6 +23,28 @@ type GLDebugHelper struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLDebugHelper creates a new android.opengl.GLDebugHelper instance.
+func NewGLDebugHelper(vm *jni.VM) (*GLDebugHelper, error) {
+	var t GLDebugHelper
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), midGLDebugHelperInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Wrap3 calls android.opengl.GLDebugHelper.wrap.
 func (m *GLDebugHelper) Wrap3(
 	arg0 *jni.Object,

@@ -23,41 +23,30 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDevice                 *jni.GlobalRef
-	midDeviceDescribeContents jni.MethodID
-	midDeviceEquals           jni.MethodID
-	midDeviceGetUuid          jni.MethodID
-	midDeviceHashCode         jni.MethodID
-	midDeviceToString         jni.MethodID
-	midDeviceWriteToParcel    jni.MethodID
+	clsSessionConfig                            *jni.GlobalRef
+	midSessionConfigDescribeContents            jni.MethodID
+	midSessionConfigEquals                      jni.MethodID
+	midSessionConfigGetDataNotificationConfig   jni.MethodID
+	midSessionConfigGetRangingMeasurementsLimit jni.MethodID
+	midSessionConfigGetSensorFusionParams       jni.MethodID
+	midSessionConfigHashCode                    jni.MethodID
+	midSessionConfigIsAngleOfArrivalNeeded      jni.MethodID
+	midSessionConfigToString                    jni.MethodID
+	midSessionConfigWriteToParcel               jni.MethodID
 
-	clsDeviceBuilder        *jni.GlobalRef
-	midDeviceBuilderBuild   jni.MethodID
-	midDeviceBuilderSetUuid jni.MethodID
+	clsSessionConfigBuilder                            *jni.GlobalRef
+	midSessionConfigBuilderBuild                       jni.MethodID
+	midSessionConfigBuilderSetAngleOfArrivalNeeded     jni.MethodID
+	midSessionConfigBuilderSetDataNotificationConfig   jni.MethodID
+	midSessionConfigBuilderSetRangingMeasurementsLimit jni.MethodID
+	midSessionConfigBuilderSetSensorFusionParams       jni.MethodID
 
-	clsCapabilities                          *jni.GlobalRef
-	midCapabilitiesDescribeContents          jni.MethodID
-	midCapabilitiesGetCsCapabilities         jni.MethodID
-	midCapabilitiesGetRttRangingCapabilities jni.MethodID
-	midCapabilitiesGetUwbCapabilities        jni.MethodID
-	midCapabilitiesToString                  jni.MethodID
-	midCapabilitiesWriteToParcel             jni.MethodID
-
-	clsSensorFusionParams                      *jni.GlobalRef
-	midSensorFusionParamsDescribeContents      jni.MethodID
-	midSensorFusionParamsEquals                jni.MethodID
-	midSensorFusionParamsHashCode              jni.MethodID
-	midSensorFusionParamsIsSensorFusionEnabled jni.MethodID
-	midSensorFusionParamsToString              jni.MethodID
-	midSensorFusionParamsWriteToParcel         jni.MethodID
-
-	clsSensorFusionParamsBuilder                       *jni.GlobalRef
-	midSensorFusionParamsBuilderBuild                  jni.MethodID
-	midSensorFusionParamsBuilderSetSensorFusionEnabled jni.MethodID
-
-	clsConfig                      *jni.GlobalRef
-	midConfigGetRangingSessionType jni.MethodID
-	midConfigToString              jni.MethodID
+	clsMeasurement                 *jni.GlobalRef
+	midMeasurementDescribeContents jni.MethodID
+	midMeasurementGetConfidence    jni.MethodID
+	midMeasurementGetMeasurement   jni.MethodID
+	midMeasurementToString         jni.MethodID
+	midMeasurementWriteToParcel    jni.MethodID
 
 	clsData                     *jni.GlobalRef
 	midDataDescribeContents     jni.MethodID
@@ -86,35 +75,9 @@ var (
 	midDataNotificationConfigBuilderSetProximityFarCm         jni.MethodID
 	midDataNotificationConfigBuilderSetProximityNearCm        jni.MethodID
 
-	clsPreference                 *jni.GlobalRef
-	midPreferenceDescribeContents jni.MethodID
-	midPreferenceGetDeviceRole    jni.MethodID
-	midPreferenceGetRangingParams jni.MethodID
-	midPreferenceGetSessionConfig jni.MethodID
-	midPreferenceToString         jni.MethodID
-	midPreferenceWriteToParcel    jni.MethodID
-
-	clsPreferenceBuilder                 *jni.GlobalRef
-	midPreferenceBuilderBuild            jni.MethodID
-	midPreferenceBuilderSetSessionConfig jni.MethodID
-
-	clsSessionConfig                            *jni.GlobalRef
-	midSessionConfigDescribeContents            jni.MethodID
-	midSessionConfigEquals                      jni.MethodID
-	midSessionConfigGetDataNotificationConfig   jni.MethodID
-	midSessionConfigGetRangingMeasurementsLimit jni.MethodID
-	midSessionConfigGetSensorFusionParams       jni.MethodID
-	midSessionConfigHashCode                    jni.MethodID
-	midSessionConfigIsAngleOfArrivalNeeded      jni.MethodID
-	midSessionConfigToString                    jni.MethodID
-	midSessionConfigWriteToParcel               jni.MethodID
-
-	clsSessionConfigBuilder                            *jni.GlobalRef
-	midSessionConfigBuilderBuild                       jni.MethodID
-	midSessionConfigBuilderSetAngleOfArrivalNeeded     jni.MethodID
-	midSessionConfigBuilderSetDataNotificationConfig   jni.MethodID
-	midSessionConfigBuilderSetRangingMeasurementsLimit jni.MethodID
-	midSessionConfigBuilderSetSensorFusionParams       jni.MethodID
+	clsConfig                      *jni.GlobalRef
+	midConfigGetRangingSessionType jni.MethodID
+	midConfigToString              jni.MethodID
 
 	clsSession                               *jni.GlobalRef
 	midSessionAddDeviceToRangingSession      jni.MethodID
@@ -133,6 +96,18 @@ var (
 	midSessionCallbackOnStarted    jni.MethodID
 	midSessionCallbackOnStopped    jni.MethodID
 
+	clsSensorFusionParams                      *jni.GlobalRef
+	midSensorFusionParamsDescribeContents      jni.MethodID
+	midSensorFusionParamsEquals                jni.MethodID
+	midSensorFusionParamsHashCode              jni.MethodID
+	midSensorFusionParamsIsSensorFusionEnabled jni.MethodID
+	midSensorFusionParamsToString              jni.MethodID
+	midSensorFusionParamsWriteToParcel         jni.MethodID
+
+	clsSensorFusionParamsBuilder                       *jni.GlobalRef
+	midSensorFusionParamsBuilderBuild                  jni.MethodID
+	midSensorFusionParamsBuilderSetSensorFusionEnabled jni.MethodID
+
 	clsManager                               *jni.GlobalRef
 	midManagerCreateRangingSession           jni.MethodID
 	midManagerRegisterCapabilitiesCallback   jni.MethodID
@@ -141,12 +116,37 @@ var (
 	clsManagerRangingCapabilitiesCallback                      *jni.GlobalRef
 	midManagerRangingCapabilitiesCallbackOnRangingCapabilities jni.MethodID
 
-	clsMeasurement                 *jni.GlobalRef
-	midMeasurementDescribeContents jni.MethodID
-	midMeasurementGetConfidence    jni.MethodID
-	midMeasurementGetMeasurement   jni.MethodID
-	midMeasurementToString         jni.MethodID
-	midMeasurementWriteToParcel    jni.MethodID
+	clsDevice                 *jni.GlobalRef
+	midDeviceDescribeContents jni.MethodID
+	midDeviceEquals           jni.MethodID
+	midDeviceGetUuid          jni.MethodID
+	midDeviceHashCode         jni.MethodID
+	midDeviceToString         jni.MethodID
+	midDeviceWriteToParcel    jni.MethodID
+
+	clsDeviceBuilder        *jni.GlobalRef
+	midDeviceBuilderBuild   jni.MethodID
+	midDeviceBuilderSetUuid jni.MethodID
+
+	clsPreference                 *jni.GlobalRef
+	midPreferenceDescribeContents jni.MethodID
+	midPreferenceGetDeviceRole    jni.MethodID
+	midPreferenceGetRangingParams jni.MethodID
+	midPreferenceGetSessionConfig jni.MethodID
+	midPreferenceToString         jni.MethodID
+	midPreferenceWriteToParcel    jni.MethodID
+
+	clsPreferenceBuilder                 *jni.GlobalRef
+	midPreferenceBuilderBuild            jni.MethodID
+	midPreferenceBuilderSetSessionConfig jni.MethodID
+
+	clsCapabilities                          *jni.GlobalRef
+	midCapabilitiesDescribeContents          jni.MethodID
+	midCapabilitiesGetCsCapabilities         jni.MethodID
+	midCapabilitiesGetRttRangingCapabilities jni.MethodID
+	midCapabilitiesGetUwbCapabilities        jni.MethodID
+	midCapabilitiesToString                  jni.MethodID
+	midCapabilitiesWriteToParcel             jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -167,50 +167,71 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/ranging/RangingDevice")
+	c, err = env.FindClass("android/ranging/SessionConfig")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDevice = env.NewGlobalRef(&c.Object)
+		clsSessionConfig = env.NewGlobalRef(&c.Object)
 
-		midDeviceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "describeContents", "()I")
+		midSessionConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
+		midSessionConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDeviceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getUuid", "()Ljava/util/UUID;")
+		midSessionConfigGetDataNotificationConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "getDataNotificationConfig", "()Landroid/ranging/DataNotificationConfig;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
+		midSessionConfigGetRangingMeasurementsLimit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "getRangingMeasurementsLimit", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
+		midSessionConfigGetSensorFusionParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "getSensorFusionParams", "()Landroid/ranging/SensorFusionParams;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDeviceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midSessionConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigIsAngleOfArrivalNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "isAngleOfArrivalNeeded", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -219,22 +240,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/RangingDevice$Builder")
+	c, err = env.FindClass("android/ranging/SessionConfig$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDeviceBuilder = env.NewGlobalRef(&c.Object)
+		clsSessionConfigBuilder = env.NewGlobalRef(&c.Object)
 
-		midDeviceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "build", "()Landroid/ranging/RangingDevice;")
+		midSessionConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "build", "()Landroid/ranging/SessionConfig;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDeviceBuilderSetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setUuid", "(Ljava/util/UUID;)Landroid/ranging/RangingDevice$Builder;")
+		midSessionConfigBuilderSetAngleOfArrivalNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setAngleOfArrivalNeeded", "(Z)Landroid/ranging/SessionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigBuilderSetDataNotificationConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setDataNotificationConfig", "(Landroid/ranging/DataNotificationConfig;)Landroid/ranging/SessionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigBuilderSetRangingMeasurementsLimit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setRangingMeasurementsLimit", "(I)Landroid/ranging/SessionConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSessionConfigBuilderSetSensorFusionParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setSensorFusionParams", "(Landroid/ranging/SensorFusionParams;)Landroid/ranging/SessionConfig$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -243,150 +285,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/RangingCapabilities")
+	c, err = env.FindClass("android/ranging/RangingMeasurement")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsCapabilities = env.NewGlobalRef(&c.Object)
+		clsMeasurement = env.NewGlobalRef(&c.Object)
 
-		midCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "describeContents", "()I")
+		midMeasurementDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCapabilitiesGetCsCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "getCsCapabilities", "()Landroid/ranging/ble/cs/BleCsRangingCapabilities;")
+		midMeasurementGetConfidence, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "getConfidence", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCapabilitiesGetRttRangingCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "getRttRangingCapabilities", "()Landroid/ranging/wifi/rtt/RttRangingCapabilities;")
+		midMeasurementGetMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "getMeasurement", "()D")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCapabilitiesGetUwbCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "getUwbCapabilities", "()Landroid/ranging/uwb/UwbRangingCapabilities;")
+		midMeasurementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/SensorFusionParams")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSensorFusionParams = env.NewGlobalRef(&c.Object)
-
-		midSensorFusionParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSensorFusionParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSensorFusionParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSensorFusionParamsIsSensorFusionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "isSensorFusionEnabled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSensorFusionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSensorFusionParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/SensorFusionParams$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSensorFusionParamsBuilder = env.NewGlobalRef(&c.Object)
-
-		midSensorFusionParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParamsBuilder)), "build", "()Landroid/ranging/SensorFusionParams;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSensorFusionParamsBuilderSetSensorFusionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParamsBuilder)), "setSensorFusionEnabled", "(Z)Landroid/ranging/SensorFusionParams$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/RangingConfig")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConfig = env.NewGlobalRef(&c.Object)
-
-		midConfigGetRangingSessionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfig)), "getRangingSessionType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfig)), "toString", "()Ljava/lang/String;")
+		midMeasurementWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -572,192 +507,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/RangingPreference")
+	c, err = env.FindClass("android/ranging/RangingConfig")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPreference = env.NewGlobalRef(&c.Object)
+		clsConfig = env.NewGlobalRef(&c.Object)
 
-		midPreferenceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "describeContents", "()I")
+		midConfigGetRangingSessionType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfig)), "getRangingSessionType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPreferenceGetDeviceRole, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "getDeviceRole", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPreferenceGetRangingParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "getRangingParams", "()Landroid/ranging/RangingConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPreferenceGetSessionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "getSessionConfig", "()Landroid/ranging/SessionConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPreferenceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/RangingPreference$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPreferenceBuilder = env.NewGlobalRef(&c.Object)
-
-		midPreferenceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferenceBuilder)), "build", "()Landroid/ranging/RangingPreference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPreferenceBuilderSetSessionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferenceBuilder)), "setSessionConfig", "(Landroid/ranging/SessionConfig;)Landroid/ranging/RangingPreference$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/SessionConfig")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSessionConfig = env.NewGlobalRef(&c.Object)
-
-		midSessionConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigGetDataNotificationConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "getDataNotificationConfig", "()Landroid/ranging/DataNotificationConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigGetRangingMeasurementsLimit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "getRangingMeasurementsLimit", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigGetSensorFusionParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "getSensorFusionParams", "()Landroid/ranging/SensorFusionParams;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigIsAngleOfArrivalNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "isAngleOfArrivalNeeded", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/ranging/SessionConfig$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSessionConfigBuilder = env.NewGlobalRef(&c.Object)
-
-		midSessionConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "build", "()Landroid/ranging/SessionConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigBuilderSetAngleOfArrivalNeeded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setAngleOfArrivalNeeded", "(Z)Landroid/ranging/SessionConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigBuilderSetDataNotificationConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setDataNotificationConfig", "(Landroid/ranging/DataNotificationConfig;)Landroid/ranging/SessionConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigBuilderSetRangingMeasurementsLimit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setRangingMeasurementsLimit", "(I)Landroid/ranging/SessionConfig$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSessionConfigBuilderSetSensorFusionParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSessionConfigBuilder)), "setSensorFusionParams", "(Landroid/ranging/SensorFusionParams;)Landroid/ranging/SessionConfig$Builder;")
+		midConfigToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConfig)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -877,6 +642,82 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/ranging/SensorFusionParams")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSensorFusionParams = env.NewGlobalRef(&c.Object)
+
+		midSensorFusionParamsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsIsSensorFusionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "isSensorFusionEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParams)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/ranging/SensorFusionParams$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSensorFusionParamsBuilder = env.NewGlobalRef(&c.Object)
+
+		midSensorFusionParamsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParamsBuilder)), "build", "()Landroid/ranging/SensorFusionParams;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSensorFusionParamsBuilderSetSensorFusionEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSensorFusionParamsBuilder)), "setSensorFusionEnabled", "(Z)Landroid/ranging/SensorFusionParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/ranging/RangingManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -925,43 +766,202 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/ranging/RangingMeasurement")
+	c, err = env.FindClass("android/ranging/RangingDevice")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsMeasurement = env.NewGlobalRef(&c.Object)
+		clsDevice = env.NewGlobalRef(&c.Object)
 
-		midMeasurementDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "describeContents", "()I")
+		midDeviceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midMeasurementGetConfidence, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "getConfidence", "()I")
+		midDeviceEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midMeasurementGetMeasurement, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "getMeasurement", "()D")
+		midDeviceGetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "getUuid", "()Ljava/util/UUID;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midMeasurementToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "toString", "()Ljava/lang/String;")
+		midDeviceHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midMeasurementWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMeasurement)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midDeviceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDevice)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/ranging/RangingDevice$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDeviceBuilder = env.NewGlobalRef(&c.Object)
+
+		midDeviceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "build", "()Landroid/ranging/RangingDevice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceBuilderSetUuid, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceBuilder)), "setUuid", "(Ljava/util/UUID;)Landroid/ranging/RangingDevice$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/ranging/RangingPreference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPreference = env.NewGlobalRef(&c.Object)
+
+		midPreferenceDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferenceGetDeviceRole, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "getDeviceRole", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferenceGetRangingParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "getRangingParams", "()Landroid/ranging/RangingConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferenceGetSessionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "getSessionConfig", "()Landroid/ranging/SessionConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferenceWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreference)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/ranging/RangingPreference$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPreferenceBuilder = env.NewGlobalRef(&c.Object)
+
+		midPreferenceBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferenceBuilder)), "build", "()Landroid/ranging/RangingPreference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPreferenceBuilderSetSessionConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPreferenceBuilder)), "setSessionConfig", "(Landroid/ranging/SessionConfig;)Landroid/ranging/RangingPreference$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/ranging/RangingCapabilities")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCapabilities = env.NewGlobalRef(&c.Object)
+
+		midCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilitiesGetCsCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "getCsCapabilities", "()Landroid/ranging/ble/cs/BleCsRangingCapabilities;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilitiesGetRttRangingCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "getRttRangingCapabilities", "()Landroid/ranging/wifi/rtt/RttRangingCapabilities;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilitiesGetUwbCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "getUwbCapabilities", "()Landroid/ranging/uwb/UwbRangingCapabilities;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

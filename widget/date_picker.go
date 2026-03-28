@@ -23,6 +23,29 @@ type DatePicker struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDatePicker creates a new android.widget.DatePicker instance.
+func NewDatePicker(vm *jni.VM, arg0 *jni.Object) (*DatePicker, error) {
+	var t DatePicker
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDatePicker)), midDatePickerInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Autofill calls android.widget.DatePicker.autofill.
 func (m *DatePicker) Autofill(arg0 *jni.Object) error {
 
@@ -408,14 +431,14 @@ func (m *DatePicker) Init(
 			callErr = err
 			return err
 		}
-		if midDatePickerInit == nil {
+		if midDatePickerInitMethod == nil {
 			callErr = fmt.Errorf("android.widget.DatePicker.init is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midDatePickerInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			midDatePickerInitMethod, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})

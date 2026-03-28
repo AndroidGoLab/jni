@@ -23,6 +23,28 @@ type Utils struct {
 	Obj *jni.GlobalRef
 }
 
+// NewUtils creates a new android.view.animation.AnimationUtils instance.
+func NewUtils(vm *jni.VM) (*Utils, error) {
+	var t Utils
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUtils)), midUtilsInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CurrentAnimationTimeMillis calls android.view.animation.AnimationUtils.currentAnimationTimeMillis.
 func (m *Utils) CurrentAnimationTimeMillis() (int64, error) {
 	var result int64

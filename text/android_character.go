@@ -23,6 +23,28 @@ type AndroidCharacter struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAndroidCharacter creates a new android.text.AndroidCharacter instance.
+func NewAndroidCharacter(vm *jni.VM) (*AndroidCharacter, error) {
+	var t AndroidCharacter
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAndroidCharacter)), midAndroidCharacterInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetDirectionalities calls android.text.AndroidCharacter.getDirectionalities.
 func (m *AndroidCharacter) GetDirectionalities(
 	arg0 *jni.Object,

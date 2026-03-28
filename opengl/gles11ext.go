@@ -23,6 +23,28 @@ type GLES11Ext struct {
 	Obj *jni.GlobalRef
 }
 
+// NewGLES11Ext creates a new android.opengl.GLES11Ext instance.
+func NewGLES11Ext(vm *jni.VM) (*GLES11Ext, error) {
+	var t GLES11Ext
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), midGLES11ExtInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GlAlphaFuncxOES calls android.opengl.GLES11Ext.glAlphaFuncxOES.
 func (m *GLES11Ext) GlAlphaFuncxOES(arg0 int32, arg1 int32) error {
 

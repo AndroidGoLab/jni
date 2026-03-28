@@ -23,6 +23,28 @@ type ETC1Util struct {
 	Obj *jni.GlobalRef
 }
 
+// NewETC1Util creates a new android.opengl.ETC1Util instance.
+func NewETC1Util(vm *jni.VM) (*ETC1Util, error) {
+	var t ETC1Util
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsETC1Util)), midETC1UtilInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // CompressTexture calls android.opengl.ETC1Util.compressTexture.
 func (m *ETC1Util) CompressTexture(
 	arg0 *jni.Object,

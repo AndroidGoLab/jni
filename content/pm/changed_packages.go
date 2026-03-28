@@ -23,6 +23,29 @@ type ChangedPackages struct {
 	Obj *jni.GlobalRef
 }
 
+// NewChangedPackages creates a new android.content.pm.ChangedPackages instance.
+func NewChangedPackages(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*ChangedPackages, error) {
+	var t ChangedPackages
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangedPackages)), midChangedPackagesInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.content.pm.ChangedPackages.describeContents.
 func (m *ChangedPackages) DescribeContents() (int32, error) {
 	var result int32

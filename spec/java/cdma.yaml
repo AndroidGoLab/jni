@@ -7,6 +7,7 @@ go_import: github.com/AndroidGoLab/jni/telephony/cdma
 classes:
     - java_class: android.telephony.cdma.CdmaCellLocation
       go_type: CellLocation
+      obtain: constructor
       methods:
         - java_method: equals
           go_name: Equals

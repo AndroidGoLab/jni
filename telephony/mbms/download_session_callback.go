@@ -23,6 +23,28 @@ type DownloadSessionCallback struct {
 	Obj *jni.GlobalRef
 }
 
+// NewDownloadSessionCallback creates a new android.telephony.mbms.MbmsDownloadSessionCallback instance.
+func NewDownloadSessionCallback(vm *jni.VM) (*DownloadSessionCallback, error) {
+	var t DownloadSessionCallback
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), midDownloadSessionCallbackInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnError calls android.telephony.mbms.MbmsDownloadSessionCallback.onError.
 func (m *DownloadSessionCallback) OnError(arg0 int32, arg1 string) error {
 

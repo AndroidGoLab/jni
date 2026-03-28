@@ -5,20 +5,18 @@ package drm
 import "github.com/AndroidGoLab/jni/drm/consts"
 
 const (
-	TypeAcquireDrmInfoFailed              = consts.TypeAcquireDrmInfoFailed
-	TypeNotSupported                      = consts.TypeNotSupported
-	TypeNoInternetConnection              = consts.TypeNoInternetConnection
-	TypeOutOfMemory                       = consts.TypeOutOfMemory
-	TypeProcessDrmInfoFailed              = consts.TypeProcessDrmInfoFailed
-	TypeRemoveAllRightsFailed             = consts.TypeRemoveAllRightsFailed
-	TypeRightsNotInstalled                = consts.TypeRightsNotInstalled
-	TypeRightsRenewalNotAllowed           = consts.TypeRightsRenewalNotAllowed
-	TypeAllRightsRemoved                  = consts.TypeAllRightsRemoved
-	TypeDrmInfoProcessed                  = consts.TypeDrmInfoProcessed
-	StatusError                           = consts.StatusError
-	StatusOk                              = consts.StatusOk
+	TypeAccountAlreadyRegistered          = consts.TypeAccountAlreadyRegistered
+	TypeAlreadyRegisteredByAnotherAccount = consts.TypeAlreadyRegisteredByAnotherAccount
+	TypeRemoveRights                      = consts.TypeRemoveRights
+	TypeRightsInstalled                   = consts.TypeRightsInstalled
+	TypeRightsRemoved                     = consts.TypeRightsRemoved
+	TypeWaitForRights                     = consts.TypeWaitForRights
 	ErrorNone                             = consts.ErrorNone
 	ErrorUnknown                          = consts.ErrorUnknown
+	TypeRegistrationInfo                  = consts.TypeRegistrationInfo
+	TypeRightsAcquisitionInfo             = consts.TypeRightsAcquisitionInfo
+	TypeRightsAcquisitionProgressInfo     = consts.TypeRightsAcquisitionProgressInfo
+	TypeUnregistrationInfo                = consts.TypeUnregistrationInfo
 	Default                               = consts.Default
 	Display                               = consts.Display
 	Execute                               = consts.Execute
@@ -39,28 +37,30 @@ const (
 	RightsInvalid                         = consts.RightsInvalid
 	RightsNotAcquired                     = consts.RightsNotAcquired
 	RightsValid                           = consts.RightsValid
+	StatusError                           = consts.StatusError
+	StatusOk                              = consts.StatusOk
+	TypeAllRightsRemoved                  = consts.TypeAllRightsRemoved
+	TypeDrmInfoProcessed                  = consts.TypeDrmInfoProcessed
+	TypeAcquireDrmInfoFailed              = consts.TypeAcquireDrmInfoFailed
+	TypeNotSupported                      = consts.TypeNotSupported
+	TypeNoInternetConnection              = consts.TypeNoInternetConnection
+	TypeOutOfMemory                       = consts.TypeOutOfMemory
+	TypeProcessDrmInfoFailed              = consts.TypeProcessDrmInfoFailed
+	TypeRemoveAllRightsFailed             = consts.TypeRemoveAllRightsFailed
+	TypeRightsNotInstalled                = consts.TypeRightsNotInstalled
+	TypeRightsRenewalNotAllowed           = consts.TypeRightsRenewalNotAllowed
 	StatusInputdataError                  = consts.StatusInputdataError
-	TypeRegistrationInfo                  = consts.TypeRegistrationInfo
-	TypeRightsAcquisitionInfo             = consts.TypeRightsAcquisitionInfo
-	TypeRightsAcquisitionProgressInfo     = consts.TypeRightsAcquisitionProgressInfo
-	TypeUnregistrationInfo                = consts.TypeUnregistrationInfo
-	TypeAccountAlreadyRegistered          = consts.TypeAccountAlreadyRegistered
-	TypeAlreadyRegisteredByAnotherAccount = consts.TypeAlreadyRegisteredByAnotherAccount
-	TypeRemoveRights                      = consts.TypeRemoveRights
-	TypeRightsInstalled                   = consts.TypeRightsInstalled
-	TypeRightsRemoved                     = consts.TypeRightsRemoved
-	TypeWaitForRights                     = consts.TypeWaitForRights
 )
 
 const (
-	DrmInfoObject        = consts.DrmInfoObject
-	DrmInfoStatusObject  = consts.DrmInfoStatusObject
+	AccountId            = consts.AccountId
+	SubscriptionId       = consts.SubscriptionId
 	ExtendedMetadata     = consts.ExtendedMetadata
 	LicenseAvailableTime = consts.LicenseAvailableTime
 	LicenseExpiryTime    = consts.LicenseExpiryTime
 	LicenseStartTime     = consts.LicenseStartTime
 	MaxRepeatCount       = consts.MaxRepeatCount
 	RemainingRepeatCount = consts.RemainingRepeatCount
-	AccountId            = consts.AccountId
-	SubscriptionId       = consts.SubscriptionId
+	DrmInfoObject        = consts.DrmInfoObject
+	DrmInfoStatusObject  = consts.DrmInfoStatusObject
 )

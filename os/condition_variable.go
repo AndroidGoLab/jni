@@ -23,6 +23,28 @@ type ConditionVariable struct {
 	Obj *jni.GlobalRef
 }
 
+// NewConditionVariable creates a new android.os.ConditionVariable instance.
+func NewConditionVariable(vm *jni.VM) (*ConditionVariable, error) {
+	var t ConditionVariable
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConditionVariable)), midConditionVariableInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Block0 calls android.os.ConditionVariable.block.
 func (m *ConditionVariable) Block0() error {
 

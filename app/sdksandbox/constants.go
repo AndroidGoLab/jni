@@ -5,7 +5,15 @@ package sdksandbox
 import "github.com/AndroidGoLab/jni/app/sdksandbox/consts"
 
 const (
-	Creator                                = consts.Creator
+	ExtraDisplayId      = consts.ExtraDisplayId
+	ExtraHeightInPixels = consts.ExtraHeightInPixels
+	ExtraHostToken      = consts.ExtraHostToken
+	ExtraSurfacePackage = consts.ExtraSurfacePackage
+	ExtraWidthInPixels  = consts.ExtraWidthInPixels
+	SdkSandboxService   = consts.SdkSandboxService
+)
+
+const (
 	LoadSdkAlreadyLoaded                   = consts.LoadSdkAlreadyLoaded
 	LoadSdkInternalError                   = consts.LoadSdkInternalError
 	LoadSdkNotFound                        = consts.LoadSdkNotFound
@@ -16,13 +24,5 @@ const (
 	SdkSandboxProcessNotAvailable          = consts.SdkSandboxProcessNotAvailable
 	SdkSandboxStateDisabled                = consts.SdkSandboxStateDisabled
 	SdkSandboxStateEnabledProcessIsolation = consts.SdkSandboxStateEnabledProcessIsolation
-)
-
-const (
-	ExtraDisplayId      = consts.ExtraDisplayId
-	ExtraHeightInPixels = consts.ExtraHeightInPixels
-	ExtraHostToken      = consts.ExtraHostToken
-	ExtraSurfacePackage = consts.ExtraSurfacePackage
-	ExtraWidthInPixels  = consts.ExtraWidthInPixels
-	SdkSandboxService   = consts.SdkSandboxService
+	Creator                                = consts.Creator
 )

@@ -23,6 +23,40 @@ type CharacterPickerDialog struct {
 	Obj *jni.GlobalRef
 }
 
+// NewCharacterPickerDialog creates a new android.text.method.CharacterPickerDialog instance.
+func NewCharacterPickerDialog(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object, arg3 string, arg4 bool) (*CharacterPickerDialog, error) {
+	var t CharacterPickerDialog
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		var jArg4 uint8
+		if arg4 {
+			jArg4 = jniTrue
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), midCharacterPickerDialogInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.BooleanValue(jArg4))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // OnClick calls android.text.method.CharacterPickerDialog.onClick.
 func (m *CharacterPickerDialog) OnClick(arg0 *jni.Object) error {
 

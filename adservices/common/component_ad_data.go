@@ -23,6 +23,35 @@ type ComponentAdData struct {
 	Obj *jni.GlobalRef
 }
 
+// NewComponentAdData creates a new android.adservices.common.ComponentAdData instance.
+func NewComponentAdData(vm *jni.VM, arg0 *jni.Object, arg1 string) (*ComponentAdData, error) {
+	var t ComponentAdData
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentAdData)), midComponentAdDataInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DescribeContents calls android.adservices.common.ComponentAdData.describeContents.
 func (m *ComponentAdData) DescribeContents() (int32, error) {
 	var result int32

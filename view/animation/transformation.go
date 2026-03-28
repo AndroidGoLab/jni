@@ -23,6 +23,28 @@ type Transformation struct {
 	Obj *jni.GlobalRef
 }
 
+// NewTransformation creates a new android.view.animation.Transformation instance.
+func NewTransformation(vm *jni.VM) (*Transformation, error) {
+	var t Transformation
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTransformation)), midTransformationInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // Clear calls android.view.animation.Transformation.clear.
 func (m *Transformation) Clear() error {
 

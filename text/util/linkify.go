@@ -23,6 +23,28 @@ type Linkify struct {
 	Obj *jni.GlobalRef
 }
 
+// NewLinkify creates a new android.text.util.Linkify instance.
+func NewLinkify(vm *jni.VM) (*Linkify, error) {
+	var t Linkify
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkify)), midLinkifyInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddLinks2 calls android.text.util.Linkify.addLinks.
 func (m *Linkify) AddLinks2(arg0 *jni.Object, arg1 int32) (bool, error) {
 	var result bool

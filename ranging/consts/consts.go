@@ -4,19 +4,15 @@ package consts
 
 const (
 	Creator                          int = 0
-	DisabledRegulatory               int = 2
-	DisabledUser                     int = 1
-	DisabledUserRestrictions         int = 4
-	Enabled                          int = 3
-	NotSupported                     int = 0
-	RangingSessionOob                int = 1
-	RangingSessionRaw                int = 0
+	ConfidenceHigh                   int = 2
+	ConfidenceLow                    int = 0
+	ConfidenceMedium                 int = 1
 	NotificationConfigDisable        int = 0
 	NotificationConfigEnable         int = 1
 	NotificationConfigProximityEdge  int = 3
 	NotificationConfigProximityLevel int = 2
-	DeviceRoleInitiator              int = 1
-	DeviceRoleResponder              int = 0
+	RangingSessionOob                int = 1
+	RangingSessionRaw                int = 0
 	ReasonLocalRequest               int = 1
 	ReasonNoPeersFound               int = 5
 	ReasonRemoteRequest              int = 2
@@ -27,7 +23,11 @@ const (
 	BleRssi                          int = 3
 	Uwb                              int = 0
 	WifiNanRtt                       int = 2
-	ConfidenceHigh                   int = 2
-	ConfidenceLow                    int = 0
-	ConfidenceMedium                 int = 1
+	DeviceRoleInitiator              int = 1
+	DeviceRoleResponder              int = 0
+	DisabledRegulatory               int = 2
+	DisabledUser                     int = 1
+	DisabledUserRestrictions         int = 4
+	Enabled                          int = 3
+	NotSupported                     int = 0
 )

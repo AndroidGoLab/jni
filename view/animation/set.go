@@ -23,6 +23,29 @@ type Set struct {
 	Obj *jni.GlobalRef
 }
 
+// NewSet creates a new android.view.animation.AnimationSet instance.
+func NewSet(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Set, error) {
+	var t Set
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSet)), midSetInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // AddAnimation calls android.view.animation.AnimationSet.addAnimation.
 func (m *Set) AddAnimation(arg0 *jni.Object) error {
 

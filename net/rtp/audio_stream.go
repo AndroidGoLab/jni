@@ -23,6 +23,29 @@ type AudioStream struct {
 	Obj *jni.GlobalRef
 }
 
+// NewAudioStream creates a new android.net.rtp.AudioStream instance.
+func NewAudioStream(vm *jni.VM, arg0 *jni.Object) (*AudioStream, error) {
+	var t AudioStream
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioStream)), midAudioStreamInit, jni.ObjectValue(arg0))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetCodec calls android.net.rtp.AudioStream.getCodec.
 func (m *AudioStream) GetCodec() (*jni.Object, error) {
 	var result *jni.Object

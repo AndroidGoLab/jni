@@ -23,6 +23,29 @@ type BassBoost struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBassBoost creates a new android.media.audiofx.BassBoost instance.
+func NewBassBoost(vm *jni.VM, arg0 int32, arg1 int32) (*BassBoost, error) {
+	var t BassBoost
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBassBoost)), midBassBoostInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // GetProperties calls android.media.audiofx.BassBoost.getProperties.
 func (m *BassBoost) GetProperties() (*jni.Object, error) {
 	var result *jni.Object

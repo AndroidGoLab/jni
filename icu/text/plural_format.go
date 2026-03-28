@@ -23,6 +23,28 @@ type PluralFormat struct {
 	Obj *jni.GlobalRef
 }
 
+// NewPluralFormat creates a new android.icu.text.PluralFormat instance.
+func NewPluralFormat(vm *jni.VM) (*PluralFormat, error) {
+	var t PluralFormat
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPluralFormat)), midPluralFormatInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // ApplyPattern calls android.icu.text.PluralFormat.applyPattern.
 func (m *PluralFormat) ApplyPattern(arg0 string) error {
 

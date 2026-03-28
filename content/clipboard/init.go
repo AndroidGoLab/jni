@@ -24,6 +24,7 @@ var (
 	initErr  error
 
 	clsClipData                 *jni.GlobalRef
+	midClipDataInit             jni.MethodID
 	midClipDataAddItem1         jni.MethodID
 	midClipDataAddItem2_1       jni.MethodID
 	midClipDataDescribeContents jni.MethodID
@@ -91,6 +92,10 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsClipData = env.NewGlobalRef(&c.Object)
+		midClipDataInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "<init>", "(Landroid/content/ClipData;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
 		midClipDataAddItem1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClipData)), "addItem", "(Landroid/content/ClipData$Item;)V")
 		if err != nil {

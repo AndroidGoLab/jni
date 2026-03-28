@@ -23,6 +23,28 @@ type EGLExt struct {
 	Obj *jni.GlobalRef
 }
 
+// NewEGLExt creates a new android.opengl.EGLExt instance.
+func NewEGLExt(vm *jni.VM) (*EGLExt, error) {
+	var t EGLExt
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEGLExt)), midEGLExtInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // EglDupNativeFenceFDANDROID calls android.opengl.EGLExt.eglDupNativeFenceFDANDROID.
 func (m *EGLExt) EglDupNativeFenceFDANDROID(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

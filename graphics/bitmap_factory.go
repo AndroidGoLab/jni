@@ -23,6 +23,28 @@ type BitmapFactory struct {
 	Obj *jni.GlobalRef
 }
 
+// NewBitmapFactory creates a new android.graphics.BitmapFactory instance.
+func NewBitmapFactory(vm *jni.VM) (*BitmapFactory, error) {
+	var t BitmapFactory
+	t.VM = vm
+
+	err := vm.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			return err
+		}
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapFactory)), midBitmapFactoryInit)
+		if err != nil {
+			return err
+		}
+		t.Obj = env.NewGlobalRef(obj)
+		return nil
+	})
+	if err != nil {
+		return nil, err
+	}
+	return &t, nil
+}
+
 // DecodeByteArray3 calls android.graphics.BitmapFactory.decodeByteArray.
 func (m *BitmapFactory) DecodeByteArray3(
 	arg0 *jni.Object,

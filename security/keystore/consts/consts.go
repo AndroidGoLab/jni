@@ -3,6 +3,7 @@
 package consts
 
 const (
+	ModuleHash                      int = -1879047468
 	AuthBiometricStrong             int = 2
 	AuthDeviceCredential            int = 1
 	OriginGenerated                 int = 1
@@ -22,7 +23,6 @@ const (
 	SecurityLevelUnknown            int = -2
 	SecurityLevelUnknownSecure      int = -1
 	UnrestrictedUsageCount          int = -1
-	ModuleHash                      int = -1879047468
 )
 
 const (
