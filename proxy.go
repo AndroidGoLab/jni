@@ -3,6 +3,7 @@ package jni
 import (
 	"encoding/binary"
 	"fmt"
+	"strings"
 	"sync"
 	"sync/atomic"
 	"unsafe"
@@ -472,6 +473,20 @@ func newProxyImpl(
 	proxyObj := capi.CallStaticObjectMethodA(e.ptr, clsProxy, midNewProxyInstance, &args[0])
 	if capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
 		capi.ExceptionClear(e.ptr)
+
+		// Proxy.newProxyInstance only works with interfaces. For abstract
+		// classes, try to find a pre-compiled adapter class that extends the
+		// abstract class and delegates to GoAbstractDispatch.invoke().
+		// Adapter naming convention: simple class name + "Adapter" in
+		// package "center.dx.jni.generated".
+		if len(ifaces) == 1 {
+			adapterObj := tryAbstractAdapter(e, ifaces[0], invHandler)
+			if adapterObj != 0 {
+				cleanup = func() { unregisterProxy(handlerID) }
+				return &Object{ref: adapterObj}, cleanup, nil
+			}
+		}
+
 		unregisterProxy(handlerID)
 		return nil, nil, fmt.Errorf("jni: %s: Proxy.newProxyInstance failed", funcName)
 	}
@@ -485,6 +500,90 @@ func newProxyImpl(
 	}
 
 	return &Object{ref: proxyObj}, cleanup, nil
+}
+
+// tryAbstractAdapter attempts to instantiate a pre-compiled Java adapter
+// class for an abstract class. These adapters extend the abstract class
+// and delegate all method calls to GoAbstractDispatch.invoke(handlerID, ...).
+//
+// It searches for adapter classes using these naming conventions:
+//  1. "center/dx/jni/generated/<SimpleClassName>Adapter"
+//  2. "center/dx/gatt/internal/Go<SimpleClassName>"
+//
+// The adapter constructor must accept a single long parameter (handlerID).
+// Returns 0 if no adapter is found.
+func tryAbstractAdapter(
+	e *Env,
+	targetClass *Class,
+	invHandler capi.Object,
+) capi.Object {
+	// Get the class name via Class.getName(). Use the Env wrapper
+	// to call toString() which returns a Java string we can convert.
+	clsCls := capi.FindClass(e.ptr, newCString("java/lang/Class"))
+	if clsCls == 0 {
+		capi.ExceptionClear(e.ptr)
+		return 0
+	}
+	defer capi.DeleteLocalRef(e.ptr, capi.Object(clsCls))
+
+	getNameMID := capi.GetMethodID(e.ptr, clsCls, newCString("getName"), newCString("()Ljava/lang/String;"))
+	if getNameMID == nil {
+		capi.ExceptionClear(e.ptr)
+		return 0
+	}
+
+	nameObj := capi.CallObjectMethodA(e.ptr, capi.Object(targetClass.ref), getNameMID, &capi.Jvalue{})
+	if nameObj == 0 || capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
+		capi.ExceptionClear(e.ptr)
+		return 0
+	}
+	defer capi.DeleteLocalRef(e.ptr, nameObj)
+
+	fullName := e.GoString((*String)(unsafe.Pointer(&Object{ref: nameObj})))
+
+	// Extract simple class name.
+	simpleName := fullName
+	if idx := strings.LastIndex(fullName, "."); idx >= 0 {
+		simpleName = fullName[idx+1:]
+	}
+
+	// Try adapter class names.
+	adapterNames := []string{
+		"center/dx/jni/generated/" + simpleName + "Adapter",
+		"center/dx/gatt/internal/Go" + simpleName,
+	}
+
+	for _, name := range adapterNames {
+		adapterCls := findClassWithFallback(e.ptr, newCString(name), strings.ReplaceAll(name, "/", "."))
+		if adapterCls == 0 {
+			continue
+		}
+
+		// Find constructor: <init>(long handlerID)
+		ctorMID := capi.GetMethodID(e.ptr, adapterCls, newCString("<init>"), newCString("(J)V"))
+		if ctorMID == nil {
+			capi.ExceptionClear(e.ptr)
+			capi.DeleteLocalRef(e.ptr, capi.Object(adapterCls))
+			continue
+		}
+
+		// Get the handlerID from the GoInvocationHandler.
+		handlerIDVal := capi.GetLongField(e.ptr, invHandler, fidHandlerID)
+
+		// Create adapter instance.
+		var idArg capi.Jvalue
+		binary.NativeEndian.PutUint64(idArg[:], uint64(handlerIDVal))
+		obj := capi.NewObjectA(e.ptr, adapterCls, ctorMID, &idArg)
+		capi.DeleteLocalRef(e.ptr, capi.Object(adapterCls))
+		if obj == 0 || capi.ExceptionCheck(e.ptr) == capi.JNI_TRUE {
+			capi.ExceptionClear(e.ptr)
+			continue
+		}
+
+		return obj
+	}
+
+	return 0
 }
 
 // throwGoError throws a Java RuntimeException with the given Go error
