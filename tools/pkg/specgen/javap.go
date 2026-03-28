@@ -92,6 +92,7 @@ func parseJavap(output string) (*JavapClass, error) {
 		if m := methodRe.FindStringSubmatch(line); m != nil {
 			lastConstIdx = -1
 			isStatic := strings.TrimSpace(m[1]) == "static"
+			isAbstract := strings.TrimSpace(m[2]) == "abstract"
 			retType := m[5]
 			name := m[6]
 			paramsStr := m[7]
@@ -101,6 +102,7 @@ func parseJavap(output string) (*JavapClass, error) {
 				Name:       name,
 				ReturnType: retType,
 				IsStatic:   isStatic,
+				IsAbstract: isAbstract,
 				Throws:     strings.Contains(throwsStr, "throws"),
 				Params:     parseParams(paramsStr),
 			}

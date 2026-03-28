@@ -618,6 +618,113 @@ func TestMerge_ConstantGroupTypeCollision(t *testing.T) {
 	}
 }
 
+func TestMerge_AbstractCallbacks(t *testing.T) {
+	spec := &Spec{
+		Package:  "le",
+		GoImport: "github.com/example/bluetooth/le",
+		AbstractCallbacks: []AbstractCallback{
+			{
+				JavaClass: "android.bluetooth.le.ScanCallback",
+				GoType:    "ScanCallbackCallback",
+				Methods: []AbstractCallbackMethod{
+					{
+						JavaMethod: "onScanFailed",
+						Params:     []string{"int"},
+						Returns:    "void",
+						GoField:    "OnScanFailed",
+					},
+					{
+						JavaMethod: "onScanResult",
+						Params:     []string{"int", "android.bluetooth.le.ScanResult"},
+						Returns:    "void",
+						GoField:    "OnScanResult",
+					},
+				},
+			},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	if len(merged.AbstractCallbacks) != 1 {
+		t.Fatalf("expected 1 abstract callback, got %d", len(merged.AbstractCallbacks))
+	}
+
+	acb := merged.AbstractCallbacks[0]
+	if acb.JavaClass != "android.bluetooth.le.ScanCallback" {
+		t.Errorf("JavaClass = %q", acb.JavaClass)
+	}
+	if acb.JavaClassSlash != "android/bluetooth/le/ScanCallback" {
+		t.Errorf("JavaClassSlash = %q", acb.JavaClassSlash)
+	}
+	if acb.GoType != "ScanCallbackCallback" {
+		t.Errorf("GoType = %q", acb.GoType)
+	}
+	if acb.AdapterClassName() != "ScanCallbackAdapter" {
+		t.Errorf("AdapterClassName = %q", acb.AdapterClassName())
+	}
+	if len(acb.Methods) != 2 {
+		t.Fatalf("expected 2 methods, got %d", len(acb.Methods))
+	}
+
+	m0 := acb.Methods[0]
+	if m0.JavaMethod != "onScanFailed" {
+		t.Errorf("Methods[0].JavaMethod = %q", m0.JavaMethod)
+	}
+	if m0.GoField != "OnScanFailed" {
+		t.Errorf("Methods[0].GoField = %q", m0.GoField)
+	}
+	if len(m0.Params) != 1 {
+		t.Fatalf("Methods[0] params: expected 1, got %d", len(m0.Params))
+	}
+	if m0.Returns != "void" {
+		t.Errorf("Methods[0].Returns = %q, want void", m0.Returns)
+	}
+
+	m1 := acb.Methods[1]
+	if len(m1.Params) != 2 {
+		t.Fatalf("Methods[1] params: expected 2, got %d", len(m1.Params))
+	}
+	if m1.JavaParamList() != "int arg0, android.bluetooth.le.ScanResult arg1" {
+		t.Errorf("JavaParamList = %q", m1.JavaParamList())
+	}
+	if m1.JavaArgList() != "Integer.valueOf(arg0), arg1" {
+		t.Errorf("JavaArgList = %q", m1.JavaArgList())
+	}
+}
+
+func TestMerge_AbstractCallbackConstantCollision(t *testing.T) {
+	spec := &Spec{
+		Package:  "test",
+		GoImport: "github.com/example/test",
+		AbstractCallbacks: []AbstractCallback{
+			{
+				JavaClass: "com.example.Callback",
+				GoType:    "Callback",
+			},
+		},
+		Constants: []Constant{
+			{GoName: "Callback", Value: "1", GoType: "int"},
+		},
+	}
+
+	merged, err := Merge(spec, &Overlay{})
+	if err != nil {
+		t.Fatalf("Merge: %v", err)
+	}
+
+	for _, grp := range merged.ConstantGroups {
+		for _, v := range grp.Values {
+			if v.GoName == "Callback" {
+				t.Error("constant Callback should have been renamed to CallbackConst")
+			}
+		}
+	}
+}
+
 func TestBuildGoParamList(t *testing.T) {
 	params := []MergedParam{
 		{GoName: "name", GoType: "string"},

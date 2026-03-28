@@ -136,6 +136,13 @@ func Generate(
 		}
 	}
 
+	// Generate Java adapter classes for abstract callbacks.
+	if len(merged.AbstractCallbacks) > 0 {
+		if err := renderAbstractAdapters(templatesDir, merged, pkgDir); err != nil {
+			return fmt.Errorf("render abstract adapters: %w", err)
+		}
+	}
+
 	return nil
 }
 

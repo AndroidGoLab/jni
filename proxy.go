@@ -547,9 +547,12 @@ func tryAbstractAdapter(
 		simpleName = fullName[idx+1:]
 	}
 
-	// Try adapter class names.
+	// Try adapter class names. The first pattern matches adapters generated
+	// by javagen (e.g. ScanCallbackAdapter). The second pattern matches
+	// the legacy hand-written naming in the gatt repo.
 	adapterNames := []string{
 		"center/dx/jni/generated/" + simpleName + "Adapter",
+		"center/dx/jni/generated/Go" + simpleName + "Adapter",
 		"center/dx/gatt/internal/Go" + simpleName,
 	}
 

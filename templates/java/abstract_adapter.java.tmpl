@@ -1,0 +1,24 @@
+package center.dx.jni.generated;
+
+import {{.JavaClass}};
+import center.dx.jni.internal.GoAbstractDispatch;
+
+public class {{.AdapterClassName}} extends {{.JavaClass}} {
+    private final long handlerID;
+
+    public {{.AdapterClassName}}(long handlerID) {
+        this.handlerID = handlerID;
+    }
+{{range .Methods}}
+    @Override
+    public {{.JavaReturnType}} {{.JavaMethod}}({{.JavaParamList}}) {
+        {{- if .HasReturn}}
+        return {{.JavaCastReturn}} GoAbstractDispatch.invoke(
+            handlerID, "{{.JavaMethod}}", new Object[]{ {{.JavaArgList}} }){{.JavaUnboxReturn}};
+        {{- else}}
+        GoAbstractDispatch.invoke(
+            handlerID, "{{.JavaMethod}}", new Object[]{ {{.JavaArgList}} });
+        {{- end}}
+    }
+{{end -}}
+}

@@ -53,6 +53,11 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 		merged.Callbacks = append(merged.Callbacks, *mcb)
 	}
 
+	for _, acb := range spec.AbstractCallbacks {
+		macb := mergeAbstractCallback(&acb, overlay)
+		merged.AbstractCallbacks = append(merged.AbstractCallbacks, *macb)
+	}
+
 	merged.ConstantGroups = mergeConstants(spec.Constants)
 
 	resolveConstantTypeCollisions(merged)
@@ -316,6 +321,45 @@ func mergeCallback(cb *Callback, overlay *Overlay) (*MergedCallback, error) {
 	return mcb, nil
 }
 
+func mergeAbstractCallback(acb *AbstractCallback, overlay *Overlay) *MergedAbstractCallback {
+	macb := &MergedAbstractCallback{
+		JavaClass:      acb.JavaClass,
+		JavaClassSlash: JavaClassToSlash(acb.JavaClass),
+		GoType:         acb.GoType,
+	}
+
+	for _, m := range acb.Methods {
+		var params []MergedParam
+		for i, jt := range m.Params {
+			goName := fmt.Sprintf("arg%d", i)
+			isString := jt == "String" || jt == "java.lang.String" || jt == "java.lang.CharSequence" || jt == "CharSequence"
+			goType := "*jni.Object"
+			if isString {
+				goType = "string"
+			}
+			params = append(params, MergedParam{
+				JavaType: jt,
+				GoName:   goName,
+				GoType:   goType,
+				IsString: isString,
+				IsObject: true,
+			})
+		}
+
+		goParams := buildGoParamList(params)
+
+		macb.Methods = append(macb.Methods, MergedAbstractCallbackMethod{
+			JavaMethod: m.JavaMethod,
+			GoField:    m.GoField,
+			Params:     params,
+			GoParams:   goParams,
+			Returns:    m.Returns,
+		})
+	}
+
+	return macb
+}
+
 // deriveJavaPackageDesc extracts the Java package name from the first
 // class in the spec to produce a human-readable description for the
 // doc.go package comment. Returns the Java package (e.g.
@@ -428,6 +472,9 @@ func resolveConstantTypeCollisions(merged *MergedSpec) {
 	}
 	for _, cb := range merged.Callbacks {
 		typeNames[cb.GoType] = struct{}{}
+	}
+	for _, acb := range merged.AbstractCallbacks {
+		typeNames[acb.GoType] = struct{}{}
 	}
 	for _, grp := range merged.ConstantGroups {
 		if grp.GoType != "" {

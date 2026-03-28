@@ -76,6 +76,10 @@ func GenerateSpec(
 	cls := classFromJavap(jc, pkgMapping.Package)
 	spec.Classes = append(spec.Classes, cls)
 
+	if acb := abstractCallbackFromJavap(jc, pkgMapping.Package); acb != nil {
+		spec.AbstractCallbacks = append(spec.AbstractCallbacks, *acb)
+	}
+
 	return spec, nil
 }
 
@@ -179,6 +183,9 @@ func GenerateFromRefDir(
 		cls := classFromJavap(jc, mapping.Package)
 		spec.Classes = append(spec.Classes, cls)
 		addConstants(spec, jc)
+		if acb := abstractCallbackFromJavap(jc, mapping.Package); acb != nil {
+			spec.AbstractCallbacks = append(spec.AbstractCallbacks, *acb)
+		}
 
 		// Parse inner classes.
 		for _, inner := range innerClasses[parentName] {
@@ -189,6 +196,9 @@ func GenerateFromRefDir(
 			icls := classFromJavap(ijc, mapping.Package)
 			spec.Classes = append(spec.Classes, icls)
 			addConstants(spec, ijc)
+			if acb := abstractCallbackFromJavap(ijc, mapping.Package); acb != nil {
+				spec.AbstractCallbacks = append(spec.AbstractCallbacks, *acb)
+			}
 		}
 	}
 
@@ -632,6 +642,49 @@ func javaConstantToGoName(name string) string {
 		}
 	}
 	return strings.Join(parts, "")
+}
+
+// abstractCallbackFromJavap builds a SpecAbstractCallback for an abstract
+// class. Android abstract callback classes (e.g. ScanCallback,
+// BluetoothGattCallback) typically have concrete methods with empty bodies
+// rather than truly abstract methods, so all non-static public methods are
+// treated as overridable callback methods.
+//
+// Returns nil if the class is not abstract, is an interface, or has no methods.
+func abstractCallbackFromJavap(jc *JavapClass, goPkg string) *SpecAbstractCallback {
+	if !jc.IsAbstract || jc.IsInterface {
+		return nil
+	}
+
+	var methods []SpecAbstractCallbackMethod
+	for _, m := range jc.Methods {
+		if m.IsStatic {
+			continue
+		}
+		if hasUnsupportedParams(m) {
+			continue
+		}
+
+		acm := SpecAbstractCallbackMethod{
+			JavaMethod: m.Name,
+			Returns:    javaTypeToSpecType(m.ReturnType),
+			GoField:    javaMethodToGoName(m.Name),
+		}
+		for _, p := range m.Params {
+			acm.Params = append(acm.Params, javaTypeToSpecType(p.JavaType))
+		}
+		methods = append(methods, acm)
+	}
+
+	if len(methods) == 0 {
+		return nil
+	}
+
+	return &SpecAbstractCallback{
+		JavaClass: jc.FullName,
+		GoType:    inferGoType(jc.FullName, goPkg) + "Callback",
+		Methods:   methods,
+	}
 }
 
 // inferConstantDefault returns a placeholder default for a constant.

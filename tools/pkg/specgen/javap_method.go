@@ -6,5 +6,6 @@ type JavapMethod struct {
 	ReturnType string // "void", "int", "boolean", "java.lang.String", etc.
 	Params     []JavapParam
 	IsStatic   bool
+	IsAbstract bool
 	Throws     bool
 }

@@ -6,8 +6,9 @@ type MergedSpec struct {
 	GoImport        string
 	JavaPackageDesc string
 
-	Classes        []MergedClass
-	DataClasses    []MergedDataClass
-	Callbacks      []MergedCallback
-	ConstantGroups []MergedConstantGroup
+	Classes            []MergedClass
+	DataClasses        []MergedDataClass
+	Callbacks          []MergedCallback
+	AbstractCallbacks  []MergedAbstractCallback
+	ConstantGroups     []MergedConstantGroup
 }

@@ -208,6 +208,90 @@ func TestClassFromJavap_ConstructorObtain(t *testing.T) {
 	})
 }
 
+func TestAbstractCallbackFromJavap(t *testing.T) {
+	t.Run("abstract class with methods generates callback", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName:   "android.bluetooth.le.ScanCallback",
+			IsAbstract: true,
+			Methods: []JavapMethod{
+				{Name: "onScanFailed", ReturnType: "void", Params: []JavapParam{{JavaType: "int"}}},
+				{Name: "onScanResult", ReturnType: "void", Params: []JavapParam{{JavaType: "int"}, {JavaType: "android.bluetooth.le.ScanResult"}}},
+			},
+		}
+		acb := abstractCallbackFromJavap(jc, "le")
+		if acb == nil {
+			t.Fatal("expected non-nil abstract callback")
+		}
+		if acb.JavaClass != "android.bluetooth.le.ScanCallback" {
+			t.Errorf("JavaClass = %q, want %q", acb.JavaClass, "android.bluetooth.le.ScanCallback")
+		}
+		if acb.GoType != "ScanCallbackCallback" {
+			t.Errorf("GoType = %q, want %q", acb.GoType, "ScanCallbackCallback")
+		}
+		if len(acb.Methods) != 2 {
+			t.Fatalf("len(Methods) = %d, want 2", len(acb.Methods))
+		}
+		if acb.Methods[0].JavaMethod != "onScanFailed" {
+			t.Errorf("Methods[0].JavaMethod = %q, want %q", acb.Methods[0].JavaMethod, "onScanFailed")
+		}
+		if len(acb.Methods[1].Params) != 2 {
+			t.Errorf("Methods[1] params count = %d, want 2", len(acb.Methods[1].Params))
+		}
+	})
+
+	t.Run("concrete class returns nil", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName: "android.app.Activity",
+			Methods:  []JavapMethod{{Name: "onCreate", ReturnType: "void"}},
+		}
+		if acb := abstractCallbackFromJavap(jc, "app"); acb != nil {
+			t.Errorf("expected nil for concrete class, got %+v", acb)
+		}
+	})
+
+	t.Run("interface returns nil", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName:    "android.location.LocationListener",
+			IsInterface: true,
+			Methods:     []JavapMethod{{Name: "onLocationChanged", ReturnType: "void"}},
+		}
+		if acb := abstractCallbackFromJavap(jc, "location"); acb != nil {
+			t.Errorf("expected nil for interface, got %+v", acb)
+		}
+	})
+
+	t.Run("static methods are excluded", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName:   "android.app.AbstractThing",
+			IsAbstract: true,
+			Methods: []JavapMethod{
+				{Name: "doWork", ReturnType: "void"},
+				{Name: "getInstance", ReturnType: "android.app.AbstractThing", IsStatic: true},
+			},
+		}
+		acb := abstractCallbackFromJavap(jc, "app")
+		if acb == nil {
+			t.Fatal("expected non-nil abstract callback")
+		}
+		if len(acb.Methods) != 1 {
+			t.Fatalf("expected 1 method (static excluded), got %d", len(acb.Methods))
+		}
+		if acb.Methods[0].JavaMethod != "doWork" {
+			t.Errorf("Methods[0].JavaMethod = %q, want %q", acb.Methods[0].JavaMethod, "doWork")
+		}
+	})
+
+	t.Run("abstract class with no methods returns nil", func(t *testing.T) {
+		jc := &JavapClass{
+			FullName:   "android.app.EmptyAbstract",
+			IsAbstract: true,
+		}
+		if acb := abstractCallbackFromJavap(jc, "app"); acb != nil {
+			t.Errorf("expected nil for abstract class with no methods, got %+v", acb)
+		}
+	})
+}
+
 func TestDeduplicateGoTypes(t *testing.T) {
 	t.Run("no collision", func(t *testing.T) {
 		classes := []SpecClass{
