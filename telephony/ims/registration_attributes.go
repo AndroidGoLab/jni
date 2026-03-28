@@ -101,6 +101,38 @@ func (m *RegistrationAttributes) GetAttributeFlags() (int32, error) {
 	return result, callErr
 }
 
+// GetFeatureTags calls android.telephony.ims.ImsRegistrationAttributes.getFeatureTags.
+func (m *RegistrationAttributes) GetFeatureTags() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRegistrationAttributesGetFeatureTags == nil {
+			callErr = fmt.Errorf("android.telephony.ims.ImsRegistrationAttributes.getFeatureTags is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRegistrationAttributesGetFeatureTags,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSipDetails calls android.telephony.ims.ImsRegistrationAttributes.getSipDetails.
 func (m *RegistrationAttributes) GetSipDetails() (*jni.Object, error) {
 	var result *jni.Object

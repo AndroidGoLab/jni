@@ -114,6 +114,38 @@ func (m *SessionConfiguration) GetRemoteApplicationVersion() (string, error) {
 	return result, callErr
 }
 
+// GetRemoteVendorIds calls android.net.ipsec.ike.IkeSessionConfiguration.getRemoteVendorIds.
+func (m *SessionConfiguration) GetRemoteVendorIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSessionConfigurationGetRemoteVendorIds == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.IkeSessionConfiguration.getRemoteVendorIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSessionConfigurationGetRemoteVendorIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsIkeExtensionEnabled calls android.net.ipsec.ike.IkeSessionConfiguration.isIkeExtensionEnabled.
 func (m *SessionConfiguration) IsIkeExtensionEnabled(arg0 int32) (bool, error) {
 	var result bool

@@ -33,7 +33,7 @@ func NewDynamicRangeProfiles(vm *jni.VM, arg0 *jni.Object) (*DynamicRangeProfile
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicRangeProfiles)), midDynamicRangeProfilesInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicRangeProfiles)), midDynamicRangeProfilesCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -44,6 +44,71 @@ func NewDynamicRangeProfiles(vm *jni.VM, arg0 *jni.Object) (*DynamicRangeProfile
 		return nil, err
 	}
 	return &t, nil
+}
+
+// GetProfileCaptureRequestConstraints calls android.hardware.camera2.params.DynamicRangeProfiles.getProfileCaptureRequestConstraints.
+func (m *DynamicRangeProfiles) GetProfileCaptureRequestConstraints(arg0 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDynamicRangeProfilesGetProfileCaptureRequestConstraints == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.DynamicRangeProfiles.getProfileCaptureRequestConstraints is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDynamicRangeProfilesGetProfileCaptureRequestConstraints, jni.LongValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedProfiles calls android.hardware.camera2.params.DynamicRangeProfiles.getSupportedProfiles.
+func (m *DynamicRangeProfiles) GetSupportedProfiles() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDynamicRangeProfilesGetSupportedProfiles == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.DynamicRangeProfiles.getSupportedProfiles is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDynamicRangeProfilesGetSupportedProfiles,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // IsExtraLatencyPresent calls android.hardware.camera2.params.DynamicRangeProfiles.isExtraLatencyPresent.

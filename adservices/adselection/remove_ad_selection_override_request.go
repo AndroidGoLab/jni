@@ -33,7 +33,7 @@ func NewRemoveAdSelectionOverrideRequest(vm *jni.VM, arg0 *jni.Object) (*RemoveA
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionOverrideRequest)), midRemoveAdSelectionOverrideRequestInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveAdSelectionOverrideRequest)), midRemoveAdSelectionOverrideRequestCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

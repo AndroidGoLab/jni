@@ -32,7 +32,7 @@ func NewBitmapDrawable(vm *jni.VM) (*BitmapDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapDrawable)), midBitmapDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapDrawable)), midBitmapDrawableCtor)
 		if err != nil {
 			return err
 		}

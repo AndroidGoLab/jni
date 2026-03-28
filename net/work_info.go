@@ -45,7 +45,7 @@ func NewworkInfo(vm *jni.VM, arg0 int32, arg1 int32, arg2 string, arg3 string) (
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsworkInfo)), midworkInfoInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsworkInfo)), midworkInfoCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object))
 		if err != nil {
 			return err
 		}

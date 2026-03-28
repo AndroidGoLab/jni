@@ -33,7 +33,7 @@ func NewPopupMenu(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*PopupMenu, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPopupMenu)), midPopupMenuInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPopupMenu)), midPopupMenuCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewSocketException(vm *jni.VM, arg0 int32) (*SocketException, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSocketException)), midSocketExceptionInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSocketException)), midSocketExceptionCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

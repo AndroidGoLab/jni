@@ -36,6 +36,7 @@ var (
 
 	clsDeviceManager                                *jni.GlobalRef
 	midDeviceManagerGetVirtualDevice                jni.MethodID
+	midDeviceManagerGetVirtualDevices               jni.MethodID
 	midDeviceManagerRegisterVirtualDeviceListener   jni.MethodID
 	midDeviceManagerUnregisterVirtualDeviceListener jni.MethodID
 
@@ -142,6 +143,13 @@ func doInit(env *jni.Env) error {
 		clsDeviceManager = env.NewGlobalRef(&c.Object)
 
 		midDeviceManagerGetVirtualDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceManager)), "getVirtualDevice", "(I)Landroid/companion/virtual/VirtualDevice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDeviceManagerGetVirtualDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDeviceManager)), "getVirtualDevices", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

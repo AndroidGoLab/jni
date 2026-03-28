@@ -33,7 +33,7 @@ func NewInterpolator(vm *jni.VM, arg0 int32) (*Interpolator, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInterpolator)), midInterpolatorInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInterpolator)), midInterpolatorCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

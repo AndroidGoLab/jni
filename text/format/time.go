@@ -32,7 +32,7 @@ func NewTime(vm *jni.VM) (*Time, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTime)), midTimeInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTime)), midTimeCtor)
 		if err != nil {
 			return err
 		}

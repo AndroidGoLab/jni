@@ -43,7 +43,7 @@ func NewDynamicLayout(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 int32, arg
 			jArg6 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicLayout)), midDynamicLayoutInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.BooleanValue(jArg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicLayout)), midDynamicLayoutCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.BooleanValue(jArg6))
 		if err != nil {
 			return err
 		}

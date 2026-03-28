@@ -43,7 +43,7 @@ func NewControlButton(vm *jni.VM, arg0 bool, arg1 string) (*ControlButton, error
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsControlButton)), midControlButtonInit, jni.BooleanValue(jArg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsControlButton)), midControlButtonCtor, jni.BooleanValue(jArg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

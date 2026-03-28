@@ -32,7 +32,7 @@ func NewIntEvaluator(vm *jni.VM) (*IntEvaluator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), midIntEvaluatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntEvaluator)), midIntEvaluatorCtor)
 		if err != nil {
 			return err
 		}

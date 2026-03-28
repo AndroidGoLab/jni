@@ -604,6 +604,38 @@ func (m *AccessibilityService) GetSoftKeyboardController() (*jni.Object, error) 
 	return result, callErr
 }
 
+// GetSystemActions calls android.accessibilityservice.AccessibilityService.getSystemActions.
+func (m *AccessibilityService) GetSystemActions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAccessibilityServiceGetSystemActions == nil {
+			callErr = fmt.Errorf("android.accessibilityservice.AccessibilityService.getSystemActions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAccessibilityServiceGetSystemActions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSystemService calls android.accessibilityservice.AccessibilityService.getSystemService.
 func (m *AccessibilityService) GetSystemService(arg0 string) (*jni.Object, error) {
 	var result *jni.Object
@@ -659,6 +691,70 @@ func (m *AccessibilityService) GetTouchInteractionController(arg0 int32) (*jni.O
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAccessibilityServiceGetTouchInteractionController, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWindows calls android.accessibilityservice.AccessibilityService.getWindows.
+func (m *AccessibilityService) GetWindows() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAccessibilityServiceGetWindows == nil {
+			callErr = fmt.Errorf("android.accessibilityservice.AccessibilityService.getWindows is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAccessibilityServiceGetWindows,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWindowsOnAllDisplays calls android.accessibilityservice.AccessibilityService.getWindowsOnAllDisplays.
+func (m *AccessibilityService) GetWindowsOnAllDisplays() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAccessibilityServiceGetWindowsOnAllDisplays == nil {
+			callErr = fmt.Errorf("android.accessibilityservice.AccessibilityService.getWindowsOnAllDisplays is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAccessibilityServiceGetWindowsOnAllDisplays,
 		)
 		if callErr != nil {
 			return callErr

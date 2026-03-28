@@ -842,8 +842,12 @@ func (m *TimeZone) GetAvailableIDs0() (*jni.Object, error) {
 	return result, callErr
 }
 
-// GetAvailableIDs1_1 calls android.icu.util.TimeZone.getAvailableIDs.
-func (m *TimeZone) GetAvailableIDs1_1(arg0 int32) (*jni.Object, error) {
+// GetAvailableIDs3_1 calls android.icu.util.TimeZone.getAvailableIDs.
+func (m *TimeZone) GetAvailableIDs3_1(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -851,14 +855,20 @@ func (m *TimeZone) GetAvailableIDs1_1(arg0 int32) (*jni.Object, error) {
 			callErr = err
 			return err
 		}
-		if midTimeZoneGetAvailableIDs1_1 == nil {
+		if midTimeZoneGetAvailableIDs3_1 == nil {
 			callErr = fmt.Errorf("android.icu.util.TimeZone.getAvailableIDs is not available on this device")
 			return callErr
 		}
 
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsTimeZone)),
-			midTimeZoneGetAvailableIDs1_1, jni.IntValue(arg0),
+			midTimeZoneGetAvailableIDs3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr
@@ -876,7 +886,7 @@ func (m *TimeZone) GetAvailableIDs1_1(arg0 int32) (*jni.Object, error) {
 }
 
 // GetAvailableIDs1_2 calls android.icu.util.TimeZone.getAvailableIDs.
-func (m *TimeZone) GetAvailableIDs1_2(arg0 string) (*jni.Object, error) {
+func (m *TimeZone) GetAvailableIDs1_2(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -888,6 +898,39 @@ func (m *TimeZone) GetAvailableIDs1_2(arg0 string) (*jni.Object, error) {
 			callErr = fmt.Errorf("android.icu.util.TimeZone.getAvailableIDs is not available on this device")
 			return callErr
 		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsTimeZone)),
+			midTimeZoneGetAvailableIDs1_2, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableIDs1_3 calls android.icu.util.TimeZone.getAvailableIDs.
+func (m *TimeZone) GetAvailableIDs1_3(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTimeZoneGetAvailableIDs1_3 == nil {
+			callErr = fmt.Errorf("android.icu.util.TimeZone.getAvailableIDs is not available on this device")
+			return callErr
+		}
 		jArg0, err := env.NewStringUTF(arg0)
 		if err != nil {
 			return err
@@ -896,7 +939,7 @@ func (m *TimeZone) GetAvailableIDs1_2(arg0 string) (*jni.Object, error) {
 
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsTimeZone)),
-			midTimeZoneGetAvailableIDs1_2, jni.ObjectValue(&jArg0.Object),
+			midTimeZoneGetAvailableIDs1_3, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr

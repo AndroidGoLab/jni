@@ -33,7 +33,7 @@ func NewTextInfo(vm *jni.VM, arg0 *jni.Object) (*TextInfo, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextInfo)), midTextInfoInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextInfo)), midTextInfoCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

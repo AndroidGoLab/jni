@@ -33,7 +33,7 @@ func NewImageView(vm *jni.VM, arg0 *jni.Object) (*ImageView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageView)), midImageViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageView)), midImageViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewWifiP2pGroup(vm *jni.VM) (*WifiP2pGroup, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pGroup)), midWifiP2pGroupInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pGroup)), midWifiP2pGroupCtor)
 		if err != nil {
 			return err
 		}
@@ -64,6 +64,38 @@ func (m *WifiP2pGroup) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetClientList calls android.net.wifi.p2p.WifiP2pGroup.getClientList.
+func (m *WifiP2pGroup) GetClientList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pGroupGetClientList == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pGroup.getClientList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pGroupGetClientList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -32,7 +32,7 @@ func NewCircularPropagation(vm *jni.VM) (*CircularPropagation, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCircularPropagation)), midCircularPropagationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCircularPropagation)), midCircularPropagationCtor)
 		if err != nil {
 			return err
 		}

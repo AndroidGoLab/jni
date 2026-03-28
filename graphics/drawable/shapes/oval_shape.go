@@ -32,7 +32,7 @@ func NewOvalShape(vm *jni.VM) (*OvalShape, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOvalShape)), midOvalShapeInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOvalShape)), midOvalShapeCtor)
 		if err != nil {
 			return err
 		}

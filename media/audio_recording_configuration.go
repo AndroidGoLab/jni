@@ -183,6 +183,38 @@ func (m *AudioRecordingConfiguration) GetClientAudioSource() (int32, error) {
 	return result, callErr
 }
 
+// GetClientEffects calls android.media.AudioRecordingConfiguration.getClientEffects.
+func (m *AudioRecordingConfiguration) GetClientEffects() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioRecordingConfigurationGetClientEffects == nil {
+			callErr = fmt.Errorf("android.media.AudioRecordingConfiguration.getClientEffects is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioRecordingConfigurationGetClientEffects,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetClientFormat calls android.media.AudioRecordingConfiguration.getClientFormat.
 func (m *AudioRecordingConfiguration) GetClientFormat() (*jni.Object, error) {
 	var result *jni.Object
@@ -199,6 +231,38 @@ func (m *AudioRecordingConfiguration) GetClientFormat() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAudioRecordingConfigurationGetClientFormat,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEffects calls android.media.AudioRecordingConfiguration.getEffects.
+func (m *AudioRecordingConfiguration) GetEffects() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioRecordingConfigurationGetEffects == nil {
+			callErr = fmt.Errorf("android.media.AudioRecordingConfiguration.getEffects is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioRecordingConfigurationGetEffects,
 		)
 		if callErr != nil {
 			return callErr

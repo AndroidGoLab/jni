@@ -33,7 +33,7 @@ func NewIconMarginSpan(vm *jni.VM, arg0 *jni.Object) (*IconMarginSpan, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), midIconMarginSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIconMarginSpan)), midIconMarginSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

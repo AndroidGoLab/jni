@@ -29,6 +29,9 @@ var (
 	midNumberEquals                         jni.MethodID
 	midNumberGetCountryIso                  jni.MethodID
 	midNumberGetEmergencyCallRouting        jni.MethodID
+	midNumberGetEmergencyNumberSources      jni.MethodID
+	midNumberGetEmergencyServiceCategories  jni.MethodID
+	midNumberGetEmergencyUrns               jni.MethodID
 	midNumberGetMnc                         jni.MethodID
 	midNumberGetNumber                      jni.MethodID
 	midNumberHashCode                       jni.MethodID
@@ -94,6 +97,27 @@ func doInit(env *jni.Env) error {
 		}
 
 		midNumberGetEmergencyCallRouting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getEmergencyCallRouting", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNumberGetEmergencyNumberSources, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getEmergencyNumberSources", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNumberGetEmergencyServiceCategories, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getEmergencyServiceCategories", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNumberGetEmergencyUrns, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNumber)), "getEmergencyUrns", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

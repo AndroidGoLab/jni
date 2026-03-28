@@ -30,7 +30,7 @@ func NewListFragment(vm *jni.VM) (*ListFragment, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListFragment)), midListFragmentInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListFragment)), midListFragmentCtor)
 		if err != nil {
 			return err
 		}

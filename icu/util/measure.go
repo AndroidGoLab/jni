@@ -33,7 +33,7 @@ func NewMeasure(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Measure, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMeasure)), midMeasureInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMeasure)), midMeasureCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

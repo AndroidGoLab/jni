@@ -301,6 +301,38 @@ func (m *Manager) GetAdnUriForPhoneAccount(arg0 *jni.Object) (*jni.Object, error
 	return result, callErr
 }
 
+// GetCallCapablePhoneAccounts calls android.telecom.TelecomManager.getCallCapablePhoneAccounts.
+func (m *Manager) GetCallCapablePhoneAccounts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetCallCapablePhoneAccounts == nil {
+			callErr = fmt.Errorf("android.telecom.TelecomManager.getCallCapablePhoneAccounts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetCallCapablePhoneAccounts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefaultDialerPackage calls android.telecom.TelecomManager.getDefaultDialerPackage.
 func (m *Manager) GetDefaultDialerPackage() (string, error) {
 	var result string
@@ -394,6 +426,38 @@ func (m *Manager) GetLine1Number(arg0 *jni.Object) (string, error) {
 	return result, callErr
 }
 
+// GetOwnSelfManagedPhoneAccounts calls android.telecom.TelecomManager.getOwnSelfManagedPhoneAccounts.
+func (m *Manager) GetOwnSelfManagedPhoneAccounts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetOwnSelfManagedPhoneAccounts == nil {
+			callErr = fmt.Errorf("android.telecom.TelecomManager.getOwnSelfManagedPhoneAccounts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetOwnSelfManagedPhoneAccounts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPhoneAccount calls android.telecom.TelecomManager.getPhoneAccount.
 func (m *Manager) GetPhoneAccount(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -411,6 +475,70 @@ func (m *Manager) GetPhoneAccount(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetPhoneAccount, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRegisteredPhoneAccounts calls android.telecom.TelecomManager.getRegisteredPhoneAccounts.
+func (m *Manager) GetRegisteredPhoneAccounts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetRegisteredPhoneAccounts == nil {
+			callErr = fmt.Errorf("android.telecom.TelecomManager.getRegisteredPhoneAccounts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetRegisteredPhoneAccounts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSelfManagedPhoneAccounts calls android.telecom.TelecomManager.getSelfManagedPhoneAccounts.
+func (m *Manager) GetSelfManagedPhoneAccounts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetSelfManagedPhoneAccounts == nil {
+			callErr = fmt.Errorf("android.telecom.TelecomManager.getSelfManagedPhoneAccounts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetSelfManagedPhoneAccounts,
 		)
 		if callErr != nil {
 			return callErr

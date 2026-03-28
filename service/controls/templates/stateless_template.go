@@ -38,7 +38,7 @@ func NewStatelessTemplate(vm *jni.VM, arg0 string) (*StatelessTemplate, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStatelessTemplate)), midStatelessTemplateInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStatelessTemplate)), midStatelessTemplateCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

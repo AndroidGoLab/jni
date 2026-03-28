@@ -38,7 +38,7 @@ func NewQwertyKeyListener(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*QwertyKeyLi
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), midQwertyKeyListenerInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQwertyKeyListener)), midQwertyKeyListenerCtor, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

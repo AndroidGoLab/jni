@@ -5,41 +5,6 @@
 package: oob
 go_import: github.com/AndroidGoLab/jni/ranging/oob
 classes:
-    - java_class: android.ranging.oob.DeviceHandle
-      go_type: DeviceHandle
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getRangingDevice
-          go_name: GetRangingDevice
-          returns: android.ranging.RangingDevice
-          error: true
-        - java_method: getTransportHandle
-          go_name: GetTransportHandle
-          returns: android.ranging.oob.TransportHandle
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.ranging.oob.DeviceHandle$Builder
-      go_type: DeviceHandleBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.ranging.oob.DeviceHandle
-          error: true
     - java_class: android.ranging.oob.TransportHandle
       go_type: TransportHandle
       methods:
@@ -85,6 +50,37 @@ classes:
           go_name: OnSendFailed
           returns: void
           error: true
+    - java_class: android.ranging.oob.OobResponderRangingConfig
+      go_type: ResponderRangingConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getDeviceHandle
+          go_name: GetDeviceHandle
+          returns: android.ranging.oob.DeviceHandle
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.ranging.oob.OobResponderRangingConfig$Builder
+      go_type: ResponderRangingConfigBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.ranging.oob.OobResponderRangingConfig
+          error: true
     - java_class: android.ranging.oob.OobInitiatorRangingConfig
       go_type: InitiatorRangingConfig
       methods:
@@ -92,9 +88,17 @@ classes:
           go_name: DescribeContents
           returns: int
           error: true
+        - java_method: getDeviceHandles
+          go_name: GetDeviceHandles
+          returns: java.util.List<android.ranging.oob.DeviceHandle>
+          error: true
         - java_method: getFastestRangingInterval
           go_name: GetFastestRangingInterval
           returns: java.time.Duration
+          error: true
+        - java_method: getRangingIntervalRange
+          go_name: GetRangingIntervalRange
+          returns: android.util.Range<java.time.Duration>
           error: true
         - java_method: getRangingMode
           go_name: GetRangingMode
@@ -163,16 +167,20 @@ classes:
               go_name: arg0
           returns: android.ranging.oob.OobInitiatorRangingConfig$Builder
           error: true
-    - java_class: android.ranging.oob.OobResponderRangingConfig
-      go_type: ResponderRangingConfig
+    - java_class: android.ranging.oob.DeviceHandle
+      go_type: DeviceHandle
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getDeviceHandle
-          go_name: GetDeviceHandle
-          returns: android.ranging.oob.DeviceHandle
+        - java_method: getRangingDevice
+          go_name: GetRangingDevice
+          returns: android.ranging.RangingDevice
+          error: true
+        - java_method: getTransportHandle
+          go_name: GetTransportHandle
+          returns: android.ranging.oob.TransportHandle
           error: true
         - java_method: toString
           go_name: ToString
@@ -187,12 +195,12 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.ranging.oob.OobResponderRangingConfig$Builder
-      go_type: ResponderRangingConfigBuilder
+    - java_class: android.ranging.oob.DeviceHandle$Builder
+      go_type: DeviceHandleBuilder
       methods:
         - java_method: build
           go_name: Build
-          returns: android.ranging.oob.OobResponderRangingConfig
+          returns: android.ranging.oob.DeviceHandle
           error: true
 constants:
     - go_name: Creator

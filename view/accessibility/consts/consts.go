@@ -4,6 +4,14 @@ package consts
 
 const (
 	RequestTypeExtraData                       int = 1
+	Creator                                    int = 0
+	TypeAccessibilityOverlay                   int = 4
+	TypeApplication                            int = 1
+	TypeInputMethod                            int = 2
+	TypeMagnificationOverlay                   int = 6
+	TypeSplitScreenDivider                     int = 5
+	TypeSystem                                 int = 3
+	TypeWindowControl                          int = 7
 	ActionAccessibilityFocus                   int = 64
 	ActionClearAccessibilityFocus              int = 128
 	ActionClearFocus                           int = 2
@@ -29,7 +37,6 @@ const (
 	CheckedStateFalse                          int = 0
 	CheckedStatePartial                        int = 2
 	CheckedStateTrue                           int = 1
-	Creator                                    int = 0
 	ExpandedStateCollapsed                     int = 1
 	ExpandedStateFull                          int = 3
 	ExpandedStatePartial                       int = 2
@@ -80,14 +87,6 @@ const (
 	RangeTypeIndeterminate                     int = 3
 	RangeTypeInt                               int = 0
 	RangeTypePercent                           int = 2
-	TypeAccessibilityOverlay                   int = 4
-	TypeApplication                            int = 1
-	TypeInputMethod                            int = 2
-	TypeMagnificationOverlay                   int = 6
-	TypeSplitScreenDivider                     int = 5
-	TypeSystem                                 int = 3
-	TypeWindowControl                          int = 7
-	HostViewId                                 int = -1
 	EdgeTypeDepressed                          int = 4
 	EdgeTypeDropShadow                         int = 2
 	EdgeTypeNone                               int = 0
@@ -159,6 +158,7 @@ const (
 	WindowsChangePip                           int = 1024
 	WindowsChangeRemoved                       int = 2
 	WindowsChangeTitle                         int = 4
+	HostViewId                                 int = -1
 )
 
 const (

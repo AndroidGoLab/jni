@@ -33,7 +33,7 @@ func NewSurfaceControlViewHost(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, a
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceControlViewHost)), midSurfaceControlViewHostInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceControlViewHost)), midSurfaceControlViewHostCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

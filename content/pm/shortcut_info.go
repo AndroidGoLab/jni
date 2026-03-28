@@ -80,6 +80,103 @@ func (m *ShortcutInfo) GetActivity() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetCapabilities calls android.content.pm.ShortcutInfo.getCapabilities.
+func (m *ShortcutInfo) GetCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutInfoGetCapabilities == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutInfo.getCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutInfoGetCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCapabilityParams calls android.content.pm.ShortcutInfo.getCapabilityParams.
+func (m *ShortcutInfo) GetCapabilityParams(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutInfoGetCapabilityParams == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutInfo.getCapabilityParams is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutInfoGetCapabilityParams, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCategories calls android.content.pm.ShortcutInfo.getCategories.
+func (m *ShortcutInfo) GetCategories() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutInfoGetCategories == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutInfo.getCategories is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutInfoGetCategories,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDisabledMessage calls android.content.pm.ShortcutInfo.getDisabledMessage.
 func (m *ShortcutInfo) GetDisabledMessage() (*jni.Object, error) {
 	var result *jni.Object

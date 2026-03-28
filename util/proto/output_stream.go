@@ -32,7 +32,7 @@ func NewOutputStream(vm *jni.VM) (*OutputStream, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutputStream)), midOutputStreamInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutputStream)), midOutputStreamCtor)
 		if err != nil {
 			return err
 		}

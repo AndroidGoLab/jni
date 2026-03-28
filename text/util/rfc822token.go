@@ -50,7 +50,7 @@ func NewRfc822Token(vm *jni.VM, arg0 string, arg1 string, arg2 string) (*Rfc822T
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822Token)), midRfc822TokenInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822Token)), midRfc822TokenCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewViewSwitcher(vm *jni.VM, arg0 *jni.Object) (*ViewSwitcher, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewSwitcher)), midViewSwitcherInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewSwitcher)), midViewSwitcherCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

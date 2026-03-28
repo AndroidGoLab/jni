@@ -32,7 +32,7 @@ func NewPermissionGroupInfo(vm *jni.VM) (*PermissionGroupInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPermissionGroupInfo)), midPermissionGroupInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPermissionGroupInfo)), midPermissionGroupInfoCtor)
 		if err != nil {
 			return err
 		}

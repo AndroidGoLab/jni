@@ -32,7 +32,7 @@ func NewLinkProperties(vm *jni.VM) (*LinkProperties, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkProperties)), midLinkPropertiesInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkProperties)), midLinkPropertiesCtor)
 		if err != nil {
 			return err
 		}
@@ -180,6 +180,38 @@ func (m *LinkProperties) GetDhcpServerAddress() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetDnsServers calls android.net.LinkProperties.getDnsServers.
+func (m *LinkProperties) GetDnsServers() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLinkPropertiesGetDnsServers == nil {
+			callErr = fmt.Errorf("android.net.LinkProperties.getDnsServers is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLinkPropertiesGetDnsServers,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDomains calls android.net.LinkProperties.getDomains.
 func (m *LinkProperties) GetDomains() (string, error) {
 	var result string
@@ -266,6 +298,38 @@ func (m *LinkProperties) GetInterfaceName() (string, error) {
 	return result, callErr
 }
 
+// GetLinkAddresses calls android.net.LinkProperties.getLinkAddresses.
+func (m *LinkProperties) GetLinkAddresses() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLinkPropertiesGetLinkAddresses == nil {
+			callErr = fmt.Errorf("android.net.LinkProperties.getLinkAddresses is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLinkPropertiesGetLinkAddresses,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMtu calls android.net.LinkProperties.getMtu.
 func (m *LinkProperties) GetMtu() (int32, error) {
 	var result int32
@@ -345,6 +409,38 @@ func (m *LinkProperties) GetPrivateDnsServerName() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRoutes calls android.net.LinkProperties.getRoutes.
+func (m *LinkProperties) GetRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLinkPropertiesGetRoutes == nil {
+			callErr = fmt.Errorf("android.net.LinkProperties.getRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLinkPropertiesGetRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

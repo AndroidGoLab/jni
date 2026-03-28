@@ -33,7 +33,7 @@ func NewRggbChannelVector(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRggbChannelVector)), midRggbChannelVectorInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRggbChannelVector)), midRggbChannelVectorCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3))
 		if err != nil {
 			return err
 		}

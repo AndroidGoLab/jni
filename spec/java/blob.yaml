@@ -65,6 +65,10 @@ classes:
               go_name: arg0
           returns: long
           error: true
+        - java_method: getLeasedBlobs
+          go_name: GetLeasedBlobs
+          returns: java.util.List<android.app.blob.BlobHandle>
+          error: true
         - java_method: getRemainingLeaseQuotaBytes
           go_name: GetRemainingLeaseQuotaBytes
           returns: long

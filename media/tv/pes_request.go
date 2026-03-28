@@ -33,7 +33,7 @@ func NewPesRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 int32) (
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPesRequest)), midPesRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPesRequest)), midPesRequestCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewNoSuchPropertyException(vm *jni.VM, arg0 string) (*NoSuchPropertyExcepti
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNoSuchPropertyException)), midNoSuchPropertyExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNoSuchPropertyException)), midNoSuchPropertyExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

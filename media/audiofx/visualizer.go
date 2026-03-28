@@ -33,7 +33,7 @@ func NewVisualizer(vm *jni.VM, arg0 int32) (*Visualizer, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVisualizer)), midVisualizerInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVisualizer)), midVisualizerCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

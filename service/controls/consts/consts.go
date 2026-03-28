@@ -62,14 +62,14 @@ const (
 	TypeWasher                   int = 31
 	TypeWaterHeater              int = 23
 	TypeWindow                   int = 43
+	ControlsSurfaceActivityPanel int = 0
+	ControlsSurfaceDream         int = 1
 	Creator                      int = 0
 	StatusDisabled               int = 4
 	StatusError                  int = 3
 	StatusNotFound               int = 2
 	StatusOk                     int = 1
 	StatusUnknown                int = 0
-	ControlsSurfaceActivityPanel int = 0
-	ControlsSurfaceDream         int = 1
 )
 
 const (

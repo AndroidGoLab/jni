@@ -20,6 +20,10 @@ classes:
         - java_type: int
           go_name: arg4
       methods:
+        - java_method: getActiveMicrophones
+          go_name: GetActiveMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
+          error: true
         - java_method: getActiveRecordingConfiguration
           go_name: GetActiveRecordingConfiguration
           returns: android.media.AudioRecordingConfiguration
@@ -79,6 +83,10 @@ classes:
         - java_method: getRoutedDevice
           go_name: GetRoutedDevice
           returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
         - java_method: getSampleRate
           go_name: GetSampleRate

@@ -32,7 +32,7 @@ func NewSecureKeyImportUnavailableException(vm *jni.VM) (*SecureKeyImportUnavail
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSecureKeyImportUnavailableException)), midSecureKeyImportUnavailableExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSecureKeyImportUnavailableException)), midSecureKeyImportUnavailableExceptionCtor)
 		if err != nil {
 			return err
 		}

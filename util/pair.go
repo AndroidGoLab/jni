@@ -33,7 +33,7 @@ func NewPair(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Pair, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPair)), midPairInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPair)), midPairCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

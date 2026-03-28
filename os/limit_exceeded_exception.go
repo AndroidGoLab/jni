@@ -32,7 +32,7 @@ func NewLimitExceededException(vm *jni.VM) (*LimitExceededException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLimitExceededException)), midLimitExceededExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLimitExceededException)), midLimitExceededExceptionCtor)
 		if err != nil {
 			return err
 		}

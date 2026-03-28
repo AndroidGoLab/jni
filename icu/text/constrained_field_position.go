@@ -32,7 +32,7 @@ func NewConstrainedFieldPosition(vm *jni.VM) (*ConstrainedFieldPosition, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConstrainedFieldPosition)), midConstrainedFieldPositionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConstrainedFieldPosition)), midConstrainedFieldPositionCtor)
 		if err != nil {
 			return err
 		}

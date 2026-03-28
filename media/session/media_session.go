@@ -39,7 +39,7 @@ func NewMediaSession(vm *jni.VM, arg0 *jni.Object, arg1 string) (*MediaSession, 
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaSession)), midMediaSessionInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaSession)), midMediaSessionCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

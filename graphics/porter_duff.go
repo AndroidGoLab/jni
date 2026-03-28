@@ -32,7 +32,7 @@ func NewPorterDuff(vm *jni.VM) (*PorterDuff, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuff)), midPorterDuffInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuff)), midPorterDuffCtor)
 		if err != nil {
 			return err
 		}

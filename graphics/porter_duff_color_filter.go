@@ -33,7 +33,7 @@ func NewPorterDuffColorFilter(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*Porter
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuffColorFilter)), midPorterDuffColorFilterInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuffColorFilter)), midPorterDuffColorFilterCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

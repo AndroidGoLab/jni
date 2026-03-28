@@ -101,6 +101,38 @@ func (m *TextServicesManager) GetCurrentSpellCheckerInfo() (*jni.Object, error) 
 	return result, callErr
 }
 
+// GetEnabledSpellCheckerInfos calls android.view.textservice.TextServicesManager.getEnabledSpellCheckerInfos.
+func (m *TextServicesManager) GetEnabledSpellCheckerInfos() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextServicesManagerGetEnabledSpellCheckerInfos == nil {
+			callErr = fmt.Errorf("android.view.textservice.TextServicesManager.getEnabledSpellCheckerInfos is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextServicesManagerGetEnabledSpellCheckerInfos,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsSpellCheckerEnabled calls android.view.textservice.TextServicesManager.isSpellCheckerEnabled.
 func (m *TextServicesManager) IsSpellCheckerEnabled() (bool, error) {
 	var result bool

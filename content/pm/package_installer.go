@@ -132,6 +132,102 @@ func (m *PackageInstaller) GetActiveStagedSession() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetActiveStagedSessions calls android.content.pm.PackageInstaller.getActiveStagedSessions.
+func (m *PackageInstaller) GetActiveStagedSessions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageInstallerGetActiveStagedSessions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageInstaller.getActiveStagedSessions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageInstallerGetActiveStagedSessions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAllSessions calls android.content.pm.PackageInstaller.getAllSessions.
+func (m *PackageInstaller) GetAllSessions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageInstallerGetAllSessions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageInstaller.getAllSessions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageInstallerGetAllSessions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMySessions calls android.content.pm.PackageInstaller.getMySessions.
+func (m *PackageInstaller) GetMySessions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageInstallerGetMySessions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageInstaller.getMySessions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageInstallerGetMySessions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSessionInfo calls android.content.pm.PackageInstaller.getSessionInfo.
 func (m *PackageInstaller) GetSessionInfo(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -149,6 +245,38 @@ func (m *PackageInstaller) GetSessionInfo(arg0 int32) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageInstallerGetSessionInfo, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetStagedSessions calls android.content.pm.PackageInstaller.getStagedSessions.
+func (m *PackageInstaller) GetStagedSessions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageInstallerGetStagedSessions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageInstaller.getStagedSessions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageInstallerGetStagedSessions,
 		)
 		if callErr != nil {
 			return callErr

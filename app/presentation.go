@@ -31,7 +31,7 @@ func NewPresentation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Presentat
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPresentation)), midPresentationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPresentation)), midPresentationCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

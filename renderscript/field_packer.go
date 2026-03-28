@@ -33,7 +33,7 @@ func NewFieldPacker(vm *jni.VM, arg0 *jni.Object) (*FieldPacker, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFieldPacker)), midFieldPackerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFieldPacker)), midFieldPackerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

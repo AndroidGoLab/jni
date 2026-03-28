@@ -31,7 +31,7 @@ func NewMediaRouteButton(vm *jni.VM, arg0 *jni.Object) (*MediaRouteButton, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaRouteButton)), midMediaRouteButtonInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaRouteButton)), midMediaRouteButtonCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

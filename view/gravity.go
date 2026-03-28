@@ -32,7 +32,7 @@ func NewGravity(vm *jni.VM) (*Gravity, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGravity)), midGravityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGravity)), midGravityCtor)
 		if err != nil {
 			return err
 		}

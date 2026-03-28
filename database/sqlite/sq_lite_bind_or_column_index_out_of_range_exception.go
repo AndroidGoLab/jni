@@ -32,7 +32,7 @@ func NewSQLiteBindOrColumnIndexOutOfRangeException(vm *jni.VM) (*SQLiteBindOrCol
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteBindOrColumnIndexOutOfRangeException)), midSQLiteBindOrColumnIndexOutOfRangeExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteBindOrColumnIndexOutOfRangeException)), midSQLiteBindOrColumnIndexOutOfRangeExceptionCtor)
 		if err != nil {
 			return err
 		}

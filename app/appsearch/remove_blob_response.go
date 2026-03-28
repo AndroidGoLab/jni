@@ -33,7 +33,7 @@ func NewRemoveBlobResponse(vm *jni.VM, arg0 *jni.Object) (*RemoveBlobResponse, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveBlobResponse)), midRemoveBlobResponseInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveBlobResponse)), midRemoveBlobResponseCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

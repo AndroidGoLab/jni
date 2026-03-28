@@ -33,7 +33,7 @@ func NewLruCache(vm *jni.VM, arg0 int32) (*LruCache, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLruCache)), midLruCacheInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLruCache)), midLruCacheCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

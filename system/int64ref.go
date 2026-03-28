@@ -33,7 +33,7 @@ func NewInt64Ref(vm *jni.VM, arg0 int64) (*Int64Ref, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt64Ref)), midInt64RefInit, jni.LongValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt64Ref)), midInt64RefCtor, jni.LongValue(arg0))
 		if err != nil {
 			return err
 		}

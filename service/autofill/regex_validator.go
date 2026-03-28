@@ -33,7 +33,7 @@ func NewRegexValidator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*RegexVa
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegexValidator)), midRegexValidatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegexValidator)), midRegexValidatorCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

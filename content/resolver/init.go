@@ -78,6 +78,8 @@ var (
 	midContentResolverCanonicalize                            jni.MethodID
 	midContentResolverDelete2                                 jni.MethodID
 	midContentResolverDelete3_1                               jni.MethodID
+	midContentResolverGetOutgoingPersistedUriPermissions      jni.MethodID
+	midContentResolverGetPersistedUriPermissions              jni.MethodID
 	midContentResolverGetStreamTypes                          jni.MethodID
 	midContentResolverGetType                                 jni.MethodID
 	midContentResolverGetTypeInfo                             jni.MethodID
@@ -116,8 +118,10 @@ var (
 	midContentResolverCancelSync2                             jni.MethodID
 	midContentResolverCancelSync1_1                           jni.MethodID
 	midContentResolverGetCurrentSync                          jni.MethodID
+	midContentResolverGetCurrentSyncs                         jni.MethodID
 	midContentResolverGetIsSyncable                           jni.MethodID
 	midContentResolverGetMasterSyncAutomatically              jni.MethodID
+	midContentResolverGetPeriodicSyncs                        jni.MethodID
 	midContentResolverGetSyncAdapterTypes                     jni.MethodID
 	midContentResolverGetSyncAutomatically                    jni.MethodID
 	midContentResolverIsSyncActive                            jni.MethodID
@@ -154,9 +158,12 @@ var (
 	midUriGetHost                      jni.MethodID
 	midUriGetLastPathSegment           jni.MethodID
 	midUriGetPath                      jni.MethodID
+	midUriGetPathSegments              jni.MethodID
 	midUriGetPort                      jni.MethodID
 	midUriGetQuery                     jni.MethodID
 	midUriGetQueryParameter            jni.MethodID
+	midUriGetQueryParameterNames       jni.MethodID
+	midUriGetQueryParameters           jni.MethodID
 	midUriGetScheme                    jni.MethodID
 	midUriGetSchemeSpecificPart        jni.MethodID
 	midUriGetUserInfo                  jni.MethodID
@@ -597,6 +604,20 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContentResolverGetOutgoingPersistedUriPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getOutgoingPersistedUriPermissions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentResolverGetPersistedUriPermissions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getPersistedUriPermissions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContentResolverGetStreamTypes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getStreamTypes", "(Landroid/net/Uri;Ljava/lang/String;)[Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -863,6 +884,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midContentResolverGetCurrentSyncs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getCurrentSyncs", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midContentResolverGetIsSyncable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getIsSyncable", "(Landroid/accounts/Account;Ljava/lang/String;)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -871,6 +899,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContentResolverGetMasterSyncAutomatically, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getMasterSyncAutomatically", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentResolverGetPeriodicSyncs, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContentResolver)), "getPeriodicSyncs", "(Landroid/accounts/Account;Ljava/lang/String;)Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1121,6 +1156,13 @@ func doInit(env *jni.Env) error {
 			env.ExceptionClear()
 		}
 
+		midUriGetPathSegments, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getPathSegments", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midUriGetPort, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getPort", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -1136,6 +1178,20 @@ func doInit(env *jni.Env) error {
 		}
 
 		midUriGetQueryParameter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getQueryParameter", "(Ljava/lang/String;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUriGetQueryParameterNames, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getQueryParameterNames", "()Ljava/util/Set;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midUriGetQueryParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsUri)), "getQueryParameters", "(Ljava/lang/String;)Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

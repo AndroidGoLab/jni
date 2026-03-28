@@ -33,7 +33,7 @@ func NewURLSpan(vm *jni.VM, arg0 *jni.Object) (*URLSpan, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsURLSpan)), midURLSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsURLSpan)), midURLSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

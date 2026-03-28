@@ -112,6 +112,38 @@ func (m *FillRequest) GetDelayedFillIntentSender() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetFillContexts calls android.service.autofill.FillRequest.getFillContexts.
+func (m *FillRequest) GetFillContexts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFillRequestGetFillContexts == nil {
+			callErr = fmt.Errorf("android.service.autofill.FillRequest.getFillContexts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFillRequestGetFillContexts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFlags calls android.service.autofill.FillRequest.getFlags.
 func (m *FillRequest) GetFlags() (int32, error) {
 	var result int32
@@ -131,6 +163,38 @@ func (m *FillRequest) GetFlags() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHints calls android.service.autofill.FillRequest.getHints.
+func (m *FillRequest) GetHints() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFillRequestGetHints == nil {
+			callErr = fmt.Errorf("android.service.autofill.FillRequest.getHints is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFillRequestGetHints,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

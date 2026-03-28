@@ -33,7 +33,7 @@ func NewViewAnimator(vm *jni.VM, arg0 *jni.Object) (*ViewAnimator, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewAnimator)), midViewAnimatorInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewAnimator)), midViewAnimatorCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewRemoteCallbackList(vm *jni.VM) (*RemoteCallbackList, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteCallbackList)), midRemoteCallbackListInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteCallbackList)), midRemoteCallbackListCtor)
 		if err != nil {
 			return err
 		}

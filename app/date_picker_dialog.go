@@ -31,7 +31,7 @@ func NewDatePickerDialog(vm *jni.VM, arg0 *jni.Object) (*DatePickerDialog, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDatePickerDialog)), midDatePickerDialogInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDatePickerDialog)), midDatePickerDialogCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

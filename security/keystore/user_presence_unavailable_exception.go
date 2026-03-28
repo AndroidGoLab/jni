@@ -32,7 +32,7 @@ func NewUserPresenceUnavailableException(vm *jni.VM) (*UserPresenceUnavailableEx
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserPresenceUnavailableException)), midUserPresenceUnavailableExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserPresenceUnavailableException)), midUserPresenceUnavailableExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewResultReceiver(vm *jni.VM, arg0 *jni.Object) (*ResultReceiver, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResultReceiver)), midResultReceiverInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResultReceiver)), midResultReceiverCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

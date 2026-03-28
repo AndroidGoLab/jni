@@ -32,7 +32,7 @@ func NewScrollingMovementMethod(vm *jni.VM) (*ScrollingMovementMethod, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), midScrollingMovementMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollingMovementMethod)), midScrollingMovementMethodCtor)
 		if err != nil {
 			return err
 		}

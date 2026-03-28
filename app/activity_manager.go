@@ -259,6 +259,38 @@ func (m *ActivityManager) GetAppTaskThumbnailSize() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetAppTasks calls android.app.ActivityManager.getAppTasks.
+func (m *ActivityManager) GetAppTasks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetAppTasks == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getAppTasks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetAppTasks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDeviceConfigurationInfo calls android.app.ActivityManager.getDeviceConfigurationInfo.
 func (m *ActivityManager) GetDeviceConfigurationInfo() (*jni.Object, error) {
 	var result *jni.Object
@@ -275,6 +307,81 @@ func (m *ActivityManager) GetDeviceConfigurationInfo() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityManagerGetDeviceConfigurationInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHistoricalProcessExitReasons calls android.app.ActivityManager.getHistoricalProcessExitReasons.
+func (m *ActivityManager) GetHistoricalProcessExitReasons(
+	arg0 string,
+	arg1 int32,
+	arg2 int32,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetHistoricalProcessExitReasons == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getHistoricalProcessExitReasons is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetHistoricalProcessExitReasons, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHistoricalProcessStartReasons calls android.app.ActivityManager.getHistoricalProcessStartReasons.
+func (m *ActivityManager) GetHistoricalProcessStartReasons(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetHistoricalProcessStartReasons == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getHistoricalProcessStartReasons is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetHistoricalProcessStartReasons, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -472,6 +579,103 @@ func (m *ActivityManager) GetProcessMemoryInfo(arg0 *jni.Object) (*jni.Object, e
 	return result, callErr
 }
 
+// GetProcessesInErrorState calls android.app.ActivityManager.getProcessesInErrorState.
+func (m *ActivityManager) GetProcessesInErrorState() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetProcessesInErrorState == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getProcessesInErrorState is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetProcessesInErrorState,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRecentTasks calls android.app.ActivityManager.getRecentTasks.
+func (m *ActivityManager) GetRecentTasks(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetRecentTasks == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getRecentTasks is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetRecentTasks, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRunningAppProcesses calls android.app.ActivityManager.getRunningAppProcesses.
+func (m *ActivityManager) GetRunningAppProcesses() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetRunningAppProcesses == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getRunningAppProcesses is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetRunningAppProcesses,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetRunningServiceControlPanel calls android.app.ActivityManager.getRunningServiceControlPanel.
 func (m *ActivityManager) GetRunningServiceControlPanel(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -489,6 +693,72 @@ func (m *ActivityManager) GetRunningServiceControlPanel(arg0 *jni.Object) (*jni.
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midActivityManagerGetRunningServiceControlPanel, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRunningServices calls android.app.ActivityManager.getRunningServices.
+func (m *ActivityManager) GetRunningServices(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetRunningServices == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getRunningServices is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetRunningServices, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRunningTasks calls android.app.ActivityManager.getRunningTasks.
+func (m *ActivityManager) GetRunningTasks(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midActivityManagerGetRunningTasks == nil {
+			callErr = fmt.Errorf("android.app.ActivityManager.getRunningTasks is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midActivityManagerGetRunningTasks, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

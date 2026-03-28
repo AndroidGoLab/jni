@@ -32,7 +32,7 @@ func NewTimeAnimator(vm *jni.VM) (*TimeAnimator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), midTimeAnimatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimeAnimator)), midTimeAnimatorCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewDiscoverySessionCallback(vm *jni.VM) (*DiscoverySessionCallback, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDiscoverySessionCallback)), midDiscoverySessionCallbackInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDiscoverySessionCallback)), midDiscoverySessionCallbackCtor)
 		if err != nil {
 			return err
 		}

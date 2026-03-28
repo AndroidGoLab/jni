@@ -33,7 +33,7 @@ func NewScanResult(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32, a
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScanResult)), midScanResultInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.LongValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScanResult)), midScanResultCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.LongValue(arg3))
 		if err != nil {
 			return err
 		}

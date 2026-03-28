@@ -39,7 +39,7 @@ func NewCompletionInfo(vm *jni.VM, arg0 int64, arg1 int32, arg2 string) (*Comple
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), midCompletionInfoInit, jni.LongValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCompletionInfo)), midCompletionInfoCtor, jni.LongValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

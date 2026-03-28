@@ -38,7 +38,7 @@ func NewRSRuntimeException(vm *jni.VM, arg0 string) (*RSRuntimeException, error)
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRSRuntimeException)), midRSRuntimeExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRSRuntimeException)), midRSRuntimeExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewLeAudioCodecStatus(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLeAudioCodecStatus)), midLeAudioCodecStatusInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLeAudioCodecStatus)), midLeAudioCodecStatusCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
 		if err != nil {
 			return err
 		}
@@ -131,6 +131,70 @@ func (m *LeAudioCodecStatus) GetInputCodecConfig() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetInputCodecLocalCapabilities calls android.bluetooth.BluetoothLeAudioCodecStatus.getInputCodecLocalCapabilities.
+func (m *LeAudioCodecStatus) GetInputCodecLocalCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeAudioCodecStatusGetInputCodecLocalCapabilities == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothLeAudioCodecStatus.getInputCodecLocalCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeAudioCodecStatusGetInputCodecLocalCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInputCodecSelectableCapabilities calls android.bluetooth.BluetoothLeAudioCodecStatus.getInputCodecSelectableCapabilities.
+func (m *LeAudioCodecStatus) GetInputCodecSelectableCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeAudioCodecStatusGetInputCodecSelectableCapabilities == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothLeAudioCodecStatus.getInputCodecSelectableCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeAudioCodecStatusGetInputCodecSelectableCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetOutputCodecConfig calls android.bluetooth.BluetoothLeAudioCodecStatus.getOutputCodecConfig.
 func (m *LeAudioCodecStatus) GetOutputCodecConfig() (*jni.Object, error) {
 	var result *jni.Object
@@ -147,6 +211,70 @@ func (m *LeAudioCodecStatus) GetOutputCodecConfig() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLeAudioCodecStatusGetOutputCodecConfig,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOutputCodecLocalCapabilities calls android.bluetooth.BluetoothLeAudioCodecStatus.getOutputCodecLocalCapabilities.
+func (m *LeAudioCodecStatus) GetOutputCodecLocalCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeAudioCodecStatusGetOutputCodecLocalCapabilities == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothLeAudioCodecStatus.getOutputCodecLocalCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeAudioCodecStatusGetOutputCodecLocalCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOutputCodecSelectableCapabilities calls android.bluetooth.BluetoothLeAudioCodecStatus.getOutputCodecSelectableCapabilities.
+func (m *LeAudioCodecStatus) GetOutputCodecSelectableCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeAudioCodecStatusGetOutputCodecSelectableCapabilities == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothLeAudioCodecStatus.getOutputCodecSelectableCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeAudioCodecStatusGetOutputCodecSelectableCapabilities,
 		)
 		if callErr != nil {
 			return callErr

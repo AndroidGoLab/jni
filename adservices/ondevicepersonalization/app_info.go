@@ -37,7 +37,7 @@ func NewAppInfo(vm *jni.VM, arg0 bool) (*AppInfo, error) {
 			jArg0 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppInfo)), midAppInfoInit, jni.BooleanValue(jArg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppInfo)), midAppInfoCtor, jni.BooleanValue(jArg0))
 		if err != nil {
 			return err
 		}

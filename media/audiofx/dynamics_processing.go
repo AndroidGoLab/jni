@@ -33,7 +33,7 @@ func NewDynamicsProcessing(vm *jni.VM, arg0 int32) (*DynamicsProcessing, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicsProcessing)), midDynamicsProcessingInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDynamicsProcessing)), midDynamicsProcessingCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

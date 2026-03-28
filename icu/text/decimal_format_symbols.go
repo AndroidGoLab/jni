@@ -32,7 +32,7 @@ func NewDecimalFormatSymbols(vm *jni.VM) (*DecimalFormatSymbols, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDecimalFormatSymbols)), midDecimalFormatSymbolsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDecimalFormatSymbols)), midDecimalFormatSymbolsCtor)
 		if err != nil {
 			return err
 		}

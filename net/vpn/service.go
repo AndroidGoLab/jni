@@ -32,7 +32,7 @@ func NewService(vm *jni.VM) (*Service, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsService)), midServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsService)), midServiceCtor)
 		if err != nil {
 			return err
 		}

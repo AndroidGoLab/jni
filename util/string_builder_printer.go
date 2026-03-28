@@ -33,7 +33,7 @@ func NewStringBuilderPrinter(vm *jni.VM, arg0 *jni.Object) (*StringBuilderPrinte
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStringBuilderPrinter)), midStringBuilderPrinterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStringBuilderPrinter)), midStringBuilderPrinterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

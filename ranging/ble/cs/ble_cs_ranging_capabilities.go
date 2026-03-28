@@ -48,6 +48,38 @@ func (m *BleCsRangingCapabilities) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetSupportedSecurityLevels calls android.ranging.ble.cs.BleCsRangingCapabilities.getSupportedSecurityLevels.
+func (m *BleCsRangingCapabilities) GetSupportedSecurityLevels() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBleCsRangingCapabilitiesGetSupportedSecurityLevels == nil {
+			callErr = fmt.Errorf("android.ranging.ble.cs.BleCsRangingCapabilities.getSupportedSecurityLevels is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBleCsRangingCapabilitiesGetSupportedSecurityLevels,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // ToString calls android.ranging.ble.cs.BleCsRangingCapabilities.toString.
 func (m *BleCsRangingCapabilities) ToString() (string, error) {
 	var result string

@@ -32,7 +32,7 @@ func NewStructure(vm *jni.VM) (*Structure, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructure)), midStructureInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructure)), midStructureCtor)
 		if err != nil {
 			return err
 		}

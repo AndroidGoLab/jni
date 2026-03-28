@@ -33,7 +33,7 @@ func NewParcelablePeerHandle(vm *jni.VM, arg0 *jni.Object) (*ParcelablePeerHandl
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelablePeerHandle)), midParcelablePeerHandleInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelablePeerHandle)), midParcelablePeerHandleCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

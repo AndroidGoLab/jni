@@ -32,7 +32,7 @@ func NewPhoneStateListener(vm *jni.VM) (*PhoneStateListener, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneStateListener)), midPhoneStateListenerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneStateListener)), midPhoneStateListenerCtor)
 		if err != nil {
 			return err
 		}

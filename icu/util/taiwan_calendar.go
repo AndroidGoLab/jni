@@ -32,7 +32,7 @@ func NewTaiwanCalendar(vm *jni.VM) (*TaiwanCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTaiwanCalendar)), midTaiwanCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTaiwanCalendar)), midTaiwanCalendarCtor)
 		if err != nil {
 			return err
 		}

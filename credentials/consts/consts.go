@@ -7,11 +7,11 @@ const (
 )
 
 const (
+	TypeUnknown            string = "android.credentials.ClearCredentialStateException.TYPE_UNKNOWN"
 	TypePasswordCredential string = "android.credentials.TYPE_PASSWORD_CREDENTIAL"
 	TypeInterrupted        string = "android.credentials.CreateCredentialException.TYPE_INTERRUPTED"
 	TypeNoCreateOptions    string = "android.credentials.CreateCredentialException.TYPE_NO_CREATE_OPTIONS"
-	TypeUnknown            string = "android.credentials.CreateCredentialException.TYPE_UNKNOWN"
 	TypeUserCanceled       string = "android.credentials.CreateCredentialException.TYPE_USER_CANCELED"
-	SupportedElementKeys   string = "android.credentials.GetCredentialOption.SUPPORTED_ELEMENT_KEYS"
 	TypeNoCredential       string = "android.credentials.GetCredentialException.TYPE_NO_CREDENTIAL"
+	SupportedElementKeys   string = "android.credentials.GetCredentialOption.SUPPORTED_ELEMENT_KEYS"
 )

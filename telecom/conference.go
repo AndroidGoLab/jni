@@ -105,6 +105,38 @@ func (m *Conference) GetCallAudioState() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetConferenceableConnections calls android.telecom.Conference.getConferenceableConnections.
+func (m *Conference) GetConferenceableConnections() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConferenceGetConferenceableConnections == nil {
+			callErr = fmt.Errorf("android.telecom.Conference.getConferenceableConnections is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConferenceGetConferenceableConnections,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetConnectionCapabilities calls android.telecom.Conference.getConnectionCapabilities.
 func (m *Conference) GetConnectionCapabilities() (int32, error) {
 	var result int32
@@ -199,6 +231,38 @@ func (m *Conference) GetConnectionTime() (int64, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetConnections calls android.telecom.Conference.getConnections.
+func (m *Conference) GetConnections() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConferenceGetConnections == nil {
+			callErr = fmt.Errorf("android.telecom.Conference.getConnections is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConferenceGetConnections,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

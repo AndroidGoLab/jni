@@ -32,7 +32,7 @@ func NewETC1Util(vm *jni.VM) (*ETC1Util, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsETC1Util)), midETC1UtilInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsETC1Util)), midETC1UtilCtor)
 		if err != nil {
 			return err
 		}

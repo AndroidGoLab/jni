@@ -33,7 +33,7 @@ func NewIpv4AddrIdentification(vm *jni.VM, arg0 *jni.Object) (*Ipv4AddrIdentific
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIpv4AddrIdentification)), midIpv4AddrIdentificationInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIpv4AddrIdentification)), midIpv4AddrIdentificationCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

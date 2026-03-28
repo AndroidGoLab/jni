@@ -33,7 +33,7 @@ func NewWindowInsets(vm *jni.VM, arg0 *jni.Object) (*WindowInsets, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInsets)), midWindowInsetsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInsets)), midWindowInsetsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -165,6 +165,72 @@ func (m *WindowInsets) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBoundingRects calls android.view.WindowInsets.getBoundingRects.
+func (m *WindowInsets) GetBoundingRects(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWindowInsetsGetBoundingRects == nil {
+			callErr = fmt.Errorf("android.view.WindowInsets.getBoundingRects is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWindowInsetsGetBoundingRects, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBoundingRectsIgnoringVisibility calls android.view.WindowInsets.getBoundingRectsIgnoringVisibility.
+func (m *WindowInsets) GetBoundingRectsIgnoringVisibility(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWindowInsetsGetBoundingRectsIgnoringVisibility == nil {
+			callErr = fmt.Errorf("android.view.WindowInsets.getBoundingRectsIgnoringVisibility is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWindowInsetsGetBoundingRectsIgnoringVisibility, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

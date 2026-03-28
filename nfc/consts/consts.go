@@ -4,6 +4,20 @@ package consts
 
 const (
 	Creator                    int = 0
+	RtdAlternativeCarrier      int = 0
+	RtdHandoverCarrier         int = 0
+	RtdHandoverRequest         int = 0
+	RtdHandoverSelect          int = 0
+	RtdSmartPoster             int = 0
+	RtdText                    int = 0
+	RtdUri                     int = 0
+	TnfAbsoluteUri             int = 3
+	TnfEmpty                   int = 0
+	TnfExternalType            int = 4
+	TnfMimeMedia               int = 2
+	TnfUnchanged               int = 6
+	TnfUnknown                 int = 5
+	TnfWellKnown               int = 1
 	FlagListenDisable          int = 0
 	FlagListenKeep             int = -2147483648
 	FlagListenNfcPassiveA      int = 1
@@ -25,23 +39,14 @@ const (
 	StateOn                    int = 3
 	StateTurningOff            int = 4
 	StateTurningOn             int = 2
-	RtdAlternativeCarrier      int = 0
-	RtdHandoverCarrier         int = 0
-	RtdHandoverRequest         int = 0
-	RtdHandoverSelect          int = 0
-	RtdSmartPoster             int = 0
-	RtdText                    int = 0
-	RtdUri                     int = 0
-	TnfAbsoluteUri             int = 3
-	TnfEmpty                   int = 0
-	TnfExternalType            int = 4
-	TnfMimeMedia               int = 2
-	TnfUnchanged               int = 6
-	TnfUnknown                 int = 5
-	TnfWellKnown               int = 1
 )
 
 const (
+	MifareClassic                      string = "com.nxp.ndef.mifareclassic"
+	NfcForumType1                      string = "org.nfcforum.ndef.type1"
+	NfcForumType2                      string = "org.nfcforum.ndef.type2"
+	NfcForumType3                      string = "org.nfcforum.ndef.type3"
+	NfcForumType4                      string = "org.nfcforum.ndef.type4"
 	ActionAdapterStateChanged          string = "android.nfc.action.ADAPTER_STATE_CHANGED"
 	ActionChangeTagIntentPreference    string = "android.nfc.action.CHANGE_TAG_INTENT_PREFERENCE"
 	ActionNdefDiscovered               string = "android.nfc.action.NDEF_DISCOVERED"
@@ -58,9 +63,4 @@ const (
 	ExtraReaderPresenceCheckDelay      string = "presence"
 	ExtraSecureElementName             string = "android.nfc.extra.SECURE_ELEMENT_NAME"
 	ExtraTag                           string = "android.nfc.extra.TAG"
-	MifareClassic                      string = "com.nxp.ndef.mifareclassic"
-	NfcForumType1                      string = "org.nfcforum.ndef.type1"
-	NfcForumType2                      string = "org.nfcforum.ndef.type2"
-	NfcForumType3                      string = "org.nfcforum.ndef.type3"
-	NfcForumType4                      string = "org.nfcforum.ndef.type4"
 )

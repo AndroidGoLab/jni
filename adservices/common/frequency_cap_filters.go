@@ -76,6 +76,134 @@ func (m *FrequencyCapFilters) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetKeyedFrequencyCapsForClickEvents calls android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForClickEvents.
+func (m *FrequencyCapFilters) GetKeyedFrequencyCapsForClickEvents() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFrequencyCapFiltersGetKeyedFrequencyCapsForClickEvents == nil {
+			callErr = fmt.Errorf("android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForClickEvents is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFrequencyCapFiltersGetKeyedFrequencyCapsForClickEvents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeyedFrequencyCapsForImpressionEvents calls android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForImpressionEvents.
+func (m *FrequencyCapFilters) GetKeyedFrequencyCapsForImpressionEvents() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFrequencyCapFiltersGetKeyedFrequencyCapsForImpressionEvents == nil {
+			callErr = fmt.Errorf("android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForImpressionEvents is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFrequencyCapFiltersGetKeyedFrequencyCapsForImpressionEvents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeyedFrequencyCapsForViewEvents calls android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForViewEvents.
+func (m *FrequencyCapFilters) GetKeyedFrequencyCapsForViewEvents() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFrequencyCapFiltersGetKeyedFrequencyCapsForViewEvents == nil {
+			callErr = fmt.Errorf("android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForViewEvents is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFrequencyCapFiltersGetKeyedFrequencyCapsForViewEvents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeyedFrequencyCapsForWinEvents calls android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForWinEvents.
+func (m *FrequencyCapFilters) GetKeyedFrequencyCapsForWinEvents() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFrequencyCapFiltersGetKeyedFrequencyCapsForWinEvents == nil {
+			callErr = fmt.Errorf("android.adservices.common.FrequencyCapFilters.getKeyedFrequencyCapsForWinEvents is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFrequencyCapFiltersGetKeyedFrequencyCapsForWinEvents,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.adservices.common.FrequencyCapFilters.hashCode.
 func (m *FrequencyCapFilters) HashCode() (int32, error) {
 	var result int32

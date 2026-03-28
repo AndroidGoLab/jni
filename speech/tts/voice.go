@@ -43,7 +43,7 @@ func NewVoice(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 int32, arg3 int32,
 			jArg4 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVoice)), midVoiceInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4), jni.ObjectValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVoice)), midVoiceCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4), jni.ObjectValue(arg5))
 		if err != nil {
 			return err
 		}
@@ -104,6 +104,38 @@ func (m *Voice) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFeatures calls android.speech.tts.Voice.getFeatures.
+func (m *Voice) GetFeatures() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midVoiceGetFeatures == nil {
+			callErr = fmt.Errorf("android.speech.tts.Voice.getFeatures is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midVoiceGetFeatures,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

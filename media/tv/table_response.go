@@ -33,7 +33,7 @@ func NewTableResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 *jni.
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableResponse)), midTableResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableResponse)), midTableResponseCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
 		if err != nil {
 			return err
 		}

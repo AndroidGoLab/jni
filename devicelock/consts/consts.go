@@ -3,7 +3,7 @@
 package consts
 
 const (
+	DeviceLockRoleFinancing int = 0
 	DeviceIdTypeImei        int = 0
 	DeviceIdTypeMeid        int = 1
-	DeviceLockRoleFinancing int = 0
 )

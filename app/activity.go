@@ -30,7 +30,7 @@ func NewActivity(vm *jni.VM) (*Activity, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivity)), midActivityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivity)), midActivityCtor)
 		if err != nil {
 			return err
 		}

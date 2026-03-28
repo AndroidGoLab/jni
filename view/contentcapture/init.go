@@ -23,9 +23,13 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDataShareWriteAdapter           *jni.GlobalRef
-	midDataShareWriteAdapterOnRejected jni.MethodID
-	midDataShareWriteAdapterOnWrite    jni.MethodID
+	clsContentCaptureManager                            *jni.GlobalRef
+	midContentCaptureManagerGetContentCaptureConditions jni.MethodID
+	midContentCaptureManagerGetServiceComponentName     jni.MethodID
+	midContentCaptureManagerIsContentCaptureEnabled     jni.MethodID
+	midContentCaptureManagerRemoveData                  jni.MethodID
+	midContentCaptureManagerSetContentCaptureEnabled    jni.MethodID
+	midContentCaptureManagerShareData                   jni.MethodID
 
 	clsContentCaptureSession                            *jni.GlobalRef
 	midContentCaptureSessionClose                       jni.MethodID
@@ -54,20 +58,19 @@ var (
 	midContentCaptureSessionIdToString         jni.MethodID
 	midContentCaptureSessionIdWriteToParcel    jni.MethodID
 
-	clsDataRemovalRequest                 *jni.GlobalRef
-	midDataRemovalRequestDescribeContents jni.MethodID
-	midDataRemovalRequestGetPackageName   jni.MethodID
-	midDataRemovalRequestIsForEverything  jni.MethodID
-	midDataRemovalRequestWriteToParcel    jni.MethodID
+	clsContentCaptureCondition                 *jni.GlobalRef
+	midContentCaptureConditionCtor             jni.MethodID
+	midContentCaptureConditionDescribeContents jni.MethodID
+	midContentCaptureConditionEquals           jni.MethodID
+	midContentCaptureConditionGetFlags         jni.MethodID
+	midContentCaptureConditionGetLocusId       jni.MethodID
+	midContentCaptureConditionHashCode         jni.MethodID
+	midContentCaptureConditionToString         jni.MethodID
+	midContentCaptureConditionWriteToParcel    jni.MethodID
 
-	clsDataRemovalRequestBuilder              *jni.GlobalRef
-	midDataRemovalRequestBuilderAddLocusId    jni.MethodID
-	midDataRemovalRequestBuilderBuild         jni.MethodID
-	midDataRemovalRequestBuilderForEverything jni.MethodID
-
-	clsDataRemovalRequestLocusIdRequest           *jni.GlobalRef
-	midDataRemovalRequestLocusIdRequestGetFlags   jni.MethodID
-	midDataRemovalRequestLocusIdRequestGetLocusId jni.MethodID
+	clsDataShareWriteAdapter           *jni.GlobalRef
+	midDataShareWriteAdapterOnRejected jni.MethodID
+	midDataShareWriteAdapterOnWrite    jni.MethodID
 
 	clsContentCaptureContext                 *jni.GlobalRef
 	midContentCaptureContextDescribeContents jni.MethodID
@@ -81,25 +84,24 @@ var (
 	midContentCaptureContextBuilderBuild     jni.MethodID
 	midContentCaptureContextBuilderSetExtras jni.MethodID
 
-	clsContentCaptureCondition                 *jni.GlobalRef
-	midContentCaptureConditionInit             jni.MethodID
-	midContentCaptureConditionDescribeContents jni.MethodID
-	midContentCaptureConditionEquals           jni.MethodID
-	midContentCaptureConditionGetFlags         jni.MethodID
-	midContentCaptureConditionGetLocusId       jni.MethodID
-	midContentCaptureConditionHashCode         jni.MethodID
-	midContentCaptureConditionToString         jni.MethodID
-	midContentCaptureConditionWriteToParcel    jni.MethodID
+	clsDataRemovalRequest                   *jni.GlobalRef
+	midDataRemovalRequestDescribeContents   jni.MethodID
+	midDataRemovalRequestGetLocusIdRequests jni.MethodID
+	midDataRemovalRequestGetPackageName     jni.MethodID
+	midDataRemovalRequestIsForEverything    jni.MethodID
+	midDataRemovalRequestWriteToParcel      jni.MethodID
 
-	clsContentCaptureManager                         *jni.GlobalRef
-	midContentCaptureManagerGetServiceComponentName  jni.MethodID
-	midContentCaptureManagerIsContentCaptureEnabled  jni.MethodID
-	midContentCaptureManagerRemoveData               jni.MethodID
-	midContentCaptureManagerSetContentCaptureEnabled jni.MethodID
-	midContentCaptureManagerShareData                jni.MethodID
+	clsDataRemovalRequestBuilder              *jni.GlobalRef
+	midDataRemovalRequestBuilderAddLocusId    jni.MethodID
+	midDataRemovalRequestBuilderBuild         jni.MethodID
+	midDataRemovalRequestBuilderForEverything jni.MethodID
+
+	clsDataRemovalRequestLocusIdRequest           *jni.GlobalRef
+	midDataRemovalRequestLocusIdRequestGetFlags   jni.MethodID
+	midDataRemovalRequestLocusIdRequestGetLocusId jni.MethodID
 
 	clsDataShareRequest                 *jni.GlobalRef
-	midDataShareRequestInit             jni.MethodID
+	midDataShareRequestCtor             jni.MethodID
 	midDataShareRequestDescribeContents jni.MethodID
 	midDataShareRequestEquals           jni.MethodID
 	midDataShareRequestGetLocusId       jni.MethodID
@@ -128,22 +130,50 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/view/contentcapture/DataShareWriteAdapter")
+	c, err = env.FindClass("android/view/contentcapture/ContentCaptureManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDataShareWriteAdapter = env.NewGlobalRef(&c.Object)
+		clsContentCaptureManager = env.NewGlobalRef(&c.Object)
 
-		midDataShareWriteAdapterOnRejected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataShareWriteAdapter)), "onRejected", "()V")
+		midContentCaptureManagerGetContentCaptureConditions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "getContentCaptureConditions", "()Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataShareWriteAdapterOnWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataShareWriteAdapter)), "onWrite", "(Landroid/os/ParcelFileDescriptor;)V")
+		midContentCaptureManagerGetServiceComponentName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "getServiceComponentName", "()Landroid/content/ComponentName;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureManagerIsContentCaptureEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "isContentCaptureEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureManagerRemoveData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "removeData", "(Landroid/view/contentcapture/DataRemovalRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureManagerSetContentCaptureEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "setContentCaptureEnabled", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureManagerShareData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "shareData", "(Landroid/view/contentcapture/DataShareRequest;Ljava/util/concurrent/Executor;Landroid/view/contentcapture/DataShareWriteAdapter;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -333,36 +363,61 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/contentcapture/DataRemovalRequest")
+	c, err = env.FindClass("android/view/contentcapture/ContentCaptureCondition")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDataRemovalRequest = env.NewGlobalRef(&c.Object)
+		clsContentCaptureCondition = env.NewGlobalRef(&c.Object)
+		midContentCaptureConditionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "<init>", "(Landroid/content/LocusId;I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midDataRemovalRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "describeContents", "()I")
+		midContentCaptureConditionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataRemovalRequestGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "getPackageName", "()Ljava/lang/String;")
+		midContentCaptureConditionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataRemovalRequestIsForEverything, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "isForEverything", "()Z")
+		midContentCaptureConditionGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "getFlags", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataRemovalRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midContentCaptureConditionGetLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "getLocusId", "()Landroid/content/LocusId;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureConditionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureConditionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContentCaptureConditionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -371,53 +426,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/contentcapture/DataRemovalRequest$Builder")
+	c, err = env.FindClass("android/view/contentcapture/DataShareWriteAdapter")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDataRemovalRequestBuilder = env.NewGlobalRef(&c.Object)
+		clsDataShareWriteAdapter = env.NewGlobalRef(&c.Object)
 
-		midDataRemovalRequestBuilderAddLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestBuilder)), "addLocusId", "(Landroid/content/LocusId;I)Landroid/view/contentcapture/DataRemovalRequest$Builder;")
+		midDataShareWriteAdapterOnRejected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataShareWriteAdapter)), "onRejected", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataRemovalRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestBuilder)), "build", "()Landroid/view/contentcapture/DataRemovalRequest;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDataRemovalRequestBuilderForEverything, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestBuilder)), "forEverything", "()Landroid/view/contentcapture/DataRemovalRequest$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/contentcapture/DataRemovalRequest$LocusIdRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDataRemovalRequestLocusIdRequest = env.NewGlobalRef(&c.Object)
-
-		midDataRemovalRequestLocusIdRequestGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestLocusIdRequest)), "getFlags", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDataRemovalRequestLocusIdRequestGetLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestLocusIdRequest)), "getLocusId", "()Landroid/content/LocusId;")
+		midDataShareWriteAdapterOnWrite, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataShareWriteAdapter)), "onWrite", "(Landroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -502,61 +526,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/contentcapture/ContentCaptureCondition")
+	c, err = env.FindClass("android/view/contentcapture/DataRemovalRequest")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsContentCaptureCondition = env.NewGlobalRef(&c.Object)
-		midContentCaptureConditionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "<init>", "(Landroid/content/LocusId;I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
+		clsDataRemovalRequest = env.NewGlobalRef(&c.Object)
 
-		midContentCaptureConditionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "describeContents", "()I")
+		midDataRemovalRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureConditionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "equals", "(Ljava/lang/Object;)Z")
+		midDataRemovalRequestGetLocusIdRequests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "getLocusIdRequests", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureConditionGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "getFlags", "()I")
+		midDataRemovalRequestGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "getPackageName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureConditionGetLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "getLocusId", "()Landroid/content/LocusId;")
+		midDataRemovalRequestIsForEverything, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "isForEverything", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureConditionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContentCaptureConditionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midContentCaptureConditionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midDataRemovalRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -565,43 +571,53 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/view/contentcapture/ContentCaptureManager")
+	c, err = env.FindClass("android/view/contentcapture/DataRemovalRequest$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsContentCaptureManager = env.NewGlobalRef(&c.Object)
+		clsDataRemovalRequestBuilder = env.NewGlobalRef(&c.Object)
 
-		midContentCaptureManagerGetServiceComponentName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "getServiceComponentName", "()Landroid/content/ComponentName;")
+		midDataRemovalRequestBuilderAddLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestBuilder)), "addLocusId", "(Landroid/content/LocusId;I)Landroid/view/contentcapture/DataRemovalRequest$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureManagerIsContentCaptureEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "isContentCaptureEnabled", "()Z")
+		midDataRemovalRequestBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestBuilder)), "build", "()Landroid/view/contentcapture/DataRemovalRequest;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureManagerRemoveData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "removeData", "(Landroid/view/contentcapture/DataRemovalRequest;)V")
+		midDataRemovalRequestBuilderForEverything, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestBuilder)), "forEverything", "()Landroid/view/contentcapture/DataRemovalRequest$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureManagerSetContentCaptureEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "setContentCaptureEnabled", "(Z)V")
+	}
+
+	c, err = env.FindClass("android/view/contentcapture/DataRemovalRequest$LocusIdRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDataRemovalRequestLocusIdRequest = env.NewGlobalRef(&c.Object)
+
+		midDataRemovalRequestLocusIdRequestGetFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestLocusIdRequest)), "getFlags", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midContentCaptureManagerShareData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContentCaptureManager)), "shareData", "(Landroid/view/contentcapture/DataShareRequest;Ljava/util/concurrent/Executor;Landroid/view/contentcapture/DataShareWriteAdapter;)V")
+		midDataRemovalRequestLocusIdRequestGetLocusId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataRemovalRequestLocusIdRequest)), "getLocusId", "()Landroid/content/LocusId;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -617,7 +633,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDataShareRequest = env.NewGlobalRef(&c.Object)
-		midDataShareRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataShareRequest)), "<init>", "(Landroid/content/LocusId;Ljava/lang/String;)V")
+		midDataShareRequestCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataShareRequest)), "<init>", "(Landroid/content/LocusId;Ljava/lang/String;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

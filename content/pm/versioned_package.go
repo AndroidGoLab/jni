@@ -38,7 +38,7 @@ func NewVersionedPackage(vm *jni.VM, arg0 string, arg1 int32) (*VersionedPackage
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVersionedPackage)), midVersionedPackageInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVersionedPackage)), midVersionedPackageCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

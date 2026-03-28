@@ -33,7 +33,7 @@ func NewSession(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Object
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession)), midSessionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession)), midSessionCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
 		if err != nil {
 			return err
 		}

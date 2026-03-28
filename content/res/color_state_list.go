@@ -33,7 +33,7 @@ func NewColorStateList(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ColorSt
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorStateList)), midColorStateListInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorStateList)), midColorStateListCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

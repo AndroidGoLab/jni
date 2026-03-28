@@ -176,6 +176,38 @@ func (m *CellUnderlyingNetworkTemplate) GetMms() (int32, error) {
 	return result, callErr
 }
 
+// GetOperatorPlmnIds calls android.net.vcn.VcnCellUnderlyingNetworkTemplate.getOperatorPlmnIds.
+func (m *CellUnderlyingNetworkTemplate) GetOperatorPlmnIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCellUnderlyingNetworkTemplateGetOperatorPlmnIds == nil {
+			callErr = fmt.Errorf("android.net.vcn.VcnCellUnderlyingNetworkTemplate.getOperatorPlmnIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCellUnderlyingNetworkTemplateGetOperatorPlmnIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetOpportunistic calls android.net.vcn.VcnCellUnderlyingNetworkTemplate.getOpportunistic.
 func (m *CellUnderlyingNetworkTemplate) GetOpportunistic() (int32, error) {
 	var result int32
@@ -245,6 +277,38 @@ func (m *CellUnderlyingNetworkTemplate) GetRoaming() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSimSpecificCarrierIds calls android.net.vcn.VcnCellUnderlyingNetworkTemplate.getSimSpecificCarrierIds.
+func (m *CellUnderlyingNetworkTemplate) GetSimSpecificCarrierIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCellUnderlyingNetworkTemplateGetSimSpecificCarrierIds == nil {
+			callErr = fmt.Errorf("android.net.vcn.VcnCellUnderlyingNetworkTemplate.getSimSpecificCarrierIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCellUnderlyingNetworkTemplateGetSimSpecificCarrierIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

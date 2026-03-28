@@ -33,7 +33,7 @@ func NewIpv6AddrIdentification(vm *jni.VM, arg0 *jni.Object) (*Ipv6AddrIdentific
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIpv6AddrIdentification)), midIpv6AddrIdentificationInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIpv6AddrIdentification)), midIpv6AddrIdentificationCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

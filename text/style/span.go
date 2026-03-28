@@ -33,7 +33,7 @@ func NewSpan(vm *jni.VM, arg0 *jni.Object) (*Span, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpan)), midSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpan)), midSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

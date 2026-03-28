@@ -33,7 +33,7 @@ func NewPrintedPdfDocument(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Pri
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), midPrintedPdfDocumentInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintedPdfDocument)), midPrintedPdfDocumentCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

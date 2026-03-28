@@ -33,7 +33,7 @@ func NewBoundary(vm *jni.VM, arg0 *jni.Object) (*Boundary, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBoundary)), midBoundaryInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBoundary)), midBoundaryCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

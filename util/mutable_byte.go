@@ -33,7 +33,7 @@ func NewMutableByte(vm *jni.VM, arg0 int8) (*MutableByte, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableByte)), midMutableByteInit, jni.ByteValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableByte)), midMutableByteCtor, jni.ByteValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewSuggestionSpan(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int3
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), midSuggestionSpanInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionSpan)), midSuggestionSpanCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

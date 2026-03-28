@@ -38,7 +38,7 @@ func NewInfo(vm *jni.VM, arg0 string) (*Info, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInfo)), midInfoInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInfo)), midInfoCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

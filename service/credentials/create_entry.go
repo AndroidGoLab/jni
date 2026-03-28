@@ -33,7 +33,7 @@ func NewCreateEntry(vm *jni.VM, arg0 *jni.Object) (*CreateEntry, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateEntry)), midCreateEntryInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateEntry)), midCreateEntryCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

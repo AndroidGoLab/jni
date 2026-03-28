@@ -32,7 +32,7 @@ func NewFloat4(vm *jni.VM) (*Float4, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloat4)), midFloat4Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloat4)), midFloat4Ctor)
 		if err != nil {
 			return err
 		}

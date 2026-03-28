@@ -33,7 +33,7 @@ func NewProxyInfo(vm *jni.VM, arg0 *jni.Object) (*ProxyInfo, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProxyInfo)), midProxyInfoInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProxyInfo)), midProxyInfoCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewIntentFilter(vm *jni.VM) (*IntentFilter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntentFilter)), midIntentFilterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIntentFilter)), midIntentFilterCtor)
 		if err != nil {
 			return err
 		}
@@ -43,6 +43,38 @@ func NewIntentFilter(vm *jni.VM) (*IntentFilter, error) {
 		return nil, err
 	}
 	return &t, nil
+}
+
+// ActionsIterator calls android.content.IntentFilter.actionsIterator.
+func (m *IntentFilter) ActionsIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterActionsIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.actionsIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterActionsIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // AddAction calls android.content.IntentFilter.addAction.
@@ -268,6 +300,135 @@ func (m *IntentFilter) AddUriRelativeFilterGroup(arg0 *jni.Object) error {
 		return callErr
 	})
 	return callErr
+}
+
+// AsPredicate calls android.content.IntentFilter.asPredicate.
+func (m *IntentFilter) AsPredicate() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterAsPredicate == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.asPredicate is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterAsPredicate,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// AsPredicateWithTypeResolution calls android.content.IntentFilter.asPredicateWithTypeResolution.
+func (m *IntentFilter) AsPredicateWithTypeResolution(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterAsPredicateWithTypeResolution == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.asPredicateWithTypeResolution is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterAsPredicateWithTypeResolution, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// AuthoritiesIterator calls android.content.IntentFilter.authoritiesIterator.
+func (m *IntentFilter) AuthoritiesIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterAuthoritiesIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.authoritiesIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterAuthoritiesIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CategoriesIterator calls android.content.IntentFilter.categoriesIterator.
+func (m *IntentFilter) CategoriesIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterCategoriesIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.categoriesIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterCategoriesIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // ClearUriRelativeFilterGroups calls android.content.IntentFilter.clearUriRelativeFilterGroups.
@@ -1183,6 +1344,38 @@ func (m *IntentFilter) MatchDataAuthority(arg0 *jni.Object) (int32, error) {
 	return result, callErr
 }
 
+// PathsIterator calls android.content.IntentFilter.pathsIterator.
+func (m *IntentFilter) PathsIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterPathsIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.pathsIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterPathsIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // ReadFromXml calls android.content.IntentFilter.readFromXml.
 func (m *IntentFilter) ReadFromXml(arg0 *jni.Object) error {
 
@@ -1206,6 +1399,70 @@ func (m *IntentFilter) ReadFromXml(arg0 *jni.Object) error {
 	return callErr
 }
 
+// SchemeSpecificPartsIterator calls android.content.IntentFilter.schemeSpecificPartsIterator.
+func (m *IntentFilter) SchemeSpecificPartsIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterSchemeSpecificPartsIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.schemeSpecificPartsIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterSchemeSpecificPartsIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SchemesIterator calls android.content.IntentFilter.schemesIterator.
+func (m *IntentFilter) SchemesIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterSchemesIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.schemesIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterSchemesIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // SetPriority calls android.content.IntentFilter.setPriority.
 func (m *IntentFilter) SetPriority(arg0 int32) error {
 
@@ -1227,6 +1484,38 @@ func (m *IntentFilter) SetPriority(arg0 int32) error {
 		return callErr
 	})
 	return callErr
+}
+
+// TypesIterator calls android.content.IntentFilter.typesIterator.
+func (m *IntentFilter) TypesIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIntentFilterTypesIterator == nil {
+			callErr = fmt.Errorf("android.content.IntentFilter.typesIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIntentFilterTypesIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // WriteToParcel calls android.content.IntentFilter.writeToParcel.

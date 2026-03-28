@@ -38,7 +38,7 @@ func NewFloatAction(vm *jni.VM, arg0 string, arg1 float32) (*FloatAction, error)
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloatAction)), midFloatActionInit, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloatAction)), midFloatActionCtor, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1))
 		if err != nil {
 			return err
 		}

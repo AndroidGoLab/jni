@@ -36,7 +36,7 @@ func NewStartForegroundCalledOnStoppedServiceException(vm *jni.VM, arg0 string) 
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStartForegroundCalledOnStoppedServiceException)), midStartForegroundCalledOnStoppedServiceExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStartForegroundCalledOnStoppedServiceException)), midStartForegroundCalledOnStoppedServiceExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

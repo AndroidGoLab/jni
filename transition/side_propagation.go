@@ -32,7 +32,7 @@ func NewSidePropagation(vm *jni.VM) (*SidePropagation, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSidePropagation)), midSidePropagationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSidePropagation)), midSidePropagationCtor)
 		if err != nil {
 			return err
 		}

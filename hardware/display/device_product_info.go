@@ -50,7 +50,7 @@ func NewDeviceProductInfo(vm *jni.VM, arg0 string, arg1 string, arg2 string, arg
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), midDeviceProductInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3), jni.IntValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceProductInfo)), midDeviceProductInfoCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3), jni.IntValue(arg4))
 		if err != nil {
 			return err
 		}

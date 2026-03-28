@@ -38,7 +38,7 @@ func NewToggleRangeTemplate(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 *jni
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), midToggleRangeTemplateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToggleRangeTemplate)), midToggleRangeTemplateCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

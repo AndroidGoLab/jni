@@ -76,6 +76,134 @@ func (m *RecognitionSupport) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetInstalledOnDeviceLanguages calls android.speech.RecognitionSupport.getInstalledOnDeviceLanguages.
+func (m *RecognitionSupport) GetInstalledOnDeviceLanguages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecognitionSupportGetInstalledOnDeviceLanguages == nil {
+			callErr = fmt.Errorf("android.speech.RecognitionSupport.getInstalledOnDeviceLanguages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecognitionSupportGetInstalledOnDeviceLanguages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOnlineLanguages calls android.speech.RecognitionSupport.getOnlineLanguages.
+func (m *RecognitionSupport) GetOnlineLanguages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecognitionSupportGetOnlineLanguages == nil {
+			callErr = fmt.Errorf("android.speech.RecognitionSupport.getOnlineLanguages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecognitionSupportGetOnlineLanguages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPendingOnDeviceLanguages calls android.speech.RecognitionSupport.getPendingOnDeviceLanguages.
+func (m *RecognitionSupport) GetPendingOnDeviceLanguages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecognitionSupportGetPendingOnDeviceLanguages == nil {
+			callErr = fmt.Errorf("android.speech.RecognitionSupport.getPendingOnDeviceLanguages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecognitionSupportGetPendingOnDeviceLanguages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedOnDeviceLanguages calls android.speech.RecognitionSupport.getSupportedOnDeviceLanguages.
+func (m *RecognitionSupport) GetSupportedOnDeviceLanguages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecognitionSupportGetSupportedOnDeviceLanguages == nil {
+			callErr = fmt.Errorf("android.speech.RecognitionSupport.getSupportedOnDeviceLanguages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecognitionSupportGetSupportedOnDeviceLanguages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.speech.RecognitionSupport.hashCode.
 func (m *RecognitionSupport) HashCode() (int32, error) {
 	var result int32

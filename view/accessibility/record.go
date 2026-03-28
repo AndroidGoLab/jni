@@ -32,7 +32,7 @@ func NewRecord(vm *jni.VM) (*Record, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecord)), midRecordInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecord)), midRecordCtor)
 		if err != nil {
 			return err
 		}
@@ -522,6 +522,38 @@ func (m *Record) GetSource1_1(arg0 int32) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRecordGetSource1_1, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetText calls android.view.accessibility.AccessibilityRecord.getText.
+func (m *Record) GetText() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecordGetText == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityRecord.getText is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecordGetText,
 		)
 		if callErr != nil {
 			return callErr

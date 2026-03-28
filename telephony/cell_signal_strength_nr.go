@@ -101,6 +101,38 @@ func (m *CellSignalStrengthNr) GetAsuLevel() (int32, error) {
 	return result, callErr
 }
 
+// GetCsiCqiReport calls android.telephony.CellSignalStrengthNr.getCsiCqiReport.
+func (m *CellSignalStrengthNr) GetCsiCqiReport() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCellSignalStrengthNrGetCsiCqiReport == nil {
+			callErr = fmt.Errorf("android.telephony.CellSignalStrengthNr.getCsiCqiReport is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCellSignalStrengthNrGetCsiCqiReport,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetCsiCqiTableIndex calls android.telephony.CellSignalStrengthNr.getCsiCqiTableIndex.
 func (m *CellSignalStrengthNr) GetCsiCqiTableIndex() (int32, error) {
 	var result int32

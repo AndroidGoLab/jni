@@ -56,7 +56,7 @@ func NewSslCertificate(vm *jni.VM, arg0 string, arg1 string, arg2 string, arg3 s
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSslCertificate)), midSslCertificateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSslCertificate)), midSslCertificateCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object))
 		if err != nil {
 			return err
 		}

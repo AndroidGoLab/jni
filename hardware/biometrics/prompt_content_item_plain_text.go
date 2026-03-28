@@ -38,7 +38,7 @@ func NewPromptContentItemPlainText(vm *jni.VM, arg0 string) (*PromptContentItemP
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), midPromptContentItemPlainTextInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), midPromptContentItemPlainTextCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

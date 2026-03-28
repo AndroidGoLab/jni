@@ -33,7 +33,7 @@ func NewWorkItem(vm *jni.VM, arg0 *jni.Object) (*WorkItem, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkItem)), midWorkItemInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkItem)), midWorkItemCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

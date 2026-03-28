@@ -33,7 +33,7 @@ func NewDateIntervalInfo(vm *jni.VM, arg0 *jni.Object) (*DateIntervalInfo, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateIntervalInfo)), midDateIntervalInfoInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateIntervalInfo)), midDateIntervalInfoCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -39,7 +39,7 @@ func NewDataShareRequest(vm *jni.VM, arg0 *jni.Object, arg1 string) (*DataShareR
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDataShareRequest)), midDataShareRequestInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDataShareRequest)), midDataShareRequestCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

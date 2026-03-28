@@ -30,7 +30,7 @@ func NewActivityGroup(vm *jni.VM) (*ActivityGroup, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivityGroup)), midActivityGroupInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivityGroup)), midActivityGroupCtor)
 		if err != nil {
 			return err
 		}

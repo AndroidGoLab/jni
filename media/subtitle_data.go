@@ -33,7 +33,7 @@ func NewSubtitleData(vm *jni.VM, arg0 int32, arg1 int64, arg2 int64, arg3 *jni.O
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSubtitleData)), midSubtitleDataInit, jni.IntValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSubtitleData)), midSubtitleDataCtor, jni.IntValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

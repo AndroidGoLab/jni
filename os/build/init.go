@@ -23,12 +23,13 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsBuild                   *jni.GlobalRef
-	midBuildInit               jni.MethodID
-	midBuildGetMajorSdkVersion jni.MethodID
-	midBuildGetMinorSdkVersion jni.MethodID
-	midBuildGetRadioVersion    jni.MethodID
-	midBuildGetSerial          jni.MethodID
+	clsBuild                           *jni.GlobalRef
+	midBuildCtor                       jni.MethodID
+	midBuildGetFingerprintedPartitions jni.MethodID
+	midBuildGetMajorSdkVersion         jni.MethodID
+	midBuildGetMinorSdkVersion         jni.MethodID
+	midBuildGetRadioVersion            jni.MethodID
+	midBuildGetSerial                  jni.MethodID
 
 	clsPartition                   *jni.GlobalRef
 	midPartitionEquals             jni.MethodID
@@ -69,8 +70,15 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBuild = env.NewGlobalRef(&c.Object)
-		midBuildInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "<init>", "()V")
+		midBuildCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "<init>", "()V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midBuildGetFingerprintedPartitions, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsBuild)), "getFingerprintedPartitions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 

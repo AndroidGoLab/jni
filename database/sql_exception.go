@@ -32,7 +32,7 @@ func NewSQLException(vm *jni.VM) (*SQLException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLException)), midSQLExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLException)), midSQLExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewDownloadProgressListener(vm *jni.VM) (*DownloadProgressListener, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadProgressListener)), midDownloadProgressListenerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadProgressListener)), midDownloadProgressListenerCtor)
 		if err != nil {
 			return err
 		}

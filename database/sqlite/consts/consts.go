@@ -3,11 +3,6 @@
 package consts
 
 const (
-	SqliteDataTypeBlob         int = 4
-	SqliteDataTypeFloat        int = 2
-	SqliteDataTypeInteger      int = 1
-	SqliteDataTypeNull         int = 5
-	SqliteDataTypeText         int = 3
 	ConflictAbort              int = 2
 	ConflictFail               int = 3
 	ConflictIgnore             int = 4
@@ -21,6 +16,11 @@ const (
 	OpenReadonly               int = 1
 	OpenReadwrite              int = 0
 	SqliteMaxLikePatternLength int = 50000
+	SqliteDataTypeBlob         int = 4
+	SqliteDataTypeFloat        int = 2
+	SqliteDataTypeInteger      int = 1
+	SqliteDataTypeNull         int = 5
+	SqliteDataTypeText         int = 3
 )
 
 const (

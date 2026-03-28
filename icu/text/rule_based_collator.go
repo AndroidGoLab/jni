@@ -38,7 +38,7 @@ func NewRuleBasedCollator(vm *jni.VM, arg0 string) (*RuleBasedCollator, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuleBasedCollator)), midRuleBasedCollatorInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuleBasedCollator)), midRuleBasedCollatorCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

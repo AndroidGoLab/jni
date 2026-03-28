@@ -38,7 +38,7 @@ func NewCommandAction(vm *jni.VM, arg0 string) (*CommandAction, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCommandAction)), midCommandActionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCommandAction)), midCommandActionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

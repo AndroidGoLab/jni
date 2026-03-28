@@ -39,7 +39,7 @@ func NewCondition(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 int32) (*Condi
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCondition)), midConditionInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCondition)), midConditionCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

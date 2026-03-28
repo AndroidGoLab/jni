@@ -33,7 +33,7 @@ func NewFileBackupHelper(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*FileB
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), midFileBackupHelperInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), midFileBackupHelperCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

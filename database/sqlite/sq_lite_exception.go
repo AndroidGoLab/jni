@@ -32,7 +32,7 @@ func NewSQLiteException(vm *jni.VM) (*SQLiteException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteException)), midSQLiteExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteException)), midSQLiteExceptionCtor)
 		if err != nil {
 			return err
 		}

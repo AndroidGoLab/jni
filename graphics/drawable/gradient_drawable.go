@@ -32,7 +32,7 @@ func NewGradientDrawable(vm *jni.VM) (*GradientDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGradientDrawable)), midGradientDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGradientDrawable)), midGradientDrawableCtor)
 		if err != nil {
 			return err
 		}

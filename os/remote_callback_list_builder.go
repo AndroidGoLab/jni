@@ -23,6 +23,38 @@ type RemoteCallbackListBuilder struct {
 	Obj *jni.GlobalRef
 }
 
+// Build calls android.os.RemoteCallbackList$Builder.build.
+func (m *RemoteCallbackListBuilder) Build() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRemoteCallbackListBuilderBuild == nil {
+			callErr = fmt.Errorf("android.os.RemoteCallbackList$Builder.build is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRemoteCallbackListBuilderBuild,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // SetExecutor calls android.os.RemoteCallbackList$Builder.setExecutor.
 func (m *RemoteCallbackListBuilder) SetExecutor(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

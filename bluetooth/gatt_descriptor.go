@@ -33,7 +33,7 @@ func NewGattDescriptor(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*GattDescripto
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), midGattDescriptorInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattDescriptor)), midGattDescriptorCtor, jni.ObjectValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

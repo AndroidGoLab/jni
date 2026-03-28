@@ -33,7 +33,7 @@ func NewExecuteAppFunctionResponse(vm *jni.VM, arg0 *jni.Object) (*ExecuteAppFun
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), midExecuteAppFunctionResponseInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExecuteAppFunctionResponse)), midExecuteAppFunctionResponseCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

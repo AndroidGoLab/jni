@@ -32,7 +32,7 @@ func NewStructPollfd(vm *jni.VM) (*StructPollfd, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructPollfd)), midStructPollfdInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructPollfd)), midStructPollfdCtor)
 		if err != nil {
 			return err
 		}

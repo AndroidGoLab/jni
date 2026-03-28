@@ -5,15 +5,8 @@ package cardemulation
 import "github.com/AndroidGoLab/jni/nfc/cardemulation/consts"
 
 const (
-	DeactivationDeselected            = consts.DeactivationDeselected
 	DeactivationLinkLoss              = consts.DeactivationLinkLoss
-	Creator                           = consts.Creator
-	PollingLoopTypeA                  = consts.PollingLoopTypeA
-	PollingLoopTypeB                  = consts.PollingLoopTypeB
-	PollingLoopTypeF                  = consts.PollingLoopTypeF
-	PollingLoopTypeOff                = consts.PollingLoopTypeOff
-	PollingLoopTypeOn                 = consts.PollingLoopTypeOn
-	PollingLoopTypeUnknown            = consts.PollingLoopTypeUnknown
+	DeactivationDeselected            = consts.DeactivationDeselected
 	NfcInternalErrorCommandTimeout    = consts.NfcInternalErrorCommandTimeout
 	NfcInternalErrorNfcCrashRestart   = consts.NfcInternalErrorNfcCrashRestart
 	NfcInternalErrorNfcHardwareError  = consts.NfcInternalErrorNfcHardwareError
@@ -26,6 +19,13 @@ const (
 	SelectionModeAlwaysAsk            = consts.SelectionModeAlwaysAsk
 	SelectionModeAskIfConflict        = consts.SelectionModeAskIfConflict
 	SelectionModePreferDefault        = consts.SelectionModePreferDefault
+	Creator                           = consts.Creator
+	PollingLoopTypeA                  = consts.PollingLoopTypeA
+	PollingLoopTypeB                  = consts.PollingLoopTypeB
+	PollingLoopTypeF                  = consts.PollingLoopTypeF
+	PollingLoopTypeOff                = consts.PollingLoopTypeOff
+	PollingLoopTypeOn                 = consts.PollingLoopTypeOn
+	PollingLoopTypeUnknown            = consts.PollingLoopTypeUnknown
 )
 
 const (

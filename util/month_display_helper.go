@@ -33,7 +33,7 @@ func NewMonthDisplayHelper(vm *jni.VM, arg0 int32, arg1 int32) (*MonthDisplayHel
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMonthDisplayHelper)), midMonthDisplayHelperInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMonthDisplayHelper)), midMonthDisplayHelperCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

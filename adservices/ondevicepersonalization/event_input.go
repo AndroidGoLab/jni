@@ -33,7 +33,7 @@ func NewEventInput(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*EventInput,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventInput)), midEventInputInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventInput)), midEventInputCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

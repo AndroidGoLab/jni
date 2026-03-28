@@ -38,7 +38,7 @@ func NewPhoneAccountSuggestion(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 bo
 			jArg2 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), midPhoneAccountSuggestionInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.BooleanValue(jArg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), midPhoneAccountSuggestionCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.BooleanValue(jArg2))
 		if err != nil {
 			return err
 		}

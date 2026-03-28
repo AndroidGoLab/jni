@@ -32,7 +32,7 @@ func NewCloseGuard(vm *jni.VM) (*CloseGuard, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCloseGuard)), midCloseGuardInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCloseGuard)), midCloseGuardCtor)
 		if err != nil {
 			return err
 		}

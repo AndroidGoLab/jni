@@ -37,7 +37,7 @@ func NewSurfaceTexture(vm *jni.VM, arg0 bool) (*SurfaceTexture, error) {
 			jArg0 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceTexture)), midSurfaceTextureInit, jni.BooleanValue(jArg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceTexture)), midSurfaceTextureCtor, jni.BooleanValue(jArg0))
 		if err != nil {
 			return err
 		}

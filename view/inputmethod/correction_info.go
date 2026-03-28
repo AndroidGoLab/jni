@@ -45,7 +45,7 @@ func NewCorrectionInfo(vm *jni.VM, arg0 int32, arg1 string, arg2 string) (*Corre
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), midCorrectionInfoInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCorrectionInfo)), midCorrectionInfoCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

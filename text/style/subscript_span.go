@@ -32,7 +32,7 @@ func NewSubscriptSpan(vm *jni.VM) (*SubscriptSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), midSubscriptSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSubscriptSpan)), midSubscriptSpanCtor)
 		if err != nil {
 			return err
 		}

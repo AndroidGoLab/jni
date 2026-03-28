@@ -38,7 +38,7 @@ func NewGatewayInfo(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 *jni.Object)
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), midGatewayInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), midGatewayInfoCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

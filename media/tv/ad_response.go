@@ -33,7 +33,7 @@ func NewAdResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int64) (*AdResponse,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdResponse)), midAdResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.LongValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdResponse)), midAdResponseCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.LongValue(arg2))
 		if err != nil {
 			return err
 		}

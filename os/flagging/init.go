@@ -28,7 +28,7 @@ var (
 	midAconfigPackageLoad                jni.MethodID
 
 	clsAconfigStorageReadException             *jni.GlobalRef
-	midAconfigStorageReadExceptionInit         jni.MethodID
+	midAconfigStorageReadExceptionCtor         jni.MethodID
 	midAconfigStorageReadExceptionGetErrorCode jni.MethodID
 	midAconfigStorageReadExceptionGetMessage   jni.MethodID
 )
@@ -82,7 +82,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAconfigStorageReadException = env.NewGlobalRef(&c.Object)
-		midAconfigStorageReadExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), "<init>", "(ILjava/lang/String;)V")
+		midAconfigStorageReadExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), "<init>", "(ILjava/lang/String;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

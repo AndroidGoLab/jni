@@ -23,15 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDisplayHashManager                  *jni.GlobalRef
-	midDisplayHashManagerVerifyDisplayHash jni.MethodID
-
-	clsDisplayHashResultCallback                    *jni.GlobalRef
-	midDisplayHashResultCallbackOnDisplayHashError  jni.MethodID
-	midDisplayHashResultCallbackOnDisplayHashResult jni.MethodID
-
 	clsVerifiedDisplayHash                  *jni.GlobalRef
-	midVerifiedDisplayHashInit              jni.MethodID
+	midVerifiedDisplayHashCtor              jni.MethodID
 	midVerifiedDisplayHashDescribeContents  jni.MethodID
 	midVerifiedDisplayHashGetBoundsInWindow jni.MethodID
 	midVerifiedDisplayHashGetHashAlgorithm  jni.MethodID
@@ -44,6 +37,14 @@ var (
 	midDisplayHashDescribeContents jni.MethodID
 	midDisplayHashToString         jni.MethodID
 	midDisplayHashWriteToParcel    jni.MethodID
+
+	clsDisplayHashResultCallback                    *jni.GlobalRef
+	midDisplayHashResultCallbackOnDisplayHashError  jni.MethodID
+	midDisplayHashResultCallbackOnDisplayHashResult jni.MethodID
+
+	clsDisplayHashManager                           *jni.GlobalRef
+	midDisplayHashManagerGetSupportedHashAlgorithms jni.MethodID
+	midDisplayHashManagerVerifyDisplayHash          jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -64,47 +65,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/view/displayhash/DisplayHashManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDisplayHashManager = env.NewGlobalRef(&c.Object)
-
-		midDisplayHashManagerVerifyDisplayHash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashManager)), "verifyDisplayHash", "(Landroid/view/displayhash/DisplayHash;)Landroid/view/displayhash/VerifiedDisplayHash;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/view/displayhash/DisplayHashResultCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDisplayHashResultCallback = env.NewGlobalRef(&c.Object)
-
-		midDisplayHashResultCallbackOnDisplayHashError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashResultCallback)), "onDisplayHashError", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDisplayHashResultCallbackOnDisplayHashResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashResultCallback)), "onDisplayHashResult", "(Landroid/view/displayhash/DisplayHash;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/view/displayhash/VerifiedDisplayHash")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -112,7 +72,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVerifiedDisplayHash = env.NewGlobalRef(&c.Object)
-		midVerifiedDisplayHashInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), "<init>", "(JLandroid/graphics/Rect;Ljava/lang/String;[B)V")
+		midVerifiedDisplayHashCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), "<init>", "(JLandroid/graphics/Rect;Ljava/lang/String;[B)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -191,6 +151,54 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDisplayHashWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHash)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/displayhash/DisplayHashResultCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDisplayHashResultCallback = env.NewGlobalRef(&c.Object)
+
+		midDisplayHashResultCallbackOnDisplayHashError, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashResultCallback)), "onDisplayHashError", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisplayHashResultCallbackOnDisplayHashResult, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashResultCallback)), "onDisplayHashResult", "(Landroid/view/displayhash/DisplayHash;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/view/displayhash/DisplayHashManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDisplayHashManager = env.NewGlobalRef(&c.Object)
+
+		midDisplayHashManagerGetSupportedHashAlgorithms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashManager)), "getSupportedHashAlgorithms", "()Ljava/util/Set;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisplayHashManagerVerifyDisplayHash, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisplayHashManager)), "verifyDisplayHash", "(Landroid/view/displayhash/DisplayHash;)Landroid/view/displayhash/VerifiedDisplayHash;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

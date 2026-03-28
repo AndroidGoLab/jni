@@ -32,7 +32,7 @@ func NewDouble3(vm *jni.VM) (*Double3, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDouble3)), midDouble3Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDouble3)), midDouble3Ctor)
 		if err != nil {
 			return err
 		}

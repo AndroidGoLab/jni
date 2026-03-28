@@ -32,7 +32,7 @@ func NewJapaneseCalendar(vm *jni.VM) (*JapaneseCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJapaneseCalendar)), midJapaneseCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJapaneseCalendar)), midJapaneseCalendarCtor)
 		if err != nil {
 			return err
 		}

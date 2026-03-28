@@ -32,7 +32,7 @@ func NewDateUtils(vm *jni.VM) (*DateUtils, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateUtils)), midDateUtilsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateUtils)), midDateUtilsCtor)
 		if err != nil {
 			return err
 		}

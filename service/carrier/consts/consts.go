@@ -3,7 +3,11 @@
 package consts
 
 const (
-	Creator                                                           int = 0
+	CarrierServiceInterface string = "android.service.carrier.CarrierService"
+	ServiceInterface        string = "android.service.carrier.CarrierMessagingService"
+)
+
+const (
 	DownloadStatusError                                               int = 2
 	DownloadStatusMmsErrorConfigurationError                          int = 606
 	DownloadStatusMmsErrorDataDisabled                                int = 610
@@ -57,9 +61,5 @@ const (
 	SendStatusResultSmsBlockedDuringEmergency                         int = 217
 	SendStatusResultSmsSendRetryFailed                                int = 218
 	SendStatusRetryOnCarrierNetwork                                   int = 1
-)
-
-const (
-	ServiceInterface        string = "android.service.carrier.CarrierMessagingService"
-	CarrierServiceInterface string = "android.service.carrier.CarrierService"
+	Creator                                                           int = 0
 )

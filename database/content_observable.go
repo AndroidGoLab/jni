@@ -32,7 +32,7 @@ func NewContentObservable(vm *jni.VM) (*ContentObservable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContentObservable)), midContentObservableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContentObservable)), midContentObservableCtor)
 		if err != nil {
 			return err
 		}

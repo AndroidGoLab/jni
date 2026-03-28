@@ -32,7 +32,7 @@ func NewByte4(vm *jni.VM) (*Byte4, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsByte4)), midByte4Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsByte4)), midByte4Ctor)
 		if err != nil {
 			return err
 		}

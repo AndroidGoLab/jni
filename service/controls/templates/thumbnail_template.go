@@ -49,7 +49,7 @@ func NewThumbnailTemplate(vm *jni.VM, arg0 string, arg1 bool, arg2 *jni.Object, 
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), midThumbnailTemplateInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsThumbnailTemplate)), midThumbnailTemplateCtor, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object))
 		if err != nil {
 			return err
 		}

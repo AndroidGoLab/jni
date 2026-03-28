@@ -33,7 +33,7 @@ func NewSumPathEffect(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*SumPathE
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSumPathEffect)), midSumPathEffectInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSumPathEffect)), midSumPathEffectCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewComponentInfo(vm *jni.VM) (*ComponentInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentInfo)), midComponentInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentInfo)), midComponentInfoCtor)
 		if err != nil {
 			return err
 		}

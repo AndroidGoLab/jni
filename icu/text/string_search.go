@@ -44,7 +44,7 @@ func NewStringSearch(vm *jni.VM, arg0 string, arg1 string) (*StringSearch, error
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStringSearch)), midStringSearchInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStringSearch)), midStringSearchCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewScaleAnimation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ScaleAn
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleAnimation)), midScaleAnimationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleAnimation)), midScaleAnimationCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

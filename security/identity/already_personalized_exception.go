@@ -38,7 +38,7 @@ func NewAlreadyPersonalizedException(vm *jni.VM, arg0 string) (*AlreadyPersonali
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlreadyPersonalizedException)), midAlreadyPersonalizedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlreadyPersonalizedException)), midAlreadyPersonalizedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

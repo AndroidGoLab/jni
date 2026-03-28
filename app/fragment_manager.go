@@ -304,6 +304,38 @@ func (m *FragmentManager) GetFragment(arg0 *jni.Object, arg1 string) (*jni.Objec
 	return result, callErr
 }
 
+// GetFragments calls android.app.FragmentManager.getFragments.
+func (m *FragmentManager) GetFragments() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFragmentManagerGetFragments == nil {
+			callErr = fmt.Errorf("android.app.FragmentManager.getFragments is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFragmentManagerGetFragments,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPrimaryNavigationFragment calls android.app.FragmentManager.getPrimaryNavigationFragment.
 func (m *FragmentManager) GetPrimaryNavigationFragment() (*jni.Object, error) {
 	var result *jni.Object

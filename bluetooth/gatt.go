@@ -220,6 +220,38 @@ func (m *Gatt) ExecuteReliableWrite() (bool, error) {
 	return result, callErr
 }
 
+// GetConnectedDevices calls android.bluetooth.BluetoothGatt.getConnectedDevices.
+func (m *Gatt) GetConnectedDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGattGetConnectedDevices == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.getConnectedDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGattGetConnectedDevices,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetConnectionState calls android.bluetooth.BluetoothGatt.getConnectionState.
 func (m *Gatt) GetConnectionState(arg0 *jni.Object) (int32, error) {
 	var result int32
@@ -278,6 +310,39 @@ func (m *Gatt) GetDevice() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetDevicesMatchingConnectionStates calls android.bluetooth.BluetoothGatt.getDevicesMatchingConnectionStates.
+func (m *Gatt) GetDevicesMatchingConnectionStates(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGattGetDevicesMatchingConnectionStates == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.getDevicesMatchingConnectionStates is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGattGetDevicesMatchingConnectionStates, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetService calls android.bluetooth.BluetoothGatt.getService.
 func (m *Gatt) GetService(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -295,6 +360,38 @@ func (m *Gatt) GetService(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midGattGetService, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetServices calls android.bluetooth.BluetoothGatt.getServices.
+func (m *Gatt) GetServices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGattGetServices == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGatt.getServices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGattGetServices,
 		)
 		if callErr != nil {
 			return callErr

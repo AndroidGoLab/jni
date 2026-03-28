@@ -5,6 +5,541 @@
 package: notification
 go_import: github.com/AndroidGoLab/jni/service/notification
 classes:
+    - java_class: android.service.notification.ZenDeviceEffects
+      go_type: ZenDeviceEffects
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: shouldDimWallpaper
+          go_name: ShouldDimWallpaper
+          returns: boolean
+          error: true
+        - java_method: shouldDisplayGrayscale
+          go_name: ShouldDisplayGrayscale
+          returns: boolean
+          error: true
+        - java_method: shouldSuppressAmbientDisplay
+          go_name: ShouldSuppressAmbientDisplay
+          returns: boolean
+          error: true
+        - java_method: shouldUseNightMode
+          go_name: ShouldUseNightMode
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.service.notification.ZenDeviceEffects$Builder
+      go_type: ZenDeviceEffectsBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.service.notification.ZenDeviceEffects
+          error: true
+        - java_method: setShouldDimWallpaper
+          go_name: SetShouldDimWallpaper
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+        - java_method: setShouldDisplayGrayscale
+          go_name: SetShouldDisplayGrayscale
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+        - java_method: setShouldSuppressAmbientDisplay
+          go_name: SetShouldSuppressAmbientDisplay
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+        - java_method: setShouldUseNightMode
+          go_name: SetShouldUseNightMode
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.service.notification.ZenDeviceEffects$Builder
+          error: true
+    - java_class: android.service.notification.NotificationListenerService
+      go_type: ListenerService
+      methods:
+        - java_method: cancelAllNotifications
+          go_name: CancelAllNotifications
+          returns: void
+          error: true
+        - java_method: cancelNotification
+          go_name: CancelNotification1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: cancelNotification
+          go_name: CancelNotification3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: cancelNotifications
+          go_name: CancelNotifications
+          params:
+            - java_type: java.lang.String[]
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clearRequestedListenerHints
+          go_name: ClearRequestedListenerHints
+          returns: void
+          error: true
+        - java_method: createConversationNotificationChannelForPackage
+          go_name: CreateConversationNotificationChannelForPackage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: String
+              go_name: arg3
+          returns: android.app.NotificationChannel
+          error: true
+        - java_method: getActiveNotifications
+          go_name: GetActiveNotifications0
+          returns: android.service.notification.StatusBarNotification[]
+          error: true
+        - java_method: getActiveNotifications
+          go_name: GetActiveNotifications1_1
+          params:
+            - java_type: java.lang.String[]
+              go_name: arg0
+          returns: android.service.notification.StatusBarNotification[]
+          error: true
+        - java_method: getCurrentInterruptionFilter
+          go_name: GetCurrentInterruptionFilter
+          returns: int
+          error: true
+        - java_method: getCurrentListenerHints
+          go_name: GetCurrentListenerHints
+          returns: int
+          error: true
+        - java_method: getCurrentRanking
+          go_name: GetCurrentRanking
+          returns: android.service.notification.NotificationListenerService$RankingMap
+          error: true
+        - java_method: getNotificationChannelGroups
+          go_name: GetNotificationChannelGroups
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: java.util.List<android.app.NotificationChannelGroup>
+          error: true
+        - java_method: getNotificationChannels
+          go_name: GetNotificationChannels
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+          returns: java.util.List<android.app.NotificationChannel>
+          error: true
+        - java_method: getSnoozedNotifications
+          go_name: GetSnoozedNotifications
+          returns: android.service.notification.StatusBarNotification[]
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onDestroy
+          go_name: OnDestroy
+          returns: void
+          error: true
+        - java_method: onInterruptionFilterChanged
+          go_name: OnInterruptionFilterChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onListenerConnected
+          go_name: OnListenerConnected
+          returns: void
+          error: true
+        - java_method: onListenerDisconnected
+          go_name: OnListenerDisconnected
+          returns: void
+          error: true
+        - java_method: onListenerHintsChanged
+          go_name: OnListenerHintsChanged
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onNotificationChannelGroupModified
+          go_name: OnNotificationChannelGroupModified
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+            - java_type: android.app.NotificationChannelGroup
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onNotificationChannelModified
+          go_name: OnNotificationChannelModified
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+            - java_type: android.app.NotificationChannel
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onNotificationPosted
+          go_name: OnNotificationPosted1
+          params:
+            - java_type: android.service.notification.StatusBarNotification
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onNotificationPosted
+          go_name: OnNotificationPosted2_1
+          params:
+            - java_type: android.service.notification.StatusBarNotification
+              go_name: arg0
+            - java_type: android.service.notification.NotificationListenerService$RankingMap
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onNotificationRankingUpdate
+          go_name: OnNotificationRankingUpdate
+          params:
+            - java_type: android.service.notification.NotificationListenerService$RankingMap
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onNotificationRemoved
+          go_name: OnNotificationRemoved1
+          params:
+            - java_type: android.service.notification.StatusBarNotification
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onNotificationRemoved
+          go_name: OnNotificationRemoved2_1
+          params:
+            - java_type: android.service.notification.StatusBarNotification
+              go_name: arg0
+            - java_type: android.service.notification.NotificationListenerService$RankingMap
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onNotificationRemoved
+          go_name: OnNotificationRemoved3_2
+          params:
+            - java_type: android.service.notification.StatusBarNotification
+              go_name: arg0
+            - java_type: android.service.notification.NotificationListenerService$RankingMap
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onSilentStatusBarIconsVisibilityChanged
+          go_name: OnSilentStatusBarIconsVisibilityChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestInterruptionFilter
+          go_name: RequestInterruptionFilter
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestListenerHints
+          go_name: RequestListenerHints
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestUnbind
+          go_name: RequestUnbind0
+          returns: void
+          error: true
+        - java_method: setNotificationsShown
+          go_name: SetNotificationsShown
+          params:
+            - java_type: java.lang.String[]
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: snoozeNotification
+          go_name: SnoozeNotification
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: updateNotificationChannel
+          go_name: UpdateNotificationChannel
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.UserHandle
+              go_name: arg1
+            - java_type: android.app.NotificationChannel
+              go_name: arg2
+          returns: void
+          error: true
+      static_methods:
+        - java_method: requestRebind
+          go_name: RequestRebind
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestUnbind
+          go_name: RequestUnbind1_1
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.service.notification.NotificationListenerService$Ranking
+      go_type: ListenerServiceRanking
+      methods:
+        - java_method: canBubble
+          go_name: CanBubble
+          returns: boolean
+          error: true
+        - java_method: canShowBadge
+          go_name: CanShowBadge
+          returns: boolean
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getChannel
+          go_name: GetChannel
+          returns: android.app.NotificationChannel
+          error: true
+        - java_method: getConversationShortcutInfo
+          go_name: GetConversationShortcutInfo
+          returns: android.content.pm.ShortcutInfo
+          error: true
+        - java_method: getImportance
+          go_name: GetImportance
+          returns: int
+          error: true
+        - java_method: getImportanceExplanation
+          go_name: GetImportanceExplanation
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getKey
+          go_name: GetKey
+          returns: String
+          error: true
+        - java_method: getLastAudiblyAlertedMillis
+          go_name: GetLastAudiblyAlertedMillis
+          returns: long
+          error: true
+        - java_method: getLockscreenVisibilityOverride
+          go_name: GetLockscreenVisibilityOverride
+          returns: int
+          error: true
+        - java_method: getOverrideGroupKey
+          go_name: GetOverrideGroupKey
+          returns: String
+          error: true
+        - java_method: getRank
+          go_name: GetRank
+          returns: int
+          error: true
+        - java_method: getSmartActions
+          go_name: GetSmartActions
+          returns: java.util.List<android.app.Notification$Action>
+          error: true
+        - java_method: getSmartReplies
+          go_name: GetSmartReplies
+          returns: java.util.List<java.lang.CharSequence>
+          error: true
+        - java_method: getSuppressedVisualEffects
+          go_name: GetSuppressedVisualEffects
+          returns: int
+          error: true
+        - java_method: getUserSentiment
+          go_name: GetUserSentiment
+          returns: int
+          error: true
+        - java_method: isAmbient
+          go_name: IsAmbient
+          returns: boolean
+          error: true
+        - java_method: isConversation
+          go_name: IsConversation
+          returns: boolean
+          error: true
+        - java_method: isSuspended
+          go_name: IsSuspended
+          returns: boolean
+          error: true
+        - java_method: matchesInterruptionFilter
+          go_name: MatchesInterruptionFilter
+          returns: boolean
+          error: true
+    - java_class: android.service.notification.NotificationListenerService$RankingMap
+      go_type: ListenerServiceRankingMap
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getOrderedKeys
+          go_name: GetOrderedKeys
+          returns: java.lang.String[]
+          error: true
+        - java_method: getRanking
+          go_name: GetRanking
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.service.notification.NotificationListenerService$Ranking
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.service.notification.ConditionProviderService
+      go_type: ConditionProviderService
+      methods:
+        - java_method: notifyCondition
+          go_name: NotifyCondition
+          params:
+            - java_type: android.service.notification.Condition
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: notifyConditions
+          go_name: NotifyConditions
+          params:
+            - java_type: android.service.notification.Condition...
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onConnected
+          go_name: OnConnected
+          returns: void
+          error: true
+        - java_method: onRequestConditions
+          go_name: OnRequestConditions
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSubscribe
+          go_name: OnSubscribe
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onUnsubscribe
+          go_name: OnUnsubscribe
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: requestUnbind
+          go_name: RequestUnbind
+          returns: void
+          error: true
+      static_methods:
+        - java_method: requestRebind
+          go_name: RequestRebind
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.service.notification.Condition
       go_type: Condition
       obtain: constructor
@@ -332,603 +867,10 @@ classes:
               go_name: arg0
           returns: android.service.notification.ZenPolicy$Builder
           error: true
-    - java_class: android.service.notification.ConditionProviderService
-      go_type: ConditionProviderService
-      methods:
-        - java_method: notifyCondition
-          go_name: NotifyCondition
-          params:
-            - java_type: android.service.notification.Condition
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: notifyConditions
-          go_name: NotifyConditions
-          params:
-            - java_type: android.service.notification.Condition...
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onConnected
-          go_name: OnConnected
-          returns: void
-          error: true
-        - java_method: onRequestConditions
-          go_name: OnRequestConditions
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSubscribe
-          go_name: OnSubscribe
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onUnsubscribe
-          go_name: OnUnsubscribe
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestUnbind
-          go_name: RequestUnbind
-          returns: void
-          error: true
-      static_methods:
-        - java_method: requestRebind
-          go_name: RequestRebind
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.service.notification.NotificationListenerService
-      go_type: ListenerService
-      methods:
-        - java_method: cancelAllNotifications
-          go_name: CancelAllNotifications
-          returns: void
-          error: true
-        - java_method: cancelNotification
-          go_name: CancelNotification1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: cancelNotification
-          go_name: CancelNotification3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: cancelNotifications
-          go_name: CancelNotifications
-          params:
-            - java_type: java.lang.String[]
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: clearRequestedListenerHints
-          go_name: ClearRequestedListenerHints
-          returns: void
-          error: true
-        - java_method: createConversationNotificationChannelForPackage
-          go_name: CreateConversationNotificationChannelForPackage
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.UserHandle
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: String
-              go_name: arg3
-          returns: android.app.NotificationChannel
-          error: true
-        - java_method: getActiveNotifications
-          go_name: GetActiveNotifications0
-          returns: android.service.notification.StatusBarNotification[]
-          error: true
-        - java_method: getActiveNotifications
-          go_name: GetActiveNotifications1_1
-          params:
-            - java_type: java.lang.String[]
-              go_name: arg0
-          returns: android.service.notification.StatusBarNotification[]
-          error: true
-        - java_method: getCurrentInterruptionFilter
-          go_name: GetCurrentInterruptionFilter
-          returns: int
-          error: true
-        - java_method: getCurrentListenerHints
-          go_name: GetCurrentListenerHints
-          returns: int
-          error: true
-        - java_method: getCurrentRanking
-          go_name: GetCurrentRanking
-          returns: android.service.notification.NotificationListenerService$RankingMap
-          error: true
-        - java_method: getSnoozedNotifications
-          go_name: GetSnoozedNotifications
-          returns: android.service.notification.StatusBarNotification[]
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onDestroy
-          go_name: OnDestroy
-          returns: void
-          error: true
-        - java_method: onInterruptionFilterChanged
-          go_name: OnInterruptionFilterChanged
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onListenerConnected
-          go_name: OnListenerConnected
-          returns: void
-          error: true
-        - java_method: onListenerDisconnected
-          go_name: OnListenerDisconnected
-          returns: void
-          error: true
-        - java_method: onListenerHintsChanged
-          go_name: OnListenerHintsChanged
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onNotificationChannelGroupModified
-          go_name: OnNotificationChannelGroupModified
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.UserHandle
-              go_name: arg1
-            - java_type: android.app.NotificationChannelGroup
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onNotificationChannelModified
-          go_name: OnNotificationChannelModified
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.UserHandle
-              go_name: arg1
-            - java_type: android.app.NotificationChannel
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onNotificationPosted
-          go_name: OnNotificationPosted1
-          params:
-            - java_type: android.service.notification.StatusBarNotification
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onNotificationPosted
-          go_name: OnNotificationPosted2_1
-          params:
-            - java_type: android.service.notification.StatusBarNotification
-              go_name: arg0
-            - java_type: android.service.notification.NotificationListenerService$RankingMap
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onNotificationRankingUpdate
-          go_name: OnNotificationRankingUpdate
-          params:
-            - java_type: android.service.notification.NotificationListenerService$RankingMap
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onNotificationRemoved
-          go_name: OnNotificationRemoved1
-          params:
-            - java_type: android.service.notification.StatusBarNotification
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onNotificationRemoved
-          go_name: OnNotificationRemoved2_1
-          params:
-            - java_type: android.service.notification.StatusBarNotification
-              go_name: arg0
-            - java_type: android.service.notification.NotificationListenerService$RankingMap
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onNotificationRemoved
-          go_name: OnNotificationRemoved3_2
-          params:
-            - java_type: android.service.notification.StatusBarNotification
-              go_name: arg0
-            - java_type: android.service.notification.NotificationListenerService$RankingMap
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onSilentStatusBarIconsVisibilityChanged
-          go_name: OnSilentStatusBarIconsVisibilityChanged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestInterruptionFilter
-          go_name: RequestInterruptionFilter
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestListenerHints
-          go_name: RequestListenerHints
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestUnbind
-          go_name: RequestUnbind0
-          returns: void
-          error: true
-        - java_method: setNotificationsShown
-          go_name: SetNotificationsShown
-          params:
-            - java_type: java.lang.String[]
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: snoozeNotification
-          go_name: SnoozeNotification
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: updateNotificationChannel
-          go_name: UpdateNotificationChannel
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.UserHandle
-              go_name: arg1
-            - java_type: android.app.NotificationChannel
-              go_name: arg2
-          returns: void
-          error: true
-      static_methods:
-        - java_method: requestRebind
-          go_name: RequestRebind
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: requestUnbind
-          go_name: RequestUnbind1_1
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.service.notification.NotificationListenerService$Ranking
-      go_type: ListenerServiceRanking
-      methods:
-        - java_method: canBubble
-          go_name: CanBubble
-          returns: boolean
-          error: true
-        - java_method: canShowBadge
-          go_name: CanShowBadge
-          returns: boolean
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getChannel
-          go_name: GetChannel
-          returns: android.app.NotificationChannel
-          error: true
-        - java_method: getConversationShortcutInfo
-          go_name: GetConversationShortcutInfo
-          returns: android.content.pm.ShortcutInfo
-          error: true
-        - java_method: getImportance
-          go_name: GetImportance
-          returns: int
-          error: true
-        - java_method: getImportanceExplanation
-          go_name: GetImportanceExplanation
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getKey
-          go_name: GetKey
-          returns: String
-          error: true
-        - java_method: getLastAudiblyAlertedMillis
-          go_name: GetLastAudiblyAlertedMillis
-          returns: long
-          error: true
-        - java_method: getLockscreenVisibilityOverride
-          go_name: GetLockscreenVisibilityOverride
-          returns: int
-          error: true
-        - java_method: getOverrideGroupKey
-          go_name: GetOverrideGroupKey
-          returns: String
-          error: true
-        - java_method: getRank
-          go_name: GetRank
-          returns: int
-          error: true
-        - java_method: getSuppressedVisualEffects
-          go_name: GetSuppressedVisualEffects
-          returns: int
-          error: true
-        - java_method: getUserSentiment
-          go_name: GetUserSentiment
-          returns: int
-          error: true
-        - java_method: isAmbient
-          go_name: IsAmbient
-          returns: boolean
-          error: true
-        - java_method: isConversation
-          go_name: IsConversation
-          returns: boolean
-          error: true
-        - java_method: isSuspended
-          go_name: IsSuspended
-          returns: boolean
-          error: true
-        - java_method: matchesInterruptionFilter
-          go_name: MatchesInterruptionFilter
-          returns: boolean
-          error: true
-    - java_class: android.service.notification.NotificationListenerService$RankingMap
-      go_type: ListenerServiceRankingMap
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getOrderedKeys
-          go_name: GetOrderedKeys
-          returns: java.lang.String[]
-          error: true
-        - java_method: getRanking
-          go_name: GetRanking
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.service.notification.NotificationListenerService$Ranking
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.service.notification.ZenDeviceEffects
-      go_type: ZenDeviceEffects
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: shouldDimWallpaper
-          go_name: ShouldDimWallpaper
-          returns: boolean
-          error: true
-        - java_method: shouldDisplayGrayscale
-          go_name: ShouldDisplayGrayscale
-          returns: boolean
-          error: true
-        - java_method: shouldSuppressAmbientDisplay
-          go_name: ShouldSuppressAmbientDisplay
-          returns: boolean
-          error: true
-        - java_method: shouldUseNightMode
-          go_name: ShouldUseNightMode
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.service.notification.ZenDeviceEffects$Builder
-      go_type: ZenDeviceEffectsBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.service.notification.ZenDeviceEffects
-          error: true
-        - java_method: setShouldDimWallpaper
-          go_name: SetShouldDimWallpaper
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
-        - java_method: setShouldDisplayGrayscale
-          go_name: SetShouldDisplayGrayscale
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
-        - java_method: setShouldSuppressAmbientDisplay
-          go_name: SetShouldSuppressAmbientDisplay
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
-        - java_method: setShouldUseNightMode
-          go_name: SetShouldUseNightMode
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.service.notification.ZenDeviceEffects$Builder
-          error: true
 constants:
     - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: FlagRelevantAlways
-      value: "2"
-      go_type: int
-    - go_name: FlagRelevantNow
-      value: "1"
-      go_type: int
-    - go_name: Scheme
-      value: '"condition"'
-      go_type: string
-    - go_name: SourceContext
-      value: "3"
-      go_type: int
-    - go_name: SourceSchedule
-      value: "2"
-      go_type: int
-    - go_name: SourceUnknown
-      value: "0"
-      go_type: int
-    - go_name: SourceUserAction
-      value: "1"
-      go_type: int
-    - go_name: StateError
-      value: "3"
-      go_type: int
-    - go_name: StateFalse
-      value: "0"
-      go_type: int
-    - go_name: StateTrue
-      value: "1"
-      go_type: int
-    - go_name: StateUnknown
-      value: "2"
-      go_type: int
-    - go_name: ConversationSendersAnyone
-      value: "1"
-      go_type: int
-    - go_name: ConversationSendersImportant
-      value: "2"
-      go_type: int
-    - go_name: ConversationSendersNone
-      value: "3"
-      go_type: int
-    - go_name: ConversationSendersUnset
-      value: "0"
-      go_type: int
-    - go_name: PeopleTypeAnyone
-      value: "1"
-      go_type: int
-    - go_name: PeopleTypeContacts
-      value: "2"
-      go_type: int
-    - go_name: PeopleTypeNone
-      value: "4"
-      go_type: int
-    - go_name: PeopleTypeStarred
-      value: "3"
-      go_type: int
-    - go_name: PeopleTypeUnset
-      value: "0"
-      go_type: int
-    - go_name: StateAllow
-      value: "1"
-      go_type: int
-    - go_name: StateDisallow
-      value: "2"
-      go_type: int
-    - go_name: StateUnset
-      value: "0"
-      go_type: int
-    - go_name: ExtraRuleId
-      value: '"android.service.notification.extra.RULE_ID"'
-      go_type: string
-    - go_name: MetaDataConfigurationActivity
-      value: '"android.service.zen.automatic.configurationActivity"'
-      go_type: string
-    - go_name: MetaDataRuleInstanceLimit
-      value: '"android.service.zen.automatic.ruleInstanceLimit"'
-      go_type: string
-    - go_name: MetaDataRuleType
-      value: '"android.service.zen.automatic.ruleType"'
-      go_type: string
-    - go_name: ServiceInterface
-      value: '"android.service.notification.ConditionProviderService"'
-      go_type: string
     - go_name: ActionSettingsHome
       value: '"android.service.notification.action.SETTINGS_HOME"'
       go_type: string
@@ -1055,6 +997,9 @@ constants:
     - go_name: ReasonUserStopped
       value: "6"
       go_type: int
+    - go_name: ServiceInterface
+      value: '"android.service.notification.NotificationListenerService"'
+      go_type: string
     - go_name: SuppressedEffectScreenOff
       value: "1"
       go_type: int
@@ -1072,4 +1017,85 @@ constants:
       go_type: int
     - go_name: VisibilityNoOverride
       value: "-1000"
+      go_type: int
+    - go_name: ExtraRuleId
+      value: '"android.service.notification.extra.RULE_ID"'
+      go_type: string
+    - go_name: MetaDataConfigurationActivity
+      value: '"android.service.zen.automatic.configurationActivity"'
+      go_type: string
+    - go_name: MetaDataRuleInstanceLimit
+      value: '"android.service.zen.automatic.ruleInstanceLimit"'
+      go_type: string
+    - go_name: MetaDataRuleType
+      value: '"android.service.zen.automatic.ruleType"'
+      go_type: string
+    - go_name: FlagRelevantAlways
+      value: "2"
+      go_type: int
+    - go_name: FlagRelevantNow
+      value: "1"
+      go_type: int
+    - go_name: Scheme
+      value: '"condition"'
+      go_type: string
+    - go_name: SourceContext
+      value: "3"
+      go_type: int
+    - go_name: SourceSchedule
+      value: "2"
+      go_type: int
+    - go_name: SourceUnknown
+      value: "0"
+      go_type: int
+    - go_name: SourceUserAction
+      value: "1"
+      go_type: int
+    - go_name: StateError
+      value: "3"
+      go_type: int
+    - go_name: StateFalse
+      value: "0"
+      go_type: int
+    - go_name: StateTrue
+      value: "1"
+      go_type: int
+    - go_name: StateUnknown
+      value: "2"
+      go_type: int
+    - go_name: ConversationSendersAnyone
+      value: "1"
+      go_type: int
+    - go_name: ConversationSendersImportant
+      value: "2"
+      go_type: int
+    - go_name: ConversationSendersNone
+      value: "3"
+      go_type: int
+    - go_name: ConversationSendersUnset
+      value: "0"
+      go_type: int
+    - go_name: PeopleTypeAnyone
+      value: "1"
+      go_type: int
+    - go_name: PeopleTypeContacts
+      value: "2"
+      go_type: int
+    - go_name: PeopleTypeNone
+      value: "4"
+      go_type: int
+    - go_name: PeopleTypeStarred
+      value: "3"
+      go_type: int
+    - go_name: PeopleTypeUnset
+      value: "0"
+      go_type: int
+    - go_name: StateAllow
+      value: "1"
+      go_type: int
+    - go_name: StateDisallow
+      value: "2"
+      go_type: int
+    - go_name: StateUnset
+      value: "0"
       go_type: int

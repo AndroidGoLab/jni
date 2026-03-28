@@ -32,7 +32,7 @@ func NewPluralFormat(vm *jni.VM) (*PluralFormat, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPluralFormat)), midPluralFormatInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPluralFormat)), midPluralFormatCtor)
 		if err != nil {
 			return err
 		}

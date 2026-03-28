@@ -38,7 +38,7 @@ func NewEthernetNetworkSpecifier(vm *jni.VM, arg0 string) (*EthernetNetworkSpeci
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEthernetNetworkSpecifier)), midEthernetNetworkSpecifierInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEthernetNetworkSpecifier)), midEthernetNetworkSpecifierCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

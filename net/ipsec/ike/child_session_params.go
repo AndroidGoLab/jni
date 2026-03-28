@@ -51,6 +51,38 @@ func (m *ChildSessionParams) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetChildSaProposals calls android.net.ipsec.ike.ChildSessionParams.getChildSaProposals.
+func (m *ChildSessionParams) GetChildSaProposals() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midChildSessionParamsGetChildSaProposals == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.ChildSessionParams.getChildSaProposals is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midChildSessionParamsGetChildSaProposals,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetHardLifetimeSeconds calls android.net.ipsec.ike.ChildSessionParams.getHardLifetimeSeconds.
 func (m *ChildSessionParams) GetHardLifetimeSeconds() (int32, error) {
 	var result int32
@@ -70,6 +102,70 @@ func (m *ChildSessionParams) GetHardLifetimeSeconds() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInboundTrafficSelectors calls android.net.ipsec.ike.ChildSessionParams.getInboundTrafficSelectors.
+func (m *ChildSessionParams) GetInboundTrafficSelectors() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midChildSessionParamsGetInboundTrafficSelectors == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.ChildSessionParams.getInboundTrafficSelectors is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midChildSessionParamsGetInboundTrafficSelectors,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOutboundTrafficSelectors calls android.net.ipsec.ike.ChildSessionParams.getOutboundTrafficSelectors.
+func (m *ChildSessionParams) GetOutboundTrafficSelectors() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midChildSessionParamsGetOutboundTrafficSelectors == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.ChildSessionParams.getOutboundTrafficSelectors is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midChildSessionParamsGetOutboundTrafficSelectors,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

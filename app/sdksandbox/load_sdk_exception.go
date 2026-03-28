@@ -33,7 +33,7 @@ func NewLoadSdkException(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*LoadS
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoadSdkException)), midLoadSdkExceptionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoadSdkException)), midLoadSdkExceptionCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

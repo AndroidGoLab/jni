@@ -33,7 +33,7 @@ func NewPorterDuffXfermode(vm *jni.VM, arg0 *jni.Object) (*PorterDuffXfermode, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuffXfermode)), midPorterDuffXfermodeInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPorterDuffXfermode)), midPorterDuffXfermodeCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

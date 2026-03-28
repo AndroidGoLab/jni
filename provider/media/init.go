@@ -24,14 +24,16 @@ var (
 	initErr  error
 
 	clsMediaStore                                       *jni.GlobalRef
-	midMediaStoreInit                                   jni.MethodID
+	midMediaStoreCtor                                   jni.MethodID
 	midMediaStoreCanManageMedia                         jni.MethodID
 	midMediaStoreGetDocumentUri                         jni.MethodID
+	midMediaStoreGetExternalVolumeNames                 jni.MethodID
 	midMediaStoreGetGeneration                          jni.MethodID
 	midMediaStoreGetMediaScannerUri                     jni.MethodID
 	midMediaStoreGetMediaUri                            jni.MethodID
 	midMediaStoreGetOriginalMediaFormatFileDescriptor   jni.MethodID
 	midMediaStoreGetPickImagesMaxLimit                  jni.MethodID
+	midMediaStoreGetRecentExternalVolumeNames           jni.MethodID
 	midMediaStoreGetRedactedUri                         jni.MethodID
 	midMediaStoreGetRequireOriginal                     jni.MethodID
 	midMediaStoreGetVersion1                            jni.MethodID
@@ -95,7 +97,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaStore = env.NewGlobalRef(&c.Object)
-		midMediaStoreInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "<init>", "()V")
+		midMediaStoreCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -108,6 +110,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaStoreGetDocumentUri, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getDocumentUri", "(Landroid/content/Context;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaStoreGetExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -143,6 +152,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaStoreGetPickImagesMaxLimit, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getPickImagesMaxLimit", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaStoreGetRecentExternalVolumeNames, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsMediaStore)), "getRecentExternalVolumeNames", "(Landroid/content/Context;)Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

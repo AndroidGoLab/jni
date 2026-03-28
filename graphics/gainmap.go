@@ -33,7 +33,7 @@ func NewGainmap(vm *jni.VM, arg0 *jni.Object) (*Gainmap, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGainmap)), midGainmapInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGainmap)), midGainmapCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

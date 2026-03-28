@@ -32,7 +32,7 @@ func NewSecurityLog(vm *jni.VM) (*SecurityLog, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSecurityLog)), midSecurityLogInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSecurityLog)), midSecurityLogCtor)
 		if err != nil {
 			return err
 		}

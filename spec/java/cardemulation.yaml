@@ -5,6 +5,97 @@
 package: cardemulation
 go_import: github.com/AndroidGoLab/jni/nfc/cardemulation
 classes:
+    - java_class: android.nfc.cardemulation.HostNfcFService
+      go_type: HostNfcFService
+      methods:
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
+        - java_method: onDeactivated
+          go_name: OnDeactivated
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: processNfcFPacket
+          go_name: ProcessNfcFPacket
+          params:
+            - java_type: '[B'
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: '[B'
+          error: true
+        - java_method: sendResponsePacket
+          go_name: SendResponsePacket
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.nfc.cardemulation.NfcFCardEmulation
+      go_type: NfcFCardEmulation
+      methods:
+        - java_method: disableService
+          go_name: DisableService
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: enableService
+          go_name: EnableService
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+            - java_type: android.content.ComponentName
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: getNfcid2ForService
+          go_name: GetNfcid2ForService
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getSystemCodeForService
+          go_name: GetSystemCodeForService
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: registerSystemCodeForService
+          go_name: RegisterSystemCodeForService
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: setNfcid2ForService
+          go_name: SetNfcid2ForService
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: unregisterSystemCodeForService
+          go_name: UnregisterSystemCodeForService
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: boolean
+          error: true
     - java_class: android.nfc.cardemulation.HostApduService
       go_type: HostApduService
       methods:
@@ -42,89 +133,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.nfc.cardemulation.PollingFrame
-      go_type: PollingFrame
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getData
-          go_name: GetData
-          returns: '[B'
-          error: true
-        - java_method: getTimestamp
-          go_name: GetTimestamp
-          returns: long
-          error: true
-        - java_method: getTriggeredAutoTransact
-          go_name: GetTriggeredAutoTransact
-          returns: boolean
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getVendorSpecificGain
-          go_name: GetVendorSpecificGain
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.nfc.cardemulation.HostNfcFService
-      go_type: HostNfcFService
-      methods:
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
-        - java_method: onDeactivated
-          go_name: OnDeactivated
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: processNfcFPacket
-          go_name: ProcessNfcFPacket
-          params:
-            - java_type: '[B'
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: '[B'
-          error: true
-        - java_method: sendResponsePacket
-          go_name: SendResponsePacket
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.nfc.cardemulation.OffHostApduService
-      go_type: OffHostApduService
-      methods:
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
     - java_class: android.nfc.cardemulation.CardEmulation
       go_type: CardEmulation
       methods:
@@ -134,6 +142,19 @@ classes:
             - java_type: String
               go_name: arg0
           returns: boolean
+          error: true
+        - java_method: getAidsForPreferredPaymentService
+          go_name: GetAidsForPreferredPaymentService
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getAidsForService
+          go_name: GetAidsForService
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: java.util.List<java.lang.String>
           error: true
         - java_method: getDefaultNfcSubscriptionId
           go_name: GetDefaultNfcSubscriptionId
@@ -288,97 +309,68 @@ classes:
           error: true
     - java_class: android.nfc.cardemulation.CardEmulation$NfcEventCallback
       go_type: CardEmulationNfcEventCallback
-    - java_class: android.nfc.cardemulation.NfcFCardEmulation
-      go_type: NfcFCardEmulation
+    - java_class: android.nfc.cardemulation.OffHostApduService
+      go_type: OffHostApduService
       methods:
-        - java_method: disableService
-          go_name: DisableService
+        - java_method: onBind
+          go_name: OnBind
           params:
-            - java_type: android.app.Activity
+            - java_type: android.content.Intent
               go_name: arg0
+          returns: android.os.IBinder
+          error: true
+    - java_class: android.nfc.cardemulation.PollingFrame
+      go_type: PollingFrame
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getData
+          go_name: GetData
+          returns: '[B'
+          error: true
+        - java_method: getTimestamp
+          go_name: GetTimestamp
+          returns: long
+          error: true
+        - java_method: getTriggeredAutoTransact
+          go_name: GetTriggeredAutoTransact
           returns: boolean
           error: true
-        - java_method: enableService
-          go_name: EnableService
-          params:
-            - java_type: android.app.Activity
-              go_name: arg0
-            - java_type: android.content.ComponentName
-              go_name: arg1
-          returns: boolean
+        - java_method: getType
+          go_name: GetType
+          returns: int
           error: true
-        - java_method: getNfcid2ForService
-          go_name: GetNfcid2ForService
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
+        - java_method: getVendorSpecificGain
+          go_name: GetVendorSpecificGain
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
           returns: String
           error: true
-        - java_method: getSystemCodeForService
-          go_name: GetSystemCodeForService
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: android.content.ComponentName
+            - java_type: android.os.Parcel
               go_name: arg0
-          returns: String
-          error: true
-        - java_method: registerSystemCodeForService
-          go_name: RegisterSystemCodeForService
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-            - java_type: String
+            - java_type: int
               go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: setNfcid2ForService
-          go_name: SetNfcid2ForService
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: unregisterSystemCodeForService
-          go_name: UnregisterSystemCodeForService
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: boolean
+          returns: void
           error: true
 constants:
-    - go_name: DeactivationDeselected
-      value: "1"
-      go_type: int
     - go_name: DeactivationLinkLoss
       value: "0"
       go_type: int
     - go_name: ServiceInterface
-      value: '"android.nfc.cardemulation.action.HOST_APDU_SERVICE"'
+      value: '"android.nfc.cardemulation.action.HOST_NFCF_SERVICE"'
       go_type: string
     - go_name: ServiceMetaData
-      value: '"android.nfc.cardemulation.host_apdu_service"'
+      value: '"android.nfc.cardemulation.host_nfcf_service"'
       go_type: string
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: PollingLoopTypeA
-      value: "65"
-      go_type: int
-    - go_name: PollingLoopTypeB
-      value: "66"
-      go_type: int
-    - go_name: PollingLoopTypeF
-      value: "70"
-      go_type: int
-    - go_name: PollingLoopTypeOff
-      value: "88"
-      go_type: int
-    - go_name: PollingLoopTypeOn
-      value: "79"
-      go_type: int
-    - go_name: PollingLoopTypeUnknown
-      value: "85"
+    - go_name: DeactivationDeselected
+      value: "1"
       go_type: int
     - go_name: ActionChangeDefault
       value: '"android.nfc.cardemulation.action.ACTION_CHANGE_DEFAULT"'
@@ -433,4 +425,25 @@ constants:
       go_type: int
     - go_name: SelectionModePreferDefault
       value: "0"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: PollingLoopTypeA
+      value: "65"
+      go_type: int
+    - go_name: PollingLoopTypeB
+      value: "66"
+      go_type: int
+    - go_name: PollingLoopTypeF
+      value: "70"
+      go_type: int
+    - go_name: PollingLoopTypeOff
+      value: "88"
+      go_type: int
+    - go_name: PollingLoopTypeOn
+      value: "79"
+      go_type: int
+    - go_name: PollingLoopTypeUnknown
+      value: "85"
       go_type: int

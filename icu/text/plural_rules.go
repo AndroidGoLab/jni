@@ -79,6 +79,114 @@ func (m *PluralRules) Equals1_1(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetAllKeywordValues calls android.icu.text.PluralRules.getAllKeywordValues.
+func (m *PluralRules) GetAllKeywordValues(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPluralRulesGetAllKeywordValues == nil {
+			callErr = fmt.Errorf("android.icu.text.PluralRules.getAllKeywordValues is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPluralRulesGetAllKeywordValues, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeywords calls android.icu.text.PluralRules.getKeywords.
+func (m *PluralRules) GetKeywords() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPluralRulesGetKeywords == nil {
+			callErr = fmt.Errorf("android.icu.text.PluralRules.getKeywords is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPluralRulesGetKeywords,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSamples calls android.icu.text.PluralRules.getSamples.
+func (m *PluralRules) GetSamples(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPluralRulesGetSamples == nil {
+			callErr = fmt.Errorf("android.icu.text.PluralRules.getSamples is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPluralRulesGetSamples, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetUniqueKeywordValue calls android.icu.text.PluralRules.getUniqueKeywordValue.
 func (m *PluralRules) GetUniqueKeywordValue(arg0 string) (float64, error) {
 	var result float64

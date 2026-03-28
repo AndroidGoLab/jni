@@ -33,7 +33,7 @@ func NewColorSpaceProfiles(vm *jni.VM, arg0 *jni.Object) (*ColorSpaceProfiles, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorSpaceProfiles)), midColorSpaceProfilesInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorSpaceProfiles)), midColorSpaceProfilesCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -44,4 +44,136 @@ func NewColorSpaceProfiles(vm *jni.VM, arg0 *jni.Object) (*ColorSpaceProfiles, e
 		return nil, err
 	}
 	return &t, nil
+}
+
+// GetSupportedColorSpaces calls android.hardware.camera2.params.ColorSpaceProfiles.getSupportedColorSpaces.
+func (m *ColorSpaceProfiles) GetSupportedColorSpaces(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midColorSpaceProfilesGetSupportedColorSpaces == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.ColorSpaceProfiles.getSupportedColorSpaces is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midColorSpaceProfilesGetSupportedColorSpaces, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedColorSpacesForDynamicRange calls android.hardware.camera2.params.ColorSpaceProfiles.getSupportedColorSpacesForDynamicRange.
+func (m *ColorSpaceProfiles) GetSupportedColorSpacesForDynamicRange(arg0 int32, arg1 int64) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midColorSpaceProfilesGetSupportedColorSpacesForDynamicRange == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.ColorSpaceProfiles.getSupportedColorSpacesForDynamicRange is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midColorSpaceProfilesGetSupportedColorSpacesForDynamicRange, jni.IntValue(arg0), jni.LongValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedDynamicRangeProfiles calls android.hardware.camera2.params.ColorSpaceProfiles.getSupportedDynamicRangeProfiles.
+func (m *ColorSpaceProfiles) GetSupportedDynamicRangeProfiles(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midColorSpaceProfilesGetSupportedDynamicRangeProfiles == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.ColorSpaceProfiles.getSupportedDynamicRangeProfiles is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midColorSpaceProfilesGetSupportedDynamicRangeProfiles, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedImageFormatsForColorSpace calls android.hardware.camera2.params.ColorSpaceProfiles.getSupportedImageFormatsForColorSpace.
+func (m *ColorSpaceProfiles) GetSupportedImageFormatsForColorSpace(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midColorSpaceProfilesGetSupportedImageFormatsForColorSpace == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.ColorSpaceProfiles.getSupportedImageFormatsForColorSpace is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midColorSpaceProfilesGetSupportedImageFormatsForColorSpace, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }

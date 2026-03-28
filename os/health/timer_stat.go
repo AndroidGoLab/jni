@@ -32,7 +32,7 @@ func NewTimerStat(vm *jni.VM) (*TimerStat, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimerStat)), midTimerStatInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimerStat)), midTimerStatCtor)
 		if err != nil {
 			return err
 		}

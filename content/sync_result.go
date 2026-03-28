@@ -32,7 +32,7 @@ func NewSyncResult(vm *jni.VM) (*SyncResult, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncResult)), midSyncResultInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncResult)), midSyncResultCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewStrongBoxUnavailableException(vm *jni.VM) (*StrongBoxUnavailableExceptio
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStrongBoxUnavailableException)), midStrongBoxUnavailableExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStrongBoxUnavailableException)), midStrongBoxUnavailableExceptionCtor)
 		if err != nil {
 			return err
 		}

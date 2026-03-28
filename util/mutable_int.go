@@ -33,7 +33,7 @@ func NewMutableInt(vm *jni.VM, arg0 int32) (*MutableInt, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableInt)), midMutableIntInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableInt)), midMutableIntCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

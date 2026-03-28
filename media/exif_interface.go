@@ -33,7 +33,7 @@ func NewExifInterface(vm *jni.VM, arg0 *jni.Object) (*ExifInterface, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExifInterface)), midExifInterfaceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExifInterface)), midExifInterfaceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

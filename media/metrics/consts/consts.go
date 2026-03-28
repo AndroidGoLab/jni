@@ -28,15 +28,31 @@ const (
 	FinalStateSucceeded                    int = 1
 	ProgressPercentUnknown                 int = -1
 	TimeSinceCreatedUnknown                int = -1
-	SourceTypeCamera                       int = 2
-	SourceTypeEditingSession               int = 3
-	SourceTypeGallery                      int = 1
-	SourceTypeGenerated                    int = 7
-	SourceTypeLocalFile                    int = 4
-	SourceTypeRemoteFile                   int = 5
-	SourceTypeRemoteLiveStream             int = 6
-	SourceTypeUnspecified                  int = 0
-	ValueUnspecified                       int = -1
+	StateAbandoned                         int = 15
+	StateBuffering                         int = 6
+	StateEnded                             int = 11
+	StateFailed                            int = 13
+	StateInterruptedByAd                   int = 14
+	StateJoiningBackground                 int = 1
+	StateJoiningForeground                 int = 2
+	StateNotStarted                        int = 0
+	StatePaused                            int = 4
+	StatePausedBuffering                   int = 7
+	StatePlaying                           int = 3
+	StateSeeking                           int = 5
+	StateStopped                           int = 12
+	StateSuppressed                        int = 9
+	StateSuppressedBuffering               int = 10
+	TrackChangeReasonAdaptive              int = 4
+	TrackChangeReasonInitial               int = 2
+	TrackChangeReasonManual                int = 3
+	TrackChangeReasonOther                 int = 1
+	TrackChangeReasonUnknown               int = 0
+	TrackStateOff                          int = 0
+	TrackStateOn                           int = 1
+	TrackTypeAudio                         int = 0
+	TrackTypeText                          int = 2
+	TrackTypeVideo                         int = 1
 	ContentTypeAd                          int = 2
 	ContentTypeMain                        int = 1
 	ContentTypeOther                       int = 3
@@ -98,21 +114,6 @@ const (
 	ErrorPlayerRemote                      int = 20
 	ErrorRuntime                           int = 2
 	ErrorUnknown                           int = 0
-	StateAbandoned                         int = 15
-	StateBuffering                         int = 6
-	StateEnded                             int = 11
-	StateFailed                            int = 13
-	StateInterruptedByAd                   int = 14
-	StateJoiningBackground                 int = 1
-	StateJoiningForeground                 int = 2
-	StateNotStarted                        int = 0
-	StatePaused                            int = 4
-	StatePausedBuffering                   int = 7
-	StatePlaying                           int = 3
-	StateSeeking                           int = 5
-	StateStopped                           int = 12
-	StateSuppressed                        int = 9
-	StateSuppressedBuffering               int = 10
 	NetworkType2g                          int = 4
 	NetworkType3g                          int = 5
 	NetworkType4g                          int = 6
@@ -123,17 +124,16 @@ const (
 	NetworkTypeOther                       int = 1
 	NetworkTypeUnknown                     int = 0
 	NetworkTypeWifi                        int = 2
-	TrackChangeReasonAdaptive              int = 4
-	TrackChangeReasonInitial               int = 2
-	TrackChangeReasonManual                int = 3
-	TrackChangeReasonOther                 int = 1
-	TrackChangeReasonUnknown               int = 0
-	TrackStateOff                          int = 0
-	TrackStateOn                           int = 1
-	TrackTypeAudio                         int = 0
-	TrackTypeText                          int = 2
-	TrackTypeVideo                         int = 1
 	LogSessionIdNone                       int = 0
+	SourceTypeCamera                       int = 2
+	SourceTypeEditingSession               int = 3
+	SourceTypeGallery                      int = 1
+	SourceTypeGenerated                    int = 7
+	SourceTypeLocalFile                    int = 4
+	SourceTypeRemoteFile                   int = 5
+	SourceTypeRemoteLiveStream             int = 6
+	SourceTypeUnspecified                  int = 0
+	ValueUnspecified                       int = -1
 )
 
 const (
@@ -145,6 +145,7 @@ const (
 	OperationTypeVideoEdit        int64 = 4
 	OperationTypeVideoTranscode   int64 = 1
 	OperationTypeVideoTransmux    int64 = 16
+	InvalidTimestamp              int64 = -1
 	DataTypeAudio                 int64 = 4
 	DataTypeDepth                 int64 = 16
 	DataTypeGainMap               int64 = 32
@@ -156,7 +157,6 @@ const (
 	DataTypeSpatialAudio          int64 = 512
 	DataTypeSpeedSettingCuePoints int64 = 128
 	DataTypeVideo                 int64 = 2
-	InvalidTimestamp              int64 = -1
 )
 
 const (

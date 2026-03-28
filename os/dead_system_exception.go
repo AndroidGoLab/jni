@@ -32,7 +32,7 @@ func NewDeadSystemException(vm *jni.VM) (*DeadSystemException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeadSystemException)), midDeadSystemExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeadSystemException)), midDeadSystemExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewYuvImage(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 int32, arg3 int3
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsYuvImage)), midYuvImageInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsYuvImage)), midYuvImageCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}

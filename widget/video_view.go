@@ -33,7 +33,7 @@ func NewVideoView(vm *jni.VM, arg0 *jni.Object) (*VideoView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVideoView)), midVideoViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVideoView)), midVideoViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

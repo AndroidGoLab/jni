@@ -33,7 +33,7 @@ func NewGeomagneticField(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, a
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGeomagneticField)), midGeomagneticFieldInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.LongValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGeomagneticField)), midGeomagneticFieldCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.LongValue(arg3))
 		if err != nil {
 			return err
 		}

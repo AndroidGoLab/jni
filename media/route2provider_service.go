@@ -23,6 +23,38 @@ type Route2ProviderService struct {
 	Obj *jni.GlobalRef
 }
 
+// GetAllSessionInfo calls android.media.MediaRoute2ProviderService.getAllSessionInfo.
+func (m *Route2ProviderService) GetAllSessionInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoute2ProviderServiceGetAllSessionInfo == nil {
+			callErr = fmt.Errorf("android.media.MediaRoute2ProviderService.getAllSessionInfo is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoute2ProviderServiceGetAllSessionInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSessionInfo calls android.media.MediaRoute2ProviderService.getSessionInfo.
 func (m *Route2ProviderService) GetSessionInfo(arg0 string) (*jni.Object, error) {
 	var result *jni.Object

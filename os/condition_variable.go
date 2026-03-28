@@ -32,7 +32,7 @@ func NewConditionVariable(vm *jni.VM) (*ConditionVariable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConditionVariable)), midConditionVariableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConditionVariable)), midConditionVariableCtor)
 		if err != nil {
 			return err
 		}

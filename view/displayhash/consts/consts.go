@@ -3,11 +3,11 @@
 package consts
 
 const (
+	Creator                              int = 0
 	DisplayHashErrorInvalidBounds        int = -2
 	DisplayHashErrorInvalidHashAlgorithm int = -5
 	DisplayHashErrorMissingWindow        int = -3
 	DisplayHashErrorNotVisibleOnScreen   int = -4
 	DisplayHashErrorTooManyRequests      int = -6
 	DisplayHashErrorUnknown              int = -1
-	Creator                              int = 0
 )

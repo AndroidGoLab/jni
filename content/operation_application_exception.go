@@ -32,7 +32,7 @@ func NewOperationApplicationException(vm *jni.VM) (*OperationApplicationExceptio
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOperationApplicationException)), midOperationApplicationExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOperationApplicationException)), midOperationApplicationExceptionCtor)
 		if err != nil {
 			return err
 		}

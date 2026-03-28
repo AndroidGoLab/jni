@@ -5,18 +5,18 @@ package chooser
 import "github.com/AndroidGoLab/jni/service/chooser/consts"
 
 const (
-	Creator                        = consts.Creator
-	ChooserResultCopy              = consts.ChooserResultCopy
-	ChooserResultEdit              = consts.ChooserResultEdit
-	ChooserResultSelectedComponent = consts.ChooserResultSelectedComponent
-	ChooserResultUnknown           = consts.ChooserResultUnknown
-)
-
-const (
 	Uri                = consts.Uri
 	Position           = consts.Position
 	OnSelectionChanged = consts.OnSelectionChanged
 	BindPermission     = consts.BindPermission
 	MetaDataName       = consts.MetaDataName
 	ServiceInterface   = consts.ServiceInterface
+)
+
+const (
+	Creator                        = consts.Creator
+	ChooserResultCopy              = consts.ChooserResultCopy
+	ChooserResultEdit              = consts.ChooserResultEdit
+	ChooserResultSelectedComponent = consts.ChooserResultSelectedComponent
+	ChooserResultUnknown           = consts.ChooserResultUnknown
 )

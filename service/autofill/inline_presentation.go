@@ -38,7 +38,7 @@ func NewInlinePresentation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 
 			jArg2 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInlinePresentation)), midInlinePresentationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInlinePresentation)), midInlinePresentationCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.BooleanValue(jArg2))
 		if err != nil {
 			return err
 		}

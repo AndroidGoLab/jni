@@ -76,6 +76,38 @@ func (m *ExecuteOutput) GetBestValue() (int32, error) {
 	return result, callErr
 }
 
+// GetEventLogRecords calls android.adservices.ondevicepersonalization.ExecuteOutput.getEventLogRecords.
+func (m *ExecuteOutput) GetEventLogRecords() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midExecuteOutputGetEventLogRecords == nil {
+			callErr = fmt.Errorf("android.adservices.ondevicepersonalization.ExecuteOutput.getEventLogRecords is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midExecuteOutputGetEventLogRecords,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetOutputData calls android.adservices.ondevicepersonalization.ExecuteOutput.getOutputData.
 func (m *ExecuteOutput) GetOutputData() (*jni.Object, error) {
 	var result *jni.Object

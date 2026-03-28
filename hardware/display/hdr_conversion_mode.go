@@ -33,7 +33,7 @@ func NewHdrConversionMode(vm *jni.VM, arg0 int32) (*HdrConversionMode, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), midHdrConversionModeInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHdrConversionMode)), midHdrConversionModeCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

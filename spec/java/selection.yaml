@@ -26,6 +26,10 @@ classes:
           go_name: GetPage
           returns: int
           error: true
+        - java_method: getSelectedTextContents
+          go_name: GetSelectedTextContents
+          returns: java.util.List<android.graphics.pdf.content.PdfPageTextContent>
+          error: true
         - java_method: getStart
           go_name: GetStart
           returns: android.graphics.pdf.models.selection.SelectionBoundary

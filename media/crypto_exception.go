@@ -38,7 +38,7 @@ func NewCryptoException(vm *jni.VM, arg0 string) (*CryptoException, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCryptoException)), midCryptoExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCryptoException)), midCryptoExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

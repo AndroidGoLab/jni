@@ -37,7 +37,7 @@ func NewMutableBoolean(vm *jni.VM, arg0 bool) (*MutableBoolean, error) {
 			jArg0 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableBoolean)), midMutableBooleanInit, jni.BooleanValue(jArg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableBoolean)), midMutableBooleanCtor, jni.BooleanValue(jArg0))
 		if err != nil {
 			return err
 		}

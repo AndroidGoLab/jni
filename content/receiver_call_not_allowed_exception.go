@@ -38,7 +38,7 @@ func NewReceiverCallNotAllowedException(vm *jni.VM, arg0 string) (*ReceiverCallN
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReceiverCallNotAllowedException)), midReceiverCallNotAllowedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReceiverCallNotAllowedException)), midReceiverCallNotAllowedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

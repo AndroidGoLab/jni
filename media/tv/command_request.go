@@ -57,7 +57,7 @@ func NewCommandRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 string, arg3 str
 		}
 		defer env.DeleteLocalRef(&jArg5.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCommandRequest)), midCommandRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(&jArg5.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCommandRequest)), midCommandRequestCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(&jArg5.Object))
 		if err != nil {
 			return err
 		}

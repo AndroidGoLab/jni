@@ -33,7 +33,7 @@ func NewStub(vm *jni.VM, arg0 *jni.Object) (*Stub, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStub)), midStubInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStub)), midStubCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

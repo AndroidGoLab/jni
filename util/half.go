@@ -33,7 +33,7 @@ func NewHalf(vm *jni.VM, arg0 float64) (*Half, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHalf)), midHalfInit, jni.DoubleValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHalf)), midHalfCtor, jni.DoubleValue(arg0))
 		if err != nil {
 			return err
 		}

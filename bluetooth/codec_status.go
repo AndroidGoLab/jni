@@ -108,6 +108,70 @@ func (m *CodecStatus) GetCodecConfig() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetCodecsLocalCapabilities calls android.bluetooth.BluetoothCodecStatus.getCodecsLocalCapabilities.
+func (m *CodecStatus) GetCodecsLocalCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecStatusGetCodecsLocalCapabilities == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothCodecStatus.getCodecsLocalCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecStatusGetCodecsLocalCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCodecsSelectableCapabilities calls android.bluetooth.BluetoothCodecStatus.getCodecsSelectableCapabilities.
+func (m *CodecStatus) GetCodecsSelectableCapabilities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecStatusGetCodecsSelectableCapabilities == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothCodecStatus.getCodecsSelectableCapabilities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecStatusGetCodecsSelectableCapabilities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.bluetooth.BluetoothCodecStatus.hashCode.
 func (m *CodecStatus) HashCode() (int32, error) {
 	var result int32

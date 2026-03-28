@@ -32,7 +32,7 @@ func NewPicture(vm *jni.VM) (*Picture, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPicture)), midPictureInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPicture)), midPictureCtor)
 		if err != nil {
 			return err
 		}

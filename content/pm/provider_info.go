@@ -32,7 +32,7 @@ func NewProviderInfo(vm *jni.VM) (*ProviderInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProviderInfo)), midProviderInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProviderInfo)), midProviderInfoCtor)
 		if err != nil {
 			return err
 		}

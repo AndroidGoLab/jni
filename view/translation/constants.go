@@ -6,8 +6,13 @@ import "github.com/AndroidGoLab/jni/view/translation/consts"
 
 const (
 	Creator                             = consts.Creator
-	StatusError                         = consts.StatusError
-	StatusSuccess                       = consts.StatusSuccess
+	StateAvailableToDownload            = consts.StateAvailableToDownload
+	StateDownloading                    = consts.StateDownloading
+	StateNotAvailable                   = consts.StateNotAvailable
+	StateOnDevice                       = consts.StateOnDevice
+	FlagDefinitions                     = consts.FlagDefinitions
+	FlagLowLatency                      = consts.FlagLowLatency
+	FlagTransliteration                 = consts.FlagTransliteration
 	TranslationStatusContextUnsupported = consts.TranslationStatusContextUnsupported
 	TranslationStatusSuccess            = consts.TranslationStatusSuccess
 	TranslationStatusUnknownError       = consts.TranslationStatusUnknownError
@@ -15,14 +20,9 @@ const (
 	FlagPartialResponses                = consts.FlagPartialResponses
 	FlagTranslationResult               = consts.FlagTranslationResult
 	FlagTransliterationResult           = consts.FlagTransliterationResult
+	StatusError                         = consts.StatusError
+	StatusSuccess                       = consts.StatusSuccess
 	DataFormatText                      = consts.DataFormatText
-	FlagDefinitions                     = consts.FlagDefinitions
-	FlagLowLatency                      = consts.FlagLowLatency
-	FlagTransliteration                 = consts.FlagTransliteration
-	StateAvailableToDownload            = consts.StateAvailableToDownload
-	StateDownloading                    = consts.StateDownloading
-	StateNotAvailable                   = consts.StateNotAvailable
-	StateOnDevice                       = consts.StateOnDevice
 )
 
 const (

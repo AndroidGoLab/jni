@@ -59,6 +59,7 @@ var (
 	clsContractPath                 *jni.GlobalRef
 	midContractPathDescribeContents jni.MethodID
 	midContractPathEquals           jni.MethodID
+	midContractPathGetPath          jni.MethodID
 	midContractPathGetRootId        jni.MethodID
 	midContractPathHashCode         jni.MethodID
 	midContractPathToString         jni.MethodID
@@ -324,6 +325,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midContractPathEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midContractPathGetPath, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContractPath)), "getPath", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

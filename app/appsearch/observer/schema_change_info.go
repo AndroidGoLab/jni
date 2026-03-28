@@ -44,7 +44,7 @@ func NewSchemaChangeInfo(vm *jni.VM, arg0 string, arg1 string, arg2 *jni.Object)
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSchemaChangeInfo)), midSchemaChangeInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSchemaChangeInfo)), midSchemaChangeInfoCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}
@@ -80,6 +80,38 @@ func (m *SchemaChangeInfo) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetChangedSchemaNames calls android.app.appsearch.observer.SchemaChangeInfo.getChangedSchemaNames.
+func (m *SchemaChangeInfo) GetChangedSchemaNames() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchemaChangeInfoGetChangedSchemaNames == nil {
+			callErr = fmt.Errorf("android.app.appsearch.observer.SchemaChangeInfo.getChangedSchemaNames is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSchemaChangeInfoGetChangedSchemaNames,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

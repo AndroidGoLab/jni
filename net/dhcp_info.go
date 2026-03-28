@@ -32,7 +32,7 @@ func NewDhcpInfo(vm *jni.VM) (*DhcpInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDhcpInfo)), midDhcpInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDhcpInfo)), midDhcpInfoCtor)
 		if err != nil {
 			return err
 		}

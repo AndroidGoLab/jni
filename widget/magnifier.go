@@ -33,7 +33,7 @@ func NewMagnifier(vm *jni.VM, arg0 *jni.Object) (*Magnifier, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMagnifier)), midMagnifierInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMagnifier)), midMagnifierCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

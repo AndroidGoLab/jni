@@ -33,7 +33,7 @@ func NewMeteringRectangle(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 i
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMeteringRectangle)), midMeteringRectangleInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMeteringRectangle)), midMeteringRectangleCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

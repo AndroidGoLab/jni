@@ -39,7 +39,7 @@ func NewPeriodicSync(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 *jni.Object
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPeriodicSync)), midPeriodicSyncInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.LongValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPeriodicSync)), midPeriodicSyncCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.LongValue(arg3))
 		if err != nil {
 			return err
 		}

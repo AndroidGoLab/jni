@@ -33,7 +33,7 @@ func NewUnicodeSetSpanner(vm *jni.VM, arg0 *jni.Object) (*UnicodeSetSpanner, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnicodeSetSpanner)), midUnicodeSetSpannerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnicodeSetSpanner)), midUnicodeSetSpannerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

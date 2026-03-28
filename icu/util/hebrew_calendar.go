@@ -32,7 +32,7 @@ func NewHebrewCalendar(vm *jni.VM) (*HebrewCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHebrewCalendar)), midHebrewCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHebrewCalendar)), midHebrewCalendarCtor)
 		if err != nil {
 			return err
 		}

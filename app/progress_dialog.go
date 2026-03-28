@@ -31,7 +31,7 @@ func NewProgressDialog(vm *jni.VM, arg0 *jni.Object) (*ProgressDialog, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProgressDialog)), midProgressDialogInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProgressDialog)), midProgressDialogCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

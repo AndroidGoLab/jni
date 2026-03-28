@@ -33,7 +33,7 @@ func NewCameraAccessException(vm *jni.VM, arg0 int32) (*CameraAccessException, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCameraAccessException)), midCameraAccessExceptionInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCameraAccessException)), midCameraAccessExceptionCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

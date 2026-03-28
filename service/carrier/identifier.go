@@ -45,7 +45,7 @@ func NewIdentifier(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 string) (*Ide
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIdentifier)), midIdentifierInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIdentifier)), midIdentifierCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

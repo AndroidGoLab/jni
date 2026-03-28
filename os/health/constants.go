@@ -5,20 +5,6 @@ package health
 import "github.com/AndroidGoLab/jni/os/health/consts"
 
 const (
-	MeasurementWakeNestingCount           = consts.MeasurementWakeNestingCount
-	MeasurementWakeStartMs                = consts.MeasurementWakeStartMs
-	MeasurementWakeSumMs                  = consts.MeasurementWakeSumMs
-	MeasurementsWakeupAlarmsCount         = consts.MeasurementsWakeupAlarmsCount
-	StatsServices                         = consts.StatsServices
-	MeasurementLaunchCount                = consts.MeasurementLaunchCount
-	MeasurementStartServiceCount          = consts.MeasurementStartServiceCount
-	MeasurementAnrCount                   = consts.MeasurementAnrCount
-	MeasurementCrashesCount               = consts.MeasurementCrashesCount
-	MeasurementForegroundMs               = consts.MeasurementForegroundMs
-	MeasurementStartsCount                = consts.MeasurementStartsCount
-	MeasurementSystemTimeMs               = consts.MeasurementSystemTimeMs
-	MeasurementUserTimeMs                 = consts.MeasurementUserTimeMs
-	Creator                               = consts.Creator
 	MeasurementBluetoothIdleMs            = consts.MeasurementBluetoothIdleMs
 	MeasurementBluetoothPowerMams         = consts.MeasurementBluetoothPowerMams
 	MeasurementBluetoothRxBytes           = consts.MeasurementBluetoothRxBytes
@@ -82,4 +68,18 @@ const (
 	TimerVibrator                         = consts.TimerVibrator
 	TimerVideo                            = consts.TimerVideo
 	TimerWifiScan                         = consts.TimerWifiScan
+	Creator                               = consts.Creator
+	MeasurementsWakeupAlarmsCount         = consts.MeasurementsWakeupAlarmsCount
+	StatsServices                         = consts.StatsServices
+	MeasurementWakeNestingCount           = consts.MeasurementWakeNestingCount
+	MeasurementWakeStartMs                = consts.MeasurementWakeStartMs
+	MeasurementWakeSumMs                  = consts.MeasurementWakeSumMs
+	MeasurementLaunchCount                = consts.MeasurementLaunchCount
+	MeasurementStartServiceCount          = consts.MeasurementStartServiceCount
+	MeasurementAnrCount                   = consts.MeasurementAnrCount
+	MeasurementCrashesCount               = consts.MeasurementCrashesCount
+	MeasurementForegroundMs               = consts.MeasurementForegroundMs
+	MeasurementStartsCount                = consts.MeasurementStartsCount
+	MeasurementSystemTimeMs               = consts.MeasurementSystemTimeMs
+	MeasurementUserTimeMs                 = consts.MeasurementUserTimeMs
 )

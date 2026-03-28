@@ -30,6 +30,7 @@ var (
 	midStoreManagerAcquireLease2_2             jni.MethodID
 	midStoreManagerAcquireLease3_3             jni.MethodID
 	midStoreManagerCreateSession               jni.MethodID
+	midStoreManagerGetLeasedBlobs              jni.MethodID
 	midStoreManagerGetRemainingLeaseQuotaBytes jni.MethodID
 	midStoreManagerOpenBlob                    jni.MethodID
 	midStoreManagerOpenSession                 jni.MethodID
@@ -123,6 +124,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midStoreManagerCreateSession, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStoreManager)), "createSession", "(Landroid/app/blob/BlobHandle;)J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStoreManagerGetLeasedBlobs, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStoreManager)), "getLeasedBlobs", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

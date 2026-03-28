@@ -33,7 +33,7 @@ func NewDescrambler(vm *jni.VM, arg0 int32) (*Descrambler, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDescrambler)), midDescramblerInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDescrambler)), midDescramblerCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

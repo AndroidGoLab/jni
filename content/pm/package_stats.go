@@ -33,7 +33,7 @@ func NewPackageStats(vm *jni.VM, arg0 *jni.Object) (*PackageStats, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageStats)), midPackageStatsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageStats)), midPackageStatsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

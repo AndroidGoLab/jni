@@ -32,7 +32,7 @@ func NewRelativeFrameTimeHistogram(vm *jni.VM) (*RelativeFrameTimeHistogram, err
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), midRelativeFrameTimeHistogramInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), midRelativeFrameTimeHistogramCtor)
 		if err != nil {
 			return err
 		}

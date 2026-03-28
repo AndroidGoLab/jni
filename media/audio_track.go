@@ -33,7 +33,7 @@ func NewAudioTrack(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32, a
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioTrack)), midAudioTrackInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioTrack)), midAudioTrackCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
 		if err != nil {
 			return err
 		}
@@ -758,6 +758,38 @@ func (m *AudioTrack) GetRoutedDevice() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAudioTrackGetRoutedDevice,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRoutedDevices calls android.media.AudioTrack.getRoutedDevices.
+func (m *AudioTrack) GetRoutedDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioTrackGetRoutedDevices == nil {
+			callErr = fmt.Errorf("android.media.AudioTrack.getRoutedDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioTrackGetRoutedDevices,
 		)
 		if callErr != nil {
 			return callErr

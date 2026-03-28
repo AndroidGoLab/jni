@@ -392,6 +392,70 @@ func (m *AudioManager) GenerateAudioSessionId() (int32, error) {
 	return result, callErr
 }
 
+// GetActivePlaybackConfigurations calls android.media.AudioManager.getActivePlaybackConfigurations.
+func (m *AudioManager) GetActivePlaybackConfigurations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetActivePlaybackConfigurations == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getActivePlaybackConfigurations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetActivePlaybackConfigurations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetActiveRecordingConfigurations calls android.media.AudioManager.getActiveRecordingConfigurations.
+func (m *AudioManager) GetActiveRecordingConfigurations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetActiveRecordingConfigurations == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getActiveRecordingConfigurations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetActiveRecordingConfigurations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAllowedCapturePolicy calls android.media.AudioManager.getAllowedCapturePolicy.
 func (m *AudioManager) GetAllowedCapturePolicy() (int32, error) {
 	var result int32
@@ -411,6 +475,39 @@ func (m *AudioManager) GetAllowedCapturePolicy() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAudioDevicesForAttributes calls android.media.AudioManager.getAudioDevicesForAttributes.
+func (m *AudioManager) GetAudioDevicesForAttributes(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetAudioDevicesForAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getAudioDevicesForAttributes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetAudioDevicesForAttributes, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -437,6 +534,38 @@ func (m *AudioManager) GetAudioHwSyncForSession(arg0 int32) (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableCommunicationDevices calls android.media.AudioManager.getAvailableCommunicationDevices.
+func (m *AudioManager) GetAvailableCommunicationDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetAvailableCommunicationDevices == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getAvailableCommunicationDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetAvailableCommunicationDevices,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -508,6 +637,39 @@ func (m *AudioManager) GetDevices(arg0 int32) (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetDirectProfilesForAttributes calls android.media.AudioManager.getDirectProfilesForAttributes.
+func (m *AudioManager) GetDirectProfilesForAttributes(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetDirectProfilesForAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getDirectProfilesForAttributes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetDirectProfilesForAttributes, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetEncodedSurroundMode calls android.media.AudioManager.getEncodedSurroundMode.
 func (m *AudioManager) GetEncodedSurroundMode() (int32, error) {
 	var result int32
@@ -527,6 +689,38 @@ func (m *AudioManager) GetEncodedSurroundMode() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMicrophones calls android.media.AudioManager.getMicrophones.
+func (m *AudioManager) GetMicrophones() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetMicrophones == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getMicrophones is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetMicrophones,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -842,6 +1036,72 @@ func (m *AudioManager) GetStreamVolumeDb(
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedDeviceTypes calls android.media.AudioManager.getSupportedDeviceTypes.
+func (m *AudioManager) GetSupportedDeviceTypes(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetSupportedDeviceTypes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getSupportedDeviceTypes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetSupportedDeviceTypes, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedMixerAttributes calls android.media.AudioManager.getSupportedMixerAttributes.
+func (m *AudioManager) GetSupportedMixerAttributes(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioManagerGetSupportedMixerAttributes == nil {
+			callErr = fmt.Errorf("android.media.AudioManager.getSupportedMixerAttributes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioManagerGetSupportedMixerAttributes, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

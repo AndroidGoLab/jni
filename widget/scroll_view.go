@@ -33,7 +33,7 @@ func NewScrollView(vm *jni.VM, arg0 *jni.Object) (*ScrollView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollView)), midScrollViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollView)), midScrollViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

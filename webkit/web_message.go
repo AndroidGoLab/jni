@@ -38,7 +38,7 @@ func NewWebMessage(vm *jni.VM, arg0 string) (*WebMessage, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebMessage)), midWebMessageInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebMessage)), midWebMessageCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

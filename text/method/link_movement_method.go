@@ -32,7 +32,7 @@ func NewLinkMovementMethod(vm *jni.VM) (*LinkMovementMethod, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), midLinkMovementMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkMovementMethod)), midLinkMovementMethodCtor)
 		if err != nil {
 			return err
 		}

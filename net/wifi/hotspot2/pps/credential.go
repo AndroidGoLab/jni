@@ -32,7 +32,7 @@ func NewCredential(vm *jni.VM) (*Credential, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCredential)), midCredentialInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCredential)), midCredentialCtor)
 		if err != nil {
 			return err
 		}

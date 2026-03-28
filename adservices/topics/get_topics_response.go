@@ -51,6 +51,70 @@ func (m *GetTopicsResponse) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetEncryptedTopics calls android.adservices.topics.GetTopicsResponse.getEncryptedTopics.
+func (m *GetTopicsResponse) GetEncryptedTopics() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGetTopicsResponseGetEncryptedTopics == nil {
+			callErr = fmt.Errorf("android.adservices.topics.GetTopicsResponse.getEncryptedTopics is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGetTopicsResponseGetEncryptedTopics,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTopics calls android.adservices.topics.GetTopicsResponse.getTopics.
+func (m *GetTopicsResponse) GetTopics() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGetTopicsResponseGetTopics == nil {
+			callErr = fmt.Errorf("android.adservices.topics.GetTopicsResponse.getTopics is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGetTopicsResponseGetTopics,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.adservices.topics.GetTopicsResponse.hashCode.
 func (m *GetTopicsResponse) HashCode() (int32, error) {
 	var result int32

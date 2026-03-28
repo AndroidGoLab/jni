@@ -33,7 +33,7 @@ func NewTsRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32) (*TsRequest, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTsRequest)), midTsRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTsRequest)), midTsRequestCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

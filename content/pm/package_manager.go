@@ -789,6 +789,39 @@ func (m *PackageManager) GetActivityLogo1_1(arg0 *jni.Object) (*jni.Object, erro
 	return result, callErr
 }
 
+// GetAllPermissionGroups calls android.content.pm.PackageManager.getAllPermissionGroups.
+func (m *PackageManager) GetAllPermissionGroups(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetAllPermissionGroups == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getAllPermissionGroups is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetAllPermissionGroups, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetApplicationBanner1 calls android.content.pm.PackageManager.getApplicationBanner.
 func (m *PackageManager) GetApplicationBanner1(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -1383,6 +1416,171 @@ func (m *PackageManager) GetInstallSourceInfo(arg0 string) (*jni.Object, error) 
 	return result, callErr
 }
 
+// GetInstalledApplications1 calls android.content.pm.PackageManager.getInstalledApplications.
+func (m *PackageManager) GetInstalledApplications1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetInstalledApplications1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledApplications is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetInstalledApplications1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInstalledApplications1_1 calls android.content.pm.PackageManager.getInstalledApplications.
+func (m *PackageManager) GetInstalledApplications1_1(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetInstalledApplications1_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledApplications is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetInstalledApplications1_1, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInstalledModules calls android.content.pm.PackageManager.getInstalledModules.
+func (m *PackageManager) GetInstalledModules(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetInstalledModules == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledModules is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetInstalledModules, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInstalledPackages1 calls android.content.pm.PackageManager.getInstalledPackages.
+func (m *PackageManager) GetInstalledPackages1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetInstalledPackages1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledPackages is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetInstalledPackages1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInstalledPackages1_1 calls android.content.pm.PackageManager.getInstalledPackages.
+func (m *PackageManager) GetInstalledPackages1_1(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetInstalledPackages1_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getInstalledPackages is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetInstalledPackages1_1, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInstallerPackageName calls android.content.pm.PackageManager.getInstallerPackageName.
 func (m *PackageManager) GetInstallerPackageName(arg0 string) (string, error) {
 	var result string
@@ -1604,6 +1802,44 @@ func (m *PackageManager) GetLeanbackLaunchIntentForPackage(arg0 string) (*jni.Ob
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetLeanbackLaunchIntentForPackage, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMimeGroup calls android.content.pm.PackageManager.getMimeGroup.
+func (m *PackageManager) GetMimeGroup(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetMimeGroup == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getMimeGroup is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetMimeGroup, jni.ObjectValue(&jArg0.Object),
 		)
 		if callErr != nil {
 			return callErr
@@ -2145,6 +2381,72 @@ func (m *PackageManager) GetPackagesForUid(arg0 int32) (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetPackagesHoldingPermissions2 calls android.content.pm.PackageManager.getPackagesHoldingPermissions.
+func (m *PackageManager) GetPackagesHoldingPermissions2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetPackagesHoldingPermissions2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackagesHoldingPermissions is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetPackagesHoldingPermissions2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPackagesHoldingPermissions2_1 calls android.content.pm.PackageManager.getPackagesHoldingPermissions.
+func (m *PackageManager) GetPackagesHoldingPermissions2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetPackagesHoldingPermissions2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPackagesHoldingPermissions is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetPackagesHoldingPermissions2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPermissionGroupInfo calls android.content.pm.PackageManager.getPermissionGroupInfo.
 func (m *PackageManager) GetPermissionGroupInfo(arg0 string, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -2205,6 +2507,39 @@ func (m *PackageManager) GetPermissionInfo(arg0 string, arg1 int32) (*jni.Object
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetPermissionInfo, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPreferredPackages calls android.content.pm.PackageManager.getPreferredPackages.
+func (m *PackageManager) GetPreferredPackages(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetPreferredPackages == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getPreferredPackages is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetPreferredPackages, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2638,6 +2973,72 @@ func (m *PackageManager) GetServiceInfo2_1(arg0 *jni.Object, arg1 int32) (*jni.O
 	return result, callErr
 }
 
+// GetSharedLibraries1 calls android.content.pm.PackageManager.getSharedLibraries.
+func (m *PackageManager) GetSharedLibraries1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetSharedLibraries1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getSharedLibraries is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetSharedLibraries1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSharedLibraries1_1 calls android.content.pm.PackageManager.getSharedLibraries.
+func (m *PackageManager) GetSharedLibraries1_1(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetSharedLibraries1_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getSharedLibraries is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetSharedLibraries1_1, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSuspendedPackageAppExtras calls android.content.pm.PackageManager.getSuspendedPackageAppExtras.
 func (m *PackageManager) GetSuspendedPackageAppExtras() (*jni.Object, error) {
 	var result *jni.Object
@@ -2933,6 +3334,44 @@ func (m *PackageManager) GetUserBadgedLabel(arg0 string, arg1 *jni.Object) (*jni
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPackageManagerGetUserBadgedLabel, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWhitelistedRestrictedPermissions calls android.content.pm.PackageManager.getWhitelistedRestrictedPermissions.
+func (m *PackageManager) GetWhitelistedRestrictedPermissions(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerGetWhitelistedRestrictedPermissions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.getWhitelistedRestrictedPermissions is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerGetWhitelistedRestrictedPermissions, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
 		)
 		if callErr != nil {
 			return callErr
@@ -3488,6 +3927,658 @@ func (m *PackageManager) IsSafeMode() (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryActivityProperty calls android.content.pm.PackageManager.queryActivityProperty.
+func (m *PackageManager) QueryActivityProperty(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryActivityProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryActivityProperty is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryActivityProperty, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryApplicationProperty calls android.content.pm.PackageManager.queryApplicationProperty.
+func (m *PackageManager) QueryApplicationProperty(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryApplicationProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryApplicationProperty is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryApplicationProperty, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryBroadcastReceivers2 calls android.content.pm.PackageManager.queryBroadcastReceivers.
+func (m *PackageManager) QueryBroadcastReceivers2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryBroadcastReceivers2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryBroadcastReceivers is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryBroadcastReceivers2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryBroadcastReceivers2_1 calls android.content.pm.PackageManager.queryBroadcastReceivers.
+func (m *PackageManager) QueryBroadcastReceivers2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryBroadcastReceivers2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryBroadcastReceivers is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryBroadcastReceivers2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryContentProviders3 calls android.content.pm.PackageManager.queryContentProviders.
+func (m *PackageManager) QueryContentProviders3(
+	arg0 string,
+	arg1 int32,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryContentProviders3 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryContentProviders is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryContentProviders3, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryContentProviders3_1 calls android.content.pm.PackageManager.queryContentProviders.
+func (m *PackageManager) QueryContentProviders3_1(
+	arg0 string,
+	arg1 int32,
+	arg2 int32,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryContentProviders3_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryContentProviders is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryContentProviders3_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryInstrumentation calls android.content.pm.PackageManager.queryInstrumentation.
+func (m *PackageManager) QueryInstrumentation(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryInstrumentation == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryInstrumentation is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryInstrumentation, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentActivities2 calls android.content.pm.PackageManager.queryIntentActivities.
+func (m *PackageManager) QueryIntentActivities2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentActivities2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentActivities is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentActivities2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentActivities2_1 calls android.content.pm.PackageManager.queryIntentActivities.
+func (m *PackageManager) QueryIntentActivities2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentActivities2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentActivities is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentActivities2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentActivityOptions calls android.content.pm.PackageManager.queryIntentActivityOptions.
+func (m *PackageManager) QueryIntentActivityOptions(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 int32,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentActivityOptions == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentActivityOptions is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentActivityOptions, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentContentProviders2 calls android.content.pm.PackageManager.queryIntentContentProviders.
+func (m *PackageManager) QueryIntentContentProviders2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentContentProviders2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentContentProviders is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentContentProviders2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentContentProviders2_1 calls android.content.pm.PackageManager.queryIntentContentProviders.
+func (m *PackageManager) QueryIntentContentProviders2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentContentProviders2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentContentProviders is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentContentProviders2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentServices2 calls android.content.pm.PackageManager.queryIntentServices.
+func (m *PackageManager) QueryIntentServices2(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentServices2 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentServices is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentServices2, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryIntentServices2_1 calls android.content.pm.PackageManager.queryIntentServices.
+func (m *PackageManager) QueryIntentServices2_1(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryIntentServices2_1 == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryIntentServices is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryIntentServices2_1, jni.ObjectValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryPermissionsByGroup calls android.content.pm.PackageManager.queryPermissionsByGroup.
+func (m *PackageManager) QueryPermissionsByGroup(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryPermissionsByGroup == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryPermissionsByGroup is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryPermissionsByGroup, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryProviderProperty calls android.content.pm.PackageManager.queryProviderProperty.
+func (m *PackageManager) QueryProviderProperty(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryProviderProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryProviderProperty is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryProviderProperty, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryReceiverProperty calls android.content.pm.PackageManager.queryReceiverProperty.
+func (m *PackageManager) QueryReceiverProperty(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryReceiverProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryReceiverProperty is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryReceiverProperty, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// QueryServiceProperty calls android.content.pm.PackageManager.queryServiceProperty.
+func (m *PackageManager) QueryServiceProperty(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPackageManagerQueryServiceProperty == nil {
+			callErr = fmt.Errorf("android.content.pm.PackageManager.queryServiceProperty is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPackageManagerQueryServiceProperty, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

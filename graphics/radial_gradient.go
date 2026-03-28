@@ -33,7 +33,7 @@ func NewRadialGradient(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, arg
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRadialGradient)), midRadialGradientInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.ObjectValue(arg6), jni.ObjectValue(arg7), jni.ObjectValue(arg8))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRadialGradient)), midRadialGradientCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.ObjectValue(arg6), jni.ObjectValue(arg7), jni.ObjectValue(arg8))
 		if err != nil {
 			return err
 		}

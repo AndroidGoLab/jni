@@ -722,6 +722,38 @@ func (m *Codec) GetQueueRequest(arg0 int32) (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetSupportedVendorParameters calls android.media.MediaCodec.getSupportedVendorParameters.
+func (m *Codec) GetSupportedVendorParameters() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecGetSupportedVendorParameters == nil {
+			callErr = fmt.Errorf("android.media.MediaCodec.getSupportedVendorParameters is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecGetSupportedVendorParameters,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // QueueInputBuffer calls android.media.MediaCodec.queueInputBuffer.
 func (m *Codec) QueueInputBuffer(
 	arg0 int32,

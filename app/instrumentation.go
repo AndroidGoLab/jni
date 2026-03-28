@@ -30,7 +30,7 @@ func NewInstrumentation(vm *jni.VM) (*Instrumentation, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInstrumentation)), midInstrumentationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInstrumentation)), midInstrumentationCtor)
 		if err != nil {
 			return err
 		}

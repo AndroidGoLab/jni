@@ -33,7 +33,7 @@ func NewBlurMaskFilter(vm *jni.VM, arg0 float32, arg1 *jni.Object) (*BlurMaskFil
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBlurMaskFilter)), midBlurMaskFilterInit, jni.FloatValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBlurMaskFilter)), midBlurMaskFilterCtor, jni.FloatValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

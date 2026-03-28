@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsPasspointConfiguration                                      *jni.GlobalRef
-	midPasspointConfigurationInit                                  jni.MethodID
+	midPasspointConfigurationCtor                                  jni.MethodID
 	midPasspointConfigurationDescribeContents                      jni.MethodID
 	midPasspointConfigurationEquals                                jni.MethodID
 	midPasspointConfigurationGetCredential                         jni.MethodID
@@ -70,7 +70,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPasspointConfiguration = env.NewGlobalRef(&c.Object)
-		midPasspointConfigurationInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "<init>", "()V")
+		midPasspointConfigurationCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

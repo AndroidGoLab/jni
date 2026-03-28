@@ -33,7 +33,7 @@ func NewTtsSpan(vm *jni.VM, arg0 *jni.Object) (*TtsSpan, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTtsSpan)), midTtsSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTtsSpan)), midTtsSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

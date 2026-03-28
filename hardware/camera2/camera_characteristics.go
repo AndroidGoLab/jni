@@ -23,6 +23,262 @@ type CameraCharacteristics struct {
 	Obj *jni.GlobalRef
 }
 
+// GetAvailableCaptureRequestKeys calls android.hardware.camera2.CameraCharacteristics.getAvailableCaptureRequestKeys.
+func (m *CameraCharacteristics) GetAvailableCaptureRequestKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetAvailableCaptureRequestKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getAvailableCaptureRequestKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetAvailableCaptureRequestKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableCaptureResultKeys calls android.hardware.camera2.CameraCharacteristics.getAvailableCaptureResultKeys.
+func (m *CameraCharacteristics) GetAvailableCaptureResultKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetAvailableCaptureResultKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getAvailableCaptureResultKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetAvailableCaptureResultKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailablePhysicalCameraRequestKeys calls android.hardware.camera2.CameraCharacteristics.getAvailablePhysicalCameraRequestKeys.
+func (m *CameraCharacteristics) GetAvailablePhysicalCameraRequestKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetAvailablePhysicalCameraRequestKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getAvailablePhysicalCameraRequestKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetAvailablePhysicalCameraRequestKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableSessionCharacteristicsKeys calls android.hardware.camera2.CameraCharacteristics.getAvailableSessionCharacteristicsKeys.
+func (m *CameraCharacteristics) GetAvailableSessionCharacteristicsKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetAvailableSessionCharacteristicsKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getAvailableSessionCharacteristicsKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetAvailableSessionCharacteristicsKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableSessionKeys calls android.hardware.camera2.CameraCharacteristics.getAvailableSessionKeys.
+func (m *CameraCharacteristics) GetAvailableSessionKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetAvailableSessionKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getAvailableSessionKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetAvailableSessionKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeys calls android.hardware.camera2.CameraCharacteristics.getKeys.
+func (m *CameraCharacteristics) GetKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeysNeedingPermission calls android.hardware.camera2.CameraCharacteristics.getKeysNeedingPermission.
+func (m *CameraCharacteristics) GetKeysNeedingPermission() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetKeysNeedingPermission == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getKeysNeedingPermission is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetKeysNeedingPermission,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPhysicalCameraIds calls android.hardware.camera2.CameraCharacteristics.getPhysicalCameraIds.
+func (m *CameraCharacteristics) GetPhysicalCameraIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraCharacteristicsGetPhysicalCameraIds == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraCharacteristics.getPhysicalCameraIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraCharacteristicsGetPhysicalCameraIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetRecommendedStreamConfigurationMap calls android.hardware.camera2.CameraCharacteristics.getRecommendedStreamConfigurationMap.
 func (m *CameraCharacteristics) GetRecommendedStreamConfigurationMap(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

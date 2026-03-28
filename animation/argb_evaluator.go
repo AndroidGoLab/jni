@@ -32,7 +32,7 @@ func NewArgbEvaluator(vm *jni.VM) (*ArgbEvaluator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArgbEvaluator)), midArgbEvaluatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArgbEvaluator)), midArgbEvaluatorCtor)
 		if err != nil {
 			return err
 		}

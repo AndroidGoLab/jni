@@ -39,7 +39,7 @@ func NewWifiP2pPairingBootstrappingConfig(vm *jni.VM, arg0 int32, arg1 string) (
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pPairingBootstrappingConfig)), midWifiP2pPairingBootstrappingConfigInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pPairingBootstrappingConfig)), midWifiP2pPairingBootstrappingConfigCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewSignalingDataRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignalingDataRequest)), midSignalingDataRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignalingDataRequest)), midSignalingDataRequestCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}
@@ -90,6 +90,38 @@ func (m *SignalingDataRequest) GetGroup() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSignalingDataTypes calls android.media.tv.SignalingDataRequest.getSignalingDataTypes.
+func (m *SignalingDataRequest) GetSignalingDataTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSignalingDataRequestGetSignalingDataTypes == nil {
+			callErr = fmt.Errorf("android.media.tv.SignalingDataRequest.getSignalingDataTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSignalingDataRequestGetSignalingDataTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

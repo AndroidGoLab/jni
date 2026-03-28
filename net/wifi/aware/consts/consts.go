@@ -3,15 +3,24 @@
 package consts
 
 const (
-	ClusterChangeEventJoined                   int = 1
-	ClusterChangeEventStarted                  int = 0
 	Creator                                    int = 0
+	SubscribeTypeActive                        int = 1
+	SubscribeTypePassive                       int = 0
 	WifiAwareDataPathRoleInitiator             int = 0
 	WifiAwareDataPathRoleResponder             int = 1
 	WifiAwareDiscoveryLostReasonPeerNotVisible int = 1
 	WifiAwareDiscoveryLostReasonUnknown        int = 0
 	PublishTypeSolicited                       int = 1
 	PublishTypeUnsolicited                     int = 0
+	ClusterChangeEventJoined                   int = 1
+	ClusterChangeEventStarted                  int = 0
+	WifiAwareCipherSuiteNcsPk128               int = 4
+	WifiAwareCipherSuiteNcsPk256               int = 8
+	WifiAwareCipherSuiteNcsPkPasn128           int = 16
+	WifiAwareCipherSuiteNcsPkPasn256           int = 32
+	WifiAwareCipherSuiteNcsSk128               int = 1
+	WifiAwareCipherSuiteNcsSk256               int = 2
+	WifiAwareCipherSuiteNone                   int = 0
 	PairingBootstrappingNfcReader              int = 256
 	PairingBootstrappingNfcTag                 int = 16
 	PairingBootstrappingOpportunistic          int = 1
@@ -21,15 +30,6 @@ const (
 	PairingBootstrappingPinCodeKeypad          int = 32
 	PairingBootstrappingQrDisplay              int = 8
 	PairingBootstrappingQrScan                 int = 128
-	WifiAwareCipherSuiteNcsPk128               int = 4
-	WifiAwareCipherSuiteNcsPk256               int = 8
-	WifiAwareCipherSuiteNcsPkPasn128           int = 16
-	WifiAwareCipherSuiteNcsPkPasn256           int = 32
-	WifiAwareCipherSuiteNcsSk128               int = 1
-	WifiAwareCipherSuiteNcsSk256               int = 2
-	WifiAwareCipherSuiteNone                   int = 0
-	SubscribeTypeActive                        int = 1
-	SubscribeTypePassive                       int = 0
 )
 
 const (

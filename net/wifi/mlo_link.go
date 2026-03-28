@@ -32,7 +32,7 @@ func NewMloLink(vm *jni.VM) (*MloLink, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMloLink)), midMloLinkInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMloLink)), midMloLinkCtor)
 		if err != nil {
 			return err
 		}

@@ -23,6 +23,21 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsHostNfcFService                   *jni.GlobalRef
+	midHostNfcFServiceOnBind             jni.MethodID
+	midHostNfcFServiceOnDeactivated      jni.MethodID
+	midHostNfcFServiceProcessNfcFPacket  jni.MethodID
+	midHostNfcFServiceSendResponsePacket jni.MethodID
+
+	clsNfcFCardEmulation                               *jni.GlobalRef
+	midNfcFCardEmulationDisableService                 jni.MethodID
+	midNfcFCardEmulationEnableService                  jni.MethodID
+	midNfcFCardEmulationGetNfcid2ForService            jni.MethodID
+	midNfcFCardEmulationGetSystemCodeForService        jni.MethodID
+	midNfcFCardEmulationRegisterSystemCodeForService   jni.MethodID
+	midNfcFCardEmulationSetNfcid2ForService            jni.MethodID
+	midNfcFCardEmulationUnregisterSystemCodeForService jni.MethodID
+
 	clsHostApduService                   *jni.GlobalRef
 	midHostApduServiceNotifyUnhandled    jni.MethodID
 	midHostApduServiceOnBind             jni.MethodID
@@ -30,27 +45,10 @@ var (
 	midHostApduServiceProcessCommandApdu jni.MethodID
 	midHostApduServiceSendResponseApdu   jni.MethodID
 
-	clsPollingFrame                         *jni.GlobalRef
-	midPollingFrameDescribeContents         jni.MethodID
-	midPollingFrameGetData                  jni.MethodID
-	midPollingFrameGetTimestamp             jni.MethodID
-	midPollingFrameGetTriggeredAutoTransact jni.MethodID
-	midPollingFrameGetType                  jni.MethodID
-	midPollingFrameGetVendorSpecificGain    jni.MethodID
-	midPollingFrameToString                 jni.MethodID
-	midPollingFrameWriteToParcel            jni.MethodID
-
-	clsHostNfcFService                   *jni.GlobalRef
-	midHostNfcFServiceOnBind             jni.MethodID
-	midHostNfcFServiceOnDeactivated      jni.MethodID
-	midHostNfcFServiceProcessNfcFPacket  jni.MethodID
-	midHostNfcFServiceSendResponsePacket jni.MethodID
-
-	clsOffHostApduService       *jni.GlobalRef
-	midOffHostApduServiceOnBind jni.MethodID
-
 	clsCardEmulation                                              *jni.GlobalRef
 	midCardEmulationCategoryAllowsForegroundPreference            jni.MethodID
+	midCardEmulationGetAidsForPreferredPaymentService             jni.MethodID
+	midCardEmulationGetAidsForService                             jni.MethodID
 	midCardEmulationGetDefaultNfcSubscriptionId                   jni.MethodID
 	midCardEmulationGetDescriptionForPreferredPaymentService      jni.MethodID
 	midCardEmulationGetRouteDestinationForPreferredPaymentService jni.MethodID
@@ -74,14 +72,18 @@ var (
 
 	clsCardEmulationNfcEventCallback *jni.GlobalRef
 
-	clsNfcFCardEmulation                               *jni.GlobalRef
-	midNfcFCardEmulationDisableService                 jni.MethodID
-	midNfcFCardEmulationEnableService                  jni.MethodID
-	midNfcFCardEmulationGetNfcid2ForService            jni.MethodID
-	midNfcFCardEmulationGetSystemCodeForService        jni.MethodID
-	midNfcFCardEmulationRegisterSystemCodeForService   jni.MethodID
-	midNfcFCardEmulationSetNfcid2ForService            jni.MethodID
-	midNfcFCardEmulationUnregisterSystemCodeForService jni.MethodID
+	clsOffHostApduService       *jni.GlobalRef
+	midOffHostApduServiceOnBind jni.MethodID
+
+	clsPollingFrame                         *jni.GlobalRef
+	midPollingFrameDescribeContents         jni.MethodID
+	midPollingFrameGetData                  jni.MethodID
+	midPollingFrameGetTimestamp             jni.MethodID
+	midPollingFrameGetTriggeredAutoTransact jni.MethodID
+	midPollingFrameGetType                  jni.MethodID
+	midPollingFrameGetVendorSpecificGain    jni.MethodID
+	midPollingFrameToString                 jni.MethodID
+	midPollingFrameWriteToParcel            jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -101,6 +103,103 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/nfc/cardemulation/HostNfcFService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsHostNfcFService = env.NewGlobalRef(&c.Object)
+
+		midHostNfcFServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHostNfcFServiceOnDeactivated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "onDeactivated", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHostNfcFServiceProcessNfcFPacket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "processNfcFPacket", "([BLandroid/os/Bundle;)[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHostNfcFServiceSendResponsePacket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "sendResponsePacket", "([B)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/nfc/cardemulation/NfcFCardEmulation")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsNfcFCardEmulation = env.NewGlobalRef(&c.Object)
+
+		midNfcFCardEmulationDisableService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "disableService", "(Landroid/app/Activity;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFCardEmulationEnableService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "enableService", "(Landroid/app/Activity;Landroid/content/ComponentName;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFCardEmulationGetNfcid2ForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "getNfcid2ForService", "(Landroid/content/ComponentName;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFCardEmulationGetSystemCodeForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "getSystemCodeForService", "(Landroid/content/ComponentName;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFCardEmulationRegisterSystemCodeForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "registerSystemCodeForService", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFCardEmulationSetNfcid2ForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "setNfcid2ForService", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midNfcFCardEmulationUnregisterSystemCodeForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "unregisterSystemCodeForService", "(Landroid/content/ComponentName;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/nfc/cardemulation/HostApduService")
 	if err != nil {
@@ -147,127 +246,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/nfc/cardemulation/PollingFrame")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPollingFrame = env.NewGlobalRef(&c.Object)
-
-		midPollingFrameDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getData", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameGetTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getTimestamp", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameGetTriggeredAutoTransact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getTriggeredAutoTransact", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameGetVendorSpecificGain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getVendorSpecificGain", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPollingFrameWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/nfc/cardemulation/HostNfcFService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsHostNfcFService = env.NewGlobalRef(&c.Object)
-
-		midHostNfcFServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHostNfcFServiceOnDeactivated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "onDeactivated", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHostNfcFServiceProcessNfcFPacket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "processNfcFPacket", "([BLandroid/os/Bundle;)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHostNfcFServiceSendResponsePacket, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHostNfcFService)), "sendResponsePacket", "([B)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/nfc/cardemulation/OffHostApduService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsOffHostApduService = env.NewGlobalRef(&c.Object)
-
-		midOffHostApduServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOffHostApduService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/nfc/cardemulation/CardEmulation")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -277,6 +255,20 @@ func doInit(env *jni.Env) error {
 		clsCardEmulation = env.NewGlobalRef(&c.Object)
 
 		midCardEmulationCategoryAllowsForegroundPreference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCardEmulation)), "categoryAllowsForegroundPreference", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCardEmulationGetAidsForPreferredPaymentService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCardEmulation)), "getAidsForPreferredPaymentService", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCardEmulationGetAidsForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCardEmulation)), "getAidsForService", "(Landroid/content/ComponentName;Ljava/lang/String;)Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -435,57 +427,81 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/nfc/cardemulation/NfcFCardEmulation")
+	c, err = env.FindClass("android/nfc/cardemulation/OffHostApduService")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsNfcFCardEmulation = env.NewGlobalRef(&c.Object)
+		clsOffHostApduService = env.NewGlobalRef(&c.Object)
 
-		midNfcFCardEmulationDisableService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "disableService", "(Landroid/app/Activity;)Z")
+		midOffHostApduServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOffHostApduService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNfcFCardEmulationEnableService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "enableService", "(Landroid/app/Activity;Landroid/content/ComponentName;)Z")
+	}
+
+	c, err = env.FindClass("android/nfc/cardemulation/PollingFrame")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPollingFrame = env.NewGlobalRef(&c.Object)
+
+		midPollingFrameDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNfcFCardEmulationGetNfcid2ForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "getNfcid2ForService", "(Landroid/content/ComponentName;)Ljava/lang/String;")
+		midPollingFrameGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getData", "()[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNfcFCardEmulationGetSystemCodeForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "getSystemCodeForService", "(Landroid/content/ComponentName;)Ljava/lang/String;")
+		midPollingFrameGetTimestamp, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getTimestamp", "()J")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNfcFCardEmulationRegisterSystemCodeForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "registerSystemCodeForService", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
+		midPollingFrameGetTriggeredAutoTransact, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getTriggeredAutoTransact", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNfcFCardEmulationSetNfcid2ForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "setNfcid2ForService", "(Landroid/content/ComponentName;Ljava/lang/String;)Z")
+		midPollingFrameGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNfcFCardEmulationUnregisterSystemCodeForService, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsNfcFCardEmulation)), "unregisterSystemCodeForService", "(Landroid/content/ComponentName;)Z")
+		midPollingFrameGetVendorSpecificGain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "getVendorSpecificGain", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPollingFrameToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPollingFrameWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPollingFrame)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

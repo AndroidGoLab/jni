@@ -36,7 +36,7 @@ func NewTimePickerDialog(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 in
 			jArg4 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimePickerDialog)), midTimePickerDialogInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimePickerDialog)), midTimePickerDialogCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4))
 		if err != nil {
 			return err
 		}

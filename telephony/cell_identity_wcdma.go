@@ -51,6 +51,38 @@ func (m *CellIdentityWcdma) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetAdditionalPlmns calls android.telephony.CellIdentityWcdma.getAdditionalPlmns.
+func (m *CellIdentityWcdma) GetAdditionalPlmns() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCellIdentityWcdmaGetAdditionalPlmns == nil {
+			callErr = fmt.Errorf("android.telephony.CellIdentityWcdma.getAdditionalPlmns is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCellIdentityWcdmaGetAdditionalPlmns,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetCid calls android.telephony.CellIdentityWcdma.getCid.
 func (m *CellIdentityWcdma) GetCid() (int32, error) {
 	var result int32

@@ -51,6 +51,38 @@ func (m *ServiceInfo) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetLocales calls android.telephony.mbms.ServiceInfo.getLocales.
+func (m *ServiceInfo) GetLocales() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midServiceInfoGetLocales == nil {
+			callErr = fmt.Errorf("android.telephony.mbms.ServiceInfo.getLocales is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midServiceInfoGetLocales,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetNameForLocale calls android.telephony.mbms.ServiceInfo.getNameForLocale.
 func (m *ServiceInfo) GetNameForLocale(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -68,6 +100,38 @@ func (m *ServiceInfo) GetNameForLocale(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midServiceInfoGetNameForLocale, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNamedContentLocales calls android.telephony.mbms.ServiceInfo.getNamedContentLocales.
+func (m *ServiceInfo) GetNamedContentLocales() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midServiceInfoGetNamedContentLocales == nil {
+			callErr = fmt.Errorf("android.telephony.mbms.ServiceInfo.getNamedContentLocales is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midServiceInfoGetNamedContentLocales,
 		)
 		if callErr != nil {
 			return callErr

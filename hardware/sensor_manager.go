@@ -262,6 +262,72 @@ func (m *SensorManager) GetDefaultSensor2_1(arg0 int32, arg1 bool) (*jni.Object,
 	return result, callErr
 }
 
+// GetDynamicSensorList calls android.hardware.SensorManager.getDynamicSensorList.
+func (m *SensorManager) GetDynamicSensorList(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSensorManagerGetDynamicSensorList == nil {
+			callErr = fmt.Errorf("android.hardware.SensorManager.getDynamicSensorList is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSensorManagerGetDynamicSensorList, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSensorList calls android.hardware.SensorManager.getSensorList.
+func (m *SensorManager) GetSensorList(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSensorManagerGetSensorList == nil {
+			callErr = fmt.Errorf("android.hardware.SensorManager.getSensorList is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSensorManagerGetSensorList, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSensors calls android.hardware.SensorManager.getSensors.
 func (m *SensorManager) GetSensors() (int32, error) {
 	var result int32

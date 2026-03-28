@@ -73,6 +73,70 @@ func (m *Request) GetFlags() (int32, error) {
 	return result, callErr
 }
 
+// GetTranslationRequestValues calls android.view.translation.TranslationRequest.getTranslationRequestValues.
+func (m *Request) GetTranslationRequestValues() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRequestGetTranslationRequestValues == nil {
+			callErr = fmt.Errorf("android.view.translation.TranslationRequest.getTranslationRequestValues is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRequestGetTranslationRequestValues,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetViewTranslationRequests calls android.view.translation.TranslationRequest.getViewTranslationRequests.
+func (m *Request) GetViewTranslationRequests() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRequestGetViewTranslationRequests == nil {
+			callErr = fmt.Errorf("android.view.translation.TranslationRequest.getViewTranslationRequests is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRequestGetViewTranslationRequests,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // ToString calls android.view.translation.TranslationRequest.toString.
 func (m *Request) ToString() (string, error) {
 	var result string

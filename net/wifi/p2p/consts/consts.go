@@ -3,18 +3,32 @@
 package consts
 
 const (
-	Available                                          int = 3
-	Connected                                          int = 0
 	Creator                                            int = 0
-	Failed                                             int = 2
-	Invited                                            int = 1
-	Unavailable                                        int = 4
+	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
+	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
+	GroupOwnerBand2ghz                                 int = 1
+	GroupOwnerBand5ghz                                 int = 2
+	GroupOwnerBand6ghz                                 int = 3
+	GroupOwnerBandAuto                                 int = 0
+	GroupOwnerIntentAuto                               int = -1
+	GroupOwnerIntentMax                                int = 15
+	GroupOwnerIntentMin                                int = 0
+	P2pVersion1                                        int = 0
+	P2pVersion2                                        int = 1
+	PccModeConnectionTypeLegacyOnly                    int = 0
+	PccModeConnectionTypeLegacyOrR2                    int = 1
+	PccModeConnectionTypeR2Only                        int = 2
 	PairingBootstrappingMethodDisplayPassphrase        int = 4
 	PairingBootstrappingMethodDisplayPincode           int = 2
 	PairingBootstrappingMethodKeypadPassphrase         int = 16
 	PairingBootstrappingMethodKeypadPincode            int = 8
 	PairingBootstrappingMethodOpportunistic            int = 1
 	PairingBootstrappingMethodOutOfBand                int = 32
+	Available                                          int = 3
+	Connected                                          int = 0
+	Failed                                             int = 2
+	Invited                                            int = 1
+	Unavailable                                        int = 4
 	DeviceInfoAudioOnlySupportAtSource                 int = 2048
 	DeviceInfoAudioUnsupportedAtPrimarySink            int = 1024
 	DeviceInfoContentProtectionSupport                 int = 256
@@ -70,20 +84,6 @@ const (
 	RequestTypeInvitation                              int = 1
 	RequestTypeJoin                                    int = 2
 	RequestTypeNegotiation                             int = 0
-	GroupClientIpProvisioningModeIpv4Dhcp              int = 0
-	GroupClientIpProvisioningModeIpv6LinkLocal         int = 1
-	GroupOwnerBand2ghz                                 int = 1
-	GroupOwnerBand5ghz                                 int = 2
-	GroupOwnerBand6ghz                                 int = 3
-	GroupOwnerBandAuto                                 int = 0
-	GroupOwnerIntentAuto                               int = -1
-	GroupOwnerIntentMax                                int = 15
-	GroupOwnerIntentMin                                int = 0
-	P2pVersion1                                        int = 0
-	P2pVersion2                                        int = 1
-	PccModeConnectionTypeLegacyOnly                    int = 0
-	PccModeConnectionTypeLegacyOrR2                    int = 1
-	PccModeConnectionTypeR2Only                        int = 2
 )
 
 const (

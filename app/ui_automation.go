@@ -478,6 +478,70 @@ func (m *UiAutomation) GetWindowContentFrameStats(arg0 int32) (*jni.Object, erro
 	return result, callErr
 }
 
+// GetWindows calls android.app.UiAutomation.getWindows.
+func (m *UiAutomation) GetWindows() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUiAutomationGetWindows == nil {
+			callErr = fmt.Errorf("android.app.UiAutomation.getWindows is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUiAutomationGetWindows,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWindowsOnAllDisplays calls android.app.UiAutomation.getWindowsOnAllDisplays.
+func (m *UiAutomation) GetWindowsOnAllDisplays() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUiAutomationGetWindowsOnAllDisplays == nil {
+			callErr = fmt.Errorf("android.app.UiAutomation.getWindowsOnAllDisplays is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUiAutomationGetWindowsOnAllDisplays,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GrantRuntimePermission calls android.app.UiAutomation.grantRuntimePermission.
 func (m *UiAutomation) GrantRuntimePermission(arg0 string, arg1 string) error {
 

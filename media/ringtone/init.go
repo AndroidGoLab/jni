@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsManager                            *jni.GlobalRef
-	midManagerInit                        jni.MethodID
+	midManagerCtor                        jni.MethodID
 	midManagerGetCursor                   jni.MethodID
 	midManagerGetIncludeDrm               jni.MethodID
 	midManagerGetRingtone1_1              jni.MethodID
@@ -90,7 +90,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsManager = env.NewGlobalRef(&c.Object)
-		midManagerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "<init>", "(Landroid/content/Context;)V")
+		midManagerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "<init>", "(Landroid/content/Context;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

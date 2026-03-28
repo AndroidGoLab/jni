@@ -38,7 +38,7 @@ func NewRuntimeShader(vm *jni.VM, arg0 string) (*RuntimeShader, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeShader)), midRuntimeShaderInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeShader)), midRuntimeShaderCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewWifiP2pUsdBasedServiceConfig(vm *jni.VM) (*WifiP2pUsdBasedServiceConfig,
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceConfig)), midWifiP2pUsdBasedServiceConfigInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pUsdBasedServiceConfig)), midWifiP2pUsdBasedServiceConfigCtor)
 		if err != nil {
 			return err
 		}

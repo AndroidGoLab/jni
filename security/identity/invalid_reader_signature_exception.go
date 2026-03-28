@@ -38,7 +38,7 @@ func NewInvalidReaderSignatureException(vm *jni.VM, arg0 string) (*InvalidReader
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidReaderSignatureException)), midInvalidReaderSignatureExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidReaderSignatureException)), midInvalidReaderSignatureExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

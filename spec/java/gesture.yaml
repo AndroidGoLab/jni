@@ -5,120 +5,47 @@
 package: gesture
 go_import: github.com/AndroidGoLab/jni/gesture
 classes:
-    - java_class: android.gesture.Gesture
-      go_type: Gesture
-      obtain: constructor
-      methods:
-        - java_method: addStroke
-          go_name: AddStroke
+    - java_class: android.gesture.GestureUtils
+      go_type: Utils
+      static_methods:
+        - java_method: computeOrientedBoundingBox
+          go_name: ComputeOrientedBoundingBox
+          params:
+            - java_type: float[]
+              go_name: arg0
+          returns: android.gesture.OrientedBoundingBox
+          error: true
+        - java_method: spatialSampling
+          go_name: SpatialSampling2
+          params:
+            - java_type: android.gesture.Gesture
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: float[]
+          error: true
+        - java_method: spatialSampling
+          go_name: SpatialSampling3_1
+          params:
+            - java_type: android.gesture.Gesture
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: float[]
+          error: true
+        - java_method: temporalSampling
+          go_name: TemporalSampling
           params:
             - java_type: android.gesture.GestureStroke
               go_name: arg0
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone
-          returns: java.lang.Object
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBoundingBox
-          go_name: GetBoundingBox
-          returns: android.graphics.RectF
-          error: true
-        - java_method: getID
-          go_name: GetID
-          returns: long
-          error: true
-        - java_method: getLength
-          go_name: GetLength
-          returns: float
-          error: true
-        - java_method: getStrokesCount
-          go_name: GetStrokesCount
-          returns: int
-          error: true
-        - java_method: toBitmap
-          go_name: ToBitmap4
-          params:
-            - java_type: int
-              go_name: arg0
             - java_type: int
               go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: android.graphics.Bitmap
+          returns: float[]
           error: true
-        - java_method: toBitmap
-          go_name: ToBitmap5_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-          returns: android.graphics.Bitmap
-          error: true
-        - java_method: toPath
-          go_name: ToPath0
-          returns: android.graphics.Path
-          error: true
-        - java_method: toPath
-          go_name: ToPath1_1
-          params:
-            - java_type: android.graphics.Path
-              go_name: arg0
-          returns: android.graphics.Path
-          error: true
-        - java_method: toPath
-          go_name: ToPath5_2
-          params:
-            - java_type: android.graphics.Path
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-          returns: android.graphics.Path
-          error: true
-        - java_method: toPath
-          go_name: ToPath4_3
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: android.graphics.Path
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.gesture.GestureStore
-      go_type: Store
-      obtain: constructor
+    - java_class: android.gesture.GestureLibrary
+      go_type: Library
       methods:
         - java_method: addGesture
           go_name: AddGesture
@@ -129,6 +56,17 @@ classes:
               go_name: arg1
           returns: void
           error: true
+        - java_method: getGestureEntries
+          go_name: GetGestureEntries
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getGestures
+          go_name: GetGestures
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<android.gesture.Gesture>
+          error: true
         - java_method: getOrientationStyle
           go_name: GetOrientationStyle
           returns: int
@@ -137,25 +75,20 @@ classes:
           go_name: GetSequenceType
           returns: int
           error: true
-        - java_method: hasChanged
-          go_name: HasChanged
+        - java_method: isReadOnly
+          go_name: IsReadOnly
           returns: boolean
           error: true
         - java_method: load
-          go_name: Load1
-          params:
-            - java_type: java.io.InputStream
-              go_name: arg0
-          returns: void
+          go_name: Load
+          returns: boolean
           error: true
-        - java_method: load
-          go_name: Load2_1
+        - java_method: recognize
+          go_name: Recognize
           params:
-            - java_type: java.io.InputStream
+            - java_type: android.gesture.Gesture
               go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
+          returns: java.util.ArrayList<android.gesture.Prediction>
           error: true
         - java_method: removeEntry
           go_name: RemoveEntry
@@ -174,20 +107,8 @@ classes:
           returns: void
           error: true
         - java_method: save
-          go_name: Save1
-          params:
-            - java_type: java.io.OutputStream
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: save
-          go_name: Save2_1
-          params:
-            - java_type: java.io.OutputStream
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
+          go_name: Save
+          returns: boolean
           error: true
         - java_method: setOrientationStyle
           go_name: SetOrientationStyle
@@ -202,6 +123,104 @@ classes:
             - java_type: int
               go_name: arg0
           returns: void
+          error: true
+    - java_class: android.gesture.Prediction
+      go_type: Prediction
+      methods:
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.gesture.GesturePoint
+      go_type: Point
+      obtain: constructor
+      constructor_params:
+        - java_type: float
+          go_name: arg0
+        - java_type: float
+          go_name: arg1
+        - java_type: long
+          go_name: arg2
+      methods:
+        - java_method: clone
+          go_name: Clone
+          returns: java.lang.Object
+          error: true
+    - java_class: android.gesture.GestureStroke
+      go_type: Stroke
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.ArrayList<android.gesture.GesturePoint>
+          go_name: arg0
+      methods:
+        - java_method: clearPath
+          go_name: ClearPath
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone
+          returns: java.lang.Object
+          error: true
+        - java_method: computeOrientedBoundingBox
+          go_name: ComputeOrientedBoundingBox
+          returns: android.gesture.OrientedBoundingBox
+          error: true
+        - java_method: getPath
+          go_name: GetPath
+          returns: android.graphics.Path
+          error: true
+        - java_method: toPath
+          go_name: ToPath
+          params:
+            - java_type: float
+              go_name: arg0
+            - java_type: float
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.graphics.Path
+          error: true
+    - java_class: android.gesture.GestureLibraries
+      go_type: Libraries
+      static_methods:
+        - java_method: fromFile
+          go_name: FromFile1
+          params:
+            - java_type: java.io.File
+              go_name: arg0
+          returns: android.gesture.GestureLibrary
+          error: true
+        - java_method: fromFile
+          go_name: FromFile1_1
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.gesture.GestureLibrary
+          error: true
+        - java_method: fromFileDescriptor
+          go_name: FromFileDescriptor
+          params:
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg0
+          returns: android.gesture.GestureLibrary
+          error: true
+        - java_method: fromPrivateFile
+          go_name: FromPrivateFile
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: android.gesture.GestureLibrary
+          error: true
+        - java_method: fromRawResource
+          go_name: FromRawResource
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: android.gesture.GestureLibrary
           error: true
     - java_class: android.gesture.GestureOverlayView
       go_type: OverlayView
@@ -259,6 +278,10 @@ classes:
             - java_type: android.graphics.Canvas
               go_name: arg0
           returns: void
+          error: true
+        - java_method: getCurrentStroke
+          go_name: GetCurrentStroke
+          returns: java.util.ArrayList<android.gesture.GesturePoint>
           error: true
         - java_method: getFadeOffset
           go_name: GetFadeOffset
@@ -519,8 +542,9 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.gesture.GestureLibrary
-      go_type: Library
+    - java_class: android.gesture.GestureStore
+      go_type: Store
+      obtain: constructor
       methods:
         - java_method: addGesture
           go_name: AddGesture
@@ -531,6 +555,17 @@ classes:
               go_name: arg1
           returns: void
           error: true
+        - java_method: getGestureEntries
+          go_name: GetGestureEntries
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getGestures
+          go_name: GetGestures
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.ArrayList<android.gesture.Gesture>
+          error: true
         - java_method: getOrientationStyle
           go_name: GetOrientationStyle
           returns: int
@@ -539,13 +574,32 @@ classes:
           go_name: GetSequenceType
           returns: int
           error: true
-        - java_method: isReadOnly
-          go_name: IsReadOnly
+        - java_method: hasChanged
+          go_name: HasChanged
           returns: boolean
           error: true
         - java_method: load
-          go_name: Load
-          returns: boolean
+          go_name: Load1
+          params:
+            - java_type: java.io.InputStream
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: load
+          go_name: Load2_1
+          params:
+            - java_type: java.io.InputStream
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: recognize
+          go_name: Recognize
+          params:
+            - java_type: android.gesture.Gesture
+              go_name: arg0
+          returns: java.util.ArrayList<android.gesture.Prediction>
           error: true
         - java_method: removeEntry
           go_name: RemoveEntry
@@ -564,8 +618,20 @@ classes:
           returns: void
           error: true
         - java_method: save
-          go_name: Save
-          returns: boolean
+          go_name: Save1
+          params:
+            - java_type: java.io.OutputStream
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: save
+          go_name: Save2_1
+          params:
+            - java_type: java.io.OutputStream
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
           error: true
         - java_method: setOrientationStyle
           go_name: SetOrientationStyle
@@ -581,148 +647,135 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.gesture.Prediction
-      go_type: Prediction
-      methods:
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.gesture.GestureStroke
-      go_type: Stroke
+    - java_class: android.gesture.OrientedBoundingBox
+      go_type: OrientedBoundingBox
+    - java_class: android.gesture.Gesture
+      go_type: Gesture
       obtain: constructor
-      constructor_params:
-        - java_type: java.util.ArrayList<android.gesture.GesturePoint>
-          go_name: arg0
       methods:
-        - java_method: clearPath
-          go_name: ClearPath
+        - java_method: addStroke
+          go_name: AddStroke
+          params:
+            - java_type: android.gesture.GestureStroke
+              go_name: arg0
           returns: void
           error: true
         - java_method: clone
           go_name: Clone
           returns: java.lang.Object
           error: true
-        - java_method: computeOrientedBoundingBox
-          go_name: ComputeOrientedBoundingBox
-          returns: android.gesture.OrientedBoundingBox
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
           error: true
-        - java_method: getPath
-          go_name: GetPath
+        - java_method: getBoundingBox
+          go_name: GetBoundingBox
+          returns: android.graphics.RectF
+          error: true
+        - java_method: getID
+          go_name: GetID
+          returns: long
+          error: true
+        - java_method: getLength
+          go_name: GetLength
+          returns: float
+          error: true
+        - java_method: getStrokes
+          go_name: GetStrokes
+          returns: java.util.ArrayList<android.gesture.GestureStroke>
+          error: true
+        - java_method: getStrokesCount
+          go_name: GetStrokesCount
+          returns: int
+          error: true
+        - java_method: toBitmap
+          go_name: ToBitmap4
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: toBitmap
+          go_name: ToBitmap5_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.graphics.Bitmap
+          error: true
+        - java_method: toPath
+          go_name: ToPath0
           returns: android.graphics.Path
           error: true
         - java_method: toPath
-          go_name: ToPath
+          go_name: ToPath1_1
           params:
-            - java_type: float
+            - java_type: android.graphics.Path
               go_name: arg0
-            - java_type: float
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
           returns: android.graphics.Path
           error: true
-    - java_class: android.gesture.GesturePoint
-      go_type: Point
-      obtain: constructor
-      constructor_params:
-        - java_type: float
-          go_name: arg0
-        - java_type: float
-          go_name: arg1
-        - java_type: long
-          go_name: arg2
-      methods:
-        - java_method: clone
-          go_name: Clone
-          returns: java.lang.Object
-          error: true
-    - java_class: android.gesture.GestureUtils
-      go_type: Utils
-      static_methods:
-        - java_method: computeOrientedBoundingBox
-          go_name: ComputeOrientedBoundingBox
+        - java_method: toPath
+          go_name: ToPath5_2
           params:
-            - java_type: float[]
-              go_name: arg0
-          returns: android.gesture.OrientedBoundingBox
-          error: true
-        - java_method: spatialSampling
-          go_name: SpatialSampling2
-          params:
-            - java_type: android.gesture.Gesture
+            - java_type: android.graphics.Path
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: float[]
-          error: true
-        - java_method: spatialSampling
-          go_name: SpatialSampling3_1
-          params:
-            - java_type: android.gesture.Gesture
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-            - java_type: boolean
               go_name: arg2
-          returns: float[]
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.graphics.Path
           error: true
-        - java_method: temporalSampling
-          go_name: TemporalSampling
+        - java_method: toPath
+          go_name: ToPath4_3
           params:
-            - java_type: android.gesture.GestureStroke
+            - java_type: int
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: float[]
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.graphics.Path
           error: true
-    - java_class: android.gesture.OrientedBoundingBox
-      go_type: OrientedBoundingBox
-    - java_class: android.gesture.GestureLibraries
-      go_type: Libraries
-      static_methods:
-        - java_method: fromFile
-          go_name: FromFile1
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: java.io.File
-              go_name: arg0
-          returns: android.gesture.GestureLibrary
-          error: true
-        - java_method: fromFile
-          go_name: FromFile1_1
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.gesture.GestureLibrary
-          error: true
-        - java_method: fromFileDescriptor
-          go_name: FromFileDescriptor
-          params:
-            - java_type: android.os.ParcelFileDescriptor
-              go_name: arg0
-          returns: android.gesture.GestureLibrary
-          error: true
-        - java_method: fromPrivateFile
-          go_name: FromPrivateFile
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: android.gesture.GestureLibrary
-          error: true
-        - java_method: fromRawResource
-          go_name: FromRawResource
-          params:
-            - java_type: android.content.Context
+            - java_type: android.os.Parcel
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: android.gesture.GestureLibrary
+          returns: void
           error: true
 constants:
-    - go_name: Creator
+    - go_name: GestureStrokeTypeMultiple
+      value: "1"
+      go_type: int
+    - go_name: GestureStrokeTypeSingle
       value: "0"
+      go_type: int
+    - go_name: OrientationHorizontal
+      value: "0"
+      go_type: int
+    - go_name: OrientationVertical
+      value: "1"
       go_type: int
     - go_name: OrientationInvariant
       value: "1"
@@ -736,15 +789,6 @@ constants:
     - go_name: SequenceSensitive
       value: "2"
       go_type: int
-    - go_name: GestureStrokeTypeMultiple
-      value: "1"
-      go_type: int
-    - go_name: GestureStrokeTypeSingle
+    - go_name: Creator
       value: "0"
-      go_type: int
-    - go_name: OrientationHorizontal
-      value: "0"
-      go_type: int
-    - go_name: OrientationVertical
-      value: "1"
       go_type: int

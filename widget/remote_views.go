@@ -33,7 +33,7 @@ func NewRemoteViews(vm *jni.VM, arg0 *jni.Object) (*RemoteViews, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteViews)), midRemoteViewsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteViews)), midRemoteViewsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

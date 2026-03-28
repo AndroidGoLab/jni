@@ -23,6 +23,244 @@ type CameraExtensionCharacteristics struct {
 	Obj *jni.GlobalRef
 }
 
+// GetAvailableCaptureRequestKeys calls android.hardware.camera2.CameraExtensionCharacteristics.getAvailableCaptureRequestKeys.
+func (m *CameraExtensionCharacteristics) GetAvailableCaptureRequestKeys(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetAvailableCaptureRequestKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getAvailableCaptureRequestKeys is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetAvailableCaptureRequestKeys, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableCaptureResultKeys calls android.hardware.camera2.CameraExtensionCharacteristics.getAvailableCaptureResultKeys.
+func (m *CameraExtensionCharacteristics) GetAvailableCaptureResultKeys(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetAvailableCaptureResultKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getAvailableCaptureResultKeys is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetAvailableCaptureResultKeys, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEstimatedCaptureLatencyRangeMillis calls android.hardware.camera2.CameraExtensionCharacteristics.getEstimatedCaptureLatencyRangeMillis.
+func (m *CameraExtensionCharacteristics) GetEstimatedCaptureLatencyRangeMillis(
+	arg0 int32,
+	arg1 *jni.Object,
+	arg2 int32,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetEstimatedCaptureLatencyRangeMillis == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getEstimatedCaptureLatencyRangeMillis is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetEstimatedCaptureLatencyRangeMillis, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetExtensionSupportedSizes calls android.hardware.camera2.CameraExtensionCharacteristics.getExtensionSupportedSizes.
+func (m *CameraExtensionCharacteristics) GetExtensionSupportedSizes(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetExtensionSupportedSizes == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getExtensionSupportedSizes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetExtensionSupportedSizes, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeys calls android.hardware.camera2.CameraExtensionCharacteristics.getKeys.
+func (m *CameraExtensionCharacteristics) GetKeys(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetKeys == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getKeys is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetKeys, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPostviewSupportedSizes calls android.hardware.camera2.CameraExtensionCharacteristics.getPostviewSupportedSizes.
+func (m *CameraExtensionCharacteristics) GetPostviewSupportedSizes(
+	arg0 int32,
+	arg1 *jni.Object,
+	arg2 int32,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetPostviewSupportedSizes == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getPostviewSupportedSizes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetPostviewSupportedSizes, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedExtensions calls android.hardware.camera2.CameraExtensionCharacteristics.getSupportedExtensions.
+func (m *CameraExtensionCharacteristics) GetSupportedExtensions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraExtensionCharacteristicsGetSupportedExtensions == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.CameraExtensionCharacteristics.getSupportedExtensions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraExtensionCharacteristicsGetSupportedExtensions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsCaptureProcessProgressAvailable calls android.hardware.camera2.CameraExtensionCharacteristics.isCaptureProcessProgressAvailable.
 func (m *CameraExtensionCharacteristics) IsCaptureProcessProgressAvailable(arg0 int32) (bool, error) {
 	var result bool

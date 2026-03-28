@@ -486,6 +486,38 @@ func (m *AbstractCursor) GetNotificationUri() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetNotificationUris calls android.database.AbstractCursor.getNotificationUris.
+func (m *AbstractCursor) GetNotificationUris() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAbstractCursorGetNotificationUris == nil {
+			callErr = fmt.Errorf("android.database.AbstractCursor.getNotificationUris is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAbstractCursorGetNotificationUris,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPosition calls android.database.AbstractCursor.getPosition.
 func (m *AbstractCursor) GetPosition() (int32, error) {
 	var result int32

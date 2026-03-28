@@ -36,7 +36,7 @@ func NewLocalActivityManager(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*LocalAct
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalActivityManager)), midLocalActivityManagerInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalActivityManager)), midLocalActivityManagerCtor, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

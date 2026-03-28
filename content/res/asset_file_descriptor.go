@@ -33,7 +33,7 @@ func NewAssetFileDescriptor(vm *jni.VM, arg0 *jni.Object, arg1 int64, arg2 int64
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAssetFileDescriptor)), midAssetFileDescriptorInit, jni.ObjectValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAssetFileDescriptor)), midAssetFileDescriptorCtor, jni.ObjectValue(arg0), jni.LongValue(arg1), jni.LongValue(arg2))
 		if err != nil {
 			return err
 		}

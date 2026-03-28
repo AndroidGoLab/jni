@@ -33,7 +33,7 @@ func NewAccelerateDecelerateInterpolator(vm *jni.VM, arg0 *jni.Object, arg1 *jni
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccelerateDecelerateInterpolator)), midAccelerateDecelerateInterpolatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccelerateDecelerateInterpolator)), midAccelerateDecelerateInterpolatorCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

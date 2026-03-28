@@ -32,7 +32,7 @@ func NewNetworkErrorException(vm *jni.VM) (*NetworkErrorException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkErrorException)), midNetworkErrorExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkErrorException)), midNetworkErrorExceptionCtor)
 		if err != nil {
 			return err
 		}

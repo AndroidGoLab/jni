@@ -33,7 +33,7 @@ func NewClipDrawable(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 int32) (*Cli
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipDrawable)), midClipDrawableInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipDrawable)), midClipDrawableCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

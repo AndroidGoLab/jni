@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsLinkify            *jni.GlobalRef
-	midLinkifyInit        jni.MethodID
+	midLinkifyCtor        jni.MethodID
 	midLinkifyAddLinks2   jni.MethodID
 	midLinkifyAddLinks3_1 jni.MethodID
 	midLinkifyAddLinks5_2 jni.MethodID
@@ -41,7 +41,7 @@ var (
 	midLinkifyTransformFilterTransformUrl jni.MethodID
 
 	clsRfc822Token                     *jni.GlobalRef
-	midRfc822TokenInit                 jni.MethodID
+	midRfc822TokenCtor                 jni.MethodID
 	midRfc822TokenEquals               jni.MethodID
 	midRfc822TokenGetAddress           jni.MethodID
 	midRfc822TokenGetComment           jni.MethodID
@@ -56,7 +56,7 @@ var (
 	midRfc822TokenQuoteNameIfNecessary jni.MethodID
 
 	clsRfc822Tokenizer               *jni.GlobalRef
-	midRfc822TokenizerInit           jni.MethodID
+	midRfc822TokenizerCtor           jni.MethodID
 	midRfc822TokenizerFindTokenEnd   jni.MethodID
 	midRfc822TokenizerFindTokenStart jni.MethodID
 	midRfc822TokenizerTerminateToken jni.MethodID
@@ -88,7 +88,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsLinkify = env.NewGlobalRef(&c.Object)
-		midLinkifyInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "<init>", "()V")
+		midLinkifyCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLinkify)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -192,7 +192,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsRfc822Token = env.NewGlobalRef(&c.Object)
-		midRfc822TokenInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
+		midRfc822TokenCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Token)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -290,7 +290,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsRfc822Tokenizer = env.NewGlobalRef(&c.Object)
-		midRfc822TokenizerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "<init>", "()V")
+		midRfc822TokenizerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

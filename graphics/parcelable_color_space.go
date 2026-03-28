@@ -33,7 +33,7 @@ func NewParcelableColorSpace(vm *jni.VM, arg0 *jni.Object) (*ParcelableColorSpac
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelableColorSpace)), midParcelableColorSpaceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelableColorSpace)), midParcelableColorSpaceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

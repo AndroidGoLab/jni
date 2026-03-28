@@ -33,7 +33,7 @@ func NewCycleInterpolator(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Cycl
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCycleInterpolator)), midCycleInterpolatorInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCycleInterpolator)), midCycleInterpolatorCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewMetadataRetriever(vm *jni.VM) (*MetadataRetriever, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMetadataRetriever)), midMetadataRetrieverInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMetadataRetriever)), midMetadataRetrieverCtor)
 		if err != nil {
 			return err
 		}
@@ -312,6 +312,76 @@ func (m *MetadataRetriever) GetFrameAtTime3_3(
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMetadataRetrieverGetFrameAtTime3_3, jni.LongValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFramesAtIndex2 calls android.media.MediaMetadataRetriever.getFramesAtIndex.
+func (m *MetadataRetriever) GetFramesAtIndex2(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMetadataRetrieverGetFramesAtIndex2 == nil {
+			callErr = fmt.Errorf("android.media.MediaMetadataRetriever.getFramesAtIndex is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMetadataRetrieverGetFramesAtIndex2, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFramesAtIndex3_1 calls android.media.MediaMetadataRetriever.getFramesAtIndex.
+func (m *MetadataRetriever) GetFramesAtIndex3_1(
+	arg0 int32,
+	arg1 int32,
+	arg2 *jni.Object,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMetadataRetrieverGetFramesAtIndex3_1 == nil {
+			callErr = fmt.Errorf("android.media.MediaMetadataRetriever.getFramesAtIndex is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMetadataRetrieverGetFramesAtIndex3_1, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		if callErr != nil {
 			return callErr

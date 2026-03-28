@@ -33,7 +33,7 @@ func NewSpace(vm *jni.VM, arg0 *jni.Object) (*Space, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpace)), midSpaceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpace)), midSpaceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

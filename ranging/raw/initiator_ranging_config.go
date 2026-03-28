@@ -48,6 +48,38 @@ func (m *InitiatorRangingConfig) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetRawRangingDevices calls android.ranging.raw.RawInitiatorRangingConfig.getRawRangingDevices.
+func (m *InitiatorRangingConfig) GetRawRangingDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInitiatorRangingConfigGetRawRangingDevices == nil {
+			callErr = fmt.Errorf("android.ranging.raw.RawInitiatorRangingConfig.getRawRangingDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInitiatorRangingConfigGetRawRangingDevices,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // ToString calls android.ranging.raw.RawInitiatorRangingConfig.toString.
 func (m *InitiatorRangingConfig) ToString() (string, error) {
 	var result string

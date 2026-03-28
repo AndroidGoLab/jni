@@ -32,7 +32,7 @@ func NewFeatureGroupInfo(vm *jni.VM) (*FeatureGroupInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFeatureGroupInfo)), midFeatureGroupInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFeatureGroupInfo)), midFeatureGroupInfoCtor)
 		if err != nil {
 			return err
 		}

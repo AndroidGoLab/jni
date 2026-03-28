@@ -32,7 +32,7 @@ func NewSQLiteOutOfMemoryException(vm *jni.VM) (*SQLiteOutOfMemoryException, err
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteOutOfMemoryException)), midSQLiteOutOfMemoryExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteOutOfMemoryException)), midSQLiteOutOfMemoryExceptionCtor)
 		if err != nil {
 			return err
 		}

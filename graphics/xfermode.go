@@ -32,7 +32,7 @@ func NewXfermode(vm *jni.VM) (*Xfermode, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsXfermode)), midXfermodeInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsXfermode)), midXfermodeCtor)
 		if err != nil {
 			return err
 		}

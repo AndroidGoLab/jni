@@ -50,7 +50,7 @@ func NewTrainingExamplesInput(vm *jni.VM, arg0 string, arg1 string, arg2 *jni.Ob
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), midTrainingExamplesInputInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), midTrainingExamplesInputCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object))
 		if err != nil {
 			return err
 		}

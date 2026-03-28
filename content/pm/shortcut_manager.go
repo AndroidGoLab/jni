@@ -102,6 +102,38 @@ func (m *ShortcutManager) CreateShortcutResultIntent(arg0 *jni.Object) (*jni.Obj
 	return result, callErr
 }
 
+// GetDynamicShortcuts calls android.content.pm.ShortcutManager.getDynamicShortcuts.
+func (m *ShortcutManager) GetDynamicShortcuts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutManagerGetDynamicShortcuts == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutManager.getDynamicShortcuts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutManagerGetDynamicShortcuts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetIconMaxHeight calls android.content.pm.ShortcutManager.getIconMaxHeight.
 func (m *ShortcutManager) GetIconMaxHeight() (int32, error) {
 	var result int32
@@ -152,6 +184,38 @@ func (m *ShortcutManager) GetIconMaxWidth() (int32, error) {
 	return result, callErr
 }
 
+// GetManifestShortcuts calls android.content.pm.ShortcutManager.getManifestShortcuts.
+func (m *ShortcutManager) GetManifestShortcuts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutManagerGetManifestShortcuts == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutManager.getManifestShortcuts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutManagerGetManifestShortcuts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMaxShortcutCountPerActivity calls android.content.pm.ShortcutManager.getMaxShortcutCountPerActivity.
 func (m *ShortcutManager) GetMaxShortcutCountPerActivity() (int32, error) {
 	var result int32
@@ -171,6 +235,71 @@ func (m *ShortcutManager) GetMaxShortcutCountPerActivity() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPinnedShortcuts calls android.content.pm.ShortcutManager.getPinnedShortcuts.
+func (m *ShortcutManager) GetPinnedShortcuts() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutManagerGetPinnedShortcuts == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutManager.getPinnedShortcuts is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutManagerGetPinnedShortcuts,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetShortcuts calls android.content.pm.ShortcutManager.getShortcuts.
+func (m *ShortcutManager) GetShortcuts(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midShortcutManagerGetShortcuts == nil {
+			callErr = fmt.Errorf("android.content.pm.ShortcutManager.getShortcuts is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midShortcutManagerGetShortcuts, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

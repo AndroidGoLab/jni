@@ -33,7 +33,7 @@ func NewCheckedTextView(vm *jni.VM, arg0 *jni.Object) (*CheckedTextView, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCheckedTextView)), midCheckedTextViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCheckedTextView)), midCheckedTextViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

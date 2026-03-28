@@ -44,7 +44,7 @@ func NewCharacterPickerDialog(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, ar
 			jArg4 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), midCharacterPickerDialogInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.BooleanValue(jArg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCharacterPickerDialog)), midCharacterPickerDialogCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.BooleanValue(jArg4))
 		if err != nil {
 			return err
 		}

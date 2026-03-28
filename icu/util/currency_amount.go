@@ -33,7 +33,7 @@ func NewCurrencyAmount(vm *jni.VM, arg0 float64, arg1 *jni.Object) (*CurrencyAmo
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCurrencyAmount)), midCurrencyAmountInit, jni.DoubleValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCurrencyAmount)), midCurrencyAmountCtor, jni.DoubleValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

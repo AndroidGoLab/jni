@@ -32,7 +32,7 @@ func NewException(vm *jni.VM) (*Exception, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsException)), midExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsException)), midExceptionCtor)
 		if err != nil {
 			return err
 		}

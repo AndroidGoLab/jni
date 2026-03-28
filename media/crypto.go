@@ -33,7 +33,7 @@ func NewCrypto(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Crypto, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCrypto)), midCryptoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCrypto)), midCryptoCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

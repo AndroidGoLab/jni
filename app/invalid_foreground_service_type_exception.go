@@ -36,7 +36,7 @@ func NewInvalidForegroundServiceTypeException(vm *jni.VM, arg0 string) (*Invalid
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidForegroundServiceTypeException)), midInvalidForegroundServiceTypeExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidForegroundServiceTypeException)), midInvalidForegroundServiceTypeExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

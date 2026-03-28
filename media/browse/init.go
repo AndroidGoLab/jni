@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsMediaBrowser                    *jni.GlobalRef
-	midMediaBrowserInit                jni.MethodID
+	midMediaBrowserCtor                jni.MethodID
 	midMediaBrowserConnect             jni.MethodID
 	midMediaBrowserDisconnect          jni.MethodID
 	midMediaBrowserGetExtras           jni.MethodID
@@ -87,7 +87,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaBrowser = env.NewGlobalRef(&c.Object)
-		midMediaBrowserInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowser)), "<init>", "(Landroid/content/Context;Landroid/content/ComponentName;Landroid/media/browse/MediaBrowser$ConnectionCallback;Landroid/os/Bundle;)V")
+		midMediaBrowserCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaBrowser)), "<init>", "(Landroid/content/Context;Landroid/content/ComponentName;Landroid/media/browse/MediaBrowser$ConnectionCallback;Landroid/os/Bundle;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

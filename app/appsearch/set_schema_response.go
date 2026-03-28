@@ -48,6 +48,134 @@ func (m *SetSchemaResponse) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetDeletedTypes calls android.app.appsearch.SetSchemaResponse.getDeletedTypes.
+func (m *SetSchemaResponse) GetDeletedTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSetSchemaResponseGetDeletedTypes == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SetSchemaResponse.getDeletedTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSetSchemaResponseGetDeletedTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIncompatibleTypes calls android.app.appsearch.SetSchemaResponse.getIncompatibleTypes.
+func (m *SetSchemaResponse) GetIncompatibleTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSetSchemaResponseGetIncompatibleTypes == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SetSchemaResponse.getIncompatibleTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSetSchemaResponseGetIncompatibleTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMigratedTypes calls android.app.appsearch.SetSchemaResponse.getMigratedTypes.
+func (m *SetSchemaResponse) GetMigratedTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSetSchemaResponseGetMigratedTypes == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SetSchemaResponse.getMigratedTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSetSchemaResponseGetMigratedTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMigrationFailures calls android.app.appsearch.SetSchemaResponse.getMigrationFailures.
+func (m *SetSchemaResponse) GetMigrationFailures() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSetSchemaResponseGetMigrationFailures == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SetSchemaResponse.getMigrationFailures is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSetSchemaResponseGetMigrationFailures,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // WriteToParcel calls android.app.appsearch.SetSchemaResponse.writeToParcel.
 func (m *SetSchemaResponse) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 

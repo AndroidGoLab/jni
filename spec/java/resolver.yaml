@@ -342,6 +342,14 @@ classes:
               go_name: arg2
           returns: int
           error: true
+        - java_method: getOutgoingPersistedUriPermissions
+          go_name: GetOutgoingPersistedUriPermissions
+          returns: java.util.List<android.content.UriPermission>
+          error: true
+        - java_method: getPersistedUriPermissions
+          go_name: GetPersistedUriPermissions
+          returns: java.util.List<android.content.UriPermission>
+          error: true
         - java_method: getStreamTypes
           go_name: GetStreamTypes
           params:
@@ -724,6 +732,10 @@ classes:
           go_name: GetCurrentSync
           returns: android.content.SyncInfo
           error: true
+        - java_method: getCurrentSyncs
+          go_name: GetCurrentSyncs
+          returns: java.util.List<android.content.SyncInfo>
+          error: true
         - java_method: getIsSyncable
           go_name: GetIsSyncable
           params:
@@ -736,6 +748,15 @@ classes:
         - java_method: getMasterSyncAutomatically
           go_name: GetMasterSyncAutomatically
           returns: boolean
+          error: true
+        - java_method: getPeriodicSyncs
+          go_name: GetPeriodicSyncs
+          params:
+            - java_type: android.accounts.Account
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: java.util.List<android.content.PeriodicSync>
           error: true
         - java_method: getSyncAdapterTypes
           go_name: GetSyncAdapterTypes
@@ -943,6 +964,10 @@ classes:
           go_name: GetPath
           returns: String
           error: true
+        - java_method: getPathSegments
+          go_name: GetPathSegments
+          returns: java.util.List<java.lang.String>
+          error: true
         - java_method: getPort
           go_name: GetPort
           returns: int
@@ -957,6 +982,17 @@ classes:
             - java_type: String
               go_name: arg0
           returns: String
+          error: true
+        - java_method: getQueryParameterNames
+          go_name: GetQueryParameterNames
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getQueryParameters
+          go_name: GetQueryParameters
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: java.util.List<java.lang.String>
           error: true
         - java_method: getScheme
           go_name: GetScheme

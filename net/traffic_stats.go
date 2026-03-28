@@ -32,7 +32,7 @@ func NewTrafficStats(vm *jni.VM) (*TrafficStats, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrafficStats)), midTrafficStatsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrafficStats)), midTrafficStatsCtor)
 		if err != nil {
 			return err
 		}

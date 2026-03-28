@@ -23,26 +23,27 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsHomeSp                        *jni.GlobalRef
-	midHomeSpInit                    jni.MethodID
-	midHomeSpDescribeContents        jni.MethodID
-	midHomeSpEquals                  jni.MethodID
-	midHomeSpGetFqdn                 jni.MethodID
-	midHomeSpGetFriendlyName         jni.MethodID
-	midHomeSpGetMatchAllOis          jni.MethodID
-	midHomeSpGetMatchAnyOis          jni.MethodID
-	midHomeSpGetRoamingConsortiumOis jni.MethodID
-	midHomeSpHashCode                jni.MethodID
-	midHomeSpSetFqdn                 jni.MethodID
-	midHomeSpSetFriendlyName         jni.MethodID
-	midHomeSpSetMatchAllOis          jni.MethodID
-	midHomeSpSetMatchAnyOis          jni.MethodID
-	midHomeSpSetRoamingConsortiumOis jni.MethodID
-	midHomeSpToString                jni.MethodID
-	midHomeSpWriteToParcel           jni.MethodID
+	clsHomeSp                         *jni.GlobalRef
+	midHomeSpCtor                     jni.MethodID
+	midHomeSpDescribeContents         jni.MethodID
+	midHomeSpEquals                   jni.MethodID
+	midHomeSpGetFqdn                  jni.MethodID
+	midHomeSpGetFriendlyName          jni.MethodID
+	midHomeSpGetMatchAllOis           jni.MethodID
+	midHomeSpGetMatchAnyOis           jni.MethodID
+	midHomeSpGetOtherHomePartnersList jni.MethodID
+	midHomeSpGetRoamingConsortiumOis  jni.MethodID
+	midHomeSpHashCode                 jni.MethodID
+	midHomeSpSetFqdn                  jni.MethodID
+	midHomeSpSetFriendlyName          jni.MethodID
+	midHomeSpSetMatchAllOis           jni.MethodID
+	midHomeSpSetMatchAnyOis           jni.MethodID
+	midHomeSpSetRoamingConsortiumOis  jni.MethodID
+	midHomeSpToString                 jni.MethodID
+	midHomeSpWriteToParcel            jni.MethodID
 
 	clsCredential                          *jni.GlobalRef
-	midCredentialInit                      jni.MethodID
+	midCredentialCtor                      jni.MethodID
 	midCredentialDescribeContents          jni.MethodID
 	midCredentialEquals                    jni.MethodID
 	midCredentialGetCaCertificate          jni.MethodID
@@ -128,7 +129,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsHomeSp = env.NewGlobalRef(&c.Object)
-		midHomeSpInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHomeSp)), "<init>", "()V")
+		midHomeSpCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHomeSp)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -169,6 +170,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midHomeSpGetMatchAnyOis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHomeSp)), "getMatchAnyOis", "()[J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHomeSpGetOtherHomePartnersList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHomeSp)), "getOtherHomePartnersList", "()Ljava/util/Collection;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -247,7 +255,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCredential = env.NewGlobalRef(&c.Object)
-		midCredentialInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredential)), "<init>", "()V")
+		midCredentialCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredential)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

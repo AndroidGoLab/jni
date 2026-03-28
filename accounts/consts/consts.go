@@ -20,7 +20,6 @@ const (
 )
 
 const (
-	KeyCustomTokenExpiry            string = "android.accounts.expiry"
 	ActionAccountRemoved            string = "android.accounts.action.ACCOUNT_REMOVED"
 	ActionAuthenticatorIntent       string = "android.accounts.AccountAuthenticator"
 	AuthenticatorAttributesName     string = "account-authenticator"
@@ -49,4 +48,5 @@ const (
 	LoginAccountsChangedAction      string = "android.accounts.LOGIN_ACCOUNTS_CHANGED"
 	PackageNameKeyLegacyNotVisible  string = "android:accounts:key_legacy_not_visible"
 	PackageNameKeyLegacyVisible     string = "android:accounts:key_legacy_visible"
+	KeyCustomTokenExpiry            string = "android.accounts.expiry"
 )

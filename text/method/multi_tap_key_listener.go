@@ -38,7 +38,7 @@ func NewMultiTapKeyListener(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*MultiTapK
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), midMultiTapKeyListenerInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMultiTapKeyListener)), midMultiTapKeyListenerCtor, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

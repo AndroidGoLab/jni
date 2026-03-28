@@ -23,11 +23,6 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsBleCsRangingCapabilities                 *jni.GlobalRef
-	midBleCsRangingCapabilitiesDescribeContents jni.MethodID
-	midBleCsRangingCapabilitiesToString         jni.MethodID
-	midBleCsRangingCapabilitiesWriteToParcel    jni.MethodID
-
 	clsBleCsRangingParams                        *jni.GlobalRef
 	midBleCsRangingParamsDescribeContents        jni.MethodID
 	midBleCsRangingParamsEquals                  jni.MethodID
@@ -45,6 +40,12 @@ var (
 	midBleCsRangingParamsBuilderSetRangingUpdateRate jni.MethodID
 	midBleCsRangingParamsBuilderSetSecurityLevel     jni.MethodID
 	midBleCsRangingParamsBuilderSetSightType         jni.MethodID
+
+	clsBleCsRangingCapabilities                           *jni.GlobalRef
+	midBleCsRangingCapabilitiesDescribeContents           jni.MethodID
+	midBleCsRangingCapabilitiesGetSupportedSecurityLevels jni.MethodID
+	midBleCsRangingCapabilitiesToString                   jni.MethodID
+	midBleCsRangingCapabilitiesWriteToParcel              jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -64,37 +65,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/ranging/ble/cs/BleCsRangingCapabilities")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBleCsRangingCapabilities = env.NewGlobalRef(&c.Object)
-
-		midBleCsRangingCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBleCsRangingCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBleCsRangingCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/ranging/ble/cs/BleCsRangingParams")
 	if err != nil {
@@ -206,6 +176,44 @@ func doInit(env *jni.Env) error {
 		}
 
 		midBleCsRangingParamsBuilderSetSightType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingParamsBuilder)), "setSightType", "(I)Landroid/ranging/ble/cs/BleCsRangingParams$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/ranging/ble/cs/BleCsRangingCapabilities")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBleCsRangingCapabilities = env.NewGlobalRef(&c.Object)
+
+		midBleCsRangingCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleCsRangingCapabilitiesGetSupportedSecurityLevels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "getSupportedSecurityLevels", "()Ljava/util/Set;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleCsRangingCapabilitiesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBleCsRangingCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBleCsRangingCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

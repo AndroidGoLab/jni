@@ -32,7 +32,7 @@ func NewSQLiteDatatypeMismatchException(vm *jni.VM) (*SQLiteDatatypeMismatchExce
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteDatatypeMismatchException)), midSQLiteDatatypeMismatchExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteDatatypeMismatchException)), midSQLiteDatatypeMismatchExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewImageFormat(vm *jni.VM) (*ImageFormat, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageFormat)), midImageFormatInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageFormat)), midImageFormatCtor)
 		if err != nil {
 			return err
 		}

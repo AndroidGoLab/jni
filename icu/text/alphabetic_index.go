@@ -33,7 +33,7 @@ func NewAlphabeticIndex(vm *jni.VM, arg0 *jni.Object) (*AlphabeticIndex, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphabeticIndex)), midAlphabeticIndexInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphabeticIndex)), midAlphabeticIndexCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -44,6 +44,169 @@ func NewAlphabeticIndex(vm *jni.VM, arg0 *jni.Object) (*AlphabeticIndex, error) 
 		return nil, err
 	}
 	return &t, nil
+}
+
+// AddLabels1 calls android.icu.text.AlphabeticIndex.addLabels.
+func (m *AlphabeticIndex) AddLabels1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexAddLabels1 == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.addLabels is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexAddLabels1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// AddLabels1_1 calls android.icu.text.AlphabeticIndex.addLabels.
+func (m *AlphabeticIndex) AddLabels1_1(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexAddLabels1_1 == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.addLabels is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexAddLabels1_1, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// AddLabels1_2 calls android.icu.text.AlphabeticIndex.addLabels.
+func (m *AlphabeticIndex) AddLabels1_2(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexAddLabels1_2 == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.addLabels is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexAddLabels1_2, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// BuildImmutableIndex calls android.icu.text.AlphabeticIndex.buildImmutableIndex.
+func (m *AlphabeticIndex) BuildImmutableIndex() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexBuildImmutableIndex == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.buildImmutableIndex is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexBuildImmutableIndex,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ClearRecords calls android.icu.text.AlphabeticIndex.clearRecords.
+func (m *AlphabeticIndex) ClearRecords() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexClearRecords == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.clearRecords is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexClearRecords,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetBucketCount calls android.icu.text.AlphabeticIndex.getBucketCount.
@@ -96,6 +259,38 @@ func (m *AlphabeticIndex) GetBucketIndex(arg0 string) (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBucketLabels calls android.icu.text.AlphabeticIndex.getBucketLabels.
+func (m *AlphabeticIndex) GetBucketLabels() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexGetBucketLabels == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.getBucketLabels is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexGetBucketLabels,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -260,6 +455,185 @@ func (m *AlphabeticIndex) GetUnderflowLabel() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// Iterator calls android.icu.text.AlphabeticIndex.iterator.
+func (m *AlphabeticIndex) Iterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexIterator == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.iterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetInflowLabel calls android.icu.text.AlphabeticIndex.setInflowLabel.
+func (m *AlphabeticIndex) SetInflowLabel(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexSetInflowLabel == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.setInflowLabel is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexSetInflowLabel, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetMaxLabelCount calls android.icu.text.AlphabeticIndex.setMaxLabelCount.
+func (m *AlphabeticIndex) SetMaxLabelCount(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexSetMaxLabelCount == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.setMaxLabelCount is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexSetMaxLabelCount, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetOverflowLabel calls android.icu.text.AlphabeticIndex.setOverflowLabel.
+func (m *AlphabeticIndex) SetOverflowLabel(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexSetOverflowLabel == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.setOverflowLabel is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexSetOverflowLabel, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// SetUnderflowLabel calls android.icu.text.AlphabeticIndex.setUnderflowLabel.
+func (m *AlphabeticIndex) SetUnderflowLabel(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexSetUnderflowLabel == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex.setUnderflowLabel is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexSetUnderflowLabel, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

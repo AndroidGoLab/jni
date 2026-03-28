@@ -39,7 +39,7 @@ func NewSettingsPreferenceServiceClient(vm *jni.VM, arg0 *jni.Object, arg1 strin
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSettingsPreferenceServiceClient)), midSettingsPreferenceServiceClientInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSettingsPreferenceServiceClient)), midSettingsPreferenceServiceClientCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

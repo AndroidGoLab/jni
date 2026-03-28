@@ -33,7 +33,7 @@ func NewGattService(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*GattService, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattService)), midGattServiceInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattService)), midGattServiceCtor, jni.ObjectValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -144,6 +144,70 @@ func (m *GattService) GetCharacteristic(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midGattServiceGetCharacteristic, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCharacteristics calls android.bluetooth.BluetoothGattService.getCharacteristics.
+func (m *GattService) GetCharacteristics() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGattServiceGetCharacteristics == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getCharacteristics is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGattServiceGetCharacteristics,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIncludedServices calls android.bluetooth.BluetoothGattService.getIncludedServices.
+func (m *GattService) GetIncludedServices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGattServiceGetIncludedServices == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattService.getIncludedServices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGattServiceGetIncludedServices,
 		)
 		if callErr != nil {
 			return callErr

@@ -32,7 +32,7 @@ func NewSearchRecentSuggestionsProvider(vm *jni.VM) (*SearchRecentSuggestionsPro
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestionsProvider)), midSearchRecentSuggestionsProviderInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestionsProvider)), midSearchRecentSuggestionsProviderCtor)
 		if err != nil {
 			return err
 		}

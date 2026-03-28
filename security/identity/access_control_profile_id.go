@@ -33,7 +33,7 @@ func NewAccessControlProfileId(vm *jni.VM, arg0 int32) (*AccessControlProfileId,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccessControlProfileId)), midAccessControlProfileIdInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccessControlProfileId)), midAccessControlProfileIdCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -39,7 +39,7 @@ func NewTimelineResponse(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 st
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimelineResponse)), midTimelineResponseInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object), jni.IntValue(arg4), jni.IntValue(arg5), jni.LongValue(arg6), jni.LongValue(arg7))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimelineResponse)), midTimelineResponseCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object), jni.IntValue(arg4), jni.IntValue(arg5), jni.LongValue(arg6), jni.LongValue(arg7))
 		if err != nil {
 			return err
 		}

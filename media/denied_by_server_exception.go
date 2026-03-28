@@ -38,7 +38,7 @@ func NewDeniedByServerException(vm *jni.VM, arg0 string) (*DeniedByServerExcepti
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeniedByServerException)), midDeniedByServerExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeniedByServerException)), midDeniedByServerExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

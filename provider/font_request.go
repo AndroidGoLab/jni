@@ -50,7 +50,7 @@ func NewFontRequest(vm *jni.VM, arg0 string, arg1 string, arg2 string) (*FontReq
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFontRequest)), midFontRequestInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFontRequest)), midFontRequestCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}
@@ -61,6 +61,38 @@ func NewFontRequest(vm *jni.VM, arg0 string, arg1 string, arg2 string) (*FontReq
 		return nil, err
 	}
 	return &t, nil
+}
+
+// GetCertificates calls android.provider.FontRequest.getCertificates.
+func (m *FontRequest) GetCertificates() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFontRequestGetCertificates == nil {
+			callErr = fmt.Errorf("android.provider.FontRequest.getCertificates is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFontRequestGetCertificates,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetProviderAuthority calls android.provider.FontRequest.getProviderAuthority.

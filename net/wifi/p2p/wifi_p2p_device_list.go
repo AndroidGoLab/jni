@@ -32,7 +32,7 @@ func NewWifiP2pDeviceList(vm *jni.VM) (*WifiP2pDeviceList, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pDeviceList)), midWifiP2pDeviceListInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pDeviceList)), midWifiP2pDeviceListCtor)
 		if err != nil {
 			return err
 		}
@@ -92,6 +92,38 @@ func (m *WifiP2pDeviceList) Get(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midWifiP2pDeviceListGet, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDeviceList calls android.net.wifi.p2p.WifiP2pDeviceList.getDeviceList.
+func (m *WifiP2pDeviceList) GetDeviceList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiP2pDeviceListGetDeviceList == nil {
+			callErr = fmt.Errorf("android.net.wifi.p2p.WifiP2pDeviceList.getDeviceList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiP2pDeviceListGetDeviceList,
 		)
 		if callErr != nil {
 			return callErr

@@ -32,7 +32,7 @@ func NewSyncStateContract(vm *jni.VM) (*SyncStateContract, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncStateContract)), midSyncStateContractInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncStateContract)), midSyncStateContractCtor)
 		if err != nil {
 			return err
 		}

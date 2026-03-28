@@ -33,7 +33,7 @@ func NewPatternMatcher(vm *jni.VM, arg0 *jni.Object) (*PatternMatcher, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPatternMatcher)), midPatternMatcherInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPatternMatcher)), midPatternMatcherCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

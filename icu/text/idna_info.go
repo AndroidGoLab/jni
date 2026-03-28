@@ -23,6 +23,38 @@ type IDNAInfo struct {
 	Obj *jni.GlobalRef
 }
 
+// GetErrors calls android.icu.text.IDNA$Info.getErrors.
+func (m *IDNAInfo) GetErrors() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIDNAInfoGetErrors == nil {
+			callErr = fmt.Errorf("android.icu.text.IDNA$Info.getErrors is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIDNAInfoGetErrors,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HasErrors calls android.icu.text.IDNA$Info.hasErrors.
 func (m *IDNAInfo) HasErrors() (bool, error) {
 	var result bool

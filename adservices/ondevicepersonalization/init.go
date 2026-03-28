@@ -23,46 +23,154 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsOnDevicePersonalizationException             *jni.GlobalRef
-	midOnDevicePersonalizationExceptionGetErrorCode jni.MethodID
+	clsIsolatedService                             *jni.GlobalRef
+	midIsolatedServiceGetEventUrlProvider          jni.MethodID
+	midIsolatedServiceGetFederatedComputeScheduler jni.MethodID
+	midIsolatedServiceGetLocalData                 jni.MethodID
+	midIsolatedServiceGetLogReader                 jni.MethodID
+	midIsolatedServiceGetModelManager              jni.MethodID
+	midIsolatedServiceGetRemoteData                jni.MethodID
+	midIsolatedServiceGetUserData                  jni.MethodID
+	midIsolatedServiceOnBind                       jni.MethodID
+	midIsolatedServiceOnCreate                     jni.MethodID
+	midIsolatedServiceOnRequest                    jni.MethodID
 
-	clsExecuteInput                  *jni.GlobalRef
-	midExecuteInputInit              jni.MethodID
-	midExecuteInputGetAppPackageName jni.MethodID
-	midExecuteInputGetAppParams      jni.MethodID
+	clsTrainingExampleRecord                   *jni.GlobalRef
+	midTrainingExampleRecordDescribeContents   jni.MethodID
+	midTrainingExampleRecordGetResumptionToken jni.MethodID
+	midTrainingExampleRecordGetTrainingExample jni.MethodID
+	midTrainingExampleRecordWriteToParcel      jni.MethodID
 
-	clsEventLogRecord                    *jni.GlobalRef
-	midEventLogRecordDescribeContents    jni.MethodID
-	midEventLogRecordEquals              jni.MethodID
-	midEventLogRecordGetData             jni.MethodID
-	midEventLogRecordGetRequestLogRecord jni.MethodID
-	midEventLogRecordGetRowIndex         jni.MethodID
-	midEventLogRecordGetTime             jni.MethodID
-	midEventLogRecordGetType             jni.MethodID
-	midEventLogRecordHashCode            jni.MethodID
-	midEventLogRecordWriteToParcel       jni.MethodID
+	clsTrainingExampleRecordBuilder                   *jni.GlobalRef
+	midTrainingExampleRecordBuilderBuild              jni.MethodID
+	midTrainingExampleRecordBuilderSetResumptionToken jni.MethodID
+	midTrainingExampleRecordBuilderSetTrainingExample jni.MethodID
 
-	clsEventLogRecordBuilder                    *jni.GlobalRef
-	midEventLogRecordBuilderBuild               jni.MethodID
-	midEventLogRecordBuilderSetData             jni.MethodID
-	midEventLogRecordBuilderSetRequestLogRecord jni.MethodID
-	midEventLogRecordBuilderSetRowIndex         jni.MethodID
-	midEventLogRecordBuilderSetType             jni.MethodID
+	clsAppInfo                 *jni.GlobalRef
+	midAppInfoCtor             jni.MethodID
+	midAppInfoDescribeContents jni.MethodID
+	midAppInfoEquals           jni.MethodID
+	midAppInfoHashCode         jni.MethodID
+	midAppInfoIsInstalled      jni.MethodID
+	midAppInfoWriteToParcel    jni.MethodID
 
-	clsFederatedComputeScheduler         *jni.GlobalRef
-	midFederatedComputeSchedulerCancel   jni.MethodID
-	midFederatedComputeSchedulerSchedule jni.MethodID
+	clsRenderingConfig                 *jni.GlobalRef
+	midRenderingConfigDescribeContents jni.MethodID
+	midRenderingConfigEquals           jni.MethodID
+	midRenderingConfigGetKeys          jni.MethodID
+	midRenderingConfigHashCode         jni.MethodID
+	midRenderingConfigWriteToParcel    jni.MethodID
 
-	clsFederatedComputeSchedulerParams                    *jni.GlobalRef
-	midFederatedComputeSchedulerParamsGetTrainingInterval jni.MethodID
+	clsRenderingConfigBuilder       *jni.GlobalRef
+	midRenderingConfigBuilderAddKey jni.MethodID
+	midRenderingConfigBuilderBuild  jni.MethodID
 
-	clsDownloadCompletedOutput         *jni.GlobalRef
-	midDownloadCompletedOutputEquals   jni.MethodID
-	midDownloadCompletedOutputHashCode jni.MethodID
+	clsDownloadCompletedOutput                *jni.GlobalRef
+	midDownloadCompletedOutputEquals          jni.MethodID
+	midDownloadCompletedOutputGetRetainedKeys jni.MethodID
+	midDownloadCompletedOutputHashCode        jni.MethodID
 
 	clsDownloadCompletedOutputBuilder               *jni.GlobalRef
 	midDownloadCompletedOutputBuilderAddRetainedKey jni.MethodID
 	midDownloadCompletedOutputBuilderBuild          jni.MethodID
+
+	clsRenderOutput                  *jni.GlobalRef
+	midRenderOutputEquals            jni.MethodID
+	midRenderOutputGetContent        jni.MethodID
+	midRenderOutputGetTemplateId     jni.MethodID
+	midRenderOutputGetTemplateParams jni.MethodID
+	midRenderOutputHashCode          jni.MethodID
+
+	clsRenderOutputBuilder                  *jni.GlobalRef
+	midRenderOutputBuilderBuild             jni.MethodID
+	midRenderOutputBuilderSetContent        jni.MethodID
+	midRenderOutputBuilderSetTemplateId     jni.MethodID
+	midRenderOutputBuilderSetTemplateParams jni.MethodID
+
+	clsTrainingExamplesOutput                          *jni.GlobalRef
+	midTrainingExamplesOutputEquals                    jni.MethodID
+	midTrainingExamplesOutputGetTrainingExampleRecords jni.MethodID
+	midTrainingExamplesOutputHashCode                  jni.MethodID
+
+	clsTrainingExamplesOutputBuilder                         *jni.GlobalRef
+	midTrainingExamplesOutputBuilderAddTrainingExampleRecord jni.MethodID
+	midTrainingExamplesOutputBuilderBuild                    jni.MethodID
+
+	clsIsolatedServiceException             *jni.GlobalRef
+	midIsolatedServiceExceptionCtor         jni.MethodID
+	midIsolatedServiceExceptionGetErrorCode jni.MethodID
+
+	clsRenderInput                   *jni.GlobalRef
+	midRenderInputCtor               jni.MethodID
+	midRenderInputEquals             jni.MethodID
+	midRenderInputGetHeight          jni.MethodID
+	midRenderInputGetRenderingConfig jni.MethodID
+	midRenderInputGetWidth           jni.MethodID
+	midRenderInputHashCode           jni.MethodID
+
+	clsExecuteOutput                    *jni.GlobalRef
+	midExecuteOutputEquals              jni.MethodID
+	midExecuteOutputGetBestValue        jni.MethodID
+	midExecuteOutputGetEventLogRecords  jni.MethodID
+	midExecuteOutputGetOutputData       jni.MethodID
+	midExecuteOutputGetRenderingConfig  jni.MethodID
+	midExecuteOutputGetRequestLogRecord jni.MethodID
+	midExecuteOutputHashCode            jni.MethodID
+
+	clsExecuteOutputBuilder                    *jni.GlobalRef
+	midExecuteOutputBuilderAddEventLogRecord   jni.MethodID
+	midExecuteOutputBuilderBuild               jni.MethodID
+	midExecuteOutputBuilderSetBestValue        jni.MethodID
+	midExecuteOutputBuilderSetOutputData       jni.MethodID
+	midExecuteOutputBuilderSetRenderingConfig  jni.MethodID
+	midExecuteOutputBuilderSetRequestLogRecord jni.MethodID
+
+	clsWebTriggerOutput                    *jni.GlobalRef
+	midWebTriggerOutputEquals              jni.MethodID
+	midWebTriggerOutputGetEventLogRecords  jni.MethodID
+	midWebTriggerOutputGetRequestLogRecord jni.MethodID
+	midWebTriggerOutputHashCode            jni.MethodID
+
+	clsWebTriggerOutputBuilder                    *jni.GlobalRef
+	midWebTriggerOutputBuilderAddEventLogRecord   jni.MethodID
+	midWebTriggerOutputBuilderBuild               jni.MethodID
+	midWebTriggerOutputBuilderSetRequestLogRecord jni.MethodID
+
+	clsModelManager *jni.GlobalRef
+
+	clsTrainingInterval                   *jni.GlobalRef
+	midTrainingIntervalEquals             jni.MethodID
+	midTrainingIntervalGetMinimumInterval jni.MethodID
+	midTrainingIntervalGetSchedulingMode  jni.MethodID
+	midTrainingIntervalHashCode           jni.MethodID
+
+	clsTrainingIntervalBuilder                   *jni.GlobalRef
+	midTrainingIntervalBuilderBuild              jni.MethodID
+	midTrainingIntervalBuilderSetMinimumInterval jni.MethodID
+	midTrainingIntervalBuilderSetSchedulingMode  jni.MethodID
+
+	clsTrainingExamplesInput                   *jni.GlobalRef
+	midTrainingExamplesInputCtor               jni.MethodID
+	midTrainingExamplesInputEquals             jni.MethodID
+	midTrainingExamplesInputGetCollectionName  jni.MethodID
+	midTrainingExamplesInputGetPopulationName  jni.MethodID
+	midTrainingExamplesInputGetResumptionToken jni.MethodID
+	midTrainingExamplesInputGetTaskName        jni.MethodID
+	midTrainingExamplesInputHashCode           jni.MethodID
+
+	clsRequestLogRecord                 *jni.GlobalRef
+	midRequestLogRecordDescribeContents jni.MethodID
+	midRequestLogRecordEquals           jni.MethodID
+	midRequestLogRecordGetRows          jni.MethodID
+	midRequestLogRecordGetTime          jni.MethodID
+	midRequestLogRecordHashCode         jni.MethodID
+	midRequestLogRecordWriteToParcel    jni.MethodID
+
+	clsRequestLogRecordBuilder       *jni.GlobalRef
+	midRequestLogRecordBuilderAddRow jni.MethodID
+	midRequestLogRecordBuilderBuild  jni.MethodID
+
+	clsSurfacePackageToken *jni.GlobalRef
 
 	clsInferenceOutput         *jni.GlobalRef
 	midInferenceOutputEquals   jni.MethodID
@@ -72,27 +180,40 @@ var (
 	midInferenceOutputBuilderAddDataOutput jni.MethodID
 	midInferenceOutputBuilderBuild         jni.MethodID
 
-	clsSurfacePackageToken *jni.GlobalRef
+	clsRequestToken *jni.GlobalRef
 
-	clsAppInfo                 *jni.GlobalRef
-	midAppInfoInit             jni.MethodID
-	midAppInfoDescribeContents jni.MethodID
-	midAppInfoEquals           jni.MethodID
-	midAppInfoHashCode         jni.MethodID
-	midAppInfoIsInstalled      jni.MethodID
-	midAppInfoWriteToParcel    jni.MethodID
+	clsKeyValueStore       *jni.GlobalRef
+	midKeyValueStoreGet    jni.MethodID
+	midKeyValueStoreKeySet jni.MethodID
 
-	clsIsolatedWorker *jni.GlobalRef
+	clsOnDevicePersonalizationManager *jni.GlobalRef
 
-	clsWebTriggerOutput                    *jni.GlobalRef
-	midWebTriggerOutputEquals              jni.MethodID
-	midWebTriggerOutputGetRequestLogRecord jni.MethodID
-	midWebTriggerOutputHashCode            jni.MethodID
+	clsOnDevicePersonalizationManagerExecuteResult                       *jni.GlobalRef
+	midOnDevicePersonalizationManagerExecuteResultGetOutputData          jni.MethodID
+	midOnDevicePersonalizationManagerExecuteResultGetSurfacePackageToken jni.MethodID
 
-	clsWebTriggerOutputBuilder                    *jni.GlobalRef
-	midWebTriggerOutputBuilderAddEventLogRecord   jni.MethodID
-	midWebTriggerOutputBuilderBuild               jni.MethodID
-	midWebTriggerOutputBuilderSetRequestLogRecord jni.MethodID
+	clsWebTriggerInput                  *jni.GlobalRef
+	midWebTriggerInputCtor              jni.MethodID
+	midWebTriggerInputEquals            jni.MethodID
+	midWebTriggerInputGetAppPackageName jni.MethodID
+	midWebTriggerInputGetData           jni.MethodID
+	midWebTriggerInputGetDestinationUrl jni.MethodID
+	midWebTriggerInputHashCode          jni.MethodID
+
+	clsEventOutput                  *jni.GlobalRef
+	midEventOutputEquals            jni.MethodID
+	midEventOutputGetEventLogRecord jni.MethodID
+	midEventOutputHashCode          jni.MethodID
+
+	clsEventOutputBuilder                  *jni.GlobalRef
+	midEventOutputBuilderBuild             jni.MethodID
+	midEventOutputBuilderSetEventLogRecord jni.MethodID
+
+	clsDownloadCompletedInput                      *jni.GlobalRef
+	midDownloadCompletedInputCtor                  jni.MethodID
+	midDownloadCompletedInputEquals                jni.MethodID
+	midDownloadCompletedInputGetDownloadedContents jni.MethodID
+	midDownloadCompletedInputHashCode              jni.MethodID
 
 	clsInferenceInput                           *jni.GlobalRef
 	midInferenceInputEquals                     jni.MethodID
@@ -118,45 +239,54 @@ var (
 	midInferenceInputParamsGetRecommendedNumThreads jni.MethodID
 	midInferenceInputParamsHashCode                 jni.MethodID
 
-	clsOnDevicePersonalizationManager *jni.GlobalRef
+	clsEventLogRecord                    *jni.GlobalRef
+	midEventLogRecordDescribeContents    jni.MethodID
+	midEventLogRecordEquals              jni.MethodID
+	midEventLogRecordGetData             jni.MethodID
+	midEventLogRecordGetRequestLogRecord jni.MethodID
+	midEventLogRecordGetRowIndex         jni.MethodID
+	midEventLogRecordGetTime             jni.MethodID
+	midEventLogRecordGetType             jni.MethodID
+	midEventLogRecordHashCode            jni.MethodID
+	midEventLogRecordWriteToParcel       jni.MethodID
 
-	clsOnDevicePersonalizationManagerExecuteResult                       *jni.GlobalRef
-	midOnDevicePersonalizationManagerExecuteResultGetOutputData          jni.MethodID
-	midOnDevicePersonalizationManagerExecuteResultGetSurfacePackageToken jni.MethodID
+	clsEventLogRecordBuilder                    *jni.GlobalRef
+	midEventLogRecordBuilderBuild               jni.MethodID
+	midEventLogRecordBuilderSetData             jni.MethodID
+	midEventLogRecordBuilderSetRequestLogRecord jni.MethodID
+	midEventLogRecordBuilderSetRowIndex         jni.MethodID
+	midEventLogRecordBuilderSetType             jni.MethodID
 
-	clsRenderingConfig                 *jni.GlobalRef
-	midRenderingConfigDescribeContents jni.MethodID
-	midRenderingConfigEquals           jni.MethodID
-	midRenderingConfigHashCode         jni.MethodID
-	midRenderingConfigWriteToParcel    jni.MethodID
+	clsExecuteInput                  *jni.GlobalRef
+	midExecuteInputCtor              jni.MethodID
+	midExecuteInputGetAppPackageName jni.MethodID
+	midExecuteInputGetAppParams      jni.MethodID
 
-	clsRenderingConfigBuilder       *jni.GlobalRef
-	midRenderingConfigBuilderAddKey jni.MethodID
-	midRenderingConfigBuilderBuild  jni.MethodID
+	clsOnDevicePersonalizationException             *jni.GlobalRef
+	midOnDevicePersonalizationExceptionGetErrorCode jni.MethodID
 
-	clsWebTriggerInput                  *jni.GlobalRef
-	midWebTriggerInputInit              jni.MethodID
-	midWebTriggerInputEquals            jni.MethodID
-	midWebTriggerInputGetAppPackageName jni.MethodID
-	midWebTriggerInputGetData           jni.MethodID
-	midWebTriggerInputGetDestinationUrl jni.MethodID
-	midWebTriggerInputHashCode          jni.MethodID
+	clsIsolatedWorker *jni.GlobalRef
 
-	clsExecuteOutput                    *jni.GlobalRef
-	midExecuteOutputEquals              jni.MethodID
-	midExecuteOutputGetBestValue        jni.MethodID
-	midExecuteOutputGetOutputData       jni.MethodID
-	midExecuteOutputGetRenderingConfig  jni.MethodID
-	midExecuteOutputGetRequestLogRecord jni.MethodID
-	midExecuteOutputHashCode            jni.MethodID
+	clsMutableKeyValueStore       *jni.GlobalRef
+	midMutableKeyValueStorePut    jni.MethodID
+	midMutableKeyValueStoreRemove jni.MethodID
 
-	clsExecuteOutputBuilder                    *jni.GlobalRef
-	midExecuteOutputBuilderAddEventLogRecord   jni.MethodID
-	midExecuteOutputBuilderBuild               jni.MethodID
-	midExecuteOutputBuilderSetBestValue        jni.MethodID
-	midExecuteOutputBuilderSetOutputData       jni.MethodID
-	midExecuteOutputBuilderSetRenderingConfig  jni.MethodID
-	midExecuteOutputBuilderSetRequestLogRecord jni.MethodID
+	clsFederatedComputeInput                  *jni.GlobalRef
+	midFederatedComputeInputEquals            jni.MethodID
+	midFederatedComputeInputGetPopulationName jni.MethodID
+	midFederatedComputeInputHashCode          jni.MethodID
+
+	clsFederatedComputeInputBuilder                  *jni.GlobalRef
+	midFederatedComputeInputBuilderBuild             jni.MethodID
+	midFederatedComputeInputBuilderSetPopulationName jni.MethodID
+
+	clsEventUrlProvider                                   *jni.GlobalRef
+	midEventUrlProviderCreateEventTrackingUrlWithRedirect jni.MethodID
+	midEventUrlProviderCreateEventTrackingUrlWithResponse jni.MethodID
+
+	clsLogReader                *jni.GlobalRef
+	midLogReaderGetJoinedEvents jni.MethodID
+	midLogReaderGetRequests     jni.MethodID
 
 	clsExecuteInIsolatedServiceRequest              *jni.GlobalRef
 	midExecuteInIsolatedServiceRequestEquals        jni.MethodID
@@ -175,136 +305,10 @@ var (
 	midExecuteInIsolatedServiceRequestOutputSpecGetOutputType      jni.MethodID
 	midExecuteInIsolatedServiceRequestOutputSpecBuildBestValueSpec jni.MethodID
 
-	clsRenderOutput                  *jni.GlobalRef
-	midRenderOutputEquals            jni.MethodID
-	midRenderOutputGetContent        jni.MethodID
-	midRenderOutputGetTemplateId     jni.MethodID
-	midRenderOutputGetTemplateParams jni.MethodID
-	midRenderOutputHashCode          jni.MethodID
-
-	clsRenderOutputBuilder                  *jni.GlobalRef
-	midRenderOutputBuilderBuild             jni.MethodID
-	midRenderOutputBuilderSetContent        jni.MethodID
-	midRenderOutputBuilderSetTemplateId     jni.MethodID
-	midRenderOutputBuilderSetTemplateParams jni.MethodID
-
-	clsRequestLogRecord                 *jni.GlobalRef
-	midRequestLogRecordDescribeContents jni.MethodID
-	midRequestLogRecordEquals           jni.MethodID
-	midRequestLogRecordGetTime          jni.MethodID
-	midRequestLogRecordHashCode         jni.MethodID
-	midRequestLogRecordWriteToParcel    jni.MethodID
-
-	clsRequestLogRecordBuilder       *jni.GlobalRef
-	midRequestLogRecordBuilderAddRow jni.MethodID
-	midRequestLogRecordBuilderBuild  jni.MethodID
-
-	clsRenderInput                   *jni.GlobalRef
-	midRenderInputInit               jni.MethodID
-	midRenderInputEquals             jni.MethodID
-	midRenderInputGetHeight          jni.MethodID
-	midRenderInputGetRenderingConfig jni.MethodID
-	midRenderInputGetWidth           jni.MethodID
-	midRenderInputHashCode           jni.MethodID
-
-	clsMutableKeyValueStore       *jni.GlobalRef
-	midMutableKeyValueStorePut    jni.MethodID
-	midMutableKeyValueStoreRemove jni.MethodID
-
-	clsTrainingExamplesInput                   *jni.GlobalRef
-	midTrainingExamplesInputInit               jni.MethodID
-	midTrainingExamplesInputEquals             jni.MethodID
-	midTrainingExamplesInputGetCollectionName  jni.MethodID
-	midTrainingExamplesInputGetPopulationName  jni.MethodID
-	midTrainingExamplesInputGetResumptionToken jni.MethodID
-	midTrainingExamplesInputGetTaskName        jni.MethodID
-	midTrainingExamplesInputHashCode           jni.MethodID
-
-	clsIsolatedServiceException             *jni.GlobalRef
-	midIsolatedServiceExceptionInit         jni.MethodID
-	midIsolatedServiceExceptionGetErrorCode jni.MethodID
-
-	clsTrainingExamplesOutput         *jni.GlobalRef
-	midTrainingExamplesOutputEquals   jni.MethodID
-	midTrainingExamplesOutputHashCode jni.MethodID
-
-	clsTrainingExamplesOutputBuilder                         *jni.GlobalRef
-	midTrainingExamplesOutputBuilderAddTrainingExampleRecord jni.MethodID
-	midTrainingExamplesOutputBuilderBuild                    jni.MethodID
-
-	clsKeyValueStore    *jni.GlobalRef
-	midKeyValueStoreGet jni.MethodID
-
-	clsEventOutput                  *jni.GlobalRef
-	midEventOutputEquals            jni.MethodID
-	midEventOutputGetEventLogRecord jni.MethodID
-	midEventOutputHashCode          jni.MethodID
-
-	clsEventOutputBuilder                  *jni.GlobalRef
-	midEventOutputBuilderBuild             jni.MethodID
-	midEventOutputBuilderSetEventLogRecord jni.MethodID
-
-	clsTrainingInterval                   *jni.GlobalRef
-	midTrainingIntervalEquals             jni.MethodID
-	midTrainingIntervalGetMinimumInterval jni.MethodID
-	midTrainingIntervalGetSchedulingMode  jni.MethodID
-	midTrainingIntervalHashCode           jni.MethodID
-
-	clsTrainingIntervalBuilder                   *jni.GlobalRef
-	midTrainingIntervalBuilderBuild              jni.MethodID
-	midTrainingIntervalBuilderSetMinimumInterval jni.MethodID
-	midTrainingIntervalBuilderSetSchedulingMode  jni.MethodID
-
-	clsTrainingExampleRecord                   *jni.GlobalRef
-	midTrainingExampleRecordDescribeContents   jni.MethodID
-	midTrainingExampleRecordGetResumptionToken jni.MethodID
-	midTrainingExampleRecordGetTrainingExample jni.MethodID
-	midTrainingExampleRecordWriteToParcel      jni.MethodID
-
-	clsTrainingExampleRecordBuilder                   *jni.GlobalRef
-	midTrainingExampleRecordBuilderBuild              jni.MethodID
-	midTrainingExampleRecordBuilderSetResumptionToken jni.MethodID
-	midTrainingExampleRecordBuilderSetTrainingExample jni.MethodID
-
-	clsRequestToken *jni.GlobalRef
-
-	clsLogReader *jni.GlobalRef
-
 	clsExecuteInIsolatedServiceResponse                       *jni.GlobalRef
-	midExecuteInIsolatedServiceResponseInit                   jni.MethodID
+	midExecuteInIsolatedServiceResponseCtor                   jni.MethodID
 	midExecuteInIsolatedServiceResponseGetBestValue           jni.MethodID
 	midExecuteInIsolatedServiceResponseGetSurfacePackageToken jni.MethodID
-
-	clsEventUrlProvider                                   *jni.GlobalRef
-	midEventUrlProviderCreateEventTrackingUrlWithRedirect jni.MethodID
-	midEventUrlProviderCreateEventTrackingUrlWithResponse jni.MethodID
-
-	clsEventInput                    *jni.GlobalRef
-	midEventInputInit                jni.MethodID
-	midEventInputEquals              jni.MethodID
-	midEventInputGetParameters       jni.MethodID
-	midEventInputGetRequestLogRecord jni.MethodID
-	midEventInputHashCode            jni.MethodID
-
-	clsDownloadCompletedInput                      *jni.GlobalRef
-	midDownloadCompletedInputInit                  jni.MethodID
-	midDownloadCompletedInputEquals                jni.MethodID
-	midDownloadCompletedInputGetDownloadedContents jni.MethodID
-	midDownloadCompletedInputHashCode              jni.MethodID
-
-	clsIsolatedService                             *jni.GlobalRef
-	midIsolatedServiceGetEventUrlProvider          jni.MethodID
-	midIsolatedServiceGetFederatedComputeScheduler jni.MethodID
-	midIsolatedServiceGetLocalData                 jni.MethodID
-	midIsolatedServiceGetLogReader                 jni.MethodID
-	midIsolatedServiceGetModelManager              jni.MethodID
-	midIsolatedServiceGetRemoteData                jni.MethodID
-	midIsolatedServiceGetUserData                  jni.MethodID
-	midIsolatedServiceOnBind                       jni.MethodID
-	midIsolatedServiceOnCreate                     jni.MethodID
-	midIsolatedServiceOnRequest                    jni.MethodID
-
-	clsModelManager *jni.GlobalRef
 
 	clsUserData                         *jni.GlobalRef
 	midUserDataDescribeContents         jni.MethodID
@@ -319,14 +323,19 @@ var (
 	midUserDataHashCode                 jni.MethodID
 	midUserDataWriteToParcel            jni.MethodID
 
-	clsFederatedComputeInput                  *jni.GlobalRef
-	midFederatedComputeInputEquals            jni.MethodID
-	midFederatedComputeInputGetPopulationName jni.MethodID
-	midFederatedComputeInputHashCode          jni.MethodID
+	clsEventInput                    *jni.GlobalRef
+	midEventInputCtor                jni.MethodID
+	midEventInputEquals              jni.MethodID
+	midEventInputGetParameters       jni.MethodID
+	midEventInputGetRequestLogRecord jni.MethodID
+	midEventInputHashCode            jni.MethodID
 
-	clsFederatedComputeInputBuilder                  *jni.GlobalRef
-	midFederatedComputeInputBuilderBuild             jni.MethodID
-	midFederatedComputeInputBuilderSetPopulationName jni.MethodID
+	clsFederatedComputeScheduler         *jni.GlobalRef
+	midFederatedComputeSchedulerCancel   jni.MethodID
+	midFederatedComputeSchedulerSchedule jni.MethodID
+
+	clsFederatedComputeSchedulerParams                    *jni.GlobalRef
+	midFederatedComputeSchedulerParamsGetTrainingInterval jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -347,15 +356,78 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/OnDevicePersonalizationException")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/IsolatedService")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsOnDevicePersonalizationException = env.NewGlobalRef(&c.Object)
+		clsIsolatedService = env.NewGlobalRef(&c.Object)
 
-		midOnDevicePersonalizationExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnDevicePersonalizationException)), "getErrorCode", "()I")
+		midIsolatedServiceGetEventUrlProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getEventUrlProvider", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/EventUrlProvider;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceGetFederatedComputeScheduler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getFederatedComputeScheduler", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/FederatedComputeScheduler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceGetLocalData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getLocalData", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/MutableKeyValueStore;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceGetLogReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getLogReader", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/LogReader;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceGetModelManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getModelManager", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/ModelManager;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceGetRemoteData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getRemoteData", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/KeyValueStore;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getUserData", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/UserData;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceOnRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "onRequest", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/IsolatedWorker;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -364,26 +436,36 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteInput")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExampleRecord")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsExecuteInput = env.NewGlobalRef(&c.Object)
-		midExecuteInputInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInput)), "<init>", "(Ljava/lang/String;Landroid/os/PersistableBundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
+		clsTrainingExampleRecord = env.NewGlobalRef(&c.Object)
 
-		midExecuteInputGetAppPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInput)), "getAppPackageName", "()Ljava/lang/String;")
+		midTrainingExampleRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteInputGetAppParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInput)), "getAppParams", "()Landroid/os/PersistableBundle;")
+		midTrainingExampleRecordGetResumptionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "getResumptionToken", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExampleRecordGetTrainingExample, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "getTrainingExample", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExampleRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -392,71 +474,29 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventLogRecord")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExampleRecord$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsEventLogRecord = env.NewGlobalRef(&c.Object)
+		clsTrainingExampleRecordBuilder = env.NewGlobalRef(&c.Object)
 
-		midEventLogRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "describeContents", "()I")
+		midTrainingExampleRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecordBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/TrainingExampleRecord;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midEventLogRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "equals", "(Ljava/lang/Object;)Z")
+		midTrainingExampleRecordBuilderSetResumptionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecordBuilder)), "setResumptionToken", "([B)Landroid/adservices/ondevicepersonalization/TrainingExampleRecord$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midEventLogRecordGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getData", "()Landroid/content/ContentValues;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventLogRecordGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventLogRecordGetRowIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getRowIndex", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventLogRecordGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getTime", "()Ljava/time/Instant;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventLogRecordGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventLogRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventLogRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midTrainingExampleRecordBuilderSetTrainingExample, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecordBuilder)), "setTrainingExample", "([B)Landroid/adservices/ondevicepersonalization/TrainingExampleRecord$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -465,43 +505,47 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventLogRecord$Builder")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/AppInfo")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsEventLogRecordBuilder = env.NewGlobalRef(&c.Object)
+		clsAppInfo = env.NewGlobalRef(&c.Object)
+		midAppInfoCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "<init>", "(Z)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midEventLogRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/EventLogRecord;")
+		midAppInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midEventLogRecordBuilderSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setData", "(Landroid/content/ContentValues;)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
+		midAppInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midEventLogRecordBuilderSetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setRequestLogRecord", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
+		midAppInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midEventLogRecordBuilderSetRowIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setRowIndex", "(I)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
+		midAppInfoIsInstalled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "isInstalled", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midEventLogRecordBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setType", "(I)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
+		midAppInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -510,22 +554,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeScheduler")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderingConfig")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFederatedComputeScheduler = env.NewGlobalRef(&c.Object)
+		clsRenderingConfig = env.NewGlobalRef(&c.Object)
 
-		midFederatedComputeSchedulerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeScheduler)), "cancel", "(Landroid/adservices/ondevicepersonalization/FederatedComputeInput;)V")
+		midRenderingConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFederatedComputeSchedulerSchedule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeScheduler)), "schedule", "(Landroid/adservices/ondevicepersonalization/FederatedComputeScheduler$Params;Landroid/adservices/ondevicepersonalization/FederatedComputeInput;)V")
+		midRenderingConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderingConfigGetKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "getKeys", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderingConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderingConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -534,15 +599,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeScheduler$Params")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderingConfig$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFederatedComputeSchedulerParams = env.NewGlobalRef(&c.Object)
+		clsRenderingConfigBuilder = env.NewGlobalRef(&c.Object)
 
-		midFederatedComputeSchedulerParamsGetTrainingInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeSchedulerParams)), "getTrainingInterval", "()Landroid/adservices/ondevicepersonalization/TrainingInterval;")
+		midRenderingConfigBuilderAddKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfigBuilder)), "addKey", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/RenderingConfig$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderingConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfigBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/RenderingConfig;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -560,6 +632,13 @@ func doInit(env *jni.Env) error {
 		clsDownloadCompletedOutput = env.NewGlobalRef(&c.Object)
 
 		midDownloadCompletedOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedOutput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadCompletedOutputGetRetainedKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedOutput)), "getRetainedKeys", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -596,6 +675,615 @@ func doInit(env *jni.Env) error {
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRenderOutput = env.NewGlobalRef(&c.Object)
+
+		midRenderOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputGetContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "getContent", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputGetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "getTemplateId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputGetTemplateParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "getTemplateParams", "()Landroid/os/PersistableBundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderOutput$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRenderOutputBuilder = env.NewGlobalRef(&c.Object)
+
+		midRenderOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/RenderOutput;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputBuilderSetContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "setContent", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/RenderOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputBuilderSetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "setTemplateId", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/RenderOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderOutputBuilderSetTemplateParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "setTemplateParams", "(Landroid/os/PersistableBundle;)Landroid/adservices/ondevicepersonalization/RenderOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExamplesOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrainingExamplesOutput = env.NewGlobalRef(&c.Object)
+
+		midTrainingExamplesOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesOutputGetTrainingExampleRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutput)), "getTrainingExampleRecords", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExamplesOutput$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrainingExamplesOutputBuilder = env.NewGlobalRef(&c.Object)
+
+		midTrainingExamplesOutputBuilderAddTrainingExampleRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutputBuilder)), "addTrainingExampleRecord", "(Landroid/adservices/ondevicepersonalization/TrainingExampleRecord;)Landroid/adservices/ondevicepersonalization/TrainingExamplesOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/TrainingExamplesOutput;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/IsolatedServiceException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIsolatedServiceException = env.NewGlobalRef(&c.Object)
+		midIsolatedServiceExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedServiceException)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midIsolatedServiceExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedServiceException)), "getErrorCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderInput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRenderInput = env.NewGlobalRef(&c.Object)
+		midRenderInputCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "<init>", "(IILandroid/adservices/ondevicepersonalization/RenderingConfig;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRenderInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderInputGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderInputGetRenderingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "getRenderingConfig", "()Landroid/adservices/ondevicepersonalization/RenderingConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderInputGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "getWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRenderInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExecuteOutput = env.NewGlobalRef(&c.Object)
+
+		midExecuteOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputGetBestValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getBestValue", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputGetEventLogRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getEventLogRecords", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputGetOutputData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getOutputData", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputGetRenderingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getRenderingConfig", "()Landroid/adservices/ondevicepersonalization/RenderingConfig;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteOutput$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsExecuteOutputBuilder = env.NewGlobalRef(&c.Object)
+
+		midExecuteOutputBuilderAddEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "addEventLogRecord", "(Landroid/adservices/ondevicepersonalization/EventLogRecord;)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/ExecuteOutput;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputBuilderSetBestValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setBestValue", "(I)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputBuilderSetOutputData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setOutputData", "([B)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputBuilderSetRenderingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setRenderingConfig", "(Landroid/adservices/ondevicepersonalization/RenderingConfig;)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midExecuteOutputBuilderSetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setRequestLogRecord", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/WebTriggerOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebTriggerOutput = env.NewGlobalRef(&c.Object)
+
+		midWebTriggerOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerOutputGetEventLogRecords, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "getEventLogRecords", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerOutputGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/WebTriggerOutput$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsWebTriggerOutputBuilder = env.NewGlobalRef(&c.Object)
+
+		midWebTriggerOutputBuilderAddEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutputBuilder)), "addEventLogRecord", "(Landroid/adservices/ondevicepersonalization/EventLogRecord;)Landroid/adservices/ondevicepersonalization/WebTriggerOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/WebTriggerOutput;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerOutputBuilderSetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutputBuilder)), "setRequestLogRecord", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;)Landroid/adservices/ondevicepersonalization/WebTriggerOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/ModelManager")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsModelManager = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingInterval")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrainingInterval = env.NewGlobalRef(&c.Object)
+
+		midTrainingIntervalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingIntervalGetMinimumInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "getMinimumInterval", "()Ljava/time/Duration;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingIntervalGetSchedulingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "getSchedulingMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingIntervalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingInterval$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrainingIntervalBuilder = env.NewGlobalRef(&c.Object)
+
+		midTrainingIntervalBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingIntervalBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/TrainingInterval;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingIntervalBuilderSetMinimumInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingIntervalBuilder)), "setMinimumInterval", "(Ljava/time/Duration;)Landroid/adservices/ondevicepersonalization/TrainingInterval$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingIntervalBuilderSetSchedulingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingIntervalBuilder)), "setSchedulingMode", "(I)Landroid/adservices/ondevicepersonalization/TrainingInterval$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExamplesInput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTrainingExamplesInput = env.NewGlobalRef(&c.Object)
+		midTrainingExamplesInputCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "<init>", "(Ljava/lang/String;Ljava/lang/String;[BLjava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesInputGetCollectionName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getCollectionName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesInputGetPopulationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getPopulationName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesInputGetResumptionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getResumptionToken", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesInputGetTaskName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getTaskName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTrainingExamplesInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RequestLogRecord")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRequestLogRecord = env.NewGlobalRef(&c.Object)
+
+		midRequestLogRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestLogRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestLogRecordGetRows, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "getRows", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestLogRecordGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "getTime", "()Ljava/time/Instant;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestLogRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestLogRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RequestLogRecord$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRequestLogRecordBuilder = env.NewGlobalRef(&c.Object)
+
+		midRequestLogRecordBuilderAddRow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecordBuilder)), "addRow", "(Landroid/content/ContentValues;)Landroid/adservices/ondevicepersonalization/RequestLogRecord$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestLogRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecordBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/SurfacePackageToken")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSurfacePackageToken = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -647,57 +1335,32 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/SurfacePackageToken")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/RequestToken")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsSurfacePackageToken = env.NewGlobalRef(&c.Object)
+		clsRequestToken = env.NewGlobalRef(&c.Object)
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/AppInfo")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/KeyValueStore")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsAppInfo = env.NewGlobalRef(&c.Object)
-		midAppInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "<init>", "(Z)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
+		clsKeyValueStore = env.NewGlobalRef(&c.Object)
 
-		midAppInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "describeContents", "()I")
+		midKeyValueStoreGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyValueStore)), "get", "(Ljava/lang/String;)[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midAppInfoEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppInfoHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppInfoIsInstalled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "isInstalled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAppInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midKeyValueStoreKeySet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyValueStore)), "keySet", "()Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -706,39 +1369,32 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/IsolatedWorker")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/OnDevicePersonalizationManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsIsolatedWorker = env.NewGlobalRef(&c.Object)
+		clsOnDevicePersonalizationManager = env.NewGlobalRef(&c.Object)
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/WebTriggerOutput")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/OnDevicePersonalizationManager$ExecuteResult")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebTriggerOutput = env.NewGlobalRef(&c.Object)
+		clsOnDevicePersonalizationManagerExecuteResult = env.NewGlobalRef(&c.Object)
 
-		midWebTriggerOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "equals", "(Ljava/lang/Object;)Z")
+		midOnDevicePersonalizationManagerExecuteResultGetOutputData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnDevicePersonalizationManagerExecuteResult)), "getOutputData", "()[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerOutputGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midWebTriggerOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutput)), "hashCode", "()I")
+		midOnDevicePersonalizationManagerExecuteResultGetSurfacePackageToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnDevicePersonalizationManagerExecuteResult)), "getSurfacePackageToken", "()Landroid/adservices/ondevicepersonalization/SurfacePackageToken;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -747,29 +1403,137 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/WebTriggerOutput$Builder")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/WebTriggerInput")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebTriggerOutputBuilder = env.NewGlobalRef(&c.Object)
+		clsWebTriggerInput = env.NewGlobalRef(&c.Object)
+		midWebTriggerInputCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "<init>", "(Landroid/net/Uri;Ljava/lang/String;[B)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midWebTriggerOutputBuilderAddEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutputBuilder)), "addEventLogRecord", "(Landroid/adservices/ondevicepersonalization/EventLogRecord;)Landroid/adservices/ondevicepersonalization/WebTriggerOutput$Builder;")
+		midWebTriggerInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/WebTriggerOutput;")
+		midWebTriggerInputGetAppPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "getAppPackageName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerOutputBuilderSetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerOutputBuilder)), "setRequestLogRecord", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;)Landroid/adservices/ondevicepersonalization/WebTriggerOutput$Builder;")
+		midWebTriggerInputGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "getData", "()[B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerInputGetDestinationUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "getDestinationUrl", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midWebTriggerInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEventOutput = env.NewGlobalRef(&c.Object)
+
+		midEventOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventOutputGetEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutput)), "getEventLogRecord", "()Landroid/adservices/ondevicepersonalization/EventLogRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventOutput$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEventOutputBuilder = env.NewGlobalRef(&c.Object)
+
+		midEventOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/EventOutput;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventOutputBuilderSetEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutputBuilder)), "setEventLogRecord", "(Landroid/adservices/ondevicepersonalization/EventLogRecord;)Landroid/adservices/ondevicepersonalization/EventOutput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/DownloadCompletedInput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDownloadCompletedInput = env.NewGlobalRef(&c.Object)
+		midDownloadCompletedInputCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "<init>", "(Landroid/adservices/ondevicepersonalization/KeyValueStore;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDownloadCompletedInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadCompletedInputGetDownloadedContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "getDownloadedContents", "()Landroid/adservices/ondevicepersonalization/KeyValueStore;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDownloadCompletedInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -934,94 +1698,71 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/OnDevicePersonalizationManager")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventLogRecord")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsOnDevicePersonalizationManager = env.NewGlobalRef(&c.Object)
+		clsEventLogRecord = env.NewGlobalRef(&c.Object)
 
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/OnDevicePersonalizationManager$ExecuteResult")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsOnDevicePersonalizationManagerExecuteResult = env.NewGlobalRef(&c.Object)
-
-		midOnDevicePersonalizationManagerExecuteResultGetOutputData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnDevicePersonalizationManagerExecuteResult)), "getOutputData", "()[B")
+		midEventLogRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midOnDevicePersonalizationManagerExecuteResultGetSurfacePackageToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnDevicePersonalizationManagerExecuteResult)), "getSurfacePackageToken", "()Landroid/adservices/ondevicepersonalization/SurfacePackageToken;")
+		midEventLogRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderingConfig")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRenderingConfig = env.NewGlobalRef(&c.Object)
-
-		midRenderingConfigDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "describeContents", "()I")
+		midEventLogRecordGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getData", "()Landroid/content/ContentValues;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRenderingConfigEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "equals", "(Ljava/lang/Object;)Z")
+		midEventLogRecordGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRenderingConfigHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "hashCode", "()I")
+		midEventLogRecordGetRowIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getRowIndex", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRenderingConfigWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfig)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midEventLogRecordGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getTime", "()Ljava/time/Instant;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderingConfig$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRenderingConfigBuilder = env.NewGlobalRef(&c.Object)
-
-		midRenderingConfigBuilderAddKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfigBuilder)), "addKey", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/RenderingConfig$Builder;")
+		midEventLogRecordGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "getType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRenderingConfigBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderingConfigBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/RenderingConfig;")
+		midEventLogRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventLogRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1030,47 +1771,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/WebTriggerInput")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventLogRecord$Builder")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsWebTriggerInput = env.NewGlobalRef(&c.Object)
-		midWebTriggerInputInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "<init>", "(Landroid/net/Uri;Ljava/lang/String;[B)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
+		clsEventLogRecordBuilder = env.NewGlobalRef(&c.Object)
 
-		midWebTriggerInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "equals", "(Ljava/lang/Object;)Z")
+		midEventLogRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/EventLogRecord;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerInputGetAppPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "getAppPackageName", "()Ljava/lang/String;")
+		midEventLogRecordBuilderSetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setData", "(Landroid/content/ContentValues;)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerInputGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "getData", "()[B")
+		midEventLogRecordBuilderSetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setRequestLogRecord", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerInputGetDestinationUrl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "getDestinationUrl", "()Landroid/net/Uri;")
+		midEventLogRecordBuilderSetRowIndex, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setRowIndex", "(I)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midWebTriggerInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsWebTriggerInput)), "hashCode", "()I")
+		midEventLogRecordBuilderSetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventLogRecordBuilder)), "setType", "(I)Landroid/adservices/ondevicepersonalization/EventLogRecord$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1079,50 +1816,26 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteOutput")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteInput")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsExecuteOutput = env.NewGlobalRef(&c.Object)
+		clsExecuteInput = env.NewGlobalRef(&c.Object)
+		midExecuteInputCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInput)), "<init>", "(Ljava/lang/String;Landroid/os/PersistableBundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midExecuteOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "equals", "(Ljava/lang/Object;)Z")
+		midExecuteInputGetAppPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInput)), "getAppPackageName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteOutputGetBestValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getBestValue", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExecuteOutputGetOutputData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getOutputData", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExecuteOutputGetRenderingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getRenderingConfig", "()Landroid/adservices/ondevicepersonalization/RenderingConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExecuteOutputGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midExecuteOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutput)), "hashCode", "()I")
+		midExecuteInputGetAppParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInput)), "getAppParams", "()Landroid/os/PersistableBundle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1131,50 +1844,152 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteOutput$Builder")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/OnDevicePersonalizationException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsExecuteOutputBuilder = env.NewGlobalRef(&c.Object)
+		clsOnDevicePersonalizationException = env.NewGlobalRef(&c.Object)
 
-		midExecuteOutputBuilderAddEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "addEventLogRecord", "(Landroid/adservices/ondevicepersonalization/EventLogRecord;)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		midOnDevicePersonalizationExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOnDevicePersonalizationException)), "getErrorCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/ExecuteOutput;")
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/IsolatedWorker")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIsolatedWorker = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/MutableKeyValueStore")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsMutableKeyValueStore = env.NewGlobalRef(&c.Object)
+
+		midMutableKeyValueStorePut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMutableKeyValueStore)), "put", "(Ljava/lang/String;[B)[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteOutputBuilderSetBestValue, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setBestValue", "(I)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		midMutableKeyValueStoreRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMutableKeyValueStore)), "remove", "(Ljava/lang/String;)[B")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteOutputBuilderSetOutputData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setOutputData", "([B)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeInput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFederatedComputeInput = env.NewGlobalRef(&c.Object)
+
+		midFederatedComputeInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInput)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteOutputBuilderSetRenderingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setRenderingConfig", "(Landroid/adservices/ondevicepersonalization/RenderingConfig;)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		midFederatedComputeInputGetPopulationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInput)), "getPopulationName", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midExecuteOutputBuilderSetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteOutputBuilder)), "setRequestLogRecord", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;)Landroid/adservices/ondevicepersonalization/ExecuteOutput$Builder;")
+		midFederatedComputeInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInput)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeInput$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFederatedComputeInputBuilder = env.NewGlobalRef(&c.Object)
+
+		midFederatedComputeInputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/FederatedComputeInput;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFederatedComputeInputBuilderSetPopulationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInputBuilder)), "setPopulationName", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/FederatedComputeInput$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventUrlProvider")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEventUrlProvider = env.NewGlobalRef(&c.Object)
+
+		midEventUrlProviderCreateEventTrackingUrlWithRedirect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventUrlProvider)), "createEventTrackingUrlWithRedirect", "(Landroid/os/PersistableBundle;Landroid/net/Uri;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventUrlProviderCreateEventTrackingUrlWithResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventUrlProvider)), "createEventTrackingUrlWithResponse", "(Landroid/os/PersistableBundle;[BLjava/lang/String;)Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/LogReader")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLogReader = env.NewGlobalRef(&c.Object)
+
+		midLogReaderGetJoinedEvents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLogReader)), "getJoinedEvents", "(Ljava/time/Instant;Ljava/time/Instant;)Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLogReaderGetRequests, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLogReader)), "getRequests", "(Ljava/time/Instant;Ljava/time/Instant;)Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1290,586 +2105,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderOutput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRenderOutput = env.NewGlobalRef(&c.Object)
-
-		midRenderOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputGetContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "getContent", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputGetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "getTemplateId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputGetTemplateParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "getTemplateParams", "()Landroid/os/PersistableBundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderOutput$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRenderOutputBuilder = env.NewGlobalRef(&c.Object)
-
-		midRenderOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/RenderOutput;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputBuilderSetContent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "setContent", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/RenderOutput$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputBuilderSetTemplateId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "setTemplateId", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/RenderOutput$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderOutputBuilderSetTemplateParams, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderOutputBuilder)), "setTemplateParams", "(Landroid/os/PersistableBundle;)Landroid/adservices/ondevicepersonalization/RenderOutput$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RequestLogRecord")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequestLogRecord = env.NewGlobalRef(&c.Object)
-
-		midRequestLogRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestLogRecordEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestLogRecordGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "getTime", "()Ljava/time/Instant;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestLogRecordHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestLogRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RequestLogRecord$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequestLogRecordBuilder = env.NewGlobalRef(&c.Object)
-
-		midRequestLogRecordBuilderAddRow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecordBuilder)), "addRow", "(Landroid/content/ContentValues;)Landroid/adservices/ondevicepersonalization/RequestLogRecord$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestLogRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestLogRecordBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RenderInput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRenderInput = env.NewGlobalRef(&c.Object)
-		midRenderInputInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "<init>", "(IILandroid/adservices/ondevicepersonalization/RenderingConfig;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midRenderInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderInputGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "getHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderInputGetRenderingConfig, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "getRenderingConfig", "()Landroid/adservices/ondevicepersonalization/RenderingConfig;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderInputGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "getWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRenderInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRenderInput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/MutableKeyValueStore")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsMutableKeyValueStore = env.NewGlobalRef(&c.Object)
-
-		midMutableKeyValueStorePut, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMutableKeyValueStore)), "put", "(Ljava/lang/String;[B)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midMutableKeyValueStoreRemove, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMutableKeyValueStore)), "remove", "(Ljava/lang/String;)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExamplesInput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingExamplesInput = env.NewGlobalRef(&c.Object)
-		midTrainingExamplesInputInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "<init>", "(Ljava/lang/String;Ljava/lang/String;[BLjava/lang/String;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesInputGetCollectionName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getCollectionName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesInputGetPopulationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getPopulationName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesInputGetResumptionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getResumptionToken", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesInputGetTaskName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "getTaskName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesInput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/IsolatedServiceException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIsolatedServiceException = env.NewGlobalRef(&c.Object)
-		midIsolatedServiceExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedServiceException)), "<init>", "(I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceExceptionGetErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedServiceException)), "getErrorCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExamplesOutput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingExamplesOutput = env.NewGlobalRef(&c.Object)
-
-		midTrainingExamplesOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExamplesOutput$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingExamplesOutputBuilder = env.NewGlobalRef(&c.Object)
-
-		midTrainingExamplesOutputBuilderAddTrainingExampleRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutputBuilder)), "addTrainingExampleRecord", "(Landroid/adservices/ondevicepersonalization/TrainingExampleRecord;)Landroid/adservices/ondevicepersonalization/TrainingExamplesOutput$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExamplesOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExamplesOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/TrainingExamplesOutput;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/KeyValueStore")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsKeyValueStore = env.NewGlobalRef(&c.Object)
-
-		midKeyValueStoreGet, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsKeyValueStore)), "get", "(Ljava/lang/String;)[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventOutput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEventOutput = env.NewGlobalRef(&c.Object)
-
-		midEventOutputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventOutputGetEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutput)), "getEventLogRecord", "()Landroid/adservices/ondevicepersonalization/EventLogRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventOutputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventOutput$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEventOutputBuilder = env.NewGlobalRef(&c.Object)
-
-		midEventOutputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/EventOutput;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventOutputBuilderSetEventLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventOutputBuilder)), "setEventLogRecord", "(Landroid/adservices/ondevicepersonalization/EventLogRecord;)Landroid/adservices/ondevicepersonalization/EventOutput$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingInterval")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingInterval = env.NewGlobalRef(&c.Object)
-
-		midTrainingIntervalEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingIntervalGetMinimumInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "getMinimumInterval", "()Ljava/time/Duration;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingIntervalGetSchedulingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "getSchedulingMode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingIntervalHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingInterval)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingInterval$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingIntervalBuilder = env.NewGlobalRef(&c.Object)
-
-		midTrainingIntervalBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingIntervalBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/TrainingInterval;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingIntervalBuilderSetMinimumInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingIntervalBuilder)), "setMinimumInterval", "(Ljava/time/Duration;)Landroid/adservices/ondevicepersonalization/TrainingInterval$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingIntervalBuilderSetSchedulingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingIntervalBuilder)), "setSchedulingMode", "(I)Landroid/adservices/ondevicepersonalization/TrainingInterval$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExampleRecord")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingExampleRecord = env.NewGlobalRef(&c.Object)
-
-		midTrainingExampleRecordDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExampleRecordGetResumptionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "getResumptionToken", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExampleRecordGetTrainingExample, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "getTrainingExample", "()[B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExampleRecordWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecord)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/TrainingExampleRecord$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTrainingExampleRecordBuilder = env.NewGlobalRef(&c.Object)
-
-		midTrainingExampleRecordBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecordBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/TrainingExampleRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExampleRecordBuilderSetResumptionToken, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecordBuilder)), "setResumptionToken", "([B)Landroid/adservices/ondevicepersonalization/TrainingExampleRecord$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTrainingExampleRecordBuilderSetTrainingExample, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTrainingExampleRecordBuilder)), "setTrainingExample", "([B)Landroid/adservices/ondevicepersonalization/TrainingExampleRecord$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/RequestToken")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequestToken = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/LogReader")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLogReader = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/adservices/ondevicepersonalization/ExecuteInIsolatedServiceResponse")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -1877,7 +2112,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsExecuteInIsolatedServiceResponse = env.NewGlobalRef(&c.Object)
-		midExecuteInIsolatedServiceResponseInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInIsolatedServiceResponse)), "<init>", "(Landroid/adservices/ondevicepersonalization/SurfacePackageToken;I)V")
+		midExecuteInIsolatedServiceResponseCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsExecuteInIsolatedServiceResponse)), "<init>", "(Landroid/adservices/ondevicepersonalization/SurfacePackageToken;I)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -1895,197 +2130,6 @@ func doInit(env *jni.Env) error {
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventUrlProvider")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEventUrlProvider = env.NewGlobalRef(&c.Object)
-
-		midEventUrlProviderCreateEventTrackingUrlWithRedirect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventUrlProvider)), "createEventTrackingUrlWithRedirect", "(Landroid/os/PersistableBundle;Landroid/net/Uri;)Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventUrlProviderCreateEventTrackingUrlWithResponse, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventUrlProvider)), "createEventTrackingUrlWithResponse", "(Landroid/os/PersistableBundle;[BLjava/lang/String;)Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventInput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEventInput = env.NewGlobalRef(&c.Object)
-		midEventInputInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "<init>", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;Landroid/os/PersistableBundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midEventInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventInputGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "getParameters", "()Landroid/os/PersistableBundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventInputGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEventInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/DownloadCompletedInput")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsDownloadCompletedInput = env.NewGlobalRef(&c.Object)
-		midDownloadCompletedInputInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "<init>", "(Landroid/adservices/ondevicepersonalization/KeyValueStore;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midDownloadCompletedInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadCompletedInputGetDownloadedContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "getDownloadedContents", "()Landroid/adservices/ondevicepersonalization/KeyValueStore;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midDownloadCompletedInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/IsolatedService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIsolatedService = env.NewGlobalRef(&c.Object)
-
-		midIsolatedServiceGetEventUrlProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getEventUrlProvider", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/EventUrlProvider;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceGetFederatedComputeScheduler, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getFederatedComputeScheduler", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/FederatedComputeScheduler;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceGetLocalData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getLocalData", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/MutableKeyValueStore;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceGetLogReader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getLogReader", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/LogReader;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceGetModelManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getModelManager", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/ModelManager;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceGetRemoteData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getRemoteData", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/KeyValueStore;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceGetUserData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "getUserData", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/UserData;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "onCreate", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midIsolatedServiceOnRequest, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIsolatedService)), "onRequest", "(Landroid/adservices/ondevicepersonalization/RequestToken;)Landroid/adservices/ondevicepersonalization/IsolatedWorker;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/ModelManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsModelManager = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -2176,29 +2220,40 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeInput")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/EventInput")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFederatedComputeInput = env.NewGlobalRef(&c.Object)
+		clsEventInput = env.NewGlobalRef(&c.Object)
+		midEventInputCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "<init>", "(Landroid/adservices/ondevicepersonalization/RequestLogRecord;Landroid/os/PersistableBundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midFederatedComputeInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInput)), "equals", "(Ljava/lang/Object;)Z")
+		midEventInputEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFederatedComputeInputGetPopulationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInput)), "getPopulationName", "()Ljava/lang/String;")
+		midEventInputGetParameters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "getParameters", "()Landroid/os/PersistableBundle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFederatedComputeInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInput)), "hashCode", "()I")
+		midEventInputGetRequestLogRecord, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "getRequestLogRecord", "()Landroid/adservices/ondevicepersonalization/RequestLogRecord;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEventInputHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEventInput)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2207,22 +2262,39 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeInput$Builder")
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeScheduler")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFederatedComputeInputBuilder = env.NewGlobalRef(&c.Object)
+		clsFederatedComputeScheduler = env.NewGlobalRef(&c.Object)
 
-		midFederatedComputeInputBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInputBuilder)), "build", "()Landroid/adservices/ondevicepersonalization/FederatedComputeInput;")
+		midFederatedComputeSchedulerCancel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeScheduler)), "cancel", "(Landroid/adservices/ondevicepersonalization/FederatedComputeInput;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFederatedComputeInputBuilderSetPopulationName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeInputBuilder)), "setPopulationName", "(Ljava/lang/String;)Landroid/adservices/ondevicepersonalization/FederatedComputeInput$Builder;")
+		midFederatedComputeSchedulerSchedule, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeScheduler)), "schedule", "(Landroid/adservices/ondevicepersonalization/FederatedComputeScheduler$Params;Landroid/adservices/ondevicepersonalization/FederatedComputeInput;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/adservices/ondevicepersonalization/FederatedComputeScheduler$Params")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFederatedComputeSchedulerParams = env.NewGlobalRef(&c.Object)
+
+		midFederatedComputeSchedulerParamsGetTrainingInterval, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFederatedComputeSchedulerParams)), "getTrainingInterval", "()Landroid/adservices/ondevicepersonalization/TrainingInterval;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

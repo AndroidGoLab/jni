@@ -44,7 +44,7 @@ func NewQueryMap(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 bool, arg3 *jni
 			jArg2 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQueryMap)), midQueryMapInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQueryMap)), midQueryMapCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

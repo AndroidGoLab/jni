@@ -32,7 +32,7 @@ func NewFormat(vm *jni.VM) (*Format, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFormat)), midFormatInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFormat)), midFormatCtor)
 		if err != nil {
 			return err
 		}
@@ -182,6 +182,38 @@ func (m *Format) GetFeatureEnabled(arg0 string) (bool, error) {
 	return result, callErr
 }
 
+// GetFeatures calls android.media.MediaFormat.getFeatures.
+func (m *Format) GetFeatures() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFormatGetFeatures == nil {
+			callErr = fmt.Errorf("android.media.MediaFormat.getFeatures is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFormatGetFeatures,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFloat1 calls android.media.MediaFormat.getFloat.
 func (m *Format) GetFloat1(arg0 string) (float32, error) {
 	var result float32
@@ -300,6 +332,38 @@ func (m *Format) GetInteger2_1(arg0 string, arg1 int32) (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeys calls android.media.MediaFormat.getKeys.
+func (m *Format) GetKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFormatGetKeys == nil {
+			callErr = fmt.Errorf("android.media.MediaFormat.getKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFormatGetKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

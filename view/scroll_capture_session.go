@@ -33,7 +33,7 @@ func NewScrollCaptureSession(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollCaptureSession)), midScrollCaptureSessionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollCaptureSession)), midScrollCaptureSessionCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

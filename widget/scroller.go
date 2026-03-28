@@ -33,7 +33,7 @@ func NewScroller(vm *jni.VM, arg0 *jni.Object) (*Scroller, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScroller)), midScrollerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScroller)), midScrollerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

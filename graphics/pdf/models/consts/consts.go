@@ -4,6 +4,9 @@ package consts
 
 const (
 	Creator               int = 0
+	EditTypeClick         int = 0
+	EditTypeSetIndices    int = 1
+	EditTypeSetText       int = 2
 	WidgetTypeCheckbox    int = 2
 	WidgetTypeCombobox    int = 4
 	WidgetTypeListbox     int = 5
@@ -12,7 +15,4 @@ const (
 	WidgetTypeSignature   int = 7
 	WidgetTypeTextfield   int = 6
 	WidgetTypeUnknown     int = 0
-	EditTypeClick         int = 0
-	EditTypeSetIndices    int = 1
-	EditTypeSetText       int = 2
 )

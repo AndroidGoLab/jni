@@ -48,6 +48,38 @@ func (m *DeletionRequest) GetDeletionMode() (int32, error) {
 	return result, callErr
 }
 
+// GetDomainUris calls android.adservices.measurement.DeletionRequest.getDomainUris.
+func (m *DeletionRequest) GetDomainUris() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeletionRequestGetDomainUris == nil {
+			callErr = fmt.Errorf("android.adservices.measurement.DeletionRequest.getDomainUris is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeletionRequestGetDomainUris,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetEnd calls android.adservices.measurement.DeletionRequest.getEnd.
 func (m *DeletionRequest) GetEnd() (*jni.Object, error) {
 	var result *jni.Object
@@ -99,6 +131,38 @@ func (m *DeletionRequest) GetMatchBehavior() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOriginUris calls android.adservices.measurement.DeletionRequest.getOriginUris.
+func (m *DeletionRequest) GetOriginUris() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeletionRequestGetOriginUris == nil {
+			callErr = fmt.Errorf("android.adservices.measurement.DeletionRequest.getOriginUris is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeletionRequestGetOriginUris,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

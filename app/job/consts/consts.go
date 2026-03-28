@@ -4,6 +4,23 @@ package consts
 
 const (
 	Creator                                  int = 0
+	BackoffPolicyExponential                 int = 1
+	BackoffPolicyLinear                      int = 0
+	NetworkBytesUnknown                      int = -1
+	NetworkTypeAny                           int = 1
+	NetworkTypeCellular                      int = 4
+	NetworkTypeMetered                       int = 4
+	NetworkTypeNone                          int = 0
+	NetworkTypeNotRoaming                    int = 3
+	NetworkTypeUnmetered                     int = 2
+	PriorityDefault                          int = 300
+	PriorityHigh                             int = 400
+	PriorityLow                              int = 200
+	PriorityMax                              int = 500
+	PriorityMin                              int = 100
+	FlagNotifyForDescendants                 int = 1
+	JobEndNotificationPolicyDetach           int = 0
+	JobEndNotificationPolicyRemove           int = 1
 	PendingJobReasonApp                      int = 1
 	PendingJobReasonAppStandby               int = 2
 	PendingJobReasonBackgroundRestriction    int = 3
@@ -25,23 +42,6 @@ const (
 	PendingJobReasonUser                     int = 15
 	ResultFailure                            int = 0
 	ResultSuccess                            int = 1
-	JobEndNotificationPolicyDetach           int = 0
-	JobEndNotificationPolicyRemove           int = 1
-	BackoffPolicyExponential                 int = 1
-	BackoffPolicyLinear                      int = 0
-	NetworkBytesUnknown                      int = -1
-	NetworkTypeAny                           int = 1
-	NetworkTypeCellular                      int = 4
-	NetworkTypeMetered                       int = 4
-	NetworkTypeNone                          int = 0
-	NetworkTypeNotRoaming                    int = 3
-	NetworkTypeUnmetered                     int = 2
-	PriorityDefault                          int = 300
-	PriorityHigh                             int = 400
-	PriorityLow                              int = 200
-	PriorityMax                              int = 500
-	PriorityMin                              int = 100
-	FlagNotifyForDescendants                 int = 1
 	StopReasonAppStandby                     int = 12
 	StopReasonBackgroundRestriction          int = 11
 	StopReasonCancelledByApp                 int = 1
@@ -62,10 +62,10 @@ const (
 )
 
 const (
-	PermissionBind string = "android.permission.BIND_JOB_SERVICE"
+	DefaultInitialBackoffMillis int64 = 30000
+	MaxBackoffDelayMillis       int64 = 18000000
 )
 
 const (
-	DefaultInitialBackoffMillis int64 = 30000
-	MaxBackoffDelayMillis       int64 = 18000000
+	PermissionBind string = "android.permission.BIND_JOB_SERVICE"
 )

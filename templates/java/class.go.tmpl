@@ -84,7 +84,7 @@ func New{{.GoType}}(vm *jni.VM) (*{{.GoType}}, error) {
 		}
 {{range .ConstructorParams}}		{{paramConversionCode .}}
 {{end -}}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), mid{{.GoType}}Init{{jniArgs .ConstructorParams}})
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), mid{{.GoType}}Ctor{{jniArgs .ConstructorParams}})
 		if err != nil {
 			return err
 		}

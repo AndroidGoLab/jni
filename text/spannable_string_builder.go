@@ -32,7 +32,7 @@ func NewSpannableStringBuilder(vm *jni.VM) (*SpannableStringBuilder, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpannableStringBuilder)), midSpannableStringBuilderInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpannableStringBuilder)), midSpannableStringBuilderCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewSparseIntArray(vm *jni.VM) (*SparseIntArray, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSparseIntArray)), midSparseIntArrayInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSparseIntArray)), midSparseIntArrayCtor)
 		if err != nil {
 			return err
 		}

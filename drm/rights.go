@@ -39,7 +39,7 @@ func NewRights(vm *jni.VM, arg0 *jni.Object, arg1 string) (*Rights, error) {
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRights)), midRightsInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRights)), midRightsCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

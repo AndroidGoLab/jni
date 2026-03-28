@@ -33,7 +33,7 @@ func NewChecksum(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*Checksum, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChecksum)), midChecksumInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChecksum)), midChecksumCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsCellLocation                            *jni.GlobalRef
-	midCellLocationInit                        jni.MethodID
+	midCellLocationCtor                        jni.MethodID
 	midCellLocationEquals                      jni.MethodID
 	midCellLocationFillInNotifierBundle        jni.MethodID
 	midCellLocationGetBaseStationId            jni.MethodID
@@ -65,7 +65,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCellLocation = env.NewGlobalRef(&c.Object)
-		midCellLocationInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCellLocation)), "<init>", "()V")
+		midCellLocationCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCellLocation)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

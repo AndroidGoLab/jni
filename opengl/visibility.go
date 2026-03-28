@@ -32,7 +32,7 @@ func NewVisibility(vm *jni.VM) (*Visibility, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVisibility)), midVisibilityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVisibility)), midVisibilityCtor)
 		if err != nil {
 			return err
 		}

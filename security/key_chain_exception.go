@@ -32,7 +32,7 @@ func NewKeyChainException(vm *jni.VM) (*KeyChainException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyChainException)), midKeyChainExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyChainException)), midKeyChainExceptionCtor)
 		if err != nil {
 			return err
 		}

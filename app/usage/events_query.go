@@ -130,6 +130,38 @@ func (m *EventsQuery) GetEventTypes() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetPackageNames calls android.app.usage.UsageEventsQuery.getPackageNames.
+func (m *EventsQuery) GetPackageNames() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEventsQueryGetPackageNames == nil {
+			callErr = fmt.Errorf("android.app.usage.UsageEventsQuery.getPackageNames is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEventsQueryGetPackageNames,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // WriteToParcel calls android.app.usage.UsageEventsQuery.writeToParcel.
 func (m *EventsQuery) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 

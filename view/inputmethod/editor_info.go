@@ -32,7 +32,7 @@ func NewEditorInfo(vm *jni.VM) (*EditorInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditorInfo)), midEditorInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditorInfo)), midEditorInfoCtor)
 		if err != nil {
 			return err
 		}

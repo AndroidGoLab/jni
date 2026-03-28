@@ -33,7 +33,7 @@ func NewX509TrustManagerExtensions(vm *jni.VM, arg0 *jni.Object) (*X509TrustMana
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsX509TrustManagerExtensions)), midX509TrustManagerExtensionsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsX509TrustManagerExtensions)), midX509TrustManagerExtensionsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -44,6 +44,106 @@ func NewX509TrustManagerExtensions(vm *jni.VM, arg0 *jni.Object) (*X509TrustMana
 		return nil, err
 	}
 	return &t, nil
+}
+
+// CheckServerTrusted5 calls android.net.http.X509TrustManagerExtensions.checkServerTrusted.
+func (m *X509TrustManagerExtensions) CheckServerTrusted5(
+	arg0 *jni.Object,
+	arg1 *jni.Object,
+	arg2 *jni.Object,
+	arg3 string,
+	arg4 string,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midX509TrustManagerExtensionsCheckServerTrusted5 == nil {
+			callErr = fmt.Errorf("android.net.http.X509TrustManagerExtensions.checkServerTrusted is not available on this device")
+			return callErr
+		}
+
+		jArg3, err := env.NewStringUTF(arg3)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg3.Object)
+
+		jArg4, err := env.NewStringUTF(arg4)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg4.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midX509TrustManagerExtensionsCheckServerTrusted5, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CheckServerTrusted3_1 calls android.net.http.X509TrustManagerExtensions.checkServerTrusted.
+func (m *X509TrustManagerExtensions) CheckServerTrusted3_1(
+	arg0 *jni.Object,
+	arg1 string,
+	arg2 string,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midX509TrustManagerExtensionsCheckServerTrusted3_1 == nil {
+			callErr = fmt.Errorf("android.net.http.X509TrustManagerExtensions.checkServerTrusted is not available on this device")
+			return callErr
+		}
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		jArg2, err := env.NewStringUTF(arg2)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg2.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midX509TrustManagerExtensionsCheckServerTrusted3_1, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // IsSameTrustConfiguration calls android.net.http.X509TrustManagerExtensions.isSameTrustConfiguration.

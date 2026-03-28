@@ -33,7 +33,7 @@ func NewMaskFilterSpan(vm *jni.VM, arg0 *jni.Object) (*MaskFilterSpan, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), midMaskFilterSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMaskFilterSpan)), midMaskFilterSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

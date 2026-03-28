@@ -32,7 +32,7 @@ func NewKeyPermanentlyInvalidatedException(vm *jni.VM) (*KeyPermanentlyInvalidat
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyPermanentlyInvalidatedException)), midKeyPermanentlyInvalidatedExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyPermanentlyInvalidatedException)), midKeyPermanentlyInvalidatedExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewCallEndpointException(vm *jni.VM, arg0 string, arg1 int32) (*CallEndpoin
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), midCallEndpointExceptionInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), midCallEndpointExceptionCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

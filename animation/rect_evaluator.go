@@ -32,7 +32,7 @@ func NewRectEvaluator(vm *jni.VM) (*RectEvaluator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), midRectEvaluatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectEvaluator)), midRectEvaluatorCtor)
 		if err != nil {
 			return err
 		}

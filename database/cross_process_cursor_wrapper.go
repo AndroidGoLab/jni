@@ -33,7 +33,7 @@ func NewCrossProcessCursorWrapper(vm *jni.VM, arg0 *jni.Object) (*CrossProcessCu
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCrossProcessCursorWrapper)), midCrossProcessCursorWrapperInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCrossProcessCursorWrapper)), midCrossProcessCursorWrapperCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewExecuteInput(vm *jni.VM, arg0 string, arg1 *jni.Object) (*ExecuteInput, 
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExecuteInput)), midExecuteInputInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExecuteInput)), midExecuteInputCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

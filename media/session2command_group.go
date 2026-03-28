@@ -48,6 +48,38 @@ func (m *Session2CommandGroup) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetCommands calls android.media.Session2CommandGroup.getCommands.
+func (m *Session2CommandGroup) GetCommands() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSession2CommandGroupGetCommands == nil {
+			callErr = fmt.Errorf("android.media.Session2CommandGroup.getCommands is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSession2CommandGroupGetCommands,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HasCommand1 calls android.media.Session2CommandGroup.hasCommand.
 func (m *Session2CommandGroup) HasCommand1(arg0 *jni.Object) (bool, error) {
 	var result bool

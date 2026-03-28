@@ -33,7 +33,7 @@ func NewDevice(vm *jni.VM, arg0 *jni.Object) (*Device, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDevice)), midDeviceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDevice)), midDeviceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

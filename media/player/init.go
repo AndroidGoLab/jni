@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsMediaPlayer                                      *jni.GlobalRef
-	midMediaPlayerInit                                  jni.MethodID
+	midMediaPlayerCtor                                  jni.MethodID
 	midMediaPlayerAddTimedTextSource3                   jni.MethodID
 	midMediaPlayerAddTimedTextSource2_1                 jni.MethodID
 	midMediaPlayerAddTimedTextSource4_2                 jni.MethodID
@@ -43,6 +43,7 @@ var (
 	midMediaPlayerGetPlaybackParams                     jni.MethodID
 	midMediaPlayerGetPreferredDevice                    jni.MethodID
 	midMediaPlayerGetRoutedDevice                       jni.MethodID
+	midMediaPlayerGetRoutedDevices                      jni.MethodID
 	midMediaPlayerGetSelectedTrack                      jni.MethodID
 	midMediaPlayerGetSyncParams                         jni.MethodID
 	midMediaPlayerGetTimestamp                          jni.MethodID
@@ -195,7 +196,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaPlayer = env.NewGlobalRef(&c.Object)
-		midMediaPlayerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "<init>", "(Landroid/content/Context;)V")
+		midMediaPlayerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "<init>", "(Landroid/content/Context;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -320,6 +321,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaPlayerGetRoutedDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getRoutedDevice", "()Landroid/media/AudioDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaPlayerGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaPlayer)), "getRoutedDevices", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

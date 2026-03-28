@@ -33,7 +33,7 @@ func NewPathDashPathEffect(vm *jni.VM, arg0 *jni.Object, arg1 float32, arg2 floa
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathDashPathEffect)), midPathDashPathEffectInit, jni.ObjectValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathDashPathEffect)), midPathDashPathEffectCtor, jni.ObjectValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

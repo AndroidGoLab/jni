@@ -24,13 +24,15 @@ var (
 	initErr  error
 
 	clsMediaRecorder                                     *jni.GlobalRef
-	midMediaRecorderInit                                 jni.MethodID
+	midMediaRecorderCtor                                 jni.MethodID
+	midMediaRecorderGetActiveMicrophones                 jni.MethodID
 	midMediaRecorderGetActiveRecordingConfiguration      jni.MethodID
 	midMediaRecorderGetLogSessionId                      jni.MethodID
 	midMediaRecorderGetMaxAmplitude                      jni.MethodID
 	midMediaRecorderGetMetrics                           jni.MethodID
 	midMediaRecorderGetPreferredDevice                   jni.MethodID
 	midMediaRecorderGetRoutedDevice                      jni.MethodID
+	midMediaRecorderGetRoutedDevices                     jni.MethodID
 	midMediaRecorderGetSurface                           jni.MethodID
 	midMediaRecorderIsPrivacySensitive                   jni.MethodID
 	midMediaRecorderPause                                jni.MethodID
@@ -124,8 +126,15 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsMediaRecorder = env.NewGlobalRef(&c.Object)
-		midMediaRecorderInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "<init>", "(Landroid/content/Context;)V")
+		midMediaRecorderCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "<init>", "(Landroid/content/Context;)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midMediaRecorderGetActiveMicrophones, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getActiveMicrophones", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -165,6 +174,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midMediaRecorderGetRoutedDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getRoutedDevice", "()Landroid/media/AudioDeviceInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midMediaRecorderGetRoutedDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsMediaRecorder)), "getRoutedDevices", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

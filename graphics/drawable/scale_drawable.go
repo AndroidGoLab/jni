@@ -33,7 +33,7 @@ func NewScaleDrawable(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 float32, ar
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), midScaleDrawableInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleDrawable)), midScaleDrawableCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3))
 		if err != nil {
 			return err
 		}

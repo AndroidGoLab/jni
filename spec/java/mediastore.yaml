@@ -25,6 +25,13 @@ classes:
               go_name: arg1
           returns: android.net.Uri
           error: true
+        - java_method: getExternalVolumeNames
+          go_name: GetExternalVolumeNames
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
+          error: true
         - java_method: getGeneration
           go_name: GetGeneration
           params:
@@ -59,6 +66,13 @@ classes:
         - java_method: getPickImagesMaxLimit
           go_name: GetPickImagesMaxLimit
           returns: int
+          error: true
+        - java_method: getRecentExternalVolumeNames
+          go_name: GetRecentExternalVolumeNames
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.util.Set<java.lang.String>
           error: true
         - java_method: getRedactedUri
           go_name: GetRedactedUri

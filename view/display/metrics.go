@@ -32,7 +32,7 @@ func NewMetrics(vm *jni.VM) (*Metrics, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMetrics)), midMetricsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMetrics)), midMetricsCtor)
 		if err != nil {
 			return err
 		}

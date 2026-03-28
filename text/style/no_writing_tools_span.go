@@ -32,7 +32,7 @@ func NewNoWritingToolsSpan(vm *jni.VM) (*NoWritingToolsSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), midNoWritingToolsSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNoWritingToolsSpan)), midNoWritingToolsSpanCtor)
 		if err != nil {
 			return err
 		}

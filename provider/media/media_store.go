@@ -32,7 +32,7 @@ func NewMediaStore(vm *jni.VM) (*MediaStore, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaStore)), midMediaStoreInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaStore)), midMediaStoreCtor)
 		if err != nil {
 			return err
 		}
@@ -90,6 +90,39 @@ func (m *MediaStore) GetDocumentUri(arg0 *jni.Object, arg1 *jni.Object) (*jni.Ob
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
 			midMediaStoreGetDocumentUri, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetExternalVolumeNames calls android.provider.MediaStore.getExternalVolumeNames.
+func (m *MediaStore) GetExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaStoreGetExternalVolumeNames == nil {
+			callErr = fmt.Errorf("android.provider.MediaStore.getExternalVolumeNames is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetExternalVolumeNames, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -255,6 +288,39 @@ func (m *MediaStore) GetPickImagesMaxLimit() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRecentExternalVolumeNames calls android.provider.MediaStore.getRecentExternalVolumeNames.
+func (m *MediaStore) GetRecentExternalVolumeNames(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaStoreGetRecentExternalVolumeNames == nil {
+			callErr = fmt.Errorf("android.provider.MediaStore.getRecentExternalVolumeNames is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsMediaStore)),
+			midMediaStoreGetRecentExternalVolumeNames, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -32,7 +32,7 @@ func NewUserDictionary(vm *jni.VM) (*UserDictionary, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserDictionary)), midUserDictionaryInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserDictionary)), midUserDictionaryCtor)
 		if err != nil {
 			return err
 		}

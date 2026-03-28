@@ -32,7 +32,7 @@ func NewInteractionService(vm *jni.VM) (*InteractionService, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInteractionService)), midInteractionServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInteractionService)), midInteractionServiceCtor)
 		if err != nil {
 			return err
 		}

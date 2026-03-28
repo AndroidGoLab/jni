@@ -3,16 +3,16 @@
 package consts
 
 const (
+	Creator               int = 0
+	CardTypeNonPayment    int = 2
+	CardTypePayment       int = 1
+	CardTypeUnknown       int = 0
+	TypeNfcPaymentStarted int = 1
+)
+
+const (
 	ActionViewWallet         string = "android.service.quickaccesswallet.action.VIEW_WALLET"
 	ActionViewWalletSettings string = "android.service.quickaccesswallet.action.VIEW_WALLET_SETTINGS"
 	ServiceInterface         string = "android.service.quickaccesswallet.QuickAccessWalletService"
 	ServiceMetaData          string = "android.quickaccesswallet"
-)
-
-const (
-	CardTypeNonPayment    int = 2
-	CardTypePayment       int = 1
-	CardTypeUnknown       int = 0
-	Creator               int = 0
-	TypeNfcPaymentStarted int = 1
 )

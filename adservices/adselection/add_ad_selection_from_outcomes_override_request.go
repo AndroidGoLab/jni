@@ -39,7 +39,7 @@ func NewAddAdSelectionFromOutcomesOverrideRequest(vm *jni.VM, arg0 *jni.Object, 
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), midAddAdSelectionFromOutcomesOverrideRequestInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAddAdSelectionFromOutcomesOverrideRequest)), midAddAdSelectionFromOutcomesOverrideRequestCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

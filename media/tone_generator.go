@@ -33,7 +33,7 @@ func NewToneGenerator(vm *jni.VM, arg0 int32, arg1 int32) (*ToneGenerator, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToneGenerator)), midToneGeneratorInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToneGenerator)), midToneGeneratorCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

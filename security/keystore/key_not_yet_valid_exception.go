@@ -32,7 +32,7 @@ func NewKeyNotYetValidException(vm *jni.VM) (*KeyNotYetValidException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyNotYetValidException)), midKeyNotYetValidExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyNotYetValidException)), midKeyNotYetValidExceptionCtor)
 		if err != nil {
 			return err
 		}

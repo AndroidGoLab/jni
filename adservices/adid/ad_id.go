@@ -43,7 +43,7 @@ func NewAdId(vm *jni.VM, arg0 string, arg1 bool) (*AdId, error) {
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdId)), midAdIdInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdId)), midAdIdCtor, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

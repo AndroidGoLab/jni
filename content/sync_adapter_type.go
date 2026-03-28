@@ -33,7 +33,7 @@ func NewSyncAdapterType(vm *jni.VM, arg0 *jni.Object) (*SyncAdapterType, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncAdapterType)), midSyncAdapterTypeInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncAdapterType)), midSyncAdapterTypeCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

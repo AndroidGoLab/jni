@@ -78,6 +78,38 @@ func (m *Router2RoutingController) GetControlHints() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetDeselectableRoutes calls android.media.MediaRouter2$RoutingController.getDeselectableRoutes.
+func (m *Router2RoutingController) GetDeselectableRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouter2RoutingControllerGetDeselectableRoutes == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter2$RoutingController.getDeselectableRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouter2RoutingControllerGetDeselectableRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetId calls android.media.MediaRouter2$RoutingController.getId.
 func (m *Router2RoutingController) GetId() (string, error) {
 	var result string
@@ -121,6 +153,102 @@ func (m *Router2RoutingController) GetRoutingSessionInfo() (*jni.Object, error) 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRouter2RoutingControllerGetRoutingSessionInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSelectableRoutes calls android.media.MediaRouter2$RoutingController.getSelectableRoutes.
+func (m *Router2RoutingController) GetSelectableRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouter2RoutingControllerGetSelectableRoutes == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter2$RoutingController.getSelectableRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouter2RoutingControllerGetSelectableRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSelectedRoutes calls android.media.MediaRouter2$RoutingController.getSelectedRoutes.
+func (m *Router2RoutingController) GetSelectedRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouter2RoutingControllerGetSelectedRoutes == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter2$RoutingController.getSelectedRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouter2RoutingControllerGetSelectedRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTransferableRoutes calls android.media.MediaRouter2$RoutingController.getTransferableRoutes.
+func (m *Router2RoutingController) GetTransferableRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouter2RoutingControllerGetTransferableRoutes == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter2$RoutingController.getTransferableRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouter2RoutingControllerGetTransferableRoutes,
 		)
 		if callErr != nil {
 			return callErr

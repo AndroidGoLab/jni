@@ -32,7 +32,7 @@ func NewArrayMap(vm *jni.VM) (*ArrayMap, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArrayMap)), midArrayMapInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArrayMap)), midArrayMapCtor)
 		if err != nil {
 			return err
 		}
@@ -278,6 +278,38 @@ func (m *ArrayMap) IsEmpty() (bool, error) {
 	return result, callErr
 }
 
+// KeySet calls android.util.ArrayMap.keySet.
+func (m *ArrayMap) KeySet() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midArrayMapKeySet == nil {
+			callErr = fmt.Errorf("android.util.ArrayMap.keySet is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midArrayMapKeySet,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // Size calls android.util.ArrayMap.size.
 func (m *ArrayMap) Size() (int32, error) {
 	var result int32
@@ -325,6 +357,38 @@ func (m *ArrayMap) ToString() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// Values calls android.util.ArrayMap.values.
+func (m *ArrayMap) Values() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midArrayMapValues == nil {
+			callErr = fmt.Errorf("android.util.ArrayMap.values is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midArrayMapValues,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

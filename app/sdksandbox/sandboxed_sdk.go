@@ -33,7 +33,7 @@ func NewSandboxedSdk(vm *jni.VM, arg0 *jni.Object) (*SandboxedSdk, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), midSandboxedSdkInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), midSandboxedSdkCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

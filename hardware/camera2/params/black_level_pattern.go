@@ -33,7 +33,7 @@ func NewBlackLevelPattern(vm *jni.VM, arg0 *jni.Object) (*BlackLevelPattern, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBlackLevelPattern)), midBlackLevelPatternInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBlackLevelPattern)), midBlackLevelPatternCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

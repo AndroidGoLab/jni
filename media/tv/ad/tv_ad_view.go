@@ -33,7 +33,7 @@ func NewTvAdView(vm *jni.VM, arg0 *jni.Object) (*TvAdView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTvAdView)), midTvAdViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTvAdView)), midTvAdViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

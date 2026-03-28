@@ -50,7 +50,7 @@ func NewWebResourceResponse(vm *jni.VM, arg0 string, arg1 string, arg2 int32, ar
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), midWebResourceResponseInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebResourceResponse)), midWebResourceResponseCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(arg4), jni.ObjectValue(arg5))
 		if err != nil {
 			return err
 		}

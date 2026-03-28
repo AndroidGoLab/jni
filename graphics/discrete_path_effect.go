@@ -33,7 +33,7 @@ func NewDiscretePathEffect(vm *jni.VM, arg0 float32, arg1 float32) (*DiscretePat
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDiscretePathEffect)), midDiscretePathEffectInit, jni.FloatValue(arg0), jni.FloatValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDiscretePathEffect)), midDiscretePathEffectCtor, jni.FloatValue(arg0), jni.FloatValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewClearCredentialStateRequest(vm *jni.VM, arg0 *jni.Object) (*ClearCredent
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), midClearCredentialStateRequestInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), midClearCredentialStateRequestCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

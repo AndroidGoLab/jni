@@ -43,7 +43,7 @@ func NewListItem(vm *jni.VM, arg0 string, arg1 bool) (*ListItem, error) {
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListItem)), midListItemInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListItem)), midListItemCtor, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

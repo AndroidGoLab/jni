@@ -23,17 +23,19 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsSdkSandboxActivityHandler                  *jni.GlobalRef
+	midSdkSandboxActivityHandlerOnActivityCreated jni.MethodID
+
 	clsSdkSandboxController                                             *jni.GlobalRef
+	midSdkSandboxControllerGetAppOwnedSdkSandboxInterfaces              jni.MethodID
 	midSdkSandboxControllerGetClientPackageName                         jni.MethodID
 	midSdkSandboxControllerGetClientSharedPreferences                   jni.MethodID
+	midSdkSandboxControllerGetSandboxedSdks                             jni.MethodID
 	midSdkSandboxControllerRegisterSdkSandboxClientImportanceListener   jni.MethodID
 	midSdkSandboxControllerUnregisterSdkSandboxClientImportanceListener jni.MethodID
 
 	clsSdkSandboxClientImportanceListener                              *jni.GlobalRef
 	midSdkSandboxClientImportanceListenerOnForegroundImportanceChanged jni.MethodID
-
-	clsSdkSandboxActivityHandler                  *jni.GlobalRef
-	midSdkSandboxActivityHandlerOnActivityCreated jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -54,6 +56,23 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
+	c, err = env.FindClass("android/app/sdksandbox/sdkprovider/SdkSandboxActivityHandler")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSdkSandboxActivityHandler = env.NewGlobalRef(&c.Object)
+
+		midSdkSandboxActivityHandlerOnActivityCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxActivityHandler)), "onActivityCreated", "(Landroid/app/Activity;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/app/sdksandbox/sdkprovider/SdkSandboxController")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -61,6 +80,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSdkSandboxController = env.NewGlobalRef(&c.Object)
+
+		midSdkSandboxControllerGetAppOwnedSdkSandboxInterfaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getAppOwnedSdkSandboxInterfaces", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 		midSdkSandboxControllerGetClientPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getClientPackageName", "()Ljava/lang/String;")
 		if err != nil {
@@ -70,6 +96,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midSdkSandboxControllerGetClientSharedPreferences, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getClientSharedPreferences", "()Landroid/content/SharedPreferences;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSdkSandboxControllerGetSandboxedSdks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxController)), "getSandboxedSdks", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -101,23 +134,6 @@ func doInit(env *jni.Env) error {
 		clsSdkSandboxClientImportanceListener = env.NewGlobalRef(&c.Object)
 
 		midSdkSandboxClientImportanceListenerOnForegroundImportanceChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxClientImportanceListener)), "onForegroundImportanceChanged", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/app/sdksandbox/sdkprovider/SdkSandboxActivityHandler")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSdkSandboxActivityHandler = env.NewGlobalRef(&c.Object)
-
-		midSdkSandboxActivityHandlerOnActivityCreated, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxActivityHandler)), "onActivityCreated", "(Landroid/app/Activity;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

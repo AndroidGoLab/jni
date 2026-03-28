@@ -33,7 +33,7 @@ func NewPictureDrawable(vm *jni.VM, arg0 *jni.Object) (*PictureDrawable, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPictureDrawable)), midPictureDrawableInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPictureDrawable)), midPictureDrawableCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -7,15 +7,12 @@ const (
 )
 
 const (
-	Creator             int = 0
 	AllPages            int = 0
-	StateBlocked        int = 4
-	StateCanceled       int = 7
-	StateCompleted      int = 5
-	StateCreated        int = 1
-	StateFailed         int = 6
-	StateQueued         int = 2
-	StateStarted        int = 3
+	Creator             int = 0
+	ContentTypeDocument int = 0
+	ContentTypePhoto    int = 1
+	ContentTypeUnknown  int = -1
+	PageCountUnknown    int = -1
 	ColorModeColor      int = 2
 	ColorModeMonochrome int = 1
 	DuplexModeLongEdge  int = 2
@@ -117,11 +114,14 @@ const (
 	Roc8k               int = 0
 	UnknownLandscape    int = 0
 	UnknownPortrait     int = 0
+	StateBlocked        int = 4
+	StateCanceled       int = 7
+	StateCompleted      int = 5
+	StateCreated        int = 1
+	StateFailed         int = 6
+	StateQueued         int = 2
+	StateStarted        int = 3
 	StatusBusy          int = 2
 	StatusIdle          int = 1
 	StatusUnavailable   int = 3
-	ContentTypeDocument int = 0
-	ContentTypePhoto    int = 1
-	ContentTypeUnknown  int = -1
-	PageCountUnknown    int = -1
 )

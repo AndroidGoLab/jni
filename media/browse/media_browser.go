@@ -33,7 +33,7 @@ func NewMediaBrowser(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.O
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaBrowser)), midMediaBrowserInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaBrowser)), midMediaBrowserCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

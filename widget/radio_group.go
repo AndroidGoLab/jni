@@ -33,7 +33,7 @@ func NewRadioGroup(vm *jni.VM, arg0 *jni.Object) (*RadioGroup, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRadioGroup)), midRadioGroupInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRadioGroup)), midRadioGroupCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

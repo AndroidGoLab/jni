@@ -32,7 +32,7 @@ func NewCallLog(vm *jni.VM) (*CallLog, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallLog)), midCallLogInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallLog)), midCallLogCtor)
 		if err != nil {
 			return err
 		}

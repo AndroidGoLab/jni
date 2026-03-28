@@ -33,7 +33,7 @@ func NewPrintStreamPrinter(vm *jni.VM, arg0 *jni.Object) (*PrintStreamPrinter, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintStreamPrinter)), midPrintStreamPrinterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintStreamPrinter)), midPrintStreamPrinterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

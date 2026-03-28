@@ -33,7 +33,7 @@ func NewRelativeSizeSpan(vm *jni.VM, arg0 *jni.Object) (*RelativeSizeSpan, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), midRelativeSizeSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRelativeSizeSpan)), midRelativeSizeSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

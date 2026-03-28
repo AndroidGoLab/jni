@@ -32,7 +32,7 @@ func NewAnimatedVectorDrawable(vm *jni.VM) (*AnimatedVectorDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), midAnimatedVectorDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatedVectorDrawable)), midAnimatedVectorDrawableCtor)
 		if err != nil {
 			return err
 		}

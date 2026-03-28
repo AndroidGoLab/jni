@@ -32,7 +32,7 @@ func NewLevelListDrawable(vm *jni.VM) (*LevelListDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), midLevelListDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLevelListDrawable)), midLevelListDrawableCtor)
 		if err != nil {
 			return err
 		}

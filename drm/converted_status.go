@@ -33,7 +33,7 @@ func NewConvertedStatus(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 int32) (*
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConvertedStatus)), midConvertedStatusInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConvertedStatus)), midConvertedStatusCtor, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

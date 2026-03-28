@@ -114,6 +114,38 @@ func (m *FillEventHistoryEvent) GetFocusedId() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetIgnoredDatasetIds calls android.service.autofill.FillEventHistory$Event.getIgnoredDatasetIds.
+func (m *FillEventHistoryEvent) GetIgnoredDatasetIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFillEventHistoryEventGetIgnoredDatasetIds == nil {
+			callErr = fmt.Errorf("android.service.autofill.FillEventHistory$Event.getIgnoredDatasetIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFillEventHistoryEventGetIgnoredDatasetIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetNoSaveUiReason calls android.service.autofill.FillEventHistory$Event.getNoSaveUiReason.
 func (m *FillEventHistoryEvent) GetNoSaveUiReason() (int32, error) {
 	var result int32
@@ -133,6 +165,70 @@ func (m *FillEventHistoryEvent) GetNoSaveUiReason() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSelectedDatasetIds calls android.service.autofill.FillEventHistory$Event.getSelectedDatasetIds.
+func (m *FillEventHistoryEvent) GetSelectedDatasetIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFillEventHistoryEventGetSelectedDatasetIds == nil {
+			callErr = fmt.Errorf("android.service.autofill.FillEventHistory$Event.getSelectedDatasetIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFillEventHistoryEventGetSelectedDatasetIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetShownDatasetIds calls android.service.autofill.FillEventHistory$Event.getShownDatasetIds.
+func (m *FillEventHistoryEvent) GetShownDatasetIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFillEventHistoryEventGetShownDatasetIds == nil {
+			callErr = fmt.Errorf("android.service.autofill.FillEventHistory$Event.getShownDatasetIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFillEventHistoryEventGetShownDatasetIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

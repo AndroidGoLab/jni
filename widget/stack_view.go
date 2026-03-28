@@ -33,7 +33,7 @@ func NewStackView(vm *jni.VM, arg0 *jni.Object) (*StackView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStackView)), midStackViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStackView)), midStackViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

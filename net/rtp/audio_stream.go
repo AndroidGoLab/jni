@@ -33,7 +33,7 @@ func NewAudioStream(vm *jni.VM, arg0 *jni.Object) (*AudioStream, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioStream)), midAudioStreamInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioStream)), midAudioStreamCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

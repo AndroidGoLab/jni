@@ -33,7 +33,7 @@ func NewClipDescription(vm *jni.VM, arg0 *jni.Object) (*ClipDescription, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipDescription)), midClipDescriptionInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipDescription)), midClipDescriptionCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

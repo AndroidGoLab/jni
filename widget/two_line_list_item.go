@@ -33,7 +33,7 @@ func NewTwoLineListItem(vm *jni.VM, arg0 *jni.Object) (*TwoLineListItem, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTwoLineListItem)), midTwoLineListItemInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTwoLineListItem)), midTwoLineListItemCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

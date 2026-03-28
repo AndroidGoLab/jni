@@ -33,7 +33,7 @@ func NewUriRelativeFilterGroup(vm *jni.VM, arg0 int32) (*UriRelativeFilterGroup,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUriRelativeFilterGroup)), midUriRelativeFilterGroupInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUriRelativeFilterGroup)), midUriRelativeFilterGroupCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -116,6 +116,38 @@ func (m *UriRelativeFilterGroup) GetAction() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUriRelativeFilters calls android.content.UriRelativeFilterGroup.getUriRelativeFilters.
+func (m *UriRelativeFilterGroup) GetUriRelativeFilters() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUriRelativeFilterGroupGetUriRelativeFilters == nil {
+			callErr = fmt.Errorf("android.content.UriRelativeFilterGroup.getUriRelativeFilters is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUriRelativeFilterGroupGetUriRelativeFilters,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

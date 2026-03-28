@@ -32,7 +32,7 @@ func NewColorDrawable(vm *jni.VM) (*ColorDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorDrawable)), midColorDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorDrawable)), midColorDrawableCtor)
 		if err != nil {
 			return err
 		}

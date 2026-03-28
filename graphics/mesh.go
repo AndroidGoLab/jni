@@ -33,7 +33,7 @@ func NewMesh(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 *jni.Object, arg3 in
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMesh)), midMeshInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMesh)), midMeshCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewRootElement(vm *jni.VM, arg0 string) (*RootElement, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRootElement)), midRootElementInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRootElement)), midRootElementCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

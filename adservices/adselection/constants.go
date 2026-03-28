@@ -9,6 +9,6 @@ const (
 	FlagReportingDestinationBuyer           = consts.FlagReportingDestinationBuyer
 	FlagReportingDestinationComponentSeller = consts.FlagReportingDestinationComponentSeller
 	FlagReportingDestinationSeller          = consts.FlagReportingDestinationSeller
-	Empty                                   = consts.Empty
 	NoOutcome                               = consts.NoOutcome
+	Empty                                   = consts.Empty
 )

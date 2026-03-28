@@ -567,6 +567,103 @@ func (m *Manager) FlushPasspointAnqpCache() error {
 	return callErr
 }
 
+// GetAllowedChannels calls android.net.wifi.WifiManager.getAllowedChannels.
+func (m *Manager) GetAllowedChannels(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetAllowedChannels == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getAllowedChannels is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetAllowedChannels, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCallerConfiguredNetworks calls android.net.wifi.WifiManager.getCallerConfiguredNetworks.
+func (m *Manager) GetCallerConfiguredNetworks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetCallerConfiguredNetworks == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getCallerConfiguredNetworks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetCallerConfiguredNetworks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetConfiguredNetworks calls android.net.wifi.WifiManager.getConfiguredNetworks.
+func (m *Manager) GetConfiguredNetworks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetConfiguredNetworks == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getConfiguredNetworks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetConfiguredNetworks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetConnectionInfo calls android.net.wifi.WifiManager.getConnectionInfo.
 func (m *Manager) GetConnectionInfo() (*jni.Object, error) {
 	var result *jni.Object
@@ -706,6 +803,102 @@ func (m *Manager) GetMaxSignalLevel() (int32, error) {
 	return result, callErr
 }
 
+// GetNetworkSuggestions calls android.net.wifi.WifiManager.getNetworkSuggestions.
+func (m *Manager) GetNetworkSuggestions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetNetworkSuggestions == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getNetworkSuggestions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetNetworkSuggestions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPasspointConfigurations calls android.net.wifi.WifiManager.getPasspointConfigurations.
+func (m *Manager) GetPasspointConfigurations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetPasspointConfigurations == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getPasspointConfigurations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetPasspointConfigurations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetScanResults calls android.net.wifi.WifiManager.getScanResults.
+func (m *Manager) GetScanResults() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetScanResults == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getScanResults is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetScanResults,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetStaConcurrencyForMultiInternetMode calls android.net.wifi.WifiManager.getStaConcurrencyForMultiInternetMode.
 func (m *Manager) GetStaConcurrencyForMultiInternetMode() (int32, error) {
 	var result int32
@@ -725,6 +918,39 @@ func (m *Manager) GetStaConcurrencyForMultiInternetMode() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUsableChannels calls android.net.wifi.WifiManager.getUsableChannels.
+func (m *Manager) GetUsableChannels(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetUsableChannels == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiManager.getUsableChannels is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetUsableChannels, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

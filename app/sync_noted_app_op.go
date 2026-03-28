@@ -37,7 +37,7 @@ func NewSyncNotedAppOp(vm *jni.VM, arg0 int32, arg1 string) (*SyncNotedAppOp, er
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncNotedAppOp)), midSyncNotedAppOpInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncNotedAppOp)), midSyncNotedAppOpCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewBadParcelableException(vm *jni.VM, arg0 *jni.Object) (*BadParcelableExce
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBadParcelableException)), midBadParcelableExceptionInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBadParcelableException)), midBadParcelableExceptionCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewAgentHelper(vm *jni.VM) (*AgentHelper, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAgentHelper)), midAgentHelperInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAgentHelper)), midAgentHelperCtor)
 		if err != nil {
 			return err
 		}

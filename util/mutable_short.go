@@ -33,7 +33,7 @@ func NewMutableShort(vm *jni.VM, arg0 int16) (*MutableShort, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableShort)), midMutableShortInit, jni.ShortValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableShort)), midMutableShortCtor, jni.ShortValue(arg0))
 		if err != nil {
 			return err
 		}

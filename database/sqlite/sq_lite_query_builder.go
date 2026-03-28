@@ -32,7 +32,7 @@ func NewSQLiteQueryBuilder(vm *jni.VM) (*SQLiteQueryBuilder, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteQueryBuilder)), midSQLiteQueryBuilderInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteQueryBuilder)), midSQLiteQueryBuilderCtor)
 		if err != nil {
 			return err
 		}
@@ -356,6 +356,38 @@ func (m *SQLiteQueryBuilder) GetCursorFactory() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSQLiteQueryBuilderGetCursorFactory,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetProjectionGreylist calls android.database.sqlite.SQLiteQueryBuilder.getProjectionGreylist.
+func (m *SQLiteQueryBuilder) GetProjectionGreylist() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSQLiteQueryBuilderGetProjectionGreylist == nil {
+			callErr = fmt.Errorf("android.database.sqlite.SQLiteQueryBuilder.getProjectionGreylist is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSQLiteQueryBuilderGetProjectionGreylist,
 		)
 		if callErr != nil {
 			return callErr

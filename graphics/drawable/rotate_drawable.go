@@ -32,7 +32,7 @@ func NewRotateDrawable(vm *jni.VM) (*RotateDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), midRotateDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRotateDrawable)), midRotateDrawableCtor)
 		if err != nil {
 			return err
 		}

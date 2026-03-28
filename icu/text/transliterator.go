@@ -562,6 +562,152 @@ func (m *Transliterator) CreateFromRules(
 	return result, callErr
 }
 
+// GetAvailableIDs calls android.icu.text.Transliterator.getAvailableIDs.
+func (m *Transliterator) GetAvailableIDs() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTransliteratorGetAvailableIDs == nil {
+			callErr = fmt.Errorf("android.icu.text.Transliterator.getAvailableIDs is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsTransliterator)),
+			midTransliteratorGetAvailableIDs,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableSources calls android.icu.text.Transliterator.getAvailableSources.
+func (m *Transliterator) GetAvailableSources() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTransliteratorGetAvailableSources == nil {
+			callErr = fmt.Errorf("android.icu.text.Transliterator.getAvailableSources is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsTransliterator)),
+			midTransliteratorGetAvailableSources,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableTargets calls android.icu.text.Transliterator.getAvailableTargets.
+func (m *Transliterator) GetAvailableTargets(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTransliteratorGetAvailableTargets == nil {
+			callErr = fmt.Errorf("android.icu.text.Transliterator.getAvailableTargets is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsTransliterator)),
+			midTransliteratorGetAvailableTargets, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableVariants calls android.icu.text.Transliterator.getAvailableVariants.
+func (m *Transliterator) GetAvailableVariants(arg0 string, arg1 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTransliteratorGetAvailableVariants == nil {
+			callErr = fmt.Errorf("android.icu.text.Transliterator.getAvailableVariants is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		jArg1, err := env.NewStringUTF(arg1)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg1.Object)
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsTransliterator)),
+			midTransliteratorGetAvailableVariants, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDisplayName1 calls android.icu.text.Transliterator.getDisplayName.
 func (m *Transliterator) GetDisplayName1(arg0 string) (string, error) {
 	var result string

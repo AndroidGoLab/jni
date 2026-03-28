@@ -33,7 +33,7 @@ func NewCategory(vm *jni.VM, arg0 *jni.Object) (*Category, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCategory)), midCategoryInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCategory)), midCategoryCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

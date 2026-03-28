@@ -39,7 +39,7 @@ func NewInfoRequest(vm *jni.VM, arg0 int32, arg1 string) (*InfoRequest, error) {
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInfoRequest)), midInfoRequestInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInfoRequest)), midInfoRequestCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}
@@ -137,6 +137,70 @@ func (m *InfoRequest) GetMimeType() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// Iterator calls android.drm.DrmInfoRequest.iterator.
+func (m *InfoRequest) Iterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInfoRequestIterator == nil {
+			callErr = fmt.Errorf("android.drm.DrmInfoRequest.iterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInfoRequestIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// KeyIterator calls android.drm.DrmInfoRequest.keyIterator.
+func (m *InfoRequest) KeyIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInfoRequestKeyIterator == nil {
+			callErr = fmt.Errorf("android.drm.DrmInfoRequest.keyIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInfoRequestKeyIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

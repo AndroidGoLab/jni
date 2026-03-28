@@ -101,6 +101,70 @@ func (m *UrspRule) GetPrecedence() (int32, error) {
 	return result, callErr
 }
 
+// GetRouteSelectionDescriptor calls android.telephony.data.UrspRule.getRouteSelectionDescriptor.
+func (m *UrspRule) GetRouteSelectionDescriptor() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUrspRuleGetRouteSelectionDescriptor == nil {
+			callErr = fmt.Errorf("android.telephony.data.UrspRule.getRouteSelectionDescriptor is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUrspRuleGetRouteSelectionDescriptor,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTrafficDescriptors calls android.telephony.data.UrspRule.getTrafficDescriptors.
+func (m *UrspRule) GetTrafficDescriptors() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUrspRuleGetTrafficDescriptors == nil {
+			callErr = fmt.Errorf("android.telephony.data.UrspRule.getTrafficDescriptors is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUrspRuleGetTrafficDescriptors,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.telephony.data.UrspRule.hashCode.
 func (m *UrspRule) HashCode() (int32, error) {
 	var result int32

@@ -38,7 +38,7 @@ func NewRfc822AddrIdentification(vm *jni.VM, arg0 string) (*Rfc822AddrIdentifica
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822AddrIdentification)), midRfc822AddrIdentificationInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822AddrIdentification)), midRfc822AddrIdentificationCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

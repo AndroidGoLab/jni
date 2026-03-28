@@ -23,14 +23,8 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsRelativeFrameTimeHistogram                           *jni.GlobalRef
-	midRelativeFrameTimeHistogramInit                       jni.MethodID
-	midRelativeFrameTimeHistogramAddRelativeFrameTimeMillis jni.MethodID
-	midRelativeFrameTimeHistogramGetBucketCounters          jni.MethodID
-	midRelativeFrameTimeHistogramGetBucketEndpointsMillis   jni.MethodID
-
 	clsAppJankStats                              *jni.GlobalRef
-	midAppJankStatsInit                          jni.MethodID
+	midAppJankStatsCtor                          jni.MethodID
 	midAppJankStatsGetJankyFrameCount            jni.MethodID
 	midAppJankStatsGetNavigationComponent        jni.MethodID
 	midAppJankStatsGetRelativeFrameTimeHistogram jni.MethodID
@@ -39,6 +33,12 @@ var (
 	midAppJankStatsGetWidgetCategory             jni.MethodID
 	midAppJankStatsGetWidgetId                   jni.MethodID
 	midAppJankStatsGetWidgetState                jni.MethodID
+
+	clsRelativeFrameTimeHistogram                           *jni.GlobalRef
+	midRelativeFrameTimeHistogramCtor                       jni.MethodID
+	midRelativeFrameTimeHistogramAddRelativeFrameTimeMillis jni.MethodID
+	midRelativeFrameTimeHistogramGetBucketCounters          jni.MethodID
+	midRelativeFrameTimeHistogramGetBucketEndpointsMillis   jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -59,41 +59,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/app/jank/RelativeFrameTimeHistogram")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRelativeFrameTimeHistogram = env.NewGlobalRef(&c.Object)
-		midRelativeFrameTimeHistogramInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "<init>", "()V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midRelativeFrameTimeHistogramAddRelativeFrameTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "addRelativeFrameTimeMillis", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRelativeFrameTimeHistogramGetBucketCounters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "getBucketCounters", "()[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRelativeFrameTimeHistogramGetBucketEndpointsMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "getBucketEndpointsMillis", "()[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/app/jank/AppJankStats")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -101,7 +66,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAppJankStats = env.NewGlobalRef(&c.Object)
-		midAppJankStatsInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppJankStats)), "<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JJLandroid/app/jank/RelativeFrameTimeHistogram;)V")
+		midAppJankStatsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppJankStats)), "<init>", "(ILjava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;JJLandroid/app/jank/RelativeFrameTimeHistogram;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -156,6 +121,41 @@ func doInit(env *jni.Env) error {
 		}
 
 		midAppJankStatsGetWidgetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppJankStats)), "getWidgetState", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/app/jank/RelativeFrameTimeHistogram")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRelativeFrameTimeHistogram = env.NewGlobalRef(&c.Object)
+		midRelativeFrameTimeHistogramCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRelativeFrameTimeHistogramAddRelativeFrameTimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "addRelativeFrameTimeMillis", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRelativeFrameTimeHistogramGetBucketCounters, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "getBucketCounters", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRelativeFrameTimeHistogramGetBucketEndpointsMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRelativeFrameTimeHistogram)), "getBucketEndpointsMillis", "()[I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

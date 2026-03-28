@@ -311,6 +311,38 @@ func (m *MeasureUnit) Reciprocal() (*jni.Object, error) {
 	return result, callErr
 }
 
+// SplitToSingleUnits calls android.icu.util.MeasureUnit.splitToSingleUnits.
+func (m *MeasureUnit) SplitToSingleUnits() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMeasureUnitSplitToSingleUnits == nil {
+			callErr = fmt.Errorf("android.icu.util.MeasureUnit.splitToSingleUnits is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMeasureUnitSplitToSingleUnits,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // ToString calls android.icu.util.MeasureUnit.toString.
 func (m *MeasureUnit) ToString() (string, error) {
 	var result string
@@ -426,6 +458,76 @@ func (m *MeasureUnit) ForIdentifier(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsMeasureUnit)),
 			midMeasureUnitForIdentifier, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailable calls android.icu.util.MeasureUnit.getAvailable.
+func (m *MeasureUnit) GetAvailable(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMeasureUnitGetAvailable == nil {
+			callErr = fmt.Errorf("android.icu.util.MeasureUnit.getAvailable is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsMeasureUnit)),
+			midMeasureUnitGetAvailable, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableTypes calls android.icu.util.MeasureUnit.getAvailableTypes.
+func (m *MeasureUnit) GetAvailableTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMeasureUnitGetAvailableTypes == nil {
+			callErr = fmt.Errorf("android.icu.util.MeasureUnit.getAvailableTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsMeasureUnit)),
+			midMeasureUnitGetAvailableTypes,
 		)
 		if callErr != nil {
 			return callErr

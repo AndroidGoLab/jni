@@ -33,7 +33,7 @@ func NewGLException(vm *jni.VM, arg0 int32) (*GLException, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLException)), midGLExceptionInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLException)), midGLExceptionCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

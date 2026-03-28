@@ -32,7 +32,7 @@ func NewBrowser(vm *jni.VM) (*Browser, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBrowser)), midBrowserInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBrowser)), midBrowserCtor)
 		if err != nil {
 			return err
 		}

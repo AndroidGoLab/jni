@@ -76,6 +76,38 @@ func (m *RenderingConfig) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetKeys calls android.adservices.ondevicepersonalization.RenderingConfig.getKeys.
+func (m *RenderingConfig) GetKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRenderingConfigGetKeys == nil {
+			callErr = fmt.Errorf("android.adservices.ondevicepersonalization.RenderingConfig.getKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRenderingConfigGetKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.adservices.ondevicepersonalization.RenderingConfig.hashCode.
 func (m *RenderingConfig) HashCode() (int32, error) {
 	var result int32

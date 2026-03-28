@@ -32,7 +32,7 @@ func NewShort3(vm *jni.VM) (*Short3, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShort3)), midShort3Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShort3)), midShort3Ctor)
 		if err != nil {
 			return err
 		}

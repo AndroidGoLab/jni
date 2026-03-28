@@ -32,7 +32,7 @@ func NewStreamingSessionCallback(vm *jni.VM) (*StreamingSessionCallback, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStreamingSessionCallback)), midStreamingSessionCallbackInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStreamingSessionCallback)), midStreamingSessionCallbackCtor)
 		if err != nil {
 			return err
 		}

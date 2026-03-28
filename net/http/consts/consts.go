@@ -3,21 +3,9 @@
 package consts
 
 const (
-	HttpCacheDisabled           int = 0
-	HttpCacheDisk               int = 3
-	HttpCacheDiskNoHttp         int = 2
-	HttpCacheInMemory           int = 1
-	ErrorAddressUnreachable     int = 9
-	ErrorConnectionClosed       int = 5
-	ErrorConnectionRefused      int = 7
-	ErrorConnectionReset        int = 8
-	ErrorConnectionTimedOut     int = 6
-	ErrorHostnameNotResolved    int = 1
-	ErrorInternetDisconnected   int = 2
-	ErrorNetworkChanged         int = 3
-	ErrorOther                  int = 11
-	ErrorQuicProtocolFailed     int = 10
-	ErrorTimedOut               int = 4
+	MigrationOptionDisabled     int = 2
+	MigrationOptionEnabled      int = 1
+	MigrationOptionUnspecified  int = 0
 	RequestPriorityHighest      int = 4
 	RequestPriorityIdle         int = 0
 	RequestPriorityLow          int = 2
@@ -39,6 +27,26 @@ const (
 	WaitingForDelegate          int = 3
 	WaitingForResponse          int = 13
 	WaitingForStalledSocketPool int = 1
+	StreamPriorityHighest       int = 4
+	StreamPriorityIdle          int = 0
+	StreamPriorityLow           int = 2
+	StreamPriorityLowest        int = 1
+	StreamPriorityMedium        int = 3
+	HttpCacheDisabled           int = 0
+	HttpCacheDisk               int = 3
+	HttpCacheDiskNoHttp         int = 2
+	HttpCacheInMemory           int = 1
+	ErrorAddressUnreachable     int = 9
+	ErrorConnectionClosed       int = 5
+	ErrorConnectionRefused      int = 7
+	ErrorConnectionReset        int = 8
+	ErrorConnectionTimedOut     int = 6
+	ErrorHostnameNotResolved    int = 1
+	ErrorInternetDisconnected   int = 2
+	ErrorNetworkChanged         int = 3
+	ErrorOther                  int = 11
+	ErrorQuicProtocolFailed     int = 10
+	ErrorTimedOut               int = 4
 	SslDateInvalid              int = 4
 	SslExpired                  int = 1
 	SslIdmismatch               int = 2
@@ -49,12 +57,4 @@ const (
 	DnsOptionDisabled           int = 2
 	DnsOptionEnabled            int = 1
 	DnsOptionUnspecified        int = 0
-	MigrationOptionDisabled     int = 2
-	MigrationOptionEnabled      int = 1
-	MigrationOptionUnspecified  int = 0
-	StreamPriorityHighest       int = 4
-	StreamPriorityIdle          int = 0
-	StreamPriorityLow           int = 2
-	StreamPriorityLowest        int = 1
-	StreamPriorityMedium        int = 3
 )

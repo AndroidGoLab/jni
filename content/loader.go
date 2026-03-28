@@ -33,7 +33,7 @@ func NewLoader(vm *jni.VM, arg0 *jni.Object) (*Loader, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoader)), midLoaderInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoader)), midLoaderCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

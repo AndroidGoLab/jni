@@ -33,7 +33,7 @@ func NewLightingColorFilter(vm *jni.VM, arg0 int32, arg1 int32) (*LightingColorF
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLightingColorFilter)), midLightingColorFilterInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLightingColorFilter)), midLightingColorFilterCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

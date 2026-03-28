@@ -33,7 +33,7 @@ func NewAdaptiveIconDrawable(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*A
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), midAdaptiveIconDrawableInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdaptiveIconDrawable)), midAdaptiveIconDrawableCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

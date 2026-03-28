@@ -51,6 +51,76 @@ func (m *Library) AddGesture(arg0 string, arg1 *jni.Object) error {
 	return callErr
 }
 
+// GetGestureEntries calls android.gesture.GestureLibrary.getGestureEntries.
+func (m *Library) GetGestureEntries() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLibraryGetGestureEntries == nil {
+			callErr = fmt.Errorf("android.gesture.GestureLibrary.getGestureEntries is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLibraryGetGestureEntries,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetGestures calls android.gesture.GestureLibrary.getGestures.
+func (m *Library) GetGestures(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLibraryGetGestures == nil {
+			callErr = fmt.Errorf("android.gesture.GestureLibrary.getGestures is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLibraryGetGestures, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetOrientationStyle calls android.gesture.GestureLibrary.getOrientationStyle.
 func (m *Library) GetOrientationStyle() (int32, error) {
 	var result int32
@@ -150,6 +220,39 @@ func (m *Library) Load() (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// Recognize calls android.gesture.GestureLibrary.recognize.
+func (m *Library) Recognize(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLibraryRecognize == nil {
+			callErr = fmt.Errorf("android.gesture.GestureLibrary.recognize is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLibraryRecognize, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

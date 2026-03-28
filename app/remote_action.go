@@ -43,7 +43,7 @@ func NewRemoteAction(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 string, arg
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteAction)), midRemoteActionInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteAction)), midRemoteActionCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

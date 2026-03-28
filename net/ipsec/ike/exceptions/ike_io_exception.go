@@ -33,7 +33,7 @@ func NewIkeIOException(vm *jni.VM, arg0 *jni.Object) (*IkeIOException, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeIOException)), midIkeIOExceptionInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeIOException)), midIkeIOExceptionCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

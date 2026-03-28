@@ -33,7 +33,7 @@ func NewPathPermission(vm *jni.VM, arg0 *jni.Object) (*PathPermission, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathPermission)), midPathPermissionInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathPermission)), midPathPermissionCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

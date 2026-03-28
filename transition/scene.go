@@ -33,7 +33,7 @@ func NewScene(vm *jni.VM, arg0 *jni.Object) (*Scene, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScene)), midSceneInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScene)), midSceneCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

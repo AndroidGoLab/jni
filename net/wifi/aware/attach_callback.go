@@ -32,7 +32,7 @@ func NewAttachCallback(vm *jni.VM) (*AttachCallback, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAttachCallback)), midAttachCallbackInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAttachCallback)), midAttachCallbackCtor)
 		if err != nil {
 			return err
 		}

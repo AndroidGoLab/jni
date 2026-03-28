@@ -32,7 +32,7 @@ func NewSyncStats(vm *jni.VM) (*SyncStats, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncStats)), midSyncStatsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncStats)), midSyncStatsCtor)
 		if err != nil {
 			return err
 		}

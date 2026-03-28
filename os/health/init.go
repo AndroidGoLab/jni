@@ -23,6 +23,23 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsUidHealthStats *jni.GlobalRef
+
+	clsTimerStat                 *jni.GlobalRef
+	midTimerStatCtor             jni.MethodID
+	midTimerStatDescribeContents jni.MethodID
+	midTimerStatGetCount         jni.MethodID
+	midTimerStatGetTime          jni.MethodID
+	midTimerStatSetCount         jni.MethodID
+	midTimerStatSetTime          jni.MethodID
+	midTimerStatWriteToParcel    jni.MethodID
+
+	clsPackageHealthStats *jni.GlobalRef
+
+	clsPidHealthStats *jni.GlobalRef
+
+	clsServiceHealthStats *jni.GlobalRef
+
 	clsStats                        *jni.GlobalRef
 	midStatsGetDataType             jni.MethodID
 	midStatsGetMeasurement          jni.MethodID
@@ -45,10 +62,6 @@ var (
 	midStatsHasTimer                jni.MethodID
 	midStatsHasTimers               jni.MethodID
 
-	clsPidHealthStats *jni.GlobalRef
-
-	clsPackageHealthStats *jni.GlobalRef
-
 	clsSystemHealthManager                                *jni.GlobalRef
 	midSystemHealthManagerGetCpuHeadroom                  jni.MethodID
 	midSystemHealthManagerGetCpuHeadroomMinIntervalMillis jni.MethodID
@@ -59,20 +72,7 @@ var (
 	midSystemHealthManagerTakeUidSnapshot                 jni.MethodID
 	midSystemHealthManagerTakeUidSnapshots                jni.MethodID
 
-	clsServiceHealthStats *jni.GlobalRef
-
 	clsProcessHealthStats *jni.GlobalRef
-
-	clsTimerStat                 *jni.GlobalRef
-	midTimerStatInit             jni.MethodID
-	midTimerStatDescribeContents jni.MethodID
-	midTimerStatGetCount         jni.MethodID
-	midTimerStatGetTime          jni.MethodID
-	midTimerStatSetCount         jni.MethodID
-	midTimerStatSetTime          jni.MethodID
-	midTimerStatWriteToParcel    jni.MethodID
-
-	clsUidHealthStats *jni.GlobalRef
 )
 
 func ensureInit(env *jni.Env) error {
@@ -92,6 +92,102 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/os/health/UidHealthStats")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsUidHealthStats = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/os/health/TimerStat")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsTimerStat = env.NewGlobalRef(&c.Object)
+		midTimerStatCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midTimerStatDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimerStatGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "getCount", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimerStatGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "getTime", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimerStatSetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "setCount", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimerStatSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "setTime", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midTimerStatWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/os/health/PackageHealthStats")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPackageHealthStats = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/os/health/PidHealthStats")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPidHealthStats = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/os/health/ServiceHealthStats")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsServiceHealthStats = env.NewGlobalRef(&c.Object)
+
+	}
 
 	c, err = env.FindClass("android/os/health/HealthStats")
 	if err != nil {
@@ -243,26 +339,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/os/health/PidHealthStats")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPidHealthStats = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/os/health/PackageHealthStats")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPackageHealthStats = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/os/health/SystemHealthManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -329,16 +405,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/os/health/ServiceHealthStats")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsServiceHealthStats = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/os/health/ProcessHealthStats")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -346,72 +412,6 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsProcessHealthStats = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/os/health/TimerStat")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsTimerStat = env.NewGlobalRef(&c.Object)
-		midTimerStatInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "<init>", "()V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midTimerStatDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimerStatGetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "getCount", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimerStatGetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "getTime", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimerStatSetCount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "setCount", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimerStatSetTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "setTime", "(J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midTimerStatWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTimerStat)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/os/health/UidHealthStats")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsUidHealthStats = env.NewGlobalRef(&c.Object)
 
 	}
 

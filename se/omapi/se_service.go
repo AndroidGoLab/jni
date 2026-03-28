@@ -33,7 +33,7 @@ func NewSEService(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.Obje
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSEService)), midSEServiceInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSEService)), midSEServiceCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

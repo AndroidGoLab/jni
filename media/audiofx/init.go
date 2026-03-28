@@ -23,52 +23,30 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsBassBoost                     *jni.GlobalRef
-	midBassBoostInit                 jni.MethodID
-	midBassBoostGetProperties        jni.MethodID
-	midBassBoostGetRoundedStrength   jni.MethodID
-	midBassBoostGetStrengthSupported jni.MethodID
-	midBassBoostSetParameterListener jni.MethodID
-	midBassBoostSetProperties        jni.MethodID
-	midBassBoostSetStrength          jni.MethodID
-
-	clsBassBoostOnParameterChangeListener                  *jni.GlobalRef
-	midBassBoostOnParameterChangeListenerOnParameterChange jni.MethodID
-
-	clsBassBoostSettings         *jni.GlobalRef
-	midBassBoostSettingsToString jni.MethodID
-
 	clsAutomaticGainControl            *jni.GlobalRef
 	midAutomaticGainControlCreate      jni.MethodID
 	midAutomaticGainControlIsAvailable jni.MethodID
 
-	clsVisualizer                       *jni.GlobalRef
-	midVisualizerInit                   jni.MethodID
-	midVisualizerGetCaptureSize         jni.MethodID
-	midVisualizerGetEnabled             jni.MethodID
-	midVisualizerGetFft                 jni.MethodID
-	midVisualizerGetMeasurementMode     jni.MethodID
-	midVisualizerGetMeasurementPeakRms  jni.MethodID
-	midVisualizerGetSamplingRate        jni.MethodID
-	midVisualizerGetScalingMode         jni.MethodID
-	midVisualizerGetWaveForm            jni.MethodID
-	midVisualizerRelease                jni.MethodID
-	midVisualizerSetCaptureSize         jni.MethodID
-	midVisualizerSetDataCaptureListener jni.MethodID
-	midVisualizerSetEnabled             jni.MethodID
-	midVisualizerSetMeasurementMode     jni.MethodID
-	midVisualizerSetScalingMode         jni.MethodID
-	midVisualizerGetCaptureSizeRange    jni.MethodID
-	midVisualizerGetMaxCaptureRate      jni.MethodID
+	clsPresetReverb                     *jni.GlobalRef
+	midPresetReverbCtor                 jni.MethodID
+	midPresetReverbGetPreset            jni.MethodID
+	midPresetReverbGetProperties        jni.MethodID
+	midPresetReverbSetParameterListener jni.MethodID
+	midPresetReverbSetPreset            jni.MethodID
+	midPresetReverbSetProperties        jni.MethodID
 
-	clsVisualizerMeasurementPeakRms *jni.GlobalRef
+	clsPresetReverbOnParameterChangeListener                  *jni.GlobalRef
+	midPresetReverbOnParameterChangeListenerOnParameterChange jni.MethodID
 
-	clsVisualizerOnDataCaptureListener                      *jni.GlobalRef
-	midVisualizerOnDataCaptureListenerOnFftDataCapture      jni.MethodID
-	midVisualizerOnDataCaptureListenerOnWaveFormDataCapture jni.MethodID
+	clsPresetReverbSettings         *jni.GlobalRef
+	midPresetReverbSettingsToString jni.MethodID
+
+	clsAcousticEchoCanceler            *jni.GlobalRef
+	midAcousticEchoCancelerCreate      jni.MethodID
+	midAcousticEchoCancelerIsAvailable jni.MethodID
 
 	clsEnvironmentalReverb                     *jni.GlobalRef
-	midEnvironmentalReverbInit                 jni.MethodID
+	midEnvironmentalReverbCtor                 jni.MethodID
 	midEnvironmentalReverbGetDecayHFRatio      jni.MethodID
 	midEnvironmentalReverbGetDecayTime         jni.MethodID
 	midEnvironmentalReverbGetDensity           jni.MethodID
@@ -99,71 +77,12 @@ var (
 	clsEnvironmentalReverbSettings         *jni.GlobalRef
 	midEnvironmentalReverbSettingsToString jni.MethodID
 
-	clsAudioEffect                         *jni.GlobalRef
-	midAudioEffectGetDescriptor            jni.MethodID
-	midAudioEffectGetEnabled               jni.MethodID
-	midAudioEffectGetId                    jni.MethodID
-	midAudioEffectHasControl               jni.MethodID
-	midAudioEffectRelease                  jni.MethodID
-	midAudioEffectSetControlStatusListener jni.MethodID
-	midAudioEffectSetEnableStatusListener  jni.MethodID
-	midAudioEffectSetEnabled               jni.MethodID
-	midAudioEffectQueryEffects             jni.MethodID
-
-	clsAudioEffectDescriptor         *jni.GlobalRef
-	midAudioEffectDescriptorEquals   jni.MethodID
-	midAudioEffectDescriptorHashCode jni.MethodID
-
-	clsAudioEffectOnControlStatusChangeListener                      *jni.GlobalRef
-	midAudioEffectOnControlStatusChangeListenerOnControlStatusChange jni.MethodID
-
-	clsAudioEffectOnEnableStatusChangeListener                     *jni.GlobalRef
-	midAudioEffectOnEnableStatusChangeListenerOnEnableStatusChange jni.MethodID
-
-	clsEqualizer                     *jni.GlobalRef
-	midEqualizerInit                 jni.MethodID
-	midEqualizerGetBand              jni.MethodID
-	midEqualizerGetBandFreqRange     jni.MethodID
-	midEqualizerGetBandLevel         jni.MethodID
-	midEqualizerGetBandLevelRange    jni.MethodID
-	midEqualizerGetCenterFreq        jni.MethodID
-	midEqualizerGetCurrentPreset     jni.MethodID
-	midEqualizerGetNumberOfBands     jni.MethodID
-	midEqualizerGetNumberOfPresets   jni.MethodID
-	midEqualizerGetPresetName        jni.MethodID
-	midEqualizerGetProperties        jni.MethodID
-	midEqualizerSetBandLevel         jni.MethodID
-	midEqualizerSetParameterListener jni.MethodID
-	midEqualizerSetProperties        jni.MethodID
-	midEqualizerUsePreset            jni.MethodID
-
-	clsEqualizerOnParameterChangeListener                  *jni.GlobalRef
-	midEqualizerOnParameterChangeListenerOnParameterChange jni.MethodID
-
-	clsEqualizerSettings         *jni.GlobalRef
-	midEqualizerSettingsToString jni.MethodID
-
-	clsPresetReverb                     *jni.GlobalRef
-	midPresetReverbInit                 jni.MethodID
-	midPresetReverbGetPreset            jni.MethodID
-	midPresetReverbGetProperties        jni.MethodID
-	midPresetReverbSetParameterListener jni.MethodID
-	midPresetReverbSetPreset            jni.MethodID
-	midPresetReverbSetProperties        jni.MethodID
-
-	clsPresetReverbOnParameterChangeListener                  *jni.GlobalRef
-	midPresetReverbOnParameterChangeListenerOnParameterChange jni.MethodID
-
-	clsPresetReverbSettings         *jni.GlobalRef
-	midPresetReverbSettingsToString jni.MethodID
-
-	clsLoudnessEnhancer              *jni.GlobalRef
-	midLoudnessEnhancerInit          jni.MethodID
-	midLoudnessEnhancerGetTargetGain jni.MethodID
-	midLoudnessEnhancerSetTargetGain jni.MethodID
+	clsNoiseSuppressor            *jni.GlobalRef
+	midNoiseSuppressorCreate      jni.MethodID
+	midNoiseSuppressorIsAvailable jni.MethodID
 
 	clsDynamicsProcessing                            *jni.GlobalRef
-	midDynamicsProcessingInit                        jni.MethodID
+	midDynamicsProcessingCtor                        jni.MethodID
 	midDynamicsProcessingGetChannelByChannelIndex    jni.MethodID
 	midDynamicsProcessingGetChannelCount             jni.MethodID
 	midDynamicsProcessingGetConfig                   jni.MethodID
@@ -320,12 +239,104 @@ var (
 	midDynamicsProcessingStageSetEnabled jni.MethodID
 	midDynamicsProcessingStageToString   jni.MethodID
 
-	clsNoiseSuppressor            *jni.GlobalRef
-	midNoiseSuppressorCreate      jni.MethodID
-	midNoiseSuppressorIsAvailable jni.MethodID
+	clsBassBoost                     *jni.GlobalRef
+	midBassBoostCtor                 jni.MethodID
+	midBassBoostGetProperties        jni.MethodID
+	midBassBoostGetRoundedStrength   jni.MethodID
+	midBassBoostGetStrengthSupported jni.MethodID
+	midBassBoostSetParameterListener jni.MethodID
+	midBassBoostSetProperties        jni.MethodID
+	midBassBoostSetStrength          jni.MethodID
+
+	clsBassBoostOnParameterChangeListener                  *jni.GlobalRef
+	midBassBoostOnParameterChangeListenerOnParameterChange jni.MethodID
+
+	clsBassBoostSettings         *jni.GlobalRef
+	midBassBoostSettingsToString jni.MethodID
+
+	clsHapticGenerator            *jni.GlobalRef
+	midHapticGeneratorClose       jni.MethodID
+	midHapticGeneratorRelease     jni.MethodID
+	midHapticGeneratorSetEnabled  jni.MethodID
+	midHapticGeneratorCreate      jni.MethodID
+	midHapticGeneratorIsAvailable jni.MethodID
+
+	clsLoudnessEnhancer              *jni.GlobalRef
+	midLoudnessEnhancerCtor          jni.MethodID
+	midLoudnessEnhancerGetTargetGain jni.MethodID
+	midLoudnessEnhancerSetTargetGain jni.MethodID
+
+	clsAudioEffect                         *jni.GlobalRef
+	midAudioEffectGetDescriptor            jni.MethodID
+	midAudioEffectGetEnabled               jni.MethodID
+	midAudioEffectGetId                    jni.MethodID
+	midAudioEffectHasControl               jni.MethodID
+	midAudioEffectRelease                  jni.MethodID
+	midAudioEffectSetControlStatusListener jni.MethodID
+	midAudioEffectSetEnableStatusListener  jni.MethodID
+	midAudioEffectSetEnabled               jni.MethodID
+	midAudioEffectQueryEffects             jni.MethodID
+
+	clsAudioEffectDescriptor         *jni.GlobalRef
+	midAudioEffectDescriptorEquals   jni.MethodID
+	midAudioEffectDescriptorHashCode jni.MethodID
+
+	clsAudioEffectOnControlStatusChangeListener                      *jni.GlobalRef
+	midAudioEffectOnControlStatusChangeListenerOnControlStatusChange jni.MethodID
+
+	clsAudioEffectOnEnableStatusChangeListener                     *jni.GlobalRef
+	midAudioEffectOnEnableStatusChangeListenerOnEnableStatusChange jni.MethodID
+
+	clsEqualizer                     *jni.GlobalRef
+	midEqualizerCtor                 jni.MethodID
+	midEqualizerGetBand              jni.MethodID
+	midEqualizerGetBandFreqRange     jni.MethodID
+	midEqualizerGetBandLevel         jni.MethodID
+	midEqualizerGetBandLevelRange    jni.MethodID
+	midEqualizerGetCenterFreq        jni.MethodID
+	midEqualizerGetCurrentPreset     jni.MethodID
+	midEqualizerGetNumberOfBands     jni.MethodID
+	midEqualizerGetNumberOfPresets   jni.MethodID
+	midEqualizerGetPresetName        jni.MethodID
+	midEqualizerGetProperties        jni.MethodID
+	midEqualizerSetBandLevel         jni.MethodID
+	midEqualizerSetParameterListener jni.MethodID
+	midEqualizerSetProperties        jni.MethodID
+	midEqualizerUsePreset            jni.MethodID
+
+	clsEqualizerOnParameterChangeListener                  *jni.GlobalRef
+	midEqualizerOnParameterChangeListenerOnParameterChange jni.MethodID
+
+	clsEqualizerSettings         *jni.GlobalRef
+	midEqualizerSettingsToString jni.MethodID
+
+	clsVisualizer                       *jni.GlobalRef
+	midVisualizerCtor                   jni.MethodID
+	midVisualizerGetCaptureSize         jni.MethodID
+	midVisualizerGetEnabled             jni.MethodID
+	midVisualizerGetFft                 jni.MethodID
+	midVisualizerGetMeasurementMode     jni.MethodID
+	midVisualizerGetMeasurementPeakRms  jni.MethodID
+	midVisualizerGetSamplingRate        jni.MethodID
+	midVisualizerGetScalingMode         jni.MethodID
+	midVisualizerGetWaveForm            jni.MethodID
+	midVisualizerRelease                jni.MethodID
+	midVisualizerSetCaptureSize         jni.MethodID
+	midVisualizerSetDataCaptureListener jni.MethodID
+	midVisualizerSetEnabled             jni.MethodID
+	midVisualizerSetMeasurementMode     jni.MethodID
+	midVisualizerSetScalingMode         jni.MethodID
+	midVisualizerGetCaptureSizeRange    jni.MethodID
+	midVisualizerGetMaxCaptureRate      jni.MethodID
+
+	clsVisualizerMeasurementPeakRms *jni.GlobalRef
+
+	clsVisualizerOnDataCaptureListener                      *jni.GlobalRef
+	midVisualizerOnDataCaptureListenerOnFftDataCapture      jni.MethodID
+	midVisualizerOnDataCaptureListenerOnWaveFormDataCapture jni.MethodID
 
 	clsVirtualizer                        *jni.GlobalRef
-	midVirtualizerInit                    jni.MethodID
+	midVirtualizerCtor                    jni.MethodID
 	midVirtualizerCanVirtualize           jni.MethodID
 	midVirtualizerForceVirtualizationMode jni.MethodID
 	midVirtualizerGetProperties           jni.MethodID
@@ -342,17 +353,6 @@ var (
 
 	clsVirtualizerSettings         *jni.GlobalRef
 	midVirtualizerSettingsToString jni.MethodID
-
-	clsAcousticEchoCanceler            *jni.GlobalRef
-	midAcousticEchoCancelerCreate      jni.MethodID
-	midAcousticEchoCancelerIsAvailable jni.MethodID
-
-	clsHapticGenerator            *jni.GlobalRef
-	midHapticGeneratorClose       jni.MethodID
-	midHapticGeneratorRelease     jni.MethodID
-	midHapticGeneratorSetEnabled  jni.MethodID
-	midHapticGeneratorCreate      jni.MethodID
-	midHapticGeneratorIsAvailable jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -372,96 +372,6 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
-
-	c, err = env.FindClass("android/media/audiofx/BassBoost")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBassBoost = env.NewGlobalRef(&c.Object)
-		midBassBoostInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "<init>", "(II)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midBassBoostGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "getProperties", "()Landroid/media/audiofx/BassBoost$Settings;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBassBoostGetRoundedStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "getRoundedStrength", "()S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBassBoostGetStrengthSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "getStrengthSupported", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBassBoostSetParameterListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "setParameterListener", "(Landroid/media/audiofx/BassBoost$OnParameterChangeListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBassBoostSetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "setProperties", "(Landroid/media/audiofx/BassBoost$Settings;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBassBoostSetStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "setStrength", "(S)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/BassBoost$OnParameterChangeListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBassBoostOnParameterChangeListener = env.NewGlobalRef(&c.Object)
-
-		midBassBoostOnParameterChangeListenerOnParameterChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoostOnParameterChangeListener)), "onParameterChange", "(Landroid/media/audiofx/BassBoost;IIS)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/BassBoost$Settings")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBassBoostSettings = env.NewGlobalRef(&c.Object)
-
-		midBassBoostSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoostSettings)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
 
 	c, err = env.FindClass("android/media/audiofx/AutomaticGainControl")
 	if err != nil {
@@ -487,124 +397,47 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/audiofx/Visualizer")
+	c, err = env.FindClass("android/media/audiofx/PresetReverb")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsVisualizer = env.NewGlobalRef(&c.Object)
-		midVisualizerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "<init>", "(I)V")
+		clsPresetReverb = env.NewGlobalRef(&c.Object)
+		midPresetReverbCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "<init>", "(II)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
-		midVisualizerGetCaptureSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getCaptureSize", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerGetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getEnabled", "()Z")
+		midPresetReverbGetPreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "getPreset", "()S")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midVisualizerGetFft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getFft", "([B)I")
+		midPresetReverbGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "getProperties", "()Landroid/media/audiofx/PresetReverb$Settings;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midVisualizerGetMeasurementMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getMeasurementMode", "()I")
+		midPresetReverbSetParameterListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "setParameterListener", "(Landroid/media/audiofx/PresetReverb$OnParameterChangeListener;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midVisualizerGetMeasurementPeakRms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getMeasurementPeakRms", "(Landroid/media/audiofx/Visualizer$MeasurementPeakRms;)I")
+		midPresetReverbSetPreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "setPreset", "(S)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midVisualizerGetSamplingRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getSamplingRate", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerGetScalingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getScalingMode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerGetWaveForm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getWaveForm", "([B)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "release", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerSetCaptureSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setCaptureSize", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerSetDataCaptureListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setDataCaptureListener", "(Landroid/media/audiofx/Visualizer$OnDataCaptureListener;IZZ)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setEnabled", "(Z)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerSetMeasurementMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setMeasurementMode", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerSetScalingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setScalingMode", "(I)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerGetCaptureSizeRange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getCaptureSizeRange", "()[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVisualizerGetMaxCaptureRate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getMaxCaptureRate", "()I")
+		midPresetReverbSetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "setProperties", "(Landroid/media/audiofx/PresetReverb$Settings;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -613,32 +446,56 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/audiofx/Visualizer$MeasurementPeakRms")
+	c, err = env.FindClass("android/media/audiofx/PresetReverb$OnParameterChangeListener")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsVisualizerMeasurementPeakRms = env.NewGlobalRef(&c.Object)
+		clsPresetReverbOnParameterChangeListener = env.NewGlobalRef(&c.Object)
 
-	}
-
-	c, err = env.FindClass("android/media/audiofx/Visualizer$OnDataCaptureListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsVisualizerOnDataCaptureListener = env.NewGlobalRef(&c.Object)
-
-		midVisualizerOnDataCaptureListenerOnFftDataCapture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizerOnDataCaptureListener)), "onFftDataCapture", "(Landroid/media/audiofx/Visualizer;[BI)V")
+		midPresetReverbOnParameterChangeListenerOnParameterChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverbOnParameterChangeListener)), "onParameterChange", "(Landroid/media/audiofx/PresetReverb;IIS)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midVisualizerOnDataCaptureListenerOnWaveFormDataCapture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizerOnDataCaptureListener)), "onWaveFormDataCapture", "(Landroid/media/audiofx/Visualizer;[BI)V")
+	}
+
+	c, err = env.FindClass("android/media/audiofx/PresetReverb$Settings")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPresetReverbSettings = env.NewGlobalRef(&c.Object)
+
+		midPresetReverbSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverbSettings)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/AcousticEchoCanceler")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAcousticEchoCanceler = env.NewGlobalRef(&c.Object)
+
+		midAcousticEchoCancelerCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAcousticEchoCanceler)), "create", "(I)Landroid/media/audiofx/AcousticEchoCanceler;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAcousticEchoCancelerIsAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAcousticEchoCanceler)), "isAvailable", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -654,7 +511,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsEnvironmentalReverb = env.NewGlobalRef(&c.Object)
-		midEnvironmentalReverbInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvironmentalReverb)), "<init>", "(II)V")
+		midEnvironmentalReverbCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvironmentalReverb)), "<init>", "(II)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -856,386 +713,22 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/audiofx/AudioEffect")
+	c, err = env.FindClass("android/media/audiofx/NoiseSuppressor")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsAudioEffect = env.NewGlobalRef(&c.Object)
+		clsNoiseSuppressor = env.NewGlobalRef(&c.Object)
 
-		midAudioEffectGetDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "getDescriptor", "()Landroid/media/audiofx/AudioEffect$Descriptor;")
+		midNoiseSuppressorCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNoiseSuppressor)), "create", "(I)Landroid/media/audiofx/NoiseSuppressor;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midAudioEffectGetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "getEnabled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "getId", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectHasControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "hasControl", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "release", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectSetControlStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "setControlStatusListener", "(Landroid/media/audiofx/AudioEffect$OnControlStatusChangeListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectSetEnableStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "setEnableStatusListener", "(Landroid/media/audiofx/AudioEffect$OnEnableStatusChangeListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "setEnabled", "(Z)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectQueryEffects, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "queryEffects", "()[Landroid/media/audiofx/AudioEffect$Descriptor;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/AudioEffect$Descriptor")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAudioEffectDescriptor = env.NewGlobalRef(&c.Object)
-
-		midAudioEffectDescriptorEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectDescriptor)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAudioEffectDescriptorHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectDescriptor)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/AudioEffect$OnControlStatusChangeListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAudioEffectOnControlStatusChangeListener = env.NewGlobalRef(&c.Object)
-
-		midAudioEffectOnControlStatusChangeListenerOnControlStatusChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectOnControlStatusChangeListener)), "onControlStatusChange", "(Landroid/media/audiofx/AudioEffect;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/AudioEffect$OnEnableStatusChangeListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAudioEffectOnEnableStatusChangeListener = env.NewGlobalRef(&c.Object)
-
-		midAudioEffectOnEnableStatusChangeListenerOnEnableStatusChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectOnEnableStatusChangeListener)), "onEnableStatusChange", "(Landroid/media/audiofx/AudioEffect;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/Equalizer")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEqualizer = env.NewGlobalRef(&c.Object)
-		midEqualizerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "<init>", "(II)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBand", "(I)S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetBandFreqRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBandFreqRange", "(S)[I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetBandLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBandLevel", "(S)S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetBandLevelRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBandLevelRange", "()[S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetCenterFreq, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getCenterFreq", "(S)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetCurrentPreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getCurrentPreset", "()S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetNumberOfBands, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getNumberOfBands", "()S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetNumberOfPresets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getNumberOfPresets", "()S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetPresetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getPresetName", "(S)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getProperties", "()Landroid/media/audiofx/Equalizer$Settings;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerSetBandLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "setBandLevel", "(SS)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerSetParameterListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "setParameterListener", "(Landroid/media/audiofx/Equalizer$OnParameterChangeListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerSetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "setProperties", "(Landroid/media/audiofx/Equalizer$Settings;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midEqualizerUsePreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "usePreset", "(S)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/Equalizer$OnParameterChangeListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEqualizerOnParameterChangeListener = env.NewGlobalRef(&c.Object)
-
-		midEqualizerOnParameterChangeListenerOnParameterChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizerOnParameterChangeListener)), "onParameterChange", "(Landroid/media/audiofx/Equalizer;IIII)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/Equalizer$Settings")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsEqualizerSettings = env.NewGlobalRef(&c.Object)
-
-		midEqualizerSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizerSettings)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/PresetReverb")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPresetReverb = env.NewGlobalRef(&c.Object)
-		midPresetReverbInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "<init>", "(II)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midPresetReverbGetPreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "getPreset", "()S")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPresetReverbGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "getProperties", "()Landroid/media/audiofx/PresetReverb$Settings;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPresetReverbSetParameterListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "setParameterListener", "(Landroid/media/audiofx/PresetReverb$OnParameterChangeListener;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPresetReverbSetPreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "setPreset", "(S)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPresetReverbSetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverb)), "setProperties", "(Landroid/media/audiofx/PresetReverb$Settings;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/PresetReverb$OnParameterChangeListener")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPresetReverbOnParameterChangeListener = env.NewGlobalRef(&c.Object)
-
-		midPresetReverbOnParameterChangeListenerOnParameterChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverbOnParameterChangeListener)), "onParameterChange", "(Landroid/media/audiofx/PresetReverb;IIS)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/PresetReverb$Settings")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPresetReverbSettings = env.NewGlobalRef(&c.Object)
-
-		midPresetReverbSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPresetReverbSettings)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/LoudnessEnhancer")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsLoudnessEnhancer = env.NewGlobalRef(&c.Object)
-		midLoudnessEnhancerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), "<init>", "(I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midLoudnessEnhancerGetTargetGain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), "getTargetGain", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midLoudnessEnhancerSetTargetGain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), "setTargetGain", "(I)V")
+		midNoiseSuppressorIsAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNoiseSuppressor)), "isAvailable", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1251,7 +744,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDynamicsProcessing = env.NewGlobalRef(&c.Object)
-		midDynamicsProcessingInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicsProcessing)), "<init>", "(I)V")
+		midDynamicsProcessingCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDynamicsProcessing)), "<init>", "(I)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -2303,22 +1796,598 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/media/audiofx/NoiseSuppressor")
+	c, err = env.FindClass("android/media/audiofx/BassBoost")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsNoiseSuppressor = env.NewGlobalRef(&c.Object)
+		clsBassBoost = env.NewGlobalRef(&c.Object)
+		midBassBoostCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "<init>", "(II)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midNoiseSuppressorCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNoiseSuppressor)), "create", "(I)Landroid/media/audiofx/NoiseSuppressor;")
+		midBassBoostGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "getProperties", "()Landroid/media/audiofx/BassBoost$Settings;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midNoiseSuppressorIsAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsNoiseSuppressor)), "isAvailable", "()Z")
+		midBassBoostGetRoundedStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "getRoundedStrength", "()S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBassBoostGetStrengthSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "getStrengthSupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBassBoostSetParameterListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "setParameterListener", "(Landroid/media/audiofx/BassBoost$OnParameterChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBassBoostSetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "setProperties", "(Landroid/media/audiofx/BassBoost$Settings;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBassBoostSetStrength, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoost)), "setStrength", "(S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/BassBoost$OnParameterChangeListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBassBoostOnParameterChangeListener = env.NewGlobalRef(&c.Object)
+
+		midBassBoostOnParameterChangeListenerOnParameterChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoostOnParameterChangeListener)), "onParameterChange", "(Landroid/media/audiofx/BassBoost;IIS)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/BassBoost$Settings")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBassBoostSettings = env.NewGlobalRef(&c.Object)
+
+		midBassBoostSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBassBoostSettings)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/HapticGenerator")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsHapticGenerator = env.NewGlobalRef(&c.Object)
+
+		midHapticGeneratorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "close", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHapticGeneratorRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "release", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHapticGeneratorSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "setEnabled", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHapticGeneratorCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "create", "(I)Landroid/media/audiofx/HapticGenerator;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midHapticGeneratorIsAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "isAvailable", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/LoudnessEnhancer")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsLoudnessEnhancer = env.NewGlobalRef(&c.Object)
+		midLoudnessEnhancerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midLoudnessEnhancerGetTargetGain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), "getTargetGain", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midLoudnessEnhancerSetTargetGain, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), "setTargetGain", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/AudioEffect")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAudioEffect = env.NewGlobalRef(&c.Object)
+
+		midAudioEffectGetDescriptor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "getDescriptor", "()Landroid/media/audiofx/AudioEffect$Descriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectGetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "getEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "getId", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectHasControl, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "hasControl", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "release", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectSetControlStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "setControlStatusListener", "(Landroid/media/audiofx/AudioEffect$OnControlStatusChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectSetEnableStatusListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "setEnableStatusListener", "(Landroid/media/audiofx/AudioEffect$OnEnableStatusChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "setEnabled", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectQueryEffects, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffect)), "queryEffects", "()[Landroid/media/audiofx/AudioEffect$Descriptor;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/AudioEffect$Descriptor")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAudioEffectDescriptor = env.NewGlobalRef(&c.Object)
+
+		midAudioEffectDescriptorEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectDescriptor)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAudioEffectDescriptorHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectDescriptor)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/AudioEffect$OnControlStatusChangeListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAudioEffectOnControlStatusChangeListener = env.NewGlobalRef(&c.Object)
+
+		midAudioEffectOnControlStatusChangeListenerOnControlStatusChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectOnControlStatusChangeListener)), "onControlStatusChange", "(Landroid/media/audiofx/AudioEffect;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/AudioEffect$OnEnableStatusChangeListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAudioEffectOnEnableStatusChangeListener = env.NewGlobalRef(&c.Object)
+
+		midAudioEffectOnEnableStatusChangeListenerOnEnableStatusChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAudioEffectOnEnableStatusChangeListener)), "onEnableStatusChange", "(Landroid/media/audiofx/AudioEffect;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/Equalizer")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEqualizer = env.NewGlobalRef(&c.Object)
+		midEqualizerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "<init>", "(II)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetBand, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBand", "(I)S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetBandFreqRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBandFreqRange", "(S)[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetBandLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBandLevel", "(S)S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetBandLevelRange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getBandLevelRange", "()[S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetCenterFreq, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getCenterFreq", "(S)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetCurrentPreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getCurrentPreset", "()S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetNumberOfBands, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getNumberOfBands", "()S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetNumberOfPresets, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getNumberOfPresets", "()S")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetPresetName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getPresetName", "(S)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerGetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "getProperties", "()Landroid/media/audiofx/Equalizer$Settings;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerSetBandLevel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "setBandLevel", "(SS)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerSetParameterListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "setParameterListener", "(Landroid/media/audiofx/Equalizer$OnParameterChangeListener;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerSetProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "setProperties", "(Landroid/media/audiofx/Equalizer$Settings;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midEqualizerUsePreset, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizer)), "usePreset", "(S)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/Equalizer$OnParameterChangeListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEqualizerOnParameterChangeListener = env.NewGlobalRef(&c.Object)
+
+		midEqualizerOnParameterChangeListenerOnParameterChange, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizerOnParameterChangeListener)), "onParameterChange", "(Landroid/media/audiofx/Equalizer;IIII)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/Equalizer$Settings")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsEqualizerSettings = env.NewGlobalRef(&c.Object)
+
+		midEqualizerSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEqualizerSettings)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/Visualizer")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVisualizer = env.NewGlobalRef(&c.Object)
+		midVisualizerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetCaptureSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getCaptureSize", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getEnabled", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetFft, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getFft", "([B)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetMeasurementMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getMeasurementMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetMeasurementPeakRms, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getMeasurementPeakRms", "(Landroid/media/audiofx/Visualizer$MeasurementPeakRms;)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetSamplingRate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getSamplingRate", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetScalingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getScalingMode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetWaveForm, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getWaveForm", "([B)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "release", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerSetCaptureSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setCaptureSize", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerSetDataCaptureListener, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setDataCaptureListener", "(Landroid/media/audiofx/Visualizer$OnDataCaptureListener;IZZ)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setEnabled", "(Z)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerSetMeasurementMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setMeasurementMode", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerSetScalingMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "setScalingMode", "(I)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetCaptureSizeRange, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getCaptureSizeRange", "()[I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerGetMaxCaptureRate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVisualizer)), "getMaxCaptureRate", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/Visualizer$MeasurementPeakRms")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVisualizerMeasurementPeakRms = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/media/audiofx/Visualizer$OnDataCaptureListener")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVisualizerOnDataCaptureListener = env.NewGlobalRef(&c.Object)
+
+		midVisualizerOnDataCaptureListenerOnFftDataCapture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizerOnDataCaptureListener)), "onFftDataCapture", "(Landroid/media/audiofx/Visualizer;[BI)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVisualizerOnDataCaptureListenerOnWaveFormDataCapture, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVisualizerOnDataCaptureListener)), "onWaveFormDataCapture", "(Landroid/media/audiofx/Visualizer;[BI)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2334,7 +2403,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsVirtualizer = env.NewGlobalRef(&c.Object)
-		midVirtualizerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualizer)), "<init>", "(II)V")
+		midVirtualizerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualizer)), "<init>", "(II)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -2437,75 +2506,6 @@ func doInit(env *jni.Env) error {
 		clsVirtualizerSettings = env.NewGlobalRef(&c.Object)
 
 		midVirtualizerSettingsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVirtualizerSettings)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/AcousticEchoCanceler")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAcousticEchoCanceler = env.NewGlobalRef(&c.Object)
-
-		midAcousticEchoCancelerCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAcousticEchoCanceler)), "create", "(I)Landroid/media/audiofx/AcousticEchoCanceler;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAcousticEchoCancelerIsAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsAcousticEchoCanceler)), "isAvailable", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/media/audiofx/HapticGenerator")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsHapticGenerator = env.NewGlobalRef(&c.Object)
-
-		midHapticGeneratorClose, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "close", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHapticGeneratorRelease, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "release", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHapticGeneratorSetEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "setEnabled", "(Z)I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHapticGeneratorCreate, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "create", "(I)Landroid/media/audiofx/HapticGenerator;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midHapticGeneratorIsAvailable, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsHapticGenerator)), "isAvailable", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

@@ -6,6 +6,23 @@ import "github.com/AndroidGoLab/jni/app/job/consts"
 
 const (
 	Creator                                  = consts.Creator
+	BackoffPolicyExponential                 = consts.BackoffPolicyExponential
+	BackoffPolicyLinear                      = consts.BackoffPolicyLinear
+	NetworkBytesUnknown                      = consts.NetworkBytesUnknown
+	NetworkTypeAny                           = consts.NetworkTypeAny
+	NetworkTypeCellular                      = consts.NetworkTypeCellular
+	NetworkTypeMetered                       = consts.NetworkTypeMetered
+	NetworkTypeNone                          = consts.NetworkTypeNone
+	NetworkTypeNotRoaming                    = consts.NetworkTypeNotRoaming
+	NetworkTypeUnmetered                     = consts.NetworkTypeUnmetered
+	PriorityDefault                          = consts.PriorityDefault
+	PriorityHigh                             = consts.PriorityHigh
+	PriorityLow                              = consts.PriorityLow
+	PriorityMax                              = consts.PriorityMax
+	PriorityMin                              = consts.PriorityMin
+	FlagNotifyForDescendants                 = consts.FlagNotifyForDescendants
+	JobEndNotificationPolicyDetach           = consts.JobEndNotificationPolicyDetach
+	JobEndNotificationPolicyRemove           = consts.JobEndNotificationPolicyRemove
 	PendingJobReasonApp                      = consts.PendingJobReasonApp
 	PendingJobReasonAppStandby               = consts.PendingJobReasonAppStandby
 	PendingJobReasonBackgroundRestriction    = consts.PendingJobReasonBackgroundRestriction
@@ -27,23 +44,6 @@ const (
 	PendingJobReasonUser                     = consts.PendingJobReasonUser
 	ResultFailure                            = consts.ResultFailure
 	ResultSuccess                            = consts.ResultSuccess
-	JobEndNotificationPolicyDetach           = consts.JobEndNotificationPolicyDetach
-	JobEndNotificationPolicyRemove           = consts.JobEndNotificationPolicyRemove
-	BackoffPolicyExponential                 = consts.BackoffPolicyExponential
-	BackoffPolicyLinear                      = consts.BackoffPolicyLinear
-	NetworkBytesUnknown                      = consts.NetworkBytesUnknown
-	NetworkTypeAny                           = consts.NetworkTypeAny
-	NetworkTypeCellular                      = consts.NetworkTypeCellular
-	NetworkTypeMetered                       = consts.NetworkTypeMetered
-	NetworkTypeNone                          = consts.NetworkTypeNone
-	NetworkTypeNotRoaming                    = consts.NetworkTypeNotRoaming
-	NetworkTypeUnmetered                     = consts.NetworkTypeUnmetered
-	PriorityDefault                          = consts.PriorityDefault
-	PriorityHigh                             = consts.PriorityHigh
-	PriorityLow                              = consts.PriorityLow
-	PriorityMax                              = consts.PriorityMax
-	PriorityMin                              = consts.PriorityMin
-	FlagNotifyForDescendants                 = consts.FlagNotifyForDescendants
 	StopReasonAppStandby                     = consts.StopReasonAppStandby
 	StopReasonBackgroundRestriction          = consts.StopReasonBackgroundRestriction
 	StopReasonCancelledByApp                 = consts.StopReasonCancelledByApp
@@ -64,10 +64,10 @@ const (
 )
 
 const (
-	PermissionBind = consts.PermissionBind
+	DefaultInitialBackoffMillis = consts.DefaultInitialBackoffMillis
+	MaxBackoffDelayMillis       = consts.MaxBackoffDelayMillis
 )
 
 const (
-	DefaultInitialBackoffMillis = consts.DefaultInitialBackoffMillis
-	MaxBackoffDelayMillis       = consts.MaxBackoffDelayMillis
+	PermissionBind = consts.PermissionBind
 )

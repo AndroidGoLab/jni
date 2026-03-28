@@ -30,7 +30,7 @@ func NewTabActivity(vm *jni.VM) (*TabActivity, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabActivity)), midTabActivityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabActivity)), midTabActivityCtor)
 		if err != nil {
 			return err
 		}

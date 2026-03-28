@@ -32,7 +32,7 @@ func NewThumbnailUtils(vm *jni.VM) (*ThumbnailUtils, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsThumbnailUtils)), midThumbnailUtilsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsThumbnailUtils)), midThumbnailUtilsCtor)
 		if err != nil {
 			return err
 		}

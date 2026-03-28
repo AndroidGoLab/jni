@@ -33,7 +33,7 @@ func NewTabWidget(vm *jni.VM, arg0 *jni.Object) (*TabWidget, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabWidget)), midTabWidgetInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabWidget)), midTabWidgetCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

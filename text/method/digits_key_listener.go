@@ -32,7 +32,7 @@ func NewDigitsKeyListener(vm *jni.VM) (*DigitsKeyListener, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), midDigitsKeyListenerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDigitsKeyListener)), midDigitsKeyListenerCtor)
 		if err != nil {
 			return err
 		}

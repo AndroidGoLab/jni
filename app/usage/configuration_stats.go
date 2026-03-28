@@ -33,7 +33,7 @@ func NewConfigurationStats(vm *jni.VM, arg0 *jni.Object) (*ConfigurationStats, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfigurationStats)), midConfigurationStatsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfigurationStats)), midConfigurationStatsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

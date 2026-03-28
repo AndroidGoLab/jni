@@ -33,7 +33,7 @@ func NewDatePicker(vm *jni.VM, arg0 *jni.Object) (*DatePicker, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDatePicker)), midDatePickerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDatePicker)), midDatePickerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -431,14 +431,14 @@ func (m *DatePicker) Init(
 			callErr = err
 			return err
 		}
-		if midDatePickerInitMethod == nil {
+		if midDatePickerInit == nil {
 			callErr = fmt.Errorf("android.widget.DatePicker.init is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midDatePickerInitMethod, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			midDatePickerInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})

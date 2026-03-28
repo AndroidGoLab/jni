@@ -33,7 +33,7 @@ func NewKeyIdIdentification(vm *jni.VM, arg0 *jni.Object) (*KeyIdIdentification,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyIdIdentification)), midKeyIdIdentificationInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyIdIdentification)), midKeyIdIdentificationCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

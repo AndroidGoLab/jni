@@ -32,7 +32,7 @@ func NewChineseCalendar(vm *jni.VM) (*ChineseCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChineseCalendar)), midChineseCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChineseCalendar)), midChineseCalendarCtor)
 		if err != nil {
 			return err
 		}

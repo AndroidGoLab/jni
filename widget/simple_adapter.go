@@ -33,7 +33,7 @@ func NewSimpleAdapter(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 int32
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleAdapter)), midSimpleAdapterInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleAdapter)), midSimpleAdapterCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}

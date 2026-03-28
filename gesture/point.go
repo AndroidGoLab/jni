@@ -33,7 +33,7 @@ func NewPoint(vm *jni.VM, arg0 float32, arg1 float32, arg2 int64) (*Point, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPoint)), midPointInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.LongValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPoint)), midPointCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.LongValue(arg2))
 		if err != nil {
 			return err
 		}

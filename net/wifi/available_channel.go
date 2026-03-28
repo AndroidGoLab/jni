@@ -33,7 +33,7 @@ func NewAvailableChannel(vm *jni.VM, arg0 int32, arg1 int32) (*AvailableChannel,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAvailableChannel)), midAvailableChannelInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAvailableChannel)), midAvailableChannelCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

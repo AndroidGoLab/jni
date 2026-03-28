@@ -3,10 +3,11 @@
 package consts
 
 const (
+	TypeKovio                     int = 1
+	TypeUnknown                   int = -1
 	PageSize                      int = 4
 	TypeUltralight                int = 1
 	TypeUltralightC               int = 2
-	TypeUnknown                   int = -1
 	BlockSize                     int = 16
 	KeyDefault                    int = 0
 	KeyMifareApplicationDirectory int = 0
@@ -18,5 +19,4 @@ const (
 	TypeClassic                   int = 0
 	TypePlus                      int = 1
 	TypePro                       int = 2
-	TypeKovio                     int = 1
 )

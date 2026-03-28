@@ -33,7 +33,7 @@ func NewSizeF(vm *jni.VM, arg0 float32, arg1 float32) (*SizeF, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSizeF)), midSizeFInit, jni.FloatValue(arg0), jni.FloatValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSizeF)), midSizeFCtor, jni.FloatValue(arg0), jni.FloatValue(arg1))
 		if err != nil {
 			return err
 		}

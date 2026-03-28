@@ -38,7 +38,7 @@ func NewModeAction(vm *jni.VM, arg0 string, arg1 int32) (*ModeAction, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsModeAction)), midModeActionInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsModeAction)), midModeActionCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewFontStyle(vm *jni.VM) (*FontStyle, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFontStyle)), midFontStyleInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFontStyle)), midFontStyleCtor)
 		if err != nil {
 			return err
 		}

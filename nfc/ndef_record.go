@@ -33,7 +33,7 @@ func NewNdefRecord(vm *jni.VM, arg0 *jni.Object) (*NdefRecord, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNdefRecord)), midNdefRecordInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNdefRecord)), midNdefRecordCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

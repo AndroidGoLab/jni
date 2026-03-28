@@ -33,7 +33,7 @@ func NewStructTimespec(vm *jni.VM, arg0 int64, arg1 int64) (*StructTimespec, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructTimespec)), midStructTimespecInit, jni.LongValue(arg0), jni.LongValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructTimespec)), midStructTimespecCtor, jni.LongValue(arg0), jni.LongValue(arg1))
 		if err != nil {
 			return err
 		}

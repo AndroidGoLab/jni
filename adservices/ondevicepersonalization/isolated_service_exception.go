@@ -33,7 +33,7 @@ func NewIsolatedServiceException(vm *jni.VM, arg0 int32) (*IsolatedServiceExcept
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIsolatedServiceException)), midIsolatedServiceExceptionInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIsolatedServiceException)), midIsolatedServiceExceptionCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

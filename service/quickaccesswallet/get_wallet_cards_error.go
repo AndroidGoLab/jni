@@ -39,7 +39,7 @@ func NewGetWalletCardsError(vm *jni.VM, arg0 *jni.Object, arg1 string) (*GetWall
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), midGetWalletCardsErrorInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGetWalletCardsError)), midGetWalletCardsErrorCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

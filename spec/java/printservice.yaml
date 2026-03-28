@@ -5,6 +5,48 @@
 package: printservice
 go_import: github.com/AndroidGoLab/jni/printservice
 classes:
+    - java_class: android.printservice.CustomPrinterIconCallback
+      go_type: CustomPrinterIconCallback
+      methods:
+        - java_method: onCustomPrinterIconLoaded
+          go_name: OnCustomPrinterIconLoaded
+          params:
+            - java_type: android.graphics.drawable.Icon
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.printservice.PrintDocument
+      go_type: PrintDocument
+      methods:
+        - java_method: getData
+          go_name: GetData
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: getInfo
+          go_name: GetInfo
+          returns: android.print.PrintDocumentInfo
+          error: true
+    - java_class: android.printservice.PrintService
+      go_type: PrintService
+      methods:
+        - java_method: generatePrinterId
+          go_name: GeneratePrinterId
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.print.PrinterId
+          error: true
+        - java_method: getActivePrintJobs
+          go_name: GetActivePrintJobs
+          returns: java.util.List<android.printservice.PrintJob>
+          error: true
+        - java_method: onBind
+          go_name: OnBind
+          params:
+            - java_type: android.content.Intent
+              go_name: arg0
+          returns: android.os.IBinder
+          error: true
     - java_class: android.printservice.PrintJob
       go_type: PrintJob
       methods:
@@ -134,47 +176,17 @@ classes:
           go_name: Start
           returns: boolean
           error: true
-    - java_class: android.printservice.CustomPrinterIconCallback
-      go_type: CustomPrinterIconCallback
-      methods:
-        - java_method: onCustomPrinterIconLoaded
-          go_name: OnCustomPrinterIconLoaded
-          params:
-            - java_type: android.graphics.drawable.Icon
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.printservice.PrintDocument
-      go_type: PrintDocument
-      methods:
-        - java_method: getData
-          go_name: GetData
-          returns: android.os.ParcelFileDescriptor
-          error: true
-        - java_method: getInfo
-          go_name: GetInfo
-          returns: android.print.PrintDocumentInfo
-          error: true
-    - java_class: android.printservice.PrintService
-      go_type: PrintService
-      methods:
-        - java_method: generatePrinterId
-          go_name: GeneratePrinterId
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.print.PrinterId
-          error: true
-        - java_method: onBind
-          go_name: OnBind
-          params:
-            - java_type: android.content.Intent
-              go_name: arg0
-          returns: android.os.IBinder
-          error: true
     - java_class: android.printservice.PrinterDiscoverySession
       go_type: PrinterDiscoverySession
       methods:
+        - java_method: getPrinters
+          go_name: GetPrinters
+          returns: java.util.List<android.print.PrinterInfo>
+          error: true
+        - java_method: getTrackedPrinters
+          go_name: GetTrackedPrinters
+          returns: java.util.List<android.print.PrinterId>
+          error: true
         - java_method: isDestroyed
           go_name: IsDestroyed
           returns: boolean

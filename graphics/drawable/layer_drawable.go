@@ -33,7 +33,7 @@ func NewLayerDrawable(vm *jni.VM, arg0 *jni.Object) (*LayerDrawable, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLayerDrawable)), midLayerDrawableInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLayerDrawable)), midLayerDrawableCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

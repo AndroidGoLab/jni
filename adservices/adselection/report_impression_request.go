@@ -33,7 +33,7 @@ func NewReportImpressionRequest(vm *jni.VM, arg0 int64) (*ReportImpressionReques
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), midReportImpressionRequestInit, jni.LongValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReportImpressionRequest)), midReportImpressionRequestCtor, jni.LongValue(arg0))
 		if err != nil {
 			return err
 		}

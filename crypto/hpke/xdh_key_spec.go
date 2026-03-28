@@ -33,7 +33,7 @@ func NewXdhKeySpec(vm *jni.VM, arg0 *jni.Object) (*XdhKeySpec, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsXdhKeySpec)), midXdhKeySpecInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsXdhKeySpec)), midXdhKeySpecCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

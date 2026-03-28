@@ -32,7 +32,7 @@ func NewBinder(vm *jni.VM) (*Binder, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBinder)), midBinderInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBinder)), midBinderCtor)
 		if err != nil {
 			return err
 		}

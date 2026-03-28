@@ -33,7 +33,7 @@ func NewChangeTransform(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Change
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangeTransform)), midChangeTransformInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangeTransform)), midChangeTransformCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

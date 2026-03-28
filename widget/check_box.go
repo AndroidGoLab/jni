@@ -33,7 +33,7 @@ func NewCheckBox(vm *jni.VM, arg0 *jni.Object) (*CheckBox, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCheckBox)), midCheckBoxInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCheckBox)), midCheckBoxCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

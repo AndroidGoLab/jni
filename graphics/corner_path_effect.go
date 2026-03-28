@@ -33,7 +33,7 @@ func NewCornerPathEffect(vm *jni.VM, arg0 float32) (*CornerPathEffect, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCornerPathEffect)), midCornerPathEffectInit, jni.FloatValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCornerPathEffect)), midCornerPathEffectCtor, jni.FloatValue(arg0))
 		if err != nil {
 			return err
 		}

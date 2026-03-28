@@ -38,7 +38,7 @@ func NewKeyboardShortcutInfo(vm *jni.VM, arg0 string, arg1 uint16, arg2 int32) (
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyboardShortcutInfo)), midKeyboardShortcutInfoInit, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyboardShortcutInfo)), midKeyboardShortcutInfoCtor, jni.ObjectValue(&jArg0.Object), jni.CharValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

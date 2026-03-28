@@ -32,7 +32,7 @@ func NewBeginGetCredentialResponse(vm *jni.VM) (*BeginGetCredentialResponse, err
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), midBeginGetCredentialResponseInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), midBeginGetCredentialResponseCtor)
 		if err != nil {
 			return err
 		}
@@ -64,6 +64,102 @@ func (m *BeginGetCredentialResponse) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetActions calls android.service.credentials.BeginGetCredentialResponse.getActions.
+func (m *BeginGetCredentialResponse) GetActions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBeginGetCredentialResponseGetActions == nil {
+			callErr = fmt.Errorf("android.service.credentials.BeginGetCredentialResponse.getActions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBeginGetCredentialResponseGetActions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAuthenticationActions calls android.service.credentials.BeginGetCredentialResponse.getAuthenticationActions.
+func (m *BeginGetCredentialResponse) GetAuthenticationActions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBeginGetCredentialResponseGetAuthenticationActions == nil {
+			callErr = fmt.Errorf("android.service.credentials.BeginGetCredentialResponse.getAuthenticationActions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBeginGetCredentialResponseGetAuthenticationActions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCredentialEntries calls android.service.credentials.BeginGetCredentialResponse.getCredentialEntries.
+func (m *BeginGetCredentialResponse) GetCredentialEntries() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBeginGetCredentialResponseGetCredentialEntries == nil {
+			callErr = fmt.Errorf("android.service.credentials.BeginGetCredentialResponse.getCredentialEntries is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBeginGetCredentialResponseGetCredentialEntries,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

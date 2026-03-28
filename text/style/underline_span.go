@@ -32,7 +32,7 @@ func NewUnderlineSpan(vm *jni.VM) (*UnderlineSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), midUnderlineSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnderlineSpan)), midUnderlineSpanCtor)
 		if err != nil {
 			return err
 		}

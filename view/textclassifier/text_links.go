@@ -80,6 +80,38 @@ func (m *TextLinks) GetExtras() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetLinks calls android.view.textclassifier.TextLinks.getLinks.
+func (m *TextLinks) GetLinks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextLinksGetLinks == nil {
+			callErr = fmt.Errorf("android.view.textclassifier.TextLinks.getLinks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextLinksGetLinks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetText calls android.view.textclassifier.TextLinks.getText.
 func (m *TextLinks) GetText() (*jni.Object, error) {
 	var result *jni.Object

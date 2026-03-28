@@ -662,6 +662,38 @@ func (m *BaseBundle) IsEmpty() (bool, error) {
 	return result, callErr
 }
 
+// KeySet calls android.os.BaseBundle.keySet.
+func (m *BaseBundle) KeySet() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midBaseBundleKeySet == nil {
+			callErr = fmt.Errorf("android.os.BaseBundle.keySet is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midBaseBundleKeySet,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // PutAll calls android.os.BaseBundle.putAll.
 func (m *BaseBundle) PutAll(arg0 *jni.Object) error {
 

@@ -33,7 +33,7 @@ func NewExtensionSessionConfiguration(vm *jni.VM, arg0 int32, arg1 *jni.Object, 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtensionSessionConfiguration)), midExtensionSessionConfigurationInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtensionSessionConfiguration)), midExtensionSessionConfigurationCtor, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}
@@ -151,6 +151,38 @@ func (m *ExtensionSessionConfiguration) GetExtension() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOutputConfigurations calls android.hardware.camera2.params.ExtensionSessionConfiguration.getOutputConfigurations.
+func (m *ExtensionSessionConfiguration) GetOutputConfigurations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midExtensionSessionConfigurationGetOutputConfigurations == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.ExtensionSessionConfiguration.getOutputConfigurations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midExtensionSessionConfigurationGetOutputConfigurations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -33,7 +33,7 @@ func NewInvalidMajorVersionException(vm *jni.VM, arg0 int8) (*InvalidMajorVersio
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), midInvalidMajorVersionExceptionInit, jni.ByteValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), midInvalidMajorVersionExceptionCtor, jni.ByteValue(arg0))
 		if err != nil {
 			return err
 		}

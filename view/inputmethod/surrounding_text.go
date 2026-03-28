@@ -38,7 +38,7 @@ func NewSurroundingText(vm *jni.VM, arg0 string, arg1 int32, arg2 int32, arg3 in
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurroundingText)), midSurroundingTextInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurroundingText)), midSurroundingTextCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

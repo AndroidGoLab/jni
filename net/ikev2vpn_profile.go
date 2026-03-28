@@ -51,6 +51,38 @@ func (m *Ikev2VpnProfile) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetAllowedAlgorithms calls android.net.Ikev2VpnProfile.getAllowedAlgorithms.
+func (m *Ikev2VpnProfile) GetAllowedAlgorithms() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIkev2VpnProfileGetAllowedAlgorithms == nil {
+			callErr = fmt.Errorf("android.net.Ikev2VpnProfile.getAllowedAlgorithms is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIkev2VpnProfileGetAllowedAlgorithms,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetIkeTunnelConnectionParams calls android.net.Ikev2VpnProfile.getIkeTunnelConnectionParams.
 func (m *Ikev2VpnProfile) GetIkeTunnelConnectionParams() (*jni.Object, error) {
 	var result *jni.Object

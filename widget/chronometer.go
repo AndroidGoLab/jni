@@ -33,7 +33,7 @@ func NewChronometer(vm *jni.VM, arg0 *jni.Object) (*Chronometer, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChronometer)), midChronometerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChronometer)), midChronometerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

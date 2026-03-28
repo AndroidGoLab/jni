@@ -33,7 +33,7 @@ func NewWifiP2pDirInfo(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), midWifiP2pDirInfoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pDirInfo)), midWifiP2pDirInfoCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

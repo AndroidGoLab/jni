@@ -38,7 +38,7 @@ func NewMemoryFile(vm *jni.VM, arg0 string, arg1 int32) (*MemoryFile, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMemoryFile)), midMemoryFileInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMemoryFile)), midMemoryFileCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

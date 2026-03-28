@@ -33,7 +33,7 @@ func NewSyncFence(vm *jni.VM, arg0 *jni.Object) (*SyncFence, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncFence)), midSyncFenceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncFence)), midSyncFenceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

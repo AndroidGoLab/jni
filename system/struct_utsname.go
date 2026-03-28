@@ -62,7 +62,7 @@ func NewStructUtsname(vm *jni.VM, arg0 string, arg1 string, arg2 string, arg3 st
 		}
 		defer env.DeleteLocalRef(&jArg4.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructUtsname)), midStructUtsnameInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructUtsname)), midStructUtsnameCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object))
 		if err != nil {
 			return err
 		}

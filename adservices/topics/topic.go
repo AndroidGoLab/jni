@@ -33,7 +33,7 @@ func NewTopic(vm *jni.VM, arg0 int64, arg1 int64, arg2 int32) (*Topic, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTopic)), midTopicInit, jni.LongValue(arg0), jni.LongValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTopic)), midTopicCtor, jni.LongValue(arg0), jni.LongValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

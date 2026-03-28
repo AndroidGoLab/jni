@@ -5,35 +5,22 @@
 package: observer
 go_import: github.com/AndroidGoLab/jni/app/appsearch/observer
 classes:
-    - java_class: android.app.appsearch.observer.ObserverSpec
-      go_type: Spec
+    - java_class: android.app.appsearch.observer.ObserverCallback
+      go_type: Callback
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: onDocumentChanged
+          go_name: OnDocumentChanged
           params:
-            - java_type: android.os.Parcel
+            - java_type: android.app.appsearch.observer.DocumentChangeInfo
               go_name: arg0
-            - java_type: int
-              go_name: arg1
           returns: void
           error: true
-    - java_class: android.app.appsearch.observer.ObserverSpec$Builder
-      go_type: SpecBuilder
-      methods:
-        - java_method: addFilterSchemas
-          go_name: AddFilterSchemas
+        - java_method: onSchemaChanged
+          go_name: OnSchemaChanged
           params:
-            - java_type: java.lang.String...
+            - java_type: android.app.appsearch.observer.SchemaChangeInfo
               go_name: arg0
-          returns: android.app.appsearch.observer.ObserverSpec$Builder
-          error: true
-        - java_method: build
-          go_name: Build
-          returns: android.app.appsearch.observer.ObserverSpec
+          returns: void
           error: true
     - java_class: android.app.appsearch.observer.DocumentChangeInfo
       go_type: DocumentChangeInfo
@@ -56,6 +43,10 @@ classes:
             - java_type: java.lang.Object
               go_name: arg0
           returns: boolean
+          error: true
+        - java_method: getChangedDocumentIds
+          go_name: GetChangedDocumentIds
+          returns: java.util.Set<java.lang.String>
           error: true
         - java_method: getDatabaseName
           go_name: GetDatabaseName
@@ -99,6 +90,10 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+        - java_method: getChangedSchemaNames
+          go_name: GetChangedSchemaNames
+          returns: java.util.Set<java.lang.String>
+          error: true
         - java_method: getDatabaseName
           go_name: GetDatabaseName
           returns: String
@@ -115,22 +110,39 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.app.appsearch.observer.ObserverCallback
-      go_type: Callback
+    - java_class: android.app.appsearch.observer.ObserverSpec
+      go_type: Spec
       methods:
-        - java_method: onDocumentChanged
-          go_name: OnDocumentChanged
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFilterSchemas
+          go_name: GetFilterSchemas
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: android.app.appsearch.observer.DocumentChangeInfo
+            - java_type: android.os.Parcel
               go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
           error: true
-        - java_method: onSchemaChanged
-          go_name: OnSchemaChanged
+    - java_class: android.app.appsearch.observer.ObserverSpec$Builder
+      go_type: SpecBuilder
+      methods:
+        - java_method: addFilterSchemas
+          go_name: AddFilterSchemas
           params:
-            - java_type: android.app.appsearch.observer.SchemaChangeInfo
+            - java_type: java.lang.String...
               go_name: arg0
-          returns: void
+          returns: android.app.appsearch.observer.ObserverSpec$Builder
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.app.appsearch.observer.ObserverSpec
           error: true
 constants:
     - go_name: Creator

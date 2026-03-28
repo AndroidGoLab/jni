@@ -33,7 +33,7 @@ func NewRingtonePreference(vm *jni.VM, arg0 *jni.Object) (*RingtonePreference, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), midRingtonePreferenceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRingtonePreference)), midRingtonePreferenceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewTextClock(vm *jni.VM, arg0 *jni.Object) (*TextClock, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextClock)), midTextClockInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextClock)), midTextClockCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

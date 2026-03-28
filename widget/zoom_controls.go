@@ -33,7 +33,7 @@ func NewZoomControls(vm *jni.VM, arg0 *jni.Object) (*ZoomControls, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsZoomControls)), midZoomControlsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsZoomControls)), midZoomControlsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

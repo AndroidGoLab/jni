@@ -5,8 +5,18 @@ package number
 import "github.com/AndroidGoLab/jni/icu/number/consts"
 
 const (
-	Always                     = consts.Always
+	All                        = consts.All
 	Auto                       = consts.Auto
+	None                       = consts.None
+	Unit                       = consts.Unit
+	Approximately              = consts.Approximately
+	ApproximatelyOrSingleValue = consts.ApproximatelyOrSingleValue
+	Range                      = consts.Range
+	SingleValue                = consts.SingleValue
+	EqualAfterRounding         = consts.EqualAfterRounding
+	EqualBeforeRounding        = consts.EqualBeforeRounding
+	NotEqual                   = consts.NotEqual
+	Always                     = consts.Always
 	Min2                       = consts.Min2
 	Off                        = consts.Off
 	OnAligned                  = consts.OnAligned
@@ -28,14 +38,4 @@ const (
 	Narrow                     = consts.Narrow
 	Short                      = consts.Short
 	Variant                    = consts.Variant
-	All                        = consts.All
-	None                       = consts.None
-	Unit                       = consts.Unit
-	Approximately              = consts.Approximately
-	ApproximatelyOrSingleValue = consts.ApproximatelyOrSingleValue
-	Range                      = consts.Range
-	SingleValue                = consts.SingleValue
-	EqualAfterRounding         = consts.EqualAfterRounding
-	EqualBeforeRounding        = consts.EqualBeforeRounding
-	NotEqual                   = consts.NotEqual
 )

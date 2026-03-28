@@ -32,7 +32,7 @@ func NewMessage(vm *jni.VM) (*Message, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessage)), midMessageInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessage)), midMessageCtor)
 		if err != nil {
 			return err
 		}

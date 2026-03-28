@@ -32,7 +32,7 @@ func NewEnterpriseConfig(vm *jni.VM) (*EnterpriseConfig, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEnterpriseConfig)), midEnterpriseConfigInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEnterpriseConfig)), midEnterpriseConfigCtor)
 		if err != nil {
 			return err
 		}

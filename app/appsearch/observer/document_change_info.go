@@ -56,7 +56,7 @@ func NewDocumentChangeInfo(vm *jni.VM, arg0 string, arg1 string, arg2 string, ar
 		}
 		defer env.DeleteLocalRef(&jArg3.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), midDocumentChangeInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDocumentChangeInfo)), midDocumentChangeInfoCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}
@@ -92,6 +92,38 @@ func (m *DocumentChangeInfo) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetChangedDocumentIds calls android.app.appsearch.observer.DocumentChangeInfo.getChangedDocumentIds.
+func (m *DocumentChangeInfo) GetChangedDocumentIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDocumentChangeInfoGetChangedDocumentIds == nil {
+			callErr = fmt.Errorf("android.app.appsearch.observer.DocumentChangeInfo.getChangedDocumentIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDocumentChangeInfoGetChangedDocumentIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

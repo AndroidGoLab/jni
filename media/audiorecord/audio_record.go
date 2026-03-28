@@ -33,7 +33,7 @@ func NewAudioRecord(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 int32, 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioRecord)), midAudioRecordInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioRecord)), midAudioRecordCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
 		if err != nil {
 			return err
 		}
@@ -44,6 +44,38 @@ func NewAudioRecord(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, arg3 int32, 
 		return nil, err
 	}
 	return &t, nil
+}
+
+// GetActiveMicrophones calls android.media.AudioRecord.getActiveMicrophones.
+func (m *AudioRecord) GetActiveMicrophones() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioRecordGetActiveMicrophones == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getActiveMicrophones is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioRecordGetActiveMicrophones,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetActiveRecordingConfiguration calls android.media.AudioRecord.getActiveRecordingConfiguration.
@@ -447,6 +479,38 @@ func (m *AudioRecord) GetRoutedDevice() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midAudioRecordGetRoutedDevice,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRoutedDevices calls android.media.AudioRecord.getRoutedDevices.
+func (m *AudioRecord) GetRoutedDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioRecordGetRoutedDevices == nil {
+			callErr = fmt.Errorf("android.media.AudioRecord.getRoutedDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioRecordGetRoutedDevices,
 		)
 		if callErr != nil {
 			return callErr

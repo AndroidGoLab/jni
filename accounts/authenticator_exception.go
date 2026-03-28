@@ -32,7 +32,7 @@ func NewAuthenticatorException(vm *jni.VM) (*AuthenticatorException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAuthenticatorException)), midAuthenticatorExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAuthenticatorException)), midAuthenticatorExceptionCtor)
 		if err != nil {
 			return err
 		}

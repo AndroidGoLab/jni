@@ -32,7 +32,7 @@ func NewHideReturnsTransformationMethod(vm *jni.VM) (*HideReturnsTransformationM
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHideReturnsTransformationMethod)), midHideReturnsTransformationMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHideReturnsTransformationMethod)), midHideReturnsTransformationMethodCtor)
 		if err != nil {
 			return err
 		}

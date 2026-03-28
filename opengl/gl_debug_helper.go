@@ -32,7 +32,7 @@ func NewGLDebugHelper(vm *jni.VM) (*GLDebugHelper, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), midGLDebugHelperInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLDebugHelper)), midGLDebugHelperCtor)
 		if err != nil {
 			return err
 		}

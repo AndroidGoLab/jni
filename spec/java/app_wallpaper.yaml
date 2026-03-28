@@ -35,6 +35,10 @@ classes:
           go_name: GetContextUri
           returns: android.net.Uri
           error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: java.util.List<java.lang.CharSequence>
+          error: true
         - java_method: getId
           go_name: GetId
           returns: String

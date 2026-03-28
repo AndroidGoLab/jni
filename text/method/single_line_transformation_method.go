@@ -32,7 +32,7 @@ func NewSingleLineTransformationMethod(vm *jni.VM) (*SingleLineTransformationMet
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSingleLineTransformationMethod)), midSingleLineTransformationMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSingleLineTransformationMethod)), midSingleLineTransformationMethodCtor)
 		if err != nil {
 			return err
 		}

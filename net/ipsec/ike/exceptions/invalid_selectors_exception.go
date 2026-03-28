@@ -33,7 +33,7 @@ func NewInvalidSelectorsException(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*In
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidSelectorsException)), midInvalidSelectorsExceptionInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidSelectorsException)), midInvalidSelectorsExceptionCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

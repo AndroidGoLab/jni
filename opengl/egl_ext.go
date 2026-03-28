@@ -32,7 +32,7 @@ func NewEGLExt(vm *jni.VM) (*EGLExt, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEGLExt)), midEGLExtInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEGLExt)), midEGLExtCtor)
 		if err != nil {
 			return err
 		}

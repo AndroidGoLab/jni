@@ -33,7 +33,7 @@ func NewListPreference(vm *jni.VM, arg0 *jni.Object) (*ListPreference, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListPreference)), midListPreferenceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListPreference)), midListPreferenceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

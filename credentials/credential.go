@@ -38,7 +38,7 @@ func NewCredential(vm *jni.VM, arg0 string, arg1 *jni.Object) (*Credential, erro
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCredential)), midCredentialInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCredential)), midCredentialCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

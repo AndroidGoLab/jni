@@ -32,7 +32,7 @@ func NewWorkDuration(vm *jni.VM) (*WorkDuration, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkDuration)), midWorkDurationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkDuration)), midWorkDurationCtor)
 		if err != nil {
 			return err
 		}

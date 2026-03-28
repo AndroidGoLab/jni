@@ -33,7 +33,7 @@ func NewSlide(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Slide, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSlide)), midSlideInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSlide)), midSlideCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

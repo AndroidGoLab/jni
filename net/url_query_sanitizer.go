@@ -32,7 +32,7 @@ func NewUrlQuerySanitizer(vm *jni.VM) (*UrlQuerySanitizer, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizer)), midUrlQuerySanitizerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUrlQuerySanitizer)), midUrlQuerySanitizerCtor)
 		if err != nil {
 			return err
 		}
@@ -94,6 +94,70 @@ func (m *UrlQuerySanitizer) GetEffectiveValueSanitizer(arg0 string) (*jni.Object
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midUrlQuerySanitizerGetEffectiveValueSanitizer, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetParameterList calls android.net.UrlQuerySanitizer.getParameterList.
+func (m *UrlQuerySanitizer) GetParameterList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUrlQuerySanitizerGetParameterList == nil {
+			callErr = fmt.Errorf("android.net.UrlQuerySanitizer.getParameterList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUrlQuerySanitizerGetParameterList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetParameterSet calls android.net.UrlQuerySanitizer.getParameterSet.
+func (m *UrlQuerySanitizer) GetParameterSet() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUrlQuerySanitizerGetParameterSet == nil {
+			callErr = fmt.Errorf("android.net.UrlQuerySanitizer.getParameterSet is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUrlQuerySanitizerGetParameterSet,
 		)
 		if callErr != nil {
 			return callErr

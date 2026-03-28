@@ -33,7 +33,7 @@ func NewEqualizer(vm *jni.VM, arg0 int32, arg1 int32) (*Equalizer, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEqualizer)), midEqualizerInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEqualizer)), midEqualizerCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

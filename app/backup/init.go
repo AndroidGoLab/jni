@@ -23,11 +23,14 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsDataOutput                  *jni.GlobalRef
-	midDataOutputGetQuota          jni.MethodID
-	midDataOutputGetTransportFlags jni.MethodID
-	midDataOutputWriteEntityData   jni.MethodID
-	midDataOutputWriteEntityHeader jni.MethodID
+	clsHelper                         *jni.GlobalRef
+	midHelperPerformBackup            jni.MethodID
+	midHelperRestoreEntity            jni.MethodID
+	midHelperWriteNewStateDescription jni.MethodID
+
+	clsFullBackupDataOutput                  *jni.GlobalRef
+	midFullBackupDataOutputGetQuota          jni.MethodID
+	midFullBackupDataOutputGetTransportFlags jni.MethodID
 
 	clsDataInput               *jni.GlobalRef
 	midDataInputGetDataSize    jni.MethodID
@@ -36,25 +39,35 @@ var (
 	midDataInputReadNextHeader jni.MethodID
 	midDataInputSkipEntityData jni.MethodID
 
-	clsDataInputStream        *jni.GlobalRef
-	midDataInputStreamGetKey  jni.MethodID
-	midDataInputStreamRead0   jni.MethodID
-	midDataInputStreamRead1_1 jni.MethodID
-	midDataInputStreamRead3_2 jni.MethodID
-	midDataInputStreamSize    jni.MethodID
+	clsRestoreObserver                *jni.GlobalRef
+	midRestoreObserverOnUpdate        jni.MethodID
+	midRestoreObserverRestoreFinished jni.MethodID
+	midRestoreObserverRestoreStarting jni.MethodID
+
+	clsAgentHelper          *jni.GlobalRef
+	midAgentHelperCtor      jni.MethodID
+	midAgentHelperAddHelper jni.MethodID
+	midAgentHelperOnBackup  jni.MethodID
+	midAgentHelperOnRestore jni.MethodID
 
 	clsManager                                *jni.GlobalRef
-	midManagerInit                            jni.MethodID
+	midManagerCtor                            jni.MethodID
 	midManagerDataChanged0                    jni.MethodID
 	midManagerGetUserForAncestralSerialNumber jni.MethodID
 	midManagerRequestRestore                  jni.MethodID
 	midManagerDataChanged1_1                  jni.MethodID
 
-	clsFileBackupHelper                         *jni.GlobalRef
-	midFileBackupHelperInit                     jni.MethodID
-	midFileBackupHelperPerformBackup            jni.MethodID
-	midFileBackupHelperRestoreEntity            jni.MethodID
-	midFileBackupHelperWriteNewStateDescription jni.MethodID
+	clsSharedPreferencesBackupHelper                         *jni.GlobalRef
+	midSharedPreferencesBackupHelperCtor                     jni.MethodID
+	midSharedPreferencesBackupHelperPerformBackup            jni.MethodID
+	midSharedPreferencesBackupHelperRestoreEntity            jni.MethodID
+	midSharedPreferencesBackupHelperWriteNewStateDescription jni.MethodID
+
+	clsDataOutput                  *jni.GlobalRef
+	midDataOutputGetQuota          jni.MethodID
+	midDataOutputGetTransportFlags jni.MethodID
+	midDataOutputWriteEntityData   jni.MethodID
+	midDataOutputWriteEntityHeader jni.MethodID
 
 	clsAgent                  *jni.GlobalRef
 	midAgentFullBackupFile    jni.MethodID
@@ -68,31 +81,18 @@ var (
 	midAgentOnRestoreFile     jni.MethodID
 	midAgentOnRestoreFinished jni.MethodID
 
-	clsFullBackupDataOutput                  *jni.GlobalRef
-	midFullBackupDataOutputGetQuota          jni.MethodID
-	midFullBackupDataOutputGetTransportFlags jni.MethodID
+	clsDataInputStream        *jni.GlobalRef
+	midDataInputStreamGetKey  jni.MethodID
+	midDataInputStreamRead0   jni.MethodID
+	midDataInputStreamRead1_1 jni.MethodID
+	midDataInputStreamRead3_2 jni.MethodID
+	midDataInputStreamSize    jni.MethodID
 
-	clsHelper                         *jni.GlobalRef
-	midHelperPerformBackup            jni.MethodID
-	midHelperRestoreEntity            jni.MethodID
-	midHelperWriteNewStateDescription jni.MethodID
-
-	clsSharedPreferencesBackupHelper                         *jni.GlobalRef
-	midSharedPreferencesBackupHelperInit                     jni.MethodID
-	midSharedPreferencesBackupHelperPerformBackup            jni.MethodID
-	midSharedPreferencesBackupHelperRestoreEntity            jni.MethodID
-	midSharedPreferencesBackupHelperWriteNewStateDescription jni.MethodID
-
-	clsRestoreObserver                *jni.GlobalRef
-	midRestoreObserverOnUpdate        jni.MethodID
-	midRestoreObserverRestoreFinished jni.MethodID
-	midRestoreObserverRestoreStarting jni.MethodID
-
-	clsAgentHelper          *jni.GlobalRef
-	midAgentHelperInit      jni.MethodID
-	midAgentHelperAddHelper jni.MethodID
-	midAgentHelperOnBackup  jni.MethodID
-	midAgentHelperOnRestore jni.MethodID
+	clsFileBackupHelper                         *jni.GlobalRef
+	midFileBackupHelperCtor                     jni.MethodID
+	midFileBackupHelperPerformBackup            jni.MethodID
+	midFileBackupHelperRestoreEntity            jni.MethodID
+	midFileBackupHelperWriteNewStateDescription jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -113,36 +113,53 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/app/backup/BackupDataOutput")
+	c, err = env.FindClass("android/app/backup/BackupHelper")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDataOutput = env.NewGlobalRef(&c.Object)
+		clsHelper = env.NewGlobalRef(&c.Object)
 
-		midDataOutputGetQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "getQuota", "()J")
+		midHelperPerformBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHelper)), "performBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataOutputGetTransportFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "getTransportFlags", "()I")
+		midHelperRestoreEntity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHelper)), "restoreEntity", "(Landroid/app/backup/BackupDataInputStream;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataOutputWriteEntityData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "writeEntityData", "([BI)I")
+		midHelperWriteNewStateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHelper)), "writeNewStateDescription", "(Landroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataOutputWriteEntityHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "writeEntityHeader", "(Ljava/lang/String;I)I")
+	}
+
+	c, err = env.FindClass("android/app/backup/FullBackupDataOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsFullBackupDataOutput = env.NewGlobalRef(&c.Object)
+
+		midFullBackupDataOutputGetQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFullBackupDataOutput)), "getQuota", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midFullBackupDataOutputGetTransportFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFullBackupDataOutput)), "getTransportFlags", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -196,43 +213,64 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/app/backup/BackupDataInputStream")
+	c, err = env.FindClass("android/app/backup/RestoreObserver")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDataInputStream = env.NewGlobalRef(&c.Object)
+		clsRestoreObserver = env.NewGlobalRef(&c.Object)
 
-		midDataInputStreamGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "getKey", "()Ljava/lang/String;")
+		midRestoreObserverOnUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestoreObserver)), "onUpdate", "(ILjava/lang/String;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataInputStreamRead0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "read", "()I")
+		midRestoreObserverRestoreFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestoreObserver)), "restoreFinished", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataInputStreamRead1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "read", "([B)I")
+		midRestoreObserverRestoreStarting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestoreObserver)), "restoreStarting", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataInputStreamRead3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "read", "([BII)I")
+	}
+
+	c, err = env.FindClass("android/app/backup/BackupAgentHelper")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAgentHelper = env.NewGlobalRef(&c.Object)
+		midAgentHelperCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "<init>", "()V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midAgentHelperAddHelper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "addHelper", "(Ljava/lang/String;Landroid/app/backup/BackupHelper;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDataInputStreamSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "size", "()I")
+		midAgentHelperOnBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "onBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midAgentHelperOnRestore, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "onRestore", "(Landroid/app/backup/BackupDataInput;ILandroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -248,7 +286,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsManager = env.NewGlobalRef(&c.Object)
-		midManagerInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "<init>", "(Landroid/content/Context;)V")
+		midManagerCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "<init>", "(Landroid/content/Context;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -283,33 +321,71 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/app/backup/FileBackupHelper")
+	c, err = env.FindClass("android/app/backup/SharedPreferencesBackupHelper")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFileBackupHelper = env.NewGlobalRef(&c.Object)
-		midFileBackupHelperInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "<init>", "(Landroid/content/Context;[Ljava/lang/String;)V")
+		clsSharedPreferencesBackupHelper = env.NewGlobalRef(&c.Object)
+		midSharedPreferencesBackupHelperCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "<init>", "(Landroid/content/Context;[Ljava/lang/String;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
-		midFileBackupHelperPerformBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "performBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midFileBackupHelperRestoreEntity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "restoreEntity", "(Landroid/app/backup/BackupDataInputStream;)V")
+		midSharedPreferencesBackupHelperPerformBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "performBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFileBackupHelperWriteNewStateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "writeNewStateDescription", "(Landroid/os/ParcelFileDescriptor;)V")
+		midSharedPreferencesBackupHelperRestoreEntity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "restoreEntity", "(Landroid/app/backup/BackupDataInputStream;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSharedPreferencesBackupHelperWriteNewStateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "writeNewStateDescription", "(Landroid/os/ParcelFileDescriptor;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/app/backup/BackupDataOutput")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDataOutput = env.NewGlobalRef(&c.Object)
+
+		midDataOutputGetQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "getQuota", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataOutputGetTransportFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "getTransportFlags", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataOutputWriteEntityData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "writeEntityData", "([BI)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataOutputWriteEntityHeader, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataOutput)), "writeEntityHeader", "(Ljava/lang/String;I)I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -398,22 +474,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/app/backup/FullBackupDataOutput")
+	c, err = env.FindClass("android/app/backup/BackupDataInputStream")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsFullBackupDataOutput = env.NewGlobalRef(&c.Object)
+		clsDataInputStream = env.NewGlobalRef(&c.Object)
 
-		midFullBackupDataOutputGetQuota, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFullBackupDataOutput)), "getQuota", "()J")
+		midDataInputStreamGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "getKey", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midFullBackupDataOutputGetTransportFlags, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFullBackupDataOutput)), "getTransportFlags", "()I")
+		midDataInputStreamRead0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "read", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataInputStreamRead1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "read", "([B)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataInputStreamRead3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "read", "([BII)I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDataInputStreamSize, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDataInputStream)), "size", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -422,130 +519,33 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/app/backup/BackupHelper")
+	c, err = env.FindClass("android/app/backup/FileBackupHelper")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsHelper = env.NewGlobalRef(&c.Object)
+		clsFileBackupHelper = env.NewGlobalRef(&c.Object)
+		midFileBackupHelperCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "<init>", "(Landroid/content/Context;[Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midHelperPerformBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHelper)), "performBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
+		midFileBackupHelperPerformBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "performBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midHelperRestoreEntity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHelper)), "restoreEntity", "(Landroid/app/backup/BackupDataInputStream;)V")
+		midFileBackupHelperRestoreEntity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "restoreEntity", "(Landroid/app/backup/BackupDataInputStream;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midHelperWriteNewStateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsHelper)), "writeNewStateDescription", "(Landroid/os/ParcelFileDescriptor;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/app/backup/SharedPreferencesBackupHelper")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSharedPreferencesBackupHelper = env.NewGlobalRef(&c.Object)
-		midSharedPreferencesBackupHelperInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "<init>", "(Landroid/content/Context;[Ljava/lang/String;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midSharedPreferencesBackupHelperPerformBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "performBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSharedPreferencesBackupHelperRestoreEntity, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "restoreEntity", "(Landroid/app/backup/BackupDataInputStream;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSharedPreferencesBackupHelperWriteNewStateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSharedPreferencesBackupHelper)), "writeNewStateDescription", "(Landroid/os/ParcelFileDescriptor;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/app/backup/RestoreObserver")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRestoreObserver = env.NewGlobalRef(&c.Object)
-
-		midRestoreObserverOnUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestoreObserver)), "onUpdate", "(ILjava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRestoreObserverRestoreFinished, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestoreObserver)), "restoreFinished", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRestoreObserverRestoreStarting, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRestoreObserver)), "restoreStarting", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/app/backup/BackupAgentHelper")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAgentHelper = env.NewGlobalRef(&c.Object)
-		midAgentHelperInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "<init>", "()V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midAgentHelperAddHelper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "addHelper", "(Ljava/lang/String;Landroid/app/backup/BackupHelper;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAgentHelperOnBackup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "onBackup", "(Landroid/os/ParcelFileDescriptor;Landroid/app/backup/BackupDataOutput;Landroid/os/ParcelFileDescriptor;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midAgentHelperOnRestore, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAgentHelper)), "onRestore", "(Landroid/app/backup/BackupDataInput;ILandroid/os/ParcelFileDescriptor;)V")
+		midFileBackupHelperWriteNewStateDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsFileBackupHelper)), "writeNewStateDescription", "(Landroid/os/ParcelFileDescriptor;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

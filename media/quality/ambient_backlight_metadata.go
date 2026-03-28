@@ -38,7 +38,7 @@ func NewAmbientBacklightMetadata(vm *jni.VM, arg0 string, arg1 int32, arg2 int32
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), midAmbientBacklightMetadataInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightMetadata)), midAmbientBacklightMetadataCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
 		if err != nil {
 			return err
 		}

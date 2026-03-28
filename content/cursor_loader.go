@@ -33,7 +33,7 @@ func NewCursorLoader(vm *jni.VM, arg0 *jni.Object) (*CursorLoader, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorLoader)), midCursorLoaderInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorLoader)), midCursorLoaderCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

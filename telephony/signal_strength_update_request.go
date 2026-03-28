@@ -76,6 +76,38 @@ func (m *SignalStrengthUpdateRequest) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetSignalThresholdInfos calls android.telephony.SignalStrengthUpdateRequest.getSignalThresholdInfos.
+func (m *SignalStrengthUpdateRequest) GetSignalThresholdInfos() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSignalStrengthUpdateRequestGetSignalThresholdInfos == nil {
+			callErr = fmt.Errorf("android.telephony.SignalStrengthUpdateRequest.getSignalThresholdInfos is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSignalStrengthUpdateRequestGetSignalThresholdInfos,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.telephony.SignalStrengthUpdateRequest.hashCode.
 func (m *SignalStrengthUpdateRequest) HashCode() (int32, error) {
 	var result int32

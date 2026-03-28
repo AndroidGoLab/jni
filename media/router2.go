@@ -84,6 +84,38 @@ func (m *Router2) GetController(arg0 string) (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetControllers calls android.media.MediaRouter2.getControllers.
+func (m *Router2) GetControllers() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouter2GetControllers == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter2.getControllers is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouter2GetControllers,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetRouteListingPreference calls android.media.MediaRouter2.getRouteListingPreference.
 func (m *Router2) GetRouteListingPreference() (*jni.Object, error) {
 	var result *jni.Object
@@ -100,6 +132,38 @@ func (m *Router2) GetRouteListingPreference() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRouter2GetRouteListingPreference,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRoutes calls android.media.MediaRouter2.getRoutes.
+func (m *Router2) GetRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouter2GetRoutes == nil {
+			callErr = fmt.Errorf("android.media.MediaRouter2.getRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouter2GetRoutes,
 		)
 		if callErr != nil {
 			return callErr

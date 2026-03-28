@@ -76,6 +76,70 @@ func (m *Config) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetGatewayConnectionConfigs calls android.net.vcn.VcnConfig.getGatewayConnectionConfigs.
+func (m *Config) GetGatewayConnectionConfigs() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConfigGetGatewayConnectionConfigs == nil {
+			callErr = fmt.Errorf("android.net.vcn.VcnConfig.getGatewayConnectionConfigs is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConfigGetGatewayConnectionConfigs,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRestrictedUnderlyingNetworkTransports calls android.net.vcn.VcnConfig.getRestrictedUnderlyingNetworkTransports.
+func (m *Config) GetRestrictedUnderlyingNetworkTransports() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConfigGetRestrictedUnderlyingNetworkTransports == nil {
+			callErr = fmt.Errorf("android.net.vcn.VcnConfig.getRestrictedUnderlyingNetworkTransports is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConfigGetRestrictedUnderlyingNetworkTransports,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.net.vcn.VcnConfig.hashCode.
 func (m *Config) HashCode() (int32, error) {
 	var result int32

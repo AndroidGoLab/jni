@@ -33,7 +33,7 @@ func NewLensIntrinsicsSample(vm *jni.VM, arg0 int64, arg1 *jni.Object) (*LensInt
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLensIntrinsicsSample)), midLensIntrinsicsSampleInit, jni.LongValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLensIntrinsicsSample)), midLensIntrinsicsSampleCtor, jni.LongValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

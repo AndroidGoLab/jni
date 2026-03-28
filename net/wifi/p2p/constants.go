@@ -5,18 +5,32 @@ package p2p
 import "github.com/AndroidGoLab/jni/net/wifi/p2p/consts"
 
 const (
-	Available                                          = consts.Available
-	Connected                                          = consts.Connected
 	Creator                                            = consts.Creator
-	Failed                                             = consts.Failed
-	Invited                                            = consts.Invited
-	Unavailable                                        = consts.Unavailable
+	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
+	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
+	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz
+	GroupOwnerBand5ghz                                 = consts.GroupOwnerBand5ghz
+	GroupOwnerBand6ghz                                 = consts.GroupOwnerBand6ghz
+	GroupOwnerBandAuto                                 = consts.GroupOwnerBandAuto
+	GroupOwnerIntentAuto                               = consts.GroupOwnerIntentAuto
+	GroupOwnerIntentMax                                = consts.GroupOwnerIntentMax
+	GroupOwnerIntentMin                                = consts.GroupOwnerIntentMin
+	P2pVersion1                                        = consts.P2pVersion1
+	P2pVersion2                                        = consts.P2pVersion2
+	PccModeConnectionTypeLegacyOnly                    = consts.PccModeConnectionTypeLegacyOnly
+	PccModeConnectionTypeLegacyOrR2                    = consts.PccModeConnectionTypeLegacyOrR2
+	PccModeConnectionTypeR2Only                        = consts.PccModeConnectionTypeR2Only
 	PairingBootstrappingMethodDisplayPassphrase        = consts.PairingBootstrappingMethodDisplayPassphrase
 	PairingBootstrappingMethodDisplayPincode           = consts.PairingBootstrappingMethodDisplayPincode
 	PairingBootstrappingMethodKeypadPassphrase         = consts.PairingBootstrappingMethodKeypadPassphrase
 	PairingBootstrappingMethodKeypadPincode            = consts.PairingBootstrappingMethodKeypadPincode
 	PairingBootstrappingMethodOpportunistic            = consts.PairingBootstrappingMethodOpportunistic
 	PairingBootstrappingMethodOutOfBand                = consts.PairingBootstrappingMethodOutOfBand
+	Available                                          = consts.Available
+	Connected                                          = consts.Connected
+	Failed                                             = consts.Failed
+	Invited                                            = consts.Invited
+	Unavailable                                        = consts.Unavailable
 	DeviceInfoAudioOnlySupportAtSource                 = consts.DeviceInfoAudioOnlySupportAtSource
 	DeviceInfoAudioUnsupportedAtPrimarySink            = consts.DeviceInfoAudioUnsupportedAtPrimarySink
 	DeviceInfoContentProtectionSupport                 = consts.DeviceInfoContentProtectionSupport
@@ -72,20 +86,6 @@ const (
 	RequestTypeInvitation                              = consts.RequestTypeInvitation
 	RequestTypeJoin                                    = consts.RequestTypeJoin
 	RequestTypeNegotiation                             = consts.RequestTypeNegotiation
-	GroupClientIpProvisioningModeIpv4Dhcp              = consts.GroupClientIpProvisioningModeIpv4Dhcp
-	GroupClientIpProvisioningModeIpv6LinkLocal         = consts.GroupClientIpProvisioningModeIpv6LinkLocal
-	GroupOwnerBand2ghz                                 = consts.GroupOwnerBand2ghz
-	GroupOwnerBand5ghz                                 = consts.GroupOwnerBand5ghz
-	GroupOwnerBand6ghz                                 = consts.GroupOwnerBand6ghz
-	GroupOwnerBandAuto                                 = consts.GroupOwnerBandAuto
-	GroupOwnerIntentAuto                               = consts.GroupOwnerIntentAuto
-	GroupOwnerIntentMax                                = consts.GroupOwnerIntentMax
-	GroupOwnerIntentMin                                = consts.GroupOwnerIntentMin
-	P2pVersion1                                        = consts.P2pVersion1
-	P2pVersion2                                        = consts.P2pVersion2
-	PccModeConnectionTypeLegacyOnly                    = consts.PccModeConnectionTypeLegacyOnly
-	PccModeConnectionTypeLegacyOrR2                    = consts.PccModeConnectionTypeLegacyOrR2
-	PccModeConnectionTypeR2Only                        = consts.PccModeConnectionTypeR2Only
 )
 
 const (

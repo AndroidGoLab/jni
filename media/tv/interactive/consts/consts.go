@@ -9,8 +9,6 @@ const (
 	InteractiveAppTypeHbbtv             int = 1
 	InteractiveAppTypeOther             int = -2147483648
 	InteractiveAppTypeTargetedAd        int = 8
-	CommandParameterValueStopModeBlank  int = 1
-	CommandParameterValueStopModeFreeze int = 2
 	ErrorBlocked                        int = 5
 	ErrorEncrypted                      int = 6
 	ErrorNone                           int = 0
@@ -29,9 +27,29 @@ const (
 	TeletextAppStateError               int = 3
 	TeletextAppStateHide                int = 2
 	TeletextAppStateShow                int = 1
+	CommandParameterValueStopModeBlank  int = 1
+	CommandParameterValueStopModeFreeze int = 2
 )
 
 const (
+	BiInteractiveAppKeyAlias                 string = "alias"
+	BiInteractiveAppKeyCertificate           string = "certificate"
+	BiInteractiveAppKeyHttpAdditionalHeaders string = "http_additional_headers"
+	BiInteractiveAppKeyHttpUserAgent         string = "http_user_agent"
+	BiInteractiveAppKeyPrivateKey            string = "private_key"
+	ErrorKeyMethodName                       string = "method_name"
+	ActionAppLinkCommand                     string = "android.media.tv.interactive.action.APP_LINK_COMMAND"
+	AppLinkKeyBackUri                        string = "back_uri"
+	AppLinkKeyClassName                      string = "class_name"
+	AppLinkKeyCommandType                    string = "command_type"
+	AppLinkKeyPackageName                    string = "package_name"
+	AppLinkKeyServiceId                      string = "service_id"
+	IntentKeyBiInteractiveAppType            string = "bi_interactive_app_type"
+	IntentKeyBiInteractiveAppUri             string = "bi_interactive_app_uri"
+	IntentKeyChannelUri                      string = "channel_uri"
+	IntentKeyCommandType                     string = "command_type"
+	IntentKeyInteractiveAppServiceId         string = "interactive_app_id"
+	IntentKeyTvInputId                       string = "tv_input_id"
 	CommandParameterKeyChangeChannelQuietly  string = "command_change_channel_quietly"
 	CommandParameterKeyChannelUri            string = "command_channel_uri"
 	CommandParameterKeyInputId               string = "command_input_id"
@@ -57,22 +75,4 @@ const (
 	TimeShiftCommandTypeSeekTo               string = "seek_to"
 	TimeShiftCommandTypeSetMode              string = "set_mode"
 	TimeShiftCommandTypeSetPlaybackParams    string = "set_playback_params"
-	BiInteractiveAppKeyAlias                 string = "alias"
-	BiInteractiveAppKeyCertificate           string = "certificate"
-	BiInteractiveAppKeyHttpAdditionalHeaders string = "http_additional_headers"
-	BiInteractiveAppKeyHttpUserAgent         string = "http_user_agent"
-	BiInteractiveAppKeyPrivateKey            string = "private_key"
-	ErrorKeyMethodName                       string = "method_name"
-	ActionAppLinkCommand                     string = "android.media.tv.interactive.action.APP_LINK_COMMAND"
-	AppLinkKeyBackUri                        string = "back_uri"
-	AppLinkKeyClassName                      string = "class_name"
-	AppLinkKeyCommandType                    string = "command_type"
-	AppLinkKeyPackageName                    string = "package_name"
-	AppLinkKeyServiceId                      string = "service_id"
-	IntentKeyBiInteractiveAppType            string = "bi_interactive_app_type"
-	IntentKeyBiInteractiveAppUri             string = "bi_interactive_app_uri"
-	IntentKeyChannelUri                      string = "channel_uri"
-	IntentKeyCommandType                     string = "command_type"
-	IntentKeyInteractiveAppServiceId         string = "interactive_app_id"
-	IntentKeyTvInputId                       string = "tv_input_id"
 )

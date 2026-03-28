@@ -33,7 +33,7 @@ func NewJsonWriter(vm *jni.VM, arg0 *jni.Object) (*JsonWriter, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJsonWriter)), midJsonWriterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJsonWriter)), midJsonWriterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

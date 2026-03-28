@@ -33,7 +33,7 @@ func NewEdgeEffect(vm *jni.VM, arg0 *jni.Object) (*EdgeEffect, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEdgeEffect)), midEdgeEffectInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEdgeEffect)), midEdgeEffectCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

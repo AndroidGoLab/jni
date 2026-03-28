@@ -32,7 +32,7 @@ func NewInputMethodService(vm *jni.VM) (*InputMethodService, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputMethodService)), midInputMethodServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputMethodService)), midInputMethodServiceCtor)
 		if err != nil {
 			return err
 		}

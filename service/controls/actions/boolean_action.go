@@ -43,7 +43,7 @@ func NewBooleanAction(vm *jni.VM, arg0 string, arg1 bool) (*BooleanAction, error
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBooleanAction)), midBooleanActionInit, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBooleanAction)), midBooleanActionCtor, jni.ObjectValue(&jArg0.Object), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

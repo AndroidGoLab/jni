@@ -31,7 +31,7 @@ func NewLocaleConfig(vm *jni.VM, arg0 *jni.Object) (*LocaleConfig, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocaleConfig)), midLocaleConfigInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocaleConfig)), midLocaleConfigCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

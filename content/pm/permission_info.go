@@ -32,7 +32,7 @@ func NewPermissionInfo(vm *jni.VM) (*PermissionInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPermissionInfo)), midPermissionInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPermissionInfo)), midPermissionInfoCtor)
 		if err != nil {
 			return err
 		}

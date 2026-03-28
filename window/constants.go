@@ -5,13 +5,13 @@ package window
 import "github.com/AndroidGoLab/jni/window/consts"
 
 const (
-	Creator                          = consts.Creator
+	EdgeLeft                         = consts.EdgeLeft
+	EdgeNone                         = consts.EdgeNone
+	EdgeRight                        = consts.EdgeRight
 	PriorityDefault                  = consts.PriorityDefault
 	PriorityOverlay                  = consts.PriorityOverlay
 	PrioritySystemNavigationObserver = consts.PrioritySystemNavigationObserver
 	SplashScreenStyleIcon            = consts.SplashScreenStyleIcon
 	SplashScreenStyleSolidColor      = consts.SplashScreenStyleSolidColor
-	EdgeLeft                         = consts.EdgeLeft
-	EdgeNone                         = consts.EdgeNone
-	EdgeRight                        = consts.EdgeRight
+	Creator                          = consts.Creator
 )

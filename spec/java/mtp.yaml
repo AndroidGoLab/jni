@@ -5,6 +5,47 @@
 package: mtp
 go_import: github.com/AndroidGoLab/jni/mtp
 classes:
+    - java_class: android.mtp.MtpDeviceInfo
+      go_type: DeviceInfo
+      methods:
+        - java_method: getEventsSupported
+          go_name: GetEventsSupported
+          returns: '[I'
+          error: true
+        - java_method: getManufacturer
+          go_name: GetManufacturer
+          returns: String
+          error: true
+        - java_method: getModel
+          go_name: GetModel
+          returns: String
+          error: true
+        - java_method: getOperationsSupported
+          go_name: GetOperationsSupported
+          returns: '[I'
+          error: true
+        - java_method: getSerialNumber
+          go_name: GetSerialNumber
+          returns: String
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: String
+          error: true
+        - java_method: isEventSupported
+          go_name: IsEventSupported
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isOperationSupported
+          go_name: IsOperationSupported
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
     - java_class: android.mtp.MtpEvent
       go_type: Event
       methods:
@@ -47,175 +88,6 @@ classes:
         - java_method: getTransactionId
           go_name: GetTransactionId
           returns: int
-          error: true
-    - java_class: android.mtp.MtpDevice
-      go_type: Device
-      obtain: constructor
-      constructor_params:
-        - java_type: android.hardware.usb.UsbDevice
-          go_name: arg0
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: deleteObject
-          go_name: DeleteObject
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getDeviceId
-          go_name: GetDeviceId
-          returns: int
-          error: true
-        - java_method: getDeviceInfo
-          go_name: GetDeviceInfo
-          returns: android.mtp.MtpDeviceInfo
-          error: true
-        - java_method: getDeviceName
-          go_name: GetDeviceName
-          returns: String
-          error: true
-        - java_method: getObject
-          go_name: GetObject
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: '[B'
-          error: true
-        - java_method: getObjectHandles
-          go_name: GetObjectHandles
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: '[I'
-          error: true
-        - java_method: getObjectInfo
-          go_name: GetObjectInfo
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.mtp.MtpObjectInfo
-          error: true
-        - java_method: getParent
-          go_name: GetParent
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: getPartialObject
-          go_name: GetPartialObject
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-            - java_type: '[B'
-              go_name: arg3
-          returns: long
-          error: true
-        - java_method: getPartialObject64
-          go_name: GetPartialObject64
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-            - java_type: '[B'
-              go_name: arg3
-          returns: long
-          error: true
-        - java_method: getStorageId
-          go_name: GetStorageId
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: getStorageIds
-          go_name: GetStorageIds
-          returns: '[I'
-          error: true
-        - java_method: getStorageInfo
-          go_name: GetStorageInfo
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.mtp.MtpStorageInfo
-          error: true
-        - java_method: getThumbnail
-          go_name: GetThumbnail
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: '[B'
-          error: true
-        - java_method: importFile
-          go_name: ImportFile2
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.os.ParcelFileDescriptor
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: importFile
-          go_name: ImportFile2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: open
-          go_name: Open
-          params:
-            - java_type: android.hardware.usb.UsbDeviceConnection
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: readEvent
-          go_name: ReadEvent
-          params:
-            - java_type: android.os.CancellationSignal
-              go_name: arg0
-          returns: android.mtp.MtpEvent
-          error: true
-        - java_method: sendObject
-          go_name: SendObject
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: android.os.ParcelFileDescriptor
-              go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: sendObjectInfo
-          go_name: SendObjectInfo
-          params:
-            - java_type: android.mtp.MtpObjectInfo
-              go_name: arg0
-          returns: android.mtp.MtpObjectInfo
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
           error: true
     - java_class: android.mtp.MtpObjectInfo
       go_type: ObjectInfo
@@ -502,46 +374,174 @@ classes:
           go_name: GetVolumeIdentifier
           returns: String
           error: true
-    - java_class: android.mtp.MtpDeviceInfo
-      go_type: DeviceInfo
+    - java_class: android.mtp.MtpDevice
+      go_type: Device
+      obtain: constructor
+      constructor_params:
+        - java_type: android.hardware.usb.UsbDevice
+          go_name: arg0
       methods:
-        - java_method: getEventsSupported
-          go_name: GetEventsSupported
-          returns: '[I'
+        - java_method: close
+          go_name: Close
+          returns: void
           error: true
-        - java_method: getManufacturer
-          go_name: GetManufacturer
-          returns: String
-          error: true
-        - java_method: getModel
-          go_name: GetModel
-          returns: String
-          error: true
-        - java_method: getOperationsSupported
-          go_name: GetOperationsSupported
-          returns: '[I'
-          error: true
-        - java_method: getSerialNumber
-          go_name: GetSerialNumber
-          returns: String
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: String
-          error: true
-        - java_method: isEventSupported
-          go_name: IsEventSupported
+        - java_method: deleteObject
+          go_name: DeleteObject
           params:
             - java_type: int
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: isOperationSupported
-          go_name: IsOperationSupported
+        - java_method: getDeviceId
+          go_name: GetDeviceId
+          returns: int
+          error: true
+        - java_method: getDeviceInfo
+          go_name: GetDeviceInfo
+          returns: android.mtp.MtpDeviceInfo
+          error: true
+        - java_method: getDeviceName
+          go_name: GetDeviceName
+          returns: String
+          error: true
+        - java_method: getObject
+          go_name: GetObject
           params:
             - java_type: int
               go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: '[B'
+          error: true
+        - java_method: getObjectHandles
+          go_name: GetObjectHandles
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: '[I'
+          error: true
+        - java_method: getObjectInfo
+          go_name: GetObjectInfo
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.mtp.MtpObjectInfo
+          error: true
+        - java_method: getParent
+          go_name: GetParent
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getPartialObject
+          go_name: GetPartialObject
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: '[B'
+              go_name: arg3
+          returns: long
+          error: true
+        - java_method: getPartialObject64
+          go_name: GetPartialObject64
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+            - java_type: '[B'
+              go_name: arg3
+          returns: long
+          error: true
+        - java_method: getStorageId
+          go_name: GetStorageId
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: getStorageIds
+          go_name: GetStorageIds
+          returns: '[I'
+          error: true
+        - java_method: getStorageInfo
+          go_name: GetStorageInfo
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.mtp.MtpStorageInfo
+          error: true
+        - java_method: getThumbnail
+          go_name: GetThumbnail
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: '[B'
+          error: true
+        - java_method: importFile
+          go_name: ImportFile2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg1
           returns: boolean
+          error: true
+        - java_method: importFile
+          go_name: ImportFile2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: open
+          go_name: Open
+          params:
+            - java_type: android.hardware.usb.UsbDeviceConnection
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: readEvent
+          go_name: ReadEvent
+          params:
+            - java_type: android.os.CancellationSignal
+              go_name: arg0
+          returns: android.mtp.MtpEvent
+          error: true
+        - java_method: sendObject
+          go_name: SendObject
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: sendObjectInfo
+          go_name: SendObjectInfo
+          params:
+            - java_type: android.mtp.MtpObjectInfo
+              go_name: arg0
+          returns: android.mtp.MtpObjectInfo
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
           error: true
     - java_class: android.mtp.MtpConstants
       go_type: Constants

@@ -33,7 +33,7 @@ func NewAttestedKeyPair(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Attest
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAttestedKeyPair)), midAttestedKeyPairInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAttestedKeyPair)), midAttestedKeyPairCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -44,6 +44,38 @@ func NewAttestedKeyPair(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Attest
 		return nil, err
 	}
 	return &t, nil
+}
+
+// GetAttestationRecord calls android.security.AttestedKeyPair.getAttestationRecord.
+func (m *AttestedKeyPair) GetAttestationRecord() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAttestedKeyPairGetAttestationRecord == nil {
+			callErr = fmt.Errorf("android.security.AttestedKeyPair.getAttestationRecord is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAttestedKeyPairGetAttestationRecord,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetKeyPair calls android.security.AttestedKeyPair.getKeyPair.

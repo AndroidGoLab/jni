@@ -32,7 +32,7 @@ func NewPaint(vm *jni.VM) (*Paint, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPaint)), midPaintInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPaint)), midPaintCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewArrowKeyMovementMethod(vm *jni.VM) (*ArrowKeyMovementMethod, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), midArrowKeyMovementMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArrowKeyMovementMethod)), midArrowKeyMovementMethodCtor)
 		if err != nil {
 			return err
 		}

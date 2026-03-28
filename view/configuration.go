@@ -32,7 +32,7 @@ func NewConfiguration(vm *jni.VM) (*Configuration, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfiguration)), midConfigurationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfiguration)), midConfigurationCtor)
 		if err != nil {
 			return err
 		}

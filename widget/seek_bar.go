@@ -33,7 +33,7 @@ func NewSeekBar(vm *jni.VM, arg0 *jni.Object) (*SeekBar, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSeekBar)), midSeekBarInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSeekBar)), midSeekBarCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

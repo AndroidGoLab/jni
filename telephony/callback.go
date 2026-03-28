@@ -32,7 +32,7 @@ func NewCallback(vm *jni.VM) (*Callback, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallback)), midCallbackInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallback)), midCallbackCtor)
 		if err != nil {
 			return err
 		}

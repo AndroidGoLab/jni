@@ -33,7 +33,7 @@ func NewSSLCertificateSocketFactory(vm *jni.VM, arg0 int32) (*SSLCertificateSock
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSSLCertificateSocketFactory)), midSSLCertificateSocketFactoryInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSSLCertificateSocketFactory)), midSSLCertificateSocketFactoryCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

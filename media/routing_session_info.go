@@ -135,6 +135,38 @@ func (m *RoutingSessionInfo) GetControlHints() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetDeselectableRoutes calls android.media.RoutingSessionInfo.getDeselectableRoutes.
+func (m *RoutingSessionInfo) GetDeselectableRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoutingSessionInfoGetDeselectableRoutes == nil {
+			callErr = fmt.Errorf("android.media.RoutingSessionInfo.getDeselectableRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoutingSessionInfoGetDeselectableRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetId calls android.media.RoutingSessionInfo.getId.
 func (m *RoutingSessionInfo) GetId() (string, error) {
 	var result string
@@ -194,6 +226,70 @@ func (m *RoutingSessionInfo) GetName() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetSelectableRoutes calls android.media.RoutingSessionInfo.getSelectableRoutes.
+func (m *RoutingSessionInfo) GetSelectableRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoutingSessionInfoGetSelectableRoutes == nil {
+			callErr = fmt.Errorf("android.media.RoutingSessionInfo.getSelectableRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoutingSessionInfoGetSelectableRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSelectedRoutes calls android.media.RoutingSessionInfo.getSelectedRoutes.
+func (m *RoutingSessionInfo) GetSelectedRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoutingSessionInfoGetSelectedRoutes == nil {
+			callErr = fmt.Errorf("android.media.RoutingSessionInfo.getSelectedRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoutingSessionInfoGetSelectedRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetTransferReason calls android.media.RoutingSessionInfo.getTransferReason.
 func (m *RoutingSessionInfo) GetTransferReason() (int32, error) {
 	var result int32
@@ -213,6 +309,38 @@ func (m *RoutingSessionInfo) GetTransferReason() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTransferableRoutes calls android.media.RoutingSessionInfo.getTransferableRoutes.
+func (m *RoutingSessionInfo) GetTransferableRoutes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoutingSessionInfoGetTransferableRoutes == nil {
+			callErr = fmt.Errorf("android.media.RoutingSessionInfo.getTransferableRoutes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoutingSessionInfoGetTransferableRoutes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

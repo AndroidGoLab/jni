@@ -32,7 +32,7 @@ func NewConverter(vm *jni.VM) (*Converter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConverter)), midConverterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConverter)), midConverterCtor)
 		if err != nil {
 			return err
 		}

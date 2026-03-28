@@ -30,7 +30,7 @@ func NewAliasActivity(vm *jni.VM) (*AliasActivity, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAliasActivity)), midAliasActivityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAliasActivity)), midAliasActivityCtor)
 		if err != nil {
 			return err
 		}

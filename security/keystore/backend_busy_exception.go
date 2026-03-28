@@ -33,7 +33,7 @@ func NewBackendBusyException(vm *jni.VM, arg0 int64) (*BackendBusyException, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackendBusyException)), midBackendBusyExceptionInit, jni.LongValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackendBusyException)), midBackendBusyExceptionCtor, jni.LongValue(arg0))
 		if err != nil {
 			return err
 		}

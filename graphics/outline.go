@@ -32,7 +32,7 @@ func NewOutline(vm *jni.VM) (*Outline, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutline)), midOutlineInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutline)), midOutlineCtor)
 		if err != nil {
 			return err
 		}

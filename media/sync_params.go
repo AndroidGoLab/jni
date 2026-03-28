@@ -32,7 +32,7 @@ func NewSyncParams(vm *jni.VM) (*SyncParams, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncParams)), midSyncParamsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSyncParams)), midSyncParamsCtor)
 		if err != nil {
 			return err
 		}

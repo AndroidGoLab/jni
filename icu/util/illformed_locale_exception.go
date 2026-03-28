@@ -32,7 +32,7 @@ func NewIllformedLocaleException(vm *jni.VM) (*IllformedLocaleException, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIllformedLocaleException)), midIllformedLocaleExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIllformedLocaleException)), midIllformedLocaleExceptionCtor)
 		if err != nil {
 			return err
 		}

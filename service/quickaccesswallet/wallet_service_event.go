@@ -33,7 +33,7 @@ func NewWalletServiceEvent(vm *jni.VM, arg0 int32) (*WalletServiceEvent, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), midWalletServiceEventInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWalletServiceEvent)), midWalletServiceEventCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

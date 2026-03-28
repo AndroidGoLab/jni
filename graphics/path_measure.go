@@ -32,7 +32,7 @@ func NewPathMeasure(vm *jni.VM) (*PathMeasure, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathMeasure)), midPathMeasureInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathMeasure)), midPathMeasureCtor)
 		if err != nil {
 			return err
 		}

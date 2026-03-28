@@ -154,6 +154,102 @@ func (m *Number) GetEmergencyCallRouting() (int32, error) {
 	return result, callErr
 }
 
+// GetEmergencyNumberSources calls android.telephony.emergency.EmergencyNumber.getEmergencyNumberSources.
+func (m *Number) GetEmergencyNumberSources() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNumberGetEmergencyNumberSources == nil {
+			callErr = fmt.Errorf("android.telephony.emergency.EmergencyNumber.getEmergencyNumberSources is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNumberGetEmergencyNumberSources,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEmergencyServiceCategories calls android.telephony.emergency.EmergencyNumber.getEmergencyServiceCategories.
+func (m *Number) GetEmergencyServiceCategories() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNumberGetEmergencyServiceCategories == nil {
+			callErr = fmt.Errorf("android.telephony.emergency.EmergencyNumber.getEmergencyServiceCategories is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNumberGetEmergencyServiceCategories,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEmergencyUrns calls android.telephony.emergency.EmergencyNumber.getEmergencyUrns.
+func (m *Number) GetEmergencyUrns() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNumberGetEmergencyUrns == nil {
+			callErr = fmt.Errorf("android.telephony.emergency.EmergencyNumber.getEmergencyUrns is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNumberGetEmergencyUrns,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMnc calls android.telephony.emergency.EmergencyNumber.getMnc.
 func (m *Number) GetMnc() (string, error) {
 	var result string

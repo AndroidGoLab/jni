@@ -32,7 +32,7 @@ func NewHardwareRenderer(vm *jni.VM) (*HardwareRenderer, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHardwareRenderer)), midHardwareRendererInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHardwareRenderer)), midHardwareRendererCtor)
 		if err != nil {
 			return err
 		}

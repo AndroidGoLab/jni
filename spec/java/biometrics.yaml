@@ -5,26 +5,8 @@
 package: biometrics
 go_import: github.com/AndroidGoLab/jni/hardware/biometrics
 classes:
-    - java_class: android.hardware.biometrics.PromptContentItemPlainText
-      go_type: PromptContentItemPlainText
-      obtain: constructor
-      constructor_params:
-        - java_type: String
-          go_name: arg0
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
+    - java_class: android.hardware.biometrics.PromptContentItem
+      go_type: PromptContentItem
     - java_class: android.hardware.biometrics.PromptVerticalListContentView
       go_type: PromptVerticalListContentView
       methods:
@@ -35,6 +17,10 @@ classes:
         - java_method: getDescription
           go_name: GetDescription
           returns: String
+          error: true
+        - java_method: getListItems
+          go_name: GetListItems
+          returns: java.util.List<android.hardware.biometrics.PromptContentItem>
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -84,12 +70,30 @@ classes:
               go_name: arg0
           returns: android.hardware.biometrics.PromptVerticalListContentView$Builder
           error: true
-    - java_class: android.hardware.biometrics.PromptContentItem
-      go_type: PromptContentItem
     - java_class: android.hardware.biometrics.PromptContentView
       go_type: PromptContentView
     - java_class: android.hardware.biometrics.PromptContentItemBulletedText
       go_type: PromptContentItemBulletedText
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.biometrics.PromptContentItemPlainText
+      go_type: PromptContentItemPlainText
       obtain: constructor
       constructor_params:
         - java_type: String

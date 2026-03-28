@@ -396,6 +396,38 @@ func (m *Manager) ClearTestProviderStatus(arg0 string) error {
 	return callErr
 }
 
+// GetAllProviders calls android.location.LocationManager.getAllProviders.
+func (m *Manager) GetAllProviders() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetAllProviders == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getAllProviders is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetAllProviders,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetBestProvider calls android.location.LocationManager.getBestProvider.
 func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 	var result string
@@ -424,6 +456,38 @@ func (m *Manager) GetBestProvider(arg0 *jni.Object, arg1 bool) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetGnssAntennaInfos calls android.location.LocationManager.getGnssAntennaInfos.
+func (m *Manager) GetGnssAntennaInfos() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetGnssAntennaInfos == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getGnssAntennaInfos is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetGnssAntennaInfos,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -644,6 +708,81 @@ func (m *Manager) GetProviderProperties(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midManagerGetProviderProperties, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetProviders2 calls android.location.LocationManager.getProviders.
+func (m *Manager) GetProviders2(arg0 *jni.Object, arg1 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetProviders2 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getProviders is not available on this device")
+			return callErr
+		}
+
+		var jArg1 uint8
+		if arg1 {
+			jArg1 = jniTrue
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetProviders2, jni.ObjectValue(arg0), jni.BooleanValue(jArg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetProviders1_1 calls android.location.LocationManager.getProviders.
+func (m *Manager) GetProviders1_1(arg0 bool) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetProviders1_1 == nil {
+			callErr = fmt.Errorf("android.location.LocationManager.getProviders is not available on this device")
+			return callErr
+		}
+		var jArg0 uint8
+		if arg0 {
+			jArg0 = jniTrue
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetProviders1_1, jni.BooleanValue(jArg0),
 		)
 		if callErr != nil {
 			return callErr

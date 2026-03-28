@@ -38,7 +38,7 @@ func NewResourceBusyException(vm *jni.VM, arg0 string) (*ResourceBusyException, 
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResourceBusyException)), midResourceBusyExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResourceBusyException)), midResourceBusyExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

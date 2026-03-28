@@ -33,7 +33,7 @@ func NewPreference(vm *jni.VM, arg0 *jni.Object) (*Preference, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPreference)), midPreferenceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPreference)), midPreferenceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

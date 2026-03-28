@@ -33,7 +33,7 @@ func NewIkeNetworkLostException(vm *jni.VM, arg0 *jni.Object) (*IkeNetworkLostEx
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), midIkeNetworkLostExceptionInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), midIkeNetworkLostExceptionCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

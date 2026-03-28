@@ -7,6 +7,6 @@ const (
 	FlagReportingDestinationBuyer           int = 2
 	FlagReportingDestinationComponentSeller int = 4
 	FlagReportingDestinationSeller          int = 1
-	Empty                                   int = 0
 	NoOutcome                               int = 0
+	Empty                                   int = 0
 )

@@ -32,7 +32,7 @@ func NewSQLiteDatabaseLockedException(vm *jni.VM) (*SQLiteDatabaseLockedExceptio
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteDatabaseLockedException)), midSQLiteDatabaseLockedExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteDatabaseLockedException)), midSQLiteDatabaseLockedExceptionCtor)
 		if err != nil {
 			return err
 		}

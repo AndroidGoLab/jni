@@ -23,14 +23,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPromptContentItemPlainText                 *jni.GlobalRef
-	midPromptContentItemPlainTextInit             jni.MethodID
-	midPromptContentItemPlainTextDescribeContents jni.MethodID
-	midPromptContentItemPlainTextWriteToParcel    jni.MethodID
+	clsPromptContentItem *jni.GlobalRef
 
 	clsPromptVerticalListContentView                              *jni.GlobalRef
 	midPromptVerticalListContentViewDescribeContents              jni.MethodID
 	midPromptVerticalListContentViewGetDescription                jni.MethodID
+	midPromptVerticalListContentViewGetListItems                  jni.MethodID
 	midPromptVerticalListContentViewWriteToParcel                 jni.MethodID
 	midPromptVerticalListContentViewGetMaxEachItemCharacterNumber jni.MethodID
 	midPromptVerticalListContentViewGetMaxItemCount               jni.MethodID
@@ -41,14 +39,17 @@ var (
 	midPromptVerticalListContentViewBuilderBuild          jni.MethodID
 	midPromptVerticalListContentViewBuilderSetDescription jni.MethodID
 
-	clsPromptContentItem *jni.GlobalRef
-
 	clsPromptContentView *jni.GlobalRef
 
 	clsPromptContentItemBulletedText                 *jni.GlobalRef
-	midPromptContentItemBulletedTextInit             jni.MethodID
+	midPromptContentItemBulletedTextCtor             jni.MethodID
 	midPromptContentItemBulletedTextDescribeContents jni.MethodID
 	midPromptContentItemBulletedTextWriteToParcel    jni.MethodID
+
+	clsPromptContentItemPlainText                 *jni.GlobalRef
+	midPromptContentItemPlainTextCtor             jni.MethodID
+	midPromptContentItemPlainTextDescribeContents jni.MethodID
+	midPromptContentItemPlainTextWriteToParcel    jni.MethodID
 
 	clsPromptContentViewWithMoreOptionsButton                             *jni.GlobalRef
 	midPromptContentViewWithMoreOptionsButtonDescribeContents             jni.MethodID
@@ -80,31 +81,13 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemPlainText")
+	c, err = env.FindClass("android/hardware/biometrics/PromptContentItem")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPromptContentItemPlainText = env.NewGlobalRef(&c.Object)
-		midPromptContentItemPlainTextInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "<init>", "(Ljava/lang/String;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midPromptContentItemPlainTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPromptContentItemPlainTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
+		clsPromptContentItem = env.NewGlobalRef(&c.Object)
 
 	}
 
@@ -124,6 +107,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPromptVerticalListContentViewGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getDescription", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptVerticalListContentViewGetListItems, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptVerticalListContentView)), "getListItems", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -191,16 +181,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/hardware/biometrics/PromptContentItem")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPromptContentItem = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/hardware/biometrics/PromptContentView")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -218,7 +198,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPromptContentItemBulletedText = env.NewGlobalRef(&c.Object)
-		midPromptContentItemBulletedTextInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "<init>", "(Ljava/lang/String;)V")
+		midPromptContentItemBulletedTextCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "<init>", "(Ljava/lang/String;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -231,6 +211,34 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPromptContentItemBulletedTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/hardware/biometrics/PromptContentItemPlainText")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPromptContentItemPlainText = env.NewGlobalRef(&c.Object)
+		midPromptContentItemPlainTextCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midPromptContentItemPlainTextDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPromptContentItemPlainTextWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPromptContentItemPlainText)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

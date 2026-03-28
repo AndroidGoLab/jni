@@ -107,8 +107,8 @@ func (m *ScanRecord) GetDeviceName() (string, error) {
 	return result, callErr
 }
 
-// GetManufacturerSpecificData calls android.bluetooth.le.ScanRecord.getManufacturerSpecificData.
-func (m *ScanRecord) GetManufacturerSpecificData(arg0 int32) (*jni.Object, error) {
+// GetManufacturerSpecificData0 calls android.bluetooth.le.ScanRecord.getManufacturerSpecificData.
+func (m *ScanRecord) GetManufacturerSpecificData0() (*jni.Object, error) {
 	var result *jni.Object
 	var callErr error
 	callErr = m.VM.Do(func(env *jni.Env) error {
@@ -116,14 +116,46 @@ func (m *ScanRecord) GetManufacturerSpecificData(arg0 int32) (*jni.Object, error
 			callErr = err
 			return err
 		}
-		if midScanRecordGetManufacturerSpecificData == nil {
+		if midScanRecordGetManufacturerSpecificData0 == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.ScanRecord.getManufacturerSpecificData is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScanRecordGetManufacturerSpecificData0,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetManufacturerSpecificData1_1 calls android.bluetooth.le.ScanRecord.getManufacturerSpecificData.
+func (m *ScanRecord) GetManufacturerSpecificData1_1(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScanRecordGetManufacturerSpecificData1_1 == nil {
 			callErr = fmt.Errorf("android.bluetooth.le.ScanRecord.getManufacturerSpecificData is not available on this device")
 			return callErr
 		}
 
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
-			midScanRecordGetManufacturerSpecificData, jni.IntValue(arg0),
+			midScanRecordGetManufacturerSpecificData1_1, jni.IntValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -157,6 +189,70 @@ func (m *ScanRecord) GetServiceData(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midScanRecordGetServiceData, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetServiceSolicitationUuids calls android.bluetooth.le.ScanRecord.getServiceSolicitationUuids.
+func (m *ScanRecord) GetServiceSolicitationUuids() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScanRecordGetServiceSolicitationUuids == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.ScanRecord.getServiceSolicitationUuids is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScanRecordGetServiceSolicitationUuids,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetServiceUuids calls android.bluetooth.le.ScanRecord.getServiceUuids.
+func (m *ScanRecord) GetServiceUuids() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midScanRecordGetServiceUuids == nil {
+			callErr = fmt.Errorf("android.bluetooth.le.ScanRecord.getServiceUuids is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midScanRecordGetServiceUuids,
 		)
 		if callErr != nil {
 			return callErr

@@ -33,7 +33,7 @@ func NewAppWidgetHostView(vm *jni.VM, arg0 *jni.Object) (*AppWidgetHostView, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetHostView)), midAppWidgetHostViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetHostView)), midAppWidgetHostViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

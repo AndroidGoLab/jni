@@ -33,7 +33,7 @@ func NewInputContentInfo(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Input
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), midInputContentInfoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputContentInfo)), midInputContentInfoCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

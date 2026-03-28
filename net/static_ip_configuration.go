@@ -76,6 +76,38 @@ func (m *StaticIpConfiguration) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetDnsServers calls android.net.StaticIpConfiguration.getDnsServers.
+func (m *StaticIpConfiguration) GetDnsServers() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midStaticIpConfigurationGetDnsServers == nil {
+			callErr = fmt.Errorf("android.net.StaticIpConfiguration.getDnsServers is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midStaticIpConfigurationGetDnsServers,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDomains calls android.net.StaticIpConfiguration.getDomains.
 func (m *StaticIpConfiguration) GetDomains() (string, error) {
 	var result string

@@ -75,6 +75,38 @@ func (m *PromptVerticalListContentView) GetDescription() (string, error) {
 	return result, callErr
 }
 
+// GetListItems calls android.hardware.biometrics.PromptVerticalListContentView.getListItems.
+func (m *PromptVerticalListContentView) GetListItems() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPromptVerticalListContentViewGetListItems == nil {
+			callErr = fmt.Errorf("android.hardware.biometrics.PromptVerticalListContentView.getListItems is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPromptVerticalListContentViewGetListItems,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // WriteToParcel calls android.hardware.biometrics.PromptVerticalListContentView.writeToParcel.
 func (m *PromptVerticalListContentView) WriteToParcel(arg0 *jni.Object, arg1 int32) error {
 

@@ -75,6 +75,38 @@ func (m *ConversationActionsRequest) GetCallingPackageName() (string, error) {
 	return result, callErr
 }
 
+// GetConversation calls android.view.textclassifier.ConversationActions$Request.getConversation.
+func (m *ConversationActionsRequest) GetConversation() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConversationActionsRequestGetConversation == nil {
+			callErr = fmt.Errorf("android.view.textclassifier.ConversationActions$Request.getConversation is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConversationActionsRequestGetConversation,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetExtras calls android.view.textclassifier.ConversationActions$Request.getExtras.
 func (m *ConversationActionsRequest) GetExtras() (*jni.Object, error) {
 	var result *jni.Object
@@ -91,6 +123,38 @@ func (m *ConversationActionsRequest) GetExtras() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midConversationActionsRequestGetExtras,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHints calls android.view.textclassifier.ConversationActions$Request.getHints.
+func (m *ConversationActionsRequest) GetHints() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConversationActionsRequestGetHints == nil {
+			callErr = fmt.Errorf("android.view.textclassifier.ConversationActions$Request.getHints is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConversationActionsRequestGetHints,
 		)
 		if callErr != nil {
 			return callErr

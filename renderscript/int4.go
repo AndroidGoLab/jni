@@ -32,7 +32,7 @@ func NewInt4(vm *jni.VM) (*Int4, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt4)), midInt4Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt4)), midInt4Ctor)
 		if err != nil {
 			return err
 		}

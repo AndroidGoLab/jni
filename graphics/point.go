@@ -32,7 +32,7 @@ func NewPoint(vm *jni.VM) (*Point, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPoint)), midPointInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPoint)), midPointCtor)
 		if err != nil {
 			return err
 		}

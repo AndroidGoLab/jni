@@ -33,7 +33,7 @@ func NewTrustedPresentationThresholds(vm *jni.VM, arg0 float32, arg1 float32, ar
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrustedPresentationThresholds)), midTrustedPresentationThresholdsInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrustedPresentationThresholds)), midTrustedPresentationThresholdsCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

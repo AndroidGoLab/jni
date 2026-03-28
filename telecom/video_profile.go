@@ -33,7 +33,7 @@ func NewVideoProfile(vm *jni.VM, arg0 int32) (*VideoProfile, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVideoProfile)), midVideoProfileInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVideoProfile)), midVideoProfileCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

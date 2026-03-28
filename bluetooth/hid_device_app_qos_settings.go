@@ -33,7 +33,7 @@ func NewHidDeviceAppQosSettings(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32, 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHidDeviceAppQosSettings)), midHidDeviceAppQosSettingsInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHidDeviceAppQosSettings)), midHidDeviceAppQosSettingsCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
 		if err != nil {
 			return err
 		}

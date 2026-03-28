@@ -30,7 +30,7 @@ func NewCancellationSignal(vm *jni.VM) (*CancellationSignal, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), midCancellationSignalInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCancellationSignal)), midCancellationSignalCtor)
 		if err != nil {
 			return err
 		}

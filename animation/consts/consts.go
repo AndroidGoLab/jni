@@ -3,10 +3,6 @@
 package consts
 
 const (
-	DurationInfinite int64 = -1
-)
-
-const (
 	Infinite           int = -1
 	Restart            int = 1
 	Reverse            int = 2
@@ -15,4 +11,8 @@ const (
 	ChangeDisappearing int = 1
 	Changing           int = 4
 	Disappearing       int = 3
+)
+
+const (
+	DurationInfinite int64 = -1
 )

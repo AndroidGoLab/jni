@@ -38,7 +38,7 @@ func NewPromptContentItemBulletedText(vm *jni.VM, arg0 string) (*PromptContentIt
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), midPromptContentItemBulletedTextInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPromptContentItemBulletedText)), midPromptContentItemBulletedTextCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

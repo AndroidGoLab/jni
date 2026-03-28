@@ -32,7 +32,7 @@ func NewPasswordTransformationMethod(vm *jni.VM) (*PasswordTransformationMethod,
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), midPasswordTransformationMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPasswordTransformationMethod)), midPasswordTransformationMethodCtor)
 		if err != nil {
 			return err
 		}

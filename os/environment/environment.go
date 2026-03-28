@@ -32,7 +32,7 @@ func NewEnvironment(vm *jni.VM) (*Environment, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEnvironment)), midEnvironmentInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEnvironment)), midEnvironmentCtor)
 		if err != nil {
 			return err
 		}

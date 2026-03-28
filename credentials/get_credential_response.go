@@ -33,7 +33,7 @@ func NewGetCredentialResponse(vm *jni.VM, arg0 *jni.Object) (*GetCredentialRespo
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGetCredentialResponse)), midGetCredentialResponseInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGetCredentialResponse)), midGetCredentialResponseCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

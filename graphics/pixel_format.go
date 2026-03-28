@@ -32,7 +32,7 @@ func NewPixelFormat(vm *jni.VM) (*PixelFormat, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPixelFormat)), midPixelFormatInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPixelFormat)), midPixelFormatCtor)
 		if err != nil {
 			return err
 		}

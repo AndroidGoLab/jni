@@ -5,7 +5,7 @@ package devicelock
 import "github.com/AndroidGoLab/jni/devicelock/consts"
 
 const (
+	DeviceLockRoleFinancing = consts.DeviceLockRoleFinancing
 	DeviceIdTypeImei        = consts.DeviceIdTypeImei
 	DeviceIdTypeMeid        = consts.DeviceIdTypeMeid
-	DeviceLockRoleFinancing = consts.DeviceLockRoleFinancing
 )

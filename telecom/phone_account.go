@@ -318,6 +318,38 @@ func (m *PhoneAccount) GetShortDescription() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetSimultaneousCallingRestriction calls android.telecom.PhoneAccount.getSimultaneousCallingRestriction.
+func (m *PhoneAccount) GetSimultaneousCallingRestriction() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPhoneAccountGetSimultaneousCallingRestriction == nil {
+			callErr = fmt.Errorf("android.telecom.PhoneAccount.getSimultaneousCallingRestriction is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPhoneAccountGetSimultaneousCallingRestriction,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSubscriptionAddress calls android.telecom.PhoneAccount.getSubscriptionAddress.
 func (m *PhoneAccount) GetSubscriptionAddress() (*jni.Object, error) {
 	var result *jni.Object
@@ -334,6 +366,38 @@ func (m *PhoneAccount) GetSubscriptionAddress() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midPhoneAccountGetSubscriptionAddress,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedUriSchemes calls android.telecom.PhoneAccount.getSupportedUriSchemes.
+func (m *PhoneAccount) GetSupportedUriSchemes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPhoneAccountGetSupportedUriSchemes == nil {
+			callErr = fmt.Errorf("android.telecom.PhoneAccount.getSupportedUriSchemes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPhoneAccountGetSupportedUriSchemes,
 		)
 		if callErr != nil {
 			return callErr

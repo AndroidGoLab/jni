@@ -23,6 +23,76 @@ type E2eeContactKeysManager struct {
 	Obj *jni.GlobalRef
 }
 
+// GetAllE2eeContactKeys calls android.provider.E2eeContactKeysManager.getAllE2eeContactKeys.
+func (m *E2eeContactKeysManager) GetAllE2eeContactKeys(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midE2eeContactKeysManagerGetAllE2eeContactKeys == nil {
+			callErr = fmt.Errorf("android.provider.E2eeContactKeysManager.getAllE2eeContactKeys is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midE2eeContactKeysManagerGetAllE2eeContactKeys, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAllE2eeSelfKeys calls android.provider.E2eeContactKeysManager.getAllE2eeSelfKeys.
+func (m *E2eeContactKeysManager) GetAllE2eeSelfKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midE2eeContactKeysManagerGetAllE2eeSelfKeys == nil {
+			callErr = fmt.Errorf("android.provider.E2eeContactKeysManager.getAllE2eeSelfKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midE2eeContactKeysManagerGetAllE2eeSelfKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetE2eeContactKey calls android.provider.E2eeContactKeysManager.getE2eeContactKey.
 func (m *E2eeContactKeysManager) GetE2eeContactKey(
 	arg0 string,
@@ -105,6 +175,76 @@ func (m *E2eeContactKeysManager) GetE2eeSelfKey(arg0 string, arg1 string) (*jni.
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midE2eeContactKeysManagerGetE2eeSelfKey, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOwnerE2eeContactKeys calls android.provider.E2eeContactKeysManager.getOwnerE2eeContactKeys.
+func (m *E2eeContactKeysManager) GetOwnerE2eeContactKeys(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midE2eeContactKeysManagerGetOwnerE2eeContactKeys == nil {
+			callErr = fmt.Errorf("android.provider.E2eeContactKeysManager.getOwnerE2eeContactKeys is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midE2eeContactKeysManagerGetOwnerE2eeContactKeys, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOwnerE2eeSelfKeys calls android.provider.E2eeContactKeysManager.getOwnerE2eeSelfKeys.
+func (m *E2eeContactKeysManager) GetOwnerE2eeSelfKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midE2eeContactKeysManagerGetOwnerE2eeSelfKeys == nil {
+			callErr = fmt.Errorf("android.provider.E2eeContactKeysManager.getOwnerE2eeSelfKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midE2eeContactKeysManagerGetOwnerE2eeSelfKeys,
 		)
 		if callErr != nil {
 			return callErr

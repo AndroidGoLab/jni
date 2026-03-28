@@ -39,7 +39,7 @@ func NewLabeledIntent(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 int32, arg
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLabeledIntent)), midLabeledIntentInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLabeledIntent)), midLabeledIntentCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

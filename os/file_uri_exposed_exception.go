@@ -38,7 +38,7 @@ func NewFileUriExposedException(vm *jni.VM, arg0 string) (*FileUriExposedExcepti
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFileUriExposedException)), midFileUriExposedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFileUriExposedException)), midFileUriExposedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

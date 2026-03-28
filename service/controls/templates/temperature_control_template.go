@@ -38,7 +38,7 @@ func NewTemperatureControlTemplate(vm *jni.VM, arg0 string, arg1 *jni.Object, ar
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), midTemperatureControlTemplateInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTemperatureControlTemplate)), midTemperatureControlTemplateCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4))
 		if err != nil {
 			return err
 		}

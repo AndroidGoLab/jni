@@ -33,7 +33,7 @@ func NewWifiSsidPolicy(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*WifiSsidPolic
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiSsidPolicy)), midWifiSsidPolicyInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiSsidPolicy)), midWifiSsidPolicyCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -118,6 +118,38 @@ func (m *WifiSsidPolicy) GetPolicyType() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSsids calls android.app.admin.WifiSsidPolicy.getSsids.
+func (m *WifiSsidPolicy) GetSsids() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWifiSsidPolicyGetSsids == nil {
+			callErr = fmt.Errorf("android.app.admin.WifiSsidPolicy.getSsids is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWifiSsidPolicyGetSsids,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -6,6 +6,20 @@ import "github.com/AndroidGoLab/jni/nfc/consts"
 
 const (
 	Creator                    = consts.Creator
+	RtdAlternativeCarrier      = consts.RtdAlternativeCarrier
+	RtdHandoverCarrier         = consts.RtdHandoverCarrier
+	RtdHandoverRequest         = consts.RtdHandoverRequest
+	RtdHandoverSelect          = consts.RtdHandoverSelect
+	RtdSmartPoster             = consts.RtdSmartPoster
+	RtdText                    = consts.RtdText
+	RtdUri                     = consts.RtdUri
+	TnfAbsoluteUri             = consts.TnfAbsoluteUri
+	TnfEmpty                   = consts.TnfEmpty
+	TnfExternalType            = consts.TnfExternalType
+	TnfMimeMedia               = consts.TnfMimeMedia
+	TnfUnchanged               = consts.TnfUnchanged
+	TnfUnknown                 = consts.TnfUnknown
+	TnfWellKnown               = consts.TnfWellKnown
 	FlagListenDisable          = consts.FlagListenDisable
 	FlagListenKeep             = consts.FlagListenKeep
 	FlagListenNfcPassiveA      = consts.FlagListenNfcPassiveA
@@ -27,23 +41,14 @@ const (
 	StateOn                    = consts.StateOn
 	StateTurningOff            = consts.StateTurningOff
 	StateTurningOn             = consts.StateTurningOn
-	RtdAlternativeCarrier      = consts.RtdAlternativeCarrier
-	RtdHandoverCarrier         = consts.RtdHandoverCarrier
-	RtdHandoverRequest         = consts.RtdHandoverRequest
-	RtdHandoverSelect          = consts.RtdHandoverSelect
-	RtdSmartPoster             = consts.RtdSmartPoster
-	RtdText                    = consts.RtdText
-	RtdUri                     = consts.RtdUri
-	TnfAbsoluteUri             = consts.TnfAbsoluteUri
-	TnfEmpty                   = consts.TnfEmpty
-	TnfExternalType            = consts.TnfExternalType
-	TnfMimeMedia               = consts.TnfMimeMedia
-	TnfUnchanged               = consts.TnfUnchanged
-	TnfUnknown                 = consts.TnfUnknown
-	TnfWellKnown               = consts.TnfWellKnown
 )
 
 const (
+	MifareClassic                      = consts.MifareClassic
+	NfcForumType1                      = consts.NfcForumType1
+	NfcForumType2                      = consts.NfcForumType2
+	NfcForumType3                      = consts.NfcForumType3
+	NfcForumType4                      = consts.NfcForumType4
 	ActionAdapterStateChanged          = consts.ActionAdapterStateChanged
 	ActionChangeTagIntentPreference    = consts.ActionChangeTagIntentPreference
 	ActionNdefDiscovered               = consts.ActionNdefDiscovered
@@ -60,9 +65,4 @@ const (
 	ExtraReaderPresenceCheckDelay      = consts.ExtraReaderPresenceCheckDelay
 	ExtraSecureElementName             = consts.ExtraSecureElementName
 	ExtraTag                           = consts.ExtraTag
-	MifareClassic                      = consts.MifareClassic
-	NfcForumType1                      = consts.NfcForumType1
-	NfcForumType2                      = consts.NfcForumType2
-	NfcForumType3                      = consts.NfcForumType3
-	NfcForumType4                      = consts.NfcForumType4
 )

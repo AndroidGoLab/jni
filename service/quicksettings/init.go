@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsTileService                            *jni.GlobalRef
-	midTileServiceInit                        jni.MethodID
+	midTileServiceCtor                        jni.MethodID
 	midTileServiceGetQsTile                   jni.MethodID
 	midTileServiceIsLocked                    jni.MethodID
 	midTileServiceIsSecure                    jni.MethodID
@@ -86,7 +86,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsTileService = env.NewGlobalRef(&c.Object)
-		midTileServiceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTileService)), "<init>", "()V")
+		midTileServiceCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsTileService)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

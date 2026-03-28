@@ -22,6 +22,10 @@ classes:
           go_name: GetAutofillId
           returns: android.view.autofill.AutofillId
           error: true
+        - java_method: getHints
+          go_name: GetHints
+          returns: java.util.Set<java.lang.String>
+          error: true
         - java_method: toString
           go_name: ToString
           returns: String

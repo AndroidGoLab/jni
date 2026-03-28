@@ -33,7 +33,7 @@ func NewChangedPackages(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*ChangedPacka
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangedPackages)), midChangedPackagesInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangedPackages)), midChangedPackagesCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -65,6 +65,38 @@ func (m *ChangedPackages) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPackageNames calls android.content.pm.ChangedPackages.getPackageNames.
+func (m *ChangedPackages) GetPackageNames() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midChangedPackagesGetPackageNames == nil {
+			callErr = fmt.Errorf("android.content.pm.ChangedPackages.getPackageNames is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midChangedPackagesGetPackageNames,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

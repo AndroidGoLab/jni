@@ -30,6 +30,7 @@ var (
 	midDescriptionGetContent            jni.MethodID
 	midDescriptionGetContextDescription jni.MethodID
 	midDescriptionGetContextUri         jni.MethodID
+	midDescriptionGetDescription        jni.MethodID
 	midDescriptionGetId                 jni.MethodID
 	midDescriptionGetThumbnail          jni.MethodID
 	midDescriptionGetTitle              jni.MethodID
@@ -48,7 +49,7 @@ var (
 	midDescriptionBuilderSetTitle              jni.MethodID
 
 	clsInstance                 *jni.GlobalRef
-	midInstanceInit             jni.MethodID
+	midInstanceCtor             jni.MethodID
 	midInstanceDescribeContents jni.MethodID
 	midInstanceEquals           jni.MethodID
 	midInstanceGetDescription   jni.MethodID
@@ -120,6 +121,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midDescriptionGetContextUri, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDescription)), "getContextUri", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDescriptionGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDescription)), "getDescription", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -243,7 +251,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInstance = env.NewGlobalRef(&c.Object)
-		midInstanceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstance)), "<init>", "(Landroid/app/WallpaperInfo;Landroid/app/wallpaper/WallpaperDescription;)V")
+		midInstanceCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInstance)), "<init>", "(Landroid/app/WallpaperInfo;Landroid/app/wallpaper/WallpaperDescription;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

@@ -32,7 +32,7 @@ func NewPlaybackParams(vm *jni.VM) (*PlaybackParams, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPlaybackParams)), midPlaybackParamsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPlaybackParams)), midPlaybackParamsCtor)
 		if err != nil {
 			return err
 		}

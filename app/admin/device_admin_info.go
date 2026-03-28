@@ -33,7 +33,7 @@ func NewDeviceAdminInfo(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Device
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminInfo)), midDeviceAdminInfoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminInfo)), midDeviceAdminInfoCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

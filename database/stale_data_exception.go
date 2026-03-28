@@ -32,7 +32,7 @@ func NewStaleDataException(vm *jni.VM) (*StaleDataException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStaleDataException)), midStaleDataExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStaleDataException)), midStaleDataExceptionCtor)
 		if err != nil {
 			return err
 		}

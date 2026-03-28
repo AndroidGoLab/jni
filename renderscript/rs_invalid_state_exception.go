@@ -38,7 +38,7 @@ func NewRSInvalidStateException(vm *jni.VM, arg0 string) (*RSInvalidStateExcepti
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRSInvalidStateException)), midRSInvalidStateExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRSInvalidStateException)), midRSInvalidStateExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

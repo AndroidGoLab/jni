@@ -33,7 +33,7 @@ func NewOpenBlobForWriteResponse(vm *jni.VM, arg0 *jni.Object) (*OpenBlobForWrit
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOpenBlobForWriteResponse)), midOpenBlobForWriteResponseInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOpenBlobForWriteResponse)), midOpenBlobForWriteResponseCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

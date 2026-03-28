@@ -33,7 +33,7 @@ func NewContextWrapper(vm *jni.VM, arg0 *jni.Object) (*ContextWrapper, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContextWrapper)), midContextWrapperInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContextWrapper)), midContextWrapperCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewBigDecimal(vm *jni.VM, arg0 *jni.Object) (*BigDecimal, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBigDecimal)), midBigDecimalInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBigDecimal)), midBigDecimalCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

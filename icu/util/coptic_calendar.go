@@ -32,7 +32,7 @@ func NewCopticCalendar(vm *jni.VM) (*CopticCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCopticCalendar)), midCopticCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCopticCalendar)), midCopticCalendarCtor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewOverlayView(vm *jni.VM, arg0 *jni.Object) (*OverlayView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOverlayView)), midOverlayViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOverlayView)), midOverlayViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -235,6 +235,38 @@ func (m *OverlayView) Draw(arg0 *jni.Object) error {
 		return callErr
 	})
 	return callErr
+}
+
+// GetCurrentStroke calls android.gesture.GestureOverlayView.getCurrentStroke.
+func (m *OverlayView) GetCurrentStroke() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midOverlayViewGetCurrentStroke == nil {
+			callErr = fmt.Errorf("android.gesture.GestureOverlayView.getCurrentStroke is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midOverlayViewGetCurrentStroke,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetFadeOffset calls android.gesture.GestureOverlayView.getFadeOffset.

@@ -38,7 +38,7 @@ func NewUnsupportedSchemeException(vm *jni.VM, arg0 string) (*UnsupportedSchemeE
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnsupportedSchemeException)), midUnsupportedSchemeExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnsupportedSchemeException)), midUnsupportedSchemeExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

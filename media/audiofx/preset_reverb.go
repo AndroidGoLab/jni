@@ -33,7 +33,7 @@ func NewPresetReverb(vm *jni.VM, arg0 int32, arg1 int32) (*PresetReverb, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPresetReverb)), midPresetReverbInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPresetReverb)), midPresetReverbCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

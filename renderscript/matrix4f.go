@@ -32,7 +32,7 @@ func NewMatrix4f(vm *jni.VM) (*Matrix4f, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix4f)), midMatrix4fInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMatrix4f)), midMatrix4fCtor)
 		if err != nil {
 			return err
 		}

@@ -48,6 +48,38 @@ func (m *Response) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetTranslationResponseValues calls android.view.translation.TranslationResponse.getTranslationResponseValues.
+func (m *Response) GetTranslationResponseValues() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midResponseGetTranslationResponseValues == nil {
+			callErr = fmt.Errorf("android.view.translation.TranslationResponse.getTranslationResponseValues is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midResponseGetTranslationResponseValues,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetTranslationStatus calls android.view.translation.TranslationResponse.getTranslationStatus.
 func (m *Response) GetTranslationStatus() (int32, error) {
 	var result int32
@@ -67,6 +99,38 @@ func (m *Response) GetTranslationStatus() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetViewTranslationResponses calls android.view.translation.TranslationResponse.getViewTranslationResponses.
+func (m *Response) GetViewTranslationResponses() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midResponseGetViewTranslationResponses == nil {
+			callErr = fmt.Errorf("android.view.translation.TranslationResponse.getViewTranslationResponses is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midResponseGetViewTranslationResponses,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

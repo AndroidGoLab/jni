@@ -39,7 +39,7 @@ func NewSearchRecentSuggestions(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestions)), midSearchRecentSuggestionsInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchRecentSuggestions)), midSearchRecentSuggestionsCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

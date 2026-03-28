@@ -33,7 +33,7 @@ func NewToast(vm *jni.VM, arg0 *jni.Object) (*Toast, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToast)), midToastInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsToast)), midToastCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

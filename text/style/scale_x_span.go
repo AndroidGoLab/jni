@@ -33,7 +33,7 @@ func NewScaleXSpan(vm *jni.VM, arg0 *jni.Object) (*ScaleXSpan, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), midScaleXSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScaleXSpan)), midScaleXSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

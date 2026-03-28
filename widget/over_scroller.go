@@ -33,7 +33,7 @@ func NewOverScroller(vm *jni.VM, arg0 *jni.Object) (*OverScroller, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOverScroller)), midOverScrollerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOverScroller)), midOverScrollerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

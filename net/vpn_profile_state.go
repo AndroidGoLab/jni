@@ -49,7 +49,7 @@ func NewVpnProfileState(vm *jni.VM, arg0 int32, arg1 string, arg2 bool, arg3 boo
 			jArg3 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVpnProfileState)), midVpnProfileStateInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.BooleanValue(jArg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVpnProfileState)), midVpnProfileStateCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.BooleanValue(jArg2), jni.BooleanValue(jArg3))
 		if err != nil {
 			return err
 		}

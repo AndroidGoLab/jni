@@ -91,6 +91,38 @@ func (m *Session2) Close() error {
 	return callErr
 }
 
+// GetConnectedControllers calls android.media.MediaSession2.getConnectedControllers.
+func (m *Session2) GetConnectedControllers() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSession2GetConnectedControllers == nil {
+			callErr = fmt.Errorf("android.media.MediaSession2.getConnectedControllers is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSession2GetConnectedControllers,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetId calls android.media.MediaSession2.getId.
 func (m *Session2) GetId() (string, error) {
 	var result string

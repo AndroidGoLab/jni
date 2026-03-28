@@ -44,7 +44,7 @@ func NewRangeTemplate(vm *jni.VM, arg0 string, arg1 float32, arg2 float32, arg3 
 		}
 		defer env.DeleteLocalRef(&jArg5.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), midRangeTemplateInit, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.FloatValue(arg4), jni.ObjectValue(&jArg5.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRangeTemplate)), midRangeTemplateCtor, jni.ObjectValue(&jArg0.Object), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.FloatValue(arg4), jni.ObjectValue(&jArg5.Object))
 		if err != nil {
 			return err
 		}

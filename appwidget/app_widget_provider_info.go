@@ -32,7 +32,7 @@ func NewAppWidgetProviderInfo(vm *jni.VM) (*AppWidgetProviderInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetProviderInfo)), midAppWidgetProviderInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppWidgetProviderInfo)), midAppWidgetProviderInfoCtor)
 		if err != nil {
 			return err
 		}

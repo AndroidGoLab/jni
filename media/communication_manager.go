@@ -69,6 +69,38 @@ func (m *CommunicationManager) Close() {
 	}
 }
 
+// GetSession2Tokens calls android.media.MediaCommunicationManager.getSession2Tokens.
+func (m *CommunicationManager) GetSession2Tokens() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCommunicationManagerGetSession2Tokens == nil {
+			callErr = fmt.Errorf("android.media.MediaCommunicationManager.getSession2Tokens is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCommunicationManagerGetSession2Tokens,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetVersion calls android.media.MediaCommunicationManager.getVersion.
 func (m *CommunicationManager) GetVersion() (int32, error) {
 	var result int32

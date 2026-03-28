@@ -32,7 +32,7 @@ func NewBulletSpan(vm *jni.VM) (*BulletSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBulletSpan)), midBulletSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBulletSpan)), midBulletSpanCtor)
 		if err != nil {
 			return err
 		}

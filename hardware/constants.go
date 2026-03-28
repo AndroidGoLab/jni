@@ -5,6 +5,56 @@ package hardware
 import "github.com/AndroidGoLab/jni/hardware/consts"
 
 const (
+	DataspaceAdobeRgb                        = consts.DataspaceAdobeRgb
+	DataspaceBt2020                          = consts.DataspaceBt2020
+	DataspaceBt2020Hlg                       = consts.DataspaceBt2020Hlg
+	DataspaceBt2020Pq                        = consts.DataspaceBt2020Pq
+	DataspaceBt601525                        = consts.DataspaceBt601525
+	DataspaceBt601625                        = consts.DataspaceBt601625
+	DataspaceBt709                           = consts.DataspaceBt709
+	DataspaceDciP3                           = consts.DataspaceDciP3
+	DataspaceDepth                           = consts.DataspaceDepth
+	DataspaceDisplayP3                       = consts.DataspaceDisplayP3
+	DataspaceDynamicDepth                    = consts.DataspaceDynamicDepth
+	DataspaceHeif                            = consts.DataspaceHeif
+	DataspaceHeifUltrahdr                    = consts.DataspaceHeifUltrahdr
+	DataspaceJfif                            = consts.DataspaceJfif
+	DataspaceJpegR                           = consts.DataspaceJpegR
+	DataspaceScrgb                           = consts.DataspaceScrgb
+	DataspaceScrgbLinear                     = consts.DataspaceScrgbLinear
+	DataspaceSrgb                            = consts.DataspaceSrgb
+	DataspaceSrgbLinear                      = consts.DataspaceSrgbLinear
+	DataspaceUnknown                         = consts.DataspaceUnknown
+	RangeExtended                            = consts.RangeExtended
+	RangeFull                                = consts.RangeFull
+	RangeLimited                             = consts.RangeLimited
+	RangeUnspecified                         = consts.RangeUnspecified
+	StandardAdobeRgb                         = consts.StandardAdobeRgb
+	StandardBt2020                           = consts.StandardBt2020
+	StandardBt2020ConstantLuminance          = consts.StandardBt2020ConstantLuminance
+	StandardBt470m                           = consts.StandardBt470m
+	StandardBt601525                         = consts.StandardBt601525
+	StandardBt601525Unadjusted               = consts.StandardBt601525Unadjusted
+	StandardBt601625                         = consts.StandardBt601625
+	StandardBt601625Unadjusted               = consts.StandardBt601625Unadjusted
+	StandardBt709                            = consts.StandardBt709
+	StandardDciP3                            = consts.StandardDciP3
+	StandardFilm                             = consts.StandardFilm
+	StandardUnspecified                      = consts.StandardUnspecified
+	TransferGamma22                          = consts.TransferGamma22
+	TransferGamma26                          = consts.TransferGamma26
+	TransferGamma28                          = consts.TransferGamma28
+	TransferHlg                              = consts.TransferHlg
+	TransferLinear                           = consts.TransferLinear
+	TransferSmpte170m                        = consts.TransferSmpte170m
+	TransferSrgb                             = consts.TransferSrgb
+	TransferSt2084                           = consts.TransferSt2084
+	TransferUnspecified                      = consts.TransferUnspecified
+	ToggleTypeHardware                       = consts.ToggleTypeHardware
+	ToggleTypeSoftware                       = consts.ToggleTypeSoftware
+	CameraConst                              = consts.CameraConst
+	Microphone                               = consts.Microphone
+	Creator                                  = consts.Creator
 	AxisMinusX                               = consts.AxisMinusX
 	AxisMinusY                               = consts.AxisMinusY
 	AxisMinusZ                               = consts.AxisMinusZ
@@ -38,7 +88,11 @@ const (
 	SensorStatusUnreliable                   = consts.SensorStatusUnreliable
 	SensorTemperature                        = consts.SensorTemperature
 	SensorTricorder                          = consts.SensorTricorder
-	Creator                                  = consts.Creator
+	StatusCharging                           = consts.StatusCharging
+	StatusDischarging                        = consts.StatusDischarging
+	StatusFull                               = consts.StatusFull
+	StatusNotCharging                        = consts.StatusNotCharging
+	StatusUnknown                            = consts.StatusUnknown
 	ReportingModeContinuous                  = consts.ReportingModeContinuous
 	ReportingModeOneShot                     = consts.ReportingModeOneShot
 	ReportingModeOnChange                    = consts.ReportingModeOnChange
@@ -86,6 +140,12 @@ const (
 	TypeSensorPlacement                      = consts.TypeSensorPlacement
 	TypeUntrackedDelay                       = consts.TypeUntrackedDelay
 	TypeVec3Calibration                      = consts.TypeVec3Calibration
+	RateFast                                 = consts.RateFast
+	RateNormal                               = consts.RateNormal
+	RateStop                                 = consts.RateStop
+	RateVeryFast                             = consts.RateVeryFast
+	TypeHardwareBuffer                       = consts.TypeHardwareBuffer
+	TypeMemoryFile                           = consts.TypeMemoryFile
 	Blob                                     = consts.Blob
 	Ds24ui8                                  = consts.Ds24ui8
 	DsFp32ui8                                = consts.DsFp32ui8
@@ -106,62 +166,6 @@ const (
 	Ycbcr420888                              = consts.Ycbcr420888
 	YcbcrP010                                = consts.YcbcrP010
 	YcbcrP210                                = consts.YcbcrP210
-	RateFast                                 = consts.RateFast
-	RateNormal                               = consts.RateNormal
-	RateStop                                 = consts.RateStop
-	RateVeryFast                             = consts.RateVeryFast
-	TypeHardwareBuffer                       = consts.TypeHardwareBuffer
-	TypeMemoryFile                           = consts.TypeMemoryFile
-	OneDimension                             = consts.OneDimension
-	SamplingKeyCieY                          = consts.SamplingKeyCieY
-	SamplingKeyMaxRgb                        = consts.SamplingKeyMaxRgb
-	SamplingKeyRgb                           = consts.SamplingKeyRgb
-	ThreeDimension                           = consts.ThreeDimension
-	DataspaceAdobeRgb                        = consts.DataspaceAdobeRgb
-	DataspaceBt2020                          = consts.DataspaceBt2020
-	DataspaceBt2020Hlg                       = consts.DataspaceBt2020Hlg
-	DataspaceBt2020Pq                        = consts.DataspaceBt2020Pq
-	DataspaceBt601525                        = consts.DataspaceBt601525
-	DataspaceBt601625                        = consts.DataspaceBt601625
-	DataspaceBt709                           = consts.DataspaceBt709
-	DataspaceDciP3                           = consts.DataspaceDciP3
-	DataspaceDepth                           = consts.DataspaceDepth
-	DataspaceDisplayP3                       = consts.DataspaceDisplayP3
-	DataspaceDynamicDepth                    = consts.DataspaceDynamicDepth
-	DataspaceHeif                            = consts.DataspaceHeif
-	DataspaceHeifUltrahdr                    = consts.DataspaceHeifUltrahdr
-	DataspaceJfif                            = consts.DataspaceJfif
-	DataspaceJpegR                           = consts.DataspaceJpegR
-	DataspaceScrgb                           = consts.DataspaceScrgb
-	DataspaceScrgbLinear                     = consts.DataspaceScrgbLinear
-	DataspaceSrgb                            = consts.DataspaceSrgb
-	DataspaceSrgbLinear                      = consts.DataspaceSrgbLinear
-	DataspaceUnknown                         = consts.DataspaceUnknown
-	RangeExtended                            = consts.RangeExtended
-	RangeFull                                = consts.RangeFull
-	RangeLimited                             = consts.RangeLimited
-	RangeUnspecified                         = consts.RangeUnspecified
-	StandardAdobeRgb                         = consts.StandardAdobeRgb
-	StandardBt2020                           = consts.StandardBt2020
-	StandardBt2020ConstantLuminance          = consts.StandardBt2020ConstantLuminance
-	StandardBt470m                           = consts.StandardBt470m
-	StandardBt601525                         = consts.StandardBt601525
-	StandardBt601525Unadjusted               = consts.StandardBt601525Unadjusted
-	StandardBt601625                         = consts.StandardBt601625
-	StandardBt601625Unadjusted               = consts.StandardBt601625Unadjusted
-	StandardBt709                            = consts.StandardBt709
-	StandardDciP3                            = consts.StandardDciP3
-	StandardFilm                             = consts.StandardFilm
-	StandardUnspecified                      = consts.StandardUnspecified
-	TransferGamma22                          = consts.TransferGamma22
-	TransferGamma26                          = consts.TransferGamma26
-	TransferGamma28                          = consts.TransferGamma28
-	TransferHlg                              = consts.TransferHlg
-	TransferLinear                           = consts.TransferLinear
-	TransferSmpte170m                        = consts.TransferSmpte170m
-	TransferSrgb                             = consts.TransferSrgb
-	TransferSt2084                           = consts.TransferSt2084
-	TransferUnspecified                      = consts.TransferUnspecified
 	CameraErrorEvicted                       = consts.CameraErrorEvicted
 	CameraErrorServerDied                    = consts.CameraErrorServerDied
 	CameraErrorUnknown                       = consts.CameraErrorUnknown
@@ -172,15 +176,30 @@ const (
 	FocusDistanceOptimalIndex                = consts.FocusDistanceOptimalIndex
 	PreviewFpsMaxIndex                       = consts.PreviewFpsMaxIndex
 	PreviewFpsMinIndex                       = consts.PreviewFpsMinIndex
-	StatusCharging                           = consts.StatusCharging
-	StatusDischarging                        = consts.StatusDischarging
-	StatusFull                               = consts.StatusFull
-	StatusNotCharging                        = consts.StatusNotCharging
-	StatusUnknown                            = consts.StatusUnknown
-	ToggleTypeHardware                       = consts.ToggleTypeHardware
-	ToggleTypeSoftware                       = consts.ToggleTypeSoftware
-	CameraConst                              = consts.CameraConst
-	Microphone                               = consts.Microphone
+	OneDimension                             = consts.OneDimension
+	SamplingKeyCieY                          = consts.SamplingKeyCieY
+	SamplingKeyMaxRgb                        = consts.SamplingKeyMaxRgb
+	SamplingKeyRgb                           = consts.SamplingKeyRgb
+	ThreeDimension                           = consts.ThreeDimension
+)
+
+const (
+	SignalTimeInvalid      = consts.SignalTimeInvalid
+	SignalTimePending      = consts.SignalTimePending
+	UsageComposerOverlay   = consts.UsageComposerOverlay
+	UsageCpuReadOften      = consts.UsageCpuReadOften
+	UsageCpuReadRarely     = consts.UsageCpuReadRarely
+	UsageCpuWriteOften     = consts.UsageCpuWriteOften
+	UsageCpuWriteRarely    = consts.UsageCpuWriteRarely
+	UsageFrontBuffer       = consts.UsageFrontBuffer
+	UsageGpuColorOutput    = consts.UsageGpuColorOutput
+	UsageGpuCubeMap        = consts.UsageGpuCubeMap
+	UsageGpuDataBuffer     = consts.UsageGpuDataBuffer
+	UsageGpuMipmapComplete = consts.UsageGpuMipmapComplete
+	UsageGpuSampledImage   = consts.UsageGpuSampledImage
+	UsageProtectedContent  = consts.UsageProtectedContent
+	UsageSensorDirectData  = consts.UsageSensorDirectData
+	UsageVideoEncode       = consts.UsageVideoEncode
 )
 
 const (
@@ -209,25 +228,6 @@ const (
 	MagneticFieldEarthMin      = consts.MagneticFieldEarthMin
 	PressureStandardAtmosphere = consts.PressureStandardAtmosphere
 	StandardGravity            = consts.StandardGravity
-)
-
-const (
-	SignalTimeInvalid      = consts.SignalTimeInvalid
-	SignalTimePending      = consts.SignalTimePending
-	UsageComposerOverlay   = consts.UsageComposerOverlay
-	UsageCpuReadOften      = consts.UsageCpuReadOften
-	UsageCpuReadRarely     = consts.UsageCpuReadRarely
-	UsageCpuWriteOften     = consts.UsageCpuWriteOften
-	UsageCpuWriteRarely    = consts.UsageCpuWriteRarely
-	UsageFrontBuffer       = consts.UsageFrontBuffer
-	UsageGpuColorOutput    = consts.UsageGpuColorOutput
-	UsageGpuCubeMap        = consts.UsageGpuCubeMap
-	UsageGpuDataBuffer     = consts.UsageGpuDataBuffer
-	UsageGpuMipmapComplete = consts.UsageGpuMipmapComplete
-	UsageGpuSampledImage   = consts.UsageGpuSampledImage
-	UsageProtectedContent  = consts.UsageProtectedContent
-	UsageSensorDirectData  = consts.UsageSensorDirectData
-	UsageVideoEncode       = consts.UsageVideoEncode
 )
 
 const (

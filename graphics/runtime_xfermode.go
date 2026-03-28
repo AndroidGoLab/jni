@@ -38,7 +38,7 @@ func NewRuntimeXfermode(vm *jni.VM, arg0 string) (*RuntimeXfermode, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeXfermode)), midRuntimeXfermodeInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeXfermode)), midRuntimeXfermodeCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

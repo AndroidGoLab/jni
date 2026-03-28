@@ -90,6 +90,44 @@ func (m *NodeProvider) CreateAccessibilityNodeInfo(arg0 int32) (*jni.Object, err
 	return result, callErr
 }
 
+// FindAccessibilityNodeInfosByText calls android.view.accessibility.AccessibilityNodeProvider.findAccessibilityNodeInfosByText.
+func (m *NodeProvider) FindAccessibilityNodeInfosByText(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeProviderFindAccessibilityNodeInfosByText == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeProvider.findAccessibilityNodeInfosByText is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeProviderFindAccessibilityNodeInfosByText, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // FindFocus calls android.view.accessibility.AccessibilityNodeProvider.findFocus.
 func (m *NodeProvider) FindFocus(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object

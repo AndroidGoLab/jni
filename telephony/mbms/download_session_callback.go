@@ -32,7 +32,7 @@ func NewDownloadSessionCallback(vm *jni.VM) (*DownloadSessionCallback, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), midDownloadSessionCallbackInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadSessionCallback)), midDownloadSessionCallbackCtor)
 		if err != nil {
 			return err
 		}

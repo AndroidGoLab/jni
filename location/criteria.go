@@ -32,7 +32,7 @@ func NewCriteria(vm *jni.VM) (*Criteria, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCriteria)), midCriteriaInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCriteria)), midCriteriaCtor)
 		if err != nil {
 			return err
 		}

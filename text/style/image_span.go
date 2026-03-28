@@ -33,7 +33,7 @@ func NewImageSpan(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ImageSpan, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageSpan)), midImageSpanInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageSpan)), midImageSpanCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewLineBreakConfigSpan(vm *jni.VM, arg0 *jni.Object) (*LineBreakConfigSpan,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), midLineBreakConfigSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLineBreakConfigSpan)), midLineBreakConfigSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

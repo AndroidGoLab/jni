@@ -33,7 +33,7 @@ func NewTextToSpeech(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*TextToSpe
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextToSpeech)), midTextToSpeechInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextToSpeech)), midTextToSpeechCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -394,6 +394,38 @@ func (m *TextToSpeech) AreDefaultsEnforced() (bool, error) {
 	return result, callErr
 }
 
+// GetAvailableLanguages calls android.speech.tts.TextToSpeech.getAvailableLanguages.
+func (m *TextToSpeech) GetAvailableLanguages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextToSpeechGetAvailableLanguages == nil {
+			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getAvailableLanguages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextToSpeechGetAvailableLanguages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefaultEngine calls android.speech.tts.TextToSpeech.getDefaultEngine.
 func (m *TextToSpeech) GetDefaultEngine() (string, error) {
 	var result string
@@ -485,6 +517,71 @@ func (m *TextToSpeech) GetDefaultVoice() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetEngines calls android.speech.tts.TextToSpeech.getEngines.
+func (m *TextToSpeech) GetEngines() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextToSpeechGetEngines == nil {
+			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getEngines is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextToSpeechGetEngines,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFeatures calls android.speech.tts.TextToSpeech.getFeatures.
+func (m *TextToSpeech) GetFeatures(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextToSpeechGetFeatures == nil {
+			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getFeatures is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextToSpeechGetFeatures, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetLanguage calls android.speech.tts.TextToSpeech.getLanguage.
 func (m *TextToSpeech) GetLanguage() (*jni.Object, error) {
 	var result *jni.Object
@@ -533,6 +630,38 @@ func (m *TextToSpeech) GetVoice() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midTextToSpeechGetVoice,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVoices calls android.speech.tts.TextToSpeech.getVoices.
+func (m *TextToSpeech) GetVoices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTextToSpeechGetVoices == nil {
+			callErr = fmt.Errorf("android.speech.tts.TextToSpeech.getVoices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTextToSpeechGetVoices,
 		)
 		if callErr != nil {
 			return callErr

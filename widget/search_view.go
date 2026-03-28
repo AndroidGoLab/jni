@@ -33,7 +33,7 @@ func NewSearchView(vm *jni.VM, arg0 *jni.Object) (*SearchView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchView)), midSearchViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchView)), midSearchViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

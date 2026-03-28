@@ -33,7 +33,7 @@ func NewCreateCredentialResponse(vm *jni.VM, arg0 *jni.Object) (*CreateCredentia
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateCredentialResponse)), midCreateCredentialResponseInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateCredentialResponse)), midCreateCredentialResponseCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

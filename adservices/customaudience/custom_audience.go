@@ -108,6 +108,38 @@ func (m *CustomAudience) GetActivationTime() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetAds calls android.adservices.customaudience.CustomAudience.getAds.
+func (m *CustomAudience) GetAds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCustomAudienceGetAds == nil {
+			callErr = fmt.Errorf("android.adservices.customaudience.CustomAudience.getAds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCustomAudienceGetAds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAuctionServerRequestFlags calls android.adservices.customaudience.CustomAudience.getAuctionServerRequestFlags.
 func (m *CustomAudience) GetAuctionServerRequestFlags() (int32, error) {
 	var result int32
@@ -181,6 +213,38 @@ func (m *CustomAudience) GetBuyer() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midCustomAudienceGetBuyer,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetComponentAds calls android.adservices.customaudience.CustomAudience.getComponentAds.
+func (m *CustomAudience) GetComponentAds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCustomAudienceGetComponentAds == nil {
+			callErr = fmt.Errorf("android.adservices.customaudience.CustomAudience.getComponentAds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCustomAudienceGetComponentAds,
 		)
 		if callErr != nil {
 			return callErr

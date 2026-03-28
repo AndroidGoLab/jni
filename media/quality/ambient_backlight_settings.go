@@ -38,7 +38,7 @@ func NewAmbientBacklightSettings(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32,
 			jArg5 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightSettings)), midAmbientBacklightSettingsInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.BooleanValue(jArg5), jni.IntValue(arg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightSettings)), midAmbientBacklightSettingsCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.BooleanValue(jArg5), jni.IntValue(arg6))
 		if err != nil {
 			return err
 		}

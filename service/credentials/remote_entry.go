@@ -33,7 +33,7 @@ func NewRemoteEntry(vm *jni.VM, arg0 *jni.Object) (*RemoteEntry, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), midRemoteEntryInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), midRemoteEntryCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

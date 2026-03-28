@@ -33,7 +33,7 @@ func NewPdfPageGotoLinkContent(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageGotoLinkContent)), midPdfPageGotoLinkContentInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageGotoLinkContent)), midPdfPageGotoLinkContentCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -65,6 +65,38 @@ func (m *PdfPageGotoLinkContent) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBounds calls android.graphics.pdf.content.PdfPageGotoLinkContent.getBounds.
+func (m *PdfPageGotoLinkContent) GetBounds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPdfPageGotoLinkContentGetBounds == nil {
+			callErr = fmt.Errorf("android.graphics.pdf.content.PdfPageGotoLinkContent.getBounds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPdfPageGotoLinkContentGetBounds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

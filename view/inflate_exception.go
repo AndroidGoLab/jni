@@ -32,7 +32,7 @@ func NewInflateException(vm *jni.VM) (*InflateException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInflateException)), midInflateExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInflateException)), midInflateExceptionCtor)
 		if err != nil {
 			return err
 		}

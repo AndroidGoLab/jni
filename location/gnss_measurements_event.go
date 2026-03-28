@@ -80,6 +80,70 @@ func (m *GnssMeasurementsEvent) GetClock() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetGnssAutomaticGainControls calls android.location.GnssMeasurementsEvent.getGnssAutomaticGainControls.
+func (m *GnssMeasurementsEvent) GetGnssAutomaticGainControls() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGnssMeasurementsEventGetGnssAutomaticGainControls == nil {
+			callErr = fmt.Errorf("android.location.GnssMeasurementsEvent.getGnssAutomaticGainControls is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGnssMeasurementsEventGetGnssAutomaticGainControls,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMeasurements calls android.location.GnssMeasurementsEvent.getMeasurements.
+func (m *GnssMeasurementsEvent) GetMeasurements() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGnssMeasurementsEventGetMeasurements == nil {
+			callErr = fmt.Errorf("android.location.GnssMeasurementsEvent.getMeasurements is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGnssMeasurementsEventGetMeasurements,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HasIsFullTracking calls android.location.GnssMeasurementsEvent.hasIsFullTracking.
 func (m *GnssMeasurementsEvent) HasIsFullTracking() (bool, error) {
 	var result bool

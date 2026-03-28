@@ -33,7 +33,7 @@ func NewAitInfo(vm *jni.VM, arg0 int32, arg1 int32) (*AitInfo, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAitInfo)), midAitInfoInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAitInfo)), midAitInfoCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

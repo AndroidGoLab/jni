@@ -33,7 +33,7 @@ func NewAlphaAnimation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AlphaAn
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphaAnimation)), midAlphaAnimationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphaAnimation)), midAlphaAnimationCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

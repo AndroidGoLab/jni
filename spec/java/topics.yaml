@@ -43,38 +43,6 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.adservices.topics.GetTopicsRequest
-      go_type: GetTopicsRequest
-      methods:
-        - java_method: getAdsSdkName
-          go_name: GetAdsSdkName
-          returns: String
-          error: true
-        - java_method: shouldRecordObservation
-          go_name: ShouldRecordObservation
-          returns: boolean
-          error: true
-    - java_class: android.adservices.topics.GetTopicsRequest$Builder
-      go_type: GetTopicsRequestBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.adservices.topics.GetTopicsRequest
-          error: true
-        - java_method: setAdsSdkName
-          go_name: SetAdsSdkName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.adservices.topics.GetTopicsRequest$Builder
-          error: true
-        - java_method: setShouldRecordObservation
-          go_name: SetShouldRecordObservation
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.adservices.topics.GetTopicsRequest$Builder
-          error: true
     - java_class: android.adservices.topics.TopicsManager
       go_type: Manager
       static_methods:
@@ -133,6 +101,14 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+        - java_method: getEncryptedTopics
+          go_name: GetEncryptedTopics
+          returns: java.util.List<android.adservices.topics.EncryptedTopic>
+          error: true
+        - java_method: getTopics
+          go_name: GetTopics
+          returns: java.util.List<android.adservices.topics.Topic>
+          error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
@@ -143,4 +119,36 @@ classes:
         - java_method: build
           go_name: Build
           returns: android.adservices.topics.GetTopicsResponse
+          error: true
+    - java_class: android.adservices.topics.GetTopicsRequest
+      go_type: GetTopicsRequest
+      methods:
+        - java_method: getAdsSdkName
+          go_name: GetAdsSdkName
+          returns: String
+          error: true
+        - java_method: shouldRecordObservation
+          go_name: ShouldRecordObservation
+          returns: boolean
+          error: true
+    - java_class: android.adservices.topics.GetTopicsRequest$Builder
+      go_type: GetTopicsRequestBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.adservices.topics.GetTopicsRequest
+          error: true
+        - java_method: setAdsSdkName
+          go_name: SetAdsSdkName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.adservices.topics.GetTopicsRequest$Builder
+          error: true
+        - java_method: setShouldRecordObservation
+          go_name: SetShouldRecordObservation
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.adservices.topics.GetTopicsRequest$Builder
           error: true

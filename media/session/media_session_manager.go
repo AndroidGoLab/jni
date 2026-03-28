@@ -138,6 +138,39 @@ func (m *MediaSessionManager) AddOnSession2TokensChangedListener(arg0 *jni.Objec
 	return callErr
 }
 
+// GetActiveSessions calls android.media.session.MediaSessionManager.getActiveSessions.
+func (m *MediaSessionManager) GetActiveSessions(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaSessionManagerGetActiveSessions == nil {
+			callErr = fmt.Errorf("android.media.session.MediaSessionManager.getActiveSessions is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaSessionManagerGetActiveSessions, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMediaKeyEventSession calls android.media.session.MediaSessionManager.getMediaKeyEventSession.
 func (m *MediaSessionManager) GetMediaKeyEventSession() (*jni.Object, error) {
 	var result *jni.Object
@@ -192,6 +225,38 @@ func (m *MediaSessionManager) GetMediaKeyEventSessionPackageName() (string, erro
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSession2Tokens calls android.media.session.MediaSessionManager.getSession2Tokens.
+func (m *MediaSessionManager) GetSession2Tokens() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaSessionManagerGetSession2Tokens == nil {
+			callErr = fmt.Errorf("android.media.session.MediaSessionManager.getSession2Tokens is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaSessionManagerGetSession2Tokens,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

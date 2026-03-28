@@ -237,6 +237,38 @@ func (m *Manager) GetActiveModemCount() (int32, error) {
 	return result, callErr
 }
 
+// GetAllCellInfo calls android.telephony.TelephonyManager.getAllCellInfo.
+func (m *Manager) GetAllCellInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetAllCellInfo == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getAllCellInfo is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetAllCellInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAllowedNetworkTypesForReason calls android.telephony.TelephonyManager.getAllowedNetworkTypesForReason.
 func (m *Manager) GetAllowedNetworkTypesForReason(arg0 int32) (int64, error) {
 	var result int64
@@ -604,6 +636,38 @@ func (m *Manager) GetDeviceSoftwareVersion() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEquivalentHomePlmns calls android.telephony.TelephonyManager.getEquivalentHomePlmns.
+func (m *Manager) GetEquivalentHomePlmns() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetEquivalentHomePlmns == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getEquivalentHomePlmns is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetEquivalentHomePlmns,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1874,6 +1938,38 @@ func (m *Manager) GetTypeAllocationCode1_1(arg0 int32) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUiccCardsInfo calls android.telephony.TelephonyManager.getUiccCardsInfo.
+func (m *Manager) GetUiccCardsInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetUiccCardsInfo == nil {
+			callErr = fmt.Errorf("android.telephony.TelephonyManager.getUiccCardsInfo is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetUiccCardsInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

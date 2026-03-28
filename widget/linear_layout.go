@@ -33,7 +33,7 @@ func NewLinearLayout(vm *jni.VM, arg0 *jni.Object) (*LinearLayout, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinearLayout)), midLinearLayoutInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinearLayout)), midLinearLayoutCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

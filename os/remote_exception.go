@@ -32,7 +32,7 @@ func NewRemoteException(vm *jni.VM) (*RemoteException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteException)), midRemoteExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteException)), midRemoteExceptionCtor)
 		if err != nil {
 			return err
 		}

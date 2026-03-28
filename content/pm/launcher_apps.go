@@ -69,6 +69,76 @@ func (m *LauncherApps) Close() {
 	}
 }
 
+// GetActivityList calls android.content.pm.LauncherApps.getActivityList.
+func (m *LauncherApps) GetActivityList(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLauncherAppsGetActivityList == nil {
+			callErr = fmt.Errorf("android.content.pm.LauncherApps.getActivityList is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLauncherAppsGetActivityList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAllPackageInstallerSessions calls android.content.pm.LauncherApps.getAllPackageInstallerSessions.
+func (m *LauncherApps) GetAllPackageInstallerSessions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLauncherAppsGetAllPackageInstallerSessions == nil {
+			callErr = fmt.Errorf("android.content.pm.LauncherApps.getAllPackageInstallerSessions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLauncherAppsGetAllPackageInstallerSessions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetAppMarketActivityIntent calls android.content.pm.LauncherApps.getAppMarketActivityIntent.
 func (m *LauncherApps) GetAppMarketActivityIntent(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -215,6 +285,39 @@ func (m *LauncherApps) GetPinItemRequest(arg0 *jni.Object) (*jni.Object, error) 
 	return result, callErr
 }
 
+// GetPreInstalledSystemPackages calls android.content.pm.LauncherApps.getPreInstalledSystemPackages.
+func (m *LauncherApps) GetPreInstalledSystemPackages(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLauncherAppsGetPreInstalledSystemPackages == nil {
+			callErr = fmt.Errorf("android.content.pm.LauncherApps.getPreInstalledSystemPackages is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLauncherAppsGetPreInstalledSystemPackages, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPrivateSpaceSettingsIntent calls android.content.pm.LauncherApps.getPrivateSpaceSettingsIntent.
 func (m *LauncherApps) GetPrivateSpaceSettingsIntent() (*jni.Object, error) {
 	var result *jni.Object
@@ -231,6 +334,38 @@ func (m *LauncherApps) GetPrivateSpaceSettingsIntent() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLauncherAppsGetPrivateSpaceSettingsIntent,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetProfiles calls android.content.pm.LauncherApps.getProfiles.
+func (m *LauncherApps) GetProfiles() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLauncherAppsGetProfiles == nil {
+			callErr = fmt.Errorf("android.content.pm.LauncherApps.getProfiles is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLauncherAppsGetProfiles,
 		)
 		if callErr != nil {
 			return callErr
@@ -313,6 +448,44 @@ func (m *LauncherApps) GetShortcutConfigActivityIntent(arg0 *jni.Object) (*jni.O
 	return result, callErr
 }
 
+// GetShortcutConfigActivityList calls android.content.pm.LauncherApps.getShortcutConfigActivityList.
+func (m *LauncherApps) GetShortcutConfigActivityList(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLauncherAppsGetShortcutConfigActivityList == nil {
+			callErr = fmt.Errorf("android.content.pm.LauncherApps.getShortcutConfigActivityList is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLauncherAppsGetShortcutConfigActivityList, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetShortcutIconDrawable calls android.content.pm.LauncherApps.getShortcutIconDrawable.
 func (m *LauncherApps) GetShortcutIconDrawable(arg0 *jni.Object, arg1 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -379,6 +552,39 @@ func (m *LauncherApps) GetShortcutIntent(
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midLauncherAppsGetShortcutIntent, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetShortcuts calls android.content.pm.LauncherApps.getShortcuts.
+func (m *LauncherApps) GetShortcuts(arg0 *jni.Object, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLauncherAppsGetShortcuts == nil {
+			callErr = fmt.Errorf("android.content.pm.LauncherApps.getShortcuts is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLauncherAppsGetShortcuts, jni.ObjectValue(arg0), jni.ObjectValue(arg1),
 		)
 		if callErr != nil {
 			return callErr

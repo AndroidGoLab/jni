@@ -5,8 +5,8 @@
 package: tech
 go_import: github.com/AndroidGoLab/jni/nfc/tech
 classes:
-    - java_class: android.nfc.tech.NfcF
-      go_type: NfcF
+    - java_class: android.nfc.tech.NfcBarcode
+      go_type: NfcBarcode
       methods:
         - java_method: close
           go_name: Close
@@ -16,43 +16,21 @@ classes:
           go_name: Connect
           returns: void
           error: true
-        - java_method: getManufacturer
-          go_name: GetManufacturer
-          returns: '[B'
-          error: true
-        - java_method: getMaxTransceiveLength
-          go_name: GetMaxTransceiveLength
-          returns: int
-          error: true
-        - java_method: getSystemCode
-          go_name: GetSystemCode
+        - java_method: getBarcode
+          go_name: GetBarcode
           returns: '[B'
           error: true
         - java_method: getTag
           go_name: GetTag
           returns: android.nfc.Tag
           error: true
-        - java_method: getTimeout
-          go_name: GetTimeout
+        - java_method: getType
+          go_name: GetType
           returns: int
           error: true
         - java_method: isConnected
           go_name: IsConnected
           returns: boolean
-          error: true
-        - java_method: setTimeout
-          go_name: SetTimeout
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: transceive
-          go_name: Transceive
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: '[B'
           error: true
       static_methods:
         - java_method: get
@@ -60,7 +38,48 @@ classes:
           params:
             - java_type: android.nfc.Tag
               go_name: arg0
-          returns: android.nfc.tech.NfcF
+          returns: android.nfc.tech.NfcBarcode
+          error: true
+    - java_class: android.nfc.tech.NdefFormatable
+      go_type: NdefFormatable
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: connect
+          go_name: Connect
+          returns: void
+          error: true
+        - java_method: format
+          go_name: Format
+          params:
+            - java_type: android.nfc.NdefMessage
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: formatReadOnly
+          go_name: FormatReadOnly
+          params:
+            - java_type: android.nfc.NdefMessage
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: android.nfc.Tag
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+      static_methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: android.nfc.Tag
+              go_name: arg0
+          returns: android.nfc.tech.NdefFormatable
           error: true
     - java_class: android.nfc.tech.MifareUltralight
       go_type: MifareUltralight
@@ -131,8 +150,8 @@ classes:
               go_name: arg0
           returns: android.nfc.tech.MifareUltralight
           error: true
-    - java_class: android.nfc.tech.NfcB
-      go_type: NfcB
+    - java_class: android.nfc.tech.NfcA
+      go_type: NfcA
       methods:
         - java_method: close
           go_name: Close
@@ -142,25 +161,36 @@ classes:
           go_name: Connect
           returns: void
           error: true
-        - java_method: getApplicationData
-          go_name: GetApplicationData
+        - java_method: getAtqa
+          go_name: GetAtqa
           returns: '[B'
           error: true
         - java_method: getMaxTransceiveLength
           go_name: GetMaxTransceiveLength
           returns: int
           error: true
-        - java_method: getProtocolInfo
-          go_name: GetProtocolInfo
-          returns: '[B'
+        - java_method: getSak
+          go_name: GetSak
+          returns: short
           error: true
         - java_method: getTag
           go_name: GetTag
           returns: android.nfc.Tag
           error: true
+        - java_method: getTimeout
+          go_name: GetTimeout
+          returns: int
+          error: true
         - java_method: isConnected
           go_name: IsConnected
           returns: boolean
+          error: true
+        - java_method: setTimeout
+          go_name: SetTimeout
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
           error: true
         - java_method: transceive
           go_name: Transceive
@@ -175,53 +205,7 @@ classes:
           params:
             - java_type: android.nfc.Tag
               go_name: arg0
-          returns: android.nfc.tech.NfcB
-          error: true
-    - java_class: android.nfc.tech.NfcV
-      go_type: NfcV
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: connect
-          go_name: Connect
-          returns: void
-          error: true
-        - java_method: getDsfId
-          go_name: GetDsfId
-          returns: byte
-          error: true
-        - java_method: getMaxTransceiveLength
-          go_name: GetMaxTransceiveLength
-          returns: int
-          error: true
-        - java_method: getResponseFlags
-          go_name: GetResponseFlags
-          returns: byte
-          error: true
-        - java_method: getTag
-          go_name: GetTag
-          returns: android.nfc.Tag
-          error: true
-        - java_method: isConnected
-          go_name: IsConnected
-          returns: boolean
-          error: true
-        - java_method: transceive
-          go_name: Transceive
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: '[B'
-          error: true
-      static_methods:
-        - java_method: get
-          go_name: Get
-          params:
-            - java_type: android.nfc.Tag
-              go_name: arg0
-          returns: android.nfc.tech.NfcV
+          returns: android.nfc.tech.NfcA
           error: true
     - java_class: android.nfc.tech.MifareClassic
       go_type: MifareClassic
@@ -375,8 +359,8 @@ classes:
               go_name: arg0
           returns: android.nfc.tech.MifareClassic
           error: true
-    - java_class: android.nfc.tech.NdefFormatable
-      go_type: NdefFormatable
+    - java_class: android.nfc.tech.NfcV
+      go_type: NfcV
       methods:
         - java_method: close
           go_name: Close
@@ -386,18 +370,96 @@ classes:
           go_name: Connect
           returns: void
           error: true
-        - java_method: format
-          go_name: Format
+        - java_method: getDsfId
+          go_name: GetDsfId
+          returns: byte
+          error: true
+        - java_method: getMaxTransceiveLength
+          go_name: GetMaxTransceiveLength
+          returns: int
+          error: true
+        - java_method: getResponseFlags
+          go_name: GetResponseFlags
+          returns: byte
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: android.nfc.Tag
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: transceive
+          go_name: Transceive
           params:
-            - java_type: android.nfc.NdefMessage
+            - java_type: '[B'
               go_name: arg0
+          returns: '[B'
+          error: true
+      static_methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: android.nfc.Tag
+              go_name: arg0
+          returns: android.nfc.tech.NfcV
+          error: true
+    - java_class: android.nfc.tech.NfcB
+      go_type: NfcB
+      methods:
+        - java_method: close
+          go_name: Close
           returns: void
           error: true
-        - java_method: formatReadOnly
-          go_name: FormatReadOnly
+        - java_method: connect
+          go_name: Connect
+          returns: void
+          error: true
+        - java_method: getApplicationData
+          go_name: GetApplicationData
+          returns: '[B'
+          error: true
+        - java_method: getMaxTransceiveLength
+          go_name: GetMaxTransceiveLength
+          returns: int
+          error: true
+        - java_method: getProtocolInfo
+          go_name: GetProtocolInfo
+          returns: '[B'
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: android.nfc.Tag
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: transceive
+          go_name: Transceive
           params:
-            - java_type: android.nfc.NdefMessage
+            - java_type: '[B'
               go_name: arg0
+          returns: '[B'
+          error: true
+      static_methods:
+        - java_method: get
+          go_name: Get
+          params:
+            - java_type: android.nfc.Tag
+              go_name: arg0
+          returns: android.nfc.tech.NfcB
+          error: true
+    - java_class: android.nfc.tech.TagTechnology
+      go_type: TagTechnology
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: connect
+          go_name: Connect
           returns: void
           error: true
         - java_method: getTag
@@ -408,16 +470,8 @@ classes:
           go_name: IsConnected
           returns: boolean
           error: true
-      static_methods:
-        - java_method: get
-          go_name: Get
-          params:
-            - java_type: android.nfc.Tag
-              go_name: arg0
-          returns: android.nfc.tech.NdefFormatable
-          error: true
-    - java_class: android.nfc.tech.NfcA
-      go_type: NfcA
+    - java_class: android.nfc.tech.NfcF
+      go_type: NfcF
       methods:
         - java_method: close
           go_name: Close
@@ -427,17 +481,17 @@ classes:
           go_name: Connect
           returns: void
           error: true
-        - java_method: getAtqa
-          go_name: GetAtqa
+        - java_method: getManufacturer
+          go_name: GetManufacturer
           returns: '[B'
           error: true
         - java_method: getMaxTransceiveLength
           go_name: GetMaxTransceiveLength
           returns: int
           error: true
-        - java_method: getSak
-          go_name: GetSak
-          returns: short
+        - java_method: getSystemCode
+          go_name: GetSystemCode
+          returns: '[B'
           error: true
         - java_method: getTag
           go_name: GetTag
@@ -471,63 +525,15 @@ classes:
           params:
             - java_type: android.nfc.Tag
               go_name: arg0
-          returns: android.nfc.tech.NfcA
-          error: true
-    - java_class: android.nfc.tech.NfcBarcode
-      go_type: NfcBarcode
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: connect
-          go_name: Connect
-          returns: void
-          error: true
-        - java_method: getBarcode
-          go_name: GetBarcode
-          returns: '[B'
-          error: true
-        - java_method: getTag
-          go_name: GetTag
-          returns: android.nfc.Tag
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: isConnected
-          go_name: IsConnected
-          returns: boolean
-          error: true
-      static_methods:
-        - java_method: get
-          go_name: Get
-          params:
-            - java_type: android.nfc.Tag
-              go_name: arg0
-          returns: android.nfc.tech.NfcBarcode
-          error: true
-    - java_class: android.nfc.tech.TagTechnology
-      go_type: TagTechnology
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: connect
-          go_name: Connect
-          returns: void
-          error: true
-        - java_method: getTag
-          go_name: GetTag
-          returns: android.nfc.Tag
-          error: true
-        - java_method: isConnected
-          go_name: IsConnected
-          returns: boolean
+          returns: android.nfc.tech.NfcF
           error: true
 constants:
+    - go_name: TypeKovio
+      value: "1"
+      go_type: int
+    - go_name: TypeUnknown
+      value: "-1"
+      go_type: int
     - go_name: PageSize
       value: "4"
       go_type: int
@@ -536,9 +542,6 @@ constants:
       go_type: int
     - go_name: TypeUltralightC
       value: "2"
-      go_type: int
-    - go_name: TypeUnknown
-      value: "-1"
       go_type: int
     - go_name: BlockSize
       value: "16"
@@ -572,7 +575,4 @@ constants:
       go_type: int
     - go_name: TypePro
       value: "2"
-      go_type: int
-    - go_name: TypeKovio
-      value: "1"
       go_type: int

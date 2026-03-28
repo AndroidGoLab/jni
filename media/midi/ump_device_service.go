@@ -55,6 +55,38 @@ func (m *UmpDeviceService) GetDeviceInfo() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetOutputPortReceivers calls android.media.midi.MidiUmpDeviceService.getOutputPortReceivers.
+func (m *UmpDeviceService) GetOutputPortReceivers() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUmpDeviceServiceGetOutputPortReceivers == nil {
+			callErr = fmt.Errorf("android.media.midi.MidiUmpDeviceService.getOutputPortReceivers is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUmpDeviceServiceGetOutputPortReceivers,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // OnBind calls android.media.midi.MidiUmpDeviceService.onBind.
 func (m *UmpDeviceService) OnBind(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object
@@ -153,4 +185,36 @@ func (m *UmpDeviceService) OnDeviceStatusChanged(arg0 *jni.Object) error {
 		return callErr
 	})
 	return callErr
+}
+
+// OnGetInputPortReceivers calls android.media.midi.MidiUmpDeviceService.onGetInputPortReceivers.
+func (m *UmpDeviceService) OnGetInputPortReceivers() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUmpDeviceServiceOnGetInputPortReceivers == nil {
+			callErr = fmt.Errorf("android.media.midi.MidiUmpDeviceService.onGetInputPortReceivers is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUmpDeviceServiceOnGetInputPortReceivers,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }

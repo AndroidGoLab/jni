@@ -33,7 +33,7 @@ func NewDownloadCompletedInput(vm *jni.VM, arg0 *jni.Object) (*DownloadCompleted
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), midDownloadCompletedInputInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadCompletedInput)), midDownloadCompletedInputCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

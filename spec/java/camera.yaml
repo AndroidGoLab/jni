@@ -36,6 +36,10 @@ classes:
           go_name: GetCameraIdList
           returns: java.lang.String[]
           error: true
+        - java_method: getConcurrentCameraIds
+          go_name: GetConcurrentCameraIds
+          returns: java.util.Set<java.util.Set<java.lang.String>>
+          error: true
         - java_method: getTorchStrengthLevel
           go_name: GetTorchStrengthLevel
           params:

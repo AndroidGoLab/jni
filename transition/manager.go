@@ -32,7 +32,7 @@ func NewManager(vm *jni.VM) (*Manager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManager)), midManagerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManager)), midManagerCtor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewKeyEvent(vm *jni.VM, arg0 *jni.Object) (*KeyEvent, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyEvent)), midKeyEventInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyEvent)), midKeyEventCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -30,7 +30,7 @@ func NewFragment(vm *jni.VM) (*Fragment, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFragment)), midFragmentInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFragment)), midFragmentCtor)
 		if err != nil {
 			return err
 		}

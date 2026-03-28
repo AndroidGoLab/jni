@@ -120,6 +120,38 @@ func (m *SubscriptionManager) CanManageSubscription(arg0 *jni.Object) (bool, err
 	return result, callErr
 }
 
+// GetAccessibleSubscriptionInfoList calls android.telephony.SubscriptionManager.getAccessibleSubscriptionInfoList.
+func (m *SubscriptionManager) GetAccessibleSubscriptionInfoList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetAccessibleSubscriptionInfoList == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getAccessibleSubscriptionInfoList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetAccessibleSubscriptionInfoList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetActiveSubscriptionInfo calls android.telephony.SubscriptionManager.getActiveSubscriptionInfo.
 func (m *SubscriptionManager) GetActiveSubscriptionInfo(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -236,6 +268,135 @@ func (m *SubscriptionManager) GetActiveSubscriptionInfoForSimSlotIndex(arg0 int3
 	return result, callErr
 }
 
+// GetActiveSubscriptionInfoList calls android.telephony.SubscriptionManager.getActiveSubscriptionInfoList.
+func (m *SubscriptionManager) GetActiveSubscriptionInfoList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetActiveSubscriptionInfoList == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getActiveSubscriptionInfoList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetActiveSubscriptionInfoList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAllSubscriptionInfoList calls android.telephony.SubscriptionManager.getAllSubscriptionInfoList.
+func (m *SubscriptionManager) GetAllSubscriptionInfoList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetAllSubscriptionInfoList == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getAllSubscriptionInfoList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetAllSubscriptionInfoList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCompleteActiveSubscriptionInfoList calls android.telephony.SubscriptionManager.getCompleteActiveSubscriptionInfoList.
+func (m *SubscriptionManager) GetCompleteActiveSubscriptionInfoList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetCompleteActiveSubscriptionInfoList == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getCompleteActiveSubscriptionInfoList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetCompleteActiveSubscriptionInfoList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDeviceToDeviceStatusSharingContacts calls android.telephony.SubscriptionManager.getDeviceToDeviceStatusSharingContacts.
+func (m *SubscriptionManager) GetDeviceToDeviceStatusSharingContacts(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetDeviceToDeviceStatusSharingContacts == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getDeviceToDeviceStatusSharingContacts is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetDeviceToDeviceStatusSharingContacts, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDeviceToDeviceStatusSharingPreference calls android.telephony.SubscriptionManager.getDeviceToDeviceStatusSharingPreference.
 func (m *SubscriptionManager) GetDeviceToDeviceStatusSharingPreference(arg0 int32) (int32, error) {
 	var result int32
@@ -256,6 +417,38 @@ func (m *SubscriptionManager) GetDeviceToDeviceStatusSharingPreference(arg0 int3
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOpportunisticSubscriptions calls android.telephony.SubscriptionManager.getOpportunisticSubscriptions.
+func (m *SubscriptionManager) GetOpportunisticSubscriptions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetOpportunisticSubscriptions == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getOpportunisticSubscriptions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetOpportunisticSubscriptions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -335,6 +528,72 @@ func (m *SubscriptionManager) GetSubscriptionIds(arg0 int32) (*jni.Object, error
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSubscriptionManagerGetSubscriptionIds, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSubscriptionPlans calls android.telephony.SubscriptionManager.getSubscriptionPlans.
+func (m *SubscriptionManager) GetSubscriptionPlans(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetSubscriptionPlans == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getSubscriptionPlans is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetSubscriptionPlans, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSubscriptionsInGroup calls android.telephony.SubscriptionManager.getSubscriptionsInGroup.
+func (m *SubscriptionManager) GetSubscriptionsInGroup(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSubscriptionManagerGetSubscriptionsInGroup == nil {
+			callErr = fmt.Errorf("android.telephony.SubscriptionManager.getSubscriptionsInGroup is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSubscriptionManagerGetSubscriptionsInGroup, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

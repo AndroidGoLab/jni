@@ -23,61 +23,12 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsCreateCredentialRequest                  *jni.GlobalRef
-	midCreateCredentialRequestInit              jni.MethodID
-	midCreateCredentialRequestDescribeContents  jni.MethodID
-	midCreateCredentialRequestGetCallingAppInfo jni.MethodID
-	midCreateCredentialRequestGetData           jni.MethodID
-	midCreateCredentialRequestGetType           jni.MethodID
-	midCreateCredentialRequestWriteToParcel     jni.MethodID
-
-	clsBeginGetCredentialOption                      *jni.GlobalRef
-	midBeginGetCredentialOptionInit                  jni.MethodID
-	midBeginGetCredentialOptionDescribeContents      jni.MethodID
-	midBeginGetCredentialOptionGetCandidateQueryData jni.MethodID
-	midBeginGetCredentialOptionGetId                 jni.MethodID
-	midBeginGetCredentialOptionGetType               jni.MethodID
-	midBeginGetCredentialOptionToString              jni.MethodID
-	midBeginGetCredentialOptionWriteToParcel         jni.MethodID
-
-	clsCredentialProviderService         *jni.GlobalRef
-	midCredentialProviderServiceOnBind   jni.MethodID
-	midCredentialProviderServiceOnCreate jni.MethodID
-
-	clsClearCredentialStateRequest                  *jni.GlobalRef
-	midClearCredentialStateRequestInit              jni.MethodID
-	midClearCredentialStateRequestDescribeContents  jni.MethodID
-	midClearCredentialStateRequestGetCallingAppInfo jni.MethodID
-	midClearCredentialStateRequestGetData           jni.MethodID
-	midClearCredentialStateRequestToString          jni.MethodID
-	midClearCredentialStateRequestWriteToParcel     jni.MethodID
-
-	clsCreateEntry                 *jni.GlobalRef
-	midCreateEntryInit             jni.MethodID
-	midCreateEntryDescribeContents jni.MethodID
-	midCreateEntryGetSlice         jni.MethodID
-	midCreateEntryWriteToParcel    jni.MethodID
-
-	clsBeginCreateCredentialRequest                  *jni.GlobalRef
-	midBeginCreateCredentialRequestInit              jni.MethodID
-	midBeginCreateCredentialRequestDescribeContents  jni.MethodID
-	midBeginCreateCredentialRequestGetCallingAppInfo jni.MethodID
-	midBeginCreateCredentialRequestGetData           jni.MethodID
-	midBeginCreateCredentialRequestGetType           jni.MethodID
-	midBeginCreateCredentialRequestWriteToParcel     jni.MethodID
-
-	clsCallingAppInfo                 *jni.GlobalRef
-	midCallingAppInfoInit             jni.MethodID
-	midCallingAppInfoDescribeContents jni.MethodID
-	midCallingAppInfoGetOrigin        jni.MethodID
-	midCallingAppInfoGetPackageName   jni.MethodID
-	midCallingAppInfoGetSigningInfo   jni.MethodID
-	midCallingAppInfoToString         jni.MethodID
-	midCallingAppInfoWriteToParcel    jni.MethodID
-
 	clsBeginGetCredentialResponse                         *jni.GlobalRef
-	midBeginGetCredentialResponseInit                     jni.MethodID
+	midBeginGetCredentialResponseCtor                     jni.MethodID
 	midBeginGetCredentialResponseDescribeContents         jni.MethodID
+	midBeginGetCredentialResponseGetActions               jni.MethodID
+	midBeginGetCredentialResponseGetAuthenticationActions jni.MethodID
+	midBeginGetCredentialResponseGetCredentialEntries     jni.MethodID
 	midBeginGetCredentialResponseGetRemoteCredentialEntry jni.MethodID
 	midBeginGetCredentialResponseWriteToParcel            jni.MethodID
 
@@ -88,9 +39,40 @@ var (
 	midBeginGetCredentialResponseBuilderBuild                    jni.MethodID
 	midBeginGetCredentialResponseBuilderSetRemoteCredentialEntry jni.MethodID
 
+	clsCallingAppInfo                 *jni.GlobalRef
+	midCallingAppInfoCtor             jni.MethodID
+	midCallingAppInfoDescribeContents jni.MethodID
+	midCallingAppInfoGetOrigin        jni.MethodID
+	midCallingAppInfoGetPackageName   jni.MethodID
+	midCallingAppInfoGetSigningInfo   jni.MethodID
+	midCallingAppInfoToString         jni.MethodID
+	midCallingAppInfoWriteToParcel    jni.MethodID
+
+	clsGetCredentialRequest                     *jni.GlobalRef
+	midGetCredentialRequestCtor                 jni.MethodID
+	midGetCredentialRequestDescribeContents     jni.MethodID
+	midGetCredentialRequestGetCallingAppInfo    jni.MethodID
+	midGetCredentialRequestGetCredentialOptions jni.MethodID
+	midGetCredentialRequestWriteToParcel        jni.MethodID
+
+	clsAction                 *jni.GlobalRef
+	midActionCtor             jni.MethodID
+	midActionDescribeContents jni.MethodID
+	midActionGetSlice         jni.MethodID
+	midActionWriteToParcel    jni.MethodID
+
+	clsCredentialEntry                              *jni.GlobalRef
+	midCredentialEntryCtor                          jni.MethodID
+	midCredentialEntryDescribeContents              jni.MethodID
+	midCredentialEntryGetBeginGetCredentialOptionId jni.MethodID
+	midCredentialEntryGetSlice                      jni.MethodID
+	midCredentialEntryGetType                       jni.MethodID
+	midCredentialEntryWriteToParcel                 jni.MethodID
+
 	clsBeginCreateCredentialResponse                     *jni.GlobalRef
-	midBeginCreateCredentialResponseInit                 jni.MethodID
+	midBeginCreateCredentialResponseCtor                 jni.MethodID
 	midBeginCreateCredentialResponseDescribeContents     jni.MethodID
+	midBeginCreateCredentialResponseGetCreateEntries     jni.MethodID
 	midBeginCreateCredentialResponseGetRemoteCreateEntry jni.MethodID
 	midBeginCreateCredentialResponseWriteToParcel        jni.MethodID
 
@@ -99,41 +81,65 @@ var (
 	midBeginCreateCredentialResponseBuilderBuild                jni.MethodID
 	midBeginCreateCredentialResponseBuilderSetRemoteCreateEntry jni.MethodID
 
-	clsCredentialEntry                              *jni.GlobalRef
-	midCredentialEntryInit                          jni.MethodID
-	midCredentialEntryDescribeContents              jni.MethodID
-	midCredentialEntryGetBeginGetCredentialOptionId jni.MethodID
-	midCredentialEntryGetSlice                      jni.MethodID
-	midCredentialEntryGetType                       jni.MethodID
-	midCredentialEntryWriteToParcel                 jni.MethodID
+	clsCreateEntry                 *jni.GlobalRef
+	midCreateEntryCtor             jni.MethodID
+	midCreateEntryDescribeContents jni.MethodID
+	midCreateEntryGetSlice         jni.MethodID
+	midCreateEntryWriteToParcel    jni.MethodID
 
-	clsBeginGetCredentialRequest                  *jni.GlobalRef
-	midBeginGetCredentialRequestDescribeContents  jni.MethodID
-	midBeginGetCredentialRequestGetCallingAppInfo jni.MethodID
-	midBeginGetCredentialRequestWriteToParcel     jni.MethodID
+	clsBeginCreateCredentialRequest                  *jni.GlobalRef
+	midBeginCreateCredentialRequestCtor              jni.MethodID
+	midBeginCreateCredentialRequestDescribeContents  jni.MethodID
+	midBeginCreateCredentialRequestGetCallingAppInfo jni.MethodID
+	midBeginCreateCredentialRequestGetData           jni.MethodID
+	midBeginCreateCredentialRequestGetType           jni.MethodID
+	midBeginCreateCredentialRequestWriteToParcel     jni.MethodID
+
+	clsClearCredentialStateRequest                  *jni.GlobalRef
+	midClearCredentialStateRequestCtor              jni.MethodID
+	midClearCredentialStateRequestDescribeContents  jni.MethodID
+	midClearCredentialStateRequestGetCallingAppInfo jni.MethodID
+	midClearCredentialStateRequestGetData           jni.MethodID
+	midClearCredentialStateRequestToString          jni.MethodID
+	midClearCredentialStateRequestWriteToParcel     jni.MethodID
+
+	clsCredentialProviderService         *jni.GlobalRef
+	midCredentialProviderServiceOnBind   jni.MethodID
+	midCredentialProviderServiceOnCreate jni.MethodID
+
+	clsRemoteEntry                 *jni.GlobalRef
+	midRemoteEntryCtor             jni.MethodID
+	midRemoteEntryDescribeContents jni.MethodID
+	midRemoteEntryGetSlice         jni.MethodID
+	midRemoteEntryWriteToParcel    jni.MethodID
+
+	clsCreateCredentialRequest                  *jni.GlobalRef
+	midCreateCredentialRequestCtor              jni.MethodID
+	midCreateCredentialRequestDescribeContents  jni.MethodID
+	midCreateCredentialRequestGetCallingAppInfo jni.MethodID
+	midCreateCredentialRequestGetData           jni.MethodID
+	midCreateCredentialRequestGetType           jni.MethodID
+	midCreateCredentialRequestWriteToParcel     jni.MethodID
+
+	clsBeginGetCredentialRequest                             *jni.GlobalRef
+	midBeginGetCredentialRequestDescribeContents             jni.MethodID
+	midBeginGetCredentialRequestGetBeginGetCredentialOptions jni.MethodID
+	midBeginGetCredentialRequestGetCallingAppInfo            jni.MethodID
+	midBeginGetCredentialRequestWriteToParcel                jni.MethodID
 
 	clsBeginGetCredentialRequestBuilder                            *jni.GlobalRef
 	midBeginGetCredentialRequestBuilderAddBeginGetCredentialOption jni.MethodID
 	midBeginGetCredentialRequestBuilderBuild                       jni.MethodID
 	midBeginGetCredentialRequestBuilderSetCallingAppInfo           jni.MethodID
 
-	clsGetCredentialRequest                  *jni.GlobalRef
-	midGetCredentialRequestInit              jni.MethodID
-	midGetCredentialRequestDescribeContents  jni.MethodID
-	midGetCredentialRequestGetCallingAppInfo jni.MethodID
-	midGetCredentialRequestWriteToParcel     jni.MethodID
-
-	clsRemoteEntry                 *jni.GlobalRef
-	midRemoteEntryInit             jni.MethodID
-	midRemoteEntryDescribeContents jni.MethodID
-	midRemoteEntryGetSlice         jni.MethodID
-	midRemoteEntryWriteToParcel    jni.MethodID
-
-	clsAction                 *jni.GlobalRef
-	midActionInit             jni.MethodID
-	midActionDescribeContents jni.MethodID
-	midActionGetSlice         jni.MethodID
-	midActionWriteToParcel    jni.MethodID
+	clsBeginGetCredentialOption                      *jni.GlobalRef
+	midBeginGetCredentialOptionCtor                  jni.MethodID
+	midBeginGetCredentialOptionDescribeContents      jni.MethodID
+	midBeginGetCredentialOptionGetCandidateQueryData jni.MethodID
+	midBeginGetCredentialOptionGetId                 jni.MethodID
+	midBeginGetCredentialOptionGetType               jni.MethodID
+	midBeginGetCredentialOptionToString              jni.MethodID
+	midBeginGetCredentialOptionWriteToParcel         jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -154,324 +160,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/service/credentials/CreateCredentialRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCreateCredentialRequest = env.NewGlobalRef(&c.Object)
-		midCreateCredentialRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "<init>", "(Landroid/service/credentials/CallingAppInfo;Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midCreateCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCreateCredentialRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCreateCredentialRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "getData", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCreateCredentialRequestGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "getType", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCreateCredentialRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/credentials/BeginGetCredentialOption")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBeginGetCredentialOption = env.NewGlobalRef(&c.Object)
-		midBeginGetCredentialOptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midBeginGetCredentialOptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginGetCredentialOptionGetCandidateQueryData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "getCandidateQueryData", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginGetCredentialOptionGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "getId", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginGetCredentialOptionGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "getType", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginGetCredentialOptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginGetCredentialOptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/credentials/CredentialProviderService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCredentialProviderService = env.NewGlobalRef(&c.Object)
-
-		midCredentialProviderServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialProviderService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCredentialProviderServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialProviderService)), "onCreate", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/credentials/ClearCredentialStateRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsClearCredentialStateRequest = env.NewGlobalRef(&c.Object)
-		midClearCredentialStateRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "<init>", "(Landroid/service/credentials/CallingAppInfo;Landroid/os/Bundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midClearCredentialStateRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClearCredentialStateRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClearCredentialStateRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "getData", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClearCredentialStateRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midClearCredentialStateRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/credentials/CreateEntry")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCreateEntry = env.NewGlobalRef(&c.Object)
-		midCreateEntryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "<init>", "(Landroid/app/slice/Slice;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midCreateEntryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCreateEntryGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "getSlice", "()Landroid/app/slice/Slice;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCreateEntryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/credentials/BeginCreateCredentialRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsBeginCreateCredentialRequest = env.NewGlobalRef(&c.Object)
-		midBeginCreateCredentialRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "<init>", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midBeginCreateCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginCreateCredentialRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginCreateCredentialRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "getData", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginCreateCredentialRequestGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "getType", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midBeginCreateCredentialRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/credentials/CallingAppInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallingAppInfo = env.NewGlobalRef(&c.Object)
-		midCallingAppInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "<init>", "(Ljava/lang/String;Landroid/content/pm/SigningInfo;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midCallingAppInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallingAppInfoGetOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "getOrigin", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallingAppInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "getPackageName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallingAppInfoGetSigningInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "getSigningInfo", "()Landroid/content/pm/SigningInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallingAppInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallingAppInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/service/credentials/BeginGetCredentialResponse")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -479,12 +167,33 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBeginGetCredentialResponse = env.NewGlobalRef(&c.Object)
-		midBeginGetCredentialResponseInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), "<init>", "()V")
+		midBeginGetCredentialResponseCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
 		midBeginGetCredentialResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginGetCredentialResponseGetActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), "getActions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginGetCredentialResponseGetAuthenticationActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), "getAuthenticationActions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginGetCredentialResponseGetCredentialEntries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialResponse)), "getCredentialEntries", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -552,6 +261,188 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/service/credentials/CallingAppInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallingAppInfo = env.NewGlobalRef(&c.Object)
+		midCallingAppInfoCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "<init>", "(Ljava/lang/String;Landroid/content/pm/SigningInfo;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCallingAppInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallingAppInfoGetOrigin, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "getOrigin", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallingAppInfoGetPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "getPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallingAppInfoGetSigningInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "getSigningInfo", "()Landroid/content/pm/SigningInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallingAppInfoToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallingAppInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallingAppInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/GetCredentialRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGetCredentialRequest = env.NewGlobalRef(&c.Object)
+		midGetCredentialRequestCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "<init>", "(Landroid/service/credentials/CallingAppInfo;Ljava/util/List;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGetCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetCredentialRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetCredentialRequestGetCredentialOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "getCredentialOptions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGetCredentialRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/Action")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsAction = env.NewGlobalRef(&c.Object)
+		midActionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "<init>", "(Landroid/app/slice/Slice;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midActionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActionGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "getSlice", "()Landroid/app/slice/Slice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midActionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/CredentialEntry")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCredentialEntry = env.NewGlobalRef(&c.Object)
+		midCredentialEntryCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "<init>", "(Landroid/service/credentials/BeginGetCredentialOption;Landroid/app/slice/Slice;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCredentialEntryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialEntryGetBeginGetCredentialOptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "getBeginGetCredentialOptionId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialEntryGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "getSlice", "()Landroid/app/slice/Slice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialEntryGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "getType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialEntryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/service/credentials/BeginCreateCredentialResponse")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -559,12 +450,19 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBeginCreateCredentialResponse = env.NewGlobalRef(&c.Object)
-		midBeginCreateCredentialResponseInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialResponse)), "<init>", "()V")
+		midBeginCreateCredentialResponseCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialResponse)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
 		midBeginCreateCredentialResponseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialResponse)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginCreateCredentialResponseGetCreateEntries, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialResponse)), "getCreateEntries", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -618,47 +516,239 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/service/credentials/CredentialEntry")
+	c, err = env.FindClass("android/service/credentials/CreateEntry")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsCredentialEntry = env.NewGlobalRef(&c.Object)
-		midCredentialEntryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "<init>", "(Landroid/service/credentials/BeginGetCredentialOption;Landroid/app/slice/Slice;)V")
+		clsCreateEntry = env.NewGlobalRef(&c.Object)
+		midCreateEntryCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "<init>", "(Landroid/app/slice/Slice;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
-		midCredentialEntryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCredentialEntryGetBeginGetCredentialOptionId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "getBeginGetCredentialOptionId", "()Ljava/lang/String;")
+		midCreateEntryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCredentialEntryGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "getSlice", "()Landroid/app/slice/Slice;")
+		midCreateEntryGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "getSlice", "()Landroid/app/slice/Slice;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCredentialEntryGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "getType", "()Ljava/lang/String;")
+		midCreateEntryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateEntry)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCredentialEntryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialEntry)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+	}
+
+	c, err = env.FindClass("android/service/credentials/BeginCreateCredentialRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsBeginCreateCredentialRequest = env.NewGlobalRef(&c.Object)
+		midBeginCreateCredentialRequestCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "<init>", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midBeginCreateCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginCreateCredentialRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginCreateCredentialRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "getData", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginCreateCredentialRequestGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "getType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginCreateCredentialRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginCreateCredentialRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/ClearCredentialStateRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsClearCredentialStateRequest = env.NewGlobalRef(&c.Object)
+		midClearCredentialStateRequestCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "<init>", "(Landroid/service/credentials/CallingAppInfo;Landroid/os/Bundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midClearCredentialStateRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClearCredentialStateRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClearCredentialStateRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "getData", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClearCredentialStateRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midClearCredentialStateRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsClearCredentialStateRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/CredentialProviderService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCredentialProviderService = env.NewGlobalRef(&c.Object)
+
+		midCredentialProviderServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialProviderService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCredentialProviderServiceOnCreate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCredentialProviderService)), "onCreate", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/RemoteEntry")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRemoteEntry = env.NewGlobalRef(&c.Object)
+		midRemoteEntryCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "<init>", "(Landroid/app/slice/Slice;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRemoteEntryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteEntryGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "getSlice", "()Landroid/app/slice/Slice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteEntryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/credentials/CreateCredentialRequest")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCreateCredentialRequest = env.NewGlobalRef(&c.Object)
+		midCreateCredentialRequestCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "<init>", "(Landroid/service/credentials/CallingAppInfo;Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCreateCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCreateCredentialRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCreateCredentialRequestGetData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "getData", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCreateCredentialRequestGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "getType", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCreateCredentialRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -676,6 +766,13 @@ func doInit(env *jni.Env) error {
 		clsBeginGetCredentialRequest = env.NewGlobalRef(&c.Object)
 
 		midBeginGetCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialRequest)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midBeginGetCredentialRequestGetBeginGetCredentialOptions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialRequest)), "getBeginGetCredentialOptions", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -729,103 +826,54 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/service/credentials/GetCredentialRequest")
+	c, err = env.FindClass("android/service/credentials/BeginGetCredentialOption")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsGetCredentialRequest = env.NewGlobalRef(&c.Object)
-		midGetCredentialRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "<init>", "(Landroid/service/credentials/CallingAppInfo;Ljava/util/List;)V")
+		clsBeginGetCredentialOption = env.NewGlobalRef(&c.Object)
+		midBeginGetCredentialOptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "<init>", "(Ljava/lang/String;Ljava/lang/String;Landroid/os/Bundle;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
-		midGetCredentialRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGetCredentialRequestGetCallingAppInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "getCallingAppInfo", "()Landroid/service/credentials/CallingAppInfo;")
+		midBeginGetCredentialOptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midGetCredentialRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGetCredentialRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midBeginGetCredentialOptionGetCandidateQueryData, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "getCandidateQueryData", "()Landroid/os/Bundle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-	}
-
-	c, err = env.FindClass("android/service/credentials/RemoteEntry")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRemoteEntry = env.NewGlobalRef(&c.Object)
-		midRemoteEntryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "<init>", "(Landroid/app/slice/Slice;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midRemoteEntryDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "describeContents", "()I")
+		midBeginGetCredentialOptionGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "getId", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRemoteEntryGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "getSlice", "()Landroid/app/slice/Slice;")
+		midBeginGetCredentialOptionGetType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "getType", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midRemoteEntryWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteEntry)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midBeginGetCredentialOptionToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-	}
-
-	c, err = env.FindClass("android/service/credentials/Action")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsAction = env.NewGlobalRef(&c.Object)
-		midActionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "<init>", "(Landroid/app/slice/Slice;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midActionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActionGetSlice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "getSlice", "()Landroid/app/slice/Slice;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midActionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAction)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midBeginGetCredentialOptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

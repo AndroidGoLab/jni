@@ -32,7 +32,7 @@ func NewSuperscriptSpan(vm *jni.VM) (*SuperscriptSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), midSuperscriptSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuperscriptSpan)), midSuperscriptSpanCtor)
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewNetworkScanRequest(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 int32,
 			jArg4 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkScanRequest)), midNetworkScanRequestInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkScanRequest)), midNetworkScanRequestCtor, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.BooleanValue(jArg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
 		if err != nil {
 			return err
 		}
@@ -175,6 +175,38 @@ func (m *NetworkScanRequest) GetMaxSearchTime() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetPlmns calls android.telephony.NetworkScanRequest.getPlmns.
+func (m *NetworkScanRequest) GetPlmns() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNetworkScanRequestGetPlmns == nil {
+			callErr = fmt.Errorf("android.telephony.NetworkScanRequest.getPlmns is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNetworkScanRequestGetPlmns,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

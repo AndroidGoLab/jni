@@ -100,6 +100,198 @@ func (m *SearchSpec) GetDefaultEmbeddingSearchMetricType() (int32, error) {
 	return result, callErr
 }
 
+// GetEmbeddingParameters calls android.app.appsearch.SearchSpec.getEmbeddingParameters.
+func (m *SearchSpec) GetEmbeddingParameters() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetEmbeddingParameters == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getEmbeddingParameters is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetEmbeddingParameters,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFilterDocumentIds calls android.app.appsearch.SearchSpec.getFilterDocumentIds.
+func (m *SearchSpec) GetFilterDocumentIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetFilterDocumentIds == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getFilterDocumentIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetFilterDocumentIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFilterNamespaces calls android.app.appsearch.SearchSpec.getFilterNamespaces.
+func (m *SearchSpec) GetFilterNamespaces() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetFilterNamespaces == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getFilterNamespaces is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetFilterNamespaces,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFilterPackageNames calls android.app.appsearch.SearchSpec.getFilterPackageNames.
+func (m *SearchSpec) GetFilterPackageNames() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetFilterPackageNames == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getFilterPackageNames is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetFilterPackageNames,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFilterSchemas calls android.app.appsearch.SearchSpec.getFilterSchemas.
+func (m *SearchSpec) GetFilterSchemas() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetFilterSchemas == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getFilterSchemas is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetFilterSchemas,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInformationalRankingExpressions calls android.app.appsearch.SearchSpec.getInformationalRankingExpressions.
+func (m *SearchSpec) GetInformationalRankingExpressions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetInformationalRankingExpressions == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getInformationalRankingExpressions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetInformationalRankingExpressions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetJoinSpec calls android.app.appsearch.SearchSpec.getJoinSpec.
 func (m *SearchSpec) GetJoinSpec() (*jni.Object, error) {
 	var result *jni.Object
@@ -304,6 +496,38 @@ func (m *SearchSpec) GetSearchSourceLogTag() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSearchStringParameters calls android.app.appsearch.SearchSpec.getSearchStringParameters.
+func (m *SearchSpec) GetSearchStringParameters() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSearchSpecGetSearchStringParameters == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SearchSpec.getSearchStringParameters is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSearchSpecGetSearchStringParameters,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

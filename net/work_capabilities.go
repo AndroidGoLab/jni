@@ -32,7 +32,7 @@ func NewworkCapabilities(vm *jni.VM) (*workCapabilities, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsworkCapabilities)), midworkCapabilitiesInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsworkCapabilities)), midworkCapabilitiesCtor)
 		if err != nil {
 			return err
 		}
@@ -288,6 +288,38 @@ func (m *workCapabilities) GetSignalStrength() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSubscriptionIds calls android.net.NetworkCapabilities.getSubscriptionIds.
+func (m *workCapabilities) GetSubscriptionIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midworkCapabilitiesGetSubscriptionIds == nil {
+			callErr = fmt.Errorf("android.net.NetworkCapabilities.getSubscriptionIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midworkCapabilitiesGetSubscriptionIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

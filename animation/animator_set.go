@@ -32,7 +32,7 @@ func NewAnimatorSet(vm *jni.VM) (*AnimatorSet, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatorSet)), midAnimatorSetInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnimatorSet)), midAnimatorSetCtor)
 		if err != nil {
 			return err
 		}
@@ -119,6 +119,38 @@ func (m *AnimatorSet) End() error {
 		return callErr
 	})
 	return callErr
+}
+
+// GetChildAnimations calls android.animation.AnimatorSet.getChildAnimations.
+func (m *AnimatorSet) GetChildAnimations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAnimatorSetGetChildAnimations == nil {
+			callErr = fmt.Errorf("android.animation.AnimatorSet.getChildAnimations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAnimatorSetGetChildAnimations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }
 
 // GetCurrentPlayTime calls android.animation.AnimatorSet.getCurrentPlayTime.

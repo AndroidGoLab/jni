@@ -5,12 +5,6 @@ package ike
 import "github.com/AndroidGoLab/jni/net/ipsec/ike/consts"
 
 const (
-	IkeDpdDelaySecDisabled              = consts.IkeDpdDelaySecDisabled
-	IkeOptionAcceptAnyRemoteId          = consts.IkeOptionAcceptAnyRemoteId
-	IkeOptionEapOnlyAuth                = consts.IkeOptionEapOnlyAuth
-	IkeOptionForcePort4500              = consts.IkeOptionForcePort4500
-	IkeOptionInitialContact             = consts.IkeOptionInitialContact
-	IkeOptionMobike                     = consts.IkeOptionMobike
 	ExtensionTypeFragmentation          = consts.ExtensionTypeFragmentation
 	ExtensionTypeMobike                 = consts.ExtensionTypeMobike
 	DhGroup1024BitModp                  = consts.DhGroup1024BitModp
@@ -44,4 +38,10 @@ const (
 	PseudorandomFunctionSha2256         = consts.PseudorandomFunctionSha2256
 	PseudorandomFunctionSha2384         = consts.PseudorandomFunctionSha2384
 	PseudorandomFunctionSha2512         = consts.PseudorandomFunctionSha2512
+	IkeDpdDelaySecDisabled              = consts.IkeDpdDelaySecDisabled
+	IkeOptionAcceptAnyRemoteId          = consts.IkeOptionAcceptAnyRemoteId
+	IkeOptionEapOnlyAuth                = consts.IkeOptionEapOnlyAuth
+	IkeOptionForcePort4500              = consts.IkeOptionForcePort4500
+	IkeOptionInitialContact             = consts.IkeOptionInitialContact
+	IkeOptionMobike                     = consts.IkeOptionMobike
 )

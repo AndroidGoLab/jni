@@ -308,6 +308,70 @@ func (m *DeviceManager) EnableSystemDataSyncForTypes(arg0 int32, arg1 int32) err
 	return callErr
 }
 
+// GetAssociations calls android.companion.CompanionDeviceManager.getAssociations.
+func (m *DeviceManager) GetAssociations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceManagerGetAssociations == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.getAssociations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceManagerGetAssociations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMyAssociations calls android.companion.CompanionDeviceManager.getMyAssociations.
+func (m *DeviceManager) GetMyAssociations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDeviceManagerGetMyAssociations == nil {
+			callErr = fmt.Errorf("android.companion.CompanionDeviceManager.getMyAssociations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDeviceManagerGetMyAssociations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HasNotificationAccess calls android.companion.CompanionDeviceManager.hasNotificationAccess.
 func (m *DeviceManager) HasNotificationAccess(arg0 *jni.Object) (bool, error) {
 	var result bool

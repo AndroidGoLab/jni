@@ -32,7 +32,7 @@ func NewDisplayLuts(vm *jni.VM) (*DisplayLuts, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDisplayLuts)), midDisplayLutsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDisplayLuts)), midDisplayLutsCtor)
 		if err != nil {
 			return err
 		}

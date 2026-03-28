@@ -33,7 +33,7 @@ func NewExplode(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Explode, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExplode)), midExplodeInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExplode)), midExplodeCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewFormatException(vm *jni.VM) (*FormatException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFormatException)), midFormatExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFormatException)), midFormatExceptionCtor)
 		if err != nil {
 			return err
 		}

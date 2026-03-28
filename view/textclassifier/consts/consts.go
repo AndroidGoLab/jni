@@ -4,6 +4,14 @@ package consts
 
 const (
 	Creator                     int = 0
+	NoOp                        int = 0
+	ApplyStrategyIgnore         int = 0
+	ApplyStrategyReplace        int = 1
+	StatusDifferentText         int = 3
+	StatusLinksApplied          int = 0
+	StatusNoLinksApplied        int = 2
+	StatusNoLinksFound          int = 1
+	StatusUnsupportedCharacter  int = 4
 	CategoryConversationActions int = 3
 	CategoryLanguageDetection   int = 4
 	CategoryLinkify             int = 2
@@ -29,6 +37,8 @@ const (
 	TypeSmartAction             int = 13
 	TypeSmartSelectionMulti     int = 4
 	TypeSmartSelectionSingle    int = 3
+	PersonUserOthers            int = 0
+	PersonUserSelf              int = 0
 	ActionAbandon               int = 107
 	ActionCopy                  int = 101
 	ActionCut                   int = 103
@@ -48,29 +58,9 @@ const (
 	InvocationLink              int = 2
 	InvocationManual            int = 1
 	InvocationUnknown           int = 0
-	ApplyStrategyIgnore         int = 0
-	ApplyStrategyReplace        int = 1
-	StatusDifferentText         int = 3
-	StatusLinksApplied          int = 0
-	StatusNoLinksApplied        int = 2
-	StatusNoLinksFound          int = 1
-	StatusUnsupportedCharacter  int = 4
-	NoOp                        int = 0
-	PersonUserOthers            int = 0
-	PersonUserSelf              int = 0
 )
 
 const (
-	TypeCallPhone                        string = "call_phone"
-	TypeCreateReminder                   string = "create_reminder"
-	TypeOpenUrl                          string = "open_url"
-	TypeSendEmail                        string = "send_email"
-	TypeSendSms                          string = "send_sms"
-	TypeShareLocation                    string = "share_location"
-	TypeTextReply                        string = "text_reply"
-	TypeTrackFlight                      string = "track_flight"
-	TypeViewCalendar                     string = "view_calendar"
-	TypeViewMap                          string = "view_map"
 	ExtraFromTextClassifier              string = "android.view.textclassifier.extra.FROM_TEXT_CLASSIFIER"
 	ExtraTextOriginPackage               string = "android.view.textclassifier.extra.TEXT_ORIGIN_PACKAGE"
 	HintTextIsEditable                   string = "android.text_is_editable"
@@ -96,6 +86,16 @@ const (
 	WidgetTypeUnknown                    string = "unknown"
 	WidgetTypeUnselectableTextview       string = "nosel-textview"
 	WidgetTypeWebview                    string = "webview"
+	TypeCallPhone                        string = "call_phone"
+	TypeCreateReminder                   string = "create_reminder"
+	TypeOpenUrl                          string = "open_url"
+	TypeSendEmail                        string = "send_email"
+	TypeSendSms                          string = "send_sms"
+	TypeShareLocation                    string = "share_location"
+	TypeTextReply                        string = "text_reply"
+	TypeTrackFlight                      string = "track_flight"
+	TypeViewCalendar                     string = "view_calendar"
+	TypeViewMap                          string = "view_map"
 	HintForInApp                         string = "in_app"
 	HintForNotification                  string = "notification"
 )

@@ -38,7 +38,7 @@ func NewAppOwnedSdkSandboxInterface(vm *jni.VM, arg0 string, arg1 int64, arg2 *j
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppOwnedSdkSandboxInterface)), midAppOwnedSdkSandboxInterfaceInit, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppOwnedSdkSandboxInterface)), midAppOwnedSdkSandboxInterfaceCtor, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

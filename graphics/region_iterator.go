@@ -33,7 +33,7 @@ func NewRegionIterator(vm *jni.VM, arg0 *jni.Object) (*RegionIterator, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegionIterator)), midRegionIteratorInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRegionIterator)), midRegionIteratorCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

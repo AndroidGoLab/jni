@@ -33,7 +33,7 @@ func NewPendingJobReasonsInfo(vm *jni.VM, arg0 int64, arg1 *jni.Object) (*Pendin
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPendingJobReasonsInfo)), midPendingJobReasonsInfoInit, jni.LongValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPendingJobReasonsInfo)), midPendingJobReasonsInfoCtor, jni.LongValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

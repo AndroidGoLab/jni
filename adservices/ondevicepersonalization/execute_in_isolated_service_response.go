@@ -33,7 +33,7 @@ func NewExecuteInIsolatedServiceResponse(vm *jni.VM, arg0 *jni.Object, arg1 int3
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExecuteInIsolatedServiceResponse)), midExecuteInIsolatedServiceResponseInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExecuteInIsolatedServiceResponse)), midExecuteInIsolatedServiceResponseCtor, jni.ObjectValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

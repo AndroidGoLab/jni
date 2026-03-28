@@ -33,7 +33,7 @@ func NewMutableLong(vm *jni.VM, arg0 int64) (*MutableLong, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableLong)), midMutableLongInit, jni.LongValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableLong)), midMutableLongCtor, jni.LongValue(arg0))
 		if err != nil {
 			return err
 		}

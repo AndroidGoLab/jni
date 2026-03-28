@@ -32,7 +32,7 @@ func NewGesture(vm *jni.VM) (*Gesture, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGesture)), midGestureInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGesture)), midGestureCtor)
 		if err != nil {
 			return err
 		}
@@ -201,6 +201,38 @@ func (m *Gesture) GetLength() (float32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetStrokes calls android.gesture.Gesture.getStrokes.
+func (m *Gesture) GetStrokes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGestureGetStrokes == nil {
+			callErr = fmt.Errorf("android.gesture.Gesture.getStrokes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGestureGetStrokes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

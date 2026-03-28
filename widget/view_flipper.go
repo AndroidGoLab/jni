@@ -33,7 +33,7 @@ func NewViewFlipper(vm *jni.VM, arg0 *jni.Object) (*ViewFlipper, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewFlipper)), midViewFlipperInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsViewFlipper)), midViewFlipperCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

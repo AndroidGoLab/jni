@@ -33,7 +33,7 @@ func NewSweepGradient(vm *jni.VM, arg0 float32, arg1 float32, arg2 int32, arg3 i
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSweepGradient)), midSweepGradientInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSweepGradient)), midSweepGradientCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

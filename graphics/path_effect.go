@@ -32,7 +32,7 @@ func NewPathEffect(vm *jni.VM) (*PathEffect, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathEffect)), midPathEffectInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathEffect)), midPathEffectCtor)
 		if err != nil {
 			return err
 		}

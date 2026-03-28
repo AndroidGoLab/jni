@@ -32,7 +32,7 @@ func NewParcelFormatException(vm *jni.VM) (*ParcelFormatException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelFormatException)), midParcelFormatExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelFormatException)), midParcelFormatExceptionCtor)
 		if err != nil {
 			return err
 		}

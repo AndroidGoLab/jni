@@ -3,18 +3,6 @@
 package consts
 
 const (
-	TypeAccountAlreadyRegistered          int = 5
-	TypeAlreadyRegisteredByAnotherAccount int = 1
-	TypeRemoveRights                      int = 2
-	TypeRightsInstalled                   int = 3
-	TypeRightsRemoved                     int = 6
-	TypeWaitForRights                     int = 4
-	ErrorNone                             int = 0
-	ErrorUnknown                          int = -2000
-	TypeRegistrationInfo                  int = 1
-	TypeRightsAcquisitionInfo             int = 3
-	TypeRightsAcquisitionProgressInfo     int = 4
-	TypeUnregistrationInfo                int = 2
 	Default                               int = 0
 	Display                               int = 7
 	Execute                               int = 6
@@ -35,10 +23,6 @@ const (
 	RightsInvalid                         int = 1
 	RightsNotAcquired                     int = 3
 	RightsValid                           int = 0
-	StatusError                           int = 2
-	StatusOk                              int = 1
-	TypeAllRightsRemoved                  int = 1001
-	TypeDrmInfoProcessed                  int = 1002
 	TypeAcquireDrmInfoFailed              int = 2008
 	TypeNotSupported                      int = 2003
 	TypeNoInternetConnection              int = 2005
@@ -47,12 +31,26 @@ const (
 	TypeRemoveAllRightsFailed             int = 2007
 	TypeRightsNotInstalled                int = 2001
 	TypeRightsRenewalNotAllowed           int = 2002
+	ErrorNone                             int = 0
+	ErrorUnknown                          int = -2000
+	TypeAllRightsRemoved                  int = 1001
+	TypeDrmInfoProcessed                  int = 1002
+	StatusError                           int = 2
+	StatusOk                              int = 1
+	TypeAccountAlreadyRegistered          int = 5
+	TypeAlreadyRegisteredByAnotherAccount int = 1
+	TypeRemoveRights                      int = 2
+	TypeRightsInstalled                   int = 3
+	TypeRightsRemoved                     int = 6
+	TypeWaitForRights                     int = 4
+	TypeRegistrationInfo                  int = 1
+	TypeRightsAcquisitionInfo             int = 3
+	TypeRightsAcquisitionProgressInfo     int = 4
+	TypeUnregistrationInfo                int = 2
 	StatusInputdataError                  int = 2
 )
 
 const (
-	AccountId            string = "account_id"
-	SubscriptionId       string = "subscription_id"
 	ExtendedMetadata     string = "extended_metadata"
 	LicenseAvailableTime string = "license_available_time"
 	LicenseExpiryTime    string = "license_expiry_time"
@@ -61,4 +59,6 @@ const (
 	RemainingRepeatCount string = "remaining_repeat_count"
 	DrmInfoObject        string = "drm_info_object"
 	DrmInfoStatusObject  string = "drm_info_status_object"
+	AccountId            string = "account_id"
+	SubscriptionId       string = "subscription_id"
 )

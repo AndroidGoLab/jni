@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsSettings                *jni.GlobalRef
-	midSettingsInit            jni.MethodID
+	midSettingsCtor            jni.MethodID
 	midSettingsCanDrawOverlays jni.MethodID
 
 	clsGlobal            *jni.GlobalRef
@@ -109,7 +109,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSettings = env.NewGlobalRef(&c.Object)
-		midSettingsInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettings)), "<init>", "()V")
+		midSettingsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSettings)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

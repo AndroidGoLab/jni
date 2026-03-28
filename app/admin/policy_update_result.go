@@ -33,7 +33,7 @@ func NewPolicyUpdateResult(vm *jni.VM, arg0 int32) (*PolicyUpdateResult, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPolicyUpdateResult)), midPolicyUpdateResultInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPolicyUpdateResult)), midPolicyUpdateResultCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

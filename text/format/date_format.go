@@ -32,7 +32,7 @@ func NewDateFormat(vm *jni.VM) (*DateFormat, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateFormat)), midDateFormatInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateFormat)), midDateFormatCtor)
 		if err != nil {
 			return err
 		}

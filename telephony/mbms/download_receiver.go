@@ -32,7 +32,7 @@ func NewDownloadReceiver(vm *jni.VM) (*DownloadReceiver, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadReceiver)), midDownloadReceiverInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadReceiver)), midDownloadReceiverCtor)
 		if err != nil {
 			return err
 		}

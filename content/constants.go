@@ -6,24 +6,9 @@ import "github.com/AndroidGoLab/jni/content/consts"
 
 const (
 	Creator                         = consts.Creator
-	ResultApproved                  = consts.ResultApproved
-	ResultDenied                    = consts.ResultDenied
-	ResultError                     = consts.ResultError
-	ResultErrorBadRequest           = consts.ResultErrorBadRequest
-	ResultErrorInternal             = consts.ResultErrorInternal
-	ResultErrorNetwork              = consts.ResultErrorNetwork
-	ResultNoResponse                = consts.ResultNoResponse
-	ResultUnknownRequest            = consts.ResultUnknownRequest
-	LogSyncDetails                  = consts.LogSyncDetails
-	AlreadyInProgress               = consts.AlreadyInProgress
-	IdNull                          = consts.IdNull
-	TrimMemoryBackground            = consts.TrimMemoryBackground
-	TrimMemoryComplete              = consts.TrimMemoryComplete
-	TrimMemoryModerate              = consts.TrimMemoryModerate
-	TrimMemoryRunningCritical       = consts.TrimMemoryRunningCritical
-	TrimMemoryRunningLow            = consts.TrimMemoryRunningLow
-	TrimMemoryRunningModerate       = consts.TrimMemoryRunningModerate
-	TrimMemoryUiHidden              = consts.TrimMemoryUiHidden
+	Fragment                        = consts.Fragment
+	Path                            = consts.Path
+	Query                           = consts.Query
 	MatchAdjustmentMask             = consts.MatchAdjustmentMask
 	MatchAdjustmentNormal           = consts.MatchAdjustmentNormal
 	MatchCategoryEmpty              = consts.MatchCategoryEmpty
@@ -40,18 +25,35 @@ const (
 	NoMatchType                     = consts.NoMatchType
 	SystemHighPriority              = consts.SystemHighPriority
 	SystemLowPriority               = consts.SystemLowPriority
+	ResultApproved                  = consts.ResultApproved
+	ResultDenied                    = consts.ResultDenied
+	ResultError                     = consts.ResultError
+	ResultErrorBadRequest           = consts.ResultErrorBadRequest
+	ResultErrorInternal             = consts.ResultErrorInternal
+	ResultErrorNetwork              = consts.ResultErrorNetwork
+	ResultNoResponse                = consts.ResultNoResponse
+	ResultUnknownRequest            = consts.ResultUnknownRequest
 	ClassificationComplete          = consts.ClassificationComplete
 	ClassificationNotComplete       = consts.ClassificationNotComplete
 	ClassificationNotPerformed      = consts.ClassificationNotPerformed
+	TrimMemoryBackground            = consts.TrimMemoryBackground
+	TrimMemoryComplete              = consts.TrimMemoryComplete
+	TrimMemoryModerate              = consts.TrimMemoryModerate
+	TrimMemoryRunningCritical       = consts.TrimMemoryRunningCritical
+	TrimMemoryRunningLow            = consts.TrimMemoryRunningLow
+	TrimMemoryRunningModerate       = consts.TrimMemoryRunningModerate
+	TrimMemoryUiHidden              = consts.TrimMemoryUiHidden
+	AlreadyInProgress               = consts.AlreadyInProgress
+	NoMatch                         = consts.NoMatch
+	DatabaseMode2lines              = consts.DatabaseMode2lines
+	DatabaseModeQueries             = consts.DatabaseModeQueries
 	Button1                         = consts.Button1
 	Button2                         = consts.Button2
 	Button3                         = consts.Button3
 	ButtonNegative                  = consts.ButtonNegative
 	ButtonNeutral                   = consts.ButtonNeutral
 	ButtonPositive                  = consts.ButtonPositive
-	Fragment                        = consts.Fragment
-	Path                            = consts.Path
-	Query                           = consts.Query
+	LogSyncDetails                  = consts.LogSyncDetails
 	TypeBoolean                     = consts.TypeBoolean
 	TypeBundle                      = consts.TypeBundle
 	TypeBundleArray                 = consts.TypeBundleArray
@@ -60,18 +62,19 @@ const (
 	TypeMultiSelect                 = consts.TypeMultiSelect
 	TypeNull                        = consts.TypeNull
 	TypeString                      = consts.TypeString
-	NoMatch                         = consts.NoMatch
+	IdNull                          = consts.IdNull
 	ActionAllow                     = consts.ActionAllow
 	ActionBlock                     = consts.ActionBlock
-	DatabaseMode2lines              = consts.DatabaseMode2lines
-	DatabaseModeQueries             = consts.DatabaseModeQueries
 )
 
 const (
-	InvalidTime = consts.InvalidTime
-)
-
-const (
+	Tag                              = consts.Tag
+	FeatureDelete                    = consts.FeatureDelete
+	FeatureDownload                  = consts.FeatureDownload
+	FeatureEdit                      = consts.FeatureEdit
+	FeaturePrint                     = consts.FeaturePrint
+	FeatureSend                      = consts.FeatureSend
+	FeatureView                      = consts.FeatureView
 	ActionPermissionResponseReceived = consts.ActionPermissionResponseReceived
 	ActionRequestLocalApproval       = consts.ActionRequestLocalApproval
 	ActionRequestPermission          = consts.ActionRequestPermission
@@ -94,12 +97,6 @@ const (
 	ResponseKeyMessage               = consts.ResponseKeyMessage
 	ResponseKeyResponseTimestamp     = consts.ResponseKeyResponseTimestamp
 	ResponseKeyResult                = consts.ResponseKeyResult
-	FeatureDelete                    = consts.FeatureDelete
-	FeatureDownload                  = consts.FeatureDownload
-	FeatureEdit                      = consts.FeatureEdit
-	FeaturePrint                     = consts.FeaturePrint
-	FeatureSend                      = consts.FeatureSend
-	FeatureView                      = consts.FeatureView
 	ExtraIsRemoteDevice              = consts.ExtraIsRemoteDevice
 	ExtraIsSensitive                 = consts.ExtraIsSensitive
 	MimetypeTextHtml                 = consts.MimetypeTextHtml
@@ -107,5 +104,8 @@ const (
 	MimetypeTextPlain                = consts.MimetypeTextPlain
 	MimetypeTextUrilist              = consts.MimetypeTextUrilist
 	MimetypeUnknown                  = consts.MimetypeUnknown
-	Tag                              = consts.Tag
+)
+
+const (
+	InvalidTime = consts.InvalidTime
 )

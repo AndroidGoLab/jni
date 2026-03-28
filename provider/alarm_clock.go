@@ -32,7 +32,7 @@ func NewAlarmClock(vm *jni.VM) (*AlarmClock, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlarmClock)), midAlarmClockInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlarmClock)), midAlarmClockCtor)
 		if err != nil {
 			return err
 		}

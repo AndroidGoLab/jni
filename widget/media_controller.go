@@ -33,7 +33,7 @@ func NewMediaController(vm *jni.VM, arg0 *jni.Object) (*MediaController, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaController)), midMediaControllerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaController)), midMediaControllerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

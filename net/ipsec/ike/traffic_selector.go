@@ -33,7 +33,7 @@ func NewTrafficSelector(vm *jni.VM, arg0 int32, arg1 int32, arg2 *jni.Object, ar
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrafficSelector)), midTrafficSelectorInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTrafficSelector)), midTrafficSelectorCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

@@ -23,6 +23,38 @@ type EncoderProfiles struct {
 	Obj *jni.GlobalRef
 }
 
+// GetAudioProfiles calls android.media.EncoderProfiles.getAudioProfiles.
+func (m *EncoderProfiles) GetAudioProfiles() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEncoderProfilesGetAudioProfiles == nil {
+			callErr = fmt.Errorf("android.media.EncoderProfiles.getAudioProfiles is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEncoderProfilesGetAudioProfiles,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDefaultDurationSeconds calls android.media.EncoderProfiles.getDefaultDurationSeconds.
 func (m *EncoderProfiles) GetDefaultDurationSeconds() (int32, error) {
 	var result int32
@@ -67,6 +99,38 @@ func (m *EncoderProfiles) GetRecommendedFileFormat() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVideoProfiles calls android.media.EncoderProfiles.getVideoProfiles.
+func (m *EncoderProfiles) GetVideoProfiles() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midEncoderProfilesGetVideoProfiles == nil {
+			callErr = fmt.Errorf("android.media.EncoderProfiles.getVideoProfiles is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midEncoderProfilesGetVideoProfiles,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

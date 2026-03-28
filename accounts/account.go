@@ -33,7 +33,7 @@ func NewAccount(vm *jni.VM, arg0 *jni.Object) (*Account, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccount)), midAccountInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccount)), midAccountCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

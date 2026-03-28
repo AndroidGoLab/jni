@@ -38,7 +38,7 @@ func NewRuntimeColorFilter(vm *jni.VM, arg0 string) (*RuntimeColorFilter, error)
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeColorFilter)), midRuntimeColorFilterInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRuntimeColorFilter)), midRuntimeColorFilterCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

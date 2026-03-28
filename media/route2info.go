@@ -128,6 +128,38 @@ func (m *Route2Info) GetConnectionState() (int32, error) {
 	return result, callErr
 }
 
+// GetDeduplicationIds calls android.media.MediaRoute2Info.getDeduplicationIds.
+func (m *Route2Info) GetDeduplicationIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoute2InfoGetDeduplicationIds == nil {
+			callErr = fmt.Errorf("android.media.MediaRoute2Info.getDeduplicationIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoute2InfoGetDeduplicationIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetDescription calls android.media.MediaRoute2Info.getDescription.
 func (m *Route2Info) GetDescription() (*jni.Object, error) {
 	var result *jni.Object
@@ -176,6 +208,38 @@ func (m *Route2Info) GetExtras() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRoute2InfoGetExtras,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFeatures calls android.media.MediaRoute2Info.getFeatures.
+func (m *Route2Info) GetFeatures() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRoute2InfoGetFeatures == nil {
+			callErr = fmt.Errorf("android.media.MediaRoute2Info.getFeatures is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRoute2InfoGetFeatures,
 		)
 		if callErr != nil {
 			return callErr

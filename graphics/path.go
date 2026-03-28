@@ -32,7 +32,7 @@ func NewPath(vm *jni.VM) (*Path, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPath)), midPathInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPath)), midPathCtor)
 		if err != nil {
 			return err
 		}

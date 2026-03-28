@@ -28,6 +28,7 @@ var (
 	midManagerGetCameraDeviceSetup              jni.MethodID
 	midManagerGetCameraExtensionCharacteristics jni.MethodID
 	midManagerGetCameraIdList                   jni.MethodID
+	midManagerGetConcurrentCameraIds            jni.MethodID
 	midManagerGetTorchStrengthLevel             jni.MethodID
 	midManagerIsCameraDeviceSetupSupported      jni.MethodID
 	midManagerOpenCamera                        jni.MethodID
@@ -99,6 +100,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midManagerGetCameraIdList, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCameraIdList", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetConcurrentCameraIds, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getConcurrentCameraIds", "()Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

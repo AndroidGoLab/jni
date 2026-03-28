@@ -33,7 +33,7 @@ func NewStats(vm *jni.VM, arg0 *jni.Object) (*Stats, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStats)), midStatsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStats)), midStatsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

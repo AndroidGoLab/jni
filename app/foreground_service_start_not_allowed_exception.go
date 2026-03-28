@@ -36,7 +36,7 @@ func NewForegroundServiceStartNotAllowedException(vm *jni.VM, arg0 string) (*For
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsForegroundServiceStartNotAllowedException)), midForegroundServiceStartNotAllowedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsForegroundServiceStartNotAllowedException)), midForegroundServiceStartNotAllowedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

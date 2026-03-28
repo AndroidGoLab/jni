@@ -38,7 +38,7 @@ func NewArchivedPackageInfo(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 *jni
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArchivedPackageInfo)), midArchivedPackageInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArchivedPackageInfo)), midArchivedPackageInfoCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}
@@ -73,6 +73,38 @@ func (m *ArchivedPackageInfo) GetDefaultToDeviceProtectedStorage() (string, erro
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetLauncherActivities calls android.content.pm.ArchivedPackageInfo.getLauncherActivities.
+func (m *ArchivedPackageInfo) GetLauncherActivities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midArchivedPackageInfoGetLauncherActivities == nil {
+			callErr = fmt.Errorf("android.content.pm.ArchivedPackageInfo.getLauncherActivities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midArchivedPackageInfoGetLauncherActivities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

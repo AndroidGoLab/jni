@@ -33,7 +33,7 @@ func NewListView(vm *jni.VM, arg0 *jni.Object) (*ListView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListView)), midListViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsListView)), midListViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

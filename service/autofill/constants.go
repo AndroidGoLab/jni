@@ -5,15 +5,30 @@ package autofill
 import "github.com/AndroidGoLab/jni/service/autofill/consts"
 
 const (
-	ExtraFillResponse = consts.ExtraFillResponse
-	ServiceInterface  = consts.ServiceInterface
-	ServiceMetaData   = consts.ServiceMetaData
-	TypeOther         = consts.TypeOther
-	TypePasswords     = consts.TypePasswords
-)
-
-const (
 	Creator                             = consts.Creator
+	ErrorNeedsUserAction                = consts.ErrorNeedsUserAction
+	ErrorOther                          = consts.ErrorOther
+	ErrorUnsupported                    = consts.ErrorUnsupported
+	FlagDelaySave                       = consts.FlagDelaySave
+	FlagDontSaveOnFinish                = consts.FlagDontSaveOnFinish
+	FlagSaveOnAllViewsInvisible         = consts.FlagSaveOnAllViewsInvisible
+	NegativeButtonStyleCancel           = consts.NegativeButtonStyleCancel
+	NegativeButtonStyleNever            = consts.NegativeButtonStyleNever
+	NegativeButtonStyleReject           = consts.NegativeButtonStyleReject
+	PositiveButtonStyleContinue         = consts.PositiveButtonStyleContinue
+	PositiveButtonStyleSave             = consts.PositiveButtonStyleSave
+	SaveDataTypeAddress                 = consts.SaveDataTypeAddress
+	SaveDataTypeCreditCard              = consts.SaveDataTypeCreditCard
+	SaveDataTypeDebitCard               = consts.SaveDataTypeDebitCard
+	SaveDataTypeEmailAddress            = consts.SaveDataTypeEmailAddress
+	SaveDataTypeGeneric                 = consts.SaveDataTypeGeneric
+	SaveDataTypeGenericCard             = consts.SaveDataTypeGenericCard
+	SaveDataTypePassword                = consts.SaveDataTypePassword
+	SaveDataTypePaymentCard             = consts.SaveDataTypePaymentCard
+	SaveDataTypeUsername                = consts.SaveDataTypeUsername
+	FlagDelayFill                       = consts.FlagDelayFill
+	FlagDisableActivityOnly             = consts.FlagDisableActivityOnly
+	FlagTrackContextCommited            = consts.FlagTrackContextCommited
 	FlagCompatibilityModeRequest        = consts.FlagCompatibilityModeRequest
 	FlagManualRequest                   = consts.FlagManualRequest
 	FlagSupportsFillDialog              = consts.FlagSupportsFillDialog
@@ -37,27 +52,12 @@ const (
 	UiTypeInline                        = consts.UiTypeInline
 	UiTypeMenu                          = consts.UiTypeMenu
 	UiTypeUnknown                       = consts.UiTypeUnknown
-	FlagDelayFill                       = consts.FlagDelayFill
-	FlagDisableActivityOnly             = consts.FlagDisableActivityOnly
-	FlagTrackContextCommited            = consts.FlagTrackContextCommited
-	FlagDelaySave                       = consts.FlagDelaySave
-	FlagDontSaveOnFinish                = consts.FlagDontSaveOnFinish
-	FlagSaveOnAllViewsInvisible         = consts.FlagSaveOnAllViewsInvisible
-	NegativeButtonStyleCancel           = consts.NegativeButtonStyleCancel
-	NegativeButtonStyleNever            = consts.NegativeButtonStyleNever
-	NegativeButtonStyleReject           = consts.NegativeButtonStyleReject
-	PositiveButtonStyleContinue         = consts.PositiveButtonStyleContinue
-	PositiveButtonStyleSave             = consts.PositiveButtonStyleSave
-	SaveDataTypeAddress                 = consts.SaveDataTypeAddress
-	SaveDataTypeCreditCard              = consts.SaveDataTypeCreditCard
-	SaveDataTypeDebitCard               = consts.SaveDataTypeDebitCard
-	SaveDataTypeEmailAddress            = consts.SaveDataTypeEmailAddress
-	SaveDataTypeGeneric                 = consts.SaveDataTypeGeneric
-	SaveDataTypeGenericCard             = consts.SaveDataTypeGenericCard
-	SaveDataTypePassword                = consts.SaveDataTypePassword
-	SaveDataTypePaymentCard             = consts.SaveDataTypePaymentCard
-	SaveDataTypeUsername                = consts.SaveDataTypeUsername
-	ErrorNeedsUserAction                = consts.ErrorNeedsUserAction
-	ErrorOther                          = consts.ErrorOther
-	ErrorUnsupported                    = consts.ErrorUnsupported
+)
+
+const (
+	ExtraFillResponse = consts.ExtraFillResponse
+	ServiceInterface  = consts.ServiceInterface
+	ServiceMetaData   = consts.ServiceMetaData
+	TypeOther         = consts.TypeOther
+	TypePasswords     = consts.TypePasswords
 )

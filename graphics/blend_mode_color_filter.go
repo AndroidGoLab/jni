@@ -33,7 +33,7 @@ func NewBlendModeColorFilter(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*BlendMo
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBlendModeColorFilter)), midBlendModeColorFilterInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBlendModeColorFilter)), midBlendModeColorFilterCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewGraphemeClusterSegmentFinder(vm *jni.VM, arg0 string, arg1 *jni.Object) 
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGraphemeClusterSegmentFinder)), midGraphemeClusterSegmentFinderInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGraphemeClusterSegmentFinder)), midGraphemeClusterSegmentFinderCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

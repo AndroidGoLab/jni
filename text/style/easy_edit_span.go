@@ -32,7 +32,7 @@ func NewEasyEditSpan(vm *jni.VM) (*EasyEditSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), midEasyEditSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEasyEditSpan)), midEasyEditSpanCtor)
 		if err != nil {
 			return err
 		}

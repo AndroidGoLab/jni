@@ -33,7 +33,7 @@ func NewDialerFilter(vm *jni.VM, arg0 *jni.Object) (*DialerFilter, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDialerFilter)), midDialerFilterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDialerFilter)), midDialerFilterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

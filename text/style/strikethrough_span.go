@@ -32,7 +32,7 @@ func NewStrikethroughSpan(vm *jni.VM) (*StrikethroughSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), midStrikethroughSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStrikethroughSpan)), midStrikethroughSpanCtor)
 		if err != nil {
 			return err
 		}

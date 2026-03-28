@@ -5,9 +5,23 @@
 package: sdkprovider
 go_import: github.com/AndroidGoLab/jni/app/sdksandbox/sdkprovider
 classes:
+    - java_class: android.app.sdksandbox.sdkprovider.SdkSandboxActivityHandler
+      go_type: SdkSandboxActivityHandler
+      methods:
+        - java_method: onActivityCreated
+          go_name: OnActivityCreated
+          params:
+            - java_type: android.app.Activity
+              go_name: arg0
+          returns: void
+          error: true
     - java_class: android.app.sdksandbox.sdkprovider.SdkSandboxController
       go_type: SdkSandboxController
       methods:
+        - java_method: getAppOwnedSdkSandboxInterfaces
+          go_name: GetAppOwnedSdkSandboxInterfaces
+          returns: java.util.List<android.app.sdksandbox.AppOwnedSdkSandboxInterface>
+          error: true
         - java_method: getClientPackageName
           go_name: GetClientPackageName
           returns: String
@@ -15,6 +29,10 @@ classes:
         - java_method: getClientSharedPreferences
           go_name: GetClientSharedPreferences
           returns: android.content.SharedPreferences
+          error: true
+        - java_method: getSandboxedSdks
+          go_name: GetSandboxedSdks
+          returns: java.util.List<android.app.sdksandbox.SandboxedSdk>
           error: true
         - java_method: registerSdkSandboxClientImportanceListener
           go_name: RegisterSdkSandboxClientImportanceListener
@@ -39,16 +57,6 @@ classes:
           go_name: OnForegroundImportanceChanged
           params:
             - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.app.sdksandbox.sdkprovider.SdkSandboxActivityHandler
-      go_type: SdkSandboxActivityHandler
-      methods:
-        - java_method: onActivityCreated
-          go_name: OnActivityCreated
-          params:
-            - java_type: android.app.Activity
               go_name: arg0
           returns: void
           error: true

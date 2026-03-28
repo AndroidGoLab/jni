@@ -38,7 +38,7 @@ func NewNotProvisionedException(vm *jni.VM, arg0 string) (*NotProvisionedExcepti
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNotProvisionedException)), midNotProvisionedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNotProvisionedException)), midNotProvisionedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

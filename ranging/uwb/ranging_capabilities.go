@@ -80,6 +80,198 @@ func (m *RangingCapabilities) GetMinimumRangingInterval() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetSupportedChannels calls android.ranging.uwb.UwbRangingCapabilities.getSupportedChannels.
+func (m *RangingCapabilities) GetSupportedChannels() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingCapabilitiesGetSupportedChannels == nil {
+			callErr = fmt.Errorf("android.ranging.uwb.UwbRangingCapabilities.getSupportedChannels is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingCapabilitiesGetSupportedChannels,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedConfigIds calls android.ranging.uwb.UwbRangingCapabilities.getSupportedConfigIds.
+func (m *RangingCapabilities) GetSupportedConfigIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingCapabilitiesGetSupportedConfigIds == nil {
+			callErr = fmt.Errorf("android.ranging.uwb.UwbRangingCapabilities.getSupportedConfigIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingCapabilitiesGetSupportedConfigIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedNotificationConfigurations calls android.ranging.uwb.UwbRangingCapabilities.getSupportedNotificationConfigurations.
+func (m *RangingCapabilities) GetSupportedNotificationConfigurations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingCapabilitiesGetSupportedNotificationConfigurations == nil {
+			callErr = fmt.Errorf("android.ranging.uwb.UwbRangingCapabilities.getSupportedNotificationConfigurations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingCapabilitiesGetSupportedNotificationConfigurations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPreambleIndexes calls android.ranging.uwb.UwbRangingCapabilities.getSupportedPreambleIndexes.
+func (m *RangingCapabilities) GetSupportedPreambleIndexes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingCapabilitiesGetSupportedPreambleIndexes == nil {
+			callErr = fmt.Errorf("android.ranging.uwb.UwbRangingCapabilities.getSupportedPreambleIndexes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingCapabilitiesGetSupportedPreambleIndexes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedRangingUpdateRates calls android.ranging.uwb.UwbRangingCapabilities.getSupportedRangingUpdateRates.
+func (m *RangingCapabilities) GetSupportedRangingUpdateRates() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingCapabilitiesGetSupportedRangingUpdateRates == nil {
+			callErr = fmt.Errorf("android.ranging.uwb.UwbRangingCapabilities.getSupportedRangingUpdateRates is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingCapabilitiesGetSupportedRangingUpdateRates,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedSlotDurations calls android.ranging.uwb.UwbRangingCapabilities.getSupportedSlotDurations.
+func (m *RangingCapabilities) GetSupportedSlotDurations() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRangingCapabilitiesGetSupportedSlotDurations == nil {
+			callErr = fmt.Errorf("android.ranging.uwb.UwbRangingCapabilities.getSupportedSlotDurations is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRangingCapabilitiesGetSupportedSlotDurations,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsAzimuthalAngleSupported calls android.ranging.uwb.UwbRangingCapabilities.isAzimuthalAngleSupported.
 func (m *RangingCapabilities) IsAzimuthalAngleSupported() (bool, error) {
 	var result bool

@@ -5,6 +5,12 @@ package res
 import "github.com/AndroidGoLab/jni/content/res/consts"
 
 const (
+	Creator                          = consts.Creator
+	ObbOverlay                       = consts.ObbOverlay
+	AccessBuffer                     = consts.AccessBuffer
+	AccessRandom                     = consts.AccessRandom
+	AccessStreaming                  = consts.AccessStreaming
+	AccessUnknown                    = consts.AccessUnknown
 	ColorModeHdrMask                 = consts.ColorModeHdrMask
 	ColorModeHdrNo                   = consts.ColorModeHdrNo
 	ColorModeHdrShift                = consts.ColorModeHdrShift
@@ -15,7 +21,6 @@ const (
 	ColorModeWideColorGamutNo        = consts.ColorModeWideColorGamutNo
 	ColorModeWideColorGamutUndefined = consts.ColorModeWideColorGamutUndefined
 	ColorModeWideColorGamutYes       = consts.ColorModeWideColorGamutYes
-	Creator                          = consts.Creator
 	DensityDpiUndefined              = consts.DensityDpiUndefined
 	FontWeightAdjustmentUndefined    = consts.FontWeightAdjustmentUndefined
 	GrammaticalGenderFeminine        = consts.GrammaticalGenderFeminine
@@ -85,11 +90,6 @@ const (
 	UiModeTypeUndefined              = consts.UiModeTypeUndefined
 	UiModeTypeVrHeadset              = consts.UiModeTypeVrHeadset
 	UiModeTypeWatch                  = consts.UiModeTypeWatch
-	ObbOverlay                       = consts.ObbOverlay
-	AccessBuffer                     = consts.AccessBuffer
-	AccessRandom                     = consts.AccessRandom
-	AccessStreaming                  = consts.AccessStreaming
-	AccessUnknown                    = consts.AccessUnknown
 )
 
 const (

@@ -33,7 +33,7 @@ func NewMultiResolutionImageReader(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), midMultiResolutionImageReaderInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMultiResolutionImageReader)), midMultiResolutionImageReaderCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

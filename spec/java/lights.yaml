@@ -7,6 +7,15 @@ go_import: github.com/AndroidGoLab/jni/hardware/lights
 classes:
     - java_class: android.hardware.lights.LightsRequest
       go_type: Request
+      methods:
+        - java_method: getLightStates
+          go_name: GetLightStates
+          returns: java.util.List<android.hardware.lights.LightState>
+          error: true
+        - java_method: getLights
+          go_name: GetLights
+          returns: java.util.List<java.lang.Integer>
+          error: true
     - java_class: android.hardware.lights.LightsRequest$Builder
       go_type: RequestBuilder
       methods:
@@ -143,6 +152,10 @@ classes:
             - java_type: android.hardware.lights.Light
               go_name: arg0
           returns: android.hardware.lights.LightState
+          error: true
+        - java_method: getLights
+          go_name: GetLights
+          returns: java.util.List<android.hardware.lights.Light>
           error: true
         - java_method: openSession
           go_name: OpenSession

@@ -33,7 +33,7 @@ func NewBackgroundColorSpan(vm *jni.VM, arg0 *jni.Object) (*BackgroundColorSpan,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), midBackgroundColorSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackgroundColorSpan)), midBackgroundColorSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

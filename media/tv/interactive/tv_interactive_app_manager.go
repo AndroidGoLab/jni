@@ -69,6 +69,70 @@ func (m *TvInteractiveAppManager) Close() {
 	}
 }
 
+// GetAppLinkInfoList calls android.media.tv.interactive.TvInteractiveAppManager.getAppLinkInfoList.
+func (m *TvInteractiveAppManager) GetAppLinkInfoList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTvInteractiveAppManagerGetAppLinkInfoList == nil {
+			callErr = fmt.Errorf("android.media.tv.interactive.TvInteractiveAppManager.getAppLinkInfoList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTvInteractiveAppManagerGetAppLinkInfoList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTvInteractiveAppServiceList calls android.media.tv.interactive.TvInteractiveAppManager.getTvInteractiveAppServiceList.
+func (m *TvInteractiveAppManager) GetTvInteractiveAppServiceList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midTvInteractiveAppManagerGetTvInteractiveAppServiceList == nil {
+			callErr = fmt.Errorf("android.media.tv.interactive.TvInteractiveAppManager.getTvInteractiveAppServiceList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midTvInteractiveAppManagerGetTvInteractiveAppServiceList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // RegisterAppLinkInfo calls android.media.tv.interactive.TvInteractiveAppManager.registerAppLinkInfo.
 func (m *TvInteractiveAppManager) RegisterAppLinkInfo(arg0 string, arg1 *jni.Object) error {
 

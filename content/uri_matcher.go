@@ -33,7 +33,7 @@ func NewUriMatcher(vm *jni.VM, arg0 int32) (*UriMatcher, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUriMatcher)), midUriMatcherInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUriMatcher)), midUriMatcherCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

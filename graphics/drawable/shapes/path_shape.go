@@ -33,7 +33,7 @@ func NewPathShape(vm *jni.VM, arg0 *jni.Object, arg1 float32, arg2 float32) (*Pa
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathShape)), midPathShapeInit, jni.ObjectValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPathShape)), midPathShapeCtor, jni.ObjectValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2))
 		if err != nil {
 			return err
 		}

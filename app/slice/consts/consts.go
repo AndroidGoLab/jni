@@ -7,17 +7,6 @@ const (
 )
 
 const (
-	FormatAction              string = "action"
-	FormatBundle              string = "bundle"
-	FormatImage               string = "image"
-	FormatInt                 string = "int"
-	FormatLong                string = "long"
-	FormatRemoteInput         string = "input"
-	FormatSlice               string = "slice"
-	FormatText                string = "text"
-	CategorySlice             string = "android.app.slice.category.SLICE"
-	SliceMetadataKey          string = "android.metadata.SLICE_URI"
-	SliceType                 string = "vnd.android.slice"
 	ExtraRangeValue           string = "android.app.slice.extra.RANGE_VALUE"
 	ExtraToggleState          string = "android.app.slice.extra.TOGGLE_STATE"
 	HintActions               string = "actions"
@@ -48,4 +37,15 @@ const (
 	SubtypeSource             string = "source"
 	SubtypeToggle             string = "toggle"
 	SubtypeValue              string = "value"
+	SliceType                 string = "vnd.android.slice"
+	FormatAction              string = "action"
+	FormatBundle              string = "bundle"
+	FormatImage               string = "image"
+	FormatInt                 string = "int"
+	FormatLong                string = "long"
+	FormatRemoteInput         string = "input"
+	FormatSlice               string = "slice"
+	FormatText                string = "text"
+	CategorySlice             string = "android.app.slice.category.SLICE"
+	SliceMetadataKey          string = "android.metadata.SLICE_URI"
 )

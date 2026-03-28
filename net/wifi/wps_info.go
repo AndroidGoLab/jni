@@ -32,7 +32,7 @@ func NewWpsInfo(vm *jni.VM) (*WpsInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWpsInfo)), midWpsInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWpsInfo)), midWpsInfoCtor)
 		if err != nil {
 			return err
 		}

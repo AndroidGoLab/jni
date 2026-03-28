@@ -10,10 +10,8 @@ const (
 	SourceAudioVideo                       = consts.SourceAudioVideo
 	SourceNone                             = consts.SourceNone
 	SourceVideo                            = consts.SourceVideo
-	AmbientBacklightEventDisabled          = consts.AmbientBacklightEventDisabled
-	AmbientBacklightEventEnabled           = consts.AmbientBacklightEventEnabled
-	AmbientBacklightEventInterrupted       = consts.AmbientBacklightEventInterrupted
-	AmbientBacklightEventMetadataAvailable = consts.AmbientBacklightEventMetadataAvailable
+	AlgorithmNone                          = consts.AlgorithmNone
+	AlgorithmRle                           = consts.AlgorithmRle
 	ErrorDuplicate                         = consts.ErrorDuplicate
 	ErrorInvalidArgument                   = consts.ErrorInvalidArgument
 	ErrorNotAllowlisted                    = consts.ErrorNotAllowlisted
@@ -21,16 +19,22 @@ const (
 	ErrorUnknown                           = consts.ErrorUnknown
 	TypeApplication                        = consts.TypeApplication
 	TypeSystem                             = consts.TypeSystem
+	AmbientBacklightEventDisabled          = consts.AmbientBacklightEventDisabled
+	AmbientBacklightEventEnabled           = consts.AmbientBacklightEventEnabled
+	AmbientBacklightEventInterrupted       = consts.AmbientBacklightEventInterrupted
+	AmbientBacklightEventMetadataAvailable = consts.AmbientBacklightEventMetadataAvailable
 	TypeDouble                             = consts.TypeDouble
 	TypeInt                                = consts.TypeInt
 	TypeLong                               = consts.TypeLong
 	TypeNone                               = consts.TypeNone
 	TypeString                             = consts.TypeString
-	AlgorithmNone                          = consts.AlgorithmNone
-	AlgorithmRle                           = consts.AlgorithmRle
 )
 
 const (
+	CapabilityDefault                                = consts.CapabilityDefault
+	CapabilityEnum                                   = consts.CapabilityEnum
+	CapabilityMax                                    = consts.CapabilityMax
+	CapabilityMin                                    = consts.CapabilityMin
 	LevelHigh                                        = consts.LevelHigh
 	LevelLow                                         = consts.LevelLow
 	LevelMedium                                      = consts.LevelMedium
@@ -85,8 +89,4 @@ const (
 	ParameterSpeakersDelayMillis                     = consts.ParameterSpeakersDelayMillis
 	ParameterSurroundSound                           = consts.ParameterSurroundSound
 	ParameterTreble                                  = consts.ParameterTreble
-	CapabilityDefault                                = consts.CapabilityDefault
-	CapabilityEnum                                   = consts.CapabilityEnum
-	CapabilityMax                                    = consts.CapabilityMax
-	CapabilityMin                                    = consts.CapabilityMin
 )

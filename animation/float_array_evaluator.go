@@ -32,7 +32,7 @@ func NewFloatArrayEvaluator(vm *jni.VM) (*FloatArrayEvaluator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), midFloatArrayEvaluatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloatArrayEvaluator)), midFloatArrayEvaluatorCtor)
 		if err != nil {
 			return err
 		}

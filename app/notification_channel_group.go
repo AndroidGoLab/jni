@@ -42,7 +42,7 @@ func NewNotificationChannelGroup(vm *jni.VM, arg0 string, arg1 string) (*Notific
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNotificationChannelGroup)), midNotificationChannelGroupInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNotificationChannelGroup)), midNotificationChannelGroupCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}
@@ -135,6 +135,38 @@ func (m *NotificationChannelGroup) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetChannels calls android.app.NotificationChannelGroup.getChannels.
+func (m *NotificationChannelGroup) GetChannels() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNotificationChannelGroupGetChannels == nil {
+			callErr = fmt.Errorf("android.app.NotificationChannelGroup.getChannels is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNotificationChannelGroupGetChannels,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

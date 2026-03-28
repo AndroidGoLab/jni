@@ -33,7 +33,7 @@ func NewStructMsghdr(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *jni.O
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructMsghdr)), midStructMsghdrInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStructMsghdr)), midStructMsghdrCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

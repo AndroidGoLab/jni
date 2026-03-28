@@ -32,7 +32,7 @@ func NewBidi(vm *jni.VM) (*Bidi, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBidi)), midBidiInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBidi)), midBidiCtor)
 		if err != nil {
 			return err
 		}

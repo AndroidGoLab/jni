@@ -33,7 +33,7 @@ func NewWifiP2pServiceRequest(vm *jni.VM, arg0 *jni.Object) (*WifiP2pServiceRequ
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pServiceRequest)), midWifiP2pServiceRequestInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pServiceRequest)), midWifiP2pServiceRequestCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

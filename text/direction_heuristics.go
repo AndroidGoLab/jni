@@ -32,7 +32,7 @@ func NewDirectionHeuristics(vm *jni.VM) (*DirectionHeuristics, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDirectionHeuristics)), midDirectionHeuristicsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDirectionHeuristics)), midDirectionHeuristicsCtor)
 		if err != nil {
 			return err
 		}

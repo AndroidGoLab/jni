@@ -32,7 +32,7 @@ func NewAndroidException(vm *jni.VM) (*AndroidException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAndroidException)), midAndroidExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAndroidException)), midAndroidExceptionCtor)
 		if err != nil {
 			return err
 		}

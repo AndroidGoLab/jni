@@ -33,7 +33,7 @@ func NewChangeBounds(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ChangeBou
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangeBounds)), midChangeBoundsInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsChangeBounds)), midChangeBoundsCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

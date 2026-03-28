@@ -32,7 +32,7 @@ func NewWebChromeClient(vm *jni.VM) (*WebChromeClient, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), midWebChromeClientInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebChromeClient)), midWebChromeClientCtor)
 		if err != nil {
 			return err
 		}

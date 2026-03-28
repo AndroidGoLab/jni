@@ -33,7 +33,7 @@ func NewAnalogClock(vm *jni.VM, arg0 *jni.Object) (*AnalogClock, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnalogClock)), midAnalogClockInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnalogClock)), midAnalogClockCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

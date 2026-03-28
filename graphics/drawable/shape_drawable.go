@@ -32,7 +32,7 @@ func NewShapeDrawable(vm *jni.VM) (*ShapeDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), midShapeDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShapeDrawable)), midShapeDrawableCtor)
 		if err != nil {
 			return err
 		}

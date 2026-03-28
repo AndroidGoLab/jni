@@ -32,7 +32,7 @@ func NewWindowInfo(vm *jni.VM) (*WindowInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInfo)), midWindowInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInfo)), midWindowInfoCtor)
 		if err != nil {
 			return err
 		}

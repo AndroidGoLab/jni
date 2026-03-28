@@ -33,7 +33,7 @@ func NewTabHost(vm *jni.VM, arg0 *jni.Object) (*TabHost, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabHost)), midTabHostInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTabHost)), midTabHostCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

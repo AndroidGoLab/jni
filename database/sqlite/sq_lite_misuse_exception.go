@@ -32,7 +32,7 @@ func NewSQLiteMisuseException(vm *jni.VM) (*SQLiteMisuseException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteMisuseException)), midSQLiteMisuseExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteMisuseException)), midSQLiteMisuseExceptionCtor)
 		if err != nil {
 			return err
 		}

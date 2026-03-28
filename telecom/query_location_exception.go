@@ -38,7 +38,7 @@ func NewQueryLocationException(vm *jni.VM, arg0 string) (*QueryLocationException
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), midQueryLocationExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), midQueryLocationExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

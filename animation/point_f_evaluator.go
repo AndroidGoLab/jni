@@ -32,7 +32,7 @@ func NewPointFEvaluator(vm *jni.VM) (*PointFEvaluator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPointFEvaluator)), midPointFEvaluatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPointFEvaluator)), midPointFEvaluatorCtor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewMutableDouble(vm *jni.VM, arg0 float64) (*MutableDouble, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableDouble)), midMutableDoubleInit, jni.DoubleValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableDouble)), midMutableDoubleCtor, jni.DoubleValue(arg0))
 		if err != nil {
 			return err
 		}

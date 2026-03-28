@@ -32,7 +32,7 @@ func NewHandler(vm *jni.VM) (*Handler, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHandler)), midHandlerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHandler)), midHandlerCtor)
 		if err != nil {
 			return err
 		}

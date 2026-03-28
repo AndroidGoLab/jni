@@ -33,7 +33,7 @@ func NewGattCharacteristic(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 int32)
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), midGattCharacteristicInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGattCharacteristic)), midGattCharacteristicCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}
@@ -116,6 +116,38 @@ func (m *GattCharacteristic) GetDescriptor(arg0 *jni.Object) (*jni.Object, error
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midGattCharacteristicGetDescriptor, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDescriptors calls android.bluetooth.BluetoothGattCharacteristic.getDescriptors.
+func (m *GattCharacteristic) GetDescriptors() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGattCharacteristicGetDescriptors == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothGattCharacteristic.getDescriptors is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGattCharacteristicGetDescriptors,
 		)
 		if callErr != nil {
 			return callErr

@@ -33,7 +33,7 @@ func NewBackEvent(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, arg3 int
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackEvent)), midBackEventInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackEvent)), midBackEventCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

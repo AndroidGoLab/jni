@@ -33,7 +33,7 @@ func NewTextSnapshot(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 int32, arg3 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), midTextSnapshotInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextSnapshot)), midTextSnapshotCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

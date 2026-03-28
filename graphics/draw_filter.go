@@ -32,7 +32,7 @@ func NewDrawFilter(vm *jni.VM) (*DrawFilter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrawFilter)), midDrawFilterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrawFilter)), midDrawFilterCtor)
 		if err != nil {
 			return err
 		}

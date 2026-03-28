@@ -39,7 +39,7 @@ func NewNinePatchDrawable(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2 *
 		}
 		defer env.DeleteLocalRef(&jArg4.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNinePatchDrawable)), midNinePatchDrawableInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(&jArg4.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNinePatchDrawable)), midNinePatchDrawableCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(&jArg4.Object))
 		if err != nil {
 			return err
 		}

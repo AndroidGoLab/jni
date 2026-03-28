@@ -32,7 +32,7 @@ func NewNodeInfo(vm *jni.VM) (*NodeInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNodeInfo)), midNodeInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNodeInfo)), midNodeInfoCtor)
 		if err != nil {
 			return err
 		}
@@ -263,6 +263,82 @@ func (m *NodeInfo) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// FindAccessibilityNodeInfosByText calls android.view.accessibility.AccessibilityNodeInfo.findAccessibilityNodeInfosByText.
+func (m *NodeInfo) FindAccessibilityNodeInfosByText(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoFindAccessibilityNodeInfosByText == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo.findAccessibilityNodeInfosByText is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoFindAccessibilityNodeInfosByText, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// FindAccessibilityNodeInfosByViewId calls android.view.accessibility.AccessibilityNodeInfo.findAccessibilityNodeInfosByViewId.
+func (m *NodeInfo) FindAccessibilityNodeInfosByViewId(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoFindAccessibilityNodeInfosByViewId == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo.findAccessibilityNodeInfosByViewId is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoFindAccessibilityNodeInfosByViewId, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // FindFocus calls android.view.accessibility.AccessibilityNodeInfo.findFocus.
 func (m *NodeInfo) FindFocus(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -329,6 +405,38 @@ func (m *NodeInfo) FocusSearch(arg0 int32) (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetActionList calls android.view.accessibility.AccessibilityNodeInfo.getActionList.
+func (m *NodeInfo) GetActionList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoGetActionList == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo.getActionList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoGetActionList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetActions calls android.view.accessibility.AccessibilityNodeInfo.getActions.
 func (m *NodeInfo) GetActions() (int32, error) {
 	var result int32
@@ -348,6 +456,38 @@ func (m *NodeInfo) GetActions() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableExtraData calls android.view.accessibility.AccessibilityNodeInfo.getAvailableExtraData.
+func (m *NodeInfo) GetAvailableExtraData() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoGetAvailableExtraData == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo.getAvailableExtraData is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoGetAvailableExtraData,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -950,6 +1090,38 @@ func (m *NodeInfo) GetLabeledBy() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midNodeInfoGetLabeledBy,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetLabeledByList calls android.view.accessibility.AccessibilityNodeInfo.getLabeledByList.
+func (m *NodeInfo) GetLabeledByList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNodeInfoGetLabeledByList == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityNodeInfo.getLabeledByList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNodeInfoGetLabeledByList,
 		)
 		if callErr != nil {
 			return callErr

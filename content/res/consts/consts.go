@@ -3,6 +3,12 @@
 package consts
 
 const (
+	Creator                          int = 0
+	ObbOverlay                       int = 1
+	AccessBuffer                     int = 3
+	AccessRandom                     int = 1
+	AccessStreaming                  int = 2
+	AccessUnknown                    int = 0
 	ColorModeHdrMask                 int = 12
 	ColorModeHdrNo                   int = 4
 	ColorModeHdrShift                int = 2
@@ -13,7 +19,6 @@ const (
 	ColorModeWideColorGamutNo        int = 1
 	ColorModeWideColorGamutUndefined int = 0
 	ColorModeWideColorGamutYes       int = 2
-	Creator                          int = 0
 	DensityDpiUndefined              int = 0
 	FontWeightAdjustmentUndefined    int = 2147483647
 	GrammaticalGenderFeminine        int = 2
@@ -83,11 +88,6 @@ const (
 	UiModeTypeUndefined              int = 0
 	UiModeTypeVrHeadset              int = 7
 	UiModeTypeWatch                  int = 6
-	ObbOverlay                       int = 1
-	AccessBuffer                     int = 3
-	AccessRandom                     int = 1
-	AccessStreaming                  int = 2
-	AccessUnknown                    int = 0
 )
 
 const (

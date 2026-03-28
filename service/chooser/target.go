@@ -38,7 +38,7 @@ func NewTarget(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 float32, arg3 *jn
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTarget)), midTargetInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.FloatValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTarget)), midTargetCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.FloatValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewPageMatchBounds(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*PageMatchBou
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPageMatchBounds)), midPageMatchBoundsInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPageMatchBounds)), midPageMatchBoundsCtor, jni.ObjectValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -65,6 +65,38 @@ func (m *PageMatchBounds) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBounds calls android.graphics.pdf.models.PageMatchBounds.getBounds.
+func (m *PageMatchBounds) GetBounds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPageMatchBoundsGetBounds == nil {
+			callErr = fmt.Errorf("android.graphics.pdf.models.PageMatchBounds.getBounds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPageMatchBoundsGetBounds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

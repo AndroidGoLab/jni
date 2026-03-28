@@ -32,7 +32,7 @@ func NewSQLiteBlobTooBigException(vm *jni.VM) (*SQLiteBlobTooBigException, error
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteBlobTooBigException)), midSQLiteBlobTooBigExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteBlobTooBigException)), midSQLiteBlobTooBigExceptionCtor)
 		if err != nil {
 			return err
 		}

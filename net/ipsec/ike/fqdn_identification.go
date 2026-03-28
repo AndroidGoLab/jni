@@ -38,7 +38,7 @@ func NewFqdnIdentification(vm *jni.VM, arg0 string) (*FqdnIdentification, error)
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFqdnIdentification)), midFqdnIdentificationInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFqdnIdentification)), midFqdnIdentificationCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewSpinner(vm *jni.VM, arg0 *jni.Object) (*Spinner, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpinner)), midSpinnerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSpinner)), midSpinnerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

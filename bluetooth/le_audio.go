@@ -45,6 +45,38 @@ func (m *LeAudio) Close() error {
 	return callErr
 }
 
+// GetConnectedDevices calls android.bluetooth.BluetoothLeAudio.getConnectedDevices.
+func (m *LeAudio) GetConnectedDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeAudioGetConnectedDevices == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothLeAudio.getConnectedDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeAudioGetConnectedDevices,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetConnectedGroupLeadDevice calls android.bluetooth.BluetoothLeAudio.getConnectedGroupLeadDevice.
 func (m *LeAudio) GetConnectedGroupLeadDevice(arg0 int32) (*jni.Object, error) {
 	var result *jni.Object
@@ -98,6 +130,39 @@ func (m *LeAudio) GetConnectionState(arg0 *jni.Object) (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetDevicesMatchingConnectionStates calls android.bluetooth.BluetoothLeAudio.getDevicesMatchingConnectionStates.
+func (m *LeAudio) GetDevicesMatchingConnectionStates(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midLeAudioGetDevicesMatchingConnectionStates == nil {
+			callErr = fmt.Errorf("android.bluetooth.BluetoothLeAudio.getDevicesMatchingConnectionStates is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midLeAudioGetDevicesMatchingConnectionStates, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -23,76 +23,164 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPhoneAccountSuggestion                      *jni.GlobalRef
-	midPhoneAccountSuggestionInit                  jni.MethodID
-	midPhoneAccountSuggestionDescribeContents      jni.MethodID
-	midPhoneAccountSuggestionEquals                jni.MethodID
-	midPhoneAccountSuggestionGetPhoneAccountHandle jni.MethodID
-	midPhoneAccountSuggestionGetReason             jni.MethodID
-	midPhoneAccountSuggestionHashCode              jni.MethodID
-	midPhoneAccountSuggestionShouldAutoSelect      jni.MethodID
-	midPhoneAccountSuggestionWriteToParcel         jni.MethodID
+	clsRemoteConference                             *jni.GlobalRef
+	midRemoteConferenceDisconnect                   jni.MethodID
+	midRemoteConferenceGetConferenceableConnections jni.MethodID
+	midRemoteConferenceGetConnectionCapabilities    jni.MethodID
+	midRemoteConferenceGetConnectionProperties      jni.MethodID
+	midRemoteConferenceGetConnections               jni.MethodID
+	midRemoteConferenceGetDisconnectCause           jni.MethodID
+	midRemoteConferenceGetExtras                    jni.MethodID
+	midRemoteConferenceGetState                     jni.MethodID
+	midRemoteConferenceHold                         jni.MethodID
+	midRemoteConferenceMerge                        jni.MethodID
+	midRemoteConferencePlayDtmfTone                 jni.MethodID
+	midRemoteConferenceRegisterCallback             jni.MethodID
+	midRemoteConferenceSeparate                     jni.MethodID
+	midRemoteConferenceSetCallAudioState            jni.MethodID
+	midRemoteConferenceStopDtmfTone                 jni.MethodID
+	midRemoteConferenceSwap                         jni.MethodID
+	midRemoteConferenceUnhold                       jni.MethodID
+	midRemoteConferenceUnregisterCallback           jni.MethodID
 
-	clsConference                                        *jni.GlobalRef
-	midConferenceAddConnection                           jni.MethodID
-	midConferenceDestroy                                 jni.MethodID
-	midConferenceGetCallAudioState                       jni.MethodID
-	midConferenceGetConnectionCapabilities               jni.MethodID
-	midConferenceGetConnectionProperties                 jni.MethodID
-	midConferenceGetConnectionStartElapsedRealtimeMillis jni.MethodID
-	midConferenceGetConnectionTime                       jni.MethodID
-	midConferenceGetCurrentCallEndpoint                  jni.MethodID
-	midConferenceGetDisconnectCause                      jni.MethodID
-	midConferenceGetExtras                               jni.MethodID
-	midConferenceGetPhoneAccountHandle                   jni.MethodID
-	midConferenceGetState                                jni.MethodID
-	midConferenceGetStatusHints                          jni.MethodID
-	midConferenceGetVideoProvider                        jni.MethodID
-	midConferenceGetVideoState                           jni.MethodID
-	midConferenceIsRingbackRequested                     jni.MethodID
-	midConferenceOnAnswer                                jni.MethodID
-	midConferenceOnCallAudioStateChanged                 jni.MethodID
-	midConferenceOnCallEndpointChanged                   jni.MethodID
-	midConferenceOnConnectionAdded                       jni.MethodID
-	midConferenceOnDisconnect                            jni.MethodID
-	midConferenceOnExtrasChanged                         jni.MethodID
-	midConferenceOnHold                                  jni.MethodID
-	midConferenceOnMerge0                                jni.MethodID
-	midConferenceOnMerge1_1                              jni.MethodID
-	midConferenceOnMuteStateChanged                      jni.MethodID
-	midConferenceOnPlayDtmfTone                          jni.MethodID
-	midConferenceOnReject                                jni.MethodID
-	midConferenceOnSeparate                              jni.MethodID
-	midConferenceOnStopDtmfTone                          jni.MethodID
-	midConferenceOnSwap                                  jni.MethodID
-	midConferenceOnUnhold                                jni.MethodID
-	midConferencePutExtras                               jni.MethodID
-	midConferenceRemoveConnection                        jni.MethodID
-	midConferenceRemoveExtras                            jni.MethodID
-	midConferenceSendConferenceEvent                     jni.MethodID
-	midConferenceSetActive                               jni.MethodID
-	midConferenceSetConnectionCapabilities               jni.MethodID
-	midConferenceSetConnectionProperties                 jni.MethodID
-	midConferenceSetConnectionStartElapsedRealTime       jni.MethodID
-	midConferenceSetConnectionStartElapsedRealtimeMillis jni.MethodID
-	midConferenceSetConnectionTime                       jni.MethodID
-	midConferenceSetDialing                              jni.MethodID
-	midConferenceSetDisconnected                         jni.MethodID
-	midConferenceSetExtras                               jni.MethodID
-	midConferenceSetOnHold                               jni.MethodID
-	midConferenceSetRingbackRequested                    jni.MethodID
-	midConferenceSetRinging                              jni.MethodID
-	midConferenceSetStatusHints                          jni.MethodID
-	midConferenceSetVideoProvider                        jni.MethodID
-	midConferenceSetVideoState                           jni.MethodID
-	midConferenceToString                                jni.MethodID
-	midConferenceCreateFailedConference                  jni.MethodID
+	clsRemoteConferenceCallback                                *jni.GlobalRef
+	midRemoteConferenceCallbackOnConnectionAdded               jni.MethodID
+	midRemoteConferenceCallbackOnConnectionCapabilitiesChanged jni.MethodID
+	midRemoteConferenceCallbackOnConnectionPropertiesChanged   jni.MethodID
+	midRemoteConferenceCallbackOnConnectionRemoved             jni.MethodID
+	midRemoteConferenceCallbackOnDestroyed                     jni.MethodID
+	midRemoteConferenceCallbackOnDisconnected                  jni.MethodID
+	midRemoteConferenceCallbackOnExtrasChanged                 jni.MethodID
+	midRemoteConferenceCallbackOnStateChanged                  jni.MethodID
+
+	clsCallAttributes                      *jni.GlobalRef
+	midCallAttributesDescribeContents      jni.MethodID
+	midCallAttributesEquals                jni.MethodID
+	midCallAttributesGetAddress            jni.MethodID
+	midCallAttributesGetCallCapabilities   jni.MethodID
+	midCallAttributesGetCallType           jni.MethodID
+	midCallAttributesGetDirection          jni.MethodID
+	midCallAttributesGetDisplayName        jni.MethodID
+	midCallAttributesGetPhoneAccountHandle jni.MethodID
+	midCallAttributesHashCode              jni.MethodID
+	midCallAttributesToString              jni.MethodID
+	midCallAttributesWriteToParcel         jni.MethodID
+
+	clsCallAttributesBuilder                    *jni.GlobalRef
+	midCallAttributesBuilderBuild               jni.MethodID
+	midCallAttributesBuilderSetCallCapabilities jni.MethodID
+	midCallAttributesBuilderSetCallType         jni.MethodID
+
+	clsPhoneAccount                                  *jni.GlobalRef
+	midPhoneAccountDescribeContents                  jni.MethodID
+	midPhoneAccountEquals                            jni.MethodID
+	midPhoneAccountGetAccountHandle                  jni.MethodID
+	midPhoneAccountGetAddress                        jni.MethodID
+	midPhoneAccountGetCapabilities                   jni.MethodID
+	midPhoneAccountGetExtras                         jni.MethodID
+	midPhoneAccountGetHighlightColor                 jni.MethodID
+	midPhoneAccountGetIcon                           jni.MethodID
+	midPhoneAccountGetLabel                          jni.MethodID
+	midPhoneAccountGetShortDescription               jni.MethodID
+	midPhoneAccountGetSimultaneousCallingRestriction jni.MethodID
+	midPhoneAccountGetSubscriptionAddress            jni.MethodID
+	midPhoneAccountGetSupportedUriSchemes            jni.MethodID
+	midPhoneAccountHasCapabilities                   jni.MethodID
+	midPhoneAccountHasSimultaneousCallingRestriction jni.MethodID
+	midPhoneAccountHashCode                          jni.MethodID
+	midPhoneAccountIsEnabled                         jni.MethodID
+	midPhoneAccountSupportsUriScheme                 jni.MethodID
+	midPhoneAccountToBuilder                         jni.MethodID
+	midPhoneAccountToString                          jni.MethodID
+	midPhoneAccountWriteToParcel                     jni.MethodID
+	midPhoneAccountBuilder                           jni.MethodID
+
+	clsPhoneAccountBuilder                                    *jni.GlobalRef
+	midPhoneAccountBuilderAddSupportedUriScheme               jni.MethodID
+	midPhoneAccountBuilderBuild                               jni.MethodID
+	midPhoneAccountBuilderClearSimultaneousCallingRestriction jni.MethodID
+	midPhoneAccountBuilderSetAddress                          jni.MethodID
+	midPhoneAccountBuilderSetCapabilities                     jni.MethodID
+	midPhoneAccountBuilderSetExtras                           jni.MethodID
+	midPhoneAccountBuilderSetHighlightColor                   jni.MethodID
+	midPhoneAccountBuilderSetIcon                             jni.MethodID
+	midPhoneAccountBuilderSetShortDescription                 jni.MethodID
+	midPhoneAccountBuilderSetSubscriptionAddress              jni.MethodID
+
+	clsQueryLocationException                 *jni.GlobalRef
+	midQueryLocationExceptionCtor             jni.MethodID
+	midQueryLocationExceptionDescribeContents jni.MethodID
+	midQueryLocationExceptionGetCode          jni.MethodID
+	midQueryLocationExceptionWriteToParcel    jni.MethodID
+
+	clsCallScreeningService              *jni.GlobalRef
+	midCallScreeningServiceOnBind        jni.MethodID
+	midCallScreeningServiceOnScreenCall  jni.MethodID
+	midCallScreeningServiceOnUnbind      jni.MethodID
+	midCallScreeningServiceRespondToCall jni.MethodID
+
+	clsCallScreeningServiceCallResponse                                 *jni.GlobalRef
+	midCallScreeningServiceCallResponseEquals                           jni.MethodID
+	midCallScreeningServiceCallResponseGetCallComposerAttachmentsToShow jni.MethodID
+	midCallScreeningServiceCallResponseGetDisallowCall                  jni.MethodID
+	midCallScreeningServiceCallResponseGetRejectCall                    jni.MethodID
+	midCallScreeningServiceCallResponseGetSilenceCall                   jni.MethodID
+	midCallScreeningServiceCallResponseGetSkipCallLog                   jni.MethodID
+	midCallScreeningServiceCallResponseGetSkipNotification              jni.MethodID
+	midCallScreeningServiceCallResponseHashCode                         jni.MethodID
+
+	clsVideoProfile                      *jni.GlobalRef
+	midVideoProfileCtor                  jni.MethodID
+	midVideoProfileDescribeContents      jni.MethodID
+	midVideoProfileGetQuality            jni.MethodID
+	midVideoProfileGetVideoState         jni.MethodID
+	midVideoProfileToString              jni.MethodID
+	midVideoProfileWriteToParcel         jni.MethodID
+	midVideoProfileIsAudioOnly           jni.MethodID
+	midVideoProfileIsBidirectional       jni.MethodID
+	midVideoProfileIsPaused              jni.MethodID
+	midVideoProfileIsReceptionEnabled    jni.MethodID
+	midVideoProfileIsTransmissionEnabled jni.MethodID
+	midVideoProfileIsVideo               jni.MethodID
+	midVideoProfileVideoStateToString    jni.MethodID
+
+	clsVideoProfileCameraCapabilities                 *jni.GlobalRef
+	midVideoProfileCameraCapabilitiesDescribeContents jni.MethodID
+	midVideoProfileCameraCapabilitiesGetHeight        jni.MethodID
+	midVideoProfileCameraCapabilitiesGetMaxZoom       jni.MethodID
+	midVideoProfileCameraCapabilitiesGetWidth         jni.MethodID
+	midVideoProfileCameraCapabilitiesIsZoomSupported  jni.MethodID
+	midVideoProfileCameraCapabilitiesWriteToParcel    jni.MethodID
+
+	clsPhoneAccountHandle                 *jni.GlobalRef
+	midPhoneAccountHandleCtor             jni.MethodID
+	midPhoneAccountHandleDescribeContents jni.MethodID
+	midPhoneAccountHandleEquals           jni.MethodID
+	midPhoneAccountHandleGetComponentName jni.MethodID
+	midPhoneAccountHandleGetId            jni.MethodID
+	midPhoneAccountHandleGetUserHandle    jni.MethodID
+	midPhoneAccountHandleHashCode         jni.MethodID
+	midPhoneAccountHandleToString         jni.MethodID
+	midPhoneAccountHandleWriteToParcel    jni.MethodID
+
+	clsStatusHints                 *jni.GlobalRef
+	midStatusHintsCtor             jni.MethodID
+	midStatusHintsDescribeContents jni.MethodID
+	midStatusHintsEquals           jni.MethodID
+	midStatusHintsGetExtras        jni.MethodID
+	midStatusHintsGetIcon          jni.MethodID
+	midStatusHintsGetLabel         jni.MethodID
+	midStatusHintsHashCode         jni.MethodID
+	midStatusHintsWriteToParcel    jni.MethodID
 
 	clsCall                                    *jni.GlobalRef
 	midCallAnswer                              jni.MethodID
 	midCallConference                          jni.MethodID
 	midCallDeflect                             jni.MethodID
 	midCallDisconnect                          jni.MethodID
+	midCallGetCannedTextResponses              jni.MethodID
+	midCallGetChildren                         jni.MethodID
+	midCallGetConferenceableCalls              jni.MethodID
 	midCallGetDetails                          jni.MethodID
 	midCallGetGenericConferenceActiveChildCall jni.MethodID
 	midCallGetParent                           jni.MethodID
@@ -178,35 +266,65 @@ var (
 	midCallRttCallSetRttMode      jni.MethodID
 	midCallRttCallWrite           jni.MethodID
 
-	clsPhoneAccountHandle                 *jni.GlobalRef
-	midPhoneAccountHandleInit             jni.MethodID
-	midPhoneAccountHandleDescribeContents jni.MethodID
-	midPhoneAccountHandleEquals           jni.MethodID
-	midPhoneAccountHandleGetComponentName jni.MethodID
-	midPhoneAccountHandleGetId            jni.MethodID
-	midPhoneAccountHandleGetUserHandle    jni.MethodID
-	midPhoneAccountHandleHashCode         jni.MethodID
-	midPhoneAccountHandleToString         jni.MethodID
-	midPhoneAccountHandleWriteToParcel    jni.MethodID
+	clsCallControlCallback *jni.GlobalRef
 
-	clsCallScreeningService              *jni.GlobalRef
-	midCallScreeningServiceOnBind        jni.MethodID
-	midCallScreeningServiceOnScreenCall  jni.MethodID
-	midCallScreeningServiceOnUnbind      jni.MethodID
-	midCallScreeningServiceRespondToCall jni.MethodID
+	clsPhoneAccountSuggestion                      *jni.GlobalRef
+	midPhoneAccountSuggestionCtor                  jni.MethodID
+	midPhoneAccountSuggestionDescribeContents      jni.MethodID
+	midPhoneAccountSuggestionEquals                jni.MethodID
+	midPhoneAccountSuggestionGetPhoneAccountHandle jni.MethodID
+	midPhoneAccountSuggestionGetReason             jni.MethodID
+	midPhoneAccountSuggestionHashCode              jni.MethodID
+	midPhoneAccountSuggestionShouldAutoSelect      jni.MethodID
+	midPhoneAccountSuggestionWriteToParcel         jni.MethodID
 
-	clsCallScreeningServiceCallResponse                                 *jni.GlobalRef
-	midCallScreeningServiceCallResponseEquals                           jni.MethodID
-	midCallScreeningServiceCallResponseGetCallComposerAttachmentsToShow jni.MethodID
-	midCallScreeningServiceCallResponseGetDisallowCall                  jni.MethodID
-	midCallScreeningServiceCallResponseGetRejectCall                    jni.MethodID
-	midCallScreeningServiceCallResponseGetSilenceCall                   jni.MethodID
-	midCallScreeningServiceCallResponseGetSkipCallLog                   jni.MethodID
-	midCallScreeningServiceCallResponseGetSkipNotification              jni.MethodID
-	midCallScreeningServiceCallResponseHashCode                         jni.MethodID
+	clsCallEndpointException                 *jni.GlobalRef
+	midCallEndpointExceptionCtor             jni.MethodID
+	midCallEndpointExceptionDescribeContents jni.MethodID
+	midCallEndpointExceptionGetCode          jni.MethodID
+	midCallEndpointExceptionWriteToParcel    jni.MethodID
+
+	clsConnectionRequest                      *jni.GlobalRef
+	midConnectionRequestCtor                  jni.MethodID
+	midConnectionRequestDescribeContents      jni.MethodID
+	midConnectionRequestGetAccountHandle      jni.MethodID
+	midConnectionRequestGetAddress            jni.MethodID
+	midConnectionRequestGetExtras             jni.MethodID
+	midConnectionRequestGetParticipants       jni.MethodID
+	midConnectionRequestGetRttTextStream      jni.MethodID
+	midConnectionRequestGetVideoState         jni.MethodID
+	midConnectionRequestIsAdhocConferenceCall jni.MethodID
+	midConnectionRequestIsRequestingRtt       jni.MethodID
+	midConnectionRequestToString              jni.MethodID
+	midConnectionRequestWriteToParcel         jni.MethodID
+
+	clsConferenceable *jni.GlobalRef
+
+	clsDisconnectCause                 *jni.GlobalRef
+	midDisconnectCauseCtor             jni.MethodID
+	midDisconnectCauseDescribeContents jni.MethodID
+	midDisconnectCauseEquals           jni.MethodID
+	midDisconnectCauseGetCode          jni.MethodID
+	midDisconnectCauseGetDescription   jni.MethodID
+	midDisconnectCauseGetLabel         jni.MethodID
+	midDisconnectCauseGetReason        jni.MethodID
+	midDisconnectCauseGetTone          jni.MethodID
+	midDisconnectCauseHashCode         jni.MethodID
+	midDisconnectCauseToString         jni.MethodID
+	midDisconnectCauseWriteToParcel    jni.MethodID
+
+	clsCallControl          *jni.GlobalRef
+	midCallControlGetCallId jni.MethodID
+	midCallControlSendEvent jni.MethodID
+
+	clsCallException                 *jni.GlobalRef
+	midCallExceptionCtor             jni.MethodID
+	midCallExceptionDescribeContents jni.MethodID
+	midCallExceptionGetCode          jni.MethodID
+	midCallExceptionWriteToParcel    jni.MethodID
 
 	clsCallEndpoint                 *jni.GlobalRef
-	midCallEndpointInit             jni.MethodID
+	midCallEndpointCtor             jni.MethodID
 	midCallEndpointDescribeContents jni.MethodID
 	midCallEndpointEquals           jni.MethodID
 	midCallEndpointGetEndpointName  jni.MethodID
@@ -216,9 +334,82 @@ var (
 	midCallEndpointToString         jni.MethodID
 	midCallEndpointWriteToParcel    jni.MethodID
 
+	clsCallRedirectionService                     *jni.GlobalRef
+	midCallRedirectionServiceCancelCall           jni.MethodID
+	midCallRedirectionServiceOnBind               jni.MethodID
+	midCallRedirectionServiceOnPlaceCall          jni.MethodID
+	midCallRedirectionServiceOnRedirectionTimeout jni.MethodID
+	midCallRedirectionServiceOnUnbind             jni.MethodID
+	midCallRedirectionServicePlaceCallUnmodified  jni.MethodID
+	midCallRedirectionServiceRedirectCall         jni.MethodID
+
+	clsConference                                        *jni.GlobalRef
+	midConferenceAddConnection                           jni.MethodID
+	midConferenceDestroy                                 jni.MethodID
+	midConferenceGetCallAudioState                       jni.MethodID
+	midConferenceGetConferenceableConnections            jni.MethodID
+	midConferenceGetConnectionCapabilities               jni.MethodID
+	midConferenceGetConnectionProperties                 jni.MethodID
+	midConferenceGetConnectionStartElapsedRealtimeMillis jni.MethodID
+	midConferenceGetConnectionTime                       jni.MethodID
+	midConferenceGetConnections                          jni.MethodID
+	midConferenceGetCurrentCallEndpoint                  jni.MethodID
+	midConferenceGetDisconnectCause                      jni.MethodID
+	midConferenceGetExtras                               jni.MethodID
+	midConferenceGetPhoneAccountHandle                   jni.MethodID
+	midConferenceGetState                                jni.MethodID
+	midConferenceGetStatusHints                          jni.MethodID
+	midConferenceGetVideoProvider                        jni.MethodID
+	midConferenceGetVideoState                           jni.MethodID
+	midConferenceIsRingbackRequested                     jni.MethodID
+	midConferenceOnAnswer                                jni.MethodID
+	midConferenceOnCallAudioStateChanged                 jni.MethodID
+	midConferenceOnCallEndpointChanged                   jni.MethodID
+	midConferenceOnConnectionAdded                       jni.MethodID
+	midConferenceOnDisconnect                            jni.MethodID
+	midConferenceOnExtrasChanged                         jni.MethodID
+	midConferenceOnHold                                  jni.MethodID
+	midConferenceOnMerge0                                jni.MethodID
+	midConferenceOnMerge1_1                              jni.MethodID
+	midConferenceOnMuteStateChanged                      jni.MethodID
+	midConferenceOnPlayDtmfTone                          jni.MethodID
+	midConferenceOnReject                                jni.MethodID
+	midConferenceOnSeparate                              jni.MethodID
+	midConferenceOnStopDtmfTone                          jni.MethodID
+	midConferenceOnSwap                                  jni.MethodID
+	midConferenceOnUnhold                                jni.MethodID
+	midConferencePutExtras                               jni.MethodID
+	midConferenceRemoveConnection                        jni.MethodID
+	midConferenceRemoveExtras                            jni.MethodID
+	midConferenceSendConferenceEvent                     jni.MethodID
+	midConferenceSetActive                               jni.MethodID
+	midConferenceSetConnectionCapabilities               jni.MethodID
+	midConferenceSetConnectionProperties                 jni.MethodID
+	midConferenceSetConnectionStartElapsedRealTime       jni.MethodID
+	midConferenceSetConnectionStartElapsedRealtimeMillis jni.MethodID
+	midConferenceSetConnectionTime                       jni.MethodID
+	midConferenceSetDialing                              jni.MethodID
+	midConferenceSetDisconnected                         jni.MethodID
+	midConferenceSetExtras                               jni.MethodID
+	midConferenceSetOnHold                               jni.MethodID
+	midConferenceSetRingbackRequested                    jni.MethodID
+	midConferenceSetRinging                              jni.MethodID
+	midConferenceSetStatusHints                          jni.MethodID
+	midConferenceSetVideoProvider                        jni.MethodID
+	midConferenceSetVideoState                           jni.MethodID
+	midConferenceToString                                jni.MethodID
+	midConferenceCreateFailedConference                  jni.MethodID
+
+	clsCallEventCallback                      *jni.GlobalRef
+	midCallEventCallbackOnCallEndpointChanged jni.MethodID
+	midCallEventCallbackOnCallStreamingFailed jni.MethodID
+	midCallEventCallbackOnEvent               jni.MethodID
+	midCallEventCallbackOnMuteStateChanged    jni.MethodID
+
 	clsInCallService                        *jni.GlobalRef
 	midInCallServiceCanAddCall              jni.MethodID
 	midInCallServiceGetCallAudioState       jni.MethodID
+	midInCallServiceGetCalls                jni.MethodID
 	midInCallServiceGetCurrentCallEndpoint  jni.MethodID
 	midInCallServiceOnBind                  jni.MethodID
 	midInCallServiceOnBringToForeground     jni.MethodID
@@ -249,90 +440,6 @@ var (
 	midInCallServiceVideoCallSetZoom                   jni.MethodID
 	midInCallServiceVideoCallUnregisterCallback        jni.MethodID
 
-	clsPhoneAccount                                  *jni.GlobalRef
-	midPhoneAccountDescribeContents                  jni.MethodID
-	midPhoneAccountEquals                            jni.MethodID
-	midPhoneAccountGetAccountHandle                  jni.MethodID
-	midPhoneAccountGetAddress                        jni.MethodID
-	midPhoneAccountGetCapabilities                   jni.MethodID
-	midPhoneAccountGetExtras                         jni.MethodID
-	midPhoneAccountGetHighlightColor                 jni.MethodID
-	midPhoneAccountGetIcon                           jni.MethodID
-	midPhoneAccountGetLabel                          jni.MethodID
-	midPhoneAccountGetShortDescription               jni.MethodID
-	midPhoneAccountGetSubscriptionAddress            jni.MethodID
-	midPhoneAccountHasCapabilities                   jni.MethodID
-	midPhoneAccountHasSimultaneousCallingRestriction jni.MethodID
-	midPhoneAccountHashCode                          jni.MethodID
-	midPhoneAccountIsEnabled                         jni.MethodID
-	midPhoneAccountSupportsUriScheme                 jni.MethodID
-	midPhoneAccountToBuilder                         jni.MethodID
-	midPhoneAccountToString                          jni.MethodID
-	midPhoneAccountWriteToParcel                     jni.MethodID
-	midPhoneAccountBuilder                           jni.MethodID
-
-	clsPhoneAccountBuilder                                    *jni.GlobalRef
-	midPhoneAccountBuilderAddSupportedUriScheme               jni.MethodID
-	midPhoneAccountBuilderBuild                               jni.MethodID
-	midPhoneAccountBuilderClearSimultaneousCallingRestriction jni.MethodID
-	midPhoneAccountBuilderSetAddress                          jni.MethodID
-	midPhoneAccountBuilderSetCapabilities                     jni.MethodID
-	midPhoneAccountBuilderSetExtras                           jni.MethodID
-	midPhoneAccountBuilderSetHighlightColor                   jni.MethodID
-	midPhoneAccountBuilderSetIcon                             jni.MethodID
-	midPhoneAccountBuilderSetShortDescription                 jni.MethodID
-	midPhoneAccountBuilderSetSubscriptionAddress              jni.MethodID
-
-	clsCallEndpointException                 *jni.GlobalRef
-	midCallEndpointExceptionInit             jni.MethodID
-	midCallEndpointExceptionDescribeContents jni.MethodID
-	midCallEndpointExceptionGetCode          jni.MethodID
-	midCallEndpointExceptionWriteToParcel    jni.MethodID
-
-	clsManager                                    *jni.GlobalRef
-	midManagerAcceptHandover                      jni.MethodID
-	midManagerAcceptRingingCall0                  jni.MethodID
-	midManagerAcceptRingingCall1_1                jni.MethodID
-	midManagerAddNewIncomingCall                  jni.MethodID
-	midManagerAddNewIncomingConference            jni.MethodID
-	midManagerCancelMissedCallsNotification       jni.MethodID
-	midManagerCreateManageBlockedNumbersIntent    jni.MethodID
-	midManagerEndCall                             jni.MethodID
-	midManagerGetAdnUriForPhoneAccount            jni.MethodID
-	midManagerGetDefaultDialerPackage             jni.MethodID
-	midManagerGetDefaultOutgoingPhoneAccount      jni.MethodID
-	midManagerGetLine1Number                      jni.MethodID
-	midManagerGetPhoneAccount                     jni.MethodID
-	midManagerGetSimCallManager                   jni.MethodID
-	midManagerGetSimCallManagerForSubscription    jni.MethodID
-	midManagerGetSystemDialerPackage              jni.MethodID
-	midManagerGetUserSelectedOutgoingPhoneAccount jni.MethodID
-	midManagerGetVoiceMailNumber                  jni.MethodID
-	midManagerHandleMmi1                          jni.MethodID
-	midManagerHandleMmi2_1                        jni.MethodID
-	midManagerHasManageOngoingCallsPermission     jni.MethodID
-	midManagerIsInCall                            jni.MethodID
-	midManagerIsInManagedCall                     jni.MethodID
-	midManagerIsIncomingCallPermitted             jni.MethodID
-	midManagerIsOutgoingCallPermitted             jni.MethodID
-	midManagerIsTtySupported                      jni.MethodID
-	midManagerIsVoiceMailNumber                   jni.MethodID
-	midManagerPlaceCall                           jni.MethodID
-	midManagerRegisterPhoneAccount                jni.MethodID
-	midManagerShowInCallScreen                    jni.MethodID
-	midManagerSilenceRinger                       jni.MethodID
-	midManagerUnregisterPhoneAccount              jni.MethodID
-
-	clsCallControlCallback *jni.GlobalRef
-
-	clsCallEventCallback                      *jni.GlobalRef
-	midCallEventCallbackOnCallEndpointChanged jni.MethodID
-	midCallEventCallbackOnCallStreamingFailed jni.MethodID
-	midCallEventCallbackOnEvent               jni.MethodID
-	midCallEventCallbackOnMuteStateChanged    jni.MethodID
-
-	clsConferenceable *jni.GlobalRef
-
 	clsRemoteConnection                                 *jni.GlobalRef
 	midRemoteConnectionAbort                            jni.MethodID
 	midRemoteConnectionAnswer                           jni.MethodID
@@ -342,6 +449,7 @@ var (
 	midRemoteConnectionGetCallerDisplayName             jni.MethodID
 	midRemoteConnectionGetCallerDisplayNamePresentation jni.MethodID
 	midRemoteConnectionGetConference                    jni.MethodID
+	midRemoteConnectionGetConferenceableConnections     jni.MethodID
 	midRemoteConnectionGetConnectionCapabilities        jni.MethodID
 	midRemoteConnectionGetConnectionProperties          jni.MethodID
 	midRemoteConnectionGetDisconnectCause               jni.MethodID
@@ -396,172 +504,6 @@ var (
 	midRemoteConnectionVideoProviderSetZoom                   jni.MethodID
 	midRemoteConnectionVideoProviderUnregisterCallback        jni.MethodID
 
-	clsCallControl          *jni.GlobalRef
-	midCallControlGetCallId jni.MethodID
-	midCallControlSendEvent jni.MethodID
-
-	clsConnectionRequest                      *jni.GlobalRef
-	midConnectionRequestInit                  jni.MethodID
-	midConnectionRequestDescribeContents      jni.MethodID
-	midConnectionRequestGetAccountHandle      jni.MethodID
-	midConnectionRequestGetAddress            jni.MethodID
-	midConnectionRequestGetExtras             jni.MethodID
-	midConnectionRequestGetRttTextStream      jni.MethodID
-	midConnectionRequestGetVideoState         jni.MethodID
-	midConnectionRequestIsAdhocConferenceCall jni.MethodID
-	midConnectionRequestIsRequestingRtt       jni.MethodID
-	midConnectionRequestToString              jni.MethodID
-	midConnectionRequestWriteToParcel         jni.MethodID
-
-	clsStatusHints                 *jni.GlobalRef
-	midStatusHintsInit             jni.MethodID
-	midStatusHintsDescribeContents jni.MethodID
-	midStatusHintsEquals           jni.MethodID
-	midStatusHintsGetExtras        jni.MethodID
-	midStatusHintsGetIcon          jni.MethodID
-	midStatusHintsGetLabel         jni.MethodID
-	midStatusHintsHashCode         jni.MethodID
-	midStatusHintsWriteToParcel    jni.MethodID
-
-	clsCallAudioState                         *jni.GlobalRef
-	midCallAudioStateInit                     jni.MethodID
-	midCallAudioStateDescribeContents         jni.MethodID
-	midCallAudioStateEquals                   jni.MethodID
-	midCallAudioStateGetActiveBluetoothDevice jni.MethodID
-	midCallAudioStateGetRoute                 jni.MethodID
-	midCallAudioStateGetSupportedRouteMask    jni.MethodID
-	midCallAudioStateIsMuted                  jni.MethodID
-	midCallAudioStateToString                 jni.MethodID
-	midCallAudioStateWriteToParcel            jni.MethodID
-	midCallAudioStateAudioRouteToString       jni.MethodID
-
-	clsCallAttributes                      *jni.GlobalRef
-	midCallAttributesDescribeContents      jni.MethodID
-	midCallAttributesEquals                jni.MethodID
-	midCallAttributesGetAddress            jni.MethodID
-	midCallAttributesGetCallCapabilities   jni.MethodID
-	midCallAttributesGetCallType           jni.MethodID
-	midCallAttributesGetDirection          jni.MethodID
-	midCallAttributesGetDisplayName        jni.MethodID
-	midCallAttributesGetPhoneAccountHandle jni.MethodID
-	midCallAttributesHashCode              jni.MethodID
-	midCallAttributesToString              jni.MethodID
-	midCallAttributesWriteToParcel         jni.MethodID
-
-	clsCallAttributesBuilder                    *jni.GlobalRef
-	midCallAttributesBuilderBuild               jni.MethodID
-	midCallAttributesBuilderSetCallCapabilities jni.MethodID
-	midCallAttributesBuilderSetCallType         jni.MethodID
-
-	clsConnectionService                                   *jni.GlobalRef
-	midConnectionServiceAddConference                      jni.MethodID
-	midConnectionServiceAddExistingConnection              jni.MethodID
-	midConnectionServiceConferenceRemoteConnections        jni.MethodID
-	midConnectionServiceConnectionServiceFocusReleased     jni.MethodID
-	midConnectionServiceCreateRemoteIncomingConference     jni.MethodID
-	midConnectionServiceCreateRemoteIncomingConnection     jni.MethodID
-	midConnectionServiceCreateRemoteOutgoingConference     jni.MethodID
-	midConnectionServiceCreateRemoteOutgoingConnection     jni.MethodID
-	midConnectionServiceOnBind                             jni.MethodID
-	midConnectionServiceOnConference                       jni.MethodID
-	midConnectionServiceOnConnectionServiceFocusGained     jni.MethodID
-	midConnectionServiceOnConnectionServiceFocusLost       jni.MethodID
-	midConnectionServiceOnCreateIncomingConference         jni.MethodID
-	midConnectionServiceOnCreateIncomingConferenceFailed   jni.MethodID
-	midConnectionServiceOnCreateIncomingConnection         jni.MethodID
-	midConnectionServiceOnCreateIncomingConnectionFailed   jni.MethodID
-	midConnectionServiceOnCreateIncomingHandoverConnection jni.MethodID
-	midConnectionServiceOnCreateOutgoingConference         jni.MethodID
-	midConnectionServiceOnCreateOutgoingConferenceFailed   jni.MethodID
-	midConnectionServiceOnCreateOutgoingConnection         jni.MethodID
-	midConnectionServiceOnCreateOutgoingConnectionFailed   jni.MethodID
-	midConnectionServiceOnCreateOutgoingHandoverConnection jni.MethodID
-	midConnectionServiceOnHandoverFailed                   jni.MethodID
-	midConnectionServiceOnRemoteConferenceAdded            jni.MethodID
-	midConnectionServiceOnRemoteExistingConnectionAdded    jni.MethodID
-	midConnectionServiceOnUnbind                           jni.MethodID
-
-	clsGatewayInfo                              *jni.GlobalRef
-	midGatewayInfoInit                          jni.MethodID
-	midGatewayInfoDescribeContents              jni.MethodID
-	midGatewayInfoGetGatewayAddress             jni.MethodID
-	midGatewayInfoGetGatewayProviderPackageName jni.MethodID
-	midGatewayInfoGetOriginalAddress            jni.MethodID
-	midGatewayInfoIsEmpty                       jni.MethodID
-	midGatewayInfoWriteToParcel                 jni.MethodID
-
-	clsCallException                 *jni.GlobalRef
-	midCallExceptionInit             jni.MethodID
-	midCallExceptionDescribeContents jni.MethodID
-	midCallExceptionGetCode          jni.MethodID
-	midCallExceptionWriteToParcel    jni.MethodID
-
-	clsCallRedirectionService                     *jni.GlobalRef
-	midCallRedirectionServiceCancelCall           jni.MethodID
-	midCallRedirectionServiceOnBind               jni.MethodID
-	midCallRedirectionServiceOnPlaceCall          jni.MethodID
-	midCallRedirectionServiceOnRedirectionTimeout jni.MethodID
-	midCallRedirectionServiceOnUnbind             jni.MethodID
-	midCallRedirectionServicePlaceCallUnmodified  jni.MethodID
-	midCallRedirectionServiceRedirectCall         jni.MethodID
-
-	clsQueryLocationException                 *jni.GlobalRef
-	midQueryLocationExceptionInit             jni.MethodID
-	midQueryLocationExceptionDescribeContents jni.MethodID
-	midQueryLocationExceptionGetCode          jni.MethodID
-	midQueryLocationExceptionWriteToParcel    jni.MethodID
-
-	clsRemoteConference                          *jni.GlobalRef
-	midRemoteConferenceDisconnect                jni.MethodID
-	midRemoteConferenceGetConnectionCapabilities jni.MethodID
-	midRemoteConferenceGetConnectionProperties   jni.MethodID
-	midRemoteConferenceGetDisconnectCause        jni.MethodID
-	midRemoteConferenceGetExtras                 jni.MethodID
-	midRemoteConferenceGetState                  jni.MethodID
-	midRemoteConferenceHold                      jni.MethodID
-	midRemoteConferenceMerge                     jni.MethodID
-	midRemoteConferencePlayDtmfTone              jni.MethodID
-	midRemoteConferenceRegisterCallback          jni.MethodID
-	midRemoteConferenceSeparate                  jni.MethodID
-	midRemoteConferenceSetCallAudioState         jni.MethodID
-	midRemoteConferenceStopDtmfTone              jni.MethodID
-	midRemoteConferenceSwap                      jni.MethodID
-	midRemoteConferenceUnhold                    jni.MethodID
-	midRemoteConferenceUnregisterCallback        jni.MethodID
-
-	clsRemoteConferenceCallback                                *jni.GlobalRef
-	midRemoteConferenceCallbackOnConnectionAdded               jni.MethodID
-	midRemoteConferenceCallbackOnConnectionCapabilitiesChanged jni.MethodID
-	midRemoteConferenceCallbackOnConnectionPropertiesChanged   jni.MethodID
-	midRemoteConferenceCallbackOnConnectionRemoved             jni.MethodID
-	midRemoteConferenceCallbackOnDestroyed                     jni.MethodID
-	midRemoteConferenceCallbackOnDisconnected                  jni.MethodID
-	midRemoteConferenceCallbackOnExtrasChanged                 jni.MethodID
-	midRemoteConferenceCallbackOnStateChanged                  jni.MethodID
-
-	clsVideoProfile                      *jni.GlobalRef
-	midVideoProfileInit                  jni.MethodID
-	midVideoProfileDescribeContents      jni.MethodID
-	midVideoProfileGetQuality            jni.MethodID
-	midVideoProfileGetVideoState         jni.MethodID
-	midVideoProfileToString              jni.MethodID
-	midVideoProfileWriteToParcel         jni.MethodID
-	midVideoProfileIsAudioOnly           jni.MethodID
-	midVideoProfileIsBidirectional       jni.MethodID
-	midVideoProfileIsPaused              jni.MethodID
-	midVideoProfileIsReceptionEnabled    jni.MethodID
-	midVideoProfileIsTransmissionEnabled jni.MethodID
-	midVideoProfileIsVideo               jni.MethodID
-	midVideoProfileVideoStateToString    jni.MethodID
-
-	clsVideoProfileCameraCapabilities                 *jni.GlobalRef
-	midVideoProfileCameraCapabilitiesDescribeContents jni.MethodID
-	midVideoProfileCameraCapabilitiesGetHeight        jni.MethodID
-	midVideoProfileCameraCapabilitiesGetMaxZoom       jni.MethodID
-	midVideoProfileCameraCapabilitiesGetWidth         jni.MethodID
-	midVideoProfileCameraCapabilitiesIsZoomSupported  jni.MethodID
-	midVideoProfileCameraCapabilitiesWriteToParcel    jni.MethodID
-
 	clsConnection                                  *jni.GlobalRef
 	midConnectionDestroy                           jni.MethodID
 	midConnectionGetAddress                        jni.MethodID
@@ -572,6 +514,7 @@ var (
 	midConnectionGetCallerDisplayNamePresentation  jni.MethodID
 	midConnectionGetCallerNumberVerificationStatus jni.MethodID
 	midConnectionGetConference                     jni.MethodID
+	midConnectionGetConferenceables                jni.MethodID
 	midConnectionGetConnectionCapabilities         jni.MethodID
 	midConnectionGetConnectionProperties           jni.MethodID
 	midConnectionGetCurrentCallEndpoint            jni.MethodID
@@ -674,18 +617,95 @@ var (
 	midConnectionVideoProviderReceiveSessionModifyResponse jni.MethodID
 	midConnectionVideoProviderSetCallDataUsage             jni.MethodID
 
-	clsDisconnectCause                 *jni.GlobalRef
-	midDisconnectCauseInit             jni.MethodID
-	midDisconnectCauseDescribeContents jni.MethodID
-	midDisconnectCauseEquals           jni.MethodID
-	midDisconnectCauseGetCode          jni.MethodID
-	midDisconnectCauseGetDescription   jni.MethodID
-	midDisconnectCauseGetLabel         jni.MethodID
-	midDisconnectCauseGetReason        jni.MethodID
-	midDisconnectCauseGetTone          jni.MethodID
-	midDisconnectCauseHashCode         jni.MethodID
-	midDisconnectCauseToString         jni.MethodID
-	midDisconnectCauseWriteToParcel    jni.MethodID
+	clsManager                                    *jni.GlobalRef
+	midManagerAcceptHandover                      jni.MethodID
+	midManagerAcceptRingingCall0                  jni.MethodID
+	midManagerAcceptRingingCall1_1                jni.MethodID
+	midManagerAddNewIncomingCall                  jni.MethodID
+	midManagerAddNewIncomingConference            jni.MethodID
+	midManagerCancelMissedCallsNotification       jni.MethodID
+	midManagerCreateManageBlockedNumbersIntent    jni.MethodID
+	midManagerEndCall                             jni.MethodID
+	midManagerGetAdnUriForPhoneAccount            jni.MethodID
+	midManagerGetCallCapablePhoneAccounts         jni.MethodID
+	midManagerGetDefaultDialerPackage             jni.MethodID
+	midManagerGetDefaultOutgoingPhoneAccount      jni.MethodID
+	midManagerGetLine1Number                      jni.MethodID
+	midManagerGetOwnSelfManagedPhoneAccounts      jni.MethodID
+	midManagerGetPhoneAccount                     jni.MethodID
+	midManagerGetRegisteredPhoneAccounts          jni.MethodID
+	midManagerGetSelfManagedPhoneAccounts         jni.MethodID
+	midManagerGetSimCallManager                   jni.MethodID
+	midManagerGetSimCallManagerForSubscription    jni.MethodID
+	midManagerGetSystemDialerPackage              jni.MethodID
+	midManagerGetUserSelectedOutgoingPhoneAccount jni.MethodID
+	midManagerGetVoiceMailNumber                  jni.MethodID
+	midManagerHandleMmi1                          jni.MethodID
+	midManagerHandleMmi2_1                        jni.MethodID
+	midManagerHasManageOngoingCallsPermission     jni.MethodID
+	midManagerIsInCall                            jni.MethodID
+	midManagerIsInManagedCall                     jni.MethodID
+	midManagerIsIncomingCallPermitted             jni.MethodID
+	midManagerIsOutgoingCallPermitted             jni.MethodID
+	midManagerIsTtySupported                      jni.MethodID
+	midManagerIsVoiceMailNumber                   jni.MethodID
+	midManagerPlaceCall                           jni.MethodID
+	midManagerRegisterPhoneAccount                jni.MethodID
+	midManagerShowInCallScreen                    jni.MethodID
+	midManagerSilenceRinger                       jni.MethodID
+	midManagerUnregisterPhoneAccount              jni.MethodID
+
+	clsConnectionService                                   *jni.GlobalRef
+	midConnectionServiceAddConference                      jni.MethodID
+	midConnectionServiceAddExistingConnection              jni.MethodID
+	midConnectionServiceConferenceRemoteConnections        jni.MethodID
+	midConnectionServiceConnectionServiceFocusReleased     jni.MethodID
+	midConnectionServiceCreateRemoteIncomingConference     jni.MethodID
+	midConnectionServiceCreateRemoteIncomingConnection     jni.MethodID
+	midConnectionServiceCreateRemoteOutgoingConference     jni.MethodID
+	midConnectionServiceCreateRemoteOutgoingConnection     jni.MethodID
+	midConnectionServiceGetAllConferences                  jni.MethodID
+	midConnectionServiceGetAllConnections                  jni.MethodID
+	midConnectionServiceOnBind                             jni.MethodID
+	midConnectionServiceOnConference                       jni.MethodID
+	midConnectionServiceOnConnectionServiceFocusGained     jni.MethodID
+	midConnectionServiceOnConnectionServiceFocusLost       jni.MethodID
+	midConnectionServiceOnCreateIncomingConference         jni.MethodID
+	midConnectionServiceOnCreateIncomingConferenceFailed   jni.MethodID
+	midConnectionServiceOnCreateIncomingConnection         jni.MethodID
+	midConnectionServiceOnCreateIncomingConnectionFailed   jni.MethodID
+	midConnectionServiceOnCreateIncomingHandoverConnection jni.MethodID
+	midConnectionServiceOnCreateOutgoingConference         jni.MethodID
+	midConnectionServiceOnCreateOutgoingConferenceFailed   jni.MethodID
+	midConnectionServiceOnCreateOutgoingConnection         jni.MethodID
+	midConnectionServiceOnCreateOutgoingConnectionFailed   jni.MethodID
+	midConnectionServiceOnCreateOutgoingHandoverConnection jni.MethodID
+	midConnectionServiceOnHandoverFailed                   jni.MethodID
+	midConnectionServiceOnRemoteConferenceAdded            jni.MethodID
+	midConnectionServiceOnRemoteExistingConnectionAdded    jni.MethodID
+	midConnectionServiceOnUnbind                           jni.MethodID
+
+	clsGatewayInfo                              *jni.GlobalRef
+	midGatewayInfoCtor                          jni.MethodID
+	midGatewayInfoDescribeContents              jni.MethodID
+	midGatewayInfoGetGatewayAddress             jni.MethodID
+	midGatewayInfoGetGatewayProviderPackageName jni.MethodID
+	midGatewayInfoGetOriginalAddress            jni.MethodID
+	midGatewayInfoIsEmpty                       jni.MethodID
+	midGatewayInfoWriteToParcel                 jni.MethodID
+
+	clsCallAudioState                             *jni.GlobalRef
+	midCallAudioStateCtor                         jni.MethodID
+	midCallAudioStateDescribeContents             jni.MethodID
+	midCallAudioStateEquals                       jni.MethodID
+	midCallAudioStateGetActiveBluetoothDevice     jni.MethodID
+	midCallAudioStateGetRoute                     jni.MethodID
+	midCallAudioStateGetSupportedBluetoothDevices jni.MethodID
+	midCallAudioStateGetSupportedRouteMask        jni.MethodID
+	midCallAudioStateIsMuted                      jni.MethodID
+	midCallAudioStateToString                     jni.MethodID
+	midCallAudioStateWriteToParcel                jni.MethodID
+	midCallAudioStateAudioRouteToString           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -706,61 +726,134 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/telecom/PhoneAccountSuggestion")
+	c, err = env.FindClass("android/telecom/RemoteConference")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPhoneAccountSuggestion = env.NewGlobalRef(&c.Object)
-		midPhoneAccountSuggestionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "<init>", "(Landroid/telecom/PhoneAccountHandle;IZ)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
+		clsRemoteConference = env.NewGlobalRef(&c.Object)
 
-		midPhoneAccountSuggestionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "describeContents", "()I")
+		midRemoteConferenceDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "disconnect", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountSuggestionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "equals", "(Ljava/lang/Object;)Z")
+		midRemoteConferenceGetConferenceableConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getConferenceableConnections", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountSuggestionGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
+		midRemoteConferenceGetConnectionCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getConnectionCapabilities", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountSuggestionGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "getReason", "()I")
+		midRemoteConferenceGetConnectionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getConnectionProperties", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountSuggestionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "hashCode", "()I")
+		midRemoteConferenceGetConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getConnections", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountSuggestionShouldAutoSelect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "shouldAutoSelect", "()Z")
+		midRemoteConferenceGetDisconnectCause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getDisconnectCause", "()Landroid/telecom/DisconnectCause;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountSuggestionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midRemoteConferenceGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getState", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceHold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "hold", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceMerge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "merge", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferencePlayDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "playDtmfTone", "(C)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceRegisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "registerCallback", "(Landroid/telecom/RemoteConference$Callback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceSeparate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "separate", "(Landroid/telecom/RemoteConnection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceSetCallAudioState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "setCallAudioState", "(Landroid/telecom/CallAudioState;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceStopDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "stopDtmfTone", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceSwap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "swap", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceUnhold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "unhold", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConferenceUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "unregisterCallback", "(Landroid/telecom/RemoteConference$Callback;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -769,379 +862,848 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/Conference")
+	c, err = env.FindClass("android/telecom/RemoteConference$Callback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsConference = env.NewGlobalRef(&c.Object)
+		clsRemoteConferenceCallback = env.NewGlobalRef(&c.Object)
 
-		midConferenceAddConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "addConnection", "(Landroid/telecom/Connection;)Z")
+		midRemoteConferenceCallbackOnConnectionAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionAdded", "(Landroid/telecom/RemoteConference;Landroid/telecom/RemoteConnection;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "destroy", "()V")
+		midRemoteConferenceCallbackOnConnectionCapabilitiesChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionCapabilitiesChanged", "(Landroid/telecom/RemoteConference;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetCallAudioState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getCallAudioState", "()Landroid/telecom/CallAudioState;")
+		midRemoteConferenceCallbackOnConnectionPropertiesChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionPropertiesChanged", "(Landroid/telecom/RemoteConference;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetConnectionCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionCapabilities", "()I")
+		midRemoteConferenceCallbackOnConnectionRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionRemoved", "(Landroid/telecom/RemoteConference;Landroid/telecom/RemoteConnection;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetConnectionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionProperties", "()I")
+		midRemoteConferenceCallbackOnDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onDestroyed", "(Landroid/telecom/RemoteConference;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetConnectionStartElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionStartElapsedRealtimeMillis", "()J")
+		midRemoteConferenceCallbackOnDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onDisconnected", "(Landroid/telecom/RemoteConference;Landroid/telecom/DisconnectCause;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetConnectionTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionTime", "()J")
+		midRemoteConferenceCallbackOnExtrasChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onExtrasChanged", "(Landroid/telecom/RemoteConference;Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetCurrentCallEndpoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getCurrentCallEndpoint", "()Landroid/telecom/CallEndpoint;")
+		midRemoteConferenceCallbackOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onStateChanged", "(Landroid/telecom/RemoteConference;II)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetDisconnectCause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getDisconnectCause", "()Landroid/telecom/DisconnectCause;")
+	}
+
+	c, err = env.FindClass("android/telecom/CallAttributes")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallAttributes = env.NewGlobalRef(&c.Object)
+
+		midCallAttributesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getExtras", "()Landroid/os/Bundle;")
+		midCallAttributesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
+		midCallAttributesGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getAddress", "()Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getState", "()I")
+		midCallAttributesGetCallCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getCallCapabilities", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetStatusHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getStatusHints", "()Landroid/telecom/StatusHints;")
+		midCallAttributesGetCallType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getCallType", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetVideoProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getVideoProvider", "()Landroid/telecom/Connection$VideoProvider;")
+		midCallAttributesGetDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getDirection", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceGetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getVideoState", "()I")
+		midCallAttributesGetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getDisplayName", "()Ljava/lang/CharSequence;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceIsRingbackRequested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "isRingbackRequested", "()Z")
+		midCallAttributesGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnAnswer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onAnswer", "(I)V")
+		midCallAttributesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnCallAudioStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onCallAudioStateChanged", "(Landroid/telecom/CallAudioState;)V")
+		midCallAttributesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnCallEndpointChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onCallEndpointChanged", "(Landroid/telecom/CallEndpoint;)V")
+		midCallAttributesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnConnectionAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onConnectionAdded", "(Landroid/telecom/Connection;)V")
+	}
+
+	c, err = env.FindClass("android/telecom/CallAttributes$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallAttributesBuilder = env.NewGlobalRef(&c.Object)
+
+		midCallAttributesBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributesBuilder)), "build", "()Landroid/telecom/CallAttributes;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onDisconnect", "()V")
+		midCallAttributesBuilderSetCallCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributesBuilder)), "setCallCapabilities", "(I)Landroid/telecom/CallAttributes$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnExtrasChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onExtrasChanged", "(Landroid/os/Bundle;)V")
+		midCallAttributesBuilderSetCallType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributesBuilder)), "setCallType", "(I)Landroid/telecom/CallAttributes$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnHold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onHold", "()V")
+	}
+
+	c, err = env.FindClass("android/telecom/PhoneAccount")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPhoneAccount = env.NewGlobalRef(&c.Object)
+
+		midPhoneAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnMerge0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onMerge", "()V")
+		midPhoneAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnMerge1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onMerge", "(Landroid/telecom/Connection;)V")
+		midPhoneAccountGetAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnMuteStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onMuteStateChanged", "(Z)V")
+		midPhoneAccountGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getAddress", "()Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnPlayDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onPlayDtmfTone", "(C)V")
+		midPhoneAccountGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getCapabilities", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnReject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onReject", "()V")
+		midPhoneAccountGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getExtras", "()Landroid/os/Bundle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnSeparate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onSeparate", "(Landroid/telecom/Connection;)V")
+		midPhoneAccountGetHighlightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getHighlightColor", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnStopDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onStopDtmfTone", "()V")
+		midPhoneAccountGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getIcon", "()Landroid/graphics/drawable/Icon;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnSwap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onSwap", "()V")
+		midPhoneAccountGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getLabel", "()Ljava/lang/CharSequence;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceOnUnhold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onUnhold", "()V")
+		midPhoneAccountGetShortDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getShortDescription", "()Ljava/lang/CharSequence;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferencePutExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "putExtras", "(Landroid/os/Bundle;)V")
+		midPhoneAccountGetSimultaneousCallingRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getSimultaneousCallingRestriction", "()Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceRemoveConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "removeConnection", "(Landroid/telecom/Connection;)V")
+		midPhoneAccountGetSubscriptionAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getSubscriptionAddress", "()Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceRemoveExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "removeExtras", "([Ljava/lang/String;)V")
+		midPhoneAccountGetSupportedUriSchemes, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getSupportedUriSchemes", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSendConferenceEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "sendConferenceEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		midPhoneAccountHasCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "hasCapabilities", "(I)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setActive", "()V")
+		midPhoneAccountHasSimultaneousCallingRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "hasSimultaneousCallingRestriction", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetConnectionCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionCapabilities", "(I)V")
+		midPhoneAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetConnectionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionProperties", "(I)V")
+		midPhoneAccountIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "isEnabled", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetConnectionStartElapsedRealTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionStartElapsedRealTime", "(J)V")
+		midPhoneAccountSupportsUriScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "supportsUriScheme", "(Ljava/lang/String;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetConnectionStartElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionStartElapsedRealtimeMillis", "(J)V")
+		midPhoneAccountToBuilder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "toBuilder", "()Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetConnectionTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionTime", "(J)V")
+		midPhoneAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "toString", "()Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetDialing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setDialing", "()V")
+		midPhoneAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setDisconnected", "(Landroid/telecom/DisconnectCause;)V")
+		midPhoneAccountBuilder, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "builder", "(Landroid/telecom/PhoneAccountHandle;Ljava/lang/CharSequence;)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setExtras", "(Landroid/os/Bundle;)V")
+	}
+
+	c, err = env.FindClass("android/telecom/PhoneAccount$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPhoneAccountBuilder = env.NewGlobalRef(&c.Object)
+
+		midPhoneAccountBuilderAddSupportedUriScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "addSupportedUriScheme", "(Ljava/lang/String;)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetOnHold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setOnHold", "()V")
+		midPhoneAccountBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "build", "()Landroid/telecom/PhoneAccount;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetRingbackRequested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setRingbackRequested", "(Z)V")
+		midPhoneAccountBuilderClearSimultaneousCallingRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "clearSimultaneousCallingRestriction", "()Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetRinging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setRinging", "()V")
+		midPhoneAccountBuilderSetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setAddress", "(Landroid/net/Uri;)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetStatusHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setStatusHints", "(Landroid/telecom/StatusHints;)V")
+		midPhoneAccountBuilderSetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setCapabilities", "(I)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetVideoProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setVideoProvider", "(Landroid/telecom/Connection;Landroid/telecom/Connection$VideoProvider;)V")
+		midPhoneAccountBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setExtras", "(Landroid/os/Bundle;)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceSetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setVideoState", "(Landroid/telecom/Connection;I)V")
+		midPhoneAccountBuilderSetHighlightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setHighlightColor", "(I)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "toString", "()Ljava/lang/String;")
+		midPhoneAccountBuilderSetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setIcon", "(Landroid/graphics/drawable/Icon;)Landroid/telecom/PhoneAccount$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midConferenceCreateFailedConference, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "createFailedConference", "(Landroid/telecom/DisconnectCause;Landroid/telecom/PhoneAccountHandle;)Landroid/telecom/Conference;")
+		midPhoneAccountBuilderSetShortDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setShortDescription", "(Ljava/lang/CharSequence;)Landroid/telecom/PhoneAccount$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountBuilderSetSubscriptionAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setSubscriptionAddress", "(Landroid/net/Uri;)Landroid/telecom/PhoneAccount$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/QueryLocationException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsQueryLocationException = env.NewGlobalRef(&c.Object)
+		midQueryLocationExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midQueryLocationExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midQueryLocationExceptionGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "getCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midQueryLocationExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/CallScreeningService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallScreeningService = env.NewGlobalRef(&c.Object)
+
+		midCallScreeningServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceOnScreenCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "onScreenCall", "(Landroid/telecom/Call$Details;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceRespondToCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "respondToCall", "(Landroid/telecom/Call$Details;Landroid/telecom/CallScreeningService$CallResponse;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/CallScreeningService$CallResponse")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallScreeningServiceCallResponse = env.NewGlobalRef(&c.Object)
+
+		midCallScreeningServiceCallResponseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseGetCallComposerAttachmentsToShow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getCallComposerAttachmentsToShow", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseGetDisallowCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getDisallowCall", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseGetRejectCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getRejectCall", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseGetSilenceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getSilenceCall", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseGetSkipCallLog, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getSkipCallLog", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseGetSkipNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getSkipNotification", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallScreeningServiceCallResponseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/VideoProfile")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVideoProfile = env.NewGlobalRef(&c.Object)
+		midVideoProfileCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midVideoProfileDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileGetQuality, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "getQuality", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileGetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "getVideoState", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileIsAudioOnly, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isAudioOnly", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileIsBidirectional, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isBidirectional", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileIsPaused, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isPaused", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileIsReceptionEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isReceptionEnabled", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileIsTransmissionEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isTransmissionEnabled", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileIsVideo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isVideo", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileVideoStateToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "videoStateToString", "(I)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/VideoProfile$CameraCapabilities")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsVideoProfileCameraCapabilities = env.NewGlobalRef(&c.Object)
+
+		midVideoProfileCameraCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileCameraCapabilitiesGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "getHeight", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileCameraCapabilitiesGetMaxZoom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "getMaxZoom", "()F")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileCameraCapabilitiesGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "getWidth", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileCameraCapabilitiesIsZoomSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "isZoomSupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midVideoProfileCameraCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/PhoneAccountHandle")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPhoneAccountHandle = env.NewGlobalRef(&c.Object)
+		midPhoneAccountHandleCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "<init>", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleGetComponentName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "getComponentName", "()Landroid/content/ComponentName;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "getId", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleGetUserHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "getUserHandle", "()Landroid/os/UserHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountHandleWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/StatusHints")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsStatusHints = env.NewGlobalRef(&c.Object)
+		midStatusHintsCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "<init>", "(Ljava/lang/CharSequence;Landroid/graphics/drawable/Icon;Landroid/os/Bundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midStatusHintsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStatusHintsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStatusHintsGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStatusHintsGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "getIcon", "()Landroid/graphics/drawable/Icon;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStatusHintsGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "getLabel", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStatusHintsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midStatusHintsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1180,6 +1742,27 @@ func doInit(env *jni.Env) error {
 		}
 
 		midCallDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCall)), "disconnect", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallGetCannedTextResponses, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCall)), "getCannedTextResponses", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallGetChildren, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCall)), "getChildren", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallGetConferenceableCalls, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCall)), "getConferenceableCalls", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1764,68 +2347,71 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/PhoneAccountHandle")
+	c, err = env.FindClass("android/telecom/CallControlCallback")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsPhoneAccountHandle = env.NewGlobalRef(&c.Object)
-		midPhoneAccountHandleInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "<init>", "(Landroid/content/ComponentName;Ljava/lang/String;)V")
+		clsCallControlCallback = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telecom/PhoneAccountSuggestion")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsPhoneAccountSuggestion = env.NewGlobalRef(&c.Object)
+		midPhoneAccountSuggestionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "<init>", "(Landroid/telecom/PhoneAccountHandle;IZ)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountHandleDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountHandleEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountHandleGetComponentName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "getComponentName", "()Landroid/content/ComponentName;")
+		midPhoneAccountSuggestionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountHandleGetId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "getId", "()Ljava/lang/String;")
+		midPhoneAccountSuggestionEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "equals", "(Ljava/lang/Object;)Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountHandleGetUserHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "getUserHandle", "()Landroid/os/UserHandle;")
+		midPhoneAccountSuggestionGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountHandleHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "hashCode", "()I")
+		midPhoneAccountSuggestionGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "getReason", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountHandleToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "toString", "()Ljava/lang/String;")
+		midPhoneAccountSuggestionHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "hashCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midPhoneAccountHandleWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountHandle)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midPhoneAccountSuggestionShouldAutoSelect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "shouldAutoSelect", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPhoneAccountSuggestionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountSuggestion)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1834,36 +2420,33 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/CallScreeningService")
+	c, err = env.FindClass("android/telecom/CallEndpointException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsCallScreeningService = env.NewGlobalRef(&c.Object)
+		clsCallEndpointException = env.NewGlobalRef(&c.Object)
+		midCallEndpointExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "<init>", "(Ljava/lang/String;I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midCallScreeningServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		midCallEndpointExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceOnScreenCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "onScreenCall", "(Landroid/telecom/Call$Details;)V")
+		midCallEndpointExceptionGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "getCode", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "onUnbind", "(Landroid/content/Intent;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallScreeningServiceRespondToCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningService)), "respondToCall", "(Landroid/telecom/Call$Details;Landroid/telecom/CallScreeningService$CallResponse;)V")
+		midCallEndpointExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1872,64 +2455,242 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/CallScreeningService$CallResponse")
+	c, err = env.FindClass("android/telecom/ConnectionRequest")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsCallScreeningServiceCallResponse = env.NewGlobalRef(&c.Object)
+		clsConnectionRequest = env.NewGlobalRef(&c.Object)
+		midConnectionRequestCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "<init>", "(Landroid/telecom/PhoneAccountHandle;Landroid/net/Uri;Landroid/os/Bundle;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
 
-		midCallScreeningServiceCallResponseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "equals", "(Ljava/lang/Object;)Z")
+		midConnectionRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "describeContents", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseGetCallComposerAttachmentsToShow, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getCallComposerAttachmentsToShow", "()I")
+		midConnectionRequestGetAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseGetDisallowCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getDisallowCall", "()Z")
+		midConnectionRequestGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getAddress", "()Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseGetRejectCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getRejectCall", "()Z")
+		midConnectionRequestGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getExtras", "()Landroid/os/Bundle;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseGetSilenceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getSilenceCall", "()Z")
+		midConnectionRequestGetParticipants, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getParticipants", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseGetSkipCallLog, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getSkipCallLog", "()Z")
+		midConnectionRequestGetRttTextStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getRttTextStream", "()Landroid/telecom/Connection$RttTextStream;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseGetSkipNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "getSkipNotification", "()Z")
+		midConnectionRequestGetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getVideoState", "()I")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midCallScreeningServiceCallResponseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallScreeningServiceCallResponse)), "hashCode", "()I")
+		midConnectionRequestIsAdhocConferenceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "isAdhocConferenceCall", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionRequestIsRequestingRtt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "isRequestingRtt", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/Conferenceable")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConferenceable = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/telecom/DisconnectCause")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsDisconnectCause = env.NewGlobalRef(&c.Object)
+		midDisconnectCauseCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "<init>", "(I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getDescription", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getLabel", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getReason", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseGetTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getTone", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midDisconnectCauseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/CallControl")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallControl = env.NewGlobalRef(&c.Object)
+
+		midCallControlGetCallId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallControl)), "getCallId", "()Landroid/os/ParcelUuid;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallControlSendEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallControl)), "sendEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/CallException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallException = env.NewGlobalRef(&c.Object)
+		midCallExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "<init>", "(Ljava/lang/String;I)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCallExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallExceptionGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "getCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -1945,7 +2706,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCallEndpoint = env.NewGlobalRef(&c.Object)
-		midCallEndpointInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpoint)), "<init>", "(Ljava/lang/CharSequence;ILandroid/os/ParcelUuid;)V")
+		midCallEndpointCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpoint)), "<init>", "(Ljava/lang/CharSequence;ILandroid/os/ParcelUuid;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -2008,6 +2769,498 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/telecom/CallRedirectionService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallRedirectionService = env.NewGlobalRef(&c.Object)
+
+		midCallRedirectionServiceCancelCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "cancelCall", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallRedirectionServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallRedirectionServiceOnPlaceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onPlaceCall", "(Landroid/net/Uri;Landroid/telecom/PhoneAccountHandle;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallRedirectionServiceOnRedirectionTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onRedirectionTimeout", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallRedirectionServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallRedirectionServicePlaceCallUnmodified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "placeCallUnmodified", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallRedirectionServiceRedirectCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "redirectCall", "(Landroid/net/Uri;Landroid/telecom/PhoneAccountHandle;Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/Conference")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConference = env.NewGlobalRef(&c.Object)
+
+		midConferenceAddConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "addConnection", "(Landroid/telecom/Connection;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "destroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetCallAudioState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getCallAudioState", "()Landroid/telecom/CallAudioState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetConferenceableConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConferenceableConnections", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetConnectionCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionCapabilities", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetConnectionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionProperties", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetConnectionStartElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionStartElapsedRealtimeMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetConnectionTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnectionTime", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getConnections", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetCurrentCallEndpoint, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getCurrentCallEndpoint", "()Landroid/telecom/CallEndpoint;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetDisconnectCause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getDisconnectCause", "()Landroid/telecom/DisconnectCause;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getExtras", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getState", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetStatusHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getStatusHints", "()Landroid/telecom/StatusHints;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetVideoProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getVideoProvider", "()Landroid/telecom/Connection$VideoProvider;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceGetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "getVideoState", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceIsRingbackRequested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "isRingbackRequested", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnAnswer, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onAnswer", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnCallAudioStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onCallAudioStateChanged", "(Landroid/telecom/CallAudioState;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnCallEndpointChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onCallEndpointChanged", "(Landroid/telecom/CallEndpoint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnConnectionAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onConnectionAdded", "(Landroid/telecom/Connection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onDisconnect", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnExtrasChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onExtrasChanged", "(Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnHold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onHold", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnMerge0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onMerge", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnMerge1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onMerge", "(Landroid/telecom/Connection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnMuteStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onMuteStateChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnPlayDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onPlayDtmfTone", "(C)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnReject, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onReject", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnSeparate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onSeparate", "(Landroid/telecom/Connection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnStopDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onStopDtmfTone", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnSwap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onSwap", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceOnUnhold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "onUnhold", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferencePutExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "putExtras", "(Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceRemoveConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "removeConnection", "(Landroid/telecom/Connection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceRemoveExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "removeExtras", "([Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSendConferenceEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "sendConferenceEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetActive, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setActive", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetConnectionCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionCapabilities", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetConnectionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionProperties", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetConnectionStartElapsedRealTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionStartElapsedRealTime", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetConnectionStartElapsedRealtimeMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionStartElapsedRealtimeMillis", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetConnectionTime, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setConnectionTime", "(J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetDialing, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setDialing", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setDisconnected", "(Landroid/telecom/DisconnectCause;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setExtras", "(Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetOnHold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setOnHold", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetRingbackRequested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setRingbackRequested", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetRinging, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setRinging", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetStatusHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setStatusHints", "(Landroid/telecom/StatusHints;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetVideoProvider, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setVideoProvider", "(Landroid/telecom/Connection;Landroid/telecom/Connection$VideoProvider;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceSetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "setVideoState", "(Landroid/telecom/Connection;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConferenceCreateFailedConference, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConference)), "createFailedConference", "(Landroid/telecom/DisconnectCause;Landroid/telecom/PhoneAccountHandle;)Landroid/telecom/Conference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/CallEventCallback")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallEventCallback = env.NewGlobalRef(&c.Object)
+
+		midCallEventCallbackOnCallEndpointChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onCallEndpointChanged", "(Landroid/telecom/CallEndpoint;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallEventCallbackOnCallStreamingFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onCallStreamingFailed", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallEventCallbackOnEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallEventCallbackOnMuteStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onMuteStateChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/telecom/InCallService")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -2024,6 +3277,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midInCallServiceGetCallAudioState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInCallService)), "getCallAudioState", "()Landroid/telecom/CallAudioState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midInCallServiceGetCalls, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInCallService)), "getCalls", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -2231,563 +3491,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/PhoneAccount")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPhoneAccount = env.NewGlobalRef(&c.Object)
-
-		midPhoneAccountDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getAddress", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getCapabilities", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getExtras", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetHighlightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getHighlightColor", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getIcon", "()Landroid/graphics/drawable/Icon;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getLabel", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetShortDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getShortDescription", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountGetSubscriptionAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "getSubscriptionAddress", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountHasCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "hasCapabilities", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountHasSimultaneousCallingRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "hasSimultaneousCallingRestriction", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountIsEnabled, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "isEnabled", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountSupportsUriScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "supportsUriScheme", "(Ljava/lang/String;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountToBuilder, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "toBuilder", "()Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilder, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccount)), "builder", "(Landroid/telecom/PhoneAccountHandle;Ljava/lang/CharSequence;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/PhoneAccount$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsPhoneAccountBuilder = env.NewGlobalRef(&c.Object)
-
-		midPhoneAccountBuilderAddSupportedUriScheme, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "addSupportedUriScheme", "(Ljava/lang/String;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "build", "()Landroid/telecom/PhoneAccount;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderClearSimultaneousCallingRestriction, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "clearSimultaneousCallingRestriction", "()Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setAddress", "(Landroid/net/Uri;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setCapabilities", "(I)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setExtras", "(Landroid/os/Bundle;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetHighlightColor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setHighlightColor", "(I)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setIcon", "(Landroid/graphics/drawable/Icon;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetShortDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setShortDescription", "(Ljava/lang/CharSequence;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midPhoneAccountBuilderSetSubscriptionAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPhoneAccountBuilder)), "setSubscriptionAddress", "(Landroid/net/Uri;)Landroid/telecom/PhoneAccount$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallEndpointException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallEndpointException = env.NewGlobalRef(&c.Object)
-		midCallEndpointExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "<init>", "(Ljava/lang/String;I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midCallEndpointExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallEndpointExceptionGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "getCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallEndpointExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEndpointException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/TelecomManager")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsManager = env.NewGlobalRef(&c.Object)
-
-		midManagerAcceptHandover, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptHandover", "(Landroid/net/Uri;ILandroid/telecom/PhoneAccountHandle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerAcceptRingingCall0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptRingingCall", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerAcceptRingingCall1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptRingingCall", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerAddNewIncomingCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNewIncomingCall", "(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerAddNewIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNewIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerCancelMissedCallsNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancelMissedCallsNotification", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerCreateManageBlockedNumbersIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createManageBlockedNumbersIntent", "()Landroid/content/Intent;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerEndCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "endCall", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetAdnUriForPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAdnUriForPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetDefaultDialerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultDialerPackage", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetDefaultOutgoingPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultOutgoingPhoneAccount", "(Ljava/lang/String;)Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetLine1Number, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLine1Number", "(Landroid/telecom/PhoneAccountHandle;)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)Landroid/telecom/PhoneAccount;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetSimCallManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCallManager", "()Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetSimCallManagerForSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCallManagerForSubscription", "(I)Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetSystemDialerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSystemDialerPackage", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetUserSelectedOutgoingPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getUserSelectedOutgoingPhoneAccount", "()Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerGetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVoiceMailNumber", "(Landroid/telecom/PhoneAccountHandle;)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerHandleMmi1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "handleMmi", "(Ljava/lang/String;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerHandleMmi2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "handleMmi", "(Ljava/lang/String;Landroid/telecom/PhoneAccountHandle;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerHasManageOngoingCallsPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasManageOngoingCallsPermission", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerIsInCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInCall", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerIsInManagedCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInManagedCall", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerIsIncomingCallPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isIncomingCallPermitted", "(Landroid/telecom/PhoneAccountHandle;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerIsOutgoingCallPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isOutgoingCallPermitted", "(Landroid/telecom/PhoneAccountHandle;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerIsTtySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isTtySupported", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerIsVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isVoiceMailNumber", "(Landroid/telecom/PhoneAccountHandle;Ljava/lang/String;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerPlaceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "placeCall", "(Landroid/net/Uri;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerRegisterPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerPhoneAccount", "(Landroid/telecom/PhoneAccount;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerShowInCallScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "showInCallScreen", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerSilenceRinger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "silenceRinger", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midManagerUnregisterPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallControlCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallControlCallback = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallEventCallback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallEventCallback = env.NewGlobalRef(&c.Object)
-
-		midCallEventCallbackOnCallEndpointChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onCallEndpointChanged", "(Landroid/telecom/CallEndpoint;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallEventCallbackOnCallStreamingFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onCallStreamingFailed", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallEventCallbackOnEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallEventCallbackOnMuteStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallEventCallback)), "onMuteStateChanged", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/Conferenceable")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConferenceable = env.NewGlobalRef(&c.Object)
-
-	}
-
 	c, err = env.FindClass("android/telecom/RemoteConnection")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -2846,6 +3549,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midRemoteConnectionGetConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConnection)), "getConference", "()Landroid/telecom/RemoteConference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRemoteConnectionGetConferenceableConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConnection)), "getConferenceableConnections", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -3217,1087 +3927,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/CallControl")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallControl = env.NewGlobalRef(&c.Object)
-
-		midCallControlGetCallId, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallControl)), "getCallId", "()Landroid/os/ParcelUuid;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallControlSendEvent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallControl)), "sendEvent", "(Ljava/lang/String;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/ConnectionRequest")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConnectionRequest = env.NewGlobalRef(&c.Object)
-		midConnectionRequestInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "<init>", "(Landroid/telecom/PhoneAccountHandle;Landroid/net/Uri;Landroid/os/Bundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestGetAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getAddress", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getExtras", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestGetRttTextStream, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getRttTextStream", "()Landroid/telecom/Connection$RttTextStream;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestGetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "getVideoState", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestIsAdhocConferenceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "isAdhocConferenceCall", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestIsRequestingRtt, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "isRequestingRtt", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionRequestWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionRequest)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/StatusHints")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsStatusHints = env.NewGlobalRef(&c.Object)
-		midStatusHintsInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "<init>", "(Ljava/lang/CharSequence;Landroid/graphics/drawable/Icon;Landroid/os/Bundle;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midStatusHintsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStatusHintsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStatusHintsGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "getExtras", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStatusHintsGetIcon, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "getIcon", "()Landroid/graphics/drawable/Icon;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStatusHintsGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "getLabel", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStatusHintsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midStatusHintsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsStatusHints)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallAudioState")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallAudioState = env.NewGlobalRef(&c.Object)
-		midCallAudioStateInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "<init>", "(ZII)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateGetActiveBluetoothDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getActiveBluetoothDevice", "()Landroid/bluetooth/BluetoothDevice;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateGetRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getRoute", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateGetSupportedRouteMask, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getSupportedRouteMask", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateIsMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "isMuted", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAudioStateAudioRouteToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "audioRouteToString", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallAttributes")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallAttributes = env.NewGlobalRef(&c.Object)
-
-		midCallAttributesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesGetAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getAddress", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesGetCallCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getCallCapabilities", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesGetCallType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getCallType", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesGetDirection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getDirection", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesGetDisplayName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getDisplayName", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesGetPhoneAccountHandle, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "getPhoneAccountHandle", "()Landroid/telecom/PhoneAccountHandle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributes)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallAttributes$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallAttributesBuilder = env.NewGlobalRef(&c.Object)
-
-		midCallAttributesBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributesBuilder)), "build", "()Landroid/telecom/CallAttributes;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesBuilderSetCallCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributesBuilder)), "setCallCapabilities", "(I)Landroid/telecom/CallAttributes$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallAttributesBuilderSetCallType, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAttributesBuilder)), "setCallType", "(I)Landroid/telecom/CallAttributes$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/ConnectionService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConnectionService = env.NewGlobalRef(&c.Object)
-
-		midConnectionServiceAddConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "addConference", "(Landroid/telecom/Conference;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceAddExistingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "addExistingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/Connection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceConferenceRemoteConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "conferenceRemoteConnections", "(Landroid/telecom/RemoteConnection;Landroid/telecom/RemoteConnection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceConnectionServiceFocusReleased, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "connectionServiceFocusReleased", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceCreateRemoteIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceCreateRemoteIncomingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteIncomingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConnection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceCreateRemoteOutgoingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteOutgoingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceCreateRemoteOutgoingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteOutgoingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConnection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onConference", "(Landroid/telecom/Connection;Landroid/telecom/Connection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnConnectionServiceFocusGained, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onConnectionServiceFocusGained", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnConnectionServiceFocusLost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onConnectionServiceFocusLost", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Conference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateIncomingConferenceFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConferenceFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateIncomingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateIncomingConnectionFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConnectionFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateIncomingHandoverConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingHandoverConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateOutgoingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Conference;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateOutgoingConferenceFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConferenceFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateOutgoingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateOutgoingConnectionFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConnectionFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnCreateOutgoingHandoverConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingHandoverConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnHandoverFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onHandoverFailed", "(Landroid/telecom/ConnectionRequest;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnRemoteConferenceAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onRemoteConferenceAdded", "(Landroid/telecom/RemoteConference;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnRemoteExistingConnectionAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onRemoteExistingConnectionAdded", "(Landroid/telecom/RemoteConnection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConnectionServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onUnbind", "(Landroid/content/Intent;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/GatewayInfo")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsGatewayInfo = env.NewGlobalRef(&c.Object)
-		midGatewayInfoInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "<init>", "(Ljava/lang/String;Landroid/net/Uri;Landroid/net/Uri;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midGatewayInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGatewayInfoGetGatewayAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "getGatewayAddress", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGatewayInfoGetGatewayProviderPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "getGatewayProviderPackageName", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGatewayInfoGetOriginalAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "getOriginalAddress", "()Landroid/net/Uri;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGatewayInfoIsEmpty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "isEmpty", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midGatewayInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallException = env.NewGlobalRef(&c.Object)
-		midCallExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "<init>", "(Ljava/lang/String;I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midCallExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallExceptionGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "getCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/CallRedirectionService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsCallRedirectionService = env.NewGlobalRef(&c.Object)
-
-		midCallRedirectionServiceCancelCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "cancelCall", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallRedirectionServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallRedirectionServiceOnPlaceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onPlaceCall", "(Landroid/net/Uri;Landroid/telecom/PhoneAccountHandle;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallRedirectionServiceOnRedirectionTimeout, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onRedirectionTimeout", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallRedirectionServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "onUnbind", "(Landroid/content/Intent;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallRedirectionServicePlaceCallUnmodified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "placeCallUnmodified", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midCallRedirectionServiceRedirectCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallRedirectionService)), "redirectCall", "(Landroid/net/Uri;Landroid/telecom/PhoneAccountHandle;Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/QueryLocationException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsQueryLocationException = env.NewGlobalRef(&c.Object)
-		midQueryLocationExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "<init>", "(Ljava/lang/String;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midQueryLocationExceptionDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midQueryLocationExceptionGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "getCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midQueryLocationExceptionWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsQueryLocationException)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/RemoteConference")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRemoteConference = env.NewGlobalRef(&c.Object)
-
-		midRemoteConferenceDisconnect, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "disconnect", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceGetConnectionCapabilities, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getConnectionCapabilities", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceGetConnectionProperties, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getConnectionProperties", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceGetDisconnectCause, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getDisconnectCause", "()Landroid/telecom/DisconnectCause;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceGetExtras, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getExtras", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceGetState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "getState", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceHold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "hold", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceMerge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "merge", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferencePlayDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "playDtmfTone", "(C)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceRegisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "registerCallback", "(Landroid/telecom/RemoteConference$Callback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceSeparate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "separate", "(Landroid/telecom/RemoteConnection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceSetCallAudioState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "setCallAudioState", "(Landroid/telecom/CallAudioState;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceStopDtmfTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "stopDtmfTone", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceSwap, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "swap", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceUnhold, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "unhold", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceUnregisterCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConference)), "unregisterCallback", "(Landroid/telecom/RemoteConference$Callback;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/RemoteConference$Callback")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRemoteConferenceCallback = env.NewGlobalRef(&c.Object)
-
-		midRemoteConferenceCallbackOnConnectionAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionAdded", "(Landroid/telecom/RemoteConference;Landroid/telecom/RemoteConnection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnConnectionCapabilitiesChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionCapabilitiesChanged", "(Landroid/telecom/RemoteConference;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnConnectionPropertiesChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionPropertiesChanged", "(Landroid/telecom/RemoteConference;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnConnectionRemoved, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onConnectionRemoved", "(Landroid/telecom/RemoteConference;Landroid/telecom/RemoteConnection;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnDestroyed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onDestroyed", "(Landroid/telecom/RemoteConference;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onDisconnected", "(Landroid/telecom/RemoteConference;Landroid/telecom/DisconnectCause;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnExtrasChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onExtrasChanged", "(Landroid/telecom/RemoteConference;Landroid/os/Bundle;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRemoteConferenceCallbackOnStateChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRemoteConferenceCallback)), "onStateChanged", "(Landroid/telecom/RemoteConference;II)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/VideoProfile")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsVideoProfile = env.NewGlobalRef(&c.Object)
-		midVideoProfileInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "<init>", "(I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midVideoProfileDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileGetQuality, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "getQuality", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileGetVideoState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "getVideoState", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileIsAudioOnly, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isAudioOnly", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileIsBidirectional, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isBidirectional", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileIsPaused, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isPaused", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileIsReceptionEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isReceptionEnabled", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileIsTransmissionEnabled, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isTransmissionEnabled", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileIsVideo, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "isVideo", "(I)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileVideoStateToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfile)), "videoStateToString", "(I)Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/telecom/VideoProfile$CameraCapabilities")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsVideoProfileCameraCapabilities = env.NewGlobalRef(&c.Object)
-
-		midVideoProfileCameraCapabilitiesDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileCameraCapabilitiesGetHeight, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "getHeight", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileCameraCapabilitiesGetMaxZoom, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "getMaxZoom", "()F")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileCameraCapabilitiesGetWidth, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "getWidth", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileCameraCapabilitiesIsZoomSupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "isZoomSupported", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midVideoProfileCameraCapabilitiesWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsVideoProfileCameraCapabilities)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/telecom/Connection")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -4363,6 +3992,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midConnectionGetConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "getConference", "()Landroid/telecom/Conference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionGetConferenceables, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnection)), "getConferenceables", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -5066,82 +4702,606 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/telecom/DisconnectCause")
+	c, err = env.FindClass("android/telecom/TelecomManager")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsDisconnectCause = env.NewGlobalRef(&c.Object)
-		midDisconnectCauseInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "<init>", "(I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
+		clsManager = env.NewGlobalRef(&c.Object)
 
-		midDisconnectCauseDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "describeContents", "()I")
+		midManagerAcceptHandover, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptHandover", "(Landroid/net/Uri;ILandroid/telecom/PhoneAccountHandle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "equals", "(Ljava/lang/Object;)Z")
+		midManagerAcceptRingingCall0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptRingingCall", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseGetCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getCode", "()I")
+		midManagerAcceptRingingCall1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "acceptRingingCall", "(I)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseGetDescription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getDescription", "()Ljava/lang/CharSequence;")
+		midManagerAddNewIncomingCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNewIncomingCall", "(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseGetLabel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getLabel", "()Ljava/lang/CharSequence;")
+		midManagerAddNewIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "addNewIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/os/Bundle;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseGetReason, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getReason", "()Ljava/lang/String;")
+		midManagerCancelMissedCallsNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "cancelMissedCallsNotification", "()V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseGetTone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "getTone", "()I")
+		midManagerCreateManageBlockedNumbersIntent, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "createManageBlockedNumbersIntent", "()Landroid/content/Intent;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "hashCode", "()I")
+		midManagerEndCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "endCall", "()Z")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "toString", "()Ljava/lang/String;")
+		midManagerGetAdnUriForPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getAdnUriForPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)Landroid/net/Uri;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
-		midDisconnectCauseWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		midManagerGetCallCapablePhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getCallCapablePhoneAccounts", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetDefaultDialerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultDialerPackage", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetDefaultOutgoingPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getDefaultOutgoingPhoneAccount", "(Ljava/lang/String;)Landroid/telecom/PhoneAccountHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetLine1Number, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLine1Number", "(Landroid/telecom/PhoneAccountHandle;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetOwnSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getOwnSelfManagedPhoneAccounts", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)Landroid/telecom/PhoneAccount;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetRegisteredPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getRegisteredPhoneAccounts", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetSelfManagedPhoneAccounts, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSelfManagedPhoneAccounts", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetSimCallManager, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCallManager", "()Landroid/telecom/PhoneAccountHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetSimCallManagerForSubscription, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSimCallManagerForSubscription", "(I)Landroid/telecom/PhoneAccountHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetSystemDialerPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getSystemDialerPackage", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetUserSelectedOutgoingPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getUserSelectedOutgoingPhoneAccount", "()Landroid/telecom/PhoneAccountHandle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getVoiceMailNumber", "(Landroid/telecom/PhoneAccountHandle;)Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerHandleMmi1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "handleMmi", "(Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerHandleMmi2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "handleMmi", "(Ljava/lang/String;Landroid/telecom/PhoneAccountHandle;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerHasManageOngoingCallsPermission, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "hasManageOngoingCallsPermission", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsInCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInCall", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsInManagedCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isInManagedCall", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsIncomingCallPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isIncomingCallPermitted", "(Landroid/telecom/PhoneAccountHandle;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsOutgoingCallPermitted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isOutgoingCallPermitted", "(Landroid/telecom/PhoneAccountHandle;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsTtySupported, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isTtySupported", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerIsVoiceMailNumber, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "isVoiceMailNumber", "(Landroid/telecom/PhoneAccountHandle;Ljava/lang/String;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerPlaceCall, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "placeCall", "(Landroid/net/Uri;Landroid/os/Bundle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerRegisterPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "registerPhoneAccount", "(Landroid/telecom/PhoneAccount;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerShowInCallScreen, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "showInCallScreen", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerSilenceRinger, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "silenceRinger", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerUnregisterPhoneAccount, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "unregisterPhoneAccount", "(Landroid/telecom/PhoneAccountHandle;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/ConnectionService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConnectionService = env.NewGlobalRef(&c.Object)
+
+		midConnectionServiceAddConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "addConference", "(Landroid/telecom/Conference;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceAddExistingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "addExistingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/Connection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceConferenceRemoteConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "conferenceRemoteConnections", "(Landroid/telecom/RemoteConnection;Landroid/telecom/RemoteConnection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceConnectionServiceFocusReleased, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "connectionServiceFocusReleased", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceCreateRemoteIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceCreateRemoteIncomingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteIncomingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConnection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceCreateRemoteOutgoingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteOutgoingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceCreateRemoteOutgoingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "createRemoteOutgoingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/RemoteConnection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceGetAllConferences, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "getAllConferences", "()Ljava/util/Collection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceGetAllConnections, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "getAllConnections", "()Ljava/util/Collection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onConference", "(Landroid/telecom/Connection;Landroid/telecom/Connection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnConnectionServiceFocusGained, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onConnectionServiceFocusGained", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnConnectionServiceFocusLost, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onConnectionServiceFocusLost", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateIncomingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Conference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateIncomingConferenceFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConferenceFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateIncomingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateIncomingConnectionFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingConnectionFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateIncomingHandoverConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateIncomingHandoverConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateOutgoingConference, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConference", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Conference;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateOutgoingConferenceFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConferenceFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateOutgoingConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateOutgoingConnectionFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingConnectionFailed", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnCreateOutgoingHandoverConnection, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onCreateOutgoingHandoverConnection", "(Landroid/telecom/PhoneAccountHandle;Landroid/telecom/ConnectionRequest;)Landroid/telecom/Connection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnHandoverFailed, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onHandoverFailed", "(Landroid/telecom/ConnectionRequest;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnRemoteConferenceAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onRemoteConferenceAdded", "(Landroid/telecom/RemoteConference;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnRemoteExistingConnectionAdded, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onRemoteExistingConnectionAdded", "(Landroid/telecom/RemoteConnection;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConnectionServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConnectionService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/GatewayInfo")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsGatewayInfo = env.NewGlobalRef(&c.Object)
+		midGatewayInfoCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "<init>", "(Ljava/lang/String;Landroid/net/Uri;Landroid/net/Uri;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midGatewayInfoDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGatewayInfoGetGatewayAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "getGatewayAddress", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGatewayInfoGetGatewayProviderPackageName, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "getGatewayProviderPackageName", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGatewayInfoGetOriginalAddress, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "getOriginalAddress", "()Landroid/net/Uri;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGatewayInfoIsEmpty, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "isEmpty", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midGatewayInfoWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsGatewayInfo)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/telecom/CallAudioState")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsCallAudioState = env.NewGlobalRef(&c.Object)
+		midCallAudioStateCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "<init>", "(ZII)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateGetActiveBluetoothDevice, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getActiveBluetoothDevice", "()Landroid/bluetooth/BluetoothDevice;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateGetRoute, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getRoute", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateGetSupportedBluetoothDevices, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getSupportedBluetoothDevices", "()Ljava/util/Collection;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateGetSupportedRouteMask, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "getSupportedRouteMask", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateIsMuted, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "isMuted", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midCallAudioStateAudioRouteToString, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsCallAudioState)), "audioRouteToString", "(I)Ljava/lang/String;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

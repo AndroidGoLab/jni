@@ -32,7 +32,7 @@ func NewColorFilter(vm *jni.VM) (*ColorFilter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorFilter)), midColorFilterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorFilter)), midColorFilterCtor)
 		if err != nil {
 			return err
 		}

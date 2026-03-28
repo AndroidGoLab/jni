@@ -50,7 +50,7 @@ func NewHidDeviceAppSdpSettings(vm *jni.VM, arg0 string, arg1 string, arg2 strin
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHidDeviceAppSdpSettings)), midHidDeviceAppSdpSettingsInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ByteValue(arg3), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHidDeviceAppSdpSettings)), midHidDeviceAppSdpSettingsCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ByteValue(arg3), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}

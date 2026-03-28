@@ -32,7 +32,7 @@ func NewEGL14(vm *jni.VM) (*EGL14, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEGL14)), midEGL14Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEGL14)), midEGL14Ctor)
 		if err != nil {
 			return err
 		}

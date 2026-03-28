@@ -32,7 +32,7 @@ func NewStore(vm *jni.VM) (*Store, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStore)), midStoreInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStore)), midStoreCtor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewPrintWriterPrinter(vm *jni.VM, arg0 *jni.Object) (*PrintWriterPrinter, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintWriterPrinter)), midPrintWriterPrinterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPrintWriterPrinter)), midPrintWriterPrinterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewAndroidCharacter(vm *jni.VM) (*AndroidCharacter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAndroidCharacter)), midAndroidCharacterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAndroidCharacter)), midAndroidCharacterCtor)
 		if err != nil {
 			return err
 		}

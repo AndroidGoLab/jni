@@ -39,7 +39,7 @@ func NewCreateCredentialRequest(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), midCreateCredentialRequestInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCreateCredentialRequest)), midCreateCredentialRequestCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

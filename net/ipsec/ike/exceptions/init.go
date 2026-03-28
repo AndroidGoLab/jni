@@ -23,40 +23,40 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsIkeNetworkLostException           *jni.GlobalRef
-	midIkeNetworkLostExceptionInit       jni.MethodID
-	midIkeNetworkLostExceptionGetNetwork jni.MethodID
-
 	clsIkeProtocolException             *jni.GlobalRef
 	midIkeProtocolExceptionGetErrorType jni.MethodID
 
-	clsIkeTimeoutException     *jni.GlobalRef
-	midIkeTimeoutExceptionInit jni.MethodID
-
-	clsIkeNonProtocolException *jni.GlobalRef
-
-	clsInvalidKeException           *jni.GlobalRef
-	midInvalidKeExceptionInit       jni.MethodID
-	midInvalidKeExceptionGetDhGroup jni.MethodID
-
-	clsInvalidMajorVersionException                *jni.GlobalRef
-	midInvalidMajorVersionExceptionInit            jni.MethodID
-	midInvalidMajorVersionExceptionGetMajorVersion jni.MethodID
-
 	clsInvalidSelectorsException                   *jni.GlobalRef
-	midInvalidSelectorsExceptionInit               jni.MethodID
+	midInvalidSelectorsExceptionCtor               jni.MethodID
 	midInvalidSelectorsExceptionGetIpSecPacketInfo jni.MethodID
 	midInvalidSelectorsExceptionGetIpSecSpi        jni.MethodID
 
-	clsIkeInternalException     *jni.GlobalRef
-	midIkeInternalExceptionInit jni.MethodID
+	clsInvalidKeException           *jni.GlobalRef
+	midInvalidKeExceptionCtor       jni.MethodID
+	midInvalidKeExceptionGetDhGroup jni.MethodID
+
+	clsIkeNetworkLostException           *jni.GlobalRef
+	midIkeNetworkLostExceptionCtor       jni.MethodID
+	midIkeNetworkLostExceptionGetNetwork jni.MethodID
 
 	clsIkeException *jni.GlobalRef
 
+	clsInvalidMajorVersionException                *jni.GlobalRef
+	midInvalidMajorVersionExceptionCtor            jni.MethodID
+	midInvalidMajorVersionExceptionGetMajorVersion jni.MethodID
+
+	clsIkeInternalException     *jni.GlobalRef
+	midIkeInternalExceptionCtor jni.MethodID
+
 	clsIkeIOException            *jni.GlobalRef
-	midIkeIOExceptionInit        jni.MethodID
+	midIkeIOExceptionCtor        jni.MethodID
 	midIkeIOExceptionGetCause0   jni.MethodID
 	midIkeIOExceptionGetCause0_1 jni.MethodID
+
+	clsIkeNonProtocolException *jni.GlobalRef
+
+	clsIkeTimeoutException     *jni.GlobalRef
+	midIkeTimeoutExceptionCtor jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -77,27 +77,6 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
-	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeNetworkLostException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIkeNetworkLostException = env.NewGlobalRef(&c.Object)
-		midIkeNetworkLostExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), "<init>", "(Landroid/net/Network;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midIkeNetworkLostExceptionGetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), "getNetwork", "()Landroid/net/Network;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeProtocolException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -115,72 +94,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeTimeoutException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIkeTimeoutException = env.NewGlobalRef(&c.Object)
-		midIkeTimeoutExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeTimeoutException)), "<init>", "(Ljava/lang/String;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeNonProtocolException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsIkeNonProtocolException = env.NewGlobalRef(&c.Object)
-
-	}
-
-	c, err = env.FindClass("android/net/ipsec/ike/exceptions/InvalidKeException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsInvalidKeException = env.NewGlobalRef(&c.Object)
-		midInvalidKeExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), "<init>", "(I)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midInvalidKeExceptionGetDhGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), "getDhGroup", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/net/ipsec/ike/exceptions/InvalidMajorVersionException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsInvalidMajorVersionException = env.NewGlobalRef(&c.Object)
-		midInvalidMajorVersionExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), "<init>", "(B)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midInvalidMajorVersionExceptionGetMajorVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), "getMajorVersion", "()B")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/net/ipsec/ike/exceptions/InvalidSelectorsException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -188,7 +101,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsInvalidSelectorsException = env.NewGlobalRef(&c.Object)
-		midInvalidSelectorsExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidSelectorsException)), "<init>", "(I[B)V")
+		midInvalidSelectorsExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidSelectorsException)), "<init>", "(I[B)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -209,15 +122,43 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeInternalException")
+	c, err = env.FindClass("android/net/ipsec/ike/exceptions/InvalidKeException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
 		// report at invocation time instead of failing the entire init.
 		env.ExceptionClear()
 	} else {
-		clsIkeInternalException = env.NewGlobalRef(&c.Object)
-		midIkeInternalExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeInternalException)), "<init>", "(Ljava/lang/String;Ljava/lang/Throwable;)V")
+		clsInvalidKeException = env.NewGlobalRef(&c.Object)
+		midInvalidKeExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), "<init>", "(I)V")
 		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midInvalidKeExceptionGetDhGroup, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), "getDhGroup", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeNetworkLostException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIkeNetworkLostException = env.NewGlobalRef(&c.Object)
+		midIkeNetworkLostExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), "<init>", "(Landroid/net/Network;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midIkeNetworkLostExceptionGetNetwork, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeNetworkLostException)), "getNetwork", "()Landroid/net/Network;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
 			env.ExceptionClear()
 		}
 
@@ -233,6 +174,41 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/net/ipsec/ike/exceptions/InvalidMajorVersionException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsInvalidMajorVersionException = env.NewGlobalRef(&c.Object)
+		midInvalidMajorVersionExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), "<init>", "(B)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midInvalidMajorVersionExceptionGetMajorVersion, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsInvalidMajorVersionException)), "getMajorVersion", "()B")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeInternalException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIkeInternalException = env.NewGlobalRef(&c.Object)
+		midIkeInternalExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeInternalException)), "<init>", "(Ljava/lang/String;Ljava/lang/Throwable;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeIOException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -240,7 +216,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsIkeIOException = env.NewGlobalRef(&c.Object)
-		midIkeIOExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeIOException)), "<init>", "(Ljava/io/IOException;)V")
+		midIkeIOExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeIOException)), "<init>", "(Ljava/io/IOException;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -256,6 +232,30 @@ func doInit(env *jni.Env) error {
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeNonProtocolException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIkeNonProtocolException = env.NewGlobalRef(&c.Object)
+
+	}
+
+	c, err = env.FindClass("android/net/ipsec/ike/exceptions/IkeTimeoutException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsIkeTimeoutException = env.NewGlobalRef(&c.Object)
+		midIkeTimeoutExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsIkeTimeoutException)), "<init>", "(Ljava/lang/String;)V")
+		if err != nil {
 			env.ExceptionClear()
 		}
 

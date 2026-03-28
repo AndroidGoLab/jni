@@ -33,7 +33,7 @@ func NewArcShape(vm *jni.VM, arg0 float32, arg1 float32) (*ArcShape, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArcShape)), midArcShapeInit, jni.FloatValue(arg0), jni.FloatValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArcShape)), midArcShapeCtor, jni.FloatValue(arg0), jni.FloatValue(arg1))
 		if err != nil {
 			return err
 		}

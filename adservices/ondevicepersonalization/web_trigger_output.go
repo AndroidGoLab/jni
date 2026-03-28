@@ -51,6 +51,38 @@ func (m *WebTriggerOutput) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetEventLogRecords calls android.adservices.ondevicepersonalization.WebTriggerOutput.getEventLogRecords.
+func (m *WebTriggerOutput) GetEventLogRecords() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midWebTriggerOutputGetEventLogRecords == nil {
+			callErr = fmt.Errorf("android.adservices.ondevicepersonalization.WebTriggerOutput.getEventLogRecords is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midWebTriggerOutputGetEventLogRecords,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetRequestLogRecord calls android.adservices.ondevicepersonalization.WebTriggerOutput.getRequestLogRecord.
 func (m *WebTriggerOutput) GetRequestLogRecord() (*jni.Object, error) {
 	var result *jni.Object

@@ -32,7 +32,7 @@ func NewTransformation(vm *jni.VM) (*Transformation, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTransformation)), midTransformationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTransformation)), midTransformationCtor)
 		if err != nil {
 			return err
 		}

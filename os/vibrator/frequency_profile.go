@@ -23,6 +23,71 @@ type FrequencyProfile struct {
 	Obj *jni.GlobalRef
 }
 
+// GetFrequenciesOutputAcceleration calls android.os.vibrator.VibratorFrequencyProfile.getFrequenciesOutputAcceleration.
+func (m *FrequencyProfile) GetFrequenciesOutputAcceleration() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFrequencyProfileGetFrequenciesOutputAcceleration == nil {
+			callErr = fmt.Errorf("android.os.vibrator.VibratorFrequencyProfile.getFrequenciesOutputAcceleration is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFrequencyProfileGetFrequenciesOutputAcceleration,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFrequencyRange calls android.os.vibrator.VibratorFrequencyProfile.getFrequencyRange.
+func (m *FrequencyProfile) GetFrequencyRange(arg0 float32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFrequencyProfileGetFrequencyRange == nil {
+			callErr = fmt.Errorf("android.os.vibrator.VibratorFrequencyProfile.getFrequencyRange is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFrequencyProfileGetFrequencyRange, jni.FloatValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMaxFrequencyHz calls android.os.vibrator.VibratorFrequencyProfile.getMaxFrequencyHz.
 func (m *FrequencyProfile) GetMaxFrequencyHz() (float32, error) {
 	var result float32

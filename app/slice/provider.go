@@ -224,6 +224,39 @@ func (m *Provider) OnCreatePermissionRequest(arg0 *jni.Object) (*jni.Object, err
 	return result, callErr
 }
 
+// OnGetSliceDescendants calls android.app.slice.SliceProvider.onGetSliceDescendants.
+func (m *Provider) OnGetSliceDescendants(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midProviderOnGetSliceDescendants == nil {
+			callErr = fmt.Errorf("android.app.slice.SliceProvider.onGetSliceDescendants is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midProviderOnGetSliceDescendants, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // OnMapIntentToUri calls android.app.slice.SliceProvider.onMapIntentToUri.
 func (m *Provider) OnMapIntentToUri(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

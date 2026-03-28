@@ -33,7 +33,7 @@ func NewSSLSessionCache(vm *jni.VM, arg0 *jni.Object) (*SSLSessionCache, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSSLSessionCache)), midSSLSessionCacheInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSSLSessionCache)), midSSLSessionCacheCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

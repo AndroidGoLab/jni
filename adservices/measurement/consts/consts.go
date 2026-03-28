@@ -3,11 +3,11 @@
 package consts
 
 const (
-	MeasurementApiStateDisabled     int = 0
-	MeasurementApiStateEnabled      int = 1
 	Creator                         int = 0
 	DeletionModeAll                 int = 0
 	DeletionModeExcludeInternalData int = 1
 	MatchBehaviorDelete             int = 0
 	MatchBehaviorPreserve           int = 1
+	MeasurementApiStateDisabled     int = 0
+	MeasurementApiStateEnabled      int = 1
 )

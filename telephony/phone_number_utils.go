@@ -32,7 +32,7 @@ func NewPhoneNumberUtils(vm *jni.VM) (*PhoneNumberUtils, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneNumberUtils)), midPhoneNumberUtilsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneNumberUtils)), midPhoneNumberUtilsCtor)
 		if err != nil {
 			return err
 		}

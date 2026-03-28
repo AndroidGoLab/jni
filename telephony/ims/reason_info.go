@@ -39,7 +39,7 @@ func NewReasonInfo(vm *jni.VM, arg0 int32, arg1 int32, arg2 string) (*ReasonInfo
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReasonInfo)), midReasonInfoInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsReasonInfo)), midReasonInfoCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

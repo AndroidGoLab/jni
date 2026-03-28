@@ -33,7 +33,7 @@ func NewMenuInflater(vm *jni.VM, arg0 *jni.Object) (*MenuInflater, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMenuInflater)), midMenuInflaterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMenuInflater)), midMenuInflaterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

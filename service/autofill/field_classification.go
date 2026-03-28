@@ -23,6 +23,38 @@ type FieldClassification struct {
 	Obj *jni.GlobalRef
 }
 
+// GetMatches calls android.service.autofill.FieldClassification.getMatches.
+func (m *FieldClassification) GetMatches() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFieldClassificationGetMatches == nil {
+			callErr = fmt.Errorf("android.service.autofill.FieldClassification.getMatches is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFieldClassificationGetMatches,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // ToString calls android.service.autofill.FieldClassification.toString.
 func (m *FieldClassification) ToString() (string, error) {
 	var result string

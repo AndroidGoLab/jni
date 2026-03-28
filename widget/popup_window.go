@@ -33,7 +33,7 @@ func NewPopupWindow(vm *jni.VM, arg0 *jni.Object) (*PopupWindow, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPopupWindow)), midPopupWindowInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPopupWindow)), midPopupWindowCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

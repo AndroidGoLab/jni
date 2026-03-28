@@ -32,7 +32,7 @@ func NewICUUncheckedIOException(vm *jni.VM) (*ICUUncheckedIOException, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsICUUncheckedIOException)), midICUUncheckedIOExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsICUUncheckedIOException)), midICUUncheckedIOExceptionCtor)
 		if err != nil {
 			return err
 		}

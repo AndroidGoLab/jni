@@ -32,7 +32,7 @@ func NewContract(vm *jni.VM) (*Contract, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContract)), midContractInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContract)), midContractCtor)
 		if err != nil {
 			return err
 		}

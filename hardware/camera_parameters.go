@@ -293,6 +293,38 @@ func (m *CameraParameters) GetFocalLength() (float32, error) {
 	return result, callErr
 }
 
+// GetFocusAreas calls android.hardware.Camera$Parameters.getFocusAreas.
+func (m *CameraParameters) GetFocusAreas() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetFocusAreas == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getFocusAreas is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetFocusAreas,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFocusDistances calls android.hardware.Camera$Parameters.getFocusDistances.
 func (m *CameraParameters) GetFocusDistances(arg0 *jni.Object) error {
 
@@ -606,6 +638,38 @@ func (m *CameraParameters) GetMaxZoom() (int32, error) {
 	return result, callErr
 }
 
+// GetMeteringAreas calls android.hardware.Camera$Parameters.getMeteringAreas.
+func (m *CameraParameters) GetMeteringAreas() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetMeteringAreas == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getMeteringAreas is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetMeteringAreas,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMinExposureCompensation calls android.hardware.Camera$Parameters.getMinExposureCompensation.
 func (m *CameraParameters) GetMinExposureCompensation() (int32, error) {
 	var result int32
@@ -852,6 +916,454 @@ func (m *CameraParameters) GetSceneMode() (string, error) {
 	return result, callErr
 }
 
+// GetSupportedAntibanding calls android.hardware.Camera$Parameters.getSupportedAntibanding.
+func (m *CameraParameters) GetSupportedAntibanding() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedAntibanding == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedAntibanding is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedAntibanding,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedColorEffects calls android.hardware.Camera$Parameters.getSupportedColorEffects.
+func (m *CameraParameters) GetSupportedColorEffects() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedColorEffects == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedColorEffects is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedColorEffects,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedFlashModes calls android.hardware.Camera$Parameters.getSupportedFlashModes.
+func (m *CameraParameters) GetSupportedFlashModes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedFlashModes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedFlashModes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedFlashModes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedFocusModes calls android.hardware.Camera$Parameters.getSupportedFocusModes.
+func (m *CameraParameters) GetSupportedFocusModes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedFocusModes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedFocusModes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedFocusModes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedJpegThumbnailSizes calls android.hardware.Camera$Parameters.getSupportedJpegThumbnailSizes.
+func (m *CameraParameters) GetSupportedJpegThumbnailSizes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedJpegThumbnailSizes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedJpegThumbnailSizes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedJpegThumbnailSizes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPictureFormats calls android.hardware.Camera$Parameters.getSupportedPictureFormats.
+func (m *CameraParameters) GetSupportedPictureFormats() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedPictureFormats == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedPictureFormats is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedPictureFormats,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPictureSizes calls android.hardware.Camera$Parameters.getSupportedPictureSizes.
+func (m *CameraParameters) GetSupportedPictureSizes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedPictureSizes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedPictureSizes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedPictureSizes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPreviewFormats calls android.hardware.Camera$Parameters.getSupportedPreviewFormats.
+func (m *CameraParameters) GetSupportedPreviewFormats() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedPreviewFormats == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedPreviewFormats is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedPreviewFormats,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPreviewFpsRange calls android.hardware.Camera$Parameters.getSupportedPreviewFpsRange.
+func (m *CameraParameters) GetSupportedPreviewFpsRange() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedPreviewFpsRange == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedPreviewFpsRange is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedPreviewFpsRange,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPreviewFrameRates calls android.hardware.Camera$Parameters.getSupportedPreviewFrameRates.
+func (m *CameraParameters) GetSupportedPreviewFrameRates() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedPreviewFrameRates == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedPreviewFrameRates is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedPreviewFrameRates,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPreviewSizes calls android.hardware.Camera$Parameters.getSupportedPreviewSizes.
+func (m *CameraParameters) GetSupportedPreviewSizes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedPreviewSizes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedPreviewSizes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedPreviewSizes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedSceneModes calls android.hardware.Camera$Parameters.getSupportedSceneModes.
+func (m *CameraParameters) GetSupportedSceneModes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedSceneModes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedSceneModes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedSceneModes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedVideoSizes calls android.hardware.Camera$Parameters.getSupportedVideoSizes.
+func (m *CameraParameters) GetSupportedVideoSizes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedVideoSizes == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedVideoSizes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedVideoSizes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedWhiteBalance calls android.hardware.Camera$Parameters.getSupportedWhiteBalance.
+func (m *CameraParameters) GetSupportedWhiteBalance() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetSupportedWhiteBalance == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getSupportedWhiteBalance is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetSupportedWhiteBalance,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetVerticalViewAngle calls android.hardware.Camera$Parameters.getVerticalViewAngle.
 func (m *CameraParameters) GetVerticalViewAngle() (float32, error) {
 	var result float32
@@ -950,6 +1462,38 @@ func (m *CameraParameters) GetZoom() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetZoomRatios calls android.hardware.Camera$Parameters.getZoomRatios.
+func (m *CameraParameters) GetZoomRatios() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCameraParametersGetZoomRatios == nil {
+			callErr = fmt.Errorf("android.hardware.Camera$Parameters.getZoomRatios is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCameraParametersGetZoomRatios,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

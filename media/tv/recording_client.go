@@ -39,7 +39,7 @@ func NewRecordingClient(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 *jni.Obj
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecordingClient)), midRecordingClientInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecordingClient)), midRecordingClientCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

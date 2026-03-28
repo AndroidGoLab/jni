@@ -5,58 +5,6 @@ package util
 import "github.com/AndroidGoLab/jni/util/consts"
 
 const (
-	BeginArray                = consts.BeginArray
-	BeginObject               = consts.BeginObject
-	Boolean                   = consts.Boolean
-	EndArray                  = consts.EndArray
-	EndDocument               = consts.EndDocument
-	EndObject                 = consts.EndObject
-	Name                      = consts.Name
-	Null                      = consts.Null
-	Number                    = consts.Number
-	String                    = consts.String
-	Nothing                   = consts.Nothing
-	WildCard                  = consts.WildCard
-	Creator                   = consts.Creator
-	Iso88591                  = consts.Iso88591
-	UsAscii                   = consts.UsAscii
-	Utf16                     = consts.Utf16
-	Utf8                      = consts.Utf8
-	DomainName                = consts.DomainName
-	EmailAddress              = consts.EmailAddress
-	IpAddress                 = consts.IpAddress
-	Phone                     = consts.Phone
-	TopLevelDomain            = consts.TopLevelDomain
-	WebUrl                    = consts.WebUrl
-	Inherit                   = consts.Inherit
-	Locale                    = consts.Locale
-	Ltr                       = consts.Ltr
-	Rtl                       = consts.Rtl
-	Epsilon                   = consts.Epsilon
-	LowestValue               = consts.LowestValue
-	MaxExponent               = consts.MaxExponent
-	MaxValue                  = consts.MaxValue
-	MinExponent               = consts.MinExponent
-	MinNormal                 = consts.MinNormal
-	MinValue                  = consts.MinValue
-	NegativeInfinity          = consts.NegativeInfinity
-	NegativeZero              = consts.NegativeZero
-	Nan                       = consts.Nan
-	PositiveInfinity          = consts.PositiveInfinity
-	PositiveZero              = consts.PositiveZero
-	SizeConst                 = consts.SizeConst
-	Assert                    = consts.Assert
-	Error                     = consts.Error
-	Info                      = consts.Info
-	Verbose                   = consts.Verbose
-	Warn                      = consts.Warn
-	Crlf                      = consts.Crlf
-	Default                   = consts.Default
-	NoClose                   = consts.NoClose
-	NoPadding                 = consts.NoPadding
-	NoWrap                    = consts.NoWrap
-	UrlSafe                   = consts.UrlSafe
-	Zero                      = consts.Zero
 	ComplexMantissaMask       = consts.ComplexMantissaMask
 	ComplexMantissaShift      = consts.ComplexMantissaShift
 	ComplexRadix0p23          = consts.ComplexRadix0p23
@@ -97,18 +45,70 @@ const (
 	TypeNull                  = consts.TypeNull
 	TypeReference             = consts.TypeReference
 	TypeString                = consts.TypeString
-)
-
-const (
-	Debug   = consts.Debug
-	Logd    = consts.Logd
-	Logv    = consts.Logv
-	Profile = consts.Profile
-	Release = consts.Release
+	BeginArray                = consts.BeginArray
+	BeginObject               = consts.BeginObject
+	Boolean                   = consts.Boolean
+	EndArray                  = consts.EndArray
+	EndDocument               = consts.EndDocument
+	EndObject                 = consts.EndObject
+	Name                      = consts.Name
+	Null                      = consts.Null
+	Number                    = consts.Number
+	String                    = consts.String
+	Crlf                      = consts.Crlf
+	Default                   = consts.Default
+	NoClose                   = consts.NoClose
+	NoPadding                 = consts.NoPadding
+	NoWrap                    = consts.NoWrap
+	UrlSafe                   = consts.UrlSafe
+	Epsilon                   = consts.Epsilon
+	LowestValue               = consts.LowestValue
+	MaxExponent               = consts.MaxExponent
+	MaxValue                  = consts.MaxValue
+	MinExponent               = consts.MinExponent
+	MinNormal                 = consts.MinNormal
+	MinValue                  = consts.MinValue
+	NegativeInfinity          = consts.NegativeInfinity
+	NegativeZero              = consts.NegativeZero
+	Nan                       = consts.Nan
+	PositiveInfinity          = consts.PositiveInfinity
+	PositiveZero              = consts.PositiveZero
+	SizeConst                 = consts.SizeConst
+	Nothing                   = consts.Nothing
+	WildCard                  = consts.WildCard
+	Creator                   = consts.Creator
+	DomainName                = consts.DomainName
+	EmailAddress              = consts.EmailAddress
+	IpAddress                 = consts.IpAddress
+	Phone                     = consts.Phone
+	TopLevelDomain            = consts.TopLevelDomain
+	WebUrl                    = consts.WebUrl
+	Iso88591                  = consts.Iso88591
+	UsAscii                   = consts.UsAscii
+	Utf16                     = consts.Utf16
+	Utf8                      = consts.Utf8
+	Zero                      = consts.Zero
+	Assert                    = consts.Assert
+	Debug                     = consts.Debug
+	Error                     = consts.Error
+	Info                      = consts.Info
+	Verbose                   = consts.Verbose
+	Warn                      = consts.Warn
+	Inherit                   = consts.Inherit
+	Locale                    = consts.Locale
+	Ltr                       = consts.Ltr
+	Rtl                       = consts.Rtl
 )
 
 const (
 	GoodIriChar                = consts.GoodIriChar
 	TopLevelDomainStr          = consts.TopLevelDomainStr
 	TopLevelDomainStrForWebUrl = consts.TopLevelDomainStrForWebUrl
+)
+
+const (
+	Logd    = consts.Logd
+	Logv    = consts.Logv
+	Profile = consts.Profile
+	Release = consts.Release
 )

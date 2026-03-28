@@ -32,7 +32,7 @@ func NewLong4(vm *jni.VM) (*Long4, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLong4)), midLong4Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLong4)), midLong4Ctor)
 		if err != nil {
 			return err
 		}

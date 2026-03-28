@@ -32,7 +32,7 @@ func NewNetworkSlicingConfig(vm *jni.VM) (*NetworkSlicingConfig, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkSlicingConfig)), midNetworkSlicingConfigInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkSlicingConfig)), midNetworkSlicingConfigCtor)
 		if err != nil {
 			return err
 		}
@@ -93,6 +93,70 @@ func (m *NetworkSlicingConfig) Equals(arg0 *jni.Object) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSliceInfo calls android.telephony.data.NetworkSlicingConfig.getSliceInfo.
+func (m *NetworkSlicingConfig) GetSliceInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNetworkSlicingConfigGetSliceInfo == nil {
+			callErr = fmt.Errorf("android.telephony.data.NetworkSlicingConfig.getSliceInfo is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNetworkSlicingConfigGetSliceInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUrspRules calls android.telephony.data.NetworkSlicingConfig.getUrspRules.
+func (m *NetworkSlicingConfig) GetUrspRules() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midNetworkSlicingConfigGetUrspRules == nil {
+			callErr = fmt.Errorf("android.telephony.data.NetworkSlicingConfig.getUrspRules is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midNetworkSlicingConfigGetUrspRules,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

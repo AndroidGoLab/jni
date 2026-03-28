@@ -9,6 +9,10 @@ classes:
       go_type: Build
       obtain: constructor
       static_methods:
+        - java_method: getFingerprintedPartitions
+          go_name: GetFingerprintedPartitions
+          returns: java.util.List<android.os.Build$Partition>
+          error: true
         - java_method: getMajorSdkVersion
           go_name: GetMajorSdkVersion
           params:

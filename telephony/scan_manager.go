@@ -32,7 +32,7 @@ func NewScanManager(vm *jni.VM) (*ScanManager, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScanManager)), midScanManagerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScanManager)), midScanManagerCtor)
 		if err != nil {
 			return err
 		}

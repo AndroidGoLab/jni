@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsEnvironment                                  *jni.GlobalRef
-	midEnvironmentInit                              jni.MethodID
+	midEnvironmentCtor                              jni.MethodID
 	midEnvironmentGetDataDirectory                  jni.MethodID
 	midEnvironmentGetDownloadCacheDirectory         jni.MethodID
 	midEnvironmentGetExternalStorageDirectory       jni.MethodID
@@ -69,7 +69,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsEnvironment = env.NewGlobalRef(&c.Object)
-		midEnvironmentInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "<init>", "()V")
+		midEnvironmentCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsEnvironment)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

@@ -33,7 +33,7 @@ func NewAnnotation(vm *jni.VM, arg0 *jni.Object) (*Annotation, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnnotation)), midAnnotationInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAnnotation)), midAnnotationCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

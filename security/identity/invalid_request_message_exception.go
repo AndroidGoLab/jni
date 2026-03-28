@@ -38,7 +38,7 @@ func NewInvalidRequestMessageException(vm *jni.VM, arg0 string) (*InvalidRequest
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidRequestMessageException)), midInvalidRequestMessageExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidRequestMessageException)), midInvalidRequestMessageExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

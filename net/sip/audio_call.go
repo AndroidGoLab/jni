@@ -33,7 +33,7 @@ func NewAudioCall(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*AudioCall, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioCall)), midAudioCallInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioCall)), midAudioCallCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

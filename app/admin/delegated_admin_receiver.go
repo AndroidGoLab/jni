@@ -32,7 +32,7 @@ func NewDelegatedAdminReceiver(vm *jni.VM) (*DelegatedAdminReceiver, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDelegatedAdminReceiver)), midDelegatedAdminReceiverInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDelegatedAdminReceiver)), midDelegatedAdminReceiverCtor)
 		if err != nil {
 			return err
 		}

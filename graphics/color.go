@@ -32,7 +32,7 @@ func NewColor(vm *jni.VM) (*Color, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColor)), midColorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColor)), midColorCtor)
 		if err != nil {
 			return err
 		}

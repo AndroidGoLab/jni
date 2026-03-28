@@ -5,104 +5,16 @@
 package: camera2
 go_import: github.com/AndroidGoLab/jni/hardware/camera2
 classes:
-    - java_class: android.hardware.camera2.CameraExtensionCharacteristics
-      go_type: CameraExtensionCharacteristics
+    - java_class: android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession
+      go_type: CameraConstrainedHighSpeedCaptureSession
       methods:
-        - java_method: isCaptureProcessProgressAvailable
-          go_name: IsCaptureProcessProgressAvailable
+        - java_method: createHighSpeedRequestList
+          go_name: CreateHighSpeedRequestList
           params:
-            - java_type: int
+            - java_type: android.hardware.camera2.CaptureRequest
               go_name: arg0
-          returns: boolean
+          returns: java.util.List<android.hardware.camera2.CaptureRequest>
           error: true
-        - java_method: isPostviewAvailable
-          go_name: IsPostviewAvailable
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.hardware.camera2.CameraOfflineSession
-      go_type: CameraOfflineSession
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-    - java_class: android.hardware.camera2.CameraOfflineSession$CameraOfflineSessionCallback
-      go_type: CameraOfflineSessionCameraOfflineSessionCallback
-      methods:
-        - java_method: onClosed
-          go_name: OnClosed
-          params:
-            - java_type: android.hardware.camera2.CameraOfflineSession
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onError
-          go_name: OnError
-          params:
-            - java_type: android.hardware.camera2.CameraOfflineSession
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onIdle
-          go_name: OnIdle
-          params:
-            - java_type: android.hardware.camera2.CameraOfflineSession
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onReady
-          go_name: OnReady
-          params:
-            - java_type: android.hardware.camera2.CameraOfflineSession
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSwitchFailed
-          go_name: OnSwitchFailed
-          params:
-            - java_type: android.hardware.camera2.CameraOfflineSession
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.hardware.camera2.CameraCharacteristics
-      go_type: CameraCharacteristics
-      methods:
-        - java_method: getRecommendedStreamConfigurationMap
-          go_name: GetRecommendedStreamConfigurationMap
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.hardware.camera2.params.RecommendedStreamConfigurationMap
-          error: true
-    - java_class: android.hardware.camera2.CameraCharacteristics$Key
-      go_type: CameraCharacteristicsKey
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.hardware.camera2.TotalCaptureResult
-      go_type: TotalCaptureResult
     - java_class: android.hardware.camera2.CaptureResult
       go_type: CaptureResult
       methods:
@@ -113,6 +25,10 @@ classes:
         - java_method: getFrameNumber
           go_name: GetFrameNumber
           returns: long
+          error: true
+        - java_method: getKeys
+          go_name: GetKeys
+          returns: java.util.List<android.hardware.camera2.CaptureResult$Key<?>>
           error: true
         - java_method: getRequest
           go_name: GetRequest
@@ -144,249 +60,12 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.hardware.camera2.CameraConstrainedHighSpeedCaptureSession
-      go_type: CameraConstrainedHighSpeedCaptureSession
     - java_class: android.hardware.camera2.CameraMetadata
       go_type: CameraMetadata
-    - java_class: android.hardware.camera2.CaptureFailure
-      go_type: CaptureFailure
       methods:
-        - java_method: getFrameNumber
-          go_name: GetFrameNumber
-          returns: long
-          error: true
-        - java_method: getPhysicalCameraId
-          go_name: GetPhysicalCameraId
-          returns: String
-          error: true
-        - java_method: getReason
-          go_name: GetReason
-          returns: int
-          error: true
-        - java_method: getRequest
-          go_name: GetRequest
-          returns: android.hardware.camera2.CaptureRequest
-          error: true
-        - java_method: getSequenceId
-          go_name: GetSequenceId
-          returns: int
-          error: true
-        - java_method: wasImageCaptured
-          go_name: WasImageCaptured
-          returns: boolean
-          error: true
-    - java_class: android.hardware.camera2.CameraExtensionSession
-      go_type: CameraExtensionSession
-      methods:
-        - java_method: capture
-          go_name: Capture
-          params:
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getDevice
-          go_name: GetDevice
-          returns: android.hardware.camera2.CameraDevice
-          error: true
-        - java_method: getRealtimeStillCaptureLatency
-          go_name: GetRealtimeStillCaptureLatency
-          returns: android.hardware.camera2.CameraExtensionSession$StillCaptureLatency
-          error: true
-        - java_method: setRepeatingRequest
-          go_name: SetRepeatingRequest
-          params:
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-            - java_type: android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback
-              go_name: arg2
-          returns: int
-          error: true
-        - java_method: stopRepeating
-          go_name: StopRepeating
-          returns: void
-          error: true
-    - java_class: android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback
-      go_type: CameraExtensionSessionExtensionCaptureCallback
-      methods:
-        - java_method: onCaptureFailed
-          go_name: OnCaptureFailed2
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCaptureFailed
-          go_name: OnCaptureFailed3_1
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onCaptureProcessProgressed
-          go_name: OnCaptureProcessProgressed
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onCaptureProcessStarted
-          go_name: OnCaptureProcessStarted
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCaptureResultAvailable
-          go_name: OnCaptureResultAvailable
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg1
-            - java_type: android.hardware.camera2.TotalCaptureResult
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onCaptureSequenceAborted
-          go_name: OnCaptureSequenceAborted
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCaptureSequenceCompleted
-          go_name: OnCaptureSequenceCompleted
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCaptureStarted
-          go_name: OnCaptureStarted
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-            - java_type: android.hardware.camera2.CaptureRequest
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.hardware.camera2.CameraExtensionSession$StateCallback
-      go_type: CameraExtensionSessionStateCallback
-      methods:
-        - java_method: onClosed
-          go_name: OnClosed
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onConfigureFailed
-          go_name: OnConfigureFailed
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onConfigured
-          go_name: OnConfigured
-          params:
-            - java_type: android.hardware.camera2.CameraExtensionSession
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.hardware.camera2.CameraExtensionSession$StillCaptureLatency
-      go_type: CameraExtensionSessionStillCaptureLatency
-      methods:
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getCaptureLatency
-          go_name: GetCaptureLatency
-          returns: long
-          error: true
-        - java_method: getProcessingLatency
-          go_name: GetProcessingLatency
-          returns: long
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.hardware.camera2.MultiResolutionImageReader
-      go_type: MultiResolutionImageReader
-      obtain: constructor
-      constructor_params:
-        - java_type: java.util.Collection<android.hardware.camera2.params.MultiResolutionStreamInfo>
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: flush
-          go_name: Flush
-          returns: void
-          error: true
-        - java_method: getStreamInfoForImageReader
-          go_name: GetStreamInfoForImageReader
-          params:
-            - java_type: android.media.ImageReader
-              go_name: arg0
-          returns: android.hardware.camera2.params.MultiResolutionStreamInfo
-          error: true
-        - java_method: getSurface
-          go_name: GetSurface
-          returns: android.view.Surface
-          error: true
-        - java_method: setOnImageAvailableListener
-          go_name: SetOnImageAvailableListener
-          params:
-            - java_type: android.media.ImageReader$OnImageAvailableListener
-              go_name: arg0
-            - java_type: java.util.concurrent.Executor
-              go_name: arg1
-          returns: void
+        - java_method: getKeys
+          go_name: GetKeys
+          returns: java.util.List<TKey>
           error: true
     - java_class: android.hardware.camera2.CameraCaptureSession
       go_type: CameraCaptureSession
@@ -607,6 +286,40 @@ classes:
               go_name: arg1
           returns: void
           error: true
+    - java_class: android.hardware.camera2.CaptureFailure
+      go_type: CaptureFailure
+      methods:
+        - java_method: getFrameNumber
+          go_name: GetFrameNumber
+          returns: long
+          error: true
+        - java_method: getPhysicalCameraId
+          go_name: GetPhysicalCameraId
+          returns: String
+          error: true
+        - java_method: getReason
+          go_name: GetReason
+          returns: int
+          error: true
+        - java_method: getRequest
+          go_name: GetRequest
+          returns: android.hardware.camera2.CaptureRequest
+          error: true
+        - java_method: getSequenceId
+          go_name: GetSequenceId
+          returns: int
+          error: true
+        - java_method: wasImageCaptured
+          go_name: WasImageCaptured
+          returns: boolean
+          error: true
+    - java_class: android.hardware.camera2.TotalCaptureResult
+      go_type: TotalCaptureResult
+      methods:
+        - java_method: getPartialResults
+          go_name: GetPartialResults
+          returns: java.util.List<android.hardware.camera2.CaptureResult>
+          error: true
     - java_class: android.hardware.camera2.CameraDevice
       go_type: CameraDevice
       methods:
@@ -734,71 +447,108 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.hardware.camera2.CaptureRequest
-      go_type: CaptureRequest
+    - java_class: android.hardware.camera2.CameraAccessException
+      go_type: CameraAccessException
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
       methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getReason
+          go_name: GetReason
           returns: int
           error: true
-        - java_method: equals
-          go_name: Equals
+    - java_class: android.hardware.camera2.CameraOfflineSession
+      go_type: CameraOfflineSession
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CameraOfflineSession$CameraOfflineSessionCallback
+      go_type: CameraOfflineSessionCameraOfflineSessionCallback
+      methods:
+        - java_method: onClosed
+          go_name: OnClosed
           params:
-            - java_type: java.lang.Object
+            - java_type: android.hardware.camera2.CameraOfflineSession
               go_name: arg0
-          returns: boolean
+          returns: void
           error: true
-        - java_method: getTag
-          go_name: GetTag
-          returns: java.lang.Object
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isReprocess
-          go_name: IsReprocess
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: onError
+          go_name: OnError
           params:
-            - java_type: android.os.Parcel
+            - java_type: android.hardware.camera2.CameraOfflineSession
               go_name: arg0
             - java_type: int
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.hardware.camera2.CaptureRequest$Builder
-      go_type: CaptureRequestBuilder
+        - java_method: onIdle
+          go_name: OnIdle
+          params:
+            - java_type: android.hardware.camera2.CameraOfflineSession
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onReady
+          go_name: OnReady
+          params:
+            - java_type: android.hardware.camera2.CameraOfflineSession
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSwitchFailed
+          go_name: OnSwitchFailed
+          params:
+            - java_type: android.hardware.camera2.CameraOfflineSession
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CameraCharacteristics
+      go_type: CameraCharacteristics
       methods:
-        - java_method: addTarget
-          go_name: AddTarget
+        - java_method: getAvailableCaptureRequestKeys
+          go_name: GetAvailableCaptureRequestKeys
+          returns: java.util.List<android.hardware.camera2.CaptureRequest$Key<?>>
+          error: true
+        - java_method: getAvailableCaptureResultKeys
+          go_name: GetAvailableCaptureResultKeys
+          returns: java.util.List<android.hardware.camera2.CaptureResult$Key<?>>
+          error: true
+        - java_method: getAvailablePhysicalCameraRequestKeys
+          go_name: GetAvailablePhysicalCameraRequestKeys
+          returns: java.util.List<android.hardware.camera2.CaptureRequest$Key<?>>
+          error: true
+        - java_method: getAvailableSessionCharacteristicsKeys
+          go_name: GetAvailableSessionCharacteristicsKeys
+          returns: java.util.List<android.hardware.camera2.CameraCharacteristics$Key<?>>
+          error: true
+        - java_method: getAvailableSessionKeys
+          go_name: GetAvailableSessionKeys
+          returns: java.util.List<android.hardware.camera2.CaptureRequest$Key<?>>
+          error: true
+        - java_method: getKeys
+          go_name: GetKeys
+          returns: java.util.List<android.hardware.camera2.CameraCharacteristics$Key<?>>
+          error: true
+        - java_method: getKeysNeedingPermission
+          go_name: GetKeysNeedingPermission
+          returns: java.util.List<android.hardware.camera2.CameraCharacteristics$Key<?>>
+          error: true
+        - java_method: getPhysicalCameraIds
+          go_name: GetPhysicalCameraIds
+          returns: java.util.Set<java.lang.String>
+          error: true
+        - java_method: getRecommendedStreamConfigurationMap
+          go_name: GetRecommendedStreamConfigurationMap
           params:
-            - java_type: android.view.Surface
+            - java_type: int
               go_name: arg0
-          returns: void
+          returns: android.hardware.camera2.params.RecommendedStreamConfigurationMap
           error: true
-        - java_method: build
-          go_name: Build
-          returns: android.hardware.camera2.CaptureRequest
-          error: true
-        - java_method: removeTarget
-          go_name: RemoveTarget
-          params:
-            - java_type: android.view.Surface
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTag
-          go_name: SetTag
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.hardware.camera2.CaptureRequest$Key
-      go_type: CaptureRequestKey
+    - java_class: android.hardware.camera2.CameraCharacteristics$Key
+      go_type: CameraCharacteristicsKey
       methods:
         - java_method: equals
           go_name: Equals
@@ -889,414 +639,382 @@ classes:
               go_name: arg3
           returns: void
           error: true
-    - java_class: android.hardware.camera2.CameraAccessException
-      go_type: CameraAccessException
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
+    - java_class: android.hardware.camera2.CaptureRequest
+      go_type: CaptureRequest
       methods:
-        - java_method: getReason
-          go_name: GetReason
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getKeys
+          go_name: GetKeys
+          returns: java.util.List<android.hardware.camera2.CaptureRequest$Key<?>>
+          error: true
+        - java_method: getTag
+          go_name: GetTag
+          returns: java.lang.Object
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isReprocess
+          go_name: IsReprocess
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CaptureRequest$Builder
+      go_type: CaptureRequestBuilder
+      methods:
+        - java_method: addTarget
+          go_name: AddTarget
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: build
+          go_name: Build
+          returns: android.hardware.camera2.CaptureRequest
+          error: true
+        - java_method: removeTarget
+          go_name: RemoveTarget
+          params:
+            - java_type: android.view.Surface
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTag
+          go_name: SetTag
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CaptureRequest$Key
+      go_type: CaptureRequestKey
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.hardware.camera2.MultiResolutionImageReader
+      go_type: MultiResolutionImageReader
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.Collection<android.hardware.camera2.params.MultiResolutionStreamInfo>
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: flush
+          go_name: Flush
+          returns: void
+          error: true
+        - java_method: getStreamInfoForImageReader
+          go_name: GetStreamInfoForImageReader
+          params:
+            - java_type: android.media.ImageReader
+              go_name: arg0
+          returns: android.hardware.camera2.params.MultiResolutionStreamInfo
+          error: true
+        - java_method: getSurface
+          go_name: GetSurface
+          returns: android.view.Surface
+          error: true
+        - java_method: setOnImageAvailableListener
+          go_name: SetOnImageAvailableListener
+          params:
+            - java_type: android.media.ImageReader$OnImageAvailableListener
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CameraExtensionSession
+      go_type: CameraExtensionSession
+      methods:
+        - java_method: capture
+          go_name: Capture
+          params:
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: getDevice
+          go_name: GetDevice
+          returns: android.hardware.camera2.CameraDevice
+          error: true
+        - java_method: getRealtimeStillCaptureLatency
+          go_name: GetRealtimeStillCaptureLatency
+          returns: android.hardware.camera2.CameraExtensionSession$StillCaptureLatency
+          error: true
+        - java_method: setRepeatingRequest
+          go_name: SetRepeatingRequest
+          params:
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg0
+            - java_type: java.util.concurrent.Executor
+              go_name: arg1
+            - java_type: android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback
+              go_name: arg2
+          returns: int
+          error: true
+        - java_method: stopRepeating
+          go_name: StopRepeating
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CameraExtensionSession$ExtensionCaptureCallback
+      go_type: CameraExtensionSessionExtensionCaptureCallback
+      methods:
+        - java_method: onCaptureFailed
+          go_name: OnCaptureFailed2
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCaptureFailed
+          go_name: OnCaptureFailed3_1
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCaptureProcessProgressed
+          go_name: OnCaptureProcessProgressed
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCaptureProcessStarted
+          go_name: OnCaptureProcessStarted
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCaptureResultAvailable
+          go_name: OnCaptureResultAvailable
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg1
+            - java_type: android.hardware.camera2.TotalCaptureResult
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCaptureSequenceAborted
+          go_name: OnCaptureSequenceAborted
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCaptureSequenceCompleted
+          go_name: OnCaptureSequenceCompleted
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCaptureStarted
+          go_name: OnCaptureStarted
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+            - java_type: android.hardware.camera2.CaptureRequest
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CameraExtensionSession$StateCallback
+      go_type: CameraExtensionSessionStateCallback
+      methods:
+        - java_method: onClosed
+          go_name: OnClosed
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onConfigureFailed
+          go_name: OnConfigureFailed
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onConfigured
+          go_name: OnConfigured
+          params:
+            - java_type: android.hardware.camera2.CameraExtensionSession
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.camera2.CameraExtensionSession$StillCaptureLatency
+      go_type: CameraExtensionSessionStillCaptureLatency
+      methods:
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCaptureLatency
+          go_name: GetCaptureLatency
+          returns: long
+          error: true
+        - java_method: getProcessingLatency
+          go_name: GetProcessingLatency
+          returns: long
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.hardware.camera2.CameraExtensionCharacteristics
+      go_type: CameraExtensionCharacteristics
+      methods:
+        - java_method: getAvailableCaptureRequestKeys
+          go_name: GetAvailableCaptureRequestKeys
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.Set<android.hardware.camera2.CaptureRequest$Key>
+          error: true
+        - java_method: getAvailableCaptureResultKeys
+          go_name: GetAvailableCaptureResultKeys
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.Set<android.hardware.camera2.CaptureResult$Key>
+          error: true
+        - java_method: getEstimatedCaptureLatencyRangeMillis
+          go_name: GetEstimatedCaptureLatencyRangeMillis
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.util.Size
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: android.util.Range<java.lang.Long>
+          error: true
+        - java_method: getExtensionSupportedSizes
+          go_name: GetExtensionSupportedSizes
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: java.util.List<android.util.Size>
+          error: true
+        - java_method: getKeys
+          go_name: GetKeys
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.Set<android.hardware.camera2.CameraCharacteristics$Key>
+          error: true
+        - java_method: getPostviewSupportedSizes
+          go_name: GetPostviewSupportedSizes
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.util.Size
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: java.util.List<android.util.Size>
+          error: true
+        - java_method: getSupportedExtensions
+          go_name: GetSupportedExtensions
+          returns: java.util.List<java.lang.Integer>
+          error: true
+        - java_method: isCaptureProcessProgressAvailable
+          go_name: IsCaptureProcessProgressAvailable
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isPostviewAvailable
+          go_name: IsPostviewAvailable
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
 constants:
-    - go_name: ExtensionAutomatic
-      value: "0"
-      go_type: int
-    - go_name: ExtensionBeauty
-      value: "1"
-      go_type: int
-    - go_name: ExtensionBokeh
-      value: "2"
-      go_type: int
-    - go_name: ExtensionFaceRetouch
-      value: "1"
-      go_type: int
-    - go_name: ExtensionHdr
-      value: "3"
-      go_type: int
-    - go_name: ExtensionNight
-      value: "4"
-      go_type: int
-    - go_name: StatusInternalError
-      value: "0"
-      go_type: int
-    - go_name: AutomotiveLensFacing
-      value: "0"
-      go_type: int
-    - go_name: AutomotiveLocation
-      value: "0"
-      go_type: int
-    - go_name: ColorCorrectionAvailableAberrationModes
-      value: "0"
-      go_type: int
-    - go_name: ColorCorrectionAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: ColorCorrectionColorTemperatureRange
-      value: "0"
-      go_type: int
-    - go_name: ControlAeAvailableAntibandingModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAeAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAeAvailablePriorityModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAeAvailableTargetFpsRanges
-      value: "0"
-      go_type: int
-    - go_name: ControlAeCompensationRange
-      value: "0"
-      go_type: int
-    - go_name: ControlAeCompensationStep
-      value: "0"
-      go_type: int
-    - go_name: ControlAeLockAvailable
-      value: "0"
-      go_type: int
-    - go_name: ControlAfAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAutoframingAvailable
-      value: "0"
-      go_type: int
-    - go_name: ControlAvailableEffects
-      value: "0"
-      go_type: int
-    - go_name: ControlAvailableExtendedSceneModeCapabilities
-      value: "0"
-      go_type: int
-    - go_name: ControlAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAvailableSceneModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAvailableSettingsOverrides
-      value: "0"
-      go_type: int
-    - go_name: ControlAvailableVideoStabilizationModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAwbAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: ControlAwbLockAvailable
-      value: "0"
-      go_type: int
-    - go_name: ControlLowLightBoostInfoLuminanceRange
-      value: "0"
-      go_type: int
-    - go_name: ControlMaxRegionsAe
-      value: "0"
-      go_type: int
-    - go_name: ControlMaxRegionsAf
-      value: "0"
-      go_type: int
-    - go_name: ControlMaxRegionsAwb
-      value: "0"
-      go_type: int
-    - go_name: ControlPostRawSensitivityBoostRange
-      value: "0"
-      go_type: int
-    - go_name: ControlZoomRatioRange
-      value: "0"
-      go_type: int
-    - go_name: DepthDepthIsExclusive
-      value: "0"
-      go_type: int
-    - go_name: DistortionCorrectionAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: EdgeAvailableEdgeModes
-      value: "0"
-      go_type: int
-    - go_name: FlashInfoAvailable
-      value: "0"
-      go_type: int
-    - go_name: FlashInfoStrengthDefaultLevel
-      value: "0"
-      go_type: int
-    - go_name: FlashInfoStrengthMaximumLevel
-      value: "0"
-      go_type: int
-    - go_name: FlashSingleStrengthDefaultLevel
-      value: "0"
-      go_type: int
-    - go_name: FlashSingleStrengthMaxLevel
-      value: "0"
-      go_type: int
-    - go_name: FlashTorchStrengthDefaultLevel
-      value: "0"
-      go_type: int
-    - go_name: FlashTorchStrengthMaxLevel
-      value: "0"
-      go_type: int
-    - go_name: HotPixelAvailableHotPixelModes
-      value: "0"
-      go_type: int
-    - go_name: InfoDeviceStateSensorOrientationMap
-      value: "0"
-      go_type: int
-    - go_name: InfoSessionConfigurationQueryVersion
-      value: "0"
-      go_type: int
-    - go_name: InfoSupportedHardwareLevel
-      value: "0"
-      go_type: int
-    - go_name: InfoVersion
-      value: "0"
-      go_type: int
-    - go_name: JpegAvailableThumbnailSizes
-      value: "0"
-      go_type: int
-    - go_name: LensDistortion
-      value: "0"
-      go_type: int
-    - go_name: LensDistortionMaximumResolution
-      value: "0"
-      go_type: int
-    - go_name: LensFacing
-      value: "0"
-      go_type: int
-    - go_name: LensInfoAvailableApertures
-      value: "0"
-      go_type: int
-    - go_name: LensInfoAvailableFilterDensities
-      value: "0"
-      go_type: int
-    - go_name: LensInfoAvailableFocalLengths
-      value: "0"
-      go_type: int
-    - go_name: LensInfoAvailableOpticalStabilization
-      value: "0"
-      go_type: int
-    - go_name: LensInfoFocusDistanceCalibration
-      value: "0"
-      go_type: int
-    - go_name: LensInfoHyperfocalDistance
-      value: "0"
-      go_type: int
-    - go_name: LensInfoMinimumFocusDistance
-      value: "0"
-      go_type: int
-    - go_name: LensIntrinsicCalibration
-      value: "0"
-      go_type: int
-    - go_name: LensIntrinsicCalibrationMaximumResolution
-      value: "0"
-      go_type: int
-    - go_name: LensPoseReference
-      value: "0"
-      go_type: int
-    - go_name: LensPoseRotation
-      value: "0"
-      go_type: int
-    - go_name: LensPoseTranslation
-      value: "0"
-      go_type: int
-    - go_name: LensRadialDistortion
-      value: "0"
-      go_type: int
-    - go_name: LogicalMultiCameraSensorSyncType
-      value: "0"
-      go_type: int
-    - go_name: NoiseReductionAvailableNoiseReductionModes
-      value: "0"
-      go_type: int
-    - go_name: ReprocessMaxCaptureStall
-      value: "0"
-      go_type: int
-    - go_name: RequestAvailableCapabilities
-      value: "0"
-      go_type: int
-    - go_name: RequestAvailableColorSpaceProfiles
-      value: "0"
-      go_type: int
-    - go_name: RequestAvailableDynamicRangeProfiles
-      value: "0"
-      go_type: int
-    - go_name: RequestMaxNumInputStreams
-      value: "0"
-      go_type: int
-    - go_name: RequestMaxNumOutputProc
-      value: "0"
-      go_type: int
-    - go_name: RequestMaxNumOutputProcStalling
-      value: "0"
-      go_type: int
-    - go_name: RequestMaxNumOutputRaw
-      value: "0"
-      go_type: int
-    - go_name: RequestPartialResultCount
-      value: "0"
-      go_type: int
-    - go_name: RequestPipelineMaxDepth
-      value: "0"
-      go_type: int
-    - go_name: RequestRecommendedTenBitDynamicRangeProfile
-      value: "0"
-      go_type: int
-    - go_name: ScalerAvailableMaxDigitalZoom
-      value: "0"
-      go_type: int
-    - go_name: ScalerAvailableRotateAndCropModes
-      value: "0"
-      go_type: int
-    - go_name: ScalerAvailableStreamUseCases
-      value: "0"
-      go_type: int
-    - go_name: ScalerCroppingType
-      value: "0"
-      go_type: int
-    - go_name: ScalerDefaultSecureImageSize
-      value: "0"
-      go_type: int
-    - go_name: ScalerMandatoryConcurrentStreamCombinations
-      value: "0"
-      go_type: int
-    - go_name: ScalerMandatoryMaximumResolutionStreamCombinations
-      value: "0"
-      go_type: int
-    - go_name: ScalerMandatoryPreviewStabilizationOutputStreamCombinations
-      value: "0"
-      go_type: int
-    - go_name: ScalerMandatoryStreamCombinations
-      value: "0"
-      go_type: int
-    - go_name: ScalerMandatoryTenBitOutputStreamCombinations
-      value: "0"
-      go_type: int
-    - go_name: ScalerMandatoryUseCaseStreamCombinations
-      value: "0"
-      go_type: int
-    - go_name: ScalerMultiResolutionStreamConfigurationMap
-      value: "0"
-      go_type: int
-    - go_name: ScalerStreamConfigurationMap
-      value: "0"
-      go_type: int
-    - go_name: ScalerStreamConfigurationMapMaximumResolution
-      value: "0"
-      go_type: int
-    - go_name: SensorAvailableTestPatternModes
-      value: "0"
-      go_type: int
-    - go_name: SensorBlackLevelPattern
-      value: "0"
-      go_type: int
-    - go_name: SensorCalibrationTransform1
-      value: "0"
-      go_type: int
-    - go_name: SensorCalibrationTransform2
-      value: "0"
-      go_type: int
-    - go_name: SensorColorTransform1
-      value: "0"
-      go_type: int
-    - go_name: SensorColorTransform2
-      value: "0"
-      go_type: int
-    - go_name: SensorForwardMatrix1
-      value: "0"
-      go_type: int
-    - go_name: SensorForwardMatrix2
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoActiveArraySize
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoActiveArraySizeMaximumResolution
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoBinningFactor
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoColorFilterArrangement
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoExposureTimeRange
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoLensShadingApplied
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoMaxFrameDuration
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoPhysicalSize
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoPixelArraySize
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoPixelArraySizeMaximumResolution
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoPreCorrectionActiveArraySize
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoPreCorrectionActiveArraySizeMaximumResolution
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoSensitivityRange
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoTimestampSource
-      value: "0"
-      go_type: int
-    - go_name: SensorInfoWhiteLevel
-      value: "0"
-      go_type: int
-    - go_name: SensorMaxAnalogSensitivity
-      value: "0"
-      go_type: int
-    - go_name: SensorOpticalBlackRegions
-      value: "0"
-      go_type: int
-    - go_name: SensorOrientation
-      value: "0"
-      go_type: int
-    - go_name: SensorReadoutTimestamp
-      value: "0"
-      go_type: int
-    - go_name: SensorReferenceIlluminant1
-      value: "0"
-      go_type: int
-    - go_name: SensorReferenceIlluminant2
-      value: "0"
-      go_type: int
-    - go_name: ShadingAvailableModes
-      value: "0"
-      go_type: int
-    - go_name: StatisticsInfoAvailableFaceDetectModes
-      value: "0"
-      go_type: int
-    - go_name: StatisticsInfoAvailableHotPixelMapModes
-      value: "0"
-      go_type: int
-    - go_name: StatisticsInfoAvailableLensShadingMapModes
-      value: "0"
-      go_type: int
-    - go_name: StatisticsInfoAvailableOisDataModes
-      value: "0"
-      go_type: int
-    - go_name: StatisticsInfoMaxFaceCount
-      value: "0"
-      go_type: int
-    - go_name: SyncMaxLatency
-      value: "0"
-      go_type: int
-    - go_name: TonemapAvailableToneMapModes
-      value: "0"
-      go_type: int
-    - go_name: TonemapMaxCurvePoints
-      value: "0"
-      go_type: int
     - go_name: BlackLevelLock
       value: "0"
       go_type: int
@@ -1459,6 +1177,9 @@ constants:
     - go_name: LensAperture
       value: "0"
       go_type: int
+    - go_name: LensDistortion
+      value: "0"
+      go_type: int
     - go_name: LensFilterDensity
       value: "0"
       go_type: int
@@ -1468,7 +1189,19 @@ constants:
     - go_name: LensFocusDistance
       value: "0"
       go_type: int
+    - go_name: LensIntrinsicCalibration
+      value: "0"
+      go_type: int
     - go_name: LensOpticalStabilizationMode
+      value: "0"
+      go_type: int
+    - go_name: LensPoseRotation
+      value: "0"
+      go_type: int
+    - go_name: LensPoseTranslation
+      value: "0"
+      go_type: int
+    - go_name: LensRadialDistortion
       value: "0"
       go_type: int
     - go_name: LensState
@@ -2491,12 +2224,6 @@ constants:
     - go_name: ErrorMaxCamerasInUse
       value: "2"
       go_type: int
-    - go_name: Creator
-      value: "0"
-      go_type: int
-    - go_name: MaxThumbnailDimension
-      value: "256"
-      go_type: int
     - go_name: CameraDisabled
       value: "1"
       go_type: int
@@ -2511,4 +2238,391 @@ constants:
       go_type: int
     - go_name: MaxCamerasInUse
       value: "5"
+      go_type: int
+    - go_name: StatusInternalError
+      value: "0"
+      go_type: int
+    - go_name: AutomotiveLensFacing
+      value: "0"
+      go_type: int
+    - go_name: AutomotiveLocation
+      value: "0"
+      go_type: int
+    - go_name: ColorCorrectionAvailableAberrationModes
+      value: "0"
+      go_type: int
+    - go_name: ColorCorrectionAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: ColorCorrectionColorTemperatureRange
+      value: "0"
+      go_type: int
+    - go_name: ControlAeAvailableAntibandingModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAeAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAeAvailablePriorityModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAeAvailableTargetFpsRanges
+      value: "0"
+      go_type: int
+    - go_name: ControlAeCompensationRange
+      value: "0"
+      go_type: int
+    - go_name: ControlAeCompensationStep
+      value: "0"
+      go_type: int
+    - go_name: ControlAeLockAvailable
+      value: "0"
+      go_type: int
+    - go_name: ControlAfAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAutoframingAvailable
+      value: "0"
+      go_type: int
+    - go_name: ControlAvailableEffects
+      value: "0"
+      go_type: int
+    - go_name: ControlAvailableExtendedSceneModeCapabilities
+      value: "0"
+      go_type: int
+    - go_name: ControlAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAvailableSceneModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAvailableSettingsOverrides
+      value: "0"
+      go_type: int
+    - go_name: ControlAvailableVideoStabilizationModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAwbAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: ControlAwbLockAvailable
+      value: "0"
+      go_type: int
+    - go_name: ControlLowLightBoostInfoLuminanceRange
+      value: "0"
+      go_type: int
+    - go_name: ControlMaxRegionsAe
+      value: "0"
+      go_type: int
+    - go_name: ControlMaxRegionsAf
+      value: "0"
+      go_type: int
+    - go_name: ControlMaxRegionsAwb
+      value: "0"
+      go_type: int
+    - go_name: ControlPostRawSensitivityBoostRange
+      value: "0"
+      go_type: int
+    - go_name: ControlZoomRatioRange
+      value: "0"
+      go_type: int
+    - go_name: DepthDepthIsExclusive
+      value: "0"
+      go_type: int
+    - go_name: DistortionCorrectionAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: EdgeAvailableEdgeModes
+      value: "0"
+      go_type: int
+    - go_name: FlashInfoAvailable
+      value: "0"
+      go_type: int
+    - go_name: FlashInfoStrengthDefaultLevel
+      value: "0"
+      go_type: int
+    - go_name: FlashInfoStrengthMaximumLevel
+      value: "0"
+      go_type: int
+    - go_name: FlashSingleStrengthDefaultLevel
+      value: "0"
+      go_type: int
+    - go_name: FlashSingleStrengthMaxLevel
+      value: "0"
+      go_type: int
+    - go_name: FlashTorchStrengthDefaultLevel
+      value: "0"
+      go_type: int
+    - go_name: FlashTorchStrengthMaxLevel
+      value: "0"
+      go_type: int
+    - go_name: HotPixelAvailableHotPixelModes
+      value: "0"
+      go_type: int
+    - go_name: InfoDeviceStateSensorOrientationMap
+      value: "0"
+      go_type: int
+    - go_name: InfoSessionConfigurationQueryVersion
+      value: "0"
+      go_type: int
+    - go_name: InfoSupportedHardwareLevel
+      value: "0"
+      go_type: int
+    - go_name: InfoVersion
+      value: "0"
+      go_type: int
+    - go_name: JpegAvailableThumbnailSizes
+      value: "0"
+      go_type: int
+    - go_name: LensDistortionMaximumResolution
+      value: "0"
+      go_type: int
+    - go_name: LensFacing
+      value: "0"
+      go_type: int
+    - go_name: LensInfoAvailableApertures
+      value: "0"
+      go_type: int
+    - go_name: LensInfoAvailableFilterDensities
+      value: "0"
+      go_type: int
+    - go_name: LensInfoAvailableFocalLengths
+      value: "0"
+      go_type: int
+    - go_name: LensInfoAvailableOpticalStabilization
+      value: "0"
+      go_type: int
+    - go_name: LensInfoFocusDistanceCalibration
+      value: "0"
+      go_type: int
+    - go_name: LensInfoHyperfocalDistance
+      value: "0"
+      go_type: int
+    - go_name: LensInfoMinimumFocusDistance
+      value: "0"
+      go_type: int
+    - go_name: LensIntrinsicCalibrationMaximumResolution
+      value: "0"
+      go_type: int
+    - go_name: LensPoseReference
+      value: "0"
+      go_type: int
+    - go_name: LogicalMultiCameraSensorSyncType
+      value: "0"
+      go_type: int
+    - go_name: NoiseReductionAvailableNoiseReductionModes
+      value: "0"
+      go_type: int
+    - go_name: ReprocessMaxCaptureStall
+      value: "0"
+      go_type: int
+    - go_name: RequestAvailableCapabilities
+      value: "0"
+      go_type: int
+    - go_name: RequestAvailableColorSpaceProfiles
+      value: "0"
+      go_type: int
+    - go_name: RequestAvailableDynamicRangeProfiles
+      value: "0"
+      go_type: int
+    - go_name: RequestMaxNumInputStreams
+      value: "0"
+      go_type: int
+    - go_name: RequestMaxNumOutputProc
+      value: "0"
+      go_type: int
+    - go_name: RequestMaxNumOutputProcStalling
+      value: "0"
+      go_type: int
+    - go_name: RequestMaxNumOutputRaw
+      value: "0"
+      go_type: int
+    - go_name: RequestPartialResultCount
+      value: "0"
+      go_type: int
+    - go_name: RequestPipelineMaxDepth
+      value: "0"
+      go_type: int
+    - go_name: RequestRecommendedTenBitDynamicRangeProfile
+      value: "0"
+      go_type: int
+    - go_name: ScalerAvailableMaxDigitalZoom
+      value: "0"
+      go_type: int
+    - go_name: ScalerAvailableRotateAndCropModes
+      value: "0"
+      go_type: int
+    - go_name: ScalerAvailableStreamUseCases
+      value: "0"
+      go_type: int
+    - go_name: ScalerCroppingType
+      value: "0"
+      go_type: int
+    - go_name: ScalerDefaultSecureImageSize
+      value: "0"
+      go_type: int
+    - go_name: ScalerMandatoryConcurrentStreamCombinations
+      value: "0"
+      go_type: int
+    - go_name: ScalerMandatoryMaximumResolutionStreamCombinations
+      value: "0"
+      go_type: int
+    - go_name: ScalerMandatoryPreviewStabilizationOutputStreamCombinations
+      value: "0"
+      go_type: int
+    - go_name: ScalerMandatoryStreamCombinations
+      value: "0"
+      go_type: int
+    - go_name: ScalerMandatoryTenBitOutputStreamCombinations
+      value: "0"
+      go_type: int
+    - go_name: ScalerMandatoryUseCaseStreamCombinations
+      value: "0"
+      go_type: int
+    - go_name: ScalerMultiResolutionStreamConfigurationMap
+      value: "0"
+      go_type: int
+    - go_name: ScalerStreamConfigurationMap
+      value: "0"
+      go_type: int
+    - go_name: ScalerStreamConfigurationMapMaximumResolution
+      value: "0"
+      go_type: int
+    - go_name: SensorAvailableTestPatternModes
+      value: "0"
+      go_type: int
+    - go_name: SensorBlackLevelPattern
+      value: "0"
+      go_type: int
+    - go_name: SensorCalibrationTransform1
+      value: "0"
+      go_type: int
+    - go_name: SensorCalibrationTransform2
+      value: "0"
+      go_type: int
+    - go_name: SensorColorTransform1
+      value: "0"
+      go_type: int
+    - go_name: SensorColorTransform2
+      value: "0"
+      go_type: int
+    - go_name: SensorForwardMatrix1
+      value: "0"
+      go_type: int
+    - go_name: SensorForwardMatrix2
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoActiveArraySize
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoActiveArraySizeMaximumResolution
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoBinningFactor
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoColorFilterArrangement
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoExposureTimeRange
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoLensShadingApplied
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoMaxFrameDuration
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoPhysicalSize
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoPixelArraySize
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoPixelArraySizeMaximumResolution
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoPreCorrectionActiveArraySize
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoPreCorrectionActiveArraySizeMaximumResolution
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoSensitivityRange
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoTimestampSource
+      value: "0"
+      go_type: int
+    - go_name: SensorInfoWhiteLevel
+      value: "0"
+      go_type: int
+    - go_name: SensorMaxAnalogSensitivity
+      value: "0"
+      go_type: int
+    - go_name: SensorOpticalBlackRegions
+      value: "0"
+      go_type: int
+    - go_name: SensorOrientation
+      value: "0"
+      go_type: int
+    - go_name: SensorReadoutTimestamp
+      value: "0"
+      go_type: int
+    - go_name: SensorReferenceIlluminant1
+      value: "0"
+      go_type: int
+    - go_name: SensorReferenceIlluminant2
+      value: "0"
+      go_type: int
+    - go_name: ShadingAvailableModes
+      value: "0"
+      go_type: int
+    - go_name: StatisticsInfoAvailableFaceDetectModes
+      value: "0"
+      go_type: int
+    - go_name: StatisticsInfoAvailableHotPixelMapModes
+      value: "0"
+      go_type: int
+    - go_name: StatisticsInfoAvailableLensShadingMapModes
+      value: "0"
+      go_type: int
+    - go_name: StatisticsInfoAvailableOisDataModes
+      value: "0"
+      go_type: int
+    - go_name: StatisticsInfoMaxFaceCount
+      value: "0"
+      go_type: int
+    - go_name: SyncMaxLatency
+      value: "0"
+      go_type: int
+    - go_name: TonemapAvailableToneMapModes
+      value: "0"
+      go_type: int
+    - go_name: TonemapMaxCurvePoints
+      value: "0"
+      go_type: int
+    - go_name: MaxThumbnailDimension
+      value: "256"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: ExtensionAutomatic
+      value: "0"
+      go_type: int
+    - go_name: ExtensionBeauty
+      value: "1"
+      go_type: int
+    - go_name: ExtensionBokeh
+      value: "2"
+      go_type: int
+    - go_name: ExtensionFaceRetouch
+      value: "1"
+      go_type: int
+    - go_name: ExtensionHdr
+      value: "3"
+      go_type: int
+    - go_name: ExtensionNight
+      value: "4"
       go_type: int

@@ -33,7 +33,7 @@ func NewAvailableNfcAntenna(vm *jni.VM, arg0 int32, arg1 int32) (*AvailableNfcAn
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAvailableNfcAntenna)), midAvailableNfcAntennaInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAvailableNfcAntenna)), midAvailableNfcAntennaCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

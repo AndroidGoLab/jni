@@ -33,7 +33,7 @@ func NewColorMatrixColorFilter(vm *jni.VM, arg0 *jni.Object) (*ColorMatrixColorF
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorMatrixColorFilter)), midColorMatrixColorFilterInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorMatrixColorFilter)), midColorMatrixColorFilterCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

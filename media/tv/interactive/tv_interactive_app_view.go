@@ -33,7 +33,7 @@ func NewTvInteractiveAppView(vm *jni.VM, arg0 *jni.Object) (*TvInteractiveAppVie
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppView)), midTvInteractiveAppViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTvInteractiveAppView)), midTvInteractiveAppViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -37,7 +37,7 @@ func NewCursorWindow(vm *jni.VM, arg0 bool) (*CursorWindow, error) {
 			jArg0 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorWindow)), midCursorWindowInit, jni.BooleanValue(jArg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorWindow)), midCursorWindowCtor, jni.BooleanValue(jArg0))
 		if err != nil {
 			return err
 		}

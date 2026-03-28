@@ -38,7 +38,7 @@ func NewKeyboardShortcutGroup(vm *jni.VM, arg0 string) (*KeyboardShortcutGroup, 
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyboardShortcutGroup)), midKeyboardShortcutGroupInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsKeyboardShortcutGroup)), midKeyboardShortcutGroupCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}
@@ -93,6 +93,38 @@ func (m *KeyboardShortcutGroup) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetItems calls android.view.KeyboardShortcutGroup.getItems.
+func (m *KeyboardShortcutGroup) GetItems() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midKeyboardShortcutGroupGetItems == nil {
+			callErr = fmt.Errorf("android.view.KeyboardShortcutGroup.getItems is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midKeyboardShortcutGroupGetItems,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

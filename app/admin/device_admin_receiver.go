@@ -32,7 +32,7 @@ func NewDeviceAdminReceiver(vm *jni.VM) (*DeviceAdminReceiver, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminReceiver)), midDeviceAdminReceiverInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminReceiver)), midDeviceAdminReceiverCtor)
 		if err != nil {
 			return err
 		}

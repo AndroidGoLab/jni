@@ -33,7 +33,7 @@ func NewDerAsn1DnIdentification(vm *jni.VM, arg0 *jni.Object) (*DerAsn1DnIdentif
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDerAsn1DnIdentification)), midDerAsn1DnIdentificationInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDerAsn1DnIdentification)), midDerAsn1DnIdentificationCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

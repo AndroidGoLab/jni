@@ -33,7 +33,7 @@ func NewCursorAnchorInfo(vm *jni.VM, arg0 *jni.Object) (*CursorAnchorInfo, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), midCursorAnchorInfoInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorAnchorInfo)), midCursorAnchorInfoCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -470,6 +470,38 @@ func (m *CursorAnchorInfo) GetTextAppearanceInfo() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midCursorAnchorInfoGetTextAppearanceInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetVisibleLineBounds calls android.view.inputmethod.CursorAnchorInfo.getVisibleLineBounds.
+func (m *CursorAnchorInfo) GetVisibleLineBounds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCursorAnchorInfoGetVisibleLineBounds == nil {
+			callErr = fmt.Errorf("android.view.inputmethod.CursorAnchorInfo.getVisibleLineBounds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCursorAnchorInfoGetVisibleLineBounds,
 		)
 		if callErr != nil {
 			return callErr

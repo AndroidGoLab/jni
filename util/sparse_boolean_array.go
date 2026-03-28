@@ -32,7 +32,7 @@ func NewSparseBooleanArray(vm *jni.VM) (*SparseBooleanArray, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSparseBooleanArray)), midSparseBooleanArrayInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSparseBooleanArray)), midSparseBooleanArrayCtor)
 		if err != nil {
 			return err
 		}

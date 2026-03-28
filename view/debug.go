@@ -32,7 +32,7 @@ func NewDebug(vm *jni.VM) (*Debug, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDebug)), midDebugInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDebug)), midDebugCtor)
 		if err != nil {
 			return err
 		}

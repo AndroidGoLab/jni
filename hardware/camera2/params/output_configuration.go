@@ -33,7 +33,7 @@ func NewOutputConfiguration(vm *jni.VM, arg0 *jni.Object) (*OutputConfiguration,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutputConfiguration)), midOutputConfigurationInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutputConfiguration)), midOutputConfigurationCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -344,6 +344,38 @@ func (m *OutputConfiguration) GetSurfaceGroupId() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSurfaces calls android.hardware.camera2.params.OutputConfiguration.getSurfaces.
+func (m *OutputConfiguration) GetSurfaces() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midOutputConfigurationGetSurfaces == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.OutputConfiguration.getSurfaces is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midOutputConfigurationGetSurfaces,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -664,4 +696,37 @@ func (m *OutputConfiguration) WriteToParcel(arg0 *jni.Object, arg1 int32) error 
 		return callErr
 	})
 	return callErr
+}
+
+// CreateInstancesForMultiResolutionOutput calls android.hardware.camera2.params.OutputConfiguration.createInstancesForMultiResolutionOutput.
+func (m *OutputConfiguration) CreateInstancesForMultiResolutionOutput(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midOutputConfigurationCreateInstancesForMultiResolutionOutput == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.OutputConfiguration.createInstancesForMultiResolutionOutput is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsOutputConfiguration)),
+			midOutputConfigurationCreateInstancesForMultiResolutionOutput, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
 }

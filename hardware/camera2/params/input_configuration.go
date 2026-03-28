@@ -33,7 +33,7 @@ func NewInputConfiguration(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32) (*Inp
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputConfiguration)), midInputConfigurationInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputConfiguration)), midInputConfigurationCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

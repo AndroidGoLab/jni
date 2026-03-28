@@ -32,7 +32,7 @@ func Newter(vm *jni.VM) (*ter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clster)), midterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clster)), midterCtor)
 		if err != nil {
 			return err
 		}

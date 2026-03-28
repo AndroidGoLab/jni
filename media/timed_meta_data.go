@@ -33,7 +33,7 @@ func NewTimedMetaData(vm *jni.VM, arg0 int64, arg1 *jni.Object) (*TimedMetaData,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimedMetaData)), midTimedMetaDataInit, jni.LongValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimedMetaData)), midTimedMetaDataCtor, jni.LongValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewSQLiteReadOnlyDatabaseException(vm *jni.VM) (*SQLiteReadOnlyDatabaseExce
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteReadOnlyDatabaseException)), midSQLiteReadOnlyDatabaseExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteReadOnlyDatabaseException)), midSQLiteReadOnlyDatabaseExceptionCtor)
 		if err != nil {
 			return err
 		}

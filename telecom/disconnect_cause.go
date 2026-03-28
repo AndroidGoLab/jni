@@ -33,7 +33,7 @@ func NewDisconnectCause(vm *jni.VM, arg0 int32) (*DisconnectCause, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), midDisconnectCauseInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDisconnectCause)), midDisconnectCauseCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -30,7 +30,7 @@ func NewDialogFragment(vm *jni.VM) (*DialogFragment, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDialogFragment)), midDialogFragmentInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDialogFragment)), midDialogFragmentCtor)
 		if err != nil {
 			return err
 		}

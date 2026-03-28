@@ -38,7 +38,7 @@ func NewPackageIdentifier(vm *jni.VM, arg0 string, arg1 *jni.Object) (*PackageId
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageIdentifier)), midPackageIdentifierInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageIdentifier)), midPackageIdentifierCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

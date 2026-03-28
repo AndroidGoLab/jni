@@ -5,6 +5,846 @@
 package: tv
 go_import: github.com/AndroidGoLab/jni/media/tv
 classes:
+    - java_class: android.media.tv.TableRequest
+      go_type: TableRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+        - java_type: int
+          go_name: arg4
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getTableId
+          go_name: GetTableId
+          returns: int
+          error: true
+        - java_method: getTableName
+          go_name: GetTableName
+          returns: int
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TsRequest
+      go_type: TsRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getTsPid
+          go_name: GetTsPid
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvContentRating
+      go_type: ContentRating
+      methods:
+        - java_method: contains
+          go_name: Contains
+          params:
+            - java_type: android.media.tv.TvContentRating
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: flattenToString
+          go_name: FlattenToString
+          returns: String
+          error: true
+        - java_method: getDomain
+          go_name: GetDomain
+          returns: String
+          error: true
+        - java_method: getMainRating
+          go_name: GetMainRating
+          returns: String
+          error: true
+        - java_method: getRatingSystem
+          go_name: GetRatingSystem
+          returns: String
+          error: true
+        - java_method: getSubRatings
+          go_name: GetSubRatings
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+      static_methods:
+        - java_method: createRating
+          go_name: CreateRating
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+            - java_type: java.lang.String...
+              go_name: arg3
+          returns: android.media.tv.TvContentRating
+          error: true
+        - java_method: unflattenFromString
+          go_name: UnflattenFromString
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.media.tv.TvContentRating
+          error: true
+    - java_class: android.media.tv.BroadcastInfoResponse
+      go_type: BroadcastInfoResponse
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getRequestId
+          go_name: GetRequestId
+          returns: int
+          error: true
+        - java_method: getResponseResult
+          go_name: GetResponseResult
+          returns: int
+          error: true
+        - java_method: getSequence
+          go_name: GetSequence
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.BroadcastInfoRequest
+      go_type: BroadcastInfoRequest
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getOption
+          go_name: GetOption
+          returns: int
+          error: true
+        - java_method: getRequestId
+          go_name: GetRequestId
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.SectionResponse
+      go_type: SectionResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+        - java_type: int
+          go_name: arg4
+        - java_type: android.os.Bundle
+          go_name: arg5
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSessionData
+          go_name: GetSessionData
+          returns: android.os.Bundle
+          error: true
+        - java_method: getSessionId
+          go_name: GetSessionId
+          returns: int
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvInputInfo
+      go_type: InputInfo
+      methods:
+        - java_method: canPauseRecording
+          go_name: CanPauseRecording
+          returns: boolean
+          error: true
+        - java_method: canRecord
+          go_name: CanRecord
+          returns: boolean
+          error: true
+        - java_method: createSettingsIntent
+          go_name: CreateSettingsIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: createSetupIntent
+          go_name: CreateSetupIntent
+          returns: android.content.Intent
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getExtras
+          go_name: GetExtras
+          returns: android.os.Bundle
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+        - java_method: getParentId
+          go_name: GetParentId
+          returns: String
+          error: true
+        - java_method: getServiceInfo
+          go_name: GetServiceInfo
+          returns: android.content.pm.ServiceInfo
+          error: true
+        - java_method: getTunerCount
+          go_name: GetTunerCount
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isHidden
+          go_name: IsHidden
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isPassthroughInput
+          go_name: IsPassthroughInput
+          returns: boolean
+          error: true
+        - java_method: loadCustomLabel
+          go_name: LoadCustomLabel
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: loadIcon
+          go_name: LoadIcon
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: android.graphics.drawable.Drawable
+          error: true
+        - java_method: loadLabel
+          go_name: LoadLabel
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvInputInfo$Builder
+      go_type: InputInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.media.tv.TvInputInfo
+          error: true
+        - java_method: setCanPauseRecording
+          go_name: SetCanPauseRecording
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.tv.TvInputInfo$Builder
+          error: true
+        - java_method: setCanRecord
+          go_name: SetCanRecord
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.tv.TvInputInfo$Builder
+          error: true
+        - java_method: setExtras
+          go_name: SetExtras
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.media.tv.TvInputInfo$Builder
+          error: true
+        - java_method: setTunerCount
+          go_name: SetTunerCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.tv.TvInputInfo$Builder
+          error: true
+    - java_class: android.media.tv.DsmccResponse
+      go_type: DsmccResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: android.os.ParcelFileDescriptor
+          go_name: arg3
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getBiopMessageType
+          go_name: GetBiopMessageType
+          returns: String
+          error: true
+        - java_method: getChildList
+          go_name: GetChildList
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getFile
+          go_name: GetFile
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: getStreamEventIds
+          go_name: GetStreamEventIds
+          returns: '[I'
+          error: true
+        - java_method: getStreamEventNames
+          go_name: GetStreamEventNames
+          returns: java.lang.String[]
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvContract
+      go_type: Contract
+      static_methods:
+        - java_method: buildChannelLogoUri
+          go_name: BuildChannelLogoUri1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildChannelLogoUri
+          go_name: BuildChannelLogoUri1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildChannelUri
+          go_name: BuildChannelUri
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildChannelUriForPassthroughInput
+          go_name: BuildChannelUriForPassthroughInput
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildChannelsUriForInput
+          go_name: BuildChannelsUriForInput
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildInputId
+          go_name: BuildInputId
+          params:
+            - java_type: android.content.ComponentName
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: buildPreviewProgramUri
+          go_name: BuildPreviewProgramUri
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildPreviewProgramsUriForChannel
+          go_name: BuildPreviewProgramsUriForChannel1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildPreviewProgramsUriForChannel
+          go_name: BuildPreviewProgramsUriForChannel1_1
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildProgramUri
+          go_name: BuildProgramUri
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildProgramsUriForChannel
+          go_name: BuildProgramsUriForChannel1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildProgramsUriForChannel
+          go_name: BuildProgramsUriForChannel3_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+        - java_method: buildProgramsUriForChannel
+          go_name: BuildProgramsUriForChannel1_2
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildProgramsUriForChannel
+          go_name: BuildProgramsUriForChannel3_3
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+            - java_type: long
+              go_name: arg2
+          returns: android.net.Uri
+          error: true
+        - java_method: buildRecordedProgramUri
+          go_name: BuildRecordedProgramUri
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: buildWatchNextProgramUri
+          go_name: BuildWatchNextProgramUri
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: android.net.Uri
+          error: true
+        - java_method: isChannelUri
+          go_name: IsChannelUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isChannelUriForPassthroughInput
+          go_name: IsChannelUriForPassthroughInput
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isChannelUriForTunerInput
+          go_name: IsChannelUriForTunerInput
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isProgramUri
+          go_name: IsProgramUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: isRecordedProgramUri
+          go_name: IsRecordedProgramUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: requestChannelBrowsable
+          go_name: RequestChannelBrowsable
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvContract$BaseTvColumns
+      go_type: ContractBaseTvColumns
+    - java_class: android.media.tv.TvContract$Channels
+      go_type: ContractChannels
+      static_methods:
+        - java_method: getVideoResolution
+          go_name: GetVideoResolution
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+    - java_class: android.media.tv.TvContract$PreviewPrograms
+      go_type: ContractPreviewPrograms
+    - java_class: android.media.tv.TvContract$Programs
+      go_type: ContractPrograms
+    - java_class: android.media.tv.TvContract$RecordedPrograms
+      go_type: ContractRecordedPrograms
+    - java_class: android.media.tv.TvContract$WatchNextPrograms
+      go_type: ContractWatchNextPrograms
+    - java_class: android.media.tv.TvRecordingClient
+      go_type: RecordingClient
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
+        - java_type: android.media.tv.TvRecordingClient$RecordingCallback
+          go_name: arg2
+        - java_type: android.os.Handler
+          go_name: arg3
+      methods:
+        - java_method: pauseRecording
+          go_name: PauseRecording0
+          returns: void
+          error: true
+        - java_method: pauseRecording
+          go_name: PauseRecording1_1
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: release
+          go_name: Release
+          returns: void
+          error: true
+        - java_method: resumeRecording
+          go_name: ResumeRecording0
+          returns: void
+          error: true
+        - java_method: resumeRecording
+          go_name: ResumeRecording1_1
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: sendAppPrivateCommand
+          go_name: SendAppPrivateCommand
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setTvInteractiveAppView
+          go_name: SetTvInteractiveAppView
+          params:
+            - java_type: android.media.tv.interactive.TvInteractiveAppView
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: startRecording
+          go_name: StartRecording1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: startRecording
+          go_name: StartRecording2_1
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: stopRecording
+          go_name: StopRecording
+          returns: void
+          error: true
+        - java_method: tune
+          go_name: Tune2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: tune
+          go_name: Tune3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvRecordingClient$RecordingCallback
+      go_type: RecordingClientRecordingCallback
+      methods:
+        - java_method: onConnectionFailed
+          go_name: OnConnectionFailed
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onDisconnected
+          go_name: OnDisconnected
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onError
+          go_name: OnError
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onRecordingStopped
+          go_name: OnRecordingStopped
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onTuned
+          go_name: OnTuned
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.media.tv.TsResponse
+      go_type: TsResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: String
+          go_name: arg3
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSharedFilterToken
+          go_name: GetSharedFilterToken
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.CommandResponse
+      go_type: CommandResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: String
+          go_name: arg3
+        - java_type: String
+          go_name: arg4
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getResponse
+          go_name: GetResponse
+          returns: String
+          error: true
+        - java_method: getResponseType
+          go_name: GetResponseType
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.AdResponse
+      go_type: AdResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: long
+          go_name: arg2
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getElapsedTimeMillis
+          go_name: GetElapsedTimeMillis
+          returns: long
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getResponseType
+          go_name: GetResponseType
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
     - java_class: android.media.tv.AdRequest
       go_type: AdRequest
       obtain: constructor
@@ -73,8 +913,42 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.media.tv.PesRequest
-      go_type: PesRequest
+    - java_class: android.media.tv.SignalingDataRequest
+      go_type: SignalingDataRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: java.util.List<java.lang.String>
+          go_name: arg3
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getGroup
+          go_name: GetGroup
+          returns: int
+          error: true
+        - java_method: getSignalingDataTypes
+          go_name: GetSignalingDataTypes
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.SectionRequest
+      go_type: SectionRequest
       obtain: constructor
       constructor_params:
         - java_type: int
@@ -85,18 +959,542 @@ classes:
           go_name: arg2
         - java_type: int
           go_name: arg3
+        - java_type: int
+          go_name: arg4
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getStreamId
-          go_name: GetStreamId
+        - java_method: getTableId
+          go_name: GetTableId
           returns: int
           error: true
         - java_method: getTsPid
           go_name: GetTsPid
           returns: int
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvView
+      go_type: View
+      obtain: constructor
+      constructor_params:
+        - java_type: android.content.Context
+          go_name: arg0
+      methods:
+        - java_method: dispatchGenericMotionEvent
+          go_name: DispatchGenericMotionEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchKeyEvent
+          go_name: DispatchKeyEvent
+          params:
+            - java_type: android.view.KeyEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchTouchEvent
+          go_name: DispatchTouchEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchTrackballEvent
+          go_name: DispatchTrackballEvent
+          params:
+            - java_type: android.view.MotionEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchUnhandledInputEvent
+          go_name: DispatchUnhandledInputEvent
+          params:
+            - java_type: android.view.InputEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: dispatchWindowFocusChanged
+          go_name: DispatchWindowFocusChanged
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: gatherTransparentRegion
+          go_name: GatherTransparentRegion
+          params:
+            - java_type: android.graphics.Region
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAudioPresentations
+          go_name: GetAudioPresentations
+          returns: java.util.List<android.media.AudioPresentation>
+          error: true
+        - java_method: getSelectedTrack
+          go_name: GetSelectedTrack
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getTracks
+          go_name: GetTracks
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.media.tv.TvTrackInfo>
+          error: true
+        - java_method: onUnhandledInputEvent
+          go_name: OnUnhandledInputEvent
+          params:
+            - java_type: android.view.InputEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: overrideTvAppAttributionSource
+          go_name: OverrideTvAppAttributionSource
+          params:
+            - java_type: android.content.AttributionSource
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: reset
+          go_name: Reset
+          returns: void
+          error: true
+        - java_method: resumePlayback
+          go_name: ResumePlayback
+          returns: void
+          error: true
+        - java_method: selectAudioPresentation
+          go_name: SelectAudioPresentation
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: selectTrack
+          go_name: SelectTrack
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: String
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: sendAppPrivateCommand
+          go_name: SendAppPrivateCommand
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.os.Bundle
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setCallback
+          go_name: SetCallback
+          params:
+            - java_type: android.media.tv.TvView$TvInputCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setCaptionEnabled
+          go_name: SetCaptionEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setInteractiveAppNotificationEnabled
+          go_name: SetInteractiveAppNotificationEnabled
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setOnUnhandledInputEventListener
+          go_name: SetOnUnhandledInputEventListener
+          params:
+            - java_type: android.media.tv.TvView$OnUnhandledInputEventListener
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setStreamVolume
+          go_name: SetStreamVolume
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTimeShiftPositionCallback
+          go_name: SetTimeShiftPositionCallback
+          params:
+            - java_type: android.media.tv.TvView$TimeShiftPositionCallback
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setTvMessageEnabled
+          go_name: SetTvMessageEnabled
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: setVideoFrozen
+          go_name: SetVideoFrozen
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setZOrderMediaOverlay
+          go_name: SetZOrderMediaOverlay
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setZOrderOnTop
+          go_name: SetZOrderOnTop
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: stopPlayback
+          go_name: StopPlayback
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: timeShiftPause
+          go_name: TimeShiftPause
+          returns: void
+          error: true
+        - java_method: timeShiftPlay
+          go_name: TimeShiftPlay
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: timeShiftResume
+          go_name: TimeShiftResume
+          returns: void
+          error: true
+        - java_method: timeShiftSeekTo
+          go_name: TimeShiftSeekTo
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: timeShiftSetMode
+          go_name: TimeShiftSetMode
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: timeShiftSetPlaybackParams
+          go_name: TimeShiftSetPlaybackParams
+          params:
+            - java_type: android.media.PlaybackParams
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: tune
+          go_name: Tune2
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: tune
+          go_name: Tune3_1
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvView$OnUnhandledInputEventListener
+      go_type: ViewOnUnhandledInputEventListener
+      methods:
+        - java_method: onUnhandledInputEvent
+          go_name: OnUnhandledInputEvent
+          params:
+            - java_type: android.view.InputEvent
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.media.tv.TvView$TimeShiftPositionCallback
+      go_type: ViewTimeShiftPositionCallback
+      methods:
+        - java_method: onTimeShiftCurrentPositionChanged
+          go_name: OnTimeShiftCurrentPositionChanged
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onTimeShiftStartPositionChanged
+          go_name: OnTimeShiftStartPositionChanged
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvView$TvInputCallback
+      go_type: ViewTvInputCallback
+      methods:
+        - java_method: onAitInfoUpdated
+          go_name: OnAitInfoUpdated
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.media.tv.AitInfo
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onAudioPresentationSelected
+          go_name: OnAudioPresentationSelected
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onAvailableSpeeds
+          go_name: OnAvailableSpeeds
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: float[]
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onChannelRetuned
+          go_name: OnChannelRetuned
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionFailed
+          go_name: OnConnectionFailed
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onContentAllowed
+          go_name: OnContentAllowed
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onContentBlocked
+          go_name: OnContentBlocked
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.media.tv.TvContentRating
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCueingMessageAvailability
+          go_name: OnCueingMessageAvailability
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onDisconnected
+          go_name: OnDisconnected
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSignalStrengthUpdated
+          go_name: OnSignalStrengthUpdated
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onTimeShiftMode
+          go_name: OnTimeShiftMode
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onTimeShiftStatusChanged
+          go_name: OnTimeShiftStatusChanged
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onTrackSelected
+          go_name: OnTrackSelected
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: String
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onTuned
+          go_name: OnTuned
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: android.net.Uri
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onTvMessage
+          go_name: OnTvMessage
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.os.Bundle
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onVideoAvailable
+          go_name: OnVideoAvailable
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onVideoFreezeUpdated
+          go_name: OnVideoFreezeUpdated
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onVideoSizeChanged
+          go_name: OnVideoSizeChanged
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onVideoUnavailable
+          go_name: OnVideoUnavailable
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.CommandRequest
+      go_type: CommandRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: String
+          go_name: arg2
+        - java_type: String
+          go_name: arg3
+        - java_type: String
+          go_name: arg4
+        - java_type: String
+          go_name: arg5
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getArgumentType
+          go_name: GetArgumentType
+          returns: String
+          error: true
+        - java_method: getArguments
+          go_name: GetArguments
+          returns: String
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getNamespace
+          go_name: GetNamespace
+          returns: String
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -139,6 +1537,645 @@ classes:
         - java_method: getNptMillis
           go_name: GetNptMillis
           returns: long
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TimelineRequest
+      go_type: TimelineRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getIntervalMillis
+          go_name: GetIntervalMillis
+          returns: int
+          error: true
+        - java_method: getSelector
+          go_name: GetSelector
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.PesResponse
+      go_type: PesResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: String
+          go_name: arg3
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSharedFilterToken
+          go_name: GetSharedFilterToken
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.SignalingDataInfo
+      go_type: SignalingDataInfo
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getEncoding
+          go_name: GetEncoding
+          returns: String
+          error: true
+        - java_method: getGroup
+          go_name: GetGroup
+          returns: int
+          error: true
+        - java_method: getSignalingDataType
+          go_name: GetSignalingDataType
+          returns: String
+          error: true
+        - java_method: getTable
+          go_name: GetTable
+          returns: String
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvTrackInfo
+      go_type: TrackInfo
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getAudioChannelCount
+          go_name: GetAudioChannelCount
+          returns: int
+          error: true
+        - java_method: getAudioSampleRate
+          go_name: GetAudioSampleRate
+          returns: int
+          error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: java.lang.CharSequence
+          error: true
+        - java_method: getEncoding
+          go_name: GetEncoding
+          returns: String
+          error: true
+        - java_method: getExtra
+          go_name: GetExtra
+          returns: android.os.Bundle
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: String
+          error: true
+        - java_method: getLanguage
+          go_name: GetLanguage
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getVideoActiveFormatDescription
+          go_name: GetVideoActiveFormatDescription
+          returns: byte
+          error: true
+        - java_method: getVideoFrameRate
+          go_name: GetVideoFrameRate
+          returns: float
+          error: true
+        - java_method: getVideoHeight
+          go_name: GetVideoHeight
+          returns: int
+          error: true
+        - java_method: getVideoPixelAspectRatio
+          go_name: GetVideoPixelAspectRatio
+          returns: float
+          error: true
+        - java_method: getVideoWidth
+          go_name: GetVideoWidth
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isAudioDescription
+          go_name: IsAudioDescription
+          returns: boolean
+          error: true
+        - java_method: isEncrypted
+          go_name: IsEncrypted
+          returns: boolean
+          error: true
+        - java_method: isHardOfHearing
+          go_name: IsHardOfHearing
+          returns: boolean
+          error: true
+        - java_method: isSpokenSubtitle
+          go_name: IsSpokenSubtitle
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvTrackInfo$Builder
+      go_type: TrackInfoBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.media.tv.TvTrackInfo
+          error: true
+        - java_method: setAudioChannelCount
+          go_name: SetAudioChannelCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setAudioDescription
+          go_name: SetAudioDescription
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setAudioSampleRate
+          go_name: SetAudioSampleRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setDescription
+          go_name: SetDescription
+          params:
+            - java_type: java.lang.CharSequence
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setEncoding
+          go_name: SetEncoding
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setEncrypted
+          go_name: SetEncrypted
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setExtra
+          go_name: SetExtra
+          params:
+            - java_type: android.os.Bundle
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setHardOfHearing
+          go_name: SetHardOfHearing
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setLanguage
+          go_name: SetLanguage
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setSpokenSubtitle
+          go_name: SetSpokenSubtitle
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setVideoActiveFormatDescription
+          go_name: SetVideoActiveFormatDescription
+          params:
+            - java_type: byte
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setVideoFrameRate
+          go_name: SetVideoFrameRate
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setVideoHeight
+          go_name: SetVideoHeight
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setVideoPixelAspectRatio
+          go_name: SetVideoPixelAspectRatio
+          params:
+            - java_type: float
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+        - java_method: setVideoWidth
+          go_name: SetVideoWidth
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.media.tv.TvTrackInfo$Builder
+          error: true
+    - java_class: android.media.tv.TableResponse
+      go_type: TableResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: android.net.Uri
+          go_name: arg3
+        - java_type: int
+          go_name: arg4
+        - java_type: int
+          go_name: arg5
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSize
+          go_name: GetSize
+          returns: int
+          error: true
+        - java_method: getTableByteArray
+          go_name: GetTableByteArray
+          returns: '[B'
+          error: true
+        - java_method: getTableSharedMemory
+          go_name: GetTableSharedMemory
+          returns: android.os.SharedMemory
+          error: true
+        - java_method: getTableUri
+          go_name: GetTableUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getVersion
+          go_name: GetVersion
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TableResponse$Builder
+      go_type: TableResponseBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.media.tv.TableResponse
+          error: true
+        - java_method: setTableByteArray
+          go_name: SetTableByteArray
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: android.media.tv.TableResponse$Builder
+          error: true
+        - java_method: setTableSharedMemory
+          go_name: SetTableSharedMemory
+          params:
+            - java_type: android.os.SharedMemory
+              go_name: arg0
+          returns: android.media.tv.TableResponse$Builder
+          error: true
+        - java_method: setTableUri
+          go_name: SetTableUri
+          params:
+            - java_type: android.net.Uri
+              go_name: arg0
+          returns: android.media.tv.TableResponse$Builder
+          error: true
+    - java_class: android.media.tv.AdBuffer
+      go_type: AdBuffer
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
+        - java_type: android.os.SharedMemory
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+        - java_type: int
+          go_name: arg4
+        - java_type: long
+          go_name: arg5
+        - java_type: int
+          go_name: arg6
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getFlags
+          go_name: GetFlags
+          returns: int
+          error: true
+        - java_method: getId
+          go_name: GetId
+          returns: int
+          error: true
+        - java_method: getLength
+          go_name: GetLength
+          returns: int
+          error: true
+        - java_method: getMimeType
+          go_name: GetMimeType
+          returns: String
+          error: true
+        - java_method: getOffset
+          go_name: GetOffset
+          returns: int
+          error: true
+        - java_method: getPresentationTimeUs
+          go_name: GetPresentationTimeUs
+          returns: long
+          error: true
+        - java_method: getSharedMemory
+          go_name: GetSharedMemory
+          returns: android.os.SharedMemory
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.SignalingDataResponse
+      go_type: SignalingDataResponse
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: java.util.List<java.lang.String>
+          go_name: arg3
+        - java_type: java.util.List<android.media.tv.SignalingDataInfo>
+          go_name: arg4
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSignalingDataInfoList
+          go_name: GetSignalingDataInfoList
+          returns: java.util.List<android.media.tv.SignalingDataInfo>
+          error: true
+        - java_method: getSignalingDataTypes
+          go_name: GetSignalingDataTypes
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.PesRequest
+      go_type: PesRequest
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+        - java_type: int
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getStreamId
+          go_name: GetStreamId
+          returns: int
+          error: true
+        - java_method: getTsPid
+          go_name: GetTsPid
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.media.tv.TvRecordingInfo
+      go_type: RecordingInfo
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: long
+          go_name: arg1
+        - java_type: long
+          go_name: arg2
+        - java_type: int
+          go_name: arg3
+        - java_type: String
+          go_name: arg4
+        - java_type: String
+          go_name: arg5
+        - java_type: long
+          go_name: arg6
+        - java_type: long
+          go_name: arg7
+        - java_type: android.net.Uri
+          go_name: arg8
+        - java_type: android.net.Uri
+          go_name: arg9
+        - java_type: java.util.List<android.media.tv.TvContentRating>
+          go_name: arg10
+        - java_type: android.net.Uri
+          go_name: arg11
+        - java_type: long
+          go_name: arg12
+        - java_type: long
+          go_name: arg13
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getChannelUri
+          go_name: GetChannelUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getContentRatings
+          go_name: GetContentRatings
+          returns: java.util.List<android.media.tv.TvContentRating>
+          error: true
+        - java_method: getDescription
+          go_name: GetDescription
+          returns: String
+          error: true
+        - java_method: getEndPaddingMillis
+          go_name: GetEndPaddingMillis
+          returns: long
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getProgramUri
+          go_name: GetProgramUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getRecordingDurationMillis
+          go_name: GetRecordingDurationMillis
+          returns: long
+          error: true
+        - java_method: getRecordingId
+          go_name: GetRecordingId
+          returns: String
+          error: true
+        - java_method: getRecordingStartTimeMillis
+          go_name: GetRecordingStartTimeMillis
+          returns: long
+          error: true
+        - java_method: getRecordingUri
+          go_name: GetRecordingUri
+          returns: android.net.Uri
+          error: true
+        - java_method: getRepeatDays
+          go_name: GetRepeatDays
+          returns: int
+          error: true
+        - java_method: getScheduledDurationMillis
+          go_name: GetScheduledDurationMillis
+          returns: long
+          error: true
+        - java_method: getScheduledStartTimeMillis
+          go_name: GetScheduledStartTimeMillis
+          returns: long
+          error: true
+        - java_method: getStartPaddingMillis
+          go_name: GetStartPaddingMillis
+          returns: long
+          error: true
+        - java_method: setDescription
+          go_name: SetDescription
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setName
+          go_name: SetName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -754,78 +2791,8 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.media.tv.BroadcastInfoRequest
-      go_type: BroadcastInfoRequest
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getOption
-          go_name: GetOption
-          returns: int
-          error: true
-        - java_method: getRequestId
-          go_name: GetRequestId
-          returns: int
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.DsmccResponse
-      go_type: DsmccResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: android.os.ParcelFileDescriptor
-          go_name: arg3
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getBiopMessageType
-          go_name: GetBiopMessageType
-          returns: String
-          error: true
-        - java_method: getFile
-          go_name: GetFile
-          returns: android.os.ParcelFileDescriptor
-          error: true
-        - java_method: getStreamEventIds
-          go_name: GetStreamEventIds
-          returns: '[I'
-          error: true
-        - java_method: getStreamEventNames
-          go_name: GetStreamEventNames
-          returns: java.lang.String[]
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.PesResponse
-      go_type: PesResponse
+    - java_class: android.media.tv.TimelineResponse
+      go_type: TimelineResponse
       obtain: constructor
       constructor_params:
         - java_type: int
@@ -836,539 +2803,38 @@ classes:
           go_name: arg2
         - java_type: String
           go_name: arg3
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSharedFilterToken
-          go_name: GetSharedFilterToken
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvRecordingInfo
-      go_type: RecordingInfo
-      obtain: constructor
-      constructor_params:
-        - java_type: String
-          go_name: arg0
-        - java_type: long
-          go_name: arg1
-        - java_type: long
-          go_name: arg2
         - java_type: int
-          go_name: arg3
-        - java_type: String
           go_name: arg4
-        - java_type: String
+        - java_type: int
           go_name: arg5
         - java_type: long
           go_name: arg6
         - java_type: long
           go_name: arg7
-        - java_type: android.net.Uri
-          go_name: arg8
-        - java_type: android.net.Uri
-          go_name: arg9
-        - java_type: java.util.List<android.media.tv.TvContentRating>
-          go_name: arg10
-        - java_type: android.net.Uri
-          go_name: arg11
-        - java_type: long
-          go_name: arg12
-        - java_type: long
-          go_name: arg13
       methods:
         - java_method: describeContents
           go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getChannelUri
-          go_name: GetChannelUri
-          returns: android.net.Uri
-          error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: String
-          error: true
-        - java_method: getEndPaddingMillis
-          go_name: GetEndPaddingMillis
-          returns: long
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getProgramUri
-          go_name: GetProgramUri
-          returns: android.net.Uri
-          error: true
-        - java_method: getRecordingDurationMillis
-          go_name: GetRecordingDurationMillis
-          returns: long
-          error: true
-        - java_method: getRecordingId
-          go_name: GetRecordingId
-          returns: String
-          error: true
-        - java_method: getRecordingStartTimeMillis
-          go_name: GetRecordingStartTimeMillis
-          returns: long
-          error: true
-        - java_method: getRecordingUri
-          go_name: GetRecordingUri
-          returns: android.net.Uri
-          error: true
-        - java_method: getRepeatDays
-          go_name: GetRepeatDays
-          returns: int
-          error: true
-        - java_method: getScheduledDurationMillis
-          go_name: GetScheduledDurationMillis
-          returns: long
-          error: true
-        - java_method: getScheduledStartTimeMillis
-          go_name: GetScheduledStartTimeMillis
-          returns: long
-          error: true
-        - java_method: getStartPaddingMillis
-          go_name: GetStartPaddingMillis
-          returns: long
-          error: true
-        - java_method: setDescription
-          go_name: SetDescription
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setName
-          go_name: SetName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.SignalingDataResponse
-      go_type: SignalingDataResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: java.util.List<java.lang.String>
-          go_name: arg3
-        - java_type: java.util.List<android.media.tv.SignalingDataInfo>
-          go_name: arg4
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.BroadcastInfoResponse
-      go_type: BroadcastInfoResponse
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getRequestId
-          go_name: GetRequestId
-          returns: int
-          error: true
-        - java_method: getResponseResult
-          go_name: GetResponseResult
-          returns: int
-          error: true
-        - java_method: getSequence
-          go_name: GetSequence
-          returns: int
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvContract
-      go_type: Contract
-      static_methods:
-        - java_method: buildChannelLogoUri
-          go_name: BuildChannelLogoUri1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildChannelLogoUri
-          go_name: BuildChannelLogoUri1_1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildChannelUri
-          go_name: BuildChannelUri
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildChannelUriForPassthroughInput
-          go_name: BuildChannelUriForPassthroughInput
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildChannelsUriForInput
-          go_name: BuildChannelsUriForInput
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildInputId
-          go_name: BuildInputId
-          params:
-            - java_type: android.content.ComponentName
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: buildPreviewProgramUri
-          go_name: BuildPreviewProgramUri
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildPreviewProgramsUriForChannel
-          go_name: BuildPreviewProgramsUriForChannel1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildPreviewProgramsUriForChannel
-          go_name: BuildPreviewProgramsUriForChannel1_1
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildProgramUri
-          go_name: BuildProgramUri
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildProgramsUriForChannel
-          go_name: BuildProgramsUriForChannel1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildProgramsUriForChannel
-          go_name: BuildProgramsUriForChannel3_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: android.net.Uri
-          error: true
-        - java_method: buildProgramsUriForChannel
-          go_name: BuildProgramsUriForChannel1_2
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildProgramsUriForChannel
-          go_name: BuildProgramsUriForChannel3_3
-          params:
-            - java_type: long
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-            - java_type: long
-              go_name: arg2
-          returns: android.net.Uri
-          error: true
-        - java_method: buildRecordedProgramUri
-          go_name: BuildRecordedProgramUri
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: buildWatchNextProgramUri
-          go_name: BuildWatchNextProgramUri
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: android.net.Uri
-          error: true
-        - java_method: isChannelUri
-          go_name: IsChannelUri
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isChannelUriForPassthroughInput
-          go_name: IsChannelUriForPassthroughInput
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isChannelUriForTunerInput
-          go_name: IsChannelUriForTunerInput
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isProgramUri
-          go_name: IsProgramUri
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isRecordedProgramUri
-          go_name: IsRecordedProgramUri
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: requestChannelBrowsable
-          go_name: RequestChannelBrowsable
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvContract$BaseTvColumns
-      go_type: ContractBaseTvColumns
-    - java_class: android.media.tv.TvContract$Channels
-      go_type: ContractChannels
-      static_methods:
-        - java_method: getVideoResolution
-          go_name: GetVideoResolution
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-    - java_class: android.media.tv.TvContract$PreviewPrograms
-      go_type: ContractPreviewPrograms
-    - java_class: android.media.tv.TvContract$Programs
-      go_type: ContractPrograms
-    - java_class: android.media.tv.TvContract$RecordedPrograms
-      go_type: ContractRecordedPrograms
-    - java_class: android.media.tv.TvContract$WatchNextPrograms
-      go_type: ContractWatchNextPrograms
-    - java_class: android.media.tv.TsRequest
-      go_type: TsRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getTsPid
-          go_name: GetTsPid
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TimelineRequest
-      go_type: TimelineRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getIntervalMillis
-          go_name: GetIntervalMillis
           returns: int
           error: true
         - java_method: getSelector
           go_name: GetSelector
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TableResponse
-      go_type: TableResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: android.net.Uri
-          go_name: arg3
-        - java_type: int
-          go_name: arg4
-        - java_type: int
-          go_name: arg5
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSize
-          go_name: GetSize
-          returns: int
-          error: true
-        - java_method: getTableByteArray
-          go_name: GetTableByteArray
-          returns: '[B'
-          error: true
-        - java_method: getTableSharedMemory
-          go_name: GetTableSharedMemory
-          returns: android.os.SharedMemory
-          error: true
-        - java_method: getTableUri
-          go_name: GetTableUri
           returns: android.net.Uri
           error: true
-        - java_method: getVersion
-          go_name: GetVersion
+        - java_method: getTicks
+          go_name: GetTicks
+          returns: long
+          error: true
+        - java_method: getUnitsPerSecond
+          go_name: GetUnitsPerSecond
           returns: int
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TableResponse$Builder
-      go_type: TableResponseBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.media.tv.TableResponse
-          error: true
-        - java_method: setTableByteArray
-          go_name: SetTableByteArray
-          params:
-            - java_type: '[B'
-              go_name: arg0
-          returns: android.media.tv.TableResponse$Builder
-          error: true
-        - java_method: setTableSharedMemory
-          go_name: SetTableSharedMemory
-          params:
-            - java_type: android.os.SharedMemory
-              go_name: arg0
-          returns: android.media.tv.TableResponse$Builder
-          error: true
-        - java_method: setTableUri
-          go_name: SetTableUri
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: android.media.tv.TableResponse$Builder
-          error: true
-    - java_class: android.media.tv.DsmccRequest
-      go_type: DsmccRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: android.net.Uri
-          go_name: arg2
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getUnitsPerTick
+          go_name: GetUnitsPerTick
           returns: int
           error: true
-        - java_method: getUri
-          go_name: GetUri
-          returns: android.net.Uri
+        - java_method: getWallClock
+          go_name: GetWallClock
+          returns: long
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -1413,843 +2879,24 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.media.tv.TvInputInfo
-      go_type: InputInfo
-      methods:
-        - java_method: canPauseRecording
-          go_name: CanPauseRecording
-          returns: boolean
-          error: true
-        - java_method: canRecord
-          go_name: CanRecord
-          returns: boolean
-          error: true
-        - java_method: createSettingsIntent
-          go_name: CreateSettingsIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: createSetupIntent
-          go_name: CreateSetupIntent
-          returns: android.content.Intent
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getExtras
-          go_name: GetExtras
-          returns: android.os.Bundle
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-        - java_method: getParentId
-          go_name: GetParentId
-          returns: String
-          error: true
-        - java_method: getServiceInfo
-          go_name: GetServiceInfo
-          returns: android.content.pm.ServiceInfo
-          error: true
-        - java_method: getTunerCount
-          go_name: GetTunerCount
-          returns: int
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isHidden
-          go_name: IsHidden
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isPassthroughInput
-          go_name: IsPassthroughInput
-          returns: boolean
-          error: true
-        - java_method: loadCustomLabel
-          go_name: LoadCustomLabel
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: loadIcon
-          go_name: LoadIcon
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: android.graphics.drawable.Drawable
-          error: true
-        - java_method: loadLabel
-          go_name: LoadLabel
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvInputInfo$Builder
-      go_type: InputInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.media.tv.TvInputInfo
-          error: true
-        - java_method: setCanPauseRecording
-          go_name: SetCanPauseRecording
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.media.tv.TvInputInfo$Builder
-          error: true
-        - java_method: setCanRecord
-          go_name: SetCanRecord
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.media.tv.TvInputInfo$Builder
-          error: true
-        - java_method: setExtras
-          go_name: SetExtras
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.media.tv.TvInputInfo$Builder
-          error: true
-        - java_method: setTunerCount
-          go_name: SetTunerCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.tv.TvInputInfo$Builder
-          error: true
-    - java_class: android.media.tv.AdBuffer
-      go_type: AdBuffer
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: String
-          go_name: arg1
-        - java_type: android.os.SharedMemory
-          go_name: arg2
-        - java_type: int
-          go_name: arg3
-        - java_type: int
-          go_name: arg4
-        - java_type: long
-          go_name: arg5
-        - java_type: int
-          go_name: arg6
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getFlags
-          go_name: GetFlags
-          returns: int
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: int
-          error: true
-        - java_method: getLength
-          go_name: GetLength
-          returns: int
-          error: true
-        - java_method: getMimeType
-          go_name: GetMimeType
-          returns: String
-          error: true
-        - java_method: getOffset
-          go_name: GetOffset
-          returns: int
-          error: true
-        - java_method: getPresentationTimeUs
-          go_name: GetPresentationTimeUs
-          returns: long
-          error: true
-        - java_method: getSharedMemory
-          go_name: GetSharedMemory
-          returns: android.os.SharedMemory
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvView
-      go_type: View
-      obtain: constructor
-      constructor_params:
-        - java_type: android.content.Context
-          go_name: arg0
-      methods:
-        - java_method: dispatchGenericMotionEvent
-          go_name: DispatchGenericMotionEvent
-          params:
-            - java_type: android.view.MotionEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: dispatchKeyEvent
-          go_name: DispatchKeyEvent
-          params:
-            - java_type: android.view.KeyEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: dispatchTouchEvent
-          go_name: DispatchTouchEvent
-          params:
-            - java_type: android.view.MotionEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: dispatchTrackballEvent
-          go_name: DispatchTrackballEvent
-          params:
-            - java_type: android.view.MotionEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: dispatchUnhandledInputEvent
-          go_name: DispatchUnhandledInputEvent
-          params:
-            - java_type: android.view.InputEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: dispatchWindowFocusChanged
-          go_name: DispatchWindowFocusChanged
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: gatherTransparentRegion
-          go_name: GatherTransparentRegion
-          params:
-            - java_type: android.graphics.Region
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getSelectedTrack
-          go_name: GetSelectedTrack
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: onUnhandledInputEvent
-          go_name: OnUnhandledInputEvent
-          params:
-            - java_type: android.view.InputEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: overrideTvAppAttributionSource
-          go_name: OverrideTvAppAttributionSource
-          params:
-            - java_type: android.content.AttributionSource
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: reset
-          go_name: Reset
-          returns: void
-          error: true
-        - java_method: resumePlayback
-          go_name: ResumePlayback
-          returns: void
-          error: true
-        - java_method: selectAudioPresentation
-          go_name: SelectAudioPresentation
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: selectTrack
-          go_name: SelectTrack
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: sendAppPrivateCommand
-          go_name: SendAppPrivateCommand
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setCallback
-          go_name: SetCallback
-          params:
-            - java_type: android.media.tv.TvView$TvInputCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setCaptionEnabled
-          go_name: SetCaptionEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setInteractiveAppNotificationEnabled
-          go_name: SetInteractiveAppNotificationEnabled
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setOnUnhandledInputEventListener
-          go_name: SetOnUnhandledInputEventListener
-          params:
-            - java_type: android.media.tv.TvView$OnUnhandledInputEventListener
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setStreamVolume
-          go_name: SetStreamVolume
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTimeShiftPositionCallback
-          go_name: SetTimeShiftPositionCallback
-          params:
-            - java_type: android.media.tv.TvView$TimeShiftPositionCallback
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setTvMessageEnabled
-          go_name: SetTvMessageEnabled
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setVideoFrozen
-          go_name: SetVideoFrozen
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setZOrderMediaOverlay
-          go_name: SetZOrderMediaOverlay
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setZOrderOnTop
-          go_name: SetZOrderOnTop
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: stopPlayback
-          go_name: StopPlayback
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: timeShiftPause
-          go_name: TimeShiftPause
-          returns: void
-          error: true
-        - java_method: timeShiftPlay
-          go_name: TimeShiftPlay
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: timeShiftResume
-          go_name: TimeShiftResume
-          returns: void
-          error: true
-        - java_method: timeShiftSeekTo
-          go_name: TimeShiftSeekTo
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: timeShiftSetMode
-          go_name: TimeShiftSetMode
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: timeShiftSetPlaybackParams
-          go_name: TimeShiftSetPlaybackParams
-          params:
-            - java_type: android.media.PlaybackParams
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: tune
-          go_name: Tune2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: tune
-          go_name: Tune3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvView$OnUnhandledInputEventListener
-      go_type: ViewOnUnhandledInputEventListener
-      methods:
-        - java_method: onUnhandledInputEvent
-          go_name: OnUnhandledInputEvent
-          params:
-            - java_type: android.view.InputEvent
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.media.tv.TvView$TimeShiftPositionCallback
-      go_type: ViewTimeShiftPositionCallback
-      methods:
-        - java_method: onTimeShiftCurrentPositionChanged
-          go_name: OnTimeShiftCurrentPositionChanged
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onTimeShiftStartPositionChanged
-          go_name: OnTimeShiftStartPositionChanged
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvView$TvInputCallback
-      go_type: ViewTvInputCallback
-      methods:
-        - java_method: onAitInfoUpdated
-          go_name: OnAitInfoUpdated
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.media.tv.AitInfo
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onAudioPresentationSelected
-          go_name: OnAudioPresentationSelected
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onAvailableSpeeds
-          go_name: OnAvailableSpeeds
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: float[]
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onChannelRetuned
-          go_name: OnChannelRetuned
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onConnectionFailed
-          go_name: OnConnectionFailed
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onContentAllowed
-          go_name: OnContentAllowed
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onContentBlocked
-          go_name: OnContentBlocked
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.media.tv.TvContentRating
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCueingMessageAvailability
-          go_name: OnCueingMessageAvailability
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onDisconnected
-          go_name: OnDisconnected
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSignalStrengthUpdated
-          go_name: OnSignalStrengthUpdated
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onTimeShiftMode
-          go_name: OnTimeShiftMode
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onTimeShiftStatusChanged
-          go_name: OnTimeShiftStatusChanged
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onTrackSelected
-          go_name: OnTrackSelected
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onTuned
-          go_name: OnTuned
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onTvMessage
-          go_name: OnTvMessage
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onVideoAvailable
-          go_name: OnVideoAvailable
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onVideoFreezeUpdated
-          go_name: OnVideoFreezeUpdated
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onVideoSizeChanged
-          go_name: OnVideoSizeChanged
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onVideoUnavailable
-          go_name: OnVideoUnavailable
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.SectionResponse
-      go_type: SectionResponse
+    - java_class: android.media.tv.DsmccRequest
+      go_type: DsmccRequest
       obtain: constructor
       constructor_params:
         - java_type: int
           go_name: arg0
         - java_type: int
           go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: int
-          go_name: arg3
-        - java_type: int
-          go_name: arg4
-        - java_type: android.os.Bundle
-          go_name: arg5
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSessionData
-          go_name: GetSessionData
-          returns: android.os.Bundle
-          error: true
-        - java_method: getSessionId
-          go_name: GetSessionId
-          returns: int
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.AdResponse
-      go_type: AdResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: long
+        - java_type: android.net.Uri
           go_name: arg2
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getElapsedTimeMillis
-          go_name: GetElapsedTimeMillis
-          returns: long
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: int
-          error: true
-        - java_method: getResponseType
-          go_name: GetResponseType
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.SectionRequest
-      go_type: SectionRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: int
-          go_name: arg3
-        - java_type: int
-          go_name: arg4
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getTableId
-          go_name: GetTableId
-          returns: int
-          error: true
-        - java_method: getTsPid
-          go_name: GetTsPid
-          returns: int
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TableRequest
-      go_type: TableRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: int
-          go_name: arg3
-        - java_type: int
-          go_name: arg4
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getTableId
-          go_name: GetTableId
-          returns: int
-          error: true
-        - java_method: getTableName
-          go_name: GetTableName
-          returns: int
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.SignalingDataRequest
-      go_type: SignalingDataRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: java.util.List<java.lang.String>
-          go_name: arg3
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getGroup
-          go_name: GetGroup
-          returns: int
+        - java_method: getUri
+          go_name: GetUri
+          returns: android.net.Uri
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -2266,6 +2913,10 @@ classes:
       service_name: tv_input
       close: true
       methods:
+        - java_method: getBlockedRatings
+          go_name: GetBlockedRatings
+          returns: java.util.List<android.media.tv.TvContentRating>
+          error: true
         - java_method: getInputState
           go_name: GetInputState
           params:
@@ -2279,6 +2930,10 @@ classes:
             - java_type: String
               go_name: arg0
           returns: android.media.tv.TvInputInfo
+          error: true
+        - java_method: getTvInputList
+          go_name: GetTvInputList
+          returns: java.util.List<android.media.tv.TvInputInfo>
           error: true
         - java_method: isParentalControlsEnabled
           go_name: IsParentalControlsEnabled
@@ -2345,72 +3000,6 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.media.tv.CommandResponse
-      go_type: CommandResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: String
-          go_name: arg3
-        - java_type: String
-          go_name: arg4
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getResponse
-          go_name: GetResponse
-          returns: String
-          error: true
-        - java_method: getResponseType
-          go_name: GetResponseType
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TsResponse
-      go_type: TsResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: String
-          go_name: arg3
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSharedFilterToken
-          go_name: GetSharedFilterToken
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
     - java_class: android.media.tv.StreamEventRequest
       go_type: StreamEventRequest
       obtain: constructor
@@ -2445,583 +3034,52 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.media.tv.SignalingDataInfo
-      go_type: SignalingDataInfo
-      obtain: constructor
-      constructor_params:
-        - java_type: String
-          go_name: arg0
-        - java_type: String
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: int
-          go_name: arg3
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getEncoding
-          go_name: GetEncoding
-          returns: String
-          error: true
-        - java_method: getGroup
-          go_name: GetGroup
-          returns: int
-          error: true
-        - java_method: getSignalingDataType
-          go_name: GetSignalingDataType
-          returns: String
-          error: true
-        - java_method: getTable
-          go_name: GetTable
-          returns: String
-          error: true
-        - java_method: getVersion
-          go_name: GetVersion
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TimelineResponse
-      go_type: TimelineResponse
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: int
-          go_name: arg2
-        - java_type: String
-          go_name: arg3
-        - java_type: int
-          go_name: arg4
-        - java_type: int
-          go_name: arg5
-        - java_type: long
-          go_name: arg6
-        - java_type: long
-          go_name: arg7
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getSelector
-          go_name: GetSelector
-          returns: android.net.Uri
-          error: true
-        - java_method: getTicks
-          go_name: GetTicks
-          returns: long
-          error: true
-        - java_method: getUnitsPerSecond
-          go_name: GetUnitsPerSecond
-          returns: int
-          error: true
-        - java_method: getUnitsPerTick
-          go_name: GetUnitsPerTick
-          returns: int
-          error: true
-        - java_method: getWallClock
-          go_name: GetWallClock
-          returns: long
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvRecordingClient
-      go_type: RecordingClient
-      obtain: constructor
-      constructor_params:
-        - java_type: android.content.Context
-          go_name: arg0
-        - java_type: String
-          go_name: arg1
-        - java_type: android.media.tv.TvRecordingClient$RecordingCallback
-          go_name: arg2
-        - java_type: android.os.Handler
-          go_name: arg3
-      methods:
-        - java_method: pauseRecording
-          go_name: PauseRecording0
-          returns: void
-          error: true
-        - java_method: pauseRecording
-          go_name: PauseRecording1_1
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: release
-          go_name: Release
-          returns: void
-          error: true
-        - java_method: resumeRecording
-          go_name: ResumeRecording0
-          returns: void
-          error: true
-        - java_method: resumeRecording
-          go_name: ResumeRecording1_1
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: sendAppPrivateCommand
-          go_name: SendAppPrivateCommand
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: setTvInteractiveAppView
-          go_name: SetTvInteractiveAppView
-          params:
-            - java_type: android.media.tv.interactive.TvInteractiveAppView
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: startRecording
-          go_name: StartRecording1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: startRecording
-          go_name: StartRecording2_1
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-            - java_type: android.os.Bundle
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: stopRecording
-          go_name: StopRecording
-          returns: void
-          error: true
-        - java_method: tune
-          go_name: Tune2
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: tune
-          go_name: Tune3_1
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: android.net.Uri
-              go_name: arg1
-            - java_type: android.os.Bundle
-              go_name: arg2
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvRecordingClient$RecordingCallback
-      go_type: RecordingClientRecordingCallback
-      methods:
-        - java_method: onConnectionFailed
-          go_name: OnConnectionFailed
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onDisconnected
-          go_name: OnDisconnected
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onError
-          go_name: OnError
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onRecordingStopped
-          go_name: OnRecordingStopped
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onTuned
-          go_name: OnTuned
-          params:
-            - java_type: android.net.Uri
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvTrackInfo
-      go_type: TrackInfo
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getAudioChannelCount
-          go_name: GetAudioChannelCount
-          returns: int
-          error: true
-        - java_method: getAudioSampleRate
-          go_name: GetAudioSampleRate
-          returns: int
-          error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: java.lang.CharSequence
-          error: true
-        - java_method: getEncoding
-          go_name: GetEncoding
-          returns: String
-          error: true
-        - java_method: getExtra
-          go_name: GetExtra
-          returns: android.os.Bundle
-          error: true
-        - java_method: getId
-          go_name: GetId
-          returns: String
-          error: true
-        - java_method: getLanguage
-          go_name: GetLanguage
-          returns: String
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getVideoActiveFormatDescription
-          go_name: GetVideoActiveFormatDescription
-          returns: byte
-          error: true
-        - java_method: getVideoFrameRate
-          go_name: GetVideoFrameRate
-          returns: float
-          error: true
-        - java_method: getVideoHeight
-          go_name: GetVideoHeight
-          returns: int
-          error: true
-        - java_method: getVideoPixelAspectRatio
-          go_name: GetVideoPixelAspectRatio
-          returns: float
-          error: true
-        - java_method: getVideoWidth
-          go_name: GetVideoWidth
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isAudioDescription
-          go_name: IsAudioDescription
-          returns: boolean
-          error: true
-        - java_method: isEncrypted
-          go_name: IsEncrypted
-          returns: boolean
-          error: true
-        - java_method: isHardOfHearing
-          go_name: IsHardOfHearing
-          returns: boolean
-          error: true
-        - java_method: isSpokenSubtitle
-          go_name: IsSpokenSubtitle
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvTrackInfo$Builder
-      go_type: TrackInfoBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.media.tv.TvTrackInfo
-          error: true
-        - java_method: setAudioChannelCount
-          go_name: SetAudioChannelCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setAudioDescription
-          go_name: SetAudioDescription
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setAudioSampleRate
-          go_name: SetAudioSampleRate
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setDescription
-          go_name: SetDescription
-          params:
-            - java_type: java.lang.CharSequence
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setEncoding
-          go_name: SetEncoding
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setEncrypted
-          go_name: SetEncrypted
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setExtra
-          go_name: SetExtra
-          params:
-            - java_type: android.os.Bundle
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setHardOfHearing
-          go_name: SetHardOfHearing
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setLanguage
-          go_name: SetLanguage
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setSpokenSubtitle
-          go_name: SetSpokenSubtitle
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setVideoActiveFormatDescription
-          go_name: SetVideoActiveFormatDescription
-          params:
-            - java_type: byte
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setVideoFrameRate
-          go_name: SetVideoFrameRate
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setVideoHeight
-          go_name: SetVideoHeight
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setVideoPixelAspectRatio
-          go_name: SetVideoPixelAspectRatio
-          params:
-            - java_type: float
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-        - java_method: setVideoWidth
-          go_name: SetVideoWidth
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.media.tv.TvTrackInfo$Builder
-          error: true
-    - java_class: android.media.tv.CommandRequest
-      go_type: CommandRequest
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-        - java_type: String
-          go_name: arg2
-        - java_type: String
-          go_name: arg3
-        - java_type: String
-          go_name: arg4
-        - java_type: String
-          go_name: arg5
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getArgumentType
-          go_name: GetArgumentType
-          returns: String
-          error: true
-        - java_method: getArguments
-          go_name: GetArguments
-          returns: String
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getNamespace
-          go_name: GetNamespace
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.media.tv.TvContentRating
-      go_type: ContentRating
-      methods:
-        - java_method: contains
-          go_name: Contains
-          params:
-            - java_type: android.media.tv.TvContentRating
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: flattenToString
-          go_name: FlattenToString
-          returns: String
-          error: true
-        - java_method: getDomain
-          go_name: GetDomain
-          returns: String
-          error: true
-        - java_method: getMainRating
-          go_name: GetMainRating
-          returns: String
-          error: true
-        - java_method: getRatingSystem
-          go_name: GetRatingSystem
-          returns: String
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-      static_methods:
-        - java_method: createRating
-          go_name: CreateRating
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: String
-              go_name: arg1
-            - java_type: String
-              go_name: arg2
-            - java_type: java.lang.String...
-              go_name: arg3
-          returns: android.media.tv.TvContentRating
-          error: true
-        - java_method: unflattenFromString
-          go_name: UnflattenFromString
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.media.tv.TvContentRating
-          error: true
 constants:
     - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: RequestTypeStart
-      value: "1"
+    - go_name: TableNameBat
+      value: "4"
       go_type: int
-    - go_name: RequestTypeStop
+    - go_name: TableNameCat
       value: "2"
       go_type: int
-    - go_name: PriorityHintUseCaseTypeBackground
-      value: "100"
+    - go_name: TableNameEit
+      value: "6"
       go_type: int
-    - go_name: PriorityHintUseCaseTypeLive
-      value: "400"
+    - go_name: TableNameNit
+      value: "3"
       go_type: int
-    - go_name: PriorityHintUseCaseTypePlayback
-      value: "300"
+    - go_name: TableNamePat
+      value: "0"
       go_type: int
-    - go_name: PriorityHintUseCaseTypeRecord
-      value: "500"
+    - go_name: TableNamePmt
+      value: "1"
       go_type: int
-    - go_name: PriorityHintUseCaseTypeScan
-      value: "200"
+    - go_name: TableNameSdt
+      value: "5"
       go_type: int
-    - go_name: ServiceInterface
-      value: '"android.media.tv.TvInputService"'
-      go_type: string
-    - go_name: ServiceMetaData
-      value: '"android.media.tv.input"'
-      go_type: string
+    - go_name: TableNameSit
+      value: "9"
+      go_type: int
+    - go_name: TableNameTdt
+      value: "7"
+      go_type: int
+    - go_name: TableNameTot
+      value: "8"
+      go_type: int
+    - go_name: Unrated
+      value: "0"
+      go_type: int
+    - go_name: ResponseResultCancel
+      value: "3"
+      go_type: int
+    - go_name: ResponseResultError
+      value: "1"
+      go_type: int
+    - go_name: ResponseResultOk
+      value: "2"
+      go_type: int
     - go_name: RequestOptionAutoUpdate
       value: "1"
       go_type: int
@@ -3033,6 +3091,39 @@ constants:
       go_type: int
     - go_name: RequestOptionRepeat
       value: "0"
+      go_type: int
+    - go_name: ExtraInputId
+      value: '"android.media.tv.extra.INPUT_ID"'
+      go_type: string
+    - go_name: TypeComponent
+      value: "1004"
+      go_type: int
+    - go_name: TypeComposite
+      value: "1001"
+      go_type: int
+    - go_name: TypeDisplayPort
+      value: "1008"
+      go_type: int
+    - go_name: TypeDvi
+      value: "1006"
+      go_type: int
+    - go_name: TypeHdmi
+      value: "1007"
+      go_type: int
+    - go_name: TypeOther
+      value: "1000"
+      go_type: int
+    - go_name: TypeScart
+      value: "1003"
+      go_type: int
+    - go_name: TypeSvideo
+      value: "1002"
+      go_type: int
+    - go_name: TypeTuner
+      value: "0"
+      go_type: int
+    - go_name: TypeVga
+      value: "1005"
       go_type: int
     - go_name: BiopMessageTypeDirectory
       value: '"directory"'
@@ -3046,45 +3137,6 @@ constants:
     - go_name: BiopMessageTypeStream
       value: '"stream"'
       go_type: string
-    - go_name: Friday
-      value: "32"
-      go_type: int
-    - go_name: Monday
-      value: "2"
-      go_type: int
-    - go_name: RecordingAll
-      value: "3"
-      go_type: int
-    - go_name: RecordingInProgress
-      value: "2"
-      go_type: int
-    - go_name: RecordingScheduled
-      value: "1"
-      go_type: int
-    - go_name: Saturday
-      value: "64"
-      go_type: int
-    - go_name: Sunday
-      value: "1"
-      go_type: int
-    - go_name: Thursday
-      value: "16"
-      go_type: int
-    - go_name: Tuesday
-      value: "4"
-      go_type: int
-    - go_name: Wednesday
-      value: "8"
-      go_type: int
-    - go_name: ResponseResultCancel
-      value: "3"
-      go_type: int
-    - go_name: ResponseResultError
-      value: "1"
-      go_type: int
-    - go_name: ResponseResultOk
-      value: "2"
-      go_type: int
     - go_name: ActionInitializePrograms
       value: '"android.media.tv.action.INITIALIZE_PROGRAMS"'
       go_type: string
@@ -3306,9 +3358,6 @@ constants:
       go_type: string
     - go_name: TypeNtsc
       value: '"TYPE_NTSC"'
-      go_type: string
-    - go_name: TypeOther
-      value: '"TYPE_OTHER"'
       go_type: string
     - go_name: TypePal
       value: '"TYPE_PAL"'
@@ -3625,36 +3674,12 @@ constants:
     - go_name: WatchNextTypeWatchlist
       value: "3"
       go_type: int
-    - go_name: ExtraInputId
-      value: '"android.media.tv.extra.INPUT_ID"'
+    - go_name: ResponseTypeJson
+      value: '"json"'
       go_type: string
-    - go_name: TypeComponent
-      value: "1004"
-      go_type: int
-    - go_name: TypeComposite
-      value: "1001"
-      go_type: int
-    - go_name: TypeDisplayPort
-      value: "1008"
-      go_type: int
-    - go_name: TypeDvi
-      value: "1006"
-      go_type: int
-    - go_name: TypeHdmi
-      value: "1007"
-      go_type: int
-    - go_name: TypeScart
-      value: "1003"
-      go_type: int
-    - go_name: TypeSvideo
-      value: "1002"
-      go_type: int
-    - go_name: TypeTuner
-      value: "0"
-      go_type: int
-    - go_name: TypeVga
-      value: "1005"
-      go_type: int
+    - go_name: ResponseTypeXml
+      value: '"xml"'
+      go_type: string
     - go_name: ResponseTypeBuffering
       value: "5"
       go_type: int
@@ -3670,35 +3695,11 @@ constants:
     - go_name: ResponseTypeStopped
       value: "3"
       go_type: int
-    - go_name: TableNameBat
-      value: "4"
-      go_type: int
-    - go_name: TableNameCat
-      value: "2"
-      go_type: int
-    - go_name: TableNameEit
-      value: "6"
-      go_type: int
-    - go_name: TableNameNit
-      value: "3"
-      go_type: int
-    - go_name: TableNamePat
-      value: "0"
-      go_type: int
-    - go_name: TableNamePmt
+    - go_name: RequestTypeStart
       value: "1"
       go_type: int
-    - go_name: TableNameSdt
-      value: "5"
-      go_type: int
-    - go_name: TableNameSit
-      value: "9"
-      go_type: int
-    - go_name: TableNameTdt
-      value: "7"
-      go_type: int
-    - go_name: TableNameTot
-      value: "8"
+    - go_name: RequestTypeStop
+      value: "2"
       go_type: int
     - go_name: SignalingDataNoGroupId
       value: "-1"
@@ -3792,6 +3793,81 @@ constants:
       go_type: string
     - go_name: SignalingMetadataVspd
       value: '"VSPD"'
+      go_type: string
+    - go_name: ArgumentTypeJson
+      value: '"json"'
+      go_type: string
+    - go_name: ArgumentTypeXml
+      value: '"xml"'
+      go_type: string
+    - go_name: ContentEncodingBase64
+      value: '"Base64"'
+      go_type: string
+    - go_name: ContentEncodingUtf8
+      value: '"UTF-8"'
+      go_type: string
+    - go_name: LlsNoGroupId
+      value: "-1"
+      go_type: int
+    - go_name: TypeAudio
+      value: "0"
+      go_type: int
+    - go_name: TypeSubtitle
+      value: "2"
+      go_type: int
+    - go_name: TypeVideo
+      value: "1"
+      go_type: int
+    - go_name: Friday
+      value: "32"
+      go_type: int
+    - go_name: Monday
+      value: "2"
+      go_type: int
+    - go_name: RecordingAll
+      value: "3"
+      go_type: int
+    - go_name: RecordingInProgress
+      value: "2"
+      go_type: int
+    - go_name: RecordingScheduled
+      value: "1"
+      go_type: int
+    - go_name: Saturday
+      value: "64"
+      go_type: int
+    - go_name: Sunday
+      value: "1"
+      go_type: int
+    - go_name: Thursday
+      value: "16"
+      go_type: int
+    - go_name: Tuesday
+      value: "4"
+      go_type: int
+    - go_name: Wednesday
+      value: "8"
+      go_type: int
+    - go_name: PriorityHintUseCaseTypeBackground
+      value: "100"
+      go_type: int
+    - go_name: PriorityHintUseCaseTypeLive
+      value: "400"
+      go_type: int
+    - go_name: PriorityHintUseCaseTypePlayback
+      value: "300"
+      go_type: int
+    - go_name: PriorityHintUseCaseTypeRecord
+      value: "500"
+      go_type: int
+    - go_name: PriorityHintUseCaseTypeScan
+      value: "200"
+      go_type: int
+    - go_name: ServiceInterface
+      value: '"android.media.tv.TvInputService"'
+      go_type: string
+    - go_name: ServiceMetaData
+      value: '"android.media.tv.input"'
       go_type: string
     - go_name: ActionBlockedRatingsChanged
       value: '"android.media.tv.action.BLOCKED_RATINGS_CHANGED"'
@@ -4029,37 +4105,4 @@ constants:
       go_type: int
     - go_name: VideoUnavailableReasonWeakSignal
       value: "2"
-      go_type: int
-    - go_name: ResponseTypeJson
-      value: '"json"'
-      go_type: string
-    - go_name: ResponseTypeXml
-      value: '"xml"'
-      go_type: string
-    - go_name: ContentEncodingBase64
-      value: '"Base64"'
-      go_type: string
-    - go_name: ContentEncodingUtf8
-      value: '"UTF-8"'
-      go_type: string
-    - go_name: LlsNoGroupId
-      value: "-1"
-      go_type: int
-    - go_name: TypeAudio
-      value: "0"
-      go_type: int
-    - go_name: TypeSubtitle
-      value: "2"
-      go_type: int
-    - go_name: TypeVideo
-      value: "1"
-      go_type: int
-    - go_name: ArgumentTypeJson
-      value: '"json"'
-      go_type: string
-    - go_name: ArgumentTypeXml
-      value: '"xml"'
-      go_type: string
-    - go_name: Unrated
-      value: "0"
       go_type: int

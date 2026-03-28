@@ -32,7 +32,7 @@ func NewIdentityChangedListener(vm *jni.VM) (*IdentityChangedListener, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIdentityChangedListener)), midIdentityChangedListenerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIdentityChangedListener)), midIdentityChangedListenerCtor)
 		if err != nil {
 			return err
 		}

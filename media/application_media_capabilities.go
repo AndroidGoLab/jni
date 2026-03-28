@@ -48,6 +48,134 @@ func (m *ApplicationMediaCapabilities) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetSupportedHdrTypes calls android.media.ApplicationMediaCapabilities.getSupportedHdrTypes.
+func (m *ApplicationMediaCapabilities) GetSupportedHdrTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midApplicationMediaCapabilitiesGetSupportedHdrTypes == nil {
+			callErr = fmt.Errorf("android.media.ApplicationMediaCapabilities.getSupportedHdrTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midApplicationMediaCapabilitiesGetSupportedHdrTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedVideoMimeTypes calls android.media.ApplicationMediaCapabilities.getSupportedVideoMimeTypes.
+func (m *ApplicationMediaCapabilities) GetSupportedVideoMimeTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midApplicationMediaCapabilitiesGetSupportedVideoMimeTypes == nil {
+			callErr = fmt.Errorf("android.media.ApplicationMediaCapabilities.getSupportedVideoMimeTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midApplicationMediaCapabilitiesGetSupportedVideoMimeTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUnsupportedHdrTypes calls android.media.ApplicationMediaCapabilities.getUnsupportedHdrTypes.
+func (m *ApplicationMediaCapabilities) GetUnsupportedHdrTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midApplicationMediaCapabilitiesGetUnsupportedHdrTypes == nil {
+			callErr = fmt.Errorf("android.media.ApplicationMediaCapabilities.getUnsupportedHdrTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midApplicationMediaCapabilitiesGetUnsupportedHdrTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUnsupportedVideoMimeTypes calls android.media.ApplicationMediaCapabilities.getUnsupportedVideoMimeTypes.
+func (m *ApplicationMediaCapabilities) GetUnsupportedVideoMimeTypes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midApplicationMediaCapabilitiesGetUnsupportedVideoMimeTypes == nil {
+			callErr = fmt.Errorf("android.media.ApplicationMediaCapabilities.getUnsupportedVideoMimeTypes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midApplicationMediaCapabilitiesGetUnsupportedVideoMimeTypes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsFormatSpecified calls android.media.ApplicationMediaCapabilities.isFormatSpecified.
 func (m *ApplicationMediaCapabilities) IsFormatSpecified(arg0 string) (bool, error) {
 	var result bool

@@ -5,274 +5,44 @@
 package: bluetooth
 go_import: github.com/AndroidGoLab/jni/bluetooth
 classes:
-    - java_class: android.bluetooth.BluetoothStatusCodes
-      go_type: StatusCodes
-    - java_class: android.bluetooth.BluetoothGattCallback
-      go_type: GattCallback
-      methods:
-        - java_method: onCharacteristicChanged
-          go_name: OnCharacteristicChanged2
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onCharacteristicChanged
-          go_name: OnCharacteristicChanged3_1
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg1
-            - java_type: '[B'
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onCharacteristicRead
-          go_name: OnCharacteristicRead4
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg1
-            - java_type: '[B'
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onCharacteristicRead
-          go_name: OnCharacteristicRead3_1
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onCharacteristicWrite
-          go_name: OnCharacteristicWrite
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onConnectionStateChange
-          go_name: OnConnectionStateChange
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onDescriptorRead
-          go_name: OnDescriptorRead3
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattDescriptor
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onDescriptorRead
-          go_name: OnDescriptorRead4_1
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattDescriptor
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: '[B'
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onDescriptorWrite
-          go_name: OnDescriptorWrite
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattDescriptor
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onMtuChanged
-          go_name: OnMtuChanged
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onPhyRead
-          go_name: OnPhyRead
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onPhyUpdate
-          go_name: OnPhyUpdate
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onReadRemoteRssi
-          go_name: OnReadRemoteRssi
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onReliableWriteCompleted
-          go_name: OnReliableWriteCompleted
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onServiceChanged
-          go_name: OnServiceChanged
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onServicesDiscovered
-          go_name: OnServicesDiscovered
-          params:
-            - java_type: android.bluetooth.BluetoothGatt
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothHealth
-      go_type: Health
-      methods:
-        - java_method: connectChannelToSource
-          go_name: ConnectChannelToSource
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: disconnectChannel
-          go_name: DisconnectChannel
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: getConnectionState
-          go_name: GetConnectionState
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getMainChannelFd
-          go_name: GetMainChannelFd
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
-              go_name: arg1
-          returns: android.os.ParcelFileDescriptor
-          error: true
-        - java_method: registerSinkAppConfiguration
-          go_name: RegisterSinkAppConfiguration
-          params:
-            - java_type: String
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothHealthCallback
-              go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: unregisterAppConfiguration
-          go_name: UnregisterAppConfiguration
-          params:
-            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.bluetooth.BluetoothCodecStatus
-      go_type: CodecStatus
+    - java_class: android.bluetooth.BluetoothHidDeviceAppSdpSettings
+      go_type: HidDeviceAppSdpSettings
+      obtain: constructor
+      constructor_params:
+        - java_type: String
+          go_name: arg0
+        - java_type: String
+          go_name: arg1
+        - java_type: String
+          go_name: arg2
+        - java_type: byte
+          go_name: arg3
+        - java_type: '[B'
+          go_name: arg4
       methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
           error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getCodecConfig
-          go_name: GetCodecConfig
-          returns: android.bluetooth.BluetoothCodecConfig
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isCodecConfigSelectable
-          go_name: IsCodecConfigSelectable
-          params:
-            - java_type: android.bluetooth.BluetoothCodecConfig
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
+        - java_method: getDescription
+          go_name: GetDescription
           returns: String
+          error: true
+        - java_method: getDescriptors
+          go_name: GetDescriptors
+          returns: '[B'
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getProvider
+          go_name: GetProvider
+          returns: String
+          error: true
+        - java_method: getSubclass
+          go_name: GetSubclass
+          returns: byte
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -283,19 +53,66 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.bluetooth.BluetoothCodecStatus$Builder
-      go_type: CodecStatusBuilder
+    - java_class: android.bluetooth.BluetoothCsipSetCoordinator
+      go_type: CsipSetCoordinator
       methods:
-        - java_method: build
-          go_name: Build
-          returns: android.bluetooth.BluetoothCodecStatus
+        - java_method: close
+          go_name: Close
+          returns: void
           error: true
-        - java_method: setCodecConfig
-          go_name: SetCodecConfig
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
           params:
-            - java_type: android.bluetooth.BluetoothCodecConfig
+            - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
-          returns: android.bluetooth.BluetoothCodecStatus$Builder
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+    - java_class: android.bluetooth.BluetoothA2dp
+      go_type: A2dp
+      methods:
+        - java_method: finalize
+          go_name: Finalize
+          returns: void
+          error: true
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getSupportedCodecTypes
+          go_name: GetSupportedCodecTypes
+          returns: java.util.Collection<android.bluetooth.BluetoothCodecType>
+          error: true
+        - java_method: isA2dpPlaying
+          go_name: IsA2dpPlaying
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: boolean
           error: true
     - java_class: android.bluetooth.BluetoothHidDeviceAppQosSettings
       go_type: HidDeviceAppQosSettings
@@ -351,12 +168,99 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.bluetooth.BluetoothA2dp
-      go_type: A2dp
+    - java_class: android.bluetooth.BluetoothHealthCallback
+      go_type: HealthCallback
       methods:
-        - java_method: finalize
-          go_name: Finalize
+        - java_method: onHealthAppConfigurationStatusChange
+          go_name: OnHealthAppConfigurationStatusChange
+          params:
+            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
           returns: void
+          error: true
+        - java_method: onHealthChannelStateChange
+          go_name: OnHealthChannelStateChange
+          params:
+            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: android.os.ParcelFileDescriptor
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothManager
+      go_type: Manager
+      obtain: system_service
+      service_name: bluetooth
+      close: true
+      methods:
+        - java_method: getAdapter
+          go_name: GetAdapter
+          returns: android.bluetooth.BluetoothAdapter
+          error: true
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: '[I'
+              go_name: arg1
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: openGattServer
+          go_name: OpenGattServer
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattServerCallback
+              go_name: arg1
+          returns: android.bluetooth.BluetoothGattServer
+          error: true
+    - java_class: android.bluetooth.BluetoothHidDevice
+      go_type: HidDevice
+      methods:
+        - java_method: connect
+          go_name: Connect
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: disconnect
+          go_name: Disconnect
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
           error: true
         - java_method: getConnectionState
           go_name: GetConnectionState
@@ -365,236 +269,225 @@ classes:
               go_name: arg0
           returns: int
           error: true
-        - java_method: isA2dpPlaying
-          go_name: IsA2dpPlaying
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
           params:
-            - java_type: android.bluetooth.BluetoothDevice
+            - java_type: '[I'
               go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: registerApp
+          go_name: RegisterApp
+          params:
+            - java_type: android.bluetooth.BluetoothHidDeviceAppSdpSettings
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothHidDeviceAppQosSettings
+              go_name: arg1
+            - java_type: android.bluetooth.BluetoothHidDeviceAppQosSettings
+              go_name: arg2
+            - java_type: java.util.concurrent.Executor
+              go_name: arg3
+            - java_type: android.bluetooth.BluetoothHidDevice$Callback
+              go_name: arg4
           returns: boolean
           error: true
-    - java_class: android.bluetooth.BluetoothGattServerCallback
-      go_type: GattServerCallback
-      methods:
-        - java_method: onCharacteristicReadRequest
-          go_name: OnCharacteristicReadRequest
+        - java_method: replyReport
+          go_name: ReplyReport
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
-            - java_type: int
+            - java_type: byte
               go_name: arg1
-            - java_type: int
+            - java_type: byte
               go_name: arg2
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onCharacteristicWriteRequest
-          go_name: OnCharacteristicWriteRequest
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg2
-            - java_type: boolean
-              go_name: arg3
-            - java_type: boolean
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
             - java_type: '[B'
-              go_name: arg6
-          returns: void
-          error: true
-        - java_method: onConnectionStateChange
-          go_name: OnConnectionStateChange
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onDescriptorReadRequest
-          go_name: OnDescriptorReadRequest
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: android.bluetooth.BluetoothGattDescriptor
               go_name: arg3
-          returns: void
-          error: true
-        - java_method: onDescriptorWriteRequest
-          go_name: OnDescriptorWriteRequest
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothGattDescriptor
-              go_name: arg2
-            - java_type: boolean
-              go_name: arg3
-            - java_type: boolean
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-            - java_type: '[B'
-              go_name: arg6
-          returns: void
-          error: true
-        - java_method: onExecuteWrite
-          go_name: OnExecuteWrite
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: boolean
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: onMtuChanged
-          go_name: OnMtuChanged
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onNotificationSent
-          go_name: OnNotificationSent
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onPhyRead
-          go_name: OnPhyRead
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onPhyUpdate
-          go_name: OnPhyUpdate
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: void
-          error: true
-        - java_method: onServiceAdded
-          go_name: OnServiceAdded
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattService
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothDevice
-      go_type: Device
-      methods:
-        - java_method: connectGatt
-          go_name: ConnectGatt3
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothGattCallback
-              go_name: arg2
-          returns: android.bluetooth.BluetoothGatt
-          error: true
-        - java_method: connectGatt
-          go_name: ConnectGatt4_1
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothGattCallback
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-          returns: android.bluetooth.BluetoothGatt
-          error: true
-        - java_method: connectGatt
-          go_name: ConnectGatt5_2
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: boolean
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothGattCallback
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-          returns: android.bluetooth.BluetoothGatt
-          error: true
-        - java_method: createBond
-          go_name: CreateBond
           returns: boolean
           error: true
-        - java_method: createInsecureL2capChannel
-          go_name: CreateInsecureL2capChannel
+        - java_method: reportError
+          go_name: ReportError
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: sendReport
+          go_name: SendReport
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: '[B'
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: unregisterApp
+          go_name: UnregisterApp
+          returns: boolean
+          error: true
+    - java_class: android.bluetooth.BluetoothHidDevice$Callback
+      go_type: HidDeviceCallback
+      methods:
+        - java_method: onAppStatusChanged
+          go_name: OnAppStatusChanged
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onConnectionStateChanged
+          go_name: OnConnectionStateChanged
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onGetReport
+          go_name: OnGetReport
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+            - java_type: byte
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onInterruptData
+          go_name: OnInterruptData
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+            - java_type: '[B'
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onSetProtocol
+          go_name: OnSetProtocol
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onSetReport
+          go_name: OnSetReport
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: byte
+              go_name: arg1
+            - java_type: byte
+              go_name: arg2
+            - java_type: '[B'
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onVirtualCableUnplug
+          go_name: OnVirtualCableUnplug
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothServerSocket
+      go_type: ServerSocket
+      methods:
+        - java_method: accept
+          go_name: Accept0
+          returns: android.bluetooth.BluetoothSocket
+          error: true
+        - java_method: accept
+          go_name: Accept1_1
           params:
             - java_type: int
               go_name: arg0
           returns: android.bluetooth.BluetoothSocket
           error: true
-        - java_method: createInsecureRfcommSocketToServiceRecord
-          go_name: CreateInsecureRfcommSocketToServiceRecord
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocket
+        - java_method: close
+          go_name: Close
+          returns: void
           error: true
-        - java_method: createL2capChannel
-          go_name: CreateL2capChannel
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocket
+        - java_method: getPsm
+          go_name: GetPsm
+          returns: int
           error: true
-        - java_method: createRfcommSocketToServiceRecord
-          go_name: CreateRfcommSocketToServiceRecord
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocket
+        - java_method: toString
+          go_name: ToString
+          returns: String
           error: true
-        - java_method: createUsingSocketSettings
-          go_name: CreateUsingSocketSettings
-          params:
-            - java_type: android.bluetooth.BluetoothSocketSettings
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocket
+    - java_class: android.bluetooth.BluetoothSocket
+      go_type: Socket
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
           error: true
+        - java_method: connect
+          go_name: Connect
+          returns: void
+          error: true
+        - java_method: getConnectionType
+          go_name: GetConnectionType
+          returns: int
+          error: true
+        - java_method: getInputStream
+          go_name: GetInputStream
+          returns: java.io.InputStream
+          error: true
+        - java_method: getMaxReceivePacketSize
+          go_name: GetMaxReceivePacketSize
+          returns: int
+          error: true
+        - java_method: getMaxTransmitPacketSize
+          go_name: GetMaxTransmitPacketSize
+          returns: int
+          error: true
+        - java_method: getOutputStream
+          go_name: GetOutputStream
+          returns: java.io.OutputStream
+          error: true
+        - java_method: getRemoteDevice
+          go_name: GetRemoteDevice
+          returns: android.bluetooth.BluetoothDevice
+          error: true
+        - java_method: isConnected
+          go_name: IsConnected
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.bluetooth.BluetoothLeAudioCodecStatus
+      go_type: LeAudioCodecStatus
+      obtain: constructor
+      constructor_params:
+        - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
+          go_name: arg0
+        - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
+          go_name: arg1
+        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
+          go_name: arg2
+        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
+          go_name: arg3
+        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
+          go_name: arg4
+        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
+          go_name: arg5
+      methods:
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
@@ -606,98 +499,51 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: fetchUuidsWithSdp
-          go_name: FetchUuidsWithSdp
-          returns: boolean
+        - java_method: getInputCodecConfig
+          go_name: GetInputCodecConfig
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig
           error: true
-        - java_method: getAddress
-          go_name: GetAddress
-          returns: String
+        - java_method: getInputCodecLocalCapabilities
+          go_name: GetInputCodecLocalCapabilities
+          returns: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
           error: true
-        - java_method: getAddressType
-          go_name: GetAddressType
-          returns: int
+        - java_method: getInputCodecSelectableCapabilities
+          go_name: GetInputCodecSelectableCapabilities
+          returns: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
           error: true
-        - java_method: getAlias
-          go_name: GetAlias
-          returns: String
+        - java_method: getOutputCodecConfig
+          go_name: GetOutputCodecConfig
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig
           error: true
-        - java_method: getBluetoothClass
-          go_name: GetBluetoothClass
-          returns: android.bluetooth.BluetoothClass
+        - java_method: getOutputCodecLocalCapabilities
+          go_name: GetOutputCodecLocalCapabilities
+          returns: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
           error: true
-        - java_method: getBondState
-          go_name: GetBondState
-          returns: int
-          error: true
-        - java_method: getIdentityAddressWithType
-          go_name: GetIdentityAddressWithType
-          returns: android.bluetooth.BluetoothDevice$BluetoothAddress
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getUuids
-          go_name: GetUuids
-          returns: android.os.ParcelUuid[]
+        - java_method: getOutputCodecSelectableCapabilities
+          go_name: GetOutputCodecSelectableCapabilities
+          returns: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-        - java_method: setAlias
-          go_name: SetAlias
+        - java_method: isInputCodecConfigSelectable
+          go_name: IsInputCodecConfigSelectable
           params:
-            - java_type: String
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: setPairingConfirmation
-          go_name: SetPairingConfirmation
-          params:
-            - java_type: boolean
+            - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: setPin
-          go_name: SetPin
+        - java_method: isOutputCodecConfigSelectable
+          go_name: IsOutputCodecConfigSelectable
           params:
-            - java_type: '[B'
+            - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
               go_name: arg0
           returns: boolean
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothDevice$BluetoothAddress
-      go_type: DeviceBluetoothAddress
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getAddress
-          go_name: GetAddress
-          returns: String
-          error: true
-        - java_method: getAddressType
-          go_name: GetAddressType
-          returns: int
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -736,6 +582,10 @@ classes:
             - java_type: java.util.UUID
               go_name: arg0
           returns: android.bluetooth.BluetoothGattDescriptor
+          error: true
+        - java_method: getDescriptors
+          go_name: GetDescriptors
+          returns: java.util.List<android.bluetooth.BluetoothGattDescriptor>
           error: true
         - java_method: getFloatValue
           go_name: GetFloatValue
@@ -844,33 +694,33 @@ classes:
               go_name: arg1
           returns: void
           error: true
-    - java_class: android.bluetooth.BluetoothManager
-      go_type: Manager
-      obtain: system_service
-      service_name: bluetooth
-      close: true
+    - java_class: android.bluetooth.BluetoothHealthAppConfiguration
+      go_type: HealthAppConfiguration
       methods:
-        - java_method: getAdapter
-          go_name: GetAdapter
-          returns: android.bluetooth.BluetoothAdapter
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
           error: true
-        - java_method: getConnectionState
-          go_name: GetConnectionState
+        - java_method: getDataType
+          go_name: GetDataType
+          returns: int
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getRole
+          go_name: GetRole
+          returns: int
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
           params:
-            - java_type: android.bluetooth.BluetoothDevice
+            - java_type: android.os.Parcel
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: int
-          error: true
-        - java_method: openGattServer
-          go_name: OpenGattServer
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothGattServerCallback
-              go_name: arg1
-          returns: android.bluetooth.BluetoothGattServer
+          returns: void
           error: true
     - java_class: android.bluetooth.BluetoothAdapter
       go_type: Adapter
@@ -907,6 +757,10 @@ classes:
         - java_method: getBluetoothLeScanner
           go_name: GetBluetoothLeScanner
           returns: android.bluetooth.le.BluetoothLeScanner
+          error: true
+        - java_method: getBondedDevices
+          go_name: GetBondedDevices
+          returns: java.util.Set<android.bluetooth.BluetoothDevice>
           error: true
         - java_method: getDiscoverableTimeout
           go_name: GetDiscoverableTimeout
@@ -1110,63 +964,8 @@ classes:
               go_name: arg2
           returns: void
           error: true
-    - java_class: android.bluetooth.BluetoothClass
-      go_type: Class
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: doesClassMatch
-          go_name: DoesClassMatch
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getDeviceClass
-          go_name: GetDeviceClass
-          returns: int
-          error: true
-        - java_method: getMajorDeviceClass
-          go_name: GetMajorDeviceClass
-          returns: int
-          error: true
-        - java_method: hasService
-          go_name: HasService
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothClass$Device
-      go_type: ClassDevice
-    - java_class: android.bluetooth.BluetoothClass$Service
-      go_type: ClassService
+    - java_class: android.bluetooth.BluetoothAssignedNumbers
+      go_type: AssignedNumbers
     - java_class: android.bluetooth.BluetoothGattServer
       go_type: GattServer
       methods:
@@ -1201,6 +1000,10 @@ classes:
               go_name: arg1
           returns: boolean
           error: true
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
         - java_method: getConnectionState
           go_name: GetConnectionState
           params:
@@ -1208,12 +1011,23 @@ classes:
               go_name: arg0
           returns: int
           error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
         - java_method: getService
           go_name: GetService
           params:
             - java_type: java.util.UUID
               go_name: arg0
           returns: android.bluetooth.BluetoothGattService
+          error: true
+        - java_method: getServices
+          go_name: GetServices
+          returns: java.util.List<android.bluetooth.BluetoothGattService>
           error: true
         - java_method: notifyCharacteristicChanged
           go_name: NotifyCharacteristicChanged3
@@ -1281,31 +1095,185 @@ classes:
               go_name: arg3
           returns: void
           error: true
-    - java_class: android.bluetooth.BluetoothServerSocket
-      go_type: ServerSocket
+    - java_class: android.bluetooth.BluetoothLeAudio
+      go_type: LeAudio
       methods:
-        - java_method: accept
-          go_name: Accept0
-          returns: android.bluetooth.BluetoothSocket
-          error: true
-        - java_method: accept
-          go_name: Accept1_1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocket
-          error: true
         - java_method: close
           go_name: Close
           returns: void
           error: true
-        - java_method: getPsm
-          go_name: GetPsm
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectedGroupLeadDevice
+          go_name: GetConnectedGroupLeadDevice
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothDevice
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getGroupId
+          go_name: GetGroupId
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: int
+          error: true
+    - java_class: android.bluetooth.BluetoothLeAudioCodecConfig
+      go_type: LeAudioCodecConfig
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getBitsPerSample
+          go_name: GetBitsPerSample
+          returns: int
+          error: true
+        - java_method: getChannelCount
+          go_name: GetChannelCount
+          returns: int
+          error: true
+        - java_method: getCodecName
+          go_name: GetCodecName
+          returns: String
+          error: true
+        - java_method: getCodecPriority
+          go_name: GetCodecPriority
+          returns: int
+          error: true
+        - java_method: getCodecType
+          go_name: GetCodecType
+          returns: int
+          error: true
+        - java_method: getFrameDuration
+          go_name: GetFrameDuration
+          returns: int
+          error: true
+        - java_method: getMaxOctetsPerFrame
+          go_name: GetMaxOctetsPerFrame
+          returns: int
+          error: true
+        - java_method: getMinOctetsPerFrame
+          go_name: GetMinOctetsPerFrame
+          returns: int
+          error: true
+        - java_method: getOctetsPerFrame
+          go_name: GetOctetsPerFrame
+          returns: int
+          error: true
+        - java_method: getSampleRate
+          go_name: GetSampleRate
+          returns: int
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+      go_type: LeAudioCodecConfigBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig
+          error: true
+        - java_method: setBitsPerSample
+          go_name: SetBitsPerSample
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setChannelCount
+          go_name: SetChannelCount
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setCodecPriority
+          go_name: SetCodecPriority
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setCodecType
+          go_name: SetCodecType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setFrameDuration
+          go_name: SetFrameDuration
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setMaxOctetsPerFrame
+          go_name: SetMaxOctetsPerFrame
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setMinOctetsPerFrame
+          go_name: SetMinOctetsPerFrame
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setOctetsPerFrame
+          go_name: SetOctetsPerFrame
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
+          error: true
+        - java_method: setSampleRate
+          go_name: SetSampleRate
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
           error: true
     - java_class: android.bluetooth.BluetoothCodecConfig
       go_type: CodecConfig
@@ -1459,534 +1427,97 @@ classes:
               go_name: arg0
           returns: android.bluetooth.BluetoothCodecConfig$Builder
           error: true
-    - java_class: android.bluetooth.BluetoothSocketException
-      go_type: SocketException
-      obtain: constructor
-      constructor_params:
-        - java_type: int
-          go_name: arg0
+    - java_class: android.bluetooth.BluetoothGattServerCallback
+      go_type: GattServerCallback
       methods:
-        - java_method: getErrorCode
-          go_name: GetErrorCode
-          returns: int
-          error: true
-    - java_class: android.bluetooth.BluetoothLeAudioCodecConfig
-      go_type: LeAudioCodecConfig
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getBitsPerSample
-          go_name: GetBitsPerSample
-          returns: int
-          error: true
-        - java_method: getChannelCount
-          go_name: GetChannelCount
-          returns: int
-          error: true
-        - java_method: getCodecName
-          go_name: GetCodecName
-          returns: String
-          error: true
-        - java_method: getCodecPriority
-          go_name: GetCodecPriority
-          returns: int
-          error: true
-        - java_method: getCodecType
-          go_name: GetCodecType
-          returns: int
-          error: true
-        - java_method: getFrameDuration
-          go_name: GetFrameDuration
-          returns: int
-          error: true
-        - java_method: getMaxOctetsPerFrame
-          go_name: GetMaxOctetsPerFrame
-          returns: int
-          error: true
-        - java_method: getMinOctetsPerFrame
-          go_name: GetMinOctetsPerFrame
-          returns: int
-          error: true
-        - java_method: getOctetsPerFrame
-          go_name: GetOctetsPerFrame
-          returns: int
-          error: true
-        - java_method: getSampleRate
-          go_name: GetSampleRate
-          returns: int
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-      go_type: LeAudioCodecConfigBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig
-          error: true
-        - java_method: setBitsPerSample
-          go_name: SetBitsPerSample
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setChannelCount
-          go_name: SetChannelCount
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setCodecPriority
-          go_name: SetCodecPriority
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setCodecType
-          go_name: SetCodecType
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setFrameDuration
-          go_name: SetFrameDuration
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setMaxOctetsPerFrame
-          go_name: SetMaxOctetsPerFrame
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setMinOctetsPerFrame
-          go_name: SetMinOctetsPerFrame
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setOctetsPerFrame
-          go_name: SetOctetsPerFrame
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-        - java_method: setSampleRate
-          go_name: SetSampleRate
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig$Builder
-          error: true
-    - java_class: android.bluetooth.BluetoothHearingAid
-      go_type: HearingAid
-      methods:
-        - java_method: getConnectionState
-          go_name: GetConnectionState
+        - java_method: onCharacteristicReadRequest
+          go_name: OnCharacteristicReadRequest
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
-          returns: int
-          error: true
-    - java_class: android.bluetooth.BluetoothHidDeviceAppSdpSettings
-      go_type: HidDeviceAppSdpSettings
-      obtain: constructor
-      constructor_params:
-        - java_type: String
-          go_name: arg0
-        - java_type: String
-          go_name: arg1
-        - java_type: String
-          go_name: arg2
-        - java_type: byte
-          go_name: arg3
-        - java_type: '[B'
-          go_name: arg4
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getDescription
-          go_name: GetDescription
-          returns: String
-          error: true
-        - java_method: getDescriptors
-          go_name: GetDescriptors
-          returns: '[B'
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getProvider
-          go_name: GetProvider
-          returns: String
-          error: true
-        - java_method: getSubclass
-          go_name: GetSubclass
-          returns: byte
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothHealthCallback
-      go_type: HealthCallback
-      methods:
-        - java_method: onHealthAppConfigurationStatusChange
-          go_name: OnHealthAppConfigurationStatusChange
-          params:
-            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onHealthChannelStateChange
-          go_name: OnHealthChannelStateChange
-          params:
-            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothDevice
               go_name: arg1
             - java_type: int
               go_name: arg2
-            - java_type: int
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
               go_name: arg3
-            - java_type: android.os.ParcelFileDescriptor
+          returns: void
+          error: true
+        - java_method: onCharacteristicWriteRequest
+          go_name: OnCharacteristicWriteRequest
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg2
+            - java_type: boolean
+              go_name: arg3
+            - java_type: boolean
               go_name: arg4
             - java_type: int
               go_name: arg5
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothGattDescriptor
-      go_type: GattDescriptor
-      obtain: constructor
-      constructor_params:
-        - java_type: java.util.UUID
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCharacteristic
-          go_name: GetCharacteristic
-          returns: android.bluetooth.BluetoothGattCharacteristic
-          error: true
-        - java_method: getPermissions
-          go_name: GetPermissions
-          returns: int
-          error: true
-        - java_method: getUuid
-          go_name: GetUuid
-          returns: java.util.UUID
-          error: true
-        - java_method: getValue
-          go_name: GetValue
-          returns: '[B'
-          error: true
-        - java_method: setValue
-          go_name: SetValue
-          params:
             - java_type: '[B'
-              go_name: arg0
-          returns: boolean
+              go_name: arg6
+          returns: void
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
+        - java_method: onConnectionStateChange
+          go_name: OnConnectionStateChange
           params:
-            - java_type: android.os.Parcel
+            - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
             - java_type: int
               go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothHealthAppConfiguration
-      go_type: HealthAppConfiguration
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getDataType
-          go_name: GetDataType
-          returns: int
-          error: true
-        - java_method: getName
-          go_name: GetName
-          returns: String
-          error: true
-        - java_method: getRole
-          go_name: GetRole
-          returns: int
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
             - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothGattService
-      go_type: GattService
-      obtain: constructor
-      constructor_params:
-        - java_type: java.util.UUID
-          go_name: arg0
-        - java_type: int
-          go_name: arg1
-      methods:
-        - java_method: addCharacteristic
-          go_name: AddCharacteristic
-          params:
-            - java_type: android.bluetooth.BluetoothGattCharacteristic
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: addService
-          go_name: AddService
-          params:
-            - java_type: android.bluetooth.BluetoothGattService
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getCharacteristic
-          go_name: GetCharacteristic
-          params:
-            - java_type: java.util.UUID
-              go_name: arg0
-          returns: android.bluetooth.BluetoothGattCharacteristic
-          error: true
-        - java_method: getInstanceId
-          go_name: GetInstanceId
-          returns: int
-          error: true
-        - java_method: getType
-          go_name: GetType
-          returns: int
-          error: true
-        - java_method: getUuid
-          go_name: GetUuid
-          returns: java.util.UUID
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothLeAudio
-      go_type: LeAudio
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getConnectedGroupLeadDevice
-          go_name: GetConnectedGroupLeadDevice
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: android.bluetooth.BluetoothDevice
-          error: true
-        - java_method: getConnectionState
-          go_name: GetConnectionState
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getGroupId
-          go_name: GetGroupId
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: int
-          error: true
-    - java_class: android.bluetooth.BluetoothProfile
-      go_type: Profile
-      methods:
-        - java_method: getConnectionState
-          go_name: GetConnectionState
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: int
-          error: true
-    - java_class: android.bluetooth.BluetoothProfile$ServiceListener
-      go_type: ProfileServiceListener
-      methods:
-        - java_method: onServiceConnected
-          go_name: OnServiceConnected
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothProfile
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onServiceDisconnected
-          go_name: OnServiceDisconnected
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothCsipSetCoordinator
-      go_type: CsipSetCoordinator
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: getConnectionState
-          go_name: GetConnectionState
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: int
-          error: true
-    - java_class: android.bluetooth.BluetoothHidDevice
-      go_type: HidDevice
-      methods:
-        - java_method: connect
-          go_name: Connect
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: disconnect
-          go_name: Disconnect
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getConnectionState
-          go_name: GetConnectionState
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: registerApp
-          go_name: RegisterApp
-          params:
-            - java_type: android.bluetooth.BluetoothHidDeviceAppSdpSettings
-              go_name: arg0
-            - java_type: android.bluetooth.BluetoothHidDeviceAppQosSettings
-              go_name: arg1
-            - java_type: android.bluetooth.BluetoothHidDeviceAppQosSettings
               go_name: arg2
-            - java_type: java.util.concurrent.Executor
+          returns: void
+          error: true
+        - java_method: onDescriptorReadRequest
+          go_name: OnDescriptorReadRequest
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: android.bluetooth.BluetoothGattDescriptor
               go_name: arg3
-            - java_type: android.bluetooth.BluetoothHidDevice$Callback
-              go_name: arg4
-          returns: boolean
+          returns: void
           error: true
-        - java_method: replyReport
-          go_name: ReplyReport
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-            - java_type: byte
-              go_name: arg2
-            - java_type: '[B'
-              go_name: arg3
-          returns: boolean
-          error: true
-        - java_method: reportError
-          go_name: ReportError
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: sendReport
-          go_name: SendReport
+        - java_method: onDescriptorWriteRequest
+          go_name: OnDescriptorWriteRequest
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
             - java_type: int
               go_name: arg1
-            - java_type: '[B'
+            - java_type: android.bluetooth.BluetoothGattDescriptor
               go_name: arg2
-          returns: boolean
-          error: true
-        - java_method: unregisterApp
-          go_name: UnregisterApp
-          returns: boolean
-          error: true
-    - java_class: android.bluetooth.BluetoothHidDevice$Callback
-      go_type: HidDeviceCallback
-      methods:
-        - java_method: onAppStatusChanged
-          go_name: OnAppStatusChanged
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
             - java_type: boolean
-              go_name: arg1
+              go_name: arg3
+            - java_type: boolean
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+            - java_type: '[B'
+              go_name: arg6
           returns: void
           error: true
-        - java_method: onConnectionStateChanged
-          go_name: OnConnectionStateChanged
+        - java_method: onExecuteWrite
+          go_name: OnExecuteWrite
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: boolean
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onMtuChanged
+          go_name: OnMtuChanged
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
@@ -1994,137 +1525,70 @@ classes:
               go_name: arg1
           returns: void
           error: true
-        - java_method: onGetReport
-          go_name: OnGetReport
+        - java_method: onNotificationSent
+          go_name: OnNotificationSent
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
-            - java_type: byte
+            - java_type: int
               go_name: arg1
-            - java_type: byte
+          returns: void
+          error: true
+        - java_method: onPhyRead
+          go_name: OnPhyRead
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
               go_name: arg2
             - java_type: int
               go_name: arg3
           returns: void
           error: true
-        - java_method: onInterruptData
-          go_name: OnInterruptData
+        - java_method: onPhyUpdate
+          go_name: OnPhyUpdate
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
-            - java_type: byte
+            - java_type: int
               go_name: arg1
-            - java_type: '[B'
+            - java_type: int
               go_name: arg2
-          returns: void
-          error: true
-        - java_method: onSetProtocol
-          go_name: OnSetProtocol
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onSetReport
-          go_name: OnSetReport
-          params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-            - java_type: byte
-              go_name: arg1
-            - java_type: byte
-              go_name: arg2
-            - java_type: '[B'
+            - java_type: int
               go_name: arg3
           returns: void
           error: true
-        - java_method: onVirtualCableUnplug
-          go_name: OnVirtualCableUnplug
+        - java_method: onServiceAdded
+          go_name: OnServiceAdded
           params:
-            - java_type: android.bluetooth.BluetoothDevice
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.bluetooth.BluetoothAssignedNumbers
-      go_type: AssignedNumbers
-    - java_class: android.bluetooth.BluetoothLeAudioCodecStatus
-      go_type: LeAudioCodecStatus
-      obtain: constructor
-      constructor_params:
-        - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
-          go_name: arg0
-        - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
-          go_name: arg1
-        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
-          go_name: arg2
-        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
-          go_name: arg3
-        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
-          go_name: arg4
-        - java_type: java.util.List<android.bluetooth.BluetoothLeAudioCodecConfig>
-          go_name: arg5
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getInputCodecConfig
-          go_name: GetInputCodecConfig
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig
-          error: true
-        - java_method: getOutputCodecConfig
-          go_name: GetOutputCodecConfig
-          returns: android.bluetooth.BluetoothLeAudioCodecConfig
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: isInputCodecConfigSelectable
-          go_name: IsInputCodecConfigSelectable
-          params:
-            - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: isOutputCodecConfigSelectable
-          go_name: IsOutputCodecConfigSelectable
-          params:
-            - java_type: android.bluetooth.BluetoothLeAudioCodecConfig
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
             - java_type: int
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattService
               go_name: arg1
           returns: void
           error: true
     - java_class: android.bluetooth.BluetoothHeadset
       go_type: Headset
       methods:
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
         - java_method: getConnectionState
           go_name: GetConnectionState
           params:
             - java_type: android.bluetooth.BluetoothDevice
               go_name: arg0
           returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
           error: true
         - java_method: isAudioConnected
           go_name: IsAudioConnected
@@ -2172,89 +1636,87 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.bluetooth.BluetoothSocketSettings
-      go_type: SocketSettings
+    - java_class: android.bluetooth.BluetoothDevice
+      go_type: Device
       methods:
-        - java_method: getL2capPsm
-          go_name: GetL2capPsm
-          returns: int
+        - java_method: connectGatt
+          go_name: ConnectGatt3
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: android.bluetooth.BluetoothGattCallback
+              go_name: arg2
+          returns: android.bluetooth.BluetoothGatt
           error: true
-        - java_method: getRfcommServiceName
-          go_name: GetRfcommServiceName
-          returns: String
+        - java_method: connectGatt
+          go_name: ConnectGatt4_1
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: android.bluetooth.BluetoothGattCallback
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: android.bluetooth.BluetoothGatt
           error: true
-        - java_method: getRfcommUuid
-          go_name: GetRfcommUuid
-          returns: java.util.UUID
+        - java_method: connectGatt
+          go_name: ConnectGatt5_2
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: boolean
+              go_name: arg1
+            - java_type: android.bluetooth.BluetoothGattCallback
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+          returns: android.bluetooth.BluetoothGatt
           error: true
-        - java_method: getSocketType
-          go_name: GetSocketType
-          returns: int
-          error: true
-        - java_method: isAuthenticationRequired
-          go_name: IsAuthenticationRequired
+        - java_method: createBond
+          go_name: CreateBond
           returns: boolean
           error: true
-        - java_method: isEncryptionRequired
-          go_name: IsEncryptionRequired
-          returns: boolean
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.bluetooth.BluetoothSocketSettings$Builder
-      go_type: SocketSettingsBuilder
-      methods:
-        - java_method: build
-          go_name: Build
-          returns: android.bluetooth.BluetoothSocketSettings
-          error: true
-        - java_method: setAuthenticationRequired
-          go_name: SetAuthenticationRequired
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocketSettings$Builder
-          error: true
-        - java_method: setEncryptionRequired
-          go_name: SetEncryptionRequired
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocketSettings$Builder
-          error: true
-        - java_method: setL2capPsm
-          go_name: SetL2capPsm
+        - java_method: createInsecureL2capChannel
+          go_name: CreateInsecureL2capChannel
           params:
             - java_type: int
               go_name: arg0
-          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          returns: android.bluetooth.BluetoothSocket
           error: true
-        - java_method: setRfcommServiceName
-          go_name: SetRfcommServiceName
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: android.bluetooth.BluetoothSocketSettings$Builder
-          error: true
-        - java_method: setRfcommUuid
-          go_name: SetRfcommUuid
+        - java_method: createInsecureRfcommSocketToServiceRecord
+          go_name: CreateInsecureRfcommSocketToServiceRecord
           params:
             - java_type: java.util.UUID
               go_name: arg0
-          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          returns: android.bluetooth.BluetoothSocket
           error: true
-        - java_method: setSocketType
-          go_name: SetSocketType
+        - java_method: createL2capChannel
+          go_name: CreateL2capChannel
           params:
             - java_type: int
               go_name: arg0
-          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          returns: android.bluetooth.BluetoothSocket
           error: true
-    - java_class: android.bluetooth.BluetoothCodecType
-      go_type: CodecType
-      methods:
+        - java_method: createRfcommSocketToServiceRecord
+          go_name: CreateRfcommSocketToServiceRecord
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocket
+          error: true
+        - java_method: createUsingSocketSettings
+          go_name: CreateUsingSocketSettings
+          params:
+            - java_type: android.bluetooth.BluetoothSocketSettings
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocket
+          error: true
         - java_method: describeContents
           go_name: DescribeContents
           returns: int
@@ -2266,25 +1728,98 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-        - java_method: getCodecId
-          go_name: GetCodecId
-          returns: long
+        - java_method: fetchUuidsWithSdp
+          go_name: FetchUuidsWithSdp
+          returns: boolean
           error: true
-        - java_method: getCodecName
-          go_name: GetCodecName
+        - java_method: getAddress
+          go_name: GetAddress
           returns: String
+          error: true
+        - java_method: getAddressType
+          go_name: GetAddressType
+          returns: int
+          error: true
+        - java_method: getAlias
+          go_name: GetAlias
+          returns: String
+          error: true
+        - java_method: getBluetoothClass
+          go_name: GetBluetoothClass
+          returns: android.bluetooth.BluetoothClass
+          error: true
+        - java_method: getBondState
+          go_name: GetBondState
+          returns: int
+          error: true
+        - java_method: getIdentityAddressWithType
+          go_name: GetIdentityAddressWithType
+          returns: android.bluetooth.BluetoothDevice$BluetoothAddress
+          error: true
+        - java_method: getName
+          go_name: GetName
+          returns: String
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getUuids
+          go_name: GetUuids
+          returns: android.os.ParcelUuid[]
           error: true
         - java_method: hashCode
           go_name: HashCode
           returns: int
           error: true
-        - java_method: isMandatoryCodec
-          go_name: IsMandatoryCodec
+        - java_method: setAlias
+          go_name: SetAlias
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: setPairingConfirmation
+          go_name: SetPairingConfirmation
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: setPin
+          go_name: SetPin
+          params:
+            - java_type: '[B'
+              go_name: arg0
           returns: boolean
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothDevice$BluetoothAddress
+      go_type: DeviceBluetoothAddress
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getAddress
+          go_name: GetAddress
+          returns: String
+          error: true
+        - java_method: getAddressType
+          go_name: GetAddressType
+          returns: int
           error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
@@ -2333,6 +1868,10 @@ classes:
           go_name: ExecuteReliableWrite
           returns: boolean
           error: true
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
         - java_method: getConnectionState
           go_name: GetConnectionState
           params:
@@ -2344,12 +1883,23 @@ classes:
           go_name: GetDevice
           returns: android.bluetooth.BluetoothDevice
           error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
         - java_method: getService
           go_name: GetService
           params:
             - java_type: java.util.UUID
               go_name: arg0
           returns: android.bluetooth.BluetoothGattService
+          error: true
+        - java_method: getServices
+          go_name: GetServices
+          returns: java.util.List<android.bluetooth.BluetoothGattService>
           error: true
         - java_method: readCharacteristic
           go_name: ReadCharacteristic
@@ -2441,140 +1991,684 @@ classes:
               go_name: arg1
           returns: int
           error: true
-    - java_class: android.bluetooth.BluetoothSocket
-      go_type: Socket
+    - java_class: android.bluetooth.BluetoothStatusCodes
+      go_type: StatusCodes
+    - java_class: android.bluetooth.BluetoothCodecStatus
+      go_type: CodecStatus
       methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: connect
-          go_name: Connect
-          returns: void
-          error: true
-        - java_method: getConnectionType
-          go_name: GetConnectionType
+        - java_method: describeContents
+          go_name: DescribeContents
           returns: int
           error: true
-        - java_method: getInputStream
-          go_name: GetInputStream
-          returns: java.io.InputStream
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
           error: true
-        - java_method: getMaxReceivePacketSize
-          go_name: GetMaxReceivePacketSize
+        - java_method: getCodecConfig
+          go_name: GetCodecConfig
+          returns: android.bluetooth.BluetoothCodecConfig
+          error: true
+        - java_method: getCodecsLocalCapabilities
+          go_name: GetCodecsLocalCapabilities
+          returns: java.util.List<android.bluetooth.BluetoothCodecConfig>
+          error: true
+        - java_method: getCodecsSelectableCapabilities
+          go_name: GetCodecsSelectableCapabilities
+          returns: java.util.List<android.bluetooth.BluetoothCodecConfig>
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
           returns: int
           error: true
-        - java_method: getMaxTransmitPacketSize
-          go_name: GetMaxTransmitPacketSize
-          returns: int
-          error: true
-        - java_method: getOutputStream
-          go_name: GetOutputStream
-          returns: java.io.OutputStream
-          error: true
-        - java_method: getRemoteDevice
-          go_name: GetRemoteDevice
-          returns: android.bluetooth.BluetoothDevice
-          error: true
-        - java_method: isConnected
-          go_name: IsConnected
+        - java_method: isCodecConfigSelectable
+          go_name: IsCodecConfigSelectable
+          params:
+            - java_type: android.bluetooth.BluetoothCodecConfig
+              go_name: arg0
           returns: boolean
           error: true
         - java_method: toString
           go_name: ToString
           returns: String
           error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothCodecStatus$Builder
+      go_type: CodecStatusBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.bluetooth.BluetoothCodecStatus
+          error: true
+        - java_method: setCodecConfig
+          go_name: SetCodecConfig
+          params:
+            - java_type: android.bluetooth.BluetoothCodecConfig
+              go_name: arg0
+          returns: android.bluetooth.BluetoothCodecStatus$Builder
+          error: true
+    - java_class: android.bluetooth.BluetoothSocketSettings
+      go_type: SocketSettings
+      methods:
+        - java_method: getL2capPsm
+          go_name: GetL2capPsm
+          returns: int
+          error: true
+        - java_method: getRfcommServiceName
+          go_name: GetRfcommServiceName
+          returns: String
+          error: true
+        - java_method: getRfcommUuid
+          go_name: GetRfcommUuid
+          returns: java.util.UUID
+          error: true
+        - java_method: getSocketType
+          go_name: GetSocketType
+          returns: int
+          error: true
+        - java_method: isAuthenticationRequired
+          go_name: IsAuthenticationRequired
+          returns: boolean
+          error: true
+        - java_method: isEncryptionRequired
+          go_name: IsEncryptionRequired
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.bluetooth.BluetoothSocketSettings$Builder
+      go_type: SocketSettingsBuilder
+      methods:
+        - java_method: build
+          go_name: Build
+          returns: android.bluetooth.BluetoothSocketSettings
+          error: true
+        - java_method: setAuthenticationRequired
+          go_name: SetAuthenticationRequired
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          error: true
+        - java_method: setEncryptionRequired
+          go_name: SetEncryptionRequired
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          error: true
+        - java_method: setL2capPsm
+          go_name: SetL2capPsm
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          error: true
+        - java_method: setRfcommServiceName
+          go_name: SetRfcommServiceName
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          error: true
+        - java_method: setRfcommUuid
+          go_name: SetRfcommUuid
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          error: true
+        - java_method: setSocketType
+          go_name: SetSocketType
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: android.bluetooth.BluetoothSocketSettings$Builder
+          error: true
+    - java_class: android.bluetooth.BluetoothGattService
+      go_type: GattService
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.UUID
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+      methods:
+        - java_method: addCharacteristic
+          go_name: AddCharacteristic
+          params:
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: addService
+          go_name: AddService
+          params:
+            - java_type: android.bluetooth.BluetoothGattService
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getCharacteristic
+          go_name: GetCharacteristic
+          params:
+            - java_type: java.util.UUID
+              go_name: arg0
+          returns: android.bluetooth.BluetoothGattCharacteristic
+          error: true
+        - java_method: getCharacteristics
+          go_name: GetCharacteristics
+          returns: java.util.List<android.bluetooth.BluetoothGattCharacteristic>
+          error: true
+        - java_method: getIncludedServices
+          go_name: GetIncludedServices
+          returns: java.util.List<android.bluetooth.BluetoothGattService>
+          error: true
+        - java_method: getInstanceId
+          go_name: GetInstanceId
+          returns: int
+          error: true
+        - java_method: getType
+          go_name: GetType
+          returns: int
+          error: true
+        - java_method: getUuid
+          go_name: GetUuid
+          returns: java.util.UUID
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothClass
+      go_type: Class
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: doesClassMatch
+          go_name: DoesClassMatch
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getDeviceClass
+          go_name: GetDeviceClass
+          returns: int
+          error: true
+        - java_method: getMajorDeviceClass
+          go_name: GetMajorDeviceClass
+          returns: int
+          error: true
+        - java_method: hasService
+          go_name: HasService
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothClass$Device
+      go_type: ClassDevice
+    - java_class: android.bluetooth.BluetoothClass$Service
+      go_type: ClassService
+    - java_class: android.bluetooth.BluetoothHealth
+      go_type: Health
+      methods:
+        - java_method: connectChannelToSource
+          go_name: ConnectChannelToSource
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
+              go_name: arg1
+          returns: boolean
+          error: true
+        - java_method: disconnectChannel
+          go_name: DisconnectChannel
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getMainChannelFd
+          go_name: GetMainChannelFd
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
+              go_name: arg1
+          returns: android.os.ParcelFileDescriptor
+          error: true
+        - java_method: registerSinkAppConfiguration
+          go_name: RegisterSinkAppConfiguration
+          params:
+            - java_type: String
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: android.bluetooth.BluetoothHealthCallback
+              go_name: arg2
+          returns: boolean
+          error: true
+        - java_method: unregisterAppConfiguration
+          go_name: UnregisterAppConfiguration
+          params:
+            - java_type: android.bluetooth.BluetoothHealthAppConfiguration
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.bluetooth.BluetoothGattDescriptor
+      go_type: GattDescriptor
+      obtain: constructor
+      constructor_params:
+        - java_type: java.util.UUID
+          go_name: arg0
+        - java_type: int
+          go_name: arg1
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getCharacteristic
+          go_name: GetCharacteristic
+          returns: android.bluetooth.BluetoothGattCharacteristic
+          error: true
+        - java_method: getPermissions
+          go_name: GetPermissions
+          returns: int
+          error: true
+        - java_method: getUuid
+          go_name: GetUuid
+          returns: java.util.UUID
+          error: true
+        - java_method: getValue
+          go_name: GetValue
+          returns: '[B'
+          error: true
+        - java_method: setValue
+          go_name: SetValue
+          params:
+            - java_type: '[B'
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothProfile
+      go_type: Profile
+      methods:
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+    - java_class: android.bluetooth.BluetoothProfile$ServiceListener
+      go_type: ProfileServiceListener
+      methods:
+        - java_method: onServiceConnected
+          go_name: OnServiceConnected
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothProfile
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onServiceDisconnected
+          go_name: OnServiceDisconnected
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothSocketException
+      go_type: SocketException
+      obtain: constructor
+      constructor_params:
+        - java_type: int
+          go_name: arg0
+      methods:
+        - java_method: getErrorCode
+          go_name: GetErrorCode
+          returns: int
+          error: true
+    - java_class: android.bluetooth.BluetoothHearingAid
+      go_type: HearingAid
+      methods:
+        - java_method: getConnectedDevices
+          go_name: GetConnectedDevices
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+        - java_method: getConnectionState
+          go_name: GetConnectionState
+          params:
+            - java_type: android.bluetooth.BluetoothDevice
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getDevicesMatchingConnectionStates
+          go_name: GetDevicesMatchingConnectionStates
+          params:
+            - java_type: '[I'
+              go_name: arg0
+          returns: java.util.List<android.bluetooth.BluetoothDevice>
+          error: true
+    - java_class: android.bluetooth.BluetoothGattCallback
+      go_type: GattCallback
+      methods:
+        - java_method: onCharacteristicChanged
+          go_name: OnCharacteristicChanged2
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onCharacteristicChanged
+          go_name: OnCharacteristicChanged3_1
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg1
+            - java_type: '[B'
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCharacteristicRead
+          go_name: OnCharacteristicRead4
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg1
+            - java_type: '[B'
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onCharacteristicRead
+          go_name: OnCharacteristicRead3_1
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onCharacteristicWrite
+          go_name: OnCharacteristicWrite
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattCharacteristic
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onConnectionStateChange
+          go_name: OnConnectionStateChange
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onDescriptorRead
+          go_name: OnDescriptorRead3
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattDescriptor
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onDescriptorRead
+          go_name: OnDescriptorRead4_1
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattDescriptor
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: '[B'
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onDescriptorWrite
+          go_name: OnDescriptorWrite
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: android.bluetooth.BluetoothGattDescriptor
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onMtuChanged
+          go_name: OnMtuChanged
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onPhyRead
+          go_name: OnPhyRead
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onPhyUpdate
+          go_name: OnPhyUpdate
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+          returns: void
+          error: true
+        - java_method: onReadRemoteRssi
+          go_name: OnReadRemoteRssi
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: onReliableWriteCompleted
+          go_name: OnReliableWriteCompleted
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onServiceChanged
+          go_name: OnServiceChanged
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onServicesDiscovered
+          go_name: OnServicesDiscovered
+          params:
+            - java_type: android.bluetooth.BluetoothGatt
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.bluetooth.BluetoothCodecType
+      go_type: CodecType
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getCodecId
+          go_name: GetCodecId
+          returns: long
+          error: true
+        - java_method: getCodecName
+          go_name: GetCodecName
+          returns: String
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: isMandatoryCodec
+          go_name: IsMandatoryCodec
+          returns: boolean
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
 constants:
-    - go_name: ErrorBluetoothNotAllowed
-      value: "2"
-      go_type: int
-    - go_name: ErrorBluetoothNotEnabled
-      value: "1"
-      go_type: int
-    - go_name: ErrorDeviceNotBonded
-      value: "3"
-      go_type: int
-    - go_name: ErrorGattWriteNotAllowed
-      value: "200"
-      go_type: int
-    - go_name: ErrorGattWriteRequestBusy
-      value: "201"
-      go_type: int
-    - go_name: ErrorMissingBluetoothConnectPermission
-      value: "6"
-      go_type: int
-    - go_name: ErrorProfileServiceNotBound
-      value: "9"
-      go_type: int
-    - go_name: ErrorUnknown
-      value: "2147483647"
-      go_type: int
-    - go_name: FeatureNotConfigured
-      value: "30"
-      go_type: int
-    - go_name: FeatureNotSupported
-      value: "11"
-      go_type: int
-    - go_name: FeatureSupported
-      value: "10"
-      go_type: int
-    - go_name: Success
-      value: "0"
-      go_type: int
-    - go_name: AppConfigRegistrationFailure
-      value: "1"
-      go_type: int
-    - go_name: AppConfigRegistrationSuccess
-      value: "0"
-      go_type: int
-    - go_name: AppConfigUnregistrationFailure
-      value: "3"
-      go_type: int
-    - go_name: AppConfigUnregistrationSuccess
-      value: "2"
-      go_type: int
-    - go_name: ChannelTypeReliable
-      value: "10"
-      go_type: int
-    - go_name: ChannelTypeStreaming
-      value: "11"
-      go_type: int
-    - go_name: SinkRole
-      value: "2"
-      go_type: int
-    - go_name: SourceRole
-      value: "1"
-      go_type: int
-    - go_name: StateChannelConnected
-      value: "2"
-      go_type: int
-    - go_name: StateChannelConnecting
-      value: "1"
-      go_type: int
-    - go_name: StateChannelDisconnected
-      value: "0"
-      go_type: int
-    - go_name: StateChannelDisconnecting
-      value: "3"
-      go_type: int
     - go_name: Creator
       value: "0"
       go_type: int
-    - go_name: ExtraCodecStatus
-      value: '"android.bluetooth.extra.CODEC_STATUS"'
+    - go_name: ActionCsisConnectionStateChanged
+      value: '"android.bluetooth.action.CSIS_CONNECTION_STATE_CHANGED"'
       go_type: string
-    - go_name: Max
-      value: "-1"
-      go_type: int
-    - go_name: ServiceBestEffort
-      value: "1"
-      go_type: int
-    - go_name: ServiceGuaranteed
-      value: "2"
-      go_type: int
-    - go_name: ServiceNoTraffic
-      value: "0"
-      go_type: int
     - go_name: ActionConnectionStateChanged
       value: '"android.bluetooth.a2dp.profile.action.CONNECTION_STATE_CHANGED"'
       go_type: string
@@ -2587,174 +2681,99 @@ constants:
     - go_name: StatePlaying
       value: "10"
       go_type: int
-    - go_name: ActionAclConnected
-      value: '"android.bluetooth.device.action.ACL_CONNECTED"'
-      go_type: string
-    - go_name: ActionAclDisconnected
-      value: '"android.bluetooth.device.action.ACL_DISCONNECTED"'
-      go_type: string
-    - go_name: ActionAclDisconnectRequested
-      value: '"android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED"'
-      go_type: string
-    - go_name: ActionAliasChanged
-      value: '"android.bluetooth.device.action.ALIAS_CHANGED"'
-      go_type: string
-    - go_name: ActionBondStateChanged
-      value: '"android.bluetooth.device.action.BOND_STATE_CHANGED"'
-      go_type: string
-    - go_name: ActionClassChanged
-      value: '"android.bluetooth.device.action.CLASS_CHANGED"'
-      go_type: string
-    - go_name: ActionEncryptionChange
-      value: '"android.bluetooth.device.action.ENCRYPTION_CHANGE"'
-      go_type: string
-    - go_name: ActionFound
-      value: '"android.bluetooth.device.action.FOUND"'
-      go_type: string
-    - go_name: ActionKeyMissing
-      value: '"android.bluetooth.device.action.KEY_MISSING"'
-      go_type: string
-    - go_name: ActionNameChanged
-      value: '"android.bluetooth.device.action.NAME_CHANGED"'
-      go_type: string
-    - go_name: ActionPairingRequest
-      value: '"android.bluetooth.device.action.PAIRING_REQUEST"'
-      go_type: string
-    - go_name: ActionUuid
-      value: '"android.bluetooth.device.action.UUID"'
-      go_type: string
-    - go_name: AddressTypeAnonymous
-      value: "255"
+    - go_name: Max
+      value: "-1"
       go_type: int
-    - go_name: AddressTypePublic
+    - go_name: ServiceBestEffort
+      value: "1"
+      go_type: int
+    - go_name: ServiceGuaranteed
+      value: "2"
+      go_type: int
+    - go_name: ServiceNoTraffic
       value: "0"
       go_type: int
-    - go_name: AddressTypeRandom
-      value: "1"
-      go_type: int
-    - go_name: AddressTypeUnknown
-      value: "65535"
-      go_type: int
-    - go_name: BondBonded
-      value: "12"
-      go_type: int
-    - go_name: BondBonding
-      value: "11"
-      go_type: int
-    - go_name: BondNone
-      value: "10"
-      go_type: int
-    - go_name: DeviceTypeClassic
-      value: "1"
-      go_type: int
-    - go_name: DeviceTypeDual
-      value: "3"
-      go_type: int
-    - go_name: DeviceTypeLe
-      value: "2"
-      go_type: int
-    - go_name: DeviceTypeUnknown
-      value: "0"
-      go_type: int
-    - go_name: EncryptionAlgorithmAes
-      value: "2"
-      go_type: int
-    - go_name: EncryptionAlgorithmE0
-      value: "1"
-      go_type: int
-    - go_name: EncryptionAlgorithmNone
-      value: "0"
-      go_type: int
-    - go_name: Error
-      value: "-2147483648"
-      go_type: int
-    - go_name: ExtraBondState
-      value: '"android.bluetooth.device.extra.BOND_STATE"'
-      go_type: string
-    - go_name: ExtraClass
-      value: '"android.bluetooth.device.extra.CLASS"'
-      go_type: string
-    - go_name: ExtraDevice
-      value: '"android.bluetooth.device.extra.DEVICE"'
-      go_type: string
-    - go_name: ExtraEncryptionAlgorithm
-      value: '"android.bluetooth.device.extra.EXTRA_ENCRYPTION_ALGORITHM"'
-      go_type: string
-    - go_name: ExtraEncryptionEnabled
-      value: '"android.bluetooth.device.extra.ENCRYPTION_ENABLED"'
-      go_type: string
-    - go_name: ExtraEncryptionStatus
-      value: '"android.bluetooth.device.extra.ENCRYPTION_STATUS"'
-      go_type: string
-    - go_name: ExtraIsCoordinatedSetMember
-      value: '"android.bluetooth.extra.IS_COORDINATED_SET_MEMBER"'
-      go_type: string
-    - go_name: ExtraKeySize
-      value: '"android.bluetooth.device.extra.KEY_SIZE"'
-      go_type: string
-    - go_name: ExtraName
-      value: '"android.bluetooth.device.extra.NAME"'
-      go_type: string
-    - go_name: ExtraPairingKey
-      value: '"android.bluetooth.device.extra.PAIRING_KEY"'
-      go_type: string
-    - go_name: ExtraPairingVariant
-      value: '"android.bluetooth.device.extra.PAIRING_VARIANT"'
-      go_type: string
-    - go_name: ExtraPreviousBondState
-      value: '"android.bluetooth.device.extra.PREVIOUS_BOND_STATE"'
-      go_type: string
-    - go_name: ExtraRssi
-      value: '"android.bluetooth.device.extra.RSSI"'
-      go_type: string
-    - go_name: ExtraTransport
-      value: '"android.bluetooth.device.extra.TRANSPORT"'
-      go_type: string
-    - go_name: ExtraUuid
-      value: '"android.bluetooth.device.extra.UUID"'
-      go_type: string
-    - go_name: PairingVariantPasskeyConfirmation
-      value: "2"
-      go_type: int
-    - go_name: PairingVariantPin
-      value: "0"
-      go_type: int
-    - go_name: PhyLe1m
-      value: "1"
-      go_type: int
-    - go_name: PhyLe1mMask
-      value: "1"
-      go_type: int
-    - go_name: PhyLe2m
-      value: "2"
-      go_type: int
-    - go_name: PhyLe2mMask
-      value: "2"
-      go_type: int
-    - go_name: PhyLeCoded
-      value: "3"
-      go_type: int
-    - go_name: PhyLeCodedMask
+    - go_name: ErrorRspInvalidParam
       value: "4"
       go_type: int
-    - go_name: PhyOptionNoPreferred
-      value: "0"
-      go_type: int
-    - go_name: PhyOptionS2
-      value: "1"
-      go_type: int
-    - go_name: PhyOptionS8
+    - go_name: ErrorRspInvalidRptId
       value: "2"
       go_type: int
-    - go_name: TransportAuto
-      value: "0"
-      go_type: int
-    - go_name: TransportBredr
+    - go_name: ErrorRspNotReady
       value: "1"
       go_type: int
-    - go_name: TransportLe
+    - go_name: ErrorRspSuccess
+      value: "0"
+      go_type: int
+    - go_name: ErrorRspUnknown
+      value: "14"
+      go_type: int
+    - go_name: ErrorRspUnsupportedReq
+      value: "3"
+      go_type: int
+    - go_name: ProtocolBootMode
+      value: "0"
+      go_type: int
+    - go_name: ProtocolReportMode
+      value: "1"
+      go_type: int
+    - go_name: ReportTypeFeature
+      value: "3"
+      go_type: int
+    - go_name: ReportTypeInput
+      value: "1"
+      go_type: int
+    - go_name: ReportTypeOutput
       value: "2"
       go_type: int
+    - go_name: Subclass1Combo
+      value: "-64"
+      go_type: int
+    - go_name: Subclass1Keyboard
+      value: "64"
+      go_type: int
+    - go_name: Subclass1Mouse
+      value: "-128"
+      go_type: int
+    - go_name: Subclass1None
+      value: "0"
+      go_type: int
+    - go_name: Subclass2CardReader
+      value: "6"
+      go_type: int
+    - go_name: Subclass2DigitizerTablet
+      value: "5"
+      go_type: int
+    - go_name: Subclass2Gamepad
+      value: "2"
+      go_type: int
+    - go_name: Subclass2Joystick
+      value: "1"
+      go_type: int
+    - go_name: Subclass2RemoteControl
+      value: "3"
+      go_type: int
+    - go_name: Subclass2SensingDevice
+      value: "4"
+      go_type: int
+    - go_name: Subclass2Uncategorized
+      value: "0"
+      go_type: int
+    - go_name: TypeL2cap
+      value: "3"
+      go_type: int
+    - go_name: TypeLe
+      value: "4"
+      go_type: int
+    - go_name: TypeRfcomm
+      value: "1"
+      go_type: int
+    - go_name: TypeSco
+      value: "2"
+      go_type: int
+    - go_name: ExtraLeAudioCodecStatus
+      value: '"android.bluetooth.extra.LE_AUDIO_CODEC_STATUS"'
+      go_type: string
     - go_name: FormatFloat
       value: "52"
       go_type: int
@@ -2857,6 +2876,9 @@ constants:
     - go_name: ActionStateChanged
       value: '"android.bluetooth.adapter.action.STATE_CHANGED"'
       go_type: string
+    - go_name: Error
+      value: "-2147483648"
+      go_type: int
     - go_name: ExtraConnectionState
       value: '"android.bluetooth.adapter.extra.CONNECTION_STATE"'
       go_type: string
@@ -2913,507 +2935,6 @@ constants:
       go_type: int
     - go_name: StateTurningOn
       value: "11"
-      go_type: int
-    - go_name: ProfileA2dp
-      value: "1"
-      go_type: int
-    - go_name: ProfileHeadset
-      value: "0"
-      go_type: int
-    - go_name: ProfileHid
-      value: "3"
-      go_type: int
-    - go_name: AudioVideoCamcorder
-      value: "1076"
-      go_type: int
-    - go_name: AudioVideoCarAudio
-      value: "1056"
-      go_type: int
-    - go_name: AudioVideoHandsfree
-      value: "1032"
-      go_type: int
-    - go_name: AudioVideoHeadphones
-      value: "1048"
-      go_type: int
-    - go_name: AudioVideoHifiAudio
-      value: "1064"
-      go_type: int
-    - go_name: AudioVideoLoudspeaker
-      value: "1044"
-      go_type: int
-    - go_name: AudioVideoMicrophone
-      value: "1040"
-      go_type: int
-    - go_name: AudioVideoPortableAudio
-      value: "1052"
-      go_type: int
-    - go_name: AudioVideoSetTopBox
-      value: "1060"
-      go_type: int
-    - go_name: AudioVideoUncategorized
-      value: "1024"
-      go_type: int
-    - go_name: AudioVideoVcr
-      value: "1068"
-      go_type: int
-    - go_name: AudioVideoVideoCamera
-      value: "1072"
-      go_type: int
-    - go_name: AudioVideoVideoConferencing
-      value: "1088"
-      go_type: int
-    - go_name: AudioVideoVideoDisplayAndLoudspeaker
-      value: "1084"
-      go_type: int
-    - go_name: AudioVideoVideoGamingToy
-      value: "1096"
-      go_type: int
-    - go_name: AudioVideoVideoMonitor
-      value: "1080"
-      go_type: int
-    - go_name: AudioVideoWearableHeadset
-      value: "1028"
-      go_type: int
-    - go_name: ComputerDesktop
-      value: "260"
-      go_type: int
-    - go_name: ComputerHandheldPcPda
-      value: "272"
-      go_type: int
-    - go_name: ComputerLaptop
-      value: "268"
-      go_type: int
-    - go_name: ComputerPalmSizePcPda
-      value: "276"
-      go_type: int
-    - go_name: ComputerServer
-      value: "264"
-      go_type: int
-    - go_name: ComputerUncategorized
-      value: "256"
-      go_type: int
-    - go_name: ComputerWearable
-      value: "280"
-      go_type: int
-    - go_name: HealthBloodPressure
-      value: "2308"
-      go_type: int
-    - go_name: HealthDataDisplay
-      value: "2332"
-      go_type: int
-    - go_name: HealthGlucose
-      value: "2320"
-      go_type: int
-    - go_name: HealthPulseOximeter
-      value: "2324"
-      go_type: int
-    - go_name: HealthPulseRate
-      value: "2328"
-      go_type: int
-    - go_name: HealthThermometer
-      value: "2312"
-      go_type: int
-    - go_name: HealthUncategorized
-      value: "2304"
-      go_type: int
-    - go_name: HealthWeighing
-      value: "2316"
-      go_type: int
-    - go_name: PeripheralKeyboard
-      value: "1344"
-      go_type: int
-    - go_name: PeripheralKeyboardPointing
-      value: "1472"
-      go_type: int
-    - go_name: PeripheralNonKeyboardNonPointing
-      value: "1280"
-      go_type: int
-    - go_name: PeripheralPointing
-      value: "1408"
-      go_type: int
-    - go_name: PhoneCellular
-      value: "516"
-      go_type: int
-    - go_name: PhoneCordless
-      value: "520"
-      go_type: int
-    - go_name: PhoneIsdn
-      value: "532"
-      go_type: int
-    - go_name: PhoneModemOrGateway
-      value: "528"
-      go_type: int
-    - go_name: PhoneSmart
-      value: "524"
-      go_type: int
-    - go_name: PhoneUncategorized
-      value: "512"
-      go_type: int
-    - go_name: ToyController
-      value: "2064"
-      go_type: int
-    - go_name: ToyDollActionFigure
-      value: "2060"
-      go_type: int
-    - go_name: ToyGame
-      value: "2068"
-      go_type: int
-    - go_name: ToyRobot
-      value: "2052"
-      go_type: int
-    - go_name: ToyUncategorized
-      value: "2048"
-      go_type: int
-    - go_name: ToyVehicle
-      value: "2056"
-      go_type: int
-    - go_name: WearableGlasses
-      value: "1812"
-      go_type: int
-    - go_name: WearableHelmet
-      value: "1808"
-      go_type: int
-    - go_name: WearableJacket
-      value: "1804"
-      go_type: int
-    - go_name: WearablePager
-      value: "1800"
-      go_type: int
-    - go_name: WearableUncategorized
-      value: "1792"
-      go_type: int
-    - go_name: WearableWristWatch
-      value: "1796"
-      go_type: int
-    - go_name: Audio
-      value: "2097152"
-      go_type: int
-    - go_name: Capture
-      value: "524288"
-      go_type: int
-    - go_name: Information
-      value: "8388608"
-      go_type: int
-    - go_name: LeAudio
-      value: "16384"
-      go_type: int
-    - go_name: LimitedDiscoverability
-      value: "8192"
-      go_type: int
-    - go_name: Networking
-      value: "131072"
-      go_type: int
-    - go_name: ObjectTransfer
-      value: "1048576"
-      go_type: int
-    - go_name: Positioning
-      value: "65536"
-      go_type: int
-    - go_name: Render
-      value: "262144"
-      go_type: int
-    - go_name: Telephony
-      value: "4194304"
-      go_type: int
-    - go_name: BitsPerSample16
-      value: "1"
-      go_type: int
-    - go_name: BitsPerSample24
-      value: "2"
-      go_type: int
-    - go_name: BitsPerSample32
-      value: "4"
-      go_type: int
-    - go_name: BitsPerSampleNone
-      value: "0"
-      go_type: int
-    - go_name: ChannelModeMono
-      value: "1"
-      go_type: int
-    - go_name: ChannelModeNone
-      value: "0"
-      go_type: int
-    - go_name: ChannelModeStereo
-      value: "2"
-      go_type: int
-    - go_name: CodecPriorityDefault
-      value: "0"
-      go_type: int
-    - go_name: CodecPriorityDisabled
-      value: "-1"
-      go_type: int
-    - go_name: CodecPriorityHighest
-      value: "1000000"
-      go_type: int
-    - go_name: SampleRate176400
-      value: "16"
-      go_type: int
-    - go_name: SampleRate192000
-      value: "32"
-      go_type: int
-    - go_name: SampleRate44100
-      value: "1"
-      go_type: int
-    - go_name: SampleRate48000
-      value: "2"
-      go_type: int
-    - go_name: SampleRate88200
-      value: "4"
-      go_type: int
-    - go_name: SampleRate96000
-      value: "8"
-      go_type: int
-    - go_name: SampleRateNone
-      value: "0"
-      go_type: int
-    - go_name: SourceCodecTypeAac
-      value: "1"
-      go_type: int
-    - go_name: SourceCodecTypeAptx
-      value: "2"
-      go_type: int
-    - go_name: SourceCodecTypeAptxHd
-      value: "3"
-      go_type: int
-    - go_name: SourceCodecTypeInvalid
-      value: "1000000"
-      go_type: int
-    - go_name: SourceCodecTypeLc3
-      value: "5"
-      go_type: int
-    - go_name: SourceCodecTypeLdac
-      value: "4"
-      go_type: int
-    - go_name: SourceCodecTypeOpus
-      value: "6"
-      go_type: int
-    - go_name: SourceCodecTypeSbc
-      value: "0"
-      go_type: int
-    - go_name: BluetoothOffFailure
-      value: "15"
-      go_type: int
-    - go_name: L2capAclFailure
-      value: "2"
-      go_type: int
-    - go_name: L2capClientSecurityFailure
-      value: "3"
-      go_type: int
-    - go_name: L2capInsufficientAuthentication
-      value: "4"
-      go_type: int
-    - go_name: L2capInsufficientAuthorization
-      value: "5"
-      go_type: int
-    - go_name: L2capInsufficientEncryption
-      value: "7"
-      go_type: int
-    - go_name: L2capInsufficientEncryptKeySize
-      value: "6"
-      go_type: int
-    - go_name: L2capInvalidParameters
-      value: "11"
-      go_type: int
-    - go_name: L2capInvalidSourceCid
-      value: "8"
-      go_type: int
-    - go_name: L2capNoPsmAvailable
-      value: "13"
-      go_type: int
-    - go_name: L2capNoResources
-      value: "12"
-      go_type: int
-    - go_name: L2capSourceCidAlreadyAllocated
-      value: "9"
-      go_type: int
-    - go_name: L2capTimeout
-      value: "14"
-      go_type: int
-    - go_name: L2capUnacceptableParameters
-      value: "10"
-      go_type: int
-    - go_name: L2capUnknown
-      value: "1"
-      go_type: int
-    - go_name: NullDevice
-      value: "19"
-      go_type: int
-    - go_name: RpcFailure
-      value: "20"
-      go_type: int
-    - go_name: SocketClosed
-      value: "17"
-      go_type: int
-    - go_name: SocketConnectionFailure
-      value: "18"
-      go_type: int
-    - go_name: SocketManagerFailure
-      value: "16"
-      go_type: int
-    - go_name: UnixFileSocketCreationFailure
-      value: "21"
-      go_type: int
-    - go_name: Unspecified
-      value: "0"
-      go_type: int
-    - go_name: ChannelCount1
-      value: "1"
-      go_type: int
-    - go_name: ChannelCount2
-      value: "2"
-      go_type: int
-    - go_name: ChannelCountNone
-      value: "0"
-      go_type: int
-    - go_name: FrameDuration10000
-      value: "2"
-      go_type: int
-    - go_name: FrameDuration7500
-      value: "1"
-      go_type: int
-    - go_name: FrameDurationNone
-      value: "0"
-      go_type: int
-    - go_name: SampleRate11025
-      value: "2"
-      go_type: int
-    - go_name: SampleRate16000
-      value: "4"
-      go_type: int
-    - go_name: SampleRate22050
-      value: "8"
-      go_type: int
-    - go_name: SampleRate24000
-      value: "16"
-      go_type: int
-    - go_name: SampleRate32000
-      value: "32"
-      go_type: int
-    - go_name: SampleRate384000
-      value: "4096"
-      go_type: int
-    - go_name: SampleRate8000
-      value: "1"
-      go_type: int
-    - go_name: DisableNotificationValue
-      value: "0"
-      go_type: int
-    - go_name: EnableIndicationValue
-      value: "0"
-      go_type: int
-    - go_name: EnableNotificationValue
-      value: "0"
-      go_type: int
-    - go_name: ServiceTypePrimary
-      value: "0"
-      go_type: int
-    - go_name: ServiceTypeSecondary
-      value: "1"
-      go_type: int
-    - go_name: ActionLeAudioConnectionStateChanged
-      value: '"android.bluetooth.action.LE_AUDIO_CONNECTION_STATE_CHANGED"'
-      go_type: string
-    - go_name: GroupIdInvalid
-      value: "-1"
-      go_type: int
-    - go_name: A2dp
-      value: "2"
-      go_type: int
-    - go_name: CsipSetCoordinator
-      value: "25"
-      go_type: int
-    - go_name: Gatt
-      value: "7"
-      go_type: int
-    - go_name: GattServer
-      value: "8"
-      go_type: int
-    - go_name: HapClient
-      value: "28"
-      go_type: int
-    - go_name: Headset
-      value: "1"
-      go_type: int
-    - go_name: Health
-      value: "3"
-      go_type: int
-    - go_name: HearingAid
-      value: "21"
-      go_type: int
-    - go_name: HidDevice
-      value: "19"
-      go_type: int
-    - go_name: Sap
-      value: "10"
-      go_type: int
-    - go_name: ActionCsisConnectionStateChanged
-      value: '"android.bluetooth.action.CSIS_CONNECTION_STATE_CHANGED"'
-      go_type: string
-    - go_name: ErrorRspInvalidParam
-      value: "4"
-      go_type: int
-    - go_name: ErrorRspInvalidRptId
-      value: "2"
-      go_type: int
-    - go_name: ErrorRspNotReady
-      value: "1"
-      go_type: int
-    - go_name: ErrorRspSuccess
-      value: "0"
-      go_type: int
-    - go_name: ErrorRspUnknown
-      value: "14"
-      go_type: int
-    - go_name: ErrorRspUnsupportedReq
-      value: "3"
-      go_type: int
-    - go_name: ProtocolBootMode
-      value: "0"
-      go_type: int
-    - go_name: ProtocolReportMode
-      value: "1"
-      go_type: int
-    - go_name: ReportTypeFeature
-      value: "3"
-      go_type: int
-    - go_name: ReportTypeInput
-      value: "1"
-      go_type: int
-    - go_name: ReportTypeOutput
-      value: "2"
-      go_type: int
-    - go_name: Subclass1Combo
-      value: "-64"
-      go_type: int
-    - go_name: Subclass1Keyboard
-      value: "64"
-      go_type: int
-    - go_name: Subclass1Mouse
-      value: "-128"
-      go_type: int
-    - go_name: Subclass1None
-      value: "0"
-      go_type: int
-    - go_name: Subclass2CardReader
-      value: "6"
-      go_type: int
-    - go_name: Subclass2DigitizerTablet
-      value: "5"
-      go_type: int
-    - go_name: Subclass2Gamepad
-      value: "2"
-      go_type: int
-    - go_name: Subclass2Joystick
-      value: "1"
-      go_type: int
-    - go_name: Subclass2RemoteControl
-      value: "3"
-      go_type: int
-    - go_name: Subclass2SensingDevice
-      value: "4"
-      go_type: int
-    - go_name: Subclass2Uncategorized
-      value: "0"
       go_type: int
     - go_name: AampOfAmerica
       value: "190"
@@ -4096,9 +3617,126 @@ constants:
     - go_name: ZscanSoftware
       value: "141"
       go_type: int
-    - go_name: ExtraLeAudioCodecStatus
-      value: '"android.bluetooth.extra.LE_AUDIO_CODEC_STATUS"'
+    - go_name: ActionLeAudioConnectionStateChanged
+      value: '"android.bluetooth.action.LE_AUDIO_CONNECTION_STATE_CHANGED"'
       go_type: string
+    - go_name: GroupIdInvalid
+      value: "-1"
+      go_type: int
+    - go_name: BitsPerSample16
+      value: "1"
+      go_type: int
+    - go_name: BitsPerSample24
+      value: "2"
+      go_type: int
+    - go_name: BitsPerSample32
+      value: "8"
+      go_type: int
+    - go_name: BitsPerSampleNone
+      value: "0"
+      go_type: int
+    - go_name: ChannelCount1
+      value: "1"
+      go_type: int
+    - go_name: ChannelCount2
+      value: "2"
+      go_type: int
+    - go_name: ChannelCountNone
+      value: "0"
+      go_type: int
+    - go_name: CodecPriorityDefault
+      value: "0"
+      go_type: int
+    - go_name: CodecPriorityDisabled
+      value: "-1"
+      go_type: int
+    - go_name: CodecPriorityHighest
+      value: "1000000"
+      go_type: int
+    - go_name: FrameDuration10000
+      value: "2"
+      go_type: int
+    - go_name: FrameDuration7500
+      value: "1"
+      go_type: int
+    - go_name: FrameDurationNone
+      value: "0"
+      go_type: int
+    - go_name: SampleRate11025
+      value: "2"
+      go_type: int
+    - go_name: SampleRate16000
+      value: "4"
+      go_type: int
+    - go_name: SampleRate176400
+      value: "1024"
+      go_type: int
+    - go_name: SampleRate192000
+      value: "2048"
+      go_type: int
+    - go_name: SampleRate22050
+      value: "8"
+      go_type: int
+    - go_name: SampleRate24000
+      value: "16"
+      go_type: int
+    - go_name: SampleRate32000
+      value: "32"
+      go_type: int
+    - go_name: SampleRate384000
+      value: "4096"
+      go_type: int
+    - go_name: SampleRate44100
+      value: "64"
+      go_type: int
+    - go_name: SampleRate48000
+      value: "128"
+      go_type: int
+    - go_name: SampleRate8000
+      value: "1"
+      go_type: int
+    - go_name: SampleRate88200
+      value: "256"
+      go_type: int
+    - go_name: SampleRate96000
+      value: "512"
+      go_type: int
+    - go_name: SampleRateNone
+      value: "0"
+      go_type: int
+    - go_name: SourceCodecTypeInvalid
+      value: "1000000"
+      go_type: int
+    - go_name: SourceCodecTypeLc3
+      value: "0"
+      go_type: int
+    - go_name: SourceCodecTypeOpus
+      value: "1"
+      go_type: int
+    - go_name: ChannelModeMono
+      value: "1"
+      go_type: int
+    - go_name: ChannelModeNone
+      value: "0"
+      go_type: int
+    - go_name: ChannelModeStereo
+      value: "2"
+      go_type: int
+    - go_name: SourceCodecTypeAac
+      value: "1"
+      go_type: int
+    - go_name: SourceCodecTypeAptx
+      value: "2"
+      go_type: int
+    - go_name: SourceCodecTypeAptxHd
+      value: "3"
+      go_type: int
+    - go_name: SourceCodecTypeLdac
+      value: "4"
+      go_type: int
+    - go_name: SourceCodecTypeSbc
+      value: "0"
+      go_type: int
     - go_name: ActionAudioStateChanged
       value: '"android.bluetooth.headset.profile.action.AUDIO_STATE_CHANGED"'
       go_type: string
@@ -4144,24 +3782,171 @@ constants:
     - go_name: VendorSpecificHeadsetEventCompanyIdCategory
       value: '"android.bluetooth.headset.intent.category.companyid"'
       go_type: string
-    - go_name: CodecIdAac
-      value: "2"
-      go_type: int64
-    - go_name: CodecIdAptx
-      value: "16797695"
-      go_type: int64
-    - go_name: CodecIdAptxHd
-      value: "604035071"
-      go_type: int64
-    - go_name: CodecIdLdac
-      value: "-1442763265"
-      go_type: int64
-    - go_name: CodecIdOpus
-      value: "16834815"
-      go_type: int64
-    - go_name: CodecIdSbc
+    - go_name: ActionAclConnected
+      value: '"android.bluetooth.device.action.ACL_CONNECTED"'
+      go_type: string
+    - go_name: ActionAclDisconnected
+      value: '"android.bluetooth.device.action.ACL_DISCONNECTED"'
+      go_type: string
+    - go_name: ActionAclDisconnectRequested
+      value: '"android.bluetooth.device.action.ACL_DISCONNECT_REQUESTED"'
+      go_type: string
+    - go_name: ActionAliasChanged
+      value: '"android.bluetooth.device.action.ALIAS_CHANGED"'
+      go_type: string
+    - go_name: ActionBondStateChanged
+      value: '"android.bluetooth.device.action.BOND_STATE_CHANGED"'
+      go_type: string
+    - go_name: ActionClassChanged
+      value: '"android.bluetooth.device.action.CLASS_CHANGED"'
+      go_type: string
+    - go_name: ActionEncryptionChange
+      value: '"android.bluetooth.device.action.ENCRYPTION_CHANGE"'
+      go_type: string
+    - go_name: ActionFound
+      value: '"android.bluetooth.device.action.FOUND"'
+      go_type: string
+    - go_name: ActionKeyMissing
+      value: '"android.bluetooth.device.action.KEY_MISSING"'
+      go_type: string
+    - go_name: ActionNameChanged
+      value: '"android.bluetooth.device.action.NAME_CHANGED"'
+      go_type: string
+    - go_name: ActionPairingRequest
+      value: '"android.bluetooth.device.action.PAIRING_REQUEST"'
+      go_type: string
+    - go_name: ActionUuid
+      value: '"android.bluetooth.device.action.UUID"'
+      go_type: string
+    - go_name: AddressTypeAnonymous
+      value: "255"
+      go_type: int
+    - go_name: AddressTypePublic
       value: "0"
-      go_type: int64
+      go_type: int
+    - go_name: AddressTypeRandom
+      value: "1"
+      go_type: int
+    - go_name: AddressTypeUnknown
+      value: "65535"
+      go_type: int
+    - go_name: BondBonded
+      value: "12"
+      go_type: int
+    - go_name: BondBonding
+      value: "11"
+      go_type: int
+    - go_name: BondNone
+      value: "10"
+      go_type: int
+    - go_name: DeviceTypeClassic
+      value: "1"
+      go_type: int
+    - go_name: DeviceTypeDual
+      value: "3"
+      go_type: int
+    - go_name: DeviceTypeLe
+      value: "2"
+      go_type: int
+    - go_name: DeviceTypeUnknown
+      value: "0"
+      go_type: int
+    - go_name: EncryptionAlgorithmAes
+      value: "2"
+      go_type: int
+    - go_name: EncryptionAlgorithmE0
+      value: "1"
+      go_type: int
+    - go_name: EncryptionAlgorithmNone
+      value: "0"
+      go_type: int
+    - go_name: ExtraBondState
+      value: '"android.bluetooth.device.extra.BOND_STATE"'
+      go_type: string
+    - go_name: ExtraClass
+      value: '"android.bluetooth.device.extra.CLASS"'
+      go_type: string
+    - go_name: ExtraDevice
+      value: '"android.bluetooth.device.extra.DEVICE"'
+      go_type: string
+    - go_name: ExtraEncryptionAlgorithm
+      value: '"android.bluetooth.device.extra.EXTRA_ENCRYPTION_ALGORITHM"'
+      go_type: string
+    - go_name: ExtraEncryptionEnabled
+      value: '"android.bluetooth.device.extra.ENCRYPTION_ENABLED"'
+      go_type: string
+    - go_name: ExtraEncryptionStatus
+      value: '"android.bluetooth.device.extra.ENCRYPTION_STATUS"'
+      go_type: string
+    - go_name: ExtraIsCoordinatedSetMember
+      value: '"android.bluetooth.extra.IS_COORDINATED_SET_MEMBER"'
+      go_type: string
+    - go_name: ExtraKeySize
+      value: '"android.bluetooth.device.extra.KEY_SIZE"'
+      go_type: string
+    - go_name: ExtraName
+      value: '"android.bluetooth.device.extra.NAME"'
+      go_type: string
+    - go_name: ExtraPairingKey
+      value: '"android.bluetooth.device.extra.PAIRING_KEY"'
+      go_type: string
+    - go_name: ExtraPairingVariant
+      value: '"android.bluetooth.device.extra.PAIRING_VARIANT"'
+      go_type: string
+    - go_name: ExtraPreviousBondState
+      value: '"android.bluetooth.device.extra.PREVIOUS_BOND_STATE"'
+      go_type: string
+    - go_name: ExtraRssi
+      value: '"android.bluetooth.device.extra.RSSI"'
+      go_type: string
+    - go_name: ExtraTransport
+      value: '"android.bluetooth.device.extra.TRANSPORT"'
+      go_type: string
+    - go_name: ExtraUuid
+      value: '"android.bluetooth.device.extra.UUID"'
+      go_type: string
+    - go_name: PairingVariantPasskeyConfirmation
+      value: "2"
+      go_type: int
+    - go_name: PairingVariantPin
+      value: "0"
+      go_type: int
+    - go_name: PhyLe1m
+      value: "1"
+      go_type: int
+    - go_name: PhyLe1mMask
+      value: "1"
+      go_type: int
+    - go_name: PhyLe2m
+      value: "2"
+      go_type: int
+    - go_name: PhyLe2mMask
+      value: "2"
+      go_type: int
+    - go_name: PhyLeCoded
+      value: "3"
+      go_type: int
+    - go_name: PhyLeCodedMask
+      value: "4"
+      go_type: int
+    - go_name: PhyOptionNoPreferred
+      value: "0"
+      go_type: int
+    - go_name: PhyOptionS2
+      value: "1"
+      go_type: int
+    - go_name: PhyOptionS8
+      value: "2"
+      go_type: int
+    - go_name: TransportAuto
+      value: "0"
+      go_type: int
+    - go_name: TransportBredr
+      value: "1"
+      go_type: int
+    - go_name: TransportLe
+      value: "2"
+      go_type: int
     - go_name: ConnectionPriorityBalanced
       value: "0"
       go_type: int
@@ -4210,15 +3995,408 @@ constants:
     - go_name: GattWriteNotPermitted
       value: "3"
       go_type: int
-    - go_name: TypeL2cap
-      value: "3"
-      go_type: int
-    - go_name: TypeLe
-      value: "4"
-      go_type: int
-    - go_name: TypeRfcomm
-      value: "1"
-      go_type: int
-    - go_name: TypeSco
+    - go_name: ErrorBluetoothNotAllowed
       value: "2"
       go_type: int
+    - go_name: ErrorBluetoothNotEnabled
+      value: "1"
+      go_type: int
+    - go_name: ErrorDeviceNotBonded
+      value: "3"
+      go_type: int
+    - go_name: ErrorGattWriteNotAllowed
+      value: "200"
+      go_type: int
+    - go_name: ErrorGattWriteRequestBusy
+      value: "201"
+      go_type: int
+    - go_name: ErrorMissingBluetoothConnectPermission
+      value: "6"
+      go_type: int
+    - go_name: ErrorProfileServiceNotBound
+      value: "9"
+      go_type: int
+    - go_name: ErrorUnknown
+      value: "2147483647"
+      go_type: int
+    - go_name: FeatureNotConfigured
+      value: "30"
+      go_type: int
+    - go_name: FeatureNotSupported
+      value: "11"
+      go_type: int
+    - go_name: FeatureSupported
+      value: "10"
+      go_type: int
+    - go_name: Success
+      value: "0"
+      go_type: int
+    - go_name: ExtraCodecStatus
+      value: '"android.bluetooth.extra.CODEC_STATUS"'
+      go_type: string
+    - go_name: ServiceTypePrimary
+      value: "0"
+      go_type: int
+    - go_name: ServiceTypeSecondary
+      value: "1"
+      go_type: int
+    - go_name: ProfileA2dp
+      value: "1"
+      go_type: int
+    - go_name: ProfileHeadset
+      value: "0"
+      go_type: int
+    - go_name: ProfileHid
+      value: "3"
+      go_type: int
+    - go_name: AudioVideoCamcorder
+      value: "1076"
+      go_type: int
+    - go_name: AudioVideoCarAudio
+      value: "1056"
+      go_type: int
+    - go_name: AudioVideoHandsfree
+      value: "1032"
+      go_type: int
+    - go_name: AudioVideoHeadphones
+      value: "1048"
+      go_type: int
+    - go_name: AudioVideoHifiAudio
+      value: "1064"
+      go_type: int
+    - go_name: AudioVideoLoudspeaker
+      value: "1044"
+      go_type: int
+    - go_name: AudioVideoMicrophone
+      value: "1040"
+      go_type: int
+    - go_name: AudioVideoPortableAudio
+      value: "1052"
+      go_type: int
+    - go_name: AudioVideoSetTopBox
+      value: "1060"
+      go_type: int
+    - go_name: AudioVideoUncategorized
+      value: "1024"
+      go_type: int
+    - go_name: AudioVideoVcr
+      value: "1068"
+      go_type: int
+    - go_name: AudioVideoVideoCamera
+      value: "1072"
+      go_type: int
+    - go_name: AudioVideoVideoConferencing
+      value: "1088"
+      go_type: int
+    - go_name: AudioVideoVideoDisplayAndLoudspeaker
+      value: "1084"
+      go_type: int
+    - go_name: AudioVideoVideoGamingToy
+      value: "1096"
+      go_type: int
+    - go_name: AudioVideoVideoMonitor
+      value: "1080"
+      go_type: int
+    - go_name: AudioVideoWearableHeadset
+      value: "1028"
+      go_type: int
+    - go_name: ComputerDesktop
+      value: "260"
+      go_type: int
+    - go_name: ComputerHandheldPcPda
+      value: "272"
+      go_type: int
+    - go_name: ComputerLaptop
+      value: "268"
+      go_type: int
+    - go_name: ComputerPalmSizePcPda
+      value: "276"
+      go_type: int
+    - go_name: ComputerServer
+      value: "264"
+      go_type: int
+    - go_name: ComputerUncategorized
+      value: "256"
+      go_type: int
+    - go_name: ComputerWearable
+      value: "280"
+      go_type: int
+    - go_name: HealthBloodPressure
+      value: "2308"
+      go_type: int
+    - go_name: HealthDataDisplay
+      value: "2332"
+      go_type: int
+    - go_name: HealthGlucose
+      value: "2320"
+      go_type: int
+    - go_name: HealthPulseOximeter
+      value: "2324"
+      go_type: int
+    - go_name: HealthPulseRate
+      value: "2328"
+      go_type: int
+    - go_name: HealthThermometer
+      value: "2312"
+      go_type: int
+    - go_name: HealthUncategorized
+      value: "2304"
+      go_type: int
+    - go_name: HealthWeighing
+      value: "2316"
+      go_type: int
+    - go_name: PeripheralKeyboard
+      value: "1344"
+      go_type: int
+    - go_name: PeripheralKeyboardPointing
+      value: "1472"
+      go_type: int
+    - go_name: PeripheralNonKeyboardNonPointing
+      value: "1280"
+      go_type: int
+    - go_name: PeripheralPointing
+      value: "1408"
+      go_type: int
+    - go_name: PhoneCellular
+      value: "516"
+      go_type: int
+    - go_name: PhoneCordless
+      value: "520"
+      go_type: int
+    - go_name: PhoneIsdn
+      value: "532"
+      go_type: int
+    - go_name: PhoneModemOrGateway
+      value: "528"
+      go_type: int
+    - go_name: PhoneSmart
+      value: "524"
+      go_type: int
+    - go_name: PhoneUncategorized
+      value: "512"
+      go_type: int
+    - go_name: ToyController
+      value: "2064"
+      go_type: int
+    - go_name: ToyDollActionFigure
+      value: "2060"
+      go_type: int
+    - go_name: ToyGame
+      value: "2068"
+      go_type: int
+    - go_name: ToyRobot
+      value: "2052"
+      go_type: int
+    - go_name: ToyUncategorized
+      value: "2048"
+      go_type: int
+    - go_name: ToyVehicle
+      value: "2056"
+      go_type: int
+    - go_name: WearableGlasses
+      value: "1812"
+      go_type: int
+    - go_name: WearableHelmet
+      value: "1808"
+      go_type: int
+    - go_name: WearableJacket
+      value: "1804"
+      go_type: int
+    - go_name: WearablePager
+      value: "1800"
+      go_type: int
+    - go_name: WearableUncategorized
+      value: "1792"
+      go_type: int
+    - go_name: WearableWristWatch
+      value: "1796"
+      go_type: int
+    - go_name: Audio
+      value: "2097152"
+      go_type: int
+    - go_name: Capture
+      value: "524288"
+      go_type: int
+    - go_name: Information
+      value: "8388608"
+      go_type: int
+    - go_name: LeAudio
+      value: "16384"
+      go_type: int
+    - go_name: LimitedDiscoverability
+      value: "8192"
+      go_type: int
+    - go_name: Networking
+      value: "131072"
+      go_type: int
+    - go_name: ObjectTransfer
+      value: "1048576"
+      go_type: int
+    - go_name: Positioning
+      value: "65536"
+      go_type: int
+    - go_name: Render
+      value: "262144"
+      go_type: int
+    - go_name: Telephony
+      value: "4194304"
+      go_type: int
+    - go_name: AppConfigRegistrationFailure
+      value: "1"
+      go_type: int
+    - go_name: AppConfigRegistrationSuccess
+      value: "0"
+      go_type: int
+    - go_name: AppConfigUnregistrationFailure
+      value: "3"
+      go_type: int
+    - go_name: AppConfigUnregistrationSuccess
+      value: "2"
+      go_type: int
+    - go_name: ChannelTypeReliable
+      value: "10"
+      go_type: int
+    - go_name: ChannelTypeStreaming
+      value: "11"
+      go_type: int
+    - go_name: SinkRole
+      value: "2"
+      go_type: int
+    - go_name: SourceRole
+      value: "1"
+      go_type: int
+    - go_name: StateChannelConnected
+      value: "2"
+      go_type: int
+    - go_name: StateChannelConnecting
+      value: "1"
+      go_type: int
+    - go_name: StateChannelDisconnected
+      value: "0"
+      go_type: int
+    - go_name: StateChannelDisconnecting
+      value: "3"
+      go_type: int
+    - go_name: DisableNotificationValue
+      value: "0"
+      go_type: int
+    - go_name: EnableIndicationValue
+      value: "0"
+      go_type: int
+    - go_name: EnableNotificationValue
+      value: "0"
+      go_type: int
+    - go_name: A2dp
+      value: "2"
+      go_type: int
+    - go_name: CsipSetCoordinator
+      value: "25"
+      go_type: int
+    - go_name: Gatt
+      value: "7"
+      go_type: int
+    - go_name: GattServer
+      value: "8"
+      go_type: int
+    - go_name: HapClient
+      value: "28"
+      go_type: int
+    - go_name: Headset
+      value: "1"
+      go_type: int
+    - go_name: Health
+      value: "3"
+      go_type: int
+    - go_name: HearingAid
+      value: "21"
+      go_type: int
+    - go_name: HidDevice
+      value: "19"
+      go_type: int
+    - go_name: Sap
+      value: "10"
+      go_type: int
+    - go_name: BluetoothOffFailure
+      value: "15"
+      go_type: int
+    - go_name: L2capAclFailure
+      value: "2"
+      go_type: int
+    - go_name: L2capClientSecurityFailure
+      value: "3"
+      go_type: int
+    - go_name: L2capInsufficientAuthentication
+      value: "4"
+      go_type: int
+    - go_name: L2capInsufficientAuthorization
+      value: "5"
+      go_type: int
+    - go_name: L2capInsufficientEncryption
+      value: "7"
+      go_type: int
+    - go_name: L2capInsufficientEncryptKeySize
+      value: "6"
+      go_type: int
+    - go_name: L2capInvalidParameters
+      value: "11"
+      go_type: int
+    - go_name: L2capInvalidSourceCid
+      value: "8"
+      go_type: int
+    - go_name: L2capNoPsmAvailable
+      value: "13"
+      go_type: int
+    - go_name: L2capNoResources
+      value: "12"
+      go_type: int
+    - go_name: L2capSourceCidAlreadyAllocated
+      value: "9"
+      go_type: int
+    - go_name: L2capTimeout
+      value: "14"
+      go_type: int
+    - go_name: L2capUnacceptableParameters
+      value: "10"
+      go_type: int
+    - go_name: L2capUnknown
+      value: "1"
+      go_type: int
+    - go_name: NullDevice
+      value: "19"
+      go_type: int
+    - go_name: RpcFailure
+      value: "20"
+      go_type: int
+    - go_name: SocketClosed
+      value: "17"
+      go_type: int
+    - go_name: SocketConnectionFailure
+      value: "18"
+      go_type: int
+    - go_name: SocketManagerFailure
+      value: "16"
+      go_type: int
+    - go_name: UnixFileSocketCreationFailure
+      value: "21"
+      go_type: int
+    - go_name: Unspecified
+      value: "0"
+      go_type: int
+    - go_name: CodecIdAac
+      value: "2"
+      go_type: int64
+    - go_name: CodecIdAptx
+      value: "16797695"
+      go_type: int64
+    - go_name: CodecIdAptxHd
+      value: "604035071"
+      go_type: int64
+    - go_name: CodecIdLdac
+      value: "-1442763265"
+      go_type: int64
+    - go_name: CodecIdOpus
+      value: "16834815"
+      go_type: int64
+    - go_name: CodecIdSbc
+      value: "0"
+      go_type: int64

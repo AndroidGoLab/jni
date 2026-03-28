@@ -32,7 +32,7 @@ func NewVectorDrawable(vm *jni.VM) (*VectorDrawable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), midVectorDrawableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVectorDrawable)), midVectorDrawableCtor)
 		if err != nil {
 			return err
 		}

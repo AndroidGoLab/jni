@@ -32,7 +32,7 @@ func NewFloat2(vm *jni.VM) (*Float2, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloat2)), midFloat2Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFloat2)), midFloat2Ctor)
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewSavedDatasetsInfo(vm *jni.VM, arg0 string, arg1 int32) (*SavedDatasetsIn
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSavedDatasetsInfo)), midSavedDatasetsInfoInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSavedDatasetsInfo)), midSavedDatasetsInfoCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

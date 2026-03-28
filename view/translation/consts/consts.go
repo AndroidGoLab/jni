@@ -4,8 +4,13 @@ package consts
 
 const (
 	Creator                             int = 0
-	StatusError                         int = 1
-	StatusSuccess                       int = 0
+	StateAvailableToDownload            int = 1
+	StateDownloading                    int = 2
+	StateNotAvailable                   int = 4
+	StateOnDevice                       int = 3
+	FlagDefinitions                     int = 4
+	FlagLowLatency                      int = 1
+	FlagTransliteration                 int = 2
 	TranslationStatusContextUnsupported int = 2
 	TranslationStatusSuccess            int = 0
 	TranslationStatusUnknownError       int = 1
@@ -13,14 +18,9 @@ const (
 	FlagPartialResponses                int = 8
 	FlagTranslationResult               int = 1
 	FlagTransliterationResult           int = 4
+	StatusError                         int = 1
+	StatusSuccess                       int = 0
 	DataFormatText                      int = 1
-	FlagDefinitions                     int = 4
-	FlagLowLatency                      int = 1
-	FlagTransliteration                 int = 2
-	StateAvailableToDownload            int = 1
-	StateDownloading                    int = 2
-	StateNotAvailable                   int = 4
-	StateOnDevice                       int = 3
 )
 
 const (

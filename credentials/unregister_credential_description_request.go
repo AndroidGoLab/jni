@@ -33,7 +33,7 @@ func NewUnregisterCredentialDescriptionRequest(vm *jni.VM, arg0 *jni.Object) (*U
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnregisterCredentialDescriptionRequest)), midUnregisterCredentialDescriptionRequestInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnregisterCredentialDescriptionRequest)), midUnregisterCredentialDescriptionRequestCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -65,6 +65,38 @@ func (m *UnregisterCredentialDescriptionRequest) DescribeContents() (int32, erro
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetCredentialDescriptions calls android.credentials.UnregisterCredentialDescriptionRequest.getCredentialDescriptions.
+func (m *UnregisterCredentialDescriptionRequest) GetCredentialDescriptions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUnregisterCredentialDescriptionRequestGetCredentialDescriptions == nil {
+			callErr = fmt.Errorf("android.credentials.UnregisterCredentialDescriptionRequest.getCredentialDescriptions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUnregisterCredentialDescriptionRequestGetCredentialDescriptions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

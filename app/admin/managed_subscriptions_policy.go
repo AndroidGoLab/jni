@@ -33,7 +33,7 @@ func NewManagedSubscriptionsPolicy(vm *jni.VM, arg0 int32) (*ManagedSubscription
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManagedSubscriptionsPolicy)), midManagedSubscriptionsPolicyInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManagedSubscriptionsPolicy)), midManagedSubscriptionsPolicyCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

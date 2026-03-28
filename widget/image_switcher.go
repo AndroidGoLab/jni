@@ -33,7 +33,7 @@ func NewImageSwitcher(vm *jni.VM, arg0 *jni.Object) (*ImageSwitcher, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageSwitcher)), midImageSwitcherInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsImageSwitcher)), midImageSwitcherCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

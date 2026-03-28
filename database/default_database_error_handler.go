@@ -32,7 +32,7 @@ func NewDefaultDatabaseErrorHandler(vm *jni.VM) (*DefaultDatabaseErrorHandler, e
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDefaultDatabaseErrorHandler)), midDefaultDatabaseErrorHandlerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDefaultDatabaseErrorHandler)), midDefaultDatabaseErrorHandlerCtor)
 		if err != nil {
 			return err
 		}

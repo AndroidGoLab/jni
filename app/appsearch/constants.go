@@ -5,6 +5,7 @@ package appsearch
 import "github.com/AndroidGoLab/jni/app/appsearch/consts"
 
 const (
+	Creator                                     = consts.Creator
 	ResultAlreadyExists                         = consts.ResultAlreadyExists
 	ResultDenied                                = consts.ResultDenied
 	ResultInternalError                         = consts.ResultInternalError
@@ -17,7 +18,34 @@ const (
 	ResultRateLimited                           = consts.ResultRateLimited
 	ResultSecurityError                         = consts.ResultSecurityError
 	ResultUnknownError                          = consts.ResultUnknownError
-	Creator                                     = consts.Creator
+	ReadAssistantAppSearchData                  = consts.ReadAssistantAppSearchData
+	ReadCalendar                                = consts.ReadCalendar
+	ReadContacts                                = consts.ReadContacts
+	ReadExternalStorage                         = consts.ReadExternalStorage
+	ReadHomeAppSearchData                       = consts.ReadHomeAppSearchData
+	ReadSms                                     = consts.ReadSms
+	IndexingTypeNone                            = consts.IndexingTypeNone
+	IndexingTypeSimilarity                      = consts.IndexingTypeSimilarity
+	QuantizationType8Bit                        = consts.QuantizationType8Bit
+	QuantizationTypeNone                        = consts.QuantizationTypeNone
+	IndexingTypeRange                           = consts.IndexingTypeRange
+	CardinalityOptional                         = consts.CardinalityOptional
+	CardinalityRepeated                         = consts.CardinalityRepeated
+	CardinalityRequired                         = consts.CardinalityRequired
+	IndexingTypeExactTerms                      = consts.IndexingTypeExactTerms
+	IndexingTypePrefixes                        = consts.IndexingTypePrefixes
+	JoinableValueTypeNone                       = consts.JoinableValueTypeNone
+	JoinableValueTypeQualifiedId                = consts.JoinableValueTypeQualifiedId
+	TokenizerTypeNone                           = consts.TokenizerTypeNone
+	TokenizerTypePlain                          = consts.TokenizerTypePlain
+	TokenizerTypeRfc822                         = consts.TokenizerTypeRfc822
+	TokenizerTypeVerbatim                       = consts.TokenizerTypeVerbatim
+	AggregationScoringAvgRankingSignal          = consts.AggregationScoringAvgRankingSignal
+	AggregationScoringMaxRankingSignal          = consts.AggregationScoringMaxRankingSignal
+	AggregationScoringMinRankingSignal          = consts.AggregationScoringMinRankingSignal
+	AggregationScoringOuterResultRankingSignal  = consts.AggregationScoringOuterResultRankingSignal
+	AggregationScoringResultCount               = consts.AggregationScoringResultCount
+	AggregationScoringSumRankingSignal          = consts.AggregationScoringSumRankingSignal
 	EmbeddingSearchMetricTypeCosine             = consts.EmbeddingSearchMetricTypeCosine
 	EmbeddingSearchMetricTypeDefault            = consts.EmbeddingSearchMetricTypeDefault
 	EmbeddingSearchMetricTypeDotProduct         = consts.EmbeddingSearchMetricTypeDotProduct
@@ -39,38 +67,10 @@ const (
 	RankingStrategyUsageLastUsedTimestamp       = consts.RankingStrategyUsageLastUsedTimestamp
 	TermMatchExactOnly                          = consts.TermMatchExactOnly
 	TermMatchPrefix                             = consts.TermMatchPrefix
+	NonRepeatedCardinality                      = consts.NonRepeatedCardinality
 	SuggestionRankingStrategyDocumentCount      = consts.SuggestionRankingStrategyDocumentCount
 	SuggestionRankingStrategyNone               = consts.SuggestionRankingStrategyNone
 	SuggestionRankingStrategyTermFrequency      = consts.SuggestionRankingStrategyTermFrequency
-	IndexingTypeNone                            = consts.IndexingTypeNone
-	IndexingTypeSimilarity                      = consts.IndexingTypeSimilarity
-	QuantizationType8Bit                        = consts.QuantizationType8Bit
-	QuantizationTypeNone                        = consts.QuantizationTypeNone
-	IndexingTypeRange                           = consts.IndexingTypeRange
-	CardinalityOptional                         = consts.CardinalityOptional
-	CardinalityRepeated                         = consts.CardinalityRepeated
-	CardinalityRequired                         = consts.CardinalityRequired
-	IndexingTypeExactTerms                      = consts.IndexingTypeExactTerms
-	IndexingTypePrefixes                        = consts.IndexingTypePrefixes
-	JoinableValueTypeNone                       = consts.JoinableValueTypeNone
-	JoinableValueTypeQualifiedId                = consts.JoinableValueTypeQualifiedId
-	TokenizerTypeNone                           = consts.TokenizerTypeNone
-	TokenizerTypePlain                          = consts.TokenizerTypePlain
-	TokenizerTypeRfc822                         = consts.TokenizerTypeRfc822
-	TokenizerTypeVerbatim                       = consts.TokenizerTypeVerbatim
-	ReadAssistantAppSearchData                  = consts.ReadAssistantAppSearchData
-	ReadCalendar                                = consts.ReadCalendar
-	ReadContacts                                = consts.ReadContacts
-	ReadExternalStorage                         = consts.ReadExternalStorage
-	ReadHomeAppSearchData                       = consts.ReadHomeAppSearchData
-	ReadSms                                     = consts.ReadSms
-	AggregationScoringAvgRankingSignal          = consts.AggregationScoringAvgRankingSignal
-	AggregationScoringMaxRankingSignal          = consts.AggregationScoringMaxRankingSignal
-	AggregationScoringMinRankingSignal          = consts.AggregationScoringMinRankingSignal
-	AggregationScoringOuterResultRankingSignal  = consts.AggregationScoringOuterResultRankingSignal
-	AggregationScoringResultCount               = consts.AggregationScoringResultCount
-	AggregationScoringSumRankingSignal          = consts.AggregationScoringSumRankingSignal
-	NonRepeatedCardinality                      = consts.NonRepeatedCardinality
 )
 
 const (

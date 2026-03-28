@@ -39,7 +39,7 @@ func NewAdBuffer(vm *jni.VM, arg0 int32, arg1 string, arg2 *jni.Object, arg3 int
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdBuffer)), midAdBufferInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.LongValue(arg5), jni.IntValue(arg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdBuffer)), midAdBufferCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.LongValue(arg5), jni.IntValue(arg6))
 		if err != nil {
 			return err
 		}

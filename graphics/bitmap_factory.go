@@ -32,7 +32,7 @@ func NewBitmapFactory(vm *jni.VM) (*BitmapFactory, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapFactory)), midBitmapFactoryInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBitmapFactory)), midBitmapFactoryCtor)
 		if err != nil {
 			return err
 		}

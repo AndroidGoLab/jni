@@ -3,28 +3,28 @@
 package consts
 
 const (
-	ActionPreferenceService string = "android.service.settings.preferences.action.PREFERENCE_SERVICE"
-)
-
-const (
 	Creator                    int = 0
 	TypeBoolean                int = 0
 	TypeDouble                 int = 2
 	TypeInt                    int = 4
 	TypeLong                   int = 1
 	TypeString                 int = 3
-	ResultInternalError        int = 2
-	ResultOk                   int = 0
-	ResultUnsupported          int = 1
-	ResultDisabled             int = 2
-	ResultDisallow             int = 7
-	ResultInvalidRequest       int = 8
-	ResultRequireAppPermission int = 5
-	ResultRequireUserConsent   int = 6
-	ResultRestricted           int = 3
-	ResultUnavailable          int = 4
 	DeeplinkOnly               int = 2
 	ExpectPostConfirmation     int = 1
 	NoDirectAccess             int = 3
 	NoSensitivity              int = 0
+	ResultDisabled             int = 2
+	ResultDisallow             int = 7
+	ResultInternalError        int = 9
+	ResultInvalidRequest       int = 8
+	ResultOk                   int = 0
+	ResultRequireAppPermission int = 5
+	ResultRequireUserConsent   int = 6
+	ResultRestricted           int = 3
+	ResultUnavailable          int = 4
+	ResultUnsupported          int = 1
+)
+
+const (
+	ActionPreferenceService string = "android.service.settings.preferences.action.PREFERENCE_SERVICE"
 )

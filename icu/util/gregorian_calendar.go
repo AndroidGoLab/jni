@@ -32,7 +32,7 @@ func NewGregorianCalendar(vm *jni.VM) (*GregorianCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGregorianCalendar)), midGregorianCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGregorianCalendar)), midGregorianCalendarCtor)
 		if err != nil {
 			return err
 		}

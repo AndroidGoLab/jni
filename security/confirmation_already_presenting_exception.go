@@ -32,7 +32,7 @@ func NewConfirmationAlreadyPresentingException(vm *jni.VM) (*ConfirmationAlready
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfirmationAlreadyPresentingException)), midConfirmationAlreadyPresentingExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfirmationAlreadyPresentingException)), midConfirmationAlreadyPresentingExceptionCtor)
 		if err != nil {
 			return err
 		}

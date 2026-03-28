@@ -33,7 +33,7 @@ func NewOisSample(vm *jni.VM, arg0 int64, arg1 float32, arg2 float32) (*OisSampl
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOisSample)), midOisSampleInit, jni.LongValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOisSample)), midOisSampleCtor, jni.LongValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2))
 		if err != nil {
 			return err
 		}

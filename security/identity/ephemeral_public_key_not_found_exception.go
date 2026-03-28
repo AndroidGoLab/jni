@@ -38,7 +38,7 @@ func NewEphemeralPublicKeyNotFoundException(vm *jni.VM, arg0 string) (*Ephemeral
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEphemeralPublicKeyNotFoundException)), midEphemeralPublicKeyNotFoundExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEphemeralPublicKeyNotFoundException)), midEphemeralPublicKeyNotFoundExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

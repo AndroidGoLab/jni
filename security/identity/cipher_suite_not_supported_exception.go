@@ -38,7 +38,7 @@ func NewCipherSuiteNotSupportedException(vm *jni.VM, arg0 string) (*CipherSuiteN
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCipherSuiteNotSupportedException)), midCipherSuiteNotSupportedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCipherSuiteNotSupportedException)), midCipherSuiteNotSupportedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

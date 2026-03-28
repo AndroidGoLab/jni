@@ -33,7 +33,7 @@ func NewWebView(vm *jni.VM, arg0 *jni.Object) (*WebView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebView)), midWebViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebView)), midWebViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

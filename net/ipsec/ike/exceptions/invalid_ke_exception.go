@@ -33,7 +33,7 @@ func NewInvalidKeException(vm *jni.VM, arg0 int32) (*InvalidKeException, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), midInvalidKeExceptionInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInvalidKeException)), midInvalidKeExceptionCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

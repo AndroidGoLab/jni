@@ -33,7 +33,7 @@ func NewSuggestionsInfo(vm *jni.VM, arg0 *jni.Object) (*SuggestionsInfo, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionsInfo)), midSuggestionsInfoInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionsInfo)), midSuggestionsInfoCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewContext(vm *jni.VM, arg0 int32) (*Context, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContext)), midContextInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContext)), midContextCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

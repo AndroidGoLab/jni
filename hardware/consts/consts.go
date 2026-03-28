@@ -3,6 +3,56 @@
 package consts
 
 const (
+	DataspaceAdobeRgb                        int = 151715840
+	DataspaceBt2020                          int = 147193856
+	DataspaceBt2020Hlg                       int = 168165376
+	DataspaceBt2020Pq                        int = 163971072
+	DataspaceBt601525                        int = 281280512
+	DataspaceBt601625                        int = 281149440
+	DataspaceBt709                           int = 281083904
+	DataspaceDciP3                           int = 155844608
+	DataspaceDepth                           int = 4096
+	DataspaceDisplayP3                       int = 143261696
+	DataspaceDynamicDepth                    int = 4098
+	DataspaceHeif                            int = 4100
+	DataspaceHeifUltrahdr                    int = 4102
+	DataspaceJfif                            int = 146931712
+	DataspaceJpegR                           int = 4101
+	DataspaceScrgb                           int = 411107328
+	DataspaceScrgbLinear                     int = 406913024
+	DataspaceSrgb                            int = 142671872
+	DataspaceSrgbLinear                      int = 138477568
+	DataspaceUnknown                         int = 0
+	RangeExtended                            int = 402653184
+	RangeFull                                int = 134217728
+	RangeLimited                             int = 268435456
+	RangeUnspecified                         int = 0
+	StandardAdobeRgb                         int = 720896
+	StandardBt2020                           int = 393216
+	StandardBt2020ConstantLuminance          int = 458752
+	StandardBt470m                           int = 524288
+	StandardBt601525                         int = 262144
+	StandardBt601525Unadjusted               int = 327680
+	StandardBt601625                         int = 131072
+	StandardBt601625Unadjusted               int = 196608
+	StandardBt709                            int = 65536
+	StandardDciP3                            int = 655360
+	StandardFilm                             int = 589824
+	StandardUnspecified                      int = 0
+	TransferGamma22                          int = 16777216
+	TransferGamma26                          int = 20971520
+	TransferGamma28                          int = 25165824
+	TransferHlg                              int = 33554432
+	TransferLinear                           int = 4194304
+	TransferSmpte170m                        int = 12582912
+	TransferSrgb                             int = 8388608
+	TransferSt2084                           int = 29360128
+	TransferUnspecified                      int = 0
+	ToggleTypeHardware                       int = 2
+	ToggleTypeSoftware                       int = 1
+	CameraConst                              int = 2
+	Microphone                               int = 1
+	Creator                                  int = 0
 	AxisMinusX                               int = 129
 	AxisMinusY                               int = 130
 	AxisMinusZ                               int = 131
@@ -36,7 +86,11 @@ const (
 	SensorStatusUnreliable                   int = 0
 	SensorTemperature                        int = 4
 	SensorTricorder                          int = 64
-	Creator                                  int = 0
+	StatusCharging                           int = 2
+	StatusDischarging                        int = 3
+	StatusFull                               int = 5
+	StatusNotCharging                        int = 4
+	StatusUnknown                            int = 1
 	ReportingModeContinuous                  int = 0
 	ReportingModeOneShot                     int = 2
 	ReportingModeOnChange                    int = 1
@@ -84,6 +138,12 @@ const (
 	TypeSensorPlacement                      int = 65539
 	TypeUntrackedDelay                       int = 65536
 	TypeVec3Calibration                      int = 65538
+	RateFast                                 int = 2
+	RateNormal                               int = 1
+	RateStop                                 int = 0
+	RateVeryFast                             int = 3
+	TypeHardwareBuffer                       int = 2
+	TypeMemoryFile                           int = 1
 	Blob                                     int = 33
 	Ds24ui8                                  int = 50
 	DsFp32ui8                                int = 52
@@ -104,62 +164,6 @@ const (
 	Ycbcr420888                              int = 35
 	YcbcrP010                                int = 54
 	YcbcrP210                                int = 60
-	RateFast                                 int = 2
-	RateNormal                               int = 1
-	RateStop                                 int = 0
-	RateVeryFast                             int = 3
-	TypeHardwareBuffer                       int = 2
-	TypeMemoryFile                           int = 1
-	OneDimension                             int = 1
-	SamplingKeyCieY                          int = 2
-	SamplingKeyMaxRgb                        int = 1
-	SamplingKeyRgb                           int = 0
-	ThreeDimension                           int = 3
-	DataspaceAdobeRgb                        int = 151715840
-	DataspaceBt2020                          int = 147193856
-	DataspaceBt2020Hlg                       int = 168165376
-	DataspaceBt2020Pq                        int = 163971072
-	DataspaceBt601525                        int = 281280512
-	DataspaceBt601625                        int = 281149440
-	DataspaceBt709                           int = 281083904
-	DataspaceDciP3                           int = 155844608
-	DataspaceDepth                           int = 4096
-	DataspaceDisplayP3                       int = 143261696
-	DataspaceDynamicDepth                    int = 4098
-	DataspaceHeif                            int = 4100
-	DataspaceHeifUltrahdr                    int = 4102
-	DataspaceJfif                            int = 146931712
-	DataspaceJpegR                           int = 4101
-	DataspaceScrgb                           int = 411107328
-	DataspaceScrgbLinear                     int = 406913024
-	DataspaceSrgb                            int = 142671872
-	DataspaceSrgbLinear                      int = 138477568
-	DataspaceUnknown                         int = 0
-	RangeExtended                            int = 402653184
-	RangeFull                                int = 134217728
-	RangeLimited                             int = 268435456
-	RangeUnspecified                         int = 0
-	StandardAdobeRgb                         int = 720896
-	StandardBt2020                           int = 393216
-	StandardBt2020ConstantLuminance          int = 458752
-	StandardBt470m                           int = 524288
-	StandardBt601525                         int = 262144
-	StandardBt601525Unadjusted               int = 327680
-	StandardBt601625                         int = 131072
-	StandardBt601625Unadjusted               int = 196608
-	StandardBt709                            int = 65536
-	StandardDciP3                            int = 655360
-	StandardFilm                             int = 589824
-	StandardUnspecified                      int = 0
-	TransferGamma22                          int = 16777216
-	TransferGamma26                          int = 20971520
-	TransferGamma28                          int = 25165824
-	TransferHlg                              int = 33554432
-	TransferLinear                           int = 4194304
-	TransferSmpte170m                        int = 12582912
-	TransferSrgb                             int = 8388608
-	TransferSt2084                           int = 29360128
-	TransferUnspecified                      int = 0
 	CameraErrorEvicted                       int = 2
 	CameraErrorServerDied                    int = 100
 	CameraErrorUnknown                       int = 1
@@ -170,15 +174,30 @@ const (
 	FocusDistanceOptimalIndex                int = 1
 	PreviewFpsMaxIndex                       int = 1
 	PreviewFpsMinIndex                       int = 0
-	StatusCharging                           int = 2
-	StatusDischarging                        int = 3
-	StatusFull                               int = 5
-	StatusNotCharging                        int = 4
-	StatusUnknown                            int = 1
-	ToggleTypeHardware                       int = 2
-	ToggleTypeSoftware                       int = 1
-	CameraConst                              int = 2
-	Microphone                               int = 1
+	OneDimension                             int = 1
+	SamplingKeyCieY                          int = 2
+	SamplingKeyMaxRgb                        int = 1
+	SamplingKeyRgb                           int = 0
+	ThreeDimension                           int = 3
+)
+
+const (
+	SignalTimeInvalid      int64 = -1
+	SignalTimePending      int64 = 9223372036854775807
+	UsageComposerOverlay   int64 = 2048
+	UsageCpuReadOften      int64 = 3
+	UsageCpuReadRarely     int64 = 2
+	UsageCpuWriteOften     int64 = 48
+	UsageCpuWriteRarely    int64 = 32
+	UsageFrontBuffer       int64 = 4294967296
+	UsageGpuColorOutput    int64 = 512
+	UsageGpuCubeMap        int64 = 33554432
+	UsageGpuDataBuffer     int64 = 16777216
+	UsageGpuMipmapComplete int64 = 67108864
+	UsageGpuSampledImage   int64 = 256
+	UsageProtectedContent  int64 = 16384
+	UsageSensorDirectData  int64 = 8388608
+	UsageVideoEncode       int64 = 65536
 )
 
 const (
@@ -207,25 +226,6 @@ const (
 	MagneticFieldEarthMin      float32 = 30.0
 	PressureStandardAtmosphere float32 = 1013.25
 	StandardGravity            float32 = 9.80665
-)
-
-const (
-	SignalTimeInvalid      int64 = -1
-	SignalTimePending      int64 = 9223372036854775807
-	UsageComposerOverlay   int64 = 2048
-	UsageCpuReadOften      int64 = 3
-	UsageCpuReadRarely     int64 = 2
-	UsageCpuWriteOften     int64 = 48
-	UsageCpuWriteRarely    int64 = 32
-	UsageFrontBuffer       int64 = 4294967296
-	UsageGpuColorOutput    int64 = 512
-	UsageGpuCubeMap        int64 = 33554432
-	UsageGpuDataBuffer     int64 = 16777216
-	UsageGpuMipmapComplete int64 = 67108864
-	UsageGpuSampledImage   int64 = 256
-	UsageProtectedContent  int64 = 16384
-	UsageSensorDirectData  int64 = 8388608
-	UsageVideoEncode       int64 = 65536
 )
 
 const (

@@ -57,7 +57,7 @@ func NewAppJankStats(vm *jni.VM, arg0 int32, arg1 string, arg2 string, arg3 stri
 		}
 		defer env.DeleteLocalRef(&jArg4.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppJankStats)), midAppJankStatsInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.LongValue(arg5), jni.LongValue(arg6), jni.ObjectValue(arg7))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppJankStats)), midAppJankStatsCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(&jArg3.Object), jni.ObjectValue(&jArg4.Object), jni.LongValue(arg5), jni.LongValue(arg6), jni.ObjectValue(arg7))
 		if err != nil {
 			return err
 		}

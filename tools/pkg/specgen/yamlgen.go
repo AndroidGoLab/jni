@@ -365,7 +365,7 @@ func isTypeVariable(t string) bool {
 }
 
 func hasUnsupportedParams(m JavapMethod) bool {
-	if strings.Contains(m.ReturnType, "<") || isTypeVariable(m.ReturnType) {
+	if isTypeVariable(m.ReturnType) {
 		return true
 	}
 	for _, p := range m.Params {

@@ -37,7 +37,7 @@ func NewCallAudioState(vm *jni.VM, arg0 bool, arg1 int32, arg2 int32) (*CallAudi
 			jArg0 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallAudioState)), midCallAudioStateInit, jni.BooleanValue(jArg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCallAudioState)), midCallAudioStateCtor, jni.BooleanValue(jArg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}
@@ -154,6 +154,38 @@ func (m *CallAudioState) GetRoute() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedBluetoothDevices calls android.telecom.CallAudioState.getSupportedBluetoothDevices.
+func (m *CallAudioState) GetSupportedBluetoothDevices() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCallAudioStateGetSupportedBluetoothDevices == nil {
+			callErr = fmt.Errorf("android.telecom.CallAudioState.getSupportedBluetoothDevices is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCallAudioStateGetSupportedBluetoothDevices,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

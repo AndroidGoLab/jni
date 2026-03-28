@@ -33,7 +33,7 @@ func NewAdWithBid(vm *jni.VM, arg0 *jni.Object, arg1 float64) (*AdWithBid, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdWithBid)), midAdWithBidInit, jni.ObjectValue(arg0), jni.DoubleValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdWithBid)), midAdWithBidCtor, jni.ObjectValue(arg0), jni.DoubleValue(arg1))
 		if err != nil {
 			return err
 		}

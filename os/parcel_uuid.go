@@ -33,7 +33,7 @@ func NewParcelUuid(vm *jni.VM, arg0 *jni.Object) (*ParcelUuid, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelUuid)), midParcelUuidInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsParcelUuid)), midParcelUuidCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -78,6 +78,70 @@ func (m *AudioDeviceInfo) GetAddress() (string, error) {
 	return result, callErr
 }
 
+// GetAudioDescriptors calls android.media.AudioDeviceInfo.getAudioDescriptors.
+func (m *AudioDeviceInfo) GetAudioDescriptors() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioDeviceInfoGetAudioDescriptors == nil {
+			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getAudioDescriptors is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioDeviceInfoGetAudioDescriptors,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAudioProfiles calls android.media.AudioDeviceInfo.getAudioProfiles.
+func (m *AudioDeviceInfo) GetAudioProfiles() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAudioDeviceInfoGetAudioProfiles == nil {
+			callErr = fmt.Errorf("android.media.AudioDeviceInfo.getAudioProfiles is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAudioDeviceInfoGetAudioProfiles,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetChannelCounts calls android.media.AudioDeviceInfo.getChannelCounts.
 func (m *AudioDeviceInfo) GetChannelCounts() (*jni.Object, error) {
 	var result *jni.Object

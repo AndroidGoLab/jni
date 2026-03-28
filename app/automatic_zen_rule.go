@@ -31,7 +31,7 @@ func NewAutomaticZenRule(vm *jni.VM, arg0 *jni.Object) (*AutomaticZenRule, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAutomaticZenRule)), midAutomaticZenRuleInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAutomaticZenRule)), midAutomaticZenRuleCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

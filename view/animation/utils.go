@@ -32,7 +32,7 @@ func NewUtils(vm *jni.VM) (*Utils, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUtils)), midUtilsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUtils)), midUtilsCtor)
 		if err != nil {
 			return err
 		}

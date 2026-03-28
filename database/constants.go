@@ -15,8 +15,8 @@ const (
 	StatementSelect     = consts.StatementSelect
 	StatementUnprepared = consts.StatementUnprepared
 	StatementUpdate     = consts.StatementUpdate
+	Creator             = consts.Creator
 	Both                = consts.Both
 	Left                = consts.Left
 	Right               = consts.Right
-	Creator             = consts.Creator
 )

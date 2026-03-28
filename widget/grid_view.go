@@ -33,7 +33,7 @@ func NewGridView(vm *jni.VM, arg0 *jni.Object) (*GridView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGridView)), midGridViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGridView)), midGridViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

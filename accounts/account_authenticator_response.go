@@ -33,7 +33,7 @@ func NewAccountAuthenticatorResponse(vm *jni.VM, arg0 *jni.Object) (*AccountAuth
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), midAccountAuthenticatorResponseInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorResponse)), midAccountAuthenticatorResponseCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

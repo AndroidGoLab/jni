@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsSmsMessage                             *jni.GlobalRef
-	midSmsMessageInit                         jni.MethodID
+	midSmsMessageCtor                         jni.MethodID
 	midSmsMessageGetDisplayMessageBody        jni.MethodID
 	midSmsMessageGetDisplayOriginatingAddress jni.MethodID
 	midSmsMessageGetEmailBody                 jni.MethodID
@@ -64,12 +64,13 @@ var (
 	midSmsMessageSubmitPduToString jni.MethodID
 
 	clsSmsManager                *jni.GlobalRef
+	midSmsManagerDivideMessage   jni.MethodID
 	midSmsManagerSendDataMessage jni.MethodID
 	midSmsManagerSendTextMessage jni.MethodID
 	midSmsManagerGetDefault      jni.MethodID
 
 	clsCellLocation                     *jni.GlobalRef
-	midCellLocationInit                 jni.MethodID
+	midCellLocationCtor                 jni.MethodID
 	midCellLocationEquals               jni.MethodID
 	midCellLocationFillInNotifierBundle jni.MethodID
 	midCellLocationGetCid               jni.MethodID
@@ -106,7 +107,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsSmsMessage = env.NewGlobalRef(&c.Object)
-		midSmsMessageInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsMessage)), "<init>", "()V")
+		midSmsMessageCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsMessage)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -372,6 +373,13 @@ func doInit(env *jni.Env) error {
 	} else {
 		clsSmsManager = env.NewGlobalRef(&c.Object)
 
+		midSmsManagerDivideMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsManager)), "divideMessage", "(Ljava/lang/String;)Ljava/util/ArrayList;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
 		midSmsManagerSendDataMessage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSmsManager)), "sendDataMessage", "(Ljava/lang/String;Ljava/lang/String;S[BLandroid/app/PendingIntent;Landroid/app/PendingIntent;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
@@ -402,7 +410,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCellLocation = env.NewGlobalRef(&c.Object)
-		midCellLocationInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCellLocation)), "<init>", "()V")
+		midCellLocationCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCellLocation)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

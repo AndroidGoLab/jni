@@ -32,7 +32,7 @@ func NewDeviceAdminService(vm *jni.VM) (*DeviceAdminService, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminService)), midDeviceAdminServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDeviceAdminService)), midDeviceAdminServiceCtor)
 		if err != nil {
 			return err
 		}

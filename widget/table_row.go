@@ -33,7 +33,7 @@ func NewTableRow(vm *jni.VM, arg0 *jni.Object) (*TableRow, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableRow)), midTableRowInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableRow)), midTableRowCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

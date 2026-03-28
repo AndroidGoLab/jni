@@ -32,7 +32,7 @@ func NewActivityNotFoundException(vm *jni.VM) (*ActivityNotFoundException, error
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivityNotFoundException)), midActivityNotFoundExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsActivityNotFoundException)), midActivityNotFoundExceptionCtor)
 		if err != nil {
 			return err
 		}

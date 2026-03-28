@@ -5,21 +5,9 @@ package http
 import "github.com/AndroidGoLab/jni/net/http/consts"
 
 const (
-	HttpCacheDisabled           = consts.HttpCacheDisabled
-	HttpCacheDisk               = consts.HttpCacheDisk
-	HttpCacheDiskNoHttp         = consts.HttpCacheDiskNoHttp
-	HttpCacheInMemory           = consts.HttpCacheInMemory
-	ErrorAddressUnreachable     = consts.ErrorAddressUnreachable
-	ErrorConnectionClosed       = consts.ErrorConnectionClosed
-	ErrorConnectionRefused      = consts.ErrorConnectionRefused
-	ErrorConnectionReset        = consts.ErrorConnectionReset
-	ErrorConnectionTimedOut     = consts.ErrorConnectionTimedOut
-	ErrorHostnameNotResolved    = consts.ErrorHostnameNotResolved
-	ErrorInternetDisconnected   = consts.ErrorInternetDisconnected
-	ErrorNetworkChanged         = consts.ErrorNetworkChanged
-	ErrorOther                  = consts.ErrorOther
-	ErrorQuicProtocolFailed     = consts.ErrorQuicProtocolFailed
-	ErrorTimedOut               = consts.ErrorTimedOut
+	MigrationOptionDisabled     = consts.MigrationOptionDisabled
+	MigrationOptionEnabled      = consts.MigrationOptionEnabled
+	MigrationOptionUnspecified  = consts.MigrationOptionUnspecified
 	RequestPriorityHighest      = consts.RequestPriorityHighest
 	RequestPriorityIdle         = consts.RequestPriorityIdle
 	RequestPriorityLow          = consts.RequestPriorityLow
@@ -41,6 +29,26 @@ const (
 	WaitingForDelegate          = consts.WaitingForDelegate
 	WaitingForResponse          = consts.WaitingForResponse
 	WaitingForStalledSocketPool = consts.WaitingForStalledSocketPool
+	StreamPriorityHighest       = consts.StreamPriorityHighest
+	StreamPriorityIdle          = consts.StreamPriorityIdle
+	StreamPriorityLow           = consts.StreamPriorityLow
+	StreamPriorityLowest        = consts.StreamPriorityLowest
+	StreamPriorityMedium        = consts.StreamPriorityMedium
+	HttpCacheDisabled           = consts.HttpCacheDisabled
+	HttpCacheDisk               = consts.HttpCacheDisk
+	HttpCacheDiskNoHttp         = consts.HttpCacheDiskNoHttp
+	HttpCacheInMemory           = consts.HttpCacheInMemory
+	ErrorAddressUnreachable     = consts.ErrorAddressUnreachable
+	ErrorConnectionClosed       = consts.ErrorConnectionClosed
+	ErrorConnectionRefused      = consts.ErrorConnectionRefused
+	ErrorConnectionReset        = consts.ErrorConnectionReset
+	ErrorConnectionTimedOut     = consts.ErrorConnectionTimedOut
+	ErrorHostnameNotResolved    = consts.ErrorHostnameNotResolved
+	ErrorInternetDisconnected   = consts.ErrorInternetDisconnected
+	ErrorNetworkChanged         = consts.ErrorNetworkChanged
+	ErrorOther                  = consts.ErrorOther
+	ErrorQuicProtocolFailed     = consts.ErrorQuicProtocolFailed
+	ErrorTimedOut               = consts.ErrorTimedOut
 	SslDateInvalid              = consts.SslDateInvalid
 	SslExpired                  = consts.SslExpired
 	SslIdmismatch               = consts.SslIdmismatch
@@ -51,12 +59,4 @@ const (
 	DnsOptionDisabled           = consts.DnsOptionDisabled
 	DnsOptionEnabled            = consts.DnsOptionEnabled
 	DnsOptionUnspecified        = consts.DnsOptionUnspecified
-	MigrationOptionDisabled     = consts.MigrationOptionDisabled
-	MigrationOptionEnabled      = consts.MigrationOptionEnabled
-	MigrationOptionUnspecified  = consts.MigrationOptionUnspecified
-	StreamPriorityHighest       = consts.StreamPriorityHighest
-	StreamPriorityIdle          = consts.StreamPriorityIdle
-	StreamPriorityLow           = consts.StreamPriorityLow
-	StreamPriorityLowest        = consts.StreamPriorityLowest
-	StreamPriorityMedium        = consts.StreamPriorityMedium
 )

@@ -33,7 +33,7 @@ func NewFade(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Fade, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFade)), midFadeInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFade)), midFadeCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

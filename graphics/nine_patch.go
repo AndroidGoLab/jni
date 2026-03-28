@@ -33,7 +33,7 @@ func NewNinePatch(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*NinePatch, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNinePatch)), midNinePatchInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNinePatch)), midNinePatchCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

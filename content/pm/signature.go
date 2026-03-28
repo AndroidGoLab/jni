@@ -33,7 +33,7 @@ func NewSignature(vm *jni.VM, arg0 *jni.Object) (*Signature, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignature)), midSignatureInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSignature)), midSignatureCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

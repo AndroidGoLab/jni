@@ -32,7 +32,7 @@ func NewInlineExecutionProhibitedException(vm *jni.VM) (*InlineExecutionProhibit
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInlineExecutionProhibitedException)), midInlineExecutionProhibitedExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInlineExecutionProhibitedException)), midInlineExecutionProhibitedExceptionCtor)
 		if err != nil {
 			return err
 		}

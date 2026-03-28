@@ -33,7 +33,7 @@ func NewGeocoder(vm *jni.VM, arg0 *jni.Object) (*Geocoder, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGeocoder)), midGeocoderInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGeocoder)), midGeocoderCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -46,8 +46,45 @@ func NewGeocoder(vm *jni.VM, arg0 *jni.Object) (*Geocoder, error) {
 	return &t, nil
 }
 
-// GetFromLocation calls android.location.Geocoder.getFromLocation.
-func (m *Geocoder) GetFromLocation(
+// GetFromLocation3 calls android.location.Geocoder.getFromLocation.
+func (m *Geocoder) GetFromLocation3(
+	arg0 float64,
+	arg1 float64,
+	arg2 int32,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGeocoderGetFromLocation3 == nil {
+			callErr = fmt.Errorf("android.location.Geocoder.getFromLocation is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGeocoderGetFromLocation3, jni.DoubleValue(arg0), jni.DoubleValue(arg1), jni.IntValue(arg2),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFromLocation4_1 calls android.location.Geocoder.getFromLocation.
+func (m *Geocoder) GetFromLocation4_1(
 	arg0 float64,
 	arg1 float64,
 	arg2 int32,
@@ -60,22 +97,60 @@ func (m *Geocoder) GetFromLocation(
 			callErr = err
 			return err
 		}
-		if midGeocoderGetFromLocation == nil {
+		if midGeocoderGetFromLocation4_1 == nil {
 			callErr = fmt.Errorf("android.location.Geocoder.getFromLocation is not available on this device")
 			return callErr
 		}
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midGeocoderGetFromLocation, jni.DoubleValue(arg0), jni.DoubleValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
+			midGeocoderGetFromLocation4_1, jni.DoubleValue(arg0), jni.DoubleValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// GetFromLocationName3 calls android.location.Geocoder.getFromLocationName.
-func (m *Geocoder) GetFromLocationName3(
+// GetFromLocationName2 calls android.location.Geocoder.getFromLocationName.
+func (m *Geocoder) GetFromLocationName2(arg0 string, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGeocoderGetFromLocationName2 == nil {
+			callErr = fmt.Errorf("android.location.Geocoder.getFromLocationName is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGeocoderGetFromLocationName2, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFromLocationName3_1 calls android.location.Geocoder.getFromLocationName.
+func (m *Geocoder) GetFromLocationName3_1(
 	arg0 string,
 	arg1 int32,
 	arg2 *jni.Object,
@@ -87,7 +162,7 @@ func (m *Geocoder) GetFromLocationName3(
 			callErr = err
 			return err
 		}
-		if midGeocoderGetFromLocationName3 == nil {
+		if midGeocoderGetFromLocationName3_1 == nil {
 			callErr = fmt.Errorf("android.location.Geocoder.getFromLocationName is not available on this device")
 			return callErr
 		}
@@ -99,15 +174,60 @@ func (m *Geocoder) GetFromLocationName3(
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midGeocoderGetFromLocationName3, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2),
+			midGeocoderGetFromLocationName3_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.ObjectValue(arg2),
 		)
 		return callErr
 	})
 	return callErr
 }
 
-// GetFromLocationName7_1 calls android.location.Geocoder.getFromLocationName.
-func (m *Geocoder) GetFromLocationName7_1(
+// GetFromLocationName6_2 calls android.location.Geocoder.getFromLocationName.
+func (m *Geocoder) GetFromLocationName6_2(
+	arg0 string,
+	arg1 int32,
+	arg2 float64,
+	arg3 float64,
+	arg4 float64,
+	arg5 float64,
+) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGeocoderGetFromLocationName6_2 == nil {
+			callErr = fmt.Errorf("android.location.Geocoder.getFromLocationName is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGeocoderGetFromLocationName6_2, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.DoubleValue(arg2), jni.DoubleValue(arg3), jni.DoubleValue(arg4), jni.DoubleValue(arg5),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFromLocationName7_3 calls android.location.Geocoder.getFromLocationName.
+func (m *Geocoder) GetFromLocationName7_3(
 	arg0 string,
 	arg1 int32,
 	arg2 float64,
@@ -123,7 +243,7 @@ func (m *Geocoder) GetFromLocationName7_1(
 			callErr = err
 			return err
 		}
-		if midGeocoderGetFromLocationName7_1 == nil {
+		if midGeocoderGetFromLocationName7_3 == nil {
 			callErr = fmt.Errorf("android.location.Geocoder.getFromLocationName is not available on this device")
 			return callErr
 		}
@@ -135,7 +255,7 @@ func (m *Geocoder) GetFromLocationName7_1(
 
 		callErr = env.CallVoidMethod(
 			m.Obj,
-			midGeocoderGetFromLocationName7_1, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.DoubleValue(arg2), jni.DoubleValue(arg3), jni.DoubleValue(arg4), jni.DoubleValue(arg5), jni.ObjectValue(arg6),
+			midGeocoderGetFromLocationName7_3, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1), jni.DoubleValue(arg2), jni.DoubleValue(arg3), jni.DoubleValue(arg4), jni.DoubleValue(arg5), jni.ObjectValue(arg6),
 		)
 		return callErr
 	})

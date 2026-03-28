@@ -38,7 +38,7 @@ func NewUnknownAuthenticationKeyException(vm *jni.VM, arg0 string) (*UnknownAuth
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnknownAuthenticationKeyException)), midUnknownAuthenticationKeyExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnknownAuthenticationKeyException)), midUnknownAuthenticationKeyExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

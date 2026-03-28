@@ -32,7 +32,7 @@ func NewRect(vm *jni.VM) (*Rect, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRect)), midRectInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRect)), midRectCtor)
 		if err != nil {
 			return err
 		}

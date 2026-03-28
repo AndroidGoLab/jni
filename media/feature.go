@@ -32,7 +32,7 @@ func NewFeature(vm *jni.VM) (*Feature, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFeature)), midFeatureInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFeature)), midFeatureCtor)
 		if err != nil {
 			return err
 		}

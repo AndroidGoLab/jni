@@ -392,6 +392,14 @@ classes:
           error: true
     - java_class: android.provider.ContactsContract$SimContacts
       go_type: ContractSimContacts
+      static_methods:
+        - java_method: getSimAccounts
+          go_name: GetSimAccounts
+          params:
+            - java_type: android.content.ContentResolver
+              go_name: arg0
+          returns: java.util.List<android.provider.ContactsContract$SimAccount>
+          error: true
     - java_class: android.provider.ContactsContract$StatusColumns
       go_type: ContractStatusColumns
     - java_class: android.provider.ContactsContract$StatusUpdates

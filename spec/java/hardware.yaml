@@ -5,6 +5,274 @@
 package: hardware
 go_import: github.com/AndroidGoLab/jni/hardware
 classes:
+    - java_class: android.hardware.SensorEventListener2
+      go_type: SensorEventListener2
+      methods:
+        - java_method: onFlushCompleted
+          go_name: OnFlushCompleted
+          params:
+            - java_type: android.hardware.Sensor
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.DisplayLuts
+      go_type: DisplayLuts
+      obtain: constructor
+      methods:
+        - java_method: set
+          go_name: Set1
+          params:
+            - java_type: android.hardware.DisplayLuts$Entry
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: set
+          go_name: Set2_1
+          params:
+            - java_type: android.hardware.DisplayLuts$Entry
+              go_name: arg0
+            - java_type: android.hardware.DisplayLuts$Entry
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.hardware.DisplayLuts$Entry
+      go_type: DisplayLutsEntry
+      methods:
+        - java_method: getBuffer
+          go_name: GetBuffer
+          returns: float[]
+          error: true
+        - java_method: getDimension
+          go_name: GetDimension
+          returns: int
+          error: true
+        - java_method: getSamplingKey
+          go_name: GetSamplingKey
+          returns: int
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+    - java_class: android.hardware.SensorEventCallback
+      go_type: SensorEventCallback
+      methods:
+        - java_method: onAccuracyChanged
+          go_name: OnAccuracyChanged
+          params:
+            - java_type: android.hardware.Sensor
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onFlushCompleted
+          go_name: OnFlushCompleted
+          params:
+            - java_type: android.hardware.Sensor
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSensorAdditionalInfo
+          go_name: OnSensorAdditionalInfo
+          params:
+            - java_type: android.hardware.SensorAdditionalInfo
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: onSensorChanged
+          go_name: OnSensorChanged
+          params:
+            - java_type: android.hardware.SensorEvent
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.DataSpace
+      go_type: DataSpace
+      static_methods:
+        - java_method: getRange
+          go_name: GetRange
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getStandard
+          go_name: GetStandard
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getTransfer
+          go_name: GetTransfer
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: pack
+          go_name: Pack
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: int
+          error: true
+    - java_class: android.hardware.SensorEventListener
+      go_type: SensorEventListener
+      methods:
+        - java_method: onAccuracyChanged
+          go_name: OnAccuracyChanged
+          params:
+            - java_type: android.hardware.Sensor
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onSensorChanged
+          go_name: OnSensorChanged
+          params:
+            - java_type: android.hardware.SensorEvent
+              go_name: arg0
+          returns: void
+          error: true
+    - java_class: android.hardware.SensorPrivacyManager
+      go_type: SensorPrivacyManager
+      methods:
+        - java_method: supportsSensorToggle
+          go_name: SupportsSensorToggle1
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: supportsSensorToggle
+          go_name: SupportsSensorToggle2_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
+          error: true
+    - java_class: android.hardware.SensorPrivacyManager$Sensors
+      go_type: SensorPrivacyManagerSensors
+    - java_class: android.hardware.TriggerEvent
+      go_type: TriggerEvent
+    - java_class: android.hardware.SensorListener
+      go_type: SensorListener
+      methods:
+        - java_method: onAccuracyChanged
+          go_name: OnAccuracyChanged
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: onSensorChanged
+          go_name: OnSensorChanged
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: float[]
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.SyncFence
+      go_type: SyncFence
+      obtain: constructor
+      constructor_params:
+        - java_type: android.hardware.SyncFence
+          go_name: arg0
+      methods:
+        - java_method: await
+          go_name: Await
+          params:
+            - java_type: java.time.Duration
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: awaitForever
+          go_name: AwaitForever
+          returns: boolean
+          error: true
+        - java_method: close
+          go_name: Close
+          returns: void
+          error: true
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getSignalTime
+          go_name: GetSignalTime
+          returns: long
+          error: true
+        - java_method: isValid
+          go_name: IsValid
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.hardware.GeomagneticField
+      go_type: GeomagneticField
+      obtain: constructor
+      constructor_params:
+        - java_type: float
+          go_name: arg0
+        - java_type: float
+          go_name: arg1
+        - java_type: float
+          go_name: arg2
+        - java_type: long
+          go_name: arg3
+      methods:
+        - java_method: getDeclination
+          go_name: GetDeclination
+          returns: float
+          error: true
+        - java_method: getFieldStrength
+          go_name: GetFieldStrength
+          returns: float
+          error: true
+        - java_method: getHorizontalStrength
+          go_name: GetHorizontalStrength
+          returns: float
+          error: true
+        - java_method: getInclination
+          go_name: GetInclination
+          returns: float
+          error: true
+        - java_method: getX
+          go_name: GetX
+          returns: float
+          error: true
+        - java_method: getY
+          go_name: GetY
+          returns: float
+          error: true
+        - java_method: getZ
+          go_name: GetZ
+          returns: float
+          error: true
     - java_class: android.hardware.SensorManager
       go_type: SensorManager
       obtain: system_service
@@ -56,6 +324,20 @@ classes:
             - java_type: boolean
               go_name: arg1
           returns: android.hardware.Sensor
+          error: true
+        - java_method: getDynamicSensorList
+          go_name: GetDynamicSensorList
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.hardware.Sensor>
+          error: true
+        - java_method: getSensorList
+          go_name: GetSensorList
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.List<android.hardware.Sensor>
           error: true
         - java_method: getSensors
           go_name: GetSensors
@@ -262,112 +544,32 @@ classes:
               go_name: arg0
           returns: void
           error: true
-    - java_class: android.hardware.SyncFence
-      go_type: SyncFence
-      obtain: constructor
-      constructor_params:
-        - java_type: android.hardware.SyncFence
-          go_name: arg0
+    - java_class: android.hardware.SensorEvent
+      go_type: SensorEvent
+    - java_class: android.hardware.BatteryState
+      go_type: BatteryState
       methods:
-        - java_method: await
-          go_name: Await
-          params:
-            - java_type: java.time.Duration
-              go_name: arg0
-          returns: boolean
+        - java_method: getCapacity
+          go_name: GetCapacity
+          returns: float
           error: true
-        - java_method: awaitForever
-          go_name: AwaitForever
-          returns: boolean
-          error: true
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getStatus
+          go_name: GetStatus
           returns: int
           error: true
-        - java_method: getSignalTime
-          go_name: GetSignalTime
-          returns: long
-          error: true
-        - java_method: isValid
-          go_name: IsValid
+        - java_method: isPresent
+          go_name: IsPresent
           returns: boolean
           error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.hardware.SensorListener
-      go_type: SensorListener
+    - java_class: android.hardware.TriggerEventListener
+      go_type: TriggerEventListener
       methods:
-        - java_method: onAccuracyChanged
-          go_name: OnAccuracyChanged
+        - java_method: onTrigger
+          go_name: OnTrigger
           params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onSensorChanged
-          go_name: OnSensorChanged
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: float[]
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.hardware.DisplayLuts
-      go_type: DisplayLuts
-      obtain: constructor
-      methods:
-        - java_method: set
-          go_name: Set1
-          params:
-            - java_type: android.hardware.DisplayLuts$Entry
+            - java_type: android.hardware.TriggerEvent
               go_name: arg0
           returns: void
-          error: true
-        - java_method: set
-          go_name: Set2_1
-          params:
-            - java_type: android.hardware.DisplayLuts$Entry
-              go_name: arg0
-            - java_type: android.hardware.DisplayLuts$Entry
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-    - java_class: android.hardware.DisplayLuts$Entry
-      go_type: DisplayLutsEntry
-      methods:
-        - java_method: getBuffer
-          go_name: GetBuffer
-          returns: float[]
-          error: true
-        - java_method: getDimension
-          go_name: GetDimension
-          returns: int
-          error: true
-        - java_method: getSamplingKey
-          go_name: GetSamplingKey
-          returns: int
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
           error: true
     - java_class: android.hardware.Sensor
       go_type: Sensor
@@ -455,61 +657,61 @@ classes:
           go_name: ToString
           returns: String
           error: true
-    - java_class: android.hardware.TriggerEventListener
-      go_type: TriggerEventListener
-      methods:
-        - java_method: onTrigger
-          go_name: OnTrigger
-          params:
-            - java_type: android.hardware.TriggerEvent
-              go_name: arg0
-          returns: void
-          error: true
     - java_class: android.hardware.SensorAdditionalInfo
       go_type: SensorAdditionalInfo
-    - java_class: android.hardware.GeomagneticField
-      go_type: GeomagneticField
-      obtain: constructor
-      constructor_params:
-        - java_type: float
-          go_name: arg0
-        - java_type: float
-          go_name: arg1
-        - java_type: float
-          go_name: arg2
-        - java_type: long
-          go_name: arg3
+    - java_class: android.hardware.OverlayProperties
+      go_type: OverlayProperties
       methods:
-        - java_method: getDeclination
-          go_name: GetDeclination
-          returns: float
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
           error: true
-        - java_method: getFieldStrength
-          go_name: GetFieldStrength
-          returns: float
+        - java_method: getLutProperties
+          go_name: GetLutProperties
+          returns: android.hardware.LutProperties[]
           error: true
-        - java_method: getHorizontalStrength
-          go_name: GetHorizontalStrength
-          returns: float
+        - java_method: isCombinationSupported
+          go_name: IsCombinationSupported
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: boolean
           error: true
-        - java_method: getInclination
-          go_name: GetInclination
-          returns: float
+        - java_method: isMixedColorSpacesSupported
+          go_name: IsMixedColorSpacesSupported
+          returns: boolean
           error: true
-        - java_method: getX
-          go_name: GetX
-          returns: float
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
           error: true
-        - java_method: getY
-          go_name: GetY
-          returns: float
+    - java_class: android.hardware.SensorDirectChannel
+      go_type: SensorDirectChannel
+      methods:
+        - java_method: close
+          go_name: Close
+          returns: void
           error: true
-        - java_method: getZ
-          go_name: GetZ
-          returns: float
+        - java_method: configure
+          go_name: Configure
+          params:
+            - java_type: android.hardware.Sensor
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
           error: true
-    - java_class: android.hardware.SensorEvent
-      go_type: SensorEvent
+        - java_method: isOpen
+          go_name: IsOpen
+          returns: boolean
+          error: true
     - java_class: android.hardware.HardwareBuffer
       go_type: Buffer
       methods:
@@ -588,95 +790,6 @@ classes:
             - java_type: long
               go_name: arg4
           returns: boolean
-          error: true
-    - java_class: android.hardware.SensorEventListener
-      go_type: SensorEventListener
-      methods:
-        - java_method: onAccuracyChanged
-          go_name: OnAccuracyChanged
-          params:
-            - java_type: android.hardware.Sensor
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onSensorChanged
-          go_name: OnSensorChanged
-          params:
-            - java_type: android.hardware.SensorEvent
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.hardware.SensorDirectChannel
-      go_type: SensorDirectChannel
-      methods:
-        - java_method: close
-          go_name: Close
-          returns: void
-          error: true
-        - java_method: configure
-          go_name: Configure
-          params:
-            - java_type: android.hardware.Sensor
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: isOpen
-          go_name: IsOpen
-          returns: boolean
-          error: true
-    - java_class: android.hardware.LutProperties
-      go_type: LutProperties
-      methods:
-        - java_method: getDimension
-          go_name: GetDimension
-          returns: int
-          error: true
-        - java_method: getSamplingKeys
-          go_name: GetSamplingKeys
-          returns: '[I'
-          error: true
-        - java_method: getSize
-          go_name: GetSize
-          returns: int
-          error: true
-    - java_class: android.hardware.DataSpace
-      go_type: DataSpace
-      static_methods:
-        - java_method: getRange
-          go_name: GetRange
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getStandard
-          go_name: GetStandard
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getTransfer
-          go_name: GetTransfer
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: pack
-          go_name: Pack
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: int
           error: true
     - java_class: android.hardware.Camera
       go_type: Camera
@@ -1001,6 +1114,10 @@ classes:
           go_name: GetFocalLength
           returns: float
           error: true
+        - java_method: getFocusAreas
+          go_name: GetFocusAreas
+          returns: java.util.List<android.hardware.Camera$Area>
+          error: true
         - java_method: getFocusDistances
           go_name: GetFocusDistances
           params:
@@ -1055,6 +1172,10 @@ classes:
           go_name: GetMaxZoom
           returns: int
           error: true
+        - java_method: getMeteringAreas
+          go_name: GetMeteringAreas
+          returns: java.util.List<android.hardware.Camera$Area>
+          error: true
         - java_method: getMinExposureCompensation
           go_name: GetMinExposureCompensation
           returns: int
@@ -1094,6 +1215,62 @@ classes:
           go_name: GetSceneMode
           returns: String
           error: true
+        - java_method: getSupportedAntibanding
+          go_name: GetSupportedAntibanding
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getSupportedColorEffects
+          go_name: GetSupportedColorEffects
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getSupportedFlashModes
+          go_name: GetSupportedFlashModes
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getSupportedFocusModes
+          go_name: GetSupportedFocusModes
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getSupportedJpegThumbnailSizes
+          go_name: GetSupportedJpegThumbnailSizes
+          returns: java.util.List<android.hardware.Camera$Size>
+          error: true
+        - java_method: getSupportedPictureFormats
+          go_name: GetSupportedPictureFormats
+          returns: java.util.List<java.lang.Integer>
+          error: true
+        - java_method: getSupportedPictureSizes
+          go_name: GetSupportedPictureSizes
+          returns: java.util.List<android.hardware.Camera$Size>
+          error: true
+        - java_method: getSupportedPreviewFormats
+          go_name: GetSupportedPreviewFormats
+          returns: java.util.List<java.lang.Integer>
+          error: true
+        - java_method: getSupportedPreviewFpsRange
+          go_name: GetSupportedPreviewFpsRange
+          returns: java.util.List<int[]>
+          error: true
+        - java_method: getSupportedPreviewFrameRates
+          go_name: GetSupportedPreviewFrameRates
+          returns: java.util.List<java.lang.Integer>
+          error: true
+        - java_method: getSupportedPreviewSizes
+          go_name: GetSupportedPreviewSizes
+          returns: java.util.List<android.hardware.Camera$Size>
+          error: true
+        - java_method: getSupportedSceneModes
+          go_name: GetSupportedSceneModes
+          returns: java.util.List<java.lang.String>
+          error: true
+        - java_method: getSupportedVideoSizes
+          go_name: GetSupportedVideoSizes
+          returns: java.util.List<android.hardware.Camera$Size>
+          error: true
+        - java_method: getSupportedWhiteBalance
+          go_name: GetSupportedWhiteBalance
+          returns: java.util.List<java.lang.String>
+          error: true
         - java_method: getVerticalViewAngle
           go_name: GetVerticalViewAngle
           returns: float
@@ -1109,6 +1286,10 @@ classes:
         - java_method: getZoom
           go_name: GetZoom
           returns: int
+          error: true
+        - java_method: getZoomRatios
+          go_name: GetZoomRatios
+          returns: java.util.List<java.lang.Integer>
           error: true
         - java_method: isAutoExposureLockSupported
           go_name: IsAutoExposureLockSupported
@@ -1412,121 +1593,178 @@ classes:
           go_name: HashCode
           returns: int
           error: true
-    - java_class: android.hardware.TriggerEvent
-      go_type: TriggerEvent
-    - java_class: android.hardware.BatteryState
-      go_type: BatteryState
+    - java_class: android.hardware.LutProperties
+      go_type: LutProperties
       methods:
-        - java_method: getCapacity
-          go_name: GetCapacity
-          returns: float
-          error: true
-        - java_method: getStatus
-          go_name: GetStatus
+        - java_method: getDimension
+          go_name: GetDimension
           returns: int
           error: true
-        - java_method: isPresent
-          go_name: IsPresent
-          returns: boolean
+        - java_method: getSamplingKeys
+          go_name: GetSamplingKeys
+          returns: '[I'
           error: true
-    - java_class: android.hardware.OverlayProperties
-      go_type: OverlayProperties
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
+        - java_method: getSize
+          go_name: GetSize
           returns: int
-          error: true
-        - java_method: getLutProperties
-          go_name: GetLutProperties
-          returns: android.hardware.LutProperties[]
-          error: true
-        - java_method: isCombinationSupported
-          go_name: IsCombinationSupported
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-        - java_method: isMixedColorSpacesSupported
-          go_name: IsMixedColorSpacesSupported
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.hardware.SensorEventCallback
-      go_type: SensorEventCallback
-      methods:
-        - java_method: onAccuracyChanged
-          go_name: OnAccuracyChanged
-          params:
-            - java_type: android.hardware.Sensor
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: onFlushCompleted
-          go_name: OnFlushCompleted
-          params:
-            - java_type: android.hardware.Sensor
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSensorAdditionalInfo
-          go_name: OnSensorAdditionalInfo
-          params:
-            - java_type: android.hardware.SensorAdditionalInfo
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: onSensorChanged
-          go_name: OnSensorChanged
-          params:
-            - java_type: android.hardware.SensorEvent
-              go_name: arg0
-          returns: void
-          error: true
-    - java_class: android.hardware.SensorPrivacyManager
-      go_type: SensorPrivacyManager
-      methods:
-        - java_method: supportsSensorToggle
-          go_name: SupportsSensorToggle1
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: supportsSensorToggle
-          go_name: SupportsSensorToggle2_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: boolean
-          error: true
-    - java_class: android.hardware.SensorPrivacyManager$Sensors
-      go_type: SensorPrivacyManagerSensors
-    - java_class: android.hardware.SensorEventListener2
-      go_type: SensorEventListener2
-      methods:
-        - java_method: onFlushCompleted
-          go_name: OnFlushCompleted
-          params:
-            - java_type: android.hardware.Sensor
-              go_name: arg0
-          returns: void
           error: true
 constants:
+    - go_name: DataspaceAdobeRgb
+      value: "151715840"
+      go_type: int
+    - go_name: DataspaceBt2020
+      value: "147193856"
+      go_type: int
+    - go_name: DataspaceBt2020Hlg
+      value: "168165376"
+      go_type: int
+    - go_name: DataspaceBt2020Pq
+      value: "163971072"
+      go_type: int
+    - go_name: DataspaceBt601525
+      value: "281280512"
+      go_type: int
+    - go_name: DataspaceBt601625
+      value: "281149440"
+      go_type: int
+    - go_name: DataspaceBt709
+      value: "281083904"
+      go_type: int
+    - go_name: DataspaceDciP3
+      value: "155844608"
+      go_type: int
+    - go_name: DataspaceDepth
+      value: "4096"
+      go_type: int
+    - go_name: DataspaceDisplayP3
+      value: "143261696"
+      go_type: int
+    - go_name: DataspaceDynamicDepth
+      value: "4098"
+      go_type: int
+    - go_name: DataspaceHeif
+      value: "4100"
+      go_type: int
+    - go_name: DataspaceHeifUltrahdr
+      value: "4102"
+      go_type: int
+    - go_name: DataspaceJfif
+      value: "146931712"
+      go_type: int
+    - go_name: DataspaceJpegR
+      value: "4101"
+      go_type: int
+    - go_name: DataspaceScrgb
+      value: "411107328"
+      go_type: int
+    - go_name: DataspaceScrgbLinear
+      value: "406913024"
+      go_type: int
+    - go_name: DataspaceSrgb
+      value: "142671872"
+      go_type: int
+    - go_name: DataspaceSrgbLinear
+      value: "138477568"
+      go_type: int
+    - go_name: DataspaceUnknown
+      value: "0"
+      go_type: int
+    - go_name: RangeExtended
+      value: "402653184"
+      go_type: int
+    - go_name: RangeFull
+      value: "134217728"
+      go_type: int
+    - go_name: RangeLimited
+      value: "268435456"
+      go_type: int
+    - go_name: RangeUnspecified
+      value: "0"
+      go_type: int
+    - go_name: StandardAdobeRgb
+      value: "720896"
+      go_type: int
+    - go_name: StandardBt2020
+      value: "393216"
+      go_type: int
+    - go_name: StandardBt2020ConstantLuminance
+      value: "458752"
+      go_type: int
+    - go_name: StandardBt470m
+      value: "524288"
+      go_type: int
+    - go_name: StandardBt601525
+      value: "262144"
+      go_type: int
+    - go_name: StandardBt601525Unadjusted
+      value: "327680"
+      go_type: int
+    - go_name: StandardBt601625
+      value: "131072"
+      go_type: int
+    - go_name: StandardBt601625Unadjusted
+      value: "196608"
+      go_type: int
+    - go_name: StandardBt709
+      value: "65536"
+      go_type: int
+    - go_name: StandardDciP3
+      value: "655360"
+      go_type: int
+    - go_name: StandardFilm
+      value: "589824"
+      go_type: int
+    - go_name: StandardUnspecified
+      value: "0"
+      go_type: int
+    - go_name: TransferGamma22
+      value: "16777216"
+      go_type: int
+    - go_name: TransferGamma26
+      value: "20971520"
+      go_type: int
+    - go_name: TransferGamma28
+      value: "25165824"
+      go_type: int
+    - go_name: TransferHlg
+      value: "33554432"
+      go_type: int
+    - go_name: TransferLinear
+      value: "4194304"
+      go_type: int
+    - go_name: TransferSmpte170m
+      value: "12582912"
+      go_type: int
+    - go_name: TransferSrgb
+      value: "8388608"
+      go_type: int
+    - go_name: TransferSt2084
+      value: "29360128"
+      go_type: int
+    - go_name: TransferUnspecified
+      value: "0"
+      go_type: int
+    - go_name: ToggleTypeHardware
+      value: "2"
+      go_type: int
+    - go_name: ToggleTypeSoftware
+      value: "1"
+      go_type: int
+    - go_name: Camera
+      value: "2"
+      go_type: int
+    - go_name: Microphone
+      value: "1"
+      go_type: int
+    - go_name: Creator
+      value: "0"
+      go_type: int
+    - go_name: SignalTimeInvalid
+      value: "-1"
+      go_type: int64
+    - go_name: SignalTimePending
+      value: "9223372036854775807"
+      go_type: int64
     - go_name: AxisMinusX
       value: "129"
       go_type: int
@@ -1701,15 +1939,21 @@ constants:
     - go_name: StandardGravity
       value: "9.80665"
       go_type: float32
-    - go_name: Creator
-      value: "0"
+    - go_name: StatusCharging
+      value: "2"
       go_type: int
-    - go_name: SignalTimeInvalid
-      value: "-1"
-      go_type: int64
-    - go_name: SignalTimePending
-      value: "9223372036854775807"
-      go_type: int64
+    - go_name: StatusDischarging
+      value: "3"
+      go_type: int
+    - go_name: StatusFull
+      value: "5"
+      go_type: int
+    - go_name: StatusNotCharging
+      value: "4"
+      go_type: int
+    - go_name: StatusUnknown
+      value: "1"
+      go_type: int
     - go_name: ReportingModeContinuous
       value: "0"
       go_type: int
@@ -1953,6 +2197,24 @@ constants:
     - go_name: TypeVec3Calibration
       value: "65538"
       go_type: int
+    - go_name: RateFast
+      value: "2"
+      go_type: int
+    - go_name: RateNormal
+      value: "1"
+      go_type: int
+    - go_name: RateStop
+      value: "0"
+      go_type: int
+    - go_name: RateVeryFast
+      value: "3"
+      go_type: int
+    - go_name: TypeHardwareBuffer
+      value: "2"
+      go_type: int
+    - go_name: TypeMemoryFile
+      value: "1"
+      go_type: int
     - go_name: Blob
       value: "33"
       go_type: int
@@ -2054,174 +2316,6 @@ constants:
       go_type: int
     - go_name: YcbcrP210
       value: "60"
-      go_type: int
-    - go_name: RateFast
-      value: "2"
-      go_type: int
-    - go_name: RateNormal
-      value: "1"
-      go_type: int
-    - go_name: RateStop
-      value: "0"
-      go_type: int
-    - go_name: RateVeryFast
-      value: "3"
-      go_type: int
-    - go_name: TypeHardwareBuffer
-      value: "2"
-      go_type: int
-    - go_name: TypeMemoryFile
-      value: "1"
-      go_type: int
-    - go_name: OneDimension
-      value: "1"
-      go_type: int
-    - go_name: SamplingKeyCieY
-      value: "2"
-      go_type: int
-    - go_name: SamplingKeyMaxRgb
-      value: "1"
-      go_type: int
-    - go_name: SamplingKeyRgb
-      value: "0"
-      go_type: int
-    - go_name: ThreeDimension
-      value: "3"
-      go_type: int
-    - go_name: DataspaceAdobeRgb
-      value: "151715840"
-      go_type: int
-    - go_name: DataspaceBt2020
-      value: "147193856"
-      go_type: int
-    - go_name: DataspaceBt2020Hlg
-      value: "168165376"
-      go_type: int
-    - go_name: DataspaceBt2020Pq
-      value: "163971072"
-      go_type: int
-    - go_name: DataspaceBt601525
-      value: "281280512"
-      go_type: int
-    - go_name: DataspaceBt601625
-      value: "281149440"
-      go_type: int
-    - go_name: DataspaceBt709
-      value: "281083904"
-      go_type: int
-    - go_name: DataspaceDciP3
-      value: "155844608"
-      go_type: int
-    - go_name: DataspaceDepth
-      value: "4096"
-      go_type: int
-    - go_name: DataspaceDisplayP3
-      value: "143261696"
-      go_type: int
-    - go_name: DataspaceDynamicDepth
-      value: "4098"
-      go_type: int
-    - go_name: DataspaceHeif
-      value: "4100"
-      go_type: int
-    - go_name: DataspaceHeifUltrahdr
-      value: "4102"
-      go_type: int
-    - go_name: DataspaceJfif
-      value: "146931712"
-      go_type: int
-    - go_name: DataspaceJpegR
-      value: "4101"
-      go_type: int
-    - go_name: DataspaceScrgb
-      value: "411107328"
-      go_type: int
-    - go_name: DataspaceScrgbLinear
-      value: "406913024"
-      go_type: int
-    - go_name: DataspaceSrgb
-      value: "142671872"
-      go_type: int
-    - go_name: DataspaceSrgbLinear
-      value: "138477568"
-      go_type: int
-    - go_name: DataspaceUnknown
-      value: "0"
-      go_type: int
-    - go_name: RangeExtended
-      value: "402653184"
-      go_type: int
-    - go_name: RangeFull
-      value: "134217728"
-      go_type: int
-    - go_name: RangeLimited
-      value: "268435456"
-      go_type: int
-    - go_name: RangeUnspecified
-      value: "0"
-      go_type: int
-    - go_name: StandardAdobeRgb
-      value: "720896"
-      go_type: int
-    - go_name: StandardBt2020
-      value: "393216"
-      go_type: int
-    - go_name: StandardBt2020ConstantLuminance
-      value: "458752"
-      go_type: int
-    - go_name: StandardBt470m
-      value: "524288"
-      go_type: int
-    - go_name: StandardBt601525
-      value: "262144"
-      go_type: int
-    - go_name: StandardBt601525Unadjusted
-      value: "327680"
-      go_type: int
-    - go_name: StandardBt601625
-      value: "131072"
-      go_type: int
-    - go_name: StandardBt601625Unadjusted
-      value: "196608"
-      go_type: int
-    - go_name: StandardBt709
-      value: "65536"
-      go_type: int
-    - go_name: StandardDciP3
-      value: "655360"
-      go_type: int
-    - go_name: StandardFilm
-      value: "589824"
-      go_type: int
-    - go_name: StandardUnspecified
-      value: "0"
-      go_type: int
-    - go_name: TransferGamma22
-      value: "16777216"
-      go_type: int
-    - go_name: TransferGamma26
-      value: "20971520"
-      go_type: int
-    - go_name: TransferGamma28
-      value: "25165824"
-      go_type: int
-    - go_name: TransferHlg
-      value: "33554432"
-      go_type: int
-    - go_name: TransferLinear
-      value: "4194304"
-      go_type: int
-    - go_name: TransferSmpte170m
-      value: "12582912"
-      go_type: int
-    - go_name: TransferSrgb
-      value: "8388608"
-      go_type: int
-    - go_name: TransferSt2084
-      value: "29360128"
-      go_type: int
-    - go_name: TransferUnspecified
-      value: "0"
       go_type: int
     - go_name: ActionNewPicture
       value: '"android.hardware.action.NEW_PICTURE"'
@@ -2409,30 +2503,18 @@ constants:
     - go_name: WhiteBalanceWarmFluorescent
       value: '"warm-fluorescent"'
       go_type: string
-    - go_name: StatusCharging
+    - go_name: OneDimension
+      value: "1"
+      go_type: int
+    - go_name: SamplingKeyCieY
       value: "2"
       go_type: int
-    - go_name: StatusDischarging
+    - go_name: SamplingKeyMaxRgb
+      value: "1"
+      go_type: int
+    - go_name: SamplingKeyRgb
+      value: "0"
+      go_type: int
+    - go_name: ThreeDimension
       value: "3"
-      go_type: int
-    - go_name: StatusFull
-      value: "5"
-      go_type: int
-    - go_name: StatusNotCharging
-      value: "4"
-      go_type: int
-    - go_name: StatusUnknown
-      value: "1"
-      go_type: int
-    - go_name: ToggleTypeHardware
-      value: "2"
-      go_type: int
-    - go_name: ToggleTypeSoftware
-      value: "1"
-      go_type: int
-    - go_name: Camera
-      value: "2"
-      go_type: int
-    - go_name: Microphone
-      value: "1"
       go_type: int

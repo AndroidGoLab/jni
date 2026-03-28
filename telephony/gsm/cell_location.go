@@ -32,7 +32,7 @@ func NewCellLocation(vm *jni.VM) (*CellLocation, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCellLocation)), midCellLocationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCellLocation)), midCellLocationCtor)
 		if err != nil {
 			return err
 		}

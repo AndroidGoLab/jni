@@ -33,7 +33,7 @@ func NewGridLayoutAnimationController(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Ob
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGridLayoutAnimationController)), midGridLayoutAnimationControllerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGridLayoutAnimationController)), midGridLayoutAnimationControllerCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

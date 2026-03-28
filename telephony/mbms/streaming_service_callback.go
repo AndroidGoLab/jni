@@ -32,7 +32,7 @@ func NewStreamingServiceCallback(vm *jni.VM) (*StreamingServiceCallback, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), midStreamingServiceCallbackInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStreamingServiceCallback)), midStreamingServiceCallbackCtor)
 		if err != nil {
 			return err
 		}

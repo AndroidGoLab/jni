@@ -32,7 +32,7 @@ func NewSQLiteCantOpenDatabaseException(vm *jni.VM) (*SQLiteCantOpenDatabaseExce
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteCantOpenDatabaseException)), midSQLiteCantOpenDatabaseExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteCantOpenDatabaseException)), midSQLiteCantOpenDatabaseExceptionCtor)
 		if err != nil {
 			return err
 		}

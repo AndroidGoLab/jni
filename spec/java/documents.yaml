@@ -297,6 +297,10 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
+        - java_method: getPath
+          go_name: GetPath
+          returns: java.util.List<java.lang.String>
+          error: true
         - java_method: getRootId
           go_name: GetRootId
           returns: String

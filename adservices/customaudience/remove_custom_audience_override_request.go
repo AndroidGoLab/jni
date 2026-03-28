@@ -39,7 +39,7 @@ func NewRemoveCustomAudienceOverrideRequest(vm *jni.VM, arg0 *jni.Object, arg1 s
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), midRemoveCustomAudienceOverrideRequestInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoveCustomAudienceOverrideRequest)), midRemoveCustomAudienceOverrideRequestCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

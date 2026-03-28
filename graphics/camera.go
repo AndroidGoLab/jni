@@ -32,7 +32,7 @@ func NewCamera(vm *jni.VM) (*Camera, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCamera)), midCameraInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCamera)), midCameraCtor)
 		if err != nil {
 			return err
 		}

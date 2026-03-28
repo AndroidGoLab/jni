@@ -33,7 +33,7 @@ func NewArcMotion(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*ArcMotion, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArcMotion)), midArcMotionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsArcMotion)), midArcMotionCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

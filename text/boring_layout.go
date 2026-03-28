@@ -43,7 +43,7 @@ func NewBoringLayout(vm *jni.VM, arg0 string, arg1 *jni.Object, arg2 int32, arg3
 			jArg7 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBoringLayout)), midBoringLayoutInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.ObjectValue(arg6), jni.BooleanValue(jArg7))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBoringLayout)), midBoringLayoutCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.ObjectValue(arg3), jni.FloatValue(arg4), jni.FloatValue(arg5), jni.ObjectValue(arg6), jni.BooleanValue(jArg7))
 		if err != nil {
 			return err
 		}

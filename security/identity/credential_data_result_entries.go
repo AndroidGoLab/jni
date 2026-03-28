@@ -67,6 +67,114 @@ func (m *CredentialDataResultEntries) GetEntry(arg0 string, arg1 string) (*jni.O
 	return result, callErr
 }
 
+// GetEntryNames calls android.security.identity.CredentialDataResult$Entries.getEntryNames.
+func (m *CredentialDataResultEntries) GetEntryNames(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCredentialDataResultEntriesGetEntryNames == nil {
+			callErr = fmt.Errorf("android.security.identity.CredentialDataResult$Entries.getEntryNames is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCredentialDataResultEntriesGetEntryNames, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNamespaces calls android.security.identity.CredentialDataResult$Entries.getNamespaces.
+func (m *CredentialDataResultEntries) GetNamespaces() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCredentialDataResultEntriesGetNamespaces == nil {
+			callErr = fmt.Errorf("android.security.identity.CredentialDataResult$Entries.getNamespaces is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCredentialDataResultEntriesGetNamespaces,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRetrievedEntryNames calls android.security.identity.CredentialDataResult$Entries.getRetrievedEntryNames.
+func (m *CredentialDataResultEntries) GetRetrievedEntryNames(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCredentialDataResultEntriesGetRetrievedEntryNames == nil {
+			callErr = fmt.Errorf("android.security.identity.CredentialDataResult$Entries.getRetrievedEntryNames is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCredentialDataResultEntriesGetRetrievedEntryNames, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetStatus calls android.security.identity.CredentialDataResult$Entries.getStatus.
 func (m *CredentialDataResultEntries) GetStatus(arg0 string, arg1 string) (int32, error) {
 	var result int32

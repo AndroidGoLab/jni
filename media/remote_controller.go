@@ -33,7 +33,7 @@ func NewRemoteController(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Remot
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteController)), midRemoteControllerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRemoteController)), midRemoteControllerCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

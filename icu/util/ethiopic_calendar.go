@@ -32,7 +32,7 @@ func NewEthiopicCalendar(vm *jni.VM) (*EthiopicCalendar, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEthiopicCalendar)), midEthiopicCalendarInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEthiopicCalendar)), midEthiopicCalendarCtor)
 		if err != nil {
 			return err
 		}

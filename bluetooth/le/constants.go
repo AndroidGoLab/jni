@@ -5,57 +5,12 @@ package le
 import "github.com/AndroidGoLab/jni/bluetooth/le/consts"
 
 const (
-	AdvertiseModeBalanced                        = consts.AdvertiseModeBalanced
-	AdvertiseModeLowLatency                      = consts.AdvertiseModeLowLatency
-	AdvertiseModeLowPower                        = consts.AdvertiseModeLowPower
-	AdvertiseTxPowerHigh                         = consts.AdvertiseTxPowerHigh
-	AdvertiseTxPowerLow                          = consts.AdvertiseTxPowerLow
-	AdvertiseTxPowerMedium                       = consts.AdvertiseTxPowerMedium
-	AdvertiseTxPowerUltraLow                     = consts.AdvertiseTxPowerUltraLow
 	Creator                                      = consts.Creator
-	ScanFailedAlreadyStarted                     = consts.ScanFailedAlreadyStarted
-	ScanFailedApplicationRegistrationFailed      = consts.ScanFailedApplicationRegistrationFailed
-	ScanFailedFeatureUnsupported                 = consts.ScanFailedFeatureUnsupported
-	ScanFailedInternalError                      = consts.ScanFailedInternalError
-	ScanFailedOutOfHardwareResources             = consts.ScanFailedOutOfHardwareResources
-	ScanFailedScanningTooFrequently              = consts.ScanFailedScanningTooFrequently
-	DataComplete                                 = consts.DataComplete
-	DataTruncated                                = consts.DataTruncated
-	PeriodicIntervalNotPresent                   = consts.PeriodicIntervalNotPresent
-	PhyUnused                                    = consts.PhyUnused
-	SidNotPresent                                = consts.SidNotPresent
-	TxPowerNotPresent                            = consts.TxPowerNotPresent
-	CallbackTypeAllMatches                       = consts.CallbackTypeAllMatches
-	CallbackTypeAllMatchesAutoBatch              = consts.CallbackTypeAllMatchesAutoBatch
-	CallbackTypeFirstMatch                       = consts.CallbackTypeFirstMatch
-	CallbackTypeMatchLost                        = consts.CallbackTypeMatchLost
-	MatchModeAggressive                          = consts.MatchModeAggressive
-	MatchModeSticky                              = consts.MatchModeSticky
-	MatchNumFewAdvertisement                     = consts.MatchNumFewAdvertisement
-	MatchNumMaxAdvertisement                     = consts.MatchNumMaxAdvertisement
-	MatchNumOneAdvertisement                     = consts.MatchNumOneAdvertisement
-	PhyLeAllSupported                            = consts.PhyLeAllSupported
-	ScanModeBalanced                             = consts.ScanModeBalanced
-	ScanModeLowLatency                           = consts.ScanModeLowLatency
-	ScanModeLowPower                             = consts.ScanModeLowPower
-	ScanModeOpportunistic                        = consts.ScanModeOpportunistic
-	IntervalHigh                                 = consts.IntervalHigh
-	IntervalLow                                  = consts.IntervalLow
-	IntervalMax                                  = consts.IntervalMax
-	IntervalMedium                               = consts.IntervalMedium
-	IntervalMin                                  = consts.IntervalMin
-	TxPowerHigh                                  = consts.TxPowerHigh
-	TxPowerLow                                   = consts.TxPowerLow
-	TxPowerMax                                   = consts.TxPowerMax
-	TxPowerMedium                                = consts.TxPowerMedium
-	TxPowerMin                                   = consts.TxPowerMin
-	TxPowerUltraLow                              = consts.TxPowerUltraLow
 	AdvertiseFailedAlreadyStarted                = consts.AdvertiseFailedAlreadyStarted
 	AdvertiseFailedDataTooLarge                  = consts.AdvertiseFailedDataTooLarge
 	AdvertiseFailedFeatureUnsupported            = consts.AdvertiseFailedFeatureUnsupported
 	AdvertiseFailedInternalError                 = consts.AdvertiseFailedInternalError
 	AdvertiseFailedTooManyAdvertisers            = consts.AdvertiseFailedTooManyAdvertisers
-	AdvertiseSuccess                             = consts.AdvertiseSuccess
 	DataType3dInformationData                    = consts.DataType3dInformationData
 	DataTypeAdvertisingInterval                  = consts.DataTypeAdvertisingInterval
 	DataTypeAdvertisingIntervalLong              = consts.DataTypeAdvertisingIntervalLong
@@ -103,14 +58,59 @@ const (
 	DataTypeTransportDiscoveryData               = consts.DataTypeTransportDiscoveryData
 	DataTypeTxPowerLevel                         = consts.DataTypeTxPowerLevel
 	DataTypeUri                                  = consts.DataTypeUri
-)
-
-const (
-	AutoBatchMinReportDelayMillis = consts.AutoBatchMinReportDelayMillis
+	AdvertiseSuccess                             = consts.AdvertiseSuccess
+	DataComplete                                 = consts.DataComplete
+	DataTruncated                                = consts.DataTruncated
+	PeriodicIntervalNotPresent                   = consts.PeriodicIntervalNotPresent
+	PhyUnused                                    = consts.PhyUnused
+	SidNotPresent                                = consts.SidNotPresent
+	TxPowerNotPresent                            = consts.TxPowerNotPresent
+	ScanFailedAlreadyStarted                     = consts.ScanFailedAlreadyStarted
+	ScanFailedApplicationRegistrationFailed      = consts.ScanFailedApplicationRegistrationFailed
+	ScanFailedFeatureUnsupported                 = consts.ScanFailedFeatureUnsupported
+	ScanFailedInternalError                      = consts.ScanFailedInternalError
+	ScanFailedOutOfHardwareResources             = consts.ScanFailedOutOfHardwareResources
+	ScanFailedScanningTooFrequently              = consts.ScanFailedScanningTooFrequently
+	AdvertiseModeBalanced                        = consts.AdvertiseModeBalanced
+	AdvertiseModeLowLatency                      = consts.AdvertiseModeLowLatency
+	AdvertiseModeLowPower                        = consts.AdvertiseModeLowPower
+	AdvertiseTxPowerHigh                         = consts.AdvertiseTxPowerHigh
+	AdvertiseTxPowerLow                          = consts.AdvertiseTxPowerLow
+	AdvertiseTxPowerMedium                       = consts.AdvertiseTxPowerMedium
+	AdvertiseTxPowerUltraLow                     = consts.AdvertiseTxPowerUltraLow
+	CallbackTypeAllMatches                       = consts.CallbackTypeAllMatches
+	CallbackTypeAllMatchesAutoBatch              = consts.CallbackTypeAllMatchesAutoBatch
+	CallbackTypeFirstMatch                       = consts.CallbackTypeFirstMatch
+	CallbackTypeMatchLost                        = consts.CallbackTypeMatchLost
+	MatchModeAggressive                          = consts.MatchModeAggressive
+	MatchModeSticky                              = consts.MatchModeSticky
+	MatchNumFewAdvertisement                     = consts.MatchNumFewAdvertisement
+	MatchNumMaxAdvertisement                     = consts.MatchNumMaxAdvertisement
+	MatchNumOneAdvertisement                     = consts.MatchNumOneAdvertisement
+	PhyLeAllSupported                            = consts.PhyLeAllSupported
+	ScanModeBalanced                             = consts.ScanModeBalanced
+	ScanModeLowLatency                           = consts.ScanModeLowLatency
+	ScanModeLowPower                             = consts.ScanModeLowPower
+	ScanModeOpportunistic                        = consts.ScanModeOpportunistic
+	IntervalHigh                                 = consts.IntervalHigh
+	IntervalLow                                  = consts.IntervalLow
+	IntervalMax                                  = consts.IntervalMax
+	IntervalMedium                               = consts.IntervalMedium
+	IntervalMin                                  = consts.IntervalMin
+	TxPowerHigh                                  = consts.TxPowerHigh
+	TxPowerLow                                   = consts.TxPowerLow
+	TxPowerMax                                   = consts.TxPowerMax
+	TxPowerMedium                                = consts.TxPowerMedium
+	TxPowerMin                                   = consts.TxPowerMin
+	TxPowerUltraLow                              = consts.TxPowerUltraLow
 )
 
 const (
 	ExtraCallbackType   = consts.ExtraCallbackType
 	ExtraErrorCode      = consts.ExtraErrorCode
 	ExtraListScanResult = consts.ExtraListScanResult
+)
+
+const (
+	AutoBatchMinReportDelayMillis = consts.AutoBatchMinReportDelayMillis
 )

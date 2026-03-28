@@ -33,7 +33,7 @@ func NewEventStats(vm *jni.VM, arg0 *jni.Object) (*EventStats, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventStats)), midEventStatsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventStats)), midEventStatsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

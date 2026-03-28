@@ -32,7 +32,7 @@ func NewAccessibilityServiceInfo(vm *jni.VM) (*AccessibilityServiceInfo, error) 
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceInfo)), midAccessibilityServiceInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccessibilityServiceInfo)), midAccessibilityServiceInfoCtor)
 		if err != nil {
 			return err
 		}

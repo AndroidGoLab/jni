@@ -9,17 +9,6 @@ const (
 )
 
 const (
-	FormatAction              = consts.FormatAction
-	FormatBundle              = consts.FormatBundle
-	FormatImage               = consts.FormatImage
-	FormatInt                 = consts.FormatInt
-	FormatLong                = consts.FormatLong
-	FormatRemoteInput         = consts.FormatRemoteInput
-	FormatSlice               = consts.FormatSlice
-	FormatText                = consts.FormatText
-	CategorySlice             = consts.CategorySlice
-	SliceMetadataKey          = consts.SliceMetadataKey
-	SliceType                 = consts.SliceType
 	ExtraRangeValue           = consts.ExtraRangeValue
 	ExtraToggleState          = consts.ExtraToggleState
 	HintActions               = consts.HintActions
@@ -50,4 +39,15 @@ const (
 	SubtypeSource             = consts.SubtypeSource
 	SubtypeToggle             = consts.SubtypeToggle
 	SubtypeValue              = consts.SubtypeValue
+	SliceType                 = consts.SliceType
+	FormatAction              = consts.FormatAction
+	FormatBundle              = consts.FormatBundle
+	FormatImage               = consts.FormatImage
+	FormatInt                 = consts.FormatInt
+	FormatLong                = consts.FormatLong
+	FormatRemoteInput         = consts.FormatRemoteInput
+	FormatSlice               = consts.FormatSlice
+	FormatText                = consts.FormatText
+	CategorySlice             = consts.CategorySlice
+	SliceMetadataKey          = consts.SliceMetadataKey
 )

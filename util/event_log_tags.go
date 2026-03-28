@@ -32,7 +32,7 @@ func NewEventLogTags(vm *jni.VM) (*EventLogTags, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventLogTags)), midEventLogTagsInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEventLogTags)), midEventLogTagsCtor)
 		if err != nil {
 			return err
 		}

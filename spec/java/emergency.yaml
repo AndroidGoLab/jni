@@ -34,6 +34,18 @@ classes:
           go_name: GetEmergencyCallRouting
           returns: int
           error: true
+        - java_method: getEmergencyNumberSources
+          go_name: GetEmergencyNumberSources
+          returns: java.util.List<java.lang.Integer>
+          error: true
+        - java_method: getEmergencyServiceCategories
+          go_name: GetEmergencyServiceCategories
+          returns: java.util.List<java.lang.Integer>
+          error: true
+        - java_method: getEmergencyUrns
+          go_name: GetEmergencyUrns
+          returns: java.util.List<java.lang.String>
+          error: true
         - java_method: getMnc
           go_name: GetMnc
           returns: String

@@ -32,7 +32,7 @@ func NewLinkify(vm *jni.VM) (*Linkify, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkify)), midLinkifyInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinkify)), midLinkifyCtor)
 		if err != nil {
 			return err
 		}

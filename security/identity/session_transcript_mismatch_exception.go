@@ -38,7 +38,7 @@ func NewSessionTranscriptMismatchException(vm *jni.VM, arg0 string) (*SessionTra
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSessionTranscriptMismatchException)), midSessionTranscriptMismatchExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSessionTranscriptMismatchException)), midSessionTranscriptMismatchExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

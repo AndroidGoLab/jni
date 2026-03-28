@@ -32,7 +32,7 @@ func NewGLU(vm *jni.VM) (*GLU, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLU)), midGLUInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLU)), midGLUCtor)
 		if err != nil {
 			return err
 		}

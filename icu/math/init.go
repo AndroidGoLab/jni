@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsBigDecimal                  *jni.GlobalRef
-	midBigDecimalInit              jni.MethodID
+	midBigDecimalCtor              jni.MethodID
 	midBigDecimalAbs0              jni.MethodID
 	midBigDecimalAbs1_1            jni.MethodID
 	midBigDecimalAdd1              jni.MethodID
@@ -83,7 +83,7 @@ var (
 	midBigDecimalValueOf2_2        jni.MethodID
 
 	clsContext                *jni.GlobalRef
-	midContextInit            jni.MethodID
+	midContextCtor            jni.MethodID
 	midContextGetDigits       jni.MethodID
 	midContextGetForm         jni.MethodID
 	midContextGetLostDigits   jni.MethodID
@@ -116,7 +116,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBigDecimal = env.NewGlobalRef(&c.Object)
-		midBigDecimalInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "<init>", "([C)V")
+		midBigDecimalCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBigDecimal)), "<init>", "([C)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -522,7 +522,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContext = env.NewGlobalRef(&c.Object)
-		midContextInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "<init>", "(I)V")
+		midContextCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContext)), "<init>", "(I)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

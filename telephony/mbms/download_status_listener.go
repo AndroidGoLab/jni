@@ -32,7 +32,7 @@ func NewDownloadStatusListener(vm *jni.VM) (*DownloadStatusListener, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadStatusListener)), midDownloadStatusListenerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDownloadStatusListener)), midDownloadStatusListenerCtor)
 		if err != nil {
 			return err
 		}

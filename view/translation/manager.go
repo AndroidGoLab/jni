@@ -23,6 +23,39 @@ type Manager struct {
 	Obj *jni.GlobalRef
 }
 
+// GetOnDeviceTranslationCapabilities calls android.view.translation.TranslationManager.getOnDeviceTranslationCapabilities.
+func (m *Manager) GetOnDeviceTranslationCapabilities(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetOnDeviceTranslationCapabilities == nil {
+			callErr = fmt.Errorf("android.view.translation.TranslationManager.getOnDeviceTranslationCapabilities is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetOnDeviceTranslationCapabilities, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetOnDeviceTranslationSettingsActivityIntent calls android.view.translation.TranslationManager.getOnDeviceTranslationSettingsActivityIntent.
 func (m *Manager) GetOnDeviceTranslationSettingsActivityIntent() (*jni.Object, error) {
 	var result *jni.Object

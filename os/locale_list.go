@@ -33,7 +33,7 @@ func NewLocaleList(vm *jni.VM, arg0 *jni.Object) (*LocaleList, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocaleList)), midLocaleListInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocaleList)), midLocaleListCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

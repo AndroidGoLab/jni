@@ -44,7 +44,7 @@ func NewBeginGetCredentialOption(vm *jni.VM, arg0 string, arg1 string, arg2 *jni
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), midBeginGetCredentialOptionInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBeginGetCredentialOption)), midBeginGetCredentialOptionCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

@@ -83,6 +83,38 @@ func (m *SleepSessionRecord) GetNotes() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetStages calls android.health.connect.datatypes.SleepSessionRecord.getStages.
+func (m *SleepSessionRecord) GetStages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSleepSessionRecordGetStages == nil {
+			callErr = fmt.Errorf("android.health.connect.datatypes.SleepSessionRecord.getStages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSleepSessionRecordGetStages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetTitle calls android.health.connect.datatypes.SleepSessionRecord.getTitle.
 func (m *SleepSessionRecord) GetTitle() (*jni.Object, error) {
 	var result *jni.Object

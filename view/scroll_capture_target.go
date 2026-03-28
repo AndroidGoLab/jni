@@ -33,7 +33,7 @@ func NewScrollCaptureTarget(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object, arg2
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollCaptureTarget)), midScrollCaptureTargetInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsScrollCaptureTarget)), midScrollCaptureTargetCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

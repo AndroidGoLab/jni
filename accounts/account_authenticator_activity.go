@@ -32,7 +32,7 @@ func NewAccountAuthenticatorActivity(vm *jni.VM) (*AccountAuthenticatorActivity,
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), midAccountAuthenticatorActivityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAccountAuthenticatorActivity)), midAccountAuthenticatorActivityCtor)
 		if err != nil {
 			return err
 		}

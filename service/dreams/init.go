@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsDreamService                                   *jni.GlobalRef
-	midDreamServiceInit                               jni.MethodID
+	midDreamServiceCtor                               jni.MethodID
 	midDreamServiceAddContentView                     jni.MethodID
 	midDreamServiceDispatchGenericMotionEvent         jni.MethodID
 	midDreamServiceDispatchKeyEvent                   jni.MethodID
@@ -96,7 +96,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsDreamService = env.NewGlobalRef(&c.Object)
-		midDreamServiceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "<init>", "()V")
+		midDreamServiceCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsDreamService)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

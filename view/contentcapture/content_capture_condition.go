@@ -33,7 +33,7 @@ func NewContentCaptureCondition(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*Cont
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), midContentCaptureConditionInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContentCaptureCondition)), midContentCaptureConditionCtor, jni.ObjectValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

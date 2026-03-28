@@ -32,7 +32,7 @@ func NewTileService(vm *jni.VM) (*TileService, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTileService)), midTileServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTileService)), midTileServiceCtor)
 		if err != nil {
 			return err
 		}

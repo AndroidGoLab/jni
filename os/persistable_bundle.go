@@ -32,7 +32,7 @@ func NewPersistableBundle(vm *jni.VM) (*PersistableBundle, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPersistableBundle)), midPersistableBundleInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPersistableBundle)), midPersistableBundleCtor)
 		if err != nil {
 			return err
 		}

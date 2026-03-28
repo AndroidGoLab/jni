@@ -32,7 +32,7 @@ func NewShader(vm *jni.VM) (*Shader, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShader)), midShaderInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsShader)), midShaderCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewUserNotAuthenticatedException(vm *jni.VM) (*UserNotAuthenticatedExceptio
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserNotAuthenticatedException)), midUserNotAuthenticatedExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUserNotAuthenticatedException)), midUserNotAuthenticatedExceptionCtor)
 		if err != nil {
 			return err
 		}

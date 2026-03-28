@@ -907,6 +907,38 @@ func (m *FragmentController) RetainNestedNonConfig() (*jni.Object, error) {
 	return result, callErr
 }
 
+// RetainNonConfig calls android.app.FragmentController.retainNonConfig.
+func (m *FragmentController) RetainNonConfig() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midFragmentControllerRetainNonConfig == nil {
+			callErr = fmt.Errorf("android.app.FragmentController.retainNonConfig is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midFragmentControllerRetainNonConfig,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // SaveAllState calls android.app.FragmentController.saveAllState.
 func (m *FragmentController) SaveAllState() (*jni.Object, error) {
 	var result *jni.Object

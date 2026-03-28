@@ -32,7 +32,7 @@ func NewManifest(vm *jni.VM) (*Manifest, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManifest)), midManifestInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsManifest)), midManifestCtor)
 		if err != nil {
 			return err
 		}

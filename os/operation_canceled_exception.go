@@ -32,7 +32,7 @@ func NewOperationCanceledException(vm *jni.VM) (*OperationCanceledException, err
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOperationCanceledException)), midOperationCanceledExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOperationCanceledException)), midOperationCanceledExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewExtractedTextRequest(vm *jni.VM) (*ExtractedTextRequest, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtractedTextRequest)), midExtractedTextRequestInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExtractedTextRequest)), midExtractedTextRequestCtor)
 		if err != nil {
 			return err
 		}

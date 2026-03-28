@@ -33,7 +33,7 @@ func NewSslError(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*SslError, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSslError)), midSslErrorInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSslError)), midSslErrorCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

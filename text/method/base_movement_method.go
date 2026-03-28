@@ -32,7 +32,7 @@ func NewBaseMovementMethod(vm *jni.VM) (*BaseMovementMethod, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), midBaseMovementMethodInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBaseMovementMethod)), midBaseMovementMethodCtor)
 		if err != nil {
 			return err
 		}

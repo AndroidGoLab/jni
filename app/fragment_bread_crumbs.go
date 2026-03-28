@@ -31,7 +31,7 @@ func NewFragmentBreadCrumbs(vm *jni.VM, arg0 *jni.Object) (*FragmentBreadCrumbs,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFragmentBreadCrumbs)), midFragmentBreadCrumbsInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsFragmentBreadCrumbs)), midFragmentBreadCrumbsCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

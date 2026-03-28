@@ -38,7 +38,7 @@ func NewPdfPageImageContent(vm *jni.VM, arg0 string) (*PdfPageImageContent, erro
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageImageContent)), midPdfPageImageContentInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageImageContent)), midPdfPageImageContentCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

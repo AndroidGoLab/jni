@@ -33,7 +33,7 @@ func NewLocalServerSocket(vm *jni.VM, arg0 *jni.Object) (*LocalServerSocket, err
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalServerSocket)), midLocalServerSocketInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocalServerSocket)), midLocalServerSocketCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

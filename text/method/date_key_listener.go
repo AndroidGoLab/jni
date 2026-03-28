@@ -32,7 +32,7 @@ func NewDateKeyListener(vm *jni.VM) (*DateKeyListener, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), midDateKeyListenerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateKeyListener)), midDateKeyListenerCtor)
 		if err != nil {
 			return err
 		}

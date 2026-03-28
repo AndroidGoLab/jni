@@ -5,6 +5,69 @@
 package: changelog
 go_import: github.com/AndroidGoLab/jni/health/connect/changelog
 classes:
+    - java_class: android.health.connect.changelog.ChangeLogTokenResponse
+      go_type: ChangeLogTokenResponse
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getToken
+          go_name: GetToken
+          returns: String
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.health.connect.changelog.ChangeLogsResponse
+      go_type: ChangeLogsResponse
+      methods:
+        - java_method: describeContents
+          go_name: DescribeContents
+          returns: int
+          error: true
+        - java_method: getDeletedLogs
+          go_name: GetDeletedLogs
+          returns: java.util.List<android.health.connect.changelog.ChangeLogsResponse$DeletedLog>
+          error: true
+        - java_method: getNextChangesToken
+          go_name: GetNextChangesToken
+          returns: String
+          error: true
+        - java_method: getUpsertedRecords
+          go_name: GetUpsertedRecords
+          returns: java.util.List<android.health.connect.datatypes.Record>
+          error: true
+        - java_method: hasMorePages
+          go_name: HasMorePages
+          returns: boolean
+          error: true
+        - java_method: writeToParcel
+          go_name: WriteToParcel
+          params:
+            - java_type: android.os.Parcel
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: void
+          error: true
+    - java_class: android.health.connect.changelog.ChangeLogsResponse$DeletedLog
+      go_type: ChangeLogsResponseDeletedLog
+      methods:
+        - java_method: getDeletedRecordId
+          go_name: GetDeletedRecordId
+          returns: String
+          error: true
+        - java_method: getDeletedTime
+          go_name: GetDeletedTime
+          returns: java.time.Instant
+          error: true
     - java_class: android.health.connect.changelog.ChangeLogsRequest
       go_type: ChangeLogsRequest
       methods:
@@ -50,6 +113,10 @@ classes:
           go_name: DescribeContents
           returns: int
           error: true
+        - java_method: getDataOriginFilters
+          go_name: GetDataOriginFilters
+          returns: java.util.Set<android.health.connect.datatypes.DataOrigin>
+          error: true
         - java_method: writeToParcel
           go_name: WriteToParcel
           params:
@@ -72,61 +139,6 @@ classes:
         - java_method: build
           go_name: Build
           returns: android.health.connect.changelog.ChangeLogTokenRequest
-          error: true
-    - java_class: android.health.connect.changelog.ChangeLogsResponse
-      go_type: ChangeLogsResponse
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getNextChangesToken
-          go_name: GetNextChangesToken
-          returns: String
-          error: true
-        - java_method: hasMorePages
-          go_name: HasMorePages
-          returns: boolean
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
-          error: true
-    - java_class: android.health.connect.changelog.ChangeLogsResponse$DeletedLog
-      go_type: ChangeLogsResponseDeletedLog
-      methods:
-        - java_method: getDeletedRecordId
-          go_name: GetDeletedRecordId
-          returns: String
-          error: true
-        - java_method: getDeletedTime
-          go_name: GetDeletedTime
-          returns: java.time.Instant
-          error: true
-    - java_class: android.health.connect.changelog.ChangeLogTokenResponse
-      go_type: ChangeLogTokenResponse
-      methods:
-        - java_method: describeContents
-          go_name: DescribeContents
-          returns: int
-          error: true
-        - java_method: getToken
-          go_name: GetToken
-          returns: String
-          error: true
-        - java_method: writeToParcel
-          go_name: WriteToParcel
-          params:
-            - java_type: android.os.Parcel
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: void
           error: true
 constants:
     - go_name: Creator

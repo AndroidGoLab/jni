@@ -38,7 +38,7 @@ func NewInputConnectionWrapper(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*InputC
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), midInputConnectionWrapperInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInputConnectionWrapper)), midInputConnectionWrapperCtor, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

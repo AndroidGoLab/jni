@@ -32,7 +32,7 @@ func NewSuggestionRangeSpan(vm *jni.VM) (*SuggestionRangeSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), midSuggestionRangeSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSuggestionRangeSpan)), midSuggestionRangeSpanCtor)
 		if err != nil {
 			return err
 		}

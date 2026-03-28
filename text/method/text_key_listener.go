@@ -38,7 +38,7 @@ func NewTextKeyListener(vm *jni.VM, arg0 *jni.Object, arg1 bool) (*TextKeyListen
 			jArg1 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), midTextKeyListenerInit, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTextKeyListener)), midTextKeyListenerCtor, jni.ObjectValue(arg0), jni.BooleanValue(jArg1))
 		if err != nil {
 			return err
 		}

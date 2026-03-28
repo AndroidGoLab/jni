@@ -33,7 +33,7 @@ func NewAppSearchException(vm *jni.VM, arg0 int32) (*AppSearchException, error) 
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppSearchException)), midAppSearchExceptionInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppSearchException)), midAppSearchExceptionCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

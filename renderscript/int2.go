@@ -32,7 +32,7 @@ func NewInt2(vm *jni.VM) (*Int2, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt2)), midInt2Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsInt2)), midInt2Ctor)
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewRestrictionEntry(vm *jni.VM, arg0 *jni.Object) (*RestrictionEntry, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRestrictionEntry)), midRestrictionEntryInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRestrictionEntry)), midRestrictionEntryCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

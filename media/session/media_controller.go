@@ -33,7 +33,7 @@ func NewMediaController(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*MediaC
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaController)), midMediaControllerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaController)), midMediaControllerCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}
@@ -261,6 +261,38 @@ func (m *MediaController) GetPlaybackState() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midMediaControllerGetPlaybackState,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetQueue calls android.media.session.MediaController.getQueue.
+func (m *MediaController) GetQueue() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midMediaControllerGetQueue == nil {
+			callErr = fmt.Errorf("android.media.session.MediaController.getQueue is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midMediaControllerGetQueue,
 		)
 		if callErr != nil {
 			return callErr

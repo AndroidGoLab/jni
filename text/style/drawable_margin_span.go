@@ -33,7 +33,7 @@ func NewDrawableMarginSpan(vm *jni.VM, arg0 *jni.Object) (*DrawableMarginSpan, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), midDrawableMarginSpanInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrawableMarginSpan)), midDrawableMarginSpanCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

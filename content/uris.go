@@ -32,7 +32,7 @@ func NewUris(vm *jni.VM) (*Uris, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUris)), midUrisInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUris)), midUrisCtor)
 		if err != nil {
 			return err
 		}

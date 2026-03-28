@@ -32,7 +32,7 @@ func NewResolveInfo(vm *jni.VM) (*ResolveInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResolveInfo)), midResolveInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResolveInfo)), midResolveInfoCtor)
 		if err != nil {
 			return err
 		}

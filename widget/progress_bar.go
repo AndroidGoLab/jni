@@ -33,7 +33,7 @@ func NewProgressBar(vm *jni.VM, arg0 *jni.Object) (*ProgressBar, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProgressBar)), midProgressBarInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProgressBar)), midProgressBarCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

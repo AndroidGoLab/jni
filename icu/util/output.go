@@ -32,7 +32,7 @@ func NewOutput(vm *jni.VM) (*Output, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutput)), midOutputInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsOutput)), midOutputCtor)
 		if err != nil {
 			return err
 		}

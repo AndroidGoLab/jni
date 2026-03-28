@@ -33,7 +33,7 @@ func NewEditText(vm *jni.VM, arg0 *jni.Object) (*EditText, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditText)), midEditTextInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditText)), midEditTextCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

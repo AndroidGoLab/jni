@@ -32,7 +32,7 @@ func NewRfc822Tokenizer(vm *jni.VM) (*Rfc822Tokenizer, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), midRfc822TokenizerInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRfc822Tokenizer)), midRfc822TokenizerCtor)
 		if err != nil {
 			return err
 		}

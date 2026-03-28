@@ -33,7 +33,7 @@ func NewBase64InputStream(vm *jni.VM, arg0 *jni.Object, arg1 int32) (*Base64Inpu
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBase64InputStream)), midBase64InputStreamInit, jni.ObjectValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBase64InputStream)), midBase64InputStreamCtor, jni.ObjectValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

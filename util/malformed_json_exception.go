@@ -38,7 +38,7 @@ func NewMalformedJsonException(vm *jni.VM, arg0 string) (*MalformedJsonException
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMalformedJsonException)), midMalformedJsonExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMalformedJsonException)), midMalformedJsonExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

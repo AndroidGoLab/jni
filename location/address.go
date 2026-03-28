@@ -33,7 +33,7 @@ func NewAddress(vm *jni.VM, arg0 *jni.Object) (*Address, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAddress)), midAddressInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAddress)), midAddressCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

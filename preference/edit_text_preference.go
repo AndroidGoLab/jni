@@ -33,7 +33,7 @@ func NewEditTextPreference(vm *jni.VM, arg0 *jni.Object) (*EditTextPreference, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), midEditTextPreferenceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEditTextPreference)), midEditTextPreferenceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -3,43 +3,6 @@
 package consts
 
 const (
-	Creator               int = 0
-	StandardColor         int = -16776961
-	StandardGapWidthPx    int = 2
-	StandardStripeWidthPx int = 2
-	AlignBaseline         int = 1
-	AlignBottom           int = 0
-	AlignCenter           int = 2
-	StandardGapWidth      int = 2
-	FlagAutoCorrection    int = 4
-	FlagEasyCorrect       int = 1
-	FlagGrammarError      int = 8
-	FlagMisspelled        int = 2
-	SuggestionsMaxSize    int = 5
-	MonthApril            int = 3
-	MonthAugust           int = 7
-	MonthDecember         int = 11
-	MonthFebruary         int = 1
-	MonthJanuary          int = 0
-	MonthJuly             int = 6
-	MonthJune             int = 5
-	MonthMarch            int = 2
-	MonthMay              int = 4
-	MonthNovember         int = 10
-	MonthOctober          int = 9
-	MonthSeptember        int = 8
-	WeekdayFriday         int = 6
-	WeekdayMonday         int = 2
-	WeekdaySaturday       int = 7
-	WeekdaySunday         int = 1
-	WeekdayThursday       int = 5
-	WeekdayTuesday        int = 3
-	WeekdayWednesday      int = 4
-	TextDeleted           int = 1
-	TextModified          int = 2
-)
-
-const (
 	ActionSuggestionPicked       string = "android.text.style.SUGGESTION_PICKED"
 	SuggestionSpanPickedAfter    string = "after"
 	SuggestionSpanPickedBefore   string = "before"
@@ -108,4 +71,41 @@ const (
 	TypeTime                     string = "android.type.time"
 	TypeVerbatim                 string = "android.type.verbatim"
 	ExtraTextChangedType         string = "android.text.style.EXTRA_TEXT_CHANGED_TYPE"
+)
+
+const (
+	Creator               int = 0
+	FlagAutoCorrection    int = 4
+	FlagEasyCorrect       int = 1
+	FlagGrammarError      int = 8
+	FlagMisspelled        int = 2
+	SuggestionsMaxSize    int = 5
+	StandardGapWidth      int = 2
+	AlignBaseline         int = 1
+	AlignBottom           int = 0
+	AlignCenter           int = 2
+	MonthApril            int = 3
+	MonthAugust           int = 7
+	MonthDecember         int = 11
+	MonthFebruary         int = 1
+	MonthJanuary          int = 0
+	MonthJuly             int = 6
+	MonthJune             int = 5
+	MonthMarch            int = 2
+	MonthMay              int = 4
+	MonthNovember         int = 10
+	MonthOctober          int = 9
+	MonthSeptember        int = 8
+	WeekdayFriday         int = 6
+	WeekdayMonday         int = 2
+	WeekdaySaturday       int = 7
+	WeekdaySunday         int = 1
+	WeekdayThursday       int = 5
+	WeekdayTuesday        int = 3
+	WeekdayWednesday      int = 4
+	TextDeleted           int = 1
+	TextModified          int = 2
+	StandardColor         int = -16776961
+	StandardGapWidthPx    int = 2
+	StandardStripeWidthPx int = 2
 )

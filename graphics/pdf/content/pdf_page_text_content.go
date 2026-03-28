@@ -38,7 +38,7 @@ func NewPdfPageTextContent(vm *jni.VM, arg0 string) (*PdfPageTextContent, error)
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageTextContent)), midPdfPageTextContentInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPdfPageTextContent)), midPdfPageTextContentCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}
@@ -70,6 +70,38 @@ func (m *PdfPageTextContent) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBounds calls android.graphics.pdf.content.PdfPageTextContent.getBounds.
+func (m *PdfPageTextContent) GetBounds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPdfPageTextContentGetBounds == nil {
+			callErr = fmt.Errorf("android.graphics.pdf.content.PdfPageTextContent.getBounds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPdfPageTextContentGetBounds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -32,7 +32,7 @@ func NewServiceState(vm *jni.VM) (*ServiceState, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsServiceState)), midServiceStateInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsServiceState)), midServiceStateCtor)
 		if err != nil {
 			return err
 		}
@@ -252,6 +252,38 @@ func (m *ServiceState) GetIsManualSelection() (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNetworkRegistrationInfoList calls android.telephony.ServiceState.getNetworkRegistrationInfoList.
+func (m *ServiceState) GetNetworkRegistrationInfoList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midServiceStateGetNetworkRegistrationInfoList == nil {
+			callErr = fmt.Errorf("android.telephony.ServiceState.getNetworkRegistrationInfoList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midServiceStateGetNetworkRegistrationInfoList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

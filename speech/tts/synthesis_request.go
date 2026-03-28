@@ -38,7 +38,7 @@ func NewSynthesisRequest(vm *jni.VM, arg0 string, arg1 *jni.Object) (*SynthesisR
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSynthesisRequest)), midSynthesisRequestInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSynthesisRequest)), midSynthesisRequestCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

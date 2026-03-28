@@ -32,7 +32,7 @@ func NewStaticInspectionCompanionProvider(vm *jni.VM) (*StaticInspectionCompanio
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStaticInspectionCompanionProvider)), midStaticInspectionCompanionProviderInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStaticInspectionCompanionProvider)), midStaticInspectionCompanionProviderCtor)
 		if err != nil {
 			return err
 		}

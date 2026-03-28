@@ -33,7 +33,7 @@ func NewCalendarView(vm *jni.VM, arg0 *jni.Object) (*CalendarView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCalendarView)), midCalendarViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCalendarView)), midCalendarViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

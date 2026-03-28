@@ -33,7 +33,7 @@ func NewHorizontalScrollView(vm *jni.VM, arg0 *jni.Object) (*HorizontalScrollVie
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHorizontalScrollView)), midHorizontalScrollViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHorizontalScrollView)), midHorizontalScrollViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

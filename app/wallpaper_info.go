@@ -31,7 +31,7 @@ func NewWallpaperInfo(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Wallpape
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWallpaperInfo)), midWallpaperInfoInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWallpaperInfo)), midWallpaperInfoCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

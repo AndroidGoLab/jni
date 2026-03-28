@@ -33,7 +33,7 @@ func NewJsonReader(vm *jni.VM, arg0 *jni.Object) (*JsonReader, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJsonReader)), midJsonReaderInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsJsonReader)), midJsonReaderCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

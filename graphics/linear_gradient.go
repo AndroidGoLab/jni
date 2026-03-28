@@ -33,7 +33,7 @@ func NewLinearGradient(vm *jni.VM, arg0 float32, arg1 float32, arg2 float32, arg
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinearGradient)), midLinearGradientInit, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLinearGradient)), midLinearGradientCtor, jni.FloatValue(arg0), jni.FloatValue(arg1), jni.FloatValue(arg2), jni.FloatValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5), jni.ObjectValue(arg6))
 		if err != nil {
 			return err
 		}

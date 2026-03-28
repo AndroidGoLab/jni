@@ -33,7 +33,7 @@ func NewColorSpaceTransform(vm *jni.VM, arg0 *jni.Object) (*ColorSpaceTransform,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorSpaceTransform)), midColorSpaceTransformInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorSpaceTransform)), midColorSpaceTransformCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

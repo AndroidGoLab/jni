@@ -33,7 +33,7 @@ func NewAutoCompleteTextView(vm *jni.VM, arg0 *jni.Object) (*AutoCompleteTextVie
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAutoCompleteTextView)), midAutoCompleteTextViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAutoCompleteTextView)), midAutoCompleteTextViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

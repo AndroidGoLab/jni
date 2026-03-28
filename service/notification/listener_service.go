@@ -358,6 +358,82 @@ func (m *ListenerService) GetCurrentRanking() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetNotificationChannelGroups calls android.service.notification.NotificationListenerService.getNotificationChannelGroups.
+func (m *ListenerService) GetNotificationChannelGroups(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midListenerServiceGetNotificationChannelGroups == nil {
+			callErr = fmt.Errorf("android.service.notification.NotificationListenerService.getNotificationChannelGroups is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midListenerServiceGetNotificationChannelGroups, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetNotificationChannels calls android.service.notification.NotificationListenerService.getNotificationChannels.
+func (m *ListenerService) GetNotificationChannels(arg0 string, arg1 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midListenerServiceGetNotificationChannels == nil {
+			callErr = fmt.Errorf("android.service.notification.NotificationListenerService.getNotificationChannels is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midListenerServiceGetNotificationChannels, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSnoozedNotifications calls android.service.notification.NotificationListenerService.getSnoozedNotifications.
 func (m *ListenerService) GetSnoozedNotifications() (*jni.Object, error) {
 	var result *jni.Object

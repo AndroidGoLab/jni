@@ -38,7 +38,7 @@ func NewULocale(vm *jni.VM, arg0 string) (*ULocale, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsULocale)), midULocaleInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsULocale)), midULocaleCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}
@@ -697,6 +697,38 @@ func (m *ULocale) GetExtension(arg0 uint16) (string, error) {
 	return result, callErr
 }
 
+// GetExtensionKeys calls android.icu.util.ULocale.getExtensionKeys.
+func (m *ULocale) GetExtensionKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleGetExtensionKeys == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale.getExtensionKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midULocaleGetExtensionKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFallback0 calls android.icu.util.ULocale.getFallback.
 func (m *ULocale) GetFallback0() (*jni.Object, error) {
 	var result *jni.Object
@@ -816,6 +848,38 @@ func (m *ULocale) GetKeywordValue1(arg0 string) (string, error) {
 	return result, callErr
 }
 
+// GetKeywords0 calls android.icu.util.ULocale.getKeywords.
+func (m *ULocale) GetKeywords0() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleGetKeywords0 == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale.getKeywords is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midULocaleGetKeywords0,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetLanguage0 calls android.icu.util.ULocale.getLanguage.
 func (m *ULocale) GetLanguage0() (string, error) {
 	var result string
@@ -919,6 +983,70 @@ func (m *ULocale) GetScript0() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUnicodeLocaleAttributes calls android.icu.util.ULocale.getUnicodeLocaleAttributes.
+func (m *ULocale) GetUnicodeLocaleAttributes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleGetUnicodeLocaleAttributes == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale.getUnicodeLocaleAttributes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midULocaleGetUnicodeLocaleAttributes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetUnicodeLocaleKeys calls android.icu.util.ULocale.getUnicodeLocaleKeys.
+func (m *ULocale) GetUnicodeLocaleKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleGetUnicodeLocaleKeys == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale.getUnicodeLocaleKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midULocaleGetUnicodeLocaleKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -1566,6 +1694,39 @@ func (m *ULocale) GetAvailableLocales() (*jni.Object, error) {
 		result, callErr = env.CallStaticObjectMethod(
 			(*jni.Class)(unsafe.Pointer(clsULocale)),
 			midULocaleGetAvailableLocales,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableLocalesByType calls android.icu.util.ULocale.getAvailableLocalesByType.
+func (m *ULocale) GetAvailableLocalesByType(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleGetAvailableLocalesByType == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale.getAvailableLocalesByType is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsULocale)),
+			midULocaleGetAvailableLocalesByType, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr
@@ -2611,6 +2772,44 @@ func (m *ULocale) GetKeywordValue2_1(arg0 string, arg1 string) (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetKeywords1_1 calls android.icu.util.ULocale.getKeywords.
+func (m *ULocale) GetKeywords1_1(arg0 string) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midULocaleGetKeywords1_1 == nil {
+			callErr = fmt.Errorf("android.icu.util.ULocale.getKeywords is not available on this device")
+			return callErr
+		}
+		jArg0, err := env.NewStringUTF(arg0)
+		if err != nil {
+			return err
+		}
+		defer env.DeleteLocalRef(&jArg0.Object)
+
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsULocale)),
+			midULocaleGetKeywords1_1, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

@@ -33,7 +33,7 @@ func NewProviderResult(vm *jni.VM, arg0 *jni.Object) (*ProviderResult, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProviderResult)), midProviderResultInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProviderResult)), midProviderResultCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

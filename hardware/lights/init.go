@@ -23,7 +23,9 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsRequest *jni.GlobalRef
+	clsRequest               *jni.GlobalRef
+	midRequestGetLightStates jni.MethodID
+	midRequestGetLights      jni.MethodID
 
 	clsRequestBuilder           *jni.GlobalRef
 	midRequestBuilderAddLight   jni.MethodID
@@ -57,6 +59,7 @@ var (
 
 	clsManager              *jni.GlobalRef
 	midManagerGetLightState jni.MethodID
+	midManagerGetLights     jni.MethodID
 	midManagerOpenSession   jni.MethodID
 
 	clsManagerLightsSession              *jni.GlobalRef
@@ -89,6 +92,20 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsRequest = env.NewGlobalRef(&c.Object)
+
+		midRequestGetLightStates, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "getLightStates", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestGetLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequest)), "getLights", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 
@@ -295,6 +312,13 @@ func doInit(env *jni.Env) error {
 		clsManager = env.NewGlobalRef(&c.Object)
 
 		midManagerGetLightState, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLightState", "(Landroid/hardware/lights/Light;)Landroid/hardware/lights/LightState;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midManagerGetLights, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsManager)), "getLights", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

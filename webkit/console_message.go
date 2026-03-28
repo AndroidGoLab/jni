@@ -44,7 +44,7 @@ func NewConsoleMessage(vm *jni.VM, arg0 string, arg1 string, arg2 int32, arg3 *j
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), midConsoleMessageInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConsoleMessage)), midConsoleMessageCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

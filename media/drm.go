@@ -33,7 +33,7 @@ func NewDrm(vm *jni.VM, arg0 *jni.Object) (*Drm, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrm)), midDrmInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDrm)), midDrmCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -253,6 +253,38 @@ func (m *Drm) GetCryptoSession(
 	return result, callErr
 }
 
+// GetLogMessages calls android.media.MediaDrm.getLogMessages.
+func (m *Drm) GetLogMessages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDrmGetLogMessages == nil {
+			callErr = fmt.Errorf("android.media.MediaDrm.getLogMessages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDrmGetLogMessages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetMaxHdcpLevel calls android.media.MediaDrm.getMaxHdcpLevel.
 func (m *Drm) GetMaxHdcpLevel() (int32, error) {
 	var result int32
@@ -319,6 +351,38 @@ func (m *Drm) GetMetrics() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDrmGetMetrics,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOfflineLicenseKeySetIds calls android.media.MediaDrm.getOfflineLicenseKeySetIds.
+func (m *Drm) GetOfflineLicenseKeySetIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDrmGetOfflineLicenseKeySetIds == nil {
+			callErr = fmt.Errorf("android.media.MediaDrm.getOfflineLicenseKeySetIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDrmGetOfflineLicenseKeySetIds,
 		)
 		if callErr != nil {
 			return callErr
@@ -539,6 +603,70 @@ func (m *Drm) GetSecureStop(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midDrmGetSecureStop, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSecureStopIds calls android.media.MediaDrm.getSecureStopIds.
+func (m *Drm) GetSecureStopIds() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDrmGetSecureStopIds == nil {
+			callErr = fmt.Errorf("android.media.MediaDrm.getSecureStopIds is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDrmGetSecureStopIds,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSecureStops calls android.media.MediaDrm.getSecureStops.
+func (m *Drm) GetSecureStops() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDrmGetSecureStops == nil {
+			callErr = fmt.Errorf("android.media.MediaDrm.getSecureStops is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midDrmGetSecureStops,
 		)
 		if callErr != nil {
 			return callErr
@@ -1145,6 +1273,38 @@ func (m *Drm) GetMaxSecurityLevel() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedCryptoSchemes calls android.media.MediaDrm.getSupportedCryptoSchemes.
+func (m *Drm) GetSupportedCryptoSchemes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midDrmGetSupportedCryptoSchemes == nil {
+			callErr = fmt.Errorf("android.media.MediaDrm.getSupportedCryptoSchemes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsDrm)),
+			midDrmGetSupportedCryptoSchemes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

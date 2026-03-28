@@ -82,6 +82,38 @@ func (m *Parcel) CreateBinderArray() (*jni.Object, error) {
 	return result, callErr
 }
 
+// CreateBinderArrayList calls android.os.Parcel.createBinderArrayList.
+func (m *Parcel) CreateBinderArrayList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midParcelCreateBinderArrayList == nil {
+			callErr = fmt.Errorf("android.os.Parcel.createBinderArrayList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midParcelCreateBinderArrayList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // CreateBooleanArray calls android.os.Parcel.createBooleanArray.
 func (m *Parcel) CreateBooleanArray() (*jni.Object, error) {
 	var result *jni.Object
@@ -322,6 +354,38 @@ func (m *Parcel) CreateStringArray() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midParcelCreateStringArray,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreateStringArrayList calls android.os.Parcel.createStringArrayList.
+func (m *Parcel) CreateStringArrayList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midParcelCreateStringArrayList == nil {
+			callErr = fmt.Errorf("android.os.Parcel.createStringArrayList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midParcelCreateStringArrayList,
 		)
 		if callErr != nil {
 			return callErr
@@ -1253,6 +1317,39 @@ func (m *Parcel) ReadParcelableArray(arg0 *jni.Object) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midParcelReadParcelableArray, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// ReadParcelableCreator calls android.os.Parcel.readParcelableCreator.
+func (m *Parcel) ReadParcelableCreator(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midParcelReadParcelableCreator == nil {
+			callErr = fmt.Errorf("android.os.Parcel.readParcelableCreator is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midParcelReadParcelableCreator, jni.ObjectValue(arg0),
 		)
 		if callErr != nil {
 			return callErr

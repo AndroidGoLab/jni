@@ -32,7 +32,7 @@ func NewWebViewFragment(vm *jni.VM) (*WebViewFragment, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), midWebViewFragmentInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebViewFragment)), midWebViewFragmentCtor)
 		if err != nil {
 			return err
 		}

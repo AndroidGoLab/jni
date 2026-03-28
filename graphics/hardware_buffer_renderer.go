@@ -33,7 +33,7 @@ func NewHardwareBufferRenderer(vm *jni.VM, arg0 *jni.Object) (*HardwareBufferRen
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHardwareBufferRenderer)), midHardwareBufferRendererInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsHardwareBufferRenderer)), midHardwareBufferRendererCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

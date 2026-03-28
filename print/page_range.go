@@ -33,7 +33,7 @@ func NewPageRange(vm *jni.VM, arg0 int32, arg1 int32) (*PageRange, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPageRange)), midPageRangeInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPageRange)), midPageRangeCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

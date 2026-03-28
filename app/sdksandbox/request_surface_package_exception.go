@@ -39,7 +39,7 @@ func NewRequestSurfacePackageException(vm *jni.VM, arg0 int32, arg1 string) (*Re
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), midRequestSurfacePackageExceptionInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), midRequestSurfacePackageExceptionCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

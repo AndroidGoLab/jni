@@ -32,7 +32,7 @@ func NewMaskFilter(vm *jni.VM) (*MaskFilter, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMaskFilter)), midMaskFilterInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMaskFilter)), midMaskFilterCtor)
 		if err != nil {
 			return err
 		}

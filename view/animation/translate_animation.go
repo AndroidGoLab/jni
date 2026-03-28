@@ -33,7 +33,7 @@ func NewTranslateAnimation(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Tra
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTranslateAnimation)), midTranslateAnimationInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTranslateAnimation)), midTranslateAnimationCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

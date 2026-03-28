@@ -32,7 +32,7 @@ func NewTransactionTooLargeException(vm *jni.VM) (*TransactionTooLargeException,
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTransactionTooLargeException)), midTransactionTooLargeExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTransactionTooLargeException)), midTransactionTooLargeExceptionCtor)
 		if err != nil {
 			return err
 		}

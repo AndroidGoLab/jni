@@ -33,7 +33,7 @@ func NewWindowInsetsAnimation(vm *jni.VM, arg0 int32, arg1 *jni.Object, arg2 int
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInsetsAnimation)), midWindowInsetsAnimationInit, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.LongValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWindowInsetsAnimation)), midWindowInsetsAnimationCtor, jni.IntValue(arg0), jni.ObjectValue(arg1), jni.LongValue(arg2))
 		if err != nil {
 			return err
 		}

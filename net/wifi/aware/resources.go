@@ -33,7 +33,7 @@ func NewResources(vm *jni.VM, arg0 int32, arg1 int32, arg2 int32) (*Resources, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResources)), midResourcesInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsResources)), midResourcesCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.IntValue(arg2))
 		if err != nil {
 			return err
 		}

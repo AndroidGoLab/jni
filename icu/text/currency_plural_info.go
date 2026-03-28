@@ -32,7 +32,7 @@ func NewCurrencyPluralInfo(vm *jni.VM) (*CurrencyPluralInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCurrencyPluralInfo)), midCurrencyPluralInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCurrencyPluralInfo)), midCurrencyPluralInfoCtor)
 		if err != nil {
 			return err
 		}

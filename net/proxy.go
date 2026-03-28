@@ -32,7 +32,7 @@ func NewProxy(vm *jni.VM) (*Proxy, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProxy)), midProxyInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProxy)), midProxyCtor)
 		if err != nil {
 			return err
 		}

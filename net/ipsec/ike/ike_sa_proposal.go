@@ -51,6 +51,38 @@ func (m *IkeSaProposal) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetPseudorandomFunctions calls android.net.ipsec.ike.IkeSaProposal.getPseudorandomFunctions.
+func (m *IkeSaProposal) GetPseudorandomFunctions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIkeSaProposalGetPseudorandomFunctions == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.IkeSaProposal.getPseudorandomFunctions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midIkeSaProposalGetPseudorandomFunctions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.net.ipsec.ike.IkeSaProposal.hashCode.
 func (m *IkeSaProposal) HashCode() (int32, error) {
 	var result int32
@@ -70,6 +102,102 @@ func (m *IkeSaProposal) HashCode() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedEncryptionAlgorithms calls android.net.ipsec.ike.IkeSaProposal.getSupportedEncryptionAlgorithms.
+func (m *IkeSaProposal) GetSupportedEncryptionAlgorithms() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIkeSaProposalGetSupportedEncryptionAlgorithms == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.IkeSaProposal.getSupportedEncryptionAlgorithms is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsIkeSaProposal)),
+			midIkeSaProposalGetSupportedEncryptionAlgorithms,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedIntegrityAlgorithms calls android.net.ipsec.ike.IkeSaProposal.getSupportedIntegrityAlgorithms.
+func (m *IkeSaProposal) GetSupportedIntegrityAlgorithms() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIkeSaProposalGetSupportedIntegrityAlgorithms == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.IkeSaProposal.getSupportedIntegrityAlgorithms is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsIkeSaProposal)),
+			midIkeSaProposalGetSupportedIntegrityAlgorithms,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPseudorandomFunctions calls android.net.ipsec.ike.IkeSaProposal.getSupportedPseudorandomFunctions.
+func (m *IkeSaProposal) GetSupportedPseudorandomFunctions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midIkeSaProposalGetSupportedPseudorandomFunctions == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.IkeSaProposal.getSupportedPseudorandomFunctions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsIkeSaProposal)),
+			midIkeSaProposalGetSupportedPseudorandomFunctions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

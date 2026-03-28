@@ -39,7 +39,7 @@ func NewVerifiedDisplayHash(vm *jni.VM, arg0 int64, arg1 *jni.Object, arg2 strin
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), midVerifiedDisplayHashInit, jni.LongValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVerifiedDisplayHash)), midVerifiedDisplayHashCtor, jni.LongValue(arg0), jni.ObjectValue(arg1), jni.ObjectValue(&jArg2.Object), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}

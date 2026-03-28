@@ -32,7 +32,7 @@ func NewPasspointConfiguration(vm *jni.VM) (*PasspointConfiguration, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), midPasspointConfigurationInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPasspointConfiguration)), midPasspointConfigurationCtor)
 		if err != nil {
 			return err
 		}

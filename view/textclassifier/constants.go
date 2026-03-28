@@ -6,6 +6,14 @@ import "github.com/AndroidGoLab/jni/view/textclassifier/consts"
 
 const (
 	Creator                     = consts.Creator
+	NoOp                        = consts.NoOp
+	ApplyStrategyIgnore         = consts.ApplyStrategyIgnore
+	ApplyStrategyReplace        = consts.ApplyStrategyReplace
+	StatusDifferentText         = consts.StatusDifferentText
+	StatusLinksApplied          = consts.StatusLinksApplied
+	StatusNoLinksApplied        = consts.StatusNoLinksApplied
+	StatusNoLinksFound          = consts.StatusNoLinksFound
+	StatusUnsupportedCharacter  = consts.StatusUnsupportedCharacter
 	CategoryConversationActions = consts.CategoryConversationActions
 	CategoryLanguageDetection   = consts.CategoryLanguageDetection
 	CategoryLinkify             = consts.CategoryLinkify
@@ -31,6 +39,8 @@ const (
 	TypeSmartAction             = consts.TypeSmartAction
 	TypeSmartSelectionMulti     = consts.TypeSmartSelectionMulti
 	TypeSmartSelectionSingle    = consts.TypeSmartSelectionSingle
+	PersonUserOthers            = consts.PersonUserOthers
+	PersonUserSelf              = consts.PersonUserSelf
 	ActionAbandon               = consts.ActionAbandon
 	ActionCopy                  = consts.ActionCopy
 	ActionCut                   = consts.ActionCut
@@ -50,29 +60,9 @@ const (
 	InvocationLink              = consts.InvocationLink
 	InvocationManual            = consts.InvocationManual
 	InvocationUnknown           = consts.InvocationUnknown
-	ApplyStrategyIgnore         = consts.ApplyStrategyIgnore
-	ApplyStrategyReplace        = consts.ApplyStrategyReplace
-	StatusDifferentText         = consts.StatusDifferentText
-	StatusLinksApplied          = consts.StatusLinksApplied
-	StatusNoLinksApplied        = consts.StatusNoLinksApplied
-	StatusNoLinksFound          = consts.StatusNoLinksFound
-	StatusUnsupportedCharacter  = consts.StatusUnsupportedCharacter
-	NoOp                        = consts.NoOp
-	PersonUserOthers            = consts.PersonUserOthers
-	PersonUserSelf              = consts.PersonUserSelf
 )
 
 const (
-	TypeCallPhone                        = consts.TypeCallPhone
-	TypeCreateReminder                   = consts.TypeCreateReminder
-	TypeOpenUrl                          = consts.TypeOpenUrl
-	TypeSendEmail                        = consts.TypeSendEmail
-	TypeSendSms                          = consts.TypeSendSms
-	TypeShareLocation                    = consts.TypeShareLocation
-	TypeTextReply                        = consts.TypeTextReply
-	TypeTrackFlight                      = consts.TypeTrackFlight
-	TypeViewCalendar                     = consts.TypeViewCalendar
-	TypeViewMap                          = consts.TypeViewMap
 	ExtraFromTextClassifier              = consts.ExtraFromTextClassifier
 	ExtraTextOriginPackage               = consts.ExtraTextOriginPackage
 	HintTextIsEditable                   = consts.HintTextIsEditable
@@ -98,6 +88,16 @@ const (
 	WidgetTypeUnknown                    = consts.WidgetTypeUnknown
 	WidgetTypeUnselectableTextview       = consts.WidgetTypeUnselectableTextview
 	WidgetTypeWebview                    = consts.WidgetTypeWebview
+	TypeCallPhone                        = consts.TypeCallPhone
+	TypeCreateReminder                   = consts.TypeCreateReminder
+	TypeOpenUrl                          = consts.TypeOpenUrl
+	TypeSendEmail                        = consts.TypeSendEmail
+	TypeSendSms                          = consts.TypeSendSms
+	TypeShareLocation                    = consts.TypeShareLocation
+	TypeTextReply                        = consts.TypeTextReply
+	TypeTrackFlight                      = consts.TypeTrackFlight
+	TypeViewCalendar                     = consts.TypeViewCalendar
+	TypeViewMap                          = consts.TypeViewMap
 	HintForInApp                         = consts.HintForInApp
 	HintForNotification                  = consts.HintForNotification
 )

@@ -38,7 +38,7 @@ func NewAntennaInfo(vm *jni.VM, arg0 int32, arg1 int32, arg2 bool, arg3 *jni.Obj
 			jArg2 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAntennaInfo)), midAntennaInfoInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.BooleanValue(jArg2), jni.ObjectValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAntennaInfo)), midAntennaInfoCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.BooleanValue(jArg2), jni.ObjectValue(arg3))
 		if err != nil {
 			return err
 		}
@@ -70,6 +70,38 @@ func (m *AntennaInfo) DescribeContents() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAvailableNfcAntennas calls android.nfc.NfcAntennaInfo.getAvailableNfcAntennas.
+func (m *AntennaInfo) GetAvailableNfcAntennas() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAntennaInfoGetAvailableNfcAntennas == nil {
+			callErr = fmt.Errorf("android.nfc.NfcAntennaInfo.getAvailableNfcAntennas is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAntennaInfoGetAvailableNfcAntennas,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

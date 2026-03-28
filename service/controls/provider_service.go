@@ -23,6 +23,70 @@ type ProviderService struct {
 	Obj *jni.GlobalRef
 }
 
+// CreatePublisherForAllAvailable calls android.service.controls.ControlsProviderService.createPublisherForAllAvailable.
+func (m *ProviderService) CreatePublisherForAllAvailable() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midProviderServiceCreatePublisherForAllAvailable == nil {
+			callErr = fmt.Errorf("android.service.controls.ControlsProviderService.createPublisherForAllAvailable is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midProviderServiceCreatePublisherForAllAvailable,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// CreatePublisherForSuggested calls android.service.controls.ControlsProviderService.createPublisherForSuggested.
+func (m *ProviderService) CreatePublisherForSuggested() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midProviderServiceCreatePublisherForSuggested == nil {
+			callErr = fmt.Errorf("android.service.controls.ControlsProviderService.createPublisherForSuggested is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midProviderServiceCreatePublisherForSuggested,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // OnBind calls android.service.controls.ControlsProviderService.onBind.
 func (m *ProviderService) OnBind(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

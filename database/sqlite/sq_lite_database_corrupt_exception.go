@@ -32,7 +32,7 @@ func NewSQLiteDatabaseCorruptException(vm *jni.VM) (*SQLiteDatabaseCorruptExcept
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteDatabaseCorruptException)), midSQLiteDatabaseCorruptExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSQLiteDatabaseCorruptException)), midSQLiteDatabaseCorruptExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsContract            *jni.GlobalRef
-	midContractInit        jni.MethodID
+	midContractCtor        jni.MethodID
 	midContractIsProfileId jni.MethodID
 
 	clsContractAggregationExceptions *jni.GlobalRef
@@ -139,7 +139,8 @@ var (
 	midContractSimAccountHashCode         jni.MethodID
 	midContractSimAccountWriteToParcel    jni.MethodID
 
-	clsContractSimContacts *jni.GlobalRef
+	clsContractSimContacts               *jni.GlobalRef
+	midContractSimContactsGetSimAccounts jni.MethodID
 
 	clsContractStatusColumns *jni.GlobalRef
 
@@ -180,7 +181,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContract = env.NewGlobalRef(&c.Object)
-		midContractInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "<init>", "()V")
+		midContractCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsContract)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -829,6 +830,13 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsContractSimContacts = env.NewGlobalRef(&c.Object)
+
+		midContractSimContactsGetSimAccounts, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsContractSimContacts)), "getSimAccounts", "(Landroid/content/ContentResolver;)Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
 
 	}
 

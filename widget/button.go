@@ -33,7 +33,7 @@ func NewButton(vm *jni.VM, arg0 *jni.Object) (*Button, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsButton)), midButtonInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsButton)), midButtonCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

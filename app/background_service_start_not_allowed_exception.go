@@ -36,7 +36,7 @@ func NewBackgroundServiceStartNotAllowedException(vm *jni.VM, arg0 string) (*Bac
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackgroundServiceStartNotAllowedException)), midBackgroundServiceStartNotAllowedExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsBackgroundServiceStartNotAllowedException)), midBackgroundServiceStartNotAllowedExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

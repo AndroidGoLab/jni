@@ -31,7 +31,7 @@ func NewMediaRouteActionProvider(vm *jni.VM, arg0 *jni.Object) (*MediaRouteActio
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaRouteActionProvider)), midMediaRouteActionProviderInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMediaRouteActionProvider)), midMediaRouteActionProviderCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

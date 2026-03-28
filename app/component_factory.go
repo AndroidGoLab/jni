@@ -30,7 +30,7 @@ func NewComponentFactory(vm *jni.VM) (*ComponentFactory, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentFactory)), midComponentFactoryInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentFactory)), midComponentFactoryCtor)
 		if err != nil {
 			return err
 		}

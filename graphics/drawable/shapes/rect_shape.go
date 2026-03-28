@@ -32,7 +32,7 @@ func NewRectShape(vm *jni.VM) (*RectShape, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectShape)), midRectShapeInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRectShape)), midRectShapeCtor)
 		if err != nil {
 			return err
 		}

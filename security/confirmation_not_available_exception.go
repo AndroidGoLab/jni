@@ -32,7 +32,7 @@ func NewConfirmationNotAvailableException(vm *jni.VM) (*ConfirmationNotAvailable
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfirmationNotAvailableException)), midConfirmationNotAvailableExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsConfirmationNotAvailableException)), midConfirmationNotAvailableExceptionCtor)
 		if err != nil {
 			return err
 		}

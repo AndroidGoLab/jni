@@ -33,7 +33,7 @@ func NewMutableFloat(vm *jni.VM, arg0 float32) (*MutableFloat, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableFloat)), midMutableFloatInit, jni.FloatValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableFloat)), midMutableFloatCtor, jni.FloatValue(arg0))
 		if err != nil {
 			return err
 		}

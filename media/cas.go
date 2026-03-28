@@ -39,7 +39,7 @@ func NewCas(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 string, arg3 int32) (
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCas)), midCasInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCas)), midCasCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object), jni.IntValue(arg3))
 		if err != nil {
 			return err
 		}

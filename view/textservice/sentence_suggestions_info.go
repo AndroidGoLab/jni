@@ -33,7 +33,7 @@ func NewSentenceSuggestionsInfo(vm *jni.VM, arg0 *jni.Object) (*SentenceSuggesti
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSentenceSuggestionsInfo)), midSentenceSuggestionsInfoInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSentenceSuggestionsInfo)), midSentenceSuggestionsInfoCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

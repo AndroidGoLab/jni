@@ -23,16 +23,17 @@ var (
 	initOnce sync.Once
 	initErr  error
 
-	clsPageSelection                 *jni.GlobalRef
-	midPageSelectionInit             jni.MethodID
-	midPageSelectionDescribeContents jni.MethodID
-	midPageSelectionGetPage          jni.MethodID
-	midPageSelectionGetStart         jni.MethodID
-	midPageSelectionGetStop          jni.MethodID
-	midPageSelectionWriteToParcel    jni.MethodID
+	clsPageSelection                        *jni.GlobalRef
+	midPageSelectionCtor                    jni.MethodID
+	midPageSelectionDescribeContents        jni.MethodID
+	midPageSelectionGetPage                 jni.MethodID
+	midPageSelectionGetSelectedTextContents jni.MethodID
+	midPageSelectionGetStart                jni.MethodID
+	midPageSelectionGetStop                 jni.MethodID
+	midPageSelectionWriteToParcel           jni.MethodID
 
 	clsBoundary                 *jni.GlobalRef
-	midBoundaryInit             jni.MethodID
+	midBoundaryCtor             jni.MethodID
 	midBoundaryDescribeContents jni.MethodID
 	midBoundaryGetIndex         jni.MethodID
 	midBoundaryGetIsRtl         jni.MethodID
@@ -65,7 +66,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsPageSelection = env.NewGlobalRef(&c.Object)
-		midPageSelectionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "<init>", "(ILandroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;Ljava/util/List;)V")
+		midPageSelectionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "<init>", "(ILandroid/graphics/pdf/models/selection/SelectionBoundary;Landroid/graphics/pdf/models/selection/SelectionBoundary;Ljava/util/List;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -78,6 +79,13 @@ func doInit(env *jni.Env) error {
 		}
 
 		midPageSelectionGetPage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "getPage", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midPageSelectionGetSelectedTextContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsPageSelection)), "getSelectedTextContents", "()Ljava/util/List;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -114,7 +122,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsBoundary = env.NewGlobalRef(&c.Object)
-		midBoundaryInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "<init>", "(Landroid/graphics/Point;)V")
+		midBoundaryCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsBoundary)), "<init>", "(Landroid/graphics/Point;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

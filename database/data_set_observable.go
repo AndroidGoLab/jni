@@ -32,7 +32,7 @@ func NewDataSetObservable(vm *jni.VM) (*DataSetObservable, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDataSetObservable)), midDataSetObservableInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDataSetObservable)), midDataSetObservableCtor)
 		if err != nil {
 			return err
 		}

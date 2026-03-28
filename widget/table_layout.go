@@ -33,7 +33,7 @@ func NewTableLayout(vm *jni.VM, arg0 *jni.Object) (*TableLayout, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableLayout)), midTableLayoutInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTableLayout)), midTableLayoutCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

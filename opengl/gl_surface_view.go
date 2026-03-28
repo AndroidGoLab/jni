@@ -33,7 +33,7 @@ func NewGLSurfaceView(vm *jni.VM, arg0 *jni.Object) (*GLSurfaceView, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLSurfaceView)), midGLSurfaceViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLSurfaceView)), midGLSurfaceViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

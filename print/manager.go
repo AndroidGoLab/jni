@@ -69,6 +69,38 @@ func (m *Manager) Close() {
 	}
 }
 
+// GetPrintJobs calls android.print.PrintManager.getPrintJobs.
+func (m *Manager) GetPrintJobs() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetPrintJobs == nil {
+			callErr = fmt.Errorf("android.print.PrintManager.getPrintJobs is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetPrintJobs,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // IsPrintServiceEnabled calls android.print.PrintManager.isPrintServiceEnabled.
 func (m *Manager) IsPrintServiceEnabled(arg0 *jni.Object) (bool, error) {
 	var result bool

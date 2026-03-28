@@ -23,8 +23,105 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsZenDeviceEffects                             *jni.GlobalRef
+	midZenDeviceEffectsDescribeContents             jni.MethodID
+	midZenDeviceEffectsEquals                       jni.MethodID
+	midZenDeviceEffectsHashCode                     jni.MethodID
+	midZenDeviceEffectsShouldDimWallpaper           jni.MethodID
+	midZenDeviceEffectsShouldDisplayGrayscale       jni.MethodID
+	midZenDeviceEffectsShouldSuppressAmbientDisplay jni.MethodID
+	midZenDeviceEffectsShouldUseNightMode           jni.MethodID
+	midZenDeviceEffectsToString                     jni.MethodID
+	midZenDeviceEffectsWriteToParcel                jni.MethodID
+
+	clsZenDeviceEffectsBuilder                                *jni.GlobalRef
+	midZenDeviceEffectsBuilderBuild                           jni.MethodID
+	midZenDeviceEffectsBuilderSetShouldDimWallpaper           jni.MethodID
+	midZenDeviceEffectsBuilderSetShouldDisplayGrayscale       jni.MethodID
+	midZenDeviceEffectsBuilderSetShouldSuppressAmbientDisplay jni.MethodID
+	midZenDeviceEffectsBuilderSetShouldUseNightMode           jni.MethodID
+
+	clsListenerService                                                *jni.GlobalRef
+	midListenerServiceCancelAllNotifications                          jni.MethodID
+	midListenerServiceCancelNotification1                             jni.MethodID
+	midListenerServiceCancelNotification3_1                           jni.MethodID
+	midListenerServiceCancelNotifications                             jni.MethodID
+	midListenerServiceClearRequestedListenerHints                     jni.MethodID
+	midListenerServiceCreateConversationNotificationChannelForPackage jni.MethodID
+	midListenerServiceGetActiveNotifications0                         jni.MethodID
+	midListenerServiceGetActiveNotifications1_1                       jni.MethodID
+	midListenerServiceGetCurrentInterruptionFilter                    jni.MethodID
+	midListenerServiceGetCurrentListenerHints                         jni.MethodID
+	midListenerServiceGetCurrentRanking                               jni.MethodID
+	midListenerServiceGetNotificationChannelGroups                    jni.MethodID
+	midListenerServiceGetNotificationChannels                         jni.MethodID
+	midListenerServiceGetSnoozedNotifications                         jni.MethodID
+	midListenerServiceOnBind                                          jni.MethodID
+	midListenerServiceOnDestroy                                       jni.MethodID
+	midListenerServiceOnInterruptionFilterChanged                     jni.MethodID
+	midListenerServiceOnListenerConnected                             jni.MethodID
+	midListenerServiceOnListenerDisconnected                          jni.MethodID
+	midListenerServiceOnListenerHintsChanged                          jni.MethodID
+	midListenerServiceOnNotificationChannelGroupModified              jni.MethodID
+	midListenerServiceOnNotificationChannelModified                   jni.MethodID
+	midListenerServiceOnNotificationPosted1                           jni.MethodID
+	midListenerServiceOnNotificationPosted2_1                         jni.MethodID
+	midListenerServiceOnNotificationRankingUpdate                     jni.MethodID
+	midListenerServiceOnNotificationRemoved1                          jni.MethodID
+	midListenerServiceOnNotificationRemoved2_1                        jni.MethodID
+	midListenerServiceOnNotificationRemoved3_2                        jni.MethodID
+	midListenerServiceOnSilentStatusBarIconsVisibilityChanged         jni.MethodID
+	midListenerServiceRequestInterruptionFilter                       jni.MethodID
+	midListenerServiceRequestListenerHints                            jni.MethodID
+	midListenerServiceRequestUnbind0                                  jni.MethodID
+	midListenerServiceSetNotificationsShown                           jni.MethodID
+	midListenerServiceSnoozeNotification                              jni.MethodID
+	midListenerServiceUpdateNotificationChannel                       jni.MethodID
+	midListenerServiceRequestRebind                                   jni.MethodID
+	midListenerServiceRequestUnbind1_1                                jni.MethodID
+
+	clsListenerServiceRanking                                *jni.GlobalRef
+	midListenerServiceRankingCanBubble                       jni.MethodID
+	midListenerServiceRankingCanShowBadge                    jni.MethodID
+	midListenerServiceRankingEquals                          jni.MethodID
+	midListenerServiceRankingGetChannel                      jni.MethodID
+	midListenerServiceRankingGetConversationShortcutInfo     jni.MethodID
+	midListenerServiceRankingGetImportance                   jni.MethodID
+	midListenerServiceRankingGetImportanceExplanation        jni.MethodID
+	midListenerServiceRankingGetKey                          jni.MethodID
+	midListenerServiceRankingGetLastAudiblyAlertedMillis     jni.MethodID
+	midListenerServiceRankingGetLockscreenVisibilityOverride jni.MethodID
+	midListenerServiceRankingGetOverrideGroupKey             jni.MethodID
+	midListenerServiceRankingGetRank                         jni.MethodID
+	midListenerServiceRankingGetSmartActions                 jni.MethodID
+	midListenerServiceRankingGetSmartReplies                 jni.MethodID
+	midListenerServiceRankingGetSuppressedVisualEffects      jni.MethodID
+	midListenerServiceRankingGetUserSentiment                jni.MethodID
+	midListenerServiceRankingIsAmbient                       jni.MethodID
+	midListenerServiceRankingIsConversation                  jni.MethodID
+	midListenerServiceRankingIsSuspended                     jni.MethodID
+	midListenerServiceRankingMatchesInterruptionFilter       jni.MethodID
+
+	clsListenerServiceRankingMap                 *jni.GlobalRef
+	midListenerServiceRankingMapDescribeContents jni.MethodID
+	midListenerServiceRankingMapEquals           jni.MethodID
+	midListenerServiceRankingMapGetOrderedKeys   jni.MethodID
+	midListenerServiceRankingMapGetRanking       jni.MethodID
+	midListenerServiceRankingMapWriteToParcel    jni.MethodID
+
+	clsConditionProviderService                    *jni.GlobalRef
+	midConditionProviderServiceNotifyCondition     jni.MethodID
+	midConditionProviderServiceNotifyConditions    jni.MethodID
+	midConditionProviderServiceOnBind              jni.MethodID
+	midConditionProviderServiceOnConnected         jni.MethodID
+	midConditionProviderServiceOnRequestConditions jni.MethodID
+	midConditionProviderServiceOnSubscribe         jni.MethodID
+	midConditionProviderServiceOnUnsubscribe       jni.MethodID
+	midConditionProviderServiceRequestUnbind       jni.MethodID
+	midConditionProviderServiceRequestRebind       jni.MethodID
+
 	clsCondition                  *jni.GlobalRef
-	midConditionInit              jni.MethodID
+	midConditionCtor              jni.MethodID
 	midConditionCopy              jni.MethodID
 	midConditionDescribeContents  jni.MethodID
 	midConditionEquals            jni.MethodID
@@ -86,99 +183,6 @@ var (
 	midZenPolicyBuilderShowLights             jni.MethodID
 	midZenPolicyBuilderShowPeeking            jni.MethodID
 	midZenPolicyBuilderShowStatusBarIcons     jni.MethodID
-
-	clsConditionProviderService                    *jni.GlobalRef
-	midConditionProviderServiceNotifyCondition     jni.MethodID
-	midConditionProviderServiceNotifyConditions    jni.MethodID
-	midConditionProviderServiceOnBind              jni.MethodID
-	midConditionProviderServiceOnConnected         jni.MethodID
-	midConditionProviderServiceOnRequestConditions jni.MethodID
-	midConditionProviderServiceOnSubscribe         jni.MethodID
-	midConditionProviderServiceOnUnsubscribe       jni.MethodID
-	midConditionProviderServiceRequestUnbind       jni.MethodID
-	midConditionProviderServiceRequestRebind       jni.MethodID
-
-	clsListenerService                                                *jni.GlobalRef
-	midListenerServiceCancelAllNotifications                          jni.MethodID
-	midListenerServiceCancelNotification1                             jni.MethodID
-	midListenerServiceCancelNotification3_1                           jni.MethodID
-	midListenerServiceCancelNotifications                             jni.MethodID
-	midListenerServiceClearRequestedListenerHints                     jni.MethodID
-	midListenerServiceCreateConversationNotificationChannelForPackage jni.MethodID
-	midListenerServiceGetActiveNotifications0                         jni.MethodID
-	midListenerServiceGetActiveNotifications1_1                       jni.MethodID
-	midListenerServiceGetCurrentInterruptionFilter                    jni.MethodID
-	midListenerServiceGetCurrentListenerHints                         jni.MethodID
-	midListenerServiceGetCurrentRanking                               jni.MethodID
-	midListenerServiceGetSnoozedNotifications                         jni.MethodID
-	midListenerServiceOnBind                                          jni.MethodID
-	midListenerServiceOnDestroy                                       jni.MethodID
-	midListenerServiceOnInterruptionFilterChanged                     jni.MethodID
-	midListenerServiceOnListenerConnected                             jni.MethodID
-	midListenerServiceOnListenerDisconnected                          jni.MethodID
-	midListenerServiceOnListenerHintsChanged                          jni.MethodID
-	midListenerServiceOnNotificationChannelGroupModified              jni.MethodID
-	midListenerServiceOnNotificationChannelModified                   jni.MethodID
-	midListenerServiceOnNotificationPosted1                           jni.MethodID
-	midListenerServiceOnNotificationPosted2_1                         jni.MethodID
-	midListenerServiceOnNotificationRankingUpdate                     jni.MethodID
-	midListenerServiceOnNotificationRemoved1                          jni.MethodID
-	midListenerServiceOnNotificationRemoved2_1                        jni.MethodID
-	midListenerServiceOnNotificationRemoved3_2                        jni.MethodID
-	midListenerServiceOnSilentStatusBarIconsVisibilityChanged         jni.MethodID
-	midListenerServiceRequestInterruptionFilter                       jni.MethodID
-	midListenerServiceRequestListenerHints                            jni.MethodID
-	midListenerServiceRequestUnbind0                                  jni.MethodID
-	midListenerServiceSetNotificationsShown                           jni.MethodID
-	midListenerServiceSnoozeNotification                              jni.MethodID
-	midListenerServiceUpdateNotificationChannel                       jni.MethodID
-	midListenerServiceRequestRebind                                   jni.MethodID
-	midListenerServiceRequestUnbind1_1                                jni.MethodID
-
-	clsListenerServiceRanking                                *jni.GlobalRef
-	midListenerServiceRankingCanBubble                       jni.MethodID
-	midListenerServiceRankingCanShowBadge                    jni.MethodID
-	midListenerServiceRankingEquals                          jni.MethodID
-	midListenerServiceRankingGetChannel                      jni.MethodID
-	midListenerServiceRankingGetConversationShortcutInfo     jni.MethodID
-	midListenerServiceRankingGetImportance                   jni.MethodID
-	midListenerServiceRankingGetImportanceExplanation        jni.MethodID
-	midListenerServiceRankingGetKey                          jni.MethodID
-	midListenerServiceRankingGetLastAudiblyAlertedMillis     jni.MethodID
-	midListenerServiceRankingGetLockscreenVisibilityOverride jni.MethodID
-	midListenerServiceRankingGetOverrideGroupKey             jni.MethodID
-	midListenerServiceRankingGetRank                         jni.MethodID
-	midListenerServiceRankingGetSuppressedVisualEffects      jni.MethodID
-	midListenerServiceRankingGetUserSentiment                jni.MethodID
-	midListenerServiceRankingIsAmbient                       jni.MethodID
-	midListenerServiceRankingIsConversation                  jni.MethodID
-	midListenerServiceRankingIsSuspended                     jni.MethodID
-	midListenerServiceRankingMatchesInterruptionFilter       jni.MethodID
-
-	clsListenerServiceRankingMap                 *jni.GlobalRef
-	midListenerServiceRankingMapDescribeContents jni.MethodID
-	midListenerServiceRankingMapEquals           jni.MethodID
-	midListenerServiceRankingMapGetOrderedKeys   jni.MethodID
-	midListenerServiceRankingMapGetRanking       jni.MethodID
-	midListenerServiceRankingMapWriteToParcel    jni.MethodID
-
-	clsZenDeviceEffects                             *jni.GlobalRef
-	midZenDeviceEffectsDescribeContents             jni.MethodID
-	midZenDeviceEffectsEquals                       jni.MethodID
-	midZenDeviceEffectsHashCode                     jni.MethodID
-	midZenDeviceEffectsShouldDimWallpaper           jni.MethodID
-	midZenDeviceEffectsShouldDisplayGrayscale       jni.MethodID
-	midZenDeviceEffectsShouldSuppressAmbientDisplay jni.MethodID
-	midZenDeviceEffectsShouldUseNightMode           jni.MethodID
-	midZenDeviceEffectsToString                     jni.MethodID
-	midZenDeviceEffectsWriteToParcel                jni.MethodID
-
-	clsZenDeviceEffectsBuilder                                *jni.GlobalRef
-	midZenDeviceEffectsBuilderBuild                           jni.MethodID
-	midZenDeviceEffectsBuilderSetShouldDimWallpaper           jni.MethodID
-	midZenDeviceEffectsBuilderSetShouldDisplayGrayscale       jni.MethodID
-	midZenDeviceEffectsBuilderSetShouldSuppressAmbientDisplay jni.MethodID
-	midZenDeviceEffectsBuilderSetShouldUseNightMode           jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -199,6 +203,661 @@ func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
 
+	c, err = env.FindClass("android/service/notification/ZenDeviceEffects")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsZenDeviceEffects = env.NewGlobalRef(&c.Object)
+
+		midZenDeviceEffectsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "hashCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsShouldDimWallpaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldDimWallpaper", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsShouldDisplayGrayscale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldDisplayGrayscale", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsShouldSuppressAmbientDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldSuppressAmbientDisplay", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsShouldUseNightMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldUseNightMode", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "toString", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/notification/ZenDeviceEffects$Builder")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsZenDeviceEffectsBuilder = env.NewGlobalRef(&c.Object)
+
+		midZenDeviceEffectsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "build", "()Landroid/service/notification/ZenDeviceEffects;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsBuilderSetShouldDimWallpaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldDimWallpaper", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsBuilderSetShouldDisplayGrayscale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldDisplayGrayscale", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsBuilderSetShouldSuppressAmbientDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldSuppressAmbientDisplay", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midZenDeviceEffectsBuilderSetShouldUseNightMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldUseNightMode", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/notification/NotificationListenerService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsListenerService = env.NewGlobalRef(&c.Object)
+
+		midListenerServiceCancelAllNotifications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelAllNotifications", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceCancelNotification1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelNotification", "(Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceCancelNotification3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelNotification", "(Ljava/lang/String;Ljava/lang/String;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceCancelNotifications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelNotifications", "([Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceClearRequestedListenerHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "clearRequestedListenerHints", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceCreateConversationNotificationChannelForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "createConversationNotificationChannelForPackage", "(Ljava/lang/String;Landroid/os/UserHandle;Ljava/lang/String;Ljava/lang/String;)Landroid/app/NotificationChannel;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetActiveNotifications0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getActiveNotifications", "()[Landroid/service/notification/StatusBarNotification;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetActiveNotifications1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getActiveNotifications", "([Ljava/lang/String;)[Landroid/service/notification/StatusBarNotification;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetCurrentInterruptionFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getCurrentInterruptionFilter", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetCurrentListenerHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getCurrentListenerHints", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetCurrentRanking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getCurrentRanking", "()Landroid/service/notification/NotificationListenerService$RankingMap;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetNotificationChannelGroups, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getNotificationChannelGroups", "(Ljava/lang/String;Landroid/os/UserHandle;)Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetNotificationChannels, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getNotificationChannels", "(Ljava/lang/String;Landroid/os/UserHandle;)Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceGetSnoozedNotifications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getSnoozedNotifications", "()[Landroid/service/notification/StatusBarNotification;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onDestroy", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnInterruptionFilterChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onInterruptionFilterChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnListenerConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onListenerConnected", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnListenerDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onListenerDisconnected", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnListenerHintsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onListenerHintsChanged", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationChannelGroupModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationChannelGroupModified", "(Ljava/lang/String;Landroid/os/UserHandle;Landroid/app/NotificationChannelGroup;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationChannelModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationChannelModified", "(Ljava/lang/String;Landroid/os/UserHandle;Landroid/app/NotificationChannel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationPosted1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationPosted", "(Landroid/service/notification/StatusBarNotification;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationPosted2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationPosted", "(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/NotificationListenerService$RankingMap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationRankingUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRankingUpdate", "(Landroid/service/notification/NotificationListenerService$RankingMap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationRemoved1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRemoved", "(Landroid/service/notification/StatusBarNotification;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationRemoved2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRemoved", "(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/NotificationListenerService$RankingMap;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnNotificationRemoved3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRemoved", "(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/NotificationListenerService$RankingMap;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceOnSilentStatusBarIconsVisibilityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onSilentStatusBarIconsVisibilityChanged", "(Z)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRequestInterruptionFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestInterruptionFilter", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRequestListenerHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestListenerHints", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRequestUnbind0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestUnbind", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceSetNotificationsShown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "setNotificationsShown", "([Ljava/lang/String;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceSnoozeNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "snoozeNotification", "(Ljava/lang/String;J)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceUpdateNotificationChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "updateNotificationChannel", "(Ljava/lang/String;Landroid/os/UserHandle;Landroid/app/NotificationChannel;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRequestRebind, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestRebind", "(Landroid/content/ComponentName;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRequestUnbind1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestUnbind", "(Landroid/content/ComponentName;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/notification/NotificationListenerService$Ranking")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsListenerServiceRanking = env.NewGlobalRef(&c.Object)
+
+		midListenerServiceRankingCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "canBubble", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "canShowBadge", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getChannel", "()Landroid/app/NotificationChannel;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetConversationShortcutInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getConversationShortcutInfo", "()Landroid/content/pm/ShortcutInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getImportance", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetImportanceExplanation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getImportanceExplanation", "()Ljava/lang/CharSequence;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getKey", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetLastAudiblyAlertedMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getLastAudiblyAlertedMillis", "()J")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetLockscreenVisibilityOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getLockscreenVisibilityOverride", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetOverrideGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getOverrideGroupKey", "()Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetRank, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getRank", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetSmartActions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getSmartActions", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetSmartReplies, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getSmartReplies", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetSuppressedVisualEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getSuppressedVisualEffects", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingGetUserSentiment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getUserSentiment", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingIsAmbient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "isAmbient", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "isConversation", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingIsSuspended, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "isSuspended", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingMatchesInterruptionFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "matchesInterruptionFilter", "()Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/notification/NotificationListenerService$RankingMap")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsListenerServiceRankingMap = env.NewGlobalRef(&c.Object)
+
+		midListenerServiceRankingMapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingMapEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "equals", "(Ljava/lang/Object;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingMapGetOrderedKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "getOrderedKeys", "()[Ljava/lang/String;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingMapGetRanking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "getRanking", "(Ljava/lang/String;Landroid/service/notification/NotificationListenerService$Ranking;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midListenerServiceRankingMapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/notification/ConditionProviderService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsConditionProviderService = env.NewGlobalRef(&c.Object)
+
+		midConditionProviderServiceNotifyCondition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "notifyCondition", "(Landroid/service/notification/Condition;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceNotifyConditions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "notifyConditions", "([Landroid/service/notification/Condition;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceOnConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onConnected", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceOnRequestConditions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onRequestConditions", "(I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceOnSubscribe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onSubscribe", "(Landroid/net/Uri;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceOnUnsubscribe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onUnsubscribe", "(Landroid/net/Uri;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceRequestUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "requestUnbind", "()V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midConditionProviderServiceRequestRebind, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "requestRebind", "(Landroid/content/ComponentName;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/service/notification/Condition")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -206,7 +865,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsCondition = env.NewGlobalRef(&c.Object)
-		midConditionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCondition)), "<init>", "(Landroid/net/Uri;Ljava/lang/String;I)V")
+		midConditionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsCondition)), "<init>", "(Landroid/net/Uri;Ljava/lang/String;I)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -624,633 +1283,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midZenPolicyBuilderShowStatusBarIcons, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenPolicyBuilder)), "showStatusBarIcons", "(Z)Landroid/service/notification/ZenPolicy$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/notification/ConditionProviderService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsConditionProviderService = env.NewGlobalRef(&c.Object)
-
-		midConditionProviderServiceNotifyCondition, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "notifyCondition", "(Landroid/service/notification/Condition;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceNotifyConditions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "notifyConditions", "([Landroid/service/notification/Condition;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceOnConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onConnected", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceOnRequestConditions, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onRequestConditions", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceOnSubscribe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onSubscribe", "(Landroid/net/Uri;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceOnUnsubscribe, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "onUnsubscribe", "(Landroid/net/Uri;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceRequestUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "requestUnbind", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midConditionProviderServiceRequestRebind, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsConditionProviderService)), "requestRebind", "(Landroid/content/ComponentName;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/notification/NotificationListenerService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsListenerService = env.NewGlobalRef(&c.Object)
-
-		midListenerServiceCancelAllNotifications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelAllNotifications", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceCancelNotification1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelNotification", "(Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceCancelNotification3_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelNotification", "(Ljava/lang/String;Ljava/lang/String;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceCancelNotifications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "cancelNotifications", "([Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceClearRequestedListenerHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "clearRequestedListenerHints", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceCreateConversationNotificationChannelForPackage, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "createConversationNotificationChannelForPackage", "(Ljava/lang/String;Landroid/os/UserHandle;Ljava/lang/String;Ljava/lang/String;)Landroid/app/NotificationChannel;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceGetActiveNotifications0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getActiveNotifications", "()[Landroid/service/notification/StatusBarNotification;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceGetActiveNotifications1_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getActiveNotifications", "([Ljava/lang/String;)[Landroid/service/notification/StatusBarNotification;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceGetCurrentInterruptionFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getCurrentInterruptionFilter", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceGetCurrentListenerHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getCurrentListenerHints", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceGetCurrentRanking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getCurrentRanking", "()Landroid/service/notification/NotificationListenerService$RankingMap;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceGetSnoozedNotifications, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "getSnoozedNotifications", "()[Landroid/service/notification/StatusBarNotification;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnDestroy, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onDestroy", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnInterruptionFilterChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onInterruptionFilterChanged", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnListenerConnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onListenerConnected", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnListenerDisconnected, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onListenerDisconnected", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnListenerHintsChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onListenerHintsChanged", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationChannelGroupModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationChannelGroupModified", "(Ljava/lang/String;Landroid/os/UserHandle;Landroid/app/NotificationChannelGroup;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationChannelModified, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationChannelModified", "(Ljava/lang/String;Landroid/os/UserHandle;Landroid/app/NotificationChannel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationPosted1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationPosted", "(Landroid/service/notification/StatusBarNotification;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationPosted2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationPosted", "(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/NotificationListenerService$RankingMap;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationRankingUpdate, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRankingUpdate", "(Landroid/service/notification/NotificationListenerService$RankingMap;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationRemoved1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRemoved", "(Landroid/service/notification/StatusBarNotification;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationRemoved2_1, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRemoved", "(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/NotificationListenerService$RankingMap;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnNotificationRemoved3_2, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onNotificationRemoved", "(Landroid/service/notification/StatusBarNotification;Landroid/service/notification/NotificationListenerService$RankingMap;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceOnSilentStatusBarIconsVisibilityChanged, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "onSilentStatusBarIconsVisibilityChanged", "(Z)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRequestInterruptionFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestInterruptionFilter", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRequestListenerHints, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestListenerHints", "(I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRequestUnbind0, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestUnbind", "()V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceSetNotificationsShown, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "setNotificationsShown", "([Ljava/lang/String;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceSnoozeNotification, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "snoozeNotification", "(Ljava/lang/String;J)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceUpdateNotificationChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "updateNotificationChannel", "(Ljava/lang/String;Landroid/os/UserHandle;Landroid/app/NotificationChannel;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRequestRebind, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestRebind", "(Landroid/content/ComponentName;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRequestUnbind1_1, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsListenerService)), "requestUnbind", "(Landroid/content/ComponentName;)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/notification/NotificationListenerService$Ranking")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsListenerServiceRanking = env.NewGlobalRef(&c.Object)
-
-		midListenerServiceRankingCanBubble, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "canBubble", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingCanShowBadge, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "canShowBadge", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetChannel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getChannel", "()Landroid/app/NotificationChannel;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetConversationShortcutInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getConversationShortcutInfo", "()Landroid/content/pm/ShortcutInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetImportance, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getImportance", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetImportanceExplanation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getImportanceExplanation", "()Ljava/lang/CharSequence;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getKey", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetLastAudiblyAlertedMillis, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getLastAudiblyAlertedMillis", "()J")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetLockscreenVisibilityOverride, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getLockscreenVisibilityOverride", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetOverrideGroupKey, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getOverrideGroupKey", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetRank, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getRank", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetSuppressedVisualEffects, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getSuppressedVisualEffects", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingGetUserSentiment, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "getUserSentiment", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingIsAmbient, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "isAmbient", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingIsConversation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "isConversation", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingIsSuspended, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "isSuspended", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingMatchesInterruptionFilter, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRanking)), "matchesInterruptionFilter", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/notification/NotificationListenerService$RankingMap")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsListenerServiceRankingMap = env.NewGlobalRef(&c.Object)
-
-		midListenerServiceRankingMapDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingMapEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingMapGetOrderedKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "getOrderedKeys", "()[Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingMapGetRanking, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "getRanking", "(Ljava/lang/String;Landroid/service/notification/NotificationListenerService$Ranking;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midListenerServiceRankingMapWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsListenerServiceRankingMap)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/notification/ZenDeviceEffects")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsZenDeviceEffects = env.NewGlobalRef(&c.Object)
-
-		midZenDeviceEffectsDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsEquals, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "equals", "(Ljava/lang/Object;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsHashCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "hashCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsShouldDimWallpaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldDimWallpaper", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsShouldDisplayGrayscale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldDisplayGrayscale", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsShouldSuppressAmbientDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldSuppressAmbientDisplay", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsShouldUseNightMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "shouldUseNightMode", "()Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsToString, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "toString", "()Ljava/lang/String;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffects)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/notification/ZenDeviceEffects$Builder")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsZenDeviceEffectsBuilder = env.NewGlobalRef(&c.Object)
-
-		midZenDeviceEffectsBuilderBuild, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "build", "()Landroid/service/notification/ZenDeviceEffects;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsBuilderSetShouldDimWallpaper, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldDimWallpaper", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsBuilderSetShouldDisplayGrayscale, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldDisplayGrayscale", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsBuilderSetShouldSuppressAmbientDisplay, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldSuppressAmbientDisplay", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midZenDeviceEffectsBuilderSetShouldUseNightMode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsZenDeviceEffectsBuilder)), "setShouldUseNightMode", "(Z)Landroid/service/notification/ZenDeviceEffects$Builder;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

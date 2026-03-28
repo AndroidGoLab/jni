@@ -44,7 +44,7 @@ func NewAuthenticatorDescription(vm *jni.VM, arg0 string, arg1 string, arg2 int3
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), midAuthenticatorDescriptionInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAuthenticatorDescription)), midAuthenticatorDescriptionCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.IntValue(arg2), jni.IntValue(arg3), jni.IntValue(arg4), jni.IntValue(arg5))
 		if err != nil {
 			return err
 		}

@@ -36,7 +36,7 @@ func NewMissingForegroundServiceTypeException(vm *jni.VM, arg0 string) (*Missing
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMissingForegroundServiceTypeException)), midMissingForegroundServiceTypeExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMissingForegroundServiceTypeException)), midMissingForegroundServiceTypeExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

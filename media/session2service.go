@@ -46,6 +46,38 @@ func (m *Session2Service) AddSession(arg0 *jni.Object) error {
 	return callErr
 }
 
+// GetSessions calls android.media.MediaSession2Service.getSessions.
+func (m *Session2Service) GetSessions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSession2ServiceGetSessions == nil {
+			callErr = fmt.Errorf("android.media.MediaSession2Service.getSessions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSession2ServiceGetSessions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // OnBind calls android.media.MediaSession2Service.onBind.
 func (m *Session2Service) OnBind(arg0 *jni.Object) (*jni.Object, error) {
 	var result *jni.Object

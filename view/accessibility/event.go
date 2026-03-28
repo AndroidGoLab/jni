@@ -32,7 +32,7 @@ func NewEvent(vm *jni.VM) (*Event, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEvent)), midEventInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEvent)), midEventCtor)
 		if err != nil {
 			return err
 		}

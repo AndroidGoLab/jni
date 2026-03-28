@@ -30,15 +30,31 @@ const (
 	FinalStateSucceeded                    = consts.FinalStateSucceeded
 	ProgressPercentUnknown                 = consts.ProgressPercentUnknown
 	TimeSinceCreatedUnknown                = consts.TimeSinceCreatedUnknown
-	SourceTypeCamera                       = consts.SourceTypeCamera
-	SourceTypeEditingSession               = consts.SourceTypeEditingSession
-	SourceTypeGallery                      = consts.SourceTypeGallery
-	SourceTypeGenerated                    = consts.SourceTypeGenerated
-	SourceTypeLocalFile                    = consts.SourceTypeLocalFile
-	SourceTypeRemoteFile                   = consts.SourceTypeRemoteFile
-	SourceTypeRemoteLiveStream             = consts.SourceTypeRemoteLiveStream
-	SourceTypeUnspecified                  = consts.SourceTypeUnspecified
-	ValueUnspecified                       = consts.ValueUnspecified
+	StateAbandoned                         = consts.StateAbandoned
+	StateBuffering                         = consts.StateBuffering
+	StateEnded                             = consts.StateEnded
+	StateFailed                            = consts.StateFailed
+	StateInterruptedByAd                   = consts.StateInterruptedByAd
+	StateJoiningBackground                 = consts.StateJoiningBackground
+	StateJoiningForeground                 = consts.StateJoiningForeground
+	StateNotStarted                        = consts.StateNotStarted
+	StatePaused                            = consts.StatePaused
+	StatePausedBuffering                   = consts.StatePausedBuffering
+	StatePlaying                           = consts.StatePlaying
+	StateSeeking                           = consts.StateSeeking
+	StateStopped                           = consts.StateStopped
+	StateSuppressed                        = consts.StateSuppressed
+	StateSuppressedBuffering               = consts.StateSuppressedBuffering
+	TrackChangeReasonAdaptive              = consts.TrackChangeReasonAdaptive
+	TrackChangeReasonInitial               = consts.TrackChangeReasonInitial
+	TrackChangeReasonManual                = consts.TrackChangeReasonManual
+	TrackChangeReasonOther                 = consts.TrackChangeReasonOther
+	TrackChangeReasonUnknown               = consts.TrackChangeReasonUnknown
+	TrackStateOff                          = consts.TrackStateOff
+	TrackStateOn                           = consts.TrackStateOn
+	TrackTypeAudio                         = consts.TrackTypeAudio
+	TrackTypeText                          = consts.TrackTypeText
+	TrackTypeVideo                         = consts.TrackTypeVideo
 	ContentTypeAd                          = consts.ContentTypeAd
 	ContentTypeMain                        = consts.ContentTypeMain
 	ContentTypeOther                       = consts.ContentTypeOther
@@ -100,21 +116,6 @@ const (
 	ErrorPlayerRemote                      = consts.ErrorPlayerRemote
 	ErrorRuntime                           = consts.ErrorRuntime
 	ErrorUnknown                           = consts.ErrorUnknown
-	StateAbandoned                         = consts.StateAbandoned
-	StateBuffering                         = consts.StateBuffering
-	StateEnded                             = consts.StateEnded
-	StateFailed                            = consts.StateFailed
-	StateInterruptedByAd                   = consts.StateInterruptedByAd
-	StateJoiningBackground                 = consts.StateJoiningBackground
-	StateJoiningForeground                 = consts.StateJoiningForeground
-	StateNotStarted                        = consts.StateNotStarted
-	StatePaused                            = consts.StatePaused
-	StatePausedBuffering                   = consts.StatePausedBuffering
-	StatePlaying                           = consts.StatePlaying
-	StateSeeking                           = consts.StateSeeking
-	StateStopped                           = consts.StateStopped
-	StateSuppressed                        = consts.StateSuppressed
-	StateSuppressedBuffering               = consts.StateSuppressedBuffering
 	NetworkType2g                          = consts.NetworkType2g
 	NetworkType3g                          = consts.NetworkType3g
 	NetworkType4g                          = consts.NetworkType4g
@@ -125,17 +126,16 @@ const (
 	NetworkTypeOther                       = consts.NetworkTypeOther
 	NetworkTypeUnknown                     = consts.NetworkTypeUnknown
 	NetworkTypeWifi                        = consts.NetworkTypeWifi
-	TrackChangeReasonAdaptive              = consts.TrackChangeReasonAdaptive
-	TrackChangeReasonInitial               = consts.TrackChangeReasonInitial
-	TrackChangeReasonManual                = consts.TrackChangeReasonManual
-	TrackChangeReasonOther                 = consts.TrackChangeReasonOther
-	TrackChangeReasonUnknown               = consts.TrackChangeReasonUnknown
-	TrackStateOff                          = consts.TrackStateOff
-	TrackStateOn                           = consts.TrackStateOn
-	TrackTypeAudio                         = consts.TrackTypeAudio
-	TrackTypeText                          = consts.TrackTypeText
-	TrackTypeVideo                         = consts.TrackTypeVideo
 	LogSessionIdNone                       = consts.LogSessionIdNone
+	SourceTypeCamera                       = consts.SourceTypeCamera
+	SourceTypeEditingSession               = consts.SourceTypeEditingSession
+	SourceTypeGallery                      = consts.SourceTypeGallery
+	SourceTypeGenerated                    = consts.SourceTypeGenerated
+	SourceTypeLocalFile                    = consts.SourceTypeLocalFile
+	SourceTypeRemoteFile                   = consts.SourceTypeRemoteFile
+	SourceTypeRemoteLiveStream             = consts.SourceTypeRemoteLiveStream
+	SourceTypeUnspecified                  = consts.SourceTypeUnspecified
+	ValueUnspecified                       = consts.ValueUnspecified
 )
 
 const (
@@ -147,6 +147,7 @@ const (
 	OperationTypeVideoEdit        = consts.OperationTypeVideoEdit
 	OperationTypeVideoTranscode   = consts.OperationTypeVideoTranscode
 	OperationTypeVideoTransmux    = consts.OperationTypeVideoTransmux
+	InvalidTimestamp              = consts.InvalidTimestamp
 	DataTypeAudio                 = consts.DataTypeAudio
 	DataTypeDepth                 = consts.DataTypeDepth
 	DataTypeGainMap               = consts.DataTypeGainMap
@@ -158,7 +159,6 @@ const (
 	DataTypeSpatialAudio          = consts.DataTypeSpatialAudio
 	DataTypeSpeedSettingCuePoints = consts.DataTypeSpeedSettingCuePoints
 	DataTypeVideo                 = consts.DataTypeVideo
-	InvalidTimestamp              = consts.InvalidTimestamp
 )
 
 const (

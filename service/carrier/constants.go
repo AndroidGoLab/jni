@@ -5,7 +5,11 @@ package carrier
 import "github.com/AndroidGoLab/jni/service/carrier/consts"
 
 const (
-	Creator                                                           = consts.Creator
+	CarrierServiceInterface = consts.CarrierServiceInterface
+	ServiceInterface        = consts.ServiceInterface
+)
+
+const (
 	DownloadStatusError                                               = consts.DownloadStatusError
 	DownloadStatusMmsErrorConfigurationError                          = consts.DownloadStatusMmsErrorConfigurationError
 	DownloadStatusMmsErrorDataDisabled                                = consts.DownloadStatusMmsErrorDataDisabled
@@ -59,9 +63,5 @@ const (
 	SendStatusResultSmsBlockedDuringEmergency                         = consts.SendStatusResultSmsBlockedDuringEmergency
 	SendStatusResultSmsSendRetryFailed                                = consts.SendStatusResultSmsSendRetryFailed
 	SendStatusRetryOnCarrierNetwork                                   = consts.SendStatusRetryOnCarrierNetwork
-)
-
-const (
-	ServiceInterface        = consts.ServiceInterface
-	CarrierServiceInterface = consts.CarrierServiceInterface
+	Creator                                                           = consts.Creator
 )

@@ -5,27 +5,6 @@ package display
 import "github.com/AndroidGoLab/jni/hardware/display/consts"
 
 const (
-	DisplayCategoryPresentation = consts.DisplayCategoryPresentation
-)
-
-const (
-	EventTypeDisplayAdded       = consts.EventTypeDisplayAdded
-	EventTypeDisplayChanged     = consts.EventTypeDisplayChanged
-	EventTypeDisplayRefreshRate = consts.EventTypeDisplayRefreshRate
-	EventTypeDisplayRemoved     = consts.EventTypeDisplayRemoved
-	EventTypeDisplayState       = consts.EventTypeDisplayState
-)
-
-const (
-	MatchContentFramerateAlways        = consts.MatchContentFramerateAlways
-	MatchContentFramerateNever         = consts.MatchContentFramerateNever
-	MatchContentFramerateSeamlesssOnly = consts.MatchContentFramerateSeamlesssOnly
-	MatchContentFramerateUnknown       = consts.MatchContentFramerateUnknown
-	VirtualDisplayFlagAutoMirror       = consts.VirtualDisplayFlagAutoMirror
-	VirtualDisplayFlagOwnContentOnly   = consts.VirtualDisplayFlagOwnContentOnly
-	VirtualDisplayFlagPresentation     = consts.VirtualDisplayFlagPresentation
-	VirtualDisplayFlagPublic           = consts.VirtualDisplayFlagPublic
-	VirtualDisplayFlagSecure           = consts.VirtualDisplayFlagSecure
 	ConnectionToSinkBuiltIn            = consts.ConnectionToSinkBuiltIn
 	ConnectionToSinkDirect             = consts.ConnectionToSinkDirect
 	ConnectionToSinkTransitive         = consts.ConnectionToSinkTransitive
@@ -35,4 +14,25 @@ const (
 	HdrConversionPassthrough           = consts.HdrConversionPassthrough
 	HdrConversionSystem                = consts.HdrConversionSystem
 	HdrConversionUnsupported           = consts.HdrConversionUnsupported
+	MatchContentFramerateAlways        = consts.MatchContentFramerateAlways
+	MatchContentFramerateNever         = consts.MatchContentFramerateNever
+	MatchContentFramerateSeamlesssOnly = consts.MatchContentFramerateSeamlesssOnly
+	MatchContentFramerateUnknown       = consts.MatchContentFramerateUnknown
+	VirtualDisplayFlagAutoMirror       = consts.VirtualDisplayFlagAutoMirror
+	VirtualDisplayFlagOwnContentOnly   = consts.VirtualDisplayFlagOwnContentOnly
+	VirtualDisplayFlagPresentation     = consts.VirtualDisplayFlagPresentation
+	VirtualDisplayFlagPublic           = consts.VirtualDisplayFlagPublic
+	VirtualDisplayFlagSecure           = consts.VirtualDisplayFlagSecure
+)
+
+const (
+	DisplayCategoryPresentation = consts.DisplayCategoryPresentation
+)
+
+const (
+	EventTypeDisplayAdded       = consts.EventTypeDisplayAdded
+	EventTypeDisplayChanged     = consts.EventTypeDisplayChanged
+	EventTypeDisplayRefreshRate = consts.EventTypeDisplayRefreshRate
+	EventTypeDisplayRemoved     = consts.EventTypeDisplayRemoved
+	EventTypeDisplayState       = consts.EventTypeDisplayState
 )

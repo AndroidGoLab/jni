@@ -33,7 +33,7 @@ func NewAmbientBacklightEvent(vm *jni.VM, arg0 int32, arg1 *jni.Object) (*Ambien
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightEvent)), midAmbientBacklightEventInit, jni.IntValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAmbientBacklightEvent)), midAmbientBacklightEventCtor, jni.IntValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewNumberingSystem(vm *jni.VM) (*NumberingSystem, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNumberingSystem)), midNumberingSystemInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNumberingSystem)), midNumberingSystemCtor)
 		if err != nil {
 			return err
 		}

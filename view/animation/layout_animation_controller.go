@@ -33,7 +33,7 @@ func NewLayoutAnimationController(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLayoutAnimationController)), midLayoutAnimationControllerInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLayoutAnimationController)), midLayoutAnimationControllerCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

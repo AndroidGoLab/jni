@@ -33,7 +33,7 @@ func NewCodecList(vm *jni.VM, arg0 int32) (*CodecList, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCodecList)), midCodecListInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCodecList)), midCodecListCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

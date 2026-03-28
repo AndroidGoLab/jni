@@ -32,7 +32,7 @@ func NewMessagePattern(vm *jni.VM) (*MessagePattern, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessagePattern)), midMessagePatternInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessagePattern)), midMessagePatternCtor)
 		if err != nil {
 			return err
 		}

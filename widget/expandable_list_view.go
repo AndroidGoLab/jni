@@ -33,7 +33,7 @@ func NewExpandableListView(vm *jni.VM, arg0 *jni.Object) (*ExpandableListView, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExpandableListView)), midExpandableListViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExpandableListView)), midExpandableListViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

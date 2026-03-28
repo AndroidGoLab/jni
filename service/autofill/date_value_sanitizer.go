@@ -33,7 +33,7 @@ func NewDateValueSanitizer(vm *jni.VM, arg0 *jni.Object) (*DateValueSanitizer, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateValueSanitizer)), midDateValueSanitizerInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDateValueSanitizer)), midDateValueSanitizerCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

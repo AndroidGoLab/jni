@@ -69,6 +69,38 @@ func (m *InputManager) Close() {
 	}
 }
 
+// GetBlockedRatings calls android.media.tv.TvInputManager.getBlockedRatings.
+func (m *InputManager) GetBlockedRatings() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInputManagerGetBlockedRatings == nil {
+			callErr = fmt.Errorf("android.media.tv.TvInputManager.getBlockedRatings is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInputManagerGetBlockedRatings,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetInputState calls android.media.tv.TvInputManager.getInputState.
 func (m *InputManager) GetInputState(arg0 string) (int32, error) {
 	var result int32
@@ -122,6 +154,38 @@ func (m *InputManager) GetTvInputInfo(arg0 string) (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midInputManagerGetTvInputInfo, jni.ObjectValue(&jArg0.Object),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTvInputList calls android.media.tv.TvInputManager.getTvInputList.
+func (m *InputManager) GetTvInputList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInputManagerGetTvInputList == nil {
+			callErr = fmt.Errorf("android.media.tv.TvInputManager.getTvInputList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInputManagerGetTvInputList,
 		)
 		if callErr != nil {
 			return callErr

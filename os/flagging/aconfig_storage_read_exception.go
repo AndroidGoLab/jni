@@ -39,7 +39,7 @@ func NewAconfigStorageReadException(vm *jni.VM, arg0 int32, arg1 string) (*Aconf
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), midAconfigStorageReadExceptionInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAconfigStorageReadException)), midAconfigStorageReadExceptionCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

@@ -23,6 +23,39 @@ type AlphabeticIndexImmutableIndex struct {
 	Obj *jni.GlobalRef
 }
 
+// GetBucket calls android.icu.text.AlphabeticIndex$ImmutableIndex.getBucket.
+func (m *AlphabeticIndexImmutableIndex) GetBucket(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexImmutableIndexGetBucket == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex$ImmutableIndex.getBucket is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexImmutableIndexGetBucket, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetBucketCount calls android.icu.text.AlphabeticIndex$ImmutableIndex.getBucketCount.
 func (m *AlphabeticIndexImmutableIndex) GetBucketCount() (int32, error) {
 	var result int32
@@ -73,6 +106,38 @@ func (m *AlphabeticIndexImmutableIndex) GetBucketIndex(arg0 string) (int32, erro
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// Iterator calls android.icu.text.AlphabeticIndex$ImmutableIndex.iterator.
+func (m *AlphabeticIndexImmutableIndex) Iterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midAlphabeticIndexImmutableIndexIterator == nil {
+			callErr = fmt.Errorf("android.icu.text.AlphabeticIndex$ImmutableIndex.iterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midAlphabeticIndexImmutableIndexIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

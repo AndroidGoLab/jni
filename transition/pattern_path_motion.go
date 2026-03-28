@@ -33,7 +33,7 @@ func NewPatternPathMotion(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Patt
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPatternPathMotion)), midPatternPathMotionInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPatternPathMotion)), midPatternPathMotionCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

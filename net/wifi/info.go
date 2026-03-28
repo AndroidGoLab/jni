@@ -76,6 +76,38 @@ func (m *Info) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetAffiliatedMloLinks calls android.net.wifi.WifiInfo.getAffiliatedMloLinks.
+func (m *Info) GetAffiliatedMloLinks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInfoGetAffiliatedMloLinks == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getAffiliatedMloLinks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInfoGetAffiliatedMloLinks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetApMldMacAddress calls android.net.wifi.WifiInfo.getApMldMacAddress.
 func (m *Info) GetApMldMacAddress() (*jni.Object, error) {
 	var result *jni.Object
@@ -152,6 +184,38 @@ func (m *Info) GetApplicableRedactions() (int64, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetAssociatedMloLinks calls android.net.wifi.WifiInfo.getAssociatedMloLinks.
+func (m *Info) GetAssociatedMloLinks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInfoGetAssociatedMloLinks == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getAssociatedMloLinks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInfoGetAssociatedMloLinks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -257,6 +321,38 @@ func (m *Info) GetHiddenSSID() (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInformationElements calls android.net.wifi.WifiInfo.getInformationElements.
+func (m *Info) GetInformationElements() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midInfoGetInformationElements == nil {
+			callErr = fmt.Errorf("android.net.wifi.WifiInfo.getInformationElements is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midInfoGetInformationElements,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

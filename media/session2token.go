@@ -33,7 +33,7 @@ func NewSession2Token(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Session2
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession2Token)), midSession2TokenInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession2Token)), midSession2TokenCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

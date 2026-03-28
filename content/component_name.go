@@ -33,7 +33,7 @@ func NewComponentName(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Componen
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentName)), midComponentNameInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsComponentName)), midComponentNameCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

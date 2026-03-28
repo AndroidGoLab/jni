@@ -32,7 +32,7 @@ func NewPackageItemInfo(vm *jni.VM) (*PackageItemInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageItemInfo)), midPackageItemInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPackageItemInfo)), midPackageItemInfoCtor)
 		if err != nil {
 			return err
 		}

@@ -38,7 +38,7 @@ func NewSurfaceSyncGroup(vm *jni.VM, arg0 string) (*SurfaceSyncGroup, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceSyncGroup)), midSurfaceSyncGroupInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSurfaceSyncGroup)), midSurfaceSyncGroupCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

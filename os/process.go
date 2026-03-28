@@ -32,7 +32,7 @@ func NewProcess(vm *jni.VM) (*Process, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProcess)), midProcessInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsProcess)), midProcessCtor)
 		if err != nil {
 			return err
 		}

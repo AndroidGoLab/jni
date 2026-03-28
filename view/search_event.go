@@ -33,7 +33,7 @@ func NewSearchEvent(vm *jni.VM, arg0 *jni.Object) (*SearchEvent, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchEvent)), midSearchEventInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSearchEvent)), midSearchEventCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewLuhnChecksumValidator(vm *jni.VM, arg0 *jni.Object) (*LuhnChecksumValida
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLuhnChecksumValidator)), midLuhnChecksumValidatorInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLuhnChecksumValidator)), midLuhnChecksumValidatorCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

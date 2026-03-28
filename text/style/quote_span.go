@@ -32,7 +32,7 @@ func NewQuoteSpan(vm *jni.VM) (*QuoteSpan, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), midQuoteSpanInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsQuoteSpan)), midQuoteSpanCtor)
 		if err != nil {
 			return err
 		}

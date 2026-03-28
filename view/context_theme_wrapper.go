@@ -33,7 +33,7 @@ func NewContextThemeWrapper(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Object) (*Co
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContextThemeWrapper)), midContextThemeWrapperInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsContextThemeWrapper)), midContextThemeWrapperCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -32,7 +32,7 @@ func NewPhoneNumberFormattingTextWatcher(vm *jni.VM) (*PhoneNumberFormattingText
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneNumberFormattingTextWatcher)), midPhoneNumberFormattingTextWatcherInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPhoneNumberFormattingTextWatcher)), midPhoneNumberFormattingTextWatcherCtor)
 		if err != nil {
 			return err
 		}

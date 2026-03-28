@@ -33,7 +33,7 @@ func NewView(vm *jni.VM, arg0 *jni.Object) (*View, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsView)), midViewInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsView)), midViewCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
@@ -3219,6 +3219,39 @@ func (m *View) GetFocusable() (int32, error) {
 	return result, callErr
 }
 
+// GetFocusables calls android.view.View.getFocusables.
+func (m *View) GetFocusables(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewGetFocusables == nil {
+			callErr = fmt.Errorf("android.view.View.getFocusables is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewGetFocusables, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetFocusedRect calls android.view.View.getFocusedRect.
 func (m *View) GetFocusedRect(arg0 *jni.Object) error {
 
@@ -5073,6 +5106,38 @@ func (m *View) GetPointerIcon() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetPreferKeepClearRects calls android.view.View.getPreferKeepClearRects.
+func (m *View) GetPreferKeepClearRects() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewGetPreferKeepClearRects == nil {
+			callErr = fmt.Errorf("android.view.View.getPreferKeepClearRects is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewGetPreferKeepClearRects,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetReceiveContentMimeTypes calls android.view.View.getReceiveContentMimeTypes.
 func (m *View) GetReceiveContentMimeTypes() (*jni.Object, error) {
 	var result *jni.Object
@@ -5781,6 +5846,38 @@ func (m *View) GetSupplementalDescription() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetSystemGestureExclusionRects calls android.view.View.getSystemGestureExclusionRects.
+func (m *View) GetSystemGestureExclusionRects() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewGetSystemGestureExclusionRects == nil {
+			callErr = fmt.Errorf("android.view.View.getSystemGestureExclusionRects is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewGetSystemGestureExclusionRects,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSystemUiVisibility calls android.view.View.getSystemUiVisibility.
 func (m *View) GetSystemUiVisibility() (int32, error) {
 	var result int32
@@ -5994,6 +6091,38 @@ func (m *View) GetTouchDelegate() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midViewGetTouchDelegate,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetTouchables calls android.view.View.getTouchables.
+func (m *View) GetTouchables() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midViewGetTouchables == nil {
+			callErr = fmt.Errorf("android.view.View.getTouchables is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midViewGetTouchables,
 		)
 		if callErr != nil {
 			return callErr

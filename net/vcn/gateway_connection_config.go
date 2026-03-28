@@ -192,6 +192,38 @@ func (m *GatewayConnectionConfig) GetRetryIntervalsMillis() (*jni.Object, error)
 	return result, callErr
 }
 
+// GetVcnUnderlyingNetworkPriorities calls android.net.vcn.VcnGatewayConnectionConfig.getVcnUnderlyingNetworkPriorities.
+func (m *GatewayConnectionConfig) GetVcnUnderlyingNetworkPriorities() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midGatewayConnectionConfigGetVcnUnderlyingNetworkPriorities == nil {
+			callErr = fmt.Errorf("android.net.vcn.VcnGatewayConnectionConfig.getVcnUnderlyingNetworkPriorities is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midGatewayConnectionConfigGetVcnUnderlyingNetworkPriorities,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HasGatewayOption calls android.net.vcn.VcnGatewayConnectionConfig.hasGatewayOption.
 func (m *GatewayConnectionConfig) HasGatewayOption(arg0 int32) (bool, error) {
 	var result bool

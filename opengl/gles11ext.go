@@ -32,7 +32,7 @@ func NewGLES11Ext(vm *jni.VM) (*GLES11Ext, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), midGLES11ExtInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES11Ext)), midGLES11ExtCtor)
 		if err != nil {
 			return err
 		}

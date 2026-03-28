@@ -5,11 +5,6 @@ package sqlite
 import "github.com/AndroidGoLab/jni/database/sqlite/consts"
 
 const (
-	SqliteDataTypeBlob         = consts.SqliteDataTypeBlob
-	SqliteDataTypeFloat        = consts.SqliteDataTypeFloat
-	SqliteDataTypeInteger      = consts.SqliteDataTypeInteger
-	SqliteDataTypeNull         = consts.SqliteDataTypeNull
-	SqliteDataTypeText         = consts.SqliteDataTypeText
 	ConflictAbort              = consts.ConflictAbort
 	ConflictFail               = consts.ConflictFail
 	ConflictIgnore             = consts.ConflictIgnore
@@ -23,6 +18,11 @@ const (
 	OpenReadonly               = consts.OpenReadonly
 	OpenReadwrite              = consts.OpenReadwrite
 	SqliteMaxLikePatternLength = consts.SqliteMaxLikePatternLength
+	SqliteDataTypeBlob         = consts.SqliteDataTypeBlob
+	SqliteDataTypeFloat        = consts.SqliteDataTypeFloat
+	SqliteDataTypeInteger      = consts.SqliteDataTypeInteger
+	SqliteDataTypeNull         = consts.SqliteDataTypeNull
+	SqliteDataTypeText         = consts.SqliteDataTypeText
 )
 
 const (

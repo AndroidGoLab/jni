@@ -32,7 +32,7 @@ func NewWifiP2pWfdInfo(vm *jni.VM) (*WifiP2pWfdInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), midWifiP2pWfdInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWifiP2pWfdInfo)), midWifiP2pWfdInfoCtor)
 		if err != nil {
 			return err
 		}

@@ -55,3 +55,67 @@ func (m *UtilsExtendedMetadataParser) Get(arg0 string) (string, error) {
 	})
 	return result, callErr
 }
+
+// Iterator calls android.drm.DrmUtils$ExtendedMetadataParser.iterator.
+func (m *UtilsExtendedMetadataParser) Iterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUtilsExtendedMetadataParserIterator == nil {
+			callErr = fmt.Errorf("android.drm.DrmUtils$ExtendedMetadataParser.iterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUtilsExtendedMetadataParserIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// KeyIterator calls android.drm.DrmUtils$ExtendedMetadataParser.keyIterator.
+func (m *UtilsExtendedMetadataParser) KeyIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUtilsExtendedMetadataParserKeyIterator == nil {
+			callErr = fmt.Errorf("android.drm.DrmUtils$ExtendedMetadataParser.keyIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUtilsExtendedMetadataParserKeyIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}

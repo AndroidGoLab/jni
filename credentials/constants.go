@@ -9,11 +9,11 @@ const (
 )
 
 const (
+	TypeUnknown            = consts.TypeUnknown
 	TypePasswordCredential = consts.TypePasswordCredential
 	TypeInterrupted        = consts.TypeInterrupted
 	TypeNoCreateOptions    = consts.TypeNoCreateOptions
-	TypeUnknown            = consts.TypeUnknown
 	TypeUserCanceled       = consts.TypeUserCanceled
-	SupportedElementKeys   = consts.SupportedElementKeys
 	TypeNoCredential       = consts.TypeNoCredential
+	SupportedElementKeys   = consts.SupportedElementKeys
 )

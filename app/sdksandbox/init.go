@@ -23,6 +23,11 @@ var (
 	initOnce sync.Once
 	initErr  error
 
+	clsRequestSurfacePackageException                                  *jni.GlobalRef
+	midRequestSurfacePackageExceptionCtor                              jni.MethodID
+	midRequestSurfacePackageExceptionGetExtraErrorInformation          jni.MethodID
+	midRequestSurfacePackageExceptionGetRequestSurfacePackageErrorCode jni.MethodID
+
 	clsSandboxedSdkProvider                *jni.GlobalRef
 	midSandboxedSdkProviderAttachContext   jni.MethodID
 	midSandboxedSdkProviderBeforeUnloadSdk jni.MethodID
@@ -32,6 +37,9 @@ var (
 
 	clsSdkSandboxManager                                      *jni.GlobalRef
 	midSdkSandboxManagerAddSdkSandboxProcessDeathCallback     jni.MethodID
+	midSdkSandboxManagerGetAppOwnedSdkSandboxInterfaces       jni.MethodID
+	midSdkSandboxManagerGetSandboxedSdks                      jni.MethodID
+	midSdkSandboxManagerGetSyncedSharedPreferencesKeys        jni.MethodID
 	midSdkSandboxManagerRegisterAppOwnedSdkSandboxInterface   jni.MethodID
 	midSdkSandboxManagerRemoveSdkSandboxProcessDeathCallback  jni.MethodID
 	midSdkSandboxManagerStartSdkSandboxActivity               jni.MethodID
@@ -42,28 +50,23 @@ var (
 	clsSdkSandboxManagerSdkSandboxProcessDeathCallback                 *jni.GlobalRef
 	midSdkSandboxManagerSdkSandboxProcessDeathCallbackOnSdkSandboxDied jni.MethodID
 
+	clsSandboxedSdk                     *jni.GlobalRef
+	midSandboxedSdkCtor                 jni.MethodID
+	midSandboxedSdkDescribeContents     jni.MethodID
+	midSandboxedSdkGetInterface         jni.MethodID
+	midSandboxedSdkGetSharedLibraryInfo jni.MethodID
+	midSandboxedSdkWriteToParcel        jni.MethodID
+
 	clsAppOwnedSdkSandboxInterface                 *jni.GlobalRef
-	midAppOwnedSdkSandboxInterfaceInit             jni.MethodID
+	midAppOwnedSdkSandboxInterfaceCtor             jni.MethodID
 	midAppOwnedSdkSandboxInterfaceDescribeContents jni.MethodID
 	midAppOwnedSdkSandboxInterfaceGetInterface     jni.MethodID
 	midAppOwnedSdkSandboxInterfaceGetName          jni.MethodID
 	midAppOwnedSdkSandboxInterfaceGetVersion       jni.MethodID
 	midAppOwnedSdkSandboxInterfaceWriteToParcel    jni.MethodID
 
-	clsRequestSurfacePackageException                                  *jni.GlobalRef
-	midRequestSurfacePackageExceptionInit                              jni.MethodID
-	midRequestSurfacePackageExceptionGetExtraErrorInformation          jni.MethodID
-	midRequestSurfacePackageExceptionGetRequestSurfacePackageErrorCode jni.MethodID
-
-	clsSandboxedSdk                     *jni.GlobalRef
-	midSandboxedSdkInit                 jni.MethodID
-	midSandboxedSdkDescribeContents     jni.MethodID
-	midSandboxedSdkGetInterface         jni.MethodID
-	midSandboxedSdkGetSharedLibraryInfo jni.MethodID
-	midSandboxedSdkWriteToParcel        jni.MethodID
-
 	clsLoadSdkException                    *jni.GlobalRef
-	midLoadSdkExceptionInit                jni.MethodID
+	midLoadSdkExceptionCtor                jni.MethodID
 	midLoadSdkExceptionDescribeContents    jni.MethodID
 	midLoadSdkExceptionGetExtraInformation jni.MethodID
 	midLoadSdkExceptionGetLoadSdkErrorCode jni.MethodID
@@ -87,6 +90,34 @@ func Init(env *jni.Env) error {
 func doInit(env *jni.Env) error {
 	var c *jni.Class
 	var err error
+
+	c, err = env.FindClass("android/app/sdksandbox/RequestSurfacePackageException")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsRequestSurfacePackageException = env.NewGlobalRef(&c.Object)
+		midRequestSurfacePackageExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), "<init>", "(ILjava/lang/String;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midRequestSurfacePackageExceptionGetExtraErrorInformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), "getExtraErrorInformation", "()Landroid/os/Bundle;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midRequestSurfacePackageExceptionGetRequestSurfacePackageErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), "getRequestSurfacePackageErrorCode", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
 
 	c, err = env.FindClass("android/app/sdksandbox/SandboxedSdkProvider")
 	if err != nil {
@@ -142,6 +173,27 @@ func doInit(env *jni.Env) error {
 		clsSdkSandboxManager = env.NewGlobalRef(&c.Object)
 
 		midSdkSandboxManagerAddSdkSandboxProcessDeathCallback, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxManager)), "addSdkSandboxProcessDeathCallback", "(Ljava/util/concurrent/Executor;Landroid/app/sdksandbox/SdkSandboxManager$SdkSandboxProcessDeathCallback;)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSdkSandboxManagerGetAppOwnedSdkSandboxInterfaces, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxManager)), "getAppOwnedSdkSandboxInterfaces", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSdkSandboxManagerGetSandboxedSdks, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxManager)), "getSandboxedSdks", "()Ljava/util/List;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSdkSandboxManagerGetSyncedSharedPreferencesKeys, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSdkSandboxManager)), "getSyncedSharedPreferencesKeys", "()Ljava/util/Set;")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -209,6 +261,48 @@ func doInit(env *jni.Env) error {
 
 	}
 
+	c, err = env.FindClass("android/app/sdksandbox/SandboxedSdk")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsSandboxedSdk = env.NewGlobalRef(&c.Object)
+		midSandboxedSdkCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "<init>", "(Landroid/os/IBinder;)V")
+		if err != nil {
+			env.ExceptionClear()
+		}
+
+		midSandboxedSdkDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "describeContents", "()I")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSandboxedSdkGetInterface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "getInterface", "()Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSandboxedSdkGetSharedLibraryInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "getSharedLibraryInfo", "()Landroid/content/pm/SharedLibraryInfo;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midSandboxedSdkWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "writeToParcel", "(Landroid/os/Parcel;I)V")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
 	c, err = env.FindClass("android/app/sdksandbox/AppOwnedSdkSandboxInterface")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -216,7 +310,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsAppOwnedSdkSandboxInterface = env.NewGlobalRef(&c.Object)
-		midAppOwnedSdkSandboxInterfaceInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppOwnedSdkSandboxInterface)), "<init>", "(Ljava/lang/String;JLandroid/os/IBinder;)V")
+		midAppOwnedSdkSandboxInterfaceCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsAppOwnedSdkSandboxInterface)), "<init>", "(Ljava/lang/String;JLandroid/os/IBinder;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}
@@ -258,76 +352,6 @@ func doInit(env *jni.Env) error {
 
 	}
 
-	c, err = env.FindClass("android/app/sdksandbox/RequestSurfacePackageException")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsRequestSurfacePackageException = env.NewGlobalRef(&c.Object)
-		midRequestSurfacePackageExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), "<init>", "(ILjava/lang/String;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midRequestSurfacePackageExceptionGetExtraErrorInformation, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), "getExtraErrorInformation", "()Landroid/os/Bundle;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midRequestSurfacePackageExceptionGetRequestSurfacePackageErrorCode, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsRequestSurfacePackageException)), "getRequestSurfacePackageErrorCode", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/app/sdksandbox/SandboxedSdk")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsSandboxedSdk = env.NewGlobalRef(&c.Object)
-		midSandboxedSdkInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "<init>", "(Landroid/os/IBinder;)V")
-		if err != nil {
-			env.ExceptionClear()
-		}
-
-		midSandboxedSdkDescribeContents, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "describeContents", "()I")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSandboxedSdkGetInterface, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "getInterface", "()Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSandboxedSdkGetSharedLibraryInfo, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "getSharedLibraryInfo", "()Landroid/content/pm/SharedLibraryInfo;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midSandboxedSdkWriteToParcel, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsSandboxedSdk)), "writeToParcel", "(Landroid/os/Parcel;I)V")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
 	c, err = env.FindClass("android/app/sdksandbox/LoadSdkException")
 	if err != nil {
 		// Class may not exist on this device's API level; skip and
@@ -335,7 +359,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsLoadSdkException = env.NewGlobalRef(&c.Object)
-		midLoadSdkExceptionInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoadSdkException)), "<init>", "(Ljava/lang/Throwable;Landroid/os/Bundle;)V")
+		midLoadSdkExceptionCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsLoadSdkException)), "<init>", "(Ljava/lang/Throwable;Landroid/os/Bundle;)V")
 		if err != nil {
 			env.ExceptionClear()
 		}

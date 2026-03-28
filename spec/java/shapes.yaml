@@ -5,139 +5,6 @@
 package: shapes
 go_import: github.com/AndroidGoLab/jni/graphics/drawable/shapes
 classes:
-    - java_class: android.graphics.drawable.shapes.OvalShape
-      go_type: OvalShape
-      obtain: constructor
-      methods:
-        - java_method: clone
-          go_name: Clone0
-          returns: android.graphics.drawable.shapes.OvalShape
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: android.graphics.Paint
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: clone
-          go_name: Clone0_1
-          returns: android.graphics.drawable.shapes.RectShape
-          error: true
-        - java_method: clone
-          go_name: Clone0_2
-          returns: android.graphics.drawable.shapes.Shape
-          error: true
-        - java_method: clone
-          go_name: Clone0_3
-          returns: java.lang.Object
-          error: true
-    - java_class: android.graphics.drawable.shapes.RoundRectShape
-      go_type: RoundRectShape
-      obtain: constructor
-      constructor_params:
-        - java_type: float[]
-          go_name: arg0
-        - java_type: android.graphics.RectF
-          go_name: arg1
-        - java_type: float[]
-          go_name: arg2
-      methods:
-        - java_method: clone
-          go_name: Clone0
-          returns: android.graphics.drawable.shapes.RoundRectShape
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: android.graphics.Paint
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: getOutline
-          go_name: GetOutline
-          params:
-            - java_type: android.graphics.Outline
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: clone
-          go_name: Clone0_1
-          returns: android.graphics.drawable.shapes.RectShape
-          error: true
-        - java_method: clone
-          go_name: Clone0_2
-          returns: android.graphics.drawable.shapes.Shape
-          error: true
-        - java_method: clone
-          go_name: Clone0_3
-          returns: java.lang.Object
-          error: true
-    - java_class: android.graphics.drawable.shapes.PathShape
-      go_type: PathShape
-      obtain: constructor
-      constructor_params:
-        - java_type: android.graphics.Path
-          go_name: arg0
-        - java_type: float
-          go_name: arg1
-        - java_type: float
-          go_name: arg2
-      methods:
-        - java_method: clone
-          go_name: Clone0
-          returns: android.graphics.drawable.shapes.PathShape
-          error: true
-        - java_method: draw
-          go_name: Draw
-          params:
-            - java_type: android.graphics.Canvas
-              go_name: arg0
-            - java_type: android.graphics.Paint
-              go_name: arg1
-          returns: void
-          error: true
-        - java_method: equals
-          go_name: Equals
-          params:
-            - java_type: java.lang.Object
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: hashCode
-          go_name: HashCode
-          returns: int
-          error: true
-        - java_method: clone
-          go_name: Clone0_1
-          returns: android.graphics.drawable.shapes.Shape
-          error: true
-        - java_method: clone
-          go_name: Clone0_2
-          returns: java.lang.Object
-          error: true
     - java_class: android.graphics.drawable.shapes.Shape
       go_type: Shape
       methods:
@@ -195,6 +62,60 @@ classes:
           error: true
         - java_method: clone
           go_name: Clone0_1
+          returns: java.lang.Object
+          error: true
+    - java_class: android.graphics.drawable.shapes.RoundRectShape
+      go_type: RoundRectShape
+      obtain: constructor
+      constructor_params:
+        - java_type: float[]
+          go_name: arg0
+        - java_type: android.graphics.RectF
+          go_name: arg1
+        - java_type: float[]
+          go_name: arg2
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.graphics.drawable.shapes.RoundRectShape
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+            - java_type: android.graphics.Paint
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: android.graphics.drawable.shapes.RectShape
+          error: true
+        - java_method: clone
+          go_name: Clone0_2
+          returns: android.graphics.drawable.shapes.Shape
+          error: true
+        - java_method: clone
+          go_name: Clone0_3
           returns: java.lang.Object
           error: true
     - java_class: android.graphics.drawable.shapes.RectShape
@@ -298,5 +219,84 @@ classes:
           error: true
         - java_method: clone
           go_name: Clone0_3
+          returns: java.lang.Object
+          error: true
+    - java_class: android.graphics.drawable.shapes.OvalShape
+      go_type: OvalShape
+      obtain: constructor
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.graphics.drawable.shapes.OvalShape
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+            - java_type: android.graphics.Paint
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: getOutline
+          go_name: GetOutline
+          params:
+            - java_type: android.graphics.Outline
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: android.graphics.drawable.shapes.RectShape
+          error: true
+        - java_method: clone
+          go_name: Clone0_2
+          returns: android.graphics.drawable.shapes.Shape
+          error: true
+        - java_method: clone
+          go_name: Clone0_3
+          returns: java.lang.Object
+          error: true
+    - java_class: android.graphics.drawable.shapes.PathShape
+      go_type: PathShape
+      obtain: constructor
+      constructor_params:
+        - java_type: android.graphics.Path
+          go_name: arg0
+        - java_type: float
+          go_name: arg1
+        - java_type: float
+          go_name: arg2
+      methods:
+        - java_method: clone
+          go_name: Clone0
+          returns: android.graphics.drawable.shapes.PathShape
+          error: true
+        - java_method: draw
+          go_name: Draw
+          params:
+            - java_type: android.graphics.Canvas
+              go_name: arg0
+            - java_type: android.graphics.Paint
+              go_name: arg1
+          returns: void
+          error: true
+        - java_method: equals
+          go_name: Equals
+          params:
+            - java_type: java.lang.Object
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: hashCode
+          go_name: HashCode
+          returns: int
+          error: true
+        - java_method: clone
+          go_name: Clone0_1
+          returns: android.graphics.drawable.shapes.Shape
+          error: true
+        - java_method: clone
+          go_name: Clone0_2
           returns: java.lang.Object
           error: true

@@ -30,7 +30,7 @@ func NewExpandableListActivity(vm *jni.VM) (*ExpandableListActivity, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExpandableListActivity)), midExpandableListActivityInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsExpandableListActivity)), midExpandableListActivityCtor)
 		if err != nil {
 			return err
 		}

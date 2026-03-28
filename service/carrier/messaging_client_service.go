@@ -32,7 +32,7 @@ func NewMessagingClientService(vm *jni.VM) (*MessagingClientService, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessagingClientService)), midMessagingClientServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMessagingClientService)), midMessagingClientServiceCtor)
 		if err != nil {
 			return err
 		}

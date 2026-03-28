@@ -270,6 +270,38 @@ func (m *Connection) GetConference() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetConferenceables calls android.telecom.Connection.getConferenceables.
+func (m *Connection) GetConferenceables() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midConnectionGetConferenceables == nil {
+			callErr = fmt.Errorf("android.telecom.Connection.getConferenceables is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midConnectionGetConferenceables,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetConnectionCapabilities calls android.telecom.Connection.getConnectionCapabilities.
 func (m *Connection) GetConnectionCapabilities() (int32, error) {
 	var result int32

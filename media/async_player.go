@@ -38,7 +38,7 @@ func NewAsyncPlayer(vm *jni.VM, arg0 string) (*AsyncPlayer, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAsyncPlayer)), midAsyncPlayerInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAsyncPlayer)), midAsyncPlayerCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

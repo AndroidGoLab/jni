@@ -38,7 +38,7 @@ func NewRenderNode(vm *jni.VM, arg0 string) (*RenderNode, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRenderNode)), midRenderNodeInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRenderNode)), midRenderNodeCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

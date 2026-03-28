@@ -32,7 +32,7 @@ func NewUnicodeSet(vm *jni.VM) (*UnicodeSet, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnicodeSet)), midUnicodeSetInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsUnicodeSet)), midUnicodeSetCtor)
 		if err != nil {
 			return err
 		}
@@ -1648,6 +1648,38 @@ func (m *UnicodeSet) IsFrozen() (bool, error) {
 	return result, callErr
 }
 
+// Iterator calls android.icu.text.UnicodeSet.iterator.
+func (m *UnicodeSet) Iterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUnicodeSetIterator == nil {
+			callErr = fmt.Errorf("android.icu.text.UnicodeSet.iterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUnicodeSetIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // Matches calls android.icu.text.UnicodeSet.matches.
 func (m *UnicodeSet) Matches(
 	arg0 *jni.Object,
@@ -1707,6 +1739,38 @@ func (m *UnicodeSet) MatchesIndexValue(arg0 int32) (bool, error) {
 			return callErr
 		}
 		result = resultRaw != 0
+		return callErr
+	})
+	return result, callErr
+}
+
+// Ranges calls android.icu.text.UnicodeSet.ranges.
+func (m *UnicodeSet) Ranges() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUnicodeSetRanges == nil {
+			callErr = fmt.Errorf("android.icu.text.UnicodeSet.ranges is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUnicodeSetRanges,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr
@@ -2311,6 +2375,38 @@ func (m *UnicodeSet) SpanBack3_1(
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// Strings calls android.icu.text.UnicodeSet.strings.
+func (m *UnicodeSet) Strings() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midUnicodeSetStrings == nil {
+			callErr = fmt.Errorf("android.icu.text.UnicodeSet.strings is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midUnicodeSetStrings,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

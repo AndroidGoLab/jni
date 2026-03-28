@@ -290,6 +290,103 @@ func (m *Manager) GetAccessibilityFocusStrokeWidth() (int32, error) {
 	return result, callErr
 }
 
+// GetAccessibilityServiceList calls android.view.accessibility.AccessibilityManager.getAccessibilityServiceList.
+func (m *Manager) GetAccessibilityServiceList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetAccessibilityServiceList == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityManager.getAccessibilityServiceList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetAccessibilityServiceList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetEnabledAccessibilityServiceList calls android.view.accessibility.AccessibilityManager.getEnabledAccessibilityServiceList.
+func (m *Manager) GetEnabledAccessibilityServiceList(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetEnabledAccessibilityServiceList == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityManager.getEnabledAccessibilityServiceList is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetEnabledAccessibilityServiceList, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInstalledAccessibilityServiceList calls android.view.accessibility.AccessibilityManager.getInstalledAccessibilityServiceList.
+func (m *Manager) GetInstalledAccessibilityServiceList() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midManagerGetInstalledAccessibilityServiceList == nil {
+			callErr = fmt.Errorf("android.view.accessibility.AccessibilityManager.getInstalledAccessibilityServiceList is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midManagerGetInstalledAccessibilityServiceList,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetRecommendedTimeoutMillis calls android.view.accessibility.AccessibilityManager.getRecommendedTimeoutMillis.
 func (m *Manager) GetRecommendedTimeoutMillis(arg0 int32, arg1 int32) (int32, error) {
 	var result int32

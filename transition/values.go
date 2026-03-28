@@ -32,7 +32,7 @@ func NewValues(vm *jni.VM) (*Values, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsValues)), midValuesInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsValues)), midValuesCtor)
 		if err != nil {
 			return err
 		}

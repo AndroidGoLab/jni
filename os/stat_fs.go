@@ -38,7 +38,7 @@ func NewStatFs(vm *jni.VM, arg0 string) (*StatFs, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStatFs)), midStatFsInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsStatFs)), midStatFsCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

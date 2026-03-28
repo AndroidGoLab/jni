@@ -50,7 +50,7 @@ func NewAppLinkInfo(vm *jni.VM, arg0 string, arg1 string, arg2 string) (*AppLink
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), midAppLinkInfoInit, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAppLinkInfo)), midAppLinkInfoCtor, jni.ObjectValue(&jArg0.Object), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

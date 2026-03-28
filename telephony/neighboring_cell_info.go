@@ -32,7 +32,7 @@ func NewNeighboringCellInfo(vm *jni.VM) (*NeighboringCellInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNeighboringCellInfo)), midNeighboringCellInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNeighboringCellInfo)), midNeighboringCellInfoCtor)
 		if err != nil {
 			return err
 		}

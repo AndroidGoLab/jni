@@ -38,7 +38,7 @@ func NewIkeTimeoutException(vm *jni.VM, arg0 string) (*IkeTimeoutException, erro
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeTimeoutException)), midIkeTimeoutExceptionInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsIkeTimeoutException)), midIkeTimeoutExceptionCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

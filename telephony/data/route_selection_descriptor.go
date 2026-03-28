@@ -76,6 +76,38 @@ func (m *RouteSelectionDescriptor) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetDataNetworkName calls android.telephony.data.RouteSelectionDescriptor.getDataNetworkName.
+func (m *RouteSelectionDescriptor) GetDataNetworkName() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouteSelectionDescriptorGetDataNetworkName == nil {
+			callErr = fmt.Errorf("android.telephony.data.RouteSelectionDescriptor.getDataNetworkName is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouteSelectionDescriptorGetDataNetworkName,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPrecedence calls android.telephony.data.RouteSelectionDescriptor.getPrecedence.
 func (m *RouteSelectionDescriptor) GetPrecedence() (int32, error) {
 	var result int32
@@ -120,6 +152,38 @@ func (m *RouteSelectionDescriptor) GetSessionType() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSliceInfo calls android.telephony.data.RouteSelectionDescriptor.getSliceInfo.
+func (m *RouteSelectionDescriptor) GetSliceInfo() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRouteSelectionDescriptorGetSliceInfo == nil {
+			callErr = fmt.Errorf("android.telephony.data.RouteSelectionDescriptor.getSliceInfo is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRouteSelectionDescriptorGetSliceInfo,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -35,7 +35,7 @@ func NewGameState(vm *jni.VM, arg0 bool, arg1 int32) (*GameState, error) {
 			jArg0 = jniTrue
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGameState)), midGameStateInit, jni.BooleanValue(jArg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGameState)), midGameStateCtor, jni.BooleanValue(jArg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

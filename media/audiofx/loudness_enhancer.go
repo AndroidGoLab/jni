@@ -33,7 +33,7 @@ func NewLoudnessEnhancer(vm *jni.VM, arg0 int32) (*LoudnessEnhancer, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), midLoudnessEnhancerInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLoudnessEnhancer)), midLoudnessEnhancerCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

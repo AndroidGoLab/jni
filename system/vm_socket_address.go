@@ -33,7 +33,7 @@ func NewVmSocketAddress(vm *jni.VM, arg0 int32, arg1 int32) (*VmSocketAddress, e
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVmSocketAddress)), midVmSocketAddressInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsVmSocketAddress)), midVmSocketAddressCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

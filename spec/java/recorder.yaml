@@ -12,6 +12,10 @@ classes:
         - java_type: android.content.Context
           go_name: arg0
       methods:
+        - java_method: getActiveMicrophones
+          go_name: GetActiveMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
+          error: true
         - java_method: getActiveRecordingConfiguration
           go_name: GetActiveRecordingConfiguration
           returns: android.media.AudioRecordingConfiguration
@@ -35,6 +39,10 @@ classes:
         - java_method: getRoutedDevice
           go_name: GetRoutedDevice
           returns: android.media.AudioDeviceInfo
+          error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
         - java_method: getSurface
           go_name: GetSurface

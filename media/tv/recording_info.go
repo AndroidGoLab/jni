@@ -50,7 +50,7 @@ func NewRecordingInfo(vm *jni.VM, arg0 string, arg1 int64, arg2 int64, arg3 int3
 		}
 		defer env.DeleteLocalRef(&jArg5.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecordingInfo)), midRecordingInfoInit, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1), jni.LongValue(arg2), jni.IntValue(arg3), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(&jArg5.Object), jni.LongValue(arg6), jni.LongValue(arg7), jni.ObjectValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10), jni.ObjectValue(arg11), jni.LongValue(arg12), jni.LongValue(arg13))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRecordingInfo)), midRecordingInfoCtor, jni.ObjectValue(&jArg0.Object), jni.LongValue(arg1), jni.LongValue(arg2), jni.IntValue(arg3), jni.ObjectValue(&jArg4.Object), jni.ObjectValue(&jArg5.Object), jni.LongValue(arg6), jni.LongValue(arg7), jni.ObjectValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10), jni.ObjectValue(arg11), jni.LongValue(arg12), jni.LongValue(arg13))
 		if err != nil {
 			return err
 		}
@@ -104,6 +104,38 @@ func (m *RecordingInfo) GetChannelUri() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midRecordingInfoGetChannelUri,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetContentRatings calls android.media.tv.TvRecordingInfo.getContentRatings.
+func (m *RecordingInfo) GetContentRatings() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecordingInfoGetContentRatings == nil {
+			callErr = fmt.Errorf("android.media.tv.TvRecordingInfo.getContentRatings is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecordingInfoGetContentRatings,
 		)
 		if callErr != nil {
 			return callErr

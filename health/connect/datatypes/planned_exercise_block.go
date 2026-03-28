@@ -108,6 +108,38 @@ func (m *PlannedExerciseBlock) GetRepetitions() (int32, error) {
 	return result, callErr
 }
 
+// GetSteps calls android.health.connect.datatypes.PlannedExerciseBlock.getSteps.
+func (m *PlannedExerciseBlock) GetSteps() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midPlannedExerciseBlockGetSteps == nil {
+			callErr = fmt.Errorf("android.health.connect.datatypes.PlannedExerciseBlock.getSteps is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midPlannedExerciseBlockGetSteps,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.health.connect.datatypes.PlannedExerciseBlock.hashCode.
 func (m *PlannedExerciseBlock) HashCode() (int32, error) {
 	var result int32

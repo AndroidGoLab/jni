@@ -46,6 +46,102 @@ func (m *SdkSandboxManager) AddSdkSandboxProcessDeathCallback(arg0 *jni.Object, 
 	return callErr
 }
 
+// GetAppOwnedSdkSandboxInterfaces calls android.app.sdksandbox.SdkSandboxManager.getAppOwnedSdkSandboxInterfaces.
+func (m *SdkSandboxManager) GetAppOwnedSdkSandboxInterfaces() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSdkSandboxManagerGetAppOwnedSdkSandboxInterfaces == nil {
+			callErr = fmt.Errorf("android.app.sdksandbox.SdkSandboxManager.getAppOwnedSdkSandboxInterfaces is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSdkSandboxManagerGetAppOwnedSdkSandboxInterfaces,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSandboxedSdks calls android.app.sdksandbox.SdkSandboxManager.getSandboxedSdks.
+func (m *SdkSandboxManager) GetSandboxedSdks() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSdkSandboxManagerGetSandboxedSdks == nil {
+			callErr = fmt.Errorf("android.app.sdksandbox.SdkSandboxManager.getSandboxedSdks is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSdkSandboxManagerGetSandboxedSdks,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSyncedSharedPreferencesKeys calls android.app.sdksandbox.SdkSandboxManager.getSyncedSharedPreferencesKeys.
+func (m *SdkSandboxManager) GetSyncedSharedPreferencesKeys() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSdkSandboxManagerGetSyncedSharedPreferencesKeys == nil {
+			callErr = fmt.Errorf("android.app.sdksandbox.SdkSandboxManager.getSyncedSharedPreferencesKeys is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSdkSandboxManagerGetSyncedSharedPreferencesKeys,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // RegisterAppOwnedSdkSandboxInterface calls android.app.sdksandbox.SdkSandboxManager.registerAppOwnedSdkSandboxInterface.
 func (m *SdkSandboxManager) RegisterAppOwnedSdkSandboxInterface(arg0 *jni.Object) error {
 

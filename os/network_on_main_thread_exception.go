@@ -32,7 +32,7 @@ func NewNetworkOnMainThreadException(vm *jni.VM) (*NetworkOnMainThreadException,
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkOnMainThreadException)), midNetworkOnMainThreadExceptionInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsNetworkOnMainThreadException)), midNetworkOnMainThreadExceptionCtor)
 		if err != nil {
 			return err
 		}

@@ -76,6 +76,38 @@ func (m *SchemaVisibilityConfig) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetAllowedPackages calls android.app.appsearch.SchemaVisibilityConfig.getAllowedPackages.
+func (m *SchemaVisibilityConfig) GetAllowedPackages() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchemaVisibilityConfigGetAllowedPackages == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SchemaVisibilityConfig.getAllowedPackages is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSchemaVisibilityConfigGetAllowedPackages,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetPubliclyVisibleTargetPackage calls android.app.appsearch.SchemaVisibilityConfig.getPubliclyVisibleTargetPackage.
 func (m *SchemaVisibilityConfig) GetPubliclyVisibleTargetPackage() (*jni.Object, error) {
 	var result *jni.Object
@@ -92,6 +124,38 @@ func (m *SchemaVisibilityConfig) GetPubliclyVisibleTargetPackage() (*jni.Object,
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midSchemaVisibilityConfigGetPubliclyVisibleTargetPackage,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetRequiredPermissions calls android.app.appsearch.SchemaVisibilityConfig.getRequiredPermissions.
+func (m *SchemaVisibilityConfig) GetRequiredPermissions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSchemaVisibilityConfigGetRequiredPermissions == nil {
+			callErr = fmt.Errorf("android.app.appsearch.SchemaVisibilityConfig.getRequiredPermissions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSchemaVisibilityConfigGetRequiredPermissions,
 		)
 		if callErr != nil {
 			return callErr

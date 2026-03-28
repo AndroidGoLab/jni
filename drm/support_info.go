@@ -32,7 +32,7 @@ func NewSupportInfo(vm *jni.VM) (*SupportInfo, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSupportInfo)), midSupportInfoInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSupportInfo)), midSupportInfoCtor)
 		if err != nil {
 			return err
 		}
@@ -178,6 +178,70 @@ func (m *SupportInfo) GetDescription() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetFileSuffixIterator calls android.drm.DrmSupportInfo.getFileSuffixIterator.
+func (m *SupportInfo) GetFileSuffixIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSupportInfoGetFileSuffixIterator == nil {
+			callErr = fmt.Errorf("android.drm.DrmSupportInfo.getFileSuffixIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSupportInfoGetFileSuffixIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetMimeTypeIterator calls android.drm.DrmSupportInfo.getMimeTypeIterator.
+func (m *SupportInfo) GetMimeTypeIterator() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSupportInfoGetMimeTypeIterator == nil {
+			callErr = fmt.Errorf("android.drm.DrmSupportInfo.getMimeTypeIterator is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSupportInfoGetMimeTypeIterator,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

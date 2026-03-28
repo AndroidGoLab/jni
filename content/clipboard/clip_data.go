@@ -33,7 +33,7 @@ func NewClipData(vm *jni.VM, arg0 *jni.Object) (*ClipData, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipData)), midClipDataInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsClipData)), midClipDataCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

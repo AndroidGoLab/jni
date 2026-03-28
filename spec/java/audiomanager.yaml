@@ -19,6 +19,14 @@ classes:
           go_name: GetAddress
           returns: String
           error: true
+        - java_method: getAudioDescriptors
+          go_name: GetAudioDescriptors
+          returns: java.util.List<android.media.AudioDescriptor>
+          error: true
+        - java_method: getAudioProfiles
+          go_name: GetAudioProfiles
+          returns: java.util.List<android.media.AudioProfile>
+          error: true
         - java_method: getChannelCounts
           go_name: GetChannelCounts
           returns: '[I'
@@ -188,9 +196,24 @@ classes:
           go_name: GenerateAudioSessionId
           returns: int
           error: true
+        - java_method: getActivePlaybackConfigurations
+          go_name: GetActivePlaybackConfigurations
+          returns: java.util.List<android.media.AudioPlaybackConfiguration>
+          error: true
+        - java_method: getActiveRecordingConfigurations
+          go_name: GetActiveRecordingConfigurations
+          returns: java.util.List<android.media.AudioRecordingConfiguration>
+          error: true
         - java_method: getAllowedCapturePolicy
           go_name: GetAllowedCapturePolicy
           returns: int
+          error: true
+        - java_method: getAudioDevicesForAttributes
+          go_name: GetAudioDevicesForAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
         - java_method: getAudioHwSyncForSession
           go_name: GetAudioHwSyncForSession
@@ -198,6 +221,10 @@ classes:
             - java_type: int
               go_name: arg0
           returns: int
+          error: true
+        - java_method: getAvailableCommunicationDevices
+          go_name: GetAvailableCommunicationDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
           error: true
         - java_method: getCommunicationDevice
           go_name: GetCommunicationDevice
@@ -210,9 +237,20 @@ classes:
               go_name: arg0
           returns: android.media.AudioDeviceInfo[]
           error: true
+        - java_method: getDirectProfilesForAttributes
+          go_name: GetDirectProfilesForAttributes
+          params:
+            - java_type: android.media.AudioAttributes
+              go_name: arg0
+          returns: java.util.List<android.media.AudioProfile>
+          error: true
         - java_method: getEncodedSurroundMode
           go_name: GetEncodedSurroundMode
           returns: int
+          error: true
+        - java_method: getMicrophones
+          go_name: GetMicrophones
+          returns: java.util.List<android.media.MicrophoneInfo>
           error: true
         - java_method: getMode
           go_name: GetMode
@@ -287,6 +325,20 @@ classes:
             - java_type: int
               go_name: arg2
           returns: float
+          error: true
+        - java_method: getSupportedDeviceTypes
+          go_name: GetSupportedDeviceTypes
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: java.util.Set<java.lang.Integer>
+          error: true
+        - java_method: getSupportedMixerAttributes
+          go_name: GetSupportedMixerAttributes
+          params:
+            - java_type: android.media.AudioDeviceInfo
+              go_name: arg0
+          returns: java.util.List<android.media.AudioMixerAttributes>
           error: true
         - java_method: getVibrateSetting
           go_name: GetVibrateSetting

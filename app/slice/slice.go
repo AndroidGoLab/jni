@@ -48,6 +48,70 @@ func (m *Slice) DescribeContents() (int32, error) {
 	return result, callErr
 }
 
+// GetHints calls android.app.slice.Slice.getHints.
+func (m *Slice) GetHints() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSliceGetHints == nil {
+			callErr = fmt.Errorf("android.app.slice.Slice.getHints is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSliceGetHints,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetItems calls android.app.slice.Slice.getItems.
+func (m *Slice) GetItems() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSliceGetItems == nil {
+			callErr = fmt.Errorf("android.app.slice.Slice.getItems is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSliceGetItems,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetSpec calls android.app.slice.Slice.getSpec.
 func (m *Slice) GetSpec() (*jni.Object, error) {
 	var result *jni.Object

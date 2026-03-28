@@ -33,7 +33,7 @@ func NewSwitch(vm *jni.VM, arg0 *jni.Object) (*Switch, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSwitch)), midSwitchInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSwitch)), midSwitchCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

@@ -3,13 +3,6 @@
 package consts
 
 const (
-	NoOverride float32 = 1.4e-45
-)
-
-const (
-	HyphenationModeFast             int = 2
-	HyphenationModeNone             int = 0
-	HyphenationModeNormal           int = 1
 	Creator                         int = 0
 	HyphenationDisabled             int = 0
 	HyphenationEnabled              int = 1
@@ -25,6 +18,9 @@ const (
 	LineBreakWordStyleNone          int = 0
 	LineBreakWordStylePhrase        int = 1
 	LineBreakWordStyleUnspecified   int = -1
+	HyphenationModeFast             int = 2
+	HyphenationModeNone             int = 0
+	HyphenationModeNormal           int = 1
 	BreakStrategyBalanced           int = 2
 	BreakStrategyHighQuality        int = 1
 	BreakStrategySimple             int = 0
@@ -34,4 +30,8 @@ const (
 	JustificationModeInterCharacter int = 2
 	JustificationModeInterWord      int = 1
 	JustificationModeNone           int = 0
+)
+
+const (
+	NoOverride float32 = 1.4e-45
 )

@@ -33,7 +33,7 @@ func NewAbsoluteLayout(vm *jni.VM, arg0 *jni.Object) (*AbsoluteLayout, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAbsoluteLayout)), midAbsoluteLayoutInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAbsoluteLayout)), midAbsoluteLayoutCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

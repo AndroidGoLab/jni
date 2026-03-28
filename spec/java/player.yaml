@@ -122,6 +122,10 @@ classes:
           go_name: GetRoutedDevice
           returns: android.media.AudioDeviceInfo
           error: true
+        - java_method: getRoutedDevices
+          go_name: GetRoutedDevices
+          returns: java.util.List<android.media.AudioDeviceInfo>
+          error: true
         - java_method: getSelectedTrack
           go_name: GetSelectedTrack
           params:

@@ -32,7 +32,7 @@ func NewWebViewClient(vm *jni.VM) (*WebViewClient, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebViewClient)), midWebViewClientInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWebViewClient)), midWebViewClientCtor)
 		if err != nil {
 			return err
 		}

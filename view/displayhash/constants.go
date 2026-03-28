@@ -5,11 +5,11 @@ package displayhash
 import "github.com/AndroidGoLab/jni/view/displayhash/consts"
 
 const (
+	Creator                              = consts.Creator
 	DisplayHashErrorInvalidBounds        = consts.DisplayHashErrorInvalidBounds
 	DisplayHashErrorInvalidHashAlgorithm = consts.DisplayHashErrorInvalidHashAlgorithm
 	DisplayHashErrorMissingWindow        = consts.DisplayHashErrorMissingWindow
 	DisplayHashErrorNotVisibleOnScreen   = consts.DisplayHashErrorNotVisibleOnScreen
 	DisplayHashErrorTooManyRequests      = consts.DisplayHashErrorTooManyRequests
 	DisplayHashErrorUnknown              = consts.DisplayHashErrorUnknown
-	Creator                              = consts.Creator
 )

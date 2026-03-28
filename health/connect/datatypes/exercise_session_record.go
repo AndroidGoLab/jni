@@ -76,6 +76,38 @@ func (m *ExerciseSessionRecord) GetExerciseType() (int32, error) {
 	return result, callErr
 }
 
+// GetLaps calls android.health.connect.datatypes.ExerciseSessionRecord.getLaps.
+func (m *ExerciseSessionRecord) GetLaps() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midExerciseSessionRecordGetLaps == nil {
+			callErr = fmt.Errorf("android.health.connect.datatypes.ExerciseSessionRecord.getLaps is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midExerciseSessionRecordGetLaps,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetNotes calls android.health.connect.datatypes.ExerciseSessionRecord.getNotes.
 func (m *ExerciseSessionRecord) GetNotes() (*jni.Object, error) {
 	var result *jni.Object
@@ -151,6 +183,38 @@ func (m *ExerciseSessionRecord) GetRoute() (*jni.Object, error) {
 		result, callErr = env.CallObjectMethod(
 			m.Obj,
 			midExerciseSessionRecordGetRoute,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSegments calls android.health.connect.datatypes.ExerciseSessionRecord.getSegments.
+func (m *ExerciseSessionRecord) GetSegments() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midExerciseSessionRecordGetSegments == nil {
+			callErr = fmt.Errorf("android.health.connect.datatypes.ExerciseSessionRecord.getSegments is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midExerciseSessionRecordGetSegments,
 		)
 		if callErr != nil {
 			return callErr

@@ -32,7 +32,7 @@ func NewColorMatrix(vm *jni.VM) (*ColorMatrix, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorMatrix)), midColorMatrixInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsColorMatrix)), midColorMatrixCtor)
 		if err != nil {
 			return err
 		}

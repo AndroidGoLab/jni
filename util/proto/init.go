@@ -24,7 +24,7 @@ var (
 	initErr  error
 
 	clsOutputStream                    *jni.GlobalRef
-	midOutputStreamInit                jni.MethodID
+	midOutputStreamCtor                jni.MethodID
 	midOutputStreamDump                jni.MethodID
 	midOutputStreamEnd                 jni.MethodID
 	midOutputStreamFlush               jni.MethodID
@@ -74,7 +74,7 @@ func doInit(env *jni.Env) error {
 		env.ExceptionClear()
 	} else {
 		clsOutputStream = env.NewGlobalRef(&c.Object)
-		midOutputStreamInit, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "<init>", "()V")
+		midOutputStreamCtor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsOutputStream)), "<init>", "()V")
 		if err != nil {
 			env.ExceptionClear()
 		}

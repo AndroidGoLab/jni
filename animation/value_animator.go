@@ -32,7 +32,7 @@ func NewValueAnimator(vm *jni.VM) (*ValueAnimator, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsValueAnimator)), midValueAnimatorInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsValueAnimator)), midValueAnimatorCtor)
 		if err != nil {
 			return err
 		}

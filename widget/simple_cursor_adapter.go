@@ -33,7 +33,7 @@ func NewSimpleCursorAdapter(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 *jni.
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleCursorAdapter)), midSimpleCursorAdapterInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleCursorAdapter)), midSimpleCursorAdapterCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.ObjectValue(arg3), jni.ObjectValue(arg4))
 		if err != nil {
 			return err
 		}

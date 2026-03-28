@@ -139,6 +139,38 @@ func (m *SettingsPreferenceMetadata) GetLaunchIntent() (*jni.Object, error) {
 	return result, callErr
 }
 
+// GetReadPermissions calls android.service.settings.preferences.SettingsPreferenceMetadata.getReadPermissions.
+func (m *SettingsPreferenceMetadata) GetReadPermissions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSettingsPreferenceMetadataGetReadPermissions == nil {
+			callErr = fmt.Errorf("android.service.settings.preferences.SettingsPreferenceMetadata.getReadPermissions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSettingsPreferenceMetadataGetReadPermissions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetScreenKey calls android.service.settings.preferences.SettingsPreferenceMetadata.getScreenKey.
 func (m *SettingsPreferenceMetadata) GetScreenKey() (string, error) {
 	var result string
@@ -215,6 +247,38 @@ func (m *SettingsPreferenceMetadata) GetTitle() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetWritePermissions calls android.service.settings.preferences.SettingsPreferenceMetadata.getWritePermissions.
+func (m *SettingsPreferenceMetadata) GetWritePermissions() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSettingsPreferenceMetadataGetWritePermissions == nil {
+			callErr = fmt.Errorf("android.service.settings.preferences.SettingsPreferenceMetadata.getWritePermissions is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSettingsPreferenceMetadataGetWritePermissions,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

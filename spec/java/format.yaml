@@ -5,6 +5,227 @@
 package: format
 go_import: github.com/AndroidGoLab/jni/text/format
 classes:
+    - java_class: android.text.format.Time
+      go_type: Time
+      obtain: constructor
+      methods:
+        - java_method: after
+          go_name: After
+          params:
+            - java_type: android.text.format.Time
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: before
+          go_name: Before
+          params:
+            - java_type: android.text.format.Time
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: clear
+          go_name: Clear
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: format
+          go_name: Format
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: format2445
+          go_name: Format2445
+          returns: String
+          error: true
+        - java_method: format3339
+          go_name: Format3339
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: getActualMaximum
+          go_name: GetActualMaximum
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getWeekNumber
+          go_name: GetWeekNumber
+          returns: int
+          error: true
+        - java_method: normalize
+          go_name: Normalize
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: parse
+          go_name: Parse
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: parse3339
+          go_name: Parse3339
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: boolean
+          error: true
+        - java_method: set
+          go_name: Set1
+          params:
+            - java_type: android.text.format.Time
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: set
+          go_name: Set3_1
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+          returns: void
+          error: true
+        - java_method: set
+          go_name: Set6_2
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+            - java_type: int
+              go_name: arg2
+            - java_type: int
+              go_name: arg3
+            - java_type: int
+              go_name: arg4
+            - java_type: int
+              go_name: arg5
+          returns: void
+          error: true
+        - java_method: set
+          go_name: Set1_3
+          params:
+            - java_type: long
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: setJulianDay
+          go_name: SetJulianDay
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: setToNow
+          go_name: SetToNow
+          returns: void
+          error: true
+        - java_method: switchTimezone
+          go_name: SwitchTimezone
+          params:
+            - java_type: String
+              go_name: arg0
+          returns: void
+          error: true
+        - java_method: toMillis
+          go_name: ToMillis
+          params:
+            - java_type: boolean
+              go_name: arg0
+          returns: long
+          error: true
+        - java_method: toString
+          go_name: ToString
+          returns: String
+          error: true
+      static_methods:
+        - java_method: compare
+          go_name: Compare
+          params:
+            - java_type: android.text.format.Time
+              go_name: arg0
+            - java_type: android.text.format.Time
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getCurrentTimezone
+          go_name: GetCurrentTimezone
+          returns: String
+          error: true
+        - java_method: getJulianDay
+          go_name: GetJulianDay
+          params:
+            - java_type: long
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: getJulianMondayFromWeeksSinceEpoch
+          go_name: GetJulianMondayFromWeeksSinceEpoch
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: int
+          error: true
+        - java_method: getWeeksSinceEpochFromJulianDay
+          go_name: GetWeeksSinceEpochFromJulianDay
+          params:
+            - java_type: int
+              go_name: arg0
+            - java_type: int
+              go_name: arg1
+          returns: int
+          error: true
+        - java_method: isEpoch
+          go_name: IsEpoch
+          params:
+            - java_type: android.text.format.Time
+              go_name: arg0
+          returns: boolean
+          error: true
+    - java_class: android.text.format.Formatter
+      go_type: ter
+      obtain: constructor
+      static_methods:
+        - java_method: formatFileSize
+          go_name: FormatFileSize
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: String
+          error: true
+        - java_method: formatIpAddress
+          go_name: FormatIpAddress
+          params:
+            - java_type: int
+              go_name: arg0
+          returns: String
+          error: true
+        - java_method: formatShortFileSize
+          go_name: FormatShortFileSize
+          params:
+            - java_type: android.content.Context
+              go_name: arg0
+            - java_type: long
+              go_name: arg1
+          returns: String
+          error: true
     - java_class: android.text.format.DateFormat
       go_type: DateFormat
       obtain: constructor
@@ -274,228 +495,64 @@ classes:
               go_name: arg0
           returns: boolean
           error: true
-    - java_class: android.text.format.Time
-      go_type: Time
-      obtain: constructor
-      methods:
-        - java_method: after
-          go_name: After
-          params:
-            - java_type: android.text.format.Time
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: before
-          go_name: Before
-          params:
-            - java_type: android.text.format.Time
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: clear
-          go_name: Clear
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: format
-          go_name: Format
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: format2445
-          go_name: Format2445
-          returns: String
-          error: true
-        - java_method: format3339
-          go_name: Format3339
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: getActualMaximum
-          go_name: GetActualMaximum
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getWeekNumber
-          go_name: GetWeekNumber
-          returns: int
-          error: true
-        - java_method: normalize
-          go_name: Normalize
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: parse
-          go_name: Parse
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: parse3339
-          go_name: Parse3339
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: boolean
-          error: true
-        - java_method: set
-          go_name: Set1
-          params:
-            - java_type: android.text.format.Time
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: set
-          go_name: Set3_1
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-          returns: void
-          error: true
-        - java_method: set
-          go_name: Set6_2
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-            - java_type: int
-              go_name: arg2
-            - java_type: int
-              go_name: arg3
-            - java_type: int
-              go_name: arg4
-            - java_type: int
-              go_name: arg5
-          returns: void
-          error: true
-        - java_method: set
-          go_name: Set1_3
-          params:
-            - java_type: long
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: setJulianDay
-          go_name: SetJulianDay
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: setToNow
-          go_name: SetToNow
-          returns: void
-          error: true
-        - java_method: switchTimezone
-          go_name: SwitchTimezone
-          params:
-            - java_type: String
-              go_name: arg0
-          returns: void
-          error: true
-        - java_method: toMillis
-          go_name: ToMillis
-          params:
-            - java_type: boolean
-              go_name: arg0
-          returns: long
-          error: true
-        - java_method: toString
-          go_name: ToString
-          returns: String
-          error: true
-      static_methods:
-        - java_method: compare
-          go_name: Compare
-          params:
-            - java_type: android.text.format.Time
-              go_name: arg0
-            - java_type: android.text.format.Time
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: getCurrentTimezone
-          go_name: GetCurrentTimezone
-          returns: String
-          error: true
-        - java_method: getJulianDay
-          go_name: GetJulianDay
-          params:
-            - java_type: long
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: getJulianMondayFromWeeksSinceEpoch
-          go_name: GetJulianMondayFromWeeksSinceEpoch
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: int
-          error: true
-        - java_method: getWeeksSinceEpochFromJulianDay
-          go_name: GetWeeksSinceEpochFromJulianDay
-          params:
-            - java_type: int
-              go_name: arg0
-            - java_type: int
-              go_name: arg1
-          returns: int
-          error: true
-        - java_method: isEpoch
-          go_name: IsEpoch
-          params:
-            - java_type: android.text.format.Time
-              go_name: arg0
-          returns: boolean
-          error: true
-    - java_class: android.text.format.Formatter
-      go_type: ter
-      obtain: constructor
-      static_methods:
-        - java_method: formatFileSize
-          go_name: FormatFileSize
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: String
-          error: true
-        - java_method: formatIpAddress
-          go_name: FormatIpAddress
-          params:
-            - java_type: int
-              go_name: arg0
-          returns: String
-          error: true
-        - java_method: formatShortFileSize
-          go_name: FormatShortFileSize
-          params:
-            - java_type: android.content.Context
-              go_name: arg0
-            - java_type: long
-              go_name: arg1
-          returns: String
-          error: true
 constants:
+    - go_name: EpochJulianDay
+      value: "2440588"
+      go_type: int
+    - go_name: Friday
+      value: "5"
+      go_type: int
+    - go_name: Hour
+      value: "3"
+      go_type: int
+    - go_name: Minute
+      value: "2"
+      go_type: int
+    - go_name: Monday
+      value: "1"
+      go_type: int
+    - go_name: MondayBeforeJulianEpoch
+      value: "2440585"
+      go_type: int
+    - go_name: Month
+      value: "5"
+      go_type: int
+    - go_name: MonthDay
+      value: "4"
+      go_type: int
+    - go_name: Saturday
+      value: "6"
+      go_type: int
+    - go_name: Second
+      value: "1"
+      go_type: int
+    - go_name: Sunday
+      value: "0"
+      go_type: int
+    - go_name: Thursday
+      value: "4"
+      go_type: int
+    - go_name: TimezoneUtc
+      value: '"UTC"'
+      go_type: string
+    - go_name: Tuesday
+      value: "2"
+      go_type: int
+    - go_name: Wednesday
+      value: "3"
+      go_type: int
+    - go_name: WeekDay
+      value: "7"
+      go_type: int
+    - go_name: WeekNum
+      value: "9"
+      go_type: int
+    - go_name: Year
+      value: "6"
+      go_type: int
+    - go_name: YearDay
+      value: "8"
+      go_type: int
     - go_name: AbbrevMonthFormat
       value: '"%b"'
       go_type: string
@@ -627,61 +684,4 @@ constants:
       go_type: int
     - go_name: Sameyeartable
       value: "0"
-      go_type: int
-    - go_name: EpochJulianDay
-      value: "2440588"
-      go_type: int
-    - go_name: Friday
-      value: "5"
-      go_type: int
-    - go_name: Hour
-      value: "3"
-      go_type: int
-    - go_name: Minute
-      value: "2"
-      go_type: int
-    - go_name: Monday
-      value: "1"
-      go_type: int
-    - go_name: MondayBeforeJulianEpoch
-      value: "2440585"
-      go_type: int
-    - go_name: Month
-      value: "5"
-      go_type: int
-    - go_name: MonthDay
-      value: "4"
-      go_type: int
-    - go_name: Saturday
-      value: "6"
-      go_type: int
-    - go_name: Second
-      value: "1"
-      go_type: int
-    - go_name: Sunday
-      value: "0"
-      go_type: int
-    - go_name: Thursday
-      value: "4"
-      go_type: int
-    - go_name: TimezoneUtc
-      value: '"UTC"'
-      go_type: string
-    - go_name: Tuesday
-      value: "2"
-      go_type: int
-    - go_name: Wednesday
-      value: "3"
-      go_type: int
-    - go_name: WeekDay
-      value: "7"
-      go_type: int
-    - go_name: WeekNum
-      value: "9"
-      go_type: int
-    - go_name: Year
-      value: "6"
-      go_type: int
-    - go_name: YearDay
-      value: "8"
       go_type: int

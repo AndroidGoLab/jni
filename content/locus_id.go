@@ -38,7 +38,7 @@ func NewLocusId(vm *jni.VM, arg0 string) (*LocusId, error) {
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocusId)), midLocusIdInit, jni.ObjectValue(&jArg0.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsLocusId)), midLocusIdCtor, jni.ObjectValue(&jArg0.Object))
 		if err != nil {
 			return err
 		}

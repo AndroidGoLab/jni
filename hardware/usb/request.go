@@ -32,7 +32,7 @@ func NewRequest(vm *jni.VM) (*Request, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRequest)), midRequestInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsRequest)), midRequestCtor)
 		if err != nil {
 			return err
 		}

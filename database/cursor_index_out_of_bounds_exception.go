@@ -33,7 +33,7 @@ func NewCursorIndexOutOfBoundsException(vm *jni.VM, arg0 int32, arg1 int32) (*Cu
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorIndexOutOfBoundsException)), midCursorIndexOutOfBoundsExceptionInit, jni.IntValue(arg0), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsCursorIndexOutOfBoundsException)), midCursorIndexOutOfBoundsExceptionCtor, jni.IntValue(arg0), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewPerBuyerDecisionLogic(vm *jni.VM, arg0 *jni.Object) (*PerBuyerDecisionLo
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), midPerBuyerDecisionLogicInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsPerBuyerDecisionLogic)), midPerBuyerDecisionLogicCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

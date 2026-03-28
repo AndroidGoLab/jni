@@ -55,6 +55,71 @@ func (m *CodecInfoVideoCapabilities) AreSizeAndRateSupported(
 	return result, callErr
 }
 
+// GetAchievableFrameRatesFor calls android.media.MediaCodecInfo$VideoCapabilities.getAchievableFrameRatesFor.
+func (m *CodecInfoVideoCapabilities) GetAchievableFrameRatesFor(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetAchievableFrameRatesFor == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getAchievableFrameRatesFor is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetAchievableFrameRatesFor, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetBitrateRange calls android.media.MediaCodecInfo$VideoCapabilities.getBitrateRange.
+func (m *CodecInfoVideoCapabilities) GetBitrateRange() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetBitrateRange == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getBitrateRange is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetBitrateRange,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetHeightAlignment calls android.media.MediaCodecInfo$VideoCapabilities.getHeightAlignment.
 func (m *CodecInfoVideoCapabilities) GetHeightAlignment() (int32, error) {
 	var result int32
@@ -74,6 +139,233 @@ func (m *CodecInfoVideoCapabilities) GetHeightAlignment() (int32, error) {
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedFrameRates calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedFrameRates.
+func (m *CodecInfoVideoCapabilities) GetSupportedFrameRates() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedFrameRates == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedFrameRates is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedFrameRates,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedFrameRatesFor calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedFrameRatesFor.
+func (m *CodecInfoVideoCapabilities) GetSupportedFrameRatesFor(arg0 int32, arg1 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedFrameRatesFor == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedFrameRatesFor is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedFrameRatesFor, jni.IntValue(arg0), jni.IntValue(arg1),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedHeights calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedHeights.
+func (m *CodecInfoVideoCapabilities) GetSupportedHeights() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedHeights == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedHeights is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedHeights,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedHeightsFor calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedHeightsFor.
+func (m *CodecInfoVideoCapabilities) GetSupportedHeightsFor(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedHeightsFor == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedHeightsFor is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedHeightsFor, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedPerformancePoints calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedPerformancePoints.
+func (m *CodecInfoVideoCapabilities) GetSupportedPerformancePoints() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedPerformancePoints == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedPerformancePoints is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedPerformancePoints,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedWidths calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedWidths.
+func (m *CodecInfoVideoCapabilities) GetSupportedWidths() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedWidths == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedWidths is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedWidths,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedWidthsFor calls android.media.MediaCodecInfo$VideoCapabilities.getSupportedWidthsFor.
+func (m *CodecInfoVideoCapabilities) GetSupportedWidthsFor(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midCodecInfoVideoCapabilitiesGetSupportedWidthsFor == nil {
+			callErr = fmt.Errorf("android.media.MediaCodecInfo$VideoCapabilities.getSupportedWidthsFor is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midCodecInfoVideoCapabilitiesGetSupportedWidthsFor, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

@@ -30,7 +30,7 @@ func NewlicationErrorReport(vm *jni.VM) (*licationErrorReport, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clslicationErrorReport)), midlicationErrorReportInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clslicationErrorReport)), midlicationErrorReportCtor)
 		if err != nil {
 			return err
 		}

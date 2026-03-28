@@ -33,7 +33,7 @@ func NewSwitchPreference(vm *jni.VM, arg0 *jni.Object) (*SwitchPreference, error
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), midSwitchPreferenceInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSwitchPreference)), midSwitchPreferenceCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

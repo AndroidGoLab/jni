@@ -33,7 +33,7 @@ func NewSimpleExpandableListAdapter(vm *jni.VM, arg0 *jni.Object, arg1 *jni.Obje
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleExpandableListAdapter)), midSimpleExpandableListAdapterInit, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5), jni.ObjectValue(arg6), jni.IntValue(arg7), jni.IntValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSimpleExpandableListAdapter)), midSimpleExpandableListAdapterCtor, jni.ObjectValue(arg0), jni.ObjectValue(arg1), jni.IntValue(arg2), jni.IntValue(arg3), jni.ObjectValue(arg4), jni.ObjectValue(arg5), jni.ObjectValue(arg6), jni.IntValue(arg7), jni.IntValue(arg8), jni.ObjectValue(arg9), jni.ObjectValue(arg10))
 		if err != nil {
 			return err
 		}

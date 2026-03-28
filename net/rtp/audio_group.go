@@ -33,7 +33,7 @@ func NewAudioGroup(vm *jni.VM, arg0 *jni.Object) (*AudioGroup, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioGroup)), midAudioGroupInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioGroup)), midAudioGroupCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}

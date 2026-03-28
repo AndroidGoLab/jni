@@ -51,6 +51,70 @@ func (m *SaProposal) Equals(arg0 *jni.Object) (bool, error) {
 	return result, callErr
 }
 
+// GetDhGroups calls android.net.ipsec.ike.SaProposal.getDhGroups.
+func (m *SaProposal) GetDhGroups() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSaProposalGetDhGroups == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.SaProposal.getDhGroups is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSaProposalGetDhGroups,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetIntegrityAlgorithms calls android.net.ipsec.ike.SaProposal.getIntegrityAlgorithms.
+func (m *SaProposal) GetIntegrityAlgorithms() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSaProposalGetIntegrityAlgorithms == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.SaProposal.getIntegrityAlgorithms is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midSaProposalGetIntegrityAlgorithms,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // HashCode calls android.net.ipsec.ike.SaProposal.hashCode.
 func (m *SaProposal) HashCode() (int32, error) {
 	var result int32
@@ -98,6 +162,38 @@ func (m *SaProposal) ToString() (string, error) {
 			return callErr
 		}
 		result = env.GoString((*jni.String)(unsafe.Pointer(resultObj)))
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetSupportedDhGroups calls android.net.ipsec.ike.SaProposal.getSupportedDhGroups.
+func (m *SaProposal) GetSupportedDhGroups() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midSaProposalGetSupportedDhGroups == nil {
+			callErr = fmt.Errorf("android.net.ipsec.ike.SaProposal.getSupportedDhGroups is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallStaticObjectMethod(
+			(*jni.Class)(unsafe.Pointer(clsSaProposal)),
+			midSaProposalGetSupportedDhGroups,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
 		return callErr
 	})
 	return result, callErr

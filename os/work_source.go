@@ -32,7 +32,7 @@ func NewWorkSource(vm *jni.VM) (*WorkSource, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkSource)), midWorkSourceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsWorkSource)), midWorkSourceCtor)
 		if err != nil {
 			return err
 		}

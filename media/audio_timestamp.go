@@ -32,7 +32,7 @@ func NewAudioTimestamp(vm *jni.VM) (*AudioTimestamp, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioTimestamp)), midAudioTimestampInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAudioTimestamp)), midAudioTimestampCtor)
 		if err != nil {
 			return err
 		}

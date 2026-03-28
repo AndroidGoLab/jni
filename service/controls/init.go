@@ -26,6 +26,13 @@ var (
 	clsDeviceTypes                *jni.GlobalRef
 	midDeviceTypesValidDeviceType jni.MethodID
 
+	clsProviderService                               *jni.GlobalRef
+	midProviderServiceCreatePublisherForAllAvailable jni.MethodID
+	midProviderServiceCreatePublisherForSuggested    jni.MethodID
+	midProviderServiceOnBind                         jni.MethodID
+	midProviderServiceOnUnbind                       jni.MethodID
+	midProviderServiceRequestAddControl              jni.MethodID
+
 	clsControl                   *jni.GlobalRef
 	midControlDescribeContents   jni.MethodID
 	midControlGetAppIntent       jni.MethodID
@@ -70,11 +77,6 @@ var (
 	midControlStatelessBuilderSetSubtitle    jni.MethodID
 	midControlStatelessBuilderSetTitle       jni.MethodID
 	midControlStatelessBuilderSetZone        jni.MethodID
-
-	clsProviderService                  *jni.GlobalRef
-	midProviderServiceOnBind            jni.MethodID
-	midProviderServiceOnUnbind          jni.MethodID
-	midProviderServiceRequestAddControl jni.MethodID
 )
 
 func ensureInit(env *jni.Env) error {
@@ -104,6 +106,51 @@ func doInit(env *jni.Env) error {
 		clsDeviceTypes = env.NewGlobalRef(&c.Object)
 
 		midDeviceTypesValidDeviceType, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsDeviceTypes)), "validDeviceType", "(I)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+	}
+
+	c, err = env.FindClass("android/service/controls/ControlsProviderService")
+	if err != nil {
+		// Class may not exist on this device's API level; skip and
+		// report at invocation time instead of failing the entire init.
+		env.ExceptionClear()
+	} else {
+		clsProviderService = env.NewGlobalRef(&c.Object)
+
+		midProviderServiceCreatePublisherForAllAvailable, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "createPublisherForAllAvailable", "()Ljava/util/concurrent/Flow$Publisher;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderServiceCreatePublisherForSuggested, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "createPublisherForSuggested", "()Ljava/util/concurrent/Flow$Publisher;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "onUnbind", "(Landroid/content/Intent;)Z")
+		if err != nil {
+			// Method may not exist on this device's API level; skip and
+			// report at invocation time instead of failing the entire init.
+			env.ExceptionClear()
+		}
+
+		midProviderServiceRequestAddControl, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "requestAddControl", "(Landroid/content/Context;Landroid/content/ComponentName;Landroid/service/controls/Control;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.
@@ -407,37 +454,6 @@ func doInit(env *jni.Env) error {
 		}
 
 		midControlStatelessBuilderSetZone, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsControlStatelessBuilder)), "setZone", "(Ljava/lang/CharSequence;)Landroid/service/controls/Control$StatelessBuilder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-	}
-
-	c, err = env.FindClass("android/service/controls/ControlsProviderService")
-	if err != nil {
-		// Class may not exist on this device's API level; skip and
-		// report at invocation time instead of failing the entire init.
-		env.ExceptionClear()
-	} else {
-		clsProviderService = env.NewGlobalRef(&c.Object)
-
-		midProviderServiceOnBind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "onBind", "(Landroid/content/Intent;)Landroid/os/IBinder;")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midProviderServiceOnUnbind, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "onUnbind", "(Landroid/content/Intent;)Z")
-		if err != nil {
-			// Method may not exist on this device's API level; skip and
-			// report at invocation time instead of failing the entire init.
-			env.ExceptionClear()
-		}
-
-		midProviderServiceRequestAddControl, err = env.GetStaticMethodID((*jni.Class)(unsafe.Pointer(clsProviderService)), "requestAddControl", "(Landroid/content/Context;Landroid/content/ComponentName;Landroid/service/controls/Control;)V")
 		if err != nil {
 			// Method may not exist on this device's API level; skip and
 			// report at invocation time instead of failing the entire init.

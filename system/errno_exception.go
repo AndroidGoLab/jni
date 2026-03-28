@@ -38,7 +38,7 @@ func NewErrnoException(vm *jni.VM, arg0 string, arg1 int32) (*ErrnoException, er
 		}
 		defer env.DeleteLocalRef(&jArg0.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsErrnoException)), midErrnoExceptionInit, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsErrnoException)), midErrnoExceptionCtor, jni.ObjectValue(&jArg0.Object), jni.IntValue(arg1))
 		if err != nil {
 			return err
 		}

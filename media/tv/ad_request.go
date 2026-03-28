@@ -33,7 +33,7 @@ func NewAdRequest(vm *jni.VM, arg0 int32, arg1 int32, arg2 *jni.Object, arg3 int
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdRequest)), midAdRequestInit, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.LongValue(arg3), jni.LongValue(arg4), jni.LongValue(arg5), jni.ObjectValue(arg6))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAdRequest)), midAdRequestCtor, jni.IntValue(arg0), jni.IntValue(arg1), jni.ObjectValue(arg2), jni.LongValue(arg3), jni.LongValue(arg4), jni.LongValue(arg5), jni.ObjectValue(arg6))
 		if err != nil {
 			return err
 		}

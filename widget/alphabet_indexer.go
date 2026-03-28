@@ -39,7 +39,7 @@ func NewAlphabetIndexer(vm *jni.VM, arg0 *jni.Object, arg1 int32, arg2 string) (
 		}
 		defer env.DeleteLocalRef(&jArg2.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphabetIndexer)), midAlphabetIndexerInit, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsAlphabetIndexer)), midAlphabetIndexerCtor, jni.ObjectValue(arg0), jni.IntValue(arg1), jni.ObjectValue(&jArg2.Object))
 		if err != nil {
 			return err
 		}

@@ -33,7 +33,7 @@ func NewTimestamp(vm *jni.VM, arg0 int64, arg1 int64, arg2 float32) (*Timestamp,
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimestamp)), midTimestampInit, jni.LongValue(arg0), jni.LongValue(arg1), jni.FloatValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTimestamp)), midTimestampCtor, jni.LongValue(arg0), jni.LongValue(arg1), jni.FloatValue(arg2))
 		if err != nil {
 			return err
 		}

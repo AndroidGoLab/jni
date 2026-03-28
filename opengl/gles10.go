@@ -32,7 +32,7 @@ func NewGLES10(vm *jni.VM) (*GLES10, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES10)), midGLES10Init)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGLES10)), midGLES10Ctor)
 		if err != nil {
 			return err
 		}

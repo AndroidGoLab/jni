@@ -23,6 +23,233 @@ type RecommendedStreamConfigurationMap struct {
 	Obj *jni.GlobalRef
 }
 
+// GetHighResolutionOutputSizes calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighResolutionOutputSizes.
+func (m *RecommendedStreamConfigurationMap) GetHighResolutionOutputSizes(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetHighResolutionOutputSizes == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighResolutionOutputSizes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetHighResolutionOutputSizes, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHighSpeedVideoFpsRanges calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighSpeedVideoFpsRanges.
+func (m *RecommendedStreamConfigurationMap) GetHighSpeedVideoFpsRanges() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetHighSpeedVideoFpsRanges == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighSpeedVideoFpsRanges is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetHighSpeedVideoFpsRanges,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHighSpeedVideoFpsRangesFor calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighSpeedVideoFpsRangesFor.
+func (m *RecommendedStreamConfigurationMap) GetHighSpeedVideoFpsRangesFor(arg0 *jni.Object) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetHighSpeedVideoFpsRangesFor == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighSpeedVideoFpsRangesFor is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetHighSpeedVideoFpsRangesFor, jni.ObjectValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetHighSpeedVideoSizes calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighSpeedVideoSizes.
+func (m *RecommendedStreamConfigurationMap) GetHighSpeedVideoSizes() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetHighSpeedVideoSizes == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getHighSpeedVideoSizes is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetHighSpeedVideoSizes,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInputFormats calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getInputFormats.
+func (m *RecommendedStreamConfigurationMap) GetInputFormats() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetInputFormats == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getInputFormats is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetInputFormats,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetInputSizes calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getInputSizes.
+func (m *RecommendedStreamConfigurationMap) GetInputSizes(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetInputSizes == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getInputSizes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetInputSizes, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOutputFormats calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getOutputFormats.
+func (m *RecommendedStreamConfigurationMap) GetOutputFormats() (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetOutputFormats == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getOutputFormats is not available on this device")
+			return callErr
+		}
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetOutputFormats,
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
 // GetOutputMinFrameDuration calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getOutputMinFrameDuration.
 func (m *RecommendedStreamConfigurationMap) GetOutputMinFrameDuration(arg0 int32, arg1 *jni.Object) (int64, error) {
 	var result int64
@@ -43,6 +270,39 @@ func (m *RecommendedStreamConfigurationMap) GetOutputMinFrameDuration(arg0 int32
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetOutputSizes calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getOutputSizes.
+func (m *RecommendedStreamConfigurationMap) GetOutputSizes(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetOutputSizes == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getOutputSizes is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetOutputSizes, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})
@@ -94,6 +354,39 @@ func (m *RecommendedStreamConfigurationMap) GetRecommendedUseCase() (int32, erro
 		)
 		if callErr != nil {
 			return callErr
+		}
+		return callErr
+	})
+	return result, callErr
+}
+
+// GetValidOutputFormatsForInput calls android.hardware.camera2.params.RecommendedStreamConfigurationMap.getValidOutputFormatsForInput.
+func (m *RecommendedStreamConfigurationMap) GetValidOutputFormatsForInput(arg0 int32) (*jni.Object, error) {
+	var result *jni.Object
+	var callErr error
+	callErr = m.VM.Do(func(env *jni.Env) error {
+		if err := ensureInit(env); err != nil {
+			callErr = err
+			return err
+		}
+		if midRecommendedStreamConfigurationMapGetValidOutputFormatsForInput == nil {
+			callErr = fmt.Errorf("android.hardware.camera2.params.RecommendedStreamConfigurationMap.getValidOutputFormatsForInput is not available on this device")
+			return callErr
+		}
+
+		result, callErr = env.CallObjectMethod(
+			m.Obj,
+			midRecommendedStreamConfigurationMapGetValidOutputFormatsForInput, jni.IntValue(arg0),
+		)
+		if callErr != nil {
+			return callErr
+		}
+		// Convert the JNI local reference to a global reference so the
+		// returned object remains valid outside this vm.Do scope.
+		if result != nil {
+			localRef := result
+			result = env.NewGlobalRef(localRef)
+			env.DeleteLocalRef(localRef)
 		}
 		return callErr
 	})

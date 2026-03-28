@@ -39,7 +39,7 @@ func NewEncryptedTopic(vm *jni.VM, arg0 *jni.Object, arg1 string, arg2 *jni.Obje
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEncryptedTopic)), midEncryptedTopicInit, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsEncryptedTopic)), midEncryptedTopicCtor, jni.ObjectValue(arg0), jni.ObjectValue(&jArg1.Object), jni.ObjectValue(arg2))
 		if err != nil {
 			return err
 		}

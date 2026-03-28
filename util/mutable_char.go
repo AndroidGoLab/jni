@@ -33,7 +33,7 @@ func NewMutableChar(vm *jni.VM, arg0 uint16) (*MutableChar, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableChar)), midMutableCharInit, jni.CharValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsMutableChar)), midMutableCharCtor, jni.CharValue(arg0))
 		if err != nil {
 			return err
 		}

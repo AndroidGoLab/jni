@@ -23,7 +23,7 @@ var (
 {{range .Classes}}
 	cls{{.GoType}} *jni.GlobalRef
 {{- if eq .Obtain "constructor"}}
-	mid{{.GoType}}Init jni.MethodID
+	mid{{.GoType}}Ctor jni.MethodID
 {{- end}}
 {{$cls := .}}{{range .Methods}}	mid{{$cls.GoType}}{{.GoName}} jni.MethodID
 {{end}}{{end}}
@@ -62,7 +62,7 @@ func doInit(env *jni.Env) error {
 	} else {
 	cls{{.GoType}} = env.NewGlobalRef(&c.Object)
 {{- if eq .Obtain "constructor"}}
-	mid{{.GoType}}Init, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), "<init>", "{{.ConstructorJNISig}}")
+	mid{{.GoType}}Ctor, err = env.GetMethodID((*jni.Class)(unsafe.Pointer(cls{{.GoType}})), "<init>", "{{.ConstructorJNISig}}")
 	if err != nil {
 		env.ExceptionClear()
 	}

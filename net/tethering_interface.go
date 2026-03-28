@@ -39,7 +39,7 @@ func NewTetheringInterface(vm *jni.VM, arg0 int32, arg1 string) (*TetheringInter
 		}
 		defer env.DeleteLocalRef(&jArg1.Object)
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTetheringInterface)), midTetheringInterfaceInit, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsTetheringInterface)), midTetheringInterfaceCtor, jni.IntValue(arg0), jni.ObjectValue(&jArg1.Object))
 		if err != nil {
 			return err
 		}

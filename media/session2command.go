@@ -33,7 +33,7 @@ func NewSession2Command(vm *jni.VM, arg0 int32) (*Session2Command, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession2Command)), midSession2CommandInit, jni.IntValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsSession2Command)), midSession2CommandCtor, jni.IntValue(arg0))
 		if err != nil {
 			return err
 		}

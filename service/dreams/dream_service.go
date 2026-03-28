@@ -32,7 +32,7 @@ func NewDreamService(vm *jni.VM) (*DreamService, error) {
 		if err := ensureInit(env); err != nil {
 			return err
 		}
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDreamService)), midDreamServiceInit)
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsDreamService)), midDreamServiceCtor)
 		if err != nil {
 			return err
 		}

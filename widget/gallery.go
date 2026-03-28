@@ -33,7 +33,7 @@ func NewGallery(vm *jni.VM, arg0 *jni.Object) (*Gallery, error) {
 			return err
 		}
 
-		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGallery)), midGalleryInit, jni.ObjectValue(arg0))
+		obj, err := env.NewObject((*jni.Class)(unsafe.Pointer(clsGallery)), midGalleryCtor, jni.ObjectValue(arg0))
 		if err != nil {
 			return err
 		}
