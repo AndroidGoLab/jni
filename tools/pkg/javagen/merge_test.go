@@ -53,8 +53,9 @@ func TestMerge_BasicClass(t *testing.T) {
 	if !cls.Close {
 		t.Error("expected Close=true")
 	}
-	if len(cls.Methods) != 1 {
-		t.Fatalf("expected 1 method, got %d", len(cls.Methods))
+	// Expect 2 methods: the spec DoSomething + the auto-injected ToString.
+	if len(cls.Methods) != 2 {
+		t.Fatalf("expected 2 methods (spec + toString), got %d", len(cls.Methods))
 	}
 
 	m := cls.Methods[0]
@@ -349,11 +350,15 @@ func TestMerge_ExtraMethodsFromOverlay(t *testing.T) {
 		t.Fatalf("Merge: %v", err)
 	}
 
-	if len(merged.Classes[0].Methods) != 1 {
-		t.Fatalf("expected 1 method (from overlay), got %d", len(merged.Classes[0].Methods))
+	// Expect 2 methods: the auto-injected ToString + the overlay ExtraMethod.
+	if len(merged.Classes[0].Methods) != 2 {
+		t.Fatalf("expected 2 methods (toString + overlay), got %d", len(merged.Classes[0].Methods))
 	}
-	if merged.Classes[0].Methods[0].GoName != "ExtraMethod" {
-		t.Errorf("expected ExtraMethod, got %q", merged.Classes[0].Methods[0].GoName)
+	if merged.Classes[0].Methods[0].GoName != "ToString" {
+		t.Errorf("expected ToString as first method, got %q", merged.Classes[0].Methods[0].GoName)
+	}
+	if merged.Classes[0].Methods[1].GoName != "ExtraMethod" {
+		t.Errorf("expected ExtraMethod as second method, got %q", merged.Classes[0].Methods[1].GoName)
 	}
 }
 

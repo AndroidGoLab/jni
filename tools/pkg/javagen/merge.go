@@ -38,6 +38,11 @@ func Merge(spec *Spec, overlay *Overlay) (*MergedSpec, error) {
 		// Promote intent_extras to synthetic getter methods.
 		promoteIntentExtrasToMethods(&cls)
 
+		// Inject toString() if missing so every wrapper type has a
+		// Go-callable ToString() method (Object.toString is inherited
+		// by all Java classes but specgen may not always include it).
+		injectToStringIfMissing(&cls)
+
 		mc, err := mergeClass(&cls, overlay)
 		if err != nil {
 			return nil, fmt.Errorf("merge class %s: %w", cls.GoType, err)
@@ -100,6 +105,30 @@ func promoteIntentExtrasToMethods(cls *Class) {
 			Error:      true,
 		})
 	}
+}
+
+// injectToStringIfMissing adds a synthetic toString method when the class
+// does not already declare one. Every Java class inherits Object.toString(),
+// so exposing it as ToString() in Go lets callers avoid raw JNI for the
+// most common debugging/display operation.
+func injectToStringIfMissing(cls *Class) {
+	for _, m := range cls.Methods {
+		if m.JavaMethod == "toString" {
+			return
+		}
+	}
+	for _, m := range cls.StaticMethods {
+		if m.JavaMethod == "toString" {
+			return
+		}
+	}
+	cls.Methods = append(cls.Methods, Method{
+		JavaMethod: "toString",
+		GoName:     "ToString",
+		Static:     false,
+		Returns:    "String",
+		Error:      true,
+	})
 }
 
 func mergeClass(cls *Class, overlay *Overlay) (*MergedClass, error) {
